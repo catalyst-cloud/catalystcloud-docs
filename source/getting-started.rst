@@ -52,6 +52,70 @@ use by Catalyst Cloud instances, free of charge. They are:
 | nz_wlg_2 | 202.78.240.213, 202.78.240.214, 202.78.240.215|
 +----------+-----------------------------------------------+
 
+Creating Required Network Elements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If a router and network/subnet don't already exist, create them. Keep any 
+network requirements in mind when choosing addressing for your networks, 
+in case you want to build a tunnel-mode VPN in the future. ::
+
+ $ neutron router-create border-router
+ Created a new router:
+ +-----------------------+--------------------------------------+
+ | Field                 | Value                                |
+ +-----------------------+--------------------------------------+
+ | admin_state_up        | True                                 |
+ | external_gateway_info |                                      |
+ | id                    | ROUTER_ID                            |
+ | name                  | border-router                        |
+ | status                | ACTIVE                               |
+ | tenant_id             | TENANT_ID                            |
+ +-----------------------+--------------------------------------+
+ 
+ $ neutron router-gateway-set border-router public-net
+ Set gateway for router border-router
+ 
+ $ neutron net-create  10.0.0.0/24
+ Created a new network:
+ +----------------+--------------------------------------+
+ | Field          | Value                                |
+ +----------------+--------------------------------------+
+ | admin_state_up | True                                 |
+ | id             | NETWORK_ID                           |
+ | name           | 10.0.0.0/24                          |
+ | shared         | False                                |
+ | status         | ACTIVE                               |
+ | subnets        |                                      |
+ | tenant_id      | TENANT_ID                            |
+ +----------------+--------------------------------------+
+ 
+ $  neutron subnet-create --name 10.0.0.0/24 --allocation-pool \
+     start=10.0.0.10,end=10.0.0.200 --dns-nameserver NAMESERVER_1 \
+     --dns-nameserver NAMESERVER_2 --dns-nameserver NAMESERVER_3 \
+     --enable-dhcp 10.0.0.0/24 10.0.0.0/24
+ Created a new subnet:
+ +------------------+---------------------------------------------+
+ | Field            | Value                                       |
+ +------------------+---------------------------------------------+
+ | allocation_pools | {"start": "10.0.0.10", "end": "10.0.0.200"} |
+ | cidr             | 10.0.0.0/24                                 |
+ | dns_nameservers  | NAMESERVER_1                                |
+ |                  | NAMESERVER_2                                |
+ |                  | NAMESERVER_3                                |
+ | enable_dhcp      | True                                        |
+ | gateway_ip       | 10.0.0.1                                    |
+ | host_routes      |                                             |
+ | id               | SUBNET_ID                                   |
+ | ip_version       | 4                                           |
+ | name             | 10.0.0.0/24                                 |
+ | network_id       | NETWORK_ID                                  |
+ | tenant_id        | TENANT_ID                                   |
+ +------------------+---------------------------------------------+
+ 
+ $ neutron router-interface-add border-router 10.0.0.0/24
+ Added interface INTERFACE_ID to router border-router.
+
+
 Choosing a Flavor
 ~~~~~~~~~~~~~~~~~
 
