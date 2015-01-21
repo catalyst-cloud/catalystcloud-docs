@@ -12,7 +12,7 @@ Contents:
    :maxdepth: 2
 
    getting-started
-
+   cloud-tunnel
 
 Indices and tables
 ==================
