@@ -8,18 +8,18 @@ Welcome
 External Resources
 ==================
 
-The Catalyst Cloud documentation is intended as a supplement to the 
-documentation maintained by the OpenStack Foundation.  It is meant 
-to clarify details about the Catalyst Cloud that may not be applicable 
+The Catalyst Cloud documentation is intended as a supplement to the
+documentation maintained by the OpenStack Foundation.  It is meant
+to clarify details about the Catalyst Cloud that may not be applicable
 OpenStack in general.  The OpenStack Foundation Documents can be found at http://docs.openstack.org/.
 
 Catalyst Cloud Regions
 ======================
 
-There are two Catalyst Cloud Regions currently: nz-por-1 and nz_wlg_2.  
-nz-por-1 is housed in the Catalyst Porirua data center.  It has more 
-capacity than the smaller nz_wlg_2 region housed in the Catalyst Central 
-Wellington data center.  If you are unsure about which region you should 
+There are two Catalyst Cloud Regions currently: nz-por-1 and nz_wlg_2.
+nz-por-1 is housed in the Catalyst Porirua data center.  It has more
+capacity than the smaller nz_wlg_2 region housed in the Catalyst Central
+Wellington data center.  If you are unsure about which region you should
 deploy resources to, use nz-por-1
 
 Tenants, Projects, Users
@@ -32,7 +32,7 @@ Spawning your first Instance
 Network Requirements
 ~~~~~~~~~~~~~~~~~~~~
 
-Before spawning an instance, it is necessary to have some network resources 
+Before spawning an instance, it is necessary to have some network resources
 in place.  These may have already been created for you.
 
 The requirements are:
@@ -41,7 +41,7 @@ The requirements are:
 * A Subnet with addressing and DHCP/DNS servers configured
 * A Router with a gateway set and an interface in a virtual network
 
-Catalyst operate a number of recursive DNS servers in each cloud region for 
+Catalyst operate a number of recursive DNS servers in each cloud region for
 use by Catalyst Cloud instances, free of charge. They are:
 
 +----------+-----------------------------------------------+
@@ -55,8 +55,8 @@ use by Catalyst Cloud instances, free of charge. They are:
 Creating Required Network Elements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If a router and network/subnet don't already exist, create them. Keep any 
-network requirements in mind when choosing addressing for your networks, 
+If a router and network/subnet don't already exist, create them. Keep any
+network requirements in mind when choosing addressing for your networks,
 in case you want to build a tunnel-mode VPN in the future. ::
 
  $ neutron router-create border-router
@@ -71,10 +71,10 @@ in case you want to build a tunnel-mode VPN in the future. ::
  | status                | ACTIVE                               |
  | tenant_id             | TENANT_ID                            |
  +-----------------------+--------------------------------------+
- 
+
  $ neutron router-gateway-set border-router public-net
  Set gateway for router border-router
- 
+
  $ neutron net-create  10.0.0.0/24
  Created a new network:
  +----------------+--------------------------------------+
@@ -88,7 +88,7 @@ in case you want to build a tunnel-mode VPN in the future. ::
  | subnets        |                                      |
  | tenant_id      | TENANT_ID                            |
  +----------------+--------------------------------------+
- 
+
  $  neutron subnet-create --name 10.0.0.0/24 --allocation-pool \
      start=10.0.0.10,end=10.0.0.200 --dns-nameserver NAMESERVER_1 \
      --dns-nameserver NAMESERVER_2 --dns-nameserver NAMESERVER_3 \
@@ -111,7 +111,7 @@ in case you want to build a tunnel-mode VPN in the future. ::
  | network_id       | NETWORK_ID                                  |
  | tenant_id        | TENANT_ID                                   |
  +------------------+---------------------------------------------+
- 
+
  $ neutron router-interface-add border-router 10.0.0.0/24
  Added interface INTERFACE_ID to router border-router.
 
@@ -119,9 +119,9 @@ in case you want to build a tunnel-mode VPN in the future. ::
 Choosing a Flavor
 ~~~~~~~~~~~~~~~~~
 
-The flavor of an instance is the disk, cpu, and memory specifications of an 
-instance.  Use 'nova flavor-list' to get a list.  Catalyst flavors are named 
-'cX.cY.cZ', where X is the 'compute generation', Y is the number of vCPUs, 
+The flavor of an instance is the disk, cpu, and memory specifications of an
+instance.  Use 'nova flavor-list' to get a list.  Catalyst flavors are named
+'cX.cY.cZ', where X is the 'compute generation', Y is the number of vCPUs,
 and Z is the number of gigabytes of memory. ::
 
  $ nova flavor-list
@@ -153,10 +153,10 @@ Let's make a small c1.c1r1 instance. (id: 3931e022-24e7-4678-bc3f-ee86ec129819)
 Choosing an Image
 ~~~~~~~~~~~~~~~~~
 
-In order to create an instance, you will need to have a pre-built Operating 
-System in the form of an Image.  Images are stored in the Glance service.  
-Catalyst provide a set of images for general use.  If none of those are 
-sufficient, custom images can be uploaded to Glance by anyone. Here is an 
+In order to create an instance, you will need to have a pre-built Operating
+System in the form of an Image.  Images are stored in the Glance service.
+Catalyst provide a set of images for general use.  If none of those are
+sufficient, custom images can be uploaded to Glance by anyone. Here is an
 example of how to locate a suitable image. ::
 
  $ glance image-list
@@ -169,23 +169,23 @@ example of how to locate a suitable image. ::
  | 0368593a-60ef-48a3-885a-add8dfefe569 | ubuntu-14.04-x86_64   | raw         | bare             | 2361393152 | active |
  +--------------------------------------+-----------------------+-------------+------------------+------------+--------+
 
-Let's use the ubuntu image for to create this instance. 
-(id: 0368593a-60ef-48a3-885a-add8dfefe569)  Note: These IDs will be different 
-in each region. Further, images are periodically updated.  The ID of an Ubuntu 
+Let's use the ubuntu image for to create this instance.
+(id: 0368593a-60ef-48a3-885a-add8dfefe569)  Note: These IDs will be different
+in each region. Further, images are periodically updated.  The ID of an Ubuntu
 image will change over time.
 
 Uploading an SSH key
 ~~~~~~~~~~~~~~~~~~~~
 
-When an instance is created, OpenStack pass an ssh key to the instance 
-which can be used for shell access.  By default, Ubuntu will install 
+When an instance is created, OpenStack pass an ssh key to the instance
+which can be used for shell access.  By default, Ubuntu will install
 this key for the 'ubuntu' user.  Other operating systems behave differently.
-  Use 'nova keypair-add' to upload your Public SSH key.  Tip: name you key 
-using information like the username and host on which the ssh key was 
+Use 'nova keypair-add' to upload your Public SSH key.  Tip: name you key
+using information like the username and host on which the ssh key was
 generated so that it is easy to identify later. ::
 
  $ nova keypair-add --pub-key ~/.ssh/id_rsa.pub username-hostname
- $ nova keypair-list 
+ $ nova keypair-list
  +-------------------+-------------------------------------------------+
  | Name              | Fingerprint                                     |
  +-------------------+-------------------------------------------------+
@@ -207,20 +207,20 @@ Use Neutron to locate the correct network to use. ::
  | MY_NETWORK_ID                        | mynetwork  | MY_SUBNET_ID 10.0.0.0/24 |
  +--------------------------------------+------------+--------------------------+
 
-The 'public-net' is used by routers to access the Internet.  Instances 
-may not be booted on this network.  Let's use mynetwork to boot our instance. 
+The 'public-net' is used by routers to access the Internet.  Instances
+may not be booted on this network.  Let's use mynetwork to boot our instance.
 (id: MY_NETWORK_ID) Note: These IDs will be different in each region.
 
 Booting an Instance
 ~~~~~~~~~~~~~~~~~~~
 
-Use the 'nova boot' command and supply the information we gathered in previous 
-steps, being sure to replace FLAVOR, IMAGE, KEY_NAME, MY_NETWORK_ID, and 
+Use the 'nova boot' command and supply the information we gathered in previous
+steps, being sure to replace FLAVOR, IMAGE, KEY_NAME, MY_NETWORK_ID, and
 INSTANCE_NAME with appropriate values.  ::
 
  nova boot --flavor FLAVOR --image IMAGE --key-name KEY_NAME --nic net-id=MY_NETWORK_ID INSTANCE_NAME
 
-After issuing that command, details about the new Instance, including its id 
+After issuing that command, details about the new Instance, including its id
 will be provided. ::
 
  +--------------------------------------+------------------------------------------------------------+
@@ -254,9 +254,9 @@ will be provided. ::
  | user_id                              | USER_ID                                                    |
  +--------------------------------------+------------------------------------------------------------+
 
-Note that the status is 'BUILD.'  Catalyst Cloud instances build very 
-quickly, but it still takes a few seconds.  Wait a few seconds and ask for 
-the status of this instance using the ID or name(if unique) of this instance. ::
+Note that the status is 'BUILD.'  Catalyst Cloud instances build very
+quickly, but it still takes a few seconds.  Wait a few seconds and ask for
+the status of this instance using the ID or name(if unique) of this instance.::
 
  $ nova show INSTANCE_ID
  +--------------------------------------+------------------------------------------------------------+
@@ -293,10 +293,10 @@ the status of this instance using the ID or name(if unique) of this instance. ::
 Allocate a Floating IP
 ~~~~~~~~~~~~~~~~~~~~~~
 
-In order to connect to our instance, we will need to allocate a floating IP 
-to the instance.  Alternately, one could create a VPN and save some money by 
-avoiding floating IPs altogether.  VPNs are not feasible when the instance 
-will be offering a service to the greater internet.  Use the id of 
+In order to connect to our instance, we will need to allocate a floating IP
+to the instance.  Alternately, one could create a VPN and save some money by
+avoiding floating IPs altogether.  VPNs are not feasible when the instance
+will be offering a service to the greater internet.  Use the id of
 public-net (found via 'neutron net-list') and request a new floating IP. ::
 
  $ neutron floatingip-create PUBLIC_NETWORK_ID
@@ -314,7 +314,7 @@ public-net (found via 'neutron net-list') and request a new floating IP. ::
  | tenant_id           | TENANT_ID                  |
  +---------------------+----------------------------+
 
-Now, get the port id of the instance's interface and associate the floating ip 
+Now, get the port id of the instance's interface and associate the floating ip
 with it. ::
 
  $ nova interface-list INSTANCE_NAME
@@ -323,16 +323,16 @@ with it. ::
  +------------+-------------+-----------------+--------------+-------------------+
  | ACTIVE     | PORT_ID     | MY_NETWORK_ID   | 10.0.0.6     | fa:16:3e:0c:89:14 |
  +------------+-------------+-----------------+--------------+-------------------+
- 
+
  $ neutron floatingip-associate FLOATING_IP_ID PORT_ID
  Associated floating IP FLOATING_IP_ID
 
 Configure Instance Security Groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-At this point, the instance is on the Internet, with a routable IP address of 
-PUBLIC_IP.  By default, instances are put in the 'default' security group.  
-By default, this security group will drop all inbound traffic.  A security 
+At this point, the instance is on the Internet, with a routable IP address of
+PUBLIC_IP.  By default, instances are put in the 'default' security group.
+By default, this security group will drop all inbound traffic.  A security
 group rule is required if inbound access is desired. ::
 
  $ neutron security-group-list
@@ -345,8 +345,8 @@ group rule is required if inbound access is desired. ::
         --protocol tcp --port-range-min 22 --port-range-max 22 \
         --remote-ip-prefix YOUR_CIDR_NETWORK SECURITY_GROUP_ID
 
-If you are unsure of what YOUR_CIDR_NETWORK should be, ask your network admin, 
-or visit http://ifconfig.me and get your IP address.  Use "IP_ADDRESS/32" as 
+If you are unsure of what YOUR_CIDR_NETWORK should be, ask your network admin,
+or visit http://ifconfig.me and get your IP address.  Use "IP_ADDRESS/32" as
 YOUR_CIDR_NETWORK to allow traffic only from your current effective IP.
 
 Connect to the new Instance
