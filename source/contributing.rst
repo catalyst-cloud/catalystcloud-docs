@@ -173,6 +173,7 @@ own account on GitHub.
 Clone the docs from your own account::
 
   git clone https://github.com/your-account/catalystcloud-docs.git
+  cd catalystcloud-docs
 
 .. note::
 
@@ -183,6 +184,7 @@ Clone the docs from your own account::
 Sync your fork with upstream changes (you can skip this step if you have just
 cloned the repository)::
 
+  git remote add upstream https://github.com/catalyst/catalystcloud-docs.git
   git fetch upstream
   git checkout master
   git merge upstream/master
@@ -232,7 +234,7 @@ Push the changes back to your personal repository::
 
   git push
 
-Submit a pull request to Catalyst.
+Submit a `pull request`_ to Catalyst.
 
 Our awesome team of document reviewers will peer review and proof read your
 documentation changes and merge your pull request. Once it is merged, the
@@ -252,4 +254,4 @@ References
 .. _`Github`: https://github.com
 .. _`Sphinx's documentation about sections`:
    http://sphinx.pocoo.org/rest.html#sections
-
+.. _`pull request`: https://help.github.com/articles/using-pull-requests/
