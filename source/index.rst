@@ -13,6 +13,7 @@ Contents:
 
    getting-started
    cloud-tunnel
+   contributing
 
 Indices and tables
 ==================
