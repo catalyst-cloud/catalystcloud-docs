@@ -7,9 +7,8 @@ interact with the cloud APIs through easy-to-use commands.
 
 .. seealso::
 
-  OpenStack upstream documentation on how to install and use the command line
-  tools can be found at:
-  http://docs.openstack.org/cli-reference/
+  The OpenStack upstream documentation on how to install and use the command
+  line tools can be found at: http://docs.openstack.org/cli-reference/
 
 ********************************
 Installing the OpenStack clients
@@ -40,17 +39,17 @@ Configuring the OpenStack clients
 Source an OpenStack RC file
 ===========================
 
-By default, the OpenStack client tools will get their configuraton from
-environment variables. To help you define these variables the cloud dashboard
-allows you to download an OpenStack RC file from which you can easily source
-the required configuration.
+When no configuration arguments are passed, the OpenStack client tools will try
+to obtain their configuraton from environment variables. To help you define
+these variables the cloud dashboard allows you to download an OpenStack RC file
+from which you can easily source the required configuration.
 
 To download an OpenStack RC file from the dashboard:
 
 * Log to your project on the dashboard and select your preferred region.
 
 * Go to "Access and Security", select the "API Access" tab and click on
-  "Download OpenStack RC File". Save this file to the host where the client
+  "Download OpenStack RC File". Save this file on the host where the client
   tools are going to be used from.
 
 * Source the configuration from the OpenStack RC file:
@@ -59,7 +58,7 @@ To download an OpenStack RC file from the dashboard:
 
     source projectname-openrc.sh
 
-* When prompted for a password, enter the password for the user who downloaded
+* When prompted for a password, enter the password of the user who downloaded
   the file. Note that your password is not displayed on the screen as you type
   it in.
 
