@@ -134,6 +134,42 @@ an example:
     import this
 
 
+Admonitions
+===========
+
+.. note:: Notes can be used to emphasise a point that requires more attention.
+
+.. code-block:: rst
+
+  .. note:: A short note (fits one line).
+
+  .. note::
+
+    A long note that can span across multiple lines.
+
+.. warning::
+
+  Warnings can be used for to highlight things that must be done with caution.
+
+.. code-block:: rst
+
+  .. warning:: A short warning (fits one line).
+
+  .. warning::
+
+    A long warning that can span across multiple lines.
+
+.. seealso:: See also can be used to refer to other documents.
+
+.. code-block:: rst
+
+  .. seealso:: A short reference (fits one line).
+
+  .. seealso::
+
+    A long reference that can span across multiple lines.
+
+
 Links and references
 ====================
 
