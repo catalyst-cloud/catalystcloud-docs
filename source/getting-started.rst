@@ -1,39 +1,149 @@
+###############
 Getting Started
----------------
+###############
 
-Welcome
+
+*******************
+General information
+*******************
+
+Regions
 =======
 
+The Catalyst Cloud is hosted on multiple regions or geographical locations.
+Regions are completely independent and isolated from each other, providing
+fault tolerance and geographic diversity.
 
-External Resources
-==================
++----------+-----------------+
+| Code     | Name            |
++==========+=================+
+| nz-por-1 | NZ Porirua 1    |
++----------+-----------------+
+| nz_wlg_2 | NZ Wellington 2 |
++----------+-----------------+
 
-The Catalyst Cloud documentation is intended as a supplement to the
-documentation maintained by the OpenStack Foundation.  It is meant
-to clarify details about the Catalyst Cloud that may not be applicable
-OpenStack in general.  The OpenStack Foundation Documents can be found at http://docs.openstack.org/.
+The Porirua region is Catalyst's newest addition to the Catalyst Cloud and has
+got six times the capacity of the Wellington region. We encourage customers to
+use “nz-por-1” as their primary region in New Zealand.
 
-Catalyst Cloud Regions
-======================
+The connectivity between compute instances hosted on different regions takes
+place over the Internet when allowed by your security groups and network
+configuration.
 
-There are two Catalyst Cloud Regions currently: nz-por-1 and nz_wlg_2.
-nz-por-1 is housed in the Catalyst Porirua data center.  It has more
-capacity than the smaller nz_wlg_2 region housed in the Catalyst Central
-Wellington data center.  If you are unsure about which region you should
-deploy resources to, use nz-por-1
+Resources are not replicated automatically across regions unless you do so.
+This provides customers the flexibility to introduce replication where required
+and to fail-over resources independently when needed.
 
-Tenants, Projects, Users
-========================
+Changing regions
+----------------
+
+The web dashboard has got a region selector dropbox on the top bar.
+
+The command line clients pick up the region from the $OS_REGION_NAME
+environment variable. To define the variable:
+
+.. code-block:: bash
+
+  export OS_REGION_NAME="region-code"
+
+Endpoints
+=========
+
+Once authenticated, you can obtain the service catalogue and the list of API
+endpoints on the current region from the identity service.
+
+From the dashboard, you can find the endpoints under Access and Security, API
+endpoints.
+
+From the command line tools, you can run "keystone catalog" to list the
+services and API endpoints of the current region.
+
+Endpoints for “nz-por-1”
+------------------------
+
++--------------+------------------------------------------------------------+
+| Service      | Endpoint                                                   |
++==============+============================================================+
+| compute      | https://api.nz-por-1.catalystcloud.io:8774/v2/%tenantid%   |
++--------------+------------------------------------------------------------+
+| computev3    | https://api.nz-por-1.catalystcloud.io:8774/v3              |
++--------------+------------------------------------------------------------+
+| ec2          | https://api.nz-por-1.catalystcloud.io:8773/services/Cloud  |
++--------------+------------------------------------------------------------+
+| identity     | https://api.cloud.catalyst.net.nz:5000/v2.0                |
++--------------+------------------------------------------------------------+
+| image        | https://api.nz-por-1.catalystcloud.io:9292                 |
++--------------+------------------------------------------------------------+
+| metering     | http://api.nz-por-1.catalystcloud.io:8777                  |
++--------------+------------------------------------------------------------+
+| network      | https://api.nz-por-1.catalystcloud.io:9696/                |
++--------------+------------------------------------------------------------+
+| object-store | https://api.nz-por-1.catalystcloud.io:8443/swift/v1        |
++--------------+------------------------------------------------------------+
+| rating       | https://api.nz-por-1.catalystcloud.io:8788/                |
++--------------+------------------------------------------------------------+
+| s3           | https://api.cloud.catalyst.net.nz:8443/swift/v1            |
++--------------+------------------------------------------------------------+
+| volume       |  https://api.nz-por-1.catalystcloud.io:8776/v1/%tenantid%  |
++--------------+------------------------------------------------------------+
+| volumev2     | https://api.nz-por-1.catalystcloud.io:8776/v2/%tenantid%   |
++--------------+------------------------------------------------------------+
+
+Endpoints for “nz_wlg_2”
+------------------------
+
++--------------+-------------------------------------------------------+
+| Service      | Endpoint                                              |
++==============+=======================================================+
+| compute      | https://api.cloud.catalyst.net.nz:8774/v2/%tenantid%  |
++--------------+-------------------------------------------------------+
+| computev3    | https://api.cloud.catalyst.net.nz:8774/v3             |
++--------------+-------------------------------------------------------+
+| ec2          | https://api.cloud.catalyst.net.nz:8773/services/Cloud |
++--------------+-------------------------------------------------------+
+| identity     | https://api.cloud.catalyst.net.nz:5000/v2.0           |
++--------------+-------------------------------------------------------+
+| image        | https://api.cloud.catalyst.net.nz:9292                |
++--------------+-------------------------------------------------------+
+| metering     | http://api.cloud.catalyst.net.nz:8777                 |
++--------------+-------------------------------------------------------+
+| network      | https://api.cloud.catalyst.net.nz:9696/               |
++--------------+-------------------------------------------------------+
+| object-store | https://api.cloud.catalyst.net.nz:8443/swift/v1       |
++--------------+-------------------------------------------------------+
+| rating       | https://api.cloud.catalyst.net.nz:8788/               |
++--------------+-------------------------------------------------------+
+| s3           | https://api.cloud.catalyst.net.nz:8443/swift/v1       |
++--------------+-------------------------------------------------------+
+| volume       | https://api.cloud.catalyst.net.nz:8776/v1/%tenantid%  |
++--------------+-------------------------------------------------------+
+| volumev2     | https://api.cloud.catalyst.net.nz:8776/v2/%tenantid%  |
++--------------+-------------------------------------------------------+
+
+DNS servers
+===========
+
+Catalyst operate a number of recursive DNS servers in each cloud region for use
+by Catalyst Cloud instances, free of charge. They are:
+
++----------+------------------------------------------------+
+|  Region  | DNS Servers                                    |
++==========+================================================+
+| nz-por-1 | 202.78.247.197, 202.78.247.198, 202.78.247.199 |
++----------+------------------------------------------------+
+| nz_wlg_2 | 202.78.240.213, 202.78.240.214, 202.78.240.215 |
++----------+------------------------------------------------+
 
 
-Spawning your first Instance
-============================
+*****************************
+Launching your first instance
+*****************************
 
 Network Requirements
-~~~~~~~~~~~~~~~~~~~~
+====================
 
-Before spawning an instance, it is necessary to have some network resources
-in place.  These may have already been created for you.
+Before spawning an instance, it is necessary to have some network resources in
+place. These may have already been created for you.
 
 The requirements are:
 
@@ -44,16 +154,16 @@ The requirements are:
 Catalyst operate a number of recursive DNS servers in each cloud region for
 use by Catalyst Cloud instances, free of charge. They are:
 
-+----------+-----------------------------------------------+
-|  Region  | DNS Servers                                   |
-+----------+-----------------------------------------------+
-| nz-por-1 | 202.78.247.197, 202.78.247.198, 202.78.247.199|
-+----------+-----------------------------------------------+
-| nz_wlg_2 | 202.78.240.213, 202.78.240.214, 202.78.240.215|
-+----------+-----------------------------------------------+
++----------+------------------------------------------------+
+|  Region  | DNS Servers                                    |
++==========+================================================+
+| nz-por-1 | 202.78.247.197, 202.78.247.198, 202.78.247.199 |
++----------+------------------------------------------------+
+| nz_wlg_2 | 202.78.240.213, 202.78.240.214, 202.78.240.215 |
++----------+------------------------------------------------+
 
 Creating Required Network Elements
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==================================
 
 If a router and network/subnet don't already exist, create them. Keep any
 network requirements in mind when choosing addressing for your networks,
@@ -115,9 +225,8 @@ in case you want to build a tunnel-mode VPN in the future. ::
  $ neutron router-interface-add border-router 10.0.0.0/24
  Added interface INTERFACE_ID to router border-router.
 
-
 Choosing a Flavor
-~~~~~~~~~~~~~~~~~
+=================
 
 The flavor of an instance is the disk, cpu, and memory specifications of an
 instance.  Use 'nova flavor-list' to get a list.  Catalyst flavors are named
@@ -147,11 +256,10 @@ and Z is the number of gigabytes of memory. ::
  +--------------------------------------+------------------+-----------+------+-----------+------+-------+-------------+-----------+
 
 Let's make a small c1.c1r1 instance. (id: 3931e022-24e7-4678-bc3f-ee86ec129819)
-  Note: These IDs will be different in each region.
-
+Note: These IDs will be different in each region.
 
 Choosing an Image
-~~~~~~~~~~~~~~~~~
+=================
 
 In order to create an instance, you will need to have a pre-built Operating
 System in the form of an Image.  Images are stored in the Glance service.
@@ -175,7 +283,7 @@ in each region. Further, images are periodically updated.  The ID of an Ubuntu
 image will change over time.
 
 Uploading an SSH key
-~~~~~~~~~~~~~~~~~~~~
+====================
 
 When an instance is created, OpenStack pass an ssh key to the instance
 which can be used for shell access.  By default, Ubuntu will install
@@ -195,7 +303,7 @@ generated so that it is easy to identify later. ::
 Note: These keypairs must be created in each region being used.
 
 Choosing a Network
-~~~~~~~~~~~~~~~~~~
+==================
 
 Use Neutron to locate the correct network to use. ::
 
@@ -212,7 +320,7 @@ may not be booted on this network.  Let's use mynetwork to boot our instance.
 (id: MY_NETWORK_ID) Note: These IDs will be different in each region.
 
 Booting an Instance
-~~~~~~~~~~~~~~~~~~~
+===================
 
 Use the 'nova boot' command and supply the information we gathered in previous
 steps, being sure to replace FLAVOR, IMAGE, KEY_NAME, MY_NETWORK_ID, and
@@ -291,7 +399,7 @@ the status of this instance using the ID or name(if unique) of this instance.::
  +--------------------------------------+------------------------------------------------------------+
 
 Allocate a Floating IP
-~~~~~~~~~~~~~~~~~~~~~~
+======================
 
 In order to connect to our instance, we will need to allocate a floating IP
 to the instance.  Alternately, one could create a VPN and save some money by
@@ -328,7 +436,7 @@ with it. ::
  Associated floating IP FLOATING_IP_ID
 
 Configure Instance Security Groups
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+==================================
 
 At this point, the instance is on the Internet, with a routable IP address of
 PUBLIC_IP.  By default, instances are put in the 'default' security group.
@@ -350,7 +458,7 @@ or visit http://ifconfig.me and get your IP address.  Use "IP_ADDRESS/32" as
 YOUR_CIDR_NETWORK to allow traffic only from your current effective IP.
 
 Connect to the new Instance
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+===========================
 
 This should be as easy as: ::
 
