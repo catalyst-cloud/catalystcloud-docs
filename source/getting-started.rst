@@ -37,7 +37,15 @@ and to fail-over resources independently when needed.
 Changing regions
 ----------------
 
-The web dashboard has got a region selector dropbox on the top bar.
+Dashboard
+^^^^^^^^^
+
+The web dashboard has got a region selector dropbox on the top bar. It
+indicates the current region you are connected to and allows you to easily
+switch between regions.
+
+Command line clients
+^^^^^^^^^^^^^^^^^^^^
 
 The command line clients pick up the region from the $OS_REGION_NAME
 environment variable. To define the variable:
@@ -45,6 +53,9 @@ environment variable. To define the variable:
 .. code-block:: bash
 
   export OS_REGION_NAME="region-code"
+
+Alternatively you can use the "--os-region-name" option to specify the region
+on each call.
 
 Endpoints
 =========
