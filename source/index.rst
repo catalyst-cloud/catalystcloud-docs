@@ -3,8 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Catalyst Cloud's documentation!
-==========================================
+############################
+Catalyst Cloud documentation
+############################
 
 Contents:
 
@@ -16,10 +17,20 @@ Contents:
    cloud-tunnel
    contributing
 
+******************
+External resources
+******************
+
+The Catalyst Cloud documentation is intended as a supplement to the
+documentation maintained by the OpenStack Foundation.  It is meant to clarify
+details about the Catalyst Cloud that may not be applicable OpenStack in
+general. The OpenStack Foundation documents can be found at
+http://docs.openstack.org/.
+
+******************
 Indices and tables
-==================
+******************
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 
