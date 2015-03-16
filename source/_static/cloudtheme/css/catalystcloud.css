@@ -1883,6 +1883,8 @@ h3 {
     background-color: #1D414E; }
   .navbar-default .navbar-brand {
     padding: 8px 15px; }
+    .navbar-default .navbar-brand img {
+      height: 36px; }
 
 /* Mobile Search (768px and below) */
 @media (max-width: 767px) {
@@ -1929,7 +1931,7 @@ div.sidebar {
       display: block;
       padding: 8px 10px;
       color: #1D414E;
-      font-family: "latoblack"; }
+      font-family: "latosemibold"; }
   .sidebar .toctree-l1 ul,
   .mobile-nav .toctree-l1 ul {
     padding: 0 0 10px; }
@@ -1973,7 +1975,7 @@ div.sidebar {
 
 /*header link icon */
 a.headerlink {
-  color: #95BCD3;
+  color: #CCCCCC;
   visibility: hidden;
   font-size: 14px; }
   a.headerlink:after {
@@ -1986,7 +1988,8 @@ a.headerlink {
 
 /* Tables */
 table {
-  border: 1px solid #DDDDDD; }
+  border: 1px solid #DDDDDD;
+  word-break: break-word; }
   table tr.row-odd {
     background-color: #F2F2F2; }
   table.footnote {
@@ -1996,6 +1999,9 @@ table {
       border-top: none; }
     table.footnote td {
       border-top: none; }
+
+.section table {
+  width: auto; }
 
 /* Responsive images */
 .section img {

@@ -50,6 +50,9 @@ h3 {
   }
   .navbar-brand {
     padding: 8px 15px;
+    img {
+      height: 36px;
+    }
   }
 }
 
@@ -110,7 +113,7 @@ div.sidebar {
         display: block;
         padding: 8px 10px;
         color: $teal;
-        font-family: "latoblack";
+        font-family: "latosemibold";
       }
     }
     
@@ -173,7 +176,7 @@ div.sidebar {
 
 /*header link icon */
 a.headerlink  {
-  color: #95BCD3;
+  color: #CCCCCC;
   visibility: hidden;
   font-size: 14px;
   &:after {
@@ -191,6 +194,7 @@ a.headerlink  {
 
 table {
   border: 1px solid #DDDDDD;
+  word-break: break-word;
 
   tr {
     &.row-odd {
@@ -208,6 +212,14 @@ table {
     td {
       border-top: none;
     }
+  }
+  td {
+    
+  }
+}
+.section {
+  table {
+    width: auto;
   }
 }
 
