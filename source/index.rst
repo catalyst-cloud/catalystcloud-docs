@@ -13,9 +13,9 @@ Contents:
    :maxdepth: 2
 
    getting-started
-   command-line-clients
    compute
    image
+   tutorials
    cloud-tunnel
    contributing
 
