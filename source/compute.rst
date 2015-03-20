@@ -26,6 +26,15 @@ You can associate one or more security groups to your compute instances.
 Creating a security group
 =========================
 
+The default behaviour of security groups is to deny all traffic. Rules added to
+security groups are all "allow" rules.
+
+.. note::
+
+  Failing to set up the appropriate security group rules is a common mistake
+  that prevents users from reaching their compute instances, or compute
+  instances to communicate with each other.
+
 From the dashboard
 ------------------
 

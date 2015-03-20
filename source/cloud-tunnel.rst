@@ -7,7 +7,7 @@ anywhere via an encrypted and authenticated SOCKS proxy over SSH. Below you
 will find instructions on how to use your cloud tunnel from different operating
 systems.
 
-You should have received the IP address of your cloud tunnel in our welcome
+You should have received the IP address of your cloud tunnel on our welcome
 email. This IP will be referred to as “[ip]” here after. You can alternatively
 use any compute instance running SSHD as a SOCKS proxy. All you have to do is
 to replace the username and IP used in the examples below.

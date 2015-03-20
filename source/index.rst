@@ -15,6 +15,7 @@ Contents:
    getting-started
    command-line-clients
    compute
+   image
    cloud-tunnel
    contributing
 
