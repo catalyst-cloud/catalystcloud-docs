@@ -49,5 +49,5 @@ tools, you can easily located them by running:
 
 .. code-block:: bash
 
-  glance image-list --owner <TENANT_ID> --is-public True
+  glance image-list --owner 94b566de52f9423fab80ceee8c0a4a23 --is-public True
 
