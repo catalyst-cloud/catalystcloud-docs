@@ -15,6 +15,7 @@ Contents:
    getting-started
    block-storage
    compute
+   dashboard
    image
    object-storage
    tutorials
