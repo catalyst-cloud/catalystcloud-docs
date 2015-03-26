@@ -3,6 +3,44 @@ Object storage
 ##############
 
 
+********
+Overview
+********
+
+Our object storage service is provided a fully distributed object storage
+system, with no single points of failure and scalable to the exabyte level. The
+system is self-healing and self-managing. Data is seamlessly replicated on
+three different servers, making it fault tolerant and resilient. The loss of a
+node or a disk leads to the data being quickly recovered on another disk or
+node.
+
+Data stored on object storage is currently replicated on three different nodes
+within the same region. However, with the introduction of the Porirua region
+and the upcoming Auckland region, object storage will be soon replicated across
+regions, providing even greater durability for your data.
+
+The system runs frequent CRC checks to protect data from soft corruption. The
+corruption of a single bit can be detected and automatically restored to a
+healthy state.
+
+Object storage is scalable, highly available and simple to use. This makes it
+the ideal place to persist the state of systems designed to run on the cloud or
+the media assets of your web applications.
+
+
+*********
+Swift API
+*********
+
+The object storage service has a Swift emulation layer that supports common
+Swift calls and operations.
+
+.. seealso::
+
+  The features supported by the Swift emulation layer can be found at
+  http://ceph.com/docs/master/radosgw/swift/.
+
+
 ******
 S3 API
 ******
