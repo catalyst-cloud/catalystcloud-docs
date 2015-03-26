@@ -7,12 +7,11 @@ Object storage
 Overview
 ********
 
-Our object storage service is provided a fully distributed object storage
-system, with no single points of failure and scalable to the exabyte level. The
-system is self-healing and self-managing. Data is seamlessly replicated on
-three different servers, making it fault tolerant and resilient. The loss of a
-node or a disk leads to the data being quickly recovered on another disk or
-node.
+Our object storage service is provided by a fully distributed storage system,
+with no single points of failure and scalable to the exabyte level. The system
+is self-healing and self-managing. Data is seamlessly replicated on three
+different servers, making it fault tolerant and resilient. The loss of a node
+or a disk leads to the data being quickly recovered on another disk or node.
 
 Data stored on object storage is currently replicated on three different nodes
 within the same region. However, with the introduction of the Porirua region
@@ -25,7 +24,7 @@ healthy state.
 
 Object storage is scalable, highly available and simple to use. This makes it
 the ideal place to persist the state of systems designed to run on the cloud or
-the media assets of your web applications.
+the media assets for your web applications.
 
 
 *********
@@ -65,8 +64,8 @@ Security, API Access), or using the command line tools:
   keystone ec2-credentials-create
 
 If you are using boto to interact with the API, you need boto installed on your
-current Python environment. The example below illustrates how intall boto on
-on a virtual environment:
+current Python environment. The example below illustrates how intall boto on a
+virtual environment:
 
 .. code-block:: bash
 
