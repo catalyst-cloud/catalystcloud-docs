@@ -20,10 +20,9 @@ healthy state.
 Storage tiers
 =============
 
-Currently the Catalyst Cloud provides a single storage tier called b1.standard,
-which combines SSDs with spinning drives to provide a good balance between
-performance and cost. Data stored on the b1.standard storage tier is replicated
-on three different storage nodes on the same region.
-
+Currently the Catalyst Cloud provides a single storage tier called
+``b1.standard``, which combines SSDs with spinning drives to provide a good
+balance between performance and cost. Data stored on the ``b1.standard``
+storage tier is replicated on three different storage nodes on the same region.
 In the future more storage tiers will be provided, offering options in terms of
 cost and performance.

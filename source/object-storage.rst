@@ -39,6 +39,17 @@ Swift calls and operations.
   The features supported by the Swift emulation layer can be found at
   http://ceph.com/docs/master/radosgw/swift/.
 
+API endpoints
+=============
+
++----------+-----------------------------------------------------+
+| Region   | Endpoint                                            |
++==========+=====================================================+
+| nz-por-1 | https://api.nz-por-1.catalystcloud.io:8443/swift/v1 |
++----------+-----------------------------------------------------+
+| nz_wlg_2 | https://api.cloud.catalyst.net.nz:8443/swift/v1     |
++----------+-----------------------------------------------------+
+
 
 ******
 S3 API
@@ -51,6 +62,17 @@ common S3 calls and operations.
 
   The features supported by the S3 emulation layer can be found at
   http://ceph.com/docs/master/radosgw/s3/.
+
+API endpoints
+=============
+
++----------+-----------------------------------------------------+
+| Region   | Endpoint                                            |
++==========+=====================================================+
+| nz-por-1 | https://api.nz-por-1.catalystcloud.io:8443/swift/v1 |
++----------+-----------------------------------------------------+
+| nz_wlg_2 | https://api.cloud.catalyst.net.nz:8443/swift/v1     |
++----------+-----------------------------------------------------+
 
 Requirements
 ============
