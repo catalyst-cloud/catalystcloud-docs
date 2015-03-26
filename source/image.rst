@@ -32,6 +32,7 @@ your applications on the cloud. The images provided by Catalyst include:
 
 * Ubuntu Linux (official cloud image provided by Canonical)
 * CentOS (official cloud image provided by the CentOS community)
+* CoreOS (official OpenStack image provided by CoreOS)
 * Debian (official cloud image provided by the Debian community)
 
 Before using them, you should always confirm that they are suitable for your
