@@ -27,8 +27,8 @@ Security, API Access), or using the command line tools:
   keystone ec2-credentials-create
 
 If you are using boto to interact with the API, you need boto installed on your
-current Python environment. The example bellow illustrates how to get boto
-installed on a virtual environment on a Debian based Linux distribution:
+current Python environment. The example below illustrates how intall boto on
+on a virtual environment:
 
 .. code-block:: bash
 
@@ -45,8 +45,8 @@ installed on a virtual environment on a Debian based Linux distribution:
 Sample code
 ===========
 
-The example below illustrates how you can use boto to interact with the S3
-compatible API:
+The code below demonstrates how you can use boto to interact with the S3
+compatible API.
 
 .. code-block:: python
 
