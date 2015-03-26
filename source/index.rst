@@ -13,6 +13,7 @@ Contents:
    :maxdepth: 2
 
    getting-started
+   block-storage
    compute
    image
    object-storage
