@@ -15,6 +15,7 @@ Contents:
    getting-started
    compute
    image
+   object-storage
    tutorials
    cloud-tunnel
    contributing
