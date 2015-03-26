@@ -133,9 +133,11 @@ In order to create an instance, you will need to have a pre-built Operating
 System in the form of an Image.  Images are stored in the Glance service.
 Catalyst provide a set of images for general use.  If none of those are
 sufficient, custom images can be uploaded to Glance by anyone. Here is an
-example of how to locate a suitable image. ::
+example of how to locate a suitable image.
 
- $ glance image-list
+.. code-block:: bash
+
+ $ glance image-list --owner 94b566de52f9423fab80ceee8c0a4a23 --is-public True
  +--------------------------------------+-----------------------+-------------+------------------+------------+--------+
  | ID                                   | Name                  | Disk Format | Container Format | Size       | Status |
  +--------------------------------------+-----------------------+-------------+------------------+------------+--------+
