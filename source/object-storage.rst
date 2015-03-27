@@ -60,7 +60,7 @@ Requirements
 
 You need valid Openstack credentials to interact using the Swift API.
 These can be obtained from the RC file (under Access &
-Security, API Access), or using the command line tools).
+Security, API Access, or using the command line tools).
 
 The standard client library is Python Swiftclient. This can be installed
 into your current Python environment. The example below illustrates:
@@ -135,9 +135,9 @@ API endpoints
 +----------+-----------------------------------------------------+
 | Region   | Endpoint                                            |
 +==========+=====================================================+
-| nz-por-1 | https://api.nz-por-1.catalystcloud.io               |
+| nz-por-1 | https://api.nz-por-1.catalystcloud.io:8443          |
 +----------+-----------------------------------------------------+
-| nz_wlg_2 | https://api.cloud.catalyst.net.nz                   |
+| nz_wlg_2 | https://api.cloud.catalyst.net.nz:8443              |
 +----------+-----------------------------------------------------+
 
 Requirements
