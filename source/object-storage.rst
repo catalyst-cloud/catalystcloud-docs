@@ -42,13 +42,79 @@ Swift calls and operations.
 API endpoints
 =============
 
-+----------+-----------------------------------------------------+
-| Region   | Endpoint                                            |
-+==========+=====================================================+
-| nz-por-1 | https://api.nz-por-1.catalystcloud.io:8443/swift/v1 |
-+----------+-----------------------------------------------------+
-| nz_wlg_2 | https://api.cloud.catalyst.net.nz:8443/swift/v1     |
-+----------+-----------------------------------------------------+
++----------+---------+-----------------------------------------------------+
+| Region   | Version | Endpoint                                            |
++==========+=========+=====================================================+
+| nz-por-1 | 1       | https://api.nz-por-1.catalystcloud.io:8443/swift/v1 |
++----------+---------+-----------------------------------------------------+
+|          | 2       | https://api.api.nz-por-1.catalystcloud.io:5000/v2.0 |
++----------+---------+-----------------------------------------------------+
+| nz_wlg_2 | 1       | https://api.cloud.catalyst.net.nz:8443/swift/v1     |
++----------+---------+-----------------------------------------------------+
+|          | 2       | https://api.cloud.catalyst.net.nz:5000/v2.0         |
++----------+---------+-----------------------------------------------------+
+
+
+Requirements
+============
+
+You need valid Openstack credentials to interact using the Swift API.
+These can be obtained from the RC file (under Access &
+Security, API Access), or using the command line tools).
+
+The standard client library is Python Swiftclient. This can be installed
+into your current Python environment. The example below illustrates:
+
+.. code-block:: bash
+
+  # Make sure you have pip and virtualenv installed
+  sudo apt-get install python-pip python-virtualenv
+
+  # Create a new virtual environment for Python and activate it
+  virtualenv venv
+  source venv/bin/activate
+
+  # Install Python Swiftclient library on your virtual environment
+  pip install python-swiftclient
+
+Sample code
+===========
+
+The code below demonstrates how you can use swiftclient to interact
+with the Swift version 2 compatible API.
+
+.. code-block:: python
+
+  #!/usr/bin/env python
+  import swiftclient
+  user = 'tenant:username'
+  key = 'thepassword'
+  apiurl = 'https://api.cloud.catalyst.net.nz:5000/v2.0'
+
+  conn = swiftclient.Connection(
+          user = user,
+          key = key,
+          authurl = apiurl,
+          insecure = False,
+          auth_version = 2,
+  )
+
+  # Create a new container
+  container_name = 'con0'
+  conn.put_container(container_name)
+
+  # Put an object in it
+  conn.put_object(container_name, 'hello.txt',
+                  contents='Some text',
+                  content_type='text/plain')
+
+  # List all containers and objects
+  for container in conn.get_account()[1]:
+      cname = container['name']
+      print 'container\t{0}'.format(cname)
+
+      for data in conn.get_container(cname)[1]:
+          print '\t{0}\t{1}\t{2}'.format(data['name'], data['bytes'], data['last_modified'])
 
 
 ******
@@ -69,9 +135,9 @@ API endpoints
 +----------+-----------------------------------------------------+
 | Region   | Endpoint                                            |
 +==========+=====================================================+
-| nz-por-1 | https://api.nz-por-1.catalystcloud.io:8443/swift/v1 |
+| nz-por-1 | https://api.nz-por-1.catalystcloud.io               |
 +----------+-----------------------------------------------------+
-| nz_wlg_2 | https://api.cloud.catalyst.net.nz:8443/swift/v1     |
+| nz_wlg_2 | https://api.cloud.catalyst.net.nz                   |
 +----------+-----------------------------------------------------+
 
 Requirements
