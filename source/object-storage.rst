@@ -47,7 +47,7 @@ API endpoints
 +==========+=========+=====================================================+
 | nz-por-1 | 1       | https://api.nz-por-1.catalystcloud.io:8443/swift/v1 |
 +----------+---------+-----------------------------------------------------+
-|          | 2       | https://api.api.nz-por-1.catalystcloud.io:5000/v2.0 |
+|          | 2       | https://api.cloud.catalyst.net.nz:5000/v2.0         |
 +----------+---------+-----------------------------------------------------+
 | nz_wlg_2 | 1       | https://api.cloud.catalyst.net.nz:8443/swift/v1     |
 +----------+---------+-----------------------------------------------------+
@@ -81,7 +81,9 @@ Sample code
 ===========
 
 The code below demonstrates how you can use swiftclient to interact
-with the Swift version 2 compatible API.
+with the Swift version 2 compatible API. Note that this version uses
+the same endpoint for both regions, but you tell it which one you want
+when connecting.
 
 .. code-block:: python
 
@@ -90,6 +92,7 @@ with the Swift version 2 compatible API.
   user = 'tenant:username'
   key = 'thepassword'
   apiurl = 'https://api.cloud.catalyst.net.nz:5000/v2.0'
+  options = {'tenant_name': 'tenant', 'region_name': 'nz-por-1'}
 
   conn = swiftclient.Connection(
           user = user,
@@ -97,15 +100,16 @@ with the Swift version 2 compatible API.
           authurl = apiurl,
           insecure = False,
           auth_version = 2,
+          os_options = options,
   )
 
   # Create a new container
-  container_name = 'con0'
+  container_name = 'mytestbucket'
   conn.put_container(container_name)
 
   # Put an object in it
   conn.put_object(container_name, 'hello.txt',
-                  contents='Some text',
+                  contents='Hello World!',
                   content_type='text/plain')
 
   # List all containers and objects
