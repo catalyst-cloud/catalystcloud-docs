@@ -145,6 +145,7 @@ by Catalyst Cloud instances, free of charge. They are:
 | nz_wlg_2 | 202.78.240.213, 202.78.240.214, 202.78.240.215 |
 +----------+------------------------------------------------+
 
+.. _command-line-tools:
 
 *************************
 Command line client tools
