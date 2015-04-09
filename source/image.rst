@@ -152,7 +152,7 @@ On the dashboard you will find the image you uploaded on “Images & Snapshots�
 under your private images. Click on the Launch button and:
 
 * Select “Boot from image (creates a new volume).” as the instance boot source.
-* Ensure the device size has got at least the same size as the image uploaded.
+* Ensure the device size is at least the same size as the image uploaded.
 * For its first boot you should choose a flavour that provides at least the
   same amount of CPU and RAM the VM had before. Once you confirm the compute
   instance is booting appropriately, if desirable, you can resize it to a

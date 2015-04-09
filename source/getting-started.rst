@@ -23,8 +23,8 @@ fault tolerance and geographic diversity.
 +----------+-----------------+
 
 The Porirua region is Catalyst's newest addition to the Catalyst Cloud and has
-got six times the capacity of the Wellington region. We encourage customers to
-use “nz-por-1” as their primary region in New Zealand.
+six times the capacity of the Wellington region. We encourage customers to use
+“nz-por-1” as their primary region in New Zealand.
 
 The connectivity between compute instances hosted on different regions takes
 place over the Internet when allowed by your security groups and network
@@ -40,9 +40,9 @@ Changing regions
 Dashboard
 ^^^^^^^^^
 
-The web dashboard has got a region selector dropbox on the top bar. It
-indicates the current region you are connected to and allows you to easily
-switch between regions.
+The web dashboard has a region selector dropbox in the top bar. It indicates
+the current region you are connected to and allows you to easily switch
+between regions.
 
 Command line clients
 ^^^^^^^^^^^^^^^^^^^^
