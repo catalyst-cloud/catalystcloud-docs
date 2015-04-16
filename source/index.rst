@@ -18,6 +18,7 @@ Contents:
    dashboard
    image
    object-storage
+   cloud-orchestration
    tutorials
    cloud-tunnel
    contributing
