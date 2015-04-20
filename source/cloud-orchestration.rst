@@ -14,8 +14,9 @@ life-cycle of the application stacks on your behalf. When you change the
 template, it orchestrates the required changes on the infrastructure in the
 appropriate order, respecting the relationship and dependencies defined.
 
-Heat makes auto-scaling easy. You can define a scaling group and a scaling
-policy and Heat will add or remove compute instances to the group as required.
+.. Heat makes auto-scaling easy. You can define a scaling group and a scaling
+   policy and Heat will add or remove compute instances to the group as
+   required.
 
 Heat can be integrated to configuration management systems to provision and
 manage software. Heat can run Puppet or Chef in standalone mode, or be used to
