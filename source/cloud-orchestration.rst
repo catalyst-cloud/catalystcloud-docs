@@ -12,7 +12,7 @@ a simple template language that describes the required resources and their
 relationship. The orchestration service manages the life-cycle of application
 stacks on your behalf. When a template is modified, the service orchestrates
 the required changes to the infrastructure in the appropriate order. Templates
-can be managed like code and versioned on your source control system.
+can be managed like code and stored on your preferred version control system.
 
 .. Heat makes auto-scaling easy. You can define a scaling group and a scaling
    policy and Heat will add or remove compute instances to the group as
