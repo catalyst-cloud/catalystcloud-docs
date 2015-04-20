@@ -7,21 +7,27 @@ Cloud orchestration
 Overview
 ********
 
-Heat allows you to deploy applications using a template that describe the
-required resources and their relationship. The templates can be managed like
-code and stored on your preferred source control system. Heat manages the
-life-cycle of the application stacks on your behalf. When you change the
-template, it orchestrates the required changes on the infrastructure in the
-appropriate order, respecting the relationship and dependencies defined.
+Cloud orchestration allows you to deploy applications and infrastructure using
+a simple template language that describes the required resources and their
+relationship. The orchestration service manages the life-cycle of application
+stacks on your behalf. When a template is modified, the service orchestrates
+the required changes to the infrastructure in the appropriate order. Templates
+can be managed like code and versioned on your source control system.
 
 .. Heat makes auto-scaling easy. You can define a scaling group and a scaling
    policy and Heat will add or remove compute instances to the group as
    required.
 
-Heat can be integrated to configuration management systems to provision and
-manage software. Heat can run Puppet or Chef in standalone mode, or be used to
-present compute instances back to the Puppet/Chef master for software
-configuration.
+The orchestration service can be integrated to configuration management systems
+to provision and manage software. It can run Puppet or Chef in standalone mode,
+or be used to present compute instances back to the Puppet/Chef master for
+software configuration.
+
+The service is currently in beta and available via the APIs and command line
+tools. It will be soon exposed via the web dashboard as well. There are no
+additional charges for the use of the cloud orchestration service. You will
+only pay for the resources consumed by your running application stacks (such as
+compute, network and storage).
 
 Using Heat via the command line tools
 =====================================
