@@ -35,9 +35,3 @@ security groups are all "allow" rules.
   that prevents users from reaching their compute instances, or compute
   instances to communicate with each other.
 
-From the dashboard
-------------------
-
-From the command line clients
------------------------------
-
