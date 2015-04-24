@@ -142,8 +142,8 @@ To upload the converted image to the Catalyst Cloud:
 
 .. code-block:: bash
 
-  glance image-create --disk-format raw --file raw-image.raw --name image-name
-  --is-public=False --progress
+  glance image-create --disk-format raw --container-format bare --file
+  raw-image.raw --name image-name --is-public=False --progress
 
 Launching the VM on the cloud
 -----------------------------
