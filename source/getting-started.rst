@@ -153,6 +153,20 @@ by Catalyst Cloud instances, free of charge. They are:
 | nz_wlg_2 | 202.78.240.213, 202.78.240.214, 202.78.240.215 |
 +----------+------------------------------------------------+
 
+Public networks
+===============
+
+Catalyst operates a public network in each region and a pool of floating IPs
+that can be allocated for your projects. The public networks are:
+
++----------+--------------------------------------+
+|  Region  | ID                                   |
++==========+======================================+
+| nz-por-1 | 849ab1e9-7ac5-4618-8801-e6176fbbcf30 |
++----------+--------------------------------------+
+| nz_wlg_2 | e0ba6b88-5360-492c-9c3d-119948356fd3 |
++----------+--------------------------------------+
+
 .. _command-line-tools:
 
 *************************
