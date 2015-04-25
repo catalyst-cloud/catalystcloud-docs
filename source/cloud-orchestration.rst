@@ -77,6 +77,17 @@ Catalyst Cloud using the Heat orchestration service.
       description: The networks of the deployed server
       value: { get_attr: [server, networks] }
 
+Validate a template
+-------------------
+
+Before launching or updating a stack, you may want to ensure that the heat
+orchestration template (HOT) provided is valid. The following command can be
+used to validate a HOT template:
+
+.. code-block:: bash
+
+  heat template-validate -f template-file.hot
+
 Creating a stack
 ----------------
 
