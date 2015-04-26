@@ -35,6 +35,12 @@ Using Heat via the command line tools
 The following HOT template illustrates how to launch a single instance on the
 Catalyst Cloud using the Heat orchestration service.
 
+.. note::
+
+  The default username for all compute instances created by the cloud
+  orchestration service (Heat) is "ec2-user". This is done to retain
+  compatibility with Amazon AWS CloudFormation.
+
 .. code-block:: yaml
 
   #
@@ -76,12 +82,6 @@ Catalyst Cloud using the Heat orchestration service.
     server_networks:
       description: The networks of the deployed server
       value: { get_attr: [server, networks] }
-
-.. note::
-
-  The default username for all compute instances created by the cloud
-  orchestration service (Heat) is "ec2-user". This is done to retain
-  compatibility with Amazon AWS CloudFormation.
 
 Validate a template
 -------------------
