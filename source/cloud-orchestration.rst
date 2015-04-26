@@ -77,6 +77,12 @@ Catalyst Cloud using the Heat orchestration service.
       description: The networks of the deployed server
       value: { get_attr: [server, networks] }
 
+.. note::
+
+  The default username for all compute instances created by the cloud
+  orchestration service (Heat) is "ec2-user". This is done to retain
+  compatibility with Amazon AWS CloudFormation.
+
 Validate a template
 -------------------
 
