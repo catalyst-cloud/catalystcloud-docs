@@ -158,6 +158,28 @@ Heat will return the following information about the stack:
   | updated_time         | None                                                      |
   +----------------------+-----------------------------------------------------------+
 
+List resources owned by a stack
+-------------------------------
+
+List resources that belong to a stack:
+
+.. code-block:: bash
+
+  heat resource-list mystack
+
+List events related to a stack
+------------------------------
+
+You can list the events related to the life-cycle of a stack with the following
+command.
+
+.. code-block:: bash
+
+  heat event-list mystack
+
+This information is useful to troubleshoot templates, as it allows you to
+identify whether they are producing the expected events and results.
+
 Deleting a stack
 ----------------
 
