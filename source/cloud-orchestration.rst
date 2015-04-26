@@ -39,7 +39,7 @@ Catalyst Cloud using the Heat orchestration service.
 
   The default username for all compute instances created by the cloud
   orchestration service (Heat) is "ec2-user". This is done to retain
-  compatibility with Amazon AWS CloudFormation.
+  compatibility with the AWS CloudFormation service.
 
 .. code-block:: yaml
 
