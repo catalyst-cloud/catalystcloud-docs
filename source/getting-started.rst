@@ -190,7 +190,7 @@ Ubuntu Linux
 .. code-block:: bash
 
   sudo apt-get update
-  sudo apt-get install python-ceilometerclient python-cinderclient python-glanceclient python-keystoneclient python-neutronclient python-novaclient python-swiftclient
+  sudo apt-get install python-ceilometerclient python-cinderclient python-glanceclient python-heatclient python-keystoneclient python-neutronclient python-novaclient python-swiftclient
 
 
 Redhat / CentOS / Fedora Linux
@@ -200,7 +200,7 @@ Redhat / CentOS / Fedora Linux
 
   sudo yum install -y https://rdo.fedorapeople.org/rdo-release.rpm
   sudo yum update -y
-  sudo yum install -y python-ceilometerclient python-cinderclient python-glanceclient python-keystoneclient python-neutronclient python-novaclient python-swiftclient
+  sudo yum install -y python-ceilometerclient python-cinderclient python-glanceclient python-heatclient python-keystoneclient python-neutronclient python-novaclient python-swiftclient
 
 Configuring the OpenStack client tools
 ======================================
