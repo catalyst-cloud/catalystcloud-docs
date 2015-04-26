@@ -161,7 +161,7 @@ Heat will return the following information about the stack:
 List resources owned by a stack
 -------------------------------
 
-List resources that belong to a stack:
+You can list the resources that belong to a stack with the command below:
 
 .. code-block:: bash
 
@@ -171,7 +171,7 @@ List events related to a stack
 ------------------------------
 
 You can list the events related to the life-cycle of a stack with the following
-command.
+command:
 
 .. code-block:: bash
 
@@ -179,6 +179,9 @@ command.
 
 This information is useful to troubleshoot templates, as it allows you to
 identify whether they are producing the expected events and results.
+
+Individual events can be further analysed using the ``heat event-show``
+command.
 
 Deleting a stack
 ----------------
