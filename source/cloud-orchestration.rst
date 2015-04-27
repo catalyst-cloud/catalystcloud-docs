@@ -218,7 +218,7 @@ guide at: http://docs.openstack.org/user-guide/enduser/hot-guide/hot.html
 
 More information on resource types that can be orchestrated by Heat can be
 found at:
-http://docs.openstack.org/developer/heat/template_guide/openstack.html
+http://docs.openstack.org/hot-reference/content/openstack-resource-types.html
 
 .. note::
 

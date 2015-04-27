@@ -32,8 +32,8 @@ resource. For example:
 * Trying to delete a network, when a port is still connected to it (such as a
   router's interface)
 
-Error messages provided by the dashboard tend to be brief and sometime lack the
-details that caused the error. If you are repeatedly being presented with a
+Error messages provided by the dashboard tend to be brief and sometimse lack
+the details that caused the error. If you are repeatedly being presented with a
 delete error, please check whether resource dependencies could be the cause.
 The command line tools are designed to be more verbose and tend to present more
 information about what is causing a delete error.
