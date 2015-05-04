@@ -32,14 +32,21 @@ compute, network and storage).
 Using Heat via the command line tools
 =====================================
 
-The following HOT template illustrates how to launch a single instance on the
-Catalyst Cloud using the Heat orchestration service.
+Sample templates
+----------------
+
+Catalyst has published example templates that demonstrate the use of the cloud
+orchestration service at:
+https://github.com/catalyst/catalystcloud-orchestration.
 
 .. note::
 
   The default username for all compute instances created by the cloud
   orchestration service (Heat) is "ec2-user". This is done to retain
   compatibility with the AWS CloudFormation service.
+
+The following HOT template is a simple example that illustrates how to launch a
+single instance on the Catalyst Cloud using the Heat orchestration service.
 
 .. code-block:: yaml
 
