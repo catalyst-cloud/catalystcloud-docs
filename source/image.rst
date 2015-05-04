@@ -8,11 +8,11 @@ Importing existing virtual machines
 ***********************************
 
 Importing an unchanged existing virtual machine to the Catalyst Cloud is likely
-to work, but to get the best out of it and ensure that all API operations will
-work with your virtual machine, there are some preparation steps and tweaks
-that are highly recommended. For example: cloud VMs have a cloud-init script
-that runs at boot time to fetch the configuration of the compute instance from
-our metadata agent.
+to work out of the box, but to get the best out of it and ensure that all API
+operations will work with your virtual machine, there are some preparation
+steps and tweaks that are highly recommended. For example: cloud VMs have a
+cloud-init script that runs at boot time to fetch the configuration of the
+compute instance from our metadata agent.
 
 Preparing your existing VM
 ==========================
@@ -44,7 +44,7 @@ Configure cloud-init to use EC2 as its metadata source:
   dpkg-reconfigure cloud-init
 
 Compute instances receive their network configuration from our cloud metadata
-agent and DHCP servers. As such, it is recommended to configure its network
+agent and DHCP servers. As such, it is recommended to configure the network
 interfaces (sudo vi /etc/network/interfaces) to use DHCP instead of a static
 IP.
 
@@ -88,9 +88,9 @@ use UUIDs or rename the devices to /dev/vd[a,b,c,...] instead.
   # The device below should be /dev/vda1 instead of /dev/sda1
   /dev/sda1       /               ext3    errors=remount-ro 0       1
 
-Renaming the file system on the original virtual machine will probably to
-prevent you from booting it. To safely rename the devices you can mount the
-image on a loopback device do the changes required.
+Renaming the file system on the original virtual machine will probably prevent
+you from booting it. To safely rename the devices, you should mount the image
+on a loopback device and then change it as required.
 
 .. code-block:: bash
 
@@ -160,10 +160,10 @@ under your private images. Click on the Launch button and:
 
 .. warning::
 
-  Remember that you VM has been imported exactly as it was before, therefore
+  Remember that your VM has been imported exactly as it was before, therefore
   there might be some things, like a host based firewall blocking connections,
   that may prevent you from connecting to it remotely. You can use the console
-  and your existent user credentials to connect to your compute instance and
+  and your existenting user credentials to connect to your compute instance and
   make adjustments to its configuration as required.
 
 
