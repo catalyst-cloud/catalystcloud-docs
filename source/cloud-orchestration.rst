@@ -221,7 +221,7 @@ HOT template format
 *******************
 
 More information on the HOT template format can be found on the OpenStack user
-guide at: http://docs.openstack.org/user-guide/enduser/hot-guide/hot.html
+guide at: http://docs.openstack.org/user-guide/hot-guide/hot.html
 
 More information on resource types that can be orchestrated by Heat can be
 found at:
