@@ -8,7 +8,7 @@ Overview
 ********
 
 The web dashboard is a simple way to interact with The Catalyst Cloud. It can
-be found at https://dashboard.clould.catalyst.net.nz.
+be found at https://dashboard.cloud.catalyst.net.nz.
 
 .. note::
 
@@ -21,6 +21,21 @@ be found at https://dashboard.clould.catalyst.net.nz.
 ***
 FAQ
 ***
+
+I cannot connect to the dashboard
+=================================
+
+Our dashboard and APIs are currently exposed to customers only (not open to the
+public Internet). We ask for your IP address during sign up, so we can provide
+you with access to the dashboard and APIs.
+
+If your IP address has changed or you would like to add more IPs, please
+contact us to change the information provided.
+
+Please note you can access the Catalyst Cloud from a dynamic IP by proxying
+your connectivity through one of your cloud instances. When it comes to your
+compute instances, you are in full control of your own firewall rules and can
+expose them to the Internet.
 
 Failed to delete resource
 =========================
