@@ -3,6 +3,15 @@ Image service
 #############
 
 
+*******************************
+Creating your own custom images
+*******************************
+
+The OpenStack upstream documentation provides detailed instructions on how to
+prepare all major operating systems to run in the cloud:
+http://docs.openstack.org/image-guide/content/ch_creating_images_manually.html
+
+
 ***********************************
 Importing existing virtual machines
 ***********************************
@@ -16,12 +25,6 @@ compute instance from our metadata agent.
 
 Preparing your existing VM
 ==========================
-
-.. seealso::
-
-  The OpenStack upstream documentation provides detailed instructions on how to
-  prepare all major operating systems to run in the cloud:
-  http://docs.openstack.org/image-guide/content/ch_creating_images_manually.html
 
 Debian and Ubuntu Linux
 -----------------------
@@ -102,17 +105,42 @@ on a loopback device and then change it as required.
   If you rename a device in fstab to vda, remember you probably need to apply
   the same changes to the boot loader. Don't forget to run update-grub.
 
+Follow the instructions of the next sections (converting the machine image,
+uploading an image to the cloud and launching a VM based on a custom image) to
+conclude the process.
+
+
+****************************
 Converting the machine image
-============================
+****************************
+
+Please make sure you have converted your image to RAW before uploading it to
+our cloud. While QCOW2 images will also work, they will not support copy on
+write operations. As a result, launching compute instances from these images or
+taking snapshots will take longer.
+
+Tools for image convertion
+==========================
 
 Ensure you have the qemu-utils package installed, as it provides the tools
-required to convert the disk images:
+required to convert the disk images.
+
+On Debian or Ubuntu:
 
 .. code-block:: bash
 
   sudo apt-get install qemu-utils
 
-From KVM to OpenStack
+On Fedora or CentOS:
+
+.. code-block:: bash
+
+  sudo yum install qemu-img
+
+Converting to RAW
+=================
+
+From KVM QCOW2 to RAW
 ---------------------
 
 On a host with QEMU installed, convert the QCOW2 disk to a RAW disk:
@@ -121,8 +149,8 @@ On a host with QEMU installed, convert the QCOW2 disk to a RAW disk:
 
   qemu-img convert -O raw kvm-image.qcow2 raw-image.raw
 
-From VMWare to OpenStack
-------------------------
+From VMWare VMDK to RAW
+-----------------------
 
 On a host with QEMU installed, convert the VMDK disk to a RAW disk:
 
@@ -130,8 +158,37 @@ On a host with QEMU installed, convert the VMDK disk to a RAW disk:
 
   qemu-img convert -O raw vmware-image.vmdk raw-image.raw
 
-Uploading the image to the cloud
---------------------------------
+
+*******************************
+Uploading an image to the cloud
+*******************************
+
+Please make sure you have converted your image to RAW before uploading it to
+our cloud. The previous section provides instructions on how to convert images
+from other formats to RAW.
+
+Via the web dashboard
+=====================
+
+On the images panel, click on create image. The create image dialogue will be
+displayed as shown below:
+
+.. image:: _static/image-create.png
+
+On the image source, select "Image Location" to provide the URL that the image
+should be downloaded from, or select "Image File" to upload an image from your
+file system.
+
+Select the appropriate format for your image. We strongly recommend the use of
+RAW images.
+
+Set the minimum disk size to at least the size of the image. If you are using a
+compressed format, like QCOW2, use the expanded size of the image.
+
+Click on create image and wait until the image has been downloaded or uploaded.
+
+Via the command line tools
+==========================
 
 If the image is larger than 5GB, we recommend using the OpenStack CLI to upload
 it to the cloud. Ensure that you have the OpenStack command line tools
@@ -145,26 +202,28 @@ To upload the converted image to the Catalyst Cloud:
   glance image-create --disk-format raw --container-format bare --file
   raw-image.raw --name image-name --is-public=False --progress
 
-Launching the VM on the cloud
------------------------------
+
+*****************************************
+Launching an instance from a custom image
+*****************************************
 
 On the dashboard you will find the image you uploaded on “Images & Snapshots”
 under your private images. Click on the Launch button and:
 
 * Select “Boot from image (creates a new volume).” as the instance boot source.
 * Ensure the device size is at least the same size as the image uploaded.
-* For its first boot you should choose a flavour that provides at least the
-  same amount of CPU and RAM the VM had before. Once you confirm the compute
-  instance is booting appropriately, if desirable, you can resize it to a
-  smaller flavour.
+* If you are importing an existing virtual machine, for its first boot you
+  should choose a flavour that provides at least the same amount of CPU and RAM
+  the VM had before. Once you confirm the compute instance is booting
+  appropriately, if desirable, you can resize it to a smaller flavour.
 
 .. warning::
 
   Remember that your VM has been imported exactly as it was before, therefore
-  there might be some things, like a host based firewall blocking connections,
-  that may prevent you from connecting to it remotely. You can use the console
-  and your existenting user credentials to connect to your compute instance and
-  make adjustments to its configuration as required.
+  there might be some things that may prevent you from connecting to it
+  remotely (for example: a host base firewall blocking connections). You can
+  use the console and your existenting user credentials to connect to your
+  compute instance and make adjustments to its configuration as required.
 
 
 ***
