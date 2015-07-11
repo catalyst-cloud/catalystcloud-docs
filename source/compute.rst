@@ -2,6 +2,38 @@
 Compute service
 ###############
 
+
+****************************
+Launching a compute instance
+****************************
+
+Instance initialisation with cloud-init
+=======================================
+
+A script called cloud-init is included in all images we provide on the Catalyst
+Cloud. This script is there to assist you with instance configuration at boot
+time. It communicates with the meta-data agent of our cloud and, for example,
+configures the network of your cloud instance as defined by you via our APIs.
+
+Cloud-init is very powerful and a defacto multi-distribution and multi-cloud
+way of handling the early initialisation of a cloud instance.
+
+For example, every time we launch a new instance we must apply security updates
+to it, ensuring we are not exposed known security issues. The configuration
+below, when passed as the user-data (either using ``--user-data`` parameter of
+``nova boot``, or as post-creation customisation script via the web dashboard),
+will tell cloud-init to update all software installed on the compute instance
+at boot time: 
+
+.. code-block:: bash
+  #cloud-config
+  # Run a package upgrade on the first boot
+  package_upgrade: true
+
+For more information on how to use cloud-init to initialise your compute
+instances, please read: http://cloudinit.readthedocs.org/en/latest/index.html.
+
+
 ***************************
 Resizing a compute instance
 ***************************
