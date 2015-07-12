@@ -121,32 +121,32 @@ format to overwrite the index.html file of the default website:
 
 .. code-block:: bash
 
-  Content-Type: multipart/mixed; boundary="===============0112358132134558914=="
+  From nobody Sun Jul 12 18:59:36 2015
+  Content-Type: multipart/mixed;
+  boundary="===============6187713584654397420=="
   MIME-Version: 1.0
 
-  --===============0112358132134558914==
-  Content-Type: text/cloud-config; charset="us-ascii"
+  --===============6187713584654397420==
   MIME-Version: 1.0
+  Content-Type: text/text/cloud-config; charset="us-ascii"
   Content-Transfer-Encoding: 7bit
-  Content-Disposition: attachment; filename="cloud-config.txt"
+  Content-Disposition: attachment; filename="cloud-config.init"
 
   #cloud-config
-
   # Install packages
   packages:
    - apache2
 
-   --===============0112358132134558914==
-   Content-Type: text/x-shellscript; charset="us-ascii"
+   --===============6187713584654397420==
    MIME-Version: 1.0
+   Content-Type: text/text/x-shellscript; charset="us-ascii"
    Content-Transfer-Encoding: 7bit
-   Content-Disposition: attachment; filename="user-script.txt"
+   Content-Disposition: attachment; filename="script.sh"
 
    #!/bin/bash
-
    echo "<h1>Hello world!</h1>" > /var/www/html/index.html
 
-   --===============0112358132134558914==--
+   --===============6187713584654397420==--
 
 Cloud-init official docs
 ------------------------
