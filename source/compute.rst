@@ -64,7 +64,7 @@ options during boot time:
   # Run package update and upgrade on first boot
   package_upgrade: true
 
-  # Install packages that every host should have for system management
+  # Install packages
   packages:
    - git
    - tig
