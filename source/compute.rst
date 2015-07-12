@@ -23,12 +23,60 @@ to it, ensuring we are not exposed known security issues. The configuration
 below, when passed as the user-data (either using ``--user-data`` parameter of
 ``nova boot``, or as post-creation customisation script via the web dashboard),
 will tell cloud-init to update all software installed on the compute instance
-at boot time: 
+at boot time:
 
 .. code-block:: bash
+
   #cloud-config
   # Run a package upgrade on the first boot
   package_upgrade: true
+
+The example below shows cloud-init being used to change various configuration
+options during boot time:
+
+.. code-block:: bash
+
+  #cloud-config
+
+  # On the Catalyst Cloud, the default username for access to your instances is:
+  # - CentOS: centos
+  # - CoreOS: core
+  # - Debian: debian
+  # - Ubuntu: ubuntu
+  # - Instances deployed by Heat: ec2-user
+  # You can chose a different username with the "user" parameter as shown below.
+  # user: username
+
+  # Set the hostname and FQDN
+  fqdn: somehost.example.com
+  manage_etc_hosts: true
+
+  # Set the timezone to UTC (strongly recommended)
+  timezone: UTC
+
+  # Set the locale
+  locale: en_US.UTF-8
+
+  # Mount additional volumes
+  mounts:
+   - [ /dev/vdb, /mnt, auto ]
+
+  # Run package update and upgrade on first boot
+  package_upgrade: true
+
+  # Install packages that every host should have for system management
+  packages:
+   - git
+   - tig
+   - sysstat
+   - htop
+   - linux-crashdump
+   - etckeeper
+
+  # Reboot when finished
+  power_state:
+   mode: reboot
+   message: Rebooting to apply new settings
 
 For more information on how to use cloud-init to initialise your compute
 instances, please read: http://cloudinit.readthedocs.org/en/latest/index.html.
