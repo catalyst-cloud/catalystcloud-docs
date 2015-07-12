@@ -10,20 +10,30 @@ Launching a compute instance
 Instance initialisation with cloud-init
 =======================================
 
-A script called cloud-init is included in all images we provide on the Catalyst
+A script called cloud-init is included in all images provided by the Catalyst
 Cloud. This script is there to assist you with instance configuration at boot
 time. It communicates with the meta-data agent of our cloud and, for example,
-configures the network of your cloud instance as defined by you via our APIs.
+configures the network of your compute instance as defined by you via our APIs.
 
 Cloud-init is very powerful and a defacto multi-distribution and multi-cloud
 way of handling the early initialisation of a cloud instance.
 
-For example, every time we launch a new instance we must apply security updates
-to it, ensuring we are not exposed known security issues. The configuration
-below, when passed as the user-data (either using ``--user-data`` parameter of
-``nova boot``, or as post-creation customisation script via the web dashboard),
-will tell cloud-init to update all software installed on the compute instance
-at boot time:
+When you launch a compute instance on the Catalyst Cloud, you can pass
+initialisation configuration to cloud-init via "user-data" (either using the
+``--user-data`` parameter of ``nova boot``, or as post-creation customisation
+script via the web dashboard).
+
+In the following sections we provide examples that illustrate how to perform
+common initialisation tasks with cloud-init, using different configuration
+formats.
+
+
+Cloud config format
+-------------------
+
+The cloud config format is the simplest way to accomplish initialisation tasks
+using the cloud-config syntax. The example below illustrates how to upgrade
+all packages on the first boot.
 
 .. code-block:: bash
 
@@ -32,7 +42,7 @@ at boot time:
   package_upgrade: true
 
 The example below shows cloud-init being used to change various configuration
-options during boot time:
+options during boot time, such as the hostname, locale and timezone.
 
 .. code-block:: bash
 
@@ -45,10 +55,10 @@ options during boot time:
   # - Ubuntu: ubuntu
   # - Instances deployed by Heat: ec2-user
   # You can chose a different username with the "user" parameter as shown below.
-  # user: username
+  user: username
 
   # Set the hostname and FQDN
-  fqdn: somehost.example.com
+  fqdn: hostname.example.com
   manage_etc_hosts: true
 
   # Set the timezone to UTC (strongly recommended)
@@ -57,29 +67,93 @@ options during boot time:
   # Set the locale
   locale: en_US.UTF-8
 
+  # Run package update and upgrade on first boot
+  package_upgrade: true
+
   # Mount additional volumes
   mounts:
    - [ /dev/vdb, /mnt, auto ]
 
-  # Run package update and upgrade on first boot
-  package_upgrade: true
-
   # Install packages
   packages:
    - git
-   - tig
    - sysstat
    - htop
-   - linux-crashdump
-   - etckeeper
+   - apache2
+
+  # Run commands (in order, output displayed on the console)
+  runcmd:
+   - echo "Sample command"
 
   # Reboot when finished
   power_state:
    mode: reboot
    message: Rebooting to apply new settings
 
-For more information on how to use cloud-init to initialise your compute
-instances, please read: http://cloudinit.readthedocs.org/en/latest/index.html.
+  # Log all cloud-init process output (info & errors) to a logfile
+  output: {all: ">> /var/log/cloud-init-output.log"}
+
+Script format
+-------------
+
+Cloud init can be used to run scripts written in any language (bash, python,
+ruby, perl, ...) at boot time. Scripts must begin with ``#!``.
+
+.. code-block:: bash
+
+  #!/bin/bash
+
+  # Upgrade all packages
+  apt-get update
+  apt-get -y upgrade
+
+  # Install apache
+  apt-get -y install apache2
+
+MIME format
+-----------
+
+The mime multi part archive format allows you to combine multiple cloud-init
+formats, files and scripts into a single file.
+
+The example below uses the cloud-config format to install apache and the script
+format to overwrite the index.html file of the default website:
+
+.. code-block:: bash
+
+  Content-Type: multipart/mixed; boundary="===============0112358132134558914=="
+  MIME-Version: 1.0
+
+  --===============0112358132134558914==
+  Content-Type: text/cloud-config; charset="us-ascii"
+  MIME-Version: 1.0
+  Content-Transfer-Encoding: 7bit
+  Content-Disposition: attachment; filename="cloud-config.txt"
+
+  #cloud-config
+
+  # Install packages
+  packages:
+   - apache2
+
+   --===============0112358132134558914==
+   Content-Type: text/x-shellscript; charset="us-ascii"
+   MIME-Version: 1.0
+   Content-Transfer-Encoding: 7bit
+   Content-Disposition: attachment; filename="user-script.txt"
+
+   #!/bin/bash
+
+   echo "<h1>Hello world!</h1>" > /var/www/html/index.html
+
+   --===============0112358132134558914==--
+
+Cloud-init official docs
+------------------------
+
+For other formats and more detailed information on how to use cloud-init to
+initialise your compute instances, please read:
+http://cloudinit.readthedocs.org/en/latest/index.html.
 
 
 ***************************
