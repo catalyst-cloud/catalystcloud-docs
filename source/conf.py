@@ -50,7 +50,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Catalyst Cloud'
-copyright = u'2014, Catalyst IT'
+copyright = u'2015, Catalyst IT'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -271,7 +271,7 @@ texinfo_documents = [
 epub_title = u'Catalyst Cloud'
 epub_author = u'Catalyst IT'
 epub_publisher = u'Catalyst IT'
-epub_copyright = u'2014, Catalyst IT'
+epub_copyright = u'2015, Catalyst IT'
 
 # The basename for the epub file. It defaults to the project name.
 #epub_basename = u'Catalyst Cloud'
