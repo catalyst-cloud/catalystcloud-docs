@@ -237,7 +237,8 @@ will be provided. ::
 
 Note that the status is 'BUILD.'  Catalyst Cloud instances build very
 quickly, but it still takes a few seconds.  Wait a few seconds and ask for
-the status of this instance using the ID or name(if unique) of this instance.::
+the status of this instance using the ID or name (if unique) of this
+instance.::
 
  $ nova show INSTANCE_ID
  +--------------------------------------+------------------------------------------------------------+
@@ -363,7 +364,7 @@ to a given compute instance:
 Uploading the volume
 ====================
 
-The procedure the upload a volume will vary depending on whether the volume is
+The procedure to upload a volume will vary depending on whether the volume is
 attached to an instance (active) or not.
 
 Uploading a detached (inactive) volume
@@ -413,7 +414,7 @@ Downloading the image
 =====================
 
 Copying a volume from the block storage service to the image service can take
-some time (depends on volume size). First, you should confirm that the upload
+some time (depending on volume size). First, you should confirm that the upload
 has finished (status shown as active), using the command below:
 
 .. code-block:: bash
