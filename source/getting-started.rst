@@ -250,7 +250,7 @@ A rich set of software development kits (SDKs) are available for OpenStack,
 providing language bindings and tools that makes it easy for you to use the
 Catalyst Cloud.
 
-The official OpenStack clients are the native Python bidings for the OpenStack
+The official OpenStack clients are the native Python bindings for the OpenStack
 APIs and the recommended SDK for the Catalyst Cloud:
 https://wiki.openstack.org/wiki/OpenStackClients
 
