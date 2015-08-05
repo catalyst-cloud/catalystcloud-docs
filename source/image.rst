@@ -253,6 +253,7 @@ What pre-configured images are provided by Catalyst?
 Catalyst provides some pre-configured images to make it easier for you to run
 your applications on the cloud. The images provided by Catalyst include:
 
+* Atomic Linux (official cloud image provided by the CentOS community)
 * Ubuntu Linux (official cloud image provided by Canonical)
 * CentOS (official cloud image provided by the CentOS community)
 * CoreOS (official OpenStack image provided by CoreOS)
