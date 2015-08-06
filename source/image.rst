@@ -2,6 +2,60 @@
 Image service
 #############
 
+***************************
+Images provided by Catalyst
+***************************
+
+Catalyst provides some pre-configured operating system images to make it easier
+for you to get started on the cloud.
+
+The table below lists the images provided by Catalyst, as well as the default
+user name you should use to log to each one of them (unless you have
+overwritten the default user name with cloud-init).
+
++------------------+-----------+
+| Operating system | User-name |
++==================+===========+
+| Atomic Linux     | centos    |
++------------------+-----------+
+| CentOS Linux     | centos    |
++------------------+-----------+
+| CoreOS Linux     | coreos    |
++------------------+-----------+
+| Debian Linux     | debian    |
++------------------+-----------+
+| Ubuntu Linux     | ubuntu    |
++------------------+-----------+
+
+.. note::
+
+  The orchestration service (Heat) changes the default user name on compute
+  instances launched by it to "ec2". This is done to preserve some level of
+  compatibility with AWS CloudFormation.
+
+Our standard policy is not to modify or customise cloud images provided by
+upstream Linux distributions. This gives you the assurance that you are running
+software exactly as provided by the software providers.
+
+Before using the images provided by Catalyst, you should always confirm that
+they are suitable for your needs and fit for purpose. Catalyst provides them
+"as is", without warranty of any kind. If there is something you need to
+change, you can always upload your own images, crafted the way you like, or
+take a snapshot of ours and modify it the way you need.
+
+How can I identify the images provided by Catalyst?
+===================================================
+
+The images provided by Catalyst are uploaded to tenant ID
+``94b566de52f9423fab80ceee8c0a4a23`` and are made public. With the command line
+tools, you can easily located them by running:
+
+.. code-block:: bash
+
+  glance image-list --owner 94b566de52f9423fab80ceee8c0a4a23 --is-public True
+
+
+
 
 *******************************
 Creating your own custom images
@@ -246,33 +300,4 @@ Catalyst Cloud. Please remember you can only run software that is owned by you,
 public domain or that you hold a valid license for. You have the freedom to
 choose what software you run and it is your responsibility to comply with the
 terms related to its usage.
-
-What pre-configured images are provided by Catalyst?
-====================================================
-
-Catalyst provides some pre-configured images to make it easier for you to run
-your applications on the cloud. The images provided by Catalyst include:
-
-* Atomic Linux (official cloud image provided by the CentOS community)
-* Ubuntu Linux (official cloud image provided by Canonical)
-* CentOS (official cloud image provided by the CentOS community)
-* CoreOS (official OpenStack image provided by CoreOS)
-* Debian (official cloud image provided by the Debian community)
-
-Before using them, you should always confirm that they are suitable for your
-needs and fit for purpose. Catalyst provides them "as is", without warranty of
-any kind. If there is something you need to change, you can always upload your
-own images, crafted the way you like, or take a snapshot of ours and modify it
-the way you need.
-
-How can I identify the images provided by Catalyst?
-===================================================
-
-The images provided by Catalyst are uploaded to tenant ID
-``94b566de52f9423fab80ceee8c0a4a23`` and are made public. With the command line
-tools, you can easily located them by running:
-
-.. code-block:: bash
-
-  glance image-list --owner 94b566de52f9423fab80ceee8c0a4a23 --is-public True
 
