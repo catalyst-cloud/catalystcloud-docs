@@ -1,7 +1,8 @@
+.. _cloud-orchestration:
+
 ###################
 Cloud orchestration
 ###################
-
 
 ********
 Overview
@@ -28,6 +29,10 @@ tools. It will be soon exposed via the web dashboard as well. There are no
 additional charges for the use of the cloud orchestration service. You will
 only pay for the resources consumed by your running application stacks (such as
 compute, network and storage).
+
+The OpenStack project that provides orchestration is known as Heat. More
+information about Heat can be found in the OpenStack wiki:
+https://wiki.openstack.org/wiki/Heat
 
 Using Heat via the command line tools
 =====================================
@@ -101,12 +106,22 @@ used to validate a HOT template:
 
   heat template-validate -f template-file.hot
 
+This command will return the yaml if it validates and will return an error with
+a message if it is invalid.
+
 Creating a stack
 ----------------
 
+.. note::
+
+  A stack is the collection of resources that will be created by Heat. This
+  might include instances (VMs), networks, subnets, routers, ports, router
+  interfaces, security groups, security group rules, auto-scaling rules, etc.
+
 The following example illustrates how to create a stack using Heat. Note that
 parameters specified in the HOT template without a default value must be passed
-using "--parameters".
+using ``--parameters``. You can pass multiple parameters by seperating them
+with a semicolon.
 
 .. code-block:: bash
 
