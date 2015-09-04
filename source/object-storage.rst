@@ -81,7 +81,7 @@ Sample code
 ===========
 
 The code below demonstrates how you can use swiftclient to interact
-with the Swift version 2 compatible API. Note that this version uses
+with Swift via the version 2 compatible (auth) API. This version uses
 the same endpoint for both regions, but you tell it which one you want
 when connecting.
 
@@ -119,6 +119,27 @@ when connecting.
 
       for data in conn.get_container(cname)[1]:
           print '\t{0}\t{1}\t{2}'.format(data['name'], data['bytes'], data['last_modified'])
+
+
+To use the version 1 (auth) API you need to have previously authenticated,
+and have remembered your token id (e.g using the keystone client). Also the
+endpoint for the desired region must be used (here por).
+
+.. code-block:: python
+
+  #!/usr/bin/env python
+  import swiftclient
+  token = 'thetokenid'
+  stourl = 'https://api.nz-por-1.catalystcloud.io:8443/swift/v1'
+
+  conn = swiftclient.Connection(
+          preauthtoken = token,
+          preauthurl = stourl,
+          insecure = False,
+          auth_version = 1,
+  )
+
+  # ...rest of program is unchanged
 
 
 ******
