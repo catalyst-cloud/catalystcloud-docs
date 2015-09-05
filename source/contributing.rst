@@ -270,7 +270,7 @@ that people can find it when navigating the docs.
 
 Compile the documentation and confirm you are happy with the changes. From the
 root directory of the documentation project (where the Makefile file is
-present)::
+located)::
 
   ./compile.sh
 

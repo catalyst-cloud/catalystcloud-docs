@@ -235,7 +235,7 @@ To download an OpenStack RC file from the dashboard:
 
     You should never type in your password on the command line (or pass it as
     an argument to the client tools), because the password will be stored in
-    plain text on the shell history file. This is unsafe and could allow a
+    plain text in the shell history file. This is unsafe and could allow a
     potential attacker to compromise your credentials.
 
 * You can confirm the configuration works by running a simple command, such as
