@@ -645,9 +645,9 @@ List the jobs in the queue:
 
   squeue
 
-***************************************************
+****************************************************
 Deploying Highly Available instances with Keepalived
-***************************************************
+****************************************************
 
 This tutorial assumes you have installed the OpenStack command line tools and
 sourced an openrc file, as explained at :ref:`command-line-tools`. We also
