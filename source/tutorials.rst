@@ -645,9 +645,9 @@ List the jobs in the queue:
 
   squeue
 
-***************************************************
-Deploying Highly Avalible instances with Keepalived
-***************************************************
+****************************************************
+Deploying Highly Available instances with Keepalived
+****************************************************
 
 This tutorial assumes you have installed the OpenStack command line tools and
 sourced an openrc file, as explained at :ref:`command-line-tools`. We also
@@ -759,7 +759,7 @@ be using some scripts and heat templates from this repository in this tutorial.
 
 .. code-block:: bash
 
- $ git clone https://github.com/donovan/catalystcloud-orchestration.git && ORCHESTRATION_DIR="$(pwd)/catalystcloud-orchestration" && echo $ORCHESTRATION_DIR
+ $ git clone https://github.com/catalyst/catalystcloud-orchestration.git && ORCHESTRATION_DIR="$(pwd)/catalystcloud-orchestration" && echo $ORCHESTRATION_DIR
 
 Network Setup
 =============
@@ -1271,7 +1271,7 @@ You can also watch the VRRP traffic on the wire with this command:
  05:28:23.651795 IP 10.0.0.5 > 224.0.0.18: VRRPv2, Advertisement, vrid 1, prio 50, authtype simple, intvl 1s, length 20
  05:28:24.652909 IP 10.0.0.5 > 224.0.0.18: VRRPv2, Advertisement, vrid 1, prio 50, authtype simple, intvl 1s, length 20
 
-You can the VRRP advertisements every second.
+You can see the VRRP advertisements every second.
 
 If you bring the master port back up at this point you will be able to see the
 master node switch from the backup instance to the master instance:
