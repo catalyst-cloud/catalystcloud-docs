@@ -783,11 +783,11 @@ hosts:
  | tenant_id      | 0cb6b9b744594a619b0b7340f424858b     |
  +----------------+--------------------------------------+
 
-Now lets setup a subnet of the network we have just created. We are going to do
-this so we can use part of the ``vrrp-net`` as a dynamically assigned pool of
-addresses and reserve the rest of the addresses for manual assignment. In this
-case the pool addresses are in the range 2-200 while the remainder of the ``/24``
-will be statically assigned.
+Now lets set up a subnet of the network we have just created. We are going to
+do this so we can use part of the ``vrrp-net`` as a dynamically assigned pool
+of addresses and reserve the rest of the addresses for manual assignment. In
+this case the pool addresses are in the range 2-200 while the remainder of the
+``/24`` will be statically assigned.
 
 .. code-block:: bash
 
@@ -1341,7 +1341,7 @@ of different commands in the right order. It would be nice if we could define
 the entire setup in one configuration file and ask OpenStack to create that
 setup based on our blueprint.
 
-OpenStack provides just such an orchestration system which is know as heat. In
+OpenStack provides just such an orchestration system which is known as heat. In
 this section we will run heat in order to recreate the stack we have created
 manually using a single command.
 
@@ -1350,7 +1350,7 @@ templates, we will make use of a predefined example from the
 cloud-orchestration repository. For more information on writing heat templates
 please consult the documentation at :ref:`cloud-orchestration`
 
-That said there are a number of parts of the heat template we should have a
+That said, there are a number of parts of the heat template we should have a
 look at in more detail. The template is located in the
 ``catalystcloud-orchestration`` repository we cloned earlier.
 
@@ -1494,7 +1494,7 @@ command to check the progress of creation process:
  | vrrp_secgroup                  | 6d5229e7-2977-4286-9214-795c1fa2198a | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:38Z |
  +--------------------------------+--------------------------------------+------------------------+--------------------+----------------------+
 
-If for some reason you prefer to create this stack in the Wellington region you
+If you prefer to create this stack in the Wellington region you
 can modify the appropriate parameters on the command line like this:
 
 .. code-block:: bash
@@ -1512,7 +1512,7 @@ viewing the state of your stack, give them a go:
  $ heat resource-list vrrp-stack
 
 Once all resources in your stack are in the ``CREATE_COMPLETE`` state you are
-ready to rerun the tests as described under :ref:`vrrp-testing`. The neturon
+ready to re-run the tests as described under :ref:`vrrp-testing`. The neturon
 ``floatingip-list`` command will give you the ip addresses and port ids you
 need for this:
 
