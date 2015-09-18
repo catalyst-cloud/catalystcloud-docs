@@ -8,10 +8,10 @@ Overview
 ********
 
 This section will demonstrate how to build an Ubuntu 14.04 server in an empty
-openstack tenant. After you have completed the steps you will be able to log
+OpenStack tenant. After you have completed the steps you will be able to log
 on to the server via ssh from anywhere on the internet using an ssh key.
 
-This section assumes that you have already setup a catalyst cloud account and
+This section assumes that you have already setup a Catalyst Cloud account and
 have been assigned a tenant and a user in that tenant who has permissions to
 create the required resources.
 
@@ -19,30 +19,30 @@ We will document the steps required to get an instance setup, the steps are:
 
 1. Create a Network and Subnet
 2. Create a Router
-3. Upload an ssh keypair
+3. Upload an SSH keypair
 4. Launch an instance
 5. Create a security group
 6. Associate a floating ip
 7. Log in to your instance
 
-There are a number of different ways to provision resources on the catalyst
-cloud. We will show you how to complete these steps using the dashboard and the
+There are a number of different ways to provision resources on the Catalyst
+Cloud. We will show you how to complete these steps using the dashboard and the
 command line tools. If you are starting out it will be easiest to use the
-dashboard. As you become more familiar with the catalyst cloud it is worth
+dashboard. As you become more familiar with the Catalyst Cloud it is worth
 learning how to provision resources programmatically.
 
 You are free to use whichever method suits you, you can use these methods in
-isolation or they can be combined. If you do not use the dashboard it can still
-be useful to make use of the dashboard to verify the stack that you have
-created via another method.
+isolation or they can be combined. If you do not use the dashboard to launch
+the compute instance, it can still be useful to make use of it to verify the
+stack that you have created via another method.
 
 Network Requirements
 ====================
 
-Before spawning an instance, it is necessary to have some network resources in
+Before launching an instance, it is necessary to have some network resources in
 place. These may have already been created for you. In this documentation we
 are going to assume your are starting from an un-configured tenant so we will
-be setting these up from scratch.
+be demonstrating how to set these up from scratch.
 
 The requirements are:
 
@@ -70,27 +70,30 @@ collisions that require renumbering in the future.
 Compute Flavors
 ===============
 
-The flavor of an instance is the disk, CPU, and memory specifications of an
-instance. Catalyst flavors are named 'cX.cY.cZ', where X is the 'compute
-generation', Y is the number of vCPUs, and Z is the number of gigabytes of
-memory.
+The flavor of an instance is the CPU, memory and disk specifications of a
+compute instance. Catalyst flavors are named 'cX.cY.cZ', where X is the
+'compute generation', Y is the number of vCPUs, and Z is the number of
+gigabytes of memory.
 
 .. note::
 
- Flavour IDs will be different in each region.
+  Flavour names are identical across all regions, but the flavour IDs will
+  vary.
 
 Operating System Images
 =======================
 
-In order to create an instance, you will need to have a pre-built Operating
-System in the form of an Image.  Images are stored in the Glance service.
-Catalyst provide a set of images for general use.  If none of those are
-sufficient, custom images can be uploaded to Glance by anyone.
+In order to create an instance, you will need to have a pre-built operating
+system in the form of an Image.  Images are stored in the Image service
+(Glance). The Catalyst Cloud provide a set of images for general use and also
+allows you to upload your own images.
 
 .. note::
 
- Image IDs will be different in each region. Further, images are periodically
- updated. The ID of an Operating System image will change over time.
+ Image IDs for the same operating system will be different in each region.
+ Further, images are periodically updated receiving new IDs over time. You
+ should always look up for an image based on its name and then retrieve the ID
+ for it.
 
 Uploading an SSH key
 ====================
@@ -102,9 +105,7 @@ for the 'ubuntu' user. Other operating systems have different default users.
 Tip: name you key using information like the username and host on which the ssh
 key was generated so that it is easy to identify later.
 
-.. note::
-
- Keypairs must be created in each region being used.
+Keypairs must be created in each region being used.
 
 Floating IPs
 ============
@@ -114,12 +115,12 @@ to the instance. Alternately, one could create a VPN and save some money by
 avoiding floating IPs altogether. VPNs are not feasible when the instance
 will be offering a service to the greater internet.
 
+
 ************************************************
 Launching your first instance from the dashboard
 ************************************************
 
-Log in to the dashboard at
-https://dashboard.cloud.catalyst.net.nz/horizon/auth/login/
+Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
 
 Creating the required network elements
 ======================================
@@ -162,7 +163,8 @@ Choose an address for your subnet (CIDR notation):
    :align: center
 
 Specify additional attributes for the subnet including enabling DHCP,
-specifying the DNS servers for your region and defining an allocation pool:
+specifying the DNS servers for your region and optionally defining an
+allocation pool:
 
 .. image:: _static/fi-network-detail.png
    :align: center
@@ -239,28 +241,37 @@ Allocate a Floating IP
 ======================
 
 To associate a floating IP you need to navigate to the "Floating IPs" tab of
-the "Access & Security" section. Select an IP that is not currently mapped and
-click "Associate":
+the "Access & Security" section.
+
+If you do not have an IP allocated, first click on "Allocate IP to Project" to
+obtain a public IP. Then, select an IP that is not currently mapped and click
+on "Associate":
 
 .. image:: _static/fi-floating-ip.png
    :align: center
 
-Select the first-instance port as the port to be associated and click
-"Associate":
+Select the port you wish to be associated with the floating IP. Ports are
+equivalent to virtual network interfaces of compute instances, and are named
+after the compute instance that owns it.
+
+In this example, select the "first-instance" port and click "Associate":
 
 .. image:: _static/fi-floating-ip-associate.png
    :align: center
 
-Select the port you wish to be associated with the floating IP.
 
 Configure Instance Security Groups
 ==================================
 
-At this point, the instance is on the Internet, with a routable IP address. By
-default, instances are put in the 'default' security group. The default
-security group will drop all inbound traffic. In order to allow inbound access
-to our instance via ssh a security group rule is required. Navigate to the
-"Access & Security" section and click on "Manage Rules":
+At this point, the instance is on the Internet with a routable IP address, but
+you will not be able to reach it due to security group restrictions (which are
+akin to a virtual firewall).
+
+Instances are put in the 'default' security group. When unchanged, the default
+security group allows all egress (outbound) traffic, but will drop all ingress
+(inbound) traffic. In order to allow inbound access to our instance via ssh a
+security group rule is required. Navigate to the "Access & Security" section
+and click on "Manage Rules":
 
 .. image:: _static/fi-security-group-rules-manage.png
    :align: center
@@ -275,6 +286,16 @@ You can use the default values for the remainder of the options. Click "Add":
 
 .. image:: _static/fi-security-group-rule-add-add.png
    :align: center
+
+.. warning::
+
+  Note that by using the CIDR 0.0.0.0/0 as a remote, you are allowing access
+  from any IP to your compute instance on the port and protocol selected. This
+  is often desirable when exposing a web server (eg: allow HTTP and HTTPs
+  access from the Internet), but is insecure when exposing other protocols,
+  such as SSH, Telnet and FTP. We strongly recommend you to limit the exposure
+  of your compute instances and services to IP addresses or subnets that are
+  trusted.
 
 Connect to the new Instance
 ===========================
