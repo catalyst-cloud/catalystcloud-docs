@@ -13,6 +13,7 @@ Contents:
    :maxdepth: 2
 
    getting-started
+   first-instance
    block-storage
    compute
    dashboard
