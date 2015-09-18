@@ -100,7 +100,8 @@ Uploading an SSH key
 
 When an instance is created, OpenStack will pass an ssh key to the instance
 which can be used for shell access. By default, Ubuntu will install this key
-for the 'ubuntu' user. Other operating systems have different default users.
+for the 'ubuntu' user. Other operating systems have different default users, as
+listed here: :ref:`images`
 
 Tip: name you key using information like the username and host on which the ssh
 key was generated so that it is easy to identify later.
@@ -455,7 +456,9 @@ Uploading an SSH key
 
 When an instance is created, OpenStack pass an ssh key to the instance
 which can be used for shell access.  By default, Ubuntu will install
-this key for the 'ubuntu' user.  Other operating systems behave differently.
+this key for the 'ubuntu' user.  Other operating systems have a different
+default user, as listed here: :ref:`images`
+
 Use 'nova keypair-add' to upload your Public SSH key.
 
 .. tip::

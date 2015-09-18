@@ -2,6 +2,8 @@
 Image service
 #############
 
+.. _images:
+
 ***************************
 Images provided by Catalyst
 ***************************
