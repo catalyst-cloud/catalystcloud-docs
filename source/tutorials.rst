@@ -320,8 +320,8 @@ assume that you have uploaded a ssh key as explained at
 Introduction
 ============
 
-In this tutorial you will learn how to deploy a two highly available instance
-pair using VRRP. This tutorial is largely based from a `blog post`_ by Aaron O'Rosen
+In this tutorial you will learn how to deploy a highly available instance pair
+using VRRP. This tutorial is largely based from a `blog post`_ by Aaron O'Rosen
 with modifications appropriate for Catalysts cloud. Networks and names have
 been kept largely compatible with the source material. Additionally information
 about configuring ``allowed_address_pairs`` in heat was sourced from this
@@ -835,7 +835,7 @@ We should now have a stack that looks something like this:
 VRRP Testing
 ============
 
-We should now have a working VRRP setup so lets try it out! We should be able
+We should now have a working VRRP setup so let's try it out! We should be able
 to curl the floating IP associated with our virtual router:
 
 .. code-block:: bash
@@ -1054,7 +1054,7 @@ will be shared between the VRRP instances.
      port_id: { get_resource: vrrp_shared_port }
    depends_on: router_interface
 
-Finally, lets take a look at the Server and Port definition for an instance:
+Finally, let's take a look at the Server and Port definition for an instance:
 
 .. code-block:: yaml
 
@@ -1108,7 +1108,7 @@ Before we start, check that the template is valid:
  $ heat template-validate -f $ORCHESTRATION_DIR/hot/ubuntu-14.04/vrrp-basic/vrrp.yaml
 
 This command will echo the yaml if it succeeds and will return an error if it
-does not. Assuming the template validates lets build a stack!
+does not. Assuming the template validates let's build a stack!
 
 .. code-block:: bash
 
