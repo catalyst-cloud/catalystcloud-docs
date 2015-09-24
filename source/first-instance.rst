@@ -288,6 +288,8 @@ You can use the default values for the remainder of the options. Click "Add":
 .. image:: _static/fi-security-group-rule-add-add.png
    :align: center
 
+|
+
 .. warning::
 
   Note that by using the CIDR 0.0.0.0/0 as a remote, you are allowing access
@@ -348,7 +350,7 @@ Lets create a router and network/subnet:
  $ neutron router-gateway-set border-router public-net
  Set gateway for router border-router
 
- $ neutron net-create  10.0.0.0/24
+ $ neutron net-create private-net
  Created a new network:
  +----------------+--------------------------------------+
  | Field          | Value                                |
@@ -362,10 +364,10 @@ Lets create a router and network/subnet:
  | tenant_id      | TENANT_ID                            |
  +----------------+--------------------------------------+
 
- $ neutron subnet-create --name 10.0.0.0/24 --allocation-pool \
+ $ neutron subnet-create --name private-subnet --allocation-pool \
    start=10.0.0.10,end=10.0.0.200 --dns-nameserver NAMESERVER_1 \
    --dns-nameserver NAMESERVER_2 --dns-nameserver NAMESERVER_3 \
-   --enable-dhcp 10.0.0.0/24 10.0.0.0/24
+   --enable-dhcp private-net 10.0.0.0/24
  Created a new subnet:
  +------------------+---------------------------------------------+
  | Field            | Value                                       |
@@ -380,7 +382,7 @@ Lets create a router and network/subnet:
  | host_routes      |                                             |
  | id               | SUBNET_ID                                   |
  | ip_version       | 4                                           |
- | name             | 10.0.0.0/24                                 |
+ | name             | private-subnet                              |
  | network_id       | NETWORK_ID                                  |
  | tenant_id        | TENANT_ID                                   |
  +------------------+---------------------------------------------+
@@ -467,13 +469,13 @@ Use 'nova keypair-add' to upload your Public SSH key.
 
 .. code-block:: bash
 
- $ nova keypair-add --pub-key ~/.ssh/id_rsa.pub username-hostname
+ $ nova keypair-add --pub-key ~/.ssh/id_rsa.pub first-instance-key
  $ nova keypair-list
- +-------------------+-------------------------------------------------+
- | Name              | Fingerprint                                     |
- +-------------------+-------------------------------------------------+
- | username-hostname | 8c:fb:ca:fd:1e:a8:90:8b:a4:a7:fb:17:7c:cc:3c:5c |
- +-------------------+-------------------------------------------------+
+ +--------------------+-------------------------------------------------+
+ | Name               | Fingerprint                                     |
+ +--------------------+-------------------------------------------------+
+ | first-instance-key | 8c:fb:ca:fd:1e:a8:90:8b:a4:a7:fb:17:7c:cc:3c:5c |
+ +--------------------+-------------------------------------------------+
 
 .. note::
  These keypairs must be created in each region being used.
@@ -503,12 +505,12 @@ Booting an Instance
 ===================
 
 Use the 'nova boot' command and supply the information we gathered in previous
-steps, being sure to replace FLAVOR, IMAGE, KEY_NAME, MY_NETWORK_ID, and
-INSTANCE_NAME with appropriate values.
+steps, being sure to replace FLAVOR, IMAGE and MY_NETWORK_ID with appropriate
+values.
 
 .. code-block:: bash
 
- $ nova boot --flavor FLAVOR --image IMAGE --key-name KEY_NAME --nic net-id=MY_NETWORK_ID INSTANCE_NAME
+ $ nova boot --flavor FLAVOR --image IMAGE --key-name first-instance-key --nic net-id=MY_NETWORK_ID first-instance
 
 After issuing that command, details about the new Instance, including its id
 will be provided. ::
@@ -534,7 +536,7 @@ will be provided. ::
  | image                                | ubuntu-14.04-x86_64 (IMAGE_ID)                             |
  | key_name                             | username-hostname                                          |
  | metadata                             | {}                                                         |
- | name                                 | INSTANCE_NAME                                              |
+ | name                                 | first-instance                                             |
  | os-extended-volumes:volumes_attached | []                                                         |
  | progress                             | 0                                                          |
  | security_groups                      | default                                                    |
@@ -570,9 +572,9 @@ instance.
  | hostId                               | HOSTID                                                     |
  | id                                   | INSTANCE_ID                                                |
  | image                                | ubuntu-14.04-x86_64 (IMAGE_ID)                             |
- | key_name                             | username-key                                               |
+ | key_name                             | first-instance-key                                         |
  | metadata                             | {}                                                         |
- | name                                 | INSTANCE_NAME                                              |
+ | name                                 | first-instance                                             |
  | os-extended-volumes:volumes_attached | []                                                         |
  | progress                             | 0                                                          |
  | security_groups                      | default                                                    |
@@ -612,7 +614,7 @@ with it.
 
 .. code-block:: bash
 
- $ nova interface-list INSTANCE_NAME
+ $ nova interface-list first-instance
  +------------+-------------+-----------------+--------------+-------------------+
  | Port State | Port ID     | Net ID          | IP addresses | MAC Addr          |
  +------------+-------------+-----------------+--------------+-------------------+
@@ -654,3 +656,51 @@ This should be as easy as:
 .. code-block:: bash
 
  $ ssh ubuntu@PUBLIC_IP
+
+**************************************
+Resource cleanup from the command line
+**************************************
+
+At this point you may want to cleanup the OpenStack resources that have been
+created. Running the following commands should remove all networks, routers,
+ports, security groups and instances. These commands will work regardless of
+the method you used to create the resources. Note that the order you delete
+resources is important.
+
+.. warning::
+ The following commands will delete all the resources you have created
+ including networks and routers, do not run these commands unless you wish to
+ delete all these resources.
+
+.. code-block:: bash
+
+ # delete the instances
+ $ nova delete first-instance
+
+ # delete instance ports
+ $ for port_id in $(neutron port-list | grep 10.0.0 | grep -v 10.0.0.1 | awk '{ print $2 }'); do neutron port-delete $port_id; done
+
+ # delete router interface
+ $ neutron router-interface-delete border-router $(neutron subnet-list | grep private-subnet | awk '{ print $2 }')
+ Removed interface from router border-router.
+
+ # delete router
+ $ neutron router-delete border-router
+ Deleted router: border-router
+
+ # delete subnet
+ $ neutron subnet-delete private-subnet
+ Deleted subnet: private-subnet
+
+ # delete network
+ $ neutron net-delete private-net
+ Deleted network: private-net
+
+ # delete security group rule for port 22
+ $ SSH_RULE_ID=$(neutron security-group-rule-list --column id --column security_group --column protocol --column to_port | egrep 'default.*tcp' | awk '{print $2}')
+ $ if [[ $(neutron security-group-rule-show $SSH_RULE_ID --column port_range_max | grep port_range_max | awk '{print $4}') == 22 ]]; then neutron security-group-rule-delete $SSH_RULE_ID; fi
+ Deleted security_group_rule: db4f0196-ed5c-4817-8ee3-1f374de0e39c
+
+ # delete ssh key
+ $ nova keypair-delete first-instance-key
+
