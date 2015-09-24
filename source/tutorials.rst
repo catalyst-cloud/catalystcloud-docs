@@ -961,16 +961,16 @@ Resource Cleanup
 
 At this point many people will want to cleanup the OpenStack resources we have
 been using in this tutorial. Running the following commands should remove all
-networks, routers, posts, security groups and instances. Note that the order
+networks, routers, ports, security groups and instances. Note that the order
 you delete resources is important.
 
 .. code-block:: bash
 
- # delete the instaces
+ # delete the instances
  $ nova delete vrrp-master
  $ nova delete vrrp-backup
 
- # delete ports
+ # delete instance ports
  $ for port_id in $(neutron port-list | grep 10.0.0 | grep -v 10.0.0.1 | awk '{ print $2 }'); do neutron port-delete $port_id; done
 
  # delete router interface
