@@ -205,6 +205,8 @@ Redhat / CentOS / Fedora Linux
 Configuring the OpenStack client tools
 ======================================
 
+.. _source-rc-file:
+
 Source an OpenStack RC file
 ---------------------------
 
@@ -254,12 +256,12 @@ The official OpenStack clients are the native Python bindings for the OpenStack
 APIs and the recommended SDK for the Catalyst Cloud:
 https://wiki.openstack.org/wiki/OpenStackClients
 
-SDKs for all other major languages can be found at:
-https://wiki.openstack.org/wiki/SDKs
-
 OpenStack has a very rich eco-system and often multiple SDK options for a given
 language. The http://developer.openstack.org/ provides a recommendation for the
 most stable and feature rich SDK for your preferred language.
+
+SDKs for all other major languages can be found at:
+https://wiki.openstack.org/wiki/SDKs
 
 
 *************

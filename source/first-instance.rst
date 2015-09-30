@@ -20,8 +20,8 @@ We will document the steps required to get an instance setup, the steps are:
 1. Create a Network and Subnet
 2. Create a Router
 3. Upload an SSH keypair
-4. Launch an instance
-5. Create a security group
+4. Create a security group
+5. Launch an instance
 6. Associate a floating ip
 7. Log in to your instance
 
@@ -107,6 +107,32 @@ Tip: name you key using information like the username and host on which the ssh
 key was generated so that it is easy to identify later.
 
 Keypairs must be created in each region being used.
+
+Security Groups
+===============
+
+Security groups are akin to a virtual firewall. All new instances are put in
+the 'default' security group. When unchanged, the default security group allows
+all egress (outbound) traffic, but will drop all ingress (inbound) traffic. In
+order to allow inbound access to our instance via SSH a security group rule is
+required.
+
+While we could create security group rules within the default group to allow
+access to our instance it is sensible to create a new group to hold the rules
+specific to our instance.  This is a useful way to group the rules associated
+with our instance and provides a convenient way to delete all rules for an
+instance when we need to cleanup resources. It is also a useful way to assign
+the same rules to subsequent instances that you may create.
+
+.. warning::
+
+  Note that by using the CIDR 0.0.0.0/0 as a remote, you are allowing access
+  from any IP to your compute instance on the port and protocol selected. This
+  is often desirable when exposing a web server (eg: allow HTTP and HTTPs
+  access from the Internet), but is insecure when exposing other protocols,
+  such as SSH, Telnet and FTP. We strongly recommend you to limit the exposure
+  of your compute instances and services to IP addresses or subnets that are
+  trusted.
 
 Floating IPs
 ============
@@ -206,6 +232,50 @@ Enter your key pair name and paste your public key into the box:
 .. image:: _static/fi-key-pair-import-2.png
    :align: center
 
+Configure Instance Security Group
+=================================
+
+We need to create a security group and rule for our instance.
+
+Navigate to the "Security Groups" tab of the "Access & Security" section and
+click "Create Security Group":
+
+.. image:: _static/fi-security-group-create-1.png
+   :align: center
+
+Enter a name and description and click "Create Security Group":
+
+.. image:: _static/fi-security-group-create-2.png
+   :align: center
+
+Now click on "Manage Rules" for the group we have created:
+
+.. image:: _static/fi-security-group-rules-manage.png
+   :align: center
+
+Click on “Add Rule”:
+
+.. image:: _static/fi-security-group-rule-add.png
+   :align: center
+
+Enter 22 for the port number (this is the tcp port the ssh service listens on).
+You can use the default values for the remainder of the options. Click "Add":
+
+.. image:: _static/fi-security-group-rule-add-add.png
+   :align: center
+
+|
+
+.. warning::
+
+  Note that by using the CIDR 0.0.0.0/0 as a remote, you are allowing access
+  from any IP to your compute instance on the port and protocol selected. This
+  is often desirable when exposing a web server (eg: allow HTTP and HTTPs
+  access from the Internet), but is insecure when exposing other protocols,
+  such as SSH, Telnet and FTP. We strongly recommend you to limit the exposure
+  of your compute instances and services to IP addresses or subnets that are
+  trusted.
+
 Booting an Instance
 ===================
 
@@ -222,8 +292,9 @@ defaults for the remaining selections. Then select the "Access & Security" tab:
 .. image:: _static/fi-instance-launch-details.png
    :align: center
 
-Select the key pair that you uploaded in the previous section and the default
-security group. Then select the "Networking" tab.
+Select the key pair that you uploaded in the previous section. Select the
+default security group and the new security group you created previously. Then
+select the "Networking" tab.
 
 .. image:: _static/fi-instance-launch-security.png
    :align: center
@@ -260,50 +331,10 @@ In this example, select the "first-instance" port and click "Associate":
 .. image:: _static/fi-floating-ip-associate.png
    :align: center
 
-
-Configure Instance Security Groups
-==================================
-
-At this point, the instance is on the Internet with a routable IP address, but
-you will not be able to reach it due to security group restrictions (which are
-akin to a virtual firewall).
-
-Instances are put in the 'default' security group. When unchanged, the default
-security group allows all egress (outbound) traffic, but will drop all ingress
-(inbound) traffic. In order to allow inbound access to our instance via ssh a
-security group rule is required. Navigate to the "Access & Security" section
-and click on "Manage Rules":
-
-.. image:: _static/fi-security-group-rules-manage.png
-   :align: center
-
-Click on "Add Rule":
-
-.. image:: _static/fi-security-group-rule-add.png
-   :align: center
-
-Enter 22 for the port number (this is the tcp port the ssh service listens on).
-You can use the default values for the remainder of the options. Click "Add":
-
-.. image:: _static/fi-security-group-rule-add-add.png
-   :align: center
-
-|
-
-.. warning::
-
-  Note that by using the CIDR 0.0.0.0/0 as a remote, you are allowing access
-  from any IP to your compute instance on the port and protocol selected. This
-  is often desirable when exposing a web server (eg: allow HTTP and HTTPs
-  access from the Internet), but is insecure when exposing other protocols,
-  such as SSH, Telnet and FTP. We strongly recommend you to limit the exposure
-  of your compute instances and services to IP addresses or subnets that are
-  trusted.
-
 Connect to the new Instance
 ===========================
 
-We can now connect to the ssh service using the floating public IP that we
+We can now connect to the SSH service using the floating public IP that we
 associated with our instance earlier. This address is visible in the Instances
 list or under the Floating IPs tab in Access & Security.
 
@@ -387,13 +418,13 @@ Lets create a router and network/subnet:
  | tenant_id        | TENANT_ID                                   |
  +------------------+---------------------------------------------+
 
- $ neutron router-interface-add border-router 10.0.0.0/24
+ $ neutron router-interface-add border-router private-subnet
  Added interface INTERFACE_ID to router border-router.
 
 Choosing a Flavor
 =================
 
-The flavor of an instance is the disk, cpu, and memory specifications of an
+The flavor of an instance is the disk, CPU, and memory specifications of an
 instance.  Use 'nova flavor-list' to get a list.  Catalyst flavors are named
 'cX.cY.cZ', where X is the 'compute generation', Y is the number of vCPUs,
 and Z is the number of gigabytes of memory. ::
@@ -446,9 +477,9 @@ example of how to locate a suitable image.
  | 0368593a-60ef-48a3-885a-add8dfefe569 | ubuntu-14.04-x86_64   | raw         | bare             | 2361393152 | active |
  +--------------------------------------+-----------------------+-------------+------------------+------------+--------+
 
-Let's use the ubuntu image for to create this instance.
-(id: 0368593a-60ef-48a3-885a-add8dfefe569)  Note: These IDs will be different
-in each region. Further, images are periodically updated.  The ID of an Ubuntu
+Let's use the ubuntu image to create this instance (id:
+0368593a-60ef-48a3-885a-add8dfefe569). Note: These IDs will be different in
+each region. Further, images are periodically updated. The ID of an Ubuntu
 image will change over time.
 
 .. _uploading-an-ssh-key:
@@ -457,8 +488,8 @@ Uploading an SSH key
 ====================
 
 When an instance is created, OpenStack pass an ssh key to the instance
-which can be used for shell access.  By default, Ubuntu will install
-this key for the 'ubuntu' user.  Other operating systems have a different
+which can be used for shell access. By default, Ubuntu will install
+this key for the 'ubuntu' user. Other operating systems have a different
 default user, as listed here: :ref:`images`
 
 Use 'nova keypair-add' to upload your Public SSH key.
@@ -495,11 +526,53 @@ Use Neutron to locate the correct network to use.
  | MY_NETWORK_ID                        | mynetwork  | MY_SUBNET_ID 10.0.0.0/24 |
  +--------------------------------------+------------+--------------------------+
 
-The 'public-net' is used by routers to access the Internet.  Instances
-may not be booted on this network.  Let's use mynetwork to boot our instance (id: MY_NETWORK_ID).
+The 'public-net' is used by routers to access the Internet. Instances may not
+be booted on this network. Let's use mynetwork to boot our instance (id:
+MY_NETWORK_ID).
 
 .. note::
  These IDs will be different in each region.
+
+Configure Instance Security Group
+=================================
+
+We need to create a security group and rule for our instance.
+
+.. code-block:: bash
+
+ $ neutron security-group-create --description 'network access for our first instance.' first-instance
+ Created a new security_group:
+ +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ | Field                | Value                                                                                                                                                                                                                                                                                                                         |
+ +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ | description          | network access for our first instance.                                                                                                                                                                                                                                                                                        |
+ | id                   | f0c68b05-edcf-48f6-bfc8-b5537ab255fe                                                                                                                                                                                                                                                                                          |
+ | name                 | first-instance                                                                                                                                                                                                                                                                                                                |
+ | security_group_rules | {"remote_group_id": null, "direction": "egress", "remote_ip_prefix": null, "protocol": null, "tenant_id": "0cb6b9b744594a619b0b7340f424858b", "port_range_max": null, "security_group_id": "f0c68b05-edcf-48f6-bfc8-b5537ab255fe", "port_range_min": null, "ethertype": "IPv4", "id": "a93fff5c-9cd6-40d4-9dd5-6cc6eba1b134"} |
+ |                      | {"remote_group_id": null, "direction": "egress", "remote_ip_prefix": null, "protocol": null, "tenant_id": "0cb6b9b744594a619b0b7340f424858b", "port_range_max": null, "security_group_id": "f0c68b05-edcf-48f6-bfc8-b5537ab255fe", "port_range_min": null, "ethertype": "IPv6", "id": "fe2a202a-6bc1-4064-8499-88401196899b"} |
+ | tenant_id            | 0cb6b9b744594a619b0b7340f424858b                                                                                                                                                                                                                                                                                              |
+ +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+We can now create a rule within our group. You can issue the ``neutron
+security-group-list`` command to find the ``SECURITY_GROUP_ID``:
+
+.. code-block:: bash
+
+ $ neutron security-group-list
+ +--------------------------------------+----------------+----------------------------------------+
+ | id                                   | name           | description                            |
+ +--------------------------------------+----------------+----------------------------------------+
+ | 687512ab-f197-4f07-ae51-788c559883b9 | default        | default                                |
+ | f0c68b05-edcf-48f6-bfc8-b5537ab255fe | first-instance | network access for our first instance. |
+ +--------------------------------------+----------------+----------------------------------------+
+
+ $ neutron security-group-rule-create --direction ingress \
+   --protocol tcp --port-range-min 22 --port-range-max 22 \
+   --remote-ip-prefix YOUR_CIDR_NETWORK SECURITY_GROUP_ID
+
+If you are unsure of what YOUR_CIDR_NETWORK should be, ask your network admin,
+or visit http://ifconfig.me and get your IP address.  Use "IP_ADDRESS/32" as
+YOUR_CIDR_NETWORK to allow traffic only from your current effective IP.
 
 Booting an Instance
 ===================
@@ -510,7 +583,7 @@ values.
 
 .. code-block:: bash
 
- $ nova boot --flavor FLAVOR --image IMAGE --key-name first-instance-key --nic net-id=MY_NETWORK_ID first-instance
+ $ nova boot --flavor FLAVOR --image IMAGE --key-name first-instance-key --security-groups default,first-instance --nic net-id=MY_NETWORK_ID first-instance
 
 After issuing that command, details about the new Instance, including its id
 will be provided. ::
@@ -539,7 +612,7 @@ will be provided. ::
  | name                                 | first-instance                                             |
  | os-extended-volumes:volumes_attached | []                                                         |
  | progress                             | 0                                                          |
- | security_groups                      | default                                                    |
+ | security_groups                      | default, first-instance                                    |
  | status                               | BUILD                                                      |
  | tenant_id                            | TENANT_ID                                                  |
  | updated                              | 2015-01-14T21:16:28Z                                       |
@@ -609,7 +682,7 @@ request a new floating IP.
  | tenant_id           | TENANT_ID                  |
  +---------------------+----------------------------+
 
-Now, get the port id of the instance's interface and associate the floating ip
+Now, get the port id of the instance's interface and associate the floating IP
 with it.
 
 .. code-block:: bash
@@ -624,30 +697,6 @@ with it.
  $ neutron floatingip-associate FLOATING_IP_ID PORT_ID
  Associated floating IP FLOATING_IP_ID
 
-Configure Instance Security Groups
-==================================
-
-At this point, the instance is on the Internet, with a routable IP address of
-PUBLIC_IP.  By default, instances are put in the 'default' security group.
-By default, this security group will drop all inbound traffic.  A security
-group rule is required if inbound access is desired.
-
-.. code-block:: bash
-
- $ neutron security-group-list
- +--------------------+-------------+--------------+
- | id                 | name        | description  |
- +--------------------+-------------+--------------+
- | SECURITY_GROUP_ID  | default     | default      |
- +--------------------+-------------+--------------+
- $ neutron security-group-rule-create --direction ingress \
-   --protocol tcp --port-range-min 22 --port-range-max 22 \
-   --remote-ip-prefix YOUR_CIDR_NETWORK SECURITY_GROUP_ID
-
-If you are unsure of what YOUR_CIDR_NETWORK should be, ask your network admin,
-or visit http://ifconfig.me and get your IP address.  Use "IP_ADDRESS/32" as
-YOUR_CIDR_NETWORK to allow traffic only from your current effective IP.
-
 Connect to the new Instance
 ===========================
 
@@ -656,6 +705,421 @@ This should be as easy as:
 .. code-block:: bash
 
  $ ssh ubuntu@PUBLIC_IP
+
+*****************************************
+Launching your first instance using a SDK
+*****************************************
+
+The Catalyst Cloud is built on top of the OpenStack project. There are many
+Software Development Kits for a variety of different languages available for
+OpenStack. Some of these SDKs are written specifically for OpenStack while
+others are multi cloud SDKs that have an OpenStack provider. Some of these
+libraries are written to support a particular service like Compute, while
+others attempt to provide a unified interface to all services.
+
+You will find an up to date list of recommended SDKs at
+http://developer.openstack.org/. A more exhaustive list that includes in
+development SDKs is available at https://wiki.openstack.org/wiki/SDKs.
+
+In this section we will use the Apache Libcloud Python library to provision our
+first instance. Libcloud is a python library for interacting with many of the
+popular cloud service providers using a unified API. For more information see
+https://libcloud.apache.org. Documentation for the OpenStack Libcloud driver is
+available at
+http://libcloud.readthedocs.org/en/latest/compute/drivers/openstack.html.
+
+.. warning::
+
+ Libcloud does not support the OpenStack Networking API.
+
+As libcloud does not support the OpenStack Networking API we will need complete
+the following two steps using one of the other documented methods.
+
+1. Create a Network and Subnet
+2. Create a Router
+
+After you have setup the networks and router as described above we need to
+install and configure libcloud.
+
+Install libcloud
+================
+
+The recommended way to install an up to date version of apache libcloud is to
+use pythons pip installer. In this example we will do this inside a python
+virtual environment.
+
+.. note::
+
+ This document shows how to setup pip and the python virtual environment on
+ Ubuntu 14.04. You will need to substitute appropriate steps for other
+ operating systems
+
+Firstly we will install the required python packages:
+
+.. code-block:: bash
+
+ $ sudo apt-get install python-pip python-virtualenv
+
+Next we will configure a python virtual environment:
+
+.. code-block:: bash
+
+ $ mkdir libcloud-first-instance
+ $ cd libcloud-first-instance/
+ $ virtualenv -p python2.7 .
+ $ . bin/activate
+ $ pip install apache-libcloud
+
+You should now have libcloud installed, remember that you will need to invoke
+your script from within this virtualenv in order for the libcloud libraries to
+be available.
+
+.. code-block:: python
+
+ from libcloud.compute.types import Provider
+ from libcloud.compute.providers import get_driver
+
+ provider = get_driver(Provider.OPENSTACK)
+
+OpenStack credentials
+=====================
+
+The first step in getting our first instance running is to provide our python
+script with the correct credentials and configuration appropriate for our
+tenant. The easiest way to achieve this is to make use of environment
+variables, we will make use of the standard variables provided by an OpenStack
+RC file as described at :ref:`source-rc-file`.
+
+We can reference these from our python script:
+
+.. code-block:: python
+
+ import os
+
+ auth_username = os.environ['OS_USERNAME']
+ auth_password = os.environ['OS_PASSWORD']
+ auth_url = os.environ['OS_AUTH_URL']
+ project_name = os.environ['OS_TENANT_NAME']
+ region_name = os.environ['OS_REGION_NAME']
+
+ # strip /v2.0
+ if auth_url[-5:] == '/v2.0': auth_url = auth_url[:-5]
+
+ conn = provider(
+     auth_username,
+     auth_password,
+     ex_force_auth_url=auth_url,
+     ex_force_auth_version='2.0_password',
+     ex_tenant_name=project_name,
+     ex_force_service_region=region_name,
+ )
+
+Using the interactive interpreter
+=================================
+
+We can use the code above to allow us to interact with the Catalyst cloud via
+the python interactive interpreter. Lets define a connection object called
+``conn.py``:
+
+.. code-block:: python
+
+ #!/usr/bin/env python
+
+ from libcloud.compute.types import Provider
+ from libcloud.compute.providers import get_driver
+
+ import os
+
+ auth_username = os.environ['OS_USERNAME']
+ auth_password = os.environ['OS_PASSWORD']
+ auth_url = os.environ['OS_AUTH_URL']
+ project_name = os.environ['OS_TENANT_NAME']
+ region_name = os.environ['OS_REGION_NAME']
+
+ # strip /v2.0
+ if auth_url[-5:] == '/v2.0': auth_url = auth_url[:-5]
+
+ print "creating a connection with the following credentials:"
+ print "auth_username = " + auth_username
+ print "project_name = " + project_name
+
+ provider = get_driver(Provider.OPENSTACK)
+ conn = provider(
+     auth_username,
+     auth_password,
+     ex_force_auth_url=auth_url,
+     ex_force_auth_version='2.0_password',
+     ex_tenant_name=project_name,
+     ex_force_service_region=region_name,
+ )
+
+We can then export this script in the ``PYTHONSTARTUP`` environment variable:
+
+.. code-block:: bash
+
+ $ export PYTHONSTARTUP=/path/to/conn.py
+
+Now when we invoke the python interpreter we will have this connection object
+available to us:
+
+.. code-block:: bash
+
+ $ python
+ Python 2.7.6 (default, Jun 22 2015, 17:58:13)
+ [GCC 4.8.2] on linux2
+ Type "help", "copyright", "credits" or "license" for more information.
+ creating a connection with the following credentials:
+ auth_username = <your-username>
+ project_name = <your-project-name>
+ >>>
+
+Choosing a Flavor
+=================
+
+The flavor of an instance is the disk, CPU, and memory specifications of an
+instance. Use ``conn.list_sizes()`` to get a list:
+
+.. code-block:: python
+
+ >>> for flavor in conn.list_sizes():
+ ...     if flavor.name == "c1.c1r1":
+ ...         print(flavor)
+ ...
+ <OpenStackNodeSize: id=28153197-6690-4485-9dbc-fc24489b0683, name=c1.c1r1, ram=1024, disk=10, bandwidth=None, price=0.0, driver=OpenStack, vcpus=1,  ...>
+ >>>
+
+Lets store the flavor id in an environment variable:
+
+.. code-block:: bash
+
+ $ export OS_FIRSTINSTANCE_FLAVOR_ID=28153197-6690-4485-9dbc-fc24489b0683
+
+We can use this variable in our script using the following code:
+
+.. code-block:: python
+
+ flavor_id = os.environ['OS_FIRSTINSTANCE_FLAVOR_ID']
+ flavor = conn.ex_get_size(flavor_id)
+
+Choosing an Image
+=================
+
+In order to create an instance, you will need to have a pre-built Operating
+System in the form of an Image. Use ``conn.list_images()`` to get a list:
+
+.. code-block:: python
+
+ >>> for image in conn.list_images():
+ ...     if image.name == "ubuntu-14.04-x86_64":
+ ...         print(image)
+ ...
+ <NodeImage: id=9f2a6a6d-3e68-4914-8e53-b0079d77bb9d, name=ubuntu-14.04-x86_64, driver=OpenStack  ...>
+ >>>
+
+Lets store the image id in an environment variable:
+
+.. code-block:: bash
+
+ $ export OS_FIRSTINSTANCE_IMAGE_ID=9f2a6a6d-3e68-4914-8e53-b0079d77bb9d
+
+We can use this variable in our script using the following code:
+
+.. code-block:: python
+
+ image_id = os.environ['OS_FIRSTINSTANCE_IMAGE_ID']
+ image = conn.get_image(image_id)
+
+Uploading an SSH key
+====================
+
+The following code uploads an SSH key:
+
+.. code-block:: python
+
+ keypair_name = 'first-instance-key'
+ pub_key_file = '~/.ssh/id_rsa.pub'
+ conn.import_key_pair_from_file(keypair_name, pub_key_file)
+
+Configure Instance Security Group
+=================================
+
+The following code will create a security group and a rule within that group:
+
+.. code-block:: python
+
+ first_instance_security_group = conn.ex_create_security_group('first-instance', 'network access for our first instance.')
+ conn.ex_create_security_group_rule(first_instance_security_group, 'TCP', 22, 22)
+
+.. warning::
+
+ The code above does not specify a source IP range for this rule, this will
+ create a rule with 0.0.0.0/0 as the source, in doing so you are allowing access
+ from any IP to your compute instance on the port and protocol selected. This is
+ often desirable when exposing a web server (eg: allow HTTP and HTTPs access
+ from the Internet), but is insecure when exposing other protocols, such as SSH,
+ Telnet and FTP. We strongly recommend you to limit the exposure of your compute
+ instances and services to IP addresses or subnets that are trusted.
+
+ See
+ http://libcloud.readthedocs.org/en/latest/compute/drivers/openstack.html#libcloud.compute.drivers.openstack.OpenStack_1_1_NodeDriver.ex_create_security_group_rule
+ for documentation on setting the source IP range for this rule.
+
+Booting an Instance
+===================
+
+The following code will launch an instance using libcloud:
+
+.. code-block:: python
+
+ instance_name = 'first-instance'
+ first_instance = conn.create_node(
+     name=instance_name,
+     image=image,
+     size=flavor,
+     ex_keyname=keypair_name,
+     ex_security_groups=[first_instance_security_group],
+ )
+
+ conn.wait_until_running([first_instance])
+
+Allocate a Floating IP
+======================
+
+We can associate a floating IP with the following code:
+
+.. code-block:: python
+
+ pool = conn.ex_list_floating_ip_pools()[0]
+ unused_floating_ip = pool.create_floating_ip()
+ conn.ex_attach_floating_ip_to_node(first_instance, unused_floating_ip)
+
+Complete script
+===============
+
+Putting everything together:
+
+.. code-block:: python
+
+ from libcloud.compute.types import Provider
+ from libcloud.compute.providers import get_driver
+ from libcloud.common.exceptions import BaseHTTPError
+
+ import os
+
+ auth_username = os.environ['OS_USERNAME']
+ auth_password = os.environ['OS_PASSWORD']
+ auth_url = os.environ['OS_AUTH_URL']
+ project_name = os.environ['OS_TENANT_NAME']
+ region_name = os.environ['OS_REGION_NAME']
+
+ # strip /v2.0
+ if auth_url[-5:] == '/v2.0': auth_url = auth_url[:-5]
+
+ provider = get_driver(Provider.OPENSTACK)
+ conn = provider(
+     auth_username,
+     auth_password,
+     ex_force_auth_url=auth_url,
+     ex_force_auth_version='2.0_password',
+     ex_tenant_name=project_name,
+     ex_force_service_region=region_name,
+ )
+
+ image_id = os.environ['OS_FIRSTINSTANCE_IMAGE_ID']
+ image = conn.get_image(image_id)
+ print(image)
+
+ flavor_id = os.environ['OS_FIRSTINSTANCE_FLAVOR_ID']
+ flavor = conn.ex_get_size(flavor_id)
+ print(flavor)
+
+ print('Checking for existing SSH key pair...')
+ keypair_name = 'first-instance-key'
+ pub_key_file = '~/.ssh/id_rsa.pub'
+ keypair_exists = False
+ for keypair in conn.list_key_pairs():
+     if keypair.name == keypair_name:
+         keypair_exists = True
+
+ if keypair_exists:
+     print('Keypair already exists. Skipping import.')
+ else:
+     print('adding keypair...')
+     conn.import_key_pair_from_file(keypair_name, pub_key_file)
+
+ for keypair in conn.list_key_pairs():
+     if keypair.name == keypair_name:
+         print(keypair)
+
+ security_group_exists = False
+ security_group_name = 'first-instance'
+ for security_group in conn.ex_list_security_groups():
+     if security_group.name == security_group_name:
+         first_instance_security_group = security_group
+         security_group_exists = True
+
+ if security_group_exists:
+     print('Security Group already exists. Skipping creation.')
+ else:
+     first_instance_security_group = conn.ex_create_security_group(security_group_name, 'network access for our first instance.')
+     conn.ex_create_security_group_rule(first_instance_security_group, 'TCP', 22, 22)
+
+ instance_name = 'first-instance'
+ print('Creating instance {}'.format(instance_name))
+ first_instance = conn.create_node(
+     name=instance_name,
+     image=image,
+     size=flavor,
+     ex_keyname=keypair_name,
+     ex_security_groups=[first_instance_security_group],
+ )
+
+ conn.wait_until_running([first_instance])
+
+ print('Checking for unused Floating IP...')
+ unused_floating_ip = None
+ for floating_ip in conn.ex_list_floating_ips():
+     if not floating_ip.node_id:
+         print('found unassociated floating ip:')
+         print(floating_ip)
+         unused_floating_ip = floating_ip
+         break
+
+ # we did not find an unassociated floating ip in our project so we will try and allocate one
+ if not unused_floating_ip:
+     pool = conn.ex_list_floating_ip_pools()[0]
+     print('Retrieving new Floating IP from pool: {}'.format(pool))
+     try:
+         unused_floating_ip = pool.create_floating_ip()
+     except BaseHTTPError, e:
+         print('Error creating floating IP: ' + str(e))
+     except:
+         raise
+
+ if unused_floating_ip:
+     if conn.ex_attach_floating_ip_to_node(first_instance, unused_floating_ip):
+         print('Allocated new Floating IP: {} to instance {}'.format(unused_floating_ip.ip_address, instance_name))
+     else:
+         print('Could not attach Floating IP')
+
+     print('Your first instance is available you can ssh to ubuntu@%s' % unused_floating_ip.ip_address)
+ else:
+     print('Could not find an unused floating ip, please check your quota')
+
+
+Connect to the new Instance
+===========================
+
+We can connect to the SSH service using the floating public IP that has been
+associated with our instance. The script will print this address if it succeeds
+in associating a floating IP with the newly created instance:
+
+.. code-block:: bash
+
+ Your first instance is available you can ssh to ubuntu@PUBLIC_IP
+
+You should be able to interact with this instance as you would any Ubuntu
+server.
 
 **************************************
 Resource cleanup from the command line
@@ -668,6 +1132,7 @@ the method you used to create the resources. Note that the order you delete
 resources is important.
 
 .. warning::
+
  The following commands will delete all the resources you have created
  including networks and routers, do not run these commands unless you wish to
  delete all these resources.
@@ -696,10 +1161,9 @@ resources is important.
  $ neutron net-delete private-net
  Deleted network: private-net
 
- # delete security group rule for port 22
- $ SSH_RULE_ID=$(neutron security-group-rule-list --column id --column security_group --column protocol --column to_port | egrep 'default.*tcp' | awk '{print $2}')
- $ if [[ $(neutron security-group-rule-show $SSH_RULE_ID --column port_range_max | grep port_range_max | awk '{print $4}') == 22 ]]; then neutron security-group-rule-delete $SSH_RULE_ID; fi
- Deleted security_group_rule: db4f0196-ed5c-4817-8ee3-1f374de0e39c
+ # delete security group
+ $ neutron security-group-delete first-instance
+ Deleted security_group: first-instance
 
  # delete ssh key
  $ nova keypair-delete first-instance-key
