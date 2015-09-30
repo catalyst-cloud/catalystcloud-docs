@@ -583,7 +583,7 @@ values.
 
 .. code-block:: bash
 
- $ nova boot --flavor FLAVOR --image IMAGE --key-name first-instance-key --nic net-id=MY_NETWORK_ID first-instance
+ $ nova boot --flavor FLAVOR --image IMAGE --key-name first-instance-key --security-groups default,first-instance --nic net-id=MY_NETWORK_ID first-instance
 
 After issuing that command, details about the new Instance, including its id
 will be provided. ::
@@ -612,7 +612,7 @@ will be provided. ::
  | name                                 | first-instance                                             |
  | os-extended-volumes:volumes_attached | []                                                         |
  | progress                             | 0                                                          |
- | security_groups                      | default                                                    |
+ | security_groups                      | default, first-instance                                    |
  | status                               | BUILD                                                      |
  | tenant_id                            | TENANT_ID                                                  |
  | updated                              | 2015-01-14T21:16:28Z                                       |
