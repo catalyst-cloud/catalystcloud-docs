@@ -20,8 +20,8 @@ We will document the steps required to get an instance setup, the steps are:
 1. Create a Network and Subnet
 2. Create a Router
 3. Upload an SSH keypair
-4. Launch an instance
-5. Create a security group
+4. Create a security group
+5. Launch an instance
 6. Associate a floating ip
 7. Log in to your instance
 
@@ -107,6 +107,32 @@ Tip: name you key using information like the username and host on which the ssh
 key was generated so that it is easy to identify later.
 
 Keypairs must be created in each region being used.
+
+Security Groups
+===============
+
+Security groups are akin to a virtual firewall. All new instances are put in
+the 'default' security group. When unchanged, the default security group allows
+all egress (outbound) traffic, but will drop all ingress (inbound) traffic. In
+order to allow inbound access to our instance via SSH a security group rule is
+required.
+
+While we could create security group rules within the default group to allow
+access to our instance it is sensible to create a new group to hold the rules
+specific to our instance.  This is a useful way to group the rules associated
+with our instance and provides a convenient way to delete all rules for an
+instance when we need to cleanup resources. It is also a useful way to assign
+the same rules to subsequent instances that you may create.
+
+.. warning::
+
+  Note that by using the CIDR 0.0.0.0/0 as a remote, you are allowing access
+  from any IP to your compute instance on the port and protocol selected. This
+  is often desirable when exposing a web server (eg: allow HTTP and HTTPs
+  access from the Internet), but is insecure when exposing other protocols,
+  such as SSH, Telnet and FTP. We strongly recommend you to limit the exposure
+  of your compute instances and services to IP addresses or subnets that are
+  trusted.
 
 Floating IPs
 ============
@@ -206,6 +232,50 @@ Enter your key pair name and paste your public key into the box:
 .. image:: _static/fi-key-pair-import-2.png
    :align: center
 
+Configure Instance Security Group
+=================================
+
+We need to create a security group and rule for our instance.
+
+Navigate to the "Security Groups" tab of the "Access & Security" section and
+click "Create Security Group":
+
+.. image:: _static/fi-security-group-create-1.png
+   :align: center
+
+Enter a name and description and click "Create Security Group":
+
+.. image:: _static/fi-security-group-create-2.png
+   :align: center
+
+Now click on "Manage Rules" for the group we have created:
+
+.. image:: _static/fi-security-group-rules-manage.png
+   :align: center
+
+Click on “Add Rule”:
+
+.. image:: _static/fi-security-group-rule-add.png
+   :align: center
+
+Enter 22 for the port number (this is the tcp port the ssh service listens on).
+You can use the default values for the remainder of the options. Click "Add":
+
+.. image:: _static/fi-security-group-rule-add-add.png
+   :align: center
+
+|
+
+.. warning::
+
+  Note that by using the CIDR 0.0.0.0/0 as a remote, you are allowing access
+  from any IP to your compute instance on the port and protocol selected. This
+  is often desirable when exposing a web server (eg: allow HTTP and HTTPs
+  access from the Internet), but is insecure when exposing other protocols,
+  such as SSH, Telnet and FTP. We strongly recommend you to limit the exposure
+  of your compute instances and services to IP addresses or subnets that are
+  trusted.
+
 Booting an Instance
 ===================
 
@@ -222,8 +292,9 @@ defaults for the remaining selections. Then select the "Access & Security" tab:
 .. image:: _static/fi-instance-launch-details.png
    :align: center
 
-Select the key pair that you uploaded in the previous section and the default
-security group. Then select the "Networking" tab.
+Select the key pair that you uploaded in the previous section. Select the
+default security group and the new security group you created previously. Then
+select the "Networking" tab.
 
 .. image:: _static/fi-instance-launch-security.png
    :align: center
@@ -260,50 +331,10 @@ In this example, select the "first-instance" port and click "Associate":
 .. image:: _static/fi-floating-ip-associate.png
    :align: center
 
-
-Configure Instance Security Groups
-==================================
-
-At this point, the instance is on the Internet with a routable IP address, but
-you will not be able to reach it due to security group restrictions (which are
-akin to a virtual firewall).
-
-Instances are put in the 'default' security group. When unchanged, the default
-security group allows all egress (outbound) traffic, but will drop all ingress
-(inbound) traffic. In order to allow inbound access to our instance via ssh a
-security group rule is required. Navigate to the "Access & Security" section
-and click on "Manage Rules":
-
-.. image:: _static/fi-security-group-rules-manage.png
-   :align: center
-
-Click on "Add Rule":
-
-.. image:: _static/fi-security-group-rule-add.png
-   :align: center
-
-Enter 22 for the port number (this is the tcp port the ssh service listens on).
-You can use the default values for the remainder of the options. Click "Add":
-
-.. image:: _static/fi-security-group-rule-add-add.png
-   :align: center
-
-|
-
-.. warning::
-
-  Note that by using the CIDR 0.0.0.0/0 as a remote, you are allowing access
-  from any IP to your compute instance on the port and protocol selected. This
-  is often desirable when exposing a web server (eg: allow HTTP and HTTPs
-  access from the Internet), but is insecure when exposing other protocols,
-  such as SSH, Telnet and FTP. We strongly recommend you to limit the exposure
-  of your compute instances and services to IP addresses or subnets that are
-  trusted.
-
 Connect to the new Instance
 ===========================
 
-We can now connect to the ssh service using the floating public IP that we
+We can now connect to the SSH service using the floating public IP that we
 associated with our instance earlier. This address is visible in the Instances
 list or under the Floating IPs tab in Access & Security.
 
@@ -387,13 +418,13 @@ Lets create a router and network/subnet:
  | tenant_id        | TENANT_ID                                   |
  +------------------+---------------------------------------------+
 
- $ neutron router-interface-add border-router 10.0.0.0/24
+ $ neutron router-interface-add border-router private-subnet
  Added interface INTERFACE_ID to router border-router.
 
 Choosing a Flavor
 =================
 
-The flavor of an instance is the disk, cpu, and memory specifications of an
+The flavor of an instance is the disk, CPU, and memory specifications of an
 instance.  Use 'nova flavor-list' to get a list.  Catalyst flavors are named
 'cX.cY.cZ', where X is the 'compute generation', Y is the number of vCPUs,
 and Z is the number of gigabytes of memory. ::
@@ -446,9 +477,9 @@ example of how to locate a suitable image.
  | 0368593a-60ef-48a3-885a-add8dfefe569 | ubuntu-14.04-x86_64   | raw         | bare             | 2361393152 | active |
  +--------------------------------------+-----------------------+-------------+------------------+------------+--------+
 
-Let's use the ubuntu image for to create this instance.
-(id: 0368593a-60ef-48a3-885a-add8dfefe569)  Note: These IDs will be different
-in each region. Further, images are periodically updated.  The ID of an Ubuntu
+Let's use the ubuntu image to create this instance (id:
+0368593a-60ef-48a3-885a-add8dfefe569). Note: These IDs will be different in
+each region. Further, images are periodically updated. The ID of an Ubuntu
 image will change over time.
 
 .. _uploading-an-ssh-key:
@@ -457,8 +488,8 @@ Uploading an SSH key
 ====================
 
 When an instance is created, OpenStack pass an ssh key to the instance
-which can be used for shell access.  By default, Ubuntu will install
-this key for the 'ubuntu' user.  Other operating systems have a different
+which can be used for shell access. By default, Ubuntu will install
+this key for the 'ubuntu' user. Other operating systems have a different
 default user, as listed here: :ref:`images`
 
 Use 'nova keypair-add' to upload your Public SSH key.
@@ -495,11 +526,53 @@ Use Neutron to locate the correct network to use.
  | MY_NETWORK_ID                        | mynetwork  | MY_SUBNET_ID 10.0.0.0/24 |
  +--------------------------------------+------------+--------------------------+
 
-The 'public-net' is used by routers to access the Internet.  Instances
-may not be booted on this network.  Let's use mynetwork to boot our instance (id: MY_NETWORK_ID).
+The 'public-net' is used by routers to access the Internet. Instances may not
+be booted on this network. Let's use mynetwork to boot our instance (id:
+MY_NETWORK_ID).
 
 .. note::
  These IDs will be different in each region.
+
+Configure Instance Security Group
+=================================
+
+We need to create a security group and rule for our instance.
+
+.. code-block:: bash
+
+ $ neutron security-group-create --description 'network access for our first instance.' first-instance
+ Created a new security_group:
+ +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ | Field                | Value                                                                                                                                                                                                                                                                                                                         |
+ +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ | description          | network access for our first instance.                                                                                                                                                                                                                                                                                        |
+ | id                   | f0c68b05-edcf-48f6-bfc8-b5537ab255fe                                                                                                                                                                                                                                                                                          |
+ | name                 | first-instance                                                                                                                                                                                                                                                                                                                |
+ | security_group_rules | {"remote_group_id": null, "direction": "egress", "remote_ip_prefix": null, "protocol": null, "tenant_id": "0cb6b9b744594a619b0b7340f424858b", "port_range_max": null, "security_group_id": "f0c68b05-edcf-48f6-bfc8-b5537ab255fe", "port_range_min": null, "ethertype": "IPv4", "id": "a93fff5c-9cd6-40d4-9dd5-6cc6eba1b134"} |
+ |                      | {"remote_group_id": null, "direction": "egress", "remote_ip_prefix": null, "protocol": null, "tenant_id": "0cb6b9b744594a619b0b7340f424858b", "port_range_max": null, "security_group_id": "f0c68b05-edcf-48f6-bfc8-b5537ab255fe", "port_range_min": null, "ethertype": "IPv6", "id": "fe2a202a-6bc1-4064-8499-88401196899b"} |
+ | tenant_id            | 0cb6b9b744594a619b0b7340f424858b                                                                                                                                                                                                                                                                                              |
+ +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+We can now create a rule within our group. You can issue the ``neutron
+security-group-list`` command to find the ``SECURITY_GROUP_ID``:
+
+.. code-block:: bash
+
+ $ neutron security-group-list
+ +--------------------------------------+----------------+----------------------------------------+
+ | id                                   | name           | description                            |
+ +--------------------------------------+----------------+----------------------------------------+
+ | 687512ab-f197-4f07-ae51-788c559883b9 | default        | default                                |
+ | f0c68b05-edcf-48f6-bfc8-b5537ab255fe | first-instance | network access for our first instance. |
+ +--------------------------------------+----------------+----------------------------------------+
+
+ $ neutron security-group-rule-create --direction ingress \
+   --protocol tcp --port-range-min 22 --port-range-max 22 \
+   --remote-ip-prefix YOUR_CIDR_NETWORK SECURITY_GROUP_ID
+
+If you are unsure of what YOUR_CIDR_NETWORK should be, ask your network admin,
+or visit http://ifconfig.me and get your IP address.  Use "IP_ADDRESS/32" as
+YOUR_CIDR_NETWORK to allow traffic only from your current effective IP.
 
 Booting an Instance
 ===================
@@ -609,7 +682,7 @@ request a new floating IP.
  | tenant_id           | TENANT_ID                  |
  +---------------------+----------------------------+
 
-Now, get the port id of the instance's interface and associate the floating ip
+Now, get the port id of the instance's interface and associate the floating IP
 with it.
 
 .. code-block:: bash
@@ -668,6 +741,7 @@ the method you used to create the resources. Note that the order you delete
 resources is important.
 
 .. warning::
+
  The following commands will delete all the resources you have created
  including networks and routers, do not run these commands unless you wish to
  delete all these resources.
@@ -696,10 +770,9 @@ resources is important.
  $ neutron net-delete private-net
  Deleted network: private-net
 
- # delete security group rule for port 22
- $ SSH_RULE_ID=$(neutron security-group-rule-list --column id --column security_group --column protocol --column to_port | egrep 'default.*tcp' | awk '{print $2}')
- $ if [[ $(neutron security-group-rule-show $SSH_RULE_ID --column port_range_max | grep port_range_max | awk '{print $4}') == 22 ]]; then neutron security-group-rule-delete $SSH_RULE_ID; fi
- Deleted security_group_rule: db4f0196-ed5c-4817-8ee3-1f374de0e39c
+ # delete security group
+ $ neutron security-group-delete first-instance
+ Deleted security_group: first-instance
 
  # delete ssh key
  $ nova keypair-delete first-instance-key
