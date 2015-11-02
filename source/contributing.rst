@@ -220,9 +220,9 @@ As an example:
   .. _`Example website`: http://www.example.com/
 
 
-*****************
-Submiting a patch
-*****************
+******************
+Submitting a patch
+******************
 
 Go to https://github.com/catalyst/catalystcloud-docs and fork the docs to your
 own account on GitHub.
