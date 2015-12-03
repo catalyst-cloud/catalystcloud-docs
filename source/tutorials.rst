@@ -1715,7 +1715,15 @@ trivial and requires you have control of your own `ASN`_.
 
 .. _ASN: https://en.wikipedia.org/wiki/Autonomous_system_%28Internet%29
 
-In this tutorial we will describe using a proxy redirection service.
+In this tutorial we will describe using a proxy redirection service. If you are
+interested in DNS based failover options there are a number of providers who
+provide combined monitoring and automated failover:
+
+- http://totaluptime.com/solutions/cloud-dns/cloud-dns-failover/
+- http://dyn.com/managed-dns/active-failover/
+- https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
+- http://www.dnsmadeeasy.com/services/dnsfailover/
+- https://www.zoneedit.com/failover.html
 
 Fastly CDN
 ==========
@@ -1744,11 +1752,10 @@ in depth coverage of how their service works.
 
 .. _documentation: https://docs.fastly.com/guides/about-fastly-services/how-fastlys-cdn-service-works
 
-
-
 Fastly has a number of features that make it useful for us:
 
-- Fastlys POPS are Anycasted meaning that we avoid DNS propagation issues as
+- Fastly has POPs in New Zealand
+- Fastlys POPs are Anycasted meaning that we avoid DNS propagation issues as
   the IP address and domain name remain static for clients
 - Fastlys provides a global network of Anycasted POPs that provides good
   resiliency and availability at the CDN layer
