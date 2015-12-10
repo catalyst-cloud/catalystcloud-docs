@@ -105,8 +105,8 @@ which can be used for shell access. By default, Ubuntu will install this key
 for the 'ubuntu' user. Other operating systems have different default users, as
 listed here: :ref:`images`
 
-Tip: name you key using information like the username and host on which the ssh
-key was generated so that it is easy to identify later.
+Tip: name your key using information like the username and host on which the
+ssh key was generated so that it is easy to identify later.
 
 Keypairs must be created in each region being used.
 
