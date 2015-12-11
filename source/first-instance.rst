@@ -586,7 +586,7 @@ an environment variable with the security group id for later use.
  +--------------------------------------+----------------+----------------------------------------+
  $ export CC_SECURITY_GROUP_ID=$(neutron security-group-list | grep first-instance | awk '{ print $2 }' )
 
-Next we will set an environment variable with our local external ip address:
+Next we will set an environment variable with our local external IP address:
 
 .. code-block:: bash
 
