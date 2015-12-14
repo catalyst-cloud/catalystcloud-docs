@@ -745,6 +745,16 @@ This should be as easy as:
 
  $ ssh ubuntu@$CC_PUBLIC_IP
 
+***************************************************
+Launching your first instance using a a bash script
+***************************************************
+
+This section provides a bash script that runs the commands from the previous
+section in a single script.
+
+.. literalinclude:: ../scripts/create-first-instance.sh
+  :language: bash
+
 *****************************************
 Launching your first instance using a SDK
 *****************************************
@@ -1182,7 +1192,7 @@ resources is important.
  $ nova delete first-instance
 
  # delete instance ports
- $ for port_id in $(neutron port-list | grep 10.0.0 | grep -v 10.0.0.1 | awk '{ print $2 }'); do neutron port-delete $port_id; done
+ $ for port_id in $(neutron port-list | grep 10.0.0 | grep -v '10.0.0.1"' | awk '{ print $2 }'); do neutron port-delete $port_id; done
 
  # delete router interface
  $ neutron router-interface-delete border-router $(neutron subnet-list | grep private-subnet | awk '{ print $2 }')
@@ -1207,3 +1217,12 @@ resources is important.
  # delete ssh key
  $ nova keypair-delete first-instance-key
 
+************************************
+Resource cleanup using a bash script
+************************************
+
+This script includes all the comands from the section above in a single bash
+script.
+
+.. literalinclude:: ../scripts/delete-first-instance.sh
+  :language: bash
