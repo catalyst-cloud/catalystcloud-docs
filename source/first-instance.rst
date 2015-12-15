@@ -161,19 +161,10 @@ Navigate to the "Routers" section and click "Create Router":
 .. image:: _static/fi-router-create.png
    :align: center
 
-Give the router a name:
+Name the router "border-router", select admin state "UP" and select
+"public-net" as the external network:
 
 .. image:: _static/fi-router-name.png
-   :align: center
-
-Set a gateway for the router:
-
-.. image:: _static/fi-router-gateway.png
-   :align: center
-
-Select ``public-net`` as the external network:
-
-.. image:: _static/fi-router-gateway-set.png
    :align: center
 
 Navigate to the "Networks" section and click "Create Network":
@@ -181,12 +172,13 @@ Navigate to the "Networks" section and click "Create Network":
 .. image:: _static/fi-network-create.png
    :align: center
 
-Choose a name for your network:
+Name your network "private-net", select create subnet and click "Next":
 
 .. image:: _static/fi-network-create-name.png
    :align: center
 
-Choose an address for your subnet (CIDR notation):
+Name your subnet "private-subnet", choose an address for your subnet in CIDR
+notation and click "Next":
 
 .. image:: _static/fi-network-address.png
    :align: center
@@ -203,7 +195,7 @@ Click on the router name in the router list:
 .. image:: _static/fi-router-detail.png
    :align: center
 
-Now add an interface:
+Select the "Interfaces" tab and click "+Add Interface":
 
 .. image:: _static/fi-router-interface-add.png
    :align: center
@@ -260,7 +252,7 @@ Click on “Add Rule”:
 .. image:: _static/fi-security-group-rule-add.png
    :align: center
 
-Enter 22 for the port number (this is the tcp port the ssh service listens on).
+Enter 22 for the port number (this is the TCP port the SSH service listens on).
 You can use the default values for the remainder of the options. Click "Add":
 
 .. image:: _static/fi-security-group-rule-add-add.png
@@ -287,23 +279,31 @@ instances list:
 .. image:: _static/fi-instance-launch.png
    :align: center
 
-Select an instance name and a flavour, use the default instance count of one.
-Select "Boot from image", then select the ``ubuntu-14.04`` image, use the
-defaults for the remaining selections. Then select the "Access & Security" tab:
+Enter an instance name, use the default instance count of one.  Select "Image"
+as the boot source and "No" for create new volume. Select the
+``ubuntu-14.04-x86_64`` from the image list. Then click "Next":
 
-.. image:: _static/fi-instance-launch-details.png
+.. image:: _static/fi-launch-instance-source.png
    :align: center
 
-Select the key pair that you uploaded in the previous section. Select the
-default security group and the new security group you created previously. Then
-select the "Networking" tab.
+Select the ``c1.c1r1`` flavor from the list and click "Next":
 
-.. image:: _static/fi-instance-launch-security.png
+.. image:: _static/fi-launch-instance-flavor.png
    :align: center
 
-Confirm that ``private-net`` is in the selected networks and click Launch.
+Select the ``private-net`` network from the list and click "Next":
 
-.. image:: _static/fi-instance-launch-networking.png
+.. image:: _static/fi-launch-instance-networks.png
+   :align: center
+
+Select the ``first-instance`` security group from the list and click "Next":
+
+.. image:: _static/fi-launch-instance-security-groups.png
+   :align: center
+
+Select the ``first-instance-key`` key pair from the list and click "Next":
+
+.. image:: _static/fi-launch-instance-key-pair.png
    :align: center
 
 Your instance will now be built, you will see the Status, Task and Power State
@@ -337,8 +337,8 @@ Connect to the new Instance
 ===========================
 
 We can now connect to the SSH service using the floating public IP that we
-associated with our instance earlier. This address is visible in the Instances
-list or under the Floating IPs tab in Access & Security.
+associated with our instance in the previous step. This address is visible in
+the Instances list or under the Floating IPs tab in Access & Security.
 
 .. code-block:: bash
 
