@@ -745,9 +745,9 @@ This should be as easy as:
 
  $ ssh ubuntu@$CC_PUBLIC_IP
 
-***************************************************
-Launching your first instance using a a bash script
-***************************************************
+*************************************************
+Launching your first instance using a bash script
+*************************************************
 
 This section provides a bash script that runs the commands from the previous
 section in a single script.
