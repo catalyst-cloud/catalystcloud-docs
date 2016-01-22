@@ -28,9 +28,9 @@ of failed requests that must occur in order for the service to be considered
 down.
 
 There are many mechanisms for redirecting traffic to alternative origin servers
-base don availability, the main ones are:
+based on availability, the main ones are:
 
-- DNS based
+- DNS redirection
 - Redirect via a proxy
 - Network redirection
 
@@ -86,7 +86,7 @@ POPs in New Zealand (Auckland and Wellington). Fastly POPs act as a cache that
 sits between your origin servers and the end users of the site. All end user
 traffic is served by Fastly POPs, the POP will respond to an end user with
 either cached content or content fetched from an origin server depending on the
-caching rules are set by the origin servers.
+caching rules set by the origin servers.
 
 .. _content delivery network: https://en.wikipedia.org/wiki/Content_delivery_network
 
@@ -104,10 +104,10 @@ Fastly has a number of features that make it useful for us:
 - Fastly has POPs in New Zealand
 - Fastlys POPs are Anycasted meaning that we avoid DNS propagation issues as
   the IP address and domain name remain static for clients
-- Fastlys provides a global network of Anycasted POPs that provides good
+- Fastly provides a global network of Anycasted POPs that provides good
   resiliency and availability at the CDN layer
 - Fastly provides an origin health check and failover feature, there are not
-  many other providers who provide both the required services as a single
+  many other CDN providers who provide both the required services as a single
   solution
 - Fastly does origin health checks and failover per POP which provides the best
   failover behaviour. Only POPs that cannot reach the primary origin will
@@ -123,7 +123,7 @@ Disadvantages of this solution include:
 - Increased complexity for your site
 - Increased cost for your site (although this will be offset by lower bandwidth
   usage on the Catalyst Cloud)
-- Requires entering into a commercial relationship with an additional company.
+- Requires entering into a commercial relationship with an additional company
 - Your site content is cached outside of New Zealand (this is also a positive)
 
 Website setup
@@ -582,7 +582,7 @@ site.
 
 .. note::
 
- We are using the `jq`_ utility to parse the json returned by https://api.fastly.com/public-ip-list. If you do not have jq it is highly reccomended. If you cannot use jp an alternative command is provided.
+ We are using the `jq`_ utility to parse the json returned by https://api.fastly.com/public-ip-list. If you do not have jq it is highly reccomended. If you cannot use jq an alternative command is provided.
 
 .. _jq: https://stedolan.github.io/jq/
 
