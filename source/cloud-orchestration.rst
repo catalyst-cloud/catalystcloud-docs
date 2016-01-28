@@ -10,19 +10,24 @@ Overview
 
 Cloud orchestration allows you to deploy applications and infrastructure using
 a simple template language that describes the required resources and their
-relationship. The orchestration service manages the life-cycle of application
-stacks on your behalf. When a template is modified, the service orchestrates
-the required changes to the infrastructure in the appropriate order. Templates
-can be managed like code and stored on your preferred version control system.
+relationship. The template format is based on YAML and called Heat
+Orchestration Template (HOT). The orchestration service manages the life-cycle
+of application stacks on your behalf. When a template is modified, the service
+orchestrates the required changes to the infrastructure in the appropriate
+order. Templates can be managed like code and stored in your preferred version
+control system.
 
 .. Heat makes auto-scaling easy. You can define a scaling group and a scaling
    policy and Heat will add or remove compute instances to the group as
    required.
 
 The orchestration service can be integrated to configuration management systems
-to provision and manage software. It can run Puppet or Chef in standalone mode,
-or be used to present compute instances back to the Puppet/Chef master for
-software configuration.
+to provision and manage software. It can run `Puppet`_ or `Chef`_ in standalone
+mode, or be used to present compute instances back to the Puppet/Chef master
+for software configuration.
+
+.. _Puppet: https://puppetlabs.com/
+.. _Chef: https://www.chef.io/
 
 The service is currently in beta and available via the APIs and command line
 tools. It will be soon exposed via the web dashboard as well. There are no
