@@ -1061,7 +1061,7 @@ Heat to delete resources rather than using the other OpenStack command line
 tools. Deleting components of the stack manually can result in resources or
 stacks in an inconsistent state.
 
-Lets delete the ``first-instance-stack`` we have created previously:
+Lets delete the ``first-instance-stack`` we created previously:
 
 .. code-block:: bash
 
