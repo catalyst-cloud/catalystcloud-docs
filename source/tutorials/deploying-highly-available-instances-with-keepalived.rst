@@ -517,7 +517,7 @@ Check that the virtual router address is associated with this port under
 
 We should now have a stack that looks something like this:
 
-.. image:: _static/vrrp-network.png
+.. image:: ../_static/vrrp-network.png
    :align: center
 
 
