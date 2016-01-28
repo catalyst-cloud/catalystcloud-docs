@@ -1058,8 +1058,8 @@ Deleting the First Instance Stack using Heat
 
 When working with stacks created by Heat it is generally a good idea to use
 Heat to delete resources rather than using the other OpenStack command line
-tools. You can cause resources and stacks to be in in an inconsistent state if
-you delete components of the stack manually.
+tools. Deleting components of the stack manually can result in resources or
+stacks in an inconsistent state.
 
 Lets delete the ``first-instance-stack`` we have created previously:
 
