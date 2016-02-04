@@ -15,3 +15,4 @@ Contents:
    tutorials/region-failover-using-the-fastly-cdn
    tutorials/using-an-openstack-vagrant-provider-on-the-catalyst-cloud
    tutorials/using-docker-machine-on-the-catalyst-cloud
+   tutorials/kubernetes-cluster-on-the-catalyst-cloud
