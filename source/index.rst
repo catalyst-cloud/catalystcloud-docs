@@ -21,6 +21,7 @@ Contents:
    object-storage
    cloud-orchestration
    tutorials
+   faq
    cloud-tunnel
    contributing
 
