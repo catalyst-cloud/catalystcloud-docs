@@ -201,6 +201,26 @@ confirm or revert the resize operation. Click on confirm to finish the resize
 operation.
 
 
+***************************
+Stopping a compute instance
+***************************
+
+There are three different ways you can stop a compute instance:
+
+* Shut off will prompt the operating system to shutdown gracefully and power
+  off the virtual machine. Instances in this state are not charged for, as
+  their compute aspect is not operational. We only charge for the disks (for
+  example: root disk or additional volumes connected to it), as we still need
+  to retain the date while the instance is powered off.
+
+* Pause will store the memory state of the compute instance in memory and then
+  freeze the virtual machine. Instances in this state are still charged as if
+  they were running.
+
+* Suspend will store the memory state of the compute instance on disk and then
+  shut down the virtual machine. Instances in this state are still charged as
+  if they were running.
+
 ***************
 Security groups
 ***************
