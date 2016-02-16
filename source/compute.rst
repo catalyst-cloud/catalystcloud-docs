@@ -211,7 +211,7 @@ There are three different ways you can stop a compute instance:
   off the virtual machine. Instances in this state are not charged for, as
   their compute aspect is not operational. We only charge for the disks (for
   example: root disk or additional volumes connected to it), as we still need
-  to retain the date while the instance is powered off.
+  to retain the data while the instance is powered off.
 
 * Pause will store the memory state of the compute instance in memory and then
   freeze the virtual machine. Instances in this state are still charged as if
