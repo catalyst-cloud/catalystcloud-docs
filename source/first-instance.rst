@@ -925,6 +925,8 @@ the ``Output floating IP`` task:
 We can now write playbooks to configure the instance we have created as
 required.
 
+.. _launching-your-first-instance-using-heat:
+
 ****************************************
 Launching your first instance using Heat
 ****************************************
