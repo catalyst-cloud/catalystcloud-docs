@@ -1,6 +1,6 @@
-########################
-Catalyst Cloud Tutorials
-########################
+#########
+Tutorials
+#########
 
 This is the tutorials section of the Catalyst Cloud Documentation.
 

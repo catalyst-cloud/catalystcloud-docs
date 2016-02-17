@@ -1,6 +1,6 @@
-##################
-Catalyst Cloud FAQ
-##################
+###
+FAQ
+###
 
 Here are some of the frequently asked questions around Catalyst Cloud.
 
