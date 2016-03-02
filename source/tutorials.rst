@@ -17,3 +17,4 @@ Contents:
    tutorials/using-docker-machine-on-the-catalyst-cloud
    tutorials/kubernetes-cluster-on-the-catalyst-cloud
    tutorials/bootstrapping-puppet
+   tutorials/cloud-socks-proxy-over-ssh

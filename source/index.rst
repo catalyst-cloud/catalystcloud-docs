@@ -22,7 +22,6 @@ Contents:
    cloud-orchestration
    tutorials
    faq
-   cloud-tunnel
    contributing
 
 ******************
