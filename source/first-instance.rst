@@ -790,13 +790,14 @@ install script in order to install Ansible.
  Installing stable version of Ansible
  ...
  $ source $CC_ANSIBLE_DIR/ansible/bin/activate
- $ ansible 2.0.0.2
- config file = /etc/ansible/ansible.cfg
- configured module search path = Default w/o overrides
+ $ ansible --version
+ ansible 2.0.1.0
+   config file = /etc/ansible/ansible.cfg
+   configured module search path = Default w/o overrides
 
 .. note::
 
-  Catalyst recommends customers to use Ansible >= 2.0 and Shade >= 1.4 with the
+  Catalyst recommends customers use Ansible >= 2.0 and Shade >= 1.4 with the
   Catalyst Cloud.
 
 OpenStack credentials
