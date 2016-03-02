@@ -17,7 +17,7 @@ In this tutorial we will show you how to add a new server to an existing
 Catalyst Cloud network and configure it with `Puppet`_ and have it check in to
 the puppetmaster.
 
-To achieve this we will create a ``heat`` script that will handle the
+To achieve this we will create a ``heat`` template that will handle the
 creation of the instance and then run a nested cloud-config script via
 `cloud-init`_ that will handle the provisioning of Puppet on the new server.
 
@@ -26,13 +26,12 @@ creation of the instance and then run a nested cloud-config script via
 
 Setup
 =====
-The main script is a simple heat template that deploys a single instance into
-an existing network hosted in the Catalyst Cloud. In order to make this work
-we first need to retrieve the relevant network ids and add them into the
-script.
+We will make use of heat template to deploy a single instance into an existing
+network hosted in the Catalyst Cloud. In order to make this work we need to
+retrieve the relevant network ids and add them into the template.
 
-The 2 networks we will be connecting to are front-end and public-net.
-To find these values we need to run the following OpenStack commands.
+The two networks we will be connecting to are front-end and public-net. To
+find these values we need to run the following OpenStack commands.
 
 .. code-block:: bash
 
@@ -46,7 +45,7 @@ To find these values we need to run the following OpenStack commands.
   +--------------------------------------+------------+
 
 We also need to know the id of the front-end network subnet in order to
-create a port and assign a floating ip to the server.
+create a port and assign a floating IP to the server.
 
 .. code-block:: bash
 
@@ -61,7 +60,7 @@ create a port and assign a floating ip to the server.
 Implementation
 ==============
 
-This snippet ( included in the script below ) is responsible for passing
+This snippet ( included in the template below ) is responsible for passing
 the cloud-config script puppet_bootstrap.yaml to cloud-init
 
 .. code-block:: yaml
@@ -71,10 +70,9 @@ the cloud-config script puppet_bootstrap.yaml to cloud-init
     get_file: /home/user1/cloud/puppet_bootstrap.yaml
 
 Here is the heat template that is responsible for creating the new instance.
-The network id values found previously have been added to the
-relevant parameters below as defaults in order to keep things simple. It is
-also possible to pass these values in as arguments from the command line,
-as shown `here`_.
+The network id values found previously have been added to the relevant
+parameters as defaults. It is also possible to pass these values in as
+arguments from the command line, as shown `here`_.
 
 .. _here: http://docs.openstack.org/cli-reference/heat.html#heat-stack-create
 
