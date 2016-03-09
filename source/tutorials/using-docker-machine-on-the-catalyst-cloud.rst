@@ -115,8 +115,8 @@ If you are unsure of what YOUR_CIDR_NETWORK should be, ask your network admin,
 or visit http://ifconfig.me and get your IP address.  Use "IP_ADDRESS/32" as
 YOUR_CIDR_NETWORK to allow traffic only from your current effective IP.
 
-Create an a Cloud VM using Docker Machine
-=========================================
+Create a Cloud VM using Docker Machine
+======================================
 
 The next step is to provision a compute instance using Docker Machine. Docker
 machine will instantiate a VM, get SSH access to this VM and will then install
