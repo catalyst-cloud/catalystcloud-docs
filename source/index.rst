@@ -14,6 +14,7 @@ Contents:
 
    getting-started
    first-instance
+   access-control
    block-storage
    compute
    network
