@@ -16,6 +16,7 @@ Contents:
    first-instance
    block-storage
    compute
+   network
    dashboard
    image
    object-storage
