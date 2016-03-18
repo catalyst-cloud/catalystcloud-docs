@@ -17,6 +17,7 @@ Contents:
    access-control
    block-storage
    compute
+   network
    dashboard
    image
    object-storage
