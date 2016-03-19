@@ -133,8 +133,7 @@ wish to route via the VPN to access the local subnet.
 
 .. note::
  If you are connecting to a remote peer that is not a Catalyst Cloud router you
- may need to modify some of the parameters used in the following steps
- following steps.
+ may need to modify some of the parameters used in the following steps.
 
 By now you should have the required values so we can proceed to create a VPN,
 there are four steps to creating a VPN:
@@ -263,11 +262,11 @@ bring up the VPN. When the VPN is up the status will changed to ``ACTIVE``.
 VPN Setup using a bash script
 =============================
 
-In order to simplify the procedure for creating a VPN the Catalyst Cloud team
-have created a bash script to simplify the process. In the case of a region to
-region VPN all you need to know is the router and subnet names for both
-regions. When one peer is not a Catalyst Cloud router you will need to know the
-peer router IP address and the remote peer CIDR range.
+The Catalyst Cloud team have created a bash script that simplifies the
+procedure for creating a VPN. In the case of a region to region VPN all you
+need to know is the router and subnet names for each region. When one peer is
+not a Catalyst Cloud router you will need to know the peer router IP address
+and the remote peer CIDR range.
 
 This script will require no modification when setting up region to region VPNs.
 If you are using it to connect a Catalyst Cloud router to a non Catalyst Cloud
