@@ -169,7 +169,7 @@ Then create a VPN IKE Policy:
 
  $ neutron vpn-ikepolicy-create --tenant-id TENANT_ID \
    --auth-algorithm sha1 --encryption-algorithm aes-256 --phase1-negotiation-mode main \
-   --ike-version v1 --pfs group5 --lifetime units=seconds,value=28800 "IKE Policy"
+   --ike-version v1 --pfs group14 --lifetime units=seconds,value=14400 "IKE Policy"
 
    Created a new ikepolicy:
    +-------------------------+--------------------------------------+
@@ -180,9 +180,9 @@ Then create a VPN IKE Policy:
    | encryption_algorithm    | aes-256                              |
    | id                      | d68a5e62-b643-4ea3-8b2c-b83824c0e61e |
    | ike_version             | v1                                   |
-   | lifetime                | {"units": "seconds", "value": 28800} |
+   | lifetime                | {"units": "seconds", "value": 14400} |
    | name                    | IKE Policy                           |
-   | pfs                     | group5                               |
+   | pfs                     | group14                              |
    | phase1_negotiation_mode | main                                 |
    | tenant_id               | e5bab53f56c14767bc44d2868ff317ae     |
    +-------------------------+--------------------------------------+
@@ -192,7 +192,7 @@ Then create a VPN IPSec Policy:
 .. code-block:: bash
 
  $ neutron vpn-ipsecpolicy-create --tenant-id TENANT_ID --transform-protocol esp \
-   --auth-algorithm sha1 --encryption-algorithm aes-256 --encapsulation-mode tunnel --pfs group5 \
+   --auth-algorithm sha1 --encryption-algorithm aes-256 --encapsulation-mode tunnel --pfs group14 \
    --lifetime units=seconds,value=3600 "IPsec Policy"
 
    created a new ipsecpolicy:
@@ -206,7 +206,7 @@ Then create a VPN IPSec Policy:
    | id                   | c3f5bc60-0959-4c4f-ba1d-2a15e68de62f |
    | lifetime             | {"units": "seconds", "value": 3600}  |
    | name                 | IPsec Policy                         |
-   | pfs                  | group5                               |
+   | pfs                  | group14                              |
    | tenant_id            | e5bab53f56c14767bc44d2868ff317ae     |
    | transform_protocol   | esp                                  |
    +----------------------+--------------------------------------+
@@ -355,9 +355,9 @@ on the Catalyst Cloud
  | encryption_algorithm    | aes-256                              |
  | id                      | 30092274-b87a-4dfe-b83d-c4fa09b938a0 |
  | ike_version             | v1                                   |
- | lifetime                | {"units": "seconds", "value": 28800} |
+ | lifetime                | {"units": "seconds", "value": 14400} |
  | name                    | IKE Policy                           |
- | pfs                     | group5                               |
+ | pfs                     | group14                              |
  | phase1_negotiation_mode | main                                 |
  | tenant_id               | 0cb6b9b744594a619b0b7340f424858b     |
  +-------------------------+--------------------------------------+
@@ -372,7 +372,7 @@ on the Catalyst Cloud
  | id                   | 316b5ef1-8b7f-45fd-893c-85610dbbdfe7 |
  | lifetime             | {"units": "seconds", "value": 3600}  |
  | name                 | IPsec Policy                         |
- | pfs                  | group5                               |
+ | pfs                  | group14                              |
  | tenant_id            | 0cb6b9b744594a619b0b7340f424858b     |
  | transform_protocol   | esp                                  |
  +----------------------+--------------------------------------+
@@ -421,9 +421,9 @@ on the Catalyst Cloud
  | encryption_algorithm    | aes-256                              |
  | id                      | 428eca9c-3713-4596-a9df-b700695ef64f |
  | ike_version             | v1                                   |
- | lifetime                | {"units": "seconds", "value": 28800} |
+ | lifetime                | {"units": "seconds", "value": 14400} |
  | name                    | IKE Policy                           |
- | pfs                     | group5                               |
+ | pfs                     | group14                              |
  | phase1_negotiation_mode | main                                 |
  | tenant_id               | 0cb6b9b744594a619b0b7340f424858b     |
  +-------------------------+--------------------------------------+
@@ -438,7 +438,7 @@ on the Catalyst Cloud
  | id                   | bce31d9f-304b-4572-9a69-5815a89ab235 |
  | lifetime             | {"units": "seconds", "value": 3600}  |
  | name                 | IPsec Policy                         |
- | pfs                  | group5                               |
+ | pfs                  | group14                              |
  | tenant_id            | 0cb6b9b744594a619b0b7340f424858b     |
  | transform_protocol   | esp                                  |
  +----------------------+--------------------------------------+
