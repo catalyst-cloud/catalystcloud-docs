@@ -194,8 +194,8 @@ then
         --encryption-algorithm aes-256 \
         --phase1-negotiation-mode main \
         --ike-version v1 \
-        --pfs group5 \
-        --lifetime units=seconds,value=28800 \
+        --pfs group14 \
+        --lifetime units=seconds,value=14400 \
         "IKE Policy"
 
     neutron vpn-ipsecpolicy-create \
@@ -204,7 +204,7 @@ then
         --auth-algorithm sha1 \
         --encryption-algorithm aes-256 \
         --encapsulation-mode tunnel \
-        --pfs group5 \
+        --pfs group14 \
         --lifetime units=seconds,value=3600 \
         "IPsec Policy"
 
@@ -241,8 +241,8 @@ then
         --encryption-algorithm aes-256 \
         --phase1-negotiation-mode main \
         --ike-version v1 \
-        --pfs group5 \
-        --lifetime units=seconds,value=28800 \
+        --pfs group14 \
+        --lifetime units=seconds,value=14400 \
         "IKE Policy"
 
     neutron vpn-ipsecpolicy-create \
@@ -251,7 +251,7 @@ then
         --auth-algorithm sha1 \
         --encryption-algorithm aes-256 \
         --encapsulation-mode tunnel \
-        --pfs group5 \
+        --pfs group14 \
         --lifetime units=seconds,value=3600 \
         "IPsec Policy"
 
