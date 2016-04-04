@@ -16,5 +16,6 @@ Contents:
    tutorials/using-an-openstack-vagrant-provider-on-the-catalyst-cloud
    tutorials/using-docker-machine-on-the-catalyst-cloud
    tutorials/kubernetes-cluster-on-the-catalyst-cloud
+   tutorials/ansible-openstack-dynamic-inventory
    tutorials/bootstrapping-puppet
    tutorials/cloud-socks-proxy-over-ssh
