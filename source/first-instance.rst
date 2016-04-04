@@ -755,6 +755,8 @@ section in a single script.
 .. literalinclude:: ../scripts/create-first-instance.sh
   :language: bash
 
+.. _launching-your-first-instance-using-ansible:
+
 *******************************************
 Launching your first instance using Ansible
 *******************************************
