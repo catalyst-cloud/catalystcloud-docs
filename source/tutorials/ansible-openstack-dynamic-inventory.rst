@@ -253,7 +253,7 @@ In the example below we are using ``jq`` to remove the data associated with the
 
 We can see a number of different groupings of instances are available including
 groupings based on the metadata we passed. Metadata with the key ``group`` is a
-special case that will be translated directly into a ansible host group of that
+special case that will be translated directly into an Ansible host group of that
 name.
 
 Any of these groups may be used within a playbook, for example lets make use of
