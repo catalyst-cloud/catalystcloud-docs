@@ -19,3 +19,4 @@ Contents:
    tutorials/ansible-openstack-dynamic-inventory
    tutorials/bootstrapping-puppet
    tutorials/cloud-socks-proxy-over-ssh
+   tutorials/ansible-create-x-servers-using-in-memory-inventory
