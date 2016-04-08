@@ -1,0 +1,79 @@
+#!/usr/bin/env ansible-playbook
+---
+
+##############################################################################
+# Play 1 - Create 'x' instances in Openstack based on 'count' var
+##############################################################################
+
+- name: Deploy multiple duplicate cloud instances in OpenStack
+  hosts: localhost
+
+  vars:
+    image: ubuntu-14.04-x86_64
+    network: example-net
+    key_name: example-key
+    flavor: c1.c1r1
+    security_groups: example-sg
+    count: 3
+
+  tasks:
+    - name: Connect to the Catalyst Cloud
+      # assume RC file has already been sourced
+      os_auth:
+
+    - name: Launch web instances
+      os_server:
+        name: test0{{ item }}
+        flavor: "{{ flavor }}"
+        image: "{{ image }}"
+        key_name: "{{ key_name }}"
+        state: present
+        wait: true
+        network: "{{ network }}"
+        security_groups: "{{ security_groups }}"
+        auto_ip: true
+      register: newnodes
+      with_sequence:
+        count={{ count }}
+
+    - add_host: name={{ item.server.public_v4 }}
+                groups=created_nodes
+                ansible_user=ubuntu
+                instance_name={{ item.server.name }}
+      with_items: "{{ newnodes.results }}"
+
+##############################################################################
+# Play 2 - Configure nodes from in-memory inventory
+##############################################################################
+- name: Configure nodes
+  hosts: created_nodes
+  become: yes
+  become_method: sudo
+  gather_facts: false
+  tasks:
+    - name: "Wait for SSH banners"
+      local_action: wait_for port=22 host="{{ inventory_hostname }}" search_regex=OpenSSH delay=5
+      become: False
+
+    - name: install apps
+      apt: name={{ item }} update_cache=yes state=latest
+      with_items:
+        - htop
+        - git
+
+    - name: Pause play to interact with the servers
+      pause: prompt="Playbook paused... hit <enter> to continue or <ctrl-c a> to abort"
+
+##############################################################################
+# Play 3 - Destroy nodes
+##############################################################################
+
+- name: Destroy nodes
+  hosts: localhost
+
+  tasks:
+  - name: Destroy instances
+    os_server:
+      name: "{{ hostvars[item].instance_name }}"
+      state: absent
+    with_items: "{{ groups['created_nodes'] }}"
