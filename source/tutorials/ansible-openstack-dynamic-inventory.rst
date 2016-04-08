@@ -1,3 +1,5 @@
+.. _ansible_openstack-dynamic-inventory:
+
 #######################################################
 Using Ansible Dynamic Inventories on the Catalyst Cloud
 #######################################################
