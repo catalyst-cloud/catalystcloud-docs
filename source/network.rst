@@ -257,7 +257,7 @@ ids to use within this command.
 You have now stood up one end of the VPN, this process should be repeated at
 the other end using the same configuration options and PSK. Once both sides of
 the VPN are configured the peers should automatically detect each other and
-bring up the VPN. When the VPN is up the status will changed to ``ACTIVE``.
+bring up the VPN. When the VPN is up the status will change to ``ACTIVE``.
 
 VPN Setup using a bash script
 =============================
