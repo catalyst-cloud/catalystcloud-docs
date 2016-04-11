@@ -1060,7 +1060,8 @@ using the floating IP:
 
 .. code-block:: bash
 
- $ export CC_PUBLIC_IP=$( neutron floatingip-list -c status -c floating_ip_address | grep ACTIVE | awk '{ print $4 }' )
+ $ export CC_FLOATING_IP_ID=$( heat resource-show first-instance-stack first_instance_server_floating_ip | grep physical_resource_id | awk '{ print $4 } ' )
+ $ export CC_PUBLIC_IP=$( neutron floatingip-list -c floating_ip_address -c id | grep $CC_FLOATING_IP_ID | awk '{ print $2 }' )
  $ ssh ubuntu@$CC_PUBLIC_IP
 
 Deleting the First Instance Stack using Heat
