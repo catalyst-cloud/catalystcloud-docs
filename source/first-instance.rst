@@ -73,7 +73,7 @@ Compute Flavors
 ===============
 
 The flavor of an instance is the CPU, memory and disk specifications of a
-compute instance. Catalyst flavors are named 'cX.cY.cZ', where X is the
+compute instance. Catalyst flavors are named 'cX.cYrZ', where X is the
 'compute generation', Y is the number of vCPUs, and Z is the number of
 gigabytes of memory.
 
@@ -388,7 +388,7 @@ Lets create a router and network:
  +----------------+--------------------------------------+
  | admin_state_up | True                                 |
  | id             | <PRIVATE_NETWORK_ID>                 |
- | name           | 10.0.0.0/24                          |
+ | name           | private-net                          |
  | shared         | False                                |
  | status         | ACTIVE                               |
  | subnets        |                                      |
