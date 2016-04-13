@@ -558,14 +558,14 @@ We need to create a security group and rule for our instance.
 
 .. code-block:: bash
 
- $ neutron security-group-create --description 'network access for our first instance.' first-instance
+ $ neutron security-group-create --description 'Network access for our first instance.' first-instance-sg
  Created a new security_group:
  +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
  | Field                | Value                                                                                                                                                                                                                                                                                                                         |
  +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
  | description          | network access for our first instance.                                                                                                                                                                                                                                                                                        |
  | id                   | f0c68b05-edcf-48f6-bfc8-b5537ab255fe                                                                                                                                                                                                                                                                                          |
- | name                 | first-instance                                                                                                                                                                                                                                                                                                                |
+ | name                 | first-instance-sg                                                                                                                                                                                                                                                                                                             |
  | security_group_rules | {"remote_group_id": null, "direction": "egress", "remote_ip_prefix": null, "protocol": null, "tenant_id": "0cb6b9b744594a619b0b7340f424858b", "port_range_max": null, "security_group_id": "f0c68b05-edcf-48f6-bfc8-b5537ab255fe", "port_range_min": null, "ethertype": "IPv4", "id": "a93fff5c-9cd6-40d4-9dd5-6cc6eba1b134"} |
  |                      | {"remote_group_id": null, "direction": "egress", "remote_ip_prefix": null, "protocol": null, "tenant_id": "0cb6b9b744594a619b0b7340f424858b", "port_range_max": null, "security_group_id": "f0c68b05-edcf-48f6-bfc8-b5537ab255fe", "port_range_min": null, "ethertype": "IPv6", "id": "fe2a202a-6bc1-4064-8499-88401196899b"} |
  | tenant_id            | 0cb6b9b744594a619b0b7340f424858b                                                                                                                                                                                                                                                                                              |
@@ -578,13 +578,13 @@ an environment variable with the security group id for later use.
 .. code-block:: bash
 
  $ neutron security-group-list
- +--------------------------------------+----------------+----------------------------------------+
- | id                                   | name           | description                            |
- +--------------------------------------+----------------+----------------------------------------+
- | 687512ab-f197-4f07-ae51-788c559883b9 | default        | default                                |
- | f0c68b05-edcf-48f6-bfc8-b5537ab255fe | first-instance | network access for our first instance. |
- +--------------------------------------+----------------+----------------------------------------+
- $ export CC_SECURITY_GROUP_ID=$(neutron security-group-list | grep first-instance | awk '{ print $2 }' )
+ +--------------------------------------+-------------------+----------------------------------------+
+ | id                                   | name              | description                            |
+ +--------------------------------------+-------------------+----------------------------------------+
+ | 687512ab-f197-4f07-ae51-788c559883b9 | default           | default                                |
+ | f0c68b05-edcf-48f6-bfc8-b5537ab255fe | first-instance-sg | network access for our first instance. |
+ +--------------------------------------+-------------------+----------------------------------------+
+ $ export CC_SECURITY_GROUP_ID=$(neutron security-group-list | grep first-instance-sg | awk '{ print $2 }' )
 
 Next we will set an environment variable with our local external IP address:
 
@@ -620,7 +620,7 @@ previous steps. Ensure you have appropriate values set for ``CC_FLAVOR_ID``,
 
  $ env | grep CC_
 
- $ nova boot --flavor $CC_FLAVOR_ID --image $CC_IMAGE_ID --key-name first-instance-key --security-groups default,first-instance --nic net-id=$CC_PRIVATE_NETWORK_ID first-instance
+ $ nova boot --flavor $CC_FLAVOR_ID --image $CC_IMAGE_ID --key-name first-instance-key --security-groups default,first-instance-sg --nic net-id=$CC_PRIVATE_NETWORK_ID first-instance
 
 After issuing that command, details about the new Instance, including its id
 will be provided. ::
@@ -649,7 +649,7 @@ will be provided. ::
  | name                                 | first-instance                                             |
  | os-extended-volumes:volumes_attached | []                                                         |
  | progress                             | 0                                                          |
- | security_groups                      | default, first-instance                                    |
+ | security_groups                      | default, first-instance-sg                                 |
  | status                               | BUILD                                                      |
  | tenant_id                            | <TENANT_ID>                                                |
  | updated                              | 2015-01-14T21:16:28Z                                       |
@@ -1038,7 +1038,7 @@ Check the output of stack show:
  |                       |   "private_net_pool_start": "10.0.0.10",                                                                                                        |
  |                       |   "private_net_dns_servers": "202.78.247.197,202.78.247.198,202.78.247.199",                                                                    |
  |                       |   "private_net_name": "private-net",                                                                                                            |
- |                       |   "secgroup_name": "first-instance",                                                                                                            |
+ |                       |   "secgroup_name": "first-instance-sg",                                                                                                         |
  |                       |   "router_name": "border-router",                                                                                                               |
  |                       |   "servers_flavor": "c1.c1r1",                                                                                                                  |
  |                       |   "host_name": "first-instance"                                                                                                                 |
@@ -1332,7 +1332,7 @@ The following code will create a security group and a rule within that group:
 
 .. code-block:: python
 
- first_instance_security_group = conn.ex_create_security_group('first-instance', 'network access for our first instance.')
+ first_instance_security_group = conn.ex_create_security_group('first-instance-sg', 'network access for our first instance.')
  conn.ex_create_security_group_rule(first_instance_security_group, 'TCP', 22, 22)
 
 .. warning::
@@ -1437,7 +1437,7 @@ Putting everything together:
          print(keypair)
 
  security_group_exists = False
- security_group_name = 'first-instance'
+ security_group_name = 'first-instance-sg'
  for security_group in conn.ex_list_security_groups():
      if security_group.name == security_group_name:
          first_instance_security_group = security_group
@@ -1547,8 +1547,8 @@ resources is important.
  Deleted network: private-net
 
  # delete security group
- $ neutron security-group-delete first-instance
- Deleted security_group: first-instance
+ $ neutron security-group-delete first-instance-sg
+ Deleted security_group: first-instance-sg
 
  # delete ssh key
  $ nova keypair-delete first-instance-key
