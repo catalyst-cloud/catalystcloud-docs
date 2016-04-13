@@ -86,37 +86,38 @@ PRIVATE_NETWORK_NAME="private-net"
 PRIVATE_SUBNET_NAME="private-subnet"
 SSH_KEY_NAME="first-instance-key"
 INSTANCE_NAME="first-instance"
+SECURITY_GROUP_NAME="first-instance-sg"
 FLAVOR_NAME="c1.c1r1"
 IMAGE_NAME="ubuntu-14.04-x86_64"
 
 # check that resources do not already exist
-if nova list | grep -q first-instance; then
-    echo "instance first-instance exists, please delete all first instance resources before running this script";
+if nova list | grep -q "$INSTANCE_NAME"; then
+    echo "instance $INSTANCE_NAME exists, please delete all first instance resources before running this script";
     EXIT=1;
 fi
 
-if neutron router-list | grep -q border-router; then
-    echo "router border-router exists, please delete all first instance resources before running this script";
+if neutron router-list | grep -q "$ROUTER_NAME"; then
+    echo "router $ROUTER_NAME exists, please delete all first instance resources before running this script";
     EXIT=1;
 fi
 
-if neutron subnet-list | grep -q private-subnet; then
-    echo "subnet private-subnet exists, please delete all first instance resources before running this script";
+if neutron subnet-list | grep -q "$PRIVATE_SUBNET_NAME"; then
+    echo "subnet $PRIVATE_SUBNET_NAME exists, please delete all first instance resources before running this script";
     EXIT=1;
 fi
 
-if neutron net-list | grep -q private-net; then
-    echo "network private-net exists, please delete all first instance resources before running this script";
+if neutron net-list | grep -q "$PRIVATE_NETWORK_NAME"; then
+    echo "network $PRIVATE_NETWORK_NAME exists, please delete all first instance resources before running this script";
     EXIT=1;
 fi
 
-if neutron security-group-list | grep -q first-instance; then
-    echo "security group first-instance exists, please delete all first instance resources before running this script";
+if neutron security-group-list | grep -q "$SECURITY_GROUP_NAME"; then
+    echo "security group $SECURITY_GROUP_NAME exists, please delete all first instance resources before running this script";
     EXIT=1;
 fi
 
-if nova keypair-list | grep -q first-instance-key; then
-    echo "keypair first-instance-key exists, please delete all first instance resources before running this script";
+if nova keypair-list | grep -q "$SSH_KEY_NAME"; then
+    echo "keypair $SSH_KEY_NAME exists, please delete all first instance resources before running this script";
     EXIT=1;
 fi
 
@@ -172,10 +173,10 @@ CC_PUBLIC_NETWORK_ID=$( neutron net-list | grep public-net | awk '{ print $2 }' 
 CC_PRIVATE_NETWORK_ID=$( neutron net-list | grep $PRIVATE_NETWORK_NAME | awk '{ print $2 }' )
 
 echo creating security group:
-neutron security-group-create --description 'network access for our first instance.' $INSTANCE_NAME
+neutron security-group-create --description 'Network access for our first instance.' $SECURITY_GROUP_NAME
 
 echo getting security group id:
-CC_SECURITY_GROUP_ID=$(neutron security-group-list | grep $INSTANCE_NAME | awk '{ print $2 }' )
+CC_SECURITY_GROUP_ID=$(neutron security-group-list | grep "$SECURITY_GROUP_NAME" | awk '{ print $2 }' )
 
 echo creating security group rule for ssh access:
 neutron security-group-rule-create --direction ingress --protocol tcp --port-range-min 22 --port-range-max 22 \
@@ -183,13 +184,13 @@ neutron security-group-rule-create --direction ingress --protocol tcp --port-ran
 
 echo booting first instance:
 nova boot --flavor "$CC_FLAVOR_ID" --image "$CC_IMAGE_ID" --key-name "$SSH_KEY_NAME" \
---security-groups default,"$INSTANCE_NAME" --nic net-id="$CC_PRIVATE_NETWORK_ID" "$INSTANCE_NAME"
+--security-groups default,"$SECURITY_GROUP_NAME" --nic net-id="$CC_PRIVATE_NETWORK_ID" "$INSTANCE_NAME"
 
-instance_status=$(nova show first-instance | grep status | awk '{ print $4 }')
+instance_status=$(nova show "$INSTANCE_NAME" | grep status | awk '{ print $4 }')
 
 until [ "$instance_status" == 'ACTIVE' ]
 do
-    instance_status=$(nova show first-instance | grep status | awk '{ print $4 }')
+    instance_status=$(nova show "$INSTANCE_NAME" | grep status | awk '{ print $4 }')
     sleep 2;
 done
 
@@ -205,8 +206,8 @@ fi
 echo getting public ip:
 CC_PUBLIC_IP=$( neutron floatingip-list -c floating_ip_address -c id | grep "$CC_FLOATING_IP_ID" | awk '{ print $2 }' )
 
-echo getting first instace port id:
-CC_PORT_ID=$( nova interface-list $INSTANCE_NAME | grep "$CC_PRIVATE_NETWORK_ID" | awk '{ print $4 }' )
+echo getting instance port id:
+CC_PORT_ID=$( nova interface-list "$INSTANCE_NAME" | grep "$CC_PRIVATE_NETWORK_ID" | awk '{ print $4 }' )
 
 neutron floatingip-associate "$CC_FLOATING_IP_ID" "$CC_PORT_ID"
 
