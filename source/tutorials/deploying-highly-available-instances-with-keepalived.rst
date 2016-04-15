@@ -701,7 +701,7 @@ manually using a single command.
 It is beyond the scope of this tutorial to explain the syntax of writing heat
 templates, thus we will make use of a predefined example from the
 cloud-orchestration repository. For more information on writing heat templates
-please consult the documentation at :ref:`cloud-orchestration`
+please consult the documentation at :ref:`cloud-orchestration`.
 
 That said, there are a number of parts of the heat template we should have a
 look at in more detail. The template is located in the
