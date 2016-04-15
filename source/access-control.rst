@@ -41,3 +41,16 @@ Project Moderator
 -----------------
 The “Project Moderator” role can invite other people to join your project and
 update their roles, but cannot change the project admin.
+
+*************
+Project Users
+*************
+
+``Dashboard → Management → Project Users``
+
+.. note::
+
+ The Project Users page is only accessible to users with the “Project Admin” or “Project Moderator” role.
+
+The project users page allows project admins and moderators to perform
+administrative functions. Users can be added, revoked or updated from here.
