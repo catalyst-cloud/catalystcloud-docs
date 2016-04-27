@@ -34,7 +34,7 @@ format that Ansible understands.
 .. _Dynamic inventory: http://docs.ansible.com/ansible/intro_dynamic_inventory.html
 
 The Ansible project has an OpenStack dynamic inventory script available which
-we can make use of to integrate Ansible with the Catalyst Cloud. This allow us
+we can make use of to integrate Ansible with the Catalyst Cloud. This allows us
 to use Ansible for configuration management of Catalyst Cloud instances
 irrespective of what method has been used to create those instances.
 
