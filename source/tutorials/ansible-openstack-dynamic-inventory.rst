@@ -59,7 +59,7 @@ to be dynamically populated from your Catalyst Cloud project.
 
  $ sudo cp openstack.py /etc/ansible/hosts
 
-Testing the dynaminc inventory script
+Testing the dynamic inventory script
 ========================================
 
 Now we can test the script:
