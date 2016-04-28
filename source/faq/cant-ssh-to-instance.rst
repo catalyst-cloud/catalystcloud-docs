@@ -24,15 +24,15 @@ Connection issues are generally caused by Security Group misconfiguration.
 Authentication issues are generally caused by the use of incorrect users or SSH
 keys.
 
-If you are encountering a ``Connection refused`` error then you have connection
-issue. If you are encountering a ``Permission denied (publickey).`` error then
-you have an authentication issue. If you are encountering a ``Connection timed
-out`` error then it is likely there is an issue with your instance.
+If you are encountering a ``Connection timed out`` error then you have
+connection issue. If you are encountering a ``Permission denied (publickey).``
+error then you have an authentication issue. If you are encountering a
+idifferent SSH error then it is likely there is an issue with your instance.
 
 Network issues
 --------------
 
-If you are encountering a ``Connection refused`` error from your SSH client
+If you are encountering a ``Connection timed out`` error from your SSH client
 then you have a network connection issue. The most common reason for this is a
 Security Group misconfiguration. If you are experiencing this issue check the
 following:
@@ -338,7 +338,7 @@ connect to the SSH port.
 The most common reason for this error is misconfigured DNS servers on the
 subnet where this instance resides. If DNS resolution is not working during
 initialisation of the instance delays will occur while the instance cloud-init
-process waits for DNS. These delays occur before the DNS service is configured.
+process waits for DNS. These delays occur before the SSH service is configured.
 The service usually becomes available after about 5 minutes. When the SSH
 connection becomes available it is often slow to connect, this is also caused
 by broken DNS resolution on the instance.
