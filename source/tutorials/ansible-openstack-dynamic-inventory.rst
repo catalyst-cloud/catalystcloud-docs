@@ -38,7 +38,7 @@ we can make use of to integrate Ansible with the Catalyst Cloud. This allows us
 to use Ansible for configuration management of Catalyst Cloud instances
 irrespective of what method has been used to create those instances.
 
-Donloading the dynamic inventory script
+Downloading the dynamic inventory script
 ========================================
 
 The latest version of the script is available here:
