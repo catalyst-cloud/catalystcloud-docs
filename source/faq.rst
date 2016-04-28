@@ -2,7 +2,7 @@
 FAQ
 ###
 
-Here are some of the frequently asked questions around Catalyst Cloud.
+Frequently Asked Questions about the Catalyst Cloud.
 
 Contents:
 
@@ -10,3 +10,4 @@ Contents:
    :maxdepth: 1
 
    faq/what-is-instance-boot-source
+   faq/cant-ssh-to-instance
