@@ -15,6 +15,12 @@ define the actions they can perform using roles.
 Roles
 *****
 
+Compute Start/Stop
+------------------
+The "Compute Start/Stop" role allows users to start, stop, hard reboot and soft
+reboot compute instances. Other, more destructive or creative actions will fail.
+This role is implied when a user also has "Project Member".
+
 Heat Stack Owner
 ----------------
 The “Heat Stack Owner” role allows users access to the Heat Cloud Orchestration
@@ -26,10 +32,19 @@ other roles.
 For more information on this service please consult the documentation at
 :ref:`cloud-orchestration`.
 
+Object Storage
+------------------
+The "Object Storage" role allows users to create, update and delete containers,
+and objects within those containers. Creative and destructive actions related
+to compute, network and block storage will fail. This role is implied when a user
+also has "Project Member".
+
 Project Admin
 -------------
 The “Project Admin” role allows users to have full control over your project,
-including adding moderators and inviting other people to join it.
+including adding moderators and inviting other people to join it.  The role
+remains largely administrative until a role such as "Project Member" is also
+assigned.
 
 Project Member
 --------------
@@ -40,7 +55,8 @@ roles.
 Project Moderator
 -----------------
 The “Project Moderator” role can invite other people to join your project and
-update their roles, but cannot change the project admin.
+update their roles, but cannot change the project admin.  The role is essentially
+an administrative one until a role such as "Project Member" is also assigned.
 
 *************
 Project Users
