@@ -55,8 +55,10 @@ The requirements are:
 Catalyst operate a number of recursive DNS servers in each cloud region for
 use by Catalyst Cloud instances, free of charge. They are:
 
+.. _DNS Name Servers:
+
 +----------+------------------------------------------------+
-|  Region  | DNS Servers                                    |
+|  Region  | DNS Name Servers                               |
 +==========+================================================+
 | nz-por-1 | 202.78.247.197, 202.78.247.198, 202.78.247.199 |
 +----------+------------------------------------------------+
@@ -184,7 +186,7 @@ notation and click "Next":
    :align: center
 
 Specify additional attributes for the subnet including enabling DHCP,
-specifying the DNS servers for your region and optionally defining an
+specifying the `DNS Name Servers`_ for your region and optionally defining an
 allocation pool:
 
 .. image:: _static/fi-network-detail.png
@@ -296,7 +298,7 @@ Select the ``private-net`` network from the list and click "Next":
 .. image:: _static/fi-launch-instance-networks.png
    :align: center
 
-Select the ``first-instance`` security group from the list and click "Next":
+Select the ``first-instance-sg`` security group from the list and click "Next":
 
 .. image:: _static/fi-launch-instance-security-groups.png
    :align: center
@@ -395,8 +397,8 @@ Lets create a router and network:
  | tenant_id      | <TENANT_ID>                          |
  +----------------+--------------------------------------+
 
-Now lets set our nameservers and create a subnet of the network we have just
-created:
+Now lets set our `DNS Name Servers`_ and create a subnet of the network we have
+just created:
 
 .. code-block:: bash
 
