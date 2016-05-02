@@ -11,3 +11,4 @@ Contents:
 
    faq/what-is-instance-boot-source
    faq/cant-ssh-to-instance
+   faq/pause-suspend-shelve-shutoff

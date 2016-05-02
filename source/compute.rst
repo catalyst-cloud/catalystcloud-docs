@@ -200,6 +200,7 @@ Once the resize operation has been completed, our cloud will prompt you to
 confirm or revert the resize operation. Click on confirm to finish the resize
 operation.
 
+.. _stopping compute:
 
 ***************************
 Stopping a compute instance
