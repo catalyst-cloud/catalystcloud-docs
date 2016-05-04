@@ -1,5 +1,21 @@
 #!/bin/bash
 
+# VARS, change these if required
+# Set a prefix if you wish all names to have a unique prefix
+PREFIX='flubber'
+ROUTER_NAME="${PREFIX}border-router"
+PRIVATE_NETWORK_NAME="${PREFIX}private-net"
+PRIVATE_SUBNET_NAME="${PREFIX}private-subnet"
+SSH_KEY_NAME="${PREFIX}first-instance-key"
+INSTANCE_NAME="${PREFIX}first-instance"
+SECURITY_GROUP_NAME="${PREFIX}first-instance-sg"
+# Network portion of /24 you wish to use in the subnet
+NETWORK="10.0.0"
+POOL_START_OCT="10"
+POOL_END_OCT="200"
+FLAVOR_NAME="c1.c1r1"
+IMAGE_NAME="ubuntu-14.04-x86_64"
+
 # valid ip function
 valid_ip() {
     regex="\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b"
@@ -80,16 +96,6 @@ else
     EXIT=1;
 fi;
 
-# Set VARS, change these if required
-ROUTER_NAME="border-router"
-PRIVATE_NETWORK_NAME="private-net"
-PRIVATE_SUBNET_NAME="private-subnet"
-SSH_KEY_NAME="first-instance-key"
-INSTANCE_NAME="first-instance"
-SECURITY_GROUP_NAME="first-instance-sg"
-FLAVOR_NAME="c1.c1r1"
-IMAGE_NAME="ubuntu-14.04-x86_64"
-
 # check that resources do not already exist
 if nova list | grep -q "$INSTANCE_NAME"; then
     echo "instance $INSTANCE_NAME exists, please delete all first instance resources before running this script";
@@ -153,8 +159,15 @@ echo creating a new private network:
 neutron net-create $PRIVATE_NETWORK_NAME
 
 echo creating a private subnet:
-neutron subnet-create --name $PRIVATE_SUBNET_NAME --allocation-pool start=10.0.0.10,end=10.0.0.200 --dns-nameserver $CC_NAMESERVER_1 \
---dns-nameserver $CC_NAMESERVER_2 --dns-nameserver $CC_NAMESERVER_3 --enable-dhcp $PRIVATE_NETWORK_NAME 10.0.0.0/24
+neutron subnet-create \
+--name $PRIVATE_SUBNET_NAME \
+--allocation-pool start="$NETWORK.$POOL_START_OCT",end="$NETWORK.$POOL_END_OCT" \
+--dns-nameserver $CC_NAMESERVER_1 \
+--dns-nameserver $CC_NAMESERVER_2 \
+--dns-nameserver $CC_NAMESERVER_3 \
+--enable-dhcp \
+$PRIVATE_NETWORK_NAME \
+"$NETWORK.0/24"
 
 echo creating a router interface on the subnet:
 neutron router-interface-add $ROUTER_NAME $PRIVATE_SUBNET_NAME
