@@ -155,11 +155,20 @@ Optionally label the partition:
 
 .. code-block:: bash
 
- $ sudo tune2fs -L 'Extra Disk' /dev/vdb1
+ $ sudo tune2fs -L 'extra-disk' /dev/vdb1
  tune2fs 1.42.13 (17-May-2015)
  $ sudo blkid
  /dev/vda1: LABEL="cloudimg-rootfs" UUID="98c51306-83a2-49da-94a9-2a841c9f27b0" TYPE="ext4" PARTUUID="8cefe526-01"
- /dev/vdb1: LABEL="Extra Disk" UUID="7dec7fb6-ff38-453b-9335-0c240d179262" TYPE="ext4" PARTUUID="235ac0e4-01"
+ /dev/vdb1: LABEL="extra-disk" UUID="7dec7fb6-ff38-453b-9335-0c240d179262" TYPE="ext4" PARTUUID="235ac0e4-01"
+
+If you want the new file system to be mounted when the system reboots then you
+should add an entry to ``/etc/fstab``, for example:
+
+.. code-block:: bash
+
+ $ cat /etc/fstab
+ LABEL=cloudimg-rootfs /               ext4    defaults    0 1
+ LABEL=extra-disk      /mnt/extra-disk ext4    defaults    0 2
 
 .. note::
 
