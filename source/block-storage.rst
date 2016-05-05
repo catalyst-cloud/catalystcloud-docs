@@ -73,6 +73,10 @@ Now use the ``nova volume-attach`` command to attach the volume to an instance:
  | volumeId | ec1a31ad-1a20-4f60-bef2-69b35d67483f |
  +----------+--------------------------------------+
 
+.. note::
+
+ There are many different ways to configure block storage up in a Linux environment, this documentation is not intended as a guide for Linux filesystems and partitioning. The example given here is for a creating a single ext4 formated partition on a volume. Please consult you distributions documentation for more information about configuring file systems on Linux.
+
 Check that the disk is recognised by the OS on the instance using ``fdisk``:
 
 .. code-block:: bash
@@ -170,6 +174,3 @@ should add an entry to ``/etc/fstab``, for example:
  LABEL=cloudimg-rootfs /               ext4    defaults    0 1
  LABEL=extra-disk      /mnt/extra-disk ext4    defaults    0 2
 
-.. note::
-
- There are a number of alternative Linux commands that will achieve the same outcomes as described in this documentation
