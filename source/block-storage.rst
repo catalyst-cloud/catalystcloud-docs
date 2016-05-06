@@ -174,3 +174,6 @@ should add an entry to ``/etc/fstab``, for example:
  LABEL=cloudimg-rootfs /               ext4    defaults    0 1
  LABEL=extra-disk      /mnt/extra-disk ext4    defaults    0 2
 
+.. note::
+
+ When referring to block devices in ``/etc/fstab`` it is recommended that UUID or volume label is used instead of using the device name explicitly. It is possible for device names to change after a reboot particularity when there are multiple attached volumes.
