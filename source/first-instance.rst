@@ -592,7 +592,7 @@ Next we will set an environment variable with our local external IP address:
 
 .. code-block:: bash
 
- $ export CC_REMOTE_CIDR_NETWORK="$( curl -s http://curlmyip.com )/32"
+ $ export CC_REMOTE_CIDR_NETWORK="$( dig +short myip.opendns.com @resolver1.opendns.com )/32"
  $ echo $CC_REMOTE_CIDR_NETWORK
 
 Ensure that this variable is correctly set and if not set it manually. If you
