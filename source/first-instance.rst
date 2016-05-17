@@ -1055,7 +1055,6 @@ Now we have a network setup we can run the launch instance playbook:
 .. code-block:: bash
 
  $ ansible-playbook launch-instance.yml
- SUDO password:
 
  PLAY [Deploy a cloud instance in OpenStack] ************************************
 
