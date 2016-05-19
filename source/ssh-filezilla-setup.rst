@@ -420,7 +420,7 @@ instance:
   $ ssh ubuntu@<FLOATING_IP>
 
 ******************************************
-Step 6: Use FileZilla with an SSH key 
+Step 6: Use FileZilla with an SSH key (optional)
 ******************************************
 
 Filezilla gives you a GUI overview of your Instance’s filesystem, with the ability 
@@ -469,4 +469,123 @@ Then click ``OK``
 Now you can access your cloud server’s file system by opening Filezilla 
 and clicking, or right-clicking on the server symbol at the top left corner 
 of the Filezilla window, then selecting the site you just created. 
+
+******************************************
+Step 7: Disable Password Authentication (optional)
+******************************************
+
+If you have followed the steps above, you should always be able to log in 
+to your server with an SSH key. You should should consider disabling
+password authentication altogether.
+
+Key pair authentication massively improves your security, but makes it impossible 
+for you to connect to your server from a friendly PC without first installing your
+key pair on it.
+
+It is recommended to disable password authentication unless you have a 
+specific reason not to.
+
+To disable password authentication
+==================================
+
+First, make a backup of your ``sshd_config`` file by copying it to your home directory, 
+or by making a read-only copy in ``/etc/ssh`` by doing:
+
+.. code-block:: bash
+
+  $ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
+  $ sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
+  
+Creating a read-only backup in ``/etc/ssh`` means you'll always be able to find a 
+known-good configuration when you need it.
+
+Once you've backed up your ``sshd_config`` file, you can make changes with the nano text editor, for example; 
+
+.. code-block:: bash
+
+ $ sudo nano /etc/ssh/sshd_config
+ 
+Now look for the following line in your ``sshd_config`` file:
+
+.. code-block:: bash
+
+  **#PasswordAuthentication yes**
+  
+Replace it with a line that looks like this:
+
+.. code-block:: bash
+
+  **PasswordAuthentication no**
+  
+Once you've made your changes you can apply them by saving the file then doing:
+
+.. code-block:: bash
+
+  $ sudo service ssh restart
+  
+Once you have saved the file and restarted your SSH server, you shouldn't even be asked for a password when you log in.
+
+*****************
+Troubleshooting
+*****************
+
+Detaching or Changing the Key on an Instance
+You cannot detach a Key from an instance, or modify it once attached.  The only way to assign a new Key Pair to an instance is to:
+Make a Snapshot of the instance
+Create a new Instance from the Snapshot
+Attach a new Key to the new instance while you are creating it
+Adding or changing a passphrase
+You can change the passphrase for an existing private key without regenerating the keypair. Just type the following command:
+$ ssh-keygen -p
+
+# Start the SSH key creation process
+Enter file in which the key is (/Users/you/.ssh/id_rsa): [Hit enter]
+Key has comment '/Users/you/.ssh/id_rsa'
+Enter new passphrase (empty for no passphrase): [Type new passphrase]
+Enter same passphrase again: [Type it again]
+Your identification has been saved with the new passphrase.
+
+If your key already has a passphrase, you will be prompted to enter it before you can change to a new passphrase.
+Encrypted Home Directory
+If you have an encrypted home directory, SSH cannot access your authorized_keys file because it is inside your encrypted home directory and won't be available until after you are authenticated. Therefore, SSH will default to password authentication.
+To solve this, create a folder outside your home named /etc/ssh/<username> (replace "<username>" with your actual username). This directory should have 755 permissions and be owned by the user. Move the authorized_keys file into it. The authorized_keys file should have 644 permissions and be owned by the user. 
+Then edit your /etc/ssh/sshd_config and add:
+AuthorizedKeysFile    /etc/ssh/%u/authorized_keys
+Finally, restart ssh with:
+sudo service ssh restart
+The next time you connect with SSH you should not have to enter your password.
+username@host's password:
+If you are not prompted for the passphrase, and instead get:
+username@host's password:
+On the host computer, ensure that the file: /etc/ssh/sshd_config contains the following lines, and that they are uncommented;
+PubkeyAuthentication yes
+RSAAuthentication yes
+If not, add them, or uncomment them, restart OpenSSH, and try logging in again. If you get the passphrase prompt now, then congratulations, you're logging in with a key!
+Permission denied (publickey)
+If you're sure you've correctly configured sshd_config, copied your ID, and have your private key in the .ssh directory, and still getting this error:
+Permission denied (publickey).
+Chances are the permissions for your /home/<user> (folder) or ~/.ssh/authorized_keys (file) are too accessible, by OpenSSH standards. You can get rid of this problem by issuing the following chmod commands:
+chmod go-w ~/     (explain)
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+Error: Agent admitted failure to sign using the key.
+This error occurs when the ssh-agent on the client is not yet managing the key. Issue the following commands to fix: 
+ssh-add
+This command should be entered after you have copied your public key to the host computer.
+Remote Host Identification Has Changed
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+It is also possible that a host key has just been changed.
+The fingerprint for the ECDSA key sent by the remote host is
+SHA256:aGZ5Fs+qEf4ESngJdksqAcn+L4H7WeOwY8nu0HsR7c4.
+Please contact your system administrator.
+Add correct host key in /home/(user)/.ssh/known_hosts to get rid of this message.
+Offending ECDSA key in /home/(user)/.ssh/known_hosts:2
+  remove with:
+  ssh-keygen -f "/home/(user)/.ssh/known_hosts" -R <IP_ADDRESS>
+ECDSA host key for <IP_ADDRESS> has changed and you have requested strict checking.
+Host key verification failed.
 
