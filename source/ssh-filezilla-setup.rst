@@ -129,27 +129,28 @@ Change the read/write permissions of the folder:
 
 .. code-block:: bash
 
-$ sudo chmod 700 ~/.ssh
+  $ sudo chmod 700 ~/.ssh
 
 Check to see of any Key Pair files already exist: 
 
 .. code-block:: bash
 
-$ ls -l
+  $ ls -l
 
 If the files id_rsa and id_rsa.pub already exist, and you’re not sure 
 what they are for, you should probably make copies or backups before proceeding:
 
 .. code-block:: bash
 
-$ cp id_rsa.pub id_rsa.pub.bak
-$ cp id_rsa id_rsa.bak
+  $ cp id_rsa.pub id_rsa.pub.bak
+  $ cp id_rsa id_rsa.bak
 
 Now generate the new RSA Key Pair, using the default name:
 
 .. code-block:: bash
 
-$ ssh-keygen -t rsa
+  $ ssh-keygen -t rsa
+
 
 Option: Create unique key file names
 =====================================
@@ -162,7 +163,7 @@ Create a unique name using the -f flag:
 
 .. code-block:: bash
 
-$ ssh-keygen -t rsa -f newKeyName
+  $ ssh-keygen -t rsa -f newKeyName
 
 
 Option: Set Key Encryption Level
@@ -173,7 +174,7 @@ making it harder to crack the key by brute force methods.
 
 .. code-block:: bash
 
-$ ssh-keygen -t rsa -b 4096
+  $ ssh-keygen -t rsa -b 4096
 
 
 Finishing Off
@@ -185,14 +186,14 @@ Ensure ssh-agent is enabled by starting the ssh-agent in the background:
 
 .. code-block:: bash
 
-$ eval "$(ssh-agent -s)"
-Agent pid 59566
+  $ eval "$(ssh-agent -s)"
+  Agent pid 59566
 
 Now Add your new SSH key to the ssh-agent.
 
 .. code-block:: bash
 
-$ ssh-add ~/.ssh/id_rsa
+  $ ssh-add ~/.ssh/id_rsa
 
 If you used an existing SSH key rather than generating a new SSH key, 
 you'll need to replace "id_rsa" in the command with the name of your 
@@ -207,7 +208,8 @@ Once you have entered the keygen command, you will get this response (with your 
 
 .. code-block:: BASH
 
-Enter file in which to save the key (/home/(username)/.ssh/id_rsa):
+  Enter file in which to save the key (/home/(username)/.ssh/id_rsa):
+
 
 This provides a default file path and filename, where SSH will automatically 
 look for your private key when you are using it to log in. You can press enter 
@@ -220,13 +222,15 @@ SSH will now ask for a passphrase:
 
 .. code-block:: BASH
 
-Enter passphrase (empty for no passphrase):
+  Enter passphrase (empty for no passphrase):
+
 
 You can press enter, to continue without a passphrase, or type in a passphrase. 
 
 Entering a passphrase increases the level of security. If one of your machines is compromised, 
 the bad guys can’t log in to your server until they figure out the passphrase. This buys you 
 more time to log-in the server from another machine and change the compromised key pair.
+
 
 Choosing a good passphrase
 ==========================
