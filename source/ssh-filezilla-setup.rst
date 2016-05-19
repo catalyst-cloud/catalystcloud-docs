@@ -33,10 +33,10 @@ The steps required to establish an encrypted SSH connection are:
 
 Before we get going, there is a subsection which explains
 why we use RSA key pairs to make secure connections over 
-the internet.
+the internet. 
 
-The last section is a Trouble-shooting guide, if things
-don't work exacctly as expected.
+The final section is a Trouble-shooting guide, if things
+don't work exactly as expected.
 
 **************
 About SSH Keys
@@ -63,25 +63,26 @@ DSA is known to be less secure, so RSA is used in this guide.
 ******************************************
 Step 1: Check that SSH is installed and running 
 ******************************************
+
 To check that SSH is installed, open a terminal and type:
 
 .. code-block:: bash
-
- $ ssh -V
+  
+  $ ssh -V
  
  
  You should get a response like this:
  
  .. code-block:: bash
-
- OpenSSH_7.2p2 Ubuntu-4ubuntu1, OpenSSL 1.0.2g-fips  1 Mar 2016
+  
+  OpenSSH_7.2p2 Ubuntu-4ubuntu1, OpenSSL 1.0.2g-fips  1 Mar 2016
  
  
  To check that SSH is running, type:
  
-  .. code-block:: bash
-
- $ ps aux | grep sshd
+.. code-block:: bash
+  
+  $ ps aux | grep sshd
  
  
  You should get a response like this:
@@ -95,19 +96,18 @@ To check that SSH is installed, open a terminal and type:
  If one or other of these does not return the expected result, then install
  OpenSSH with the command:
  
-   .. code-block:: bash
-   
-   sudo apt-get install openssh-client
-   
-
-And then restart your computer or start OpenSSH with the command:
+.. code-block:: bash
  
-   .. code-block:: bash
-   
-   sudo ssh start
-   
+  sudo apt-get install openssh-client
 
-And then run the checks above, to make sure it's working.
+Now restart your computer, or start OpenSSH with the command:
+ 
+ .. code-block:: bash
+ 
+  sudo ssh start
+
+
+Finally run the checks above, to make sure it's working.
  
 
 ******************************************
@@ -118,28 +118,33 @@ Create the key pair on the client machine (your computer).
 Open a terminal and go to your SSH folder by typing:
 
 .. code-block:: bash
+
 $ cd /home/(your_username)/.ssh/
 
 Change the read/write permissions of the folder:
 
 .. code-block:: bash
+
 $ sudo chmod 700 ~/.ssh
 
 Check to see of any Key Pair files already exist: 
 
 .. code-block:: bash
+
 $ ls -l
 
 If the files id_rsa and id_rsa.pub already exist, and you’re not sure 
 what they are for, you should probably make copies or backups before proceeding:
 
 .. code-block:: bash
+
 $ cp id_rsa.pub id_rsa.pub.bak
 $ cp id_rsa id_rsa.bak
 
 Now generate the new RSA Key Pair, using the default name:
 
 .. code-block:: bash
+
 $ ssh-keygen -t rsa
 
 Option: Create unique key file names
@@ -155,6 +160,7 @@ Create a unique name using the -f flag:
 
 $ ssh-keygen -t rsa -f newKeyName
 
+
 Option: Set Key Encryption Level
 ====================================
 
@@ -162,6 +168,7 @@ The default key is 2048 bits. You can increase this to 4096 bits with the -b fla
 making it harder to crack the key by brute force methods.
 
 .. code-block:: bash
+
 $ ssh-keygen -t rsa -b 4096
 
 Add your SSH key to the ssh-agent
@@ -169,12 +176,14 @@ Add your SSH key to the ssh-agent
 Ensure ssh-agent is enabled by starting the ssh-agent in the background:
 
 .. code-block:: bash
+
 $ eval "$(ssh-agent -s)"
 Agent pid 59566
 
 Now Add your new SSH key to the ssh-agent.
 
 .. code-block:: bash
+
 $ ssh-add ~/.ssh/id_rsa
 
 If you used an existing SSH key rather than generating a new SSH key, 
