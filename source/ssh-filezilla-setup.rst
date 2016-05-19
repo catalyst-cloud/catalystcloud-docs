@@ -71,40 +71,44 @@ To check that SSH is installed, open a terminal and type:
   $ ssh -V
  
  
- You should get a response like this:
+You should get a response like this:
  
- .. code-block:: bash
+.. code-block:: bash
   
   OpenSSH_7.2p2 Ubuntu-4ubuntu1, OpenSSL 1.0.2g-fips  1 Mar 2016
  
  
- To check that SSH is running, type:
+To check that SSH is running, type:
  
 .. code-block:: bash
   
   $ ps aux | grep sshd
  
  
- You should get a response like this:
- 
- (user)   5404  0.0  0.0  21300   984 pts/2    S+   13:13   0:00 grep --color=auto sshd
- 
- 
- Install and start SSH
- =====================
- 
- If one or other of these does not return the expected result, then install
- OpenSSH with the command:
+You should get a response like this:
  
 .. code-block:: bash
  
-  sudo apt-get install openssh-client
+  (user)   5404  0.0  0.0  21300   984 pts/2    S+   13:13   0:00 grep --color=auto sshd
+ 
+ 
+ 
+Install and start SSH
+=====================
+ 
+If one or other of these does not return the expected result, then install
+OpenSSH with the command:
+ 
+.. code-block:: bash
+ 
+  $ sudo apt-get install openssh-client
+  
 
 Now restart your computer, or start OpenSSH with the command:
  
- .. code-block:: bash
+.. code-block:: bash
  
-  sudo ssh start
+  $ sudo ssh start
 
 
 Finally run the checks above, to make sure it's working.
