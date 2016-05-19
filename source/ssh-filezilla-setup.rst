@@ -419,4 +419,54 @@ instance:
 
   $ ssh ubuntu@<FLOATING_IP>
 
+******************************************
+Step 6: Use FileZilla with an SSH key 
+******************************************
+
+Filezilla gives you a GUI overview of your Instance’s filesystem, with the ability 
+to quickly and easily upload or download files from your local machine to the 
+cloud server using SFTP (SSH File Transfer Protocol). 
+
+You can access the server with Filezilla by using the password with SFTP, if you want. 
+But using the key pair encryption is much safer. 
+
+If you want to disable password login for security reasons (see below), you’ll need 
+to set up Filezilla to utilise the private key you have now created.
+
+Open the menu ``Edit`` > ``Preferences…`` then navigate to ``Connection`` > ``SFTP``.
+
+[insert image]
+
+Add your private key file by clicking the ``Add keyfile…`` button, choosing
+``all file types`` and navigating to your new private key file (e.g. /home/(user)/.myNewKey).  
+
+Note: you may have to select View > Show Hidden Files to get to the .ssh/ folder: 
+
+When you select the private key file, Filezilla will ask if you want to convert it to a PPK file. 
+Say yes, add a new filename,  and save it in the same folder.  To avoid confusion, 
+the new filename should be something like myNewKey_fz.ppk (make sure to add the .ppk suffix).
+
+Now go to ``File`` > ``Site Manager…`` and add a ``New Site``.
+
+Enter the details as required:
+
+  **Host:** the floating Public IP address attached to your instance
+
+  **Port:** 22 (if using the default port)
+
+  **Protocol:** SFTP - SSH File Transfer Protocol
+
+  **Logon Type:** Key file
+
+  **User:** ubuntu (or your chosen distribution name) 
+
+  **Key File:** browse to the .ppk file you just created
+  
+[ Insert Image ]
+
+Then click ``OK``
+
+Now you can access your cloud server’s file system by opening Filezilla 
+and clicking, or right-clicking on the server symbol at the top left corner 
+of the Filezilla window, then selecting the site you just created. 
 
