@@ -488,6 +488,12 @@ specific reason not to.
 To disable password authentication
 ==================================
 
+Once you have copied your SSH keys unto your server and ensured that you can 
+log in with the SSH keys alone, you can go ahead and restrict the root login 
+to only be permitted via SSH keys.
+
+In order to do this, log in to your instance.
+
 First, make a backup of your ``sshd_config`` file by copying it to your home directory, 
 or by making a read-only copy in ``/etc/ssh`` by doing:
 
@@ -496,59 +502,86 @@ or by making a read-only copy in ``/etc/ssh`` by doing:
   $ sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
   $ sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
   
-Creating a read-only backup in ``/etc/ssh`` means you'll always be able to find a 
-known-good configuration when you need it.
-
-Once you've backed up your ``sshd_config`` file, you can make changes with the nano text editor, for example; 
+Then open up the SSH config file with nano:
 
 .. code-block:: bash
 
- $ sudo nano /etc/ssh/sshd_config
- 
-Now look for the following line in your ``sshd_config`` file:
+  $ sudo nano /etc/ssh/sshd_config
+
+Find the line that includes **PermitRootLogin** and modify it to ensure that users can only connect with their SSH key:
+
+.. code-block:: bash
+  
+  **PermitRootLogin without-password**
+
+Also look for the line:
 
 .. code-block:: bash
 
   **#PasswordAuthentication yes**
   
-Replace it with a line that looks like this:
+Replace it with:
 
 .. code-block:: bash
 
   **PasswordAuthentication no**
   
-Once you've made your changes you can apply them by saving the file then doing:
+Once you've made your changes you can save the file with ``ctrl`` + ``X``
+then entering ``Y`` to save changes.
+
+Now apply the changes by doing:
 
 .. code-block:: bash
 
-  $ sudo service ssh restart
-  
-Once you have saved the file and restarted your SSH server, you shouldn't even be asked for a password when you log in.
+  $ reload ssh
+
+Now you should never be asked for a password when you log in.
 
 *****************
 Troubleshooting
 *****************
 
 Detaching or Changing the Key on an Instance
-You cannot detach a Key from an instance, or modify it once attached.  The only way to assign a new Key Pair to an instance is to:
-Make a Snapshot of the instance
-Create a new Instance from the Snapshot
-Attach a new Key to the new instance while you are creating it
-Adding or changing a passphrase
-You can change the passphrase for an existing private key without regenerating the keypair. Just type the following command:
-$ ssh-keygen -p
+============================================
 
-# Start the SSH key creation process
-Enter file in which the key is (/Users/you/.ssh/id_rsa): [Hit enter]
-Key has comment '/Users/you/.ssh/id_rsa'
-Enter new passphrase (empty for no passphrase): [Type new passphrase]
-Enter same passphrase again: [Type it again]
-Your identification has been saved with the new passphrase.
+You cannot detach a Key from an instance, or modify it once attached.  
+The only way to assign a new Key Pair to an instance is to:
+
+* Make a Snapshot of the instance
+* Create a new Instance from the Snapshot
+* Attach a new Key to the new instance while you are creating it
+
+Adding or changing a passphrase
+===============================
+
+You can change the passphrase for an existing private key without regenerating the keypair. 
+Just type the following command:
+
+.. code-block:: bash
+ $ ssh-keygen -p
+
+.. code-block:: bash
+ # Start the SSH key creation process
+ Enter file in which the key is (/Users/you/.ssh/id_rsa): [Hit enter]
+ Key has comment '/Users/you/.ssh/id_rsa'
+ Enter new passphrase (empty for no passphrase): [Type new passphrase]
+ Enter same passphrase again: [Type it again]
+ Your identification has been saved with the new passphrase.
 
 If your key already has a passphrase, you will be prompted to enter it before you can change to a new passphrase.
+
 Encrypted Home Directory
-If you have an encrypted home directory, SSH cannot access your authorized_keys file because it is inside your encrypted home directory and won't be available until after you are authenticated. Therefore, SSH will default to password authentication.
-To solve this, create a folder outside your home named /etc/ssh/<username> (replace "<username>" with your actual username). This directory should have 755 permissions and be owned by the user. Move the authorized_keys file into it. The authorized_keys file should have 644 permissions and be owned by the user. 
+========================
+
+If you have an encrypted home directory, SSH cannot access your authorized_keys 
+file because it is inside your encrypted home directory and won't be available 
+until after you are authenticated. Therefore, SSH will default to password authentication.
+
+To solve this, create a folder outside your home named /etc/ssh/<username> 
+(replace "<username>" with your actual username). This directory should have 755 permissions 
+and be owned by the user. Move the authorized_keys file into it. The authorized_keys file 
+should have 644 permissions and be owned by the user.
+
 Then edit your /etc/ssh/sshd_config and add:
 AuthorizedKeysFile    /etc/ssh/%u/authorized_keys
 Finally, restart ssh with:
@@ -572,7 +605,9 @@ Error: Agent admitted failure to sign using the key.
 This error occurs when the ssh-agent on the client is not yet managing the key. Issue the following commands to fix: 
 ssh-add
 This command should be entered after you have copied your public key to the host computer.
+
 Remote Host Identification Has Changed
+======================================
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
