@@ -17,25 +17,27 @@ After you have completed the steps you will be able to log
 on to the server via SSH from your local machine, with an strongly
 encrypted connection.
 
-This section assumes You have a Catalyst Cloud account, and you're 
-preparing to create your first instance. It is verbose: written for 
-a relative newbie, who has not set up an SSH connection to a remote 
-server before, but has some experience with the command line interface (terminal).
+This section assumes you have a Catalyst Cloud account, and you're 
+preparing to create your first instance. It is written for a relative newbie, 
+who has not set up an SSH connection to a remote server before, but has some
+experience with the command line interface (terminal). The commands are 
+written for, and tested, on a machine running Ubuntu 16.04.
 
 The steps required to establish an encrypted SSH connection are:
 
-1. Check that you have OpenSSH
+1. Check that OpenSSH is installed and running
 2. Create an RSA Key Pair
 3. Finish off by securing your key
 4. Upload the Public Key to a cloud server
 5. Connect to the cloud server
-6. Set-up FileZilla with your SSH key
+6. Set-up FileZilla with your SSH key (optional)
+7. Disable password authentication (optional)
 
 Before we start, there is a subsection which explains
 why we use RSA key pairs to make secure connections over 
 the internet. 
 
-The final section is a Trouble-shooting guide, if things
+The final section is a trouble shooting guide, if things
 don't work exactly as expected.
 
 **************
@@ -48,14 +50,15 @@ secure method, and is therefore recommended.
 
 Other authentication methods are only used in specific situations (such as 
 setting a password log-in when creating a new instance). Ideally, password 
-authentication should be disabled, once SSH your key-based authentication 
+authentication should be disabled once SSH your key-based authentication 
 is set up and working properly.
 
 Generating a key pair provides you with two long string of characters: 
 a “public key” and a “private key”. Anyone is allowed to see the public key, 
 but only the owner is allowed to see the private key. You place the public key 
 on a server, and then unlock it by connecting to it with a client that already 
-has the private key. If the two match up, the system unlocks without the need for 
+has the private key. If the two keys match up, the server and client are 
+connected, with a strongly encrypted connection, without the need for 
 a password. You can increase security even more by protecting the private key 
 with a passphrase.
 
@@ -114,7 +117,7 @@ Now restart your computer, or start OpenSSH with the command:
   $ sudo ssh start
 
 
-Now run the checks above, again, to make sure it's working.
+Run the checks again, to make sure it's working.
  
 
 ******************************************
@@ -135,7 +138,7 @@ these back again in Step 3):
 
   $ sudo chmod 700 ~/.ssh
 
-You don't want to overwrite an existing key pai, check to see of any 
+You don't want to overwrite an existing Key Pair, check to see if any 
 Key Pair files already exist, and what their names are:
 
 
@@ -164,14 +167,14 @@ OR generate a new Key Pair with a unique name using the -f flag:
 
   $ ssh-keygen -t rsa -f newKeyName
 
-You will want to add a new and unique key file name if you are making more 
+You will want a unique key file name if you will be making more 
 than one set of keys, to access different projects or instances. 
 
-.. note::
-
-  **Set Key Encryption Level**
-  The default key is 2048 bits. You can increase this to 4096 bits with the -b flag, 
-  making it harder to crack the key by brute force methods.
+Optional: Increase Key Encryption Level
+=======================================
+  
+The default key is 2048 bits. You can increase this to 4096 bits with the -b flag,
+making it harder to crack the key by brute force methods.
 
 .. code-block:: bash
 
@@ -180,16 +183,16 @@ than one set of keys, to access different projects or instances.
 
 Once you have entered the keygen command, you will get this response (with your username in it):
 
-.. code-block:: BASH
+.. code-block:: bash
 
   Enter file in which to save the key (/home/(username)/.ssh/id_rsa):
 
-This provides a default file path and filename, where SSH will automatically 
-look for your private key when you are using it to log in. You can press enter 
-here, saving the file to the default folder. 
+You can press enter here, saving the file to the default folder where SSH will automatically 
+look for your private key when you are using it to log in.  
 
 If you specify another folder, you will need to enter its file path when you 
-issue a log-in command (explained below).
+issue a log in command (explained below).  You may want to use different folders
+to store the Key Pair files for different projects or instances.
 
 SSH will now ask for a passphrase:
 
@@ -215,7 +218,7 @@ a new key must be generated and the corresponding public key copied to other mac
 
 If you use a passphrase, pick a strong one and store it securely in a password manager, 
 or write it down on a piece of paper and keep it in a secure place. Obviously, you should 
-not store it on the client machine that you are using to connect to your server!
+not store it on the client machine that you are using to connect to your server.
 
 
 Key Pair Generated successfully
@@ -247,8 +250,8 @@ The entire key generation process will look something like this in your terminal
   |                 |
   +-----------------+
 
-It is a good idea to select all of this information, use ctrl + shift + c to copy it
-from the terminal, and paste it into a text editor file.  Add the passphrase, if you used
+It is a good idea to select all of this information, use ``ctrl`` + ``shift`` + ``c`` to copy it
+from the terminal, and paste it into a text editor file.  Then add the passphrase, if you used
 one. Then save the text file and store it somewhere very safe.
 
 ******************************************
@@ -288,10 +291,11 @@ users won't have access to it
   $ chmod 600 myNewKey
 
 
-.. note:: 
+.. warning:: 
 
   If you fail to do this, you may get an error when you try to use the
   key: ``Permissions... are too open. This private key will be ignored''
+  
   
 Repeat Steps 2 to 3 for each Instance
 =====================================
@@ -299,8 +303,8 @@ Repeat Steps 2 to 3 for each Instance
 On OpenStack (and the Catalyst Cloud), each instance can have only one Key Pair,
 and one public IP address. 
 
-You will need to repeat steps 2 to 3 for each instance that you wish to access
-with SSH. And this is where it becomes important to think about using unique Key Pair
+That means will need to repeat steps 2 to 3 for each instance that you wish to access
+with SSH. This is where it becomes important to think about using unique Key Pair
 file names, which reflect the name of the instance they will be attached to.
 
 There are some other implications:
@@ -311,15 +315,15 @@ There are some other implications:
 
 * If you install a Key Pair on only one machine, which it is subsequently lost, stolen or destroyed, then you may have a significant problem.  
 
-It is advisable to make a copy of your private and public Key Pair files and store them 
-somewhere safe (e.g. on an encrypted USB drive). **This might be a good moment to do that.**
+It is advisable to make copies of your private and public Key Pair files and store them 
+somewhere safe (e.g. on an encrypted USB drive). *This might be a good moment to do that.*
 
 
 ******************************************
 Step 4: Upload the Public Key to Cloud Server
 ******************************************
 
-Now it's time to place the public key on the virtual server we want to use. 
+Now it's time to place the public key on the virtual server. 
 You will need to open the public key file, to copy and upload it. 
 Assuming you use gedit as a text editor, open a terminal and type:
 
@@ -335,7 +339,7 @@ Enter a key pair name, then copy and paste your public key
 from your text editor into the box. 
 
 
-Transfer Client Key to Host with command line (not recommended)
+Transfer Client Key to Host with command line (if you must)
 ===============================================================
 
 If you can log in to a computer over SSH using a password, you can 
@@ -356,19 +360,21 @@ then issue the command with a -p flag and the port number:
   $ ssh-copy-id "<username>@<host> -p <port_number>"
 
 Another method is to copy the public key file to the server and 
-concatenate it onto the authorized_keys file manually. It is wise to back that up first:
+concatenate it onto the authorized_keys file manually. 
+
+First, make a backup of the authorised_keys file, then concatenate the Public Key:
 
 .. code-block:: bash
 
   $ cp authorized_keys authorized_keys_Backup
-  $ cat id_rsa.pub >> authorized_keys
+  $ cat myNewKey.pub >> authorized_keys
 
 You can copy the public key into the new machine's authorized_keys file 
 with the ssh-copy-id command. Make sure to replace the example username and IP address below.
 
 .. code-block:: bash
 
-  $ ssh-copy-id user@123.45.56.78 ]
+  $ ssh-copy-id ubuntu@<public_IP>
 
 Alternatively, you can paste in the keys using SSH:
 
@@ -376,7 +382,7 @@ Alternatively, you can paste in the keys using SSH:
 
   $ cat ~/.ssh/myNewKey.pub | ssh ubuntu@<public_IP> "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys" ]
 
-No matter which command you chose, you should see something like:
+No matter which command you chose, you should then see something like:
 
 .. code-block:: bash
 
@@ -394,12 +400,12 @@ Step 5: Connecting to the new Instance
 ******************************************
 
 You can now connect to the SSH service using the floating public IP that you 
-associated with your instance in the previous step. This IP address address is 
-visible in the Instances list or under the Floating IPs tab in Access & Security.
+associated with your instance in the previous step. On your Catalyst Cloud Dashboard the
+IP address address is visible in the Instances list or under the Floating IPs tab in Access & Security.
 
 .. code-block:: bash
 
-  $ ssh -i ~/<myKeyName> ubuntu@<FLOATING_IP>
+  $ ssh -i ~/<myKeyName> ubuntu@<public_IP>
 
 If you have set a passphrase, you will be asked to enter the passphrase now.
 
@@ -411,14 +417,18 @@ If you have set a passphrase, you will be asked to enter the passphrase now.
  terminal window. 
  Just enter you passphrase into the dialog box and continue.
  
-You should be able to interact with this instance as you would any Ubuntu server.
+Success
+=======
+
+You should be able to interact with your new instance as you would any Ubuntu server.
 
 And from now on, you only need to enter this command in the terminal to access the
 instance:
 
 .. code-block:: bash
 
-  $ ssh ubuntu@<FLOATING_IP>
+  $ ssh ubuntu@<Public_IP>
+
 
 ******************************************
 Step 6: Use FileZilla with an SSH key (optional)
@@ -428,11 +438,10 @@ Filezilla gives you a GUI overview of your Instance’s filesystem, with the abi
 to quickly and easily upload or download files from your local machine to the 
 cloud server using SFTP (SSH File Transfer Protocol). 
 
-You can access the server with Filezilla by using the password with SFTP, if you want. 
-But using the key pair encryption is much safer. 
-
-If you want to disable password login for security reasons (see below), you’ll need 
-to set up Filezilla to utilise the private key you have now created.
+You can access the server with Filezilla by using the password, if you want, 
+but using your Key Pair encryption is much safer. And if you want to disable 
+password login for security reasons (see below), you’ll need to set up 
+Filezilla to utilise the private key you have now created.
 
 Open the menu ``Edit`` > ``Preferences…`` then navigate to ``Connection`` > ``SFTP``.
 
@@ -441,11 +450,11 @@ Open the menu ``Edit`` > ``Preferences…`` then navigate to ``Connection`` > ``
 Add your private key file by clicking the ``Add keyfile…`` button, choosing
 ``all file types`` and navigating to your new private key file (e.g. /home/(user)/.myNewKey).  
 
-Note: you may have to select View > Show Hidden Files to get to the .ssh/ folder: 
+Note: you may have to select ``View`` > ``Show Hidden Files`` to get to the **.ssh/** folder: 
 
 When you select the private key file, Filezilla will ask if you want to convert it to a PPK file. 
 Say yes, add a new filename,  and save it in the same folder.  To avoid confusion, 
-the new filename should be something like myNewKey_fz.ppk (make sure to add the .ppk suffix).
+the new filename should be something like ``myNewKey_fz.ppk`` (make sure to add the .ppk suffix).
 
 Now go to ``File`` > ``Site Manager…`` and add a ``New Site``.
 
@@ -468,35 +477,26 @@ Enter the details as required:
 Then click ``OK``
 
 Now you can access your cloud server’s file system by opening Filezilla 
-and clicking, or right-clicking on the server symbol at the top left corner 
+and clicking, or right-clicking, on the server symbol at the top left corner 
 of the Filezilla window, then selecting the site you just created. 
 
 ******************************************
 Step 7: Disable Password Authentication (optional)
 ******************************************
 
-If you have followed the steps above, you should always be able to log in 
-to your server with an SSH key. You should should consider disabling
-password authentication altogether.
+If you have followed the steps above, including saving a copy of your 
+Key Pair in a secure place, you should always be able to log in to your 
+server with an SSH key. 
 
-Key pair authentication massively improves your security, but makes it impossible 
-for you to connect to your server from a friendly PC without first installing your
-key pair on it.
-
+You should should now consider disabling password authentication altogether.
 It is recommended to disable password authentication unless you have a 
 specific reason not to.
 
 To disable password authentication
 ==================================
 
-Once you have copied your SSH keys unto your server and ensured that you can 
-log in with the SSH keys alone, you can go ahead and restrict the root login 
-to only be permitted via SSH keys.
-
-In order to do this, log in to your instance.
-
-First, make a backup of your ``sshd_config`` file by copying it to your home directory, 
-or by making a read-only copy in ``/etc/ssh`` by doing:
+Log in to your instance and make a backup of your ``sshd_config`` file 
+by copying it to your home directory, or by making a read-only copy in ``/etc/ssh`` by doing:
 
 .. code-block:: bash
 
@@ -513,30 +513,30 @@ Find the line that includes **PermitRootLogin** and modify it to ensure that use
 
 .. code-block:: bash
   
-  **PermitRootLogin without-password**
+  PermitRootLogin without-password
 
 Also look for the line:
 
 .. code-block:: bash
 
-  **#PasswordAuthentication yes**
+  #PasswordAuthentication yes
   
-Replace it with:
+Uncomment it (delete the #), and change ``yes`` to ``no``:
 
 .. code-block:: bash
 
-  **PasswordAuthentication no**
+  PasswordAuthentication no
   
-Once you've made your changes you can save the file with ``ctrl`` + ``X``
+Once you've made your changes you can save the file with ``ctrl`` + ``X``,
 then entering ``Y`` to save changes.
 
-Now apply the changes by doing:
+Now apply the changes with the command:
 
 .. code-block:: bash
 
   $ reload ssh
 
-Now you should never be asked for a password when you log in.
+Now you should only be able to log in using a secure SSH connection.
 
 *****************
 Troubleshooting
@@ -559,9 +559,11 @@ You can change the passphrase for an existing private key without regenerating t
 Just type the following command:
 
 .. code-block:: bash
+
  $ ssh-keygen -p
 
 .. code-block:: bash
+
  # Start the SSH key creation process
  Enter file in which the key is (/Users/you/.ssh/id_rsa): [Hit enter]
  Key has comment '/Users/you/.ssh/id_rsa'
@@ -583,45 +585,98 @@ To solve this, create a folder outside your home named /etc/ssh/<username>
 and be owned by the user. Move the authorized_keys file into it. The authorized_keys file 
 should have 644 permissions and be owned by the user.
 
-Then edit your /etc/ssh/sshd_config and add:
-AuthorizedKeysFile    /etc/ssh/%u/authorized_keys
+Then edit your ``/etc/ssh/sshd_config`` file with nano bby adding:
+
+.. code-block:: bash
+
+  AuthorizedKeysFile    /etc/ssh/%u/authorized_keys
+
 Finally, restart ssh with:
-sudo service ssh restart
+
+.. code-block:: bash
+
+  $ sudo service ssh restart
+  
 The next time you connect with SSH you should not have to enter your password.
-username@host's password:
+
+Password requested (not passphrase)
+=========================
+
 If you are not prompted for the passphrase, and instead get:
-username@host's password:
-On the host computer, ensure that the file: /etc/ssh/sshd_config contains the following lines, and that they are uncommented;
-PubkeyAuthentication yes
-RSAAuthentication yes
-If not, add them, or uncomment them, restart OpenSSH, and try logging in again. If you get the passphrase prompt now, then congratulations, you're logging in with a key!
+
+.. code-block:: bash
+
+  $ ubuntu@<Public_IP> password:
+  
+Log in to the server and ensure that the file: ``/etc/ssh/sshd_config`` contains 
+the following lines, and that they are uncommented:
+
+.. code-block:: bash
+
+  PubkeyAuthentication yes
+  RSAAuthentication yes
+  
+If not; add them, or uncomment them. Then restart OpenSSH, and try logging in again. 
+If you get the passphrase prompt now, then you're logging in with a key.
+
 Permission denied (publickey)
-If you're sure you've correctly configured sshd_config, copied your ID, and have your private key in the .ssh directory, and still getting this error:
-Permission denied (publickey).
-Chances are the permissions for your /home/<user> (folder) or ~/.ssh/authorized_keys (file) are too accessible, by OpenSSH standards. You can get rid of this problem by issuing the following chmod commands:
-chmod go-w ~/     (explain)
-chmod 700 ~/.ssh
-chmod 600 ~/.ssh/authorized_keys
-Error: Agent admitted failure to sign using the key.
-This error occurs when the ssh-agent on the client is not yet managing the key. Issue the following commands to fix: 
-ssh-add
+=============================
+
+If you're sure you've correctly configured sshd_config, copied your ID, 
+and have your private key in the .ssh directory, and still getting this error:
+
+.. code-block:: bash
+
+  Permission denied (publickey).
+  
+Chances are the permissions for your /home/<user> (folder) or ~/.ssh/authorized_keys 
+(file) are too accessible, by OpenSSH standards. You can get rid of this problem 
+by issuing the following chmod commands:
+
+.. code-block:: bash
+
+  chmod go-w ~/     (explain)
+  chmod 700 ~/.ssh
+  chmod 600 ~/.ssh/authorized_keys
+  
+  
+Error: Agent admitted failure to sign using the key
+===================================================
+
+This error occurs when the ssh-agent on the client is not managing the key. 
+Issue the following commands to fix: 
+
+.. code-block:: bash
+  $ ssh-add
+
 This command should be entered after you have copied your public key to the host computer.
+
 
 Remote Host Identification Has Changed
 ======================================
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
-Someone could be eavesdropping on you right now (man-in-the-middle attack)!
-It is also possible that a host key has just been changed.
-The fingerprint for the ECDSA key sent by the remote host is
-SHA256:aGZ5Fs+qEf4ESngJdksqAcn+L4H7WeOwY8nu0HsR7c4.
-Please contact your system administrator.
-Add correct host key in /home/(user)/.ssh/known_hosts to get rid of this message.
-Offending ECDSA key in /home/(user)/.ssh/known_hosts:2
-  remove with:
-  ssh-keygen -f "/home/(user)/.ssh/known_hosts" -R <IP_ADDRESS>
-ECDSA host key for <IP_ADDRESS> has changed and you have requested strict checking.
-Host key verification failed.
 
+You get this scary message.
+
+.. code-block:: bash
+
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
+  Someone could be eavesdropping on you right now (man-in-the-middle attack)!
+  It is also possible that a host key has just been changed.
+  The fingerprint for the ECDSA key sent by the remote host is
+  SHA256:aGZ5Fs+qEf4ESngJdksqAcn+L4H7WeOwY8nu0HsR7c4.
+  Please contact your system administrator.
+  Add correct host key in /home/(user)/.ssh/known_hosts to get rid of this message.
+  Offending ECDSA key in /home/(user)/.ssh/known_hosts:2
+  remove with:
+  ssh-keygen -f "/home/(user)/.ssh/known_hosts" -R <Public_IP>
+  ECDSA host key for <Public_IP> has changed and you have requested strict checking.
+  Host key verification failed.
+
+Just do what it says in that third-to-last line. In your local terminal type:
+
+.. code-block:: bash
+
+  $ ssh-keygen -f "/home/(user)/.ssh/known_hosts" -R <Public_IP>
