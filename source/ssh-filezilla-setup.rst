@@ -11,14 +11,19 @@ Overview
 
 This section provides step-by-step advice on setting up a connection
 to your Catalyst Cloud instance from your local (client) machine.
-After you have completed the steps you will be able to log
-on to the server via SSH from anywhere on the internet using an SSH key.
 
-This section assumes you are a relative "newbie", who may not have set 
-up an SSH connection to a remote server before. You have a Catalyst Cloud 
-account, and you're preparing to create your first instance.  You know
-how to use the command line interface (terminal), but may not be very
-experienced with it.
+Some of the steps are required before you create a new instance
+
+After you have completed the steps you will be able to log
+on to the server via SSH from your local machine, with an strongly
+encrypted connection.
+
+This section assumes You have a Catalyst Cloud account, and you're 
+preparing to create your first instance.
+
+It is verbose: written for a relative "newbie", who may not have set 
+up an SSH connection to a remote server before, but has some expience with
+the command line interface (terminal).
 
 The steps required to establish an encrypted SSH connection are:
 
