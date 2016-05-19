@@ -348,15 +348,15 @@ from your text editor into the box.
 Transfer Client Key to Host with command line (if you must)
 ===============================================================
 
-If you can log in to a computer over SSH using a password, you can 
-transfer your RSA key to the server by using the terminal command:
+If you really want to stay on the command line, and if you can log in to the server 
+using a password, you can transfer your RSA key to the server by using terminal commands.
+There are three different ways of doing this.
+
+**First method:**
 
 .. code-block:: bash
 
-  $ ssh-copy-id <username>@<host>
-
-Where <username> and <host> should be replaced by your username 
-and the name of the computer you're transferring your key to.
+  $ ssh-copy-id ubuntu@<Public_IP>
 
 The method above uses the default port 22. If you are not using port 22, 
 then issue the command with a -p flag and the port number: 
@@ -365,30 +365,29 @@ then issue the command with a -p flag and the port number:
 
   $ ssh-copy-id "<username>@<host> -p <port_number>"
 
-Another method is to copy the public key file to the server and 
-concatenate it onto the authorized_keys file manually. 
+**Second method:**
 
-First, make a backup of the authorised_keys file, then concatenate the Public Key:
+Copy the public key file to the remote server and 
+concatenate it onto the authorized_keys file manually. These two commands 
+(1) make a backup of the authorised_keys file, then (2) concatenate 
+the Public Key into the original file:
 
 .. code-block:: bash
 
   $ cp authorized_keys authorized_keys_Backup
   $ cat myNewKey.pub >> authorized_keys
 
-You can copy the public key into the new machine's authorized_keys file 
-with the ssh-copy-id command. Make sure to replace the example username and IP address below.
+**Third method:**
 
-.. code-block:: bash
-
-  $ ssh-copy-id ubuntu@<public_IP>
-
-Alternatively, you can paste in the keys using SSH:
+Paste in the keys using SSH:
 
 .. code-block:: bash
 
   $ cat ~/.ssh/myNewKey.pub | ssh ubuntu@<public_IP> "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys" ]
 
-No matter which command you chose, you should then see something like:
+**Result:**
+
+No matter which method you chose, you should then see something like:
 
 .. code-block:: bash
 
@@ -398,7 +397,7 @@ No matter which command you chose, you should then see something like:
   Warning: Permanently added '<public_IP>' (RSA) to the list of known hosts.
   ubuntu@public_IP's password: 
 
-Type in your password and continue.
+Type in your password (NOT your *passphrase*) and continue.
 
 
 ******************************************
