@@ -407,10 +407,8 @@ If you have set a passphrase, you will be asked to enter the passphrase now.
 
  Sometimes your machine will open a dialog box asking for your *password*.
  What it actually wants is the *passphrase* you set when creating the key pair.
- 
  This can be confusing if you were expecting to be asked for a passphrase in
  terminal window. 
- 
  Just enter you passphrase into the dialog box and continue.
  
 You should be able to interact with this instance as you would any Ubuntu server.
