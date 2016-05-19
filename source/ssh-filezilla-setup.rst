@@ -151,18 +151,32 @@ It is probably wiser to do this if the files id_rsa and id_rsa.pub already exist
 
 Create a unique name using the -f flag:
 
+.. code-block:: bash
+
 $ ssh-keygen -t rsa -f newKeyName
 
 Option: Set Key Encryption Level
 ====================================
-The default key is 2048 bits. You can increase this to 4096 bits with the -b flag, making it harder to crack the key by brute force methods.
+
+The default key is 2048 bits. You can increase this to 4096 bits with the -b flag, 
+making it harder to crack the key by brute force methods.
+
+.. code-block:: bash
 $ ssh-keygen -t rsa -b 4096
+
 Add your SSH key to the ssh-agent
+
 Ensure ssh-agent is enabled by starting the ssh-agent in the background:
+
+.. code-block:: bash
 $ eval "$(ssh-agent -s)"
 Agent pid 59566
-Now Add your new SSH key to the ssh-agent. 
+
+Now Add your new SSH key to the ssh-agent.
+
+.. code-block:: bash
 $ ssh-add ~/.ssh/id_rsa
 
-
-If you used an existing SSH key rather than generating a new SSH key, you'll need to replace id_rsa in the command with the name of your existing private key file.
+If you used an existing SSH key rather than generating a new SSH key, 
+you'll need to replace "id_rsa" in the command with the name of your 
+existing private key file.
