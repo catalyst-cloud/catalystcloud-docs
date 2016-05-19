@@ -304,8 +304,11 @@ with SSH. And this is where it becomes important to think about using unique Key
 file names, which reflect the name of the instance they will be attached to.
 
 There are some other implications:
+
 * If you want to access one instance from multiple machines, you need to install the same Key Pair on each machine. 
-* If you want multiple users to access one instance, then each user must to install the same Key Pair on their machine.  
+
+* If you want multiple users to access one instance, then each user must to install the same Key Pair on their machine. 
+
 * If you install a Key Pair on only one machine, which it is subsequently lost, stolen or destroyed, then you may have a significant problem.  
 
 It is advisable to make a copy of your private and public Key Pair files and store them 
