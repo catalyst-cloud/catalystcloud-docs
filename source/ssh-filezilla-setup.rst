@@ -128,41 +128,45 @@ Open a terminal and go to your SSH folder by typing:
 
   $ cd /home/(your_username)/.ssh/
 
-Change the read/write permissions of the folder:
+Change the read/write permissions of the folder (you will change
+these back again in Step 3):
 
 .. code-block:: bash
 
   $ sudo chmod 700 ~/.ssh
 
-Check to see of any Key Pair files already exist: 
+You don't want to overwrite an existing key pai, check to see of any 
+Key Pair files already exist, and what their names are:
+
 
 .. code-block:: bash
 
   $ ls -l
 
-If the files id_rsa and id_rsa.pub already exist, and you’re not sure 
-what they are for, you should probably make copies or backups before proceeding:
+If the files id_rsa and id_rsa.pub already exist (or any other files), 
+and you’re not sure what they are for, you should probably make backup 
+copies before proceeding:
 
 .. code-block:: bash
 
   $ cp id_rsa.pub id_rsa.pub.bak
   $ cp id_rsa id_rsa.bak
 
-Now generate the new RSA Key Pair, using the default name (id_rsa):
+Now EITHER generate the new RSA Key Pair, using the default name (id_rsa):
 
 .. code-block:: bash
 
   $ ssh-keygen -t rsa
 
-Or you can create a unique name using the -f flag:
+OR generate a new Key Pair with a unique name using the -f flag:
 
 .. code-block:: bash
 
   $ ssh-keygen -t rsa -f newKeyName
 
 You will want to add a new and unique key file name if you are making more 
-than one set of keys, to access different projects or instances. And it is 
-probably wiser to do this if the files id_rsa and id_rsa.pub already exist.
+than one set of keys, to access different projects or instances. 
+
 
 Option: Set Key Encryption Level
 ====================================
@@ -244,13 +248,16 @@ The entire key generation process will look something like this in your terminal
   |                 |
   +-----------------+
 
+It is a good idea to select all of this information, use ctrl + shift + c to copy it
+from the terminal, and paste it into a text editor file.  Add the passphrase, if you used
+one. Then save the text file and store it somewhere very safe.
 
 ******************************************
  Step 3: Finishing off
 ******************************************
 
 There are a few final steps to make sure your SSH connection
-will work properly the ffirst time.
+will work properly the first time.
 
 Add your SSH key to the ssh-agent
 ====================================
@@ -270,24 +277,10 @@ Now, add your new SSH key to the ssh-agent:
   $ ssh-add ~/.ssh/newKeyName
 
 
-Locating your new public and private keys
-=========================================
-
-If you created the keys with the default name, then:
-
-The public key is now located in ``/home/(user)/.ssh/id_rsa.pub``
-The private key is now located in ``/home/(user)/.ssh/id_rsa``
-
-If you created the keys with a unique name, then:
-
-The public key is now located in ``/home/(user)/.ssh/myNewKeyName.pub``
-The private key is now located in ``/home/(user)/.ssh/myNewKeyName``
-
-
 Securing your new key pair
 ==========================
 
-Change the file permissions on your private key to make sure other
+Finally, change the file permissions on your private key to make sure other
 users won't have access to it
 
 .. code-block:: bash
@@ -300,3 +293,128 @@ users won't have access to it
 
   If you fail to do this, you may get an error when you try to use the
   key: ``Permissions... are too open. This private key will be ignored''
+  
+Repeat Steps 2 to 3 for each Instance
+=====================================
+
+On OpenStack (and the Catalyst Cloud), each instance can have only one Key Pair,
+and one public IP address. 
+
+You will need to repeat steps 2 to 3 for each instance that you wish to access
+with SSH. And this is where it becomes important to think about using unique Key Pair
+file names, which reflect the name of the instance they will be attached to.
+
+There are some other implications:
+* If you want to access one instance from multiple machines, you need to install the same Key Pair on each machine. 
+* If you want multiple users to access one instance, then each user must to install the same Key Pair on their machine.  
+* If you install a Key Pair on only one machine, which it is subsequently lost, stolen or destroyed, then you may have a significant problem.  
+
+It is advisable to make a copy of your private and public Key Pair files and store them 
+somewhere safe (e.g. on an encrypted USB drive). **This might be a good moment to do that.**
+
+
+******************************************
+Step 4: Upload the Public Key to Cloud Server
+******************************************
+
+Now it's time to place the public key on the virtual server we want to use. 
+You will need to open the public key file, to copy and upload it. 
+Assuming you use gedit as a text editor, open a terminal and type:
+
+.. code-block:: bash
+
+  $ sudo gedit /home/(user)/.ssh/myNewKey.pub
+
+On your Catalyst Cloud dashboard select “Import Key Pair”:
+
+[ Insert image here ]
+
+Enter a key pair name, then copy and paste your public key 
+from your text editor into the box. 
+
+
+Transfer Client Key to Host with command line (not recommended)
+===============================================================
+
+If you can log in to a computer over SSH using a password, you can 
+transfer your RSA key to the server by using the terminal command:
+
+.. code-block:: bash
+
+  $ ssh-copy-id <username>@<host>
+
+Where <username> and <host> should be replaced by your username 
+and the name of the computer you're transferring your key to.
+
+The method above uses the default port 22. If you are not using port 22, 
+then issue the command with a -p flag and the port number: 
+
+.. code-block:: bash
+
+  $ ssh-copy-id "<username>@<host> -p <port_number>"
+
+Another method is to copy the public key file to the server and 
+concatenate it onto the authorized_keys file manually. It is wise to back that up first:
+
+.. code-block:: bash
+
+  $ cp authorized_keys authorized_keys_Backup
+  $ cat id_rsa.pub >> authorized_keys
+
+You can copy the public key into the new machine's authorized_keys file 
+with the ssh-copy-id command. Make sure to replace the example username and IP address below.
+
+.. code-block:: bash
+
+  $ ssh-copy-id user@123.45.56.78 ]
+
+Alternatively, you can paste in the keys using SSH:
+
+.. code-block:: bash
+
+  $ cat ~/.ssh/myNewKey.pub | ssh ubuntu@<public_IP> "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys" ]
+
+No matter which command you chose, you should see something like:
+
+.. code-block:: bash
+
+  The authenticity of host 'public_IP (public_IP)' can't be established.
+  RSA key fingerprint is b1:2d:33:67:ce:35:4d:5f:f3:a8:cd:c0:c4:48:86:12.
+  Are you sure you want to continue connecting (yes/no)? yes
+  Warning: Permanently added '<public_IP>' (RSA) to the list of known hosts.
+  ubuntu@public_IP's password: 
+
+Type in your password and continue.
+
+
+******************************************
+Step 5: Connecting to the new Instance 
+******************************************
+
+You can now connect to the SSH service using the floating public IP that you 
+associated with your instance in the previous step. This IP address address is 
+visible in the Instances list or under the Floating IPs tab in Access & Security.
+
+.. code-block:: bash
+
+  $ ssh -i ~/<myKeyName> ubuntu@<FLOATING_IP>
+
+If you have set a passphrase, you will be asked to enter the passphrase now.
+
+.. note::
+
+ Sometimes your machine will open a dialog box asking for your *password*.
+ What it actually wants is the *passphrase* you set when creating the key pair.
+ This can be disconcerting, if you were expecting to be asked for a passphrase in
+ terminal window. Just enter you passphrase and continue.
+ 
+You should be able to interact with this instance as you would any Ubuntu server.
+
+And from now on, you only need to enter this command in the terminal to access the
+instance:
+
+.. code-block:: bash
+
+  $ ssh ubuntu@<FLOATING_IP>
+
+
