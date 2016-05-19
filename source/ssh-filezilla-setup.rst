@@ -11,19 +11,16 @@ Overview
 
 This section provides step-by-step advice on setting up a connection
 to your Catalyst Cloud instance from your local (client) machine.
-
-Some of the steps are required before you create a new instance
+Steps 1 through 3 are required before you create a new instance.
 
 After you have completed the steps you will be able to log
 on to the server via SSH from your local machine, with an strongly
 encrypted connection.
 
 This section assumes You have a Catalyst Cloud account, and you're 
-preparing to create your first instance.
-
-This guide is verbose: it's written for a relative "newbie", who has not set 
-up an SSH connection to a remote server before, but has some experience with
-the command line interface (terminal).
+preparing to create your first instance. It is verbose: written for 
+a relative newbie, who has not set up an SSH connection to a remote 
+server before, but has some experience with the command line interface (terminal).
 
 The steps required to establish an encrypted SSH connection are:
 
@@ -63,5 +60,46 @@ SSH can use either "RSA" (Rivest-Shamir-Adleman) or "DSA" ("Digital Signature Al
 DSA is known to be less secure, so RSA is recommended: this guide uses "RSA key" 
 and "SSH key" interchangeably.
 
+******************************************
+Step 1: Check that SSH is installed and running 
+******************************************
+To check that SSH is installed, open a terminal and type:
 
+.. code-block:: bash
 
+ $ ssh -V
+ 
+ You should get a response like this:
+ 
+ .. code-block:: bash
+
+ OpenSSH_7.2p2 Ubuntu-4ubuntu1, OpenSSL 1.0.2g-fips  1 Mar 2016
+ 
+ To check that SSH is running, type:
+ 
+  .. code-block:: bash
+
+ $ ps aux | grep sshd
+ 
+ You should get a response like this:
+ 
+ (user)   5404  0.0  0.0  21300   984 pts/2    S+   13:13   0:00 grep --color=auto sshd
+ 
+ Install and start SSH
+ =====================
+ 
+ If one or other of these does not return the expected result, then install
+ OpenSSH with the command:
+ 
+   .. code-block:: bash
+   
+   sudo apt-get install openssh-client
+   
+ And then restart your computer or start OpenSSH with the command:
+ 
+   .. code-block:: bash
+   
+   sudo ssh start
+   
+And then run the checks above, to make sure it's working.
+ 
