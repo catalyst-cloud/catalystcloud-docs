@@ -181,6 +181,9 @@ making it harder to crack the key by brute force methods.
   $ ssh-keygen -t rsa -b 4096
 
 
+Save to location
+=================
+
 Once you have entered the keygen command, you will get this response (with your username in it):
 
 .. code-block:: bash
@@ -194,6 +197,10 @@ If you specify another folder, you will need to enter its file path when you
 issue a log in command (explained below).  You may want to use different folders
 to store the Key Pair files for different projects or instances.
 
+
+Enter a passphrase
+===================
+
 SSH will now ask for a passphrase:
 
 .. code-block:: BASH
@@ -202,23 +209,22 @@ SSH will now ask for a passphrase:
 
 You can press enter, to continue without a passphrase, or type in a passphrase. 
 
-Entering a passphrase increases the level of security. If one of your machines is compromised, 
-the bad guys can’t log in to your server until they figure out the passphrase. This buys you 
-more time to log-in the server from another machine and change the compromised key pair.
+There are a few things you should know:
 
-Choosing a good passphrase
-==========================
+* Entering a passphrase increases the level of security. If one of your machines is compromised, 
+  the bad guys can’t log in to your server until they figure out the passphrase. This buys you 
+  more time to log-in the server from another machine and change the compromised key pair.
 
-Your SSH key passphrase is only used to protect your “private key” from thieves. 
-It's never transmitted over the Internet, and the strength of your key has nothing to do 
-with the strength of your passphrase.
+* Your SSH key passphrase is only used to protect your “private key” from thieves. 
+  It's never transmitted over the Internet, and the strength of your key has nothing to do 
+  with the strength of your passphrase.
 
-There is no way to recover a lost passphrase. If the passphrase is lost or forgotten, 
-a new key must be generated and the corresponding public key copied to other machines.
+* There is no way to recover a lost passphrase. If the passphrase is lost or forgotten, 
+  a new key must be generated and the corresponding public key copied to other machines.
 
 If you use a passphrase, pick a strong one and store it securely in a password manager, 
-or write it down on a piece of paper and keep it in a secure place. Obviously, you should 
-not store it on the client machine that you are using to connect to your server.
+or keep a copy in a secure place. Obviously, you should not store it on the client machine 
+that you are using to connect to your server. Especially if it is a laptop.
 
 
 Key Pair Generated successfully
