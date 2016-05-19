@@ -1,4 +1,4 @@
-.. _setting-up-local-connections:
+.. _ssh-filezilla-setup:
 
 ################################################
 Setting up SSH and Filezilla connections locally
@@ -112,7 +112,7 @@ Finally run the checks above, to make sure it's working.
 
 ******************************************
  Step 2: Create an RSA Key Pair
- ******************************************
+******************************************
  
 Create the key pair on the client machine (your computer). 
 Open a terminal and go to your SSH folder by typing:
@@ -171,6 +171,10 @@ making it harder to crack the key by brute force methods.
 
 $ ssh-keygen -t rsa -b 4096
 
+
+Finishing Off
+====================================
+
 Add your SSH key to the ssh-agent
 
 Ensure ssh-agent is enabled by starting the ssh-agent in the background:
@@ -189,3 +193,98 @@ $ ssh-add ~/.ssh/id_rsa
 If you used an existing SSH key rather than generating a new SSH key, 
 you'll need to replace "id_rsa" in the command with the name of your 
 existing private key file.
+
+
+******************************************
+ Step 3: Store the Keys and Passphrase
+******************************************
+
+Once you have entered the keygen command, you will get this response (with your username in it):
+
+.. code-block:: BASH
+
+Enter file in which to save the key (/home/(username)/.ssh/id_rsa):
+
+This provides a default file path and filename, where SSH will automatically 
+look for your private key when you are using it to log in. You can press enter 
+here, saving the file to the default folder. 
+
+If you specify another folder, you will need to enter its file path when you 
+issue a log-in command (explained below).
+
+SSH will now ask for a passphrase:
+
+.. code-block:: BASH
+
+Enter passphrase (empty for no passphrase):
+
+You can press enter, to continue without a passphrase, or type in a passphrase. 
+
+Entering a passphrase increases the level of security. If one of your machines is compromised, 
+the bad guys can’t log in to your server until they figure out the passphrase. This buys you 
+more time to log-in the server from another machine and change the compromised key pair.
+
+Choosing a good passphrase
+==========================
+
+Your SSH key passphrase is only used to protect your “private key” from thieves. 
+It's never transmitted over the Internet, and the strength of your key has nothing to do 
+with the strength of your passphrase.
+
+There is no way to recover a lost passphrase. If the passphrase is lost or forgotten, 
+a new key must be generated and the corresponding public key copied to other machines.
+
+If you use a passphrase, pick a strong one and store it securely in a password manager, 
+or write it down on a piece of paper and keep it in a secure place. Obviously, you should 
+not store it on the client machine that you are using to connect to your server!
+
+
+Key Pair Generated successfully
+===============================
+
+The entire key generation process will look something like this in your terminal:
+
+.. code-block:: BASH
+
+  ssh-keygen -t rsa
+  Generating public/private rsa key pair.
+  Enter file in which to save the key (/home/(user)/.ssh/id_rsa): 
+  Enter passphrase (empty for no passphrase): 
+  Enter same passphrase again: 
+  Your identification has been saved in /home/(user)/.ssh/id_rsa.
+  Your public key has been saved in /home/(user)/.ssh/id_rsa.pub.
+  The key fingerprint is:
+  4a:dd:0a:c6:35:4e:3f:ed:27:38:8c:74:44:4d:93:67 (user)@(machine)
+  The key's randomart image is:
+  +--[ RSA 2048]----+
+  |          .oo.   |
+  |         .  o.E  |
+  |        + .  o   |
+  |     . = = .     |
+  |      = S = .    |
+  |     o + = +     |
+  |      . o + o .  |
+  |           . o   |
+  |                 |
+  +-----------------+
+
+
+If you created the keys with the default name, then:
+
+The public key is now located in ``/home/(user)/.ssh/id_rsa.pub``
+The private key is now located in ``/home/(user)/.ssh/id_rsa``
+
+If you created the keys with a unique name, then:
+
+The public key is now located in ``/home/(user)/.ssh/myNewKeyName.pub``
+The private key is now located in ``/home/(user)/.ssh/myNewKeyName``
+
+
+Securing your new key pair
+==========================
+
+To use your new key pair, you need to make it available to your ssh client.  
+Change permissions to 600:
+$ cd ~/.ssh
+$ chmod 600 KEY_NAME.pem
+
