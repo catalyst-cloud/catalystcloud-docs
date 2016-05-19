@@ -123,7 +123,7 @@ Open a terminal and go to your SSH folder by typing:
 
 .. code-block:: bash
 
-$ cd /home/(your_username)/.ssh/
+  $ cd /home/(your_username)/.ssh/
 
 Change the read/write permissions of the folder:
 
