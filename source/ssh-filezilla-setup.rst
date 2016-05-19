@@ -1,7 +1,7 @@
 .. _ssh-filezilla-setup:
 
 ################################################
-Setting up SSH and Filezilla connections locally
+Setting up SSH and Filezilla on the client
 ################################################
 
 
