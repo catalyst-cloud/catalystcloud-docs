@@ -167,17 +167,15 @@ OR generate a new Key Pair with a unique name using the -f flag:
 You will want to add a new and unique key file name if you are making more 
 than one set of keys, to access different projects or instances. 
 
-
 .. note::
 
   **Set Key Encryption Level**
-
   The default key is 2048 bits. You can increase this to 4096 bits with the -b flag, 
   making it harder to crack the key by brute force methods.
 
-  .. code-block:: bash
+.. code-block:: bash
 
-    $ ssh-keygen -t rsa -b 4096
+  $ ssh-keygen -t rsa -b 4096
 
 
 Once you have entered the keygen command, you will get this response (with your username in it):
