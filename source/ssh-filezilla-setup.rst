@@ -26,12 +26,12 @@ The steps required to establish an encrypted SSH connection are:
 
 1. Check that you have OpenSSH
 2. Create an RSA Key Pair
-3. Securely store the Key Pair and Passphrase
+3. Finish off by securing your key
 4. Upload the Public Key to a cloud server
 5. Connect to the cloud server
 6. Set-up FileZilla with your SSH key
 
-Before we get going, there is a subsection which explains
+Before we start, there is a subsection which explains
 why we use RSA key pairs to make secure connections over 
 the internet. 
 
@@ -44,10 +44,12 @@ About SSH Keys
 
 OpenSSH provides several modes of authentication: password log-in, Kerberos 
 tickets and Key-based authentication. Key-based authentication is the most 
-secure method, and is therefore recommended. Other authentication methods are 
-only used in specific situations (such as setting a password when creating a 
-new instance). Ideally, password authentication should be disabled, once SSH 
-Key-based authentication is working properly.
+secure method, and is therefore recommended. 
+
+Other authentication methods are only used in specific situations (such as 
+setting a password log-in when creating a new instance). Ideally, password 
+authentication should be disabled, once SSH your key-based authentication 
+is set up and working properly.
 
 Generating a key pair provides you with two long string of characters: 
 a “public key” and a “private key”. Anyone is allowed to see the public key, 
@@ -59,6 +61,7 @@ with a passphrase.
 
 SSH can use either "RSA" (Rivest-Shamir-Adleman) or "DSA" ("Digital Signature Algorithm") keys. 
 DSA is known to be less secure, so RSA is used in this guide.
+
 
 ******************************************
 Step 1: Check that SSH is installed and running 
@@ -111,7 +114,7 @@ Now restart your computer, or start OpenSSH with the command:
   $ sudo ssh start
 
 
-Finally run the checks above, to make sure it's working.
+Now run the checks above, again, to make sure it's working.
  
 
 ******************************************
@@ -145,26 +148,21 @@ what they are for, you should probably make copies or backups before proceeding:
   $ cp id_rsa.pub id_rsa.pub.bak
   $ cp id_rsa id_rsa.bak
 
-Now generate the new RSA Key Pair, using the default name:
+Now generate the new RSA Key Pair, using the default name (id_rsa):
 
 .. code-block:: bash
 
   $ ssh-keygen -t rsa
 
-
-Option: Create unique key file names
-=====================================
-
-You will want to add a new and unique key file name if you are making more 
-than one set of keys, to access different projects or instances. 
-It is probably wiser to do this if the files id_rsa and id_rsa.pub already exist. 
-
-Create a unique name using the -f flag:
+Or you can create a unique name using the -f flag:
 
 .. code-block:: bash
 
   $ ssh-keygen -t rsa -f newKeyName
 
+You will want to add a new and unique key file name if you are making more 
+than one set of keys, to access different projects or instances. And it is 
+probably wiser to do this if the files id_rsa and id_rsa.pub already exist.
 
 Option: Set Key Encryption Level
 ====================================
@@ -177,39 +175,11 @@ making it harder to crack the key by brute force methods.
   $ ssh-keygen -t rsa -b 4096
 
 
-Finishing Off
-====================================
-
-Add your SSH key to the ssh-agent
-
-Ensure ssh-agent is enabled by starting the ssh-agent in the background:
-
-.. code-block:: bash
-
-  $ eval "$(ssh-agent -s)"
-  Agent pid 59566
-
-Now Add your new SSH key to the ssh-agent.
-
-.. code-block:: bash
-
-  $ ssh-add ~/.ssh/id_rsa
-
-If you used an existing SSH key rather than generating a new SSH key, 
-you'll need to replace "id_rsa" in the command with the name of your 
-existing private key file.
-
-
-******************************************
- Step 3: Store the Keys and Passphrase
-******************************************
-
 Once you have entered the keygen command, you will get this response (with your username in it):
 
 .. code-block:: BASH
 
   Enter file in which to save the key (/home/(username)/.ssh/id_rsa):
-
 
 This provides a default file path and filename, where SSH will automatically 
 look for your private key when you are using it to log in. You can press enter 
@@ -224,13 +194,11 @@ SSH will now ask for a passphrase:
 
   Enter passphrase (empty for no passphrase):
 
-
 You can press enter, to continue without a passphrase, or type in a passphrase. 
 
 Entering a passphrase increases the level of security. If one of your machines is compromised, 
 the bad guys can’t log in to your server until they figure out the passphrase. This buys you 
 more time to log-in the server from another machine and change the compromised key pair.
-
 
 Choosing a good passphrase
 ==========================
@@ -277,6 +245,34 @@ The entire key generation process will look something like this in your terminal
   +-----------------+
 
 
+******************************************
+ Step 3: Finishing off
+******************************************
+
+There are a few final steps to make sure your SSH connection
+will work properly the ffirst time.
+
+Add your SSH key to the ssh-agent
+====================================
+
+First, ensure ``ssh-agent`` is enabled by starting the ssh-agent in the background.
+If it is working, you will get an ``Agent pid`` response:
+
+.. code-block:: bash
+
+  $ eval "$(ssh-agent -s)"
+  Agent pid 59566
+
+Now, add your new SSH key to the ssh-agent:
+
+.. code-block:: bash
+
+  $ ssh-add ~/.ssh/newKeyName
+
+
+Locating your new public and private keys
+=========================================
+
 If you created the keys with the default name, then:
 
 The public key is now located in ``/home/(user)/.ssh/id_rsa.pub``
@@ -291,8 +287,16 @@ The private key is now located in ``/home/(user)/.ssh/myNewKeyName``
 Securing your new key pair
 ==========================
 
-To use your new key pair, you need to make it available to your ssh client.  
-Change permissions to 600:
-$ cd ~/.ssh
-$ chmod 600 KEY_NAME.pem
+Change the file permissions on your private key to make sure other
+users won't have access to it
 
+.. code-block:: bash
+
+  $ cd ~/.ssh
+  $ chmod 600 myNewKey
+
+
+.. note:: 
+
+  If you fail to do this, you may get an error when you try to use the
+  key: ``Permissions... are too open. This private key will be ignored''
