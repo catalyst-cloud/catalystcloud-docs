@@ -83,7 +83,7 @@ The next step is to create a ``Vagrantfile`` in the root of your repository:
      os.image               = 'ubuntu-14.04-x86_64'
      os.tenant_name         = "#{ENV['OS_TENANT_NAME']}"
      os.region              = "#{ENV['OS_REGION_NAME']}"
-     os.security_groups     = ['my-sg']
+     os.security_groups     = ['default','my-sg']
      os.floating_ip_pool    = 'public-net'
    end
 
