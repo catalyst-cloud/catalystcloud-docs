@@ -13,3 +13,4 @@ Contents:
    faq/cant-ssh-to-instance
    faq/pause-suspend-shelve-shutoff
    faq/how-to-grow-a-cinder-volume
+   faq/external-ip-address
