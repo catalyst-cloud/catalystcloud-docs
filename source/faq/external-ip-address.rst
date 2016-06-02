@@ -7,6 +7,11 @@ instances in your project are using. For example you may wish to allow traffic
 from your Catalyst Cloud instances to access a service that has firewalling or
 other IP based access control in place.
 
+For instances that have a floating IP you simply need to find the floating IP,
+for instances that do not have a floating IP address the external IP address
+will be the external address of the router they are using to access the
+``public-net``.
+
 There are a number of methods you can use to find the IP address:
 
 Using DNS on an instance
@@ -54,6 +59,9 @@ instance has a floating IP address or not:
 
 For an instance with a floating IP
 **********************************
+
+You can find the Floating IP of an instance in the instances list on the
+dashboard. From the command line you can use the following command:
 
 .. code-block:: bash
 
