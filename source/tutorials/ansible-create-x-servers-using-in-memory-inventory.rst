@@ -78,7 +78,7 @@ The Goal
 --------
 The requirements of this playbook are as follows:
 
-- create a variable number of Openstack instances on the Catalyst cloud
+- create a variable number of OpenStack instances on the Catalyst cloud
 - carry out identical configuration across all nodes
 - pause the playbook to allow for interaction with the new nodes,
   i.e. processing/testing etc.

@@ -51,7 +51,7 @@ You can download and run this script on an instance:
  $ finding your external ip:
  Your external IP address is: 150.242.43.13
 
-Using the Openstack Command Line Tools
+Using the OpenStack Command Line Tools
 ======================================
 
 The method you use to find the external IP address will depend on whether the
