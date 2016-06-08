@@ -2,7 +2,8 @@
 
 # VARS, change these if required
 # Set a prefix if you wish all names to have a unique prefix
-PREFIX='flubber'
+#PREFIX='myprefix-'
+PREFIX=''
 ROUTER_NAME="${PREFIX}border-router"
 PRIVATE_NETWORK_NAME="${PREFIX}private-net"
 PRIVATE_SUBNET_NAME="${PREFIX}private-subnet"
