@@ -48,7 +48,8 @@ You can download and run this script on an instance:
 
  $ wget -q https://raw.githubusercontent.com/catalyst/catalystcloud-docs/master/scripts/whats-my-ip.sh
  $ chmod 744 whats-my-ip.sh
- $ finding your external ip:
+ $ ./whats-my-ip.sh
+ finding your external ip ...
  Your external IP address is: 150.242.43.13
 
 Using the OpenStack Command Line Tools
