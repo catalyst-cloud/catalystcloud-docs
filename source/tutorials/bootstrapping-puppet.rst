@@ -5,7 +5,7 @@ Bootstrapping Puppet from Heat
 This tutorial assumes the following:
 
 * You have created a basic network setup in the Catalyst Cloud.
-* You access to a server that is acting as the puppetmaster.
+* You have access to a server that is acting as the puppetmaster.
 * You have installed the OpenStack command line tools and sourced an
   openrc file, as explained at :ref:`command-line-tools`.
 * You have a basic understanding of heat templates as shown at
@@ -13,6 +13,7 @@ This tutorial assumes the following:
 
 Introduction
 ============
+
 In this tutorial we will show you how to add a new server to an existing
 Catalyst Cloud network and configure it with `Puppet`_ and have it check in to
 the puppetmaster.
@@ -26,6 +27,7 @@ creation of the instance and then run a nested cloud-config script via
 
 Setup
 =====
+
 We will make use of heat template to deploy a single instance into an existing
 network hosted in the Catalyst Cloud. In order to make this work we need to
 retrieve the relevant network ids and add them into the template.
@@ -217,6 +219,7 @@ It performs the following tasks:
 
 Creating the Server
 ===================
+
 To create the server run the following heat command. This will create a new
 server called server1 in a stack named puppet-slave-stack
 
@@ -232,6 +235,7 @@ Here's how to check the progress of your deployment
 
 Final Note
 ==========
+
 Unless your puppetmaster is configured to automatically sign agent certificate
 requests you will need to sign your new servers cert before the first puppet
 run will complete.
