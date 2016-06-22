@@ -2,7 +2,8 @@
 
 # VARS, change these if required
 # Set a prefix if you wish all names to have a unique prefix
-PREFIX='flubber'
+#PREFIX='myprefix-'
+PREFIX=''
 ROUTER_NAME="${PREFIX}border-router"
 PRIVATE_NETWORK_NAME="${PREFIX}private-net"
 PRIVATE_SUBNET_NAME="${PREFIX}private-subnet"
@@ -14,7 +15,7 @@ NETWORK="10.0.0"
 POOL_START_OCT="10"
 POOL_END_OCT="200"
 FLAVOR_NAME="c1.c1r1"
-IMAGE_NAME="ubuntu-14.04-x86_64"
+IMAGE_NAME="ubuntu-16.04-x86_64"
 
 # valid ip function
 valid_ip() {
