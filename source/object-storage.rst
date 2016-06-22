@@ -58,7 +58,7 @@ API endpoints
 Requirements
 ============
 
-You need valid Openstack credentials to interact using the Swift API.
+You need valid OpenStack credentials to interact using the Swift API.
 These can be obtained from the RC file (under Access &
 Security, API Access, or using the command line tools).
 
