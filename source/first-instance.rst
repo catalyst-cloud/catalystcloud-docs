@@ -1,6 +1,6 @@
-##############
-First Instance
-##############
+#############################
+Launching your First Instance
+#############################
 
 This is the first instance section of the Catalyst Cloud Documentation. It
 demonstrates the process of creating an instance using a variety of methods.
