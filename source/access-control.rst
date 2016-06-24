@@ -70,3 +70,6 @@ Project Users
 
 The project users page allows project admins and moderators to perform
 administrative functions. Users can be added, revoked or updated from here.
+If updating a user who is currently logged in to the Dashboard, that user
+will be automatically required to re-authenticate.  If updating one's own
+roles, these will take effect on the next login.
