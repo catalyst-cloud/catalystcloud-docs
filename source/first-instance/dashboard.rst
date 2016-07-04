@@ -4,6 +4,9 @@ Launching your first instance from the dashboard
 
 Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
 
+.. attention::
+  Most of the steps in this section of the guide are generic, however there are a places where the setup will be specific to either Linux or Windows. Where such a distinction needs to be made it will be highlighted as important.
+
 Creating the required network elements
 ======================================
 
@@ -65,6 +68,8 @@ You should now have a network topology this looks like this:
 
 Uploading an SSH key
 ====================
+.. important::
+  This step is not required if you are deploying a Windows image.
 
 You can either import an existing public key or have OpenStack create a key for
 you, we document how to import an existing key here.
@@ -113,6 +118,13 @@ You can use the default values for the remainder of the options. Click "Add":
 
 |
 
+.. important::
+  For a windows compute instance this rule needs to be changed to allow RDP access rather than SSH. To do this select RDP from the Rule drop down menu as shown below.
+
+.. image:: ../_static/fi-rdp-rule.png
+
+|
+
 .. warning::
 
   Note that by using the CIDR 0.0.0.0/0 as a remote, you are allowing access
@@ -139,7 +151,16 @@ as the boot source and "No" for create new volume. Select the
 .. image:: ../_static/fi-launch-instance-source.png
    :align: center
 
+|
+
+.. important:: When creating a windows instance you need to select the ``windows-server-2012r2-x86_64`` image from the image list first, then select "Yes" to create new volume.  An alert symbol will appear alongside the Size(GB) selector.  If you hover the mouse on this it will show the minimum size of the volume required to host the windows image.  Set an appropriate volume size, select "Yes" to Delete Volume on Terminate then click "Next".
+
+.. image:: ../_static/fi-windows-volume.png
+   :align: center
+
 Select the ``c1.c1r1`` flavor from the list and click "Next":
+
+.. important:: For a windows instance the recommended minimum is ``c1.c2r2``
 
 .. image:: ../_static/fi-launch-instance-flavor.png
    :align: center
@@ -155,6 +176,8 @@ Select the ``first-instance-sg`` security group from the list and click "Next":
    :align: center
 
 Select the ``first-instance-key`` key pair from the list and click "Next":
+
+.. important:: no key pair is required for a windows instance.
 
 .. image:: ../_static/fi-launch-instance-key-pair.png
    :align: center
@@ -188,7 +211,8 @@ In this example, select the "first-instance" port and click "Associate":
 
 Connect to the new Instance
 ===========================
-
+Connecting to Linux
+-------------------
 We can now connect to the SSH service using the floating public IP that we
 associated with our instance in the previous step. This address is visible in
 the Instances list or under the Floating IPs tab in Access & Security.
@@ -199,3 +223,19 @@ the Instances list or under the Floating IPs tab in Access & Security.
 
 You should be able to interact with this instance as you would any Ubuntu
 server.
+
+Connecting to Windows
+---------------------
+First you need to set the Administrator password. To do this go to the "Instances" section, click on first-instance under "Instance Name" and select the "Console" tab.
+
+Once the following screen loads, click on OK to continue.
+
+.. image:: ../_static/fi-windows-login.png
+
+You will then be prompted by the following screen to create a new administator password.
+
+.. image:: ../_static/fi-windows-login-2.png
+
+Once this step has been completed it will be possible to connect to this instance with an RDP application via the floating public IP that we
+associated with our instance in the previous step. This address is visible in
+the Instances list or under the Floating IPs tab in Access & Security.
