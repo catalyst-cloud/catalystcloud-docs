@@ -11,7 +11,8 @@ Contents:
    :maxdepth: 1
 
    first-instance/overview
-   first-instance/dashboard
+   first-instance/dashboard-linux
+   first-instance/dashboard-windows
    first-instance/command-line
    first-instance/bash-script
    first-instance/heat
