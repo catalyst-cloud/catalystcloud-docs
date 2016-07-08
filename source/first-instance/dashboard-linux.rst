@@ -111,6 +111,8 @@ You can use the default values for the remainder of the options. Click "Add":
 .. image:: ../_static/fi-security-group-rule-add-add.png
    :align: center
 
+|
+
 .. warning::
 
   Note that by using the CIDR 0.0.0.0/0 as a remote, you are allowing access
@@ -186,6 +188,7 @@ In this example, select the "first-instance" port and click "Associate":
 
 Connect to the new Instance
 ===========================
+
 We can now connect to the SSH service using the floating public IP that we
 associated with our instance in the previous step. This address is visible in
 the Instances list or under the Floating IPs tab in Access & Security.
