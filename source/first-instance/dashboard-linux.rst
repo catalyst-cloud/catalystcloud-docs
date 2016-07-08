@@ -1,6 +1,6 @@
-************************************************
-Launching your first instance from the dashboard
-************************************************
+******************************************************
+Launching your first Linux instance from the dashboard
+******************************************************
 
 Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
 
