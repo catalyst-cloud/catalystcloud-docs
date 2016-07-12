@@ -7,6 +7,14 @@ Object storage
 Overview
 ********
 
+Object storage is a storage architecture that manages data as objects as
+opposed to other approaches that may use a file hierarchy or blocks stored in
+sectors and tracks.  Each object typically includes the data itself, a variable
+amount of metadata, and a globally unique identifier. It is a relatively
+inexpensive, scalable, highly available and simple to use. This makes it the
+ideal place to persist the state of systems designed to run on the cloud or the
+media assets for your web applications.
+
 Our object storage service is provided by a fully distributed storage system,
 with no single points of failure and scalable to the exabyte level. The system
 is self-healing and self-managing. Data is seamlessly replicated on three
@@ -22,9 +30,54 @@ The system runs frequent CRC checks to protect data from soft corruption. The
 corruption of a single bit can be detected and automatically restored to a
 healthy state.
 
-Object storage is scalable, highly available and simple to use. This makes it
-the ideal place to persist the state of systems designed to run on the cloud or
-the media assets for your web applications.
+*********************************
+Object Storage from the Dashboard
+*********************************
+Data must be stored in a container so we need to create at least one container
+prior to uploading data.  To create a new container navigate to the
+"Containers" section and click "Create Container".
+
+.. image:: _static/os-containers.png
+   :align: center
+
+|
+
+Provide a name for the container and select the appropriate access level and
+click "Create".
+
+.. note::
+
+  Setting "Public" level access on a container means that anyone
+  with the containers URL can access the content of that container.
+
+.. image:: _static/os-create-container.png
+   :align: center
+
+|
+
+You should now see the newly created container. As this is a new container it
+currently does not contain any data.  Click on "Upload Object" to add some
+content.
+
+.. image:: _static/os-view-containers.png
+   :align: center
+
+|
+
+Click on the "Browse" button to select the file you wish to upload and click
+"Upload Object"
+
+.. image:: _static/os-upload-object.png
+   :align: center
+
+|
+
+In the Containers view the Object Count has gone up to one and the size of
+the container is now 69.9KB
+
+.. image:: _static/os-data-uploaded.png
+   :align: center
+
 
 
 *********
@@ -85,14 +138,24 @@ with Swift via the version 2 compatible (auth) API. This version uses
 the same endpoint for both regions, but you tell it which one you want
 when connecting.
 
+Before running this example ensure that you have sourced an openrc file, as
+explained in :ref:`command-line-tools`.
+
 .. code-block:: python
 
   #!/usr/bin/env python
+  import os
   import swiftclient
-  user = 'tenant:username'
-  key = 'thepassword'
-  apiurl = 'https://api.cloud.catalyst.net.nz:5000/v2.0'
-  options = {'tenant_name': 'tenant', 'region_name': 'nz-por-1'}
+
+
+  auth_username = os.environ['OS_USERNAME']
+  auth_password = os.environ['OS_PASSWORD']
+  auth_url = os.environ['OS_AUTH_URL']
+  project_name = os.environ['OS_TENANT_NAME']
+  region_name = os.environ['OS_REGION_NAME']
+
+  options = {'tenant_name': project_name, 'region_name': region_name}
+
 
   conn = swiftclient.Connection(
           user = user,
@@ -104,8 +167,12 @@ when connecting.
   )
 
   # Create a new container
-  container_name = 'mytestbucket'
-  conn.put_container(container_name)
+  container_name = 'gd-test-container'
+  try:
+    conn.put_container(container_name)
+  except:
+
+  finally:
 
   # Put an object in it
   conn.put_object(container_name, 'hello.txt',
@@ -118,7 +185,8 @@ when connecting.
       print 'container\t{0}'.format(cname)
 
       for data in conn.get_container(cname)[1]:
-          print '\t{0}\t{1}\t{2}'.format(data['name'], data['bytes'], data['last_modified'])
+          print '\t{0}\t{1}\t{2}'.format(data['name'], data['bytes'],
+          data['last_modified'])
 
 
 To use the version 1 (auth) API you need to have previously authenticated,
