@@ -1,19 +1,22 @@
 Set up a Puppet master and clients with Ansible
 ===============================================
 
-This tutorial will show you how to combine Ansible and Puppet to manage
-a dynamic set of servers on the Catalyst Cloud. This way you get the
-beautifully simple orchestration of Ansible, combined with the vast
-library of modules available with Puppet.
+This tutorial will show you how to combine `Ansible`_ and `Puppet`_ to manage a
+dynamic set of servers on the Catalyst Cloud. This way you get the beautifully
+simple orchestration of Ansible, combined with the vast library of modules
+available with Puppet.
+
+.. _Ansible: https://www.ansible.com/
+.. _Puppet: https://puppet.com/
 
 You will need:
 
--  The OpenStack command line tools and have sourced an OpenStack RC
-   file, as explained at :ref:``command-line-tools``
--  A basic understanding of how to use ``Ansible``\ \_, and ideally have
-   done the other Ansible tutorials first.
--  A good enough understanding of puppet that you know why you're
-   following this tutorial.
+-  The OpenStack command line tools and have sourced an OpenStack RC file, as
+   explained at :ref:`command-line-tools`
+-  A basic understanding of how to use Ansible, and ideally have done the other
+   Ansible tutorials first.
+-  A good enough understanding of puppet that you know why you're following
+   this tutorial.
 
 If you follow this guide you will:
 
@@ -25,10 +28,10 @@ If you follow this guide you will:
 Setup your puppet master
 ------------------------
 
-We'll start by checking out the project skeleton and setting up some
-vars specific to your local setup.
+We'll start by checking out the project skeleton and setting up some vars
+specific to your local setup.
 
-.. code:: bash
+.. code-block:: bash
 
     $ git clone https://github.com/catalyst/catalystcloud-ansible
     $ cd catalystcloud-ansible/example-playbooks/puppet-master
@@ -54,12 +57,12 @@ vars specific to your local setup.
     # remainder of this project.
     echo "ansible_store_os_password: yes" >> local-vars.yml
 
-Now we're ready to create the puppet master, but first we'll check out
-some of the interesting parts of the create-puppetmaster playbook.
+Now we're ready to create the puppet master, but first we'll check out some of
+the interesting parts of the create-puppetmaster playbook.
 
 We set up puppet to run on demand, and never in the background.
 
-.. code:: yaml
+.. code-block:: yaml
 
       # We run puppet on demand via ansible, so disable the agent daemon...
       - name: Disable puppet agent
@@ -76,12 +79,12 @@ We set up puppet to run on demand, and never in the background.
         shell: puppet agent --enable
         become: yes
 
-We also copy our local modules directory in to the puppet master's
-modulepath. For now, there is very little in there other than an empty
-manifest for ``roles::puppetmaster``, but this is where you could keep
-your army of puppet modules for whatever.
+We also copy our local modules directory in to the puppet master's modulepath.
+For now, there is very little in there other than an empty manifest for
+``roles::puppetmaster``, but this is where you could keep your army of puppet
+modules for whatever.
 
-.. code:: yaml
+.. code-block:: yaml
 
     # using copy is incredibly slow for large sets of files, so we tar it up from
     # local before extracting it in /etc/puppet
@@ -95,11 +98,10 @@ your army of puppet modules for whatever.
        unarchive: dest=/etc/puppet src=/tmp/puppet-modules.tar.gz copy=yes
        become: yes
 
-We also have a very crude external node classifier that uses a property
-that each server is created with to decide which top-level puppet class
-to apply:
+We also have a very crude external node classifier that uses a property that
+each server is created with to decide which top-level puppet class to apply:
 
-.. code:: shell
+.. code-block:: bash
 
     #! /usr/bin/env bash
     # Return back 'yaml' including scraped role property as profile
@@ -110,19 +112,19 @@ to apply:
     echo "classes: ['roles::$ROLE']"
 
 The script pulls the role property from the instance's metadata and
-interpolates that in to the ENC response, where a role of ``foo`` wants
-to include the ``roles::foo`` manifest.
+interpolates that in to the ENC response, where a role of ``foo`` wants to
+include the ``roles::foo`` manifest.
 
 OK, let's run the play...
 
-.. code:: bash
+.. code-block:: bash
 
     $ export ANSIBLE_HOST_KEY_CHECKING=false # disables ssh host key checks
     $ ansible-playbook -e'@local-vars.yml'  create-puppetmaster.yml
 
 Assuming everything worked, you can now log in to your new box:
 
-.. code:: bash
+.. code-block:: bash
 
     $ export SSH_CMD="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=false ubuntu@$PUBLIC_IP"
     $ $SSH_CMD
@@ -136,7 +138,7 @@ Assuming everything worked, you can now log in to your new box:
 
 Lets update our puppet manifests and update the controller:
 
-.. code:: bash
+.. code-block:: bash
 
     # Let's generate some entropy!
     $ echo 'class roles::puppetmaster { package { "haveged": } }' > modules/roles/manifests/puppetmaster.pp
@@ -148,10 +150,10 @@ OK, take a deep breath and get ready for part two - creating some hosts!
 Create some hosts
 -----------------
 
-In this step we are going to quickly add two hosts and provision them
-with our puppet master. In your working copy, run:
+In this step we are going to quickly add two hosts and provision them with our
+puppet master. In your working copy, run:
 
-.. code:: bash
+.. code-block:: bash
 
 
     # define a couple of server roles, push them to the puppet master
@@ -159,11 +161,11 @@ with our puppet master. In your working copy, run:
     # package
     $ echo 'class roles::webserver { package { 'nginx': } }' > modules/roles/manifests/webserver.pp
     $ echo 'class roles::dbserver { package { 'postgresql': } }' > modules/roles/manifests/dbserver.pp
-    $ ansible-playbook -e '@local-vars.yml'  update-puppetmaster.pp
+    $ ansible-playbook -e '@local-vars.yml' update-puppetmaster.pp
 
 Now switch to the pupetmaster and run:
 
-.. code:: bash
+.. code-block:: bash
 
     $ cd /opt/ansible
     $ . /etc/openstack.rc
@@ -181,14 +183,14 @@ Now switch to the pupetmaster and run:
 
     $ ssh db1 dpkg -l postgresql # prints out postgres package information
 
-If you take a look at the create-host play, it does the fiddly work of
-signing certificate requests for your servers, adds a host entry to the
-puppetmaster's /etc/hosts and then runs puppet for you.
+If you take a look at the create-host play, it does the fiddly work of signing
+certificate requests for your servers, adds a host entry to the puppetmaster's
+``/etc/hosts`` and then runs puppet for you.
 
 As an exercise, let's do the reverse - create a play for removing a
 server.
 
-.. code:: yaml
+.. code-block:: yaml
 
     ---
     - name: Remove a server from our tenant
@@ -201,9 +203,9 @@ server.
         - name: Remove traces of the server from puppetmaster
           include: tasks/clean-previous-host-info.yml hostname="{{ oldhost_name }}"
 
-Save this file as /opt/ansible/delete-host.yml and give it a whirl...
+Save this file as ``/opt/ansible/delete-host.yml`` and give it a whirl...
 
-.. code:: bash
+.. code-block:: bash
 
 
     $ ansible-playbook -e @local-vars.yml -e oldhost_name=db1 delete-host.yml
@@ -213,6 +215,5 @@ Save this file as /opt/ansible/delete-host.yml and give it a whirl...
     $ ansible-playbook -e @local-vars.yml -e keypair_name=puppetmaster \
       -e oldhost_name=web1 delete-host.yml
 
-You can add and remove servers now at will. Don't bother upgrading your
-servers any more - just delete & create and never let your servers
-drift.
+You can add and remove servers now at will. Don't bother upgrading your servers
+any more - just delete & create and never let your servers drift.
