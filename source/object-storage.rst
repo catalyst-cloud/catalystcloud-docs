@@ -31,11 +31,11 @@ corruption of a single bit can be detected and automatically restored to a
 healthy state.
 
 *********************************
-Object Storage from the Dashboard
+Object storage from the dashboard
 *********************************
-Data must be stored in a container so we need to create at least one container
-prior to uploading data.  To create a new container navigate to the
-"Containers" section and click "Create Container".
+Data must be stored in a container ( also referred to as a bucket ) so we need
+to create at least one container prior to uploading data.  To create a new
+container navigate to the "Containers" section and click "Create Container".
 
 .. image:: _static/os-containers.png
    :align: center
@@ -78,7 +78,123 @@ the container is now 69.9KB
 .. image:: _static/os-data-uploaded.png
    :align: center
 
+***********************************
+Using the command line client tools
+***********************************
+First ensure that you have installed the correct version of the tools for your
+operating system version and have sourced your OpenStack RC file
+see :ref:`command-line-tools` for full details.
 
+To view the containers currently in existence in your project:
+
+.. code::
+
+    $ swift list
+    mycontainer-1
+    mycontainer-2
+
+To view the objeects stored within a container:
+**swift list <container_name>**
+
+.. code::
+
+    $ swift list mycontainer-1
+    file-1.txt
+    image-1.png
+
+To create a new container: **swift post <container_name>**
+
+.. code::
+
+    $ swift post mynewcontainer
+
+To add a new object to a container:
+**swift upload <container_name> <file_name>**
+
+.. code::
+
+    $ swift upload mynewcontainer hello.txt
+    hello.txt
+
+To delete an object: **swift delete <container> <object>**
+
+.. code::
+
+    $ swift delete mynewcontainer hello.txt
+    hello.txt
+    mynewcontainer
+
+To delete a container: **swift delete <container>**
+
+.. code::
+
+    $ swift delete mycontainer-1
+    file-1.txt
+    image-1.png
+    mycontainer-1
+
+.. note::
+
+    Deleting a container will also delete all of the objects within the
+    container
+
+
+**********
+Using cURL
+**********
+
+To access object storage using cURL it will be necessary to provide credentials
+to authenticate the request.
+
+This can be done by sourcing a valid RC file ( see :ref:`command-line-tools` )
+retrieving the account specific detail via the swift commandline tools then
+exporting the required variables as shown below.
+
+.. code::
+
+    $ source openstack-openrc.sh
+
+    $ swift stat -v
+     StorageURL: https://api.ostst.wgtn.cat-it.co.nz:8443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda
+                      Auth Token: 5f5a043e1bd24a8fa84b8785cca8e0fc
+                         Account: AUTH_0ef8ecaa78684c399d1d514b61698fda
+                      Containers: 48
+                         Objects: 156
+                           Bytes: 11293750551
+ Containers in policy "policy-0": 48
+    Objects in policy "policy-0": 156
+      Bytes in policy "policy-0": 11293750551
+     X-Account-Project-Domain-Id: default
+                          Server: nginx/1.8.1
+                     X-Timestamp: 1466047859.45584
+                      X-Trans-Id: tx4bdb5d859f8c47f18b44d-00578c0e63
+                    Content-Type: text/plain; charset=utf-8
+                   Accept-Ranges: bytes
+
+    $ export storageURL="https://api.ostst.wgtn.cat-it.co.nz:8443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda"
+    $ export token="5f5a043e1bd24a8fa84b8785cca8e0fc"
+
+Then run the following command to get a list of all available containers for
+that tenant
+
+.. code::
+
+    curl -i -X GET -H "X-Auth-Token: $token" $storageURL
+
+You can optionally specify alternative output formats; for example to use XML
+or JSON using the following syntax
+
+.. code::
+
+    curl -i -X GET -H "X-Auth-Token: $token" $storageURL?format=xml
+    curl -i -X GET -H "X-Auth-Token: $token" $storageURL?format=json
+
+To view the objects within a container simply append the container name to
+the cURL request
+
+.. code::
+
+    curl -i -X GET -H "X-Auth-Token: $token" $storageURL/<container_name>
 
 *********
 Swift API
@@ -167,12 +283,9 @@ explained in :ref:`command-line-tools`.
   )
 
   # Create a new container
-  container_name = 'gd-test-container'
-  try:
-    conn.put_container(container_name)
-  except:
+  container_name = 'mycontainer'
+  conn.put_container(container_name)
 
-  finally:
 
   # Put an object in it
   conn.put_object(container_name, 'hello.txt',
@@ -193,12 +306,14 @@ To use the version 1 (auth) API you need to have previously authenticated,
 and have remembered your token id (e.g using the keystone client). Also the
 endpoint for the desired region must be used (here por).
 
+https://api.nz-por-1.catalystcloud.io:8443/swift/v1/auth_tenant_id/container_name/object_name
+
 .. code-block:: python
 
   #!/usr/bin/env python
   import swiftclient
   token = 'thetokenid'
-  stourl = 'https://api.nz-por-1.catalystcloud.io:8443/swift/v1'
+  stourl = 'https://api.nz-por-1.catalystcloud.io:8443/v1/AUTH_<tenant_id>'
 
   conn = swiftclient.Connection(
           preauthtoken = token,
@@ -277,15 +392,17 @@ compatible API.
   secret = 'bbbb5555bbbb5555bbbb555'
   api_endpoint = 'api.cloud.catalyst.net.nz'
   port = 8443
-  bucket = 'mytestbucket'
+  mybucket = 'mytestbucket'
 
   conn = boto.connect_s3(aws_access_key_id=access_key,
-                         aws_secret_access_key=secret,
-                         host=api_endpoint, port=port,
-                         calling_format=boto.s3.connection.OrdinaryCallingFormat())
+                    aws_secret_access_key=secret,
+                    host=api_endpoint, port=port,
+                    calling_format=boto.s3.connection.OrdinaryCallingFormat())
 
-  # Create new bucket
-  bucket = conn.create_bucket(bucket)
+  # Create new bucket if not already existing
+  bucket = conn.lookup(mybucket)
+  if bucket is None:
+      bucket = conn.create_bucket(mybucket)
 
   # Store hello world file in it
   key = bucket.new_key('hello.txt')
