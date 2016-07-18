@@ -155,7 +155,7 @@ exporting the required variables as shown below.
     $ source openstack-openrc.sh
 
     $ swift stat -v
-     StorageURL: https://api.ostst.wgtn.cat-it.co.nz:8443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda
+     StorageURL: https://api.nz-por-1.catalystcloud.io:8443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda
                       Auth Token: 5f5a043e1bd24a8fa84b8785cca8e0fc
                          Account: AUTH_0ef8ecaa78684c399d1d514b61698fda
                       Containers: 48
@@ -171,7 +171,7 @@ exporting the required variables as shown below.
                     Content-Type: text/plain; charset=utf-8
                    Accept-Ranges: bytes
 
-    $ export storageURL="https://api.ostst.wgtn.cat-it.co.nz:8443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda"
+    $ export storageURL="https://api.nz-por-1.catalystcloud.io:8443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda"
     $ export token="5f5a043e1bd24a8fa84b8785cca8e0fc"
 
 Then run the following command to get a list of all available containers for
@@ -194,7 +194,7 @@ the cURL request
 
 .. code::
 
-    curl -i -X GET -H "X-Auth-Token: $token" $storageURL/<container_name>
+    curl -i -X GET -H "X-Auth-Token: $token" $storageURL/mycontainer
 
 *********
 Swift API
