@@ -7,6 +7,14 @@ Object storage
 Overview
 ********
 
+Object storage is a storage architecture that manages data as objects as
+opposed to other approaches that may use a file hierarchy or blocks stored in
+sectors and tracks.  Each object typically includes the data itself, a variable
+amount of metadata, and a globally unique identifier. It is a relatively
+inexpensive, scalable, highly available and simple to use. This makes it the
+ideal place to persist the state of systems designed to run on the cloud or the
+media assets for your web applications.
+
 Our object storage service is provided by a fully distributed storage system,
 with no single points of failure and scalable to the exabyte level. The system
 is self-healing and self-managing. Data is seamlessly replicated on three
@@ -22,10 +30,171 @@ The system runs frequent CRC checks to protect data from soft corruption. The
 corruption of a single bit can be detected and automatically restored to a
 healthy state.
 
-Object storage is scalable, highly available and simple to use. This makes it
-the ideal place to persist the state of systems designed to run on the cloud or
-the media assets for your web applications.
+*********************************
+Object storage from the dashboard
+*********************************
+Data must be stored in a container ( also referred to as a bucket ) so we need
+to create at least one container prior to uploading data.  To create a new
+container navigate to the "Containers" section and click "Create Container".
 
+.. image:: _static/os-containers.png
+   :align: center
+
+|
+
+Provide a name for the container and select the appropriate access level and
+click "Create".
+
+.. note::
+
+  Setting "Public" level access on a container means that anyone
+  with the containers URL can access the content of that container.
+
+.. image:: _static/os-create-container.png
+   :align: center
+
+|
+
+You should now see the newly created container. As this is a new container it
+currently does not contain any data.  Click on "Upload Object" to add some
+content.
+
+.. image:: _static/os-view-containers.png
+   :align: center
+
+|
+
+Click on the "Browse" button to select the file you wish to upload and click
+"Upload Object"
+
+.. image:: _static/os-upload-object.png
+   :align: center
+
+|
+
+In the Containers view the Object Count has gone up to one and the size of
+the container is now 69.9KB
+
+.. image:: _static/os-data-uploaded.png
+   :align: center
+
+***********************************
+Using the command line client tools
+***********************************
+First ensure that you have installed the correct version of the tools for your
+operating system version and have sourced your OpenStack RC file
+see :ref:`command-line-tools` for full details.
+
+To view the containers currently in existence in your project:
+
+.. code::
+
+    $ swift list
+    mycontainer-1
+    mycontainer-2
+
+To view the objeects stored within a container:
+**swift list <container_name>**
+
+.. code::
+
+    $ swift list mycontainer-1
+    file-1.txt
+    image-1.png
+
+To create a new container: **swift post <container_name>**
+
+.. code::
+
+    $ swift post mynewcontainer
+
+To add a new object to a container:
+**swift upload <container_name> <file_name>**
+
+.. code::
+
+    $ swift upload mynewcontainer hello.txt
+    hello.txt
+
+To delete an object: **swift delete <container> <object>**
+
+.. code::
+
+    $ swift delete mynewcontainer hello.txt
+    hello.txt
+    mynewcontainer
+
+To delete a container: **swift delete <container>**
+
+.. code::
+
+    $ swift delete mycontainer-1
+    file-1.txt
+    image-1.png
+    mycontainer-1
+
+.. note::
+
+    Deleting a container will also delete all of the objects within the
+    container
+
+
+**********
+Using cURL
+**********
+
+To access object storage using cURL it will be necessary to provide credentials
+to authenticate the request.
+
+This can be done by sourcing a valid RC file ( see :ref:`command-line-tools` )
+retrieving the account specific detail via the swift commandline tools then
+exporting the required variables as shown below.
+
+.. code::
+
+    $ source openstack-openrc.sh
+
+    $ swift stat -v
+     StorageURL: https://api.ostst.wgtn.cat-it.co.nz:8443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda
+                      Auth Token: 5f5a043e1bd24a8fa84b8785cca8e0fc
+                         Account: AUTH_0ef8ecaa78684c399d1d514b61698fda
+                      Containers: 48
+                         Objects: 156
+                           Bytes: 11293750551
+ Containers in policy "policy-0": 48
+    Objects in policy "policy-0": 156
+      Bytes in policy "policy-0": 11293750551
+     X-Account-Project-Domain-Id: default
+                          Server: nginx/1.8.1
+                     X-Timestamp: 1466047859.45584
+                      X-Trans-Id: tx4bdb5d859f8c47f18b44d-00578c0e63
+                    Content-Type: text/plain; charset=utf-8
+                   Accept-Ranges: bytes
+
+    $ export storageURL="https://api.ostst.wgtn.cat-it.co.nz:8443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda"
+    $ export token="5f5a043e1bd24a8fa84b8785cca8e0fc"
+
+Then run the following command to get a list of all available containers for
+that tenant
+
+.. code::
+
+    curl -i -X GET -H "X-Auth-Token: $token" $storageURL
+
+You can optionally specify alternative output formats; for example to use XML
+or JSON using the following syntax
+
+.. code::
+
+    curl -i -X GET -H "X-Auth-Token: $token" $storageURL?format=xml
+    curl -i -X GET -H "X-Auth-Token: $token" $storageURL?format=json
+
+To view the objects within a container simply append the container name to
+the cURL request
+
+.. code::
+
+    curl -i -X GET -H "X-Auth-Token: $token" $storageURL/<container_name>
 
 *********
 Swift API
@@ -85,14 +254,24 @@ with Swift via the version 2 compatible (auth) API. This version uses
 the same endpoint for both regions, but you tell it which one you want
 when connecting.
 
+Before running this example ensure that you have sourced an openrc file, as
+explained in :ref:`command-line-tools`.
+
 .. code-block:: python
 
   #!/usr/bin/env python
+  import os
   import swiftclient
-  user = 'tenant:username'
-  key = 'thepassword'
-  apiurl = 'https://api.cloud.catalyst.net.nz:5000/v2.0'
-  options = {'tenant_name': 'tenant', 'region_name': 'nz-por-1'}
+
+
+  auth_username = os.environ['OS_USERNAME']
+  auth_password = os.environ['OS_PASSWORD']
+  auth_url = os.environ['OS_AUTH_URL']
+  project_name = os.environ['OS_TENANT_NAME']
+  region_name = os.environ['OS_REGION_NAME']
+
+  options = {'tenant_name': project_name, 'region_name': region_name}
+
 
   conn = swiftclient.Connection(
           user = user,
@@ -104,8 +283,9 @@ when connecting.
   )
 
   # Create a new container
-  container_name = 'mytestbucket'
+  container_name = 'mycontainer'
   conn.put_container(container_name)
+
 
   # Put an object in it
   conn.put_object(container_name, 'hello.txt',
@@ -118,19 +298,22 @@ when connecting.
       print 'container\t{0}'.format(cname)
 
       for data in conn.get_container(cname)[1]:
-          print '\t{0}\t{1}\t{2}'.format(data['name'], data['bytes'], data['last_modified'])
+          print '\t{0}\t{1}\t{2}'.format(data['name'], data['bytes'],
+          data['last_modified'])
 
 
 To use the version 1 (auth) API you need to have previously authenticated,
 and have remembered your token id (e.g using the keystone client). Also the
 endpoint for the desired region must be used (here por).
 
+https://api.nz-por-1.catalystcloud.io:8443/swift/v1/auth_tenant_id/container_name/object_name
+
 .. code-block:: python
 
   #!/usr/bin/env python
   import swiftclient
   token = 'thetokenid'
-  stourl = 'https://api.nz-por-1.catalystcloud.io:8443/swift/v1'
+  stourl = 'https://api.nz-por-1.catalystcloud.io:8443/v1/AUTH_<tenant_id>'
 
   conn = swiftclient.Connection(
           preauthtoken = token,
@@ -209,15 +392,17 @@ compatible API.
   secret = 'bbbb5555bbbb5555bbbb555'
   api_endpoint = 'api.cloud.catalyst.net.nz'
   port = 8443
-  bucket = 'mytestbucket'
+  mybucket = 'mytestbucket'
 
   conn = boto.connect_s3(aws_access_key_id=access_key,
-                         aws_secret_access_key=secret,
-                         host=api_endpoint, port=port,
-                         calling_format=boto.s3.connection.OrdinaryCallingFormat())
+                    aws_secret_access_key=secret,
+                    host=api_endpoint, port=port,
+                    calling_format=boto.s3.connection.OrdinaryCallingFormat())
 
-  # Create new bucket
-  bucket = conn.create_bucket(bucket)
+  # Create new bucket if not already existing
+  bucket = conn.lookup(mybucket)
+  if bucket is None:
+      bucket = conn.create_bucket(mybucket)
 
   # Store hello world file in it
   key = bucket.new_key('hello.txt')
