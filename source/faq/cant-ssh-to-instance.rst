@@ -26,8 +26,8 @@ keys.
 
 If you are encountering a ``Connection timed out`` error then you have
 connection issue. If you are encountering a ``Permission denied (publickey).``
-error then you have an authentication issue. If you are encountering a
-idifferent SSH error then it is likely there is an issue with your instance.
+error then you have an authentication issue. If you are encountering a 
+different SSH error then it is likely there is an issue with your instance.
 
 Network issues
 --------------
