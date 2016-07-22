@@ -143,7 +143,7 @@ Lets update our puppet manifests and update the controller:
     # Let's generate some entropy!
     $ echo 'class roles::puppetmaster { package { "haveged": } }' > modules/roles/manifests/puppetmaster.pp
     # This play reuses tasks from the create play to update manifests, then puppet apply
-    $ ansible-playbook -e '@local-vars.yml' -e local_apply=true update-puppetmaster.pp
+    $ ansible-playbook -e '@local-vars.yml' -e local_apply=true update-puppetmaster.yml
 
 OK, take a deep breath and get ready for part two - creating some hosts!
 
@@ -161,7 +161,7 @@ puppet master. In your working copy, run:
     # package
     $ echo 'class roles::webserver { package { 'nginx': } }' > modules/roles/manifests/webserver.pp
     $ echo 'class roles::dbserver { package { 'postgresql': } }' > modules/roles/manifests/dbserver.pp
-    $ ansible-playbook -e '@local-vars.yml' update-puppetmaster.pp
+    $ ansible-playbook -e '@local-vars.yml' update-puppetmaster.yml
 
 Now switch to the pupetmaster and run:
 
