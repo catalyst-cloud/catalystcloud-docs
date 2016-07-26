@@ -7,6 +7,19 @@ Getting Started
 General information
 *******************
 
+Access to the Catalyst Cloud
+============================
+
+The cloud dashboard is publicly available on the Internet and can be reached
+from everywhere. The cloud APIs are available to all compute instances hosted
+on the cloud, but need to be white-listed to your IP address for access over
+the Internet.
+
+If you have provided an IP address during sign up, you should be able to reach
+the APIs from this API. Otherwise, you can `open a support request
+<https://dashboard.cloud.catalyst.net.nz/management/tickets/>`_ via the
+dashboard at any time to request a change to the white-listed IPs.
+
 Regions
 =======
 
