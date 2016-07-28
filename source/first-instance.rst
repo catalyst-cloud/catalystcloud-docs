@@ -21,3 +21,4 @@ Contents:
    first-instance/libcloud-sdk
    first-instance/command-line-cleanup
    first-instance/bash-script-cleanup
+   first-instance/cli-client-installations.rst
