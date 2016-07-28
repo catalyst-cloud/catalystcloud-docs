@@ -173,34 +173,23 @@ that can be allocated for your projects. The public networks are:
 Command line client tools
 *************************
 
-Each OpenStack project provides a command-line client, which enables you to
-interact with the cloud APIs through easy-to-use commands.
+Orininally each OpenStack project provided a command-line client, which enabled
+you to interact with the cloud APIs through easy-to-use commands. In recent
+times thees commandline clients have undergone some changes and the
+older tools sets have been deprecated in favour of a newer common client.
 
 .. seealso::
 
   The OpenStack upstream documentation on how to install and use the command
-  line tools can be found at: http://docs.openstack.org/cli-reference/
+  line tools can be found at: http://docs.openstack.org/user-guide/common/cli_install_openstack_command_line_clients.html
 
 Installing the OpenStack clients
 ================================
 
-Ubuntu Linux
-------------
+To expand on what the official documentation covers we have compiled a set of
+examples, available here :ref:`cli-installation-examples` that cover some of
+the more common operating system releases.
 
-.. code-block:: bash
-
-  sudo apt-get update
-  sudo apt-get install python-ceilometerclient python-cinderclient python-glanceclient python-heatclient python-keystoneclient python-neutronclient python-novaclient python-swiftclient
-
-
-Redhat / CentOS / Fedora Linux
-------------------------------
-
-.. code-block:: bash
-
-  sudo yum install -y https://rdo.fedorapeople.org/rdo-release.rpm
-  sudo yum update -y
-  sudo yum install -y python-ceilometerclient python-cinderclient python-glanceclient python-heatclient python-keystoneclient python-neutronclient python-novaclient python-swiftclient
 
 Configuring the OpenStack client tools
 ======================================
