@@ -175,8 +175,9 @@ Command line client tools
 
 Orininally each OpenStack project provided a command-line client, which enabled
 you to interact with the cloud APIs through easy-to-use commands. In recent
-times thees commandline clients have undergone some changes and the
-older tools sets have been deprecated in favour of a newer common client.
+times these commandline clients have undergone some changes and the
+older tools sets have been deprecated in favour of a newer common client called
+python-openstackclient.
 
 .. seealso::
 
