@@ -34,9 +34,15 @@ install script in order to install Ansible.
  $ ./install-ansible.sh
  Installing stable version of Ansible
  ...
- $ source $CC_ANSIBLE_DIR/ansible/bin/activate
+ Ansible installed successfully!
+
+ To activate run the following command:
+
+ source /home/yourname/src/catalystcloud-ansible/ansible-venv/bin/activate
+
+ $ source $CC_ANSIBLE_DIR/ansible-venv/bin/activate
  $ ansible --version
- ansible 2.0.1.0
+ ansible 2.1.1.0
    config file = /etc/ansible/ansible.cfg
    configured module search path = Default w/o overrides
 
@@ -90,14 +96,9 @@ playbook to work. You can edit ``create-network.yml`` and update the
 ``ssh_public_key`` variable, or we can override the variable when we run the
 playbook as shown below:
 
-.. note::
-
- Bash does not perform tilde expansion within quotes so you need to provide the
- full path to your SSH public key in the ssh_public_key extra var below.
-
 .. code-block:: bash
 
- $ ansible-playbook --extra-vars 'ssh_public_key=/home/youruser/.ssh/id_rsa.pub' create-network.yml
+ $ ansible-playbook --extra-vars "ssh_public_key=$HOME/.ssh/id_rsa.pub" create-network.yml
 
  PLAY [Deploy a cloud instance in OpenStack] ************************************
 
