@@ -23,7 +23,8 @@ errors, such as:
 These errors can occur while installing packages or performing simple tasks on
 the operating system.
 
-If you have not defined the locale at boot time, you can still configure it later using the following procedure.
+If you have not defined the locale at boot time, you can still configure it
+later using the following procedure.
 
 First, ensure that your hostname is defined in ``/etc/hosts`` (sudo vi
 /etc/hosts). If you only have an entry for localhost, add another entry with
