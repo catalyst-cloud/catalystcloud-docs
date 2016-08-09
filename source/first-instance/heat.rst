@@ -1,3 +1,5 @@
+.. _launching-your-first-instance-using-heat:
+
 ****************************************
 Launching your first instance using Heat
 ****************************************
