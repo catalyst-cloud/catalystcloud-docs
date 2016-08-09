@@ -233,3 +233,70 @@ There are four different ways you can stop a compute instance:
   if they were running. When re-started it will resume its operation exactly
   where it was, but will take longer to start because it needs to read its
   memory state from disk.
+
+*********************************
+Affinity and Anti-affinity groups
+*********************************
+
+Affinity and anti-affinity groups allow you to ensure compute instances are
+placed on the same or different hypervisors (physical servers).
+
+Server affinity is useful when you want to ensure that the data transfer
+amongst compute instances is as fast as possible. On the other hand it may
+reduce the availability of your application (a single server going down affects
+all compute instances in the group) or increase CPU contention.
+
+Server anti-affinity is useful when you want to increase the availability of an
+application within a region. Compute instances in an anti-affinity group are
+placed on different hypervisors, ensuring that the failure of a server will not
+affect all your compute instances simultaneously.
+
+Managing server groups
+======================
+
+To create a server group:
+
+.. code-block:: bash
+
+  nova server-group-create $group-name $policy
+
+Where:
+
+    * `$group-name` is a name you choose (eg: app-servers)
+    * `$policy` is either `affinity` or `anti-affinity`
+
+To list server groups:
+
+.. code-block:: bash
+
+  nova server-group-list
+
+To delete a server group:
+
+.. code-block:: bash
+
+  nova server-group-delete $group-name
+
+Deleting a server group does not delete the compute instances that belong to
+the group.
+
+Add compute intance to server group
+===================================
+
+When launching a compute instance, you can pass a hint to our cloud scheduler
+to indicate it belongs to a server group. This is done using the `--hint
+group=$GROUP_ID` parameter, as indicated below.
+
+.. code-block:: bash
+
+  nova boot --flavor $CC_FLAVOR_ID --image $CC_IMAGE_ID --key-name
+  $KEY_NAME --security-groups $SEC_GROUP --nic net-id=$PRIVATE_NETWORK_ID
+  first-instance --hint group=$GROUP_ID
+
+.. note::
+
+  If you receive a `No valid host was found` error, it means that the cloud
+  scheduler could not find a suitable server to honour the policy of the server
+  group. For example, we may not have enough capacity on the same hypervisor to
+  place another instance in affinity, or enough hypervisors with sufficient
+  capacity to place instances in anti-affinity.
