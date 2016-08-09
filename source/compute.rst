@@ -254,16 +254,24 @@ affect all your compute instances simultaneously.
 Managing server groups
 ======================
 
+Via the APIs
+------------
+
+Please refer to the server groups API calls at http://developer.openstack.org/api-ref/compute/#server-groups-os-server-groups.
+
+Via the command line tools
+--------------------------
+
 To create a server group:
 
 .. code-block:: bash
 
-  nova server-group-create $group-name $policy
+  nova server-group-create $groupname $policy
 
 Where:
 
-    * `$group-name` is a name you choose (eg: app-servers)
-    * `$policy` is either `affinity` or `anti-affinity`
+* ``$groupname`` is a name you choose (eg: app-servers)
+* ``$policy`` is either ``affinity`` or ``anti-affinity``
 
 To list server groups:
 
@@ -275,17 +283,20 @@ To delete a server group:
 
 .. code-block:: bash
 
-  nova server-group-delete $group-name
+  nova server-group-delete $groupid
 
 Deleting a server group does not delete the compute instances that belong to
 the group.
 
-Add compute intance to server group
-===================================
+Add compute instance to server group
+====================================
+
+Via the command line tools
+--------------------------
 
 When launching a compute instance, you can pass a hint to our cloud scheduler
-to indicate it belongs to a server group. This is done using the `--hint
-group=$GROUP_ID` parameter, as indicated below.
+to indicate it belongs to a server group. This is done using the ``--hint
+group=$GROUP_ID`` parameter, as indicated below.
 
 .. code-block:: bash
 
@@ -300,3 +311,24 @@ group=$GROUP_ID` parameter, as indicated below.
   group. For example, we may not have enough capacity on the same hypervisor to
   place another instance in affinity, or enough hypervisors with sufficient
   capacity to place instances in anti-affinity.
+
+Via Ansible
+-----------
+
+The example below illustrates how the server group hint can be passed in an
+Ansible playbook using the os_server module:
+
+.. code-block:: yaml
+
+  - name: Create a compute instance on the Catalyst Cloud
+    os_server:
+      state: present
+      name: "{{ instance_name }}"
+      image: "{{ image }}"
+      key_name: "{{ keypair_name }}"
+      flavor: "{{ flavor }}"
+      nics:
+        - net-name: "{{ private_network_name }}"
+      security_groups: "default,{{ security_group_name }}"
+      scheduler_hints: "group=78f2aabc-e73a-4c72-88fd-79185797548c"
+
