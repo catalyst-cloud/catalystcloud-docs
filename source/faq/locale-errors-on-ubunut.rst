@@ -41,5 +41,6 @@ Use the commands below to configure and generate your locales. Replace
 .. code-block:: bash
 
   export LC_ALL="en_US.UTF-8"
+  sudo echo "LC_ALL=en_US.UTF-8" >> /etc/environment
   sudo dpkg-reconfigure locales
 
