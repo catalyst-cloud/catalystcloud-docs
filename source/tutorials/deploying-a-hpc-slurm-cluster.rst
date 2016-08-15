@@ -49,7 +49,7 @@ Install Python development tools:
 
 .. code-block:: bash
 
-  sudo apt-get install python-dev
+  sudo apt-get install python-dev python-virtualenv libffi-dev libssl-dev git
 
 Create a virtual environment to install the software:
 
@@ -61,9 +61,13 @@ Create a virtual environment to install the software:
 
 Install Elasticluster on the virtual environment:
 
+.. warning::
+
+  The latest elasticluster release (1.2.0) has broken dependencies and cannot be installed from PyPI. The command below will fetch and install a working version from the project's repository. Alternatively, you can omit the `@5ccccff` and try installing the latest development version.
+
 .. code-block:: bash
 
-  pip install elasticluster pyopenssl ndg-httpsclient pyasn1 ecdsa
+  pip install git+https://github.com/gc3-uzh-ch/elasticluster.git@5ccccff pyopenssl ndg-httpsclient pyasn1 ecdsa
 
 Install the Catalyst Cloud OpenStack client tools:
 
