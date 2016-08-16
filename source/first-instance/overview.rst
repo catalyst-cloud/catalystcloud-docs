@@ -4,7 +4,7 @@
 Launching your first instance - Overview
 ****************************************
 
-This section will demonstrate how to build an Ubuntu 14.04 server in an empty
+This section will demonstrate how to build an Ubuntu 14.04 server in a new
 OpenStack tenant. After you have completed the steps you will be able to log
 on to the server via SSH from anywhere on the internet using an SSH key.
 
@@ -12,7 +12,18 @@ This section assumes that you have already setup a Catalyst Cloud account and
 have been assigned a tenant and a user in that tenant who has permissions to
 create the required resources.
 
-We will document the steps required to get an instance setup, the steps are:
+When a new tenancy is created it will have a network, subnet and
+router built by default.  For completeness the process below includes the steps
+required to do this in the case that the default setup has been deleted or an
+additiional network is required.
+
+.. note::
+
+    Steps 1 & 2 below can be skipped on a new tenancy where the default
+    networking is still in place. The creation of your first instance
+    can proceed from step 3.
+
+Here are the steps for creating your first cloud instance.
 
 1. Create a Network and Subnet
 2. Create a Router
