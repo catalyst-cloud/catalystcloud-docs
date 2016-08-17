@@ -2,6 +2,47 @@
 Network service
 ###############
 
+The network service allows you to create your own private networks, subnets,
+routers, security groups and site-to-site VPNs.
+
+
+***************
+Public networks
+***************
+
+Catalyst operates a public network in each region. These public networks
+provide you with connectivity to the Internet and allow you to allocate
+floating IPs (public IPs that can be associated to your compute instances) from
+a pool managed by Catalyst.
+
+Our public networks are listed on the table below:
+
++----------+--------------------------------------+
+|  Region  | ID                                   |
++==========+======================================+
+| nz-por-1 | 849ab1e9-7ac5-4618-8801-e6176fbbcf30 |
++----------+--------------------------------------+
+| nz_wlg_2 | e0ba6b88-5360-492c-9c3d-119948356fd3 |
++----------+--------------------------------------+
+
+
+***********
+DNS servers
+***********
+
+Catalyst operate a number of recursive DNS servers in each cloud region for use
+by Catalyst Cloud instances, free of charge. They are:
+
++----------+------------------------------------------------+
+|  Region  | DNS Servers                                    |
++==========+================================================+
+| nz-por-1 | 202.78.247.197, 202.78.247.198, 202.78.247.199 |
++----------+------------------------------------------------+
+| nz_wlg_2 | 202.78.240.213, 202.78.240.214, 202.78.240.215 |
++----------+------------------------------------------------+
+
+.. _security-groups:
+
 ***************
 Security groups
 ***************
@@ -33,6 +74,7 @@ security groups are all "allow" rules.
   Failing to set up the appropriate security group rules is a common mistake
   that prevents users from reaching their compute instances, or compute
   instances to communicate with each other.
+
 
 ************************
 Virtual Private Networks
