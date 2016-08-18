@@ -17,30 +17,29 @@ resources is important.
 .. code-block:: bash
 
  # delete the instances
- $ nova delete first-instance
+ $ openstack server delete first-instance
 
  # delete instance ports
- $ for port_id in $(neutron port-list | grep 10.0.0 | grep -v '10.0.0.1"' | awk '{ print $2 }'); do neutron port-delete $port_id; done
+ $ for port_id in $(openstack port list | grep 10.0.0 | grep -v "10.0.0.1'" | awk '{ print $2 }'); do os port delete $port_id; done
 
  # delete router interface
- $ neutron router-interface-delete border-router $(neutron subnet-list | grep private-subnet | awk '{ print $2 }')
- Removed interface from router border-router.
+ $ openstack router remove port border-router $( os port list | grep "10.0.0.1'" | awk '{print $2}' )
 
  # delete router
- $ neutron router-delete border-router
+ $ openstack router delete border-router
  Deleted router: border-router
 
  # delete subnet
- $ neutron subnet-delete private-subnet
+ $ openstack subnet delete private-subnet
  Deleted subnet: private-subnet
 
  # delete network
- $ neutron net-delete private-net
+ $ openstack network delete private-net
  Deleted network: private-net
 
  # delete security group
- $ neutron security-group-delete first-instance-sg
+ $ openstack security group delete first-instance-sg
  Deleted security_group: first-instance-sg
 
  # delete ssh key
- $ nova keypair-delete first-instance-key
+ $ openstack keypair delete first-instance-key
