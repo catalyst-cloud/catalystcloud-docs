@@ -3,10 +3,7 @@ Launching your first instance from the command line
 ***************************************************
 
 This section assumes you have installed the OpenStack command line tools and
-sourced an openrc file, as explained in :ref:`command-line-tools`.
-
-If you would prefer to use the older individual project based commandline tools
-then please refer to this page instead :ref:`commandline-tools-deprecated`.
+sourced an openrc file, as explained in :ref:`command-line-interface`.
 
 .. note::
 
@@ -332,7 +329,7 @@ previous steps. Ensure you have appropriate values set for ``CC_FLAVOR_ID``,
  $ openstack server create --flavor $CC_FLAVOR_ID --image $CC_IMAGE_ID --key-name first-instance-key --security-group default --security-group first-instance-sg --nic net-id=$CC_PRIVATE_NETWORK_ID  first-instance
 
 After issuing that command, details about the new Instance, including its id
-will be provided. ::
+will be provided.
 
 .. code-block:: bash
 
@@ -354,7 +351,7 @@ will be provided. ::
   | created                              | 2016-08-17T23:35:32Z                                       |
   | flavor                               | c1.c1r1 (28153197-6690-4485-9dbc-fc24489b0683)             |
   | hostId                               |                                                            |
-  | id                                   | <INSTANCE_ID>                                             |
+  | id                                   | <INSTANCE_ID>                                              |
   | image                                | ubuntu-14.04-x86_64 (cab9f3f4-a3a5-488b-885e-892873c15f53) |
   | key_name                             | glyndavies                                                 |
   | name                                 | first-instance                                             |
@@ -418,22 +415,23 @@ and request a new floating IP.
 
 .. code-block:: bash
 
- $ neutron floatingip-create $CC_PUBLIC_NETWORK_ID
- Created a new floatingip:
- +---------------------+----------------------------+
- | Field               | Value                      |
- +---------------------+----------------------------+
- | fixed_ip_address    |                            |
- | floating_ip_address | <PUBLIC_IP>                |
- | floating_network_id | <PUBLIC_NETWORK_ID>        |
- | id                  | <FLOATING_IP_ID>           |
- | port_id             |                            |
- | router_id           |                            |
- | status              | DOWN                       |
- | tenant_id           | <TENANT_ID>                |
- +---------------------+----------------------------+
- $ export CC_FLOATING_IP_ID=$( neutron floatingip-list -c status -c floating_ip_address -c id | grep DOWN | head -1 | awk '{ print $6 }' )
- $ export CC_PUBLIC_IP=$( neutron floatingip-list -c floating_ip_address -c id | grep $CC_FLOATING_IP_ID | awk '{ print $2 }' )
+  $ openstack ip floating create $CC_PUBLIC_NETWORK_ID
+  +---------------------+--------------------------------------+
+  | Field               | Value                                |
+  +---------------------+--------------------------------------+
+  | fixed_ip_address    | None                                 |
+  | floating_ip_address | <PUBLIC_IP>                          |
+  | floating_network_id | <PUBLIC_NETWORK_ID>                  |
+  | headers             |                                      |
+  | id                  | <FLOATING_IP_ID>                     |
+  | port_id             | None                                 |
+  | project_id          | <PROJECT_ID>                         |
+  | router_id           | None                                 |
+  | status              | DOWN                                 |
+  +---------------------+--------------------------------------+
+
+ $ export CC_FLOATING_IP_ID=$( openstack ip floating list | grep None | awk '{ print $2 }' )
+ $ export CC_PUBLIC_IP=$( openstack ip floating list | grep $CC_FLOATING_IP_ID | awk '{ print $4 }' )
 
 Now, get the port id of the instance's interface and associate the floating IP
 with it.
