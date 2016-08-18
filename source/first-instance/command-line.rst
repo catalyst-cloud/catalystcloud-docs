@@ -446,8 +446,8 @@ with it.
  +------------+---------------+----------------------+--------------+-------------------+
  $ export CC_PORT_ID=$( nova interface-list first-instance | grep $CC_PRIVATE_NETWORK_ID | awk '{ print $4 }' )
 
- $ neutron floatingip-associate $CC_FLOATING_IP_ID $CC_PORT_ID
- Associated floating IP <FLOATING_IP_ID>
+ $ openstack ip floating add $CC_FLOATING_IP_ID first-instance
+
 
 Connect to the new Instance
 ===========================
