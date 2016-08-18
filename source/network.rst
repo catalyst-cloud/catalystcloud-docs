@@ -30,7 +30,7 @@ Our public networks are listed on the table below:
 DNS servers
 ***********
 
-Catalyst operate a number of recursive DNS servers in each cloud region for use
+Catalyst operates a number of recursive DNS servers in each cloud region for use
 by Catalyst Cloud instances, free of charge. They are:
 
 +----------+------------------------------------------------+
