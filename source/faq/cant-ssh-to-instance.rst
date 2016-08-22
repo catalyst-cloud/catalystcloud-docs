@@ -11,7 +11,7 @@ client like this:
 
 .. note::
 
- The nova command line client has an SSH option, this is not a recommended method for logging in to an instance. This command currently has a bug where it cannot find the public address for an instances that does have a valid floating IP.
+ The openstack command line client has an SSH option, this is not a recommended method for logging in to an instance. This command currently has a bug where it cannot find the public address for an instances that does have a valid floating IP.
 
 If you cannot SSH to an instance there are two common and one less common
 root cause, these are:
@@ -94,7 +94,7 @@ Create a new security group with this command:
 
 .. code-block:: bash
 
- $ nova secgroup-create <name> <description>
+ $ openstack security group create <name> <description>
 
 For example, create a new security group called test-security-group:
 
