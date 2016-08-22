@@ -34,44 +34,49 @@ Attaching an empty volume
 A common use case for volumes is to provide extra disk space for an instance.
 This section demonstrates how to do this on an existing Ubuntu 16.04 instance.
 
-Use the ``nova volume-create`` command to create a new volume:
+Use the ``openstack volume create`` command to create a new volume:
 
 .. code-block:: bash
 
- $ nova volume-create --display-name 'extra-disk' --display-description 'Extra diskspace for our instance' 50
- +---------------------+--------------------------------------+
- | Property            | Value                                |
- +---------------------+--------------------------------------+
- | attachments         | []                                   |
- | availability_zone   | nz-por-1a                            |
- | bootable            | false                                |
- | created_at          | 2016-05-04T04:49:07.633072           |
- | display_description | Extra diskspace for our instance     |
- | display_name        | extra-disk                           |
- | encrypted           | False                                |
- | id                  | 4c52fa4b-c1a0-493f-9672-a06feda81d7f |
- | metadata            | {}                                   |
- | multiattach         | false                                |
- | size                | 50                                   |
- | snapshot_id         | -                                    |
- | source_volid        | -                                    |
- | status              | creating                             |
- | volume_type         | b1.standard                          |
- +---------------------+--------------------------------------+
+  $ openstack volume create --description 'Extra diskspace for our instance' --size 50 extra-disk
+  +---------------------+--------------------------------------+
+  | Field               | Value                                |
+  +---------------------+--------------------------------------+
+  | attachments         | []                                   |
+  | availability_zone   | nz-por-1a                            |
+  | bootable            | false                                |
+  | consistencygroup_id | None                                 |
+  | created_at          | 2016-08-18T23:08:40.021641           |
+  | description         | Extra diskspace for our instance     |
+  | encrypted           | False                                |
+  | id                  | 7e94a2f6-b4d2-47f1-83f7-a200e963404a |
+  | multiattach         | False                                |
+  | name                | extra-disk                           |
+  | properties          |                                      |
+  | replication_status  | disabled                             |
+  | size                | 50                                   |
+  | snapshot_id         | None                                 |
+  | source_volid        | None                                 |
+  | status              | creating                             |
+  | type                | b1.standard                          |
+  | updated_at          | None                                 |
+  | user_id             | 4b934c44d8b24e60acad9609b641bee3     |
+  +---------------------+--------------------------------------+
 
 Now use the ``nova volume-attach`` command to attach the volume to an instance:
 
 .. code-block:: bash
 
- $ nova volume-attach example-instance ec1a31ad-1a20-4f60-bef2-69b35d67483f
- +----------+--------------------------------------+
- | Property | Value                                |
- +----------+--------------------------------------+
- | device   | /dev/vdb                             |
- | id       | ec1a31ad-1a20-4f60-bef2-69b35d67483f |
- | serverId | 2586b9ce-cbe3-481d-9f43-b93df21e525e |
- | volumeId | ec1a31ad-1a20-4f60-bef2-69b35d67483f |
- +----------+--------------------------------------+
+  $ export CC_VOLUME_ID=$( openstack volume list | grep extra-disk | awk '{ print $2 }' )
+  $ nova volume-attach example-instance $CC_VOLUME_ID
+  +----------+--------------------------------------+
+  | Property | Value                                |
+  +----------+--------------------------------------+
+  | device   | /dev/vdb                             |
+  | id       | ec1a31ad-1a20-4f60-bef2-69b35d67483f |
+  | serverId | 2586b9ce-cbe3-481d-9f43-b93df21e525e |
+  | volumeId | ec1a31ad-1a20-4f60-bef2-69b35d67483f |
+  +----------+--------------------------------------+
 
 .. note::
 
