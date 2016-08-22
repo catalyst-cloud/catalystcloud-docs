@@ -20,7 +20,7 @@ way of handling the early initialisation of a cloud instance.
 
 When you launch a compute instance on the Catalyst Cloud, you can pass
 initialisation configuration to cloud-init via "user-data" (either using the
-``--user-data`` parameter of ``nova boot``, or as post-creation customisation
+``--user-data`` parameter of ``openstack server create``, or as post-creation customisation
 script via the web dashboard).
 
 In the following sections we provide examples that illustrate how to perform
