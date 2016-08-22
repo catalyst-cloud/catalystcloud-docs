@@ -48,7 +48,7 @@ You can check your floating IP address with the following command:
 
 .. code-block:: bash
 
- $ nova show example-instance | grep private-net
+ $ openstack server show example-instance | grep private-net
  | private-net network                  | 10.0.0.10, 150.242.40.180                                  |
 
 You can check you have a security group rule for ssh access with the following
@@ -56,7 +56,7 @@ command:
 
 .. code-block:: bash
 
- $ nova secgroup-list-rules example-instance-sg
+ $ openstack security group rule list example-instance-sg
  +-------------+-----------+---------+------------+--------------+
  | IP Protocol | From Port | To Port | IP Range   | Source Group |
  +-------------+-----------+---------+------------+--------------+
@@ -68,7 +68,7 @@ following command:
 
 .. code-block:: bash
 
- $ nova show example-instance | grep security_groups
+ $ openstack server show example-instance | grep security_groups
  | security_groups                      | example-instance-sg, default
 
 You can check what your public source IP address is using one of the following
@@ -100,31 +100,31 @@ For example, create a new security group called test-security-group:
 
 .. code-block:: bash
 
- $ nova secgroup-create test-security-group "security group for test instance"
+ $ openstack security group create test-security-group --description "security group for test instance"
 
 Add a new rule to the security group to allow access with the following:
 
 .. code-block:: bash
 
- $ nova secgroup-add-rule <secgroup> <ip-proto> <from-port> <to-port> <cidr>
+ $ openstack security group rule create --ingress --protocol <ip-proto> --dst-port <to-port> --src-ip <cidr> <secgroup>
 
 For example allow SSH access from 1.2.3.4
 
 .. code-block:: bash
 
- $ nova secgroup-add-rule test-security-group tcp 22 22 1.2.3.4/32
+ $ openstack security group rule create --ingress --protocol tcp --dst-port 22 --src-ip  1.2.3.4/32 test-security-group
 
 Finally, associate the new security group with the instance:
 
 .. code-block:: bash
 
- $ nova add-secgroup <server> <securitygroup>
+ $ server add security group <server> <securitygroup>
 
 For example associate test-security-group with the instance first-instance
 
 .. code-block:: bash
 
- $ nova add-secgroup first-instance test-security-group
+ $ server add security group first-instance test-security-group
 
 Now test your access, you should be able to connect to your instance.
 
@@ -242,8 +242,8 @@ retrieve it using one of the following commands:
 
 .. code-block:: bash
 
- $ nova keypair-show keyname | grep Public
- Public key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCDqJg/ijZsMk0AW33YOtGEmxatyakgEqOCE72hDy/MLyEiRPuInYPTJH9WhfjFQA8JgV/Wwt7iJqvosWWN65Sal8Vdqux2tVQtUHNTyllbh0JhlgNuRvQuPSLFN7IyRTlFSyUBztvDMLCBfR8785f8qwI4lNQ1LQyUWqAfXJ8sxYV0RO1puG3dIq6ME0MseQTxXB+G/ceiW17isUQ7zCK71KDECOhPF76sUgJaS/xBrKUFAwaXnHUmLxs7vLCChag0EGaMAo3yAAEy+Ptpfser+tdfK2xf54MvH4ebgQU+yZwPI8DpidbLmcuIOGimzqCG/MQUrCgY6jwT9CRlBsR Generated-by-Nova
+ $ openstack keypair show --public-key keyname
+ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCXX4g2e95XRH42zNN0rU+82e4UuND/5qjjMWeB/U7wm+kqPHHQpT98UJmDWMsyiJ93fpC+0vd9Hu2DAkycPhd0Tp4y8g/MagwaHj+hJrvUeCXnfHwHgPwcHQR3BoIXGBl0h/+BRELRBfyQAoN7+InlFlqp3lnhNQm9X6CKlfMNo7x1T0VWRUh64WdWrcjQOVU9EFFIL8xCHut7/eZY5l+X7NxIK8rALw+6Lo7AGAaWVo3Msi0DmE6y0y48OzGmOrXbZWUyS3mX7Tg0RsA9ynm2cJ2VM2GWpc7AMdxCv7VZu0J445MDj2ueJna4r8+qq4y6nJZ2JPJG3Su+51Vp4U93FtA0a90smTOGccOx6OMCly19sGEmQhUrUEevx0lrRHoDujZ+P7JD8mVR6cog/1n+OBqUMAa8dHgIGg0/KgcZ5ilDeyeqgELAcZoyRQLXu7eiQyH/hEc/Hh9xpXWwAK4kYe0HNXlJ0pB8j3aaY9Xrkk1s7xbCgZuoFZ2q1S+rEVMh9k1cflNurYwT8V5Iv9YuvX/rK7bSpmnFN6TtCEvJSBoqF3YXcxLjMCC7JMmhtXlNhWaethIdGz1iatjrVmKKe+r43N7IGBQX2iThi9sg6Uv6jeayjx5sUlPfimzFjnVB2/g/WKpiEFzA+nsfY8mKQzeLmRuuVQqlryWmCY0FIQ==
  $ ssh-keygen -f ~/.ssh/keyname.pem -y
  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDCDqJg/ijZsMk0AW33YOtGEmxatyakgEqOCE72hDy/MLyEiRPuInYPTJH9WhfjFQA8JgV/Wwt7iJqvosWWN65Sal8Vdqux2tVQtUHNTyllbh0JhlgNuRvQuPSLFN7IyRTlFSyUBztvDMLCBfR8785f8qwI4lNQ1LQyUWqAfXJ8sxYV0RO1puG3dIq6ME0MseQTxXB+G/ceiW17isUQ7zCK71KDECOhPF76sUgJaS/xBrKUFAwaXnHUmLxs7vLCChag0EGaMAo3yAAEy+Ptpfser+tdfK2xf54MvH4ebgQU+yZwPI8DpidbLmcuIOGimzqCG/MQUrCgY6jwT9CRlBsR
 
@@ -287,7 +287,7 @@ command:
 
 .. code-block:: bash
 
- $ nova keypair-show keyname | grep fingerprint
+ $  openstack keypair show testkey | grep fingerprint
   | fingerprint | 34:de:c7:b7:f1:26:7f:88:d5:e7:10:6c:ab:af:a2:03 |
 
 To check the key associated with an instance you can issue the following
@@ -295,7 +295,7 @@ command:
 
 .. code-block:: bash
 
- $ nova show example-instance | grep key_name
+ $ openstack server show first-instance | grep key_name
  | key_name                             | keyname                                         |
 
 To check the key with the correct fingerprint was correctly injected into the
@@ -303,7 +303,7 @@ correct users authorized keys issue the following command:
 
 .. code-block:: bash
 
- $ nova console-log first-instance | grep 'Authorized keys' -A 5
+ $ openstack console log show first-instance | grep 'Authorized keys' -A 5
  ci-info: ++++++Authorized keys from /home/ubuntu/.ssh/authorized_keys for user ubuntu++++++++++
  ci-info: +---------+-------------------------------------------------+---------+--------------+
  ci-info: | Keytype |                Fingerprint (md5)                | Options |  Comment     |
@@ -322,7 +322,7 @@ an issue with your instance. You should check that the instance is running:
 
 .. code-block:: bash
 
- $ nova show instance-name | grep status
+ $ openstack server show instance-name | grep status
  | status                               | SUSPENDED
 
 The error can be triggered when an instance state is not ``ACTIVE``, in this
@@ -348,7 +348,7 @@ experiencing:
 
 .. code-block:: bash
 
- $ nova console-log --length 6 broken-dns-instance
+ $ openstack console log show broken-dns-instance --lines 6
  ci-info: +-------+-------------+-----------+---------------+-----------+-------+
  ci-info: | Route | Destination |  Gateway  |    Genmask    | Interface | Flags |
  ci-info: +-------+-------------+-----------+---------------+-----------+-------+
