@@ -114,15 +114,15 @@ You can use the following commands to find these:
 
 .. code-block:: bash
 
- $ neutron router-list
- $ neutron subnet-list
+ $ openstack router list
+ $ openstack subnet list
 
 To find the Tenant ID, Router ID and Router IP Address you can issue the
 following command using the name of the router you found previously:
 
 .. code-block:: bash
 
- $ neutron router-show example-router
+ $ openstack router show example-router
  +-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
  | Field                 | Value                                                                                                                                                                                      |
  +-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -143,7 +143,7 @@ the subnet name you found previously:
 
 .. code-block:: bash
 
- $ neutron subnet-show example-subnet
+ $ openstack subnet show example-subnet
  +-------------------+-----------------------------------------------+
  | Field             | Value                                         |
  +-------------------+-----------------------------------------------+
@@ -161,7 +161,8 @@ the subnet name you found previously:
  | ipv6_ra_mode      |                                               |
  | name              | example-subnet                                |
  | network_id        | 3599a1dc-e712-4b4c-9208-76566b76a118          |
- | tenant_id         | 0cb6b9b744594a619b0b7340f424858b              |
+ | project_id        | 3d5d40b4a6904e6db4dc5321f53d4f39              |
+ | subnetpool_id     | None                                          |
  +-------------------+-----------------------------------------------+
 
 If you are creating a VPN that connects your projects between Catalyst Cloud
