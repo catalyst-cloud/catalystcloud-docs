@@ -92,7 +92,7 @@ Choosing a Flavor
 =================
 
 The flavor of an instance is the disk, CPU, and memory specifications of an
-instance.  Use 'nova flavor-list' to get a list.  Catalyst flavors are named
+instance.  Use 'openstack flavor list' to get a list.  Catalyst flavors are named
 'cX.cY.cZ', where X is the 'compute generation', Y is the number of vCPUs, and
 Z is the number of gigabytes of memory. We will export an environment variable
 with the flavour id for later use.
@@ -318,7 +318,7 @@ public IP address:
 Booting an Instance
 ===================
 
-Use the ``nova boot`` command and supply the information we gathered in
+Use the ``openstack server create`` command and supply the information we gathered in
 previous steps. Ensure you have appropriate values set for ``CC_FLAVOR_ID``,
 ``CC_IMAGE_ID`` and ``CC_PRIVATE_NETWORK_ID``.
 
