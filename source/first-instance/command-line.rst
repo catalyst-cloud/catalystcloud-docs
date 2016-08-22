@@ -410,8 +410,8 @@ Allocate a Floating IP
 ======================
 
 In order to connect to our instance, we will need to allocate a floating IP to
-the instance. We will use the id of public-net (found via 'neutron net-list')
-and request a new floating IP.
+the instance. We will use the id of public-net (found via 'openstack network
+list') and request a new floating IP.
 
 .. code-block:: bash
 
