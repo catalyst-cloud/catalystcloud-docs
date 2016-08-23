@@ -311,13 +311,3 @@ example using the nova command line client:
 An Ansible playbook for creating the instances used in this example is
 available at
 https://raw.githubusercontent.com/catalyst/catalystcloud-ansible/master/example-playbooks/two-instances-with-sequence.yml
-
-Instance detection
-==================
-
-There are some quirks around which instances in an OpenStack project the
-dynamic inventory script will report:
-
-* Instances that do not have floating IPs are not included in the inventory
-* Instances that do not have SSH access due to security group rules are
-  included in the inventory
