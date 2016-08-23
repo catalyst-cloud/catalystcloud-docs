@@ -205,8 +205,7 @@ You can list the resources that belong to a stack with the command below:
 
 .. code-block:: bash
 
-  openstack stack resource list  mystack
-  
+  $ openstack stack resource list mystack
   +---------------+--------------------------------------+------------------+-----------------+----------------------+
   | resource_name | physical_resource_id                 | resource_type    | resource_status | updated_time         |
   +---------------+--------------------------------------+------------------+-----------------+----------------------+

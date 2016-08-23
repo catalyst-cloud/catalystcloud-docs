@@ -78,8 +78,7 @@ following command:
 .. code-block:: bash
 
  $ openstack router show border-router | grep external_gateway_info
-| external_gateway_info | {"network_id": "849ab1e9-7ac5-4618-8801-e6176fbbcf30", "enable_snat": true, "external_fixed_ips": [{"subnet_id": "aef23c7c-6c53-4157-8350-d6879c43346c", "ip_address": "150.242.40.120"}]} |
-
+ | external_gateway_info | {"network_id": "849ab1e9-7ac5-4618-8801-e6176fbbcf30", "enable_snat": true, "external_fixed_ips": [{"subnet_id": "aef23c7c-6c53-4157-8350-d6879c43346c", "ip_address": "150.242.40.120"}]} |
 
 The address is the value associated with ``ip_address`` in
 ``external_fixed_ips``.

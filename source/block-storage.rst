@@ -63,7 +63,8 @@ Use the ``openstack volume create`` command to create a new volume:
   | user_id             | 4b934c44d8b24e60acad9609b641bee3     |
   +---------------------+--------------------------------------+
 
-Now use the ``openstack server add volume`` command to attach the volume to an instance:
+Now use the ``openstack server add volume`` command to attach the volume to an
+instance:
 
 .. code-block:: bash
 
