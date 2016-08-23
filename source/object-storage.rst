@@ -87,57 +87,70 @@ see :ref:`command-line-tools` for full details.
 
 To view the containers currently in existence in your project:
 
-.. code::
+.. code-block:: bash
 
-    $ swift list
+    $ openstack container list
     mycontainer-1
     mycontainer-2
 
-To view the objeects stored within a container:
-**swift list <container_name>**
+To view the objects stored within a container:
+**openstack object list <container_name>**
 
-.. code::
+.. code-block:: bash
 
-    $ swift list mycontainer-1
-    file-1.txt
-    image-1.png
+    $ openstack object list mycontainer-1
+    +-------------+
+    | Name        |
+    +-------------+
+    | file-1.txt  |
+    | image-1.png |
+    +-------------+
 
-To create a new container: **swift post <container_name>**
+To create a new container: **openstack container create <container_name>**
 
-.. code::
+.. code-block:: bash
 
-    $ swift post mynewcontainer
+    $ openstack container create mynewcontainer
+    +---------+----------------+----------------------------------------------------+
+    | account | container      | x-trans-id                                         |
+    +---------+----------------+----------------------------------------------------+
+    | v1      | mynewcontainer | tx000000000000000146531-0057bb8fc9-2836950-default |
+    +---------+----------------+----------------------------------------------------+
+
 
 To add a new object to a container:
-**swift upload <container_name> <file_name>**
+**openstack object create <container_name> <file_name>**
 
-.. code::
+.. code-block:: bash
 
-    $ swift upload mynewcontainer hello.txt
-    hello.txt
+    $ openstack object create mynewcontainer hello.txt
+    +-----------+----------------+----------------------------------+
+    | object    | container      | etag                             |
+    +-----------+----------------+----------------------------------+
+    | hello.txt | mynewcontainer | d41d8cd98f00b204e9800998ecf8427e |
+    +-----------+----------------+----------------------------------+
 
-To delete an object: **swift delete <container> <object>**
 
-.. code::
+To delete an object: **openstack object delete <container> <object>**
 
-    $ swift delete mynewcontainer hello.txt
-    hello.txt
-    mynewcontainer
+.. code-block:: bash
 
-To delete a container: **swift delete <container>**
+    $ openstack object delete mynewcontainer hello.txt
 
-.. code::
-
-    $ swift delete mycontainer-1
-    file-1.txt
-    image-1.png
-    mycontainer-1
+To delete a container: **openstack container delete <container>**
 
 .. note::
 
-    Deleting a container will also delete all of the objects within the
-    container
+  this will only work if the container is empty.
 
+.. code-block:: bash
+
+    $ openstack container delete mycontainer-1
+
+To delete a container and all of the objects within the container:
+**openstack container delete --recursive <container>**
+
+  $ openstack container delete --recursive mycontainer-1
 
 **********
 Using cURL
@@ -150,7 +163,7 @@ This can be done by sourcing a valid RC file ( see :ref:`command-line-tools` )
 retrieving the account specific detail via the swift commandline tools then
 exporting the required variables as shown below.
 
-.. code::
+.. code-block:: bash
 
     $ source openstack-openrc.sh
 
@@ -177,14 +190,14 @@ exporting the required variables as shown below.
 Then run the following command to get a list of all available containers for
 that tenant
 
-.. code::
+.. code-block:: bash
 
     curl -i -X GET -H "X-Auth-Token: $token" $storageURL
 
 You can optionally specify alternative output formats; for example to use XML
 or JSON using the following syntax
 
-.. code::
+.. code-block:: bash
 
     curl -i -X GET -H "X-Auth-Token: $token" $storageURL?format=xml
     curl -i -X GET -H "X-Auth-Token: $token" $storageURL?format=json
@@ -192,7 +205,7 @@ or JSON using the following syntax
 To view the objects within a container simply append the container name to
 the cURL request
 
-.. code::
+.. code-block:: bash
 
     curl -i -X GET -H "X-Auth-Token: $token" $storageURL/mycontainer
 
