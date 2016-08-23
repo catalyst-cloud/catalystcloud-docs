@@ -318,9 +318,9 @@ public IP address:
 Booting an Instance
 ===================
 
-Use the ``openstack server create`` command and supply the information we gathered in
-previous steps. Ensure you have appropriate values set for ``CC_FLAVOR_ID``,
-``CC_IMAGE_ID`` and ``CC_PRIVATE_NETWORK_ID``.
+Use the ``openstack server create`` command and supply the information we
+gathered in previous steps. Ensure you have appropriate values set for
+``CC_FLAVOR_ID``, ``CC_IMAGE_ID`` and ``CC_PRIVATE_NETWORK_ID``.
 
 .. code-block:: bash
 
