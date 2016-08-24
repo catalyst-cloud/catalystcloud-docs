@@ -37,9 +37,9 @@ find these values we need to run the following OpenStack commands.
 
 .. code-block:: bash
 
-  $ neutron net-list -F id -F name
+  $ openstack network list -c ID -c Name
   +--------------------------------------+------------+
-  | id                                   | name       |
+  | ID                                   | Name       |
   +--------------------------------------+------------+
   | 74be55e6-b303-473c-ac1a-185c39b6f7b3 | mgmt-net   |
   | 849ab1e9-7ac5-4618-8801-e6176fcccf30 | public-net |
@@ -51,9 +51,9 @@ create a port and assign a floating IP to the server.
 
 .. code-block:: bash
 
-  $ neutron subnet-list -F id -F name
+  $ openstack subnet list -c ID -c Name
   +--------------------------------------+-------------+
-  | id                                   | name        |
+  | ID                                   | Name        |
   +--------------------------------------+-------------+
   | 279a71ca-6772-4235-bbb4-c0ddf2029f67 | front-end   |
   | 450cb9f7-b297-40fe-a855-fc187bb27b2a | mgmt-subnet |
@@ -225,13 +225,13 @@ server called server1 in a stack named puppet-slave-stack
 
 .. code-block:: bash
 
-  heat stack-create -f /home/user1/cloud/puppet_slave.yaml puppet-slave-stack
+  openstack stack create -t /home/user1/cloud/puppet_slave.yaml puppet-slave-stack
 
 Here's how to check the progress of your deployment
 
 .. code-block:: bash
 
-  nova console-log server1
+  openstack console log show server1
 
 Final Note
 ==========
