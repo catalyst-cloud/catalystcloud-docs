@@ -83,7 +83,7 @@ single instance on the Catalyst Cloud using the Heat orchestration service.
     image:
       type: string
       description: Image ID or image name to use for the server
-      default: cirros-0.3.1-x86_64
+      default: atomic-7-x86_64
       constraints:
         - custom_constraint: glance.image
 
@@ -109,7 +109,7 @@ used to validate a HOT template:
 
 .. code-block:: bash
 
-  heat template-validate -f template-file.hot
+   openstack orchestration template validate-f template-file.hot
 
 This command will return the yaml if it validates and will return an error with
 a message if it is invalid.
@@ -130,17 +130,24 @@ with a semicolon.
 
 .. code-block:: bash
 
-  heat stack-create mystack --template-file test.hot --parameters "key_name=mykey"
+  openstack stack create -t test.hot --parameter "key_name=mykey" mystack
 
 Heat will return a confirmation message indicating the stack is being created:
 
 .. code-block:: text
 
-  +--------------------------------------+------------+--------------------+----------------------+
-  | id                                   | stack_name | stack_status       | creation_time        |
-  +--------------------------------------+------------+--------------------+----------------------+
-  | 74236185-7180-40f7-80e2-395229f0c2e9 | mystack    | CREATE_IN_PROGRESS | 2015-04-16T05:54:06Z |
-  +--------------------------------------+------------+--------------------+----------------------+
+  +---------------------+-------------------------------------------------+
+  | Field               | Value                                           |
+  +---------------------+-------------------------------------------------+
+  | id                  | f2975b89-4a34-4333-90e3-3712636f6d1b            |
+  | stack_name          | mystack                                         |
+  | description         | Deploying a single compute instance using Heat. |
+  |                     |                                                 |
+  | creation_time       | 2016-08-21T23:37:39Z                            |
+  | updated_time        | None                                            |
+  | stack_status        | CREATE_IN_PROGRESS                              |
+  | stack_status_reason | Stack CREATE started                            |
+  +---------------------+-------------------------------------------------+
 
 Showing information about a stack
 ---------------------------------
@@ -149,47 +156,47 @@ To obtain information about a running stack:
 
 .. code-block:: bash
 
-  heat stack-show mystack
+  openstack stack show mystack
 
 Heat will return the following information about the stack:
 
 .. code-block:: text
 
-  +----------------------+-----------------------------------------------------------+
-  | Property             | Value                                                     |
-  +----------------------+-----------------------------------------------------------+
-  | capabilities         | []                                                        |
-  | creation_time        | 2015-04-16T05:58:49Z                                      |
-  | description          | Deploying a single compute instance using Heat.           |
-  | disable_rollback     | True                                                      |
-  | id                   | 1f913699-010e-4564-ba08-e57dc5e09bca                      |
-  | links                | https://api.cloud.catalyst.net.nz:8004/v1/...             |
-  | notification_topics  | []                                                        |
-  | outputs              | [                                                         |
-  |                      |   {                                                       |
-  |                      |     "output_value": {                                     |
-  |                      |       "frontend": [                                       |
-  |                      |         "192.168.0.13"                                    |
-  |                      |       ]                                                   |
-  |                      |     },                                                    |
-  |                      |     "description": "The networks of the deployed server", |
-  |                      |     "output_key": "server_networks"                       |
-  |                      |   }                                                       |
-  |                      | ]                                                         |
-  | parameters           | {                                                         |
-  |                      |   "OS::stack_name": "mystack",                            |
-  |                      |   "key_name": "bruno",                                    |
-  |                      |   "flavor": "c1.c1r1",                                    |
-  |                      |   "image": "cirros-0.3.1-x86_64",                         |
-  |                      |   "OS::stack_id": "1f913699-010e-4564-ba08-e57dc5e09bca"  |
-  |                      | }                                                         |
-  | stack_name           | mystack                                                   |
-  | stack_status         | CREATE_COMPLETE                                           |
-  | stack_status_reason  | Stack CREATE completed successfully                       |
-  | template_description | Deploying a single compute instance using Heat.           |
-  | timeout_mins         | 60                                                        |
-  | updated_time         | None                                                      |
-  +----------------------+-----------------------------------------------------------+
+  +-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+  | Field                 | Value                                                                                                                                      |
+  +-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
+  | id                    | 700a9425-8ed8-4993-8773-eed4a276b040                                                                                                       |
+  | stack_name            | mystack                                                                                                                                    |
+  | description           | Deploying a single compute instance using Heat.                                                                                            |
+  |                       |                                                                                                                                            |
+  | creation_time         | 2016-08-22T00:44:14Z                                                                                                                       |
+  | updated_time          | None                                                                                                                                       |
+  | stack_status          | CREATE_COMPLETE                                                                                                                            |
+  | stack_status_reason   | Stack CREATE completed successfully                                                                                                        |
+  | parameters            | OS::project_id: 3d5d40b4a6904e6db4dc5321f53d4f39                                                                                           |
+  |                       | OS::stack_id: 700a9425-8ed8-4993-8773-eed4a276b040                                                                                         |
+  |                       | OS::stack_name: mystack                                                                                                                    |
+  |                       | flavor: c1.c1r1                                                                                                                            |
+  |                       | image: atomic-7-x86_64                                                                                                                     |
+  |                       | key_name: glyndavies                                                                                                                       |
+  |                       |                                                                                                                                            |
+  | outputs               | - description: The networks of the deployed server                                                                                         |
+  |                       |   output_key: server_networks                                                                                                              |
+  |                       |   output_value:                                                                                                                            |
+  |                       |     private-net:                                                                                                                           |
+  |                       |     - 192.168.100.17                                                                                                                       |
+  |                       |                                                                                                                                            |
+  | links                 | - href: https://api.nz-por-1.catalystcloud.io:8004/v1/3d5d40b4a6904e6db4dc5321f53d4f39/stacks/mystack/700a9425-8ed8-4993-8773-eed4a276b040 |
+  |                       |   rel: self                                                                                                                                |
+  |                       |                                                                                                                                            |
+  | parent                | None                                                                                                                                       |
+  | disable_rollback      | True                                                                                                                                       |
+  | stack_user_project_id | 3d5d40b4a6904e6db4dc5321f53d4f39                                                                                                           |
+  | stack_owner           | None                                                                                                                                       |
+  | capabilities          | []                                                                                                                                         |
+  | notification_topics   | []                                                                                                                                         |
+  | timeout_mins          | None                                                                                                                                       |
+  +-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------
 
 List resources owned by a stack
 -------------------------------
@@ -198,7 +205,13 @@ You can list the resources that belong to a stack with the command below:
 
 .. code-block:: bash
 
-  heat resource-list mystack
+  $ openstack stack resource list mystack
+  +---------------+--------------------------------------+------------------+-----------------+----------------------+
+  | resource_name | physical_resource_id                 | resource_type    | resource_status | updated_time         |
+  +---------------+--------------------------------------+------------------+-----------------+----------------------+
+  | server        | 498df201-7206-4565-822d-3482fb10b5a7 | OS::Nova::Server | CREATE_COMPLETE | 2016-08-22T00:44:14Z |
+  +---------------+--------------------------------------+------------------+-----------------+----------------------+
+
 
 List events related to a stack
 ------------------------------
@@ -208,7 +221,7 @@ command:
 
 .. code-block:: bash
 
-  heat event-list mystack
+   openstack stack event list mystack
 
 This information is useful to troubleshoot templates, as it allows you to
 identify whether they are producing the expected events and results.
@@ -223,7 +236,7 @@ To delete a stack:
 
 .. code-block:: bash
 
-  heat stack-delete mystack
+  openstack stack delete mystack
 
 Heat will return a confirmation message informing the stack is being deleted.
 
@@ -318,4 +331,3 @@ The resource types available on the Catalyst Cloud are:
 .. * OS::Sahara::NodeGroupTemplate
 .. * OS::Trove::Cluster
 .. * OS::Trove::Instance
-

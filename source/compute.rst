@@ -20,7 +20,7 @@ way of handling the early initialisation of a cloud instance.
 
 When you launch a compute instance on the Catalyst Cloud, you can pass
 initialisation configuration to cloud-init via "user-data" (either using the
-``--user-data`` parameter of ``nova boot``, or as post-creation customisation
+``--user-data`` parameter of ``openstack server create``, or as post-creation customisation
 script via the web dashboard).
 
 In the following sections we provide examples that illustrate how to perform
@@ -266,7 +266,7 @@ To create a server group:
 
 .. code-block:: bash
 
-  nova server-group-create $groupname $policy
+  openstack server group create $groupname $policy
 
 Where:
 
@@ -277,13 +277,13 @@ To list server groups:
 
 .. code-block:: bash
 
-  nova server-group-list
+  openstack server group list
 
 To delete a server group:
 
 .. code-block:: bash
 
-  nova server-group-delete $groupid
+  openstack server group delete $groupid
 
 Deleting a server group does not delete the compute instances that belong to
 the group.
@@ -300,9 +300,9 @@ group=$GROUP_ID`` parameter, as indicated below.
 
 .. code-block:: bash
 
-  nova boot --flavor $CC_FLAVOR_ID --image $CC_IMAGE_ID --key-name
-  $KEY_NAME --security-groups $SEC_GROUP --nic net-id=$PRIVATE_NETWORK_ID
-  first-instance --hint group=$GROUP_ID
+  openstack server create --flavor $CC_FLAVOR_ID --image $CC_IMAGE_ID
+  --key-name $KEY_NAME --security-group default --security-group $SEC_GROUP
+  --nic net-id=$CC_PRIVATE_NETWORK_ID --hint group=$GROUP_ID first-instance
 
 .. note::
 
@@ -331,4 +331,3 @@ Ansible playbook using the os_server module:
         - net-name: "{{ private_network_name }}"
       security_groups: "default,{{ security_group_name }}"
       scheduler_hints: "group=78f2aabc-e73a-4c72-88fd-79185797548c"
-
