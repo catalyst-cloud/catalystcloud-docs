@@ -159,9 +159,9 @@ Using cURL
 To access object storage using cURL it will be necessary to provide credentials
 to authenticate the request.
 
-This can be done by sourcing a valid RC file ( see :ref:`command-line-interface` )
-retrieving the account specific detail via the swift commandline tools then
-exporting the required variables as shown below.
+This can be done by sourcing a valid RC file ( see
+:ref:`command-line-interface` ) retrieving the account specific detail via the
+swift commandline tools then exporting the required variables as shown below.
 
 .. code-block:: bash
 
