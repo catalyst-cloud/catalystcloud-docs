@@ -2,7 +2,7 @@
 Getting support
 ###############
 
-If you need help, you can raise a support ticket for Catalyst via the `Support
+If you need help, you can raise a support request to Catalyst via the `Support
 Requests <https://dashboard.cloud.catalyst.net.nz/management/tickets/>`_ panel.
 
 Most requests are resolved within one business day. If you would like faster
