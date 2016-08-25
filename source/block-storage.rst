@@ -198,7 +198,7 @@ Make a new filesystem on the partition:
   Superblock backups stored on blocks:
       32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
       4096000
- 
+
   Allocating group tables: done
   Writing inode tables: done
   Creating journal (32768 blocks): done

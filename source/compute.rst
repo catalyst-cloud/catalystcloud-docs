@@ -3,6 +3,39 @@ Compute service
 ###############
 
 
+********
+Overview
+********
+
+The compute service provies scalable on-demand compute capacity for your
+applications in the form of compute instances. Compute instances are virtual
+servers that can be scalled up, down, or horizontally (by adding and removing
+more compute instances).
+
+Flavours
+========
+
+The compute instance flavour defines the amount of CPU and RAM allocated to
+your virtual servers. The price per hour for a compute instance varies
+according to its flavour. Existing flavours can be found here:
+https://catalyst.net.nz/catalyst-cloud/services/iaas/compute-service
+
+Our flavours are named after the amount of CPU and RAM they provide you,
+avoiding the need to consult our documentation to find out their specification.
+We currently provide a number of common combinations of CPU and RAM and are
+prepared to introduce new flavours if required.
+
+Best practices
+==============
+
+It is best to scale applications horizontally (by adding more compute instances
+and balancing load amongst them) rather than vertically. It is possible to
+scale compute instances horizontally without downtime. Resizing compute
+instance vertically (up or down) will result in brief downtime, because the
+operating system needs to reboot to pick up the new configuration.
+
+
+
 ****************************
 Launching a compute instance
 ****************************
