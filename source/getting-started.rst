@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 1
 
    getting-started/access
+   getting-started/support
    getting-started/regions
    getting-started/cli
    getting-started/apis
