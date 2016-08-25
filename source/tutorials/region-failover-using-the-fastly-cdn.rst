@@ -3,7 +3,7 @@ Region failover using the Fastly CDN
 ####################################
 
 This tutorial assumes you have installed the OpenStack command line tools and
-sourced an openrc file, as explained at :ref:`command-line-tools`. We also
+sourced an openrc file, as explained at :ref:`command-line-interface`. We also
 require that you have upload an ssh key called ``nginx-demo-key`` as explained
 at :ref:`uploading-an-ssh-key`.
 

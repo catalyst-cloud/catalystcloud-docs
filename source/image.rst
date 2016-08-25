@@ -249,7 +249,7 @@ Via the command line tools
 If the image is larger than 5GB, we recommend using the OpenStack CLI to upload
 it to the cloud. Ensure that you have the OpenStack command line tools
 installed and that you have sourced an openrc file, as explained on
-:ref:`command-line-tools`.
+:ref:`command-line-interface`.
 
 To upload the converted image to the Catalyst Cloud:
 

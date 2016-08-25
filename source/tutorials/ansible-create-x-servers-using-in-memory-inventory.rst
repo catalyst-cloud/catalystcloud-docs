@@ -4,7 +4,7 @@ Using Ansibles in-memory inventory to create a variable number of instances
 This tutorial assumes the following:
 
 * You have installed the OpenStack command line tools and sourced an
-  OpenStack RC file, as explained at :ref:`command-line-tools`
+  OpenStack RC file, as explained at :ref:`command-line-interface`
 * You have a basic understanding of how to use `Ansible`_ on the Catalyst Cloud
   as shown at :ref:`launching-your-first-instance-using-ansible`
 

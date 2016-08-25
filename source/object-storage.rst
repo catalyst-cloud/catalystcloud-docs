@@ -83,7 +83,7 @@ Using the command line client tools
 ***********************************
 First ensure that you have installed the correct version of the tools for your
 operating system version and have sourced your OpenStack RC file
-see :ref:`command-line-tools` for full details.
+see :ref:`command-line-interface` for full details.
 
 To view the containers currently in existence in your project:
 
@@ -159,7 +159,7 @@ Using cURL
 To access object storage using cURL it will be necessary to provide credentials
 to authenticate the request.
 
-This can be done by sourcing a valid RC file ( see :ref:`command-line-tools` )
+This can be done by sourcing a valid RC file ( see :ref:`command-line-interface` )
 retrieving the account specific detail via the swift commandline tools then
 exporting the required variables as shown below.
 
@@ -268,7 +268,7 @@ the same endpoint for both regions, but you tell it which one you want
 when connecting.
 
 Before running this example ensure that you have sourced an openrc file, as
-explained in :ref:`command-line-tools`.
+explained in :ref:`command-line-interface`.
 
 .. code-block:: python
 

@@ -12,7 +12,7 @@ available with Puppet.
 You will need:
 
 -  The OpenStack command line tools and have sourced an OpenStack RC file, as
-   explained at :ref:`command-line-tools`
+   explained at :ref:`command-line-interface`
 -  A basic understanding of how to use Ansible, and ideally have done the other
    Ansible tutorials first.
 -  A good enough understanding of puppet that you know why you're following

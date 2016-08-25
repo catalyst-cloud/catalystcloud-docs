@@ -128,7 +128,7 @@ Create SSH keys for elasticluster (no passphrase):
 
   ssh-keygen -t rsa -b 4096 -f ~/elasticluster/id_rsa
 
-Source your openrc file, as explained on :ref:`command-line-tools`.
+Source your openrc file, as explained on :ref:`command-line-interface`.
 
 Allow elasticluster to connect to instances over SSH:
 

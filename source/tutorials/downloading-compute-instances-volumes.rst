@@ -6,7 +6,7 @@ Volumes can be copied from the block storage service to the image service and
 downloaded using the glance client.
 
 This tutorial assumes you have installed the OpenStack command line tools and
-sourced an openrc file, as explained on :ref:`command-line-tools`.
+sourced an openrc file, as explained on :ref:`command-line-interface`.
 
 Identifying the volume(s)
 =========================
