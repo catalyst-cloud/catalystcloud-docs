@@ -11,7 +11,8 @@ sourced an openrc file, as explained on :ref:`command-line-tools`.
 Identifying the volume(s)
 =========================
 
-The ``openstack volume list`` command can be used to list all volumes available.
+The ``openstack volume list`` command can be used to list all volumes
+available.
 
 The ``openstack server show`` command can be used to identity the volumes that
 are attached to a given compute instance:
