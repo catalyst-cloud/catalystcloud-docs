@@ -15,4 +15,5 @@ Contents:
    getting-started/regions
    getting-started/cli
    getting-started/apis
+   getting-started/quotas
 
