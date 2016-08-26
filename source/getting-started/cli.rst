@@ -96,6 +96,10 @@ need to install a different version of python.
   # into your virtual environment
   pip install pytz python-openstackclient
 
+  # Uncomment the line below if you would like to install the deprecated
+  # openstack CLI in addition to the new unified CLI
+  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
+
 Ubuntu Linux 16.04
 ------------------
 
@@ -114,6 +118,11 @@ Python 2.7.x, so the procedure below will also install it as a dependency.
   # Install Python openstackclient library into your virtual environment
   pip install python-openstackclient
 
+  # Uncomment the line below if you would like to install the deprecated
+  # openstack CLI in addition to the new unified CLI
+  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
+
+
 In case you would like to test the CLI with Python 3.x, please use this
 procedure instead:
 
@@ -128,6 +137,11 @@ procedure instead:
 
   # Install Python openstackclient library into your virtual environment
   pip install python-openstackclient
+
+  # Uncomment the line below if you would like to install the deprecated
+  # openstack CLI in addition to the new unified CLI
+  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
+
 
 .. note::
 
@@ -152,6 +166,11 @@ Debian Linux 8
   # into your virtual environment
   pip install pytz python-openstackclient
 
+  # Uncomment the line below if you would like to install the deprecated
+  # openstack CLI in addition to the new unified CLI
+  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
+
+
 CentOS Linux 7
 --------------
 
@@ -170,7 +189,12 @@ CentOS Linux 7
   source venv/bin/activate
 
   # Install Python openstackclient library on your virtual environment
-  pip install python-openstackclient
+  # pip install python-openstackclient
+
+  # Uncomment the line below if you would like to install the deprecated
+  # openstack CLI in addition to the new unified CLI
+  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
+
 
 Mac OS X
 --------
@@ -187,6 +211,11 @@ Mac OS X
 
   # Install Python openstackclient library on your virtual environment
   pip install python-openstackclient
+
+  # Uncomment the line below if you would like to install the deprecated
+  # openstack CLI in addition to the new unified CLI
+  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
+
 
 
 Windows Server 2012 R2
@@ -206,6 +235,11 @@ Assuming that Python and pip have successfully been installed then
 
   # Install Python openstackclient library on your virtual environment
   pip install python-openstackclient
+
+  # Uncomment the line below if you would like to install the deprecated
+  # openstack CLI in addition to the new unified CLI
+  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
+
 
 If any errors are encountered while pip is building packages it may be
 necessary to install the following and retry.
