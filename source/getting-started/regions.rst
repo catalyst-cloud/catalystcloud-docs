@@ -9,13 +9,13 @@ other, providing fault tolerance and geographic diversity.
 All our data centres have backup disel generators, UPS, N+1 process coolers and
 diverse fibre paths for network connectivity.
 
-+----------+-----------------+
-| Code     | Name            |
-+==========+=================+
-| nz-por-1 | NZ Porirua 1    |
-+----------+-----------------+
-| nz_wlg_2 | NZ Wellington 2 |
-+----------+-----------------+
++----------+-----------------+--------------------+
+| Code     | Name            | PCI DSS certified? |
++==========+=================+====================+
+| nz-por-1 | NZ Porirua 1    | Yes                |
++----------+-----------------+--------------------+
+| nz_wlg_2 | NZ Wellington 2 | In progress        |
++----------+-----------------+--------------------+
 
 We encourage customers to use Porirua as their primary region in New Zealand.
 This region is Catalyst's newest addition to the Catalyst Cloud. It is PCI
