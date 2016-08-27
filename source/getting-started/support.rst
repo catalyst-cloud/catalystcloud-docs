@@ -33,8 +33,8 @@ Contacting your account manager
 ===============================
 
 Customers that contract premium support from Catalyst have a technical account
-manager they can call. You should have received the contact of your account
-manager when you applied for premium support.
+manager. You should have received the contact of your account manager when you
+applied for premium support.
 
 
 Contacting a solutions architect
