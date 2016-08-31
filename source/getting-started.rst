@@ -14,6 +14,7 @@ Contents:
    getting-started/access
    getting-started/support
    getting-started/regions
+   getting-started/terminology
    getting-started/cli
    getting-started/apis
    getting-started/quotas
