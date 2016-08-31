@@ -1,6 +1,6 @@
-**************************************
-Resource cleanup from the command line
-**************************************
+***************************************
+Resource cleanup using the command line
+***************************************
 
 At this point you may want to cleanup the OpenStack resources that have been
 created. Running the following commands should remove all networks, routers,

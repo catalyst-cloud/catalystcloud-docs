@@ -1,6 +1,6 @@
-****************************************************
-Launching your first instance using the libcloud SDK
-****************************************************
+**********************
+Using the libcloud SDK
+**********************
 
 The Catalyst Cloud is built on top of the OpenStack project. There are many
 Software Development Kits for a variety of different languages available for

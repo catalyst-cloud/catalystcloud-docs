@@ -1,6 +1,6 @@
-*************************************************
-Launching your first instance using a bash script
-*************************************************
+*******************
+Using a bash script
+*******************
 
 This section provides a bash script that runs the commands from the previous
 section in a single script.

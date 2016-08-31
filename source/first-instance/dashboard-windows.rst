@@ -1,6 +1,6 @@
-********************************************************
-Launching your first Windows instance from the dashboard
-********************************************************
+****************************************
+Windows instance using the web interface
+****************************************
 
 Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
 

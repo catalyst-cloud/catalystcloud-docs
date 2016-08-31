@@ -1,8 +1,8 @@
 .. _launching-your-first-instance:
 
-****************************************
-Launching your first instance - Overview
-****************************************
+********
+Overview
+********
 
 This section will demonstrate how to build an Ubuntu 14.04 server in a new
 OpenStack tenant. After you have completed the steps you will be able to log

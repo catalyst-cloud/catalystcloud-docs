@@ -1,6 +1,6 @@
-***************************************************
-Launching your first instance from the command line
-***************************************************
+********************************
+Using the command line interface
+********************************
 
 This section assumes you have installed the OpenStack command line tools and
 sourced an openrc file, as explained in :ref:`command-line-interface`.

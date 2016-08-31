@@ -1,8 +1,8 @@
 .. _launching-your-first-instance-using-heat:
 
-****************************************
-Launching your first instance using Heat
-****************************************
+*******************************
+Using the orchestration service
+*******************************
 
 Heat is the native OpenStack orchestration tool. This section demonstrates how
 to create your first instance using Heat.

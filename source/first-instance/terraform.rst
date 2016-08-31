@@ -1,6 +1,6 @@
-*********************************************
-Launching your first instance using Terraform
-*********************************************
+***************
+Using Terraform
+***************
 
 This section demonstrates how to create your first instance using `Terraform`_.
 

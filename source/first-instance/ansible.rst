@@ -1,7 +1,7 @@
 .. _launching-your-first-instance-using-ansible:
 
 *******************************************
-Launching your first instance using Ansible
+Using Ansible
 *******************************************
 
 `Ansible`_ is a popular open source configuration management and application
