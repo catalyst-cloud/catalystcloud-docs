@@ -21,3 +21,4 @@ Contents:
    tutorials/cloud-socks-proxy-over-ssh
    tutorials/ansible-create-x-servers-using-in-memory-inventory
    tutorials/ansible-driven-puppet
+   tutorials/using-packer-to-build-custom-bootable-images-on-the-catalyst-cloud
