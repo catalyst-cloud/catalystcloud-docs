@@ -318,7 +318,7 @@ public IP address:
  | project_id        | <PROJECT_ID>                         |
  | protocol          | tcp                                  |
  | remote_group_id   | None                                 |
- | remote_ip_prefix  | <CC_REMOTE_CIDR_NETWORK>             |
+ | remote_ip_prefix  | <REMOTE_CIDR_NETWORK>                |
  | security_group_id | 14aeedb8-5e9c-4617-8cf9-6e072bb41886 |
  +-------------------+--------------------------------------+
 
@@ -416,8 +416,8 @@ Allocate a Floating IP
 ======================
 
 In order to connect to our instance, we will need to allocate a floating IP to
-the instance. We will use the id of public-net (found previously via 'openstack
-network list') and request a new floating IP.
+the instance. We will use the id of public-net (found previously via
+``openstack network list``) and request a new floating IP.
 
 .. code-block:: bash
 
