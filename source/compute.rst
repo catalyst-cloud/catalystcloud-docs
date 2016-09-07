@@ -267,22 +267,28 @@ There are four different ways you can stop a compute instance:
   where it was, but will take longer to start because it needs to read its
   memory state from disk.
 
-*********************************
-Affinity and Anti-affinity groups
-*********************************
+***************************
+Anti-affinity groups for HA
+***************************
 
-Affinity and anti-affinity groups allow you to ensure compute instances are
-placed on the same or different hypervisors (physical servers).
+..
+  Affinity and anti-affinity groups allow you to ensure compute instances are
+  placed on the same or different hypervisors (physical servers).
 
-Server affinity is useful when you want to ensure that the data transfer
-amongst compute instances is as fast as possible. On the other hand it may
-reduce the availability of your application (a single server going down affects
-all compute instances in the group) or increase CPU contention.
+Anti-affinity groups allow you to ensure compute instances are placed on the
+on different physical servers.
+
+..
+  Server affinity is useful when you want to ensure that the data transfer
+  amongst compute instances is as fast as possible. On the other hand it may
+  reduce the availability of your application (a single server going down affects
+  all compute instances in the group) or increase CPU contention.
 
 Server anti-affinity is useful when you want to increase the availability of an
 application within a region. Compute instances in an anti-affinity group are
-placed on different hypervisors, ensuring that the failure of a server will not
-affect all your compute instances simultaneously.
+placed on different physical servers, ensuring that the failure of a server
+will not affect all your compute instances simultaneously.
+
 
 Managing server groups
 ======================
@@ -304,7 +310,8 @@ To create a server group:
 Where:
 
 * ``$groupname`` is a name you choose (eg: app-servers)
-* ``$policy`` is either ``affinity`` or ``anti-affinity``
+* ``$policy`` is `anti-affinity``
+.. * ``$policy`` is either ``affinity`` or ``anti-affinity``
 
 To list server groups:
 
