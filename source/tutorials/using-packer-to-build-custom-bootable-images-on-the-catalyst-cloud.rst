@@ -257,6 +257,111 @@ we installed in the image:
  ssllabs-scan v1.3.0 (stable $Id: 81cb03888c46dd07fb4d97acffa6768b692efa49 $)
  API location: https://api.ssllabs.com/api/v2
 
+Using Packer with Windows on the Catalyst Cloud
+===============================================
+
+.. note::
+
+  At this time, due to a known issue in the Catalyst Cloud, it is not possible
+  to deploy a Windows image using packer directly fom the publicly available
+  Windows image.
+
+  In order to overcome this limitation it is necessary to deploy a new
+  temporary Windows instance in the Catalyst Cloud. When launching this
+  instance it is required to say Yes to ``Create New Volume`` when selecting
+  the ``Instance Source``.
+
+  Once the image has booted succesfully, take a snapshot of it. This new
+  snapshot can now be used as the source image for your packer build. It is
+  not necessary to keep the temporary windows instance once the snapshot has
+  been successfully taken.
+
+
+It is possible to use Packer to create custom Windows images, this requires
+some changes in approach as the tools and connection details are those typical
+of Windows technologies.
+
+The first change is in the ``builders`` section of the packer build file. Here
+we need to add the settings to specify the connection type and the credentails
+to use on this connection.
+
+Below is an  example of the  new communicator settings. These make use of the
+Windows Remote Management feature, this uses the WS-Management Protocol, which
+is based on SOAP (Simple Object Access Protocol).
+
+.. code-block:: bash
+
+    "builders": [{
+        ...
+
+        "communicator": "winrm",
+        "winrm_username": "Administrator",
+        "winrm_password": "uUteQ419EPFUMoE4zaTE",
+
+        ...
+    }],
+
+
+Setting ``"communicator"`` to ``"winrm"`` is mandatory in order for this to
+work as expected. The username is required but it does not have to be
+``Administrator``, though for a Windows instance it makes sense to have a known
+administration account.
+
+The other important change is the creation of ``userdata`` script that is run
+by the builders section of the build file. The purpose of the this userdata
+section is to configure the WinRM access and define the user so that packer is
+able to connect to the instance once it has been created.
+
+The reference to the userdata script needs to be added to the builders section
+and provide the location of the script that needs to be run.
+
+.. code-block:: bash
+
+    "builders": [{
+        ...
+
+        "user_data_file": "./userdata_setup.ps1",
+
+        ...
+    }],
+
+The userdata itself is a Windows command-line/PowerShell script that configures
+various settings required to allow remote connectivity via WinRM.
+
+.. code-block:: bash
+
+    #ps1_sysnative
+    wmic UserAccount set PasswordExpires=False
+    net user Administrator uUteQ419EPFUMoE4zaTE
+    cmd /C netsh advfirewall set allprofiles state off
+    winrm quickconfig -q
+    winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="500"}'
+    winrm set winrm/config '@{MaxTimeoutms="1800000"}'
+    winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+    winrm set winrm/config/client/auth '@{Basic="true"}'
+    winrm set winrm/config/service/auth '@{Basic="true"}'
+    net stop winrm
+    net start winrm
+
+    Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine -Force
+
+.. warning::
+
+  The userdata script disables the windows firewall and also sets the
+  Administrator password using plain text which means it could be recovered
+  from the file system.
+
+  These two points present a huge risk and should both be addressed to prevent
+  any subsequent compromise of security.
+
+Once the userdata file has been created and the packer build file edited
+accordingly simply run the packer build command as discussed above.
+
+.. code-block:: bash
+
+  ./packer build windows-build-file.json
+
+
 .. _Packer: https://www.packer.io/
 .. _Hashicorp: https://www.hashicorp.com/
 .. _builders: https://www.packer.io/docs/templates/builders.html

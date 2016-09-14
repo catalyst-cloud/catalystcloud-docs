@@ -311,6 +311,7 @@ Where:
 
 * ``$groupname`` is a name you choose (eg: app-servers)
 * ``$policy`` is `anti-affinity``
+
 .. * ``$policy`` is either ``affinity`` or ``anti-affinity``
 
 To list server groups:
