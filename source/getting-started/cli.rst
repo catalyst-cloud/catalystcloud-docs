@@ -22,14 +22,15 @@ Working with virtual environments
 =================================
 
 In case you are not familiar with Python virtual environments, we recommend
-reading `the virtualenv section of the Python docs
-<http://docs.python-guide.org/en/latest/dev/virtualenvs/>` for an overview.
+reading `the virtualenv section of the Python documentation`_ for an overview.
 
 Below we provide a cheat sheet for the actions and commands you will use the
 most.
 
-Create virtual environment
---------------------------
+.. _the virtualenv section of the Python documentation: http://docs.python-guide.org/en/latest/dev/virtualenvs/
+
+Create a virtual environment
+----------------------------
 
 To create a new virtual environment, go to the directory where you would like
 it to be placed and run the command below:
@@ -43,8 +44,8 @@ It is common practice to use ``venv`` as the name.
 
 .. _activate-venv:
 
-Activate virtual environment
-----------------------------
+Activate a virtual environment
+------------------------------
 
 When you activate a virtual environment, virtualenv overwrites (temporarily)
 some environment variables to place the ``venv/bin`` directory on your
@@ -61,8 +62,8 @@ When activated, you will notice that the virtual environment name is now shown
 on the left sime of the prompt. This is done to remind you that you are working
 "inside" this virtual environment.
 
-Deactivate virtual environment
-------------------------------
+Deactivate a virtual environment
+--------------------------------
 
 Once you are done working in the virtual environment, you can deactivate it.
 This will revert the environment variables back to what they were, prior to it
@@ -242,9 +243,9 @@ Assuming that Python and pip have successfully been installed then
 
 
 If any errors are encountered while pip is building packages it may be
-necessary to install the following and retry.
-Microsoft Visual C++ Compiler for Python 2.7
-https://www.microsoft.com/en-gb/download/details.aspx?id=44266
+necessary to install the `Microsoft Visual C++ Compiler for Python 2.7`_ and retry.
+
+.. _Microsoft Visual C++ Compiler for Python 2.7: https://www.microsoft.com/en-gb/download/details.aspx?id=44266
 
 Configuring the CLI
 ===================
@@ -292,8 +293,8 @@ To download an OpenStack RC file from the dashboard:
 Using the CLI
 *************
 
-Before using the CLI, always remember to :ref:`activate-venv` activate your
-virtual environment and :ref:`source-rc-file`.
+Before using the CLI, always remember to :ref:`activate-venv` and
+:ref:`source-rc-file`.
 
 Please refer to http://docs.openstack.org/cli-reference/openstack.html for a
 reference of all commands supported by the CLI.
