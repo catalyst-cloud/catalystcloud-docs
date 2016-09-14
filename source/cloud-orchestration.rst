@@ -100,6 +100,48 @@ single instance on the Catalyst Cloud using the Heat orchestration service.
       description: The networks of the deployed server
       value: { get_attr: [server, networks] }
 
+Some variations
+---------------
+
+If the more typical choice of default user (i.e "ubuntu" for Ubuntu images,
+"contos" for Centos etc.) is desired then amend the template to specify
+the user_data_format of "RAW":
+
+.. code-block:: yaml
+
+  resources:
+    server:
+      type: OS::Nova::Server
+      properties:
+        key_name: { get_param: key_name }
+        image: { get_param: image }
+        flavor: { get_param: flavor }
+        user_data_format: RAW
+
+If your tenant has multiple private networks then the above example will fail
+to start an instance - you need to specify which private network to attach to:
+
+.. code-block:: yaml
+
+  parameters:
+    net:
+      type: string
+      description: Network for the server use
+      default: private_net
+      constraints:
+        - custom_constraint: neutron.network
+
+  resources:
+    server:
+      type: OS::Nova::Server
+      properties:
+        key_name: { get_param: key_name }
+        image: { get_param: image }
+        flavor: { get_param: flavor }
+        user_data_format: RAW
+        networks:
+          - network: {get_param: net}
+
 Validate a template
 -------------------
 
