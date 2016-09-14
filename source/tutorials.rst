@@ -22,3 +22,4 @@ Contents:
    tutorials/ansible-create-x-servers-using-in-memory-inventory
    tutorials/ansible-driven-puppet
    tutorials/using-packer-to-build-custom-bootable-images-on-the-catalyst-cloud
+   tutorials/deploying-a-turnkey-image
