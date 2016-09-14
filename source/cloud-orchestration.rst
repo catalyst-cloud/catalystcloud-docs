@@ -100,12 +100,9 @@ single instance on the Catalyst Cloud using the Heat orchestration service.
       description: The networks of the deployed server
       value: { get_attr: [server, networks] }
 
-Some variations
----------------
-
 If the more typical choice of default user (i.e "ubuntu" for Ubuntu images,
-"contos" for Centos etc.) is desired then amend the template to specify
-the user_data_format of "RAW":
+"centos" for Centos etc.) is desired then amend the template to specify
+a user_data_format of "RAW" in the ``OS::Nova::Server`` properties:
 
 .. code-block:: yaml
 
@@ -151,7 +148,7 @@ used to validate a HOT template:
 
 .. code-block:: bash
 
-   openstack orchestration template validate-f template-file.hot
+ $ openstack orchestration template validate-f template-file.hot
 
 This command will return the yaml if it validates and will return an error with
 a message if it is invalid.
@@ -172,7 +169,7 @@ with a semicolon.
 
 .. code-block:: bash
 
-  openstack stack create -t test.hot --parameter "key_name=mykey" mystack
+  $ openstack stack create -t test.hot --parameter "key_name=mykey" mystack
 
 Heat will return a confirmation message indicating the stack is being created:
 
@@ -198,7 +195,7 @@ To obtain information about a running stack:
 
 .. code-block:: bash
 
-  openstack stack show mystack
+  $ openstack stack show mystack
 
 Heat will return the following information about the stack:
 
@@ -263,7 +260,7 @@ command:
 
 .. code-block:: bash
 
-   openstack stack event list mystack
+ $ openstack stack event list mystack
 
 This information is useful to troubleshoot templates, as it allows you to
 identify whether they are producing the expected events and results.
@@ -278,7 +275,7 @@ To delete a stack:
 
 .. code-block:: bash
 
-  openstack stack delete mystack
+  $ openstack stack delete mystack
 
 Heat will return a confirmation message informing the stack is being deleted.
 
