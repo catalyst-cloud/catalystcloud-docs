@@ -23,3 +23,4 @@ Contents:
    tutorials/ansible-driven-puppet
    tutorials/using-packer-to-build-custom-bootable-images-on-the-catalyst-cloud
    tutorials/deploying-a-turnkey-image
+   tutorials/advanced-heat
