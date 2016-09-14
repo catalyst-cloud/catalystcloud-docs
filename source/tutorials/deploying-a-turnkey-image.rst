@@ -7,9 +7,9 @@ sourced an openrc file, as explained at :ref:`command-line-interface`. We also
 assume that you have uploaded a ssh key as explained at
 :ref:`uploading-an-ssh-key`.
 
-
 Introduction
 ============
+
 In this tutorial you will learn how to deploy a `Turnkey Linux`_ image onto the
 Catalyst Cloud using the command line tools.
 
@@ -17,6 +17,7 @@ Catalyst Cloud using the command line tools.
 
 Pre-requisites and Setup
 ========================
+
 First retrieve the required image from `Turnkey Linux`_, for this
 example we will use the following image ``turnkey-core-14.1-jessie-amd64``.
 
@@ -38,10 +39,9 @@ change into the directoryy containing the image files.
   -rw-r--r-- 1 glyndavies glyndavies  15755328 Apr 12 13:20 turnkey-core-14.1-jessie-amd64-initrd
   -rw-r--r-- 1 glyndavies glyndavies   3120288 Apr 12 13:20 turnkey-core-14.1-jessie-amd64-kernel
 
-
-
 Creating the images
 ===================
+
 There are actually 3 images that need to get created to allow this work
 correctly. These are the ramdisk image, the kernel image and that actual
 Turnkey image we are looking to deploy.
@@ -76,7 +76,7 @@ variable called ``TL_RAMDISK_ID``.
   | visibility       | private                                                                                                  |
   +------------------+----------------------------------------------------------------------------------------------------------+
 
-  TL_RAMDISK_ID=$(openstack image show turnkey-initrd -c id | grep id | awk '{ print $4 }') && echo $TL_RAMDISK_ID
+  $ TL_RAMDISK_ID=$(openstack image show turnkey-initrd -c id -f value) && echo $TL_RAMDISK_ID
 
 Next we create the kernel image and store it's ID in ``TL_KERNEL_ID``.
 
@@ -107,7 +107,7 @@ Next we create the kernel image and store it's ID in ``TL_KERNEL_ID``.
   | visibility       | private                                                                                                  |
   +------------------+----------------------------------------------------------------------------------------------------------+
 
-  TL_KERNEL_ID=$(openstack image show turnkey-kernel -c id | grep id | awk '{ print $4 }') && echo $TL_KERNEL_ID
+  $ TL_KERNEL_ID=$(openstack image show turnkey-kernel -c id -f value) && echo $TL_KERNEL_ID
 
 Finally we create the ``Turnkey`` image:
 
@@ -140,7 +140,7 @@ Finally we create the ``Turnkey`` image:
   | visibility       | private                                                                                                  |
   +------------------+----------------------------------------------------------------------------------------------------------+
 
-  TL_TURNKEY_ID=$(openstack image show turnkey-img -c id | grep id | awk '{ print $4 }') && echo $TL_TURNKEY_ID
+  $ TL_TURNKEY_ID=$(openstack image show turnkey-img -c id -f value) && echo $TL_TURNKEY_ID
 
 Deploy the Turnkey image
 ========================
@@ -156,7 +156,7 @@ variables.
   $ export CC_SECURITY_GROUP_ID=$( openstack security group show example-security-grp -f value -c id )
   $ export CC_PRIVATE_NETWORK_ID=$( openstack network show private-net -f value -c id )
 
-  openstack server create --flavor $CC_FLAVOR_ID --image $TL_TURNKEY_ID \
+  $ openstack server create --flavor $CC_FLAVOR_ID --image $TL_TURNKEY_ID \
   --key-name example-key --security-group default \
   --security-group $CC_SECURITY_GROUP_ID \
   --nic net-id=$CC_PRIVATE_NETWORK_ID turnkey-instance
@@ -196,9 +196,9 @@ variables.
 Once the following command show your new instance as active, you will be able
 to associate a floting IP with your new instance and access it via SSH.
 
-.. code-block bash
+.. code-block:: bash
 
-  openstack server list
+  $ openstack server list
   +--------------------------------------+-------------------------+---------+--------------------------------------------+
   | ID                                   | Name                    | Status  | Networks                                   |
   +--------------------------------------+-------------------------+---------+--------------------------------------------+
