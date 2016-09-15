@@ -1,6 +1,6 @@
-##############################
-Advanced Heat
-##############################
+####################################################################
+Creating an instance with interfaces on different networks with Heat
+####################################################################
 
 This tutorial assumes the following:
 
@@ -13,8 +13,9 @@ This tutorial assumes the following:
 Introduction
 ============
 
-In this tutorial we will show you how to create an additional network, and then
-create a server using and existing private network and the new created one.
+In this tutorial we will show you how to create an additional network in a
+project that already has a private network, and then create a server that has
+interfaces on the existing private network and the newly created one.
 
 We will need to delve into the mysteries of 'cloud-init' a litle to achieve
 this and this enables us to take the opportunity to show how to perform
@@ -24,12 +25,12 @@ is.
 Heat Template
 =============
 
-We need to create a network, and a subnet - and then boot and instance using
-these plus an already existing (private) network. Unfortunately it is not
+We need to create a network, and a subnet - and then boot an instance using
+these plus an already existing private network. Unfortunately it is not
 sufficient simply to create networks and provide these to the instance at
 creation time - only the first network is properly configured if this approach
-is tried (this could be viewed as a bug), however this can be worked around
-using the the user_data property along with cloud-init:
+is taken (this could be viewed as a bug). This can be worked around using the
+the user_data property along with cloud-init:
 
 .. code-block:: yaml
 
