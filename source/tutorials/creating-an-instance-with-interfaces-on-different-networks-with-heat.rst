@@ -1,6 +1,6 @@
-##############################
-Advanced Heat
-##############################
+####################################################################
+Creating an instance with interfaces on different networks with Heat
+####################################################################
 
 This tutorial assumes the following:
 
