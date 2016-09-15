@@ -14,13 +14,18 @@ if [ -z "$OS_AUTH_URL" ]; then
     EXIT=1;
 fi
 
-if [ -z "$OS_TENANT_NAME" ]; then
-    echo OS_TENANT_NAME not set please ensure you have sourced an OpenStack RC file.
+if [ -z "$OS_TENANT_ID" ]; then
+    echo OS_TENANT_ID not set please ensure you have sourced an OpenStack RC file.
     EXIT=1;
 fi
 
 if [ -z "$OS_USERNAME" ]; then
     echo OS_USERNAME not set please ensure you have sourced an OpenStack RC file.
+    EXIT=1;
+fi
+
+if [ -z "$OS_PASSWORD" ]; then
+    echo OS_PASSWORD not set please ensure you have sourced an OpenStack RC file.
     EXIT=1;
 fi
 
@@ -130,7 +135,7 @@ then
     por_subnet=$( neutron subnet-show "$por_subnet_name" -f shell --variable cidr | awk -F '"' '{ print $2 }' )
 fi
 
-tenant_id=$( nova credentials --wrap 200 | grep tenant | awk -F'|' '{ print $3 }' | jq -r '.id' )
+tenant_id="$OS_TENANT_ID"
 echo "Please enter you pre shared key:";
 read -r pre_shared_key;
 
