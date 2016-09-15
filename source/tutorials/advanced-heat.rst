@@ -126,7 +126,6 @@ using the the user_data property along with cloud-init:
                   shell: /bin/bash
             params:
              $USER: {get_param: user}
-
         user_data_format: RAW
 
   outputs:
