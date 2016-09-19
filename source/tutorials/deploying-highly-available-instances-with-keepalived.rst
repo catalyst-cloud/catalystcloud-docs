@@ -844,42 +844,61 @@ does not. Assuming the template validates let's build a stack
  | stack_status_reason | Stack CREATE started                                                                              |
  +---------------------+---------------------------------------------------------------------------------------------------+
 
-As you can see the creation is in progress. You can use the ``event-list``
-command to check the progress of creation process:
+As you can see the creation is in progress. You can use the ``openstack stack
+event list`` or ``openstack stack resource list`` commands to check the
+progress of creation process:
 
 .. code-block:: bash
 
- $ heat event-list vrrp-stack
- +--------------------------------+--------------------------------------+------------------------+--------------------+----------------------+
- | resource_name                  | id                                   | resource_status_reason | resource_status    | event_time           |
- +--------------------------------+--------------------------------------+------------------------+--------------------+----------------------+
- | vrrp_backup_server             | 40351139-008c-4d42-b4bb-89e761b4caf8 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:24:17Z |
- | vrrp_backup_server             | 4b8b38db-1292-46db-8307-ef5e95c2a51b | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:24:00Z |
- | vrrp_master_server             | 1c48a5a9-bd92-4c05-8513-f02c1b1e4c8b | state changed          | CREATE_COMPLETE    | 2015-09-01T03:24:00Z |
- | vrrp_shared_floating_ip        | e8829f1e-ba73-4fad-b08e-6cc8e4cf9e59 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:50Z |
- | vrrp_backup_server_floating_ip | 8bff5aa5-5b50-4619-86ed-eaa434f2f9f0 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:50Z |
- | vrrp_master_server_floating_ip | 031949ea-45c8-4fc4-859d-9a1b13e37be3 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:50Z |
- | vrrp_master_server_floating_ip | 0975e4f8-922d-41f3-b363-73d0b6d8e407 | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:49Z |
- | vrrp_shared_floating_ip        | 083c7c2b-4c0f-473b-a417-f6a12ea77f9e | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:48Z |
- | vrrp_master_server             | 0a72a874-7346-4df1-adfa-67ee262863c9 | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:47Z |
- | vrrp_backup_server_floating_ip | d157d7b3-c4e1-4e81-a61b-323aa59256bf | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:45Z |
- | router_interface               | 4468ad1c-a850-4145-91c0-ccb55bc51dc1 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:45Z |
- | vrrp_shared_port               | 94d8d1f0-c38e-4831-b4f2-48a2d5172595 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:45Z |
- | vrrp_master_server_port        | 4263d08f-99b4-43bc-b90f-d72fc125a9bf | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:45Z |
- | vrrp_backup_server_port        | 926342ac-e63a-4707-be56-de0a34d6276f | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:44Z |
- | router_interface               | 3a91b996-3eda-4425-a016-5ab93c503a7f | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:43Z |
- | vrrp_shared_port               | ee41a8c2-5451-4f23-861b-6cf74af666df | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:43Z |
- | vrrp_master_server_port        | c9fa1cd9-79fd-478b-9f0f-099cf341ced9 | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:42Z |
- | vrrp_backup_server_port        | 101a9a93-1600-47f7-8194-90b25c0405c7 | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:42Z |
- | private_subnet                 | eeb887aa-828d-4e87-b224-2f873de21061 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:42Z |
- | private_subnet                 | 144d7c8f-9f0d-4a87-9d42-dc068f906caf | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:41Z |
- | private_net                    | c232f2bc-aac0-44aa-b615-9fd464d22d8d | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:41Z |
- | router                         | 2dd769d8-b44b-46c6-866a-5bf3f74de1c2 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:41Z |
- | vrrp_secgroup                  | 89741526-6a38-4e64-95dd-b826c9921aff | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:41Z |
- | router                         | 39321e72-dcbf-4e22-805f-ad3e86abd8ef | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:39Z |
- | private_net                    | ac5a2e1b-42c1-4c73-b947-df47c6db23a1 | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:39Z |
- | vrrp_secgroup                  | 6d5229e7-2977-4286-9214-795c1fa2198a | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:38Z |
- +--------------------------------+--------------------------------------+------------------------+--------------------+----------------------+
+  $ openstack stack event list vrrp-stack
+  2016-09-19 03:20:05Z [vrrp-stack]: CREATE_IN_PROGRESS  Stack CREATE started
+  2016-09-19 03:20:06Z [private_net]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:07Z [vrrp_secgroup]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:09Z [router]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:11Z [private_net]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:11Z [vrrp_secgroup]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:11Z [router]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:11Z [private_subnet]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:14Z [private_subnet]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:14Z [vrrp_master_server_port]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:16Z [vrrp_backup_server_port]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:18Z [vrrp_shared_port]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:19Z [router_interface]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:22Z [vrrp_master_server_port]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:22Z [vrrp_backup_server_port]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:22Z [vrrp_shared_port]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:23Z [router_interface]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:24Z [vrrp_master_server_floating_ip]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:25Z [vrrp_backup_server_floating_ip]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:27Z [vrrp_shared_floating_ip]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:28Z [vrrp_master_server]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:31Z [vrrp_master_server_floating_ip]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:31Z [vrrp_backup_server_floating_ip]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:32Z [vrrp_shared_floating_ip]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:43Z [vrrp_master_server]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:44Z [vrrp_backup_server]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:21:06Z [vrrp_backup_server]: CREATE_COMPLETE  state changed
+  2016-09-19 03:21:06Z [vrrp-stack]: CREATE_COMPLETE  Stack CREATE completed successfully
+
+
+ $ openstack stack resource list -c resource_name -c resource_type -c resource_status  vrrp-stack
+ +--------------------------------+------------------------------+-----------------+
+ | resource_name                  | resource_type                | resource_status |
+ +--------------------------------+------------------------------+-----------------+
+ | vrrp_backup_server_port        | OS::Neutron::Port            | CREATE_COMPLETE |
+ | vrrp_backup_server_floating_ip | OS::Neutron::FloatingIP      | CREATE_COMPLETE |
+ | vrrp_master_server             | OS::Nova::Server             | CREATE_COMPLETE |
+ | router_interface               | OS::Neutron::RouterInterface | CREATE_COMPLETE |
+ | vrrp_master_server_port        | OS::Neutron::Port            | CREATE_COMPLETE |
+ | vrrp_master_server_floating_ip | OS::Neutron::FloatingIP      | CREATE_COMPLETE |
+ | vrrp_secgroup                  | OS::Neutron::SecurityGroup   | CREATE_COMPLETE |
+ | private_subnet                 | OS::Neutron::Subnet          | CREATE_COMPLETE |
+ | private_net                    | OS::Neutron::Net             | CREATE_COMPLETE |
+ | router                         | OS::Neutron::Router          | CREATE_COMPLETE |
+ | vrrp_backup_server             | OS::Nova::Server             | CREATE_COMPLETE |
+ | vrrp_shared_floating_ip        | OS::Neutron::FloatingIP      | CREATE_COMPLETE |
+ | vrrp_shared_port               | OS::Neutron::Port            | CREATE_COMPLETE |
+ +--------------------------------+------------------------------+-----------------+
 
 If you prefer to create this stack in the Wellington region you
 can modify the appropriate parameters on the command line:
