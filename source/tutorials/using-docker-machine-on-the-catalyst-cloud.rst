@@ -51,16 +51,15 @@ The first thing we need to do is install Docker Machine locally:
 
 .. code-block:: bash
 
- $ curl -L https://github.com/docker/machine/releases/download/v0.4.0/docker-machine_linux-amd64 \
-   | sudo tee /usr/local/bin/docker-machine > /dev/null
- $ sudo chmod +x /usr/local/bin/docker-machine
+ $ curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` | \
+   sudo tee /usr/local/bin/docker-machine > /dev/null && sudo chmod +x /usr/local/bin/docker-machine
 
 Check that docker machine is working:
 
 .. code-block:: bash
 
  $ docker-machine -v
- docker-machine version 0.4.0 (9d0dc7a)
+ docker-machine version 0.7.0, build a650a40
 
 Create a Security Group and rules
 =================================
@@ -74,18 +73,18 @@ command line clients to achieve this. First create a security group:
 
 .. code-block:: bash
 
- $ neutron security-group-create --description 'network access for docker' docker-security-group
- Created a new security_group:
- +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
- | Field                | Value                                                                                                                                                                                                                                                                                                                         |
- +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
- | description          | network access for docker                                                                                                                                                                                                                                                                                                     |
- | id                   | 2fc1b247-3b2d-4f2d-9270-0d164302ebb7                                                                                                                                                                                                                                                                                          |
- | name                 | docker-security-group                                                                                                                                                                                                                                                                                                         |
- | security_group_rules | {"remote_group_id": null, "direction": "egress", "remote_ip_prefix": null, "protocol": null, "tenant_id": "0cb6b9b744594a619b0b7340f424858b", "port_range_max": null, "security_group_id": "2fc1b247-3b2d-4f2d-9270-0d164302ebb7", "port_range_min": null, "ethertype": "IPv4", "id": "100a67fb-a4df-48fc-b42c-c383aac849fc"} |
- |                      | {"remote_group_id": null, "direction": "egress", "remote_ip_prefix": null, "protocol": null, "tenant_id": "0cb6b9b744594a619b0b7340f424858b", "port_range_max": null, "security_group_id": "2fc1b247-3b2d-4f2d-9270-0d164302ebb7", "port_range_min": null, "ethertype": "IPv6", "id": "3a9eaed9-ae56-4f80-8123-1bbc47aed57b"} |
- | tenant_id            | 0cb6b9b744594a619b0b7340f424858b                                                                                                                                                                                                                                                                                              |
- +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ $ openstack security group create --description 'network access for docker' docker-security-group
+ +-------------+---------------------------------------------------------------------------------+
+ | Field       | Value                                                                           |
+ +-------------+---------------------------------------------------------------------------------+
+ | description | network access for docker                                                       |
+ | headers     |                                                                                 |
+ | id          | f27b5889-8f43-4e57-ba99-8ea6b5d8da30                                            |
+ | name        | docker-security-group                                                           |
+ | project_id  | 3d5d40b4a6904e6db4dc5321f53d4f39                                                |
+ | rules       | direction='egress', ethertype='IPv4', id='ffaea025-3511-492f-b8ce-096df4089fd7' |
+ |             | direction='egress', ethertype='IPv6', id='00132465-6141-4842-ad5c-acd47c7a53f5' |
+ +-------------+---------------------------------------------------------------------------------+
 
 Now we need to create three rules:
 
@@ -95,25 +94,74 @@ Now we need to create three rules:
 * Inbound access to TCP port 2376 so our local client can communicate with the
   Docker Engine daemon
 
-You can issue the ``neutron security-group-list`` command to find your
+You can issue the ``openstack security group list`` command to find your
 ``SECURITY_GROUP_ID``:
 
 .. code-block:: bash
 
- $ neutron security-group-list
- +--------------------------------------+-----------------------+---------------------------+
- | id                                   | name                  | description               |
- +--------------------------------------+-----------------------+---------------------------+
- | 2fc1b247-3b2d-4f2d-9270-0d164302ebb7 | docker-security-group | network access for docker |
- | 687512ab-f197-4f07-ae51-788c559883b9 | default               | default                   |
- +--------------------------------------+-----------------------+---------------------------+
+ $ openstack security group list
+ +--------------------------------------+-----------------------+-----------------------------------------+----------------------------------+
+ | ID                                   | Name                  | Description                             | Project                          |
+ +--------------------------------------+-----------------------+-----------------------------------------+----------------------------------+
+ | 87426623-b895-4fa8-bf1b-b3ea6f074328 | default               | default                                 | 3d5d40b4a6904e6db4dc5321f53d4f39 |
+ | f27b5889-8f43-4e57-ba99-8ea6b5d8da30 | docker-security-group | network access for docker               | 3d5d40b4a6904e6db4dc5321f53d4f39 |
+ +--------------------------------------+-----------------------+-----------------------------------------+----------------------------------+
 
- $ for port in 22 80 2376; do echo neutron security-group-rule-create --direction ingress --protocol tcp \
-   --port-range-min $port --port-range-max $port --remote-ip-prefix YOUR_CIDR_NETWORK SECURITY_GROUP_ID; done
 
-If you are unsure of what YOUR_CIDR_NETWORK should be, ask your network admin,
-or visit http://ifconfig.me and get your IP address.  Use "IP_ADDRESS/32" as
-YOUR_CIDR_NETWORK to allow traffic only from your current effective IP.
+ $ for port in 22 80 2376; do openstack security group rule create --dst-port $port --ingress \
+   --protocol tcp --src-ip YOUR_CIDR_NETWORK SECURITY_GROUP_ID; done
+
+ +-------------------+--------------------------------------+
+ | Field             | Value                                |
+ +-------------------+--------------------------------------+
+ | direction         | ingress                              |
+ | ethertype         | IPv4                                 |
+ | headers           |                                      |
+ | id                | d988e327-01c7-4c80-8b72-8625b0ce425d |
+ | port_range_max    | 22                                   |
+ | port_range_min    | 22                                   |
+ | project_id        | 3d5d40b4a6904e6db4dc5321f53d4f39     |
+ | protocol          | tcp                                  |
+ | remote_group_id   | None                                 |
+ | remote_ip_prefix  | 114.110.38.54/32                     |
+ | security_group_id | f27b5889-8f43-4e57-ba99-8ea6b5d8da30 |
+ +-------------------+--------------------------------------+
+ +-------------------+--------------------------------------+
+ | Field             | Value                                |
+ +-------------------+--------------------------------------+
+ | direction         | ingress                              |
+ | ethertype         | IPv4                                 |
+ | headers           |                                      |
+ | id                | 01fad37d-518f-48f2-93d6-3eeb29b4fda5 |
+ | port_range_max    | 80                                   |
+ | port_range_min    | 80                                   |
+ | project_id        | 3d5d40b4a6904e6db4dc5321f53d4f39     |
+ | protocol          | tcp                                  |
+ | remote_group_id   | None                                 |
+ | remote_ip_prefix  | 114.110.38.54/32                     |
+ | security_group_id | f27b5889-8f43-4e57-ba99-8ea6b5d8da30 |
+ +-------------------+--------------------------------------+
+ +-------------------+--------------------------------------+
+ | Field             | Value                                |
+ +-------------------+--------------------------------------+
+ | direction         | ingress                              |
+ | ethertype         | IPv4                                 |
+ | headers           |                                      |
+ | id                | 3b4e03a7-4d3e-4d88-afc8-ecd968469b06 |
+ | port_range_max    | 2376                                 |
+ | port_range_min    | 2376                                 |
+ | project_id        | 3d5d40b4a6904e6db4dc5321f53d4f39     |
+ | protocol          | tcp                                  |
+ | remote_group_id   | None                                 |
+ | remote_ip_prefix  | 114.110.38.54/32                     |
+ | security_group_id | f27b5889-8f43-4e57-ba99-8ea6b5d8da30 |
+ +-------------------+--------------------------------------+
+
+
+If you are unsure of what ``YOUR_CIDR_NETWORK`` should be, ask your network
+admin, or visit http://ifconfig.me and get your IP address.  Use
+"IP_ADDRESS/32" as YOUR_CIDR_NETWORK to allow traffic only from your current
+effective IP.
 
 Create a Cloud VM using Docker Machine
 ======================================
@@ -131,7 +179,14 @@ progress and see any errors that may occur.
 .. code-block:: bash
 
  $ docker-machine --debug create --driver openstack --openstack-ssh-user ubuntu --openstack-image-name ubuntu-14.04-x86_64 --openstack-flavor-name c1.c1r1 \
-   --openstack-floatingip-pool public-net --openstack-sec-groups docker-security-group docker-engine-host
+   --openstack-net-name PRIVATE-NET-NAME --openstack-floatingip-pool public-net --openstack-sec-groups docker-security-group docker-engine-host
+
+.. note::
+
+  If your cloud tenant only has one private network defined then the
+  ``--openstack-net-name PRIVATE-NET-NAME`` can be omitted. If there is more
+  than one private network defined then ``PRIVATE-NET-NAME`` should be replaced
+  with the network you wish to connect the docker-engine-host to
 
 Now we need to tell our local client how to connect to the remote Docker Engine
 we have created:
@@ -147,25 +202,42 @@ interacting with the docker daemon in the cloud instance:
 
  $ docker info
  Containers: 0
+  Running: 0
+  Paused: 0
+  Stopped: 0
  Images: 0
+ Server Version: 1.12.1
  Storage Driver: aufs
   Root Dir: /var/lib/docker/aufs
   Backing Filesystem: extfs
   Dirs: 0
   Dirperm1 Supported: false
- Execution Driver: native-0.2
- Kernel Version: 3.13.0-63-generic
- Operating System: Ubuntu 14.04.3 LTS
+ Logging Driver: json-file
+ Cgroup Driver: cgroupfs
+ Plugins:
+  Volume: local
+  Network: null bridge host overlay
+ Swarm: inactive
+ Runtimes: runc
+ Default Runtime: runc
+ Security Options: apparmor
+ Kernel Version: 3.13.0-95-generic
+ Operating System: Ubuntu 14.04.5 LTS
+ OSType: linux
+ Architecture: x86_64
  CPUs: 1
  Total Memory: 993.9 MiB
  Name: docker-engine-host
- ID: UGVP:U52P:ORYW:26VK:OCXE:33OI:LADQ:E4LQ:ML5L:SHGU:XQZH:WIE7
- Http Proxy:
- Https Proxy:
- No Proxy:
+ ID: UERI:SGSA:5SDC:W7HF:Z3DC:Y5H3:FOKJ:OQO5:YSYG:BPYR:BOBY:4VDV
+ Docker Root Dir: /var/lib/docker
+ Debug Mode (client): false
+ Debug Mode (server): false
+ Registry: https://index.docker.io/v1/
  WARNING: No swap limit support
  Labels:
   provider=openstack
+ Insecure Registries:
+  127.0.0.0/8
 
 .. note::
 
@@ -194,34 +266,26 @@ Now lets create a our image:
 
 .. code-block:: bash
 
- $ docker build -t yourname/nginx .
- Sending build context to Docker daemon 24.37 MB
- Sending build context to Docker daemon
- Step 0 : FROM nginx
- latest: Pulling from library/nginx
- 843e2bded498: Pull complete
- 8c00acfb0175: Pull complete
- 426ac73b867e: Pull complete
- d6c6bbd63f57: Pull complete
- 4ac684e3f295: Pull complete
- 91391bd3c4d3: Pull complete
- b4587525ed53: Pull complete
- 0240288f5187: Pull complete
- 28c109ec1572: Pull complete
- 063d51552dac: Pull complete
- d8a70839d961: Pull complete
- ceab60537ad2: Pull complete
- Digest: sha256:9d0768452fe8f43c23292d24ec0fbd0ce06c98f776a084623d62ee12c4b7d58c
- Status: Downloaded newer image for nginx:latest
-  ---> ceab60537ad2
- Step 1 : MAINTAINER Yourname Yoursurname <yourname@example.com>
-  ---> Running in e273723984fc
-  ---> 007bd52c229f
- Removing intermediate container e273723984fc
- Step 2 : COPY index.html /usr/share/nginx/html/index.html
-  ---> c129a8d2eb17
- Removing intermediate container 649645c47ca9
- Successfully built c129a8d2eb17
+  $ docker build -t yourname/nginx .
+  Sending build context to Docker daemon 3.072 kB
+  Step 1 : FROM nginx
+  latest: Pulling from library/nginx
+
+  8ad8b3f87b37: Pull complete
+  c6b290308f88: Pull complete
+  f8f1e94eb9a9: Pull complete
+  Digest: sha256:aa5ac743d65e434c06fff5ceaab6f35cc8519d80a5b6767ed3bdb330f47e4c31
+  Status: Downloaded newer image for nginx:latest
+   ---> 4a88d06e26f4
+  Step 2 : MAINTAINER Yourname Yoursurname <yourname@example.com>
+   ---> Running in 0ec25b1c7689
+   ---> 9e2a7f2166b4
+  Removing intermediate container 0ec25b1c7689
+  Step 3 : COPY index.html /usr/share/nginx/html/index.html
+   ---> 11bcf58d424a
+  Removing intermediate container 642408c201d3
+  Successfully built 11bcf58d424a
+
 
 .. note::
 
@@ -239,14 +303,15 @@ Lets check we have a running container:
 .. code-block:: bash
 
  $ docker ps
- CONTAINER ID        IMAGE               COMMAND                CREATED                  STATUS              PORTS                         NAMES
- 3f47ef854fbe        yourname/nginx      "nginx -g 'daemon of   Less than a second ago   Up About a minute   0.0.0.0:80->80/tcp, 443/tcp   naughty_bell
+ CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                         NAMES
+ eac317f0642b        yourname/nginx    "nginx -g 'daemon off"   10 seconds ago      Up 9 seconds        0.0.0.0:80->80/tcp, 443/tcp   amazing_pike
+
 
 Now lets hit the external IP to verify we have everything working:
 
 .. code-block:: bash
 
- $ curl $( nova show --minimal docker-engine-host | grep network | awk '{print $(NF-1)}' )
+ $ curl $( openstack server show docker-engine-host | grep addresses | awk '{print $(NF-1)}' )
  <html>
  <h3>Hello, Docker World!</h3>
  </html>
@@ -257,7 +322,7 @@ generated by Docker Machine:
 .. code-block:: bash
 
  $ ssh -i ~/.docker/machine/machines/docker-engine-host/id_rsa \
-   ubuntu@$( nova show --minimal docker-engine-host | grep network | awk '{print $(NF-1)}' )
+   ubuntu@$( openstack server show docker-engine-host | grep addresses | awk '{print $(NF-1)}' )
 
 If you wish to interact with the Docker Engine on the cloud instance you will
 need to use ``sudo``:
@@ -278,4 +343,3 @@ Documentation
 .. _Docker Machine Documentation: https://www.docker.com/docker-machine
 .. _Docker Machine Installation Documentation: https://docs.docker.com/machine/install-machine/
 .. _Docker Machine OpenStack Driver Documentation: https://docs.docker.com/machine/drivers/openstack/
-
