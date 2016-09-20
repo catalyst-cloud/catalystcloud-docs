@@ -24,9 +24,15 @@ about configuring ``allowed_address_pairs`` in heat was sourced from this
 
 
 We will be using two different methods to setup this stack. Initially we will
-use the ``neutron`` and ``nova``  command line tools to complete the setup
+use the ``openstack`` command line tool to complete the setup
 manually. We will then replicate the manual configuration using a ``heat``
 template to instantiate the same stack automatically.
+
+.. note::
+
+  Due to some functionality not yet being available in the ``openstack``
+  command line tool it is still necessary to use the ``neutron`` & ``nova``
+  tools for certain operations.
 
 Virtual Router Redundancy Protocol
 ==================================
@@ -76,28 +82,34 @@ Let's double check that this extension is available on the Catalyst Cloud:
 
 .. code-block:: bash
 
- $ neutron ext-list
- +-----------------------+-----------------------------------------------+
- | alias                 | name                                          |
- +-----------------------+-----------------------------------------------+
- | service-type          | Neutron Service Type Management               |
- | security-group        | security-group                                |
- | l3_agent_scheduler    | L3 Agent Scheduler                            |
- | ext-gw-mode           | Neutron L3 Configurable external gateway mode |
- | binding               | Port Binding                                  |
- | metering              | Neutron Metering                              |
- | agent                 | agent                                         |
- | quotas                | Quota management support                      |
- | dhcp_agent_scheduler  | DHCP Agent Scheduler                          |
- | multi-provider        | Multi Provider Network                        |
- | external-net          | Neutron external network                      |
- | router                | Neutron L3 Router                             |
- | allowed-address-pairs | Allowed Address Pairs                         |
- | vpnaas                | VPN service                                   |
- | extra_dhcp_opt        | Neutron Extra DHCP opts                       |
- | provider              | Provider Network                              |
- | extraroute            | Neutron Extra Route                           |
- +-----------------------+-----------------------------------------------+
+ $ openstack extension list --network -c Name -c Alias
+ +-----------------------------------------------+-----------------------+
+ | Name                                          | Alias                 |
+ +-----------------------------------------------+-----------------------+
+ | DNS Integration                               | dns-integration       |
+ | Neutron L3 Configurable external gateway mode | ext-gw-mode           |
+ | Port Binding                                  | binding               |
+ | agent                                         | agent                 |
+ | Subnet Allocation                             | subnet_allocation     |
+ | L3 Agent Scheduler                            | l3_agent_scheduler    |
+ | Neutron external network                      | external-net          |
+ | Neutron Service Flavors                       | flavors               |
+ | Network MTU                                   | net-mtu               |
+ | Quota management support                      | quotas                |
+ | HA Router extension                           | l3-ha                 |
+ | Provider Network                              | provider              |
+ | Multi Provider Network                        | multi-provider        |
+ | VPN service                                   | vpnaas                |
+ | Neutron Extra Route                           | extraroute            |
+ | Neutron Extra DHCP opts                       | extra_dhcp_opt        |
+ | Neutron Service Type Management               | service-type          |
+ | security-group                                | security-group        |
+ | DHCP Agent Scheduler                          | dhcp_agent_scheduler  |
+ | RBAC Policies                                 | rbac-policies         |
+ | Neutron L3 Router                             | router                |
+ | Allowed Address Pairs                         | allowed-address-pairs |
+ | Distributed Virtual Router                    | dvr                   |
+ +-----------------------------------------------+-----------------------+
 
 As you can see, the Allowed Address Pairs extension is available.
 
@@ -122,19 +134,22 @@ available hosts:
 
 .. code-block:: bash
 
- $ neutron net-create vrrp-net
- Created a new network:
- +----------------+--------------------------------------+
- | Field          | Value                                |
- +----------------+--------------------------------------+
- | admin_state_up | True                                 |
- | id             | 617ff618-9da6-4c47-ab3f-527fe5413ea8 |
- | name           | vrrp-net                             |
- | shared         | False                                |
- | status         | ACTIVE                               |
- | subnets        |                                      |
- | tenant_id      | 0cb6b9b744594a619b0b7340f424858b     |
- +----------------+--------------------------------------+
+ $ openstack network create vrrp-net
+ +-----------------+--------------------------------------+
+ | Field           | Value                                |
+ +-----------------+--------------------------------------+
+ | admin_state_up  | UP                                   |
+ | headers         |                                      |
+ | id              | 98ec34ba-b25e-4720-ae5e-ab7a87fadc51 |
+ | mtu             | 0                                    |
+ | name            | vrrp-net                             |
+ | project_id      | <PROJECT_ID>                         |
+ | router:external | Internal                             |
+ | shared          | False                                |
+ | status          | ACTIVE                               |
+ | subnets         |                                      |
+ +-----------------+--------------------------------------+
+
 
 Now let's set up a subnet of the network we have just created. We are going to
 do this so we can use part of the ``vrrp-net`` as a dynamically assigned pool
@@ -144,52 +159,57 @@ this case the pool addresses are in the range 2-200 while the remainder of the
 
 .. code-block:: bash
 
- $ neutron subnet-create --name vrrp-subnet --allocation-pool \
-   start=10.0.0.2,end=10.0.0.200 vrrp-net 10.0.0.0/24
- Created a new subnet:
- +------------------+--------------------------------------------+
- | Field            | Value                                      |
- +------------------+--------------------------------------------+
- | allocation_pools | {"start": "10.0.0.2", "end": "10.0.0.200"} |
- | cidr             | 10.0.0.0/24                                |
- | dns_nameservers  |                                            |
- | enable_dhcp      | True                                       |
- | gateway_ip       | 10.0.0.1                                   |
- | host_routes      |                                            |
- | id               | 7c3ca3d4-70a2-4fdd-be9e-4b6bd1eef537       |
- | ip_version       | 4                                          |
- | name             | vrrp-subnet                                |
- | network_id       | 617ff618-9da6-4c47-ab3f-527fe5413ea8       |
- | tenant_id        | 0cb6b9b744594a619b0b7340f424858b           |
- +------------------+--------------------------------------------+
+ $ openstack subnet create --network vrrp-net --allocation-pool start=10.0.0.2,end=10.0.0.200 --subnet-range 10.0.0.0/24 vrrp-subnet
+ +-------------------+--------------------------------------+
+ | Field             | Value                                |
+ +-------------------+--------------------------------------+
+ | allocation_pools  | 10.0.0.2-10.0.0.200                  |
+ | cidr              | 10.0.0.0/24                          |
+ | dns_nameservers   |                                      |
+ | enable_dhcp       | True                                 |
+ | gateway_ip        | 10.0.0.1                             |
+ | headers           |                                      |
+ | host_routes       |                                      |
+ | id                | cd376d6f-42f4-46c2-8988-717b2f642af4 |
+ | ip_version        | 4                                    |
+ | ipv6_address_mode | None                                 |
+ | ipv6_ra_mode      | None                                 |
+ | name              | vrrp-subnet                          |
+ | network_id        | 98ec34ba-b25e-4720-ae5e-ab7a87fadc51 |
+ | project_id        | <PROJECT_ID>                         |
+ | subnetpool_id     | None                                 |
+ +-------------------+--------------------------------------+
+
 
 Next we will create a router, we will give this router an interface on our new
 subnet and we will set its gateway as our public network:
 
 .. code-block:: bash
 
- $ neutron router-create vrrp-router
- Created a new router:
+ $ openstack router create vrrp-router
  +-----------------------+--------------------------------------+
  | Field                 | Value                                |
  +-----------------------+--------------------------------------+
- | admin_state_up        | True                                 |
- | external_gateway_info |                                      |
- | id                    | 8e9df7a5-0d5a-4574-bbbe-b4db35616efa |
+ | admin_state_up        | UP                                   |
+ | external_gateway_info | null                                 |
+ | headers               |                                      |
+ | id                    | 78701fa1-e831-4987-a26e-3c24a245294c |
  | name                  | vrrp-router                          |
+ | project_id            | <PROJECT_ID>                         |
+ | routes                |                                      |
  | status                | ACTIVE                               |
- | tenant_id             | 0cb6b9b744594a619b0b7340f424858b     |
  +-----------------------+--------------------------------------+
 
- $ neutron router-interface-add vrrp-router vrrp-subnet
- Added interface 7e11450c-b605-4931-a304-0d864e205ed2 to router vrrp-router.
+
+ $ openstack router add subnet vrrp-router vrrp-subnet
 
  $ neutron router-gateway-set vrrp-router public-net
  Set gateway for router vrrp-router
 
 .. note::
 
- If you look at the ports created at this point using the ``neutron port-list`` command you will notice three interfaces have been created. The ip 10.0.0.1 is the gateway address while 10.0.0.2 and 10.0.0.3 provide DHCP for this network.
+ * The previous command uses the old ``neutron`` command rather than the ``openstack`` command as setting router gateways is not yet implemented in the new client.
+ * If you look at the ports created at this point using the ``openstack port list -c ID -c 'Fixed IP Addresses'`` command you will notice three interfaces have been created. The ip 10.0.0.1 is the gateway address while 10.0.0.2 and 10.0.0.3 provide DHCP for this network.
 
 
 Security Group Setup
@@ -200,91 +220,94 @@ allow http, ssh and icmp ingres:
 
 .. code-block:: bash
 
- $ neutron security-group-create vrrp-sec-group
- Created a new security_group:
- +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
- | Field                | Value                                                                                                                                                                                                                                                                                                                         |
- +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
- | description          |                                                                                                                                                                                                                                                                                                                               |
- | id                   | 3d50882c-c8b8-4c39-9758-390593a5774b                                                                                                                                                                                                                                                                                          |
- | name                 | vrrp-sec-group                                                                                                                                                                                                                                                                                                                |
- | security_group_rules | {"remote_group_id": null, "direction": "egress", "remote_ip_prefix": null, "protocol": null, "tenant_id": "0cb6b9b744594a619b0b7340f424858b", "port_range_max": null, "security_group_id": "3d50882c-c8b8-4c39-9758-390593a5774b", "port_range_min": null, "ethertype": "IPv4", "id": "33d9bf4b-03a2-4169-a47d-1116345d9e1d"} |
- |                      | {"remote_group_id": null, "direction": "egress", "remote_ip_prefix": null, "protocol": null, "tenant_id": "0cb6b9b744594a619b0b7340f424858b", "port_range_max": null, "security_group_id": "3d50882c-c8b8-4c39-9758-390593a5774b", "port_range_min": null, "ethertype": "IPv6", "id": "2e192759-871c-449f-ab67-cc9f03ed2f35"} |
- | tenant_id            | 0cb6b9b744594a619b0b7340f424858b                                                                                                                                                                                                                                                                                              |
- +----------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+ $ openstack security group create --description 'VRRP security group' vrrp-sec-group
+ +-------------+---------------------------------------------------------------------------------+
+ | Field       | Value                                                                           |
+ +-------------+---------------------------------------------------------------------------------+
+ | description | VRRP security group                                                             |
+ | headers     |                                                                                 |
+ | id          | f981cd9a-14fe-4aff-bccf-a60957a32023                                            |
+ | name        | vrrp-sec-group                                                                  |
+ | project_id  | <PROJECT_ID>                                                                    |
+ | rules       | direction='egress', ethertype='IPv4', id='8aa56d18-4b41-4d4a-9cf4-1c2ca0ce2f4e' |
+ |             | direction='egress', ethertype='IPv6', id='bc6ab597-e58f-405c-9b2a-685be0091d26' |
+ +-------------+---------------------------------------------------------------------------------+
 
- $ neutron security-group-rule-create --protocol icmp vrrp-sec-group
- Created a new security_group_rule:
+ $ openstack security group rule create --ingress --protocol icmp vrrp-sec-group
  +-------------------+--------------------------------------+
  | Field             | Value                                |
  +-------------------+--------------------------------------+
  | direction         | ingress                              |
  | ethertype         | IPv4                                 |
- | id                | 9ddcc056-0915-4365-a303-a5a1d691c87e |
- | port_range_max    |                                      |
- | port_range_min    |                                      |
+ | headers           |                                      |
+ | id                | 269fe470-9d8c-40d8-ba4a-5261a4ff757a |
+ | port_range_max    | None                                 |
+ | port_range_min    | None                                 |
+ | project_id        | <PROJECT_ID>                         |
  | protocol          | icmp                                 |
- | remote_group_id   |                                      |
- | remote_ip_prefix  |                                      |
- | security_group_id | 3d50882c-c8b8-4c39-9758-390593a5774b |
- | tenant_id         | 0cb6b9b744594a619b0b7340f424858b     |
+ | remote_group_id   | None                                 |
+ | remote_ip_prefix  | 0.0.0.0/0                            |
+ | security_group_id | f981cd9a-14fe-4aff-bccf-a60957a32023 |
  +-------------------+--------------------------------------+
 
- $ neutron security-group-rule-create --protocol tcp --port-range-min 80 --port-range-max 80 vrrp-sec-group
- Created a new security_group_rule:
+
+ $ openstack security group rule create --ingress --protocol tcp --dst-port 80 vrrp-sec-group
  +-------------------+--------------------------------------+
  | Field             | Value                                |
  +-------------------+--------------------------------------+
  | direction         | ingress                              |
  | ethertype         | IPv4                                 |
- | id                | 55cbfd57-03c5-4ed8-a760-33453b447669 |
+ | headers           |                                      |
+ | id                | 15e64147-1ed1-41f3-8dc1-a827877f726e |
  | port_range_max    | 80                                   |
  | port_range_min    | 80                                   |
+ | project_id        | <PROJECT_ID>                         |
  | protocol          | tcp                                  |
- | remote_group_id   |                                      |
- | remote_ip_prefix  |                                      |
- | security_group_id | 3d50882c-c8b8-4c39-9758-390593a5774b |
- | tenant_id         | 0cb6b9b744594a619b0b7340f424858b     |
+ | remote_group_id   | None                                 |
+ | remote_ip_prefix  | 0.0.0.0/0                            |
+ | security_group_id | f981cd9a-14fe-4aff-bccf-a60957a32023 |
  +-------------------+--------------------------------------+
 
- $ neutron security-group-rule-create --protocol tcp --port-range-min 22 --port-range-max 22 vrrp-sec-group
- Created a new security_group_rule:
+ $ openstack security group rule create --ingress --protocol tcp --dst-port 22 vrrp-sec-group
  +-------------------+--------------------------------------+
  | Field             | Value                                |
  +-------------------+--------------------------------------+
  | direction         | ingress                              |
  | ethertype         | IPv4                                 |
- | id                | e9c0d635-e1bb-498d-8bd2-64e4a4d553c3 |
+ | headers           |                                      |
+ | id                | fb2a36d9-bb6e-4c73-b86f-0a45728e6872 |
  | port_range_max    | 22                                   |
  | port_range_min    | 22                                   |
+ | project_id        | <PROJECT_ID>                         |
  | protocol          | tcp                                  |
- | remote_group_id   |                                      |
- | remote_ip_prefix  |                                      |
- | security_group_id | 3d50882c-c8b8-4c39-9758-390593a5774b |
- | tenant_id         | 0cb6b9b744594a619b0b7340f424858b     |
+ | remote_group_id   | None                                 |
+ | remote_ip_prefix  | 0.0.0.0/0                            |
+ | security_group_id | f981cd9a-14fe-4aff-bccf-a60957a32023 |
  +-------------------+--------------------------------------+
+
 
 Next we will add a rule to allow our Keepalived instances to communicate with
 each other via VRRP broadcasts:
 
 .. code-block:: bash
 
- $ neutron security-group-rule-create --protocol 112 --remote-group-id vrrp-sec-group vrrp-sec-group
- Created a new security_group_rule:
+ $ openstack security group rule create --protocol 112 --src-group vrrp-sec-group vrrp-sec-group
  +-------------------+--------------------------------------+
  | Field             | Value                                |
  +-------------------+--------------------------------------+
  | direction         | ingress                              |
  | ethertype         | IPv4                                 |
- | id                | 2c10b6fd-5729-480d-a4f8-88fe1286dceb |
- | port_range_max    |                                      |
- | port_range_min    |                                      |
+ | headers           |                                      |
+ | id                | 3645d670-9cb5-4194-8352-16c5304f1e19 |
+ | port_range_max    | None                                 |
+ | port_range_min    | None                                 |
+ | project_id        | <PROJECT_ID>                         |
  | protocol          | 112                                  |
- | remote_group_id   | 3d50882c-c8b8-4c39-9758-390593a5774b |
- | remote_ip_prefix  |                                      |
- | security_group_id | 3d50882c-c8b8-4c39-9758-390593a5774b |
- | tenant_id         | 0cb6b9b744594a619b0b7340f424858b     |
+ | remote_group_id   | f981cd9a-14fe-4aff-bccf-a60957a32023 |
+ | remote_ip_prefix  | None                                 |
+ | security_group_id | f981cd9a-14fe-4aff-bccf-a60957a32023 |
  +-------------------+--------------------------------------+
+
 
 Instance Creation
 =================
@@ -302,20 +325,20 @@ To find the correct IDs you can use the following commands:
 
 .. code-block:: bash
 
- $ VRRP_IMAGE_ID=$(glance image-show ubuntu-14.04-x86_64 | grep ' id '| awk '{ print $4 }') && echo $VRRP_IMAGE_ID
- 9eab2d64-818c-4548-980d-535412d16249
+ $ VRRP_IMAGE_ID=$( openstack image show ubuntu-14.04-x86_64 -f value -c id ) && echo $VRRP_IMAGE_ID
+ cab9f3f4-a3a5-488b-885e-892873c15f53
 
- $ VRRP_FLAVOR_ID=$(nova flavor-list | grep 'c1.c1r1' | awk '{ print $2 }') && echo $VRRP_FLAVOR_ID
+ $ VRRP_FLAVOR_ID=$( openstack flavor show c1.c1r1 -f value -c id ) && echo $VRRP_FLAVOR_ID
  28153197-6690-4485-9dbc-fc24489b0683
 
- $ VRRP_NET_ID=$(neutron net-show vrrp-net | grep ' id '| awk '{ print $4 }') && echo $VRRP_NET_ID
- 617ff618-9da6-4c47-ab3f-527fe5413ea8
+ $ VRRP_NET_ID=$( openstack network show vrrp-net -f value -c id ) && echo $VRRP_NET_ID
+ 98ec34ba-b25e-4720-ae5e-ab7a87fadc51
 
- $ nova keypair-list
+ $ openstack keypair list
  +------------------+-------------------------------------------------+
  | Name             | Fingerprint                                     |
  +------------------+-------------------------------------------------+
- | vrrp-demo-key    | 9a:17:a8:1f:48:a4:f4:0d:c8:1b:ee:de:d4:a1:60:0b |
+ | vrrp-demo-key    | <SSH_KEY_FINGERPRINT>                           |
  +------------------+-------------------------------------------------+
 
 We will be passing a script to our instance boot command using the
@@ -372,54 +395,57 @@ path to the ``vrrp-setup.sh`` script):
 
 .. code-block:: bash
 
- $ nova boot --image $VRRP_IMAGE_ID --flavor $VRRP_FLAVOR_ID --nic net-id=$VRRP_NET_ID --security_groups \
-   vrrp-sec-group --user-data vrrp-setup.sh --key_name vrrp-demo-key vrrp-master
-
+ $ openstack server create --image $VRRP_IMAGE_ID --flavor $VRRP_FLAVOR_ID --nic net-id=$VRRP_NET_ID \
+ --security-group vrrp-sec-group --user-data vrrp-setup.sh --key-name vrrp-demo-key vrrp-master
  +--------------------------------------+------------------------------------------------------------+
- | Property                             | Value                                                      |
+ | Field                                | Value                                                      |
  +--------------------------------------+------------------------------------------------------------+
  | OS-DCF:diskConfig                    | MANUAL                                                     |
- | OS-EXT-AZ:availability_zone          | nz-por-1a                                                  |
- | OS-EXT-STS:power_state               | 0                                                          |
+ | OS-EXT-AZ:availability_zone          |                                                            |
+ | OS-EXT-STS:power_state               | NOSTATE                                                    |
  | OS-EXT-STS:task_state                | scheduling                                                 |
  | OS-EXT-STS:vm_state                  | building                                                   |
- | OS-SRV-USG:launched_at               | -                                                          |
- | OS-SRV-USG:terminated_at             | -                                                          |
+ | OS-SRV-USG:launched_at               | None                                                       |
+ | OS-SRV-USG:terminated_at             | None                                                       |
  | accessIPv4                           |                                                            |
  | accessIPv6                           |                                                            |
- | adminPass                            | p7GmoGyK2HDP                                               |
+ | addresses                            |                                                            |
+ | adminPass                            | <ADMIN_PASSWD>                                             |
  | config_drive                         |                                                            |
- | created                              | 2015-08-26T03:57:15Z                                       |
+ | created                              | 2016-09-08T03:39:09Z                                       |
  | flavor                               | c1.c1r1 (28153197-6690-4485-9dbc-fc24489b0683)             |
  | hostId                               |                                                            |
- | id                                   | ebd4b72f-6fcf-4e1d-ad7d-507b944f86df                       |
- | image                                | ubuntu-14.04-x86_64 (9eab2d64-818c-4548-980d-535412d16249) |
+ | id                                   | <INSTANCE_ID>                                              |
+ | image                                | ubuntu-14.04-x86_64 (cab9f3f4-a3a5-488b-885e-892873c15f53) |
  | key_name                             | vrrp-demo-key                                              |
- | metadata                             | {}                                                         |
  | name                                 | vrrp-master                                                |
  | os-extended-volumes:volumes_attached | []                                                         |
  | progress                             | 0                                                          |
- | security_groups                      | vrrp-sec-group                                             |
+ | project_id                           | <PROJECT_ID>                                               |
+ | properties                           |                                                            |
+ | security_groups                      | [{u'name': u'vrrp-sec-group'}]                             |
  | status                               | BUILD                                                      |
- | tenant_id                            | 0cb6b9b744594a619b0b7340f424858b                           |
- | updated                              | 2015-08-26T03:57:15Z                                       |
- | user_id                              | 8c1914eda99d406195674864f2846d45                           |
+ | updated                              | 2016-09-08T03:39:10Z                                       |
+ | user_id                              | <USER_ID>                                                  |
  +--------------------------------------+------------------------------------------------------------+
 
- $ nova boot --image $VRRP_IMAGE_ID --flavor $VRRP_FLAVOR_ID --nic net-id=$VRRP_NET_ID --security_groups \
-   vrrp-sec-group --user-data vrrp-setup.sh --key_name vrrp-demo-key vrrp-backup
+
+ $ openstack server create --image $VRRP_IMAGE_ID --flavor $VRRP_FLAVOR_ID --nic net-id=$VRRP_NET_ID \
+ --security-group vrrp-sec-group --user-data vrrp-setup.sh --key-name vrrp-demo-key vrrp-backup
 
 Let's check the instances have been created:
 
 .. code-block:: bash
 
- $ nova list
- +--------------------------------------+-------------+--------+------------+-------------+-------------------+
- | ID                                   | Name        | Status | Task State | Power State | Networks          |
- +--------------------------------------+-------------+--------+------------+-------------+-------------------+
- | ebd4b72f-6fcf-4e1d-ad7d-507b944f86df | vrrp-master | ACTIVE | -          | Running     | vrrp-net=10.0.0.4 |
- | f980dc30-9d3e-4e47-adf5-8f6715be6a8a | vrrp-backup | ACTIVE | -          | Running     | vrrp-net=10.0.0.5 |
- +--------------------------------------+-------------+--------+------------+-------------+-------------------+
+ $ openstack server list
+ +---------------------------------+-------------------------+---------+---------------------------------+------------------------------+
+ | ID                              | Name                    | Status  | Networks                        | Image Name                   |
+ +---------------------------------+-------------------------+---------+---------------------------------+------------------------------+
+ | d920fa78-a463-4e17-90de-        | vrrp-backup             | ACTIVE  | vrrp-net=10.0.0.5               | ubuntu-14.04-x86_64          |
+ | d3167b97a4a3                    |                         |         |                                 |                              |
+ | ffebb72c-                       | vrrp-master             | ACTIVE  | vrrp-net=10.0.0.4               | ubuntu-14.04-x86_64          |
+ | 54f7-4a25-a8a9-d164259f8fa5     |                         |         |                                 |                              |
+ +---------------------------------+-------------------------+---------+---------------------------------+------------------------------+
 
 Virtual Address Setup
 =====================
@@ -429,48 +455,51 @@ router:
 
 .. code-block:: bash
 
- $ neutron port-create --fixed-ip ip_address=10.0.0.201 --security-group vrrp-sec-group vrrp-net
- Created a new port:
- +-----------------------+-----------------------------------------------------------------------------------+
- | Field                 | Value                                                                             |
- +-----------------------+-----------------------------------------------------------------------------------+
- | admin_state_up        | True                                                                              |
- | allowed_address_pairs |                                                                                   |
- | binding:vnic_type     | normal                                                                            |
- | device_id             |                                                                                   |
- | device_owner          |                                                                                   |
- | fixed_ips             | {"subnet_id": "7c3ca3d4-70a2-4fdd-be9e-4b6bd1eef537", "ip_address": "10.0.0.201"} |
- | id                    | 40aa1a50-4a96-4103-beaf-89bdb0b49327                                              |
- | mac_address           | fa:16:3e:40:69:5f                                                                 |
- | name                  |                                                                                   |
- | network_id            | 617ff618-9da6-4c47-ab3f-527fe5413ea8                                              |
- | security_groups       | 3d50882c-c8b8-4c39-9758-390593a5774b                                              |
- | status                | DOWN                                                                              |
- | tenant_id             | 0cb6b9b744594a619b0b7340f424858b                                                  |
- +-----------------------+-----------------------------------------------------------------------------------+
+ $ openstack port create --network vrrp-net --fixed-ip ip-address=10.0.0.201 vrrp-port
+ +-----------------------+---------------------------------------------------------------------------------------------+
+ | Field                 | Value                                                                                       |
+ +-----------------------+---------------------------------------------------------------------------------------------+
+ | admin_state_up        | UP                                                                                          |
+ | allowed_address_pairs |                                                                                             |
+ | binding_vnic_type     | normal                                                                                      |
+ | device_id             |                                                                                             |
+ | device_owner          |                                                                                             |
+ | dns_assignment        | fqdn='host-10-0-0-201.openstacklocal.', hostname='host-10-0-0-201', ip_address='10.0.0.201' |
+ | dns_name              |                                                                                             |
+ | fixed_ips             | ip_address='10.0.0.201', subnet_id='cd376d6f-42f4-46c2-8988-717b2f642af4'                   |
+ | headers               |                                                                                             |
+ | id                    | aa70e5e7-0dcb-4de2-8ccc-033b1851fa01                                                        |
+ | mac_address           | fa:16:3e:36:8e:f2                                                                           |
+ | name                  | vrrp-port                                                                                   |
+ | network_id            | 98ec34ba-b25e-4720-ae5e-ab7a87fadc51                                                        |
+ | project_id            | <PROJECT_ID>                                                                                |
+ | security_groups       | 87426623-b895-4fa8-bf1b-b3ea6f074328                                                        |
+ | status                | DOWN                                                                                        |
+ +-----------------------+---------------------------------------------------------------------------------------------+
+
 
 Now we need to create a floating IP and point it to our virtual router IP using
 its port ID:
 
 .. code-block:: bash
 
- $ VRRP_VR_PORT_ID=$(neutron port-list | grep '10.0.0.201' | awk '{ print $2 }') && echo $VRRP_VR_PORT_ID
- 40aa1a50-4a96-4103-beaf-89bdb0b49327
+ $ VRRP_VR_PORT_ID=$(openstack port list | grep 10.0.0.201 | awk '{ print $2 }') && echo $VRRP_VR_PORT_ID
 
- $ neutron floatingip-create --port-id=$VRRP_VR_PORT_ID public-net
- Created a new floatingip:
+ $ openstack floating ip create --port $VRRP_VR_PORT_ID public-net
  +---------------------+--------------------------------------+
  | Field               | Value                                |
  +---------------------+--------------------------------------+
  | fixed_ip_address    | 10.0.0.201                           |
- | floating_ip_address | 150.242.40.102                       |
+ | floating_ip_address | 150.242.40.101                       |
  | floating_network_id | 849ab1e9-7ac5-4618-8801-e6176fbbcf30 |
- | id                  | 1247fd9d-af4b-448b-9635-51b7a71f56ad |
- | port_id             | 40aa1a50-4a96-4103-beaf-89bdb0b49327 |
- | router_id           | 8e9df7a5-0d5a-4574-bbbe-b4db35616efa |
+ | headers             |                                      |
+ | id                  | a4209b06-74f5-4ea8-91c0-832ff75aa612 |
+ | port_id             | deb027b4-0c3a-4c9e-a5e3-282313e1cb3c |
+ | project_id          | <PROJECT_ID>                         |
+ | router_id           | f14dfd59-0bb4-4bc2-b01b-c808d33bc775 |
  | status              | DOWN                                 |
- | tenant_id           | 0cb6b9b744594a619b0b7340f424858b     |
  +---------------------+--------------------------------------+
+
 
 Next up we update the ports associated with each instance to allow the virtual
 router IP as an ``allowed-address-pair``. This will allow them to send traffic
@@ -478,10 +507,10 @@ using this address.
 
 .. code-block:: bash
 
- $ VRRP_MASTER_PORT=$(neutron port-list -- --network_id=$VRRP_NET_ID | grep '10.0.0.4' | awk '{ print $2 }') && echo $VRRP_MASTER_PORT
+ $ VRRP_MASTER_PORT=$(openstack port list | grep '10.0.0.4' | awk '{ print $2 }') && echo $VRRP_MASTER_PORT
  8f1997e4-fd12-41df-9fb9-d4605e5157d8
 
- $ VRRP_BACKUP_PORT=$(neutron port-list -- --network_id=$VRRP_NET_ID | grep '10.0.0.5' | awk '{ print $2 }') && echo $VRRP_BACKUP_PORT
+ $ VRRP_BACKUP_PORT=$(openstack port list | grep '10.0.0.5' | awk '{ print $2 }') && echo $VRRP_BACKUP_PORT
  1736183d-8beb-4131-bb60-eb447bcb18f4
 
  $ neutron port-update $VRRP_MASTER_PORT --allowed_address_pairs list=true type=dict ip_address=10.0.0.201
@@ -490,12 +519,13 @@ using this address.
  $ neutron port-update $VRRP_BACKUP_PORT --allowed_address_pairs list=true type=dict ip_address=10.0.0.201
  Updated port: 1736183d-8beb-4131-bb60-eb447bcb18f4
 
+
 Check that the virtual router address is associated with this port under
 ``allowed_address_pairs``:
 
 .. code-block:: bash
 
- $ neutron port-show $VRRP_MASTER_PORT
+ $ openstack port show $VRRP_MASTER_PORT
  +-----------------------+---------------------------------------------------------------------------------+
  | Field                 | Value                                                                           |
  +-----------------------+---------------------------------------------------------------------------------+
@@ -531,7 +561,7 @@ to curl the floating IP associated with our virtual router:
 
 .. code-block:: bash
 
- $ VRRP_FLOATING_IP=$(neutron floatingip-list | grep 10.0.0.201 | awk '{ print $6 }') && echo $VRRP_FLOATING_IP
+ $ VRRP_FLOATING_IP=$(openstack floating ip list | grep 10.0.0.201 | awk '{ print $4 }') && echo $VRRP_FLOATING_IP
  150.242.40.121
  $ curl $VRRP_FLOATING_IP
  vrrp-master
@@ -542,8 +572,7 @@ to the backup:
 
 .. code-block:: bash
 
- $ neutron port-update $VRRP_MASTER_PORT --admin_state_up=False
- Updated port: 8f1997e4-fd12-41df-9fb9-d4605e5157d8
+ $ os port set $VRRP_MASTER_PORT --disable
 
 Curl again:
 
@@ -565,35 +594,37 @@ IP to each instance for SSH access.
 
 .. code-block:: bash
 
- $ neutron floatingip-create --port-id=$VRRP_MASTER_PORT public-net
- Created a new floatingip:
+ $ openstack floating ip create --port $VRRP_MASTER_PORT public-net
  +---------------------+--------------------------------------+
  | Field               | Value                                |
  +---------------------+--------------------------------------+
  | fixed_ip_address    | 10.0.0.4                             |
- | floating_ip_address | 150.242.40.110                       |
+ | floating_ip_address | 150.242.42.223                       |
  | floating_network_id | 849ab1e9-7ac5-4618-8801-e6176fbbcf30 |
- | id                  | e411608f-7548-45a5-98e5-d1f55b92a350 |
- | port_id             | 8f1997e4-fd12-41df-9fb9-d4605e5157d8 |
- | router_id           | 8e9df7a5-0d5a-4574-bbbe-b4db35616efa |
+ | headers             |                                      |
+ | id                  | c83a90df-0797-4407-822d-824dc4cbcf01 |
+ | port_id             | e4ff861b-eb5f-4ec9-95fb-e6ede74b0ad5 |
+ | project_id          | <PROJECT_ID>                         |
+ | router_id           | f14dfd59-0bb4-4bc2-b01b-c808d33bc775 |
  | status              | DOWN                                 |
- | tenant_id           | 0cb6b9b744594a619b0b7340f424858b     |
  +---------------------+--------------------------------------+
 
- $ neutron floatingip-create --port-id=$VRRP_BACKUP_PORT public-net
- Created a new floatingip:
+
+ $ openstack floating ip create --port $VRRP_BACKUP_PORT public-net
  +---------------------+--------------------------------------+
  | Field               | Value                                |
  +---------------------+--------------------------------------+
  | fixed_ip_address    | 10.0.0.5                             |
- | floating_ip_address | 150.242.40.112                       |
+ | floating_ip_address | 150.242.42.226                       |
  | floating_network_id | 849ab1e9-7ac5-4618-8801-e6176fbbcf30 |
- | id                  | 72e3d549-b3e8-432d-b8af-f48c32268082 |
- | port_id             | 1736183d-8beb-4131-bb60-eb447bcb18f4 |
- | router_id           | 8e9df7a5-0d5a-4574-bbbe-b4db35616efa |
+ | headers             |                                      |
+ | id                  | f75bca89-a590-44d0-8a1c-0b5e1c3f18a9 |
+ | port_id             | a32870b3-e70b-49e6-882d-d4f5332f181b |
+ | project_id          | <PROJECT_ID>                         |
+ | router_id           | f14dfd59-0bb4-4bc2-b01b-c808d33bc775 |
  | status              | DOWN                                 |
- | tenant_id           | 0cb6b9b744594a619b0b7340f424858b     |
  +---------------------+--------------------------------------+
+
 
 Now we can SSH to our instances. We will connect using the default ``ubuntu``
 user that is configured on Ubuntu cloud images. You will need to substitute the
@@ -658,31 +689,27 @@ you delete resources is important.
 .. code-block:: bash
 
  # delete the instances
- $ nova delete vrrp-master
- $ nova delete vrrp-backup
+ $ openstack server delete vrrp-master
+ $ openstack server delete vrrp-backup
 
  # delete instance ports
- $ for port_id in $(neutron port-list | grep 10.0.0 | grep -v 10.0.0.1 | awk '{ print $2 }'); do neutron port-delete $port_id; done
+ $ for port_id in $(openstack port list | grep 10.0.0 | grep -v 10.0.0.1 | awk '{ print $2 }'); do openstack port delete $port_id; done
 
  # delete router interface
  $ neutron router-interface-delete vrrp-router $(neutron subnet-list | grep vrrp-subnet | awk '{ print $2 }')
  Removed interface from router vrrp-router.
 
  # delete router
- $ neutron router-delete vrrp-router
- Deleted router: vrrp-router
+ $ openstack router delete vrrp-router
 
  # delete subnet
- $ neutron subnet-delete vrrp-subnet
- Deleted subnet: vrrp-subnet
+ $ openstack subnet delete vrrp-subnet
 
  # delete network
- $ neutron net-delete vrrp-net
- Deleted network: vrrp-net
+ $ openstack network delete vrrp-net
 
  # delete security group
  $ neutron security-group-delete vrrp-sec-group
- Deleted security_group: vrrp-sec-group
 
 
 Setup Using HEAT Templates
@@ -796,56 +823,82 @@ Before we start, check that the template is valid:
 
 .. code-block:: bash
 
- $ heat template-validate -f $ORCHESTRATION_DIR/hot/ubuntu-14.04/vrrp-basic/vrrp.yaml
+ $ openstack orchestration template validate -t $ORCHESTRATION_DIR/hot/ubuntu-14.04/vrrp-basic/vrrp.yaml
 
 This command will echo the yaml if it succeeds and will return an error if it
 does not. Assuming the template validates let's build a stack
 
 .. code-block:: bash
 
- $ heat stack-create vrrp-stack --template-file $ORCHESTRATION_DIR/hot/ubuntu-14.04/vrrp-basic/vrrp.yaml
- +--------------------------------------+------------+--------------------+----------------------+
- | id                                   | stack_name | stack_status       | creation_time        |
- +--------------------------------------+------------+--------------------+----------------------+
- | e38eab21-fbf5-4e85-bbad-153321bc1f5d | vrrp-stack | CREATE_IN_PROGRESS | 2015-09-01T03:23:38Z |
- +--------------------------------------+------------+--------------------+----------------------+
+ $ openstack stack create -t $ORCHESTRATION_DIR/hot/ubuntu-14.04/vrrp-basic/vrrp.yaml vrrp-stack
+ +---------------------+---------------------------------------------------------------------------------------------------+
+ | Field               | Value                                                                                             |
+ +---------------------+---------------------------------------------------------------------------------------------------+
+ | id                  | d5096a5e-4934-490e-822b-d5831fbf57d5                                                              |
+ | stack_name          | vrrp-stack                                                                                        |
+ | description         | HOT template for building a Keepalived/Apache VRRP stack in the Catalyst Cloud (nz-por-1) region. |
+ |                     |                                                                                                   |
+ | creation_time       | 2016-09-18T23:57:33Z                                                                              |
+ | updated_time        | None                                                                                              |
+ | stack_status        | CREATE_IN_PROGRESS                                                                                |
+ | stack_status_reason | Stack CREATE started                                                                              |
+ +---------------------+---------------------------------------------------------------------------------------------------+
 
-As you can see the creation is in progress. You can use the ``event-list``
-command to check the progress of creation process:
+As you can see the creation is in progress. You can use the ``openstack stack
+event list`` or ``openstack stack resource list`` commands to check the
+progress of creation process:
 
 .. code-block:: bash
 
- $ heat event-list vrrp-stack
- +--------------------------------+--------------------------------------+------------------------+--------------------+----------------------+
- | resource_name                  | id                                   | resource_status_reason | resource_status    | event_time           |
- +--------------------------------+--------------------------------------+------------------------+--------------------+----------------------+
- | vrrp_backup_server             | 40351139-008c-4d42-b4bb-89e761b4caf8 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:24:17Z |
- | vrrp_backup_server             | 4b8b38db-1292-46db-8307-ef5e95c2a51b | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:24:00Z |
- | vrrp_master_server             | 1c48a5a9-bd92-4c05-8513-f02c1b1e4c8b | state changed          | CREATE_COMPLETE    | 2015-09-01T03:24:00Z |
- | vrrp_shared_floating_ip        | e8829f1e-ba73-4fad-b08e-6cc8e4cf9e59 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:50Z |
- | vrrp_backup_server_floating_ip | 8bff5aa5-5b50-4619-86ed-eaa434f2f9f0 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:50Z |
- | vrrp_master_server_floating_ip | 031949ea-45c8-4fc4-859d-9a1b13e37be3 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:50Z |
- | vrrp_master_server_floating_ip | 0975e4f8-922d-41f3-b363-73d0b6d8e407 | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:49Z |
- | vrrp_shared_floating_ip        | 083c7c2b-4c0f-473b-a417-f6a12ea77f9e | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:48Z |
- | vrrp_master_server             | 0a72a874-7346-4df1-adfa-67ee262863c9 | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:47Z |
- | vrrp_backup_server_floating_ip | d157d7b3-c4e1-4e81-a61b-323aa59256bf | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:45Z |
- | router_interface               | 4468ad1c-a850-4145-91c0-ccb55bc51dc1 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:45Z |
- | vrrp_shared_port               | 94d8d1f0-c38e-4831-b4f2-48a2d5172595 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:45Z |
- | vrrp_master_server_port        | 4263d08f-99b4-43bc-b90f-d72fc125a9bf | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:45Z |
- | vrrp_backup_server_port        | 926342ac-e63a-4707-be56-de0a34d6276f | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:44Z |
- | router_interface               | 3a91b996-3eda-4425-a016-5ab93c503a7f | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:43Z |
- | vrrp_shared_port               | ee41a8c2-5451-4f23-861b-6cf74af666df | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:43Z |
- | vrrp_master_server_port        | c9fa1cd9-79fd-478b-9f0f-099cf341ced9 | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:42Z |
- | vrrp_backup_server_port        | 101a9a93-1600-47f7-8194-90b25c0405c7 | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:42Z |
- | private_subnet                 | eeb887aa-828d-4e87-b224-2f873de21061 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:42Z |
- | private_subnet                 | 144d7c8f-9f0d-4a87-9d42-dc068f906caf | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:41Z |
- | private_net                    | c232f2bc-aac0-44aa-b615-9fd464d22d8d | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:41Z |
- | router                         | 2dd769d8-b44b-46c6-866a-5bf3f74de1c2 | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:41Z |
- | vrrp_secgroup                  | 89741526-6a38-4e64-95dd-b826c9921aff | state changed          | CREATE_COMPLETE    | 2015-09-01T03:23:41Z |
- | router                         | 39321e72-dcbf-4e22-805f-ad3e86abd8ef | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:39Z |
- | private_net                    | ac5a2e1b-42c1-4c73-b947-df47c6db23a1 | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:39Z |
- | vrrp_secgroup                  | 6d5229e7-2977-4286-9214-795c1fa2198a | state changed          | CREATE_IN_PROGRESS | 2015-09-01T03:23:38Z |
- +--------------------------------+--------------------------------------+------------------------+--------------------+----------------------+
+  $ openstack stack event list vrrp-stack
+  2016-09-19 03:20:05Z [vrrp-stack]: CREATE_IN_PROGRESS  Stack CREATE started
+  2016-09-19 03:20:06Z [private_net]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:07Z [vrrp_secgroup]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:09Z [router]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:11Z [private_net]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:11Z [vrrp_secgroup]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:11Z [router]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:11Z [private_subnet]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:14Z [private_subnet]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:14Z [vrrp_master_server_port]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:16Z [vrrp_backup_server_port]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:18Z [vrrp_shared_port]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:19Z [router_interface]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:22Z [vrrp_master_server_port]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:22Z [vrrp_backup_server_port]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:22Z [vrrp_shared_port]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:23Z [router_interface]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:24Z [vrrp_master_server_floating_ip]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:25Z [vrrp_backup_server_floating_ip]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:27Z [vrrp_shared_floating_ip]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:28Z [vrrp_master_server]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:20:31Z [vrrp_master_server_floating_ip]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:31Z [vrrp_backup_server_floating_ip]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:32Z [vrrp_shared_floating_ip]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:43Z [vrrp_master_server]: CREATE_COMPLETE  state changed
+  2016-09-19 03:20:44Z [vrrp_backup_server]: CREATE_IN_PROGRESS  state changed
+  2016-09-19 03:21:06Z [vrrp_backup_server]: CREATE_COMPLETE  state changed
+  2016-09-19 03:21:06Z [vrrp-stack]: CREATE_COMPLETE  Stack CREATE completed successfully
+
+
+ $ openstack stack resource list -c resource_name -c resource_type -c resource_status  vrrp-stack
+ +--------------------------------+------------------------------+-----------------+
+ | resource_name                  | resource_type                | resource_status |
+ +--------------------------------+------------------------------+-----------------+
+ | vrrp_backup_server_port        | OS::Neutron::Port            | CREATE_COMPLETE |
+ | vrrp_backup_server_floating_ip | OS::Neutron::FloatingIP      | CREATE_COMPLETE |
+ | vrrp_master_server             | OS::Nova::Server             | CREATE_COMPLETE |
+ | router_interface               | OS::Neutron::RouterInterface | CREATE_COMPLETE |
+ | vrrp_master_server_port        | OS::Neutron::Port            | CREATE_COMPLETE |
+ | vrrp_master_server_floating_ip | OS::Neutron::FloatingIP      | CREATE_COMPLETE |
+ | vrrp_secgroup                  | OS::Neutron::SecurityGroup   | CREATE_COMPLETE |
+ | private_subnet                 | OS::Neutron::Subnet          | CREATE_COMPLETE |
+ | private_net                    | OS::Neutron::Net             | CREATE_COMPLETE |
+ | router                         | OS::Neutron::Router          | CREATE_COMPLETE |
+ | vrrp_backup_server             | OS::Nova::Server             | CREATE_COMPLETE |
+ | vrrp_shared_floating_ip        | OS::Neutron::FloatingIP      | CREATE_COMPLETE |
+ | vrrp_shared_port               | OS::Neutron::Port            | CREATE_COMPLETE |
+ +--------------------------------+------------------------------+-----------------+
 
 If you prefer to create this stack in the Wellington region you
 can modify the appropriate parameters on the command line:
@@ -861,8 +914,9 @@ viewing the state of your stack. Give them a go:
 
 .. code-block:: bash
 
- $ heat stack-show vrrp-stack
- $ heat resource-list vrrp-stack
+ $ openstack stack show vrrp-stack
+ $ openstack stack resource list vrrp-stack
+
 
 Once all resources in your stack are in the ``CREATE_COMPLETE`` state you are
 ready to re-run the tests as described under :ref:`vrrp-testing`. The neturon
@@ -871,7 +925,7 @@ need:
 
 .. code-block:: bash
 
- $ neutron floatingip-list
+ $ openstack floating ip list
 
 If you wish you can SSH to the master and backup instances as described under
 :ref:`instance-access`.
@@ -881,13 +935,8 @@ our original state:
 
 .. code-block:: bash
 
- $ heat stack-delete vrrp-stack
- +--------------------------------------+------------+--------------------+----------------------+
- | id                                   | stack_name | stack_status       | creation_time        |
- +--------------------------------------+------------+--------------------+----------------------+
- | e38eab21-fbf5-4e85-bbad-153321bc1f5d | vrrp-stack | DELETE_IN_PROGRESS | 2015-09-01T03:23:38Z |
- +--------------------------------------+------------+--------------------+----------------------+
+ $ openstack stack delete vrrp-stack
+ Are you sure you want to delete this stack(s) [y/N]? y
 
 This ends the tutorial on setting up hot swap VRRP instances in the Catalyst
 Cloud.
-
