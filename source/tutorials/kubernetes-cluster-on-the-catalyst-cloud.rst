@@ -19,7 +19,7 @@ The fundamental units that make up a `Kubernetes cluster`_ are:
 * Services
 * Nodes (Minions)
 
-.. _Kubernetes cluster: http://kubernetes.io/v1.1/docs/user-guide/README.html
+.. _Kubernetes cluster: http://kubernetes.io/docs/user-guide/
 
 These resources can be organised and partitioned using namespaces, which
 provides a convenient way of separating and scheduling virtual environments
@@ -105,7 +105,8 @@ Clone:
 
 
 Ensure that you have the kubectl command installed and in the PATH.
-Follow the installation instructions here: http://kubernetes.io/v1.0/docs/getting-started-guides/aws/kubectl.html and test with:
+Follow the installation instructions here:
+http://kubernetes.io/docs/user-guide/prereqs/ and test with:
 
 .. code-block:: bash
 
@@ -140,12 +141,12 @@ Testing this will give a similar output to the following:
 
 .. code-block:: bash
 
- $ heat stack-list
- +--------------------------------------+------------+---------------+----------------------+
- | id                                   | stack_name | stack_status  | creation_time        |
- +--------------------------------------+------------+---------------+----------------------+
- | ...                                  | a-name     |CREATE_COMPLETE| 2016-01-12T03:34:23Z |
- +--------------------------------------+------------+---------------+----------------------+
+ $ openstack stack list
+ +--------------------------------------+-----------------------+-----------------+----------------------+--------------+
+| ID                                   | Stack Name            | Stack Status    | Creation Time        | Updated Time |
++--------------------------------------+-----------------------+-----------------+----------------------+--------------+
+| <STACK_ID>                           | a-stack               | CHECK_COMPLETE  | 2016-08-19T00:44:33Z | None         |
++--------------------------------------+-----------------------+-----------------+----------------------+--------------+
 
 
 Execution
