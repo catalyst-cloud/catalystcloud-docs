@@ -20,10 +20,10 @@ resources is important.
  $ openstack server delete first-instance
 
  # delete instance ports
- $ for port_id in $(openstack port list | grep 10.0.0 | grep -v "10.0.0.1'" | awk '{ print $2 }'); do os port delete $port_id; done
+ $ for port_id in $(openstack port list | grep 10.0.0 | grep -v "10.0.0.1'" | awk '{ print $2 }'); do openstack port delete $port_id; done
 
  # delete router interface
- $ openstack router remove port border-router $( os port list | grep "10.0.0.1'" | awk '{print $2}' )
+ $ openstack router remove port border-router $( openstack port list | grep "10.0.0.1'" | awk '{print $2}' )
 
  # delete router
  $ openstack router delete border-router
