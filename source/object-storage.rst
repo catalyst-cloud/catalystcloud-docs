@@ -276,20 +276,19 @@ explained in :ref:`command-line-interface`.
   import os
   import swiftclient
 
-
+  # Read configuration from environment variables (openstack.rc)
   auth_username = os.environ['OS_USERNAME']
   auth_password = os.environ['OS_PASSWORD']
   auth_url = os.environ['OS_AUTH_URL']
   project_name = os.environ['OS_TENANT_NAME']
   region_name = os.environ['OS_REGION_NAME']
-
   options = {'tenant_name': project_name, 'region_name': region_name}
 
-
+  # Establish the connection with the object storage API
   conn = swiftclient.Connection(
-          user = user,
-          key = key,
-          authurl = apiurl,
+          user = auth_username,
+          key = auth_password,
+          authurl = auth_url,
           insecure = False,
           auth_version = 2,
           os_options = options,
