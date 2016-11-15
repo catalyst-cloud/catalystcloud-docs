@@ -170,3 +170,25 @@ the ``Output floating IP`` task:
 
 We can now write playbooks to configure the instance we have created as
 required.
+
+
+Resource cleanup with an Ansible playbook
+=========================================
+
+This playbook will remove all of resources created and allocated by running
+the previous playbooks.
+
+You can download and run this playbook using the following commands:
+
+.. code-block:: bash
+
+ $ wget -q https://raw.githubusercontent.com/catalyst/catalystcloud-ansible/master/remove-stack.yml
+ $ ansible-playbook remove-instance.yml --extra-vars "floating_ip=<ip-address>"
+
+Where ``<ip-address>`` is the floating-ip that was assigned by the ``launch
+instance`` playbook
+
+.. note::
+
+ This cleanup playbook assumes that you have created all resources using the
+ default names defined in the original playbooks.
