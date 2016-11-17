@@ -14,4 +14,4 @@ Contents:
    faq/pause-suspend-shelve-shutoff
    faq/how-to-grow-a-cinder-volume
    faq/external-ip-address
-   faq/locale-errors-on-ubunut
+   faq/locale-errors-on-ubuntu
