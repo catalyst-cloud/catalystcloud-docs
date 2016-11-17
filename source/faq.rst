@@ -15,3 +15,4 @@ Contents:
    faq/how-to-grow-a-cinder-volume
    faq/external-ip-address
    faq/locale-errors-on-ubuntu
+   faq/whats-my-project-id
