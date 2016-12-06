@@ -430,3 +430,118 @@ compatible API.
           name = bucket.name,
           created = bucket.creation_date,
       )
+
+*****************
+Object Versioning
+*****************
+This provides a means by which multiple versions of your content can be stored
+allowing for recovery from unintended overwrites.
+
+First we need to create an archive container to store the older versions of our
+objects
+
+.. code-block:: bash
+
+  $ curl -i -X PUT -H "X-Auth-Token: $token" $storageURL/archive
+
+Now we can create a container to hold our objects. We must include the
+``X-Versions-Location`` header which defines the container that holds the
+previous versions of your objects.
+
+.. code-block:: bash
+
+  $ curl -i -X PUT -H "X-Auth-Token: $token" -H 'X-Versions-Location: archive' $storageURL/my-container
+  HTTP/1.1 201 Created
+  Server: nginx/1.10.1
+  Date: Mon, 05 Dec 2016 23:50:00 GMT
+  Content-Type: text/html; charset=UTF-8
+  Content-Length: 0
+  X-Trans-Id: txe6d2f4e289654d02a7329-005845fd28
+
+Once the ``X-Versions-Location`` header has been applied to the container any
+changes to objects in the container automatically result in a copy of the
+original object being placed in the archive container. The backed up version
+will have the following format:
+
+.. code-block:: bash
+
+  <length><object_name>/<timestamp>
+
+Where <length> is the length of the object name ( as a 3 character zero padded
+hex number ), <object_name> is the original object name and <timestamp> is the
+unix timestamp of the original file creation.
+
+<length> and <object_name> are then combined to make a new container
+(pseudo-folder in the dashboard) with the backed up object stored within using
+the timestamp as it's name.
+
+.. note::
+
+  You must UTF-8-encode and then URL-encode the container name before you
+  include it in the X-Versions-Location header.
+
+If we list out current containers we can see that we now have 2 empty
+containers.
+
+.. code-block:: bash
+
+  $ openstack container list --long
+  +--------------+-------+-------+
+  | Name         | Bytes | Count |
+  +--------------+-------+-------+
+  | archive      |     0 |     0 |
+  | my-container |     0 |     0 |
+  +--------------+-------+-------+
+
+If we upload a sample file in to my-container we can see the confirmation of
+this operation which includes the etag, which is an MD5 hash of the objects
+contents.
+
+.. code-block:: bash
+
+  $ openstack object create my-container file1.txt
+  +-----------+--------------+----------------------------------+
+  | object    | container    | etag                             |
+  +-----------+--------------+----------------------------------+
+  | file1.txt | my-container | 2767104ea585e1a98a23c52addeeae4a |
+  +-----------+--------------+----------------------------------+
+
+Now if the original file is modified and uploaded to the same container, we get
+a successful confirmation except this time we get a new etag as the contents of
+the file have changed.
+
+.. code-block:: bash
+
+  $ openstack object create my-container file1.txt
+  +-----------+--------------+----------------------------------+
+  | object    | container    | etag                             |
+  +-----------+--------------+----------------------------------+
+  | file1.txt | my-container | 9673f4c3efc2ee8dd9edbc2ba60c76c4 |
+  +-----------+--------------+----------------------------------+
+
+If we show the containers again we can see now that even though we only
+uploaded the file into my-container we now also have a file present in the
+archive container.
+
+.. code-block:: bash
+
+  $ os container list --long
+  +--------------+-------+-------+
+  | Name         | Bytes | Count |
+  +--------------+-------+-------+
+  | archive      |    70 |     1 |
+  | my-container |    73 |     1 |
+  +--------------+-------+-------+
+
+Further investigation of the archive container reveals that we have a new
+object, that was created automatically and named in accordance with the
+convention outlined above
+
+.. code-block:: bash
+
+  $ openstack object list archive
+  +-------------------------------+
+  | Name                          |
+  +-------------------------------+
+  | 009file1.txt/1480982072.29403 |
+  +-------------------------------+
