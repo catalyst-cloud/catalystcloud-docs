@@ -82,14 +82,19 @@ complete:
 
 .. code-block:: bash
 
- $ grep ' \- name' create-network.yml
-     - name: Connect to the Catalyst Cloud
-     - name: Create a network
-     - name: Create a subnet
-     - name: Create a router
-     - name: Create a security group
-     - name: Create a security group rule for SSH access
-     - name: Import an SSH keypair
+ $ ansible-playbook --list-tasks create-network.yml
+
+ playbook: create-network.yml
+
+  play #1 (localhost): Create a network in the Catalyst Cloud   TAGS: []
+    tasks:
+      Connect to the Catalyst Cloud TAGS: []
+      Create a network  TAGS: []
+      Create a subnet   TAGS: []
+      Create a router   TAGS: []
+      Create a security group   TAGS: []
+      Create a security group rule for SSH access   TAGS: []
+      Import an SSH keypair TAGS: []
 
 We are going to need to provide the path to a valid SSH key in order for this
 playbook to work. You can edit ``create-network.yml`` and update the
