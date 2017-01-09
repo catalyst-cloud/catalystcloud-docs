@@ -1,3 +1,5 @@
+.. _using-docker-machine:
+
 ##########################################
 Using Docker Machine on the Catalyst Cloud
 ##########################################
