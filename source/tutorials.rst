@@ -24,3 +24,4 @@ Contents:
    tutorials/using-packer-to-build-custom-bootable-images-on-the-catalyst-cloud
    tutorials/deploying-a-turnkey-image
    tutorials/creating-an-instance-with-interfaces-on-different-networks-with-heat
+   tutorials/docker-getting-started-with-swarm-mode-tutorial-on-the-catalyst-cloud
