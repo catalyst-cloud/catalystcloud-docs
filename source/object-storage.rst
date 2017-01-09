@@ -545,3 +545,97 @@ convention outlined above
   +-------------------------------+
   | 009file1.txt/1480982072.29403 |
   +-------------------------------+
+
+*************
+Temporary URL
+*************
+This a means by which a temporary URL can be generated to allow unauthenticated
+access to the Swift object at the given path. The access is via the given HTTP
+method (e.g. GET, PUT) and is valid for the number of seconds provided when the
+URL is created.
+
+The expiry time can be expressed as valid for the given number of seconds from
+now or if the optional --absolute argument is provided, seconds is instead
+interpreted as a Unix timestamp at which the URL should expire.
+
+The syntax for the tempurl creation command is
+
+**swift tempurl [command-option] method seconds path key**
+
+This generates  a  temporary URL allowing unauthenticated access to the Swift
+object at the given path, using the given HTTP method, for the given number of
+seconds, using the given TempURL key. If optional --absolute argument is
+provided, seconds is instead interpreted as a Unix timestamp at which the URL
+should expire.
+
+**Example:**
+
+.. code-block:: bash
+
+  swift tempurl GET $(date -d "Jan 1 2017" +%s) /v1/AUTH_foo/bar_container/quux.md my_secret_tempurl_key --absolute
+
+- sets the expiry using the absolute method to be Jan 1 2017
+- for the object : quux.md
+- in the nested container structure : bar_container/quux.mdbar_container/
+- with key : my_secret_tempurl_key
+
+Creating Temporary URLs in the Catalyst Cloud
+=============================================
+At the time of writing the only method currently available for the creation of
+temporary URLs is using the command line tools.
+
+Firstly we need to associate a secret key with our object store account.
+
+.. code-block:: bash
+
+  $ openstack object store account set --property Temp-Url-Key='testkey'
+
+You can then confirm the details of the key.
+
+.. code-block:: bash
+
+  $ openstack object store account show
+  +------------+---------------------------------------+
+  | Field      | Value                                 |
+  +------------+---------------------------------------+
+  | Account    | AUTH_b24e9ee3447e48eab1bc99cb894cac6f |
+  | Bytes      | 128                                   |
+  | Containers | 4                                     |
+  | Objects    | 8                                     |
+  | properties | Temp-Url-Key='testkey'                |
+  +------------+---------------------------------------+
+
+Then using the syntax outlined above you can create a temporary URL to access
+an object residing in the object store.
+
+We will create a URL that will be valid for 600 seconds and provide access to
+the object "file2.txt" that is located in the container "my-container"
+
+.. code-block:: bash
+
+  $ swift tempurl GET 600 /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt "testkey"
+  /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005
+
+We can test this using cURL and appending the generated URL to the Catalyst
+Cloud's server URL "https://api.nz-por-1.catalystcloud.io:8443". If it is
+successful the request should return the contents of the object.
+
+.. code-block:: bash
+
+  $ curl -i "https://api.nz-por-1.catalystcloud.io:8443/v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005"
+  HTTP/1.1 200 OK
+  Server: nginx/1.10.1
+  Date: Mon, 09 Jan 2017 19:22:05 GMT
+  Content-Type: text/plain
+  Content-Length: 501
+  Accept-Ranges: bytes
+  Last-Modified: Mon, 09 Jan 2017 19:18:47 GMT
+  Etag: 137eed1d424a58831892172f5433594a
+  X-Timestamp: 1483989526.71129
+  Content-Disposition: attachment; filename="file2.txt"; filename*=UTF-8''file2.txt
+  X-Trans-Id: tx9aa84268bd984358b6afe-005873e2dd
+
+  "For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us." "For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us."
+
+We could also access the object by taking the same URL that we passed to cURL
+and pasting it into a web browser.
