@@ -16,3 +16,4 @@ Contents:
    faq/external-ip-address
    faq/locale-errors-on-ubuntu
    faq/whats-my-project-id
+   faq/duplicity-backup-to-objectstore
