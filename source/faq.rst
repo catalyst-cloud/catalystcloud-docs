@@ -17,4 +17,4 @@ Contents:
    faq/locale-errors-on-ubuntu
    faq/whats-my-project-id
    faq/duplicity-backup-to-objectstore
-   faq/can-i-use-s3cmd-for-ojbect-storage
+   faq/can-i-use-s3cmd-for-object-storage
