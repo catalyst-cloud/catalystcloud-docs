@@ -22,6 +22,7 @@ Contents:
    image
    object-storage
    cloud-orchestration
+   backups
    tutorials
    faq
    contributing
@@ -47,4 +48,3 @@ Indices and tables
 
 * :ref:`genindex`
 * :ref:`search`
-

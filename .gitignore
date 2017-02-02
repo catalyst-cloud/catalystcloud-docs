@@ -1,4 +1,5 @@
 build/
 venv/
+.idea/
 .build-tools.cson
 docs_wip
