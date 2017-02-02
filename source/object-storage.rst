@@ -10,19 +10,19 @@ Overview
 Object storage is a storage architecture that manages data as objects as
 opposed to other approaches that may use a file hierarchy or blocks stored in
 sectors and tracks.  Each object typically includes the data itself, a variable
-amount of metadata, and a globally unique identifier. It is a relatively
-inexpensive, scalable, highly available and simple to use. This makes it the
-ideal place to persist the state of systems designed to run on the cloud or the
-media assets for your web applications.
+amount of metadata, and a globally unique identifier.  It is a relatively
+inexpensive, scalable, highly available and simple to use storage solution.
+This makes it the ideal place to persist the state of systems designed to run
+on the cloud or the media assets for your web applications.
 
 Our object storage is provided by the native OpenStack object storage, known
 as Swift.
 
 Our object storage service is backed by a fully distributed storage system,
 with no single points of failure and scalable to the exabyte level. The system
-is self-healing and self-managing. Data is seamlessly replicated on three
-different servers, making it fault tolerant and resilient. The loss of a node
-or a disk leads to the data being quickly recovered on another disk or node.
+is self-healing and self-managing. Data stored in object storage is seamlessly
+replicated so there are always three copies.  This makes object storage a
+cost-effective, reliable, fault tolerant and resilient storage solution.
 
 Data stored on object storage is automatically replicated on to the other
 Catalyst Cloud regions, currently, Porirua and Wellington.  Auckland will be
@@ -33,7 +33,8 @@ your data.
 
 The system runs frequent CRC checks to protect data from soft corruption. The
 corruption of a single bit can be detected and automatically restored to a
-healthy state.
+healthy state.  The loss of a region, server or a disk leads to the data
+being quickly recovered from another disk, server or region.
 
 *********************************
 Object storage from the dashboard
