@@ -167,7 +167,8 @@ Select the ``first-instance-sg`` security group from the list and click "Next":
 .. image:: ../_static/fi-launch-instance-security-groups.png
    :align: center
 
-Select the ``first-instance-key`` key pair from the list and click "Next":
+Select the ``first-instance-key`` key pair from the list and click "Launch
+Instance":
 
 .. image:: ../_static/fi-launch-instance-key-pair.png
    :align: center
