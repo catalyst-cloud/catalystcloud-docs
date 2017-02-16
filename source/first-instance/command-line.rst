@@ -305,7 +305,7 @@ public IP address:
 
 .. code-block:: bash
 
- $ openstack security group rule create --ingress --protocol tcp --dst-port 22 --src-ip $CC_REMOTE_CIDR_NETWORK $CC_SECURITY_GROUP_ID
+ $ openstack security group rule create --ingress --protocol tcp --dst-port 22 --remote-ip $CC_REMOTE_CIDR_NETWORK $CC_SECURITY_GROUP_ID
  +-------------------+--------------------------------------+
  | Field             | Value                                |
  +-------------------+--------------------------------------+
