@@ -31,12 +31,7 @@ Lets create a router and network:
  | status                | ACTIVE                               |
  +-----------------------+--------------------------------------+
 
- $ neutron router-gateway-set border-router public-net
- Set gateway for router border-router
-
-.. note::
-
- The previous command uses the old ``neutron`` command rather than the ``openstack`` command as setting router gateways is not yet implemented in the new client.
+ $ openstack router set border-router --external-gateway public-net
 
 .. code-block:: bash
 
