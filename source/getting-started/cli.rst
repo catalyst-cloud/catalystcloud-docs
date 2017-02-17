@@ -13,7 +13,7 @@ Set up
 
 The OpenStack CLI can be installed in multiple ways. The recommended method for
 the Catalyst Cloud is to create a python virtual environment and use ``pip`` to
-install it. This method has be benefit of installing the latest version of the
+install it. This method has the benefit of installing the latest version of the
 CLI (operating system packages tend to install an outdated version) and
 prevents conflicts of python libraries (dependencies are isolated in the
 virtual environment).
