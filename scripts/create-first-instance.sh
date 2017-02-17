@@ -177,7 +177,7 @@ echo selecting a flavour:
 CC_FLAVOR_ID=$( nova flavor-list | grep $FLAVOR_NAME | awk '{ print $2 }' )
 
 echo selecting an image:
-CC_IMAGE_ID=$( glance image-list --name $IMAGE_NAME | grep $IMAGE_NAME | awk '{ print $2 }' )
+CC_IMAGE_ID=$( glance image-list --property-filter "name=$IMAGE_NAME" | grep $IMAGE_NAME | awk '{ print $2 }' )
 
 echo uploading a key:
 nova keypair-add --pub-key $SSH_PUBLIC_KEY $SSH_KEY_NAME
