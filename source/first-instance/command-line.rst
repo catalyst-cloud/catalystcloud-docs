@@ -17,7 +17,6 @@ Lets create a router and network:
 .. code-block:: bash
 
  $ openstack router create border-router
- Created a new router:
  +-----------------------+--------------------------------------+
  | Field                 | Value                                |
  +-----------------------+--------------------------------------+
@@ -31,14 +30,7 @@ Lets create a router and network:
  | status                | ACTIVE                               |
  +-----------------------+--------------------------------------+
 
- $ neutron router-gateway-set border-router public-net
- Set gateway for router border-router
-
-.. note::
-
- The previous command uses the old ``neutron`` command rather than the ``openstack`` command as setting router gateways is not yet implemented in the new client.
-
-.. code-block:: bash
+ $ openstack router set border-router --external-gateway public-net
 
  $ openstack network create private-net
  +-----------------+--------------------------------------+
@@ -305,7 +297,7 @@ public IP address:
 
 .. code-block:: bash
 
- $ openstack security group rule create --ingress --protocol tcp --dst-port 22 --src-ip $CC_REMOTE_CIDR_NETWORK $CC_SECURITY_GROUP_ID
+ $ openstack security group rule create --ingress --protocol tcp --dst-port 22 --remote-ip $CC_REMOTE_CIDR_NETWORK $CC_SECURITY_GROUP_ID
  +-------------------+--------------------------------------+
  | Field             | Value                                |
  +-------------------+--------------------------------------+

@@ -19,27 +19,17 @@ resources is important.
  # delete the instances
  $ openstack server delete first-instance
 
- # delete instance ports
- $ for port_id in $(openstack port list | grep 10.0.0 | grep -v "10.0.0.1'" | awk '{ print $2 }'); do openstack port delete $port_id; done
-
  # delete router interface
- $ openstack router remove port border-router $( openstack port list | grep "10.0.0.1'" | awk '{print $2}' )
+ $ openstack router remove port border-router $( openstack port list -f value -c ID --router border-router )
 
  # delete router
  $ openstack router delete border-router
- Deleted router: border-router
-
- # delete subnet
- $ openstack subnet delete private-subnet
- Deleted subnet: private-subnet
 
  # delete network
  $ openstack network delete private-net
- Deleted network: private-net
 
  # delete security group
  $ openstack security group delete first-instance-sg
- Deleted security_group: first-instance-sg
 
  # delete ssh key
  $ openstack keypair delete first-instance-key

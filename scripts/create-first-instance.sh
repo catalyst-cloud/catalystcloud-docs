@@ -16,6 +16,7 @@ POOL_START_OCT="10"
 POOL_END_OCT="200"
 FLAVOR_NAME="c1.c1r1"
 IMAGE_NAME="ubuntu-16.04-x86_64"
+SSH_PUBLIC_KEY=~/.ssh/id_rsa.pub
 
 # valid ip function
 valid_ip() {
@@ -53,32 +54,13 @@ if [ -z "$OS_PASSWORD" ]; then
     EXIT=1;
 fi
 
-# check the required commands are available
-hash neutron 2>/dev/null || {
-    echo "Neutron command line client is not available, please install it before proceeding";
-    EXIT=1;
-}
-
-hash glance 2>/dev/null || {
-    echo "Glance command line client is not available, please install it before proceeding";
-    EXIT=1;
-}
-
-hash nova 2>/dev/null || {
-    echo "Nova command line client is not available, please install it before proceeding";
-    EXIT=1;
-}
-
-hash curl 2>/dev/null || {
-    echo "Curl command line client is not available, please install it before proceeding";
+# check the openstack command is available
+hash openstack 2>/dev/null || {
+    echo "Openstack command line client is not available, please install it before proceeding";
     EXIT=1;
 }
 
 # Checks
-SSH_PUBLIC_KEY=~/.ssh/id_rsa.pub
-if [ ! -f $SSH_PUBLIC_KEY ]; then
-    SSH_PUBLIC_KEY=~/.ssh/id_dsa.pub
-fi
 if [ ! -f $SSH_PUBLIC_KEY ]; then
     echo "Cannot find an ssh public key, please set SSH_PUBLIC_KEY to point at a valid key";
     EXIT=1;
@@ -98,33 +80,33 @@ else
 fi;
 
 # check that resources do not already exist
-if nova list | grep -q "$INSTANCE_NAME"; then
-    echo "instance $INSTANCE_NAME exists, please delete all first instance resources before running this script";
+if openstack server list | grep -q "$INSTANCE_NAME"; then
+    echo "Instance $INSTANCE_NAME exists, please delete all first instance resources before running this script";
     EXIT=1;
 fi
 
-if neutron router-list | grep -q "$ROUTER_NAME"; then
-    echo "router $ROUTER_NAME exists, please delete all first instance resources before running this script";
+if openstack router list | grep -q "$ROUTER_NAME"; then
+    echo "Router $ROUTER_NAME exists, please delete all first instance resources before running this script";
     EXIT=1;
 fi
 
-if neutron subnet-list | grep -q "$PRIVATE_SUBNET_NAME"; then
-    echo "subnet $PRIVATE_SUBNET_NAME exists, please delete all first instance resources before running this script";
+if openstack subnet list | grep -q "$PRIVATE_SUBNET_NAME"; then
+    echo "Subnet $PRIVATE_SUBNET_NAME exists, please delete all first instance resources before running this script";
     EXIT=1;
 fi
 
-if neutron net-list | grep -q "$PRIVATE_NETWORK_NAME"; then
-    echo "network $PRIVATE_NETWORK_NAME exists, please delete all first instance resources before running this script";
+if openstack network list | grep -q "$PRIVATE_NETWORK_NAME"; then
+    echo "Network $PRIVATE_NETWORK_NAME exists, please delete all first instance resources before running this script";
     EXIT=1;
 fi
 
-if neutron security-group-list | grep -q "$SECURITY_GROUP_NAME"; then
-    echo "security group $SECURITY_GROUP_NAME exists, please delete all first instance resources before running this script";
+if openstack security group list | grep -q "$SECURITY_GROUP_NAME"; then
+    echo "Security group $SECURITY_GROUP_NAME exists, please delete all first instance resources before running this script";
     EXIT=1;
 fi
 
-if nova keypair-list | grep -q "$SSH_KEY_NAME"; then
-    echo "keypair $SSH_KEY_NAME exists, please delete all first instance resources before running this script";
+if openstack keypair list | grep -q "$SSH_KEY_NAME"; then
+    echo "Keypair $SSH_KEY_NAME exists, please delete all first instance resources before running this script";
     EXIT=1;
 fi
 
@@ -132,7 +114,7 @@ if [ "$EXIT" -eq 1 ]; then
     exit 1;
 fi
 
-echo finding your external ip:
+echo Finding your external ip:
 hash dig 2>/dev/null && {
     CC_REMOTE_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
 }
@@ -147,83 +129,92 @@ if ! valid_ip "$CC_REMOTE_IP"; then
     echo "Could not determine your external IP address, please find it and edit CC_REMOTE_IP before proceeding";
     exit 1;
 fi
+echo "$CC_REMOTE_IP"
 CC_REMOTE_CIDR_NETWORK="$CC_REMOTE_IP/32"
 
 # everything is in order, lets build a stack!
-echo creating a new router:
-neutron router-create $ROUTER_NAME
+echo Creating a new router:
+openstack router create $ROUTER_NAME
 
-echo setting gateway:
-neutron router-gateway-set $ROUTER_NAME public-net
+echo Setting router gateway.
+openstack router set $ROUTER_NAME --external-gateway public-net
 
-echo creating a new private network:
-neutron net-create $PRIVATE_NETWORK_NAME
+echo Creating a new private network:
+openstack network create "$PRIVATE_NETWORK_NAME"
 
-echo creating a private subnet:
-neutron subnet-create \
---name $PRIVATE_SUBNET_NAME \
---allocation-pool start="$NETWORK.$POOL_START_OCT",end="$NETWORK.$POOL_END_OCT" \
---dns-nameserver $CC_NAMESERVER_1 \
---dns-nameserver $CC_NAMESERVER_2 \
---dns-nameserver $CC_NAMESERVER_3 \
---enable-dhcp \
-$PRIVATE_NETWORK_NAME \
-"$NETWORK.0/24"
+echo Creating a private subnet:
+openstack subnet create \
+--allocation-pool "start=${NETWORK}.${POOL_START_OCT},end=${NETWORK}.${POOL_END_OCT}" \
+--dns-nameserver "$CC_NAMESERVER_1" \
+--dns-nameserver "$CC_NAMESERVER_2" \
+--dns-nameserver "$CC_NAMESERVER_3" \
+--dhcp \
+--network "$PRIVATE_NETWORK_NAME" \
+--subnet-range "$NETWORK.0/24" \
+"$PRIVATE_SUBNET_NAME" \
 
-echo creating a router interface on the subnet:
-neutron router-interface-add $ROUTER_NAME $PRIVATE_SUBNET_NAME
+echo Creating a router interface on the subnet.
+openstack router add subnet "$ROUTER_NAME" "$PRIVATE_SUBNET_NAME"
 
-echo selecting a flavour:
-CC_FLAVOR_ID=$( nova flavor-list | grep $FLAVOR_NAME | awk '{ print $2 }' )
+echo Selecting a flavour.
+CC_FLAVOR_ID=$( openstack flavor show "$FLAVOR_NAME" -f value -c id )
 
-echo selecting an image:
-CC_IMAGE_ID=$( glance image-list --name $IMAGE_NAME | grep $IMAGE_NAME | awk '{ print $2 }' )
+echo Selecting an image.
+CC_IMAGE_ID=$( openstack image show "$IMAGE_NAME" -f value -c id )
 
-echo uploading a key:
-nova keypair-add --pub-key $SSH_PUBLIC_KEY $SSH_KEY_NAME
+echo Uploading a key:
+openstack keypair create --public-key $SSH_PUBLIC_KEY $SSH_KEY_NAME
 
-echo getting network ids:
-CC_PUBLIC_NETWORK_ID=$( neutron net-list | grep public-net | awk '{ print $2 }' )
-CC_PRIVATE_NETWORK_ID=$( neutron net-list | grep $PRIVATE_NETWORK_NAME | awk '{ print $2 }' )
+echo Getting network ids.
+CC_PUBLIC_NETWORK_ID=$( openstack network show public-net -f value -c id )
+CC_PRIVATE_NETWORK_ID=$( openstack network show "$PRIVATE_NETWORK_NAME" -f value -c id )
 
-echo creating security group:
-neutron security-group-create --description 'Network access for our first instance.' $SECURITY_GROUP_NAME
+echo Creating security group:
+openstack security group create --description 'Network access for our first instance.' $SECURITY_GROUP_NAME
 
-echo getting security group id:
-CC_SECURITY_GROUP_ID=$(neutron security-group-list | grep "$SECURITY_GROUP_NAME" | awk '{ print $2 }' )
+echo Getting security group id.
+CC_SECURITY_GROUP_ID=$( openstack security group show "$SECURITY_GROUP_NAME" -f value -c id )
 
-echo creating security group rule for ssh access:
-neutron security-group-rule-create --direction ingress --protocol tcp --port-range-min 22 --port-range-max 22 \
---remote-ip-prefix "$CC_REMOTE_CIDR_NETWORK" "$CC_SECURITY_GROUP_ID"
+echo Creating security group rule for ssh access:
+openstack security group rule create \
+--ingress \
+--protocol tcp \
+--dst-port 22 \
+--remote-ip "$CC_REMOTE_CIDR_NETWORK" \
+"$CC_SECURITY_GROUP_ID"
 
-echo booting first instance:
-nova boot --flavor "$CC_FLAVOR_ID" --image "$CC_IMAGE_ID" --key-name "$SSH_KEY_NAME" \
---security-groups default,"$SECURITY_GROUP_NAME" --nic net-id="$CC_PRIVATE_NETWORK_ID" "$INSTANCE_NAME"
+echo Booting first instance:
+openstack server create \
+--flavor "$CC_FLAVOR_ID" \
+--image "$CC_IMAGE_ID" \
+--key-name "$SSH_KEY_NAME" \
+--security-group default \
+--security-group "$SECURITY_GROUP_NAME" \
+--nic "net-id=$CC_PRIVATE_NETWORK_ID" \
+"$INSTANCE_NAME"
 
-instance_status=$(nova show "$INSTANCE_NAME" | grep status | awk '{ print $4 }')
+INSTANCE_STATUS=$( openstack server show "$INSTANCE_NAME" -f value -c status )
 
-until [ "$instance_status" == 'ACTIVE' ]
+until [ "$INSTANCE_STATUS" == 'ACTIVE' ]
 do
-    instance_status=$(nova show "$INSTANCE_NAME" | grep status | awk '{ print $4 }')
+    INSTANCE_STATUS=$( openstack server show "$INSTANCE_NAME" -f value -c status )
     sleep 2;
 done
 
-echo getting floating ip id:
-CC_FLOATING_IP_ID=$( neutron floatingip-list -c status -c floating_ip_address -c id | grep DOWN | head -1 | awk '{ print $6 }' )
+echo Getting floating ip id.
+CC_FLOATING_IP_ID=$( openstack floating ip list -f value -c ID --status 'DOWN' | head -n 1 )
 if [ -z "$CC_FLOATING_IP_ID" ]; then
-    echo no floating ip found creating a floating ip:
-    neutron floatingip-create "$CC_PUBLIC_NETWORK_ID"
-    echo getting floating ip id:
-    CC_FLOATING_IP_ID=$( neutron floatingip-list -c status -c floating_ip_address -c id | grep DOWN | head -1 | awk '{ print $6 }' )
+    echo No floating ip found creating a floating ip:
+    openstack floating ip create "$CC_PUBLIC_NETWORK_ID"
+    echo Getting floating ip id:
+    CC_FLOATING_IP_ID=$( openstack floating ip list -f value -c ID --status 'DOWN' | head -n 1 )
 fi
 
-echo getting public ip:
-CC_PUBLIC_IP=$( neutron floatingip-list -c floating_ip_address -c id | grep "$CC_FLOATING_IP_ID" | awk '{ print $2 }' )
+echo Getting public ip.
+CC_PUBLIC_IP=$( openstack floating ip show "$CC_FLOATING_IP_ID" -f value -c floating_ip_address )
 
-echo getting instance port id:
-CC_PORT_ID=$( nova interface-list "$INSTANCE_NAME" | grep "$CC_PRIVATE_NETWORK_ID" | awk '{ print $4 }' )
+echo Associating floating ip with instance.
+openstack server add floating ip "$INSTANCE_NAME" "$CC_PUBLIC_IP"
 
-neutron floatingip-associate "$CC_FLOATING_IP_ID" "$CC_PORT_ID"
-
-echo you can now connect to your instance using the following command:
+echo You can now connect to your instance using the following command:
 echo "ssh ubuntu@$CC_PUBLIC_IP"

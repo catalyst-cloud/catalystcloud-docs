@@ -180,15 +180,22 @@ required.
 Resource cleanup with an Ansible playbook
 =========================================
 
-This playbook will remove all of resources created and allocated by running
-the previous playbooks.
+This playbook will remove all resources created when running the previous
+playbooks.
 
-You can download and run this playbook using the following commands:
+This playbook is included in the git repository checked out earlier, if the
+checkout does not exist the playbook can be downloaded using the following
+command:
 
 .. code-block:: bash
 
  $ wget -q https://raw.githubusercontent.com/catalyst/catalystcloud-ansible/master/remove-stack.yml
- $ ansible-playbook remove-instance.yml --extra-vars "floating_ip=<ip-address>"
+
+Now run the playbook to remove all resources created previously:
+
+.. code-block:: bash
+
+ $ ansible-playbook remove-stack.yml --extra-vars "floating_ip=<ip-address>"
 
 Where ``<ip-address>`` is the floating-ip that was assigned by the ``launch
 instance`` playbook

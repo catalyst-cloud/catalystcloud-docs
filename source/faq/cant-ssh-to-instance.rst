@@ -179,6 +179,8 @@ Note the use of the ubuntu username, this is the default user for Ubuntu,
 change this as required for the distribution you are using as explained at
 :ref:`images`.
 
+.. _ssh_keypairs:
+
 SSH Key Pairs
 =============
 
