@@ -17,7 +17,6 @@ Lets create a router and network:
 .. code-block:: bash
 
  $ openstack router create border-router
- Created a new router:
  +-----------------------+--------------------------------------+
  | Field                 | Value                                |
  +-----------------------+--------------------------------------+
@@ -32,8 +31,6 @@ Lets create a router and network:
  +-----------------------+--------------------------------------+
 
  $ openstack router set border-router --external-gateway public-net
-
-.. code-block:: bash
 
  $ openstack network create private-net
  +-----------------+--------------------------------------+
