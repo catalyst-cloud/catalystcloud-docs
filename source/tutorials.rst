@@ -25,3 +25,4 @@ Contents:
    tutorials/deploying-a-turnkey-image
    tutorials/creating-an-instance-with-interfaces-on-different-networks-with-heat
    tutorials/docker-getting-started-with-swarm-mode-tutorial-on-the-catalyst-cloud
+   tutorials/kubernetes-getting-started-kubeadm-guide-on-the-catalyst-cloud
