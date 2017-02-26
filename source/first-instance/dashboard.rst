@@ -66,8 +66,9 @@ You should now have a network topology this looks like this:
 Uploading an SSH key
 ====================
 
-You can either import an existing public key or have OpenStack create a key for
-you, we document how to import an existing key here.
+You can either import an existing public key or have OpenStack create a keypair
+for you, we document how to import the public key from an existing keypair
+here.
 
 Select "Import Key Pair":
 
@@ -78,6 +79,18 @@ Enter your key pair name and paste your public key into the box:
 
 .. image:: ../_static/fi-key-pair-import-2.png
    :align: center
+
+|
+
+.. note::
+
+ The dashboard has two options "Create Key Pair" and "Import Key Pair". When
+ you select "Create Key Pair", OpenStack creates a keypair and saves the public
+ key while providing the private key to you to download. When you select
+ "Import Key Pair" the dashboard provides a form where you can upload a public
+ key. This option is somewhat confusingly named as you are importing a public
+ key only and not a keypair, it would be more correctly named "Import Public
+ Key". See the :ref:`ssh_keypairs` section of the FAQ for more information.
 
 Configure Instance Security Group
 =================================
@@ -154,7 +167,8 @@ Select the ``first-instance-sg`` security group from the list and click "Next":
 .. image:: ../_static/fi-launch-instance-security-groups.png
    :align: center
 
-Select the ``first-instance-key`` key pair from the list and click "Next":
+Select the ``first-instance-key`` key pair from the list and click "Launch
+Instance":
 
 .. image:: ../_static/fi-launch-instance-key-pair.png
    :align: center

@@ -57,7 +57,10 @@ Use ``openstack keypair create`` to upload your Public SSH key.
   | testkey    | <SSH_KEY_FINGERPRINT> |
   +------------+-------------------------------------------------+
 
- .. note::
+|
+
+.. note::
+
  These keypairs must be created in each region being used.
 
 Building the First Instance Stack using a HEAT Template
@@ -153,8 +156,8 @@ using the floating IP:
 
 .. code-block:: bash
 
- $ export CC_FLOATING_IP_ID=$( openstack stack resource show first-instance-stack first_instance_server_floating_ip | grep physical_resource_id | awk '{ print $4 } ' )
- $ export CC_PUBLIC_IP=$( openstack ip floating list -c 'Floating IP Address' -c ID | grep $CC_FLOATING_IP_ID | awk '{ print $4 }' )
+ $ export CC_FLOATING_IP_ID=$( openstack stack resource show -f value -c physical_resource_id first-instance-stack first_instance_server_floating_ip )
+ $ export CC_PUBLIC_IP=$( openstack floating ip show -f value -c floating_ip_address $CC_FLOATING_IP_ID )
  $ ssh ubuntu@$CC_PUBLIC_IP
 
 Deleting the First Instance Stack using Heat

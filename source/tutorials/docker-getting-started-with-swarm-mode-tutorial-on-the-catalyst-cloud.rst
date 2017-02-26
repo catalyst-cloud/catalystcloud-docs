@@ -1,5 +1,5 @@
 #######################################################################
-Docker "getting started with swarm mode" tutorial on the Catalyst cloud
+Docker "getting started with swarm mode" tutorial on the Catalyst Cloud
 #######################################################################
 
 The Docker Engine 1.12 includes a new feature known as `swarm mode`_ which

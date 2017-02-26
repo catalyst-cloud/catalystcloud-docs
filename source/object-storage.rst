@@ -10,25 +10,31 @@ Overview
 Object storage is a storage architecture that manages data as objects as
 opposed to other approaches that may use a file hierarchy or blocks stored in
 sectors and tracks.  Each object typically includes the data itself, a variable
-amount of metadata, and a globally unique identifier. It is a relatively
-inexpensive, scalable, highly available and simple to use. This makes it the
-ideal place to persist the state of systems designed to run on the cloud or the
-media assets for your web applications.
+amount of metadata, and a globally unique identifier.  It is a relatively
+inexpensive, scalable, highly available and simple to use storage solution.
+This makes it the ideal place to persist the state of systems designed to run
+on the cloud or the media assets for your web applications.
 
-Our object storage service is provided by a fully distributed storage system,
+Our object storage is provided by the native OpenStack object storage, known
+as Swift.
+
+Our object storage service is backed by a fully distributed storage system,
 with no single points of failure and scalable to the exabyte level. The system
-is self-healing and self-managing. Data is seamlessly replicated on three
-different servers, making it fault tolerant and resilient. The loss of a node
-or a disk leads to the data being quickly recovered on another disk or node.
+is self-healing and self-managing. Data stored in object storage is seamlessly
+replicated so there are always three copies.  This makes object storage a
+cost-effective, reliable, fault tolerant and resilient storage solution.
 
-Data stored on object storage is currently replicated on three different nodes
-within the same region. However, with the introduction of the Porirua region
-and the upcoming Auckland region, object storage will be soon replicated across
-regions, providing even greater durability for your data.
+Data stored on object storage is automatically replicated on to the other
+Catalyst Cloud regions, currently, Porirua and Wellington.  Auckland will be
+available soon and replication between Auckland, Porirua and Wellington will
+happen automatically.  Having object storage replicated across three
+geogaphically disparate regions will provide even greater durability for
+your data.
 
 The system runs frequent CRC checks to protect data from soft corruption. The
 corruption of a single bit can be detected and automatically restored to a
-healthy state.
+healthy state.  The loss of a region, server or a disk leads to the data
+being quickly recovered from another disk, server or region.
 
 *********************************
 Object storage from the dashboard
@@ -213,13 +219,13 @@ the cURL request
 Swift API
 *********
 
-The object storage service has a Swift emulation layer that supports common
-Swift calls and operations.
+The Swift object storage service has a feature API that is fully documented on
+the OpenStack website
 
 .. seealso::
 
-  The features supported by the Swift emulation layer can be found at
-  http://ceph.com/docs/master/radosgw/swift/.
+  The features supported by the Swift can be found at
+  http://developer.openstack.org/api-ref/object-storage/
 
 API endpoints
 =============
@@ -341,13 +347,17 @@ https://api.nz-por-1.catalystcloud.io:8443/swift/v1/auth_tenant_id/container_nam
 S3 API
 ******
 
-The object storage service has an Amazon S3 emulation layer that supports
+The Swift object storage service has an Amazon S3 emulation layer that supports
 common S3 calls and operations.
 
 .. seealso::
 
   The features supported by the S3 emulation layer can be found at
-  http://ceph.com/docs/master/radosgw/s3/.
+  https://wiki.openstack.org/wiki/Swift/APIFeatureComparison
+
+  In addition, Swift3 middleware emulates the S3 REST API on top of OpenStack
+  Swift is docmented fully at
+  http://docs.openstack.org/mitaka/config-reference/object-storage/configure-s3.html
 
 API endpoints
 =============
