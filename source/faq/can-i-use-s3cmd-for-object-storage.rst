@@ -34,3 +34,4 @@ compatibility to S3 API's.
 
   It is documented here in the Catalyst Cloud documentation
   http://docs.catalystcloud.io/object-storage.html#s3-api
+
