@@ -164,7 +164,7 @@ Creating a stack
 
 The following example illustrates how to create a stack using Heat. Note that
 parameters specified in the HOT template without a default value must be passed
-using ``--parameters``. You can pass multiple parameters by seperating them
+using the ``--parameter`` argument. You can pass multiple parameters by seperating them
 with a semicolon.
 
 .. code-block:: bash
