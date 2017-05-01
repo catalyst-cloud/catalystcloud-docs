@@ -74,6 +74,10 @@ elif [[ $OS_REGION_NAME == "nz-por-1" ]]; then
     CC_NAMESERVER_1=202.78.247.197
     CC_NAMESERVER_2=202.78.247.198
     CC_NAMESERVER_3=202.78.247.199
+elif [[ $OS_REGION_NAME == "nz-hlz-1" ]]; then
+    CC_NAMESERVER_1=202.78.244.85
+    CC_NAMESERVER_2=202.78.244.86
+    CC_NAMESERVER_3=202.78.244.87
 else
     echo "OS_REGION_NAME does not point at a valid region";
     EXIT=1;

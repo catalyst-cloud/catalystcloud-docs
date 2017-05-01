@@ -70,6 +70,9 @@ use by Catalyst Cloud instances, free of charge. They are:
 +----------+------------------------------------------------+
 | nz_wlg_2 | 202.78.240.213, 202.78.240.214, 202.78.240.215 |
 +----------+------------------------------------------------+
+| nz-hlz-1 | 202.78.244.85, 202.78.244.86, 202.78.244.87    |
++----------+------------------------------------------------+
+
 
 When creating a router and network/subnet keep any network requirements in mind
 when choosing addressing for your networks. You may want to build a tunnel-mode

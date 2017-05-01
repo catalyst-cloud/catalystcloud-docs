@@ -16,10 +16,12 @@ diverse fibre paths for network connectivity.
 +----------+-----------------+--------------------+
 | nz_wlg_2 | NZ Wellington 2 | In progress        |
 +----------+-----------------+--------------------+
+| nz-hlz-1 | NZ Hamilton 1   | Yes                |
++----------+-----------------+--------------------+
 
-We encourage customers to use Porirua as their primary region in New Zealand.
-This region is Catalyst's newest addition to the Catalyst Cloud. It is PCI
-certified and has six times the capacity of the Wellington region.
+We encourage customers to use Porirua for their primary region in New Zealand
+as it currently has the most capacity of all our sites. The Porirua and
+Hamilton datacenters are PCI DSS certified.
 
 The connectivity between compute instances hosted on different regions takes
 place over the Internet when allowed by your security groups and network
@@ -27,7 +29,9 @@ configuration.
 
 Resources are not replicated automatically across regions unless you do so.
 This provides customers the flexibility to introduce replication where required
-and to fail-over resources independently when needed.
+and to fail-over resources independently when needed. The only exception to
+this is object replication which will, over time, ensure that there is a copy
+of every object replicated across all three regions.
 
 ****************
 Changing regions
@@ -59,4 +63,3 @@ Via the APIs
 The API request you use to authenticate with the Catalyst Cloud allows you to
 scope a token on a given region. The token can then be used to interact with
 the API endpoints of the other services hosted in the same region.
-
