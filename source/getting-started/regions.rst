@@ -6,8 +6,8 @@ The Catalyst Cloud is hosted on multiple regions or geographical locations.
 Regions are data centres that are completely independent and isolated from each
 other, providing fault tolerance and geographic diversity.
 
-All our data centres have backup diesel generators, UPS, N+1 process coolers and
-diverse fibre paths for network connectivity.
+All our data centres have backup diesel generators, UPS, N+1 process coolers
+and diverse fibre paths for network connectivity.
 
 +----------+-----------------+--------------------+
 | Code     | Name            | PCI DSS certified? |
@@ -25,10 +25,10 @@ The connectivity between compute instances hosted on different regions takes
 place over either our wide area network or the Internet when allowed by your
 security groups and network configuration.
 
-Most resources are not replicated automatically across regions unless you do so.
-The only resource which are replicated, is object storage. This provides
-customers the flexibility to introduce replication where required
-and to fail-over resources independently when needed.
+Most resources are not replicated automatically across regions unless you do
+so. The only resource which are replicated, is object storage. This provides
+customers the flexibility to introduce replication where required and to
+fail-over resources independently when needed.
 
 ****************
 Changing regions

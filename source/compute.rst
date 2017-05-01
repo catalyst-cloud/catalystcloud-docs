@@ -25,6 +25,21 @@ avoiding the need to consult our documentation to find out their specification.
 We currently provide a number of common combinations of CPU and RAM and are
 prepared to introduce new flavours if required.
 
+A virtual CPU (vCPU), also known as a virtual processor, is a time slice of a
+physical processing unit assigned to a compute instance or virtual machine. The
+mapping between virtual CPUs to physical cores is part of the performance and
+capacity management services performed by the Catalyst Cloud on your behalf. We
+aim to deliver the performance required by applications, and to increase cost
+efficiency to our customers by optimising hardware utilisation.
+
+Since virtual CPUs do not map one-to-one to a physical core, some performance
+variation may occur over time. This variation tends do be small and can be
+mitigated by scaling applications horizontally on multiple compute instances in
+an anti-affinity group. We monitor the performance of our physical servers and
+have the ability to move compute instances around, without downtime, to spread
+out load if required.
+
+
 Best practices
 ==============
 
