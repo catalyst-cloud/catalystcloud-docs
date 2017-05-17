@@ -668,7 +668,7 @@ optionally allow files to be listed.
   swift post con0
   swift post -r '.r:*,.rlistings' con0
 
-To confirm the ACL settings, or any of the other metadata settings tthat follow
+To confirm the ACL settings, or any of the other metadata settings that follow
 run the following command.
 
 .. code-block:: bash
