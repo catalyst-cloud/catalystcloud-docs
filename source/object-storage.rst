@@ -652,3 +652,74 @@ successful the request should return the contents of the object.
 
 We could also access the object by taking the same URL that we passed to cURL
 and pasting it into a web browser.
+
+****************************************
+Static websites hosted in object storage
+****************************************
+
+It is possible to host simple websites that contain only static content from
+within a container.
+
+First setup a container and configure the read ACL to allow read access and
+optionally allow files to be listed.
+
+.. code-block:: bash
+
+  swift post con0
+  swift post -r '.r:*,.rlistings' con0
+
+To confirm the ACL settings, or any of the other metadata settings tthat follow
+run the following command.
+
+.. code-block:: bash
+
+  swift stat con0
+           Account: AUTH_b24e9ee3447e48eab1bc99cb894cac6f
+         Container: con0
+           Objects: 3
+             Bytes: 35354
+          Read ACL: .r:*,.rlistings
+         Write ACL:
+           Sync To:
+          Sync Key:
+     Accept-Ranges: bytes
+        X-Trans-Id: tx54e1341d5fd74634b19c5-005906aaf6
+            Server: nginx/1.10.1
+       X-Timestamp: 1493608620.58190
+  X-Storage-Policy: Policy-0
+      Content-Type: text/plain; charset=utf-8
+
+Next upload the files you wish to host.
+
+.. code-block:: bash
+
+  swift upload con0 index.html error.html image.png styles.css
+
+It is possible to allow listing of all files in the container by enabling
+web-listings. It is also possible to style theses listing using a separate CSS
+file to the one you would use to style the actual website.
+
+Upload the css file and enable the web listing and styling for the listing.
+
+.. code-block:: bash
+
+  swift upload con0 listing.css
+  swift post -m 'web-listings: true' con0
+  swift post -m 'web-listings-css:listings.css' con0
+
+You should now be able to view the files in the container by visiting the
+containers URL, where %AUTH_ID% & %container_name% are replaced by your values.
+
+https://object-storage.nz-por-1.catalystcloud.io/v1/%AUTH_ID%/%container_name%/
+
+To enable the container to work as a full website it is also necessary to
+enable the index and optionally the error settings.
+
+.. code-block:: bash
+
+  swift post -m 'web-index:index.html' con0
+  swift post -m 'web-error:error.html' con0
+
+You should now be able to view the index file as a website.
+
+https://object-storage.nz-por-1.catalystcloud.io/v1/%AUTH_ID%/%container_name%/
