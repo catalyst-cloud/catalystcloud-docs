@@ -4,6 +4,7 @@
 Access Control
 ##############
 
+
 ********
 Overview
 ********
@@ -11,9 +12,34 @@ Overview
 The Catalyst Cloud allows you to invite more people to join your project and
 define the actions they can perform using roles.
 
+
+*************
+Project Users
+*************
+
+The project users panel can be found under ``Dashboard → Management → Project
+Users``. It allows you to invite people to join your projects, modify their
+roles, or remove access from existing users.
+
+.. note::
+
+  The Project Users panel is only visible to users with the “Project Admin”
+  or “Project Moderator” role. The "Project Admin" role is given to the person
+  that signed up for the account.
+
+The project users panel allows project admins and moderators to perform
+administrative functions. Users can be added, removed or updated from here.  If
+updating a user who is currently logged in to the Dashboard, that user will be
+automatically required to re-authenticate. If updating one's own roles, these
+will take effect on the next login.
+
+
 *****
 Roles
 *****
+
+Below is a drecription of the roles available on the Catalyst Cloud and the
+actions they allow to be performed.
 
 Compute Start/Stop
 ------------------
@@ -58,18 +84,3 @@ The “Project Moderator” role can invite other people to join your project an
 update their roles, but cannot change the project admin.  The role is essentially
 an administrative one until a role such as "Project Member" is also assigned.
 
-*************
-Project Users
-*************
-
-``Dashboard → Management → Project Users``
-
-.. note::
-
- The Project Users page is only accessible to users with the “Project Admin” or “Project Moderator” role.
-
-The project users page allows project admins and moderators to perform
-administrative functions. Users can be added, revoked or updated from here.
-If updating a user who is currently logged in to the Dashboard, that user
-will be automatically required to re-authenticate.  If updating one's own
-roles, these will take effect on the next login.
