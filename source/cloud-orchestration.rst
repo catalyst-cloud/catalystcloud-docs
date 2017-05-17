@@ -29,11 +29,9 @@ for software configuration.
 .. _Puppet: https://puppetlabs.com/
 .. _Chef: https://www.chef.io/
 
-The service is currently in beta and available via the APIs and command line
-tools. It will be soon exposed via the web dashboard as well. There are no
-additional charges for the use of the cloud orchestration service. You will
-only pay for the resources consumed by your running application stacks (such as
-compute, network and storage).
+There are no additional charges for the use of the cloud orchestration service.
+You will only pay for the resources consumed by your running application stacks
+(such as compute, network and storage).
 
 The OpenStack project that provides orchestration is known as Heat. More
 information about Heat can be found in the OpenStack wiki:
