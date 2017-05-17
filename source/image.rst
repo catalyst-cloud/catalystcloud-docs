@@ -11,9 +11,9 @@ Images provided by Catalyst
 Catalyst provides some pre-configured operating system images to make it easier
 for you to get started on the cloud.
 
-The table below lists the images provided by Catalyst, as well as the default
-user name you should use to log to each one of them (unless you have
-overwritten the default user name with cloud-init).
+The table below lists the images provided by Catalyst and our partners, as well
+as the default user name you should use to log to each one of them (unless you
+have overwritten the default user name with cloud-init).
 
 +------------------+-----------+
 | Operating system | User-name |
@@ -28,6 +28,9 @@ overwritten the default user name with cloud-init).
 +------------------+-----------+
 | Ubuntu Linux     | ubuntu    |
 +------------------+-----------+
+| Windows          | admin     |
++------------------+-----------+
+
 
 .. note::
 
