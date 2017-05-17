@@ -9,19 +9,18 @@ other, providing fault tolerance and geographic diversity.
 All our data centres have backup diesel generators, UPS, N+1 process coolers
 and diverse fibre paths for network connectivity.
 
-+----------+-----------------+--------------------+
-| Code     | Name            | PCI DSS certified? |
-+==========+=================+====================+
-| nz-por-1 | NZ Porirua 1    | Yes                |
-+----------+-----------------+--------------------+
-| nz_wlg_2 | NZ Wellington 2 | In progress        |
-+----------+-----------------+--------------------+
-| nz-hlz-1 | NZ Hamilton 1   | Yes                |
-+----------+-----------------+--------------------+
++----------+-----------------+--------------------+----------------------+
+| Code     | Name            | PCI DSS certified? | ISO 27001 certified? |
++==========+=================+====================+======================+
+| nz-por-1 | NZ Porirua 1    | Yes                | Yes                  |
++----------+-----------------+--------------------+----------------------+
+| nz_wlg_2 | NZ Wellington 2 | In progress        | In progress          |
++----------+-----------------+--------------------+----------------------+
+| nz-hlz-1 | NZ Hamilton 1   | Yes                | In progress          |
++----------+-----------------+--------------------+----------------------+
 
 We encourage customers to use Porirua for their primary region in New Zealand
-as it currently has the most capacity of all our sites. The Porirua and
-Hamilton datacenters are PCI DSS certified.
+as it currently has the most capacity of all our sites.
 
 The connectivity between compute instances hosted on different regions takes
 place over either our wide area network or the Internet when allowed by your
