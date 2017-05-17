@@ -26,11 +26,10 @@ The connectivity between compute instances hosted on different regions takes
 place over either our wide area network or the Internet when allowed by your
 security groups and network configuration.
 
-Resources are not replicated automatically across regions unless you do so.
-This provides customers the flexibility to introduce replication where required
-and to fail-over resources independently when needed. The only exception to
-this is object replication which will, over time, ensure that there is a copy
-of every object replicated across all three regions.
+With the exception of object storage, resources are not replicated
+automatically across regions unless you do so.  This provides customers the
+flexibility to introduce replication where required and to fail-over resources
+independently when needed.
 
 ****************
 Changing regions
