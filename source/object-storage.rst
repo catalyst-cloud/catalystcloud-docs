@@ -7,38 +7,30 @@ Object storage
 Overview
 ********
 
-Object storage is a storage architecture that manages data as objects as
-opposed to other approaches that may use a file hierarchy or blocks stored in
-sectors and tracks.  Each object typically includes the data itself, a variable
-amount of metadata, and a globally unique identifier.  It is a relatively
-inexpensive, scalable, highly available and simple to use storage solution.
-This makes it the ideal place to persist the state of systems designed to run
-on the cloud or the media assets for your web applications.
+Object storage is a web service to store and retrieve data from anywhere using
+native web protocols. Each object typically includes the data itself, a
+variable amount of metadata, and a globally unique identifier. All object
+storage operations are done via a modern and easy to use REST API.
 
-Our object storage is provided by the native OpenStack object storage, known
-as Swift.
+Object storage is the primary storage for modern (cloud-native) web and mobile
+applications, as well as a place to archive data or a target for backup and
+recovery. It is cost-effective, highly durable, highly available, scalable and
+simple to use storage solution.
 
-Our object storage service is backed by a fully distributed storage system,
-with no single points of failure and scalable to the exabyte level. The system
-is self-healing and self-managing. Data stored in object storage is seamlessly
-replicated so there are always three copies.  This makes object storage a
-cost-effective, reliable, fault tolerant and resilient storage solution.
-
-Data stored on object storage is automatically replicated on to the other
-Catalyst Cloud regions, currently, Porirua and Wellington.  Auckland will be
-available soon and replication between Auckland, Porirua and Wellington will
-happen automatically.  Having object storage replicated across three
-geogaphically disparate regions will provide even greater durability for
-your data.
-
+Our object storage service is a fully distributed storage system, with no
+single points of failure and scalable to the exabyte level. The system is
+self-healing and self-managing. Data stored in object storage is asynchronously
+replicated to preserve three replicas of the data on different cloud regions.
 The system runs frequent CRC checks to protect data from soft corruption. The
 corruption of a single bit can be detected and automatically restored to a
-healthy state.  The loss of a region, server or a disk leads to the data
-being quickly recovered from another disk, server or region.
+healthy state. The loss of a region, server or a disk leads to the data being
+quickly recovered from another disk, server or region.
+
 
 *********************************
 Object storage from the dashboard
 *********************************
+
 Data must be stored in a container ( also referred to as a bucket ) so we need
 to create at least one container prior to uploading data.  To create a new
 container navigate to the "Containers" section and click "Create Container".
@@ -84,9 +76,11 @@ the container is now 69.9KB
 .. image:: _static/os-data-uploaded.png
    :align: center
 
+
 ***********************************
 Using the command line client tools
 ***********************************
+
 First ensure that you have installed the correct version of the tools for your
 operating system version and have sourced your OpenStack RC file
 see :ref:`command-line-interface` for full details.
@@ -158,6 +152,7 @@ To delete a container and all of the objects within the container:
 
   $ openstack container delete --recursive mycontainer-1
 
+
 **********
 Using cURL
 **********
@@ -214,6 +209,7 @@ the cURL request
 .. code-block:: bash
 
     curl -i -X GET -H "X-Auth-Token: $token" $storageURL/mycontainer
+
 
 *********
 Swift API
@@ -444,9 +440,11 @@ compatible API.
           created = bucket.creation_date,
       )
 
+
 *****************
 Object Versioning
 *****************
+
 This provides a means by which multiple versions of your content can be stored
 allowing for recovery from unintended overwrites.
 
@@ -559,9 +557,11 @@ convention outlined above
   | 009file1.txt/1480982072.29403 |
   +-------------------------------+
 
+
 *************
 Temporary URL
 *************
+
 This a means by which a temporary URL can be generated to allow unauthenticated
 access to the Swift object at the given path. The access is via the given HTTP
 method (e.g. GET, PUT) and is valid for the number of seconds provided when the
@@ -652,6 +652,7 @@ successful the request should return the contents of the object.
 
 We could also access the object by taking the same URL that we passed to cURL
 and pasting it into a web browser.
+
 
 ****************************************
 Static websites hosted in object storage
