@@ -13,6 +13,7 @@ Contents:
 
    first-instance/overview
    first-instance/dashboard
+   first-instance/network
    first-instance/dashboard-windows
    first-instance/command-line
    first-instance/bash-script
