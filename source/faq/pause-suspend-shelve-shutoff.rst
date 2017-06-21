@@ -9,8 +9,13 @@ a compute instance.
 * For longer term preservation of halted instances ``Shelve Instance`` is the
   recommended option.
 
-It is important to note here that the ``Shelve Instance`` action will only help to lower the
-monthly costs associated with your cloud project.
+The cost of a running instance vs a shelved instance
+=====================================================
+
+.. note::
+
+  It is important to be aware that the ``Shelve Instance`` action will only help to lower the
+  monthly costs associated with your cloud project.
 
 The act of shelving an instance creates a snapshot of the running instance which it stores as an
 image on block storage meaning you now have an extra volume associated with your project. Once this
@@ -23,14 +28,14 @@ To illustrate this, lets say you had a simple 1 vCPU 1Gb RAM instance with a 10G
 for an entire month, which we will assume is 730 hours as an average.
 
 The cost for this would be:
-  $32.12 / month
+**$32.12 / month**
 
 Compare that to the same instance stored as a disk image:
-  $4.02 / month
+**$4.02 / month**
 
 You can see that even for such a small compute instance the cost saving is quite significant. If
 you were to apply this to a compute instance with 4vCPU and 16GB RAM, the monthly running cost
 would be:
-  $285.43 / month
+**$285.43 / month**
 
 so it would definitely make sense to shelve instances you not need running fulltime.
