@@ -31,7 +31,7 @@ quickly recovered from another disk, server or region.
 Object storage from the dashboard
 *********************************
 
-Data must be stored in a container ( also referred to as a bucket ) so we need
+Data must be stored in a container (also referred to as a bucket) so we need
 to create at least one container prior to uploading data.  To create a new
 container navigate to the "Containers" section and click "Create Container".
 
@@ -724,3 +724,44 @@ enable the index and optionally the error settings.
 You should now be able to view the index file as a website.
 
 https://object-storage.nz-por-1.catalystcloud.io/v1/%AUTH_ID%/%container_name%/
+
+
+***
+FAQ
+***
+
+Can I use s3cmd for object storage?
+===================================
+
+There is a powerful open source tool for managing object storage called
+s3cmd. It is available from http://s3tools.org/s3cmd and was originally
+written for managing object storage data in Amazon S3.  It is also
+compatible with Catalyst Cloud object storage using the OpenStack S3
+API.
+
+While it is compatible, there is a gotcha with the Catalyst Cloud.  In
+order to use s3cmd with the Catalyst Cloud, you need to customise the
+s3cmd configuration file.
+
+Configuration changes
+---------------------
+
+The following changes need to be specified in the .s3cfg file.
+
+.. code-block:: ini
+
+  host_base = api.cloud.catalyst.net.nz:8443
+  host_bucket = api.cloud.catalyst.net.nz:8443
+  signature_v2 = True
+  use_https = True
+
+Compatibility with S3
+---------------------
+
+Please reference the Object Storage section for OpenStack Swift
+compatibility to S3 API's.
+
+.. seealso::
+
+  It is documented here in the Catalyst Cloud documentation
+  http://docs.catalystcloud.io/object-storage.html#s3-api
