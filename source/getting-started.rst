@@ -18,4 +18,4 @@ Contents:
    getting-started/apis
    getting-started/quotas
    getting-started/terminology
-
+   getting-started/projects
