@@ -2,9 +2,10 @@
 Cloud regions
 #############
 
-The Catalyst Cloud is hosted on multiple regions or geographical locations.
-Regions are data centres that are completely independent and isolated from each
-other, providing fault tolerance and geographic diversity.
+The Catalyst Cloud is hosted on multiple regions, each in a different
+geographical location. Regions are data centres that are completely
+independent and isolated from each other, providing fault tolerance and
+geographic diversity.
 
 All our data centres have backup diesel generators, UPS, N+1 process coolers
 and diverse fibre paths for network connectivity.
