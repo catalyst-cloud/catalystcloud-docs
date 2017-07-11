@@ -8,7 +8,7 @@ Status page
 ***********
 
 Our status page shows the state of our services in each region and also informs
-you about planned maintenance.The status page can be found here:
+you about planned maintenance. The status page can be found here:
 https://catalyst.net.nz/catalyst-cloud/status
 
 
@@ -19,7 +19,7 @@ Support requests
 Raising a support request
 =========================
 
-If you need help, you can raise a support request to Catalyst via the `Support
+If you need help, you can raise a support request with Catalyst via the `Support
 Requests <https://dashboard.cloud.catalyst.net.nz/management/tickets/>`_ panel.
 
 Most requests are resolved within one business day. If you would like faster
