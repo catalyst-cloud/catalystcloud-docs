@@ -3,9 +3,10 @@ Quotas
 ######
 
 The Catalyst Cloud provides customers with a quota mechanism to protect them
-from accidentally launching too many resources and having a big surprise with
-their invoices. In fact, every cloud provider has a similar mechanism, but most
-do not expose this information back to customers.
+from accidentally launching too many resources. This helps prevent unexpected
+and significant costs being invoiced to our customers. In fact, every cloud
+provider has a similar mechanism, but most do not furnish this information to
+their customers.
 
 We allow customers to see their current per region quota on the overview page
 of the dashboard. Quotas are a soft cap that can be changed any at time
