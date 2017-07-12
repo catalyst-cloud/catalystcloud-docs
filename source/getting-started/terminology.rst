@@ -2,14 +2,14 @@
 Terminology
 ###########
 
-Catalyst Cloud names its services after what they do. As an example, we call 
-our compute service “compute”, which clearly describes its function. This is 
+Catalyst Cloud names its services after what they do. As an example, we call
+our compute service “compute”, which clearly describes its function. This is
 more straightforward, and easier to remember than unintuitive code-names such
 as Nova or EC2.
 
 Since Catalyst Cloud is based on OpenStack, it is important and useful to be
 familiar with the names that apply to each part of OpenStack. This is practical
-when searching for, and referring to, supplementary OpenStack documentation. 
+when searching for, and referring to, supplementary OpenStack documentation.
 Many resources on the Internet will refer to OpenStack’s native project titles.
 
 Below you will find a table listing the services offered by Catalyst Cloud and
