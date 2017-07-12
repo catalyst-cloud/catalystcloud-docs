@@ -156,8 +156,9 @@ APIs and the recommended SDK for the Catalyst Cloud:
 https://wiki.openstack.org/wiki/OpenStackClients
 
 OpenStack has a very rich eco-system and often multiple SDK options for a given
-language. The http://developer.openstack.org/ provides a recommendation for the
-most stable and feature rich SDK for your preferred language.
+language. The 'Development resources for OpenStack clouds' page, found at
+http://developer.openstack.org/, provides recommendations for the most stable
+and feature rich SDK for your preferred language.
 
 SDKs for all other major languages can be found at:
 https://wiki.openstack.org/wiki/SDKs
