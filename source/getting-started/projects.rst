@@ -2,9 +2,9 @@
 What is a project?
 ##################
 
-Openstack provides an isolated multi-tenanted approach to creating user workspaces. These
+Openstack provides an isolated and multi-tenanted approach to creating user workspaces. These
 workspaces are typically referred to as ``projects`` but for historical reasons you may also see
-them referred to as ``tenants or tenancies``.
+them referred to as ``tenants`` or ``tenancies``.
 
 When you sign up to the Catalyst Cloud a ``project`` is created for you. This process creates you
 a workspace within the cloud that is isolated, by default, from every other project. It comes with
@@ -15,13 +15,13 @@ The person that raised the cloud sign-up request gets added as the default
 ``Project Administrator`` and as such has the ability to invite and remove users as they desire via
 the Access Control page under the Management tab in the dashboard.
 
-Your project has 2 important values associated with it, these are the project name and the project
-id. The project name is typically a company name or the individuals name if they are signing up
-on their own behalf and the project key is an auto-generated unique 33 character string.
+Your project has 2 important values associated with it, these are the ``project name`` and the
+``project id``. The project name is typically a company name or an individual's name (as applicable).
+The project key is an auto-generated unique 33 character string.
 
-To view your project details take a look at the following :ref:`project-id-name`.
+To find out how to view your project details refer to: :ref:`project-id-name`.
 
-While projects are inherently secure there is still an argument for having multiple projects and
-it is usually considered best practice to, at least, have your production workloads running
-separately from your development and testing environments if only to help mitigate the possibility
-of human error impacting your business.
+While projects are inherently secure, it is considered best practice to use multiple projects where
+practical to do so. For example, it is sensible and practical to separate production workloads from
+development and testing environments, if only to help mitigate the possibility of human error
+impacting your business.

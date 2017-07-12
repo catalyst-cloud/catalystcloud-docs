@@ -5,39 +5,40 @@ Overview
 ********
 
 This section will demonstrate how to build an Ubuntu 14.04 server in a new
-OpenStack tenant. After you have completed the steps you will be able to log
+OpenStack project. After you have completed the steps you will be able to log
 on to the server via SSH from anywhere on the internet using an SSH key.
 
-This section assumes that you have already setup a Catalyst Cloud account and
-have been assigned a tenant and a user in that tenant who has permissions to
-create the required resources.
+The following is assumed:
 
-When a new tenancy is created it will have a network, subnet and
-router built by default.  For completeness the process below includes the steps
-required to do this in the case that the default setup has been deleted or an
-additiional network is required.
+* A Catalyst Cloud account has been set up for you
+* You have been assigned a project
+* Your user in that project has permissions to create the required resources.
+
+When a new project is created, a network, subnet, and router is built by default.
+The process below outlines the steps required to do this in the case that the
+default setup has been deleted or an additional network is required.
 
 .. note::
 
-    Steps 1 & 2 below can be skipped on a new tenancy where the default
+    Steps 1 & 2 below can be skipped on a new project where the default
     networking is still in place. The creation of your first instance
     can proceed from step 3.
 
-Here are the steps for creating your first cloud instance.
+Here are the steps for creating your first cloud instance:
 
 1. Create a Network and Subnet
 2. Create a Router
-3. Upload an SSH keypair
-4. Create a security group
-5. Launch an instance
-6. Associate a floating ip
-7. Log in to your instance
+3. Upload an SSH Keypair
+4. Create a Security Group
+5. Launch an Instance
+6. Associate a Floating IP
+7. Log in to your Instance
 
 There are a number of different ways to provision resources on the Catalyst
 Cloud. We will show you how to complete these steps using the dashboard and the
-command line tools. If you are starting out it will be easiest to use the
-dashboard. As you become more familiar with the Catalyst Cloud it is worth
-learning how to provision resources programmatically.
+command line tools. If you are not comfortable with the command line, it will
+be easier to use the dashboard. As you become more familiar with the Catalyst
+Cloud it is worth learning how to provision resources programmatically.
 
 You are free to use whichever method suits you, you can use these methods in
 isolation or they can be combined. If you do not use the dashboard to launch
@@ -49,8 +50,8 @@ Network Requirements
 
 Before launching an instance, it is necessary to have some network resources in
 place. These may have already been created for you. In this documentation we
-are going to assume your are starting from an un-configured tenant so we will
-be demonstrating how to set these up from scratch.
+will assume your are starting from an unconfigured project and will demonstrate
+how to set these up from scratch.
 
 The requirements are:
 
@@ -58,8 +59,8 @@ The requirements are:
 * A Subnet with addressing and DHCP/DNS servers configured
 * A Router with a gateway set and an interface in a virtual network
 
-Catalyst operate a number of recursive DNS servers in each cloud region for
-use by Catalyst Cloud instances, free of charge. They are:
+Catalyst operates, free of charge, a number of recursive DNS servers in each
+cloud region for use by Catalyst Cloud instances. They are:
 
 .. _name_servers:
 
@@ -90,7 +91,7 @@ gigabytes of memory.
 
 .. note::
 
-  Flavour names are identical across all regions, but the flavour IDs will
+  Flavor names are identical across all regions, but the flavor IDs will
   vary.
 
 Operating System Images
@@ -105,7 +106,7 @@ allows you to upload your own images.
 
  Image IDs for the same operating system will be different in each region.
  Further, images are periodically updated receiving new IDs over time. You
- should always look up for an image based on its name and then retrieve the ID
+ should always look up an image based on its name and then retrieve the ID
  for it.
 
 Uploading an SSH key
@@ -116,8 +117,10 @@ which can be used for shell access. By default, Ubuntu will install this key
 for the 'ubuntu' user. Other operating systems have different default users, as
 listed here: :ref:`images`
 
-Tip: name your key using information like the username and host on which the
-ssh key was generated so that it is easy to identify later.
+.. Tip::
+
+ Name your key using information such as the username and host on which the
+ ssh key was generated so that it is easy to identify later.
 
 Keypairs must be created in each region being used.
 
@@ -150,7 +153,7 @@ the same rules to subsequent instances that you may create.
 Floating IPs
 ============
 
-In order to connect to our instance, we will need to allocate a floating IP
-to the instance. Alternately, one could create a VPN and save some money by
+In order to connect to your instance, you will need to allocate a floating IP
+to the instance. Alternately, you could create a VPN and save some money by
 avoiding floating IPs altogether. VPNs are not feasible when the instance
 will be offering a service to the greater internet.
