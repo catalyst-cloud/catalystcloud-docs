@@ -282,6 +282,18 @@ There are four different ways you can stop a compute instance:
   where it was, but will take longer to start because it needs to read its
   memory state from disk.
 
+******************
+Automatic failover
+******************
+To enhance the availability of our compute service, when a server failure is detected, our cloud
+automatically migrates and restarts the compute instances on a healthy server.
+
+To benefit from this feature, your application must be configured and prepared to start
+automatically and resume its normal operation at boot time and your guest operating system to
+respond to ACPI power events. The default images supplied in the Catalyst Cloud already have this
+enabled by default.
+
+
 ***************************
 Anti-affinity groups for HA
 ***************************
