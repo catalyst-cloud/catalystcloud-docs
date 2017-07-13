@@ -10,17 +10,20 @@ create additional networks then please see :ref:`creating_networks` for details 
 
 Otherwise, let's proceed with building your first instance.
 
+
 Uploading an SSH key
 ====================
 
 You can either import an existing public key or have OpenStack create a keypair
-for you, we document how to import the public key from an existing keypair
-here.
+for you. Here we document how to import the public key from an existing keypair:
 
 Select "Import Key Pair":
 
 .. image:: ../_static/fi-key-pair-import-1.png
    :align: center
+
+|
+|
 
 Enter your key pair name and paste your public key into the box:
 
@@ -28,10 +31,11 @@ Enter your key pair name and paste your public key into the box:
    :align: center
 
 |
+|
 
 .. note::
 
- The dashboard has two options "Create Key Pair" and "Import Key Pair". When
+ The dashboard has two options, "Create Key Pair" and "Import Key Pair". When
  you select "Create Key Pair", OpenStack creates a keypair and saves the public
  key while providing the private key to you to download. When you select
  "Import Key Pair" the dashboard provides a form where you can upload a public
@@ -39,10 +43,12 @@ Enter your key pair name and paste your public key into the box:
  key only and not a keypair, it would be more correctly named "Import Public
  Key". See the :ref:`ssh_keypairs` section of the FAQ for more information.
 
+
 Configure Instance Security Group
 =================================
 
-We need to create a security group and rule for our instance.
+We will add  a security group and a rule for our instance so that it can be
+accessed using SSH.
 
 Navigate to the "Security Groups" tab of the "Access & Security" section and
 click "Create Security Group":
@@ -50,20 +56,32 @@ click "Create Security Group":
 .. image:: ../_static/fi-security-group-create-1.png
    :align: center
 
+|
+|
+
 Enter a name and description and click "Create Security Group":
 
 .. image:: ../_static/fi-security-group-create-2.png
    :align: center
+
+|
+|
 
 Now click on "Manage Rules" for the group we have created:
 
 .. image:: ../_static/fi-security-group-rules-manage.png
    :align: center
 
+|
+|
+
 Click on “Add Rule”:
 
 .. image:: ../_static/fi-security-group-rule-add.png
    :align: center
+
+|
+|
 
 Enter 22 for the port number (this is the TCP port the SSH service listens on).
 You can use the default values for the remainder of the options. Click "Add":
@@ -71,6 +89,7 @@ You can use the default values for the remainder of the options. Click "Add":
 .. image:: ../_static/fi-security-group-rule-add-add.png
    :align: center
 
+|
 |
 
 .. warning::
@@ -83,14 +102,18 @@ You can use the default values for the remainder of the options. Click "Add":
   of your compute instances and services to IP addresses or subnets that are
   trusted.
 
+
 Booting an Instance
 ===================
 
-We are now ready to launch our first instance, select launch instance from the
+We are now ready to launch our first instance. Select launch instance from the
 instances list:
 
 .. image:: ../_static/fi-instance-launch.png
    :align: center
+
+|
+|
 
 Enter an instance name, use the default instance count of one.  Select "Image"
 as the boot source and "No" for create new volume. Select the
@@ -99,20 +122,32 @@ as the boot source and "No" for create new volume. Select the
 .. image:: ../_static/fi-launch-instance-source.png
    :align: center
 
+|
+|
+
 Select the ``c1.c1r1`` flavor from the list and click "Next":
 
 .. image:: ../_static/fi-launch-instance-flavor.png
    :align: center
+
+|
+|
 
 Select the ``private-net`` network from the list and click "Next":
 
 .. image:: ../_static/fi-launch-instance-networks.png
    :align: center
 
+|
+|
+
 Select the ``first-instance-sg`` security group from the list and click "Next":
 
 .. image:: ../_static/fi-launch-instance-security-groups.png
    :align: center
+
+|
+|
 
 Select the ``first-instance-key`` key pair from the list and click "Launch
 Instance":
@@ -120,25 +155,32 @@ Instance":
 .. image:: ../_static/fi-launch-instance-key-pair.png
    :align: center
 
-Your instance will now be built, you will see the Status, Task and Power State
-change during this process which will take a few seconds. When the process is
-complete the status will be "Active". We now have a running instance but there
-are a few more steps required before we can login.
+|
+|
+
+It will take a few seconds for your instance to build. You will see the Status,
+Task and Power State change during this process. When complete, the status will
+be "Active". You now have a running instance but there are a few more steps
+required before you can login.
+
 
 Allocate a Floating IP
 ======================
 
-To associate a floating IP you need to navigate to the "Floating IPs" tab of
-the "Access & Security" section.
+To associate a Floating IP with your instance you need to navigate to the
+"Floating IPs" tab of the "Access & Security" section.
 
-If you do not have an IP allocated, first click on "Allocate IP to Project" to
+If an IP address has not yet been allocated, click on "Allocate IP to Project" to
 obtain a public IP. Then, select an IP that is not currently mapped and click
 on "Associate":
 
 .. image:: ../_static/fi-floating-ip.png
    :align: center
 
-Select the port you wish to be associated with the floating IP. Ports are
+|
+|
+
+Select the port you wish to be associated with the Floating IP. Ports are
 equivalent to virtual network interfaces of compute instances, and are named
 after the compute instance that owns it.
 
@@ -147,16 +189,20 @@ In this example, select the "first-instance" port and click "Associate":
 .. image:: ../_static/fi-floating-ip-associate.png
    :align: center
 
+|
+|
+
+
 Connect to the new Instance
 ===========================
 
-We can now connect to the SSH service using the floating public IP that we
-associated with our instance in the previous step. This address is visible in
-the Instances list or under the Floating IPs tab in Access & Security.
+You can now connect to the SSH service using the floating public IP that you
+associated with your instance in the previous step. This address is visible in
+the Instances list, or under the Floating IPs tab in Access & Security.
 
 .. code-block:: bash
 
  $ ssh ubuntu@PUBLIC_IP
 
-You should be able to interact with this instance as you would any Ubuntu
-server.
+You should be able to SSH into, and interact with this instance as you would
+any Ubuntu server.
