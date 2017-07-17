@@ -2,17 +2,30 @@
 Using the command line interface
 ********************************
 
-This section assumes you have installed the OpenStack command line tools and
-sourced an openrc file, as explained in :ref:`command-line-interface`.
+The following is assumed:
+
+* You have installed the OpenStack command line tools
+* You have sourced an OpenRC file
+
+If not, please refer to the :ref:`command-line-interface` section for
+details on how to do so.
+
 
 .. note::
 
- This documentation displays values like ``<PRIVATE_SUBNET_ID>`` in command output, the majority of these will be displayed as UUIDs in your output. We will store many of these values in bash variables prefixed with ``CC_`` so you do not have to cut and paste them. The prefix ``CC_`` (Catalyst Cloud) is used to distinguish these varibles from the ``OS_`` variables derived from an openrc file.
+ This documentation refers to values using placeholders (such as ``<PRIVATE_SUBNET_ID>``)
+ in example command output. The majority of these values will be displayed as UUIDs
+ in your output. Many of these values will be stored in bash variables prefixed with
+ ``CC_`` so you do not have to cut and paste them. The prefix ``CC_`` (Catalyst Cloud)
+ is used to  distinguish these variables from the ``OS_`` (OpenStack) variables obtained
+ from an OpenRC file.
+
 
 Creating the required network elements
 ======================================
 
-Lets create a router and network:
+Create a router called "border-router" with a gateway to "public-net".
+Also create what will be a private network, called "private-net":
 
 .. code-block:: bash
 
@@ -48,8 +61,11 @@ Lets create a router and network:
  | subnets         |                                      |
  +-----------------+--------------------------------------+
 
-Now lets set our :ref:`DNS Name Servers <name_servers>` and create a subnet
-of the network we have just created:
+|
+|
+
+Set your :ref:`DNS Name Servers <name_servers>` variables. Then create a subnet
+of the "private-net" network, assigning the appropriate DNS server to that subnet.
 
 .. code-block:: bash
 
@@ -80,20 +96,30 @@ of the network we have just created:
  | subnetpool_id     | None                                           |
  +-------------------+------------------------------------------------+
 
-Now create a router interface on the subnet:
+|
+|
+
+Now create a router interface on the "private-subnet" subnet:
 
 .. code-block:: bash
 
  $ openstack router add subnet border-router private-subnet
 
+|
+|
+
 Choosing a Flavor
 =================
 
-The flavor of an instance is the disk, CPU, and memory specifications of an
-instance. Use 'openstack flavor list' to get a list. Catalyst flavors are named
-'cX.cYrZ', where X is the 'compute generation', Y is the number of vCPUs, and
-Z is the number of gigabytes of memory. We will export an environment variable
-with the flavour ID for later use.
+The Flavor of an instance specifies the disk, CPU, and memory allocated to  an
+instance. Use ``openstack flavor list`` to see a list of available configurations.
+
+.. note::
+
+  Catalyst flavors are named 'cX.cYrZ', where X is the "compute generation", Y is
+  the number of vCPUs, and Z is the number of gigabytes of memory.
+
+Choose a Flavor ID, assign it to an environment variable, then export for later use:
 
 .. code-block:: bash
 
@@ -126,21 +152,28 @@ with the flavour ID for later use.
 
  $ export CC_FLAVOR_ID=$( openstack flavor show c1.c1r1 -f value -c id )
 
-In this tutorial we have chosen to use a c1.c1r1 instance.
+This example assigns a c1.c1r1 flavor to the instance.
 
 .. note::
 
- These IDs will be different in each region.
+ Flavor IDs will be different in each region. Remember always to check what is available
+ using ``openstack flavor list``.
+
+|
+|
 
 Choosing an Image
 =================
 
-In order to create an instance, you will need to have a pre-built Operating
-System in the form of an Image. Images are stored in the Glance service.
-Catalyst provide a set of images for general use. If none of those are
-sufficient, custom images can be uploaded to Glance by anyone. Here is an
-example of how to locate a suitable image. We will export an environment
-variable with the image id for later use.
+In order to create an instance, you will use a pre-built Operating System
+known as an Image. Images are stored in the Glance service.
+
+.. note::
+
+  Catalyst provides a number of popular images for general use. If your preferred image
+  is not available, you may upload a custom image to Glance.
+
+Choose an Image ID, assign it to an environment variable, then export for later use:
 
 .. code-block:: bash
 
@@ -177,25 +210,33 @@ variable with the image id for later use.
 
  $ export CC_IMAGE_ID=$( openstack image show ubuntu-16.04-x86_64 -f value -c id )
 
-Let's use the ubuntu image to create this instance. Note that these IDs will be
-different in each region. Furthermore, images are periodically updated so the
-ID of an Ubuntu image will change over time.
+This example uses the Ubuntu image to create an instance.
+
+.. note::
+
+  Image IDs will be different in each region. Furthermore, images are periodically updated so
+  Image IDs will change over time. Remember always to check what is available
+  using ``openstack image list --public``.
+
+|
+|
 
 .. _uploading-an-ssh-key:
 
 Uploading an SSH key
 ====================
 
-When an instance is created, OpenStack passes an SSH key to the instance which
+When an instance is created, OpenStack places an SSH key on the instance which
 can be used for shell access. By default, Ubuntu will install this key for the
-'ubuntu' user. Other operating systems have a different default user, as listed
+"ubuntu" user. Other operating systems have a different default user, as listed
 here: :ref:`images`
 
 Use ``openstack keypair create`` to upload your Public SSH key.
 
 .. tip::
 
- You can name your key using information like the username and host on which the ssh key was generated so that it is easy to identify later.
+ Name the key using information such as your username and the hostname on which the
+ ssh key was generated. This makes the key easy to identify at a later stage.
 
 .. code-block:: bash
 
@@ -219,11 +260,14 @@ Use ``openstack keypair create`` to upload your Public SSH key.
 
  Keypairs must be created in each region being used.
 
+|
+|
+
 Choosing a Network
 ==================
 
-Use Neutron to locate the correct network to use. We will export an environment
-variable with the network id for later use.
+List the available networks and choose the appropriate network to use.
+Assign the Network ID to an environment variable and export it for later use.
 
 .. code-block:: bash
 
@@ -239,15 +283,20 @@ variable with the network id for later use.
  $ export CC_PRIVATE_NETWORK_ID=$( openstack network show private-net -f value -c id )
 
 The `public-net` is used by routers to access the Internet. Instances may not
-be booted on this network. We will use private-net to boot our instance.
+be booted on this network. Choose "private-net" when assigning a network to the instance.
 
 .. note::
- These IDs will be different in each region.
+
+  Network IDs will be different in each region. Remember always to check what is available
+  using ``openstack network list``.
+
+|
+|
 
 Configure Instance Security Group
 =================================
 
-We need to create a security group and rule for our instance.
+Create a security group called "first-instance-sg".
 
 .. code-block:: bash
 
@@ -264,9 +313,13 @@ We need to create a security group and rule for our instance.
  |             | direction='egress', ethertype='IPv6', id='e027c9b3-f59b-40bb-b4ea-d44a0f057d7f' |
  +-------------+---------------------------------------------------------------------------------+
 
-We can now create a rule within our group. You can issue the ``openstack
-security group list`` command to find the ``SECURITY_GROUP_ID``. We will export
-an environment variable with the security group id for later use.
+|
+|
+
+Create a rule within the "first-instance-sg" security group.
+
+Issue the ``openstack security group list`` command to find the ``SECURITY_GROUP_ID``.
+Assign the Security Group ID to an environment variable and export it for later use.
 
 .. code-block:: bash
 
@@ -280,21 +333,27 @@ an environment variable with the security group id for later use.
 
  $ export CC_SECURITY_GROUP_ID=$( openstack security group show first-instance-sg -f value -c id )
 
-Next we will set an environment variable with our local external IP address:
+|
+|
+
+Assign the local external IP address to an environment variable and export it for later use:
 
 .. code-block:: bash
 
  $ export CC_REMOTE_CIDR_NETWORK="$( dig +short myip.opendns.com @resolver1.opendns.com )/32"
  $ echo $CC_REMOTE_CIDR_NETWORK
 
-Ensure that this variable is correctly set and if not set it manually. If you
-are unsure of what ``CC_REMOTE_CIDR_NETWORK`` should be, ask your network
-admin, or visit http://ifconfig.me and get your IP address. Use
-"<IP_ADDRESS>/32" as ``CC_REMOTE_CIDR_NETWORK`` to allow traffic only from your
-current effective IP.
+.. note::
 
-Now we can create a rule to restrict SSH access to our instance to our current
-public IP address:
+ Ensure that this variable is correctly set and if not set it manually. If you are unsure of
+ what ``CC_REMOTE_CIDR_NETWORK`` should be, ask your network administrator, or visit
+ http://ifconfig.me to find your IP address. Use "<IP_ADDRESS>/32" as ``CC_REMOTE_CIDR_NETWORK``
+ to allow traffic only from your current effective IP.
+
+|
+|
+
+Create a rule to restrict SSH access to our instance to the current public IP address:
 
 .. code-block:: bash
 
@@ -315,12 +374,16 @@ public IP address:
  | security_group_id | 14aeedb8-5e9c-4617-8cf9-6e072bb41886 |
  +-------------------+--------------------------------------+
 
+|
+|
 
 Booting an Instance
 ===================
 
-Use the ``openstack server create`` command and supply the information we
-gathered in previous steps. Ensure you have appropriate values set for
+Use the ``openstack server create`` command, supplying the information
+obtained in previous steps and exported as environment variables.
+
+Ensure you have appropriate values set for
 ``CC_FLAVOR_ID``, ``CC_IMAGE_ID`` and ``CC_PRIVATE_NETWORK_ID``.
 
 .. code-block:: bash
@@ -330,8 +393,11 @@ gathered in previous steps. Ensure you have appropriate values set for
  $ openstack server create --flavor $CC_FLAVOR_ID --image $CC_IMAGE_ID --key-name first-instance-key \
  --security-group default --security-group first-instance-sg --nic net-id=$CC_PRIVATE_NETWORK_ID first-instance
 
-After issuing that command, details about the new Instance, including its id
-will be provided.
+|
+|
+
+As the Instance builds, its details will be provided. This includes its ID
+(represented by ``<INSTANCE_ID>``) below.
 
 .. code-block:: bash
 
@@ -367,9 +433,15 @@ will be provided.
  | user_id                              | <USER_ID>                                                  |
  +--------------------------------------+------------------------------------------------------------+
 
-Note that the status is ``BUILD`` Catalyst Cloud instances build very quickly,
-but it still takes a few seconds. Wait a few seconds and ask for the status of
-this instance using the <INSTANCE_ID> or name (if unique) of this instance.
+|
+
+.. note::
+
+ Observe that the status is ``BUILD`` Catalyst Cloud instances build very quickly,
+ but it still takes a few seconds. Wait a few seconds and ask for the status of
+ this instance using the ``<INSTANCE_ID>`` or name (if unique) of this instance.
+
+|
 
 .. code-block:: bash
 
@@ -405,12 +477,15 @@ this instance using the <INSTANCE_ID> or name (if unique) of this instance.
  | user_id                              | <USER_ID>                                                  |
  +--------------------------------------+------------------------------------------------------------+
 
+|
+|
+
 Allocate a Floating IP
 ======================
 
-In order to connect to our instance, we will need to allocate a floating IP to
-the instance. We will use the id of public-net (found previously via
-``openstack network list``) and request a new floating IP.
+In order to connect to the instance, first allocate a Floating IP.
+Use the ID of "public-net" (obtained previously with ``openstack network list``)
+to request a new Floating IP.
 
 .. code-block:: bash
 
@@ -431,23 +506,27 @@ the instance. We will use the id of public-net (found previously via
 
 .. note::
 
- This step can be skipped if floating IPs already exist, you can check this with the command ``openstack floating ip list``.
+ This step can be skipped if Floating IPs already exist.
+ Check this by issuing the command: ``openstack floating ip list``.
 
 .. code-block:: bash
 
  $ export CC_FLOATING_IP_ID=$( openstack floating ip list -f value | grep -m 1 'None None' | awk '{ print $1 }' )
  $ export CC_PUBLIC_IP=$( openstack floating ip show $CC_FLOATING_IP_ID -f value -c floating_ip_address )
 
-Now, we can associate this floating IP with our instance:
+Associate this Floating IP with the instance:
 
 .. code-block:: bash
 
  $ openstack server add floating ip first-instance $CC_PUBLIC_IP
 
+|
+|
+
 Connect to the new Instance
 ===========================
 
-Connecting to our instance should be as easy as:
+Connecting to the Instance should be as easy as:
 
 .. code-block:: bash
 
