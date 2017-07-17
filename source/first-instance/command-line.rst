@@ -1,3 +1,5 @@
+.. _using-the-command-line-interface:
+
 ********************************
 Using the command line interface
 ********************************
