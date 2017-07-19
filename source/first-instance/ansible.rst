@@ -9,20 +9,23 @@ deployment tool. Ansible provides a set of core modules for interacting with
 OpenStack. This makes Ansible an ideal tool for providing both OpenStack
 orchestration and instance configuration, letting you use a single tool to
 setup the underlying infrastructure and configure instances. As such Ansible
-can substitute for Heat for OpenStack orchestration and Puppet for instance
-configuration.
+can replace other tools, such as Heat for OpenStack orchestration, and Puppet
+for instance configuration.
 
 .. _Ansible: http://www.ansible.com/
 
 Comprehensive documentation of the Ansible OpenStack modules is available at
 https://docs.ansible.com/ansible/list_of_cloud_modules.html#openstack
 
+|
+|
+
 Install Ansible
 ===============
 
-We have written a script to install the required Ansible and OpenStack
+A script is provided by Catalyst which installs the required Ansible and OpenStack
 libraries within a Python virtual environment. This script is part of the
-`catalystcloud-ansible`_ git repository. Lets clone this repository and run the
+`catalystcloud-ansible`_ git repository. Clone this repository and run the
 install script in order to install Ansible.
 
 .. _catalystcloud-ansible: https://github.com/catalyst/catalystcloud-ansible
@@ -51,34 +54,39 @@ install script in order to install Ansible.
   Catalyst recommends customers use Ansible >= 2.0 and Shade >= 1.4 with the
   Catalyst Cloud.
 
+|
+|
+
 OpenStack credentials
 =====================
 
-Before we can run the playbooks we need to setup our OpenStack credentials, the
-easiest way to achieve this is to make use of environment variables. We will
-make use of the standard variables provided by an OpenStack RC file as
-described at :ref:`source-rc-file`. These variables are read by the Ansible
-``os_auth`` module to provide Ansible with permissions to access the Catalyst
-Cloud APIs.
+Before running the Ansible playbooks, ensure your OpenStack credentials have
+been set up. The easiest way to achieve this is by making use of environment
+variables. Use the standard variables provided by an OpenStack RC file as
+described in :ref:`source-rc-file`. These variables are read by the Ansible
+``os_auth`` module, and will provide Ansible with the credentials required
+to access the Catalyst Cloud APIs.
 
 .. note::
 
- If you do not source an OpenStack RC file, you will need to set a few
- mandatory authentication attributes in the playbooks. See the vars section of
- the playbooks for details.
+ If credentials are not set up by sourcing an OpenStack RC file, a few
+ mandatory authentication attributes will need to be included in the playbooks.
+ See the "vars" section of the playbooks for details.
 
-Now we have an Ansible installation that includes the required OpenStack
-modules and have setup our OpenStack credentials we can proceed to build our
-first instance. We have split the first instance playbooks into two playbook
-files, the first playbook ``create-network.yml`` creates the required network
-components and the second playbook ``launch-instance.yml`` launches the
-instance.
+Once the Ansible installation includes the required OpenStack modules, and the
+OpenStack credentials have been set up, a first instance may be built.
+The first instance playbooks have been split up as follows:
+
+* The first playbook, ``create-network.yml`` creates the required network components.
+* The second playbook, ``launch-instance.yml`` launches the instance.
+
+|
+|
 
 Run the create network playbook
 ===============================
 
-Lets take a look at what tasks the create network playbook is going to
-complete:
+These are the tasks the ``create-network.yml`` playbook will perform:
 
 .. code-block:: bash
 
@@ -96,10 +104,11 @@ complete:
       Create a security group rule for SSH access   TAGS: []
       Import an SSH keypair TAGS: []
 
-We are going to need to provide the path to a valid SSH key in order for this
-playbook to work. You can edit ``create-network.yml`` and update the
-``ssh_public_key`` variable, or we can override the variable when we run the
-playbook as shown below:
+|
+
+In order for this playbook to work, the path to a valid SSH key must be provided.
+Edit ``create-network.yml`` and update the ``ssh_public_key`` variable, or override
+the variable when running the playbook as shown below:
 
 .. code-block:: bash
 
@@ -134,11 +143,19 @@ playbook as shown below:
  PLAY RECAP *********************************************************************
  localhost                  : ok=8    changed=6    unreachable=0    failed=0
 
+|
+
+.. tip::
+
+  Pay careful attention to the console output. It provides lots of useful information.
+
+|
+|
 
 Run the launch instance playbook
 ================================
 
-Now we have a network setup we can run the launch instance playbook:
+After the network has been setup successfully, run the ``launch-instance.yml`` playbook:
 
 .. code-block:: bash
 
@@ -166,41 +183,55 @@ Now we have a network setup we can run the launch instance playbook:
  PLAY RECAP *********************************************************************
  localhost                  : ok=4    changed=2    unreachable=0    failed=1
 
-We can now connect to our new instance via SSH using the IP address output by
-the ``Output floating IP`` task:
+|
+
+The new instance is accessible using SSH. Retrieve the instance's IP address from
+the console output. It is echoed by the example ``Output floating IP`` task above
+as "150.242.41.75". Login using SSH (using the username appropriate to the build image):
 
 .. code-block:: bash
 
  $ ssh ubuntu@150.242.41.75
 
-We can now write playbooks to configure the instance we have created as
-required.
+|
 
+.. tip::
+
+  Additional Ansible playbooks may now be used to configure this instance further,
+  as required.
+
+|
+|
 
 Resource cleanup with an Ansible playbook
 =========================================
 
-This playbook will remove all resources created when running the previous
-playbooks.
+This playbook will remove all resources created by the previous playbooks.
 
-This playbook is included in the git repository checked out earlier, if the
-checkout does not exist the playbook can be downloaded using the following
-command:
+It has been included in the `catalystcloud-ansible`_ git repository referenced
+earlier, but may also be downloaded as follows:
 
 .. code-block:: bash
 
  $ wget -q https://raw.githubusercontent.com/catalyst/catalystcloud-ansible/master/remove-stack.yml
 
-Now run the playbook to remove all resources created previously:
+|
+
+Run the playbook to remove all resources created previously:
 
 .. code-block:: bash
 
  $ ansible-playbook remove-stack.yml --extra-vars "floating_ip=<ip-address>"
 
-Where ``<ip-address>`` is the floating-ip that was assigned by the ``launch
-instance`` playbook
+Replace ``<ip-address>`` with the floating-ip assigned by the ``launch-instance.yml``
+playbook.
+
+|
 
 .. note::
 
- This cleanup playbook assumes that you have created all resources using the
- default names defined in the original playbooks.
+ This cleanup playbook assumes that all resources have been created using the
+ default names defined in the original playbooks. If the original names have
+ been changed, it will be necessary to edit the cleanup playbook to reflect these
+ changes.
+
