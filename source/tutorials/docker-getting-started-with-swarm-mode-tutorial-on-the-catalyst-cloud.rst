@@ -59,7 +59,7 @@ We can now run the ``create-swarm-hosts.yaml`` playbook to create the swarm:
 
 .. code-block:: bash
 
- $ ansible-playbook --extra-vars "ssh_public_key=$HOME/.ssh/id_rsa.pub" create-swarm-hosts.yaml
+ $ ansible-playbook --ask-sudo-pass create-swarm-hosts.yaml
 
 After this playbook successfully completes you are ready to complete the
 tutorial. As described in the tutorial `setup`_ instructions it provides:
@@ -107,5 +107,5 @@ associated resources by running the ``remove-swarm-hosts.yaml`` playbook:
 
 .. code-block:: bash
 
- $ ansible-playbook remove-swarm-hosts.yaml
+ $ ansible-playbook --ask-sudo-pass remove-swarm-hosts.yaml
 
