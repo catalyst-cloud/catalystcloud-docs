@@ -67,7 +67,7 @@ Creating your own custom images
 
 The OpenStack upstream documentation provides detailed instructions on how to
 prepare all major operating systems to run in the cloud:
-http://docs.openstack.org/image-guide/content/ch_creating_images_manually.html
+https://docs.openstack.org/image-guide/create-images-manually.html
 
 Another method for creating custom images is to use `Packer`_. Packer is an
 open source tool developed by `Hashicorp`_ for creating machine images for
