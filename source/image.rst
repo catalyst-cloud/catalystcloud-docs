@@ -28,9 +28,6 @@ have overwritten the default user name with cloud-init).
 +------------------+-----------+
 | Ubuntu Linux     | ubuntu    |
 +------------------+-----------+
-| Windows          | admin     |
-+------------------+-----------+
-
 
 .. note::
 
@@ -60,6 +57,20 @@ tools, you can easily located them by running:
   glance image-list --owner 94b566de52f9423fab80ceee8c0a4a23
 
 
+*******************************
+Images provided by our partners
+*******************************
+
++------------------+-----------+-----------------+
+| Operating system | User-name | Partner         |
++==================+===========+=================+
+| Windows          | admin     | Silicon Systems |
++------------------+-----------+-----------------+
+
+Before using the images provided by our Partners, you should always confirm
+that they are suitable for your needs and fit for purpose. Catalyst provides
+them "as is", without warranty of any kind.
+
 
 *******************************
 Creating your own custom images
@@ -67,7 +78,7 @@ Creating your own custom images
 
 The OpenStack upstream documentation provides detailed instructions on how to
 prepare all major operating systems to run in the cloud:
-http://docs.openstack.org/image-guide/content/ch_creating_images_manually.html
+https://docs.openstack.org/image-guide/create-images-manually.html
 
 Another method for creating custom images is to use `Packer`_. Packer is an
 open source tool developed by `Hashicorp`_ for creating machine images for

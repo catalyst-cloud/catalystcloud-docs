@@ -2,10 +2,10 @@
 Using a bash script
 *******************
 
-This section provides a bash script that runs the commands from the previous
-section in a single script.
+The bash script provided here comprises all the commands from the section
+:ref:`using-the-command-line-interface` in a single script.
 
-You can download and run this script using the following commands:
+Download and run this script using the following commands:
 
 .. code-block:: bash
 
@@ -15,7 +15,10 @@ You can download and run this script using the following commands:
 
 .. note::
 
- You may wish to edit the script before executing, for example to add a prefix.
+ Please examine the script carefully before it is run, ensuring that its content,
+ function, and impact is thoroughly understood. The script may require editing to
+ add a prefix, for example.
+ See the "VARS" section at the top of the script for more details.
 
 .. literalinclude:: ../../scripts/create-first-instance.sh
   :language: bash

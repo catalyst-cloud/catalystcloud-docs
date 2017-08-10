@@ -31,7 +31,7 @@ quickly recovered from another disk, server or region.
 Object storage from the dashboard
 *********************************
 
-Data must be stored in a container ( also referred to as a bucket ) so we need
+Data must be stored in a container (also referred to as a bucket) so we need
 to create at least one container prior to uploading data.  To create a new
 container navigate to the "Containers" section and click "Create Container".
 
@@ -724,3 +724,209 @@ enable the index and optionally the error settings.
 You should now be able to view the index file as a website.
 
 https://object-storage.nz-por-1.catalystcloud.io/v1/%AUTH_ID%/%container_name%/
+
+
+**************************
+Working with Large Objects
+**************************
+
+Typically the size of a single object cannot exceed 5GB. It is possible
+however, to use several smaller objects to break up the large object. When this
+approach is taken the resulting large object is made ou of two types of
+objects:
+
+- **Segment Objects** which store the actual content. You need to split your content into chunks
+  and then upload each piece as its own segment object.
+
+- A **manifest object** then links the segment objects into a single logical object. To download
+  the object you download the manifest and object storage then concatenates the segments and
+  returns the the contents.
+
+There are tools avaiable, both GUI and CLI, that will handle the segmentation
+of large objects for you. For all other cases you must manually split the
+oversized files and manage the manifest objects yourself.
+
+Using the Swift commandline tool
+================================
+The Swift tool which is included in the `python-swiftclient`_ library, for example, is
+capable of handling oversized files
+and gives you the choice of using either ``static large objects (SLO)`` or
+``dynamic large objects (DLO)``, which will be explained in more detail later.
+
+.. _python-swiftclient: http://github.com/openstack/python-swiftclient
+
+|
+
+Here are 2 examples of how to upload a large object to an object storage container using the Swift
+tool. For the purpose of keeping output brief we are using a 512MB file in the example.
+
+example 1 : DLO
+---------------
+The default mode for the tool is the ``dynamic large object`` type so in this example the only
+other parameter that is required is the segment size. The ``-S`` flag is used to specify the size
+of each chunk, in this case  104857600 bytes (100MB).
+
+.. code-block:: bash
+
+  $ swift upload mycontainer -S 104857600 large_file
+  large_file segment 5
+  large_file segment 0
+  large_file segment 4
+  large_file segment 3
+  large_file segment 1
+  large_file segment 2
+  large_file
+
+|
+
+example 2 : SLO
+---------------
+In the second example the same segment size as above is used but we specify that the object type
+must now be the ``static large object`` type.
+
+.. code-block:: bash
+
+  $ swift upload mycontainer --use-slo -S 104857600 large_file
+  large_file segment 5
+  large_file segment 1
+  large_file segment 4
+  large_file segment 0
+  large_file segment 2
+  large_file segment 3
+  large_file
+
+Both of these approaches will successfully upload our large file file into object storage. The
+file would be split into 100MB segments which are uploaded in parallel. Once all the segments are
+uploaded, the manifest file will be created so that the segments can be downloaded as a single
+object.
+
+The Swift uses a strict convention for its segmented object support. All segments that are
+uploaded are placed into a second container that has ``_segments`` appended to the original
+container name, in this case it would be mycontainer_segments. The segment names follow the format
+of ``<name>/<timestamp>/<object_size>/<segment_size>/<segment_name>``.
+
+If we check on the segments created in example 1 we can see this.
+
+.. code-block:: bash
+
+  $ swift list mycontainer_segments
+  large_file/1500505735.549995/536870912/104857600/00000000
+  large_file/1500505735.549995/536870912/104857600/00000001
+  large_file/1500505735.549995/536870912/104857600/00000002
+  large_file/1500505735.549995/536870912/104857600/00000003
+  large_file/1500505735.549995/536870912/104857600/00000004
+  large_file/1500505735.549995/536870912/104857600/00000005
+
+
+In the above example it will upload all the segments into a second container named
+test_container_segments. These segments will have names like
+large_file/1290206778.25/21474836480/00000000, large_file/1290206778.25/21474836480/00000001, etc.
+
+The main benefit for using a separate container is that the main container listings will not be
+polluted with all the segment names. The reason for using the segment name format of
+<name>/<timestamp>/<size>/<segment> is so that an upload of a new file with the same name won’t
+overwrite the contents of the first until the last moment when the manifest file is updated.
+
+
+Swift will manage these segment files for you, deleting old segments on deletes and overwrites,
+etc. You can override this behavior with the --leave-segments option if desired; this is useful if
+you want to have multiple versions of the same large object available.
+
+Static Large Objects (SLO) vs Dynamic Large Objects (DLO)
+=========================================================
+
+The main difference between the two object types is to do with the associated manifest file that
+describes the overall object structure within swift.
+
+In both of our examples above, the file would be split into 100MB chunks and uploaded, this can
+happen concurrently if desired. Once the segments are uploaded it is then necessary to create a
+manifest file to describe the object and allow it to be downloaded as a single file. When using
+Swift the manifest fles are created for you.
+
+The manifest for the ``DLO`` is an empty file and all segments must be stored in the same container
+, though depending on the object store implementation the segments, as mentioned above, may go into
+a container with '_segments' appended to the original container name. It also works on the
+assumption that the container will be eventually consistent.
+
+For ``SLO`` the difference is that a user-defined manifest file describing the object segments is
+required. It also does not rely on eventually consistent container listings to do so. This means
+that the segments can be help in different container locations. The fact that once all files are
+can't then change is the reason why these are referred to as 'static' objects.
+
+A more manual approach
+======================
+
+While the Swift tool is certainly handy as it handles a lot of the underlying file management tasks
+required to upload files into object storage the same can be achieved by more manual means.
+
+Here is an example using standard linux commandline tools such as ``split`` and ``curl`` to perform
+a dynamic large object file upload.
+
+The file 'large_file' is broken into 100MB chunks which are prefixed with 'split-'
+
+.. code-block:: bash
+
+  $ split --bytes=100M large_file split-
+
+
+The upload of these segments is then handled by curl. See `using curl`_ for more information on how
+to do this.
+
+.. _using curl: http://docs.catalystcloud.io/object-storage.html#using-curl
+
+The first curl command creates a new container, the next 2 upload the 2 segmetns created previously
+and finally a zero byte file is created for the manifest.
+
+.. code-block:: bash
+
+  curl -i $storageURL/lgfile -X PUT -H “X-Auth-Token: $token"
+  curl -i $storageURL/lgfile/split_aa -X PUT -H "X-Auth-Token: $token" -T split-aa
+  curl -i $storageURL/lgfile/split_ab -X PUT -H "X-Auth-Token: $token" -T split-ab
+  curl -i -X PUT -H "X-Auth-Token: $token" -H "X-Object-Manifest: lgfile/split_" -H "Content-Length: 0"  $storageURL/lgfile/manifest/1gb_sample.txt
+
+A similar approach can also be taken to use the SLO type, but this is a lot more involved. A
+detailed description of the process can be seen `here`_
+
+
+.. _here: https://docs.openstack.org/swift/latest/overview_large_objects.html#module-swift.common.middleware.slo
+
+
+***
+FAQ
+***
+
+Can I use s3cmd for object storage?
+===================================
+
+There is a powerful open source tool for managing object storage called
+s3cmd. It is available from http://s3tools.org/s3cmd and was originally
+written for managing object storage data in Amazon S3.  It is also
+compatible with Catalyst Cloud object storage using the OpenStack S3
+API.
+
+While it is compatible, there is a gotcha with the Catalyst Cloud.  In
+order to use s3cmd with the Catalyst Cloud, you need to customise the
+s3cmd configuration file.
+
+Configuration changes
+---------------------
+
+The following changes need to be specified in the .s3cfg file.
+
+.. code-block:: ini
+
+  host_base = api.cloud.catalyst.net.nz:8443
+  host_bucket = api.cloud.catalyst.net.nz:8443
+  signature_v2 = True
+  use_https = True
+
+Compatibility with S3
+---------------------
+
+Please reference the Object Storage section for OpenStack Swift
+compatibility to S3 API's.
+
+.. seealso::
+
+  It is documented here in the Catalyst Cloud documentation
+  http://docs.catalystcloud.io/object-storage.html#s3-api
