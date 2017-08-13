@@ -191,6 +191,63 @@ Tables should use the grid notation.
   | body row 2             | ...        | ...      |          |
   +------------------------+------------+----------+----------+
 
+Lists
+=====
+
+Bullet lists
+------------
+
+Use the following format to create bullet lists:
+
+* A bullet list must have an empty line before it begins;
+* First level items use the "*" symbol;
+* No empty lines should be used in between elements;
+* If a line is to long, like this one, it must be broken into multiple lines
+  with no more than 80 characters in each line;
+* Second level sub items use the "-" symbol;
+
+  - A sub list must have an empty line before it begins;
+  - It must be indented with two spaces more than the first level lists;
+  - A sub list must have an empty line after it ends.
+
+* There should be an empty line after a list ends.
+
+.. code-block:: rst
+
+  * A bullet list must have an empty line before it begins;
+  * First level items use the "*" symbol;
+  * No empty lines should be used in between elements;
+  * If a line is to long, like this one, it must be broken into multiple lines
+    with no more than 80 characters in each line;
+  * Second level sub items use the "-" symbol;
+
+    - A sub list must have an empty line before it begins;
+    - It must be indented with two spaces more than the first level lists;
+    - A sub list must have an empty line after it ends.
+
+  * There should be an empty line after a list ends.
+
+Numbered lists
+--------------
+
+Use the following format to create numbered lists:
+
+#. A bullet list must have an empty line before it begins;
+#. List items must be auto-numbered using the "#" symbol;
+#. No empty lines should be used in between elements;
+#. If a line is to long, like this one, it must be broken into multiple lines
+   with no more than 80 characters in each line.
+#. There should be an empty line after a list ends.
+
+.. code-block:: rst
+
+  #. A bullet list must have an empty line before it begins;
+  #. List items must be auto-numbered using the "#" symbol;
+  #. No empty lines should be used in between elements;
+  #. If a line is to long, like this one, it must be broken into multiple lines
+     with no more than 80 characters in each line.
+  #. There should be an empty line after a list ends.
+
 Links and references
 ====================
 
