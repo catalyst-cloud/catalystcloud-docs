@@ -288,6 +288,41 @@ To download an OpenStack RC file from the dashboard:
 * You can confirm the configuration works by running a simple command, such as
   ``openstack network list`` and ensuring it return no errors.
 
+|
+
+Setting up the command line environment on Windows
+--------------------------------------------------
+
+As the standard OpenStack RC file will not work in it current form it is necessary to take a
+different approach.
+
+To do this we will need to create the equivalent script using PowerShell. Add the following lines,
+replacing the placeholder entries with the appropriate details from your OpenStack RC file which
+can be obtained following the steps above.
+
+.. code-block:: bash
+
+  $env:OS_AUTH_URL = "https://api.cloud.catalyst.net.nz:5000/v2.0"
+  $env:OS_TENANT_NAME = "<tenant-name>"
+  $env:OS_TENANT_ID = "<tenant-id>"
+  $env:OS_USERNAME = "<username>"
+
+  $password = Read-Host 'Please enter your OpenStack Password' -AsSecureString
+  $env:OS_PASSWORD = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))
+
+Save the file and run it from a PowerShell session. To confirm if the variables were set correctly,
+run the following command
+
+.. code-block:: bash
+
+  Get-ChildItem Env: | Where-Object {$_.name -match "OS_"}
+
+the output should show the following 5 variables
+
+.. image:: ../_static/powershell_env.png
+   :align: center
+
+|
 
 *************
 Using the CLI
