@@ -24,7 +24,6 @@ Contents:
    cloud-orchestration
    backups
    tutorials
-   faq
    contributing
 
 ******************
