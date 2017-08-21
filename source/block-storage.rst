@@ -578,7 +578,7 @@ mounted as a useable disk.
 
   mkfs.ext4 /dev/lvm_volume_group/striped_vol
   mount /dev/lvm_volume_group/striped_vol /mnt/<mount_point>/
-=======
+
 ***
 FAQ
 ***
