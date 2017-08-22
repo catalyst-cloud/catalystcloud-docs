@@ -54,8 +54,13 @@ tools, you can easily located them by running:
 
 .. code-block:: bash
 
-  glance image-list --owner 94b566de52f9423fab80ceee8c0a4a23
+  openstack image list --long | grep 94b566de52f9423fab80ceee8c0a4a23
 
+For a less verbose view filter by column name
+
+.. code-block:: bash
+
+  openstack image list -c ID -c Name -c Project --long | grep 94b566de52f9423fab80ceee8c0a4a23
 
 *******************************
 Images provided by our partners
@@ -275,8 +280,30 @@ To upload the converted image to the Catalyst Cloud:
 
 .. code-block:: bash
 
-  glance image-create --disk-format raw --container-format bare --file
-  raw-image.raw --name image-name --is-public=False --progress
+  $ openstack image create --disk-format raw --container-format bare --file raw-image.raw --private test-image
+  +------------------+----------------------------------------------------------------------------------------------------------+
+  | Field            | Value                                                                                                    |
+  +------------------+----------------------------------------------------------------------------------------------------------+
+  | checksum         | 84add06465aa223602257710f90699be                                                                         |
+  | container_format | bare                                                                                                     |
+  | created_at       | 2017-08-22T01:17:58Z                                                                                     |
+  | disk_format      | raw                                                                                                      |
+  | file             | /v2/images/2442ee5a-ddd4-4b7d-b08f-641e0707c4e9/file                                                     |
+  | id               | 2442ee5a-ddd4-4b7d-b08f-641e0707c4e9                                                                     |
+  | min_disk         | 0                                                                                                        |
+  | min_ram          | 0                                                                                                        |
+  | name             | test-image                                                                                               |
+  | owner            | b24exxxxxxxxxxxxxxxxxxxxxxxxxc6f                                                                         |
+  | properties       | direct_url='rbd://b08xxxxx-xxxx-xxxx-a84c-f5ccd277c076/images/2442ee5a-ddd4-4b7d-b08f-641e0707c4e9/snap' |
+  | protected        | False                                                                                                    |
+  | schema           | /v2/schemas/image                                                                                        |
+  | size             | 8589934592                                                                                               |
+  | status           | active                                                                                                   |
+  | tags             |                                                                                                          |
+  | updated_at       | 2017-08-22T01:30:26Z                                                                                     |
+  | virtual_size     | None                                                                                                     |
+  | visibility       | private                                                                                                  |
+  +------------------+----------------------------------------------------------------------------------------------------------+
 
 
 *****************************************
