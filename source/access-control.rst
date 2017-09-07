@@ -1,7 +1,7 @@
 .. _access-control:
 
 ##############
-Access Control
+Access control
 ##############
 
 
