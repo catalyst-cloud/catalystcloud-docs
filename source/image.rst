@@ -22,7 +22,7 @@ have overwritten the default user name with cloud-init).
 +------------------+-----------+
 | CentOS Linux     | centos    |
 +------------------+-----------+
-| CoreOS Linux     | coreos    |
+| CoreOS Linux     | core      |
 +------------------+-----------+
 | Debian Linux     | debian    |
 +------------------+-----------+
@@ -421,4 +421,3 @@ Catalyst Cloud. Please remember you can only run software that is owned by you,
 public domain or that you hold a valid license for. You have the freedom to
 choose what software you run and it is your responsibility to comply with the
 terms related to its usage.
-
