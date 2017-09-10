@@ -264,8 +264,8 @@ To download an OpenStack RC file from the dashboard:
 
 * Log to your project on the dashboard and select your preferred region.
 
-* Go to "Access and Security", select the "API Access" tab and click on
-  "Download OpenStack RC File". Save this file on the host where the client
+* From the left hand menu select "API Access" and click on
+  "Download OpenStack RC File v2.0". Save this file on the host where the client
   tools are going to be used from.
 
 * Source the configuration from the OpenStack RC file:
@@ -287,6 +287,12 @@ To download an OpenStack RC file from the dashboard:
 
 * You can confirm the configuration works by running a simple command, such as
   ``openstack network list`` and ensuring it return no errors.
+
+.. note::
+
+  While there is also a V3 version of the RC file available, we recommend using the v2.0 version
+  unless otherwise requested by Catalyst Cloud support staff. This is due to the fact that at the
+  current time not all backend services fully support the V3 version.
 
 |
 
