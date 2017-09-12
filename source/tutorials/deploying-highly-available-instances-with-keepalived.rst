@@ -69,6 +69,22 @@ and IP protocol number 112. The protocol is defined in `RFC3768`_.
 
 .. _article: http://louwrentius.com/configuring-attacking-and-securing-vrrp-on-linux.html
 
+.. warning::
+
+ A neutron bug that causes DHCP agents to reject previously held DHCP leases for instances
+ after they have been migrated to another node has been discovered. The DHCP agent responds
+ with a DHCPNAK message to instances trying to renew their leases after the agent has been
+ migrated. The DHCPNAK message forces the instances to release the IP addresses assigned to
+ them by the DHCP agent and  re-negotiate the DHCP handshake process all over again. A keepalived
+ master instance that receives a DHCPNAK message when attempting to renew the lease for the IP
+ addresses on its primary interface would release all IP addresses including the virtual IP addresses
+ associated with the interface, and this would not be noticed by the keepalived backup instance because
+ the failure time is much shorter than the keepalived advertisement interval thus leaving the virtual
+ IP address unmanaged and unattached to any of the keepalived instances until the keepalived daemon on
+ the master instance is restarted.
+
+ While we work on getting this bug fixed, we would recommend that users create new keepalived instances
+ and update existing keepalived instances to use fixed IP on their interfaces.
 
 Allowed Address Pairs
 =====================
@@ -210,7 +226,27 @@ subnet and we will set its gateway as our public network:
 
  * The previous command uses the old ``neutron`` command rather than the ``openstack`` command as setting router gateways is not yet implemented in the new client.
  * If you look at the ports created at this point using the ``openstack port list -c ID -c 'Fixed IP Addresses'`` command you will notice three interfaces have been created. The ip 10.0.0.1 is the gateway address while 10.0.0.2 and 10.0.0.3 provide DHCP for this network.
+ * Note the DNS nameservers, gateway address, subnet mask and allocation pool of the subnet from the ``openstack subnet create`` command.
 
+Next we will create ports with a fixed IP for our new keepalived instances:
+
+To find the correct subnet and network ID use the following commands
+
+.. code-block:: bash
+
+ $ VRRP_SUBNET_ID=$( openstack subnet show vrrp-subnet -f value -c id ) && echo $VRRP_SUBNET_ID
+ cd376d6f-42f4-46c2-8988-717b2f642af4
+
+ $ VRRP_NET_ID=$( openstack network show vrrp-net -f value -c id ) && echo $VRRP_NET_ID
+ 98ec34ba-b25e-4720-ae5e-ab7a87fadc51
+
+Then create the ports with your preferred IP addresses
+
+.. code-block:: bash
+
+ $ openstack port create --fixed-ip subnet=$VRRP_SUBNET_ID,ip-address=10.0.0.4 --network $VRRP_NET_ID vrrp_master_server_port
+
+ $ openstack port create --fixed-ip subnet=$VRRP_SUBNET_ID,ip-address=10.0.0.5 --network $VRRP_NET_ID vrrp_backup_server_port
 
 Security Group Setup
 ====================
@@ -334,6 +370,13 @@ To find the correct IDs you can use the following commands:
  $ VRRP_NET_ID=$( openstack network show vrrp-net -f value -c id ) && echo $VRRP_NET_ID
  98ec34ba-b25e-4720-ae5e-ab7a87fadc51
 
+ $ VRRP_MASTER_PORT=$(openstack port show vrrp_master_server_port -f value -c id) && echo $VRRP_MASTER_PORT
+ 8f1997e4-fd12-41df-9fb9-d4605e5157d8
+
+ $ VRRP_BACKUP_PORT=$(openstack port show vrrp_backup_server_port -f value -c id) && echo $VRRP_BACKUP_PORT
+ 1736183d-8beb-4131-bb60-eb447bcb18f4
+
+
  $ openstack keypair list
  +------------------+-------------------------------------------------+
  | Name             | Fingerprint                                     |
@@ -372,6 +415,22 @@ This script is located in the git repository you cloned previously at
  apt-get update
  apt-get -y install keepalived
 
+ echo "auto eth0
+       iface eth0 inet static
+          address $IP
+          netmask 255.255.255.0
+          broadcast 10.0.0.255
+          gateway   10.0.0.1 " > /etc/network/interfaces.d/eth0.cfg
+
+ apt-get -y --purge remove resolvconf
+
+ echo "nameserver 202.78.247.197
+       nameserver 202.78.247.198
+       nameserver 202.78.247.199
+       search openstacklocal" > /etc/resolv.conf
+
+ service networking reload
+
  echo "vrrp_instance vrrp_group_1 {
      state $KEEPALIVED_STATE
      interface eth0
@@ -395,7 +454,7 @@ path to the ``vrrp-setup.sh`` script):
 
 .. code-block:: bash
 
- $ openstack server create --image $VRRP_IMAGE_ID --flavor $VRRP_FLAVOR_ID --nic net-id=$VRRP_NET_ID \
+ $ openstack server create --image $VRRP_IMAGE_ID --flavor $VRRP_FLAVOR_ID --nic port-id=$VRRP_MASTER_PORT \
  --security-group vrrp-sec-group --user-data vrrp-setup.sh --key-name vrrp-demo-key vrrp-master
  +--------------------------------------+------------------------------------------------------------+
  | Field                                | Value                                                      |
@@ -430,7 +489,7 @@ path to the ``vrrp-setup.sh`` script):
  +--------------------------------------+------------------------------------------------------------+
 
 
- $ openstack server create --image $VRRP_IMAGE_ID --flavor $VRRP_FLAVOR_ID --nic net-id=$VRRP_NET_ID \
+ $ openstack server create --image $VRRP_IMAGE_ID --flavor $VRRP_FLAVOR_ID --nic port-id=$VRRP_BACKUP_PORT \
  --security-group vrrp-sec-group --user-data vrrp-setup.sh --key-name vrrp-demo-key vrrp-backup
 
 Let's check the instances have been created:
@@ -441,9 +500,9 @@ Let's check the instances have been created:
  +---------------------------------+-------------------------+---------+---------------------------------+------------------------------+
  | ID                              | Name                    | Status  | Networks                        | Image Name                   |
  +---------------------------------+-------------------------+---------+---------------------------------+------------------------------+
- | d920fa78-a463-4e17-90de-        | vrrp-backup             | ACTIVE  | vrrp-net=10.0.0.5               | ubuntu-14.04-x86_64          |
+ | d920fa78-a463-4e17-90de-        | vrrp-backup             | ACTIVE  | vrrp-net=10.0.0.4               | ubuntu-14.04-x86_64          |
  | d3167b97a4a3                    |                         |         |                                 |                              |
- | ffebb72c-                       | vrrp-master             | ACTIVE  | vrrp-net=10.0.0.4               | ubuntu-14.04-x86_64          |
+ | ffebb72c-                       | vrrp-master             | ACTIVE  | vrrp-net=10.0.0.5               | ubuntu-14.04-x86_64          |
  | 54f7-4a25-a8a9-d164259f8fa5     |                         |         |                                 |                              |
  +---------------------------------+-------------------------+---------+---------------------------------+------------------------------+
 
@@ -550,6 +609,58 @@ We should now have a stack that looks something like this:
 .. image:: ../_static/vrrp-network.png
    :align: center
 
+.. _updating-instance:
+
+Updating Existing VRRP Instances To Use Fixed IP
+================================================
+
+To update existing VRRP instances to use fixed IP on their interfaces, obtain
+the port ID of the instances and update the port:
+
+.. code-block:: bash
+
+ $ VRRP_SUBNET_ID=$( openstack subnet show vrrp-subnet -f value -c id ) && echo $VRRP_SUBNET_ID
+ cd376d6f-42f4-46c2-8988-717b2f642af4
+
+ $ VRRP_NET_ID=$( openstack network show vrrp-net -f value -c id ) && echo $VRRP_NET_ID
+ 98ec34ba-b25e-4720-ae5e-ab7a87fadc51
+
+ $ VRRP_MASTER_ID=$(openstack server list | grep 'vrrp-master' | awk '{print $2}') && echo $VRRP_MASTER_ID
+ ffebb72c-54f7-4a25-a8a9-d164259f8fa5
+
+ $ VRRP_MASTER_PORT=$(openstack port list --server $VRRP_MASTER_ID | grep '10.0.0.4' | awk '{print $2}') && echo $VRRP_MASTER_PORT
+ 8f1997e4-fd12-41df-9fb9-d4605e5157d8
+
+ $ neutron port-update $VRRP_MASTER_PORT --request-format=json --fixed-ips type=dict list=true subnet_id=$VRRP_SUBNET_ID,ip_address=10.0.0.4
+
+ $ VRRP_BACKUP_ID=$(openstack server list | grep 'vrrp-backup' | awk '{print $2}') && echo $VRRP_BACKUP_ID
+ d920fa78-a463-4e17-90de-d3167b97a4a3
+
+ $ VRRP_BACKUP_PORT=$(openstack port list --server $VRRP_BACKUP_ID | grep '10.0.0.5' | awk '{print $2}') && echo $VRRP_BACKUP_PORT
+
+ $ neutron port-update $VRRP_BACKUP_PORT --request-format=json --fixed-ips type=dict list=true subnet_id=$VRRP_SUBNET_ID,ip_address=10.0.0.5
+
+Then login to the instances and edit their network interfaces and resolv.conf files:
+
+.. code-block:: bash
+
+ $ sudo vi /etc/network/interfaces.d/eth0.cfg
+ auto eth0
+ iface eth0 inet static
+    address 10.0.0.4
+    netmask 255.255.255.0
+    broadcast 10.0.0.255
+    gateway  10.0.0.1
+
+ $ sudo apt-get -y --purge remove resolvconf
+
+ $ sudo vi /etc/resolv.conf
+ nameserver 202.78.247.197
+ nameserver 202.78.247.198
+ nameserver 202.78.247.199
+ search openstacklocal
+
+ $ sudo service networking reload
 
 .. _vrrp-testing:
 
