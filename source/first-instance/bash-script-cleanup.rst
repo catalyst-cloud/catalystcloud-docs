@@ -17,5 +17,5 @@ You can download and run this script using the following commands:
 
  You may wish to edit the script before executing, for example to add a prefix.
 
-.. literalinclude:: ../../scripts/delete-first-instance.sh
+.. literalinclude:: ../_scripts/delete-first-instance.sh
   :language: bash

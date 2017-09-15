@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source SWIFT access variables required by duplicity
-source /etc/duplicity/duplicity.vars
+source /etc/duplicity/duplicity-vars.sh
 BACKUP_DEFINITIONS_DIR="/etc/duplicity/backup_sources.d"
 BACKUP_CONFIG="${1}"
 

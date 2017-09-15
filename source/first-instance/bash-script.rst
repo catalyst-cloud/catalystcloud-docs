@@ -20,5 +20,5 @@ Download and run this script using the following commands:
  add a prefix, for example.
  See the "VARS" section at the top of the script for more details.
 
-.. literalinclude:: ../../scripts/create-first-instance.sh
+.. literalinclude:: ../_scripts/create-first-instance.sh
   :language: bash

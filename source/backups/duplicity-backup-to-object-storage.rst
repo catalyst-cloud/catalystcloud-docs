@@ -244,15 +244,15 @@ Now we can create our backup process. This will consist of:
 Here is the basic script to manage the running of the duplicity backups.
 Typically this would be placed somewhere like ``/usr/local/bin``.
 
-.. literalinclude:: ../../scripts/duplicity-backup.sh
+.. literalinclude:: ../_scripts/duplicity-backup.sh
   :language: bash
 
 This script defines the control parameters such as retention and frequency for
 the backup tasks as well as providing authentication information for object
 storage. The previous script is expecting to find this in
-``/etc/duplicity/duplicity.vars``.
+``/etc/duplicity/duplicity-vars.sh``.
 
-.. literalinclude:: ../../scripts/duplicity.vars
+.. literalinclude:: ../_scripts/duplicity-vars.sh
   :language: bash
 
 Then we need to define the backup definitions. Create a file with a name

@@ -700,7 +700,7 @@ on the Catalyst Cloud
 
 The script source is included below for reference:
 
-.. literalinclude:: ../scripts/create-vpn.sh
+.. literalinclude:: _scripts/create-vpn.sh
   :language: bash
 
 ***
@@ -747,7 +747,7 @@ Using a bash script on an instance
 
 You can use a bash script we have written for this purpose:
 
-.. literalinclude:: ../../scripts/whats-my-ip.sh
+.. literalinclude:: _scripts/whats-my-ip.sh
   :language: bash
 
 You can download and run this script on an instance:

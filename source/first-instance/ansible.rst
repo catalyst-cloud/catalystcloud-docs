@@ -75,7 +75,9 @@ to access the Catalyst Cloud APIs.
 
 Once the Ansible installation includes the required OpenStack modules, and the
 OpenStack credentials have been set up, a first instance may be built.
-The first instance playbooks have been split up as follows:
+
+The first instance playbooks are located under the `example-playbooks`
+directory and have been split up as follows:
 
 * The first playbook, ``create-network.yml`` creates the required network components.
 * The second playbook, ``launch-instance.yml`` launches the instance.
