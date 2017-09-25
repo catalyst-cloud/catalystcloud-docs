@@ -20,6 +20,8 @@ https://docs.ansible.com/ansible/list_of_cloud_modules.html#openstack
 |
 |
 
+.. _install-ansible:
+
 Install Ansible
 ===============
 
