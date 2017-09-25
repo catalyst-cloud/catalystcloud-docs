@@ -1,6 +1,6 @@
-**********************
-Using the libcloud SDK
-**********************
+*******************
+Using the shade SDK
+*******************
 
 The Catalyst Cloud is built on top of the OpenStack project. There are many
 Software Development Kits for a variety of different languages available for
@@ -13,159 +13,89 @@ You will find an up to date list of recommended SDKs at
 http://developer.openstack.org/. A more exhaustive list that includes in
 development SDKs is available at https://wiki.openstack.org/wiki/SDKs.
 
-In this section we will use the Apache Libcloud Python library to provision our
-first instance. Libcloud is a python library for interacting with many of the
-popular cloud service providers using a unified API. For more information see
-https://libcloud.apache.org. Documentation for the OpenStack Libcloud driver is
-available at
-http://libcloud.readthedocs.org/en/latest/compute/drivers/openstack.html.
+In this section we will use the shade library to provision our first instance.
+Shade is a python library for interacting with OpenStack clouds. Shade began
+its life inside of the Ansible project when duplicated code inside of the many
+OpenStack modules was refactored into an internal library. It was recognised
+that this library was useful beyond Ansible and was subsequently moved to
+standalone library. Shade is maintained by the OpenStack Infra team.
 
-.. warning::
+Documentation for shade is available at
+https://docs.openstack.org/shade/latest/index.html. Comprehensive `usage`_
+information is provided.
 
- Libcloud does not support the OpenStack Networking API.
+.. _usage: https://docs.openstack.org/shade/latest/user/usage.html
 
-As libcloud does not support the OpenStack Networking API we will need complete
-the following two steps using one of the other documented methods.
-
-1. Create a Network and Subnet
-2. Create a Router
-
-After you have setup the networks and router as described above we need to
-install and configure libcloud.
-
-Install libcloud
+Installing shade
 ================
 
-The recommended way to install an up to date version of apache libcloud is to
-use pythons pip installer. In this example we will do this inside a python
-virtual environment.
+The recommended way to install an up to date version of shade is to use pythons
+pip installer. The easiest way to achieve this is to follow the instructions
+for installing Ansible at :ref:`install-ansible` as shade will be installed as
+a dependency.
 
 .. note::
 
- This document shows how to setup pip and the python virtual environment on
- Ubuntu 14.04. You will need to substitute appropriate steps for other
- operating systems.
-
-Firstly we will install the required python packages:
-
-.. code-block:: bash
-
- $ sudo apt-get install python-pip python-virtualenv
-
-Next we will configure a python virtual environment:
-
-.. code-block:: bash
-
- $ mkdir libcloud-first-instance
- $ cd libcloud-first-instance/
- $ virtualenv -p python2.7 .
- $ . bin/activate
- $ pip install apache-libcloud
-
-You should now have libcloud installed, remember that you will need to invoke
-your script from a shell that has sourced this virtualenv in order for the
-libcloud libraries to be available.
-
-.. code-block:: python
-
- from libcloud.compute.types import Provider
- from libcloud.compute.providers import get_driver
-
- provider = get_driver(Provider.OPENSTACK)
+Ansible relies on python2 in order to provide long term backwards compatibilty,
+consequently this tutorial is using a python2 virtual environemnt. Shade can
+make use of python3 if you prefer.
 
 OpenStack credentials
 =====================
 
-The first step in getting our first instance running is to provide our python
-script with the correct credentials and configuration appropriate for our
-tenant. The easiest way to achieve this is to make use of environment
-variables, we will make use of the standard variables provided by an OpenStack
-RC file as described at :ref:`source-rc-file`.
+The first step in getting an instance running is to provide our python script
+with the correct credentials and configuration appropriate for our tenant. The
+easiest way to achieve this is to make use of environment variables, we will
+make use of the standard variables provided by an OpenStack RC file as
+described at :ref:`source-rc-file`.
 
-We can reference these from our python script:
+We will use the `os_client_config`_ OpenStack client configuration library.
+This library reads environment variables and config files, in this case we will
+use environment variables. Ensure you have sourced an OpenStack RC file before
+running the following code
+
+.. _os_client_config: https://pypi.python.org/pypi/os-client-config
 
 .. code-block:: python
 
- import os
+ import os_client_config
+ import shade
 
- auth_username = os.environ['OS_USERNAME']
- auth_password = os.environ['OS_PASSWORD']
- auth_url = os.environ['OS_AUTH_URL']
- project_name = os.environ['OS_TENANT_NAME']
- region_name = os.environ['OS_REGION_NAME']
+ cloud_config = os_client_config.OpenStackConfig().get_one_cloud()
+ cloud = os_client_config.make_shade()
 
- # strip /v2.0
- if auth_url[-5:] == '/v2.0': auth_url = auth_url[:-5]
+We now have a ``cloud`` object representing our cloud
 
- conn = provider(
-     auth_username,
-     auth_password,
-     ex_force_auth_url=auth_url,
-     ex_force_auth_version='2.0_password',
-     ex_tenant_name=project_name,
-     ex_force_service_region=region_name,
- )
-
-Using the interactive interpreter
-=================================
+Using an interactive interpreter
+================================
 
 .. note::
 
  This section is optional, if you do not wish to interact with the Catalyst
  Cloud interactively you can safely skip it.
 
-We can use the code above to allow us to interact with the Catalyst Cloud via
-the python interactive interpreter. Lets define a connection object called
-``conn.py``:
+We can use the code below to allow us to interact with the Catalyst Cloud via
+the python interactive interpreter. Lets define a cloud object called
+``cloud``:
 
-.. code-block:: python
-
- #!/usr/bin/env python
-
- from libcloud.compute.types import Provider
- from libcloud.compute.providers import get_driver
-
- import os
-
- auth_username = os.environ['OS_USERNAME']
- auth_password = os.environ['OS_PASSWORD']
- auth_url = os.environ['OS_AUTH_URL']
- project_name = os.environ['OS_TENANT_NAME']
- region_name = os.environ['OS_REGION_NAME']
-
- # strip /v2.0
- if auth_url[-5:] == '/v2.0': auth_url = auth_url[:-5]
-
- print "creating a connection with the following credentials:"
- print "auth_username = " + auth_username
- print "project_name = " + project_name
-
- provider = get_driver(Provider.OPENSTACK)
- conn = provider(
-     auth_username,
-     auth_password,
-     ex_force_auth_url=auth_url,
-     ex_force_auth_version='2.0_password',
-     ex_tenant_name=project_name,
-     ex_force_service_region=region_name,
- )
+.. literalinclude:: ../_scripts/cloud.py
 
 We can then export this script in the ``PYTHONSTARTUP`` environment variable:
 
 .. code-block:: bash
 
- $ export PYTHONSTARTUP=/path/to/conn.py
+ $ export PYTHONSTARTUP=/path/to/cloud.py
 
-Now when we invoke the python interpreter we will have this connection object
+Now when we invoke the python interpreter we will have this cloud object
 available to us:
 
 .. code-block:: bash
 
  $ python
- Python 2.7.6 (default, Jun 22 2015, 17:58:13)
- [GCC 4.8.2] on linux2
+ Python 2.7.12 (default, Nov 19 2016, 06:48:10)
+ [GCC 5.4.0 20160609] on linux2
  Type "help", "copyright", "credits" or "license" for more information.
- creating a connection with the following credentials:
+ Created a cloud with the following credentials:
  auth_username = <your-username>
  project_name = <your-project-name>
  >>>
@@ -174,57 +104,100 @@ Choosing a Flavor
 =================
 
 The flavor of an instance is the disk, CPU, and memory specifications of an
-instance. Use ``conn.list_sizes()`` to get a list:
+instance. Use ``cloud.list_flavors()`` to get a list and
+``cloud.get_flavor(flavor_name)`` to get a flavor:
 
 .. code-block:: python
 
- >>> for flavor in conn.list_sizes():
- ...     if flavor.name == "c1.c1r1":
- ...         print(flavor)
- ...
- <OpenStackNodeSize: id=28153197-6690-4485-9dbc-fc24489b0683, name=c1.c1r1, ram=1024, disk=10, bandwidth=None, price=0.0, driver=OpenStack, vcpus=1,  ...>
- >>>
+ >>> flavor = cloud.get_flavor('c1.c1r1')
+ >>> cloud.pprint(flavor)
+ {u'OS-FLV-DISABLED:disabled': False,
+  u'OS-FLV-EXT-DATA:ephemeral': 0,
+  'disk': 10,
+  'ephemeral': 0,
+  'extra_specs': {u'production': u'true'},
+  'id': u'6371ec4a-47d1-4159-a42f-83b84b80eea7',
+  'is_disabled': False,
+  'is_public': True,
+  'location': {'cloud': 'envvars',
+               'project': {'domain_id': None,
+                           'domain_name': None,
+                           'id': u'0cb6b9b744594a619b0b7340f424858b',
+                           'name': 'os-training.catalyst.net.nz'},
+               'region_name': 'nz_wlg_2',
+               'zone': None},
+  'name': u'c1.c1r1',
+  u'os-flavor-access:is_public': True,
+  'properties': {u'OS-FLV-DISABLED:disabled': False,
+                 u'OS-FLV-EXT-DATA:ephemeral': 0,
+                 u'os-flavor-access:is_public': True},
+  'ram': 1024,
+  'rxtx_factor': 1.0,
+  'swap': 0,
+  'vcpus': 1}
 
-Lets store the flavor id in an environment variable:
-
-.. code-block:: bash
-
- $ export CC_FLAVOR_ID=28153197-6690-4485-9dbc-fc24489b0683
-
-We can use this variable in our script using the following code:
+Lets store the flavor name in a variable:
 
 .. code-block:: python
 
- flavor_id = os.environ['CC_FLAVOR_ID']
- flavor = conn.ex_get_size(flavor_id)
+ flavor_name = 'c1.c1r1'
+
 
 Choosing an Image
 =================
 
 In order to create an instance, you will need to have a pre-built Operating
-System in the form of an Image. Use ``conn.list_images()`` to get a list:
+System in the form of an Image. Use ``cloud.list_images()`` to get a list and
+``cloud.get_image(image_name)`` to get an image:
 
 .. code-block:: python
 
- >>> for image in conn.list_images():
- ...     if image.name == "ubuntu-14.04-x86_64":
- ...         print(image)
- ...
- <NodeImage: id=9f2a6a6d-3e68-4914-8e53-b0079d77bb9d, name=ubuntu-14.04-x86_64, driver=OpenStack  ...>
- >>>
+ >>> image = cloud.get_image('ubuntu-16.04-x86_64')
+ >>> cloud.pprint(image)
+ {'checksum': u'50cbac72860d9370b38af822936677ab',
+  'container_format': u'bare',
+  'created': u'2017-08-13T22:25:25Z',
+  'created_at': u'2017-08-13T22:25:25Z',
+  'direct_url': u'rbd://b5bc0fb6-f490-4018-abd3-a984ca3dd6a4/images/d105d837-67b7-4db6-8aeb-41d92ecb31e1/snap',
+  'disk_format': u'raw',
+  'file': u'/v2/images/d105d837-67b7-4db6-8aeb-41d92ecb31e1/file',
+  'id': u'd105d837-67b7-4db6-8aeb-41d92ecb31e1',
+  'is_protected': True,
+  'is_public': True,
+  'location': {'cloud': 'envvars',
+               'project': {'domain_id': None,
+                           'domain_name': None,
+                           'id': u'94b566de52f9423fab80ceee8c0a4a23',
+                           'name': None},
+               'region_name': 'nz_wlg_2',
+               'zone': None},
+  'locations': [],
+  'metadata': {u'schema': u'/v2/schemas/image',
+               u'self': u'/v2/images/d105d837-67b7-4db6-8aeb-41d92ecb31e1'},
+  'minDisk': 10,
+  'minRam': 1024,
+  'min_disk': 10,
+  'min_ram': 1024,
+  'name': u'ubuntu-16.04-x86_64',
+  'owner': u'94b566de52f9423fab80ceee8c0a4a23',
+  'properties': {u'schema': u'/v2/schemas/image',
+                 u'self': u'/v2/images/d105d837-67b7-4db6-8aeb-41d92ecb31e1'},
+  'protected': True,
+  u'schema': u'/v2/schemas/image',
+  u'self': u'/v2/images/d105d837-67b7-4db6-8aeb-41d92ecb31e1',
+  'size': 10737418240,
+  'status': u'active',
+  'tags': [],
+  'updated': u'2017-08-13T22:27:30Z',
+  'updated_at': u'2017-08-13T22:27:30Z',
+  'virtual_size': 0,
+  'visibility': u'public'}
 
-Lets store the image id in an environment variable:
-
-.. code-block:: bash
-
- $ export CC_IMAGE_ID=9f2a6a6d-3e68-4914-8e53-b0079d77bb9d
-
-We can use this variable in our script using the following code:
+Lets store the image name in a variable:
 
 .. code-block:: python
 
- image_id = os.environ['CC_IMAGE_ID']
- image = conn.get_image(image_id)
+ image_name = 'ubuntu-16.04-x86_64'
 
 Uploading an SSH key
 ====================
@@ -234,50 +207,78 @@ The following code uploads an SSH key:
 .. code-block:: python
 
  keypair_name = 'first-instance-key'
- pub_key_file = '~/.ssh/id_rsa.pub'
- conn.import_key_pair_from_file(keypair_name, pub_key_file)
+ pub_key_file = os.environ['HOME'] + '/.ssh/id_rsa.pub'
+ public_key = open(pub_key_file).read()
+ cloud.create_keypair(keypair_name, public_key)
 
-Configure Instance Security Group
-=================================
+
+Configure an Instance Security Group
+====================================
 
 The following code will create a security group and a rule within that group:
 
 .. code-block:: python
 
- first_instance_security_group = conn.ex_create_security_group('first-instance-sg', 'network access for our first instance.')
- conn.ex_create_security_group_rule(first_instance_security_group, 'TCP', 22, 22)
+ restricted_cidr_range = '0.0.0.0/32'
+ security_group = cloud.create_security_group(
+     security_group_name,
+     'First instance security group',
+ )
+ cloud.create_security_group_rule(
+     security_group.id,
+     protocol='tcp',
+     port_range_min=22,
+     port_range_max=22,
+     remote_ip_prefix=restricted_cidr_range,
+ )
 
-.. warning::
+The code above specifys 0.0.0.0/0 as the source, in doing so you are allowing
+access from any IP to your compute instance on the port and protocol selected.
+This is often desirable when exposing a web server (eg: allow HTTP and HTTPs
+access from the Internet), but is insecure when exposing other protocols, such
+as SSH. We strongly recommend you to limit the exposure of your compute
+instances and services to IP addresses or subnets that are trusted.
 
- The code above does not specify a source IP range for this rule, this will
- create a rule with 0.0.0.0/0 as the source, in doing so you are allowing access
- from any IP to your compute instance on the port and protocol selected. This is
- often desirable when exposing a web server (eg: allow HTTP and HTTPs access
- from the Internet), but is insecure when exposing other protocols, such as SSH,
- Telnet and FTP. We strongly recommend you to limit the exposure of your compute
- instances and services to IP addresses or subnets that are trusted.
+The following code will set restricted_cidr_range to your external IP address
+if you have the dig command available.
 
- See
- http://libcloud.readthedocs.org/en/latest/compute/drivers/openstack.html#libcloud.compute.drivers.openstack.OpenStack_1_1_NodeDriver.ex_create_security_group_rule
- for documentation on setting the source IP range for this rule.
+.. code-block:: python
+
+ # set restricted_cidr_range to our external address if we can
+ try:
+     external_ip = check_output(
+         ['dig', '+short', 'myip.opendns.com', '@resolver1.opendns.com']
+     ).rstrip()
+     try:
+         socket.inet_aton(external_ip)
+         restricted_cidr_range = external_ip + '/32'
+     except socket.error:
+         pass
+ except:
+     pass
 
 Booting an Instance
 ===================
 
-The following code will launch an instance using libcloud:
+The following code will launch an instance using shade:
 
 .. code-block:: python
 
  instance_name = 'first-instance'
- first_instance = conn.create_node(
+ # assumes you have a private network named private-net
+ private_network = get_network('private-net')
+ # Create the instance
+ server =cloud.create_server(
      name=instance_name,
-     image=image,
-     size=flavor,
-     ex_keyname=keypair_name,
-     ex_security_groups=[first_instance_security_group],
+     image=image.id,
+     wait=True,
+     auto_ip=False,
+     flavor=flavor.id,
+     security_groups=[security_group.id, 'default'],
+     network=private_network.id,
+     key_name=keypair_name,
  )
 
- conn.wait_until_running([first_instance])
 
 Allocate a Floating IP
 ======================
@@ -286,123 +287,19 @@ We can associate a floating IP with the following code:
 
 .. code-block:: python
 
- pool = conn.ex_list_floating_ip_pools()[0]
- unused_floating_ip = pool.create_floating_ip()
- conn.ex_attach_floating_ip_to_node(first_instance, unused_floating_ip)
+ floating_ip_address = cloud.add_auto_ip(server, wait=True)
 
 Complete script
 ===============
 
-Putting everything together:
+The complete script is included below:
 
-.. code-block:: python
+.. warning::
 
- from libcloud.compute.types import Provider
- from libcloud.compute.providers import get_driver
- from libcloud.common.exceptions import BaseHTTPError
+ Note that this script is creating the network, subnet and router, this is not
+ necessary if you already have these resources.
 
- import os
-
- auth_username = os.environ['OS_USERNAME']
- auth_password = os.environ['OS_PASSWORD']
- auth_url = os.environ['OS_AUTH_URL']
- project_name = os.environ['OS_TENANT_NAME']
- region_name = os.environ['OS_REGION_NAME']
-
- # strip /v2.0
- if auth_url[-5:] == '/v2.0': auth_url = auth_url[:-5]
-
- provider = get_driver(Provider.OPENSTACK)
- conn = provider(
-     auth_username,
-     auth_password,
-     ex_force_auth_url=auth_url,
-     ex_force_auth_version='2.0_password',
-     ex_tenant_name=project_name,
-     ex_force_service_region=region_name,
- )
-
- image_id = os.environ['CC_IMAGE_ID']
- image = conn.get_image(image_id)
- print(image)
-
- flavor_id = os.environ['CC_FLAVOR_ID']
- flavor = conn.ex_get_size(flavor_id)
- print(flavor)
-
- print('Checking for existing SSH key pair...')
- keypair_name = 'first-instance-key'
- pub_key_file = '~/.ssh/id_rsa.pub'
- keypair_exists = False
- for keypair in conn.list_key_pairs():
-     if keypair.name == keypair_name:
-         keypair_exists = True
-
- if keypair_exists:
-     print('Keypair already exists. Skipping import.')
- else:
-     print('adding keypair...')
-     conn.import_key_pair_from_file(keypair_name, pub_key_file)
-
- for keypair in conn.list_key_pairs():
-     if keypair.name == keypair_name:
-         print(keypair)
-
- security_group_exists = False
- security_group_name = 'first-instance-sg'
- for security_group in conn.ex_list_security_groups():
-     if security_group.name == security_group_name:
-         first_instance_security_group = security_group
-         security_group_exists = True
-
- if security_group_exists:
-     print('Security Group already exists. Skipping creation.')
- else:
-     first_instance_security_group = conn.ex_create_security_group(security_group_name, 'network access for our first instance.')
-     conn.ex_create_security_group_rule(first_instance_security_group, 'TCP', 22, 22)
-
- instance_name = 'first-instance'
- print('Creating instance {}'.format(instance_name))
- first_instance = conn.create_node(
-     name=instance_name,
-     image=image,
-     size=flavor,
-     ex_keyname=keypair_name,
-     ex_security_groups=[first_instance_security_group],
- )
-
- conn.wait_until_running([first_instance])
-
- print('Checking for unused Floating IP...')
- unused_floating_ip = None
- for floating_ip in conn.ex_list_floating_ips():
-     if not floating_ip.node_id:
-         print('found unassociated floating ip:')
-         print(floating_ip)
-         unused_floating_ip = floating_ip
-         break
-
- # we did not find an unassociated floating ip in our project so we will try and allocate one
- if not unused_floating_ip:
-     pool = conn.ex_list_floating_ip_pools()[0]
-     print('Retrieving new Floating IP from pool: {}'.format(pool))
-     try:
-         unused_floating_ip = pool.create_floating_ip()
-     except BaseHTTPError, e:
-         print('Error creating floating IP: ' + str(e))
-     except:
-         raise
-
- if unused_floating_ip:
-     if conn.ex_attach_floating_ip_to_node(first_instance, unused_floating_ip):
-         print('Allocated new Floating IP: {} to instance {}'.format(unused_floating_ip.ip_address, instance_name))
-     else:
-         print('Could not attach Floating IP')
-
-     print('Your first instance is available you can ssh to ubuntu@%s' % unused_floating_ip.ip_address)
- else:
-     print('Could not find an unused floating ip, please check your quota')
-
+.. literalinclude:: ../_scripts/create-first-instance-shade.py
 
 Connect to the new Instance
 ===========================
@@ -417,3 +314,18 @@ in associating a floating IP with the newly created instance:
 
 You should be able to interact with this instance as you would any Ubuntu
 server.
+
+Deleting resources using shade
+==============================
+
+The following script shows how you can delete resources using shade.
+
+.. warning::
+
+ Note that this script is deleting the network, subnet and router, you may not
+ wish to delete these resources. If so you should comment out the relevant
+ lines.
+
+
+.. literalinclude:: ../_scripts/create-first-instance-shade.py
+
