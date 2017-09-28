@@ -36,9 +36,9 @@ a dependency.
 
 .. note::
 
-Ansible relies on python2 in order to provide long term backwards compatibilty,
-consequently this tutorial is using a python2 virtual environemnt. Shade can
-make use of python3 if you prefer.
+  Ansible relies on python2 in order to provide long term backwards
+  compatibilty, consequently this tutorial is using a python2 virtual
+  environemnt. Shade can make use of python3 if you prefer.
 
 OpenStack credentials
 =====================
