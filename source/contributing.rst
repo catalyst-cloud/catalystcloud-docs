@@ -354,6 +354,53 @@ Our awesome team of document reviewers will peer review and proof read your
 documentation changes and merge your pull request. Once it is merged, the
 changes will be automatically deployed and published within one hour.
 
+*********
+Git Hooks
+*********
+
+In order to avoid committing reStructuredText code that does not compile we have
+written a git pre-commit hook. Using this hook will ensure you do not commit
+code that does not compile.
+
+The pre commit hook is located at ``githooks/pre-commit``. The best way to
+enable this hook depends on your version of git.
+
+Git 2.9.0 or above
+==================
+
+In order to enable this hook run the following command:
+
+.. code-block:: bash
+
+  $ git config core.hooksPath githooks
+
+Be aware that if you have other hooks located in ``.git/hooks`` you will need to
+move them into the ``githooks`` directory.
+
+Git older than 2.9.0
+====================
+
+In order to enable this hook run the following command for the root of this
+repo:
+
+.. code-block:: bash
+
+  $ cp githooks/pre-commit .git/hooks/
+
+If you prefer you can symlink hooks as described `here`_.
+
+Output Verbosity
+================
+
+The commit hook currently displays the output of ``compile.sh`` if you would
+prefer to supress this output you can sitch these scommented lines:
+
+.. code-block:: bash
+
+  # Switch these if you prefer to supress compiles output
+  #"$DIR/compile.sh" &>/dev/null
+  "$DIR/compile.sh"
+
 
 **********
 References
@@ -369,3 +416,4 @@ References
 .. _`Sphinx's documentation about sections`:
    http://sphinx.pocoo.org/rest.html#sections
 .. _`pull request`: https://help.github.com/articles/using-pull-requests/
+.. _`here`: https://stackoverflow.com/questions/4592838/symbolic-link-to-a-hook-in-git
