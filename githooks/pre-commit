@@ -1,0 +1,27 @@
+#!/bin/bash
+
+echo
+echo "Checking that the RST source compiles before commiting"
+echo
+echo "This will take a little while ..."
+echo
+
+DIR=$( git rev-parse --show-toplevel )
+
+# Switch these if you prefer to supress compiles output
+#"$DIR/compile.sh" &>/dev/null
+"$DIR/compile.sh"
+
+COMPILE_EXIT_VALUE=$?
+
+if [ $COMPILE_EXIT_VALUE -ne 0 ]; then
+    echo
+    echo "Compile exited with $COMPILE_EXIT_VALUE, please fix before commiting"
+    exit 1
+fi
+
+echo
+echo "Compile succeeded proceeding to commit"
+echo
+
+exit 0
