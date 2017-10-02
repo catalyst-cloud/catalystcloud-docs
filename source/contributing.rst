@@ -131,6 +131,17 @@ an example:
 
     import this
 
+When documenting command line interactions code-block ``console`` should be
+used:
+
+.. code-block:: rst
+
+  .. code-block:: console
+
+    $ ls -la
+
+When documenting bash or shell scirpts ``bash`` or ``sh`` should be used.
+
 Admonitions
 ===========
 
@@ -393,7 +404,7 @@ Output Verbosity
 ================
 
 The commit hook currently displays the output of ``compile.sh`` if you would
-prefer to supress this output you can sitch these scommented lines:
+prefer to suppress this output you can switch these commented lines:
 
 .. code-block:: bash
 
