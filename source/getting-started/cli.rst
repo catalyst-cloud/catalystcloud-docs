@@ -78,29 +78,6 @@ To deactivate a virtual environment:
 Installing the CLI
 ==================
 
-Ubuntu Linux 14.04
-------------------
-
-Ubuntu 14.04 uses Python version: 2.7.6 by default. As a result, you do not
-need to install a different version of python.
-
-.. code-block:: bash
-
-  # Make sure you have pip and virtualenv installed
-  sudo apt-get install python-pip python-virtualenv python-dev
-
-  # Create a new virtual environment for Python and activate it
-  virtualenv venv
-  source venv/bin/activate
-
-  # Install Python openstackclient library and the Python timezone definitions
-  # into your virtual environment
-  pip install pytz python-openstackclient
-
-  # Uncomment the line below if you would like to install the deprecated
-  # openstack CLI in addition to the new unified CLI
-  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
-
 Ubuntu Linux 16.04
 ------------------
 
@@ -150,6 +127,29 @@ procedure instead:
     in an error at this time due to a known issue: see
     https://bugs.launchpad.net/python-openstackclient/+bug/1505268 If complete
     commands are run however they will work as expected.
+
+Ubuntu Linux 14.04
+------------------
+
+Ubuntu 14.04 uses Python version: 2.7.6 by default. As a result, you do not
+need to install a different version of python.
+
+.. code-block:: bash
+
+  # Make sure you have pip and virtualenv installed
+  sudo apt-get install python-pip python-virtualenv python-dev
+
+  # Create a new virtual environment for Python and activate it
+  virtualenv venv
+  source venv/bin/activate
+
+  # Install Python openstackclient library and the Python timezone definitions
+  # into your virtual environment
+  pip install pytz python-openstackclient
+
+  # Uncomment the line below if you would like to install the deprecated
+  # openstack CLI in addition to the new unified CLI
+  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
 
 Debian Linux 8
 --------------
