@@ -2,7 +2,6 @@
 Block storage
 #############
 
-
 ********
 Overview
 ********
@@ -20,6 +19,7 @@ The loss of a node or a disk leads to the data being quickly recovered on
 another disk or node. The system runs frequent CRC checks to protect data from
 soft corruption. The corruption of a single bit can be detected and
 automatically restored to a healthy state.
+
 
 Storage tiers
 =============
@@ -46,6 +46,7 @@ Catalyst is prepared to introduce additional storage tiers and is currently
 waiting for demand from customers to introduce a faster tier backed purely by
 SSDs. If you are interested and would like to see this available as soon as
 possible, please contact your account manager.
+
 
 Best practices
 ==============
@@ -78,7 +79,7 @@ Create a new volume
 
 Use the ``openstack volume create`` command to create a new volume:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ openstack volume create --description 'database volume' --size 50 db-vol-01
   +---------------------+--------------------------------------+
@@ -111,7 +112,7 @@ Attach a volume to a compute instance
 Use the ``openstack server add volume`` command to attach the volume to an
 instance:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ openstack server add volume INSTANCE_NAME VOLUME_NAME
 
@@ -140,7 +141,7 @@ The example below illustrates the use of a volume without LVM.
 
 Check that the disk is recognised by the OS on the instance using ``fdisk``:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ sudo fdisk -l /dev/vdb
   Disk /dev/vdb: 50 GiB, 53687091200 bytes, 104857600 sectors
@@ -150,7 +151,7 @@ Check that the disk is recognised by the OS on the instance using ``fdisk``:
 
 Now use ``fdisk`` to create a partition on the disk:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ sudo fdisk /dev/vdb
 
@@ -179,8 +180,9 @@ Now use ``fdisk`` to create a partition on the disk:
 
 Check the partition using ``lsblk``:
 
-.. code-block:: bash
+.. code-block:: console
 
+  $ lsblk
   NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
   vda    253:0    0  10G  0 disk
   └─vda1 253:1    0  10G  0 part /
@@ -189,7 +191,7 @@ Check the partition using ``lsblk``:
 
 Make a new filesystem on the partition:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ sudo mkfs.ext4 /dev/vdb1
   mke2fs 1.42.13 (17-May-2015)
@@ -206,19 +208,19 @@ Make a new filesystem on the partition:
 
 Create a directory where you wish to mount this file system:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ sudo mkdir /mnt/extra-disk
 
 Mount the file system:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ sudo mount /dev/vdb1 /mnt/extra-disk
 
 Label the partition:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ sudo tune2fs -L 'extra-disk' /dev/vdb1
   tune2fs 1.42.13 (17-May-2015)
@@ -229,7 +231,7 @@ Label the partition:
 If you want the new file system to be mounted when the system reboots then you
 should add an entry to ``/etc/fstab``, for example:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ cat /etc/fstab
   LABEL=cloudimg-rootfs /               ext4    defaults    0 1
@@ -248,6 +250,7 @@ Best Practice for maximising disk performance
 
 I/O Readahead
 =============
+
 One of the recommended ways in which to improve disk perfomance on a virtual
 server is by increasing the I/O readahead value. This parameter determines the
 number of kilobytes that the kernel will read ahead during a sequential read
@@ -259,17 +262,18 @@ can be done using a script in /etc/udev/rules.d/.
 
 Here is an example of what this script might look like.
 
-# cat /etc/udev/rules.d/read-ahead-kb.rules
-SUBSYSTEM=="block", KERNEL=="vd[a-z]" ACTION=="add|change",
-ATTR{queue/read_ahead_kb}="1024"
+.. code-block:: console
+
+  $ sudo cat /etc/udev/rules.d/read-ahead-kb.rules
+  SUBSYSTEM=="block", KERNEL=="vd[a-z]" ACTION=="add|change",
+  ATTR{queue/read_ahead_kb}="1024"
 
 This change is highly recommended if your workload is doing a lot of large streaming
 reads.
 
-|
-
 Striping Volumes and RAID0
 ==========================
+
 These techniques provide improved I/O performance by distributing I/O requests across multiple
 disks. While the implementation differs between the two options the resulting setups provide the
 same benefits.
@@ -285,6 +289,7 @@ as the operating system on the VM. So for the sake of completeness
 
 RAID0 with LVM
 --------------
+
 Of the two approaches outlined here, this would be the preferred option. This example will use
 `md`_ the Multiple Device driver aka Linux Software RAID and the associated tool `mdadm`_ to create
 a software defined RAID device and then `LVM`_ adds a logical volume on top of that.
@@ -297,7 +302,7 @@ First find the details of the two disks we will use in the RAID array, in this e
 .. _LVM: https://wiki.ubuntu.com/Lvm
 
 
-.. code-block:: bash
+.. code-block:: console
 
   $ fdisk -l
   Disk /dev/vda: 10 GiB, 10737418240 bytes, 20971520 sectors
@@ -324,7 +329,7 @@ First find the details of the two disks we will use in the RAID array, in this e
 
 check that the devices in question have no previous RAID configuration present
 
-.. code-block:: bash
+.. code-block:: console
 
   $ mdadm --examine /dev/vd[b-c]
   mdadm: No md superblock detected on /dev/vdb.
@@ -341,7 +346,7 @@ using fdisk create a RAID partition on each device, the steps are as follow:
 - type **fd** for `Linux raid auto` and press `Enter` to apply.
 - type **w** to write the changes.
 
-.. code-block:: bash
+.. code-block:: console
 
   $ fdisk /dev/vdb
 
@@ -403,7 +408,7 @@ using fdisk create a RAID partition on each device, the steps are as follow:
 
 confirm that both devices now have a partion of type **fd**
 
-.. code-block:: bash
+.. code-block:: console
 
   $ mdadm --examine /dev/vd[b-c]
   /dev/vdb:
@@ -420,25 +425,25 @@ now create the raid device with the following parameters:
 - using 2 disks (-n 2 /dev/vd[b-c]1)
 
 
-.. code-block:: bash
+.. code-block:: console
 
   $ mdadm -C /dev/md0 -l raid0 -n 2 /dev/vd[b-c]1
   mdadm: Defaulting to version 1.2 metadata
   mdadm: array /dev/md0 started.
 
-checking /proc/mdstat will show a snapshot of the kernel's RAID/md state which should show there is
-now an active RAID0 device
+checking ``/proc/mdstat`` will show a snapshot of the kernel's RAID/md state
+which should show there is now an active RAID0 device
 
-.. code-block:: bash
+.. code-block:: console
 
-  cat /proc/mdstat
+  $ cat /proc/mdstat
   Personalities : [linear] [multipath] [raid0] [raid1] [raid6] [raid5] [raid4] [raid10]
   md0 : active raid0 vdc1[1] vdb1[0]
         20953088 blocks super 1.2 512k chunks
 
-to get a more detailed view use `mdadm`
+to get a more detailed view use ``mdadm``
 
-.. code-block:: bash
+.. code-block:: console
 
   $ mdadm --detail /dev/md0
   /dev/md0:
@@ -470,7 +475,7 @@ to get a more detailed view use `mdadm`
 Now create a new logical volume using the raid device. Below is an outline of the steps required to
 do this and the following example also contains more complete information on these steps.
 
-.. code-block:: bash
+.. code-block:: console
 
   $ pvcreate /dev/md0
     Physical volume "/dev/md0" successfully created
@@ -487,14 +492,15 @@ do this and the following example also contains more complete information on the
 
 Finally add a filesystem to the device and mount is so that it is useable.
 
-.. code-block:: bash
+.. code-block:: console
 
-    mkfs.ext4 /dev/raid0-vg/raid0-lvm
-    mount /dev/raid0-vg/raid0-lvm  /mnt/<mount_point>/
+  $ mkfs.ext4 /dev/raid0-vg/raid0-lvm
+  $ mount /dev/raid0-vg/raid0-lvm  /mnt/<mount_point>/
 
 
 Creating a striped logical volume
 ---------------------------------
+
 While LVM striping does achieve a very similar outcome to the RAID0 setup outlined above it should
 be noted that changing the number of stripes in sync with the number of disks is an unnecessary
 overheard and why the previous approach is preferred.
@@ -503,7 +509,7 @@ This example will use 3 volumes to create the striped volume. Once logged into t
 lvmdiskscan to confirm that there are 3 (unpartitioned) disks, in this case */dev/vdc*, */dev/dvd*
 and */dev/vde*.
 
-.. code-block:: bash
+.. code-block:: console
 
   $ sudo lvmdiskscan
     /dev/vda1 [      10.00 GiB]
@@ -518,13 +524,13 @@ and */dev/vde*.
 
 Now we need to create a new physical volumes for all of the newly added disks.
 
-.. code-block:: bash
+.. code-block:: console
 
   $ sudo pvcreate /dev/vdc /dev/vdd /dev/vde
 
 A rescan with lvmdiskscan shows us that those disks have now been tagged as LVM volumes.
 
-.. code-block:: bash
+.. code-block:: console
 
   $ sudo lvmdiskscan
     /dev/vda1 [      10.00 GiB]
@@ -539,7 +545,7 @@ A rescan with lvmdiskscan shows us that those disks have now been tagged as LVM 
 
 Now create a volume group called lvm_volume_group from the physical volumes created above.
 
-.. code-block:: bash
+.. code-block:: console
 
   $ sudo vgcreate lvm_volume_group /dev/vdc /dev/vdd /dev/vde
     Volume group "lvm_volume_group" successfully created
@@ -559,7 +565,7 @@ following parameters:
 
 this will be created on the volume group lvm_volume_group
 
-.. code-block:: bash
+.. code-block:: console
 
   $ sudo lvcreate --type striped -i3 -I4 -L20G -n striped_vol lvm_volume_group
     Rounding size 20.00 GiB (5120 extents) up to stripe boundary size 20.00 GiB (5121 extents).
@@ -574,10 +580,10 @@ this will be created on the volume group lvm_volume_group
 Once the striped LV has been successfully created it will need to have a file system added and be
 mounted as a useable disk.
 
-.. code-block:: bash
+.. code-block:: console
 
-  mkfs.ext4 /dev/lvm_volume_group/striped_vol
-  mount /dev/lvm_volume_group/striped_vol /mnt/<mount_point>/
+  $ mkfs.ext4 /dev/lvm_volume_group/striped_vol
+  $ mount /dev/lvm_volume_group/striped_vol /mnt/<mount_point>/
 
 ***
 FAQ

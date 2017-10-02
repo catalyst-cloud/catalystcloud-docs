@@ -40,7 +40,7 @@ temporary build machine that packer will create.
 Next we need to install packer, packer is a single go binary so this it a
 simple process:
 
-.. code-block:: bash
+.. code-block:: console
 
  $ wget https://releases.hashicorp.com/packer/0.10.1/packer_0.10.1_linux_amd64.zip
  $ unzip packer_0.10.1_linux_amd64.zip
@@ -96,7 +96,7 @@ Building an image
 Now we can build a new image called ``ubuntu1604_packer_test_1`` using this
 template:
 
-.. code-block:: bash
+.. code-block:: console
 
  $ ./packer build domain-check-packer.json
  openstack output will be in this color.
@@ -161,7 +161,7 @@ Booting an image
 Once the packer build command is complete our newly build image should be
 available:
 
-.. code-block:: bash
+.. code-block:: console
 
  $ openstack image show e81c38a0-6fbf-4f62-b873-79af33e4f246
  +------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -193,7 +193,7 @@ available:
 Lets boot this image and verify we can invoke the `ssllabs-scan`_ application
 we installed in the image:
 
-.. code-block:: bash
+.. code-block:: console
 
  $ openstack server create --flavor c1.c1r1 --image e81c38a0-6fbf-4f62-b873-79af33e4f246 --key-name example-key \
  --security-group default --security-group example-sg --nic net-id=097a6779-ca20-4017-913e-715c7a2c9967 ssl-scan
@@ -330,7 +330,7 @@ and provide the location of the script that needs to be run.
 The userdata itself is a Windows command-line/PowerShell script that configures
 various settings required to allow remote connectivity via WinRM.
 
-.. code-block:: bash
+.. code-block:: console
 
     #ps1_sysnative
     wmic UserAccount set PasswordExpires=False
@@ -359,9 +359,9 @@ various settings required to allow remote connectivity via WinRM.
 Once the userdata file has been created and the packer build file edited
 accordingly simply run the packer build command as discussed above.
 
-.. code-block:: bash
+.. code-block:: console
 
-  ./packer build windows-build-file.json
+  $ ./packer build windows-build-file.json
 
 
 .. _Packer: https://www.packer.io/
