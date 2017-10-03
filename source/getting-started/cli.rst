@@ -15,13 +15,13 @@ The OpenStack CLI can be installed in multiple ways. The recommended method for
 the Catalyst Cloud is to create a python virtual environment and use ``pip`` to
 install it. This method has the benefit of installing the latest version of the
 CLI (operating system packages tend to install an outdated version) and
-prevents conflicts of python libraries (dependencies are isolated in the
+prevents conflicts between python libraries (dependencies are isolated in the
 virtual environment).
 
 Working with virtual environments
 =================================
 
-In case you are not familiar with Python virtual environments, we recommend
+If you're not familiar with Python virtual environments, we recommend
 reading `the virtualenv section of the Python documentation`_ for an overview.
 
 Below we provide a cheat sheet for the actions and commands you will use the
@@ -59,7 +59,7 @@ To activate a virtual environment:
   source venv/bin/activate
 
 When activated, you will notice that the virtual environment name is now shown
-on the left sime of the prompt. This is done to remind you that you are working
+on the left side of the prompt. This is done to remind you that you are working
 "inside" this virtual environment.
 
 Deactivate a virtual environment
@@ -229,7 +229,7 @@ Assuming that Python and pip have successfully been installed then
 
 .. code-block:: powershell
 
-  # From a PowerShell session started with administratoion rights
+  # From a PowerShell session started with administration rights
   # create and activate a virtual environment
   virtualenv.exe venv
   .\venv\scripts\activate
@@ -257,12 +257,12 @@ Source an OpenStack RC file
 
 When no configuration arguments are passed, the OpenStack client tools will try
 to obtain their configuraton from environment variables. To help you define
-these variables the cloud dashboard allows you to download an OpenStack RC file
+these variables, the cloud dashboard allows you to download an OpenStack RC file
 from which you can easily source the required configuration.
 
 To download an OpenStack RC file from the dashboard:
 
-* Log to your project on the dashboard and select your preferred region.
+* Log in to your project on the dashboard and select your preferred region.
 
 * From the left hand menu select "API Access" and click on
   "Download OpenStack RC File v2.0". Save this file on the host where the client
@@ -286,7 +286,7 @@ To download an OpenStack RC file from the dashboard:
     potential attacker to compromise your credentials.
 
 * You can confirm the configuration works by running a simple command, such as
-  ``openstack network list`` and ensuring it return no errors.
+  ``openstack network list`` and ensuring it returns no errors.
 
 .. note::
 
@@ -299,7 +299,7 @@ To download an OpenStack RC file from the dashboard:
 Setting up the command line environment on Windows
 --------------------------------------------------
 
-As the standard OpenStack RC file will not work in it current form it is necessary to take a
+As the standard OpenStack RC file will not work in its current form, it is necessary to take a
 different approach.
 
 To do this we will need to create the equivalent script using PowerShell. Add the following lines,
@@ -345,4 +345,4 @@ Finding your way
 
 The command ``openstack help`` will list all commands supported by the
 OpenStack CLI. You can then use ``openstack COMMAND --help`` to understand how
-you can use a command.
+to use a command.

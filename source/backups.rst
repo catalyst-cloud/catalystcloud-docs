@@ -2,7 +2,7 @@
 Backups
 #######
 
-How to backup your data and servers in the Catalyst Cloud.
+How to back up your data and servers in the Catalyst Cloud.
 
 Contents:
 

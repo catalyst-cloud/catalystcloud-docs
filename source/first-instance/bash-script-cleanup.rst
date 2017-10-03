@@ -2,7 +2,7 @@
 Resource cleanup using a bash script
 ************************************
 
-This script includes all the comands from the section above in a single bash
+This script includes all the commands from the section above in a single bash
 script.
 
 You can download and run this script using the following commands:

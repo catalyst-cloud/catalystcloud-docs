@@ -8,7 +8,7 @@ Using Ansible
 deployment tool. Ansible provides a set of core modules for interacting with
 OpenStack. This makes Ansible an ideal tool for providing both OpenStack
 orchestration and instance configuration, letting you use a single tool to
-setup the underlying infrastructure and configure instances. As such Ansible
+set up the underlying infrastructure and configure instances. As such Ansible
 can replace other tools, such as Heat for OpenStack orchestration, and Puppet
 for instance configuration.
 
@@ -159,7 +159,7 @@ the variable when running the playbook as shown below:
 Run the launch instance playbook
 ================================
 
-After the network has been setup successfully, run the ``launch-instance.yml`` playbook:
+After the network has been set up successfully, run the ``launch-instance.yml`` playbook:
 
 .. code-block:: bash
 

@@ -14,7 +14,7 @@ dashboard at any time to request a change to the white-listed IPs.
 
 The compute instances you launch on the Catalyst Cloud are created in your
 private network by default. You have the option to associate a floating IP
-(public IP) to expose them to the Internet. You can use security groups
+(public IP) with your compute instances to expose them to the Internet. You can use security groups
 (similar to firewalls) to define who has access to your compute instances, as
 explained in :ref:`security-groups`.
 

@@ -9,7 +9,7 @@ The following is assumed:
 * You have installed the OpenStack command line tools
 * You have sourced an OpenRC file
 
-If not, please refer to the :ref:`command-line-interface` section for
+If you haven't done the above, please refer to the :ref:`command-line-interface` section for
 details on how to do so.
 
 
@@ -289,7 +289,7 @@ be booted on this network. Choose "private-net" when assigning a network to the 
 
 .. note::
 
-  Network IDs will be different in each region. Remember always to check what is available
+  Network IDs will be different in each region. Remember to always check what is available
   using ``openstack network list``.
 
 |
@@ -347,7 +347,7 @@ Assign the local external IP address to an environment variable and export it fo
 
 .. note::
 
- Ensure that this variable is correctly set and if not set it manually. If you are unsure of
+ Ensure that this variable is correctly set and if not, set it manually. If you are unsure of
  what ``CC_REMOTE_CIDR_NETWORK`` should be, ask your network administrator, or visit
  http://ifconfig.me to find your IP address. Use "<IP_ADDRESS>/32" as ``CC_REMOTE_CIDR_NETWORK``
  to allow traffic only from your current effective IP.
@@ -355,7 +355,7 @@ Assign the local external IP address to an environment variable and export it fo
 |
 |
 
-Create a rule to restrict SSH access to our instance to the current public IP address:
+Create a rule to restrict SSH access to your instance to the current public IP address:
 
 .. code-block:: bash
 

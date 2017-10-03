@@ -4,7 +4,7 @@ Windows instance using the web interface
 
 Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
 
-As a new user to the Catalyst Cloud your initial cloud project will come with a pre-configured
+As a new user to the Catalyst Cloud, your initial cloud project will come with a pre-configured
 private network and a router connected to the internet. If you have deleted this, or would like to
 create additional networks then please see :ref:`creating_networks` for details on how to do that.
 
@@ -13,7 +13,7 @@ Otherwise, let's proceed with building your first instance.
 Configure Instance Security Group
 =================================
 
-We will add  a security group and a rule for our instance so that it can be
+You will add  a security group and a rule for your instance so that it can be
 accessed using SSH.
 
 Navigate to the "Security Groups" tab of the "Access & Security" section and
@@ -33,7 +33,7 @@ Enter a name and description and click "Create Security Group":
 |
 |
 
-Now click on "Manage Rules" for the group we have created:
+Now click on "Manage Rules" for the group you have created:
 
 .. image:: ../_static/fi-security-group-rules-manage.png
    :align: center
@@ -64,7 +64,7 @@ menu, leave the defaults for the other fields. Click "Add".
   from any IP to your compute instance on the port and protocol selected. This
   is often desirable when exposing a web server (eg: allow HTTP and HTTPs
   access from the Internet), but is insecure when exposing other protocols,
-  such as SSH, Telnet and FTP. We strongly recommend you to limit the exposure
+  such as SSH, Telnet and FTP. We strongly recommend you limit the exposure
   of your compute instances and services to IP addresses or subnets that are
   trusted.
 
@@ -72,7 +72,7 @@ menu, leave the defaults for the other fields. Click "Add".
 Booting an Instance
 ===================
 
-We are now ready to launch our first instance, select launch instance from the
+We are now ready to launch your first instance. Select launch instance from the
 instances list:
 
 .. image:: ../_static/fi-instance-launch.png
@@ -81,11 +81,11 @@ instances list:
 |
 |
 
-When creating a windows instance you need to select the
+When creating a Windows instance you need to select the
 ``windows-server-2012r2-x86_64`` image from the image list first, then select
-"Yes" to create new volume.  An alert symbol will appear alongside the Size(GB)
-selector.  If you hover the mouse on this it will show the minimum size of the
-volume required to host the windows image.  Set an appropriate volume size,
+"Yes" to create a new volume.  An alert symbol will appear alongside the Size(GB)
+selector. If you hover the mouse on this it will show the minimum size of the
+volume required to host the windows image. Set an appropriate volume size,
 select "No" to Delete Volume on Terminate then click "Next".
 
 .. image:: ../_static/fi-windows-volume.png
@@ -94,7 +94,7 @@ select "No" to Delete Volume on Terminate then click "Next".
 |
 |
 
-For a windows instance the recommended minimum flavor is ``c1.c2r2``, select
+For a Windows instance the recommended minimum flavor is ``c1.c2r2``. Select
 this from the list and click "Next":
 
 .. image:: ../_static/fi-windows-flavor.png
@@ -119,20 +119,20 @@ Select the ``first-instance-sg`` security group from the list and click "Next":
 |
 |
 
-No key pair is required for a windows instance, click "Next":
+No key pair is required for a Windows instance. Click "Next":
 
 
 
 It will take a few seconds for your instance to build. You will see the Status,
 Task and Power State change during this process. When complete, the status will
-be "Active". You now have a running instance but there are a few more steps
-required before you can login.
+be "Active". You now have a running instance, but there are a few more steps
+required before you can log in.
 
 
 Allocate a Floating IP
 ======================
 
-To associate a floating IP with your instance you need to navigate to the
+To associate a floating IP with your instance, you need to navigate to the
 "Floating IPs" tab of the "Access & Security" section.
 
 If an IP address has not yet been allocated, click on "Allocate IP to Project" to
@@ -147,7 +147,7 @@ on "Associate":
 
 Select the port you wish to be associated with the floating IP. Ports are
 equivalent to virtual network interfaces of compute instances, and are named
-after the compute instance that owns it.
+after the compute instance that owns them.
 
 In this example, select the "first-instance" port and click "Associate":
 
@@ -159,7 +159,7 @@ In this example, select the "first-instance" port and click "Associate":
 
 Connect to the new Instance
 ===========================
-First you must set the Administrator password. To do this go to the "Instances"
+First you must set the Administrator password. To do this, go to the "Instances"
 section, click on first-instance under "Instance Name" and select the "Console"
 tab.
 
@@ -181,6 +181,6 @@ password.
 |
 
 Upon completion of this step, it will be possible to connect to this
-instance with an RDP application. Connect via the floating public IP that we
-associated with our instance in the previous step. This address is visible in
+instance with an RDP application. Connect via the floating public IP that you
+associated with your instance in the previous step. This address is visible in
 the Instances list and under the Floating IPs tab in Access & Security.

@@ -32,15 +32,15 @@ times for priority one incidents are listed on the `premium support page
 Contacting your account manager
 ===============================
 
-Customers that contract premium support from Catalyst have a technical account
-manager. You should have received the contact of your account manager when you
+Customers that have a premium support contract from Catalyst have a technical account
+manager. You should have received the contact details for your account manager when you
 applied for premium support.
 
 
 Contacting a solutions architect
 ================================
 
-Premium support customers have access to cloud solution architects that can
+Premium support customers have access to cloud solution architects who can
 provide guidance on the best way to implement your applications on the cloud.
 Please contact your account manager to arrange a discussion with a cloud
 solutions architect.
@@ -54,6 +54,6 @@ Catalyst provides training on how to use the Catalyst Cloud in Auckland,
 Wellington and Christchurch. Upcoming training sessions can be found at
 https://catalyst.net.nz/training/upcoming-training.
 
-You can also request training to be delivered on premises or customised for the
+You can also request training to be delivered on your premises or customised for the
 needs of your team. Please contact Catalyst via our training page to discuss
 your needs: https://catalyst.net.nz/training-services

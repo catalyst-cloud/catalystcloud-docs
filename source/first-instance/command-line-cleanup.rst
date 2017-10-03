@@ -2,16 +2,16 @@
 Resource cleanup using the command line
 ***************************************
 
-At this point you may want to cleanup the OpenStack resources that have been
+At this point you may want to clean up the OpenStack resources that have been
 created. Running the following commands should remove all networks, routers,
 ports, security groups and instances. These commands will work regardless of
-the method you used to create the resources. Note that the order you delete
+the method you used to create the resources. Note that the order in which you delete
 resources is important.
 
 .. warning::
 
  The following commands will delete all the resources you have created
- including networks and routers, do not run these commands unless you wish to
+ including networks and routers. Do not run these commands unless you wish to
  delete all these resources.
 
 .. code-block:: bash

@@ -9,7 +9,7 @@ instance using the dashboard in five minutes.
 
   <iframe width="560" height="315" src="https://www.youtube.com/embed/GjYs1gsQIrs" frameborder="0" allowfullscreen></iframe>
 
-There are a variety of methods that you can use to create your first instance.
+There are a variety of methods you can use to create your first instance.
 We have outlined a number of these in detail. Follow the links listed below for
 further information:
 

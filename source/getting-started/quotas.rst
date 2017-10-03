@@ -9,8 +9,8 @@ provider has a similar mechanism, but most do not furnish this information to
 their customers.
 
 We allow customers to see their current per region quota on the overview page
-of the dashboard. Quotas are a soft cap that can be changed any at time
-according to the customer needs. A quota change may be requested via the support
+of the dashboard. Quotas are a soft cap that can be changed at any time
+according to your needs. A quota change may be requested via the support
 panel: https://dashboard.cloud.catalyst.net.nz/management/tickets/
 
 Catalyst may give you a call if you are about to exceed your quota and ask you

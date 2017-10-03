@@ -7,18 +7,18 @@ Using the orchestration service
 Heat is the native OpenStack orchestration tool. This section demonstrates how
 to create a first instance using Heat.
 
-It is beyond the scope of this section to explain the syntax of writing heat
+It is beyond the scope of this section to explain the syntax of writing Heat
 templates. A predefined example from the `catalystcloud-orchestration`_ git
 repository will be used here as a template. This example may also be used as
 the basis for new templates.
 
 .. tip::
 
-  For more information on writing heat templates please consult the documentation
+  For more information on writing Heat templates, please consult the documentation
   at :ref:`cloud-orchestration`.
 
 Checkout the catalystcloud-orchestration repository. This includes the example
-heat templates:
+Heat templates:
 
 .. _catalystcloud-orchestration: https://github.com/catalyst/catalystcloud-orchestration
 
@@ -77,7 +77,7 @@ Building the First Instance Stack using a Heat Template
 =======================================================
 
 Select the following Heat template from the catalystcloud-orchestration
-repository cloned earlier. Before making use of a template it is good practice
+repository cloned earlier. Before making use of a template, it is good practice
 to check that the template is valid:
 
 .. code-block:: bash
@@ -87,7 +87,7 @@ to check that the template is valid:
 |
 
 This command will echo the yaml if it succeeds and will return an error if it
-does not. If the template validates it may be used to build the stack:
+does not. If the template validates, it may be used to build the stack:
 
 .. code-block:: bash
 
@@ -185,8 +185,8 @@ Deleting the First Instance Stack using Heat
 
 .. warning::
 
-  If a stack has been orchestrated using Heat, it is generally a good idea also
-  to use Heat to delete that stack's resources. Deleting components of a Heat
+  If a stack has been orchestrated using Heat, it is generally a good idea to also
+  use Heat to delete that stack's resources. Deleting components of a Heat
   orchestrated stack manually, whether using the other command line tools or the
   web interface, can result in resources or stacks being left in an inconsistent
   state.

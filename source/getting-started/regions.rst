@@ -2,7 +2,7 @@
 Cloud regions
 #############
 
-The Catalyst Cloud is hosted on multiple regions, each in a different
+The Catalyst Cloud is hosted in multiple regions, each in a different
 geographical location. Regions are data centres that are completely
 independent and isolated from each other, providing fault tolerance and
 geographic diversity.
@@ -21,14 +21,14 @@ and diverse fibre paths for network connectivity.
 +----------+-----------------+--------------------+----------------------+
 
 We encourage customers to use Porirua for their primary region in New Zealand
-as it currently has the most capacity of all our sites.
+as it currently has the greatest capacity of all our sites.
 
 The connectivity between compute instances hosted on different regions takes
 place over either our wide area network or the Internet when allowed by your
 security groups and network configuration.
 
 With the exception of object storage, resources are not replicated
-automatically across regions unless you do so.  This provides customers the
+automatically across regions unless you do so. This provides customers the
 flexibility to introduce replication where required and to fail-over resources
 independently when needed.
 

@@ -40,7 +40,7 @@ Enter your key pair name and paste your public key into the box:
  key while providing the private key to you to download. When you select
  "Import Key Pair" the dashboard provides a form where you can upload a public
  key. This option is somewhat confusingly named as you are importing a public
- key only and not a keypair, it would be more correctly named "Import Public
+ key only and not a keypair; it would be more correctly named "Import Public
  Key". See the :ref:`ssh_keypairs` section of the FAQ for more information.
 
 
@@ -67,7 +67,7 @@ Enter a name and description and click "Create Security Group":
 |
 |
 
-Now click on "Manage Rules" for the group we have created:
+Now click on "Manage Rules" for the group you have created:
 
 .. image:: ../_static/fi-security-group-rules-manage.png
    :align: center
@@ -116,7 +116,7 @@ instances list:
 |
 
 Enter an instance name, use the default instance count of one.  Select "Image"
-as the boot source and "No" for create new volume. Select the
+as the boot source and "No" for create new volume. Select
 ``ubuntu-14.04-x86_64`` from the image list. Then click "Next":
 
 .. image:: ../_static/fi-launch-instance-source.png
@@ -160,8 +160,8 @@ Instance":
 
 It will take a few seconds for your instance to build. You will see the Status,
 Task and Power State change during this process. When complete, the status will
-be "Active". You now have a running instance but there are a few more steps
-required before you can login.
+be "Active". You now have a running instance, but there are a few more steps
+required before you can log in.
 
 
 Allocate a Floating IP
@@ -182,7 +182,7 @@ on "Associate":
 
 Select the port you wish to be associated with the Floating IP. Ports are
 equivalent to virtual network interfaces of compute instances, and are named
-after the compute instance that owns it.
+after the compute instance that owns them.
 
 In this example, select the "first-instance" port and click "Associate":
 
