@@ -10,7 +10,7 @@ Overview
 
 Cloud orchestration allows you to deploy applications and infrastructure using
 a simple template language that describes the required resources and their
-relationship. The template format is based on YAML and called Heat
+relationship. The template format is based on YAML and is called Heat
 Orchestration Template (HOT). The orchestration service manages the life-cycle
 of application stacks on your behalf. When a template is modified, the service
 orchestrates the required changes to the infrastructure in the appropriate
@@ -53,8 +53,9 @@ https://github.com/catalyst/catalystcloud-orchestration.
   orchestration service (Heat) is "ec2-user". This is done to retain
   compatibility with the AWS CloudFormation service.
 
-The following HOT template is a simple example that illustrates how to launch a
-single instance on the Catalyst Cloud using the Heat orchestration service.
+The following heat Heat Orchestration Template (HOT) is a simple example
+that illustrates how to launch a single instance on the Catalyst Cloud
+using the Heat orchestration service.
 
 .. code-block:: yaml
 
@@ -99,7 +100,7 @@ single instance on the Catalyst Cloud using the Heat orchestration service.
       value: { get_attr: [server, networks] }
 
 If the more typical choice of default user (i.e "ubuntu" for Ubuntu images,
-"centos" for Centos etc.) is desired then amend the template to specify
+"centos" for Centos etc.) is desired, then amend the template to specify
 a user_data_format of "RAW" in the ``OS::Nova::Server`` properties:
 
 .. code-block:: yaml
@@ -113,7 +114,7 @@ a user_data_format of "RAW" in the ``OS::Nova::Server`` properties:
         flavor: { get_param: flavor }
         user_data_format: RAW
 
-If your tenant has multiple private networks then the above example will fail
+If your tenant has multiple private networks, then the above example will fail
 to start an instance - you need to specify which private network to attach to:
 
 .. code-block:: yaml
@@ -140,9 +141,8 @@ to start an instance - you need to specify which private network to attach to:
 Validate a template
 -------------------
 
-Before launching or updating a stack, you may want to ensure that the heat
-orchestration template (HOT) provided is valid. The following command can be
-used to validate a HOT template:
+Before launching or updating a stack, you may want to ensure that the HOT
+provided is valid. The following command can be used to validate a HOT:
 
 .. code-block:: bash
 
@@ -161,9 +161,9 @@ Creating a stack
   interfaces, security groups, security group rules, auto-scaling rules, etc.
 
 The following example illustrates how to create a stack using Heat. Note that
-parameters specified in the HOT template without a default value must be passed
-using the ``--parameter`` argument. You can pass multiple parameters by seperating them
-with a semicolon.
+parameters specified in the HOT without a default value must be passed
+using the ``--parameter`` argument. You can pass multiple parameters by
+separating them with a semicolon.
 
 .. code-block:: bash
 
@@ -260,7 +260,7 @@ command:
 
  $ openstack stack event list mystack
 
-This information is useful to troubleshoot templates, as it allows you to
+This information is useful for troubleshooting templates, as it allows you to
 identify whether they are producing the expected events and results.
 
 Individual events can be further analysed using the ``heat event-show``
@@ -275,7 +275,7 @@ To delete a stack:
 
   $ openstack stack delete mystack
 
-Heat will return a confirmation message informing the stack is being deleted.
+Heat will return a confirmation message saying the stack is being deleted.
 
 .. code-block:: text
 
@@ -287,10 +287,10 @@ Heat will return a confirmation message informing the stack is being deleted.
 
 
 *******************
-HOT template format
+HOT format
 *******************
 
-More information on the HOT template format can be found on the OpenStack user
+More information on the HOT format can be found on the OpenStack user
 guide at: http://docs.openstack.org/user-guide/hot-guide/hot.html
 
 More information on resource types that can be orchestrated by Heat can be
@@ -379,12 +379,13 @@ FAQ
 How do I find my project ID or name?
 ====================================
 
-There are a number of ways to find your project ID & name.
+There are a number of ways to find your project ID and name.
 
 Using the Dashboard
 -------------------
-The project ID and name can be found in the ``User Credentials`` popup. This can be
-accessed by clicking on `+View Credentials`_ in the `API Access` tab on the main
+The project ID and name can be found in the ``User Credentials`` popup. This
+can be accessed by clicking on `+View Credentials`_ in the `API Access` tab
+on the main
 
 .. _+View Credentials: https://dashboard.cloud.catalyst.net.nz/project/access_and_security/api_access/view_credentials/
 .. _Access & Security: https://dashboard.cloud.catalyst.net.nz/project/access_and_security/
@@ -395,7 +396,7 @@ Using the Command Line
 
 If you are using the OpenStack command line tools you have most likely sourced
 an openrc file, as explained in :ref:`command-line-interface`. If this is the
-case then you can find your project ID by issuing the following command:
+case, you can find your project ID by issuing the following command:
 
 .. code-block:: bash
 
@@ -405,7 +406,7 @@ case then you can find your project ID by issuing the following command:
  $ echo $OS_TENANT_NAME
  My-Example-Company-Ltd
 
-Alternatively you can use the ``openstack configuration show`` command:
+Alternatively, you can use the ``openstack configuration show`` command:
 
 .. code-block:: bash
 

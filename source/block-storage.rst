@@ -15,9 +15,9 @@ with no single points of failure and scalable to the exabyte level. The system
 is self-healing and self-managing. Data is seamlessly replicated on three
 different servers in the same region, making it fault tolerant and resilient.
 
-The loss of a node or a disk leads to the data being quickly recovered on
-another disk or node. The system runs frequent CRC checks to protect data from
-soft corruption. The corruption of a single bit can be detected and
+The loss of a node or disk leads to the data being quickly recovered on
+another node or disk. The system runs frequent CRC checks to protect data
+from soft corruption. The corruption of a single bit can be detected and
 automatically restored to a healthy state.
 
 
@@ -52,13 +52,13 @@ Best practices
 ==============
 
 The root volume of your compute instance should only be used for operating
-system data. It is recommended to add additional volumes to your compute
+system data. We recommend you add additional volumes to your compute
 instances to persist application data. For example: when running a MySQL
 database, you should add at least one additional volume with enough space to
 hold your database and mount it on ``/var/lib/mysql``.
 
-While block volumes can be formatted and used independently, it is highly
-recommended to use a logical volume management layer, such as LVM, in
+While block volumes can be formatted and used independently, we highly
+recommend you use a logical volume management layer, such as LVM, in
 production environments. By using LVM you will be able to add additional
 volumes and resize file-systems without downtime. Please consult the
 documentation of your operating system for information on how to use LVM.
@@ -241,7 +241,7 @@ should add an entry to ``/etc/fstab``, for example:
 
   When referring to block devices in ``/etc/fstab`` it is recommended that UUID
   or volume label is used instead of using the device name explicitly. It is
-  possible for device names to change after a reboot particularity when there are
+  possible for device names to change after a reboot, particularly when there are
   multiple attached volumes.
 
 *********************************************
@@ -274,28 +274,31 @@ reads.
 Striping Volumes and RAID0
 ==========================
 
-These techniques provide improved I/O performance by distributing I/O requests across multiple
-disks. While the implementation differs between the two options the resulting setups provide the
-same benefits.
+These techniques provide improved I/O performance by distributing I/O requests
+across multiple disks. While the implementation differs between the two
+options, the resulting setups provide the same benefits.
 
-Due to the nature of the way block storage is implemented on Catalyst Cloud it is already
-using distributed IO and coupled with the recent raising of the IOPS cap from 500 to 1000 this
-change may not have as much impact on performance as it would have previously.
+Due to the way block storage is implemented on Catalyst Cloud, it is already
+using distributed IO, and coupled with the recent raising of the IOPS cap
+from 500 to 1000, this change may not have as much impact on performance
+as it would have had previously.
 
-That being said there has been cases where a noticeable increase was seen, especially with Windows
-as the operating system on the VM. So for the sake of completeness
+That being said, there have been cases where a noticeable increase was seen,
+especially with Windows as the operating system on the VM.
+So for the sake of completeness:
 
 
 
 RAID0 with LVM
 --------------
 
-Of the two approaches outlined here, this would be the preferred option. This example will use
-`md`_ the Multiple Device driver aka Linux Software RAID and the associated tool `mdadm`_ to create
-a software defined RAID device and then `LVM`_ adds a logical volume on top of that.
+Of the two approaches outlined here, this would be the preferred option.
+This example will use `md`_ the Multiple Device driver aka Linux Software
+RAID and the associated tool `mdadm`_ to create a software defined RAID
+device and then `LVM`_ adds a logical volume on top of that.
 
-First find the details of the two disks we will use in the RAID array, in this example they will be
-/dev/vdb and /dev/vdc.
+First find the details of the two disks we will use in the RAID array. In
+this example they will be /dev/vdb and /dev/vdc.
 
 .. _md: https://linux.die.net/man/4/md
 .. _mdadm: https://raid.wiki.kernel.org/index.php/RAID_setup
@@ -335,7 +338,7 @@ check that the devices in question have no previous RAID configuration present
   mdadm: No md superblock detected on /dev/vdb.
   mdadm: No md superblock detected on /dev/vdc.
 
-using fdisk create a RAID partition on each device, the steps are as follow:
+using fdisk create a RAID partition on each device, the steps are as follows:
 
 - type **n** to create a new partition
 - type **p** for primary partition
@@ -472,8 +475,9 @@ to get a more detailed view use ``mdadm``
          0     253       17        0      active sync   /dev/vdb1
          1     253       33        1      active sync   /dev/vdc1
 
-Now create a new logical volume using the raid device. Below is an outline of the steps required to
-do this and the following example also contains more complete information on these steps.
+Now create a new logical volume using the raid device. Below is an outline
+of the steps required to do this, and the following example also contains
+more complete information on these steps.
 
 .. code-block:: console
 
@@ -490,7 +494,7 @@ do this and the following example also contains more complete information on the
     LV        VG       Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
     raid0-lvm raid0-vg -wi-a----- 19.00g
 
-Finally add a filesystem to the device and mount is so that it is useable.
+Finally add a filesystem to the device and mount it so that it is useable.
 
 .. code-block:: console
 
@@ -501,13 +505,14 @@ Finally add a filesystem to the device and mount is so that it is useable.
 Creating a striped logical volume
 ---------------------------------
 
-While LVM striping does achieve a very similar outcome to the RAID0 setup outlined above it should
-be noted that changing the number of stripes in sync with the number of disks is an unnecessary
-overheard and why the previous approach is preferred.
+While LVM striping does achieve a very similar outcome to the RAID0 setup
+outlined above, it should be noted that changing the number of stripes
+in sync with the number of disks is an unnecessary overheard. This is why
+the previous approach is preferred.
 
-This example will use 3 volumes to create the striped volume. Once logged into the server use
-lvmdiskscan to confirm that there are 3 (unpartitioned) disks, in this case */dev/vdc*, */dev/dvd*
-and */dev/vde*.
+This example will use three volumes to create the striped volume. Once logged
+in to the server use lvmdiskscan to confirm that there are three
+(unpartitioned) disks, in this case */dev/vdc*, */dev/dvd* and */dev/vde*.
 
 .. code-block:: console
 
@@ -543,7 +548,8 @@ A rescan with lvmdiskscan shows us that those disks have now been tagged as LVM 
     3 LVM physical volume whole disks
     0 LVM physical volumes
 
-Now create a volume group called lvm_volume_group from the physical volumes created above.
+Now create a volume group called lvm_volume_group from the physical volumes
+created above.
 
 .. code-block:: console
 
@@ -555,8 +561,8 @@ Now create a volume group called lvm_volume_group from the physical volumes crea
     lvm_volume_group   3   0   0 wz--n- 59.99g 59.99g
 
 
-The final step is to create the actual striped logical volume. Here we are creating it with the
-following parameters:
+The final step is to create the actual striped logical volume. Here we are
+creating it with the following parameters:
 
 - three stripes (-i3)
 - stripe size of 4KiB (-I4)
@@ -577,8 +583,8 @@ this will be created on the volume group lvm_volume_group
     striped_vol lvm_volume_group -wi-a----- 20g
 
 
-Once the striped LV has been successfully created it will need to have a file system added and be
-mounted as a useable disk.
+Once the striped LV has been successfully created, it will need to have a file system
+added and be mounted as a useable disk.
 
 .. code-block:: console
 
@@ -592,8 +598,8 @@ FAQ
 How to grow a cinder volume?
 ============================
 
-So you have been succesfully using OpenStack and now one of your volumes has
-started filling up.  What is the best, quickest and safest way to grow the
+So you have been successfully using OpenStack, and now one of your volumes has
+started filling up. What is the best, quickest and safest way to grow the
 size of your volume?
 
 Well, as always, that depends.
@@ -601,18 +607,18 @@ Well, as always, that depends.
 Boot Volumes
 ============
 
-This is difficult in OpenStack as there is not an easy and obvious choice.
+This is difficult in OpenStack, as there is not an easy and obvious choice.
 
 Create New Instance
 -------------------
 
 The best method is to spin up a new instance with a new volume and use
 the configuration management tool of your choice to make sure it is as you
-want it.  Terminate the old instance and attach all the data volumes to the
+want it. Terminate the old instance and attach all the data volumes to the
 new instance.
 
 This assumes there is no permanent data stored on the boot volume that is
-outside the configuration managment tool control.
+outside the configuration management tool control.
 
 Use a Volume Snapshot
 ---------------------
@@ -621,7 +627,7 @@ Another method which is quick and safe is to perform a volume snapshot.
 
 The process is as follows:
 
-* Shutdown the instance.
+* Shut down the instance.
 * Take a volume snapshot.
 * Create volume from snapshot.
 * Boot instance from volume.
@@ -629,24 +635,24 @@ The process is as follows:
 This sequence can be performed either through the API/commands or the
 dashboard.
 
-A reason to like this method is that the original volume is maintained, it is
-quick and cloud-init grows the new instance filesystem to the new volume size
-on first boot.
+A reason to like this method is that the original volume is maintained,
+it is quick and cloud-init grows the new instance filesystem to the new
+volume size on first boot.
 
 The reasons not to like this method are:
 
-* The host gets new keys which may upset some applications.
-* The original volume and the snapshot can not be deleted until the newly
+* The host gets new keys, which may upset some applications.
+* The original volume and the snapshot cannot be deleted until the newly
   created volume is deleted.
 * You will be charged for these cinder volumes and the snapshot.
 
 Old Fashioned Method
 --------------------
 
-Finally, there is the old fashioned methods that involves:
+Finally, there is the old fashioned method that involves:
 
 * Create a new bootable volume.
-* Shutdown instance and detach boot volume.
+* Shut down instance and detach boot volume.
 * Attach the new volume and the original to another instance.
 * Perform a copy using tools like dd.
 

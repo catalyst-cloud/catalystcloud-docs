@@ -28,18 +28,18 @@ roles, or remove access from existing users.
   that signed up for the account.
 
 The project users panel allows project admins and moderators to perform
-administrative functions. Users can be added, removed or updated from here.  If
+administrative functions. Users can be added, removed or updated from here. If
 updating a user who is currently logged in to the Dashboard, that user will be
 automatically required to re-authenticate. If updating one's own roles, these
-will take effect on the next login.
+will take effect on the next log in.
 
 
 *****
 Roles
 *****
 
-Below is a drecription of the roles available on the Catalyst Cloud and the
-actions they allow to be performed.
+Below is a description of the roles available on the Catalyst Cloud and the
+actions they are allowed to perform.
 
 Compute Start/Stop
 ------------------
@@ -50,12 +50,12 @@ This role is implied when a user also has "Project Member".
 Heat Stack Owner
 ----------------
 The “Heat Stack Owner” role allows users access to the Heat Cloud Orchestration
-Service. Users who attempt to use heat when they do not have this role will
+Service. Users who attempt to use Heat when they do not have this role will
 receive an error stating they are missing the required role. This role is
-required for interacting with the Cloud Orchestration Service regardless of
+required for interacting with the Cloud Orchestration Service, regardless of
 other roles.
 
-For more information on this service please consult the documentation at
+For more information on this service, please consult the documentation at
 :ref:`cloud-orchestration`.
 
 Object Storage
@@ -68,7 +68,7 @@ also has "Project Member".
 Project Admin
 -------------
 The “Project Admin” role allows users to have full control over your project,
-including adding moderators and inviting other people to join it.  The role
+including adding moderators and inviting other people to join it. The role
 remains largely administrative until a role such as "Project Member" is also
 assigned.
 
@@ -81,6 +81,6 @@ roles.
 Project Moderator
 -----------------
 The “Project Moderator” role can invite other people to join your project and
-update their roles, but cannot change the project admin.  The role is essentially
+update their roles, but cannot change the project admin. The role is essentially
 an administrative one until a role such as "Project Member" is also assigned.
 

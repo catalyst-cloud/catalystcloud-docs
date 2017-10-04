@@ -157,7 +157,7 @@ Admonitions
 
 .. warning::
 
-  Warnings can be used for to highlight things that must be done with caution.
+  Warnings can be used to highlight things that must be done with caution.
 
 .. code-block:: rst
 
@@ -213,7 +213,7 @@ Use the following format to create bullet lists:
 * A bullet list must have an empty line before it begins;
 * First level items use the "*" symbol;
 * No empty lines should be used in between elements;
-* If a line is to long, like this one, it must be broken into multiple lines
+* If a line is too long, like this one, it must be broken into multiple lines
   with no more than 80 characters in each line;
 * Second level sub items use the "-" symbol;
 
@@ -228,7 +228,7 @@ Use the following format to create bullet lists:
   * A bullet list must have an empty line before it begins;
   * First level items use the "*" symbol;
   * No empty lines should be used in between elements;
-  * If a line is to long, like this one, it must be broken into multiple lines
+  * If a line is too long, like this one, it must be broken into multiple lines
     with no more than 80 characters in each line;
   * Second level sub items use the "-" symbol;
 
@@ -246,7 +246,7 @@ Use the following format to create numbered lists:
 #. A bullet list must have an empty line before it begins;
 #. List items must be auto-numbered using the "#" symbol;
 #. No empty lines should be used in between elements;
-#. If a line is to long, like this one, it must be broken into multiple lines
+#. If a line is too long, like this one, it must be broken into multiple lines
    with no more than 80 characters in each line.
 #. There should be an empty line after a list ends.
 
@@ -255,7 +255,7 @@ Use the following format to create numbered lists:
   #. A bullet list must have an empty line before it begins;
   #. List items must be auto-numbered using the "#" symbol;
   #. No empty lines should be used in between elements;
-  #. If a line is to long, like this one, it must be broken into multiple lines
+  #. If a line is too long, like this one, it must be broken into multiple lines
      with no more than 80 characters in each line.
   #. There should be an empty line after a list ends.
 
@@ -379,7 +379,7 @@ enable this hook depends on your version of git.
 Git 2.9.0 or above
 ==================
 
-In order to enable this hook run the following command:
+In order to enable this hook, run the following command:
 
 .. code-block:: bash
 
@@ -391,24 +391,24 @@ move them into the ``githooks`` directory.
 Git older than 2.9.0
 ====================
 
-In order to enable this hook run the following command for the root of this
+In order to enable this hook, run the following command for the root of this
 repo:
 
 .. code-block:: bash
 
   $ cp githooks/pre-commit .git/hooks/
 
-If you prefer you can symlink hooks as described `here`_.
+If you prefer, you can symlink hooks as described `here`_.
 
 Output Verbosity
 ================
 
-The commit hook currently displays the output of ``compile.sh`` if you would
-prefer to suppress this output you can switch these commented lines:
+The commit hook currently displays the output of ``compile.sh``. If you would
+prefer to suppress this output, you can switch these commented lines:
 
 .. code-block:: bash
 
-  # Switch these if you prefer to supress compiles output
+  # Switch these if you prefer to suppress compiles output
   #"$DIR/compile.sh" &>/dev/null
   "$DIR/compile.sh"
 
