@@ -13,25 +13,25 @@ You will find an up to date list of recommended SDKs at
 http://developer.openstack.org/. A more exhaustive list that includes in
 development SDKs is available at https://wiki.openstack.org/wiki/SDKs.
 
-In this section we will use the shade library to provision our first instance.
-Shade is a python library for interacting with OpenStack clouds. Shade began
-its life inside of the Ansible project when duplicated code inside of the many
+In this section we will use the Shade library to provision our first instance.
+Shade is a Python library for interacting with OpenStack clouds. Shade began
+its life in the Ansible project when duplicated code inside of the many
 OpenStack modules was refactored into an internal library. It was recognised
-that this library was useful beyond Ansible and was subsequently moved to
+that this library was useful beyond Ansible and it was subsequently moved to
 standalone library. Shade is maintained by the OpenStack Infra team.
 
-Documentation for shade is available at
+Documentation for Shade is available at
 https://docs.openstack.org/shade/latest/index.html. Comprehensive `usage`_
 information is provided.
 
 .. _usage: https://docs.openstack.org/shade/latest/user/usage.html
 
-Installing shade
+Installing Shade
 ================
 
-The recommended way to install an up to date version of shade is to use pythons
+The recommended way to install an up to date version of Shade is to use Python's
 pip installer. The easiest way to achieve this is to follow the instructions
-for installing Ansible at :ref:`install-ansible` as shade will be installed as
+for installing Ansible at :ref:`install-ansible` as Shade will be installed as
 a dependency.
 
 .. note::
@@ -43,14 +43,14 @@ a dependency.
 OpenStack credentials
 =====================
 
-The first step in getting an instance running is to provide our python script
-with the correct credentials and configuration appropriate for our tenant. The
-easiest way to achieve this is to make use of environment variables, we will
+The first step in getting an instance running is to provide your Python script
+with the correct credentials and configuration appropriate for your tenant. The
+easiest way to achieve this is to make use of environment variables. You will
 make use of the standard variables provided by an OpenStack RC file as
 described at :ref:`source-rc-file`.
 
-We will use the `os_client_config`_ OpenStack client configuration library.
-This library reads environment variables and config files, in this case we will
+You will use the `os_client_config`_ OpenStack client configuration library.
+This library reads environment variables and config files. In this case you will
 use environment variables. Ensure you have sourced an OpenStack RC file before
 running the following code
 
@@ -64,30 +64,30 @@ running the following code
  cloud_config = os_client_config.OpenStackConfig().get_one_cloud()
  cloud = os_client_config.make_shade()
 
-We now have a ``cloud`` object representing our cloud
+You now have a ``cloud`` object representing your cloud
 
 Using an interactive interpreter
 ================================
 
 .. note::
 
- This section is optional, if you do not wish to interact with the Catalyst
+ This section is optional. If you do not wish to interact with the Catalyst
  Cloud interactively you can safely skip it.
 
-We can use the code below to allow us to interact with the Catalyst Cloud via
-the python interactive interpreter. Lets define a cloud object called
+You can use the code below to allow yourself to interact with the Catalyst Cloud via
+the Python interactive interpreter. First, define a cloud object called
 ``cloud``:
 
 .. literalinclude:: ../_scripts/cloud.py
 
-We can then export this script in the ``PYTHONSTARTUP`` environment variable:
+You can then export this script in the ``PYTHONSTARTUP`` environment variable:
 
 .. code-block:: bash
 
  $ export PYTHONSTARTUP=/path/to/cloud.py
 
-Now when we invoke the python interpreter we will have this cloud object
-available to us:
+Now when you invoke the Python interpreter, you will have this cloud object
+available to you:
 
 .. code-block:: bash
 
@@ -136,7 +136,7 @@ instance. Use ``cloud.list_flavors()`` to get a list and
   'swap': 0,
   'vcpus': 1}
 
-Lets store the flavor name in a variable:
+Let's store the flavor name in a variable:
 
 .. code-block:: python
 
@@ -193,7 +193,7 @@ System in the form of an Image. Use ``cloud.list_images()`` to get a list and
   'virtual_size': 0,
   'visibility': u'public'}
 
-Lets store the image name in a variable:
+Let's store the image name in a variable:
 
 .. code-block:: python
 
@@ -232,11 +232,11 @@ The following code will create a security group and a rule within that group:
      remote_ip_prefix=restricted_cidr_range,
  )
 
-The code above specifys 0.0.0.0/0 as the source, in doing so you are allowing
+The code above specifys 0.0.0.0/0 as the source. In doing so, you are allowing
 access from any IP to your compute instance on the port and protocol selected.
 This is often desirable when exposing a web server (eg: allow HTTP and HTTPs
 access from the Internet), but is insecure when exposing other protocols, such
-as SSH. We strongly recommend you to limit the exposure of your compute
+as SSH. We strongly recommend you limit the exposure of your compute
 instances and services to IP addresses or subnets that are trusted.
 
 The following code will set restricted_cidr_range to your external IP address
@@ -260,7 +260,7 @@ if you have the dig command available.
 Booting an Instance
 ===================
 
-The following code will launch an instance using shade:
+The following code will launch an instance using Shade:
 
 .. code-block:: python
 
@@ -283,7 +283,7 @@ The following code will launch an instance using shade:
 Allocate a Floating IP
 ======================
 
-We can associate a floating IP with the following code:
+You can associate a floating IP with the following code:
 
 .. code-block:: python
 
@@ -296,7 +296,7 @@ The complete script is included below:
 
 .. warning::
 
- Note that this script is creating the network, subnet and router, this is not
+ Note that this script is creating the network, subnet and router. This is not
  necessary if you already have these resources.
 
 .. literalinclude:: ../_scripts/create-first-instance-shade.py
@@ -304,26 +304,26 @@ The complete script is included below:
 Connect to the new Instance
 ===========================
 
-We can connect to the SSH service using the floating public IP that has been
-associated with our instance. The script will print this address if it succeeds
+You can connect to the SSH service using the floating public IP that has been
+associated with your instance. The script will print this address if it succeeds
 in associating a floating IP with the newly created instance:
 
 .. code-block:: bash
 
- Your first instance is available you can ssh to ubuntu@PUBLIC_IP
+ Your first instance is available: you can ssh to ubuntu@PUBLIC_IP
 
 You should be able to interact with this instance as you would any Ubuntu
 server.
 
-Deleting resources using shade
+Deleting resources using Shade
 ==============================
 
-The following script shows how you can delete resources using shade.
+The following script shows how you can delete resources using Shade.
 
 .. warning::
 
- Note that this script is deleting the network, subnet and router, you may not
- wish to delete these resources. If so you should comment out the relevant
+ Note that this script deletes the network, subnet and router. You may not
+ wish to delete these resources. If so, you should comment out the relevant
  lines.
 
 

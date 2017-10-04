@@ -5,7 +5,7 @@ Using Terraform
 `Terraform`_ is an open source infrastructure configuration and provisioning tool
 developed by `Hashicorp`_. Terraform supports the configuration of many kinds of
 infrastructure, including the Catalyst Cloud. It achieves this by using components
-known as `providers`_. In the case of the Catalyst Cloud this is the `Openstack
+known as `providers`_. In the case of the Catalyst Cloud, this is the `Openstack
 provider`_.
 
 .. _Terraform: https://www.terraform.io/
@@ -13,7 +13,7 @@ provider`_.
 .. _providers: https://www.terraform.io/docs/providers/index.html
 .. _Openstack provider: https://www.terraform.io/docs/providers/openstack/index.html
 
-For further information on using Terraform with OpenStack see the linked `video`_ and
+For further information on using Terraform with OpenStack, see the linked `video`_ and
 `blog`_ post:
 
 * https://www.openstack.org/videos/tokio-2015/tokyo-3141
@@ -80,7 +80,7 @@ It is beyond the scope of this documentation to explain how Terraform configurat
 files are written. A pre-prepared example is provided in the `catalystcloud-orchestration`_
 git repository.
 
-For more information on writing Terraform configuration files please consult the
+For more information on writing Terraform configuration files, please consult the
 `Terraform documentation`_. The configuration file used here can be used as a
 template from which you can build your own configurations.
 
@@ -226,8 +226,8 @@ The "./terraform plan" command outlines the plan that Terraform will execute:
 |
 
 .. note::
-  It is a good idea to review the output of this command. Check that resources which
-  will be created match intentions.
+  It is a good idea to review the output of this command. Check the resources that
+  will be created match your intentions.
 
 |
 |
