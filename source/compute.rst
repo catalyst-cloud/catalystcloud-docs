@@ -9,7 +9,7 @@ Overview
 
 The compute service provies scalable on-demand compute capacity for your
 applications in the form of compute instances. Compute instances are virtual
-servers that can be scalled up, down, or horizontally (by adding and removing
+servers that can be scaled up, down, or horizontally (by adding and removing
 more compute instances).
 
 Flavours
@@ -21,9 +21,9 @@ according to its flavour. Existing flavours can be found here:
 https://catalyst.net.nz/catalyst-cloud/services/iaas/compute-service
 
 Our flavours are named after the amount of CPU and RAM they provide you,
-avoiding the need to consult our documentation to find out their specification.
-We currently provide a number of common combinations of CPU and RAM and are
-prepared to introduce new flavours if required.
+avoiding the need to consult our documentation to find out their
+specifications. We currently provide a number of common combinations
+of CPU and RAM and are prepared to introduce new flavours if required.
 
 A virtual CPU (vCPU), also known as a virtual processor, is a time slice of a
 physical processing unit assigned to a compute instance or virtual machine. The
@@ -33,7 +33,7 @@ aim to deliver the performance required by applications, and to increase cost
 efficiency to our customers by optimising hardware utilisation.
 
 Since virtual CPUs do not map one-to-one to a physical core, some performance
-variation may occur over time. This variation tends do be small and can be
+variation may occur over time. This variation tends to be small and can be
 mitigated by scaling applications horizontally on multiple compute instances in
 an anti-affinity group. We monitor the performance of our physical servers and
 have the ability to move compute instances around, without downtime, to spread
@@ -46,7 +46,7 @@ Best practices
 It is best to scale applications horizontally (by adding more compute instances
 and balancing load amongst them) rather than vertically. It is possible to
 scale compute instances horizontally without downtime. Resizing compute
-instance vertically (up or down) will result in brief downtime, because the
+instance vertically (up or down) will result in a brief downtime, because the
 operating system needs to reboot to pick up the new configuration.
 
 
@@ -63,15 +63,15 @@ Cloud. This script is there to assist you with instance configuration at boot
 time. It communicates with the meta-data agent of our cloud and, for example,
 configures the network of your compute instance as defined by you via our APIs.
 
-Cloud-init is very powerful and a defacto multi-distribution and multi-cloud
+Cloud-init is very powerful. It's a de facto multi-distribution and multi-cloud
 way of handling the early initialisation of a cloud instance.
 
 When you launch a compute instance on the Catalyst Cloud, you can pass
 initialisation configuration to cloud-init via "user-data" (either using the
-``--user-data`` parameter of ``openstack server create``, or as post-creation customisation
-script via the web dashboard).
+``--user-data`` parameter of ``openstack server create``, or as a post-creation
+customisation script via the web dashboard).
 
-In the following sections we provide examples that illustrate how to perform
+In the following sections, we provide examples that illustrate how to perform
 common initialisation tasks with cloud-init, using different configuration
 formats.
 
@@ -208,7 +208,7 @@ http://cloudinit.readthedocs.org/en/latest/index.html.
 Resizing a compute instance
 ***************************
 
-The resize operation can be used to change the flavor (increase or decrease the
+The resize operation can be used to change the flavour (increase or decrease the
 amount of CPU and RAM) of a compute instance.
 
 .. warning::
@@ -219,8 +219,8 @@ amount of CPU and RAM) of a compute instance.
   (add/remove resources to an existing instance).
 
 To resize a compute instance, go to the Instances panel on the dashboard and
-locate the instance to be resized. On the actions column, click on the downward
-arrow to list more actions and then click on resize instance as shown below:
+locate the instance to be resized. On the Actions column, click on the downward
+arrow to list more actions and then click on Resize Instance as shown below:
 
 .. image:: _static/compute-resize-button.png
    :align: center
@@ -234,7 +234,7 @@ The resize dialogue will pop up, allowing you to chose a new flavour.
   Before resizing down a compute instance, please consider if you need to
   change the configuration of your applications, so they can start up with less
   resources. For example: databases and Java virtual machines are often
-  configured to allocate a certain amount memory and will fail to start if not
+  configured to allocate a certain amount of memory and will fail to start if not
   enough memory is available.
 
 The status of the instance will change to preparing to resize or migrate,
@@ -306,8 +306,8 @@ Anti-affinity groups for HA
   Affinity and anti-affinity groups allow you to ensure compute instances are
   placed on the same or different hypervisors (physical servers).
 
-Anti-affinity groups allow you to ensure compute instances are placed on the
-on different physical servers.
+Anti-affinity groups allow you to ensure compute instances are placed on
+different physical servers.
 
 ..
   Server affinity is useful when you want to ensure that the data transfer
@@ -417,7 +417,7 @@ Instance Boot Source. This is the template used to create an instance. You can
 use a snapshot of an existing instance, an image, or a volume (if enabled). You
 can also choose to use persistent storage by creating a new volume.
 
-Lets clarify these terms.
+Let's clarify these terms.
 
 Images
 ------
@@ -426,7 +426,7 @@ These are pre-configured operating system images that are available for
 selection as a boot source. Images are provided by the OpenStack service known
 as Glance. When booting from an image you can elect to create a new volume from
 the image. If you choose to create a new volume you need to decide if you want
-to the volume deleted on instance termination.
+the volume to be deleted on instance termination.
 
 Volumes
 -------
@@ -518,8 +518,8 @@ Select the boot source
 
 |
 
-Pause, Suspend, Shelve and Shut Off Instance. Whats the difference?
-===================================================================
+Pause, Suspend, Shelve and Shut Off Instance. What's the difference?
+=====================================================================
 
 See :ref:`stopping compute` for the differences between the methods of halting
 a compute instance.
@@ -538,15 +538,17 @@ The cost of a running instance vs a shelved instance
   It is important to be aware that the ``Shelve Instance`` action will only help to lower the
   monthly costs associated with your cloud project.
 
-The act of shelving an instance creates a snapshot of the running instance which it stores as an
-image on block storage meaning you now have an extra volume associated with your project. Once this
-has been done it stops the instance and schedules it to be removed from memory. So where the cost
-saving comes in when shelving instances is due to the fact that you are no longer paying for the
-compute services that a running instance uses, instead you are now only paying the, much cheaper,
-cost of storing a snapshot of your image on disk.
+The act of shelving an instance creates a snapshot of the running instance
+which it stores as an image on block storage, meaning you now have an extra
+volume associated with your project. Once this has been done, it stops the
+instance and schedules it to be removed from memory. The cost saving when
+shelving instances is due to the fact that you are no longer paying for the
+compute services that a running instance uses. Instead, you are now only
+paying the much cheaper cost of storing a snapshot of your image on disk.
 
-To illustrate this, lets say you had a simple 1 vCPU 1Gb RAM instance with a 10GB disk running 24/7
-for an entire month, which we will assume is 730 hours as an average.
+To illustrate this, let's say you had a simple 1 vCPU 1Gb RAM instance
+with a 10GB disk running 24/7 for an entire month, which we will assume is
+730 hours as an average.
 
 The cost for this would be:
 **$32.12 / month**
@@ -554,19 +556,20 @@ The cost for this would be:
 Compare that to the same instance stored as a disk image:
 **$4.02 / month**
 
-You can see that even for such a small compute instance the cost saving is quite significant. If
-you were to apply this to a compute instance with 4vCPU and 16GB RAM, the monthly running cost
-would be:
+You can see that even for such a small compute instance the cost saving is
+quite significant. If you were to apply this to a compute instance with
+4vCPU and 16GB RAM, the monthly running cost would be:
 **$285.43 / month**
 
-so it would definitely make sense to shelve instances you not need running fulltime.
+so it would definitely make sense to shelve instances you don't need
+to run fulltime.
 
 
 Locale errors on Ubuntu Linux
 =============================
 
 When launching an Ubuntu compute instance using the images provided by
-Canonical, it is recommended to configure the locale using cloud-init. The
+Canonical, we recommend you configure the locale using cloud-init. The
 example below illustrates how the locale can be defined at boot time using the
 cloud-config syntax.
 

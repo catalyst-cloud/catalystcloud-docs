@@ -12,8 +12,8 @@ Catalyst provides some pre-configured operating system images to make it easier
 for you to get started on the cloud.
 
 The table below lists the images provided by Catalyst and our partners, as well
-as the default user name you should use to log to each one of them (unless you
-have overwritten the default user name with cloud-init).
+as the default user name you should use to log in to each one of them
+(unless you have overwritten the default user name with cloud-init).
 
 +------------------+-----------+
 | Operating system | User-name |
@@ -100,7 +100,7 @@ Importing existing virtual machines
 Importing an unchanged existing virtual machine to the Catalyst Cloud is likely
 to work out of the box, but to get the best out of it and ensure that all API
 operations will work with your virtual machine, there are some preparation
-steps and tweaks that are highly recommended. For example: cloud VMs have a
+steps and tweaks that we highly recommend. For example: cloud VMs have a
 cloud-init script that runs at boot time to fetch the configuration of the
 compute instance from our metadata agent.
 
@@ -128,7 +128,7 @@ Configure cloud-init to use EC2 as its metadata source:
   dpkg-reconfigure cloud-init
 
 Compute instances receive their network configuration from our cloud metadata
-agent and DHCP servers. As such, it is recommended to configure the network
+agent and DHCP servers. As such, we recommend you configure the network
 interfaces (sudo vi /etc/network/interfaces) to use DHCP instead of a static
 IP.
 
@@ -146,9 +146,9 @@ IP.
   Using DHCP does not mean your compute instance will get a different IP every
   time you boot it up. On our cloud, an IP is allocated for your compute
   instance by our compute and network services. This IP will remain the same
-  throughout the life-cycle of the compute instance (until it is terminated). Each
-  virtual network created by you runs its own DHCP agent that is used to lease
-  IPs directed by the compute and network services.
+  throughout the life-cycle of the compute instance (until it is terminated).
+  Each virtual network created by you runs its own DHCP agent that is used
+  to lease IPs directed by the compute and network services.
 
 Since the MAC addresses for your network interfaces will be different on the
 cloud, you must remove persistent net rules from udev:
@@ -200,7 +200,7 @@ our cloud. While QCOW2 images will also work, they will not support copy on
 write operations. As a result, launching compute instances from these images or
 taking snapshots will take longer.
 
-Tools for image convertion
+Tools for image conversion
 ==========================
 
 Ensure you have the qemu-utils package installed, as it provides the tools
@@ -317,15 +317,15 @@ under your private images. Click on the Launch button and:
 * Ensure the device size is at least the same size as the image uploaded.
 * If you are importing an existing virtual machine, for its first boot you
   should choose a flavour that provides at least the same amount of CPU and RAM
-  the VM had before. Once you confirm the compute instance is booting
-  appropriately, if desirable, you can resize it to a smaller flavour.
+  as the VM had before. Once you confirm the compute instance is booting
+  appropriately, you can resize it to a smaller flavour if you wish.
 
 .. warning::
 
   Remember that your VM has been imported exactly as it was before, therefore
   there might be some things that may prevent you from connecting to it
   remotely (for example: a host base firewall blocking connections). You can
-  use the console and your existenting user credentials to connect to your
+  use the console and your existing user credentials to connect to your
   compute instance and make adjustments to its configuration as required.
 
 *******************************
@@ -338,10 +338,10 @@ another project, the following section describes how to achieve this.
 .. note::
 
  Some commands need to be issued when connected to the source project and some
- when connected to the target, ensure you are connected to the correct project
+ when connected to the target. Ensure you are connected to the correct project
  when issuing these commands.
 
-While connected to the source project find the id of the image you wish to
+While connected to the source project, find the ID of the image you wish to
 share:
 
 .. code-block:: bash
@@ -349,16 +349,16 @@ share:
   $ openstack image show -c id -f value ubuntu1604_base_packer
   55d3168c-dbdc-40d9-8ee6-96aff4f9e741
 
-While connected to the target project issue the following command to find the
-project id:
+While connected to the target project, issue the following command to find the
+project ID:
 
 .. code-block:: bash
 
  $ openstack configuration show -c auth.project_id -f value
  1234567892b04ed38247bab7d808e214
 
-Now we can proceed to share the image from the source project with the target
-project. While connected to the source project issue the following command:
+Now you can proceed to share the image from the source project with the target
+project. While connected to the source project, issue the following command:
 
 .. code-block:: bash
 
@@ -374,7 +374,7 @@ project. While connected to the source project issue the following command:
  | updated_at | 2016-11-17T02:52:24Z                 |
  +------------+--------------------------------------+
 
-Next ensure we can see the shared image in the target project:
+Next, ensure you can see the shared image in the target project:
 
 .. code-block:: bash
 
@@ -385,7 +385,7 @@ Next ensure we can see the shared image in the target project:
  | 55d3168c-dbdc-40d9-8ee6-96aff4f9e741 | ubuntu1604_base_packer      |
  +--------------------------------------+-----------------------------+
 
-Finally we accept the image in the target project:
+Finally, accept the image in the target project:
 
 .. code-block:: bash
 
@@ -398,8 +398,8 @@ Finally we accept the image in the target project:
 
 .. note::
 
- The last two commands are using the older glance client, this will be updated
- as soon as the openstack client supports accepting images.
+ The last two commands are using the older Glance client. This will be updated
+ as soon as the OpenStack client supports accepting images.
 
 ***
 FAQ
@@ -409,8 +409,8 @@ What operating systems are supported by the Catalyst Cloud?
 ===========================================================
 
 You should be able to run all major operating systems supporting the x86_64
-architecture. The following operating systems were already tested by Catalyst
-or its customers:
+architecture. The following operating systems have already been tested by
+Catalyst or its customers:
 
 * Linux
 * FreeBSD

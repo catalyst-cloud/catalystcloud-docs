@@ -48,9 +48,10 @@ use by Catalyst Cloud instances, free of charge. They are:
 Adding a network
 ****************
 
-By default all new Catalyst Cloud projects in the Porirua region (nz-por-1) are created with a
-router and network. If you have removed this or simply wish to create additional networks then the
-following guide will show you the steps required to achieve this.
+By default all new Catalyst Cloud projects in the Porirua region (nz-por-1)
+are created with a router and network. If you have removed this, or simply
+wish to create additional networks, then the following guide will show you
+the steps required to achieve this.
 
 .. _creating_networks:
 
@@ -96,8 +97,8 @@ notation and click "Next":
 
 |
 
-The Subnet Details page is normally, by default, empty. This example sets additional attributes
-for the subnet including:
+The Subnet Details page is normally, by default, empty. This example sets
+additional attributes for the subnet including:
 
 - enabling DHCP
 - defining a DHCP ip address allocation pool
@@ -129,7 +130,7 @@ Select the correct subnet:
 
 |
 
-You should now have a network topology this looks like this:
+You should now have a network topology that looks like this:
 
 .. image:: _static/fi-network-topology.png
    :align: center
@@ -141,40 +142,45 @@ You should now have a network topology this looks like this:
 Deleting a network
 ******************
 
-There are some dependencies that exist between the various infrastructure elements that get
-created in the cloud. While this is necessary in order to have things work correctly, it does cause
-the occasional problem when trying to delete unwanted items.
+There are some dependencies that exist between the various infrastructure
+elements that get created in the cloud. While this is necessary in order to
+have things work correctly, it does cause the occasional problem when trying to
+delete unwanted items.
 
 Deleting an entire network
 ==========================
 
-One area where this crops up from time to time is while removing network elements, so here is the
-recommended process for deleting an entire network and associated parts.
+One area where this crops up from time to time is while removing network elements,
+so here is the recommended process for deleting an entire network and
+associated parts.
 
 - first ensure that there are no instances connected to the network in question
 - remove the interface from the router
 - delete the router
 - delete the network
 
-If you had security groups that were only required by the network just deleted you could also
-remove these at this stage.
+If you had security groups that were only required by the network just deleted
+you could also remove these at this stage.
 
 Deleting specific network elements
 ==================================
 
-If you are looking to only remove certain elements then you would have to ensure that all
-dependencies on that network are first removed. In some case these dependencies might be nested,
-meaning that the obvious dependency may also have less obvious dependencies.
+If you are looking to only remove certain elements, then you would have to
+ensure that all dependencies on that network are removed first. In some
+cases, these dependencies might be nested, meaning that the obvious
+dependency may also have less obvious dependencies.
 
 An example - finding the dependency problem
 ===========================================
 
-One example of this would be trying to remove a network that is connected to a router but also
-still in use by a VPN. If we try and remove the router interface through the dashboard we would get
-a non specific error indicating that removing the interface failed.
+One example of this would be trying to remove a network that is connected
+to a router but also still in use by a VPN. If we try and remove the router
+interface through the dashboard, we would get a non-specific error indicating
+that removing the interface failed.
 
-At this point it may be quite challenging to determine what the exact cause of the error is. The
-best way to diagnose the problem is to use the openstack command line tools.
+At this point it may be quite challenging to determine what the exact cause
+of the error is. The best way to diagnose the problem is to use the OpenStack
+command line tools.
 
 To start lets get the IDs of our router, subnet and router port.
 
@@ -213,10 +219,12 @@ Let's try and delete the port from the router.
   API: has device owner network:router_interface
   1 of 1 ports failed to delete.
 
-OK, so while that wasn't successful at least we got a bit more information that tells us that there
-is some kind of dependency that is associated with the router interface.
+OK, so while that wasn't successful at least we got a bit more information
+that tells us that there is some kind of dependency that is associated with
+the router interface.
 
-This time we will try and remove the subnet from the router as that would remove the interface.
+This time we will try and remove the subnet from the router as that would
+remove the interface.
 
 .. code-block:: bash
 
@@ -224,9 +232,9 @@ This time we will try and remove the subnet from the router as that would remove
   HttpException: Conflict (HTTP 409) (Request-ID: req-a0821a75-e616-4e9a-a1a3-0f64574e07dc),
   Subnet c5145b18-26f1-4053-bac4-d8d0bdc77b48 is used by VPNService 478073d3-a347-4d1a-8653-609788064147
 
-Success, now we can see what the problem is. It appears that our subnet is associated with a VPN.
-If we were to go ahead and remove the VPN we would be able to delete the network as we initially
-set out to do.
+Success: now we can see what the problem is. It appears that our subnet is
+associated with a VPN. If we were to go ahead and remove the VPN, we would
+be able to delete the network as we initially set out to do.
 
 
 .. _security-groups:
@@ -243,12 +251,12 @@ Security groups are made of security rules. You can add or modify security
 rules at any time. When you modify a security group, the new rules are
 automatically applied to all compute instances associated with it.
 
-You can associate one or more security groups to your compute instances.
+You can associate one or more security groups with your compute instances.
 
 .. note::
 
   While it is possible to assign many security groups to a compute instance, we
-  recommend you to consolidate your security groups and rules as much as
+  recommend you consolidate your security groups and rules as much as
   possible.
 
 Creating a security group
@@ -261,7 +269,7 @@ security groups are all "allow" rules.
 
   Failing to set up the appropriate security group rules is a common mistake
   that prevents users from reaching their compute instances, or compute
-  instances to communicate with each other.
+  instances from communicating with each other.
 
 
 ************************
@@ -275,7 +283,7 @@ based VPNs.
 Requirements
 ============
 
-In order to setup a VPN you need to know a number of parameters:
+In order to setup a VPN, you need to know a number of parameters:
 
 * Tenant ID
 * Router ID
@@ -287,10 +295,10 @@ In order to setup a VPN you need to know a number of parameters:
 * A Secret Pre Shared Key
 
 .. note::
- IPSec relies on symmetric encryption where both sides use the same private
- key, this key is known as a Pre Shared Key (PSK). You should ensure that you
+ IPSec relies on symmetrical encryption where both sides use the same private
+ key. This key is known as a Pre Shared Key (PSK). You should ensure that you
  manage this key appropriately, so for example be sure that it is not commited
- to your configuration managment system source control in plain text.
+ to your configuration management system source control in plain text.
 
 VPN Setup from the Command Line
 ===============================
@@ -305,7 +313,7 @@ You can use the following commands to find these:
  $ openstack router list
  $ openstack subnet list
 
-To find the Tenant ID, Router ID and Router IP Address you can issue the
+To find the Tenant ID, Router ID and Router IP Address, you can issue the
 following command using the name of the router you found previously:
 
 .. code-block:: bash
@@ -326,7 +334,7 @@ following command using the name of the router you found previously:
 The Router IP Address is the value associated with the "ip_address" key within
 the external_gateway_info JSON data.
 
-To find the Subnet ID and Subnet CIDR Range issue the following command using
+To find the Subnet ID and Subnet CIDR Range, issue the following command using
 the subnet name you found previously:
 
 .. code-block:: bash
@@ -354,20 +362,20 @@ the subnet name you found previously:
  +-------------------+-----------------------------------------------+
 
 If you are creating a VPN that connects your projects between Catalyst Cloud
-Regions then the Remote Peer Router IP and Remote Peer Subnet CIDR Range will
-be the values associated with the subnet and router in the other region, you
+Regions, then the Remote Peer Router IP and Remote Peer Subnet CIDR Range will
+be the values associated with the subnet and router in the other region. You
 can determine these in the same way as shown above while connected to the other
-region. If you are setting up a VPN to a different peer then the Peer Router IP
-will be the publicly accessible IPv4 address of that router while the Remote
+region. If you are setting up a VPN to a different peer, then the Peer Router IP
+will be the publicly accessible IPv4 address of that router, while the Remote
 Peer Subnet CIDR Range will be the subnet behind that router whose traffic you
 wish to route via the VPN to access the local subnet.
 
 .. note::
- If you are connecting to a remote peer that is not a Catalyst Cloud router you
- may need to modify some of the parameters used in the following steps.
+ If you are connecting to a remote peer that is not a Catalyst Cloud router,
+ you may need to modify some of the parameters used in the following steps.
 
-By now you should have the required values so we can proceed to create a VPN,
-there are four steps to creating a VPN:
+By now you should have the required values so we can proceed to create a VPN.
+There are four steps to creating a VPN:
 
 * Create a VPN Service
 * Create a VPN IKE Policy
@@ -442,8 +450,8 @@ Then create a VPN IPSec Policy:
    | transform_protocol   | esp                                  |
    +----------------------+--------------------------------------+
 
-Lastly create a VPN IPSec Site Connection, this command makes use of the
-resources created in the last three steps, you will need to take note of these
+Lastly create a VPN IPSec Site Connection. This command makes use of the
+resources created in the last three steps. You will need to take note of these
 ids to use within this command.
 
 .. code-block:: bash
@@ -485,30 +493,30 @@ ids to use within this command.
  You can provide multiple ``--peer-cidr`` arguments if you want to tunnel more
  than one CIDR range.
 
-You have now stood up one end of the VPN, this process should be repeated at
+You have now stood up one end of the VPN. This process should be repeated at
 the other end using the same configuration options and PSK. Once both sides of
-the VPN are configured the peers should automatically detect each other and
-bring up the VPN. When the VPN is up the status will change to ``ACTIVE``.
+the VPN are configured, the peers should automatically detect each other and
+bring up the VPN. When the VPN is up, the status will change to ``ACTIVE``.
 
 VPN Setup using a bash script
 =============================
 
 The Catalyst Cloud team have created a bash script that simplifies the
-procedure for creating a VPN. In the case of a region to region VPN all you
+procedure for creating a VPN. In the case of a region to region VPN, all you
 need to know is the router and subnet names for each region. When one peer is
-not a Catalyst Cloud router you will need to know the peer router IP address
+not a Catalyst Cloud router, you will need to know the peer router IP address
 and the remote peer CIDR range.
 
 This script will require no modification when setting up region to region VPNs.
 If you are using it to connect a Catalyst Cloud router to a non Catalyst Cloud
-router you may need to change some configuration options.
+router, you may need to change some configuration options.
 
-This script currently only supports single CIDR ranges, if you are wanting to
+This script currently only supports single CIDR ranges. If you are wanting to
 tunnel multiple ranges then it will require some modification.
 
 .. note::
- This script makes used of the `jq`_ command line utility for parsing JSON,
- you will need to install it before using the script.
+ This script makes used of the `jq`_ command line utility for parsing JSON.
+ You will need to install it before using the script.
 
  .. _jq: https://stedolan.github.io/jq/
 
@@ -519,7 +527,7 @@ You can download the latest version of this script using the following command:
  $ wget https://raw.githubusercontent.com/catalyst/catalystcloud-docs/master/scripts/create-vpn.sh
 
 Below is an example of the script being used to create a region to region VPN
-on the Catalyst Cloud
+on the Catalyst Cloud:
 
 .. code-block:: bash
 
@@ -711,12 +719,12 @@ How do I find the external IP address of my instance?
 =====================================================
 
 There are scenarios where you may need to know the external IP address that
-instances in your project are using. For example you may wish to allow traffic
+instances in your project are using. For example, you may wish to allow traffic
 from your Catalyst Cloud instances to access a service that has firewalling or
 other IP based access control in place.
 
-For instances that have a floating IP you simply need to find the floating IP,
-for instances that do not have a floating IP address the external IP address
+For instances that have a floating IP you simply need to find the floating IP.
+For instances that do not have a floating IP address, the external IP address
 will be the external address of the router they are using to access the
 ``public-net``.
 
@@ -811,10 +819,13 @@ client like this:
 
 .. note::
 
-  The openstack command line client has an SSH option, this is not a recommended method for logging in to an instance. This command currently has a bug where it cannot find the public address for an instances that does have a valid floating IP.
+  The OpenStack command line client has an SSH option. This is not a
+  recommended method for logging into an instance. This command
+  currently has a bug where it cannot find the public address
+  for an instance that does have a valid floating IP.
 
-If you cannot SSH to an instance there are two common and one less common
-root cause, these are:
+If you cannot SSH to an instance, there are two common root causes and one
+less common one:
 
 * Network issues connecting to the SSH Daemon on your instance
 * Authentication issues after connecting to the SSH Daemon
@@ -824,10 +835,10 @@ Connection issues are generally caused by Security Group misconfiguration.
 Authentication issues are generally caused by the use of incorrect users or SSH
 keys.
 
-If you are encountering a ``Connection timed out`` error then you have
+If you are encountering a ``Connection timed out`` error then you have a
 connection issue. If you are encountering a ``Permission denied (publickey).``
 error then you have an authentication issue. If you are encountering a
-different SSH error then it is likely there is an issue with your instance.
+different SSH error, then it is likely there is an issue with your instance.
 
 Network issues
 --------------
@@ -849,7 +860,7 @@ You can check your floating IP address with the following command:
   $ openstack server show example-instance | grep private-net
   | private-net network                  | 10.0.0.10, 150.242.40.180                                  |
 
-You can check you have a security group rule for ssh access with the following
+You can check you have a security group rule for SSH access with the following
 command:
 
 .. code-block:: bash
@@ -924,7 +935,7 @@ For example associate test-security-group with the instance first-instance
 
   $ server add security group first-instance test-security-group
 
-Now test your access, you should be able to connect to your instance.
+Now test your access: you should be able to connect to your instance.
 
 The same outcome can be achieved via the Cloud dashboard.
 
@@ -939,7 +950,7 @@ ensure it now appears as one of the Instance Security Groups.
 Testing Network Access
 ======================
 
-If you want to test you have setup security groups properly for SSH access you
+If you want to test you have set up security groups properly for SSH access, you
 can check port 22 on the floating IP for an SSH banner using telnet or netcat:
 
 .. code-block:: bash
@@ -948,7 +959,7 @@ can check port 22 on the floating IP for an SSH banner using telnet or netcat:
   SSH-2.0-OpenSSH_6.6.1p1 Ubuntu-2ubuntu2.6
   ^C
 
-If you do not see an SSH banner then it is likely you have not configured your
+If you do not see an SSH banner, then it is likely you have not configured your
 security group rules appropriately.
 
 Authentication issues
@@ -982,10 +993,10 @@ change this as required for the distribution you are using as explained at
 SSH Key Pairs
 =============
 
-SSH key pairs are required for SSH access to instances, you can either import
+SSH key pairs are required for SSH access to instances. You can either import
 an existing key pair or you can have a key pair created for you.
 
-A key pair consists of two files, one contains the private key and the other
+A key pair consists of two files: one contains the private key and the other
 contains the public key. The private key will remain on your local machine and
 should be kept private and secure. The public key is uploaded to your project
 and will be injected into the authorised keys (``~/.ssh/authorized_keys``) for
@@ -1005,7 +1016,7 @@ should be able to SSH using the standard SSH command:
 Alternate Key Pair
 ------------------
 
-If your SSH key pair is not in the standard location then you will need to use
+If your SSH key pair is not in the standard location, you will need to use
 the ``-i`` flag to SSH to indicate the key you wish to use.
 
 .. code-block:: bash
@@ -1019,14 +1030,14 @@ the ``-i`` flag to SSH to indicate the key you wish to use.
 Created Key Pair
 ----------------
 
-If you selected ``+ Create Key Pair`` from the dashboard then your browser
+If you selected ``+ Create Key Pair`` from the dashboard, your browser
 should have downloaded and saved the private key file for you. This will be
 located in the default download location on your local machine (e.g.
 ``~/Downloads/keyname.pem``).
 
 Before you can use this file you will need to change the permissions. If you do
 not do so you will receive a warning entitled ``WARNING: UNPROTECTED PRIVATE
-KEY FILE!`` and the key will be ignored which will result in an ``Permission
+KEY FILE!`` and the key will be ignored which will result in a ``Permission
 denied (publickey).`` error when connecting.
 
 Do the following to secure this key:
@@ -1036,7 +1047,7 @@ Do the following to secure this key:
   $ mv ~/Downloads/keyname.pem ~/.ssh/
   $ chmod 400 ~/.ssh/keyname.pem
 
-When you use this option only the private key is downloaded to your machine, if
+When you use this option only the private key is downloaded to your machine. If
 you need to know the public key (e.g. if you wish to use it elsewhere) you can
 retrieve it using one of the following commands:
 
@@ -1076,13 +1087,13 @@ generate the fingerprint:
   2048 34:de:c7:b7:f1:26:7f:88:d5:e7:10:6c:ab:af:a2:03 you@hostname (RSA)
 
 If you have an OpenStack generated ``pem`` file and do not have the public key
-stored locally you can issue the following command:
+stored locally, you can issue the following command:
 
 .. code-block:: bash
 
   $ ssh-keygen -lf /dev/stdin <<< $( ssh-keygen -f ~/.ssh/keyname.pem -y )
 
-To check the fingerprint of the key stored in your project issue the following
+To check the fingerprint of the key stored in your project, issue the following
 command:
 
 .. code-block:: bash
@@ -1090,7 +1101,7 @@ command:
   $  openstack keypair show testkey | grep fingerprint
   | fingerprint | 34:de:c7:b7:f1:26:7f:88:d5:e7:10:6c:ab:af:a2:03 |
 
-To check the key associated with an instance you can issue the following
+To check the key associated with an instance, issue the following
 command:
 
 .. code-block:: bash
@@ -1099,7 +1110,7 @@ command:
   | key_name                             | keyname                                         |
 
 To check the key with the correct fingerprint was correctly injected into the
-correct users authorized keys issue the following command:
+correct user's authorised keys, issue the following command:
 
 .. code-block:: bash
 
@@ -1117,7 +1128,7 @@ Instance issues
 No route to host
 ----------------
 
-If you are encountering a ``No route to host`` error then it is likely there is
+If you are encountering a ``No route to host`` error, it is likely there is
 an issue with your instance. You should check that the instance is running:
 
 .. code-block:: bash
@@ -1125,8 +1136,8 @@ an issue with your instance. You should check that the instance is running:
   $ openstack server show instance-name | grep status
   | status                               | SUSPENDED
 
-The error can be triggered when an instance state is not ``ACTIVE``, in this
-case OpenStack will reply to a SSH connection attempt with a ICMP host
+The error can be triggered when an instance state is not ``ACTIVE``. In this
+case, OpenStack will reply to a SSH connection attempt with a ICMP host
 unreachable packet.
 
 Connection refused
@@ -1137,13 +1148,13 @@ connect to the SSH port.
 
 The most common reason for this error is misconfigured DNS servers on the
 subnet where this instance resides. If DNS resolution is not working during
-initialisation of the instance delays will occur while the instance cloud-init
+initialisation of the instance, delays will occur while the instance cloud-init
 process waits for DNS. These delays occur before the SSH service is configured.
 The service usually becomes available after about 5 minutes. When the SSH
-connection becomes available it is often slow to connect, this is also caused
+connection becomes available it is often slow to connect. This is also caused
 by broken DNS resolution on the instance.
 
-Checking the instance console log can help verify if this is the issue are
+Checking the instance console log can help verify if this is the issue you're
 experiencing:
 
 .. code-block:: bash
@@ -1156,5 +1167,5 @@ experiencing:
   ci-info: |   1   |  10.0.20.0  |  0.0.0.0  | 255.255.255.0 |    eth0   |   U   |
   ci-info: +-------+-------------+-----------+---------------+-----------+-------+
 
-If you see output similar to that shown above it is likely the server is
+If you see output similar to that shown above, it is likely the server is
 waiting on DNS resolution.

@@ -32,8 +32,8 @@ Object storage from the dashboard
 *********************************
 
 Data must be stored in a container (also referred to as a bucket) so we need
-to create at least one container prior to uploading data.  To create a new
-container navigate to the "Containers" section and click "Create Container".
+to create at least one container prior to uploading data. To create a new
+container, navigate to the "Containers" section and click "Create Container".
 
 .. image:: _static/os-containers.png
    :align: center
@@ -46,15 +46,15 @@ click "Create".
 .. note::
 
   Setting "Public" level access on a container means that anyone
-  with the containers URL can access the content of that container.
+  with the container's URL can access the content of that container.
 
 .. image:: _static/os-create-container.png
    :align: center
 
 |
 
-You should now see the newly created container. As this is a new container it
-currently does not contain any data.  Click on "Upload Object" to add some
+You should now see the newly created container. As this is a new container, it
+currently does not contain any data. Click on "Upload Object" to add some
 content.
 
 .. image:: _static/os-view-containers.png
@@ -81,7 +81,7 @@ the container is now 69.9KB
 Using the command line client tools
 ***********************************
 
-First ensure that you have installed the correct version of the tools for your
+First, ensure that you have installed the correct version of the tools for your
 operating system version and have sourced your OpenStack RC file
 see :ref:`command-line-interface` for full details.
 
@@ -161,8 +161,8 @@ To access object storage using cURL it will be necessary to provide credentials
 to authenticate the request.
 
 This can be done by sourcing a valid RC file ( see
-:ref:`command-line-interface` ) retrieving the account specific detail via the
-swift commandline tools then exporting the required variables as shown below.
+:ref:`command-line-interface` ), retrieving the account specific detail via the
+Swift command line tools, then exporting the required variables as shown below.
 
 .. code-block:: bash
 
@@ -189,22 +189,22 @@ swift commandline tools then exporting the required variables as shown below.
     $ export token="5f5a043e1bd24a8fa84b8785cca8e0fc"
 
 Then run the following command to get a list of all available containers for
-that tenant
+that tenant:
 
 .. code-block:: bash
 
     curl -i -X GET -H "X-Auth-Token: $token" $storageURL
 
 You can optionally specify alternative output formats; for example to use XML
-or JSON using the following syntax
+or JSON using the following syntax:
 
 .. code-block:: bash
 
     curl -i -X GET -H "X-Auth-Token: $token" $storageURL?format=xml
     curl -i -X GET -H "X-Auth-Token: $token" $storageURL?format=json
 
-To view the objects within a container simply append the container name to
-the cURL request
+To view the objects within a container, simply append the container name to
+the cURL request:
 
 .. code-block:: bash
 
@@ -250,7 +250,7 @@ These can be obtained from the RC file (under Access &
 Security, API Access, or using the command line tools).
 
 The standard client library is Python Swiftclient. This can be installed
-into your current Python environment. The example below illustrates:
+into your current Python environment. The example below illustrates how:
 
 .. code-block:: bash
 
@@ -267,12 +267,12 @@ into your current Python environment. The example below illustrates:
 Sample code
 ===========
 
-The code below demonstrates how you can use swiftclient to interact
+The code below demonstrates how you can use Swiftclient to interact
 with Swift via the version 2 compatible (auth) API. This version uses
 the same endpoint for both regions, but you tell it which one you want
 when connecting.
 
-Before running this example ensure that you have sourced an openrc file, as
+Before running this example, ensure that you have sourced an openrc file, as
 explained in :ref:`command-line-interface`.
 
 .. code-block:: python
@@ -321,7 +321,7 @@ explained in :ref:`command-line-interface`.
 
 To use the version 1 (auth) API you need to have previously authenticated,
 and have remembered your token id (e.g using the keystone client). Also the
-endpoint for the desired region must be used (here por).
+endpoint for the desired region must be used (por in this case).
 
 https://api.nz-por-1.catalystcloud.io:8443/swift/v1/auth_tenant_id/container_name/object_name
 
@@ -354,7 +354,7 @@ common S3 calls and operations.
   The features supported by the S3 emulation layer can be found at
   https://wiki.openstack.org/wiki/Swift/APIFeatureComparison
 
-  In addition, Swift3 middleware emulates the S3 REST API on top of OpenStack
+  In addition, Swift3 middleware emulates the S3 REST API on top of OpenStack.
   Swift is docmented fully at
   http://docs.openstack.org/mitaka/config-reference/object-storage/configure-s3.html
 
@@ -381,8 +381,8 @@ Security, API Access), or using the command line tools:
   keystone ec2-credentials-create
 
 If you are using boto to interact with the API, you need boto installed on your
-current Python environment. The example below illustrates how intall boto on a
-virtual environment:
+current Python environment. The example below illustrates how to install boto
+on a virtual environment:
 
 .. code-block:: bash
 
@@ -448,15 +448,15 @@ Object Versioning
 This provides a means by which multiple versions of your content can be stored
 allowing for recovery from unintended overwrites.
 
-First we need to create an archive container to store the older versions of our
-objects
+First, you need to create an archive container to store the older versions of our
+objects:
 
 .. code-block:: bash
 
   $ curl -i -X PUT -H "X-Auth-Token: $token" $storageURL/archive
 
-Now we can create a container to hold our objects. We must include the
-``X-Versions-Location`` header which defines the container that holds the
+Now you can create a container to hold your objects. You must include the
+``X-Versions-Location`` header, which defines the container that holds the
 previous versions of your objects.
 
 .. code-block:: bash
@@ -469,7 +469,7 @@ previous versions of your objects.
   Content-Length: 0
   X-Trans-Id: txe6d2f4e289654d02a7329-005845fd28
 
-Once the ``X-Versions-Location`` header has been applied to the container any
+Once the ``X-Versions-Location`` header has been applied to the container, any
 changes to objects in the container automatically result in a copy of the
 original object being placed in the archive container. The backed up version
 will have the following format:
@@ -478,20 +478,20 @@ will have the following format:
 
   <length><object_name>/<timestamp>
 
-Where <length> is the length of the object name ( as a 3 character zero padded
+Where <length> is the length of the object name ( as a three character zero padded
 hex number ), <object_name> is the original object name and <timestamp> is the
 unix timestamp of the original file creation.
 
 <length> and <object_name> are then combined to make a new container
 (pseudo-folder in the dashboard) with the backed up object stored within using
-the timestamp as it's name.
+the timestamp as its name.
 
 .. note::
 
   You must UTF-8-encode and then URL-encode the container name before you
   include it in the X-Versions-Location header.
 
-If we list out current containers we can see that we now have 2 empty
+If you list your current containers, you can see you now have two empty
 containers.
 
 .. code-block:: bash
@@ -504,8 +504,8 @@ containers.
   | my-container |     0 |     0 |
   +--------------+-------+-------+
 
-If we upload a sample file in to my-container we can see the confirmation of
-this operation which includes the etag, which is an MD5 hash of the objects
+If you upload a sample file into my-container, you can see the confirmation of
+this operation. This includes the etag, which is an MD5 hash of the object's
 contents.
 
 .. code-block:: bash
@@ -517,9 +517,9 @@ contents.
   | file1.txt | my-container | 2767104ea585e1a98a23c52addeeae4a |
   +-----------+--------------+----------------------------------+
 
-Now if the original file is modified and uploaded to the same container, we get
-a successful confirmation except this time we get a new etag as the contents of
-the file have changed.
+Now if the original file is modified and uploaded to the same container, you
+get a successful confirmation, except this time you get a new etag, as the
+contents of the file have changed.
 
 .. code-block:: bash
 
@@ -530,8 +530,8 @@ the file have changed.
   | file1.txt | my-container | 9673f4c3efc2ee8dd9edbc2ba60c76c4 |
   +-----------+--------------+----------------------------------+
 
-If we show the containers again we can see now that even though we only
-uploaded the file into my-container we now also have a file present in the
+If you show the containers again, you can see now that even though you only
+uploaded the file into my-container, you now also have a file present in the
 archive container.
 
 .. code-block:: bash
@@ -544,9 +544,9 @@ archive container.
   | my-container |    73 |     1 |
   +--------------+-------+-------+
 
-Further investigation of the archive container reveals that we have a new
-object, that was created automatically and named in accordance with the
-convention outlined above
+Further investigation of the archive container reveals that you have a new
+object, which was created automatically, and named in accordance with the
+convention outlined above.
 
 .. code-block:: bash
 
@@ -562,22 +562,22 @@ convention outlined above
 Temporary URL
 *************
 
-This a means by which a temporary URL can be generated to allow unauthenticated
-access to the Swift object at the given path. The access is via the given HTTP
-method (e.g. GET, PUT) and is valid for the number of seconds provided when the
-URL is created.
+This is a means by which a temporary URL can be generated, to allow
+unauthenticated access to the Swift object at the given path. The
+access is via the given HTTP method (e.g. GET, PUT) and is valid
+for the number of seconds specified when the URL is created.
 
 The expiry time can be expressed as valid for the given number of seconds from
 now or if the optional --absolute argument is provided, seconds is instead
 interpreted as a Unix timestamp at which the URL should expire.
 
-The syntax for the tempurl creation command is
+The syntax for the tempurl creation command is:
 
 **swift tempurl [command-option] method seconds path key**
 
-This generates  a  temporary URL allowing unauthenticated access to the Swift
+This generates a temporary URL allowing unauthenticated access to the Swift
 object at the given path, using the given HTTP method, for the given number of
-seconds, using the given TempURL key. If optional --absolute argument is
+seconds, using the given TempURL key. If the optional --absolute argument is
 provided, seconds is instead interpreted as a Unix timestamp at which the URL
 should expire.
 
@@ -594,10 +594,10 @@ should expire.
 
 Creating Temporary URLs in the Catalyst Cloud
 =============================================
-At the time of writing the only method currently available for the creation of
-temporary URLs is using the command line tools.
+At the time of writing, the only method currently available for the creation
+of temporary URLs is using the command line tools.
 
-Firstly we need to associate a secret key with our object store account.
+Firstly you need to associate a secret key with your object store account.
 
 .. code-block:: bash
 
@@ -618,20 +618,20 @@ You can then confirm the details of the key.
   | properties | Temp-Url-Key='testkey'                |
   +------------+---------------------------------------+
 
-Then using the syntax outlined above you can create a temporary URL to access
+Then, using the syntax outlined above, you can create a temporary URL to access
 an object residing in the object store.
 
-We will create a URL that will be valid for 600 seconds and provide access to
-the object "file2.txt" that is located in the container "my-container"
+You will create a URL that will be valid for 600 seconds and provide access to
+the object "file2.txt" that is located in the container "my-container".
 
 .. code-block:: bash
 
   $ swift tempurl GET 600 /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt "testkey"
   /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005
 
-We can test this using cURL and appending the generated URL to the Catalyst
+You can test this using cURL and appending the generated URL to the Catalyst
 Cloud's server URL "https://api.nz-por-1.catalystcloud.io:8443". If it is
-successful the request should return the contents of the object.
+successful, the request should return the contents of the object.
 
 .. code-block:: bash
 
@@ -650,7 +650,7 @@ successful the request should return the contents of the object.
 
   "For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us." "For those who have seen the Earth from space, and for the hundreds and perhaps thousands more who will, the experience most certainly changes your perspective. The things that we share in our world are far more valuable than those which divide us."
 
-We could also access the object by taking the same URL that we passed to cURL
+You could also access the object by taking the same URL that you passed to cURL
 and pasting it into a web browser.
 
 
@@ -661,7 +661,7 @@ Static websites hosted in object storage
 It is possible to host simple websites that contain only static content from
 within a container.
 
-First setup a container and configure the read ACL to allow read access and
+First set up a container, and configure the read ACL to allow read access and
 optionally allow files to be listed.
 
 .. code-block:: bash
@@ -670,7 +670,7 @@ optionally allow files to be listed.
   swift post -r '.r:*,.rlistings' con0
 
 To confirm the ACL settings, or any of the other metadata settings that follow
-run the following command.
+run the following command:
 
 .. code-block:: bash
 
@@ -690,17 +690,17 @@ run the following command.
   X-Storage-Policy: Policy-0
       Content-Type: text/plain; charset=utf-8
 
-Next upload the files you wish to host.
+Next upload the files you wish to host:
 
 .. code-block:: bash
 
   swift upload con0 index.html error.html image.png styles.css
 
 It is possible to allow listing of all files in the container by enabling
-web-listings. It is also possible to style theses listing using a separate CSS
+web-listings. It is also possible to style these listings using a separate CSS
 file to the one you would use to style the actual website.
 
-Upload the css file and enable the web listing and styling for the listing.
+Upload the CSS file and enable the web listing and styling for the listing.
 
 .. code-block:: bash
 
@@ -708,13 +708,14 @@ Upload the css file and enable the web listing and styling for the listing.
   swift post -m 'web-listings: true' con0
   swift post -m 'web-listings-css:listings.css' con0
 
-You should now be able to view the files in the container by visiting the
-containers URL, where %AUTH_ID% & %container_name% are replaced by your values.
+You should now be able to view the files in the container by visiting
+the container's URL, where %AUTH_ID% & %container_name% are replaced by
+your values.
 
 https://object-storage.nz-por-1.catalystcloud.io/v1/%AUTH_ID%/%container_name%/
 
-To enable the container to work as a full website it is also necessary to
-enable the index and optionally the error settings.
+To enable the container to work as a full website, it is also necessary to
+enable the index and optionally the error settings:
 
 .. code-block:: bash
 
@@ -730,41 +731,43 @@ https://object-storage.nz-por-1.catalystcloud.io/v1/%AUTH_ID%/%container_name%/
 Working with Large Objects
 **************************
 
-Typically the size of a single object cannot exceed 5GB. It is possible
+Typically, the size of a single object cannot exceed 5GB. It is possible,
 however, to use several smaller objects to break up the large object. When this
-approach is taken the resulting large object is made ou of two types of
+approach is taken, the resulting large object is made out of two types of
 objects:
 
 - **Segment Objects** which store the actual content. You need to split your content into chunks
   and then upload each piece as its own segment object.
 
 - A **manifest object** then links the segment objects into a single logical object. To download
-  the object you download the manifest and object storage then concatenates the segments and
-  returns the the contents.
+  the object, you download the manifest. Object storage then concatenates the segments and
+  returns the contents.
 
-There are tools avaiable, both GUI and CLI, that will handle the segmentation
-of large objects for you. For all other cases you must manually split the
+There are tools available, both GUI and CLI, that will handle the segmentation
+of large objects for you. For all other cases, you must manually split the
 oversized files and manage the manifest objects yourself.
 
-Using the Swift commandline tool
-================================
-The Swift tool which is included in the `python-swiftclient`_ library, for example, is
-capable of handling oversized files
-and gives you the choice of using either ``static large objects (SLO)`` or
-``dynamic large objects (DLO)``, which will be explained in more detail later.
+Using the Swift command line tool
+=================================
+The Swift tool which is included in the `python-swiftclient`_ library, for
+example, is capable of handling oversized files and gives you the choice of
+using either``static large objects (SLO)`` or``dynamic large objects (DLO)``,
+which will be explained in more detail later.
 
 .. _python-swiftclient: http://github.com/openstack/python-swiftclient
 
 |
 
-Here are 2 examples of how to upload a large object to an object storage container using the Swift
-tool. For the purpose of keeping output brief we are using a 512MB file in the example.
+Here are two examples of how to upload a large object to an object storage
+container using the Swift tool. To keep the output brief, a 512MB file
+is used in the example.
 
 example 1 : DLO
 ---------------
-The default mode for the tool is the ``dynamic large object`` type so in this example the only
-other parameter that is required is the segment size. The ``-S`` flag is used to specify the size
-of each chunk, in this case  104857600 bytes (100MB).
+The default mode for the tool is the ``dynamic large object`` type, so in this
+example, the only other parameter that is required is the segment size.
+The ``-S`` flag is used to specify the size of each chunk, in this case
+104857600 bytes (100MB).
 
 .. code-block:: bash
 
@@ -781,8 +784,8 @@ of each chunk, in this case  104857600 bytes (100MB).
 
 example 2 : SLO
 ---------------
-In the second example the same segment size as above is used but we specify that the object type
-must now be the ``static large object`` type.
+In the second example, the same segment size as above is used, but you specify
+that the object type must now be the ``static large object`` type.
 
 .. code-block:: bash
 
@@ -795,17 +798,18 @@ must now be the ``static large object`` type.
   large_file segment 3
   large_file
 
-Both of these approaches will successfully upload our large file file into object storage. The
-file would be split into 100MB segments which are uploaded in parallel. Once all the segments are
-uploaded, the manifest file will be created so that the segments can be downloaded as a single
+Both of these approaches will successfully upload your large file into
+object storage. The file would be split into 100MB segments which are
+uploaded in parallel. Once all the segments are uploaded, the manifest file
+will be created so that the segments can be downloaded as a single
 object.
 
-The Swift uses a strict convention for its segmented object support. All segments that are
-uploaded are placed into a second container that has ``_segments`` appended to the original
-container name, in this case it would be mycontainer_segments. The segment names follow the format
-of ``<name>/<timestamp>/<object_size>/<segment_size>/<segment_name>``.
+The Swift tool uses a strict convention for its segmented object support.
+All segments that are uploaded are placed into a second container that has
+``_segments`` appended to the original container name, in this case it would be mycontainer_segments. The segment names follow the format of
+``<name>/<timestamp>/<object_size>/<segment_size>/<segment_name>``.
 
-If we check on the segments created in example 1 we can see this.
+If you check on the segments created in example 1, you can see this:
 
 .. code-block:: bash
 
@@ -818,64 +822,73 @@ If we check on the segments created in example 1 we can see this.
   large_file/1500505735.549995/536870912/104857600/00000005
 
 
-In the above example it will upload all the segments into a second container named
-test_container_segments. These segments will have names like
-large_file/1290206778.25/21474836480/00000000, large_file/1290206778.25/21474836480/00000001, etc.
+In the above example, it will upload all the segments into a second container
+named test_container_segments. These segments will have names like
+large_file/1290206778.25/21474836480/00000000,
+large_file/1290206778.25/21474836480/00000001, etc.
 
-The main benefit for using a separate container is that the main container listings will not be
-polluted with all the segment names. The reason for using the segment name format of
-<name>/<timestamp>/<size>/<segment> is so that an upload of a new file with the same name won’t
-overwrite the contents of the first until the last moment when the manifest file is updated.
+The main benefit for using a separate container is that the main container
+listings will not be polluted with all the segment names. The reason for using
+the segment name format of <name>/<timestamp>/<size>/<segment> is so that
+an upload of a new file with the same name won’t overwrite the contents of the
+first until the last moment when the manifest file is updated.
 
 
-Swift will manage these segment files for you, deleting old segments on deletes and overwrites,
-etc. You can override this behavior with the --leave-segments option if desired; this is useful if
-you want to have multiple versions of the same large object available.
+Swift will manage these segment files for you, deleting old segments on deletes
+and overwrites, etc. You can override this behavior with the --leave-segments
+option if desired; this is useful if you want to have multiple versions of
+the same large object available.
 
-Static Large Objects (SLO) vs Dynamic Large Objects (DLO)
-=========================================================
+Dynamic Large Objects (DLO) vs Static Large Objects (SLO)
+==========================================================
 
-The main difference between the two object types is to do with the associated manifest file that
-describes the overall object structure within swift.
+The main difference between the two object types is to do with the associated
+manifest file that describes the overall object structure within Swift.
 
-In both of our examples above, the file would be split into 100MB chunks and uploaded, this can
-happen concurrently if desired. Once the segments are uploaded it is then necessary to create a
-manifest file to describe the object and allow it to be downloaded as a single file. When using
-Swift the manifest fles are created for you.
+In both of the examples above, the file would be split into 100MB chunks
+and uploaded. This can happen concurrently if desired. Once the segments
+are uploaded, it is then necessary to create a manifest file to describe
+the object and allow it to be downloaded as a single file. When using
+Swift, the manifest fles are created for you.
 
-The manifest for the ``DLO`` is an empty file and all segments must be stored in the same container
-, though depending on the object store implementation the segments, as mentioned above, may go into
-a container with '_segments' appended to the original container name. It also works on the
-assumption that the container will be eventually consistent.
+The manifest for the ``DLO`` is an empty file and all segments must be
+stored in the same container, though depending on the object store
+implementation the segments, as mentioned above, may go into a container
+with '_segments' appended to the original container name. It also works
+on the assumption that the container will eventually be consistent.
 
-For ``SLO`` the difference is that a user-defined manifest file describing the object segments is
-required. It also does not rely on eventually consistent container listings to do so. This means
-that the segments can be help in different container locations. The fact that once all files are
+For ``SLO`` the difference is that a user-defined manifest file describing
+the object segments is required. It also does not rely on eventually
+consistent container listings to do so. This means that the segments can
+be held in different container locations. The fact that once all files are
 can't then change is the reason why these are referred to as 'static' objects.
 
 A more manual approach
 ======================
 
-While the Swift tool is certainly handy as it handles a lot of the underlying file management tasks
-required to upload files into object storage the same can be achieved by more manual means.
+While the Swift tool is certainly handy as it handles a lot of the underlying
+file management tasks required to upload files into object storage, the same
+can be achieved by more manual means.
 
-Here is an example using standard linux commandline tools such as ``split`` and ``curl`` to perform
-a dynamic large object file upload.
+Here is an example using standard linux commandline tools such as
+``split`` and ``curl`` to perform a dynamic large object file upload.
 
-The file 'large_file' is broken into 100MB chunks which are prefixed with 'split-'
+The file 'large_file' is broken into 100MB chunks which are prefixed with
+'split-'
 
 .. code-block:: bash
 
   $ split --bytes=100M large_file split-
 
 
-The upload of these segments is then handled by curl. See `using curl`_ for more information on how
-to do this.
+The upload of these segments is then handled by cURL. See `using curl`_
+for more information on how to do this.
 
 .. _using curl: http://docs.catalystcloud.io/object-storage.html#using-curl
 
-The first curl command creates a new container, the next 2 upload the 2 segmetns created previously
-and finally a zero byte file is created for the manifest.
+The first cURL command creates a new container. The next two upload the two
+segments created previously, and finally, a zero byte file is created for the
+manifest.
 
 .. code-block:: bash
 
@@ -900,11 +913,11 @@ Can I use s3cmd for object storage?
 
 There is a powerful open source tool for managing object storage called
 s3cmd. It is available from http://s3tools.org/s3cmd and was originally
-written for managing object storage data in Amazon S3.  It is also
+written for managing object storage data in Amazon S3. It is also
 compatible with Catalyst Cloud object storage using the OpenStack S3
 API.
 
-While it is compatible, there is a gotcha with the Catalyst Cloud.  In
+While it is compatible, there is a gotcha with the Catalyst Cloud. In
 order to use s3cmd with the Catalyst Cloud, you need to customise the
 s3cmd configuration file.
 
@@ -923,8 +936,8 @@ The following changes need to be specified in the .s3cfg file.
 Compatibility with S3
 ---------------------
 
-Please reference the Object Storage section for OpenStack Swift
-compatibility to S3 API's.
+Please refer to the Object Storage section for OpenStack Swift
+compatibility to S3 APIs.
 
 .. seealso::
 
