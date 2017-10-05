@@ -9,7 +9,7 @@ the Catalyst Cloud. Packer is an open source tool developed by `Hashicorp`_ for
 creating machine images for multiple platforms from a single source
 configuration.
 
-Packer makes use of a builders and provisioners to create custom bootable
+Packer makes use of builders and provisioners to create custom bootable
 images.
 
 Builders
@@ -17,13 +17,13 @@ Builders
 
 Packer supports a number of `builders`_ for different target platforms
 including Amazon EC2 AMI images, VirtualBox and VMware. When building images
-for the Catalyst Cloud we will be using the `OpenStack builder`_.
+for the Catalyst Cloud you will be using the `OpenStack builder`_.
 
 Provisioners
 ============
 
 `Provisioners`_ provide a way to configure a base image such that a new custom
-image can be created. Many provisioners are available including shell
+image can be created. Many provisioners are available, including shell
 provisoners and provisioners that use DevOps tools like Ansible, Puppet and
 Chef.
 
@@ -35,9 +35,9 @@ This tutorial assumes that you have sourced an openrc file, as described at
 to interact with the Catalyst Cloud image service.
 
 You will also need an appropriate security group to allow SSH access for the
-temporary build machine that packer will create.
+temporary build machine that Packer will create.
 
-Next we need to install packer, packer is a single go binary so this it a
+Next you need to install Packer. Packer is a single go binary, so this is a
 simple process:
 
 .. code-block:: console
@@ -47,21 +47,21 @@ simple process:
  $ ./packer --version
  0.10.1
 
-Create a packer template file
+Create a Packer template file
 =============================
 
 `Templates`_ are JSON files that configure the builders and provisioners that
-we will use to create our custom image.
+you will use to create our custom image.
 
-In this example we will create a basic template that can be invoked with the
+In this example, you will create a basic template that can be invoked with the
 ``packer build`` command. It will create an instance in the Catalyst cloud, and
-once running copy a script to it and run that script using SSH. Once the script
-is finished running it will create a new Catalyst Cloud image that includes the
-changes we have made. Once this process is complete it will cleanup after
-itself so that only the new image remains.
+once the instance is running, copy a script to it and run the script using SSH.
+Once the script has finished running, it will create a new Catalyst Cloud image
+that includes the changes you have made. Once this process is complete, it will
+clean up after itself so that only the new image remains.
 
-In this example we will be using the shell provisioner to update the packages
-on an Ubuntu 16.04 machine to the latest versions. We will then build a
+In this example, you will be using the shell provisioner to update the packages
+on an Ubuntu 16.04 machine to the latest versions. You will then build a
 `golang`_ application called `ssllabs-scan`_ from source.
 
 .. code-block:: json
@@ -93,7 +93,7 @@ on an Ubuntu 16.04 machine to the latest versions. We will then build a
 Building an image
 =================
 
-Now we can build a new image called ``ubuntu1604_packer_test_1`` using this
+Now you can build a new image called ``ubuntu1604_packer_test_1`` using this
 template:
 
 .. code-block:: console
@@ -153,12 +153,12 @@ template:
 
 .. note::
 
- The process of building a new image takes some time, now would be a good time to make a cup of tea.
+ The process of building a new image takes some time, so now would be a good time to make a cup of tea.
 
 Booting an image
 =================
 
-Once the packer build command is complete our newly build image should be
+Once the packer build command is complete, your newly build image should be
 available:
 
 .. code-block:: console
@@ -190,8 +190,8 @@ available:
  | visibility       | private                                                                                                                                                                                       |
  +------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Lets boot this image and verify we can invoke the `ssllabs-scan`_ application
-we installed in the image:
+Boot this image and verify you can invoke the `ssllabs-scan`_ application
+you installed in the image:
 
 .. code-block:: console
 
@@ -265,30 +265,30 @@ Using Packer with Windows on the Catalyst Cloud
 .. note::
 
   At this time, due to a known issue in the Catalyst Cloud, it is not possible
-  to deploy a Windows image using packer directly fom the publicly available
+  to deploy a Windows image using Packer directly from the publicly available
   Windows image.
 
-  In order to overcome this limitation it is necessary to deploy a new
+  In order to overcome this limitation, it is necessary to deploy a new
   temporary Windows instance in the Catalyst Cloud. When launching this
-  instance it is required to say Yes to ``Create New Volume`` when selecting
+  instance, you need to say Yes to ``Create New Volume`` when selecting
   the ``Instance Source``.
 
   Once the image has booted succesfully, take a snapshot of it. This new
-  snapshot can now be used as the source image for your packer build. It is
-  not necessary to keep the temporary windows instance once the snapshot has
+  snapshot can now be used as the source image for your Packer build. It is
+  not necessary to keep the temporary Windows instance once the snapshot has
   been successfully taken.
 
 
-It is possible to use Packer to create custom Windows images, this requires
+It is possible to use Packer to create custom Windows images. This requires
 some changes in approach as the tools and connection details are those typical
 of Windows technologies.
 
 The first change is in the ``builders`` section of the packer build file. Here
-we need to add the settings to specify the connection type and the credentails
+you need to add the settings to specify the connection type and the credentials
 to use on this connection.
 
-Below is an  example of the  new communicator settings. These make use of the
-Windows Remote Management feature, this uses the WS-Management Protocol, which
+Below is an example of the new communicator settings. These make use of the
+Windows Remote Management feature. This uses the WS-Management Protocol, which
 is based on SOAP (Simple Object Access Protocol).
 
 .. code-block:: bash
@@ -305,13 +305,13 @@ is based on SOAP (Simple Object Access Protocol).
 
 
 Setting ``"communicator"`` to ``"winrm"`` is mandatory in order for this to
-work as expected. The username is required but it does not have to be
+work as expected. The username is required, but it does not have to be
 ``Administrator``, though for a Windows instance it makes sense to have a known
 administration account.
 
-The other important change is the creation of ``userdata`` script that is run
-by the builders section of the build file. The purpose of the this userdata
-section is to configure the WinRM access and define the user so that packer is
+The other important change is the creation of a ``userdata`` script that is run
+by the builders section of the build file. The purpose of this userdata
+section is to configure the WinRM access and define the user so that Packer is
 able to connect to the instance once it has been created.
 
 The reference to the userdata script needs to be added to the builders section
@@ -349,15 +349,15 @@ various settings required to allow remote connectivity via WinRM.
 
 .. warning::
 
-  The userdata script disables the windows firewall and also sets the
-  Administrator password using plain text which means it could be recovered
+  The userdata script disables the Windows firewall and also sets the
+  Administrator password using plain text, which means it could be recovered
   from the file system.
 
   These two points present a huge risk and should both be addressed to prevent
   any subsequent compromise of security.
 
-Once the userdata file has been created and the packer build file edited
-accordingly simply run the packer build command as discussed above.
+Once the userdata file has been created and the Packer build file edited
+accordingly, simply run the Packer build command as discussed above.
 
 .. code-block:: console
 

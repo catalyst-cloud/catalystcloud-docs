@@ -4,8 +4,8 @@
 Using Docker Machine on the Catalyst Cloud
 ##########################################
 
-This tutorial shows you how to use Docker Machine with the OpenStack driver in
-order to provision Docker Engines on Catalyst Cloud compute instances.
+This tutorial shows you how to use Docker Machine with the OpenStack driver
+to provision Docker Engines on Catalyst Cloud compute instances.
 
 `Docker Engine`_ is the daemon at the core of the `Docker`_ platform. It is
 responsible for providing the lightweight runtime on which containers are run.
@@ -24,8 +24,8 @@ providers. On the Catalyst Cloud we will be making use of the OpenStack
 
 .. _Docker Machine: https://www.docker.com/docker-machine
 
-Once a Docker Engine has been provisioned on a VM instance the local docker
-client can be configured to talk to the remote Docker Engine rather than
+Once a Docker Engine has been provisioned on a VM instance, the local docker
+client can be configured to talk to the remote Docker Engine, rather than
 talking to the local Docker Engine. This is achieved using environment
 variables.
 
@@ -40,7 +40,7 @@ This tutorial assumes a number of things:
 * You are familiar with basic usage of the Catalyst Cloud (e.g. you have
   created your first instance as described at
   :ref:`launching-your-first-instance`)
-* You have a single private network and subnet within your tenant
+* You have a single private network and subnet within your project
 * You will be setting up a Ubuntu 14.04 instance
 * You will be using the ubuntu user
 * You will be letting the driver create an SSH keypair for you
@@ -49,14 +49,14 @@ This tutorial assumes a number of things:
 Install Docker Machine
 ======================
 
-The first thing we need to do is install Docker Machine locally:
+The first thing you need to do is install Docker Machine locally:
 
 .. code-block:: bash
 
  $ curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` | \
    sudo tee /usr/local/bin/docker-machine > /dev/null && sudo chmod +x /usr/local/bin/docker-machine
 
-Check that docker machine is working:
+Check that Docker Machine is working:
 
 .. code-block:: bash
 
@@ -68,9 +68,10 @@ Create a Security Group and rules
 
 .. note::
 
- We are assuming that your tenent has a private network, subnet and router setup, please see consult :ref:`launching-your-first-instance` if you do not have this configured already. We are also assuming that you have spare floating IPs available in your quota.
+ Assumptions: your project has a private network, subnet and router set up. Please see    consult :ref:`launching-your-first-instance` if you do not have this configured already.
+ It is also assumed that you have spare floating IPs available in your quota.
 
-The next step is to setup a security group for our docker host, we will use the
+The next step is to set up a security group for your docker host. You will use the
 command line clients to achieve this. First create a security group:
 
 .. code-block:: bash
@@ -88,12 +89,12 @@ command line clients to achieve this. First create a security group:
  |             | direction='egress', ethertype='IPv6', id='00132465-6141-4842-ad5c-acd47c7a53f5' |
  +-------------+---------------------------------------------------------------------------------+
 
-Now we need to create three rules:
+Now you need to create three rules:
 
 * Inbound access to TCP port 22 for SSH access
-* Inbound access to TCP port 80 for web access so we can demonstrate Nginx
+* Inbound access to TCP port 80 for web access so you can demonstrate Nginx
   running inside a docker container
-* Inbound access to TCP port 2376 so our local client can communicate with the
+* Inbound access to TCP port 2376 so your local client can communicate with the
   Docker Engine daemon
 
 You can issue the ``openstack security group list`` command to find your
@@ -161,7 +162,7 @@ You can issue the ``openstack security group list`` command to find your
 
 
 If you are unsure of what ``YOUR_CIDR_NETWORK`` should be, ask your network
-admin, or visit http://ifconfig.me and get your IP address.  Use
+admin, or visit http://ifconfig.me and get your IP address. Use
 "IP_ADDRESS/32" as YOUR_CIDR_NETWORK to allow traffic only from your current
 effective IP.
 
@@ -169,14 +170,14 @@ Create a Cloud VM using Docker Machine
 ======================================
 
 The next step is to provision a compute instance using Docker Machine. Docker
-machine will instantiate a VM, get SSH access to this VM and will then install
-the Docker Engine on this host. This process can take quite a while, we
-recommend using the ``--debug`` flag so you can monitor the installation
+Machine will instantiate a VM, get SSH access to this VM and will then install
+the Docker Engine on this host. As this process can take quite a while, it's
+a good idea to use the ``--debug`` flag so you can monitor the installation
 progress and see any errors that may occur.
 
 .. note::
 
- We are making use of OpenStack environment variables in this command, ensure you have followed the steps described at :ref:`source-rc-file`
+ You are making use of OpenStack environment variables in this command. Ensure you have followed the steps described at :ref:`source-rc-file`
 
 .. code-block:: bash
 
@@ -185,20 +186,20 @@ progress and see any errors that may occur.
 
 .. note::
 
-  If your cloud tenant only has one private network defined then the
+  If your cloud tenant only has one private network defined, then the
   ``--openstack-net-name PRIVATE-NET-NAME`` can be omitted. If there is more
-  than one private network defined then ``PRIVATE-NET-NAME`` should be replaced
+  than one private network defined, then ``PRIVATE-NET-NAME`` should be replaced
   with the network you wish to connect the docker-engine-host to
 
-Now we need to tell our local client how to connect to the remote Docker Engine
-we have created:
+Now you need to tell your local client how to connect to the remote Docker Engine
+you have created:
 
 .. code-block:: bash
 
  $ eval "$(docker-machine env docker-engine-host)"
 
-Now when you issue docker commands using the local client you will be
-interacting with the docker daemon in the cloud instance:
+Now, when you issue docker commands using the local client, you will be
+interacting with the Docker daemon in the cloud instance:
 
 .. code-block:: bash
 
@@ -248,9 +249,9 @@ interacting with the docker daemon in the cloud instance:
 Create a test container
 =======================
 
-Lets create a test image from which we will instantiate a container running in
-the cloud. We will run a simple webserver by basing our image on the official
-Nginx image. Lets create a custom index page and a ``Dockerfile`` for our
+Next, create a test image from which you will instantiate a container running in
+the cloud. You will run a simple webserver by basing your image on the official
+Nginx image. To create a custom index page and a ``Dockerfile`` for our
 image:
 
 .. code-block:: bash
@@ -264,7 +265,7 @@ image:
  MAINTAINER Yourname Yoursurname <yourname@example.com>
  COPY index.html /usr/share/nginx/html/index.html
 
-Now lets create a our image:
+Now create your image:
 
 .. code-block:: bash
 
@@ -293,14 +294,14 @@ Now lets create a our image:
 
  At this point you are referencing a local ``Dockerfile`` but the image is being built on the remote Docker Engine cloud instance.
 
-Now lets instantiate the image we have just built as a running container:
+Now instantiate the image you have just built as a running container:
 
 .. code-block:: bash
 
  $ docker run -d -p 80:80 yourname/nginx
  3f47ef854fbe7d58b0e14e8ce2407ddb00b0883399aa1ff434c50fcfe1406750
 
-Lets check we have a running container:
+Check you have a running container:
 
 .. code-block:: bash
 
@@ -309,7 +310,7 @@ Lets check we have a running container:
  eac317f0642b        yourname/nginx    "nginx -g 'daemon off"   10 seconds ago      Up 9 seconds        0.0.0.0:80->80/tcp, 443/tcp   amazing_pike
 
 
-Now lets hit the external IP to verify we have everything working:
+Now hit the external IP to verify you have everything working:
 
 .. code-block:: bash
 

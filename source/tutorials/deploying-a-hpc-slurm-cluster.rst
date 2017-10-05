@@ -14,8 +14,8 @@ In this tutorial you will learn how to deploy a high performance computing
 .. _elasticluster: https://gc3-uzh-ch.github.io/elasticluster/
 .. _SLURM: https://computing.llnl.gov/linux/slurm/
 
-Elasticluster is an open source tool to create and manage compute clusters on
-cloud infrastructures. The project has been originally created by the `Grid
+ElastiCluster is an open source tool to create and manage compute clusters on
+cloud infrastructures. The project was originally created by the `Grid
 Computing Competence Center`_ from the University of Zurich.
 
 .. _Grid Computing Competence Center: https://www.gc3.uzh.ch/
@@ -27,7 +27,7 @@ manager on about 60% of the `TOP500 supercomputers`_).
 .. _TOP500 supercomputers: http://www.top500.org/
 
 The following video outlines what you will learn in this tutorial. It shows a
-SLURM HPC cluster being deployed automatically by Elasticluster on the Catalyst
+SLURM HPC cluster being deployed automatically by ElastiCluster on the Catalyst
 Cloud, a data set being uploaded, the cluster being scaled on demand from 2 to
 10 nodes, the execution of an embarrassingly parallel job, the results being
 downloaded, and finally, the cluster being destroyed.
@@ -39,10 +39,10 @@ downloaded, and finally, the cluster being destroyed.
 .. warning::
 
   This tutorial assumes you are starting with a blank tenant and using your VPC
-  only for elasticluster. You may need to adjust things (eg: create a dedicated
+  only for ElastiCluster. You may need to adjust things (e.g. create a dedicated
   elasticluster security group), if you are doing this in a shared VPC.
 
-Pre-requisites
+Prerequisites
 ==============
 
 Install Python development tools:
@@ -71,16 +71,16 @@ Install the Catalyst Cloud OpenStack client tools:
 
   pip install python-keystoneclient python-novaclient python-cinderclient python-glanceclient python-ceilometerclient python-heatclient python-neutronclient python-swiftclient
 
-Configuring Elasticluster
+Configuring ElastiCluster
 =========================
 
-Create template configuration files for elasticluster:
+Create template configuration files for ElastiCluster:
 
 .. code-block:: bash
 
   elasticluster list-templates 1> /dev/null 2>&1
 
-Edit the elasticluster configuration file (~/.elasticluster/config). A sample
+Edit the ElastiCluster configuration file (~/.elasticluster/config). A sample
 configuration file compatible with the Catalyst Cloud is provided below:
 
 .. code-block:: ini
@@ -122,7 +122,7 @@ configuration file compatible with the Catalyst Cloud is provided below:
 Configuring the cloud
 =====================
 
-Create SSH keys for elasticluster (no passphrase):
+Create SSH keys for ElastiCluster (no passphrase):
 
 .. code-block:: bash
 
@@ -130,18 +130,18 @@ Create SSH keys for elasticluster (no passphrase):
 
 Source your openrc file, as explained on :ref:`command-line-interface`.
 
-Allow elasticluster to connect to instances over SSH:
+Allow ElastiCluster to connect to instances over SSH:
 
 .. code-block:: bash
 
   nova secgroup-add-group-rule default default tcp 22 22
 
-Using elasticluster
+Using ElastiCluster
 ===================
 
-The following commands are provided as examples on how to use elasticluster to
+The following commands are provided as examples of how to use ElastiCluster to
 create and interact with a simple SLURM cluster. For more information on
-elasticluster, please refer to https://elasticluster.readthedocs.org/.
+ElastiCluster, please refer to https://elasticluster.readthedocs.org/.
 
 Deploy a SLURM cluster on the cloud using the configuration provided:
 
@@ -186,7 +186,7 @@ Using SLURM
 Connect to the front-end node of the SLURM cluster over SSH as described on the
 previous section.
 
-The following example demonstrates how to create a simple embarrassingly
+The following example demonstrates how to create a simple, embarrassingly
 parallel workload job that will trigger four tasks and write its output to
 results.txt.
 

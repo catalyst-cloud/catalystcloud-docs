@@ -5,20 +5,20 @@ Bootstrapping Puppet from Heat
 This tutorial assumes the following:
 
 * You have created a basic network setup in the Catalyst Cloud.
-* You have access to a server that is acting as the puppetmaster.
+* You have access to a server that is acting as the Puppet Master.
 * You have installed the OpenStack command line tools and sourced an
   openrc file, as explained at :ref:`command-line-interface`.
-* You have a basic understanding of heat templates as shown at
+* You have a basic understanding of Heat templates as shown at
   :ref:`launching-your-first-instance-using-heat`.
 
 Introduction
 ============
 
-In this tutorial we will show you how to add a new server to an existing
+In this tutorial, you will see how to add a new server to an existing
 Catalyst Cloud network and configure it with `Puppet`_ and have it check in to
-the puppetmaster.
+the Puppet Master.
 
-To achieve this we will create a ``heat`` template that will handle the
+To achieve this, you will create a ``heat`` template that will handle the
 creation of the instance and then run a nested cloud-config script via
 `cloud-init`_ that will handle the provisioning of Puppet on the new server.
 
@@ -28,12 +28,12 @@ creation of the instance and then run a nested cloud-config script via
 Setup
 =====
 
-We will make use of heat template to deploy a single instance into an existing
-network hosted in the Catalyst Cloud. In order to make this work we need to
-retrieve the relevant network ids and add them into the template.
+You will make use of Heat template to deploy a single instance into an existing
+network hosted in the Catalyst Cloud. In order to make this work, you need to
+retrieve the relevant network IDs and add them into the template.
 
-The two networks we will be connecting to are front-end and public-net. To
-find these values we need to run the following OpenStack commands.
+The two networks you will be connecting to are front-end and public-net. To
+find these values, you need to run the following OpenStack commands.
 
 .. code-block:: bash
 
@@ -46,7 +46,7 @@ find these values we need to run the following OpenStack commands.
   | e7adca02-5b8b-4c2e-9946-2e2eff55997a | front-end  |
   +--------------------------------------+------------+
 
-We also need to know the id of the front-end network subnet in order to
+You also need to know the ID of the front-end network subnet, in order to
 create a port and assign a floating IP to the server.
 
 .. code-block:: bash
@@ -71,8 +71,8 @@ the cloud-config script puppet_bootstrap.yaml to cloud-init
    user_data:
     get_file: /home/user1/cloud/puppet_bootstrap.yaml
 
-Here is the heat template that is responsible for creating the new instance.
-The network id values found previously have been added to the relevant
+Here is the Heat template that is responsible for creating the new instance.
+The network ID values found previously have been added to the relevant
 parameters as defaults. It is also possible to pass these values in as
 arguments from the command line, as shown `here`_.
 
@@ -84,8 +84,8 @@ arguments from the command line, as shown `here`_.
   heat_template_version: 2013-05-23
 
   description: >
-    Heat template to deploy a single servers into an existing neutron tenant
-    network, assign a floating IP addresses and ensure its is accessible from
+    Heat template to deploy a single server into an existing Neutron tenant
+    network, assign a floating IP addresses and ensure it is accessible from
     the public network.
 
     It also uses a cloud-init script to bootstrap the server with Puppet.
@@ -170,20 +170,20 @@ arguments from the command line, as shown `here`_.
 This is the ``cloud-init`` script that is called via the ``user-data``
 command. It ensures that the Puppet package is installed and sets some
 basic configuration to ensure that the server can identify itself and
-locate the puppetmaster.
+locate the Puppet Master.
 
 It performs the following tasks:
 
-* creates a host entry for the puppet master
-* adds environment and puppetmaster server variables to puppet.conf
-* runs puppet agent with an optional 120 second wait for the certificate
-  request to be signed by the puppet master
+* creates a host entry for the Puppet Master
+* adds environment and Puppet Master server variables to puppet.conf
+* runs Puppet agent with an optional 120 second wait for the certificate
+  request to be signed by the Puppet Master
 
 .. code-block:: yaml
 
   #cloud-config
 
-  # This is an example of how to have puppet agent installed and run
+  # This is an example of how to have Puppet agent installed and run
   # when the instance boots for the first time.
   # It needs to passed in valid YAML format to user-data when starting
   # the instance.
@@ -208,7 +208,7 @@ It performs the following tasks:
         server: "puppet.example.co.nz"
         environment: dev
 
-  # add puppetmaster host entry and do initial puppet run
+  # add Puppet Master host entry and do initial Puppet run
   runcmd:
     - echo 10.20.40.12 puppet.example.co.nz puppet >> /etc/hosts
     - puppet agent --test --server puppet.example.co.nz --waitforcert 120
@@ -220,14 +220,14 @@ It performs the following tasks:
 Creating the Server
 ===================
 
-To create the server run the following heat command. This will create a new
+To create the server, run the following Heat command. This will create a new
 server called server1 in a stack named puppet-slave-stack
 
 .. code-block:: bash
 
   openstack stack create -t /home/user1/cloud/puppet_slave.yaml puppet-slave-stack
 
-Here's how to check the progress of your deployment
+Here's how to check the progress of your deployment:
 
 .. code-block:: bash
 
@@ -236,6 +236,6 @@ Here's how to check the progress of your deployment
 Final Note
 ==========
 
-Unless your puppetmaster is configured to automatically sign agent certificate
-requests you will need to sign your new servers cert before the first puppet
+Unless your Puppet Master is configured to automatically sign agent certificate
+requests, you will need to sign your new server's cert before the first Puppet
 run will complete.

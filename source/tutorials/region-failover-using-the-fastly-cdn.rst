@@ -3,23 +3,23 @@ Region failover using the Fastly CDN
 ####################################
 
 This tutorial assumes you have installed the OpenStack command line tools and
-sourced an openrc file, as explained at :ref:`command-line-interface`. We also
-require that you have upload an ssh key called ``nginx-demo-key`` as explained
+sourced an openrc file, as explained at :ref:`command-line-interface`. You also
+need to have uploaded an SSH key called ``nginx-demo-key``, as explained
 at :ref:`uploading-an-ssh-key`.
 
 
 Introduction
 ============
 
-This tutorial demonstrates how to setup automatic failover for a website that
+This tutorial demonstrates how to set up automatic failover for a website that
 is hosted in two different Catalyst Cloud regions. In order to achieve
-automatic failover two components are required:
+automatic failover, two components are required:
 
 - Monitoring of the origin servers so you can decide when you need to switch
   from the primary to the backup
 - A mechanism to redirect traffic from the primary to the backup origin server
 
-These components can be decoupled, they do not need to be provided by the same
+These components can be decoupled; they do not need to be provided by the same
 system.
 
 Monitoring usually comprises a health check that ensures the site is responding
@@ -28,42 +28,42 @@ of failed requests that must occur in order for the service to be considered
 down.
 
 There are many mechanisms for redirecting traffic to alternative origin servers
-based on availability, the main ones are:
+based on availability. The main ones are:
 
 - DNS redirection
 - Redirect via a proxy
 - Network redirection
 
 DNS based traffic redirection is a very common method that is relatively easy
-to setup. It is a generally effective method for traffic redirection, however
+to set up. It is a generally effective method for traffic redirection, however
 it is not atomic and suffers from a lag due to DNS propagation. Even with low
-TTLs (eg 300 sec) it can take more than 15 minutes before greater than 90% of
-traffic has switched. In many cases a small volume of traffic will continue to
+TTLs (e.g. 300 sec) it can take more than 15 minutes before greater than 90% of
+traffic has switched. In many cases, a small volume of traffic will continue to
 be directed to the primary address 24 hours after switching. These issues are
 often caused by poorly implemented DNS services on CPE routers and to a lesser
 extent ISP and Operating System resolvers.
 
 Proxy redirection is an effective method that avoids the lag present with DNS
 based solutions. With this method the frontend address that the client connects
-to does not change, the redirection is achieved by the HTTP proxy. `Anycast`_
+to does not change; the redirection is achieved by the HTTP proxy. `Anycast`_
 is sometimes used in these solutions in order to provide a single static
 frontend address while providing a geographically diverse set of POPs.
 
 .. _Anycast: https://en.wikipedia.org/wiki/Anycast
 
-The third common method is to use rely on a network protocol like `BGP`_ to
+The third common method is to rely on a network protocol like `BGP`_ to
 achieve failover to the backup origin server when the primary origin server
 becomes unavailable. This is achieved at the network layer such that traffic is
-directed to the router in front of the backup origin when the router in front
+directed to the router in front of the backup origin, when the router in front
 of the primary origin server becomes unavailable. This configuration is not
-trivial and requires you have control of your own `ASN`_.
+trivial and requires you to have control of your own `ASN`_.
 
 .. _BGP: https://en.wikipedia.org/wiki/Border_Gateway_Protocol
 
 .. _ASN: https://en.wikipedia.org/wiki/Autonomous_system_%28Internet%29
 
-In this tutorial we will describe using a proxy redirection service. If you are
-interested in DNS based failover options there are a number of providers who
+This tutorial describes using a proxy redirection service. If you are
+interested in DNS based failover options, there are a number of providers who
 provide combined monitoring and automated failover:
 
 - http://totaluptime.com/solutions/cloud-dns/cloud-dns-failover/
@@ -84,15 +84,15 @@ Fastly is a `content delivery network`_ (CDN) that provides `many points of
 presence`_ (POPs) globally. Fastly has good coverage in Australasia with two
 POPs in New Zealand (Auckland and Wellington). Fastly POPs act as a cache that
 sits between your origin servers and the end users of the site. All end user
-traffic is served by Fastly POPs, the POP will respond to an end user with
-either cached content or content fetched from an origin server depending on the
-caching rules set by the origin servers.
+traffic is served by Fastly POPs; the POP will respond to an end user with
+either cached content or content fetched from an origin server, depending on
+the caching rules set by the origin servers.
 
 .. _content delivery network: https://en.wikipedia.org/wiki/Content_delivery_network
 
 .. _many points of presence: https://www.fastly.com/network
 
-Please consult Fastlys `getting started guide`_ and `documentation`_ for more
+Please consult Fastly's `getting started guide`_ and `documentation`_ for more
 in depth coverage of how their service works.
 
 .. _getting started guide: https://docs.fastly.com/guides/basic-setup/getting-started-with-fastly
@@ -102,19 +102,19 @@ in depth coverage of how their service works.
 Fastly has a number of features that make it useful for us:
 
 - Fastly has POPs in New Zealand
-- Fastlys POPs are Anycasted meaning that we avoid DNS propagation issues as
+- Fastlys POPs are Anycasted meaning that you avoid DNS propagation issues as
   the IP address and domain name remain static for clients
 - Fastly provides a global network of Anycasted POPs that provides good
   resiliency and availability at the CDN layer
-- Fastly provides an origin health check and failover feature, there are not
+- Fastly provides an origin health check and failover feature. There are not
   many other CDN providers who provide both the required services as a single
   solution
 - Fastly does origin health checks and failover per POP which provides the best
   failover behaviour. Only POPs that cannot reach the primary origin will
   failover
-- Anycast solutions like that provided by Fastly are an effective DDoS
-  mitigation tool that shields the origin servers from direct attack
-- Fastlys global network of POPs will improve site performance for users
+- Anycast solutions like that provided by Fastly are effective DDoS
+  mitigation tools that shield the origin servers from direct attack
+- Fastly's global network of POPs will improve site performance for users
   particularly those outside of New Zealand
 - You can prototype the solution without any financial outlay
 
@@ -129,19 +129,19 @@ Disadvantages of this solution include:
 Website setup
 =============
 
-Now that we understand what we are trying to achieve our first task is to setup
-our website in both regions, we are going to configure a simple Nginx webserver
-to serve the default Nginx webpage. As this tutorial is not focused on how to
-setup webservers we will configure the required stacks using the heat cloud
-orchestration system.
+Now that you understand what you are trying to achieve here, your first task is
+to set up your website in both regions. You are going to configure a simple
+Nginx webserver to serve the default Nginx webpage. As this tutorial is not
+focused on how to set up webservers, you will configure the required stacks
+using the Heat cloud orchestration system.
 
-It is beyond the scope of this tutorial to explain the syntax of writing heat
-templates, thus we will make use of a predefined example from the
+It is beyond the scope of this tutorial to explain the syntax of writing Heat
+templates, thus you will make use of a predefined example from the
 `catalystcloud-orchestration`_ git repository. For more information on writing
-heat templates please consult the documentation at :ref:`cloud-orchestration`.
+Heat templates, please consult the documentation at :ref:`cloud-orchestration`.
 
-Let's checkout the catalystcloud-orchestration repository which includes the
-heat templates we will be using:
+First, check out the catalystcloud-orchestration repository, which includes the
+Heat templates you will be using:
 
 .. _catalystcloud-orchestration: https://github.com/catalyst/catalystcloud-orchestration
 
@@ -151,27 +151,27 @@ heat templates we will be using:
 
 .. note::
 
- This heat template references an SSH key called ``nginx-demo-key``, you will need to change this to a key that already exists or upload a key with this name. This key needs to exist in both regions.
+ This heat template references an SSH key called ``nginx-demo-key``. You will need to change this to a key that already exists or upload a key with this name. This key needs to exist in both regions.
 
-Building the Nginx Stack in two regions using HEAT Templates
+Building the Nginx Stack in two regions using Heat templates
 ============================================================
 
-In order to demonstrate region failover we need to be running the service we
-wish to failover in both regions. To achieve this we will build two simple
+In order to demonstrate region failover, you need to be running the service we
+wish to failover in both regions. To achieve this, you will build two simple
 stacks running an Nginx webserver.
 
-Before we start, check that the template is valid:
+Before you start, check that the template is valid:
 
 .. code-block:: bash
 
  $ heat template-validate -f $ORCHESTRATION_DIR/hot/ubuntu-14.04/nginx-region-instance/nginx.yaml
 
 This command will echo the yaml if it succeeds and will return an error if it
-does not. Assuming the template validates let's build a stack.
+does not. Assuming the template validates, the next step is to build a stack.
 
 Heat templates cannot be used to build a stack in more than one region
-simultaneously so we will build a stack in each region individually. This heat
-template is configured for the Porirua region so lets start there:
+simultaneously, so you will build a stack in each region individually. This
+Heat template is configured for the Porirua region, so start there:
 
 .. code-block:: bash
 
@@ -182,8 +182,8 @@ template is configured for the Porirua region so lets start there:
  | 18d3a376-ac33-4740-a2d3-19879f4807af | nginx-por-stack | CREATE_IN_PROGRESS | 2015-11-12T20:19:42Z |
  +--------------------------------------+-----------------+--------------------+----------------------+
 
-As you can see the creation is in progress. You can use the ``event-list``
-command to check the progress of creation process:
+As you can see, the creation is in progress. You can use the ``event-list``
+command to check the progress of the creation process:
 
 .. code-block:: bash
 
@@ -237,10 +237,10 @@ Check the output of stack show:
  | updated_time         | None                                                                                                                                       |
  +----------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
 
-Once our stack status is ``CREATE_COMPLETE`` we can proceed to build our
-Wellington region stack. In order to build the Wellington region stack we will
-use the same template while overriding a number of parameters. We also need to
-change our ``OS_REGION_NAME`` environment variable to point at the Wellington
+Once your stack status is ``CREATE_COMPLETE`` you can proceed to build your
+Wellington region stack. To build the Wellington region stack, you will
+use the same template while overriding a number of parameters. You also need to
+change your ``OS_REGION_NAME`` environment variable to point at the Wellington
 region:
 
 .. code-block:: bash
@@ -250,26 +250,26 @@ region:
    --parameters "public_net_id=e0ba6b88-5360-492c-9c3d-119948356fd3;private_net_dns_servers=202.78.240.213,202.78.240.214,202.78.240.215;host_name=backup"
 
 Consult the output of the ``stack-show`` and ``resource-list`` commands to
-viewing the state of your stack:
+view the state of your stack:
 
 .. code-block:: bash
 
  $ heat stack-show nginx-wlg-stack
  $ heat resource-list nginx-wlg-stack
 
-We should now have a stack in each region which comprises an Nginx webserver
-serving identical content. When we begin to test region failover we are going
-to want to be able to see which region we are hitting. To help us do this a
-clound-init script was added to the HEAT template we ran previously, this
-script adds an ``Origin`` header to our Nginx configuration which we can use to
-see which region we are accessing.
+You should now have a stack in each region which comprises an Nginx webserver
+serving identical content. When you begin to test region failover, you will
+want to be able to see which region you are hitting. To help you do this, a
+clound-init script was added to the Heat template you ran previously. This
+script adds an ``Origin`` header to your Nginx configuration which you can use
+to see which region you are accessing.
 
-In addition to adding an Origin header we are also adding a ``Cache-Control``
-header that tells the varnish service on Fastlys POPs to not cache our content.
-This will let us observe the failover behaviour without needing to be aware of
-caching or to wait for cached version to pages to expire.
+In addition to adding an Origin header, you are also adding a ``Cache-Control``
+header that tells the Varnish service on Fastly's POPs to not cache your
+content. This will let you observe the failover behaviour without needing to be
+aware of caching or waiting for the cached version of pages to expire.
 
-Lets test this now:
+Test this now:
 
 .. code-block:: bash
 
@@ -301,14 +301,14 @@ Lets test this now:
  Cache-Control: max-age=0, no-store
  Accept-Ranges: bytes
 
-Now we are ready to configure Fastly to begin proxying for our site.
+Now you are ready to configure Fastly to begin proxying for your site.
 
 Fastly signup
 =============
 
-We need to `signup`_ to Fastly in order to configure our service. You can use
-the free developer trial to evaluate the service, you get $50 of traffic for
-free. After this you will be billed according the `pricing`_ plan you elect.
+You need to `signup`_ to Fastly in order to configure your service. You can use
+the free developer trial to evaluate the service: you get $50 of traffic for
+free. After this you will be billed according to the `pricing`_ plan you select.
 
 .. _signup: https://www.fastly.com/signup
 
@@ -322,37 +322,37 @@ Fastly basic configuration
  We will not be doing any DNS or HTTPS setup for the purposes of this demonstration.
 
 Please follow the Fastly documentation to `signup and create your first
-service`_ you can skip the final step of creating a CNAME for your domain if
+service`_. You can skip the final step of creating a CNAME for your domain if
 you do not wish to configure DNS.
 
 .. _signup and create your first service: https://docs.fastly.com/guides/basic-setup/sign-up-and-create-your-first-service
 
 Once you have signed up and logged in to the Fastly app using the verification
-link emailed to you you will be presented with a Quick Start wizard.
+link emailed to you, you will be presented with a Quick Start wizard.
 
 Name your service something like *Region Failover Test*.
 
-Add the IP address of your primary server, this should be available in the
+Add the IP address of your primary server: this should be available in the
 environment variable ``$PRIMARY_IP``.
 
-You will need to select a domain name for the service you can use the domain
+You will need to select a domain name for the service. You can use the domain
 ``www.failover.net.nz`` which does not exist at the time of writing. Fastly
 does not check if this domain is valid or if it belongs to you.
 
 .. image:: ../_static/rf-quickstart.png
    :align: center
 
-Click *Configure* and your site will be setup.
+Click *Configure* and your site will be set up.
 
-After 30 seconds or so you should be able to hit your site via the URL
+After 30 seconds or so, you should be able to hit your site via the URL
 provided:
 
 http://www.failover.net.nz.global.prod.fastly.net
 
 You should be presented with the default **Welcome to nginx!** being served up
-from our primary instance.
+from your primary instance.
 
-Lets verify this from the command line:
+To verify this from the command line:
 
 .. code-block:: bash
 
@@ -376,20 +376,20 @@ Lets verify this from the command line:
 
 .. note::
 
- When hitting Fastly we always need to specify a valid host header (``-H`` flag in curl). Fastly needs this header so it knows which origin site to proxy for.
+ When hitting Fastly, you always need to specify a valid host header (``-H`` flag in curl). Fastly needs this header so it knows which origin site to proxy for.
 
-Notice the additional headers that have been added by Fastly. We can see that
+Notice the additional headers that have been added by Fastly. You can see that
 Fastly uses the `varnish`_ cache from the ``Via: 1.1 varnish`` header.
-``X-Served-By`` indicates which Fastly node we are hitting. We can also see
-that Fastly is not caching any of our content from the ``X-Cache: MISS`` header
-this is expected due to the Cache-Control headers we have set in Nginx.
+``X-Served-By`` indicates which Fastly node you are hitting. You can also see
+that Fastly is not caching any of your content from the ``X-Cache: MISS`` header.
+This is expected due to the Cache-Control headers you have set in Nginx.
 
 .. _varnish: https://www.varnish-cache.org/
 
 Fastly backup backend configuration
 ===================================
 
-The next step is to configure our backup site. Click on the **configure** tab
+The next step is to configure your backup site. Click on the **configure** tab
 on the toolbar.
 
 .. image:: ../_static/rf-configure.png
@@ -400,31 +400,31 @@ Now click the Blue **Configure** button.
 .. image:: ../_static/rf-service.png
    :align: center
 
-Now we need to clone our current configuration by clicking on the **+ Clone**
-button. This will let us edit a cloned configuration which we can deploy once
-we are happy that it is sane and validates. Please see the Fastly `working with
-services`_ documentation form more information about service versions and their
-activation.
+Now you need to clone your current configuration by clicking on the **+ Clone**
+button. This will let you edit a cloned configuration which you can deploy once
+you are happy that it is sane and validates. Please see the Fastly `working
+with services`_ documentation for more information about service versions and
+their activation.
 
 .. _working with services: https://docs.fastly.com/guides/basic-setup/working-with-services#service-versions-and-their-activation
 
 .. image:: ../_static/rf-clone.png
    :align: center
 
-Lets setup our backup origin server as a Fastly Backend, Click the **Hosts**
-tab and click on the green **+ New** button to create a new backend.
+To set up your backup origin server as a Fastly backend, click the **Hosts**
+tab and click on the green **+ New** button.
 
 .. image:: ../_static/rf-new-backend.png
    :align: center
 
-Add a new backend called **backup** with the public IP address of our backup
+Add a new backend called **backup** with the public IP address of your backup
 instance which should be available in the ``$BACKUP_IP`` environment variable.
 Set **Auto Load Balance** to **No**.
 
 .. image:: ../_static/rf-new-backend-create.png
    :align: center
 
-Now lets edit the original backend, rename it **primary** and ensure that
+Now edit the original backend, rename it **primary** and ensure that
 **Auto Load Balance** is set to **No**.
 
 .. image:: ../_static/rf-edit-backend-update.png
@@ -433,7 +433,7 @@ Now lets edit the original backend, rename it **primary** and ensure that
 Fastly health check configuration
 =================================
 
-The next step is to configure a health check for our site, we will only be
+The next step is to configure a health check for your site. You will only be
 doing this for the primary instance. Click on the green **+ New** button to
 create a new **Health Check**. Name your check something like **Primary origin
 check** and provide an appropriate **Host Header** , use
@@ -443,10 +443,10 @@ setup. Change the **Check Frequency** to **Normal** and click **Create**.
 .. image:: ../_static/rf-health-check-create.png
    :align: center
 
-Now we need to assign this Health Check to our primary backend, Navigate to the
-**Backends** section under the **Hosts** menu item and edit the primary backend
-by selecting **edit** from tyhe gear menu. Select the health check that you
-just created in the **Health Check** dropdown for this backend:
+Now you need to assign this Health Check to your primary backend. Navigate to
+the **Backends** section under the **Hosts** menu item and edit the primary
+backend by selecting **edit** from the gear menu. Select the health check that
+you just created in the **Health Check** dropdown for this backend:
 
 .. image:: ../_static/rf-health-check-update.png
    :align: center
@@ -458,8 +458,8 @@ See the Fastly `health checks tutorial`_ for additional information.
 Fastly failover configuration
 =============================
 
-Now we are going to follow the Fastly `documentation for configuring a failover
-origin server`_.
+Now you are going to follow the Fastly `documentation for configuring a
+failover origin server`_.
 
 .. _documentation for configuring a failover origin server: https://docs.fastly.com/guides/performance-tuning/load-balancing-and-failover#configuring-a-failover-origin-server
 
@@ -471,7 +471,7 @@ This comprises three steps:
 3. Create a header condition that specifies exactly when to use the failover
    server
 
-We have already ensured that automatic load balancing is turned off, you can
+You have already ensured that automatic load balancing is turned off. You can
 check this if you are not sure.
 
 The next step is to create two new request headers, one each for our primary
@@ -496,7 +496,7 @@ prefixed with an ``F_``.
 .. image:: ../_static/rf-headers-primary-create.png
    :align: center
 
-Now we will repeat the process to create a header for the backup:
+Now you will repeat the process to create a header for the backup:
 
 - Set **Name** to **Set backup backend**
 - Set **Type / Action** to **Request / Set**
@@ -509,7 +509,7 @@ Now we will repeat the process to create a header for the backup:
    :align: center
 
 The final step is to configure a header condition that specifies exactly when
-to use the failover server. To do this click on the gear icon next to the **Set
+to use the failover server. To do this, click on the gear icon next to the **Set
 backup backend** Header and select **Request Conditions**:
 
 .. image:: ../_static/rf-headers-request-conditions.png
@@ -524,11 +524,11 @@ Fill out this form with the following:
 .. image:: ../_static/rf-headers-condition-create.png
    :align: center
 
-We have now completed our setup, our final task is to check that the
-configuration we have built is valid and if it is we need to apply it.
+You have now completed your setup. Your final task is to check that the
+configuration you have built is valid, and if it is, you need to apply it.
 
-Ensure that our configuration version is shown to be valid by checking the VCL
-status in the top right corner, if it is click **Activate**, if not you will
+Ensure that your configuration version is shown to be valid by checking the VCL
+status in the top right corner. If it is, click **Activate**. If not, you will
 need to go back and check you have followed all the instructions correctly to
 this point.
 
@@ -538,7 +538,7 @@ this point.
 Testing Region Failover
 =======================
 
-In order to test region failover we will log in to our primary server and issue
+To test region failover, you will log in to your primary server and issue
 the following commands:
 
 .. code-block:: bash
@@ -549,9 +549,9 @@ the following commands:
  ubuntu@primary:~$ sudo service nginx start
  ubuntu@primary:~$ logout
 
-At the same time we will run curl in a loop hitting the Fastly frontend. Note
-the addition of the two commented lines in the output, these lines indicate
-when the nginx stop and start commands are executed.
+At the same time, you will run cURL in a loop, hitting the Fastly frontend.
+Note the addition of the two commented lines in the output: these lines
+indicate when the nginx stop and start commands are executed.
 
 .. code-block:: bash
 
@@ -570,19 +570,19 @@ when the nginx stop and start commands are executed.
 
 .. note::
 
- There is a small amount of downtime when the primary is not available and Fastly has not yet switched as the threshold for switching has not been reached. This window can be made shorter by increasing the Fastly Health Check Frequency. Also note that we have explicitly disabled caching for the purposes of this demonstration, in normal operations Fastly will continue to serve cached content during this window.
+ There is a small amount of downtime when the primary is not available and Fastly has not yet switched as the threshold for switching has not been reached. This window can be made shorter by increasing the Fastly Health Check Frequency. Also note that you have explicitly disabled caching for the purposes of this demonstration. In normal operations, Fastly will continue to serve cached content during this window.
 
 Restrict HTTP access to fastly nodes
 ====================================
 
-To finish we are going to restrict HTTP access to fastly nodes. As Fastly is
-proxying for our site there is no need for users to hit the site directly.
-Restricting access to Fastly address ranges provides DDoS resiliency for our
+To finish, you are going to restrict HTTP access to fastly nodes. As Fastly is
+proxying for your site, there is no need for users to hit the site directly.
+Restricting access to Fastly address ranges provides DDoS resiliency for your
 site.
 
 .. note::
 
- We are using the `jq`_ utility to parse the json returned by https://api.fastly.com/public-ip-list. If you do not have jq it is highly reccomended. If you cannot use jq an alternative command is provided.
+ You are using the `jq`_ utility to parse the json returned by https://api.fastly.com/public-ip-list. If you do not have jq, it is highly recommended. If you cannot use jq, an alternative command is provided.
 
 .. _jq: https://stedolan.github.io/jq/
 

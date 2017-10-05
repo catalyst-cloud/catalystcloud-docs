@@ -4,18 +4,18 @@ Deploying Highly Available instances with Keepalived
 
 This tutorial assumes you have installed the OpenStack command line tools and
 sourced an openrc file, as explained at :ref:`command-line-interface`. We also
-assume that you have uploaded a ssh key as explained at
+assume that you have uploaded an SSH key, as explained at
 :ref:`uploading-an-ssh-key`.
 
 
 Introduction
 ============
 
-In this tutorial you will learn how to deploy a highly available instance pair
-using VRRP. This tutorial is largely based from a `blog post`_ by Aaron O'Rosen
-with modifications appropriate for Catalysts cloud. Networks and names have
-been kept largely compatible with the source material. Additionally information
-about configuring ``allowed_address_pairs`` in heat was sourced from this
+In this tutorial, you will learn how to deploy a highly available instance pair
+using VRRP. This tutorial is largely based on a `blog post`_ by Aaron O'Rosen
+with modifications appropriate for the Catalyst Cloud. Networks and names have
+been kept largely compatible with the source material. Additional information
+about configuring ``allowed_address_pairs`` in Heat was sourced from this
 `post`_.
 
 .. _blog post: http://blog.aaronorosen.com/implementing-high-availability-instances-with-neutron-using-vrrp/
@@ -23,34 +23,34 @@ about configuring ``allowed_address_pairs`` in heat was sourced from this
 .. _post: https://www.hastexo.com/blogs/syed/2014/08/05/orchestrating-highly-available-load-balancers-openstack-heat
 
 
-We will be using two different methods to setup this stack. Initially we will
+You will be using two different methods to set up this stack. Initially you will
 use the ``openstack`` command line tool to complete the setup
-manually. We will then replicate the manual configuration using a ``heat``
+manually. You will then replicate the manual configuration using a ``heat``
 template to instantiate the same stack automatically.
 
 .. note::
 
   Due to some functionality not yet being available in the ``openstack``
-  command line tool it is still necessary to use the ``neutron`` & ``nova``
+  command line tool, it is still necessary to use the ``neutron`` & ``nova``
   tools for certain operations.
 
 Virtual Router Redundancy Protocol
 ==================================
 `VRRP`_ provides hardware redundancy and automatic failover for routers. It
 allows specifying a virtual router which maps to two or more physical routers.
-Individual VRRP router instances share an IP address but at any time, only one
-of the instances is the master (active), the other instances are backups and
+Individual VRRP router instances share an IP address, but at any time, only one
+of the instances is the master (active); the other instances are backups and
 will not respond using the virtual address. If the master fails, one of the
 backups is elected as the new master and will begin to respond on the virtual
 address.
 
-Instances use priorities from 1 (lowest) through 255 (highest), devices running
+Instances use priorities from 1 (lowest) to 255 (highest). Devices running
 VRRP dynamically elect master and backup routers based on their respective
 priorities. Only the router that is acting as the master sends out VRRP
 advertisements at any given point in time. The master router sends
-advertisements to backup routers at regular intervals (default 1 second). If a
-backup router does not receive an advertisement for a set period, the backup
-router with the next highest priority takes over as master and begins
+advertisements to backup routers at regular intervals (default is every second).
+If a backup router does not receive an advertisement for a set period, the
+backup router with the next highest priority takes over as master and begins
 forwarding packets.
 
 VRRP instances communicate using packets with multicast IP address 224.0.0.18
@@ -64,24 +64,24 @@ and IP protocol number 112. The protocol is defined in `RFC3768`_.
 
  There is an extension to VRRP that uses IPSEC-AH (IP protocol 51) for
  integrity (see http://www.keepalived.org/draft-ietf-vrrp-ipsecah-spec-00.txt).
- This tutorial will demostrate using standard VRRP. See this `article`_ for
+ This tutorial will demonstrate using standard VRRP. See this `article`_ for
  more information on securing VRRP.
 
 .. _article: http://louwrentius.com/configuring-attacking-and-securing-vrrp-on-linux.html
 
 .. warning::
 
- A neutron bug that causes DHCP agents to reject previously held DHCP leases for instances
+ A Neutron bug that causes DHCP agents to reject previously held DHCP leases for instances
  after they have been migrated to another node has been discovered. The DHCP agent responds
  with a DHCPNAK message to instances trying to renew their leases after the agent has been
  migrated. The DHCPNAK message forces the instances to release the IP addresses assigned to
- them by the DHCP agent and  re-negotiate the DHCP handshake process all over again. A keepalived
+ them by the DHCP agent and re-negotiate the DHCP handshake process all over again. A keepalived
  master instance that receives a DHCPNAK message when attempting to renew the lease for the IP
  addresses on its primary interface would release all IP addresses including the virtual IP addresses
  associated with the interface, and this would not be noticed by the keepalived backup instance because
- the failure time is much shorter than the keepalived advertisement interval thus leaving the virtual
- IP address unmanaged and unattached to any of the keepalived instances until the keepalived daemon on
- the master instance is restarted.
+ the failure time is much shorter than the keepalived advertisement interval, thus leaving the virtual
+ IP address unmanaged and unattached to any of the keepalived instances until the keepalived daemon
+ on the master instance is restarted.
 
  While we work on getting this bug fixed, we would recommend that users create new keepalived instances
  and update existing keepalived instances to use fixed IP on their interfaces.
@@ -91,7 +91,7 @@ Allowed Address Pairs
 
 Allowed Address Pairs is a Neutron Extension that extends the port attribute to
 enable you to specify arbitrary ``mac_address/ip_address(cidr)`` pairs that are
-allowed to pass through a port regardless of the subnet associated with the
+allowed to pass through a port, regardless of the subnet associated with the
 network.
 
 Let's double check that this extension is available on the Catalyst Cloud:
@@ -134,9 +134,9 @@ As you can see, the Allowed Address Pairs extension is available.
 Clone Orchestration Git Repository
 ==================================
 
-Before we start let's checkout the
-https://github.com/catalyst/catalystcloud-orchestration git repository. We will
-be using some scripts and heat templates from this repository in this tutorial.
+Before you start you should check out the
+https://github.com/catalyst/catalystcloud-orchestration git repository. You will
+be using some scripts and Heat templates from this repository in this tutorial.
 
 .. code-block:: bash
 
@@ -145,7 +145,7 @@ be using some scripts and heat templates from this repository in this tutorial.
 Network Setup
 =============
 
-Let's create a network called ``vrrp-net`` where we can run our highly
+First, create a network called ``vrrp-net`` where you can run your highly
 available hosts:
 
 .. code-block:: bash
@@ -167,10 +167,10 @@ available hosts:
  +-----------------+--------------------------------------+
 
 
-Now let's set up a subnet of the network we have just created. We are going to
-do this so we can use part of the ``vrrp-net`` as a dynamically assigned pool
+Next, set up a subnet of the network you have just created. You are going to
+do this so you can use part of the ``vrrp-net`` as a dynamically assigned pool
 of addresses and reserve the rest of the addresses for manual assignment. In
-this case the pool addresses are in the range 2-200 while the remainder of the
+this case, the pool addresses are in the range 2-200, while the remainder of the
 ``/24`` will be statically assigned.
 
 .. code-block:: bash
@@ -197,8 +197,8 @@ this case the pool addresses are in the range 2-200 while the remainder of the
  +-------------------+--------------------------------------+
 
 
-Next we will create a router, we will give this router an interface on our new
-subnet and we will set its gateway as our public network:
+Now you will create a router. You will give this router an interface on your new
+subnet and set its gateway as your public network:
 
 .. code-block:: bash
 
@@ -225,10 +225,10 @@ subnet and we will set its gateway as our public network:
 .. note::
 
  * The previous command uses the old ``neutron`` command rather than the ``openstack`` command as setting router gateways is not yet implemented in the new client.
- * If you look at the ports created at this point using the ``openstack port list -c ID -c 'Fixed IP Addresses'`` command you will notice three interfaces have been created. The ip 10.0.0.1 is the gateway address while 10.0.0.2 and 10.0.0.3 provide DHCP for this network.
+ * If you look at the ports created at this point using the ``openstack port list -c ID -c 'Fixed IP Addresses'`` command you will notice three interfaces have been created. The IP 10.0.0.1 is the gateway address while 10.0.0.2 and 10.0.0.3 provide DHCP for this network.
  * Note the DNS nameservers, gateway address, subnet mask and allocation pool of the subnet from the ``openstack subnet create`` command.
 
-Next we will create ports with a fixed IP for our new keepalived instances:
+Next you will create ports with a fixed IP for your new keepalived instances:
 
 To find the correct subnet and network ID use the following commands
 
@@ -251,8 +251,8 @@ Then create the ports with your preferred IP addresses
 Security Group Setup
 ====================
 
-Now we will create the ``vrrp-sec-group`` security group with rules to
-allow http, ssh and icmp ingres:
+Now create the ``vrrp-sec-group`` security group with rules to
+allow HTTP, SSH and ICMP ingress:
 
 .. code-block:: bash
 
@@ -322,7 +322,7 @@ allow http, ssh and icmp ingres:
  +-------------------+--------------------------------------+
 
 
-Next we will add a rule to allow our Keepalived instances to communicate with
+Next you will add a rule to allow your Keepalived instances to communicate with
 each other via VRRP broadcasts:
 
 .. code-block:: bash
@@ -348,10 +348,10 @@ each other via VRRP broadcasts:
 Instance Creation
 =================
 
-The next step is to boot two instances where we will run Keepalived and Apache.
-We will be using the Ubuntu 14.04 image and ``c1.c1r1`` flavour. We will assign
-these instances to the ``vrrp-sec-group`` security group. We will also provide
-the name of our SSH key so we can login to these machines via SSH once they are
+The next step is to boot two instances where you will run Keepalived and Apache.
+You will be using the Ubuntu 14.04 image and ``c1.c1r1`` flavour. You will assign
+these instances to the ``vrrp-sec-group`` security group. You will also provide
+the name of your SSH key so you can log in to these machines via SSH once they are
 created:
 
 .. note::
@@ -384,9 +384,9 @@ To find the correct IDs you can use the following commands:
  | vrrp-demo-key    | <SSH_KEY_FINGERPRINT>                           |
  +------------------+-------------------------------------------------+
 
-We will be passing a script to our instance boot command using the
-``--user-data`` flag. This script sets up Keepalived and Apache on our master
-and backup instances. This saves us having to execute these commands manually.
+You will be passing a script to our instance boot command using the
+``--user-data`` flag. This script sets up Keepalived and Apache on your master
+and backup instances. This saves you from having to execute these commands manually.
 This script is located in the git repository you cloned previously at
 :ref:`clone-orchestration-repo`.
 
@@ -449,7 +449,7 @@ This script is located in the git repository you cloned previously at
  echo "$HOSTNAME" > /var/www/html/index.html
  service keepalived restart
 
-Let's run the boot command (you will need to substitute your SSH key name and
+Run the boot command (you will need to substitute your SSH key name and
 path to the ``vrrp-setup.sh`` script):
 
 .. code-block:: bash
@@ -492,7 +492,7 @@ path to the ``vrrp-setup.sh`` script):
  $ openstack server create --image $VRRP_IMAGE_ID --flavor $VRRP_FLAVOR_ID --nic port-id=$VRRP_BACKUP_PORT \
  --security-group vrrp-sec-group --user-data vrrp-setup.sh --key-name vrrp-demo-key vrrp-backup
 
-Let's check the instances have been created:
+Check the instances have been created:
 
 .. code-block:: bash
 
@@ -509,7 +509,7 @@ Let's check the instances have been created:
 Virtual Address Setup
 =====================
 
-The next step is to create the IP address that will be used by our virtual
+The next step is to create the IP address that will be used by your virtual
 router:
 
 .. code-block:: bash
@@ -537,7 +537,7 @@ router:
  +-----------------------+---------------------------------------------------------------------------------------------+
 
 
-Now we need to create a floating IP and point it to our virtual router IP using
+Now you need to create a floating IP and point it to your virtual router IP using
 its port ID:
 
 .. code-block:: bash
@@ -560,7 +560,7 @@ its port ID:
  +---------------------+--------------------------------------+
 
 
-Next up we update the ports associated with each instance to allow the virtual
+Next, you update the ports associated with each instance to allow the virtual
 router IP as an ``allowed-address-pair``. This will allow them to send traffic
 using this address.
 
@@ -604,7 +604,7 @@ Check that the virtual router address is associated with this port under
  | tenant_id             | 0cb6b9b744594a619b0b7340f424858b                                                |
  +-----------------------+---------------------------------------------------------------------------------+
 
-We should now have a stack that looks something like this:
+You should now have a stack that looks something like this:
 
 .. image:: ../_static/vrrp-network.png
    :align: center
@@ -640,7 +640,7 @@ the port ID of the instances and update the port:
 
  $ neutron port-update $VRRP_BACKUP_PORT --request-format=json --fixed-ips type=dict list=true subnet_id=$VRRP_SUBNET_ID,ip_address=10.0.0.5
 
-Then login to the instances and edit their network interfaces and resolv.conf files:
+Then log in to the instances and edit their network interfaces and resolv.conf files:
 
 .. code-block:: bash
 
@@ -667,8 +667,8 @@ Then login to the instances and edit their network interfaces and resolv.conf fi
 VRRP Testing
 ============
 
-We should now have a working VRRP setup so let's try it out! We should be able
-to curl the floating IP associated with our virtual router:
+You should now have a working VRRP setup, so try it out! You should be able
+to curl the floating IP associated with your virtual router:
 
 .. code-block:: bash
 
@@ -677,8 +677,8 @@ to curl the floating IP associated with our virtual router:
  $ curl $VRRP_FLOATING_IP
  vrrp-master
 
-As you can see we are hitting the master instance. Let's take down the port the
-virtual router address is configured on on the master to test that we failover
+As you can see, you are hitting the master instance. Take down the port the
+virtual router address is configured on on the master to test that you failover
 to the backup:
 
 .. code-block:: bash
@@ -697,9 +697,9 @@ Curl again:
 Instance Access
 ===============
 
-If we want to take a closer look at what is happening when we switch between
-VRRP hosts we need to SSH to the instances. We won't use the floating IP
-associated with our virtual router, as that will be switching between instances
+If you want to take a closer look at what is happening when you switch between
+VRRP hosts, you need to SSH to the instances. You won't use the floating IP
+associated with your virtual router, as that will be switching between instances,
 which will make our SSH client unhappy. Consequently, we will assign a floating
 IP to each instance for SSH access.
 
@@ -737,12 +737,12 @@ IP to each instance for SSH access.
  +---------------------+--------------------------------------+
 
 
-Now we can SSH to our instances. We will connect using the default ``ubuntu``
+Now you can SSH to your instances. You will connect using the default ``ubuntu``
 user that is configured on Ubuntu cloud images. You will need to substitute the
 correct floating IP address.
 
 You can tail syslog in order to see what keepalived is doing. For example, here
-we can see the backup instance switch from backup to master state:
+you can see the backup instance switch from backup to master state:
 
 .. code-block:: bash
 
@@ -768,7 +768,7 @@ You can also watch the VRRP traffic on the wire with this command:
 
 You can see the VRRP advertisements every second.
 
-If you bring the master port back up at this point you will be able to see the
+If you bring the master port back up at this point, you will be able to see the
 master node switch from the backup instance to the master instance:
 
 .. code-block:: bash
@@ -785,17 +785,17 @@ on ``vrrp-backup``:
  05:30:11.774311 IP 10.0.0.4 > 224.0.0.18: VRRPv2, Advertisement, vrid 1, prio 100, authtype simple, intvl 1s, length 20
  05:30:12.775156 IP 10.0.0.4 > 224.0.0.18: VRRPv2, Advertisement, vrid 1, prio 100, authtype simple, intvl 1s, length 20
 
-At this point we have successfully setup Keepalived with automatic failover
-between instances. If this is all that you require for your setup so you can
+At this point you have successfully set up Keepalived with automatic failover
+between instances. If this is all that you require for your setup, you can
 stop here.
 
 Resource Cleanup
 ================
 
-At this point many people will want to cleanup the OpenStack resources we have
+At this point many people will want to clean up the OpenStack resources you have
 been using in this tutorial. Running the following commands should remove all
 networks, routers, ports, security groups and instances. Note that the order
-you delete resources is important.
+in which you delete resources is important.
 
 .. code-block:: bash
 
@@ -823,25 +823,25 @@ you delete resources is important.
  $ neutron security-group-delete vrrp-sec-group
 
 
-Setup Using HEAT Templates
+Setup Using Heat Templates
 ==========================
 
-Up to this point in this tutorial we have been using the Nova and Neutron
-command line clients to setup our system. We have needed to run a large number
-of different commands in the right order. It would be nice if we could define
+Up to this point in this tutorial, you have been using the Nova and Neutron
+command line clients to set up our system. You have needed to run a large number
+of different commands in the right order. It would be nice if you could define
 the entire setup in one configuration file and ask OpenStack to create that
-setup based on our blueprint.
+setup based on your blueprint.
 
-OpenStack provides just such an orchestration system which is known as heat. In
-this section we will run heat in order to recreate the stack we have created
-manually using a single command.
+OpenStack provides just such an orchestration system, known as Heat. In
+this section, you will run Heat, in order to recreate with a single command
+the stack you previously created manually.
 
-It is beyond the scope of this tutorial to explain the syntax of writing heat
-templates, thus we will make use of a predefined example from the
-cloud-orchestration repository. For more information on writing heat templates
+It is beyond the scope of this tutorial to explain the syntax of writing Heat
+templates, thus you will make use of a predefined example from the
+cloud-orchestration repository. For more information on writing Heat templates
 please consult the documentation at :ref:`cloud-orchestration`.
 
-That said, there are a number of parts of the heat template we should have a
+That said, there are a number of parts of the Heat template you should have a
 look at in more detail. The template is located in the
 ``catalystcloud-orchestration`` repository we cloned earlier.
 
@@ -859,7 +859,7 @@ The first thing to note is the Security Group rule for VRRP traffic:
    remote_mode: remote_group_id
 
 Note that the ``remote_mode`` is set to ``remote_group_id`` and
-``remote_group_id`` is not set. If no value is set then the rule uses the
+``remote_group_id`` is not set. If no value is set, then the rule uses the
 current security group (`heat documentation`_).
 
 .. _heat documentation: http://docs.openstack.org/developer/heat/template_guide/openstack.html#OS::Neutron::SecurityGroup-props
@@ -919,15 +919,15 @@ required so that cloud init will setup the ``ubuntu`` user correctly (see this
 __ http://blog.scottlowe.org/2015/04/23/ubuntu-openstack-heat-cloud-init/
 
 The ``allowed_address_pairs`` section associates the shared VRRP address with
-the instance port. We are explicitly setting the port IP address to
-``10.0.0.4``. This is not required, we are doing it in order to stay consistent
-with the manual configuration. If we do not set it we cannot control which IPs
-are assigned to instances and which are assigned for DCHP. If we don't set
-these the assigned addresses will be inconsistent across heat invocations.
+the instance port. You are explicitly setting the port IP address to
+``10.0.0.4``. This is not required; you are doing it in order to stay consistent
+with the manual configuration. If you do not set it, you cannot control which
+IPs are assigned to instances and which are assigned for DCHP. If you don't
+set these, the assigned addresses will be inconsistent across Heat invocations.
 
 This configuration is mirrored for the backup instance.
 
-Building the VRRP Stack using HEAT Templates
+Building the VRRP Stack using Heat Templates
 ============================================
 
 Before we start, check that the template is valid:
@@ -937,7 +937,7 @@ Before we start, check that the template is valid:
  $ openstack orchestration template validate -t $ORCHESTRATION_DIR/hot/ubuntu-14.04/vrrp-basic/vrrp.yaml
 
 This command will echo the yaml if it succeeds and will return an error if it
-does not. Assuming the template validates let's build a stack
+does not. Assuming the template validates, build a stack:
 
 .. code-block:: bash
 
@@ -957,7 +957,7 @@ does not. Assuming the template validates let's build a stack
 
 As you can see the creation is in progress. You can use the ``openstack stack
 event list`` or ``openstack stack resource list`` commands to check the
-progress of creation process:
+progress of the creation process:
 
 .. code-block:: bash
 
@@ -1011,7 +1011,7 @@ progress of creation process:
  | vrrp_shared_port               | OS::Neutron::Port            | CREATE_COMPLETE |
  +--------------------------------+------------------------------+-----------------+
 
-If you prefer to create this stack in the Wellington region you
+If you prefer to create this stack in the Wellington region, you
 can modify the appropriate parameters on the command line:
 
 .. code-block:: bash
@@ -1029,8 +1029,8 @@ viewing the state of your stack. Give them a go:
  $ openstack stack resource list vrrp-stack
 
 
-Once all resources in your stack are in the ``CREATE_COMPLETE`` state you are
-ready to re-run the tests as described under :ref:`vrrp-testing`. The neturon
+Once all resources in your stack are in the ``CREATE_COMPLETE`` state, you are
+ready to re-run the tests as described under :ref:`vrrp-testing`. The Neutron
 ``floatingip-list`` command will give you the IP addresses and port IDs you
 need:
 
@@ -1038,11 +1038,11 @@ need:
 
  $ openstack floating ip list
 
-If you wish you can SSH to the master and backup instances as described under
+If you wish, you can SSH to the master and backup instances as described under
 :ref:`instance-access`.
 
-Once satisfied with the configuration we can cleanup and get back to
-our original state:
+Once satisfied with the configuration, you can clean up and get back to
+your original state:
 
 .. code-block:: bash
 

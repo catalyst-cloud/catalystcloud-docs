@@ -6,9 +6,9 @@ This tutorial shows you how to build and test a simple Kubernetes cluster on
 the Catalyst Cloud.
 
 `Kubernetes`_ is a set of tools for orchestrating and managing an arbitrary
-number of containers, that maybe organised as services.  The user interface
-for managing these clusters are abstracted away from the underlying compute
-and storage resources leaving that up to the master resource scheduler.
+number of containers, that may be organised as services. The user interface
+for managing these clusters is abstracted away from the underlying compute
+and storage resources, leaving that up to the master resource scheduler.
 
 .. _Kubernetes: https://kubernetes.io/
 
@@ -26,7 +26,7 @@ provides a convenient way of separating and scheduling virtual environments
 such as Dev, Test, and Prod within the same infrastructure if desired.
 
 The fundamental unit of a Pod is driven by the `Docker`_ container engine. This
-gives the advantage of portability of application development between a vanila
+gives the advantage of portability of application development between a vanilla
 Docker environment and Kubernetes orchestration.
 
 .. _Docker: https://www.docker.com
@@ -38,7 +38,7 @@ This tutorial assumes a number of things:
 
 * You are familiar with Docker and Kubernetes and its use case and wish to
   make use of Catalyst Cloud compute instances to run Kubenetes
-* You are familiar with basic usage of the Catalyst Cloud (e.g. you have
+* You are familiar with basic usage of the Catalyst Cloud (i.e. you have
   created your first instance as described at
   :ref:`launching-your-first-instance`)
 * You will be setting up a cluster of Ubuntu 14.04 instances
@@ -47,12 +47,12 @@ This tutorial assumes a number of things:
 
 
 
-Installing a Kubernetes Cluster
+Installing a Kubernetes cluster
 ===============================
 
 This repo guides you through the process of setting up your own Kubernetes
-Cluster on your existing OpenStack Cloud using its Orchestration Service Heat.
-This Kubernetes Cluster is a Proof of Concept.
+cluster on your existing OpenStack Cloud using its Orchestration Service, Heat.
+This Kubernetes cluster is a proof of concept.
 
 
 Technology involved:
@@ -66,23 +66,23 @@ Technology involved:
 Architecture
 ------------
 
-The provisioned Cluster consists of 5 VMs. The first one, discovery, is a
+The provisioned Cluster consists of five VMs. The first one, discovery, is a
 dedicated etcd host. This allows easy etcd discovery thanks to a static
 IP-Address.
 
-A Kubernetes Master host is setup with the Kubernetes components apiserver,
+A Kubernetes Master host is set up with the Kubernetes components apiserver,
 scheduler, kube-register, controller-manager, kubelet as well as proxy.
-This machine also gets a floating IP assigned and acts as a access point to
-your Kubernetes cluster.  The master also acts as a minion which can be handy
+This machine also gets a floating IP assigned and acts as an access point to
+your Kubernetes cluster. The master also acts as a minion, which can be handy
 for special case Pods that need specific dedicated storage etc.
 
-Three further Kubernetes Minion hosts are setup with the Kubernetes components
+Three further Kubernetes minion hosts are setup with the Kubernetes components
 kubelet and proxy.
 
-Start the Cluster
+Start the cluster
 -----------------
 
-This Template was written for and tested on OpenStack Kilo.  The architecture
+This Template was written for and tested on OpenStack Kilo. The architecture
 is broken into three main stack components:
 
 * Kubernetes network - a dedicated private network that the cluster runs on
@@ -114,12 +114,12 @@ http://kubernetes.io/docs/user-guide/prereqs/ and test with:
 
 
 This will display the client version information and complain about the server
-as we don't have one yet.
+as you don't have one yet.
 
-Next, setup your ssh agent so that when it comes time to make the tunnel for
+Next, set up your SSH agent, so that when it comes time to make the tunnel for
 kubectl to reach the Kubernetes API, there will be no key issues.
 
-Setup the agent, and add the key that will be used for access to the cluster
+Set up the agent, and add the key that will be used for access to the cluster
 hosts:
 
 .. code-block:: bash
@@ -129,7 +129,7 @@ hosts:
 
 
 Following this, you will need to set the Open Stack environment (even if you
-have already done this, do it again as ssh-agent bash has reset ENV).
+have already done this, do it again, as ssh-agent bash has reset ENV).
 Re-source the rc file eg:
 
 .. code-block:: bash
@@ -153,14 +153,14 @@ Execution
 ---------
 
 The entire process of running the cluster build is driven through using make
-configured with a Makefile.  While make is calling the appropriate heat
+configured with a Makefile. While make is calling the appropriate Heat
 stack-create commands, as would normally be done manually, it also helps ensure
 the order of execution, and monitors the completion of each step before
 continuing with the next process.
 
-It is necessary to pass atleast one parameter to the make process, of the
-KEY_PAIR.  This is the same key file name (without the .pem) as used in the
-environment setup above.  Check the other default values in the
+It is necessary to pass at least one parameter to the make process, of the
+KEY_PAIR. This is the same key file name (without the .pem) as used in the
+environment setup above. Check the other default values in the
 templates/environment.yaml file (don't worry about NET_ID as it will be
 substituted by the build process).
 
@@ -300,9 +300,9 @@ The output will be something similar to the following:
  "150.242.xxx.xxx"
 
 
-All 5 stacks need to show CREATE_COMPLETE.  On top of this, as the cloud-init
+All five stacks need to show CREATE_COMPLETE. On top of this, as the cloud-init
 scripts for each host completes, each will be rebooted and need to settle into
-the cluster.  This may take a few minutes (actually 5-10) before Kubernetes is
+the cluster. It may take a few minutes (actually 5-10) before Kubernetes is
 up and running, so best to have a cup of tea at this stage.
 
 Next Steps
@@ -340,13 +340,13 @@ executed.
 Test it
 -------
 
-To verify that the Cluster is up, list all minions:
+To verify that the cluster is up, list all minions:
 
 .. code-block:: bash
 
  $ kubectl get nodes
 
-It should show you 4 minions (10.101.1.12 is the master):
+It should show you four minions (10.101.1.12 is the master):
 
 .. code-block:: bash
 
@@ -357,8 +357,8 @@ It should show you 4 minions (10.101.1.12 is the master):
  10.101.1.25   kubernetes.io/hostname=10.101.1.25   Ready     14m
 
 
-Setup cluster DNS
------------------
+Set up cluster DNS
+-------------------
 
 .. code-block:: bash
 
@@ -416,12 +416,12 @@ again.
 Further examples
 ----------------
 
-For further Kubernetes examples have a look at the `guestbook examples`_ .
+For further Kubernetes examples, have a look at the `guestbook examples`_ .
 
 .. _guestbook examples: https://github.com/kubernetes/kubernetes/blob/master/examples/guestbook/README.md
 
 
-Expanding your Minions!
+Expanding your minions!
 -----------------------
 
 More minion worker nodes can be created by specifying a start and stop range -
@@ -431,8 +431,8 @@ eg:
 
  $ make build_minions START=4 FINISH=5 KEY_PAIR=<your-key-pair>
 
-This will give you two new nodes.  Test that they have joined the cluster
-(after  an appropriate wait for the cloud-init build and reboot to complete):
+This will give you two new nodes. Test that they have joined the cluster
+(after an appropriate wait for the cloud-init build and reboot to complete):
 
 .. code-block:: bash
 
@@ -446,7 +446,7 @@ This will give you two new nodes.  Test that they have joined the cluster
  10.101.1.27   kubernetes.io/hostname=10.101.1.27   NotReady   1m
 
 You may see a NotReady status for a new node - this should mean that it is up
-but has not settled into the cluster yet.  Wait and check again.
+but has not settled into the cluster yet. Wait and check again.
 
 
 Cleaning Up

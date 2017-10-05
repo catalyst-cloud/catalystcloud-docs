@@ -3,7 +3,7 @@ Downloading compute instance's volume(s)
 ########################################
 
 Volumes can be copied from the block storage service to the image service and
-downloaded using the glance client.
+downloaded using the Glance client.
 
 This tutorial assumes you have installed the OpenStack command line tools and
 sourced an openrc file, as explained on :ref:`command-line-interface`.
@@ -30,8 +30,8 @@ attached to an instance (active) or not.
 Uploading a detached (inactive) volume
 --------------------------------------
 
-With thos command ``openstack image create --volume <volume-name-or-id>
-<image-name>`` detached volume can be uploaded to the image service:
+With the command ``openstack image create --volume <volume-name-or-id>
+<image-name>``, a detached volume can be uploaded to the image service:
 
 .. code-block:: bash
 
@@ -58,7 +58,7 @@ Uploading an attached (active) volume
 
 To upload an active volume (a volume that is currently attached to a compute
 instance and in use), you must first take a snapshot of the volume using the
-``openstack snapshot create`` command and then create a new (inactive) volume from
+``openstack snapshot create`` command, then create a new (inactive) volume from
 it using the ``cinder volume-create`` command.
 
 To take a snapshot of an active volume:
