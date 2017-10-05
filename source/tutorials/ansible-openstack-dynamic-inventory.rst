@@ -16,7 +16,7 @@ This tutorial assumes the following:
 Introduction
 ============
 
-In order for Ansible to run playbooks and tasks it needs to know which machines
+In order for Ansible to run playbooks and tasks, it needs to know which machines
 to operate on. The standard way that Ansible achieves this is to use an
 `inventory file`_ which lists the hosts and groups that playbooks will run
 against. This inventory is a plain text ini file that lives at
@@ -34,7 +34,7 @@ format that Ansible understands.
 .. _Dynamic inventory: http://docs.ansible.com/ansible/intro_dynamic_inventory.html
 
 The Ansible project has an OpenStack dynamic inventory script available which
-we can make use of to integrate Ansible with the Catalyst Cloud. This allows us
+we can use to integrate Ansible with the Catalyst Cloud. This allows us
 to use Ansible for configuration management of Catalyst Cloud instances
 irrespective of what method has been used to create those instances.
 
@@ -89,8 +89,8 @@ or if you have ``jq`` installed:
  example-instance-02
  example-instance-01
 
-Now that we have the inventory script working we can use it in a playbook, we
-are going to use the following playbook:
+Now that you have the inventory script working, you can use it in a playbook.
+You are going to use the following playbook:
 
 .. code-block:: yaml
 
@@ -104,7 +104,7 @@ are going to use the following playbook:
      - name: Test connection to instance
        ping:
 
-Lets run this playbook with the dynamic inventory:
+Let's run this playbook with the dynamic inventory:
 
 .. code-block:: bash
 
@@ -129,7 +129,7 @@ Lets run this playbook with the dynamic inventory:
  If you have replaced ``/etc/ansible/inventory`` then you don't need to call ``ansible-playbook`` with the ``-i`` flag.
 
 You will notice in the output above that the inventory script is passing
-instance IDs as the hostname. If you would prefer to use instance names you can
+instance IDs as the hostname. If you would prefer to use instance names, you can
 create a ``/etc/ansible/openstack.yml`` file with the following content:
 
 .. code-block:: yaml
@@ -142,7 +142,7 @@ create a ``/etc/ansible/openstack.yml`` file with the following content:
 
  The ``expand_hostvars`` option controls whether or not the inventory will make extra API calls to fill out additional information about each server.
 
-With this file in place the output will change to use instance names rather
+With this file in place, the output will change to use instance names rather
 than IDs:
 
 .. code-block:: bash
@@ -163,18 +163,18 @@ than IDs:
  example-instance-01        : ok=2    changed=0    unreachable=0    failed=0
  example-instance-02        : ok=2    changed=0    unreachable=0    failed=0
 
-You will notice that our playbook is configured to operate against all hosts
+You will notice that your playbook is configured to operate against all hosts
 returned from the inventory script (set via ``hosts: all``). If you would like to
-operate on a subset of hosts there are a number of options.
+operate on a subset of hosts, there are a number of options.
 
-If we look at the JSON output again we can see the information about our
+If you look at the JSON output again, you can see the information about your
 instances is contained under the ``_meta`` key. The other top level keys of the
 returned JSON object point to lists of instances. These keys relate to various
-properties of our instances and are output by the dynamic inventory script
+properties of your instances and are output by the dynamic inventory script
 dynamically.
 
-In addition to the automatic key creation users can generate their own
-groupings based on instance metadata. In this example we have added two
+In addition to the automatic key creation, users can generate their own
+groupings based on instance metadata. In the following example, you have added two
 metadata items to each instance:
 
 .. code-block:: bash
@@ -190,8 +190,8 @@ metadata items to each instance:
    "example": "foobar"
  }
 
-In the example below we are using ``jq`` to remove the data associated with the
-``_meta`` key so we can view just the instance lists.
+In the example below, you are using ``jq`` to remove the data associated with the
+``_meta`` key so you can view just the instance lists.
 
 .. code-block:: bash
 
@@ -253,12 +253,12 @@ In the example below we are using ``jq`` to remove the data associated with the
    ]
  }
 
-We can see a number of different groupings of instances are available including
-groupings based on the metadata we passed. Metadata with the key ``group`` is a
+You can see a number of different groupings of instances are available, including
+groupings based on the metadata you passed. Metadata with the key ``group`` is a
 special case that will be translated directly into an Ansible host group of that
 name.
 
-Any of these groups may be used within a playbook, for example lets make use of
+Any of these groups may be used within a playbook. For example, let's make use of
 the ``group01`` group to run our playbook against only ``example-instance-01``:
 
 .. code-block:: yaml
@@ -273,7 +273,7 @@ the ``group01`` group to run our playbook against only ``example-instance-01``:
      - name: Test connection to instance
        ping:
 
-Lets run this playbook with the dynamic inventory:
+Let's run this playbook with the dynamic inventory:
 
 .. code-block:: bash
 
@@ -306,7 +306,7 @@ example using the nova command line client:
 
 .. note::
 
- Metadata keys do not natively suport lists as keys so you will overwrite the previous group if you reset a group.
+ Metadata keys do not natively support lists as keys, so you will overwrite the previous group if you reset a group.
 
 An Ansible playbook for creating the instances used in this example is
 available at

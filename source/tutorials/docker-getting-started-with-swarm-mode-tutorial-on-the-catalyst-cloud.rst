@@ -4,12 +4,12 @@ Docker "getting started with swarm mode" tutorial on the Catalyst Cloud
 
 The Docker Engine 1.12 includes a new feature known as `swarm mode`_ which
 allows the native management of a cluster of Docker Engines. This cluster of
-Docker Engines or nodes is known as a swarm. Swarm mode allows you to
+Docker Engines or nodes is known as a swarm. Swarm Mode allows you to
 orchestrate services across all the nodes in a swarm. This is useful for the
 scaling, load balancing, distribution and availability of your services.
 
-This tutorial shows you how to easily setup Catalyst Cloud compute instances to
-use with the `Getting started with swarm mode`_ tutorial available as part of
+This tutorial shows you how to easily set up Catalyst Cloud compute instances to
+use with the `Getting started with swarm mode`_ tutorial, available as part of
 the `docker`_ `documentation`_.
 
 .. _swarm mode: https://docs.docker.com/engine/swarm/
@@ -17,8 +17,8 @@ the `docker`_ `documentation`_.
 .. _docker: https://www.docker.com/
 .. _documentation: https://docs.docker.com/
 
-This tutorial will use `Ansible`_ to create 3 swarm nodes that correspond to
-the examples used in the docker tutorial. After running the playbook you will
+This tutorial will use `Ansible`_ to create three swarm nodes that correspond to
+the examples used in the Docker tutorial. After running the playbook, you will
 have access to three hosts exactly as described in the tutorial. A cleanup
 playbook is provided to remove all resources when you have completed the
 tutorial.
@@ -30,7 +30,7 @@ Setup
 
 This tutorial assumes a number of things:
 
-* You are interested in docker swarm mode and wish to complete the tutorial.
+* You are interested in Docker Swarm Mode and wish to complete the tutorial.
 * You are familiar with basic usage of the Catalyst Cloud (e.g. you have
   created your first instance as described at
   :ref:`launching-your-first-instance`)
@@ -41,10 +41,10 @@ This tutorial assumes a number of things:
 Install Ansible
 ===============
 
-Firstly you need to install ansible as shown at
+Firstly you need to install Ansible as shown at
 :ref:`launching-your-first-instance-using-ansible`.
 
-When ansible is installed you should change directory to the
+When Ansible is installed, you should change directory to the
 ``example-playbooks/docker-swarm-mode`` directory within the
 ``catalystcloud-ansible`` git checkout.
 
@@ -52,7 +52,7 @@ When ansible is installed you should change directory to the
 
  $ cd example-playbooks/docker-swarm-mode
 
-Create the Swarm
+Create the swarm
 ================
 
 We can now run the ``create-swarm-hosts.yaml`` playbook to create the swarm:
@@ -61,8 +61,8 @@ We can now run the ``create-swarm-hosts.yaml`` playbook to create the swarm:
 
  $ ansible-playbook --ask-sudo-pass create-swarm-hosts.yaml
 
-After this playbook successfully completes you are ready to complete the
-tutorial. As described in the tutorial `setup`_ instructions it provides:
+After this playbook successfully completes, you are ready to complete the
+tutorial. As described in the tutorial `setup`_ instructions, it provides:
 
 * three networked host machines
 * Docker Engine 1.12 or later installed
@@ -97,9 +97,9 @@ two commands are:
 
 .. note::
 
- The tutorial uses ``docker-machine ssh``, you should omit ``docker-machine`` from the command as we did not create these nodes using docker machine. If you would prefer to use docker machine to setup the nodes you can follow the tutorial at :ref:`using-docker-machine`.
+ The tutorial uses ``docker-machine ssh``, you should omit ``docker-machine`` from the command as we did not create these nodes using Docker machine. If you would prefer to use Docker machine to set up the nodes you can follow the tutorial at :ref:`using-docker-machine`.
 
-Delete the Swarm
+Delete the swarm
 ================
 
 When you have completed the tutorial you can remove the swarm and its

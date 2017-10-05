@@ -3,12 +3,12 @@ Follow the "Installing Kubernetes on Linux with kubeadm" guide on the Catalyst C
 ####################################################################################
 
 `Kubernetes 1.4`_ released in September 2016 `introduced`_ the ``kubeadm``
-command which greatly simplifies setting up a Kubernetes cluster. Once Docker
-and Kubernetes are installed on the nodes cluster configuration is reduced to
-two commands; ``kubeadm init`` which starts the master and ``kubeadm join``
+command, which greatly simplifies setting up a Kubernetes cluster. Once Docker
+and Kubernetes are installed on the nodes, cluster configuration is reduced to
+two commands: ``kubeadm init`` which starts the master and ``kubeadm join``
 which joins the nodes to the cluster.
 
-This tutorial shows you how to easily setup Catalyst Cloud compute instances to
+This tutorial shows you how to easily set up Catalyst Cloud compute instances to
 use with the `kubeadm getting started guide`_ tutorial available as part of
 the `Kubernetes`_ `documentation`_.
 
@@ -18,9 +18,9 @@ the `Kubernetes`_ `documentation`_.
 .. _Kubernetes: https://kubernetes.io/
 .. _documentation: https://kubernetes.io/docs/
 
-This tutorial will use `Ansible`_ to create 5 nodes that correspond to the
-examples used in the Kubernetes tutorial. After running the playbook you will
-have access to five hosts exactly as described in the tutorial. A cleanup
+This tutorial will use `Ansible`_ to create five nodes that correspond to the
+examples used in the Kubernetes tutorial. After running the playbook, you will
+have access to five hosts, exactly as described in the tutorial. A cleanup
 playbook is provided to remove all resources when you have completed the
 tutorial.
 
@@ -28,9 +28,9 @@ tutorial.
 
 .. warning::
 
- The ansible playbook creates 4 worker nodes using the c1.c1r1 flavour and one
- master node which uses the c1.c4r4 flavour. Remeber to run the cleanup
- playbook after completing this tutorial to avoid incuring unnecessary costs.
+ The ansible playbook creates four worker nodes using the c1.c1r1 flavour and
+ one master node which uses the c1.c4r4 flavour. Remember to run the cleanup
+ playbook after completing this tutorial to avoid incurring unnecessary costs.
 
 Setup
 =====
@@ -53,7 +53,7 @@ Install Ansible
 Firstly you need to install Ansible as shown at
 :ref:`launching-your-first-instance-using-ansible`.
 
-When Ansible is installed you should change directory to the
+When Ansible is installed, you should change directory to the
 ``example-playbooks/kubernetes-with-kubeadm`` directory within the
 ``catalystcloud-ansible`` git checkout.
 
@@ -71,9 +71,9 @@ nodes:
 
  $ ansible-playbook create-kubernetes-hosts.yaml
 
-The playbook run should take about 10 minutes, after it successfully completes
+The playbook run should take about 10 minutes. After it successfully completes
 you are ready to follow the guide. As described in part one of the guide
-`(1/4) Installing kubelet and kubeadm on your hosts`_, it provides:
+`(1/4) Installing kubelet and kubeadm on your hosts`_, it:
 
 * Provides five networked host machines running Ubuntu 16.04
 * Ensures Docker Engine 1.11 or later is installed
@@ -86,7 +86,7 @@ you are ready to follow the guide. As described in part one of the guide
 .. _(1/4) Installing kubelet and kubeadm on your hosts: https://kubernetes.io/docs/getting-started-guides/kubeadm/#instructions
 
 
-Initializing your master
+Initialising your master
 ========================
 
 We will now follow the guide from section ``(2/4) Initializing your master``.
@@ -96,7 +96,7 @@ We will now follow the guide from section ``(2/4) Initializing your master``.
     CLI communicates with). All of these components run in pods started by
     kubelet.
 
-To initialize the master, ssh to ``master1`` and run ``kubeadm init``.
+To initialise the master, ssh to ``master1`` and run ``kubeadm init``.
 
 .. code-block:: bash
 
@@ -124,7 +124,7 @@ To initialize the master, ssh to ``master1`` and run ``kubeadm init``.
  [addons] Created essential addon: kube-proxy
  [addons] Created essential addon: kube-dns
 
- Your Kubernetes master has initialized successfully!
+ Your Kubernetes master has initialised successfully!
 
  You should now deploy a pod network to the cluster.
  Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
@@ -135,7 +135,7 @@ To initialize the master, ssh to ``master1`` and run ``kubeadm init``.
  kubeadm join --token=<TOKEN> 192.168.99.100
 
 Alternatively if you wish to use the ``flannel`` pod network add-on use the
-``--pod-network-cidr`` flag to define the flannel subnet, if omitted
+``--pod-network-cidr`` flag to define the flannel subnet. If omitted,
 ``kube-dns`` pod will not start.
 
 .. code-block:: bash
@@ -145,7 +145,7 @@ Alternatively if you wish to use the ``flannel`` pod network add-on use the
 |
 
     Make a record of the kubeadm join command that kubeadm init outputs. You
-    will need this in a moment. The key included here is secret, keep it safe —
+    will need this in a moment. The key included here is secret; keep it safe —
     anyone with this key can add authenticated nodes to your cluster.
 
     The key is used for mutual authentication between the master and the
@@ -158,11 +158,11 @@ Installing a pod network
     with each other.
 
     **It is necessary to do this before you try to deploy any applications to
-    your cluster, and before kube-dns will start up. Note also that kubeadm
+    your cluster, and before kube-dns starts up. Note also that kubeadm
     only supports CNI based networks and therefore kubenet based networks will
     not work.**
 
-Using weave (reccomended)
+Using weave (recommended)
 -------------------------
 
 To use the weave pod network add-on issue the following command:
@@ -172,16 +172,16 @@ To use the weave pod network add-on issue the following command:
  root@master1:~# kubectl apply -f https://git.io/weave-kube
  daemonset "weave-net" created
 
-Using Flannel
+Using flannel
 -------------
 
 .. note::
 
- If you wish to use flannel ensure you specified a --pod-network-cidr when
+ If you wish to use flannel, ensure you specified a --pod-network-cidr when
  running kubeadm init
 
-As an alternative you can use the ``flannel`` pod network add-on. Ansible
-installed the yaml file in roots home directory on the master node so you can
+As an alternative, you can use the ``flannel`` pod network add-on. Ansible
+installed the yaml file in roots home directory on the master node, so you can
 simply issue the following command:
 
 .. code-block:: bash
@@ -260,7 +260,7 @@ observe workers joining the cluster:
 Installing a sample application
 ===============================
 
-We are going to install the sock shop sample microservice application:
+You are going to install the sock shop sample microservice application:
 
 .. code-block:: bash
 
@@ -343,7 +343,7 @@ Run ``kubectl get pods`` and wait for the STATUS of all the pods to be
  sock-shop     zipkin-cron-1577918700-kdgpx      1/1       Running   0          4m
  sock-shop     zipkin-mysql-1199230279-p8tx5     1/1       Running   0          4m
 
-Now we can describe the service:
+Now you can describe the service:
 
 .. code-block:: bash
 
@@ -360,8 +360,8 @@ Now we can describe the service:
  Session Affinity:	None
  No events.
 
-The Ansible playbook we ran previously created a security group rule to allow
-incoming TCP traffic to port ``30001`` on the master node. Lookup the IP
+The Ansible playbook you ran previously created a security group rule to allow
+incoming TCP traffic to port ``30001`` on the master node. Look up the IP
 address of the master so we can browse to the sock shop demo application. You
 can run the following command to find the floating IP address of the master
 node:
@@ -382,7 +382,7 @@ To remove the socks shop demo you can issue the following command:
 
  root@master1:~# kubectl delete namespace sock-shop
 
-When you have completed the guide you can run the
+When you have completed the guide, you can run the
 ``remove-kubernetes-hosts.yaml`` playbook to remove all the Catalyst Cloud
 resources you have been using.
 

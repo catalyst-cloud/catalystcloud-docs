@@ -7,26 +7,25 @@ This tutorial assumes the following:
 * You have created a basic network setup in the Catalyst Cloud.
 * You have installed the OpenStack command line tools and sourced an
   openrc file, as explained at :ref:`command-line-interface`.
-* You have a basic understanding of heat templates as shown at
+* You have a basic understanding of Heat templates as shown at
   :ref:`launching-your-first-instance-using-heat`.
 
 Introduction
 ============
 
-In this tutorial we will show you how to create an additional network in a
+In this tutorial, you will find out how to create an additional network in a
 project that already has a private network, and then create a server that has
 interfaces on the existing private network and the newly created one.
 
-We will need to delve into the mysteries of 'cloud-init' a litle to achieve
-this and this enables us to take the opportunity to show how to perform
-another useful customisation - changing who the default user for an instance
-is.
+You will need to delve into the mysteries of 'cloud-init' a little to achieve
+this. You'll also learn how to perform another useful customisation -
+changing who the default user is for an instance.
 
 Heat Template
 =============
 
 We need to create a network, and a subnet - and then boot an instance using
-these plus an already existing private network. Unfortunately it is not
+these plus an already existing private network. Unfortunately, it is not
 sufficient simply to create networks and provide these to the instance at
 creation time - only the first network is properly configured if this approach
 is taken (this could be viewed as a bug). This can be worked around using the

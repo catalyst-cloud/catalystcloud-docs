@@ -4,7 +4,7 @@ Deploying a Turnkey Linux Image on the Catalyst Cloud
 
 This tutorial assumes you have installed the OpenStack command line tools and
 sourced an openrc file, as explained at :ref:`command-line-interface`. We also
-assume that you have uploaded a ssh key as explained at
+assume that you have uploaded an SSH key, as explained at
 :ref:`uploading-an-ssh-key`.
 
 Introduction
@@ -18,16 +18,16 @@ Catalyst Cloud using the command line tools.
 Pre-requisites and Setup
 ========================
 
-First retrieve the required image from `Turnkey Linux`_, for this
-example we will use the following image ``turnkey-core-14.1-jessie-amd64``.
+First, retrieve the required image from `Turnkey Linux`_, for this
+example you will use the following image ``turnkey-core-14.1-jessie-amd64``.
 
 The following steps need to be completed on a machine that has API access to
 the Catalyst Cloud. If your location has not been whitelisted to allow for this
-then you can deploy a barebones Linux instance in the Catalyst Cloud and
+you can deploy a barebones Linux instance in the Catalyst Cloud and
 complete the following steps from there.
 
 Download the ``Turnkey Linux`` image to your machine, extract the archive and
-change into the directoryy containing the image files.
+change into the directory containing the image files.
 
 .. code-block:: bash
 
@@ -42,11 +42,11 @@ change into the directoryy containing the image files.
 Creating the images
 ===================
 
-There are actually 3 images that need to get created to allow this work
-correctly. These are the ramdisk image, the kernel image and that actual
+Three images need to be created to allow this to work correctly.
+These are the ramdisk image, the kernel image and that actual
 Turnkey image we are looking to deploy.
 
-First we will create the ramdisk image and store it's ID in an environment
+First we will create the ramdisk image and store its ID in an environment
 variable called ``TL_RAMDISK_ID``.
 
 .. code-block:: bash
@@ -78,7 +78,7 @@ variable called ``TL_RAMDISK_ID``.
 
   $ TL_RAMDISK_ID=$(openstack image show turnkey-initrd -c id -f value) && echo $TL_RAMDISK_ID
 
-Next we create the kernel image and store it's ID in ``TL_KERNEL_ID``.
+Next we create the kernel image and store its ID in ``TL_KERNEL_ID``.
 
 .. code-block:: bash
 
@@ -145,9 +145,9 @@ Finally we create the ``Turnkey`` image:
 Deploy the Turnkey image
 ========================
 
-Now that we have a local version of the ``Turnkey Linux`` image hosted on the
-Catalyst Cloud, we can use this to create out new instance. Once again we will
-do this using the command line tools and pass in parameters using environment
+Now that you have a local version of the ``Turnkey Linux`` image hosted on the
+Catalyst Cloud, you can use this to create your new instance. Once again you will
+do this using the command line tools, and pass in parameters using environment
 variables.
 
 .. code-block:: bash
@@ -193,8 +193,8 @@ variables.
   | user_id                              | <USER_ID>                                                                   |
   +--------------------------------------+-----------------------------------------------------------------------------+
 
-Once the following command show your new instance as active, you will be able
-to associate a floting IP with your new instance and access it via SSH.
+Once the following command shows your new instance as active, you will be able
+to associate a floating IP with your new instance and access it via SSH.
 
 .. code-block:: bash
 
@@ -207,8 +207,8 @@ to associate a floting IP with your new instance and access it via SSH.
 
 .. note::
 
-  * The Turnkey Linux instances will expect you to ssh initially as root
+  * The Turnkey Linux instances will expect you to SSH initially as root
     ``ssh root@<floating-ip>`` and complete the initial setup steps.
-  * Turnkey images also provide a web console for administration purposes, if
-    you are having trouble connecting to this please ensure that your security
+  * Turnkey images also provide a web console for administration purposes. If
+    you are having trouble connecting to this, please ensure that your security
     group/s are configured to provide appropriate access.

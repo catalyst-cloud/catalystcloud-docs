@@ -1,5 +1,5 @@
-Using Ansibles in-memory inventory to create a variable number of instances
-###########################################################################
+Using Ansible's in-memory inventory to create a variable number of instances
+############################################################################
 
 This tutorial assumes the following:
 
@@ -13,7 +13,7 @@ This tutorial assumes the following:
 Introduction
 ============
 
-Normally Ansible requires an `inventory file`_ to be created to know which
+Normally Ansible requires an `inventory file`_ to be created, to know which
 machines it is meant to operate on.
 
 This is typically a manual process but can be greatly improved by using the
@@ -26,11 +26,11 @@ systems. Details for this approach are shown at
 
 Suppose, however, you needed to create 'x' number of instances which were
 transient in nature and had no existing details available to populate an
-inventory file for Ansible to utilise? If 'x' is a small number you could
-easily hand-craft the inventory file but once this number gets into tens
+inventory file for Ansible to utilise? If 'x' is a small number, you could
+easily hand-craft the inventory file, but once this number gets into tens
 of instances it becomes onerous.
 
-To get around this problem we can make use of Ansible's ability to populate an
+To get around this problem, we can make use of Ansible's ability to populate an
 in-memory inventory, using the `add_host`_ module, with information it
 generates while creating new instances.
 
@@ -82,7 +82,7 @@ The requirements of this playbook are as follows:
 - carry out identical configuration across all nodes
 - pause the playbook to allow for interaction with the new nodes,
   i.e. processing/testing etc.
-- on resuming playback terminate all new instances
+- on resuming playback, terminate all new instances
 
 This makes the following assumptions:
 
@@ -98,9 +98,9 @@ Play 1:
 *******
 
 The number of instances to be created is controlled by a *'count'* variable. As
-the instances are created the results are captured in a registered variable
+the instances are created, the results are captured in a registered variable
 called 'newnodes'. This is in turn iterated over using a *'with_items'* loop to
-add the required details to the in-memory inventory as shown in this snippet...
+add the required details to the in-memory inventory, as shown in this snippet:
 
 .. literalinclude:: ../../playbooks/create-x-servers.yml
   :language: yaml
@@ -110,23 +110,23 @@ Play 2:
 *******
 
 The newly created group *'created_nodes'* is used to iterate over the new
-instances. Firstly it checks to see that SSH is responding and then begins the
-configuration of the nodes.
+instances. Firstly it checks to see that SSH is responding and then it begins
+the configuration of the nodes.
 
-For the purposes of this example the configuration involves simply installing
-some packages on to each node.  Once this has been completed the playbook is
+For the purposes of this example, the configuration involves simply installing
+some packages onto each node. Once this has been completed, the playbook is
 paused and will remain that way until told to either continue or abort.
 
 Play 3:
 *******
 
-Assuming that playback is continued rather than aborted the final play will
+Assuming that playback is continued rather than aborted, the final play will
 delete all of the nodes in the created_nodes group.
 
 
 The Playbook
 ------------
-Here is the complete playbook containing the 3 plays outlined above:
+Here is the complete playbook containing the three plays outlined above:
 
 .. literalinclude:: ../../playbooks/create-x-servers.yml
   :language: yaml

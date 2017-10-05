@@ -6,7 +6,7 @@ Using an OpenStack Vagrant Provider on the Catalyst Cloud
 configure lightweight, reproducible, and portable development environments. It
 allows developers to easily manage virtual machines for development or staging
 environments. Vagrant provides a plugin mechanism through which different VM
-`providers`_ can be used. These providers can either be local (eg VirtualBox,
+`providers`_ can be used. These providers can either be local (e.g. VirtualBox,
 LXC, Docker) or remote (AWS, OpenStack). This tutorial shows you how to use
 OpenStack as a remote provider for Vagrant.
 
@@ -17,10 +17,10 @@ OpenStack as a remote provider for Vagrant.
 Vagrant OpenStack providers
 ===========================
 
-Currently there are two different Vagrant OpenStack providers in common usage,
+Currently there are two different Vagrant OpenStack providers in common usage:
 `vagrant-openstack-plugin`_ and `vagrant-openstack-provider`_. The
-configuration for both these providers is similar, this can lead to confusion,
-be sure you are clear which provider you are using.
+configuration for both these providers is similar, which can lead to confusion.
+Be sure you know which provider you are using.
 
 .. _vagrant-openstack-plugin: https://github.com/cloudbau/vagrant-openstack-plugin
 
@@ -39,7 +39,7 @@ This tutorial assumes a number of things:
   created your first instance as described at
   :ref:`launching-your-first-instance`)
 * You already have Vagrant installed on your machine
-* You have a single private network and subnet within your tenant
+* You have a single private network and subnet within your project
 * You have an appropriate security group that allows inbound SSH connections
 * You will be setting up a Ubuntu 14.04 instance
 * You will be using the ubuntu user
@@ -62,7 +62,7 @@ The next step is to create a ``Vagrantfile`` in the root of your repository:
 
 .. note::
 
- We are referencing environment variables in this configuration, ensure you have followed the steps described at :ref:`source-rc-file`
+ You are referencing environment variables in this configuration. Ensure you have followed the steps described at :ref:`source-rc-file`
 
 .. code-block:: ruby
 
@@ -92,7 +92,7 @@ The next step is to create a ``Vagrantfile`` in the root of your repository:
 Create an instance
 ==================
 
-Now we can run ``vagrant up`` to create our instance:
+Now you can run ``vagrant up`` to create your instance:
 
 .. code-block:: bash
 
@@ -127,7 +127,7 @@ Now we can run ``vagrant up`` to create our instance:
 SSH to the instance
 ====================
 
-We can now connect to our instance via SSH:
+You can now connect to your instance via SSH:
 
 .. code-block:: bash
 
@@ -160,8 +160,8 @@ We can now connect to our instance via SSH:
 Documentation
 =============
 
-For Vagrant documentation consult https://docs.vagrantup.com/v2/. For
-documentation on the Vagrant OpenStack provider consult
+For Vagrant documentation, consult https://docs.vagrantup.com/v2/. For
+documentation on the Vagrant OpenStack provider, consult
 https://github.com/ggiamarchi/vagrant-openstack-provider. You may also find
 this `presentation`_ by the developer of the plugin useful.
 

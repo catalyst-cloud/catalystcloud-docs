@@ -90,7 +90,7 @@ In order to establish a SSH connection with your cloud tunnel you will need an
 SSH client. If you do not have one, you can download and install PuTTY from:
 http://the.earth.li/~sgtatham/putty/latest/x86/putty-0.63-installer.exe
 
-After installing it, open PuTTY and connect to your cloud tunnel instance. On
+After installing PuTTY, open it and connect to your cloud tunnel instance. On
 the Category list, go to Connection, SSH and Tunnels. For the destination
 source port, enter 6676 and select Dynamic and then click on “Add”, as
 indicated on the image below.
@@ -98,7 +98,7 @@ indicated on the image below.
 .. image:: ../_static/ct-putty-pf-config.png
    :align: center
 
-On the category list, go back to session and enter the IP address of your cloud
+On the Category list, go back to session and enter the IP address of your cloud
 tunnel instance.
 
 .. image:: ../_static/ct-putty-connect.png
@@ -123,7 +123,7 @@ On the connections tab open your “LAN settings” and click on “Advanced”.
 .. image:: ../_static/ct-ie-proxy02.png
    :align: center
 
-On the proxy settings screen configure the socks proxy with your local host
+On the proxy settings screen, configure the socks proxy with your local host
 (127.0.0.1) and the port used for the SSH tunnel (6676) as indicated below:
 
 .. image:: ../_static/ct-ie-proxy03.png
@@ -134,8 +134,8 @@ Chrome
 
 In your browser, enter the URL chrome://settings/search#proxy and click on the
 “Change proxy settings...” button. This should open your system internet
-options, where you can configure a SOCKS proxy just like explained previously
-on the Internet Explorer example.
+options, where you can configure a SOCKS proxy as explained previously
+in the Internet Explorer example.
 
 Firefox
 -------
@@ -157,13 +157,13 @@ documentation for your library.
 OpenStack Clients
 =================
 
-Most OpenStack command line clients use the urllib3 library, SOCKS5 support is
+Most OpenStack command line clients use the urllib3 library. SOCKS5 support is
 offered via the `urllib3.contrib.socks`_ module.
 
 .. _urllib3.contrib.socks: https://urllib3.readthedocs.org/en/latest/contrib.html#socks
 
-Curl
+cURL
 ====
 
-Curl supports SOCKS5 proxying natively, it is available via the ``--proxy``,
+CURL supports SOCKS5 proxying natively. It is available via the ``--proxy``,
 ``--socks5`` or ``--socks5-hostname`` options.
