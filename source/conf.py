@@ -32,7 +32,7 @@ import sphinx_bootstrap_theme
 extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
-    'sphinx.ext.pngmath',
+    'sphinx.ext.imgmath',
     'sphinx.ext.ifconfig',
 ]
 
