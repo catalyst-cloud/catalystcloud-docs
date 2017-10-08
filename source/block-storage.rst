@@ -251,10 +251,9 @@ Best Practice for maximising disk performance
 I/O Readahead
 =============
 
-One of the recommended ways in which to improve disk perfomance on a virtual
-server is by increasing the I/O readahead value. This parameter determines the
-number of kilobytes that the kernel will read ahead during a sequential read
-operation.
+It is recommended to increase the I/O readahead value for the volume to improve
+performance. This parameter determines the number of kilobytes that the kernel
+will read ahead during a sequential read operation.
 
 The default value for this is 128KB but it is possible to increase this up to
 around 2048KB. This should drastically improve sequential read performance, and
