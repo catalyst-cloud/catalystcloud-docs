@@ -114,7 +114,7 @@ a user_data_format of "RAW" in the ``OS::Nova::Server`` properties:
         flavor: { get_param: flavor }
         user_data_format: RAW
 
-If your tenant has multiple private networks, then the above example will fail
+If your project has multiple private networks, then the above example will fail
 to start an instance - you need to specify which private network to attach to:
 
 .. code-block:: yaml

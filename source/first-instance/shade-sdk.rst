@@ -44,7 +44,7 @@ OpenStack credentials
 =====================
 
 The first step in getting an instance running is to provide your Python script
-with the correct credentials and configuration appropriate for your tenant. The
+with the correct credentials and configuration appropriate for your project. The
 easiest way to achieve this is to make use of environment variables. You will
 make use of the standard variables provided by an OpenStack RC file as
 described at :ref:`source-rc-file`.
@@ -71,10 +71,10 @@ Using an interactive interpreter
 
 .. note::
 
- This section is optional. If you do not wish to interact with the Catalyst
- Cloud interactively you can safely skip it.
+ This section is optional. If you do not wish to engage with the Catalyst
+ Cloud interactively, you can safely skip it.
 
-You can use the code below to allow yourself to interact with the Catalyst Cloud via
+The following code allows you to engage with the Catalyst Cloud via
 the Python interactive interpreter. First, define a cloud object called
 ``cloud``:
 

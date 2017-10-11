@@ -28,8 +28,8 @@ tutorial.
 
 .. warning::
 
- The ansible playbook creates four worker nodes using the c1.c1r1 flavour and
- one master node which uses the c1.c4r4 flavour. Remember to run the cleanup
+ The ansible playbook creates four worker nodes using the c1.c1r1 flavor and
+ one master node which uses the c1.c4r4 flavor. Remember to run the cleanup
  playbook after completing this tutorial to avoid incurring unnecessary costs.
 
 Setup

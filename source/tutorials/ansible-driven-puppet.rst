@@ -22,7 +22,7 @@ If you follow this guide you will:
 
 -  See how to setup a Puppet Master using Ansible
 -  Drive provisioning of OpenStack and Puppet from Ansible
--  Define new server roles and roll these out quickly in your tenant
+-  Define new server roles and roll these out quickly in your project
 -  Use the above to have an "immutable infrastructure"
 
 Setup your puppet master
@@ -36,7 +36,7 @@ specific to your local setup.
     $ git clone https://github.com/catalyst/catalystcloud-ansible
     $ cd catalystcloud-ansible/example-playbooks/puppet-master
 
-    # substitute my-keypair-name for whatever you have set up in your tenant
+    # substitute my-keypair-name for whatever you have set up in your project
     echo 'keypair_name: my-keypair-name' > local-vars.yml
     openstack ip floating list # grab one of these and store it in PUBLIC_IP...
     export PUBLIC_IP=150.x.y.z
@@ -193,7 +193,7 @@ server.
 .. code-block:: yaml
 
     ---
-    - name: Remove a server from our tenant
+    - name: Remove a server from our project
       hosts: localhost
       tasks:
 

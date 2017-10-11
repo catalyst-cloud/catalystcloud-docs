@@ -7,33 +7,33 @@ Compute service
 Overview
 ********
 
-The compute service provies scalable on-demand compute capacity for your
+The compute service provides scalable on-demand compute capacity for your
 applications in the form of compute instances. Compute instances are virtual
 servers that can be scaled up, down, or horizontally (by adding and removing
 more compute instances).
 
-Flavours
+Flavors
 ========
 
-The compute instance flavour defines the amount of CPU and RAM allocated to
-your virtual servers. The price per hour for a compute instance varies
-according to its flavour. Existing flavours can be found here:
+The compute instance flavor (US spelling is correct here) defines the amount of
+CPU and RAM allocated to your virtual servers. The price per hour for a compute
+instance varies according to its flavor. Existing flavors can be found here:
 https://catalyst.net.nz/catalyst-cloud/services/iaas/compute-service
 
-Our flavours are named after the amount of CPU and RAM they provide you,
-avoiding the need to consult our documentation to find out their
+Our flavors are named after the amount of CPU and RAM they provide you,
+so you don't need to consult our documentation to find out their
 specifications. We currently provide a number of common combinations
-of CPU and RAM and are prepared to introduce new flavours if required.
+of CPU and RAM, and are prepared to introduce new flavors if required.
 
 A virtual CPU (vCPU), also known as a virtual processor, is a time slice of a
 physical processing unit assigned to a compute instance or virtual machine. The
-mapping between virtual CPUs to physical cores is part of the performance and
+mapping of virtual CPUs to physical cores is part of the performance and
 capacity management services performed by the Catalyst Cloud on your behalf. We
 aim to deliver the performance required by applications, and to increase cost
 efficiency to our customers by optimising hardware utilisation.
 
-Since virtual CPUs do not map one-to-one to a physical core, some performance
-variation may occur over time. This variation tends to be small and can be
+Since virtual CPUs do not map one-to-one to physical cores, some performance
+variation may occur over time. This variation tends to be small, and can be
 mitigated by scaling applications horizontally on multiple compute instances in
 an anti-affinity group. We monitor the performance of our physical servers and
 have the ability to move compute instances around, without downtime, to spread
@@ -208,7 +208,7 @@ http://cloudinit.readthedocs.org/en/latest/index.html.
 Resizing a compute instance
 ***************************
 
-The resize operation can be used to change the flavour (increase or decrease the
+The resize operation can be used to change the flavor (increase or decrease the
 amount of CPU and RAM) of a compute instance.
 
 .. warning::
@@ -225,7 +225,7 @@ arrow to list more actions and then click on Resize Instance as shown below:
 .. image:: _static/compute-resize-button.png
    :align: center
 
-The resize dialogue will pop up, allowing you to chose a new flavour.
+The resize dialogue will pop up, allowing you to chose a new flavor.
 
 .. image:: _static/compute-resize-action.png
    :align: center
@@ -524,8 +524,8 @@ Pause, Suspend, Shelve and Shut Off Instance. What's the difference?
 See :ref:`stopping compute` for the differences between the methods of halting
 a compute instance.
 
-* For lowering costs ``Shelve Instance`` is the recommended option.
-* For longer term preservation of halted instances ``Shelve Instance`` is the
+* For lowering costs, ``Shelve Instance`` is the recommended option.
+* For longer term preservation of halted instances, ``Shelve Instance`` is the
   recommended option.
 
 |

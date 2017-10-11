@@ -174,15 +174,15 @@ An example - finding the dependency problem
 ===========================================
 
 One example of this would be trying to remove a network that is connected
-to a router but also still in use by a VPN. If we try and remove the router
-interface through the dashboard, we would get a non-specific error indicating
+to a router but also still in use by a VPN. If you try and remove the router
+interface through the dashboard, you would get a non-specific error indicating
 that removing the interface failed.
 
 At this point it may be quite challenging to determine what the exact cause
 of the error is. The best way to diagnose the problem is to use the OpenStack
 command line tools.
 
-To start lets get the IDs of our router, subnet and router port.
+To start, get the IDs of your router, subnet and router port.
 
 .. code-block:: bash
 
@@ -208,7 +208,7 @@ To start lets get the IDs of our router, subnet and router port.
   | 44f6d507-2969-4e8f-b03c-e7361d13109d |
   +--------------------------------------+
 
-Let's try and delete the port from the router.
+Now try to delete the port from the router.
 
 .. code-block:: bash
 
@@ -219,11 +219,11 @@ Let's try and delete the port from the router.
   API: has device owner network:router_interface
   1 of 1 ports failed to delete.
 
-OK, so while that wasn't successful at least we got a bit more information
-that tells us that there is some kind of dependency that is associated with
+OK, so while that wasn't successful, at least you got a bit more information
+telling you that there is some kind of dependency associated with
 the router interface.
 
-This time we will try and remove the subnet from the router as that would
+This time, try to remove the subnet from the router, as that would
 remove the interface.
 
 .. code-block:: bash
@@ -232,9 +232,9 @@ remove the interface.
   HttpException: Conflict (HTTP 409) (Request-ID: req-a0821a75-e616-4e9a-a1a3-0f64574e07dc),
   Subnet c5145b18-26f1-4053-bac4-d8d0bdc77b48 is used by VPNService 478073d3-a347-4d1a-8653-609788064147
 
-Success: now we can see what the problem is. It appears that our subnet is
-associated with a VPN. If we were to go ahead and remove the VPN, we would
-be able to delete the network as we initially set out to do.
+Success: now you can see what the problem is. It appears that your subnet is
+associated with a VPN. If you were to go ahead and remove the VPN, you would
+be able to delete the network as you initially set out to do.
 
 
 .. _security-groups:
@@ -244,7 +244,7 @@ Security groups
 ***************
 
 A security group is a virtual firewall that controls network traffic to and
-from compute instances. Your tenant comes with a default security group, which
+from compute instances. Your project comes with a default security group, which
 cannot be deleted, and you can create additional security groups.
 
 Security groups are made of security rules. You can add or modify security
@@ -285,7 +285,7 @@ Requirements
 
 In order to setup a VPN, you need to know a number of parameters:
 
-* Tenant ID
+* Project (previously Tenant) ID
 * Router ID
 * Router IP Address
 * Subnet ID
@@ -313,7 +313,7 @@ You can use the following commands to find these:
  $ openstack router list
  $ openstack subnet list
 
-To find the Tenant ID, Router ID and Router IP Address, you can issue the
+To find the Project ID, Router ID and Router IP Address, you can issue the
 following command using the name of the router you found previously:
 
 .. code-block:: bash
@@ -374,7 +374,7 @@ wish to route via the VPN to access the local subnet.
  If you are connecting to a remote peer that is not a Catalyst Cloud router,
  you may need to modify some of the parameters used in the following steps.
 
-By now you should have the required values so we can proceed to create a VPN.
+By now you should have the required values so you can proceed to create a VPN.
 There are four steps to creating a VPN:
 
 * Create a VPN Service
@@ -452,7 +452,7 @@ Then create a VPN IPSec Policy:
 
 Lastly create a VPN IPSec Site Connection. This command makes use of the
 resources created in the last three steps. You will need to take note of these
-ids to use within this command.
+IDs to use within this command.
 
 .. code-block:: bash
 
@@ -533,10 +533,10 @@ on the Catalyst Cloud:
 
  $ ./create-vpn.sh
  ---------------------------------------------
- This script will setup a VPN in your project.
+ This script will set up a VPN in your project.
  You can select either one or both regions.
  If you select both regions this script will
- setup a site to site VPN for you.
+ set up a site to site VPN for you.
  ---------------------------------------------
  Please select the region(s):
 
@@ -553,7 +553,7 @@ on the Catalyst Cloud:
  por-router
  Please enter the name of your Porirua subnet:
  por-subnet
- Please enter you pre shared key
+ Please enter your pre shared key
  supersecretpsk
  --------------------------------------------------------
  Proceeding to create VPN with the following credentials:

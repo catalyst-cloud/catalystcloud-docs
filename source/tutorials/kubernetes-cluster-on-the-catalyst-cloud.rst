@@ -134,7 +134,7 @@ Re-source the rc file eg:
 
 .. code-block:: bash
 
- $ . /path/to/rc/file/your-tenant-openrc.sh
+ $ . /path/to/rc/file/your-project-openrc.sh
 
 
 Testing this will give a similar output to the following:
