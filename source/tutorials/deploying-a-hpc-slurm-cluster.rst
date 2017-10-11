@@ -38,7 +38,7 @@ downloaded, and finally, the cluster being destroyed.
 
 .. warning::
 
-  This tutorial assumes you are starting with a blank tenant and using your VPC
+  This tutorial assumes you are starting with a blank project and using your VPC
   only for ElastiCluster. You may need to adjust things (e.g. create a dedicated
   elasticluster security group), if you are doing this in a shared VPC.
 
@@ -90,7 +90,7 @@ configuration file compatible with the Catalyst Cloud is provided below:
   auth_url=https://api.cloud.catalyst.net.nz:5000/v2.0
   username=username
   password=password
-  project_name=tenantname
+  project_name=projectname
   region_name=nz-por-1
   request_floating_ip=True
 

@@ -48,7 +48,7 @@ take a snapshot of ours and modify it the way you need.
 How can I identify the images provided by Catalyst?
 ===================================================
 
-The images provided by Catalyst are uploaded to tenant ID
+The images provided by Catalyst are uploaded to project (tenant) ID
 ``94b566de52f9423fab80ceee8c0a4a23`` and are made public. With the command line
 tools, you can easily located them by running:
 
@@ -316,9 +316,9 @@ under your private images. Click on the Launch button and:
 * Select “Boot from image (creates a new volume).” as the instance boot source.
 * Ensure the device size is at least the same size as the image uploaded.
 * If you are importing an existing virtual machine, for its first boot you
-  should choose a flavour that provides at least the same amount of CPU and RAM
+  should choose a flavor that provides at least the same amount of CPU and RAM
   as the VM had before. Once you confirm the compute instance is booting
-  appropriately, you can resize it to a smaller flavour if you wish.
+  appropriately, you can resize it to a smaller flavor if you wish.
 
 .. warning::
 

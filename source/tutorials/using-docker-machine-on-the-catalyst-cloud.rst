@@ -186,7 +186,7 @@ progress and see any errors that may occur.
 
 .. note::
 
-  If your cloud tenant only has one private network defined, then the
+  If your cloud project only has one private network defined, then the
   ``--openstack-net-name PRIVATE-NET-NAME`` can be omitted. If there is more
   than one private network defined, then ``PRIVATE-NET-NAME`` should be replaced
   with the network you wish to connect the docker-engine-host to

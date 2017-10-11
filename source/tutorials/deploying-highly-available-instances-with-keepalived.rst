@@ -75,16 +75,16 @@ and IP protocol number 112. The protocol is defined in `RFC3768`_.
  after they have been migrated to another node has been discovered. The DHCP agent responds
  with a DHCPNAK message to instances trying to renew their leases after the agent has been
  migrated. The DHCPNAK message forces the instances to release the IP addresses assigned to
- them by the DHCP agent and re-negotiate the DHCP handshake process all over again. A keepalived
+ them by the DHCP agent and re-negotiate the DHCP handshake process all over again. A Keepalived
  master instance that receives a DHCPNAK message when attempting to renew the lease for the IP
  addresses on its primary interface would release all IP addresses including the virtual IP addresses
- associated with the interface, and this would not be noticed by the keepalived backup instance because
- the failure time is much shorter than the keepalived advertisement interval, thus leaving the virtual
- IP address unmanaged and unattached to any of the keepalived instances until the keepalived daemon
+ associated with the interface, and this would not be noticed by the Keepalived backup instance because
+ the failure time is much shorter than the Keepalived advertisement interval, thus leaving the virtual
+ IP address unmanaged and unattached to any of the Keepalived instances until the Keepalived daemon
  on the master instance is restarted.
 
- While we work on getting this bug fixed, we would recommend that users create new keepalived instances
- and update existing keepalived instances to use fixed IP on their interfaces.
+ While we work on getting this bug fixed, we would recommend that users create new Keepalived instances
+ and update existing Keepalived instances to use fixed IP on their interfaces.
 
 Allowed Address Pairs
 =====================
@@ -228,7 +228,7 @@ subnet and set its gateway as your public network:
  * If you look at the ports created at this point using the ``openstack port list -c ID -c 'Fixed IP Addresses'`` command you will notice three interfaces have been created. The IP 10.0.0.1 is the gateway address while 10.0.0.2 and 10.0.0.3 provide DHCP for this network.
  * Note the DNS nameservers, gateway address, subnet mask and allocation pool of the subnet from the ``openstack subnet create`` command.
 
-Next you will create ports with a fixed IP for your new keepalived instances:
+Next you will create ports with a fixed IP for your new Keepalived instances:
 
 To find the correct subnet and network ID use the following commands
 
@@ -349,7 +349,7 @@ Instance Creation
 =================
 
 The next step is to boot two instances where you will run Keepalived and Apache.
-You will be using the Ubuntu 14.04 image and ``c1.c1r1`` flavour. You will assign
+You will be using the Ubuntu 14.04 image and ``c1.c1r1`` flavor. You will assign
 these instances to the ``vrrp-sec-group`` security group. You will also provide
 the name of your SSH key so you can log in to these machines via SSH once they are
 created:
@@ -741,7 +741,7 @@ Now you can SSH to your instances. You will connect using the default ``ubuntu``
 user that is configured on Ubuntu cloud images. You will need to substitute the
 correct floating IP address.
 
-You can tail syslog in order to see what keepalived is doing. For example, here
+You can tail syslog in order to see what Keepalived is doing. For example, here
 you can see the backup instance switch from backup to master state:
 
 .. code-block:: bash

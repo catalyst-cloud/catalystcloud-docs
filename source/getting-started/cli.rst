@@ -12,10 +12,10 @@ Set up
 ******
 
 The OpenStack CLI can be installed in multiple ways. The recommended method for
-the Catalyst Cloud is to create a python virtual environment and use ``pip`` to
+the Catalyst Cloud is to create a Python virtual environment and use ``pip`` to
 install it. This method has the benefit of installing the latest version of the
 CLI (operating system packages tend to install an outdated version) and
-prevents conflicts between python libraries (dependencies are isolated in the
+prevents conflicts between Python libraries (dependencies are isolated in the
 virtual environment).
 
 Working with virtual environments
@@ -101,7 +101,7 @@ Python 2.7.x, so the procedure below will also install it as a dependency.
   # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
 
 
-In case you would like to test the CLI with Python 3.x, please use this
+If you would like to test the CLI with Python 3.x, please use this
 procedure instead:
 
 .. code-block:: bash
@@ -132,7 +132,7 @@ Ubuntu Linux 14.04
 ------------------
 
 Ubuntu 14.04 uses Python version: 2.7.6 by default. As a result, you do not
-need to install a different version of python.
+need to install a different version of Python.
 
 .. code-block:: bash
 
@@ -177,7 +177,7 @@ CentOS Linux 7
 
 .. code-block:: bash
 
-  # Make sure you have python development tools and wget installed
+  # Make sure you have Python development tools and wget installed
   sudo yum install python-devel gcc wget
 
   # retrieve the pip installer script and install pip and virtualenv
@@ -323,7 +323,7 @@ run the following command
 
   Get-ChildItem Env: | Where-Object {$_.name -match "OS_"}
 
-the output should show the following 5 variables
+The output should show the following 5 variables
 
 .. image:: ../_static/powershell_env.png
    :align: center
