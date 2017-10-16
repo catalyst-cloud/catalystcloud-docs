@@ -19,7 +19,7 @@ users as they desire via the Access Control page under the Management tab
 in the dashboard.
 
 Your project has two important values associated with it:
-the ``project name`` and the``project id``. The project name is typically
+the ``project name`` and the ``project id``. The project name is typically
 a company name or an individual's name (as applicable).
 The project key is an auto-generated unique 33 character string.
 

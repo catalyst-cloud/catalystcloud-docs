@@ -31,7 +31,7 @@ Indent with 2 spaces.
 
 Except:
 
-* ``toctree`` directive requires a 3 spaces indentation.
+* ``toctree`` directive requires a 3 space indentation.
 
 Blank lines
 -----------
@@ -140,7 +140,7 @@ used:
 
     $ ls -la
 
-When documenting bash or shell scirpts ``bash`` or ``sh`` should be used.
+When documenting bash or shell scripts ``bash`` or ``sh`` should be used.
 
 Admonitions
 ===========
