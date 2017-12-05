@@ -23,6 +23,7 @@ Contents:
    object-storage
    cloud-orchestration
    backups
+   billing
    tutorials
    contributing
 
