@@ -152,8 +152,8 @@ prefix as shown here:
 FAQ
 ***
 
-Why are amounts shownby separate billing script different from the dashboard?
-================================================================================
+Why are the amounts shown by the separate billing script different from the dashboard?
+======================================================================================
 
 GST is not included in the billing script when doing separated billing while it
 is included in the dashboard costs.
