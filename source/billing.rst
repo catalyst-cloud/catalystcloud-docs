@@ -6,16 +6,16 @@ Billing service
 Billing API
 ***********
 
-Catalyst Cloud now provides the RESTful API to access our billing service. With
-the billing API, it's easy to get history invoices and current month cost. And
-we have released an official Python client to help you consume the APi, see
-https://pypi.python.org/pypi/python-distilclient.
+Catalyst Cloud now provides a RESTful API to access our billing service. With
+the billing API, it's easy to get historical invoices and the cost for the
+current month. We have released an official Python client to help you consume
+the API, see https://pypi.python.org/pypi/python-distilclient.
 
 How can I list my quotations or invoices?
 =========================================
 
-After installed python-distilclient and python-openstackclient, you can easily
-run command as below to list invoices:
+After you have installed python-distilclient and python-openstackclient, you
+can easily run the following command to list invoices:
 
 .. code-block:: bash
 
@@ -59,9 +59,10 @@ Or getting current month quotation:
 Separate Billing
 ****************
 
-As mentioned above, With our billing API user can easily deal with their invoices
-and make their life eaiser. Now we're providing a small script as a reference
-about how to consumer the billing API, see https://github.com/catalyst-cloud/catalystcloud-billing
+As mentioned above, with our billing API the user can easily deal with their
+invoices and make their life easier. We are providing a small script as a
+reference for how to consume the billing API, see
+https://github.com/catalyst-cloud/catalystcloud-billing
 
 This script provides a means to get itemised billing based on the prefix of a
 set of resources so that a Catalyst Cloud customer can easily on-charge their
@@ -71,7 +72,7 @@ hosted customers based on that customers usage.
 
   This script is meant as a reference for how to consume the Catalyst
   Cloud billing API to get a separate billing based on the latest invoice. It
-  should be fairly simple to change the code to meet the other requirements.
+  should be fairly simple to change the code to meet other requirements.
 
 How to use
 ==========
@@ -99,7 +100,7 @@ http://docs.catalystcloud.io/getting-started/cli.html#source-an-openstack-rc-fil
 
   If you do not source an openrc file, you will need to pass the
   authentication information to the command line tool when running it. See
-  ./separate-billing.py help for more infromation.
+  ./separate-billing.py help for more information.
 
 Make sure your python virtual environment is activated (`source
 venv/bin/activate`).
@@ -134,9 +135,10 @@ The output will look similar to this:
 Get billing information when there are no unique resource prefixes defined
 --------------------------------------------------------------------------
 
-The parameter **prefix** is used to filter the invoice to get the separate
-billing for different customers. If resources have been created without specific
-prefixes it is still possible to query the billing data for the entire project.
+The parameter **prefix** is used to filter the invoice to get separate billing
+information for different customers. If resources have been created without
+specific prefixes it is still possible to query the billing data for the entire
+project.
 
 To view the full invoice, just issue the command without a specific
 prefix as shown here:
@@ -150,8 +152,9 @@ prefix as shown here:
 FAQ
 ***
 
-Why the amount cost are different from the separate billng script and dashboard?
+Why are amounts shownby separate billing script different from the dashboard?
 ================================================================================
 
-Because GST is not includeded in the billing script when doing separated billing.
+GST is not included in the billing script when doing separated billing while it
+is included in the dashboard costs.
 
