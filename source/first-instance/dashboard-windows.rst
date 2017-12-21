@@ -64,7 +64,7 @@ menu, leave the defaults for the other fields. Click "Add".
   from any IP to your compute instance on the port and protocol selected. This
   is often desirable when exposing a web server (eg: allow HTTP and HTTPs
   access from the Internet), but is insecure when exposing other protocols,
-  such as SSH, Telnet and FTP. We strongly recommend you limit the exposure
+  such as RDP, SSH, Telnet and FTP. We strongly recommend you limit the exposure
   of your compute instances and services to IP addresses or subnets that are
   trusted.
 
@@ -164,6 +164,27 @@ section, click on first-instance under "Instance Name" and select the "Console"
 tab.
 
 Once the following screen loads, click on OK to continue.
+
+Firewall rules required to allow access to the console in the cloud dashboard
+-----------------------------------------------------------------------------
+
+.. note::
+
+  If the console shown in the image below fails to load or you see errors on
+  this page please ensure that your local machine and/or corporate firewall is
+  allowing the following traffic.
+
+port
+^^^^
+- 6080 (TCP)
+
+for the following Catalyst Cloud API hosts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- nz-por-1: 202.78.247.202
+- nz-hlz-1: 202.78.244.90
+- nz_wlg_2: 202.78.240.218 & 2404:130:20:2::218
+
+|
 
 .. image:: ../_static/fi-windows-login.png
    :align: center
