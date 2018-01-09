@@ -13,11 +13,11 @@ and diverse fibre paths for network connectivity.
 +----------+-----------------+--------------------+----------------------+
 | Code     | Name            | PCI DSS certified? | ISO 27001 certified? |
 +==========+=================+====================+======================+
-| nz-por-1 | NZ Porirua 1    | Yes                | Yes                  |
+| nz-por-1 | NZ Porirua 1    | Yes                | In progress          |
 +----------+-----------------+--------------------+----------------------+
-| nz_wlg_2 | NZ Wellington 2 | In progress        | In progress          |
+| nz_wlg_2 | NZ Wellington 2 | Compliant          | In progress          |
 +----------+-----------------+--------------------+----------------------+
-| nz-hlz-1 | NZ Hamilton 1   | Yes                | In progress          |
+| nz-hlz-1 | NZ Hamilton 1   | Yes                | Yes                  |
 +----------+-----------------+--------------------+----------------------+
 
 We encourage customers to use Porirua for their primary region in New Zealand
