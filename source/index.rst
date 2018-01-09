@@ -14,6 +14,7 @@ Contents:
 
    getting-started
    first-instance
+   best-practices
    access-control
    block-storage
    compute
