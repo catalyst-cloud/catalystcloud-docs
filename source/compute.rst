@@ -297,6 +297,7 @@ guest operating system to respond to ACPI power events.
 The operating system images supplied by Catalyst or our partners already have
 ACPI configured to respond to power events by default.
 
+.. _anti-affinity:
 
 ***************************
 Anti-affinity groups for HA
