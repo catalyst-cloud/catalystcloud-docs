@@ -1,3 +1,5 @@
+.. _regions:
+
 #############
 Cloud regions
 #############
@@ -31,6 +33,38 @@ With the exception of object storage, resources are not replicated
 automatically across regions unless you do so. This provides customers the
 flexibility to introduce replication where required and to fail-over resources
 independently when needed.
+
+
+***********************
+Physical infrastructure
+***********************
+
+Access controll
+===============
+
+All our data centres have comprehensive access control systems with multiple
+perimeters. There are security cameras covering all entrances and the server
+room.
+
+Power, cooling and fire supression
+==================================
+
+All our data centres have guaranteed power which is provided by UPSes and
+diesel generators. The diesel generators will start automatically in the event
+of a mains power failure. Our Porirua and Hamilton regions have redundancy for
+the power infrastructure.
+
+They all have N+1 or better cooling systems and have gas flood fire suppression
+systems.
+
+External network
+================
+
+Each region is connected by our wide area network (WAN). Our WAN is built so
+that each region has multiple fibres which take diverse paths from a number of
+fibre providers to other regions. We have multiple Internet Service Providers
+to provide diversity and resiliency for our Internet connections.
+
 
 ****************
 Changing regions
