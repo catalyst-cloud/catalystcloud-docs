@@ -64,23 +64,6 @@ and IP protocol number 112. The protocol is defined in `RFC3768`_.
 
 .. _article: http://louwrentius.com/configuring-attacking-and-securing-vrrp-on-linux.html
 
-.. warning::
-
-  A Neutron bug that causes DHCP agents to reject previously held DHCP leases for instances
-  after they have been migrated to another node has been discovered. The DHCP agent responds
-  with a DHCPNAK message to instances trying to renew their leases after the agent has been
-  migrated. The DHCPNAK message forces the instances to release the IP addresses assigned to
-  them by the DHCP agent and re-negotiate the DHCP handshake process all over again. A Keepalived
-  master instance that receives a DHCPNAK message when attempting to renew the lease for the IP
-  addresses on its primary interface would release all IP addresses including the virtual IP addresses
-  associated with the interface, and this would not be noticed by the Keepalived backup instance because
-  the failure time is much shorter than the Keepalived advertisement interval, thus leaving the virtual
-  IP address unmanaged and unattached to any of the Keepalived instances until the Keepalived daemon
-  on the master instance is restarted.
-
-  While we work on getting this bug fixed, we would recommend that users create new Keepalived instances
-  and update existing Keepalived instances to use fixed IP on their interfaces.
-
 Allowed Address Pairs
 =====================
 
