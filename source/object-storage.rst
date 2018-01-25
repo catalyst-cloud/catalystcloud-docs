@@ -169,7 +169,7 @@ Swift command line tools, then exporting the required variables as shown below.
     $ source openstack-openrc.sh
 
     $ swift stat -v
-     StorageURL: https://api.nz-por-1.catalystcloud.io:8443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda
+     StorageURL: https://api.nz-por-1.catalystcloud.io:443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda
                       Auth Token: 5f5a043e1bd24a8fa84b8785cca8e0fc
                          Account: AUTH_0ef8ecaa78684c399d1d514b61698fda
                       Containers: 48
@@ -185,7 +185,7 @@ Swift command line tools, then exporting the required variables as shown below.
                     Content-Type: text/plain; charset=utf-8
                    Accept-Ranges: bytes
 
-    $ export storageURL="https://api.nz-por-1.catalystcloud.io:8443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda"
+    $ export storageURL="https://api.nz-por-1.catalystcloud.io:443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda"
     $ export token="5f5a043e1bd24a8fa84b8785cca8e0fc"
 
 Then run the following command to get a list of all available containers for
@@ -229,15 +229,15 @@ API endpoints
 +----------+---------+---------------------------------------------------------------+
 | Region   | Version | Endpoint                                                      |
 +==========+=========+===============================================================+
-| nz-por-1 | 1       | https://api.nz-por-1.catalystcloud.io:8443/v1/AUTH_%tenantid% |
+| nz-por-1 | 1       | https://api.nz-por-1.catalystcloud.io:443/v1/AUTH_%tenantid%  |
 +----------+---------+---------------------------------------------------------------+
 |          | 2       | https://api.cloud.catalyst.net.nz:5000/v2.0                   |
 +----------+---------+---------------------------------------------------------------+
-| nz_wlg_2 | 1       | https://api.cloud.catalyst.net.nz:8443/v1/AUTH_%tenantid%     |
+| nz_wlg_2 | 1       | https://api.cloud.catalyst.net.nz:443/v1/AUTH_%tenantid%      |
 +----------+---------+---------------------------------------------------------------+
 |          | 2       | https://api.cloud.catalyst.net.nz:5000/v2.0                   |
 +----------+---------+---------------------------------------------------------------+
-| nz-hlz-1 | 1       | https://api.nz-hlz-1.catalystcloud.io:8443/v1/AUTH_%tenantid% |
+| nz-hlz-1 | 1       | https://api.nz-hlz-1.catalystcloud.io:443/v1/AUTH_%tenantid%  |
 +----------+---------+---------------------------------------------------------------+
 |          | 2       | https://api.cloud.catalyst.net.nz:5000/v2.0                   |
 +----------+---------+---------------------------------------------------------------+
@@ -323,14 +323,14 @@ To use the version 1 (auth) API you need to have previously authenticated,
 and have remembered your token id (e.g using the keystone client). Also the
 endpoint for the desired region must be used (por in this case).
 
-https://api.nz-por-1.catalystcloud.io:8443/swift/v1/auth_tenant_id/container_name/object_name
+https://api.nz-por-1.catalystcloud.io:443/swift/v1/auth_tenant_id/container_name/object_name
 
 .. code-block:: python
 
   #!/usr/bin/env python
   import swiftclient
   token = 'thetokenid'
-  stourl = 'https://api.nz-por-1.catalystcloud.io:8443/v1/AUTH_<tenant_id>'
+  stourl = 'https://api.nz-por-1.catalystcloud.io:443/v1/AUTH_<tenant_id>'
 
   conn = swiftclient.Connection(
           preauthtoken = token,
@@ -364,9 +364,11 @@ API endpoints
 +----------+-----------------------------------------------------+
 | Region   | Endpoint                                            |
 +==========+=====================================================+
-| nz-por-1 | https://api.nz-por-1.catalystcloud.io:8443          |
+| nz-por-1 | https://api.nz-por-1.catalystcloud.io:443           |
 +----------+-----------------------------------------------------+
-| nz_wlg_2 | https://api.cloud.catalyst.net.nz:8443              |
+| nz_wlg_2 | https://api.cloud.catalyst.net.nz:443               |
++----------+-----------------------------------------------------+
+| nz-hlz-1 | https://api.nz-hlz-1.catalyst.net.nz:443            |
 +----------+-----------------------------------------------------+
 
 Requirements
@@ -412,7 +414,7 @@ compatible API.
   access_key = 'fffff8888fffff888ffff'
   secret = 'bbbb5555bbbb5555bbbb555'
   api_endpoint = 'api.cloud.catalyst.net.nz'
-  port = 8443
+  port = 443
   mybucket = 'mytestbucket'
 
   conn = boto.connect_s3(aws_access_key_id=access_key,
@@ -630,12 +632,12 @@ the object "file2.txt" that is located in the container "my-container".
   /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005
 
 You can test this using cURL and appending the generated URL to the Catalyst
-Cloud's server URL "https://api.nz-por-1.catalystcloud.io:8443". If it is
+Cloud's server URL "https://api.nz-por-1.catalystcloud.io:443". If it is
 successful, the request should return the contents of the object.
 
 .. code-block:: bash
 
-  $ curl -i "https://api.nz-por-1.catalystcloud.io:8443/v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005"
+  $ curl -i "https://api.nz-por-1.catalystcloud.io:443/v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005"
   HTTP/1.1 200 OK
   Server: nginx/1.10.1
   Date: Mon, 09 Jan 2017 19:22:05 GMT
@@ -928,8 +930,8 @@ The following changes need to be specified in the .s3cfg file.
 
 .. code-block:: ini
 
-  host_base = api.cloud.catalyst.net.nz:8443
-  host_bucket = api.cloud.catalyst.net.nz:8443
+  host_base = api.cloud.catalyst.net.nz:443
+  host_bucket = api.cloud.catalyst.net.nz:443
   signature_v2 = True
   use_https = True
 
