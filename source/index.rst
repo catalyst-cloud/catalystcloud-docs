@@ -25,6 +25,7 @@ Contents:
    cloud-orchestration
    backups
    billing
+   management
    tutorials
    contributing
 
