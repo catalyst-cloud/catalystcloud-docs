@@ -64,7 +64,7 @@ Select the new quota value and click submit
 
 |
 
-if your requested change does not fall into the preapproved category the **Previous Quota Changes**
+If your requested change does not fall into the preapproved category the **Previous Quota Changes**
 area will display a message showing the current state of your request.
 
 .. image:: _static/pending_change.png
