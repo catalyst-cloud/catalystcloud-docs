@@ -11,15 +11,28 @@ command line interface.
 Set up
 ******
 
-The OpenStack CLI can be installed in multiple ways. The recommended method for
-the Catalyst Cloud is to create a Python virtual environment and use ``pip`` to
-install it. This method has the benefit of installing the latest version of the
-CLI (operating system packages tend to install an outdated version) and
-prevents conflicts between Python libraries (dependencies are isolated in the
-virtual environment).
+The OpenStackClient Container
+=============================
+
+The OpenStack CLI can be installed in multiple ways. The recommended method for the Catalyst Cloud
+is to use the containerised version of the the OpenStackClient. This provides a docker container
+that has the CLI tool and it's dependencies pre-installed and tested against the Catalyst Cloud to
+ensure that they function correctly. It also contains logic to help simplify the handling of cloud
+credentials.
+
+To install the toolset visit `Catalyst Cloud OpenStackClient Container`_ . This has the all of the
+relevant information required to get the tools installed.
+
+.. _Catalyst Cloud OpenStackClient Container: https://github.com/catalyst-cloud/openstackclient-container
 
 Working with virtual environments
 =================================
+
+If the containerised approach does not fit with you the next best option is to create a Python
+virtual environment and use ``pip`` to install it. This method has the benefit of installing the
+latest version of the CLI (operating system packages tend to install an outdated version) and
+prevents conflicts between Python libraries (dependencies are isolated in the virtual environment).
+
 
 If you're not familiar with Python virtual environments, we recommend
 reading `the virtualenv section of the Python documentation`_ for an overview.
