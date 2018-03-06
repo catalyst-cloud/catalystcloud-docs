@@ -255,7 +255,7 @@ complete the entry and submit it otherwise you will have to redo it.
     If you are having trouble getting the MFA to activate and are receiving errors then try the
     following.
 
-    - Refresh the page fully, Rescan the QR code, try again.
+    - Refresh the page fully, rescan the QR code, try again.
     - Before you submit make sure that when you click the details link on the page, there are
       secret details there, if not, reload, rescan, retry."
 
@@ -271,7 +271,7 @@ re-login using MFA.
 |
 
 Place a tick in the **MFA Enabled** checkbox and enter a valid passcode from your authentication
-app and click **Sign In**
+app and click **Sign In**.
 
 |
 
@@ -283,7 +283,7 @@ Which users have MFA enabled
 ----------------------------
 
 Any project user that has one of the admin roles assigned to them can view all of the users
-currently able to access that project and see whether or not they haver enabled
+currently able to access that project and see whether or not they have MFA enabled.
 
 Removing MFA
 ------------
