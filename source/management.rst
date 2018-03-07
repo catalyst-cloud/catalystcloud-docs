@@ -204,7 +204,7 @@ click "Revoke Users" on the upper right of the page.
 .. image:: _static/revoke_multiple_users.png
 
 
-Multi factor authentication
+Multi Factor Authentication
 ===========================
 
 Catalyst Cloud provides the ability to further secure your cloud access by enabling multi factor
