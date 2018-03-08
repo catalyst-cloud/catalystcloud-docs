@@ -1,6 +1,6 @@
 # Catalyst Cloud Documentation
 
-This is the official documentation for the [Catalyst Cloud](https://www.catalyst.net.nz/catalyst-cloud), written by [Catalyst IT Limited](https://catalystcloud.nz/) with community contributions.
+This is the official documentation for the [Catalyst Cloud](https://catalystcloud.nz/), written by [Catalyst IT Limited](https://catalyst.net.nz/) with community contributions.
 
 ## Contributions
 
