@@ -39,9 +39,9 @@ general. The OpenStack Foundation documents can be found at
 http://docs.openstack.org/.
 
 You can find more information about the Catalyst Cloud, including prices and
-its terms and conditions at https://catalyst.net.nz/cloud.
+its terms and conditions at https://catalystcloud.nz/.
 
-You can sign up to the Catalyst Cloud at https://catalyst.net.nz/cloud-sign-up.
+You can sign up to the Catalyst Cloud at https://catalystcloud.nz/signup/.
 
 ******************
 Indices and tables
