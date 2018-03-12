@@ -9,8 +9,7 @@ Status page
 
 Our status page shows the state of our services in each region and also informs
 you about planned maintenance. The status page can be found here:
-https://catalyst.net.nz/catalyst-cloud/status
-
+https://catalystcloud.nz/support/status/
 
 ****************
 Support requests
@@ -25,9 +24,9 @@ Requests <https://dashboard.cloud.catalyst.net.nz/management/tickets/>`_ panel.
 Most requests are resolved within one business day. If you would like faster
 response times or additional support, please consider purchasing one of our
 `premium support packages
-<https://catalyst.net.nz/catalyst-cloud/premium-support>`_. Our target response
+<https://catalystcloud.nz/support/premium-support/>`_. Our target response
 times for priority one incidents are listed on the `premium support page
-<https://catalyst.net.nz/catalyst-cloud/premium-support>`_.
+<https://catalystcloud.nz/support/premium-support/>`_.
 
 Contacting your account manager
 ===============================

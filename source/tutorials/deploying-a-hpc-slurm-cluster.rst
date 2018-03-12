@@ -10,7 +10,7 @@ In this tutorial you will learn how to deploy a high performance computing
 (`HPC`_) cluster on the `Catalyst Cloud`_ using `elasticluster`_ and `SLURM`_.
 
 .. _HPC: https://en.wikipedia.org/wiki/High-performance_computing
-.. _Catalyst Cloud: https://www.catalyst.net.nz/catalyst-cloud
+.. _Catalyst Cloud: https://catalystcloud.nz/
 .. _elasticluster: https://gc3-uzh-ch.github.io/elasticluster/
 .. _SLURM: https://computing.llnl.gov/linux/slurm/
 
@@ -216,4 +216,3 @@ List the jobs in the queue:
 .. code-block:: bash
 
   squeue
-
