@@ -18,6 +18,7 @@ Contents:
    block-storage
    compute
    network
+   lbaas
    dashboard
    image
    object-storage
