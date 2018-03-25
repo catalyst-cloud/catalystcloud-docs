@@ -39,8 +39,8 @@ independently when needed.
 Physical infrastructure
 ***********************
 
-Access controll
-===============
+Access control
+==============
 
 All our data centres have comprehensive access control systems with multiple
 perimeters. There are security cameras covering all entrances and the server
