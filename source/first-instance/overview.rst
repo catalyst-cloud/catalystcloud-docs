@@ -143,12 +143,12 @@ the same rules to subsequent instances that you may create.
 .. warning::
 
   Note that by using the CIDR 0.0.0.0/0 as a remote, you are allowing access
-  from any IP to your compute instance on the port and protocol selected. This
-  is often desirable when exposing a web server (eg: allow HTTP and HTTPs
-  access from the Internet), but is insecure when exposing other protocols,
-  such as SSH, Telnet and FTP. We strongly recommend you to limit the exposure
-  of your compute instances and services to IP addresses or subnets that are
-  trusted.
+  from any IP on the public Internet to your compute instance on the port and
+  protocol selected. This is often desirable when exposing a web server (eg:
+  allow HTTP and HTTPs access from the Internet), but is insecure when
+  exposing other protocols, such as SSH, Telnet and FTP. We strongly recommend
+  you to limit the exposure of your compute instances and services to IP
+  addresses or subnets that are trusted.
 
 Floating IPs
 ============
