@@ -1,3 +1,5 @@
+.. _quota_info:
+
 ######
 Quotas
 ######

@@ -1,8 +1,8 @@
 .. _regions:
 
-#############
-Cloud regions
-#############
+#######
+Regions
+#######
 
 The Catalyst Cloud is hosted in multiple regions, each in a different
 geographical location. Regions are data centres that are completely

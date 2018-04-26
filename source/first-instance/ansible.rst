@@ -1,8 +1,8 @@
 .. _launching-your-first-instance-using-ansible:
 
-*******************************************
+*************
 Using Ansible
-*******************************************
+*************
 
 `Ansible`_ is a popular open source configuration management and application
 deployment tool. Ansible provides a set of core modules for interacting with

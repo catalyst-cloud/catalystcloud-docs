@@ -1,177 +1,244 @@
-***********************
-Using the web interface
-***********************
+.. _first-instance-with-dashboard:
 
-Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
+#######################
+Using the web dashboard
+#######################
 
-As a new user to the Catalyst Cloud your initial cloud project will come with a pre-configured
-private network and a router connected to the internet. If you have deleted this, or would like to
-create additional networks then please see :ref:`creating_networks` for details on how to do that.
+Now we're going to take you step by step on the process of creating a Linux
+instance on the Catalyst Cloud.
+
+****************
+Before you begin
+****************
+
+1) We assume you've already `signed up <https://catalystcloud.nz/signup/>`_ to
+   the Catalyst Cloud.
+2) Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
+3) As a new user to the Catalyst Cloud your initial cloud project will come with
+   a pre-configured private network and a router connected to the internet. We
+   assume this is the case for this tutorial. If you have deleted this, or would
+   like to create additional networks then please see :ref:`creating networks
+   <creating_networks>` for details on how to do that.
 
 Otherwise, let's proceed with building your first instance.
 
-
+********************
 Uploading an SSH key
-====================
+********************
 
-You can either import an existing public key or have OpenStack create a keypair
-for you. Here we document how to import the public key from an existing keypair:
+The first thing we need to do is to have a way to access the instances we
+create. Typcially this is done by a Secure Shell tunnel, or SSH. To allow our
+instance to accept our workstation's SSH tunnel request, we must add our SSH
+public key to our instance. We can do this right from the dashboard.
 
-Select "Import Key Pair":
+You can either import an existing public key or have the Catalyst Cloud create a
+key pair for you. We document both below.
 
-.. image:: ../_static/fi-key-pair-import-1.png
-   :align: center
+Creating a new key pair
+=======================
+
+If you haven't generated a SSH key pair before, Catalyst Cloud can create one
+for you.
+
+Navigate to the ``Key Pairs`` tab.
+
+.. image:: dashboard_assets/key-pair-tab.png
+
+Select the ``Create Key Pair`` button.
+
+.. image:: dashboard_assets/key-pair-buttons.png
+
+Name and create the key pair.
+
+.. image:: dashboard_assets/new-key-pair.png
+
+Click ``Copy Private Key to Clipboard`` and paste it into a text file in a
+secure location. Make sure the file is saved as plain text.
+
+Importing an existing key pair
+==============================
+
+If you already have an SSH key pair, you can import the public key into Catalyst
+Cloud.
+
+Navigate to the ``Key Pairs`` tab.
+
+.. image:: dashboard_assets/key-pair-tab.png
+
+Select the ``Import Key Pair`` button.
+
+.. image:: dashboard_assets/key-pair-buttons.png
+
+Name the key pair, and paste your public key into the box.
+
+.. image:: dashboard_assets/import-key-pair.png
 
 
-Enter your key pair name and paste your public key into the box:
+Now that you've either imported or created an SSH key pair, we can continue.
 
-.. image:: ../_static/fi-key-pair-import-2.png
-   :align: center
-
-
-.. note::
-
- The dashboard has two options, "Create Key Pair" and "Import Key Pair". When
- you select "Create Key Pair", OpenStack creates a keypair and saves the public
- key while providing the private key to you to download. When you select
- "Import Key Pair" the dashboard provides a form where you can upload a public
- key. This option is somewhat confusingly named as you are importing a public
- key only and not a keypair; it would be more correctly named "Import Public
- Key". See the :ref:`ssh_keypairs` section of the FAQ for more information.
-
-
+*********************************
 Configure Instance Security Group
-=================================
+*********************************
 
-We will add  a security group and a rule for our instance so that it can be
-accessed using SSH.
+By default, instances are inaccessible from all external IP addresses on all
+ports. So we'll need to create an extra security group to let us SSH into the
+instance we're about to create.
 
-Navigate to the "Security Groups" tab of the "Access & Security" section and
-click "Create Security Group":
+Navigate to the ``Security Groups`` tab.
 
-.. image:: ../_static/fi-security-group-create-1.png
-   :align: center
+.. image:: dashboard_assets/security-group-tab.png
 
+Now we'll create a new security group, specific to allowing SSH access. Select ``Create Security Group``
+, give it a name, and create it.
 
-Enter a name and description and click "Create Security Group":
+.. image:: dashboard_assets/create-security-group.png
 
-.. image:: ../_static/fi-security-group-create-2.png
-   :align: center
+Now select manage rules for your new security group.
 
+.. image:: dashboard_assets/select-manage-rules.png
 
-Now click on "Manage Rules" for the group you have created:
+As you can tell, by default security rules allow egress of all traffic, and
+allow no ingress of traffic. By adding additional rules, we can whitelist new
+types of traffic, coming from new IP addresses. Note that you can assign more
+than one security rules to an instance.
 
-.. image:: ../_static/fi-security-group-rules-manage.png
-   :align: center
+Select add rule.
 
+.. image:: dashboard_assets/sec-rule-list.png
 
-Click on “Add Rule”:
+Here we can see the add rule screen. Many options are available to us.
 
-.. image:: ../_static/fi-security-group-rule-add.png
-   :align: center
+.. image:: dashboard_assets/add_rule_screen.png
 
+Change the ``Rule`` dropdown to ``SSH``. If you'd like to restrict SSH requests
+to just your IP address, you could change the ``CIDR`` option to your IP
+address. Here however, I've left it as ``0.0.0.0/0``, to allow SSH access **from
+all IP addresses**. Obviously, this would be an insecure thing to do when
+working in a real production environment, but I'm leaving it like this for
+convenience.
 
-Enter 22 for the port number (this is the TCP port the SSH service listens on).
-You can use the default values for the remainder of the options. Click "Add":
+When you're happy, select ``Add`` to add the rule to the security group.
 
-.. image:: ../_static/fi-security-group-rule-add-add.png
-   :align: center
-
-
-.. warning::
-
-  Note that by using the CIDR 0.0.0.0/0 as a remote, you are allowing access
-  from any IP to your compute instance on the port and protocol selected. This
-  is often desirable when exposing a web server (eg: allow HTTP and HTTPs
-  access from the Internet), but is insecure when exposing other protocols,
-  such as SSH, Telnet and FTP. We strongly recommend you to limit the exposure
-  of your compute instances and services to IP addresses or subnets that are
-  trusted.
+.. image:: dashboard_assets/add-ssh-rule.png
 
 
+We now have a security group that will allow SSH access to our soon to be
+created instance.
+
+
+
+*******************
 Booting an Instance
-===================
+*******************
 
-We are now ready to launch our first instance. Select launch instance from the
-instances list:
+We are now ready to launch our first instance! Navigate to the ``Instances``
+page.
 
-.. image:: ../_static/fi-instance-launch.png
-   :align: center
+.. image:: dashboard_assets/instances-tab.png
 
+Select launch instance.
 
-Enter an instance name, use the default instance count of one.  Select "Image"
-as the boot source and "No" for create new volume. Select
-``ubuntu-14.04-x86_64`` from the image list. Then click "Next":
+.. image:: dashboard_assets/launch-instance-button.png
 
-.. image:: ../_static/fi-launch-instance-source.png
-   :align: center
+Name your instance.
 
+.. image:: dashboard_assets/name-instance.png
 
-Select the ``c1.c1r1`` flavor from the list and click "Next":
+Navigate to the ``Source`` tab.
 
-.. image:: ../_static/fi-launch-instance-flavor.png
-   :align: center
+There are many types of sources you can use for your instance. In this case,
+we'll use an Image to create a standard Ubuntu installation.
 
+.. image:: dashboard_assets/vanilla-image.png
 
-Select the ``private-net`` network from the list and click "Next":
+Search for Ubuntu.
 
-.. image:: ../_static/fi-launch-instance-networks.png
-   :align: center
+Select the image for Ubuntu 18.
 
+By default the volume will just be large enough to hold the image's files.
+We'll increase it to 100GB so we have enough space for later.
 
-Select the ``first-instance-sg`` security group from the list and click "Next":
+.. image:: dashboard_assets/ubuntu-source.png
 
-.. image:: ../_static/fi-launch-instance-security-groups.png
-   :align: center
+Navigate to the ``Flavor`` tab. This is where we select the compute resources we
+want to assign to our compute instance.
 
+Order the flavors by ``VCPUS``, and select an appropriate size.
 
-Select the ``first-instance-key`` key pair from the list and click "Launch
-Instance":
+.. image:: dashboard_assets/setting-flavor.png
 
-.. image:: ../_static/fi-launch-instance-key-pair.png
-   :align: center
+Navigate to the ``Security Groups`` tab. Add your new security group.
 
+.. image:: dashboard_assets/setting-sec-rules.png
 
-It will take a few seconds for your instance to build. You will see the Status,
-Task and Power State change during this process. When complete, the status will
-be "Active". You now have a running instance, but there are a few more steps
-required before you can log in.
+Navigate to the ``Key Pair`` tab. Your key pair should already be assigned, but
+if it's not, do it now. This will inject your public key into the new instance,
+so that your private key will be accepted for SSH connections.
 
+.. image:: dashboard_assets/setting-key-pair.png
 
-Allocate a Floating IP
-======================
+All the other tabs are for advanced features, and we can safely ignore them for
+now.
 
-To associate a Floating IP with your instance you need to navigate to the
-"Floating IPs" tab of the "Access & Security" section.
+Select ``Launch Instance``.
 
-If an IP address has not yet been allocated, click on "Allocate IP to Project" to
-obtain a public IP. Then, select an IP that is not currently mapped and click
-on "Associate":
+Wait for your instance to launch.
 
-.. image:: ../_static/fi-floating-ip.png
-   :align: center
+.. image:: dashboard_assets/launching-instance.png
 
+Finally, to make your instance accessable, we need to give it a publicly
+available, static IP address, because currently the instance only has an
+internal IP address from instance's subnet. These are ``Floating IPs``.
 
-Select the port you wish to be associated with the Floating IP. Ports are
-equivalent to virtual network interfaces of compute instances, and are named
-after the compute instance that owns them.
+Use the instance's dropdown to find the ``Associate Floating IP`` option and
+select it.
 
-In this example, select the "first-instance" port and click "Associate":
+.. image:: dashboard_assets/finding-floating-ip.png
 
-.. image:: ../_static/fi-floating-ip-associate.png
-   :align: center
+Select the ``+`` to create a new floating IP address.
 
+.. image:: dashboard_assets/assigning-floating-ip.png
 
+Select ``Allocate IP`` to provision yourself a floating IP address.
+
+.. image:: dashboard_assets/creating-floating-ip.png
+
+The new floating IP should already be assigned.
+
+Select ``Associate`` to associate it to your instance.
+
+The floating IP is a way to access your new instance.
+
+.. image:: dashboard_assets/set-floating-ip.png
+
+|
+|
+
+Congratulations, you've now booted an instance. Now we'll connect to it with an
+SSH tunnel so you can start using it.
+
+***************************
 Connect to the new Instance
-===========================
+***************************
 
-You can now connect to the SSH service using the floating public IP that you
-associated with your instance in the previous step. This address is visible in
-the Instances list, or under the Floating IPs tab in Access & Security.
+You can now connect to the SSH service using the floating IP that you
+associated with your instance. This address is visible in
+the Instances list, or under the ``Floating IPs`` window.
 
 .. code-block:: bash
 
- $ ssh ubuntu@PUBLIC_IP
+ $ ssh -i <path to private key> ubuntu@<your floating ip>
 
 You should be able to SSH into, and interact with this instance as you would
 any Ubuntu server.
+
+***********************
+Learning more from here
+***********************
+
+Now you've learned a great deal about Catalyst Cloud instances, security groups,
+floating ips, SSH key pairs, and images. To move forward from here, you might
+want to:
+
+* :ref:`Install the command line interface. <command-line-interface>`
+* :ref:`Install Ansible, and use it to deploy a new instance. <launching-your-first-instance-using-ansible>`

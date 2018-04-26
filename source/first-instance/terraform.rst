@@ -1,3 +1,5 @@
+.. _launching-your-first-instance-using-terraform:
+
 ***************
 Using Terraform
 ***************
