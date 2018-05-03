@@ -1,15 +1,20 @@
-*************
+#############
 Load Balancer
-*************
+#############
 
+|
+
+********
 Overview
-========
+********
 Load balancing is the action of taking front-end requests and distributing these across a pool of
-back-end servers for processing based on a series of rules. The OpenStack Load Balancer as a
+back-end servers for processing based on a series of rules. The Catalyst Cloud Load Balancer as a
 Service (LBaaS) is aimed at encapsulating the complexity of implementing a typical load balancing
 solution into an easy to use cloud based service that natively provides a multi-tenanted, highly
 scaleable programmable alternative.
 
+Layer 4 vs Layer 7 Load balancing
+=================================
 Load balancers are typically grouped into two categories: Layer 4 or Layer 7, which correspond to
 the layers of the `OSI model`_. The Layer 4 type act upon data such as IP, TCP, UDP which are
 protocols found in the network and transport layers whereas the Layer 7 type act upon requests that
@@ -17,7 +22,8 @@ contain data from application layer protocols such as HTTP.
 
 In order to get started we need to first define some terminology as it applies to this service:
  - The ``load balancer`` is a logical grouping of listeners on one or more virtual ip addresses
-   (VIP) - A ``listener`` is the listening endpoint of a load balanced service. It requires port
+   (VIP)
+ - A ``listener`` is the listening endpoint of a load balanced service. It requires port
    and protocol information but not an IP address.
  - The ``pool`` is associated with a listener and responsible for grouping the **members** which
    receive the client requests forwarded by the listener.
@@ -28,8 +34,11 @@ For a more complete set of definitions take a look at the OpenStack LBaaS `gloss
 .. _OSI model: https://en.wikipedia.org/wiki/OSI_model
 .. _glossary: https://docs.openstack.org/octavia/pike/reference/glossary.html
 
-A simple TCP loadbalancer
-=========================
+|
+|
+
+Layer 4 load balancing
+======================
 
 In this example we will create a simple scenario that load balances traffic based on TCP port
 numbers to different service endpoints.
@@ -39,7 +48,7 @@ will be attached to the local subnet **private-subnet**.
 
 .. code-block:: bash
 
-  $ export SUBNET=`openstack subnet list --name private-subnet private-subnet -f value -c ID`
+  $ export SUBNET=`openstack subnet list --name private-subnet -f value -c ID`
   $ openstack loadbalancer create --vip-subnet-id ${SUBNET} --name lb_test
   +---------------------+--------------------------------------+
   | Field               | Value                                |
@@ -63,10 +72,10 @@ will be attached to the local subnet **private-subnet**.
   | vip_subnet_id       | 1c221166-3cb3-4534-915a-b75220ec1873 |
   +---------------------+--------------------------------------+
 
-Next we will create two listeners, both will use as their protocol and they will listen on ports
+Next we will create two listeners, both will use TCP as their protocol and they will listen on ports
 80 and 90 respectively
 
-.. code-block:: console
+.. code-block:: bash
 
 
   $ openstack loadbalancer listener create --name 80_listener --protocol TCP --protocol-port 80 lb_test
@@ -119,7 +128,7 @@ Next we will create two listeners, both will use as their protocol and they will
 
 Then add a pool to each listener
 
-.. code-block:: console
+.. code-block:: bash
 
   $ openstack loadbalancer pool create --name 80_pool --listener 80_listener --protocol TCP --lb-algorithm ROUND_ROBIN
   +---------------------+--------------------------------------+
@@ -167,7 +176,7 @@ Then add a pool to each listener
 
 Finally we can add the members to the pools.
 
-.. code-block:: console
+.. code-block:: bash
 
   $ openstack loadbalancer member create --name 80_member --address 10.0.0.4 --protocol-port 80  80_pool
   +---------------------+--------------------------------------+
@@ -223,7 +232,7 @@ To test, telnet to both of the ports at VIP of the listener, in this case 10.0.0
 should expect to get an appropriate response for the targeted port indicating that the correct
 server has responded to the request.
 
-.. code-block:: console
+.. code-block:: bash
 
   $ telnet 10.0.0.3 80
   Trying 10.0.0.3...
@@ -249,9 +258,12 @@ server has responded to the request.
 
   Connection closed by foreign host.
 
+|
+|
 
-What is L7 load balancing?
-==========================
+**********************
+Layer 7 load balancing
+**********************
 
 Layer 7 load balancing takes its name from the OSI model, indicating that the load balancer
 distributes requests to back-end pools based on layer 7 (application) data. Layer 7 load balancing
@@ -261,10 +273,13 @@ switching,”
 A layer 7 load balancer consists of a listener that accepts requests on behalf of a number of
 back-end pools and distributes those requests based on policies that use application data to
 determine which pools should service any given request. This allows for the application
-infrastructure to be specifically tuned/optimized to serve specific types of content. For example,
-one group of back-end servers (pool) can be tuned to serve only images, another for execution of
-server-side scripting languages like PHP and ASP, and another for static content such as HTML, CSS,
-and JavaScript.
+infrastructure to be specifically tuned/optimized to serve specific types of content.
+
+For example,
+
+A site with "mydomain.nz/login" or a subdomain "login.mydomain.nz" will be routed to a back-end pool running an
+identity provider and authentication system, while "mydomain.nz/shop" or "shop.mydomain.nz" will be
+outed to a commerce application".
 
 Unlike lower-level load balancing, layer 7 load balancing does not require that all pools behind
 the load balancing service have the same content. In fact, it is generally expected that a layer 7
@@ -273,7 +288,7 @@ load balancer expects the back-end servers from different pools will have differ
 in the application message.
 
 L7 rule
--------
+=======
 An L7 rule is a single, simple logical test that evaluates to true or false. It consists of a rule
 type, a comparison type, a value and an optional key that gets used depending on the rule type.
 An L7 rule must always be associated with an L7 policy.
@@ -299,7 +314,7 @@ Comparison types
 - EQUAL_TO: String is equal to
 
 L7 policy
----------
+=========
 An L7 Policy is a collection of L7 rules associated with a Listener, and which may also have an
 association to a back-end pool. Policies describe actions that should be taken by the load
 balancing software if all of the rules in the policy return true.
@@ -311,7 +326,7 @@ L7 Policy Testing
 
 Create the listener
 
-.. code-block:: console
+.. code-block:: bash
 
 
   $ openstack loadbalancer listener create --name http_listener --protocol HTTP --protocol-port 80 lb_test
@@ -338,9 +353,9 @@ Create the listener
   | updated_at                | None                                 |
   +---------------------------+--------------------------------------+
 
-create the first pool
+Create the first pool
 
-.. code-block:: console
+.. code-block:: bash
 
   $ openstack loadbalancer pool create --name http_pool --listener http_listener --protocol HTTP --lb-algorithm ROUND_ROBIN
   +---------------------+--------------------------------------+
@@ -364,9 +379,9 @@ create the first pool
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
 
-add the member to the pool
+Add the member to the pool
 
-.. code-block:: console
+.. code-block:: bash
 
   $ openstack loadbalancer member create --name www.example.com --subnet private-subnet --address 10.0.0.4 --protocol-port 80  http_pool
   +---------------------+--------------------------------------+
@@ -388,9 +403,9 @@ add the member to the pool
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
-create the second pool
+Create the second pool
 
-.. code-block:: console
+.. code-block:: bash
 
   $ openstack loadbalancer pool create --name http_pool_2 --loadbalancer lb_test --protocol HTTP --lb-algorithm ROUND_ROBIN
   +---------------------+--------------------------------------+
@@ -414,9 +429,9 @@ create the second pool
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
 
-add the other member to the second pool
+Add the other member to the second pool
 
-.. code-block:: console
+.. code-block:: bash
 
   $ openstack loadbalancer member create --name www2.example.com --subnet private-subnet --address 10.0.0.12 --protocol-port 80  http_pool_2
   +---------------------+--------------------------------------+
@@ -438,9 +453,9 @@ add the other member to the second pool
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
-create the layer 7 policy
+Create the layer 7 policy
 
-.. code-block:: console
+.. code-block:: bash
 
   openstack loadbalancer l7policy create --action REDIRECT_TO_POOL --redirect-pool http_pool_2 --name policy1 http_listener
   +---------------------+--------------------------------------+
@@ -463,9 +478,9 @@ create the layer 7 policy
   | name                | policy1                              |
   +---------------------+--------------------------------------+
 
-create a rule for the policy
+Create a rule for the policy
 
-.. code-block:: console
+.. code-block:: bash
 
   openstack loadbalancer l7rule create --compare-type EQUAL_TO --type HOST_NAME --value www2.example.com policy1
   +---------------------+--------------------------------------+
@@ -519,3 +534,10 @@ add to /etc/hosts
 
   sudo ip netns exec $SERVER_NS curl www2.example.com
   Welcome to 10.0.0.12 the URL is www2.example.com
+
+|
+|
+
+***************
+TLS termination
+***************
