@@ -16,7 +16,7 @@ Problem
 
 In Catalyst Cloud we provide OS images that users can use to start their
 virtual machines. We update our images regularily so the image name stays
-the same but image contents changes. Users who manage Catalyst Cloud using
+the same but the image contents change. Users who manage Catalyst Cloud using
 Terraform, will notice that when they use certain images to start compute
 instances Terraform will periodically offer to re-create an entire instance
 in response to image id change.
@@ -60,7 +60,9 @@ in response to image id change.
 
 Lifecycle or image ID
 =====================
-One possible solution is to use `image_id` in Terraform manifes, this will
+One possible solution is to use `image_id` in the Terraform manifest, this will
+pin `image_id` to specific value so that change in `image_name` won't affect
+the resource.
 
 .. code-block:: bash
 
