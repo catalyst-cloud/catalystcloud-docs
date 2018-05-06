@@ -7,44 +7,51 @@ Load Balancer
 ********
 Overview
 ********
-Load balancing is the action of taking front-end requests and distributing these across a pool of
-back-end servers for processing based on a series of rules. The Catalyst Cloud Load Balancer as a
-Service (LBaaS) is aimed at encapsulating the complexity of implementing a typical load balancing
-solution into an easy to use cloud based service that natively provides a multi-tenanted, highly
-scaleable programmable alternative.
+Load balancing is the action of taking front-end requests and distributing
+these across a pool of back-end servers for processing based on a series of
+rules. The Catalyst Cloud Load Balancer as a Service (LBaaS) is aimed at
+encapsulating the complexity of implementing a typical load balancing solution
+into an easy to use cloud based service that natively provides a multi-tenanted
+, highly scaleable programmable alternative.
 
 Layer 4 vs Layer 7 Load balancing
 =================================
-Load balancers are typically grouped into two categories: Layer 4 or Layer 7, which correspond to
-the layers of the `OSI model`_. The Layer 4 type act upon data such as IP, TCP, UDP which are
-protocols found in the network and transport layers whereas the Layer 7 type act upon requests that
-contain data from application layer protocols such as HTTP.
+Load balancers are typically grouped into two categories: Layer 4 or Layer 7,
+which correspond to the layers of the `OSI model`_. The Layer 4 type act upon
+data such as IP, TCP, UDP which are protocols found in the network and
+transport layers whereas the Layer 7 type act upon requests that contain data
+from application layer protocols such as HTTP.
 
-In order to get started we need to first define some terminology as it applies to this service:
- - The ``load balancer`` is a logical grouping of listeners on one or more virtual ip addresses
-   (VIP)
- - A ``listener`` is the listening endpoint of a load balanced service. It requires port
-   and protocol information but not an IP address.
- - The ``pool`` is associated with a listener and responsible for grouping the **members** which
-   receive the client requests forwarded by the listener.
- - A ``member`` is a single server or service. It can only be associated with a single pool.
+In order to get started we need to first define some terminology as it applies
+to this service:
 
-For a more complete set of definitions take a look at the OpenStack LBaaS `glossary`_.
+ - The ``load balancer`` is a logical grouping of listeners on one or more
+   virtual ip addresses (VIP)
+ - A ``listener`` is the listening endpoint of a load balanced service. It
+   requires port and protocol information but not an IP address.
+ - The ``pool`` is associated with a listener and responsible for grouping the
+   **members** which receive the client requests forwarded by the listener.
+ - A ``member`` is a single server or service. It can only be associated with
+   a single pool.
+
+For a more complete set of definitions take a look at the OpenStack LBaaS
+`glossary`_.
 
 .. _OSI model: https://en.wikipedia.org/wiki/OSI_model
 .. _glossary: https://docs.openstack.org/octavia/pike/reference/glossary.html
 
 |
-|
 
+**********************
 Layer 4 load balancing
-======================
+**********************
 
-In this example we will create a simple scenario that load balances traffic based on TCP port
-numbers to different service endpoints.
+In this example we will create a simple scenario that load balances traffic
+based on TCP port numbers to different service endpoints.
 
-First lets create the loadbalancer. It will be called **lb_test** and it's virtual IP address (VIP)
-will be attached to the local subnet **private-subnet**.
+First lets create the loadbalancer. It will be called **lb_test** and it's
+virtual IP address (VIP) will be attached to the local subnet
+**private-subnet**.
 
 .. code-block:: bash
 
@@ -72,8 +79,8 @@ will be attached to the local subnet **private-subnet**.
   | vip_subnet_id       | 1c221166-3cb3-4534-915a-b75220ec1873 |
   +---------------------+--------------------------------------+
 
-Next we will create two listeners, both will use TCP as their protocol and they will listen on ports
-80 and 90 respectively
+Next we will create two listeners, both will use TCP as their protocol and they
+will listen on ports 80 and 90 respectively
 
 .. code-block:: bash
 
@@ -218,9 +225,10 @@ Finally we can add the members to the pools.
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
-As a simple mockup we have the commands shown below running on each of the member servers, they
-will send a response when a connection is received on the listening port. Make sure that you
-replace the PORT variable with the correct value for each member server.
+As a simple mockup we have the commands shown below running on each of the
+member servers, they will send a response when a connection is received on the
+listening port. Make sure that you replace the PORT variable with the correct
+value for each member server.
 
 .. code-block:: bash
 
@@ -228,9 +236,9 @@ replace the PORT variable with the correct value for each member server.
   export PORT="80"
   sudo nc -lk -p ${PORT} -e echo -e "HTTP/1.1 200 OK\r\n$(date)\r\n\r\n\tHi this is port ${PORT} on ${MYIP}\n\n"
 
-To test, telnet to both of the ports at VIP of the listener, in this case 10.0.0.3, in response you
-should expect to get an appropriate response for the targeted port indicating that the correct
-server has responded to the request.
+To test, telnet to both of the ports at VIP of the listener, in this case
+10.0.0.3, in response you should expect to get an appropriate response for the
+targeted port indicating that the correct server has responded to the request.
 
 .. code-block:: bash
 
@@ -259,51 +267,56 @@ server has responded to the request.
   Connection closed by foreign host.
 
 |
-|
 
 **********************
 Layer 7 load balancing
 **********************
 
-Layer 7 load balancing takes its name from the OSI model, indicating that the load balancer
-distributes requests to back-end pools based on layer 7 (application) data. Layer 7 load balancing
-s also known as “request switching,” “application load balancing,” “content based routing or
-switching,”
+Layer 7 load balancing takes its name from the OSI model, indicating that the
+load balancer distributes requests to back-end pools based on layer 7
+(application) data. Layer 7 load balancing s also known as
+**request switching**, **application load balancing**, or
+**content based routing or switching**.
 
-A layer 7 load balancer consists of a listener that accepts requests on behalf of a number of
-back-end pools and distributes those requests based on policies that use application data to
-determine which pools should service any given request. This allows for the application
-infrastructure to be specifically tuned/optimized to serve specific types of content.
+A layer 7 load balancer consists of a listener that accepts requests on behalf
+of a number of back-end pools and distributes those requests based on policies
+that use application data to determine which pools should service any given
+request. This allows for the application infrastructure to be specifically
+tuned/optimized to serve specific types of content.
 
 For example,
 
-A site with "mydomain.nz/login" or a subdomain "login.mydomain.nz" will be routed to a back-end pool running an
-identity provider and authentication system, while "mydomain.nz/shop" or "shop.mydomain.nz" will be
-outed to a commerce application".
+A site with "mydomain.nz/login" or a subdomain "login.mydomain.nz" will be
+routed to a back-end pool running an identity provider and authentication
+system, while "mydomain.nz/shop" or "shop.mydomain.nz" will be outed to a
+commerce application".
 
-Unlike lower-level load balancing, layer 7 load balancing does not require that all pools behind
-the load balancing service have the same content. In fact, it is generally expected that a layer 7
-load balancer expects the back-end servers from different pools will have different content. Layer
-7 load balancers are capable of directing requests based on URI, host, HTTP headers, and other data
-in the application message.
+Unlike lower-level load balancing, layer 7 load balancing does not require
+that all pools behind the load balancing service have the same content. In
+fact, it is generally expected that a layer load balancer expects the
+back-end servers from different pools will have different content. Layer
+7 load balancers are capable of directing requests based on URI, host, HTTP
+headers, and other data in the application message.
 
 L7 rule
 =======
-An L7 rule is a single, simple logical test that evaluates to true or false. It consists of a rule
-type, a comparison type, a value and an optional key that gets used depending on the rule type.
-An L7 rule must always be associated with an L7 policy.
+An L7 rule is a single, simple logical test that evaluates to true or false.
+It consists of a rule type, a comparison type, a value and an optional key that
+gets used depending on the rule type. An L7 rule must always be associated
+with an L7 policy.
 
 Rule types
 
-- HOST_NAME: The rule does a comparison between the HTTP/1.1 hostname in the request against the
-  value parameter in the rule.
-- PATH: The rule compares the path portion of the HTTP URI against the value parameter in the rule.
-- FILE_TYPE: The rule compares the last portion of the URI against the value parameter in the rule.
-  (eg. “txt”, “jpg”, etc.)
-- HEADER: The rule looks for a header defined in the key parameter and compares it against the
-  value parameter in the rule.
-- COOKIE: The rule looks for a cookie named by the key parameter and compares it against the value
+- HOST_NAME: The rule does a comparison between the HTTP/1.1 hostname in the
+  request against the value parameter in the rule.
+- PATH: The rule compares the path portion of the HTTP URI against the value
   parameter in the rule.
+- FILE_TYPE: The rule compares the last portion of the URI against the value
+  parameter in the rule. (eg. “txt”, “jpg”, etc.)
+- HEADER: The rule looks for a header defined in the key parameter and compares
+  it against the value parameter in the rule.
+- COOKIE: The rule looks for a cookie named by the key parameter and compares
+  it against the value parameter in the rule.
 
 Comparison types
 
@@ -315,9 +328,10 @@ Comparison types
 
 L7 policy
 =========
-An L7 Policy is a collection of L7 rules associated with a Listener, and which may also have an
-association to a back-end pool. Policies describe actions that should be taken by the load
-balancing software if all of the rules in the policy return true.
+An L7 Policy is a collection of L7 rules associated with a Listener, and which
+may also have an association to a back-end pool. Policies describe actions that
+should be taken by the load balancing software if all of the rules in the
+policy return true.
 
 
 
@@ -327,7 +341,6 @@ L7 Policy Testing
 Create the listener
 
 .. code-block:: bash
-
 
   $ openstack loadbalancer listener create --name http_listener --protocol HTTP --protocol-port 80 lb_test
   +---------------------------+--------------------------------------+
@@ -536,8 +549,11 @@ add to /etc/hosts
   Welcome to 10.0.0.12 the URL is www2.example.com
 
 |
-|
 
 ***************
 TLS termination
 ***************
+At the current time the Catalyst Cloud Load Balancer as a Service does not
+support TLS termination but it will be available soon, once the secret storage
+service is available. The secret storage service is required to be able to
+safely store certificates uploaded to the cloud.
