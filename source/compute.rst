@@ -7,12 +7,12 @@ Table of Contents
 .. toctree::
   :maxdepth: 1
 
-  compute-services/overview
-  compute-services/launch-compute-instance
-  compute-services/resize-instance
-  compute-services/stop-instance
-  compute-services/anti-affinity-groups-ha
-  compute-services/faq
+  compute-service/overview
+  compute-service/launch-compute-instance
+  compute-service/resize-instance
+  compute-service/stop-instance
+  compute-service/anti-affinity-groups-ha
+  compute-service/faq
 
 
 The compute service provides scalable on-demand compute capacity for your
