@@ -38,7 +38,7 @@ To create a server group:
 
 .. code-block:: bash
 
-  openstack server group create $groupname $policy
+  openstack server group create --policy $policy $groupname
 
 Where:
 
