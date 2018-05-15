@@ -6,6 +6,17 @@ This is the official documentation for the [Catalyst Cloud](https://catalystclou
 
 If you have anything to fix or details to add, please consult [Contributing to the documentation](http://docs.catalystcloud.nz/contributing.html).
 
+To start a live reloading server, run:
+
+```
+./live_compile.sh
+```
+Then navigate in your preferred browser to `localhost:8000`.
+
+Changes from files edited in the `source` directory will now be updated in the browser
+after a brief delay. This makes editing the documentation and judging the effects
+of your changes much easier.
+
 ## Licence
 
 Unless otherwise specified, everything in this repository is covered by the following licence:
