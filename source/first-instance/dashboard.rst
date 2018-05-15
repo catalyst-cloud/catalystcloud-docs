@@ -22,16 +22,12 @@ Select "Import Key Pair":
 .. image:: ../_static/fi-key-pair-import-1.png
    :align: center
 
-|
-|
 
 Enter your key pair name and paste your public key into the box:
 
 .. image:: ../_static/fi-key-pair-import-2.png
    :align: center
 
-|
-|
 
 .. note::
 
@@ -56,32 +52,24 @@ click "Create Security Group":
 .. image:: ../_static/fi-security-group-create-1.png
    :align: center
 
-|
-|
 
 Enter a name and description and click "Create Security Group":
 
 .. image:: ../_static/fi-security-group-create-2.png
    :align: center
 
-|
-|
 
 Now click on "Manage Rules" for the group you have created:
 
 .. image:: ../_static/fi-security-group-rules-manage.png
    :align: center
 
-|
-|
 
 Click on “Add Rule”:
 
 .. image:: ../_static/fi-security-group-rule-add.png
    :align: center
 
-|
-|
 
 Enter 22 for the port number (this is the TCP port the SSH service listens on).
 You can use the default values for the remainder of the options. Click "Add":
@@ -89,8 +77,6 @@ You can use the default values for the remainder of the options. Click "Add":
 .. image:: ../_static/fi-security-group-rule-add-add.png
    :align: center
 
-|
-|
 
 .. warning::
 
@@ -112,8 +98,6 @@ instances list:
 .. image:: ../_static/fi-instance-launch.png
    :align: center
 
-|
-|
 
 Enter an instance name, use the default instance count of one.  Select "Image"
 as the boot source and "No" for create new volume. Select
@@ -122,32 +106,24 @@ as the boot source and "No" for create new volume. Select
 .. image:: ../_static/fi-launch-instance-source.png
    :align: center
 
-|
-|
 
 Select the ``c1.c1r1`` flavor from the list and click "Next":
 
 .. image:: ../_static/fi-launch-instance-flavor.png
    :align: center
 
-|
-|
 
 Select the ``private-net`` network from the list and click "Next":
 
 .. image:: ../_static/fi-launch-instance-networks.png
    :align: center
 
-|
-|
 
 Select the ``first-instance-sg`` security group from the list and click "Next":
 
 .. image:: ../_static/fi-launch-instance-security-groups.png
    :align: center
 
-|
-|
 
 Select the ``first-instance-key`` key pair from the list and click "Launch
 Instance":
@@ -155,8 +131,6 @@ Instance":
 .. image:: ../_static/fi-launch-instance-key-pair.png
    :align: center
 
-|
-|
 
 It will take a few seconds for your instance to build. You will see the Status,
 Task and Power State change during this process. When complete, the status will
@@ -177,8 +151,6 @@ on "Associate":
 .. image:: ../_static/fi-floating-ip.png
    :align: center
 
-|
-|
 
 Select the port you wish to be associated with the Floating IP. Ports are
 equivalent to virtual network interfaces of compute instances, and are named
@@ -188,9 +160,6 @@ In this example, select the "first-instance" port and click "Associate":
 
 .. image:: ../_static/fi-floating-ip-associate.png
    :align: center
-
-|
-|
 
 
 Connect to the new Instance

@@ -17,8 +17,6 @@ for instance configuration.
 Comprehensive documentation of the Ansible OpenStack modules is available at
 https://docs.ansible.com/ansible/list_of_cloud_modules.html#openstack
 
-|
-|
 
 .. _install-ansible:
 
@@ -56,8 +54,6 @@ install script in order to install Ansible.
   Catalyst recommends customers use Ansible >= 2.0 and Shade >= 1.4 with the
   Catalyst Cloud.
 
-|
-|
 
 OpenStack credentials
 =====================
@@ -84,8 +80,6 @@ directory and have been split up as follows:
 * The first playbook, ``create-network.yml`` creates the required network components.
 * The second playbook, ``launch-instance.yml`` launches the instance.
 
-|
-|
 
 Run the create network playbook
 ===============================
@@ -108,7 +102,7 @@ These are the tasks the ``create-network.yml`` playbook will perform:
       Create a security group rule for SSH access   TAGS: []
       Import an SSH keypair TAGS: []
 
-|
+
 
 In order for this playbook to work, the path to a valid SSH key must be provided.
 Edit ``create-network.yml`` and update the ``ssh_public_key`` variable, or override
@@ -147,14 +141,12 @@ the variable when running the playbook as shown below:
  PLAY RECAP *********************************************************************
  localhost                  : ok=8    changed=6    unreachable=0    failed=0
 
-|
+
 
 .. tip::
 
   Pay careful attention to the console output. It provides lots of useful information.
 
-|
-|
 
 Run the launch instance playbook
 ================================
@@ -187,7 +179,7 @@ After the network has been set up successfully, run the ``launch-instance.yml`` 
  PLAY RECAP *********************************************************************
  localhost                  : ok=4    changed=2    unreachable=0    failed=1
 
-|
+
 
 The new instance is accessible using SSH. Retrieve the instance's IP address from
 the console output. It is echoed by the example ``Output floating IP`` task above
@@ -197,15 +189,12 @@ as "150.242.41.75". Login using SSH (using the username appropriate to the build
 
  $ ssh ubuntu@150.242.41.75
 
-|
 
 .. tip::
 
   Additional Ansible playbooks may now be used to configure this instance further,
   as required.
 
-|
-|
 
 Resource cleanup with an Ansible playbook
 =========================================
@@ -219,7 +208,6 @@ earlier, but may also be downloaded as follows:
 
  $ wget -q https://raw.githubusercontent.com/catalyst/catalystcloud-ansible/master/remove-stack.yml
 
-|
 
 Run the playbook to remove all resources created previously:
 
@@ -230,7 +218,6 @@ Run the playbook to remove all resources created previously:
 Replace ``<ip-address>`` with the floating-ip assigned by the ``launch-instance.yml``
 playbook.
 
-|
 
 .. note::
 
@@ -238,4 +225,3 @@ playbook.
  default names defined in the original playbooks. If the original names have
  been changed, it will be necessary to edit the cleanup playbook to reflect these
  changes.
-

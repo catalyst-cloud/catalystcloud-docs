@@ -63,8 +63,6 @@ Also create what will be a private network, called "private-net":
  | subnets         |                                      |
  +-----------------+--------------------------------------+
 
-|
-|
 
 Set your :ref:`DNS Name Servers <name_servers>` variables. Then create a subnet
 of the "private-net" network, assigning the appropriate DNS server to that subnet.
@@ -98,8 +96,6 @@ of the "private-net" network, assigning the appropriate DNS server to that subne
  | subnetpool_id     | None                                           |
  +-------------------+------------------------------------------------+
 
-|
-|
 
 Now create a router interface on the "private-subnet" subnet:
 
@@ -107,8 +103,6 @@ Now create a router interface on the "private-subnet" subnet:
 
  $ openstack router add subnet border-router private-subnet
 
-|
-|
 
 Choosing a Flavor
 =================
@@ -161,8 +155,6 @@ This example assigns a c1.c1r1 flavor to the instance.
  Flavor IDs will be different in each region. Remember always to check what is available
  using ``openstack flavor list``.
 
-|
-|
 
 Choosing an Image
 =================
@@ -220,8 +212,6 @@ This example uses the Ubuntu image to create an instance.
   Image IDs will change over time. Remember always to check what is available
   using ``openstack image list --public``.
 
-|
-|
 
 .. _uploading-an-ssh-key:
 
@@ -262,8 +252,6 @@ Use ``openstack keypair create`` to upload your Public SSH key.
 
  Keypairs must be created in each region being used.
 
-|
-|
 
 Choosing a Network
 ==================
@@ -292,8 +280,6 @@ be booted on this network. Choose "private-net" when assigning a network to the 
   Network IDs will be different in each region. Remember to always check what is available
   using ``openstack network list``.
 
-|
-|
 
 Configure Instance Security Group
 =================================
@@ -315,8 +301,6 @@ Create a security group called "first-instance-sg".
  |             | direction='egress', ethertype='IPv6', id='e027c9b3-f59b-40bb-b4ea-d44a0f057d7f' |
  +-------------+---------------------------------------------------------------------------------+
 
-|
-|
 
 Create a rule within the "first-instance-sg" security group.
 
@@ -335,8 +319,6 @@ Assign the Security Group ID to an environment variable and export it for later 
 
  $ export CC_SECURITY_GROUP_ID=$( openstack security group show first-instance-sg -f value -c id )
 
-|
-|
 
 Assign the local external IP address to an environment variable and export it for later use:
 
@@ -352,8 +334,6 @@ Assign the local external IP address to an environment variable and export it fo
  http://ifconfig.me to find your IP address. Use "<IP_ADDRESS>/32" as ``CC_REMOTE_CIDR_NETWORK``
  to allow traffic only from your current effective IP.
 
-|
-|
 
 Create a rule to restrict SSH access to your instance to the current public IP address:
 
@@ -376,8 +356,6 @@ Create a rule to restrict SSH access to your instance to the current public IP a
  | security_group_id | 14aeedb8-5e9c-4617-8cf9-6e072bb41886 |
  +-------------------+--------------------------------------+
 
-|
-|
 
 Booting an Instance
 ===================
@@ -395,8 +373,6 @@ Ensure you have appropriate values set for
  $ openstack server create --flavor $CC_FLAVOR_ID --image $CC_IMAGE_ID --key-name first-instance-key \
  --security-group default --security-group first-instance-sg --nic net-id=$CC_PRIVATE_NETWORK_ID first-instance
 
-|
-|
 
 As the Instance builds, its details will be provided. This includes its ID
 (represented by ``<INSTANCE_ID>``) below.
@@ -435,7 +411,7 @@ As the Instance builds, its details will be provided. This includes its ID
  | user_id                              | <USER_ID>                                                  |
  +--------------------------------------+------------------------------------------------------------+
 
-|
+
 
 .. note::
 
@@ -443,7 +419,6 @@ As the Instance builds, its details will be provided. This includes its ID
  but it still takes a few seconds. Wait a few seconds and ask for the status of
  this instance using the ``<INSTANCE_ID>`` or name (if unique) of this instance.
 
-|
 
 .. code-block:: bash
 
@@ -479,8 +454,6 @@ As the Instance builds, its details will be provided. This includes its ID
  | user_id                              | <USER_ID>                                                  |
  +--------------------------------------+------------------------------------------------------------+
 
-|
-|
 
 Allocate a Floating IP
 ======================
@@ -522,8 +495,6 @@ Associate this Floating IP with the instance:
 
  $ openstack server add floating ip first-instance $CC_PUBLIC_IP
 
-|
-|
 
 Connect to the new Instance
 ===========================
