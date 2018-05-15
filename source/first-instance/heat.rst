@@ -26,8 +26,6 @@ Heat templates:
 
  $ git clone https://github.com/catalyst/catalystcloud-orchestration.git && ORCHESTRATION_DIR="$(pwd)/catalystcloud-orchestration" && echo $ORCHESTRATION_DIR
 
-|
-|
 
 Uploading an SSH key
 ====================
@@ -64,14 +62,11 @@ Use ``openstack keypair create`` to upload your Public SSH key.
   | testkey    | <SSH_KEY_FINGERPRINT>                           |
   +------------+-------------------------------------------------+
 
-|
 
 .. note::
 
  Keypairs must be created in each region being used.
 
-|
-|
 
 Building the First Instance Stack using a Heat Template
 =======================================================
@@ -84,7 +79,6 @@ to check that the template is valid:
 
  $ openstack orchestration template validate -t $ORCHESTRATION_DIR/hot/ubuntu-14.04/first-instance/first-instance.yaml
 
-|
 
 This command will echo the yaml if it succeeds and will return an error if it
 does not. If the template validates, it may be used to build the stack:
@@ -105,7 +99,7 @@ does not. If the template validates, it may be used to build the stack:
   | stack_status_reason | Stack CREATE started                                                                      |
   +---------------------+-------------------------------------------------------------------------------------------+
 
-|
+
 
 The ``stack_status`` indicates that creation is in progress. Use the
 ``event list`` command to check on the stack's orchestration progress:
@@ -114,7 +108,7 @@ The ``stack_status`` indicates that creation is in progress. Use the
 
  $  openstack stack event list first-instance-stack
 
-|
+
 
 View the output of the ``stack show`` command for further details:
 
@@ -166,7 +160,6 @@ View the output of the ``stack show`` command for further details:
   | timeout_mins          | None                                                                                                                                                    |
   +-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-|
 
 Once the stack status is ``CREATE_COMPLETE``, it is possible to SSH to the
 Floating IP of the instance:
@@ -177,8 +170,6 @@ Floating IP of the instance:
  $ export CC_PUBLIC_IP=$( openstack floating ip show -f value -c floating_ip_address $CC_FLOATING_IP_ID )
  $ ssh ubuntu@$CC_PUBLIC_IP
 
-|
-|
 
 Deleting the First Instance Stack using Heat
 ============================================

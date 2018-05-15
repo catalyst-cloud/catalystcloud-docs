@@ -22,8 +22,6 @@ For further information on using Terraform with OpenStack, see the linked `video
 .. _video: https://www.openstack.org/videos/tokio-2015/tokyo-3141
 .. _blog: http://blog.scottlowe.org/2015/11/25/intro-to-terraform/
 
-|
-|
 
 Install Terraform
 =================
@@ -46,8 +44,6 @@ instructions.
  $ wget https://releases.hashicorp.com/terraform/0.6.16/terraform_0.6.16_linux_amd64.zip
  $ unzip terraform_0.6.16_linux_amd64.zip
 
-|
-|
 
 OpenStack credentials
 =====================
@@ -70,8 +66,6 @@ will provide Terraform with permissions to access the Catalyst Cloud APIs.
 Once Terraform had been installed and the OpenStack credentials have been set up,
 a first instance may be built.
 
-|
-|
 
 Download the Terraform first instance configuration file
 ========================================================
@@ -95,7 +89,7 @@ Download the configuration file:
  $ cd $TERRAFORM_DIR
  $ wget https://raw.githubusercontent.com/catalyst/catalystcloud-orchestration/master/terraform/first-instance/first-instance.tf
 
-|
+
 
 In order for the pre-prepared configuration to work, a number of changes must be made:
 
@@ -107,9 +101,6 @@ In order for the pre-prepared configuration to work, a number of changes must be
   particular attention to ``external_gateway``, ``dns_nameservers``, ``image_id``,
   and ``flavor_id``.
 
-
-|
-|
 
 Run Terraform plan
 ==================
@@ -223,14 +214,11 @@ The "./terraform plan" command outlines the plan that Terraform will execute:
 
  Plan: 8 to add, 0 to change, 0 to destroy.
 
-|
 
 .. note::
   It is a good idea to review the output of this command. Check the resources that
   will be created match your intentions.
 
-|
-|
 
 Run Terraform apply
 ===================
@@ -341,8 +329,6 @@ The "./terraform apply" command executes the plan, creating OpenStack resources:
 
  State path: terraform.tfstate
 
-|
-|
 
 Run Terraform delete
 ====================

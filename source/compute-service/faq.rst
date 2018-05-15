@@ -111,8 +111,6 @@ Select the boot source
 |                    | be deleted on termination.        |            |
 +--------------------+-----------------------------------+------------+
 
-|
-
 
 Pause, Suspend, Shelve and Shut Off Instance. What's the difference?
 ====================================================================
@@ -124,15 +122,14 @@ a compute instance.
 * For longer term preservation of halted instances, ``Shelve Instance`` is the
   recommended option.
 
-|
 
 The cost of a running instance vs a shelved instance
 ====================================================
 
 .. note::
 
-  It is important to be aware that the ``Shelve Instance`` action will only help to lower the
-  monthly costs associated with your cloud project.
+  It is important to be aware that the ``Shelve Instance`` action will only help
+  to lower the monthly costs associated with your cloud project.
 
 The act of shelving an instance creates a snapshot of the running instance
 which it stores as an image on block storage, meaning you now have an extra

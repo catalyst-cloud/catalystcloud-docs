@@ -22,32 +22,24 @@ click "Create Security Group":
 .. image:: ../_static/fi-security-group-create-1.png
    :align: center
 
-|
-|
 
 Enter a name and description and click "Create Security Group":
 
 .. image:: ../_static/fi-security-group-create-2.png
    :align: center
 
-|
-|
 
 Now click on "Manage Rules" for the group you have created:
 
 .. image:: ../_static/fi-security-group-rules-manage.png
    :align: center
 
-|
-|
 
 Click on “Add Rule”:
 
 .. image:: ../_static/fi-security-group-rule-add.png
    :align: center
 
-|
-|
 
 Create a rule to allow RDP access. This can be selected from the Rule drop down
 menu, leave the defaults for the other fields. Click "Add".
@@ -55,8 +47,6 @@ menu, leave the defaults for the other fields. Click "Add".
 .. image:: ../_static/fi-rdp-rule.png
    :align: center
 
-|
-|
 
 .. warning::
 
@@ -78,8 +68,6 @@ instances list:
 .. image:: ../_static/fi-instance-launch.png
    :align: center
 
-|
-|
 
 When creating a Windows instance you need to select the
 ``windows-server-2012r2-x86_64`` image from the image list first, then select
@@ -91,8 +79,6 @@ select "No" to Delete Volume on Terminate then click "Next".
 .. image:: ../_static/fi-windows-volume.png
    :align: center
 
-|
-|
 
 For a Windows instance the recommended minimum flavor is ``c1.c2r2``. Select
 this from the list and click "Next":
@@ -100,24 +86,18 @@ this from the list and click "Next":
 .. image:: ../_static/fi-windows-flavor.png
    :align: center
 
-|
-|
 
 Select the ``private-net`` network from the list and click "Next":
 
 .. image:: ../_static/fi-launch-instance-networks.png
    :align: center
 
-|
-|
 
 Select the ``first-instance-sg`` security group from the list and click "Next":
 
 .. image:: ../_static/fi-launch-instance-security-groups.png
    :align: center
 
-|
-|
 
 No key pair is required for a Windows instance. Click "Next":
 
@@ -142,8 +122,6 @@ on "Associate":
 .. image:: ../_static/fi-floating-ip.png
    :align: center
 
-|
-|
 
 Select the port you wish to be associated with the floating IP. Ports are
 equivalent to virtual network interfaces of compute instances, and are named
@@ -154,8 +132,6 @@ In this example, select the "first-instance" port and click "Associate":
 .. image:: ../_static/fi-floating-ip-associate.png
    :align: center
 
-|
-|
 
 Connect to the new Instance
 ===========================
@@ -184,13 +160,10 @@ for the following Catalyst Cloud API hosts
 - nz-hlz-1: 202.78.244.90
 - nz_wlg_2: 202.78.240.218 & 2404:130:20:2::218
 
-|
 
 .. image:: ../_static/fi-windows-login.png
    :align: center
 
-|
-|
 
 You will then be prompted by the following screen to create a new administator
 password.
@@ -198,8 +171,6 @@ password.
 .. image:: ../_static/fi-windows-login-2.png
    :align: center
 
-|
-|
 
 Upon completion of this step, it will be possible to connect to this
 instance with an RDP application. Connect via the floating public IP that you
