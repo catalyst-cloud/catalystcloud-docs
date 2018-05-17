@@ -1,0 +1,4 @@
+Sphinx==1.6.4
+-e git://github.com/catalyst-cloud/sphinx-catalystcloud-theme.git#egg=sphinx_catalystcloud_theme
+doc8==0.8.0
+sphinx-autobuild
