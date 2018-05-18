@@ -11,8 +11,8 @@ This style guide describes the conventions that are followed by our
 documentation project. If you follow them, your documents will pass the doc8
 tests and compile cleanly.
 
-This documentation uses `Python-sphinx`_, which itself uses `reStructuredText`_
-syntax.
+This documentation uses `Python-sphinx <http://sphinx.pocoo.org/>`_, which
+itself uses `reStructuredText <http://sphinx-doc.org/rest.html>`_ syntax.
 
 Filenames
 =========
@@ -117,7 +117,8 @@ There should be only one H1 in a document.
 
 .. note::
 
-  See also `Sphinx's documentation about sections`_.
+  See also `Sphinx's documentation about sections
+  <http://sphinx.pocoo.org/rest.html#sections>`_.
 
 Code blocks
 ===========
@@ -292,58 +293,53 @@ As an example:
 Submitting a patch
 ******************
 
+Cloning the repo
+================
+
 Go to https://github.com/catalyst/catalystcloud-docs and fork the docs to your
 own account on GitHub.
 
-Clone the docs from your own account::
+Clone the docs::
 
-  git clone https://github.com/your-account/catalystcloud-docs.git
+  git clone https://github.com/catalyst-cloud/catalystcloud-docs.git
   cd catalystcloud-docs
-
-.. note::
-
-  Remember to replace "your-account" on the example above with your account
-  name.
-
-
-Sync your fork with upstream changes (you can skip this step if you have just
-cloned the repository)::
-
-  git remote add upstream https://github.com/catalyst/catalystcloud-docs.git
-  git fetch upstream
-  git checkout master
-  git merge upstream/master
 
 Create a new topic branch for your contribution (choose a sensible name)::
 
-  git checkout -b new/howto-do-x#9999
+  git checkout -b new/fantastic-content#9999
+
+Sync your branch with GitHub::
+
+  git branch --set-upstream-to=origin/<branch> new/fantastic-content#9999
 
 .. note::
 
-  Branch naming convention: new|bug|?/<shortdesc>[#<ticket-num>]
+  Branch naming convention: ``new|bug|?/<shortdesc>#<ticket-num>``
 
   Branch names starts with "new" or "bug". New is used when adding a new
   document or new sections to existing documents. Bug is using when ammending
   content of an existing document.
 
-  Short description is something brief that indicates what the change is.
+  ``<shortdesc>``: is something brief that indicates what the change is.
 
-  Ticket number is optional and indicates the ticket number that the change
+  ``<ticket-num>``: is optional and indicates the ticket number that the change
   is related to.
 
-Make your changes and contributions.
+
+Making your changes and contributions
+=====================================
+
+When you'd like to make changes to the content, you can see your changes by
+running the ``live_compile.sh`` script in the root directory::
+
+  cd catalystcloud-docs
+  ./live_compile.sh
+
+Then navigate to ``localhost:8000`` to see the results of your changes. As you
+save files, the changes will appear in your browser.
 
 If you are adding a new document, you may want to add it to the index.rst, so
 that people can find it when navigating the docs.
-
-Compile the documentation and confirm you are happy with the changes. From the
-root directory of the documentation project (where the Makefile file is
-located)::
-
-  ./compile.sh
-
-Use your browser or file explorer to navigate to build/html and open either the
-index.html or the document that you just changed.
 
 When done::
 
@@ -352,18 +348,26 @@ When done::
 
 .. note::
 
-  Never add the build or venv directories to your commit. These are temporary
-  directories that are generated automatically with every build.
+  If you want to be sure your documentation will work correctly, you can use
+  :ref:`git hooks <doc-git-hooks>` documented below to check that the
+  documentation will compile before it is committed.
 
-Push the changes back to your personal repository::
+Push the changes back to your personal branch::
 
   git push origin your-branch-name
 
-Submit a `pull request`_ to Catalyst.
+Submitting your changes to be added
+===================================
+
+Submit a `pull request<https://help.github.com/articles/using-pull-requests/>`_
+to Catalyst Cloud.
 
 Our awesome team of document reviewers will peer review and proof read your
 documentation changes and merge your pull request. Once it is merged, the
 changes will be automatically deployed and published within one hour.
+
+.. _doc-git-hooks:
+
 
 *********
 Git Hooks
@@ -398,7 +402,8 @@ repo:
 
   $ cp githooks/pre-commit .git/hooks/
 
-If you prefer, you can symlink hooks as described `here`_.
+If you prefer, you can symlink hooks as described `here
+<https://stackoverflow.com/questions/4592838/symbolic-link-to-a-hook-in-git>`_.
 
 Output Verbosity
 ================
@@ -411,20 +416,3 @@ prefer to suppress this output, you can switch these commented lines:
   # Switch these if you prefer to suppress compiles output
   #"$DIR/compile.sh" &>/dev/null
   "$DIR/compile.sh"
-
-
-**********
-References
-**********
-
-.. target-notes::
-
-.. _`Python-sphinx`: http://sphinx.pocoo.org/
-.. _`reStructuredText`: http://sphinx-doc.org/rest.html
-.. _`rst2html`:
-   http://docutils.sourceforge.net/docs/user/tools.html#rst2html-py
-.. _`Github`: https://github.com
-.. _`Sphinx's documentation about sections`:
-   http://sphinx.pocoo.org/rest.html#sections
-.. _`pull request`: https://help.github.com/articles/using-pull-requests/
-.. _`here`: https://stackoverflow.com/questions/4592838/symbolic-link-to-a-hook-in-git
