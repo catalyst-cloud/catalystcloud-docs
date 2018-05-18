@@ -341,6 +341,11 @@ save files, the changes will appear in your browser.
 If you are adding a new document, you may want to add it to the index.rst, so
 that people can find it when navigating the docs.
 
+If you're using the `Atom text editor <https://atom.io/>`_, we recommend
+installing the `Sphinx language <https://atom.io/packages/language-sphinx>`_
+package, and making extensive use of the Reflow selection command
+(``Shift+Ctrl+Q``).
+
 When done::
 
   git add source/*
