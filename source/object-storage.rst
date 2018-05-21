@@ -150,6 +150,8 @@ To delete a container: **openstack container delete <container>**
 To delete a container and all of the objects within the container:
 **openstack container delete --recursive <container>**
 
+.. code-block:: bash
+
   $ openstack container delete --recursive mycontainer-1
 
 
