@@ -2,8 +2,6 @@
 Load Balancer
 #############
 
-|
-
 ********
 Overview
 ********
@@ -40,8 +38,6 @@ For a more complete set of definitions take a look at the OpenStack LBaaS
 .. _OSI model: https://en.wikipedia.org/wiki/OSI_model
 .. _glossary: https://docs.openstack.org/octavia/pike/reference/glossary.html
 
-|
-
 **********************
 Layer 4 load balancing
 **********************
@@ -49,14 +45,31 @@ Layer 4 load balancing
 In this example we will create a simple scenario that load balances traffic
 based on TCP port numbers to different service endpoints.
 
-First lets create the loadbalancer. It will be called **lb_test** and it's
+.. note::
+
+  In order to work with the load balancer service it necessary to add the
+  octaviaclient python module to your virtual environment. More information on
+  installing commandline tools can be found at `CLI`_.
+
+.. _CLI: http://docs.catalystcloud.nz/getting-started/cli.html#command-line-interface-cli
+
+Assuming you have a virtual environment called ``venv``, simply follow the
+steps below.
+
+.. code-block:: bash
+
+  source venv/bin/activate
+  pip install python-octaviaclient
+
+
+First lets create the loadbalancer. It will be called **lb_test_1** and it's
 virtual IP address (VIP) will be attached to the local subnet
 **private-subnet**.
 
 .. code-block:: bash
 
   $ export SUBNET=`openstack subnet list --name private-subnet -f value -c ID`
-  $ openstack loadbalancer create --vip-subnet-id ${SUBNET} --name lb_test
+  $ openstack loadbalancer create --vip-subnet-id ${SUBNET} --name lb_test_1
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
@@ -66,7 +79,7 @@ virtual IP address (VIP) will be attached to the local subnet
   | flavor              |                                      |
   | id                  | 547deffe-55fc-49be-ac52-e24c7fd22ece |
   | listeners           |                                      |
-  | name                | lb_test                              |
+  | name                | lb_test_1                             |
   | operating_status    | OFFLINE                              |
   | pools               |                                      |
   | project_id          | a3a9af91b9e547739bfcb02cc2acded0     |
@@ -84,8 +97,7 @@ will listen on ports 80 and 90 respectively
 
 .. code-block:: bash
 
-
-  $ openstack loadbalancer listener create --name 80_listener --protocol TCP --protocol-port 80 lb_test
+  $ openstack loadbalancer listener create --name 80_listener --protocol TCP --protocol-port 80 lb_test_1
   +---------------------------+--------------------------------------+
   | Field                     | Value                                |
   +---------------------------+--------------------------------------+
@@ -109,7 +121,7 @@ will listen on ports 80 and 90 respectively
   | updated_at                | None                                 |
   +---------------------------+--------------------------------------+
 
-  $ openstack loadbalancer listener create --name 90_listener --protocol TCP --protocol-port 90 lb_test
+  $ openstack loadbalancer listener create --name 90_listener --protocol TCP --protocol-port 90 lb_test_1
   +---------------------------+--------------------------------------+
   | Field                     | Value                                |
   +---------------------------+--------------------------------------+
@@ -181,7 +193,7 @@ Then add a pool to each listener
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
 
-Finally we can add the members to the pools.
+Now add the members to the pools.
 
 .. code-block:: bash
 
@@ -225,48 +237,56 @@ Finally we can add the members to the pools.
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
+The final step is to assign a floating ip address to the VIP port on the
+loadbalancer. In order to do this we need to create a floating ip, find the
+VIP Port ID and then assign it a floating ip address.
+
+.. code-block:: bash
+
+  export FIP=`openstack floating ip create public -f value -c floating_ip_address`
+  export VIP_PORT_ID=`openstack loadbalancer show lb_test_1 -f value -c vip_port_id`
+  openstack floating ip set --port $VIP_PORT_ID $FIP
+
 As a simple mockup we have the commands shown below running on each of the
 member servers, they will send a response when a connection is received on the
 listening port. Make sure that you replace the PORT variable with the correct
-value for each member server.
+value, i.e. 80 or 90, for each member server.
 
 .. code-block:: bash
 
   export MYIP=$(/sbin/ifconfig eth0 |grep 'inet addr'|awk -F: '{print $2}'| awk '{print $1}');
   export PORT="80"
-  sudo nc -lk -p ${PORT} -e echo -e "HTTP/1.1 200 OK\r\n$(date)\r\n\r\n\tHi this is port ${PORT} on ${MYIP}\n\n"
+  sudo nc -lk -p ${PORT} -c 'echo -e "HTTP/1.1 200 OK\r\n$(date)\r\n\r\n\tThis is server : $(hostname)\n\n"'
 
-To test, telnet to both of the ports at VIP of the listener, in this case
-10.0.0.3, in response you should expect to get an appropriate response for the
-targeted port indicating that the correct server has responded to the request.
+To test, telnet to both of the ports at VIP of the listener, in response you
+should expect to get an appropriate response for the targeted port indicating
+that the correct server has responded to the request.
 
 .. code-block:: bash
 
-  $ telnet 10.0.0.3 80
+  $ telnet $FIP 80
   Trying 10.0.0.3...
   Connected to 10.0.0.3.
   Escape character is '^]'.
   HTTP/1.1 200 OK
   Thu Nov  9 01:25:08 UTC 2017
 
-    Hi this is port 80 on 10.0.0.4
+    This is server : <hostname>
 
   Connection closed by foreign host.
 
 
-  $ telnet 10.0.0.3 90
+  $ telnet $FIP 90
   Trying 10.0.0.3...
   Connected to 10.0.0.3.
   Escape character is '^]'.
   HTTP/1.1 200 OK
   Thu Nov  9 01:25:55 UTC 2017
 
-    Hi this is port 90 on 10.0.0.12
+    This is server : <hostname>
 
 
   Connection closed by foreign host.
-
-|
 
 **********************
 Layer 7 load balancing
@@ -333,16 +353,43 @@ may also have an association to a back-end pool. Policies describe actions that
 should be taken by the load balancing software if all of the rules in the
 policy return true.
 
-
-
 L7 Policy Testing
 =================
+
+First lets create the loadbalancer. It will be called **lb_test_2** and it’s
+virtual IP address (VIP) will be attached to the local subnet
+**private-subnet**.
+
+  $ export SUBNET=`openstack subnet list --name private-subnet -f value -c ID`
+  $ openstack loadbalancer create --vip-subnet-id ${SUBNET} --name lb_test_2
+  +---------------------+--------------------------------------+
+  | Field               | Value                                |
+  +---------------------+--------------------------------------+
+  | admin_state_up      | True                                 |
+  | created_at          | 2018-05-28T02:55:10                  |
+  | description         |                                      |
+  | flavor              |                                      |
+  | id                  | fa1ba76a-f6eb-423d-b101-921ba439b4d1 |
+  | listeners           |                                      |
+  | name                | lb_test_2                            |
+  | operating_status    | OFFLINE                              |
+  | pools               |                                      |
+  | project_id          | 0ef8ecaa78684c399d1d514b61698fda     |
+  | provider            | octavia                              |
+  | provisioning_status | PENDING_CREATE                       |
+  | updated_at          | None                                 |
+  | vip_address         | 10.0.0.9                             |
+  | vip_network_id      | 908816f1-933c-4ff2-8595-f0f57c689e48 |
+  | vip_port_id         | 1f6a4e91-36c7-43d9-ad77-97b771239f7c |
+  | vip_qos_policy_id   |                                      |
+  | vip_subnet_id       | af0f251c-0a36-4bde-b3bc-e6167eda3d1e |
+  +---------------------+--------------------------------------+
 
 Create the listener
 
 .. code-block:: bash
 
-  $ openstack loadbalancer listener create --name http_listener --protocol HTTP --protocol-port 80 lb_test
+  $ openstack loadbalancer listener create --name http_listener --protocol HTTP --protocol-port 80 lb_test_2
   +---------------------------+--------------------------------------+
   | Field                     | Value                                |
   +---------------------------+--------------------------------------+
@@ -420,7 +467,7 @@ Create the second pool
 
 .. code-block:: bash
 
-  $ openstack loadbalancer pool create --name http_pool_2 --loadbalancer lb_test --protocol HTTP --lb-algorithm ROUND_ROBIN
+  $ openstack loadbalancer pool create --name http_pool_2 --loadbalancer lb_test_2 --protocol HTTP --lb-algorithm ROUND_ROBIN
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
@@ -513,42 +560,66 @@ Create a rule for the policy
   | operating_status    | OFFLINE                              |
   +---------------------+--------------------------------------+
 
+The final step is to assign a floating ip address to the VIP port on the
+loadbalancer. In order to do this we need to create a floating ip, find the
+VIP Port ID and then assign it a floating ip address.
+
+.. code-block:: bash
+
+  export FIP=`openstack floating ip create public -f value -c floating_ip_address`
+  export VIP_PORT_ID=`openstack loadbalancer show lb_test_2 -f value -c vip_port_id`
+  openstack floating ip set --port $VIP_PORT_ID $FIP
 
 Testing the setup
 =================
+Place a copy of the files below on to each of the endpoint servers.
+
+Server 1
 
 .. code-block:: bash
 
   #!/bin/sh
   URL="www.example.com"
   MYIP=$(/sbin/ifconfig eth0 |grep 'inet addr'|awk -F: '{print $2}'| awk '{print $1}');
-  OUTPUT="Welcome to $MYIP the URL is ${URL}\r"
+  OUTPUT="Welcome to www.example.com\r"
   LEN=${#OUTPUT}
   while true; do echo -e "HTTP/1.1 200 OK\r\nContent-Length: ${LEN}\r\n\r\n${OUTPUT}" | sudo nc
   -l -p 80; done
+
+Server 2
+
+.. code-block:: bash
 
   #!/bin/sh
   URL="www2.example.com"
   MYIP=$(/sbin/ifconfig eth0 |grep 'inet addr'|awk -F: '{print $2}'| awk '{print $1}');
-  OUTPUT="Welcome to $MYIP the URL is ${URL}\r"
+  OUTPUT="Welcome to www2.example.com\r"
   LEN=${#OUTPUT}
   while true; do echo -e "HTTP/1.1 200 OK\r\nContent-Length: ${LEN}\r\n\r\n${OUTPUT}" | sudo nc
   -l -p 80; done
 
 
-add to /etc/hosts
- - 10.0.0.3 www.example.com
- - 10.0.0.3 www2.example.com
+On the test server add entries to /etc/hosts to provide name resolution. The
+value for <loadbalancer_floating_ip> will be the value of $FIP from the final
+step of setting up the loadbalancer above.
+
+/etc/host entries
 
 .. code-block:: bash
 
-  sudo ip netns exec $SERVER_NS curl www.example.com
+  <loadbalancer_floating_ip> www.example.com
+  <loadbalancer_floating_ip> www2.example.com
+
+
+Test connectivity to the 2 web endpoints.
+.. code-block:: bash
+
+  $ curl www.example.com
   Welcome to 10.0.0.4 the URL is www.example.com
 
-  sudo ip netns exec $SERVER_NS curl www2.example.com
+  $ curl www2.example.com
   Welcome to 10.0.0.12 the URL is www2.example.com
 
-|
 
 ***************
 TLS termination
