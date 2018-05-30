@@ -3,9 +3,9 @@ Object storage with the command line tools
 ##########################################
 
 
-********
+========
 Overview
-********
+========
 
 Object storage is a web service to store and retrieve data from anywhere using
 native web protocols. Each object typically includes the data itself, a
@@ -27,9 +27,9 @@ healthy state. The loss of a region, server or a disk leads to the data being
 quickly recovered from another disk, server or region.
 
 
-***********************************
+===================================
 Using the command line client tools
-***********************************
+===================================
 
 First, ensure that you have installed the correct version of the tools for your
 operating system version and have sourced your OpenStack RC file

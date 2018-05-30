@@ -2,9 +2,9 @@
 Object storage with the APIs
 ############################
 
-********
+========
 Overview
-********
+========
 
 Object storage is a web service to store and retrieve data from anywhere using
 native web protocols. Each object typically includes the data itself, a
@@ -26,9 +26,9 @@ healthy state. The loss of a region, server or a disk leads to the data being
 quickly recovered from another disk, server or region.
 
 
-*******************
+===================
 Using the Swift API
-*******************
+===================
 
 The Swift object storage service has a feature API that is fully documented on
 the OpenStack website
@@ -159,9 +159,9 @@ endpoint for the desired region must be used (por in this case).::
 
 .. _s3-api-documentation:
 
-****************
+================
 Using the S3 API
-****************
+================
 
 The Swift object storage service has an Amazon S3 emulation layer that supports
 common S3 calls and operations.
@@ -256,9 +256,9 @@ compatible API.
           created = bucket.creation_date,
       )
 
-**********
+==========
 Using cURL
-**********
+==========
 
 To access object storage using cURL it will be necessary to provide credentials
 to authenticate the request.

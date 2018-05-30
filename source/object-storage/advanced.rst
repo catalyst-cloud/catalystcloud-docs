@@ -3,9 +3,9 @@ Advanced object storage features
 ################################
 
 
-****************************************
+========================================
 Static websites hosted in object storage
-****************************************
+========================================
 
 It is possible to host simple websites that contain only static content from
 within a container.
@@ -77,9 +77,9 @@ https://object-storage.nz-por-1.catalystcloud.io:443/v1/%AUTH_ID%/%container_nam
 
 
 
-*****************
+=================
 Object Versioning
-*****************
+=================
 
 This provides a means by which multiple versions of your content can be stored
 allowing for recovery from unintended overwrites.
@@ -194,9 +194,9 @@ convention outlined above.
   +-------------------------------+
 
 
-*************
+=============
 Temporary URL
-*************
+=============
 
 This is a means by which a temporary URL can be generated, to allow
 unauthenticated access to the Swift object at the given path. The
@@ -289,9 +289,9 @@ successful, the request should return the contents of the object.
 You could also access the object by taking the same URL that you passed to cURL
 and pasting it into a web browser.
 
-**************************
+==========================
 Working with Large Objects
-**************************
+==========================
 
 Typically, the size of a single object cannot exceed 5GB. It is possible,
 however, to use several smaller objects to break up the large object. When this
@@ -311,6 +311,7 @@ oversized files and manage the manifest objects yourself.
 
 Using the Swift command line tool
 =================================
+
 The Swift tool which is included in the `python-swiftclient`_ library, for
 example, is capable of handling oversized files and gives you the choice of
 using either``static large objects (SLO)`` or``dynamic large objects (DLO)``,
