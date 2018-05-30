@@ -27,56 +27,6 @@ healthy state. The loss of a region, server or a disk leads to the data being
 quickly recovered from another disk, server or region.
 
 
-*********************************
-Object storage from the dashboard
-*********************************
-
-Data must be stored in a container (also referred to as a bucket) so we need
-to create at least one container prior to uploading data. To create a new
-container, navigate to the "Containers" section and click "Create Container".
-
-.. image:: _static/os-containers.png
-   :align: center
-
-|
-
-Provide a name for the container and select the appropriate access level and
-click "Create".
-
-.. note::
-
-  Setting "Public" level access on a container means that anyone
-  with the container's URL can access the content of that container.
-
-.. image:: _static/os-create-container.png
-   :align: center
-
-|
-
-You should now see the newly created container. As this is a new container, it
-currently does not contain any data. Click on "Upload Object" to add some
-content.
-
-.. image:: _static/os-view-containers.png
-   :align: center
-
-|
-
-Click on the "Browse" button to select the file you wish to upload and click
-"Upload Object"
-
-.. image:: _static/os-upload-object.png
-   :align: center
-
-|
-
-In the Containers view the Object Count has gone up to one and the size of
-the container is now 69.9KB
-
-.. image:: _static/os-data-uploaded.png
-   :align: center
-
-
 ***********************************
 Using the command line client tools
 ***********************************
