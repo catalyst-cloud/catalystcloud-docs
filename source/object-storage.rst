@@ -2,6 +2,16 @@
 Object storage
 ##############
 
+Table of Contents:
+
+.. toctree::
+  :maxdepth: 1
+
+  object-storage/dashboard
+  object-storage/cli
+  object-storage/api
+  object-storage/advanced
+  object-storage/faq
 
 ********
 Overview
