@@ -1,10 +1,10 @@
-*********************************
+#################################
 Object storage from the dashboard
-*********************************
+#################################
 
-========
+********
 Overview
-========
+********
 
 Object storage is a web service to store and retrieve data from anywhere using
 native web protocols. Each object typically includes the data itself, a
@@ -25,9 +25,9 @@ corruption of a single bit can be detected and automatically restored to a
 healthy state. The loss of a region, server or a disk leads to the data being
 quickly recovered from another disk, server or region.
 
-==================
-Basics of creating
-==================
+*******************
+Using the dashboard
+*******************
 
 Data must be stored in a container (also referred to as a bucket) so we need
 to create at least one container prior to uploading data. To create a new
