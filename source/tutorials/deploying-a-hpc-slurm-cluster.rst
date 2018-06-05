@@ -49,7 +49,7 @@ Install Python development tools:
 
 .. code-block:: bash
 
-  sudo apt-get install python-dev
+  sudo apt-get install python-dev virtualenv gcc
 
 Create a virtual environment to install the software:
 
@@ -63,13 +63,18 @@ Install Elasticluster on the virtual environment:
 
 .. code-block:: bash
 
-  pip install elasticluster pyopenssl ndg-httpsclient pyasn1 ecdsa
+  git clone git://github.com/gc3-uzh-ch/elasticluster.git src
+  cd src
+  pip install -e .
+  pip install ndg-httpsclient
 
 Install the Catalyst Cloud OpenStack client tools:
 
 .. code-block:: bash
 
-  pip install python-keystoneclient python-novaclient python-cinderclient python-glanceclient python-ceilometerclient python-heatclient python-neutronclient python-swiftclient
+  pip install python-keystoneclient python-novaclient python-cinderclient \
+      python-glanceclient python-ceilometerclient python-heatclient       \
+      python-neutronclient python-swiftclient python-openstackclient
 
 Configuring ElastiCluster
 =========================
@@ -87,11 +92,10 @@ configuration file compatible with the Catalyst Cloud is provided below:
 
   [cloud/catalyst]
   provider=openstack
-  auth_url=https://api.cloud.catalyst.net.nz:5000/v2.0
+  auth_url=auth_url
   username=username
   password=password
   project_name=projectname
-  region_name=nz-por-1
   request_floating_ip=True
 
   [login/ubuntu]
@@ -102,22 +106,35 @@ configuration file compatible with the Catalyst Cloud is provided below:
   user_key_private=~/elasticluster/id_rsa
   user_key_public=~/elasticluster/id_rsa.pub
 
-  [setup/ansible-slurm]
+  [setup/slurm]
   provider=ansible
   frontend_groups=slurm_master
-  compute_groups=slurm_clients
+  compute_groups=slurm_worker
 
   [cluster/slurm]
   cloud=catalyst
   login=ubuntu
-  setup_provider=ansible-slurm
+  setup_provider=slurm
   security_group=default
-  # Ubuntu image
-  image_id=fe2a52bd-1881-45a6-8c16-d0a1005a1a4e
+  # Ubuntu image - Use the ID from running (as of June 2018, 18.04 doesn't work):
+  #   openstack image show -c id ubuntu-16.04-x86_64
+  image_id=<image UUID>
+  # Use the correct network UUID from: openstack network list
+  network_ids=<network UUID>
   flavor=c1.c1r1
   frontend_nodes=1
   compute_nodes=2
   ssh_to=frontend
+
+  [cluster/slurm/frontend]
+  # The frontend shares /home via NFS to the compute nodes.
+  boot_disk_type=b1.standard
+  boot_disk_size=50
+
+  [cluster/slurm/compute]
+  # Use whatever flavour you'd like to use for your compute nodes.
+  flavor=c1.c16r64
+
 
 Configuring the cloud
 =====================
