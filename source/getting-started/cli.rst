@@ -4,22 +4,208 @@
 Command line interface (CLI)
 ############################
 
-This section describes how you can install and configure the Catalyst Cloud
-command line interface.
+The OpenStack command line tools are a collection of Python based modules that
+provide a means for command line interaction with the various Catalyst Cloud
+API endpoints.
 
-******
-Set up
-******
+These can be installed in multiple ways, the following covers some of the more
+common approaches.
 
-The OpenStack CLI can be installed in multiple ways. The recommended method for
-the Catalyst Cloud is to create a Python virtual environment and use ``pip`` to
+***********************************
+Using the OpenStackClient Container
+***********************************
+The recommended method for Catalyst Cloud is to use the OpenStackClient Container.
+, This is a self contained deployment of the
+OpenStack command line tools and their dependencies. It is capable of using an
+openrc file or direct user input for the purposes of authenticating against the
+cloud.
+
+One advantage of this approach is that the container image is tested against
+the Catalyst Cloud when it is built to confirm that the individual packaged
+modules are functioning as expected.
+
+This tool does require Docker to be installed to function and there are
+operating system specific details available `here`_ on how this can be done.
+
+.. _here: https://docs.docker.com/install/
+.. _OpenStackClient container: https://github.com/catalyst-cloud/openstackclient-container
+
+***************************
+Installing the CLI Manually
+***************************
+
+The preferred alternative to this is to use python virtual environments to
+contain the required tools.
+
+The following provides the basics of manually installing the OpenStack command
+line tools on typical operating systems. The examples all make reference to the
+use of virtual environments and more information on that can be seen here
+:ref:`python-virtual-env`.
+
+Operating System Specific Steps
+===============================
+
+Ubuntu Linux 16.04
+------------------
+
+Ubuntu 16.04 uses Python 3.x by default. The CLI currently works best with
+Python 2.7.x, so the procedure below will also install it as a dependency.
+
+.. code-block:: bash
+
+  # Install python 2.7.x, pip and virtualenv
+  sudo apt-get install python python-pip python-virtualenv
+
+  # Create a new virtual environment for Python 2.7.x and activate it
+  virtualenv venv
+
+  # Activate the virtual environment
+  source venv/bin/activate
+
+  # Install Python openstackclient library into your virtual environment
+  pip install python-openstackclient
+
+If you would like to test the CLI with Python 3.x, please use this
+procedure instead:
+
+.. code-block:: bash
+
+  # Make sure you have virtualenv and pip code dependencies installed
+  sudo apt-get install python3-dev python-pip python-virtualenv
+
+  # Create a new virtual environment for Python 3.x and activate it
+  virtualenv -p /usr/bin/python3 venv
+
+  # Activate the virtual environment
+  source venv/bin/activate
+
+  # Install Python openstackclient library into your virtual environment
+  pip install python-openstackclient
+
+.. note::
+
+    Running the OpenStack CLI in interactive mode with Python 3.x will result
+    in an error at this time due to a known issue: see
+    https://bugs.launchpad.net/python-openstackclient/+bug/1505268 If complete
+    commands are run however they will work as expected.
+
+Ubuntu Linux 14.04
+------------------
+
+Ubuntu 14.04 uses Python version: 2.7.6 by default. As a result, you do not
+need to install a different version of Python.
+
+.. code-block:: bash
+
+  # Make sure you have pip and virtualenv installed
+  sudo apt-get install python-pip python-virtualenv python-dev
+
+  # Create a new virtual environment for Python and activate it
+  virtualenv venv
+
+  # Activate the virtual environment
+  source venv/bin/activate
+
+  # Install Python openstackclient library and the Python timezone definitions
+  # into your virtual environment
+  pip install pytz python-openstackclient
+
+Debian Linux 8
+--------------
+
+.. code-block:: bash
+
+  # Make sure you have virtualenv and pip code dependencies installed
+  sudo apt-get install gcc python-dev python-virtualenv
+
+  # Create a new virtual environment for Python 3.x and activate it
+  virtualenv venv
+
+  # Activate the virtual environment
+  source venv/bin/activate
+
+  # Install Python openstackclient library and the Python timezone definitions
+  # into your virtual environment
+  pip install pytz python-openstackclient
+
+CentOS Linux 7
+--------------
+
+.. code-block:: bash
+
+  # Make sure you have Python development tools and wget installed
+  sudo yum install python-devel gcc wget
+
+  # retrieve the pip installer script and install pip and virtualenv
+  wget https://bootstrap.pypa.io/get-pip.py
+  sudo python get-pip.py
+  sudo pip install virtualenv
+
+  # Create a new virtual environment for Python 3.x and activate it
+  virtualenv venv
+
+  # Activate the virtual environment
+  source venv/bin/activate
+
+  # Install Python openstackclient library on your virtual environment
+  pip install python-openstackclient
+
+Mac OS X
+--------
+
+.. code-block:: bash
+
+  # from a terminal session install pip and virtualenv
+  sudo easy_install pip
+  sudo pip install virtualenv
+
+  # Create a new virtual environment and activate it
+  virtualenv venv
+  source venv/bin/activate
+
+  # Install Python openstackclient library on your virtual environment
+  pip install python-openstackclient
+
+Windows Server 2012 R2
+----------------------
+
+A good overview for the setup and configuration of Python, pip and virtualenv
+on Windows can be found at http://www.tylerbutler.com/2012/05/how-to-install-python-pip-and-virtualenv-on-windows-with-powershell/
+
+Assuming that Python and pip have successfully been installed then
+
+.. code-block:: powershell
+
+  # From a PowerShell session started with administration rights
+  # create and activate a virtual environment
+  virtualenv.exe venv
+  .\venv\scripts\activate
+
+  # Install Python openstackclient library on your virtual environment
+  pip install python-openstackclient
+
+  # Uncomment the line below if you would like to install the deprecated
+  # openstack CLI in addition to the new unified CLI
+  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
+
+
+If any errors are encountered while pip is building packages it may be
+necessary to install the `Microsoft Visual C++ Compiler for Python 2.7`_ and retry.
+
+.. _Microsoft Visual C++ Compiler for Python 2.7: https://www.microsoft.com/en-gb/download/details.aspx?id=44266
+
+.. _python-virtual-env:
+
+Using Python Virtual Environments
+=================================
+create a Python virtual environment and use ``pip`` to
 install it. This method has the benefit of installing the latest version of the
 CLI (operating system packages tend to install an outdated version) and
 prevents conflicts between Python libraries (dependencies are isolated in the
 virtual environment).
 
 Working with virtual environments
-=================================
+---------------------------------
 
 If you're not familiar with Python virtual environments, we recommend
 reading `the virtualenv section of the Python documentation`_ for an overview.
@@ -75,177 +261,6 @@ To deactivate a virtual environment:
 
   deactivate
 
-Installing the CLI
-==================
-
-Ubuntu Linux 16.04
-------------------
-
-Ubuntu 16.04 uses Python 3.x by default. The CLI currently works best with
-Python 2.7.x, so the procedure below will also install it as a dependency.
-
-.. code-block:: bash
-
-  # Install python 2.7.x, pip and virtualenv
-  sudo apt-get install python python-pip python-virtualenv
-
-  # Create a new virtual environment for Python 2.7.x and activate it
-  virtualenv venv
-  source venv/bin/activate
-
-  # Install Python openstackclient library into your virtual environment
-  pip install python-openstackclient
-
-  # Uncomment the line below if you would like to install the deprecated
-  # openstack CLI in addition to the new unified CLI
-  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
-
-
-If you would like to test the CLI with Python 3.x, please use this
-procedure instead:
-
-.. code-block:: bash
-
-  # Make sure you have virtualenv and pip code dependencies installed
-  sudo apt-get install python3-dev python-pip python-virtualenv
-
-  # Create a new virtual environment for Python 3.x and activate it
-  virtualenv -p /usr/bin/python3 venv
-  source venv/bin/activate
-
-  # Install Python openstackclient library into your virtual environment
-  pip install python-openstackclient
-
-  # Uncomment the line below if you would like to install the deprecated
-  # openstack CLI in addition to the new unified CLI
-  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
-
-
-.. note::
-
-    Running the OpenStack CLI in interactive mode with Python 3.x will result
-    in an error at this time due to a known issue: see
-    https://bugs.launchpad.net/python-openstackclient/+bug/1505268 If complete
-    commands are run however they will work as expected.
-
-Ubuntu Linux 14.04
-------------------
-
-Ubuntu 14.04 uses Python version: 2.7.6 by default. As a result, you do not
-need to install a different version of Python.
-
-.. code-block:: bash
-
-  # Make sure you have pip and virtualenv installed
-  sudo apt-get install python-pip python-virtualenv python-dev
-
-  # Create a new virtual environment for Python and activate it
-  virtualenv venv
-  source venv/bin/activate
-
-  # Install Python openstackclient library and the Python timezone definitions
-  # into your virtual environment
-  pip install pytz python-openstackclient
-
-  # Uncomment the line below if you would like to install the deprecated
-  # openstack CLI in addition to the new unified CLI
-  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
-
-Debian Linux 8
---------------
-
-.. code-block:: bash
-
-  # Make sure you have virtualenv and pip code dependencies installed
-  sudo apt-get install gcc python-dev python-virtualenv
-
-  # Create a new virtual environment for Python 3.x and activate it
-  virtualenv venv
-  source venv/bin/activate
-
-  # Install Python openstackclient library and the Python timezone definitions
-  # into your virtual environment
-  pip install pytz python-openstackclient
-
-  # Uncomment the line below if you would like to install the deprecated
-  # openstack CLI in addition to the new unified CLI
-  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
-
-
-CentOS Linux 7
---------------
-
-.. code-block:: bash
-
-  # Make sure you have Python development tools and wget installed
-  sudo yum install python-devel gcc wget
-
-  # retrieve the pip installer script and install pip and virtualenv
-  wget https://bootstrap.pypa.io/get-pip.py
-  sudo python get-pip.py
-  sudo pip install virtualenv
-
-  # Create a new virtual environment for Python 3.x and activate it
-  virtualenv venv
-  source venv/bin/activate
-
-  # Install Python openstackclient library on your virtual environment
-  # pip install python-openstackclient
-
-  # Uncomment the line below if you would like to install the deprecated
-  # openstack CLI in addition to the new unified CLI
-  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
-
-
-Mac OS X
---------
-
-.. code-block:: bash
-
-  # from a terminal session install pip and virtualenv
-  sudo easy_install pip
-  sudo pip install virtualenv
-
-  # Create a new virtual environment and activate it
-  virtualenv venv
-  source venv/bin/activate
-
-  # Install Python openstackclient library on your virtual environment
-  pip install python-openstackclient
-
-  # Uncomment the line below if you would like to install the deprecated
-  # openstack CLI in addition to the new unified CLI
-  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
-
-
-
-Windows Server 2012 R2
-----------------------
-
-A good overview for the setup and configuration of Python, pip and virtualenv
-on Windows can be found at http://www.tylerbutler.com/2012/05/how-to-install-python-pip-and-virtualenv-on-windows-with-powershell/
-
-Assuming that Python and pip have successfully been installed then
-
-.. code-block:: powershell
-
-  # From a PowerShell session started with administration rights
-  # create and activate a virtual environment
-  virtualenv.exe venv
-  .\venv\scripts\activate
-
-  # Install Python openstackclient library on your virtual environment
-  pip install python-openstackclient
-
-  # Uncomment the line below if you would like to install the deprecated
-  # openstack CLI in addition to the new unified CLI
-  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
-
-
-If any errors are encountered while pip is building packages it may be
-necessary to install the `Microsoft Visual C++ Compiler for Python 2.7`_ and retry.
-
-.. _Microsoft Visual C++ Compiler for Python 2.7: https://www.microsoft.com/en-gb/download/details.aspx?id=44266
 
 Configuring the CLI
 ===================
@@ -288,14 +303,6 @@ To download an OpenStack RC file from the dashboard:
 * You can confirm the configuration works by running a simple command, such as
   ``openstack network list`` and ensuring it returns no errors.
 
-.. note::
-
-  While there is also a V3 version of the RC file available, we recommend using the v2.0 version
-  unless otherwise requested by Catalyst Cloud support staff. This is due to the fact that at the
-  current time not all backend services fully support the V3 version.
-
-|
-
 Setting up the command line environment on Windows
 --------------------------------------------------
 
@@ -328,8 +335,6 @@ The output should show the following 5 variables
 .. image:: ../_static/powershell_env.png
    :align: center
 
-|
-
 *************
 Using the CLI
 *************
@@ -346,3 +351,15 @@ Finding your way
 The command ``openstack help`` will list all commands supported by the
 OpenStack CLI. You can then use ``openstack COMMAND --help`` to understand how
 to use a command.
+
+.. note::
+    The python-openstackclient does have some dependency on the per-service
+    project modules from OpenStack to provide functionality and while some of these
+    are included automatically this is not always the case.
+
+    If  missing options then run the following command from within the
+    virtual environment to correct this
+
+.. code-block:: bash
+
+  pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}

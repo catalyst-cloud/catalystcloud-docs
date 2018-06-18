@@ -1,3 +1,5 @@
+.. _security-groups:
+
 ###############
 Security groups
 ###############
