@@ -2,6 +2,52 @@
 Best practices
 ###############
 
+***********************
+Everyday considerations
+***********************
+
+Getting the correct ID
+======================
+
+For user created objects within the cloud it is always advisable to lookup ID
+values before using them in any type of command to ensure that the correct
+element has been identified. While it is very rare, it should be noted that it
+is possible for underlying system generated cloud objects, such as flavor and
+image IDs to also change.
+
+With this in mind, if you are running comands from the CLI tools or one of the
+support SDKs, it is recommended to lookup the ID before using it to ensure that
+the correct object is referenced.
+
+The following example shows how this could be done using the OpenStack CLI
+tool. It queries can query both images and flavors by name to retrieve their ID
+and then it also stores the resulting ID into an environment variable so that
+it can be reused in subsequent commands.
+
+.. code-block:: bash
+
+    export CC_IMAGE_ID=$( openstack image show ubuntu-16.04-x86_64 -f value -c id )
+    export CC_FLAVOR_ID=$( openstack flavor show c1.c1r2 -f value -c id )
+
+Similar mechanisms exist for doing this with other toolsets such as Ansible,
+Terraform and the various supported development SDKs.
+
+Using a block device for the instance root volume
+=================================================
+When creating a new compute instance, the preference is to use a block storage
+volume for the root disk. Volume backed instances have several benefits,
+such as:
+
+- creating snapshots is much quicker.
+- the volume and it's associated data can exist independent from the instance.
+
+When launching an instance via the dashboard the default behaviour is to create
+a volume along with the instance. Other methods of instance creation vary and
+some will equire the volume to be created ahead of the instance being launched,
+so please consult the relevant documentation for clarification.
+
+Typically ephemeral (memory resident) root disks should only be considered for
+workloads that are temporary in nature, like one-off jobs.
 
 *****************
 High availability
@@ -54,6 +100,8 @@ Customers that require their applications to survive the loss of an entire
 region can launch compute instances in different regions. This requires their
 applications, or middleware used by their applications (such as databases), to
 support this architecture.
+
+For consistency
 
 Block storage
 =============
