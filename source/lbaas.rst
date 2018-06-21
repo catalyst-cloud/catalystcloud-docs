@@ -624,7 +624,10 @@ Test connectivity to the 2 web endpoints.
 ***************
 TLS termination
 ***************
-At the current time the Catalyst Cloud Load Balancer as a Service does not
-support TLS termination but it will be available soon, once the secret storage
-service is available. The secret storage service is required to be able to
-safely store certificates uploaded to the cloud.
+
+At present the load balancer service does not support TLS termination. It can
+however forward encrypted traffic so that it can be terminated at the
+application layer.
+
+TLS termination is in our roadmap and should be available in the next version
+of the load balancer service.
