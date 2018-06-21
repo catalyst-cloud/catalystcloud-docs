@@ -18,7 +18,7 @@ Contents:
    block-storage
    compute
    network
-   lbaas
+   load-balancer
    dashboard
    image
    object-storage
