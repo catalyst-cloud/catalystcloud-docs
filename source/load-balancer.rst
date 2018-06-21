@@ -308,7 +308,7 @@ For example,
 
 A site with "mydomain.nz/login" or a subdomain "login.mydomain.nz" will be
 routed to a back-end pool running an identity provider and authentication
-system, while "mydomain.nz/shop" or "shop.mydomain.nz" will be outed to a
+system, while "mydomain.nz/shop" or "shop.mydomain.nz" will be routed to a
 commerce application".
 
 Unlike lower-level load balancing, layer 7 load balancing does not require
