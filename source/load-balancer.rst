@@ -9,8 +9,8 @@ Load balancing is the action of taking front-end requests and distributing
 these across a pool of back-end servers for processing based on a series of
 rules. The Catalyst Cloud Load Balancer as a Service (LBaaS) is aimed at
 encapsulating the complexity of implementing a typical load balancing solution
-into an easy to use cloud based service that natively provides a multi-tenanted
-, highly scaleable programmable alternative.
+into an easy to use cloud based service that natively provides a
+multi-tenanted, highly scaleable programmable alternative.
 
 Layer 4 vs Layer 7 Load balancing
 =================================
@@ -27,8 +27,8 @@ to this service:
    virtual ip addresses (VIP)
  - A ``listener`` is the listening endpoint of a load balanced service. It
    requires port and protocol information but not an IP address.
- - The ``pool`` is associated with a listener and responsible for grouping the
-   **members** which receive the client requests forwarded by the listener.
+ - The ``pool`` is associated with a listener and is responsible for grouping
+   the **members** which receive the client requests forwarded by the listener.
  - A ``member`` is a single server or service. It can only be associated with
    a single pool.
 
@@ -68,6 +68,7 @@ virtual IP address (VIP) will be attached to the local subnet
 
 .. code-block:: bash
 
+  $ source example-openrc.sh
   $ export SUBNET=`openstack subnet list --name private-subnet -f value -c ID`
   $ openstack loadbalancer create --vip-subnet-id ${SUBNET} --name lb_test_1
   +---------------------+--------------------------------------+
@@ -79,7 +80,7 @@ virtual IP address (VIP) will be attached to the local subnet
   | flavor              |                                      |
   | id                  | 547deffe-55fc-49be-ac52-e24c7fd22ece |
   | listeners           |                                      |
-  | name                | lb_test_1                             |
+  | name                | lb_test_1                            |
   | operating_status    | OFFLINE                              |
   | pools               |                                      |
   | project_id          | a3a9af91b9e547739bfcb02cc2acded0     |
@@ -92,8 +93,18 @@ virtual IP address (VIP) will be attached to the local subnet
   | vip_subnet_id       | 1c221166-3cb3-4534-915a-b75220ec1873 |
   +---------------------+--------------------------------------+
 
-Next we will create two listeners, both will use TCP as their protocol and they
-will listen on ports 80 and 90 respectively
+Once the load balancer is ``ACTIVE``, we will create two listeners,
+both will use TCP as their protocol and they will listen on ports 80 and 90
+respectively
+
+.. code-block:: bash
+
+  $ openstack loadbalancer list
+  +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
+  | id                                   | name      | project_id                       | vip_address | provisioning_status | provider |
+  +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
+  | 547deffe-55fc-49be-ac52-e24c7fd22ece | lb_test_1 | a3a9af91b9e547739bfcb02cc2acded0 | 10.0.0.16   | ACTIVE              | octavia  |
+  +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
 
 .. code-block:: bash
 
@@ -313,7 +324,7 @@ commerce application".
 
 Unlike lower-level load balancing, layer 7 load balancing does not require
 that all pools behind the load balancing service have the same content. In
-fact, it is generally expected that a layer load balancer expects the
+fact, it is generally expected that a layer 7 load balancer expects the
 back-end servers from different pools will have different content. Layer
 7 load balancers are capable of directing requests based on URI, host, HTTP
 headers, and other data in the application message.
@@ -360,6 +371,8 @@ First lets create the loadbalancer. It will be called **lb_test_2** and it’s
 virtual IP address (VIP) will be attached to the local subnet
 **private-subnet**.
 
+.. code-block:: bash
+
   $ export SUBNET=`openstack subnet list --name private-subnet -f value -c ID`
   $ openstack loadbalancer create --vip-subnet-id ${SUBNET} --name lb_test_2
   +---------------------+--------------------------------------+
@@ -385,7 +398,16 @@ virtual IP address (VIP) will be attached to the local subnet
   | vip_subnet_id       | af0f251c-0a36-4bde-b3bc-e6167eda3d1e |
   +---------------------+--------------------------------------+
 
-Create the listener
+Once the load balancer is ``Active``, Create the listener
+
+.. code-block:: bash
+
+  $ openstack loadbalancer list
+  +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
+  | id                                   | name      | project_id                       | vip_address | provisioning_status | provider |
+  +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
+  | fa1ba76a-f6eb-423d-b101-921ba439b4d1 | lb_test_2 | 0ef8ecaa78684c399d1d514b61698fda | 10.0.0.19   | ACTIVE              | octavia  |
+  +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
 
 .. code-block:: bash
 
