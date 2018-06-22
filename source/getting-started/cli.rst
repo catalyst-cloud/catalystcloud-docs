@@ -342,8 +342,8 @@ Using the CLI
 Before using the CLI, always remember to :ref:`activate-venv` and
 :ref:`source-rc-file`.
 
-Please refer to http://docs.openstack.org/cli-reference/openstack.html for a
-reference of all commands supported by the CLI.
+For a reference of all commands supported by the CLI, refer to the `OpenStack
+Client documentation <https://docs.openstack.org/python-openstackclient>`_.
 
 Finding your way
 ================
