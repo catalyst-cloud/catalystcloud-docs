@@ -2,9 +2,11 @@
 Load Balancer
 #############
 
+
 ********
 Overview
 ********
+
 Load balancing is the action of taking front-end requests and distributing
 these across a pool of back-end servers for processing based on a series of
 rules. The Catalyst Cloud Load Balancer as a Service (LBaaS) is aimed at
@@ -14,6 +16,7 @@ multi-tenanted, highly scaleable programmable alternative.
 
 Layer 4 vs Layer 7 Load balancing
 =================================
+
 Load balancers are typically grouped into two categories: Layer 4 or Layer 7,
 which correspond to the layers of the `OSI model`_. The Layer 4 type act upon
 data such as IP, TCP, UDP which are protocols found in the network and
@@ -23,20 +26,21 @@ from application layer protocols such as HTTP.
 In order to get started we need to first define some terminology as it applies
 to this service:
 
- - The ``load balancer`` is a logical grouping of listeners on one or more
-   virtual ip addresses (VIP)
- - A ``listener`` is the listening endpoint of a load balanced service. It
-   requires port and protocol information but not an IP address.
- - The ``pool`` is associated with a listener and is responsible for grouping
-   the **members** which receive the client requests forwarded by the listener.
- - A ``member`` is a single server or service. It can only be associated with
-   a single pool.
+* The ``load balancer`` is a logical grouping of listeners on one or more
+  virtual ip addresses (VIP)
+* A ``listener`` is the listening endpoint of a load balanced service. It
+  requires port and protocol information but not an IP address.
+* The ``pool`` is associated with a listener and is responsible for grouping
+  the **members** which receive the client requests forwarded by the listener.
+* A ``member`` is a single server or service. It can only be associated with
+  a single pool.
 
 For a more complete set of definitions take a look at the OpenStack LBaaS
 `glossary`_.
 
 .. _OSI model: https://en.wikipedia.org/wiki/OSI_model
 .. _glossary: https://docs.openstack.org/octavia/pike/reference/glossary.html
+
 
 **********************
 Layer 4 load balancing
@@ -299,6 +303,7 @@ that the correct server has responded to the request.
 
   Connection closed by foreign host.
 
+
 **********************
 Layer 7 load balancing
 **********************
@@ -338,15 +343,15 @@ with an L7 policy.
 
 Rule types
 
-- HOST_NAME: The rule does a comparison between the HTTP/1.1 hostname in the
+* HOST_NAME: The rule does a comparison between the HTTP/1.1 hostname in the
   request against the value parameter in the rule.
-- PATH: The rule compares the path portion of the HTTP URI against the value
+* PATH: The rule compares the path portion of the HTTP URI against the value
   parameter in the rule.
-- FILE_TYPE: The rule compares the last portion of the URI against the value
+* FILE_TYPE: The rule compares the last portion of the URI against the value
   parameter in the rule. (eg. “txt”, “jpg”, etc.)
-- HEADER: The rule looks for a header defined in the key parameter and compares
+* HEADER: The rule looks for a header defined in the key parameter and compares
   it against the value parameter in the rule.
-- COOKIE: The rule looks for a cookie named by the key parameter and compares
+* COOKIE: The rule looks for a cookie named by the key parameter and compares
   it against the value parameter in the rule.
 
 Comparison types
@@ -634,6 +639,7 @@ step of setting up the loadbalancer above.
 
 
 Test connectivity to the 2 web endpoints.
+
 .. code-block:: bash
 
   $ curl www.example.com
