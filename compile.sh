@@ -4,13 +4,13 @@
 # Check dependencies are installed
 if ! which virtualenv; then
   echo "Could not find virtualenv on the PATH."
-  echo "Try: apt-get instal python-virtualenv"
+  echo "Try: apt-get install python-virtualenv"
   exit 1
 fi
 
 if ! which pip; then
   echo "Could not find pip on the PATH."
-  echo "Try: apt-get instal python-pipv"
+  echo "Try: apt-get install python-pip"
   exit 1
 fi
 
@@ -18,6 +18,7 @@ fi
 if [ ! -d venv ]; then
   virtualenv venv
 fi
+
 # Activate the virtual environment
 source venv/bin/activate
 
