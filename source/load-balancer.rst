@@ -7,12 +7,11 @@ Load Balancer
 Overview
 ********
 
-Load balancing is the action of taking front-end requests and distributing
-these across a pool of back-end servers for processing based on a series of
-rules. The Catalyst Cloud Load Balancer as a Service (LBaaS) is aimed at
-encapsulating the complexity of implementing a typical load balancing solution
-into an easy to use cloud based service that natively provides a
-multi-tenanted, highly scaleable programmable alternative.
+Load balancing is the action of taking front-end requests and distributing these
+across a pool of back-end servers for processing based on a series of rules. The
+load balancer service encapsulates the complexity of implementing a typical load
+balancing solution into an easy to use cloud based service that natively
+provides a multi-tenanted, highly scaleable programmable alternative.
 
 Layer 4 vs Layer 7 Load balancing
 =================================
@@ -41,21 +40,14 @@ For a more complete set of definitions take a look at the OpenStack LBaaS
 .. _OSI model: https://en.wikipedia.org/wiki/OSI_model
 .. _glossary: https://docs.openstack.org/octavia/pike/reference/glossary.html
 
+Command line interface
+======================
 
-**********************
-Layer 4 load balancing
-**********************
+In order to work with the load balancer service it necessary to add the
+octaviaclient python module to your virtual environment. Please refer to the
+`command line install instructions`_ for more information.
 
-In this example we will create a simple scenario that load balances traffic
-based on TCP port numbers to different service endpoints.
-
-.. note::
-
-  In order to work with the load balancer service it necessary to add the
-  octaviaclient python module to your virtual environment. More information on
-  installing commandline tools can be found at `CLI`_.
-
-.. _CLI: http://docs.catalystcloud.nz/getting-started/cli.html#command-line-interface-cli
+.. _command line install instructions: http://docs.catalystcloud.nz/getting-started/cli.html#command-line-interface-cli
 
 Assuming you have a virtual environment called ``venv``, simply follow the
 steps below.
@@ -65,6 +57,13 @@ steps below.
   source venv/bin/activate
   pip install python-octaviaclient
 
+
+**********************
+Layer 4 load balancing
+**********************
+
+In this example we will create a simple scenario that load balances traffic
+based on TCP port numbers to different service endpoints.
 
 First lets create the loadbalancer. It will be called **lb_test_1** and it's
 virtual IP address (VIP) will be attached to the local subnet
@@ -97,9 +96,9 @@ virtual IP address (VIP) will be attached to the local subnet
   | vip_subnet_id       | 1c221166-3cb3-4534-915a-b75220ec1873 |
   +---------------------+--------------------------------------+
 
-Once the load balancer is ``ACTIVE``, we will create two listeners,
-both will use TCP as their protocol and they will listen on ports 80 and 90
-respectively
+Once the ``operating_status`` of the load balancer is ``ACTIVE``, we will create
+two listeners, both will use TCP as their protocol and they will listen on ports
+80 and 90 respectively.
 
 .. code-block:: bash
 
@@ -310,7 +309,7 @@ Layer 7 load balancing
 
 Layer 7 load balancing takes its name from the OSI model, indicating that the
 load balancer distributes requests to back-end pools based on layer 7
-(application) data. Layer 7 load balancing s also known as
+(application) data. Layer 7 load balancing is also known as
 **request switching**, **application load balancing**, or
 **content based routing or switching**.
 
@@ -324,8 +323,8 @@ For example,
 
 A site with "mydomain.nz/login" or a subdomain "login.mydomain.nz" will be
 routed to a back-end pool running an identity provider and authentication
-system, while "mydomain.nz/shop" or "shop.mydomain.nz" will be routed to a
-commerce application".
+system, while "mydomain.nz/shop" or "shop.mydomain.nz" will be routed to an
+e-commerce web application.
 
 Unlike lower-level load balancing, layer 7 load balancing does not require
 that all pools behind the load balancing service have the same content. In
@@ -364,12 +363,13 @@ Comparison types
 
 L7 policy
 =========
+
 An L7 Policy is a collection of L7 rules associated with a Listener, and which
 may also have an association to a back-end pool. Policies describe actions that
 should be taken by the load balancing software if all of the rules in the
 policy return true.
 
-L7 Policy Testing
+L7 policy testing
 =================
 
 First lets create the loadbalancer. It will be called **lb_test_2** and it’s
@@ -403,7 +403,8 @@ virtual IP address (VIP) will be attached to the local subnet
   | vip_subnet_id       | af0f251c-0a36-4bde-b3bc-e6167eda3d1e |
   +---------------------+--------------------------------------+
 
-Once the load balancer is ``Active``, Create the listener
+Once the ``provisioning_status`` of the load balancer is ``Active``, create the
+listener.
 
 .. code-block:: bash
 
@@ -440,7 +441,7 @@ Once the load balancer is ``Active``, Create the listener
   | updated_at                | None                                 |
   +---------------------------+--------------------------------------+
 
-Create the first pool
+Create the first pool.
 
 .. code-block:: bash
 
@@ -466,7 +467,7 @@ Create the first pool
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
 
-Add the member to the pool
+Add the member to the pool.
 
 .. code-block:: bash
 
@@ -490,7 +491,7 @@ Add the member to the pool
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
-Create the second pool
+Create the second pool.
 
 .. code-block:: bash
 
@@ -516,7 +517,7 @@ Create the second pool
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
 
-Add the other member to the second pool
+Add the other member to the second pool.
 
 .. code-block:: bash
 
@@ -540,7 +541,7 @@ Add the other member to the second pool
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
-Create the layer 7 policy
+Create the layer 7 policy.
 
 .. code-block:: bash
 
@@ -565,7 +566,7 @@ Create the layer 7 policy
   | name                | policy1                              |
   +---------------------+--------------------------------------+
 
-Create a rule for the policy
+Create a rule for the policy.
 
 .. code-block:: bash
 
