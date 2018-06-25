@@ -62,8 +62,8 @@ Python 2.7.x, so the procedure below will also install it as a dependency.
   # Activate the virtual environment
   source venv/bin/activate
 
-  # Install Python openstackclient library into your virtual environment
-  pip install python-openstackclient
+  # Install the Python openstack client libraries into your virtual environment
+  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient}
 
 If you would like to test the CLI with Python 3.x, please use this
 procedure instead:
@@ -79,8 +79,8 @@ procedure instead:
   # Activate the virtual environment
   source venv/bin/activate
 
-  # Install Python openstackclient library into your virtual environment
-  pip install python-openstackclient
+  # Install the Python openstack client libraries into your virtual environment
+  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient}
 
 .. note::
 
@@ -106,9 +106,9 @@ need to install a different version of Python.
   # Activate the virtual environment
   source venv/bin/activate
 
-  # Install Python openstackclient library and the Python timezone definitions
+  # Install the Python openstack client libraries and the Python timezone definitions
   # into your virtual environment
-  pip install pytz python-openstackclient
+  pip install pytz python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient}
 
 Debian Linux 8
 --------------
@@ -124,9 +124,9 @@ Debian Linux 8
   # Activate the virtual environment
   source venv/bin/activate
 
-  # Install Python openstackclient library and the Python timezone definitions
+  # Install the Python openstack client libraries and the Python timezone definitions
   # into your virtual environment
-  pip install pytz python-openstackclient
+  pip install pytz python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient}
 
 CentOS Linux 7
 --------------
@@ -147,8 +147,8 @@ CentOS Linux 7
   # Activate the virtual environment
   source venv/bin/activate
 
-  # Install Python openstackclient library on your virtual environment
-  pip install python-openstackclient
+  # Install the Python openstack client libraries into your virtual environment
+  pip install Python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient}
 
 Mac OS X
 --------
@@ -163,8 +163,8 @@ Mac OS X
   virtualenv venv
   source venv/bin/activate
 
-  # Install Python openstackclient library on your virtual environment
-  pip install python-openstackclient
+  # Install the Python openstack client libraries into your virtual environment
+  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient}
 
 Windows Server 2012 R2
 ----------------------
@@ -181,12 +181,8 @@ Assuming that Python and pip have successfully been installed then
   virtualenv.exe venv
   .\venv\scripts\activate
 
-  # Install Python openstackclient library on your virtual environment
-  pip install python-openstackclient
-
-  # Uncomment the line below if you would like to install the deprecated
-  # openstack CLI in addition to the new unified CLI
-  # pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
+  Install the Python openstack client libraries into your virtual environment
+  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient}
 
 
 If any errors are encountered while pip is building packages it may be
@@ -351,15 +347,3 @@ Finding your way
 The command ``openstack help`` will list all commands supported by the
 OpenStack CLI. You can then use ``openstack COMMAND --help`` to understand how
 to use a command.
-
-.. note::
-    The python-openstackclient does have some dependency on the per-service
-    project modules from OpenStack to provide functionality and while some of these
-    are included automatically this is not always the case.
-
-    If  missing options then run the following command from within the
-    virtual environment to correct this
-
-.. code-block:: bash
-
-  pip install python-{ceilometerclient,cinderclient,glanceclient,heatclient,keystoneclient,neutronclient,novaclient,swiftclient}
