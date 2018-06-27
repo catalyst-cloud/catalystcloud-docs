@@ -916,9 +916,9 @@ Test connectivity to the 2 web endpoints.
   $ curl shop.example.com
   Welcome to shop.example.com
 
-
+*******************
 Connection Draining
-===================
+*******************
 When needing to perform maintenance tasks on an active pool member it is
 preferrable to be able to remove that member from the pool in a graceful manner
 which does not abruptly terminate client connections. The usual approach to
@@ -937,7 +937,7 @@ for the target member to 0.
 Once the member is ready to go back in to the pool simply reset its weight
 value back the the same as the other members in the pool.
 
-To check the weight values for existing pool members run 
+To check the weight values for existing pool members run
 
 .. code-block:: bash
 
