@@ -51,27 +51,10 @@ on how the back-end services are selected.
   active transactions and then forwards the user request to the back end.
 
 
-See this `glossary`_ for .
+See this `glossary`_ for more information and terminology.
 
 .. _OSI model: https://en.wikipedia.org/wiki/OSI_model
 .. _glossary: https://docs.openstack.org/octavia/queens/reference/glossary.html
-
-Command line interface
-======================
-
-In order to work with the load balancer service it necessary to add the
-octaviaclient python module to your virtual environment. Please refer to the
-`command line install instructions`_ for more information.
-
-.. _command line install instructions: http://docs.catalystcloud.nz/getting-started/cli.html#command-line-interface-cli
-
-Assuming you have a virtual environment called ``venv``, simply follow the
-steps below.
-
-.. code-block:: bash
-
-  source venv/bin/activate
-  pip install python-octaviaclient
 
 
 **********************
@@ -115,7 +98,7 @@ virtual IP address (VIP) will be attached to the local subnet
 
 Once the ``operating_status`` of the load balancer is ``ACTIVE``, we will create
 two listeners, both will use TCP as their protocol and they will listen on ports
-80 and 90 respectively.
+80 and 443 respectively.
 
 .. code-block:: bash
 
@@ -152,6 +135,7 @@ two listeners, both will use TCP as their protocol and they will listen on ports
   | updated_at                | None                                 |
   +---------------------------+--------------------------------------+
 
+.. code-block:: bash
 
   $ openstack loadbalancer listener create --name 443_listener --protocol TCP --protocol-port 443 lb_test_1
   +---------------------------+--------------------------------------+
@@ -184,7 +168,6 @@ two listeners, both will use TCP as their protocol and they will listen on ports
 To view the newly created listeners
 
 .. code-block:: bash
-
 
   $ openstack loadbalancer listener list
   +--------------------------------------+-----------------+--------------+----------------------------------+----------+---------------+----------------+
@@ -219,6 +202,8 @@ Then add a pool to each listener
   | session_persistence | None                                 |
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
+
+.. code-block:: bash
 
   $ openstack loadbalancer pool create --name 443_pool --listener 443_listener --protocol TCP --lb-algorithm ROUND_ROBIN
   +---------------------+--------------------------------------+
@@ -266,6 +251,8 @@ Now add the members to the pools.
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
+.. code-block:: bash
+
   $ openstack loadbalancer member create --name 80_member_2 --address 10.0.0.6 --protocol-port 80  80_pool
   +---------------------+--------------------------------------+
   | Field               | Value                                |
@@ -286,6 +273,10 @@ Now add the members to the pools.
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
+Check that the members were created
+
+.. code-block:: bash
+
   $ openstack loadbalancer member list 80_pool
   +--------------------------------------+-------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
   | id                                   | name        | project_id                       | provisioning_status | address  | protocol_port | operating_status | weight |
@@ -293,6 +284,10 @@ Now add the members to the pools.
   | 5ce83425-9d85-4da4-a057-4023e603ab2e | 80_member_1 | eac679e4896146e6827ce29d755fe289 | ACTIVE              | 10.0.0.4 |            80 | NO_MONITOR       |      1 |
   | 5f973af6-7d59-4f64-a0b8-df5680d1bf78 | 80_member_2 | eac679e4896146e6827ce29d755fe289 | ACTIVE              | 10.0.0.6 |            80 | NO_MONITOR       |      1 |
   +--------------------------------------+-------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
+
+Now repeat for the service on port 443
+
+.. code-block:: bash
 
   $ openstack loadbalancer member create --name 443_member_1 --address 10.0.0.4 --protocol-port 443  443_pool
   +---------------------+--------------------------------------+
@@ -314,6 +309,7 @@ Now add the members to the pools.
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
+
   $ openstack loadbalancer member create --name 443_member_2 --address 10.0.0.6 --protocol-port 443  443_pool
   +---------------------+--------------------------------------+
   | Field               | Value                                |
@@ -333,6 +329,7 @@ Now add the members to the pools.
   | monitor_port        | None                                 |
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
+
 
   $ openstack loadbalancer member list 443_pool
   +--------------------------------------+--------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
@@ -359,7 +356,7 @@ the pool.
 HTTP health monitors
 --------------------
 
-By default, the Catalyst loadbalance service will check the “/” path on the
+By default, the Catalyst load balancer service will check the “/” path on the
 application server but this may not appropriate because that location may
 require authorisation, be cached or cause the server to perform too much work
 for a simle health check.
@@ -370,8 +367,15 @@ simple as providing a basic static page which returns an HTTP status code of
 200 to far more elaborate setups that provide a JSON packet containing a
 variety of server status metrics.
 
-There are also other health monitor types available including PING, TCP, HTTPS,
-and TLS-HELLO.
+There are also other health monitor types available including
+* PING
+* TCP
+* HTTPS
+* TLS-HELLO
+
+To create a health monitor to check the state of the back-end servers providing
+the on port 80. These services are proving a simple static response at the URL
+path '/health'
 
 .. code-block:: bash
 
@@ -543,7 +547,7 @@ the pool.
 
 If you need to retrieve the VIP for the loadbalancer
 
-..code-block:: bash
+.. code-block:: bash
 
   export VIP=$(openstack loadbalancer show lb_test_1 -f value -c vip_address)
   openstack floating ip list | grep $VIP | awk '{ print $4}'
@@ -912,12 +916,37 @@ Test connectivity to the 2 web endpoints.
   $ curl shop.example.com
   Welcome to shop.example.com
 
+
 Connection Draining
 ===================
-Octavia supports the feature by manually set the weight value for
-one of the members to 0, `openstack loadbalancer member set $pool_id
-$member_id --weight 0`, so octavia won't transit requests to that member
-and the current requests are not interrupted.
+When needing to perform maintenance tasks on an active pool member it is
+preferrable to be able to remove that member from the pool in a graceful manner
+which does not abruptly terminate client connections. The usual approach to
+this is a process known as connection draining, where a member's state is set
+so that it will no longer accept new connections requests. This allows for any
+existing connections to complete their current tasks and close, then once there
+are no remaining connections the member server can be worked on safely.
+
+To achieve this on the Catalyst Cloud Load Balancer service set the ``weight``
+for the target member to 0.
+
+.. code-block:: bash
+
+  $ openstack loadbalancer member set http_pool login.example.com --weight 0
+
+Once the member is ready to go back in to the pool simply reset its weight
+value back the the same as the other members in the pool.
+
+To check the weight values for existing pool members run 
+
+.. code-block:: bash
+
+  $ openstack loadbalancer member list http_pool_2 -c name -c weight
+  +------------------+--------+
+  | name             | weight |
+  +------------------+--------+
+  | shop.example.com |      1 |
+  +------------------+--------+
 
 
 ***************
