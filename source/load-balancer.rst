@@ -33,12 +33,28 @@ to this service:
   the **members** which receive the client requests forwarded by the listener.
 * A ``member`` is a single server or service. It can only be associated with
   a single pool.
+* As members may go offline it is possible to use ``health monitors`` to detect
+  their state and divert traffic away from members that are not responding properly.
+  A health monitors is associated with a pool.
 
-For a more complete set of definitions take a look at the OpenStack LBaaS
-`glossary`_.
+Load Balancing Algorithms
+-------------------------
+There are several load balancing algorithms available, their role is to decide
+on how the back-end services are selected.
+
+* ``Round Robin`` The algorithm chooses the server sequentially in the list.
+  Once it reaches the end of the server, the algorithm forwards the new request
+  to the first server in the list.
+* ``Source`` This algorithm selects the server based on the source IP address
+  using the hash to connect it to the matching server.
+* ``Least connection`` algorithm This algorithm selects the server with few
+  active transactions and then forwards the user request to the back end.
+
+
+See this `glossary`_ for .
 
 .. _OSI model: https://en.wikipedia.org/wiki/OSI_model
-.. _glossary: https://docs.openstack.org/octavia/pike/reference/glossary.html
+.. _glossary: https://docs.openstack.org/octavia/queens/reference/glossary.html
 
 Command line interface
 ======================
@@ -63,7 +79,8 @@ Layer 4 load balancing
 **********************
 
 In this example we will create a simple scenario that load balances traffic
-based on TCP port numbers to different service endpoints.
+based on TCP port numbers to different service endpoints. There will be 2
+servers both with services running on ports 80 & 443.
 
 First lets create the loadbalancer. It will be called **lb_test_1** and it's
 virtual IP address (VIP) will be attached to the local subnet
@@ -135,29 +152,47 @@ two listeners, both will use TCP as their protocol and they will listen on ports
   | updated_at                | None                                 |
   +---------------------------+--------------------------------------+
 
-  $ openstack loadbalancer listener create --name 90_listener --protocol TCP --protocol-port 90 lb_test_1
+
+  $ openstack loadbalancer listener create --name 443_listener --protocol TCP --protocol-port 443 lb_test_1
   +---------------------------+--------------------------------------+
   | Field                     | Value                                |
   +---------------------------+--------------------------------------+
   | admin_state_up            | True                                 |
   | connection_limit          | -1                                   |
-  | created_at                | 2017-11-08T22:45:14                  |
+  | created_at                | 2018-06-25T01:13:06                  |
   | default_pool_id           | None                                 |
   | default_tls_container_ref | None                                 |
   | description               |                                      |
-  | id                        | 12a4eed8-a5d1-465d-b947-b589c700d127 |
+  | id                        | 724816cc-2dbd-42c8-9b61-19f49fa48165 |
   | insert_headers            | None                                 |
   | l7policies                |                                      |
-  | loadbalancers             | 547deffe-55fc-49be-ac52-e24c7fd22ece |
-  | name                      | 90_listener                          |
+  | loadbalancers             | bfc1a299-3ec2-4681-974a-b7c47b52529f |
+  | name                      | 443_listener                         |
   | operating_status          | OFFLINE                              |
-  | project_id                | a3a9af91b9e547739bfcb02cc2acded0     |
+  | project_id                | eac679e4896146e6827ce29d755fe289     |
   | protocol                  | TCP                                  |
-  | protocol_port             | 90                                   |
+  | protocol_port             | 443                                  |
   | provisioning_status       | PENDING_CREATE                       |
   | sni_container_refs        | []                                   |
+  | timeout_client_data       |                                      |
+  | timeout_member_connect    |                                      |
+  | timeout_member_data       |                                      |
+  | timeout_tcp_inspect       |                                      |
   | updated_at                | None                                 |
   +---------------------------+--------------------------------------+
+
+To view the newly created listeners
+
+.. code-block:: bash
+
+
+  $ openstack loadbalancer listener list
+  +--------------------------------------+-----------------+--------------+----------------------------------+----------+---------------+----------------+
+  | id                                   | default_pool_id | name         | project_id                       | protocol | protocol_port | admin_state_up |
+  +--------------------------------------+-----------------+--------------+----------------------------------+----------+---------------+----------------+
+  | 380ea1df-e043-4167-90ca-03f044b620a3 | None            | 80_listener  | eac679e4896146e6827ce29d755fe289 | TCP      |            80 | True           |
+  | 724816cc-2dbd-42c8-9b61-19f49fa48165 | None            | 443_listener | eac679e4896146e6827ce29d755fe289 | TCP      |           443 | True           |
+  +--------------------------------------+-----------------+--------------+----------------------------------+----------+---------------+----------------+
 
 Then add a pool to each listener
 
@@ -168,39 +203,39 @@ Then add a pool to each listener
   | Field               | Value                                |
   +---------------------+--------------------------------------+
   | admin_state_up      | True                                 |
-  | created_at          | 2017-11-08T22:46:39                  |
+  | created_at          | 2018-06-25T01:30:17                  |
   | description         |                                      |
   | healthmonitor_id    |                                      |
-  | id                  | 1bac72f2-4a16-45ef-b3ec-eec49fe8eb28 |
+  | id                  | 96dde7c5-77c5-4ffe-9542-226714f5c58d |
   | lb_algorithm        | ROUND_ROBIN                          |
-  | listeners           | de21c777-1c98-4061-aa86-f4b9faa7ea04 |
-  | loadbalancers       | 547deffe-55fc-49be-ac52-e24c7fd22ece |
+  | listeners           | 380ea1df-e043-4167-90ca-03f044b620a3 |
+  | loadbalancers       | bfc1a299-3ec2-4681-974a-b7c47b52529f |
   | members             |                                      |
   | name                | 80_pool                              |
   | operating_status    | OFFLINE                              |
-  | project_id          | a3a9af91b9e547739bfcb02cc2acded0     |
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
   | protocol            | TCP                                  |
   | provisioning_status | PENDING_CREATE                       |
   | session_persistence | None                                 |
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
 
-  $ openstack loadbalancer pool create --name 90_pool --listener 90_listener --protocol TCP --lb-algorithm ROUND_ROBIN
+  $ openstack loadbalancer pool create --name 443_pool --listener 443_listener --protocol TCP --lb-algorithm ROUND_ROBIN
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
   | admin_state_up      | True                                 |
-  | created_at          | 2017-11-08T22:47:11                  |
+  | created_at          | 2018-06-25T01:31:04                  |
   | description         |                                      |
   | healthmonitor_id    |                                      |
-  | id                  | 2a0e5985-1d06-4e4e-9b51-700461b8ba7a |
+  | id                  | da26844d-921d-4045-af24-017f07107934 |
   | lb_algorithm        | ROUND_ROBIN                          |
-  | listeners           | 12a4eed8-a5d1-465d-b947-b589c700d127 |
-  | loadbalancers       | 547deffe-55fc-49be-ac52-e24c7fd22ece |
+  | listeners           | 724816cc-2dbd-42c8-9b61-19f49fa48165 |
+  | loadbalancers       | bfc1a299-3ec2-4681-974a-b7c47b52529f |
   | members             |                                      |
-  | name                | 90_pool                              |
+  | name                | 443_pool                             |
   | operating_status    | OFFLINE                              |
-  | project_id          | a3a9af91b9e547739bfcb02cc2acded0     |
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
   | protocol            | TCP                                  |
   | provisioning_status | PENDING_CREATE                       |
   | session_persistence | None                                 |
@@ -211,17 +246,17 @@ Now add the members to the pools.
 
 .. code-block:: bash
 
-  $ openstack loadbalancer member create --name 80_member --address 10.0.0.4 --protocol-port 80  80_pool
+  $ openstack loadbalancer member create --name 80_member_1 --address 10.0.0.4 --protocol-port 80  80_pool
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
   | address             | 10.0.0.4                             |
   | admin_state_up      | True                                 |
-  | created_at          | 2017-11-08T22:49:46                  |
-  | id                  | a895336a-0843-484f-923f-d9d74e7dee85 |
-  | name                | 80_member                            |
+  | created_at          | 2018-06-25T01:37:46                  |
+  | id                  | 5ce83425-9d85-4da4-a057-4023e603ab2e |
+  | name                | 80_member_1                          |
   | operating_status    | NO_MONITOR                           |
-  | project_id          | a3a9af91b9e547739bfcb02cc2acded0     |
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
   | protocol_port       | 80                                   |
   | provisioning_status | PENDING_CREATE                       |
   | subnet_id           | None                                 |
@@ -231,18 +266,18 @@ Now add the members to the pools.
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
-  $ openstack loadbalancer member create --name 90_member --address 10.0.0.12 --protocol-port 90  90_pool
+  $ openstack loadbalancer member create --name 80_member_2 --address 10.0.0.6 --protocol-port 80  80_pool
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
-  | address             | 10.0.0.12                            |
+  | address             | 10.0.0.6                             |
   | admin_state_up      | True                                 |
-  | created_at          | 2017-11-08T23:16:47                  |
-  | id                  | 5a9ec068-4c68-4d56-b75f-f842b493dadc |
-  | name                | 90_member                            |
+  | created_at          | 2018-06-25T01:38:48                  |
+  | id                  | 5f973af6-7d59-4f64-a0b8-df5680d1bf78 |
+  | name                | 80_member_2                          |
   | operating_status    | NO_MONITOR                           |
-  | project_id          | a3a9af91b9e547739bfcb02cc2acded0     |
-  | protocol_port       | 90                                   |
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | protocol_port       | 80                                   |
   | provisioning_status | PENDING_CREATE                       |
   | subnet_id           | None                                 |
   | updated_at          | None                                 |
@@ -251,57 +286,275 @@ Now add the members to the pools.
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
+  $ openstack loadbalancer member list 80_pool
+  +--------------------------------------+-------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
+  | id                                   | name        | project_id                       | provisioning_status | address  | protocol_port | operating_status | weight |
+  +--------------------------------------+-------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
+  | 5ce83425-9d85-4da4-a057-4023e603ab2e | 80_member_1 | eac679e4896146e6827ce29d755fe289 | ACTIVE              | 10.0.0.4 |            80 | NO_MONITOR       |      1 |
+  | 5f973af6-7d59-4f64-a0b8-df5680d1bf78 | 80_member_2 | eac679e4896146e6827ce29d755fe289 | ACTIVE              | 10.0.0.6 |            80 | NO_MONITOR       |      1 |
+  +--------------------------------------+-------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
+
+  $ openstack loadbalancer member create --name 443_member_1 --address 10.0.0.4 --protocol-port 443  443_pool
+  +---------------------+--------------------------------------+
+  | Field               | Value                                |
+  +---------------------+--------------------------------------+
+  | address             | 10.0.0.4                             |
+  | admin_state_up      | True                                 |
+  | created_at          | 2018-06-25T01:43:41                  |
+  | id                  | ec245cb0-7548-4b25-881f-5a7dcd0c6e89 |
+  | name                | 443_member_1                         |
+  | operating_status    | NO_MONITOR                           |
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | protocol_port       | 443                                  |
+  | provisioning_status | PENDING_CREATE                       |
+  | subnet_id           | None                                 |
+  | updated_at          | None                                 |
+  | weight              | 1                                    |
+  | monitor_port        | None                                 |
+  | monitor_address     | None                                 |
+  +---------------------+--------------------------------------+
+
+  $ openstack loadbalancer member create --name 443_member_2 --address 10.0.0.6 --protocol-port 443  443_pool
+  +---------------------+--------------------------------------+
+  | Field               | Value                                |
+  +---------------------+--------------------------------------+
+  | address             | 10.0.0.6                             |
+  | admin_state_up      | True                                 |
+  | created_at          | 2018-06-25T01:44:19                  |
+  | id                  | f91e7d8e-a932-43da-8c9f-c37c0d58d864 |
+  | name                | 443_member_2                         |
+  | operating_status    | NO_MONITOR                           |
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | protocol_port       | 443                                  |
+  | provisioning_status | PENDING_CREATE                       |
+  | subnet_id           | None                                 |
+  | updated_at          | None                                 |
+  | weight              | 1                                    |
+  | monitor_port        | None                                 |
+  | monitor_address     | None                                 |
+  +---------------------+--------------------------------------+
+
+  $ openstack loadbalancer member list 443_pool
+  +--------------------------------------+--------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
+  | id                                   | name         | project_id                       | provisioning_status | address  | protocol_port | operating_status | weight |
+  +--------------------------------------+--------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
+  | ec245cb0-7548-4b25-881f-5a7dcd0c6e89 | 443_member_1 | eac679e4896146e6827ce29d755fe289 | ACTIVE              | 10.0.0.4 |           443 | NO_MONITOR       |      1 |
+  | f91e7d8e-a932-43da-8c9f-c37c0d58d864 | 443_member_2 | eac679e4896146e6827ce29d755fe289 | ACTIVE              | 10.0.0.6 |           443 | NO_MONITOR       |      1 |
+  +--------------------------------------+--------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
+
+Adding a health monitor
+=======================
+
+While it is possible to create a listener without a health monitor this is not
+considered best practice to do so, especially for production load balancers.
+The reason behind this is that should a back-end pool member go offline it will
+not be detected or removed from the pool for a while leading to possible
+service disruption for web clients.
+
+The health monitors role is to perform pro-active checks on each back-end
+server to pre-emptively detect failed servers and temporarily take them out of
+the pool.
+
+
+HTTP health monitors
+--------------------
+
+By default, the Catalyst loadbalance service will check the “/” path on the
+application server but this may not appropriate because that location may
+require authorisation, be cached or cause the server to perform too much work
+for a simle health check.
+
+Typically the web application that is being load balanced will provide an
+endpoint such as ``/health`` specifically for health checks. This could be as
+simple as providing a basic static page which returns an HTTP status code of
+200 to far more elaborate setups that provide a JSON packet containing a
+variety of server status metrics.
+
+There are also other health monitor types available including PING, TCP, HTTPS,
+and TLS-HELLO.
+
+.. code-block:: bash
+
+  $ openstack loadbalancer healthmonitor create --name 80_healthcheck --delay 60 --timeout 20 --max-retries 2 --url-path /health --type http  80_pool
+  +---------------------+--------------------------------------+
+  | Field               | Value                                |
+  +---------------------+--------------------------------------+
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | name                | 80_healthcheck                       |
+  | admin_state_up      | True                                 |
+  | pools               | 96dde7c5-77c5-4ffe-9542-226714f5c58d |
+  | created_at          | 2018-06-25T21:22:25                  |
+  | provisioning_status | PENDING_CREATE                       |
+  | updated_at          | None                                 |
+  | delay               | 60                                   |
+  | expected_codes      | 200                                  |
+  | max_retries         | 2                                    |
+  | http_method         | GET                                  |
+  | timeout             | 20                                   |
+  | max_retries_down    | 3                                    |
+  | url_path            | /health                              |
+  | type                | HTTP                                 |
+  | id                  | d8c8c074-574a-4e41-8c43-f0633a4e828d |
+  | operating_status    | OFFLINE                              |
+  +---------------------+--------------------------------------+
+
+  Here is a brief description of some of the parameters used in the health
+  monitor examle.
+
+  * ``url_path`` : Path part of the URL that should be retrieved from the
+    back-end server. By default this is “/”.
+  * ``delay`` : Number of seconds to wait between health checks.
+  * ``timeout`` : Number of seconds to wait for any given health check to
+    complete. timeout should always be smaller than delay.
+  * ``max-retries`` : Number of subsequent health checks a given back-end server
+    must fail before it is considered down, or that a failed back-end server
+    must pass to be considered up again.
+
+
+Assigning the VIP
+=================
 The final step is to assign a floating ip address to the VIP port on the
 loadbalancer. In order to do this we need to create a floating ip, find the
 VIP Port ID and then assign it a floating ip address.
 
 .. code-block:: bash
 
-  export FIP=`openstack floating ip create public -f value -c floating_ip_address`
+  export FIP=`openstack floating ip create public-net -f value -c floating_ip_address`
   export VIP_PORT_ID=`openstack loadbalancer show lb_test_1 -f value -c vip_port_id`
   openstack floating ip set --port $VIP_PORT_ID $FIP
 
-As a simple mockup we have the commands shown below running on each of the
-member servers, they will send a response when a connection is received on the
-listening port. Make sure that you replace the PORT variable with the correct
-value, i.e. 80 or 90, for each member server.
+
+Testing the setup
+=================
+As a simple mockup we have the setup shown below running on each of the
+member servers.
+
+There are 2 basic python Flask apps running on each instance, they bind to
+ports 80 and 443 respectively and  will send a response when a request is
+received on the listening port.
+
+To try out the example, create a copy of both of the flasky_80.py and
+flasky_443.py scripts (shown below) on each server, then run each script from
+its own terminal session. Each server should have both scripts running at the
+same time.
+
+Ideally these should be run in a `virtual environment`_, below are the basic
+steps required to do this and install the required `Flask`_ package.
+
+.. _virtual environment: https://virtualenv.pypa.io/en/stable/
+.. _Flask: http://flask.pocoo.org/
 
 .. code-block:: bash
 
-  export MYIP=$(/sbin/ifconfig eth0 |grep 'inet addr'|awk -F: '{print $2}'| awk '{print $1}');
-  export PORT="80"
-  sudo nc -lk -p ${PORT} -c 'echo -e "HTTP/1.1 200 OK\r\n$(date)\r\n\r\n\tThis is server : $(hostname)\n\n"'
+  # install the required system packages
+  $ sudo apt install virtualenv python-pip
 
-To test, telnet to both of the ports at VIP of the listener, in response you
-should expect to get an appropriate response for the targeted port indicating
-that the correct server has responded to the request.
+  # create a virtual environment
+  $ virtualenv venv
+
+  # activate the virtual environment
+  $ source venv/bin/activate
+
+  # install Flask into the virtul environment
+  $ pip install flask
+
+  # exit the virtual environment
+  $ deactivate
+
+
+**script** flask_80.py
+
+.. code-block:: python
+
+  from flask import Flask
+  import socket
+
+
+  host_name = socket.gethostname()
+  host_ip = socket.gethostbyname(host_name)
+
+  app = Flask(__name__)
+
+  @app.route("/")
+  def hello():
+      #return "Hello World!"
+      return "Server : {} @ {}".format(host_name, host_ip)
+
+  @app.route("/health")
+  def health():
+      return "healthy!"
+
+  if __name__ == "__main__":
+      app.run(host='0.0.0.0', port=443)
+
+**script** flask_443.py
+
+.. code-block:: python
+
+  from flask import Flask
+  import socket
+
+
+  host_name = socket.gethostname()
+  host_ip = socket.gethostbyname(host_name)
+
+  app = Flask(__name__)
+
+  @app.route("/")
+  def hello():
+      #return "Hello World!"
+      return "Server : {} @ {}".format(host_name, host_ip)
+
+  @app.route("/health")
+  def health():
+      return "healthy!"
+
+  if __name__ == "__main__":
+      app.run(host='0.0.0.0', port=80)
+
+
+Run the scripts, each in their own terminal session, in the following manner:
 
 .. code-block:: bash
 
-  $ telnet $FIP 80
-  Trying 10.0.0.3...
-  Connected to 10.0.0.3.
-  Escape character is '^]'.
-  HTTP/1.1 200 OK
-  Thu Nov  9 01:25:08 UTC 2017
+  source venv/bin/activate
 
-    This is server : <hostname>
+  sudo python <script_name>.py
 
-  Connection closed by foreign host.
+The output for the services running on port 80 will look similar to this
 
+.. code-block:: bash
 
-  $ telnet $FIP 90
-  Trying 10.0.0.3...
-  Connected to 10.0.0.3.
-  Escape character is '^]'.
-  HTTP/1.1 200 OK
-  Thu Nov  9 01:25:55 UTC 2017
+  $ sudo python flasky_80.py
+   * Serving Flask app "flasky_80" (lazy loading)
+   * Environment: production
+     WARNING: Do not use the development server in a production environment.
+     Use a production WSGI server instead.
+   * Debug mode: off
+   * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+  10.0.0.9 - - [27/Jun/2018 00:36:33] "GET /health HTTP/1.0" 200 -
+  10.0.0.10 - - [27/Jun/2018 00:36:35] "GET /health HTTP/1.0" 200 -
+  10.0.0.9 - - [27/Jun/2018 00:37:33] "GET /health HTTP/1.0" 200 -
+  10.0.0.10 - - [27/Jun/2018 00:37:35] "GET /health HTTP/1.0" 200 -
 
-    This is server : <hostname>
+The first few 'GET' requests are the loadbalancer's health check querying the
+service on port 80, once this has been successful the member will be added to
+the pool.
 
+If you need to retrieve the VIP for the loadbalancer
 
-  Connection closed by foreign host.
+..code-block:: bash
 
+  export VIP=$(openstack loadbalancer show lb_test_1 -f value -c vip_address)
+  openstack floating ip list | grep $VIP | awk '{ print $4}'
+
+Test the following:
+
+* connect to the loadbalancer VIP from a browser. The output
+  should alternate between both back-end servers on port 80.
+
+* connect to the healtmonitor url on $VIP/health
+* connect to $VIP:443 to confirm that the second service is also loadbalanced
 
 **********************
 Layer 7 load balancing
@@ -382,23 +635,23 @@ virtual IP address (VIP) will be attached to the local subnet
   | Field               | Value                                |
   +---------------------+--------------------------------------+
   | admin_state_up      | True                                 |
-  | created_at          | 2018-05-28T02:55:10                  |
+  | created_at          | 2018-06-27T03:47:29                  |
   | description         |                                      |
   | flavor              |                                      |
-  | id                  | fa1ba76a-f6eb-423d-b101-921ba439b4d1 |
+  | id                  | afa1cd14-03e7-4bff-afed-8001d196b9df |
   | listeners           |                                      |
   | name                | lb_test_2                            |
   | operating_status    | OFFLINE                              |
   | pools               |                                      |
-  | project_id          | 0ef8ecaa78684c399d1d514b61698fda     |
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
   | provider            | octavia                              |
   | provisioning_status | PENDING_CREATE                       |
   | updated_at          | None                                 |
-  | vip_address         | 10.0.0.9                             |
-  | vip_network_id      | 908816f1-933c-4ff2-8595-f0f57c689e48 |
-  | vip_port_id         | 1f6a4e91-36c7-43d9-ad77-97b771239f7c |
+  | vip_address         | 10.0.0.11                            |
+  | vip_network_id      | 452fc8b7-218d-4279-99b2-3d46f9d016b7 |
+  | vip_port_id         | 095c4d86-7051-4618-967a-ddae50820118 |
   | vip_qos_policy_id   |                                      |
-  | vip_subnet_id       | af0f251c-0a36-4bde-b3bc-e6167eda3d1e |
+  | vip_subnet_id       | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
   +---------------------+--------------------------------------+
 
 Once the ``provisioning_status`` of the load balancer is ``Active``, create the
@@ -410,9 +663,8 @@ listener.
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
   | id                                   | name      | project_id                       | vip_address | provisioning_status | provider |
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
-  | fa1ba76a-f6eb-423d-b101-921ba439b4d1 | lb_test_2 | 0ef8ecaa78684c399d1d514b61698fda | 10.0.0.19   | ACTIVE              | octavia  |
+  | afa1cd14-03e7-4bff-afed-8001d196b9df | lb_test_2 | eac679e4896146e6827ce29d755fe289 | 10.0.0.11   | ACTIVE              | octavia  |
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
-
 .. code-block:: bash
 
   $ openstack loadbalancer listener create --name http_listener --protocol HTTP --protocol-port 80 lb_test_2
@@ -421,21 +673,25 @@ listener.
   +---------------------------+--------------------------------------+
   | admin_state_up            | True                                 |
   | connection_limit          | -1                                   |
-  | created_at                | 2017-11-09T02:48:50                  |
+  | created_at                | 2018-06-27T03:48:52                  |
   | default_pool_id           | None                                 |
   | default_tls_container_ref | None                                 |
   | description               |                                      |
-  | id                        | eb1d781d-38d3-45e5-bc17-8e6ab53613f2 |
+  | id                        | b35681df-5bea-4f14-aa11-1dcb4396a8df |
   | insert_headers            | None                                 |
   | l7policies                |                                      |
-  | loadbalancers             | 547deffe-55fc-49be-ac52-e24c7fd22ece |
+  | loadbalancers             | afa1cd14-03e7-4bff-afed-8001d196b9df |
   | name                      | http_listener                        |
   | operating_status          | OFFLINE                              |
-  | project_id                | a3a9af91b9e547739bfcb02cc2acded0     |
+  | project_id                | eac679e4896146e6827ce29d755fe289     |
   | protocol                  | HTTP                                 |
   | protocol_port             | 80                                   |
   | provisioning_status       | PENDING_CREATE                       |
   | sni_container_refs        | []                                   |
+  | timeout_client_data       |                                      |
+  | timeout_member_connect    |                                      |
+  | timeout_member_data       |                                      |
+  | timeout_tcp_inspect       |                                      |
   | updated_at                | None                                 |
   +---------------------------+--------------------------------------+
 
@@ -448,17 +704,17 @@ Create the first pool.
   | Field               | Value                                |
   +---------------------+--------------------------------------+
   | admin_state_up      | True                                 |
-  | created_at          | 2017-11-09T02:50:04                  |
+  | created_at          | 2018-06-27T03:51:37                  |
   | description         |                                      |
   | healthmonitor_id    |                                      |
-  | id                  | 77d958cd-d2ba-4bbc-b5dc-ebba82963bdc |
+  | id                  | e61c9da3-ef83-4aaf-88d0-326d2ee56b11 |
   | lb_algorithm        | ROUND_ROBIN                          |
-  | listeners           | eb1d781d-38d3-45e5-bc17-8e6ab53613f2 |
-  | loadbalancers       | 547deffe-55fc-49be-ac52-e24c7fd22ece |
+  | listeners           | b35681df-5bea-4f14-aa11-1dcb4396a8df |
+  | loadbalancers       | afa1cd14-03e7-4bff-afed-8001d196b9df |
   | members             |                                      |
   | name                | http_pool                            |
   | operating_status    | OFFLINE                              |
-  | project_id          | a3a9af91b9e547739bfcb02cc2acded0     |
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
   | protocol            | HTTP                                 |
   | provisioning_status | PENDING_CREATE                       |
   | session_persistence | None                                 |
@@ -469,20 +725,20 @@ Add the member to the pool.
 
 .. code-block:: bash
 
-  $ openstack loadbalancer member create --name www.example.com --subnet private-subnet --address 10.0.0.4 --protocol-port 80  http_pool
+  $ openstack loadbalancer member create --name login.example.com --subnet private-subnet --address 10.0.0.5 --protocol-port 80  http_pool
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
-  | address             | 10.0.0.4                             |
+  | address             | 10.0.0.5                             |
   | admin_state_up      | True                                 |
-  | created_at          | 2017-11-09T02:50:39                  |
-  | id                  | 02d4c636-cc38-42d3-a7fd-2339e0acd536 |
-  | name                | www.example.com                      |
+  | created_at          | 2018-06-27T04:02:06                  |
+  | id                  | d2497d5a-0c80-4037-84bf-6e3cb498126e |
+  | name                | login.example.com                    |
   | operating_status    | NO_MONITOR                           |
-  | project_id          | a3a9af91b9e547739bfcb02cc2acded0     |
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
   | protocol_port       | 80                                   |
   | provisioning_status | PENDING_CREATE                       |
-  | subnet_id           | 1c221166-3cb3-4534-915a-b75220ec1873 |
+  | subnet_id           | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
   | updated_at          | None                                 |
   | weight              | 1                                    |
   | monitor_port        | None                                 |
@@ -498,17 +754,17 @@ Create the second pool.
   | Field               | Value                                |
   +---------------------+--------------------------------------+
   | admin_state_up      | True                                 |
-  | created_at          | 2017-11-09T02:51:21                  |
+  | created_at          | 2018-06-27T04:09:22                  |
   | description         |                                      |
   | healthmonitor_id    |                                      |
-  | id                  | af13eb62-d4a1-44e5-8a9d-d7df0595b8bb |
+  | id                  | 3efc552b-8cfd-43a8-be06-dddfb903d285 |
   | lb_algorithm        | ROUND_ROBIN                          |
   | listeners           |                                      |
-  | loadbalancers       | 547deffe-55fc-49be-ac52-e24c7fd22ece |
+  | loadbalancers       | afa1cd14-03e7-4bff-afed-8001d196b9df |
   | members             |                                      |
   | name                | http_pool_2                          |
   | operating_status    | OFFLINE                              |
-  | project_id          | a3a9af91b9e547739bfcb02cc2acded0     |
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
   | protocol            | HTTP                                 |
   | provisioning_status | PENDING_CREATE                       |
   | session_persistence | None                                 |
@@ -519,20 +775,20 @@ Add the other member to the second pool.
 
 .. code-block:: bash
 
-  $ openstack loadbalancer member create --name www2.example.com --subnet private-subnet --address 10.0.0.12 --protocol-port 80  http_pool_2
+  $ openstack loadbalancer member create --name shop.example.com --subnet private-subnet --address 10.0.0.7 --protocol-port 80 http_pool_2
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
-  | address             | 10.0.0.12                            |
+  | address             | 10.0.0.7                             |
   | admin_state_up      | True                                 |
-  | created_at          | 2017-11-09T02:51:51                  |
-  | id                  | 60edcc97-5afe-43e1-9c8e-e164ec381274 |
-  | name                | www2.example.com                     |
+  | created_at          | 2018-06-27T04:55:08                  |
+  | id                  | 4c6cb13c-a68d-45fd-9c72-3e34e38f50e9 |
+  | name                | shop.example.com                     |
   | operating_status    | NO_MONITOR                           |
-  | project_id          | a3a9af91b9e547739bfcb02cc2acded0     |
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
   | protocol_port       | 80                                   |
   | provisioning_status | PENDING_CREATE                       |
-  | subnet_id           | 1c221166-3cb3-4534-915a-b75220ec1873 |
+  | subnet_id           | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
   | updated_at          | None                                 |
   | weight              | 1                                    |
   | monitor_port        | None                                 |
@@ -543,23 +799,23 @@ Create the layer 7 policy.
 
 .. code-block:: bash
 
-  openstack loadbalancer l7policy create --action REDIRECT_TO_POOL --redirect-pool http_pool_2 --name policy1 http_listener
+  $ openstack loadbalancer l7policy create --action REDIRECT_TO_POOL --redirect-pool http_pool_2 --name policy1 http_listener
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
-  | listener_id         | eb1d781d-38d3-45e5-bc17-8e6ab53613f2 |
+  | listener_id         | b35681df-5bea-4f14-aa11-1dcb4396a8df |
   | description         |                                      |
   | admin_state_up      | True                                 |
   | rules               |                                      |
-  | project_id          | a3a9af91b9e547739bfcb02cc2acded0     |
-  | created_at          | 2017-11-09T02:52:16                  |
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | created_at          | 2018-06-27T04:55:47                  |
   | provisioning_status | PENDING_CREATE                       |
   | updated_at          | None                                 |
-  | redirect_pool_id    | af13eb62-d4a1-44e5-8a9d-d7df0595b8bb |
+  | redirect_pool_id    | 3efc552b-8cfd-43a8-be06-dddfb903d285 |
   | redirect_url        | None                                 |
   | action              | REDIRECT_TO_POOL                     |
   | position            | 1                                    |
-  | id                  | 7b191c4f-cc22-4896-8b16-0c703d8b5220 |
+  | id                  | 2aa69093-b82a-4e2d-8013-0ec224f9a142 |
   | operating_status    | OFFLINE                              |
   | name                | policy1                              |
   +---------------------+--------------------------------------+
@@ -568,21 +824,21 @@ Create a rule for the policy.
 
 .. code-block:: bash
 
-  openstack loadbalancer l7rule create --compare-type EQUAL_TO --type HOST_NAME --value www2.example.com policy1
+  $ openstack loadbalancer l7rule create --compare-type EQUAL_TO --type HOST_NAME --value shop.example.com policy1
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
-  | created_at          | 2017-11-09T02:52:58                  |
+  | created_at          | 2018-06-27T04:56:39                  |
   | compare_type        | EQUAL_TO                             |
   | provisioning_status | PENDING_CREATE                       |
   | invert              | False                                |
   | admin_state_up      | True                                 |
   | updated_at          | None                                 |
-  | value               | www2.example.com                     |
+  | value               | shop.example.com                     |
   | key                 | None                                 |
-  | project_id          | a3a9af91b9e547739bfcb02cc2acded0     |
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
   | type                | HOST_NAME                            |
-  | id                  | 6a8c5d53-1e21-4bf4-b0fc-6f168f600f91 |
+  | id                  | 4924fcf2-c508-47f1-a40a-afab0bca9e5f |
   | operating_status    | OFFLINE                              |
   +---------------------+--------------------------------------+
 
@@ -592,7 +848,7 @@ VIP Port ID and then assign it a floating ip address.
 
 .. code-block:: bash
 
-  export FIP=`openstack floating ip create public -f value -c floating_ip_address`
+  export FIP=`openstack floating ip create public-net -f value -c floating_ip_address`
   export VIP_PORT_ID=`openstack loadbalancer show lb_test_2 -f value -c vip_port_id`
   openstack floating ip set --port $VIP_PORT_ID $FIP
 
@@ -602,27 +858,36 @@ Place a copy of the files below on to each of the endpoint servers.
 
 Server 1
 
-.. code-block:: bash
+**script** flask_login.py
 
-  #!/bin/sh
-  URL="www.example.com"
-  MYIP=$(/sbin/ifconfig eth0 |grep 'inet addr'|awk -F: '{print $2}'| awk '{print $1}');
-  OUTPUT="Welcome to www.example.com\r"
-  LEN=${#OUTPUT}
-  while true; do echo -e "HTTP/1.1 200 OK\r\nContent-Length: ${LEN}\r\n\r\n${OUTPUT}" | sudo nc
-  -l -p 80; done
+.. code-block:: python
+
+  from flask import Flask
+  app = Flask(__name__)
+
+  @app.route("/")
+  def hello():
+      return "Welcome to login.example.com"
+
+  if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=80)
 
 Server 2
 
-.. code-block:: bash
+**script** flask_shop.py
 
-  #!/bin/sh
-  URL="www2.example.com"
-  MYIP=$(/sbin/ifconfig eth0 |grep 'inet addr'|awk -F: '{print $2}'| awk '{print $1}');
-  OUTPUT="Welcome to www2.example.com\r"
-  LEN=${#OUTPUT}
-  while true; do echo -e "HTTP/1.1 200 OK\r\nContent-Length: ${LEN}\r\n\r\n${OUTPUT}" | sudo nc
-  -l -p 80; done
+.. code-block:: python
+
+  from flask import Flask
+  app = Flask(__name__)
+
+  @app.route("/")
+  def hello():
+      return "Welcome to shop.example.com"
+
+  if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=80)
+
 
 
 On the test server add entries to /etc/hosts to provide name resolution. The
@@ -633,19 +898,26 @@ step of setting up the loadbalancer above.
 
 .. code-block:: bash
 
-  <loadbalancer_floating_ip> www.example.com
-  <loadbalancer_floating_ip> www2.example.com
+  <loadbalancer_floating_ip> login.example.com
+  <loadbalancer_floating_ip> shop.example.com
 
 
 Test connectivity to the 2 web endpoints.
 
 .. code-block:: bash
 
-  $ curl www.example.com
-  Welcome to 10.0.0.4 the URL is www.example.com
+  $ curl login.example.com
+  Welcome to login.example.com
 
-  $ curl www2.example.com
-  Welcome to 10.0.0.12 the URL is www2.example.com
+  $ curl shop.example.com
+  Welcome to shop.example.com
+
+Connection Draining
+===================
+Octavia supports the feature by manually set the weight value for
+one of the members to 0, `openstack loadbalancer member set $pool_id
+$member_id --weight 0`, so octavia won't transit requests to that member
+and the current requests are not interrupted.
 
 
 ***************
