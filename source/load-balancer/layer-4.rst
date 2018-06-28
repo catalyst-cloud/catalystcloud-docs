@@ -387,7 +387,7 @@ We have two copies of a basic python Flask app running on each instance, they
 bind to ports 80 and 443 respectively and  will send a response when a request
 is received on the listening port.
 
-To try out the example, create a copy of the flasky_app.py script (shown below)
+To try out the example, create a copy of the flask_app.py script (shown below)
 on each server.
 
 Ideally these should be run in a `virtual environment`_, below are the basic
@@ -444,16 +444,15 @@ The output for the services running on port 80 will look similar to this
 
 .. code-block:: bash
 
-  $ root@server1:~# python flask_app.py -p 80
+  root@server-1:~# python flask_app.py -p 80
    * Serving Flask app "flask_app" (lazy loading)
    * Environment: production
      WARNING: Do not use the development server in a production environment.
      Use a production WSGI server instead.
    * Debug mode: off
    * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
-  127.0.0.1 - - [28/Jun/2018 15:11:06] "GET / HTTP/1.1" 200 -
-  127.0.0.1 - - [28/Jun/2018 15:11:07] "GET /favicon.ico HTTP/1.1" 404 -
-  127.0.0.1 - - [28/Jun/2018 15:11:07] "GET /favicon.ico HTTP/1.1" 404 -
+  10.0.0.9 - - [28/Jun/2018 06:09:43] "GET /health HTTP/1.0" 200 -
+  10.0.0.10 - - [28/Jun/2018 06:09:45] "GET /health HTTP/1.0" 200 -
 
 The first few 'GET' requests are the loadbalancer's health check querying the
 service on port 80, once this has been successful the member will be added to
