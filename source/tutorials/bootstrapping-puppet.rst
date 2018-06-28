@@ -1,4 +1,5 @@
 .. _bootstrapping-puppet-from-heat:
+
 ##############################
 Bootstrapping Puppet from Heat
 ##############################

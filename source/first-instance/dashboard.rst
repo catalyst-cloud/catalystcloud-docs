@@ -88,8 +88,8 @@ Navigate to the ``Security Groups`` tab.
 
 .. image:: dashboard_assets/security-group-tab.png
 
-Now we'll create a new security group, specific to allowing SSH access. Select ``Create Security Group``
-, give it a name, and create it.
+Now we'll create a new security group, specific to allowing SSH access. Select
+``Create Security Group`` , give it a name, and create it.
 
 .. image:: dashboard_assets/create-security-group.png
 
@@ -241,4 +241,5 @@ floating ips, SSH key pairs, and images. To move forward from here, you might
 want to:
 
 * :ref:`Install the command line interface. <command-line-interface>`
-* :ref:`Install Ansible, and use it to deploy a new instance. <launching-your-first-instance-using-ansible>`
+* :ref:`Install Ansible, and use it to deploy a new instance.
+  <launching-your-first-instance-using-ansible>`
