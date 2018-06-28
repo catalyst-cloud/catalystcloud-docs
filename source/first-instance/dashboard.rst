@@ -221,6 +221,13 @@ SSH tunnel so you can start using it.
 Connect to the new Instance
 ***************************
 
+Before we SSH in, we should give the private SSH key the correct, more secure
+permissions.
+
+.. code-block:: bash
+
+  $ chmod 600 <path to private key>
+
 You can now connect to the SSH service using the floating IP that you
 associated with your instance. This address is visible in
 the Instances list, or under the ``Floating IPs`` window.
