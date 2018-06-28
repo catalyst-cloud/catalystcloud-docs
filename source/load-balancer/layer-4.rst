@@ -310,6 +310,7 @@ simple as providing a basic static page which returns an HTTP status code of
 variety of server status metrics.
 
 There are also other health monitor types available including
+
 * PING
 * TCP
 * HTTPS
@@ -344,17 +345,17 @@ path '/health'
   | operating_status    | OFFLINE                              |
   +---------------------+--------------------------------------+
 
-  Here is a brief description of some of the parameters used in the health
-  monitor examle.
+Here is a brief description of some of the parameters used in the health
+monitor examle.
 
-  * ``url_path`` : Path part of the URL that should be retrieved from the
-    back-end server. By default this is “/”.
-  * ``delay`` : Number of seconds to wait between health checks.
-  * ``timeout`` : Number of seconds to wait for any given health check to
-    complete. timeout should always be smaller than delay.
-  * ``max-retries`` : Number of subsequent health checks a given back-end server
-    must fail before it is considered down, or that a failed back-end server
-    must pass to be considered up again.
+* ``url_path`` : Path part of the URL that should be retrieved from the
+  back-end server. By default this is “/”.
+* ``delay`` : Number of seconds to wait between health checks.
+* ``timeout`` : Number of seconds to wait for any given health check to
+  complete. timeout should always be smaller than delay.
+* ``max-retries`` : Number of subsequent health checks a given back-end server
+  must fail before it is considered down, or that a failed back-end server
+  must pass to be considered up again.
 
 
 *****************
