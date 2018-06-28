@@ -433,7 +433,7 @@ steps required to do this and install the required `Flask`_ package.
       return "healthy!"
 
   if __name__ == "__main__":
-      app.run(host='0.0.0.0', port=443)
+      app.run(host='0.0.0.0', port=80)
 
 **script** flask_443.py
 
@@ -458,7 +458,7 @@ steps required to do this and install the required `Flask`_ package.
       return "healthy!"
 
   if __name__ == "__main__":
-      app.run(host='0.0.0.0', port=80)
+      app.run(host='0.0.0.0', port=443)
 
 
 Run the scripts, each in their own terminal session, in the following manner:
