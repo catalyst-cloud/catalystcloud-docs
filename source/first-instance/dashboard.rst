@@ -100,7 +100,7 @@ Now select manage rules for your new security group.
 As you can tell, by default security rules allow egress of all traffic, and
 allow no ingress of traffic. By adding additional rules, we can whitelist new
 types of traffic, coming from new IP addresses. Note that you can assign more
-than one security rules to an instance.
+than one security group to an instance.
 
 Select add rule.
 
