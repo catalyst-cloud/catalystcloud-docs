@@ -10,6 +10,12 @@ First lets create the loadbalancer. It will be called **lb_test_1** and it's
 virtual IP address (VIP) will be attached to the local subnet
 **private-subnet**.
 
+.. note::
+
+  If you wish to run the tests included with this example, you will need to
+  root access on the test instances. If you do not have that level of access
+  then substitute 8080 and 8443 whereever you see 80 and 443 respectively.
+
 .. code-block:: bash
 
   $ source example-openrc.sh
@@ -377,14 +383,12 @@ Testing the setup
 As a simple mockup we have the setup shown below running on each of the
 member servers.
 
-There are 2 basic python Flask apps running on each instance, they bind to
-ports 80 and 443 respectively and  will send a response when a request is
-received on the listening port.
+We have two copies of a basic python Flask app running on each instance, they
+bind to ports 80 and 443 respectively and  will send a response when a request
+is received on the listening port.
 
-To try out the example, create a copy of both of the flasky_80.py and
-flasky_443.py scripts (shown below) on each server, then run each script from
-its own terminal session. Each server should have both scripts running at the
-same time.
+To try out the example, create a copy of the flasky_app.py script (shown below)
+on each server.
 
 Ideally these should be run in a `virtual environment`_, below are the basic
 steps required to do this and install the required `Flask`_ package.
@@ -392,10 +396,17 @@ steps required to do this and install the required `Flask`_ package.
 .. _virtual environment: https://virtualenv.pypa.io/en/stable/
 .. _Flask: http://flask.pocoo.org/
 
+.. note::
+
+  In order to be able to bind to ports 80 & 443 the virtualenv needs to be
+  created for the root user.
+
 .. code-block:: bash
 
+  # sudo to the root account
+  $ sudo -i
   # install the required system packages
-  $ sudo apt install virtualenv python-pip
+  $ apt install virtualenv python-pip
 
   # create a virtual environment
   $ virtualenv venv
@@ -410,80 +421,39 @@ steps required to do this and install the required `Flask`_ package.
   $ deactivate
 
 
-**script** flask_80.py
+**script** flask_app.py
 
-.. code-block:: python
+.. literalinclude:: ../_scripts/flask_app.py
 
-  from flask import Flask
-  import socket
-
-
-  host_name = socket.gethostname()
-  host_ip = socket.gethostbyname(host_name)
-
-  app = Flask(__name__)
-
-  @app.route("/")
-  def hello():
-      #return "Hello World!"
-      return "Server : {} @ {}".format(host_name, host_ip)
-
-  @app.route("/health")
-  def health():
-      return "healthy!"
-
-  if __name__ == "__main__":
-      app.run(host='0.0.0.0', port=80)
-
-**script** flask_443.py
-
-.. code-block:: python
-
-  from flask import Flask
-  import socket
-
-
-  host_name = socket.gethostname()
-  host_ip = socket.gethostbyname(host_name)
-
-  app = Flask(__name__)
-
-  @app.route("/")
-  def hello():
-      #return "Hello World!"
-      return "Server : {} @ {}".format(host_name, host_ip)
-
-  @app.route("/health")
-  def health():
-      return "healthy!"
-
-  if __name__ == "__main__":
-      app.run(host='0.0.0.0', port=443)
-
-
-Run the scripts, each in their own terminal session, in the following manner:
+Run 2 copies of the script, each in their own terminal session, on each of the
+member servers in the following manner, ensuring that there is one listening on
+port 80 and the other on port 443.
 
 .. code-block:: bash
 
-  source venv/bin/activate
+  # sudo to the root account
+  $ sudo -i
 
-  sudo python <script_name>.py
+  # activate the virtual environment
+  $ source venv/bin/activate
+
+  # run the flask app - providing the correct port numbers
+  $ python flask_app.py -p <port_number>
 
 The output for the services running on port 80 will look similar to this
 
 .. code-block:: bash
 
-  $ sudo python flasky_80.py
-   * Serving Flask app "flasky_80" (lazy loading)
+  $ root@server1:~# python flask_app.py -p 80
+   * Serving Flask app "flask_app" (lazy loading)
    * Environment: production
      WARNING: Do not use the development server in a production environment.
      Use a production WSGI server instead.
    * Debug mode: off
    * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
-  10.0.0.9 - - [27/Jun/2018 00:36:33] "GET /health HTTP/1.0" 200 -
-  10.0.0.10 - - [27/Jun/2018 00:36:35] "GET /health HTTP/1.0" 200 -
-  10.0.0.9 - - [27/Jun/2018 00:37:33] "GET /health HTTP/1.0" 200 -
-  10.0.0.10 - - [27/Jun/2018 00:37:35] "GET /health HTTP/1.0" 200 -
+  127.0.0.1 - - [28/Jun/2018 15:11:06] "GET / HTTP/1.1" 200 -
+  127.0.0.1 - - [28/Jun/2018 15:11:07] "GET /favicon.ico HTTP/1.1" 404 -
+  127.0.0.1 - - [28/Jun/2018 15:11:07] "GET /favicon.ico HTTP/1.1" 404 -
 
 The first few 'GET' requests are the loadbalancer's health check querying the
 service on port 80, once this has been successful the member will be added to
