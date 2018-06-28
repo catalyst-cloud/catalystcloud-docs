@@ -1,8 +1,8 @@
 .. _command-line-interface:
 
-############################
-Command line interface (CLI)
-############################
+###########################################
+Installing the command line interface (CLI)
+###########################################
 
 The OpenStack command line tools are a collection of Python based modules that
 provide a means for command line interaction with the various Catalyst Cloud

@@ -1,6 +1,8 @@
-##################
-What is a project?
-##################
+.. _project_info:
+
+########
+Projects
+########
 
 Openstack provides an isolated and multi-tenanted approach to creating user
 workspaces. These workspaces are typically referred to as ``projects`` but

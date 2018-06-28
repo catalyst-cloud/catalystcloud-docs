@@ -1,3 +1,4 @@
+.. _access_control:
 ##############
 Access Control
 ##############
