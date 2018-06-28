@@ -88,8 +88,8 @@ Navigate to the ``Security Groups`` tab.
 
 .. image:: dashboard_assets/security-group-tab.png
 
-Now we'll create a new security group, specific to allowing SSH access. Select
-``Create Security Group`` , give it a name, and create it.
+Now we'll create a new security group, specific to allowing SSH access.
+Select ``Create Security Group`` , give it a name, and create it.
 
 .. image:: dashboard_assets/create-security-group.png
 
