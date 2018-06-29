@@ -2,15 +2,20 @@
 Object storage with the command line tools
 ##########################################
 
-===================================
-Using the command line client tools
-===================================
+****************
+Before you begin
+****************
 
-First, ensure that you have installed the correct version of the tools for your
-operating system version and have sourced your OpenStack RC file
+Before you begin, ensure that you have installed the correct version of the
+tools for your operating system version and have sourced your OpenStack RC file
 see :ref:`command-line-interface` for full details.
 
-To view the containers currently in existence in your project:
+***************************
+Viewing your object storage
+***************************
+
+To view the containers currently in existence in your project, use ``openstack
+container list``.
 
 .. code-block:: bash
 
@@ -18,8 +23,8 @@ To view the containers currently in existence in your project:
     mycontainer-1
     mycontainer-2
 
-To view the objects stored within a container:
-``openstack object list <container_name>``
+To view the objects stored within a container, use ``openstack object list
+<container_name>``.
 
 .. code-block:: bash
 
@@ -31,7 +36,11 @@ To view the objects stored within a container:
     | image-1.png |
     +-------------+
 
-To create a new container: ``openstack container create <container_name>``
+*****************************
+Adding to your object storage
+*****************************
+
+To create a new container, use ``openstack container create <container_name>``.
 
 .. code-block:: bash
 
@@ -43,8 +52,8 @@ To create a new container: ``openstack container create <container_name>``
     +---------+----------------+----------------------------------------------------+
 
 
-To add a new object to a container:
-``openstack object create <container_name> <file_name>``
+To add a new object to a container, use ``openstack object create
+<container_name> <local_file_path>``.
 
 .. code-block:: bash
 
@@ -55,25 +64,25 @@ To add a new object to a container:
     | hello.txt | mynewcontainer | d41d8cd98f00b204e9800998ecf8427e |
     +-----------+----------------+----------------------------------+
 
+*********************************
+Deleting from your object storage
+*********************************
 
-To delete an object: ``openstack object delete <container> <object>``
+To delete an object, use ``openstack object delete <container> <object>``.
 
 .. code-block:: bash
 
     $ openstack object delete mynewcontainer hello.txt
 
-To delete a container: ``openstack container delete <container>``
-
-.. note::
-
-  this will only work if the container is empty.
+To delete a container, use ``openstack container delete <container>``. Keep in
+mind this will only work if the container is empty.
 
 .. code-block:: bash
 
     $ openstack container delete mycontainer-1
 
-To delete a container and all of the objects within the container:
-``openstack container delete --recursive <container>``
+However, to delete a container and all of the objects within the
+container, use ``openstack container delete --recursive <container>``.
 
 .. code-block:: bash
 
