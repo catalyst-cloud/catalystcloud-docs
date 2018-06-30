@@ -2,9 +2,92 @@
 Launching a compute instance
 ############################
 
-***************************************
-Instance initialisation with cloud-init
-***************************************
+
+*********
+Root disk
+*********
+
+A root disk is used to boot the compute instance and typically contains an
+operating system image.
+
+Choosing a source
+=================
+
+When creating a new instance via the dashboard you are asked to select a
+`Boot Source`. You can choose to use an image provided by Catalyst Cloud, images
+uploaded by you, instance snapshots, existing volumes, or volume snapshots:
+
+* ``Image``: Public images are pre-configured operating system images provided
+  by Catalyst Cloud or our partners. Private images are images you have uploaded
+  yourself.
+* ``Instance Snapshot``: Assuming you have previously created a snapshot of
+  another compute instance, this option will create a new compute instance that
+  is a clone of an existing compute instance (at the point the snapshoot was
+  taken).
+* ``Volume``: Will re-attach an existing volume as the root disk of the new
+  compute instance. This option assumes that the existing volume is a valid boot
+  source (i.e.: contains an operating system).
+* ``Volume Snapshot``: Assuming you have previously created a snapshot of a
+  volume, this option will create a new root disk that is a clone of an existing
+  volume (at the point in time the snapshoot was taken).
+
+Choosing the root disk type
+============================
+
+Compute instances can have their root disk backed by a ``Persistent Volume`` or
+an ``Ephemeral Disk``. The table below outlines the main differences between
+these two options:
+
++-------------------+------------------------------+---------------------------+
+| Root disk type    | Life-cycle                   | Snapshots                 |
++===================+==============================+===========================+
+| Persistent Volume | Will continue to exist       | Snapshots will take less  |
+|                   | after the compute instance   | than a second to be       |
+|                   | is deleted, so long the      | performed and will use    |
+|                   | option `delete on terminate` | less space.               |
+|                   | was not selected.            |                           |
+|                   |                              | Copy on Write (CoW) is    |
+|                   |                              | used for the snapshot. As |
+|                   |                              | a result, the snapshot    |
+|                   |                              | will depend and require   |
+|                   |                              | the original volume to    |
+|                   |                              | remain available.         |
++-------------------+------------------------------+---------------------------+
+| Ephemeral Disk    | Will be deleted when the     | Will take longer to be    |
+|                   | compute instance is deleted. | performed and will use    |
+|                   |                              | more space.               |
+|                   |                              |                           |
+|                   |                              | A complete copy of the    |
+|                   |                              | data will be created. As  |
+|                   |                              | a result, the snapshot    |
+|                   |                              | will be independent and   |
+|                   |                              | the original ephemeral    |
+|                   |                              | disk can be deleted.      |
++-------------------+------------------------------+---------------------------+
+
+By default the web dashboard will create a ``Persistent Volume``. This is the
+recommended option for most use cases, and in doubt, the one that should be
+selected.
+
+``Ephemeral Disk`` is only recommended for true cloud native applications, built
+using the immutable infrastructure principle, or one-off jobs.
+
+Delete on terminate
+===================
+
+For convenience, it is possible to request the compute service to delete the
+``Persistent Volume`` used for the root disk when the compute instance is
+deleted. To do so, select "Yes" for "Delete Volume on Instance Delete".
+
+.. warning::
+
+  For production workloads it is not recommended to delete volumes automatically
+  when compute instances are deleted.
+
+
+***********************
+Instance initialisation
+***********************
 
 A script called cloud-init is included in all images provided by the Catalyst
 Cloud. This script is there to assist you with instance configuration at boot
@@ -23,9 +106,8 @@ In the following sections, we provide examples that illustrate how to perform
 common initialisation tasks with cloud-init, using different configuration
 formats.
 
-*******************
 Cloud config format
-*******************
+===================
 
 The cloud config format is the simplest way to accomplish initialisation tasks
 using the cloud-config syntax. The example below illustrates how to upgrade
@@ -89,9 +171,8 @@ options during boot time, such as the hostname, locale and timezone.
   # Log all cloud-init process output (info & errors) to a logfile
   output: {all: ">> /var/log/cloud-init-output.log"}
 
-*************
 Script format
-*************
+=============
 
 Cloud init can be used to run scripts written in any language (bash, python,
 ruby, perl, ...) at boot time. Scripts must begin with ``#!``.
@@ -107,9 +188,8 @@ ruby, perl, ...) at boot time. Scripts must begin with ``#!``.
   # Install apache
   apt-get -y install apache2
 
-***********
 MIME format
-***********
+===========
 
 The mime multi part archive format allows you to combine multiple cloud-init
 formats, files and scripts into a single file.
@@ -146,9 +226,8 @@ format to overwrite the index.html file of the default website:
 
    --===============6187713584654397420==--
 
-************************
 Cloud-init official docs
-************************
+========================
 
 For other formats and more detailed information on how to use cloud-init to
 initialise your compute instances, please read:

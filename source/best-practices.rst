@@ -32,22 +32,6 @@ it can be reused in subsequent commands.
 Similar mechanisms exist for doing this with other toolsets such as Ansible,
 Terraform and the various supported development SDKs.
 
-Using a block device for the instance root volume
-=================================================
-When creating a new compute instance, the preference is to use a block storage
-volume for the root disk. Volume backed instances have several benefits,
-such as:
-
-- creating snapshots is much quicker.
-- the volume and it's associated data can exist independent from the instance.
-
-When launching an instance via the dashboard the default behaviour is to create
-a volume along with the instance. Other methods of instance creation vary and
-some will equire the volume to be created ahead of the instance being launched,
-so please consult the relevant documentation for clarification.
-
-Typically ephemeral (memory resident) root disks should only be considered for
-workloads that are temporary in nature, like one-off jobs.
 
 *****************
 High availability

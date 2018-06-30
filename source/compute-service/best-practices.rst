@@ -7,21 +7,22 @@ Best practices
 Root volumes
 ************
 
-When creating a new compute instance, the preference is to use a block storage
-volume for the root disk. Volume backed instances have several benefits, such
-as:
+When creating a new compute instance, the preference is to use a
+``Persistent Volume`` for its root disk. Persistent volumes have several
+benefits, such as:
 
-* Snapshopts are created in seconds and use less space.
+* Snapshots oare created in seconds and use less space.
 * The volume and it's associated data can continue to exist after the compute
-  instace is terminated.
+  instace is deleted.
 
 When launching an instance via the dashboard the default behaviour is to create
-a volume for its root disk. Other methods of instance creation vary and some
-will equire the volume to be created ahead of the instance being launched, so
-please consult the relevant documentation for clarification.
+a ``Persistent Volume`` for its root disk. Other methods of instance creation
+vary and some will equire the volume to be created ahead of the instance being
+launched, so please consult the relevant documentation for clarification.
 
-Typically ephemeral root disks should only be used for workloads that are
-temporary in nature, like one-off jobs.
+Typically an ``Ephemeral Disk`` should only be used for cloud native workloads,
+that use the immutable infrastructure principle, or workloads that are temporary
+in nature, such as batch jobs.
 
 
 *****************
@@ -45,6 +46,21 @@ Customers that require their applications to survive the loss of an entire
 region can launch compute instances in different regions. This requires their
 applications, or middleware used by their applications (such as databases), to
 support this architecture.
+
+
+****************************
+Automatic restart on failure
+****************************
+
+When server failures occur, the Catalyst Cloud will attempt to restart the
+affected compute instances on a healthy server to minimise their downtime.
+
+To benefit from this feature, your application must be configured and prepared
+to start automatically and resume its normal operation at boot time and your
+guest operating system to respond to ACPI power events.
+
+The operating system images supplied by Catalyst or our partners already have
+ACPI configured to respond to power events by default.
 
 
 ***********
