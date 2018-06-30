@@ -34,18 +34,3 @@ There are four different ways you can stop a compute instance:
   as if they were running. When re-started it will resume its operation exactly
   where it was, but will take longer to start because it needs to read its
   memory state from disk.
-
-
-****************************
-Automatic restart on failure
-****************************
-
-When server failures occur, the Catalyst Cloud will attempt to restart the
-affected compute instances on a healthy server to minimise their downtime.
-
-To benefit from this feature, your application must be configured and prepared
-to start automatically and resume its normal operation at boot time and your
-guest operating system to respond to ACPI power events.
-
-The operating system images supplied by Catalyst or our partners already have
-ACPI configured to respond to power events by default.

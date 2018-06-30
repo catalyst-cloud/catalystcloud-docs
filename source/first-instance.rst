@@ -1,3 +1,5 @@
+.. _launch-first-instance:
+
 #############################
 Launching your first instance
 #############################

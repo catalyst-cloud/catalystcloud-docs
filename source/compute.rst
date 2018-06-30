@@ -7,9 +7,9 @@ applications in the form of compute instances. Compute instances are virtual
 servers that can be scaled up, down, or horizontally (by adding and removing
 more compute instances).
 
-When booting compute instances, you can choose from a list of pre-configured
-operating system images (Linux and Windows), or to upload your own using the
-imaging service.
+Please refer to the :ref:`launch-first-instance` tutorial for step by step
+guidance on how to launch your first compute instance (and the pre-requisites to
+do so).
 
 Table of Contents
 
