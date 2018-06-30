@@ -16,7 +16,7 @@ In order to get started we need to first define some terminology as it applies
 to this service:
 
 * The ``load balancer`` is a logical grouping of listeners on one or more
-  virtual ip addresses (VIP)
+  virtual ip addresses (VIP).
 * A ``listener`` is the listening endpoint of a load balanced service. It
   requires port and protocol information but not an IP address.
 * The ``pool`` is associated with a listener and is responsible for grouping
