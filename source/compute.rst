@@ -13,6 +13,7 @@ Table of Contents
   compute-service/stop-instance
   compute-service/anti-affinity-groups-ha
   compute-service/faq
+  compute-service/best-practices
 
 
 The compute service provides scalable on-demand compute capacity for your
