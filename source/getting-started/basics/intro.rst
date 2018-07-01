@@ -3,7 +3,7 @@ Introduction
 ############
 
 This section of the documentation is for people that are entirely new to cloud
-computing and the Catalyst Cloud.
+computing and/or the Catalyst Cloud.
 
 
 ***************************

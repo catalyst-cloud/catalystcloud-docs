@@ -10,6 +10,7 @@ controling them with OpenStack. Now we'll learn about the various services
 offered by Catalyst Cloud so that we know *what* we can do on the Catalyst
 Cloud, even if right now we don't know *how* we can do it yet.
 
+
 ****************************************
 What services are on the Catalyst Cloud?
 ****************************************
@@ -121,7 +122,7 @@ setting up load balancing is as smooth and intuitive as possible.
 What can you do with services?
 ******************************
 
-Catalyst Cloud is an entirely automated platform that adheres to the NSIT
+Catalyst Cloud is an entirely automated platform that adheres to the NIST
 definition of `true cloud computing <https://csrc.nist.gov/publications/d
 etail/sp/800-145/final>`_. Among other things, that means you have total and
 near instant control over all the services you use on the Catalyst Cloud. You
@@ -130,7 +131,7 @@ don't need to wait for a human to do things for you.
 .. note::
   There are a few exceptions where human help *is* required for security
   reasons. Signing up for the first time, increasing your
-  :ref:`quota<quota_info>`, and whitelisting IP addresses are the most common.
+  :ref:`quota<quotas>`, and whitelisting IP addresses are the most common.
   We intend to automate these in the future.
 
 Resources on the Catalyst Cloud can be created, deleted, assigned, resized,

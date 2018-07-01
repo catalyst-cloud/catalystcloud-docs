@@ -10,6 +10,7 @@ Contents:
    :maxdepth: 2
 
    getting-started
+   key-concepts
    first-instance
    dashboard
    compute

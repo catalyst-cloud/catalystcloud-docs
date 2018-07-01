@@ -5,7 +5,8 @@ Accessing the Catalyst Cloud
 ############################
 
 In the previous section, we learned about the various services the Catalyst
-Cloud offers. Now we'll learn about the various ways users can access services.
+Cloud offers. Now we'll learn about the various ways you can interact with
+these services.
 
 *****************
 The web dashboard
@@ -20,31 +21,34 @@ One advantage to the web dashboard is that it is accessible from any IP address,
 making it a quick way to perform tasks on the Catalyst Cloud while you're away
 from your normal work station.
 
+
 **************************
 The command line interface
 **************************
 
 The command line interface (CLI) is a very powerful, efficent way to interact
-with Catalyst Cloud. To interact with Catalyst Cloud through the CLI, a user
-must:
+with Catalyst Cloud. To use the CLI you will need to:
 
-1) Install the OpenStack CLI.
-2) Tell the OpenStack CLI who you are, and which OpenStack cloud you want to
-   talk to. This is done with an OpenStack environment file (RC file).
+1. Install the OpenStack CLI.
+2. Tell the OpenStack CLI who you are, and which OpenStack cloud you want to
+   connect to. This is typically done by sourcing a configuration file that sets
+   environment variables to configure the CLI.
 
-We have written a best practice guide to help you do this :ref:`here
-<command-line-interface>`. We're also working on an experemental command line
-client designed to help you get up on the command line as quickly and
-intuitively as possible. You can `try it here
+You can find instructions on how to install and set up the CLI :ref:`here
+<command-line-interface>`.
+
+We're also working on a containerised version of the CLI designed to help you
+get up and running as quickly and intuitively as possible. You can `try it here
 <https://github.com/catalyst-cloud/openstackclient-container>`_.
 
 After installing and configuring the CLI, you may want to familiarise yourself
 with it's functioning by following :ref:`this tutorial
 <using-the-command-line-interface>` to use it to deploy a compute instance.
 
-For more indepth documentation, the official OpenStack Client documentation is
+For more in depth documentation, the official OpenStack Client documentation is
 the most thorough source of information. You can `find it here
 <https://docs.openstack.org/python-openstackclient>`_.
+
 
 ****************
 Automation tools
@@ -82,7 +86,10 @@ To make this integration easier, the OpenStack community has developed a range
 of software development kits (SDKs) for numerious languages. You can find a list
 `here <https://wiki.openstack.org/wiki/SDKs>`_.
 
-|
+
+**********
+Next steps
+**********
 
 Now that you understand how you can access the Catalyst Cloud, there are a few
 small administrative concerns to be aware of before we dive into a hands on

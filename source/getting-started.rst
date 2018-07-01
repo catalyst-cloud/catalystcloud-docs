@@ -1,5 +1,5 @@
 ###############
-Getting Started
+Getting started
 ###############
 
 This section provides you with the minimum information you need to get started
@@ -25,7 +25,3 @@ In-depth information:
    getting-started/apis
    getting-started/access
    getting-started/support
-   getting-started/regions
-   getting-started/projects
-   getting-started/quotas
-   getting-started/terminology
