@@ -27,3 +27,4 @@ Contents:
    tutorials/docker-getting-started-with-swarm-mode-tutorial-on-the-catalyst-cloud
    tutorials/kubernetes-getting-started-kubeadm-guide-on-the-catalyst-cloud
    tutorials/terraform-lifecycle-to-prevent-resource-re-creation
+   tutorials/using-python-virtual-environments

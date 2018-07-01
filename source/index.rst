@@ -11,6 +11,7 @@ Contents:
 
    getting-started
    key-concepts
+   sdks-and-toolkits
    first-instance
    dashboard
    compute
