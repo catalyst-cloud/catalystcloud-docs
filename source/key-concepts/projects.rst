@@ -21,8 +21,8 @@ Every project on the Catalyst Cloud has a ``project name`` (a user friendly
 name) and a ``project id`` (an auto-generated UUID). There are a number of ways
 to find your project ID and name.
 
-Using the Dashboard
-===================
+Via the Dashboard
+=================
 
 The project ID and name can be found on the `API Access`_ panel by clicking on
 the `View Credentials`_ button.
@@ -30,12 +30,12 @@ the `View Credentials`_ button.
 .. _API Access: https://dashboard.cloud.catalyst.net.nz/project/api_access/
 .. _View Credentials: https://dashboard.cloud.catalyst.net.nz/project/api_access/view_credentials/
 
-Using the Command Line
-======================
+Via the CLI
+===========
 
-If you are using the OpenStack command line tools you have most likely sourced
-an openrc file, as explained in :ref:`command-line-interface`. If this is the
-case, you can find your project ID by issuing the following command:
+If you are using the OpenStack command line interface you have most likely
+sourced an openrc file, as explained in :ref:`command-line-interface`. If this
+is the case, you can find your project ID by issuing the following command:
 
 .. code-block:: bash
 
