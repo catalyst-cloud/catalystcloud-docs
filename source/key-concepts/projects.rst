@@ -65,6 +65,7 @@ Requests`_ panel.
 
 .. _Support Requests: https://dashboard.cloud.catalyst.net.nz/management/tickets/
 
+
 ****************
 Changing project
 ****************
@@ -120,6 +121,7 @@ more resources.
 
 Please refer to the :ref:`quota section of the documentation<quotas>` for more
 information on quotas.
+
 
 *****************
 Project isolation
