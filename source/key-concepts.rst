@@ -2,7 +2,8 @@
 Key concepts
 ############
 
-In-depth information:
+When using the Catalyst Cloud it is important to know and understand the
+following key concepts:
 
 .. toctree::
    :maxdepth: 1
