@@ -4,84 +4,46 @@
 Regions
 #######
 
-The Catalyst Cloud is hosted in multiple regions, each in a different
-geographical location. Regions are data centres that are completely
-independent and isolated from each other, providing fault tolerance and
-geographic diversity.
+The Catalyst Cloud provides three regions in New Zealand. Regions are data
+centres that are completely independent and isolated (each with their own
+`control plane`), providing fault tolerance and geographic diversity.
 
-All our data centres have backup diesel generators, UPS, N+1 process coolers
-and diverse fibre paths for network connectivity.
+Please visit our website for more information about our national infrastructure:
+https://catalystcloud.nz/about/national-infrastructure/
 
-+----------+-----------------+--------------------+----------------------+
-| Code     | Name            | PCI DSS certified? | ISO 27001 certified? |
-+==========+=================+====================+======================+
-| nz-por-1 | NZ Porirua 1    | Yes                | In progress          |
-+----------+-----------------+--------------------+----------------------+
-| nz_wlg_2 | NZ Wellington 2 | Compliant          | In progress          |
-+----------+-----------------+--------------------+----------------------+
-| nz-hlz-1 | NZ Hamilton 1   | Yes                | Yes                  |
-+----------+-----------------+--------------------+----------------------+
++-------------+-----------------+--------------------+----------------------+
+| Region Code | Name            | PCI DSS certified? | ISO 27001 certified? |
++=============+=================+====================+======================+
+| nz-por-1    | NZ Porirua 1    | Yes                | In progress          |
++-------------+-----------------+--------------------+----------------------+
+| nz_wlg_2    | NZ Wellington 2 | Compliant          | In progress          |
++-------------+-----------------+--------------------+----------------------+
+| nz-hlz-1    | NZ Hamilton 1   | Yes                | Yes                  |
++-------------+-----------------+--------------------+----------------------+
 
-We encourage customers to use Porirua for their primary region in New Zealand
-as it currently has the greatest capacity of all our sites.
+.. note::
 
-The connectivity between compute instances hosted on different regions takes
-place over either our wide area network or the Internet when allowed by your
-security groups and network configuration.
+  We encourage customers to use Porirua as their primary region, as it has the
+  greatest capacity of all our regions.
 
-With the exception of object storage, resources are not replicated
-automatically across regions unless you do so. This provides customers the
-flexibility to introduce replication where required and to fail-over resources
-independently when needed.
-
-
-***********************
-Physical infrastructure
-***********************
-
-Access control
-==============
-
-All our data centres have comprehensive access control systems with multiple
-perimeters. There are security cameras covering all entrances and the server
-room.
-
-Power, cooling and fire supression
-==================================
-
-All our data centres have guaranteed power which is provided by UPSes and
-diesel generators. The diesel generators will start automatically in the event
-of a mains power failure. Our Porirua and Hamilton regions have redundancy for
-the power infrastructure.
-
-They all have N+1 or better cooling systems and have gas flood fire suppression
-systems.
-
-External network
-================
-
-Each region is connected by our wide area network (WAN). Our WAN is built so
-that each region has multiple fibres which take diverse paths from a number of
-fibre providers to other regions. We have multiple Internet Service Providers
-to provide diversity and resiliency for our Internet connections.
-
-
-****************
-Changing regions
-****************
+******************
+Selecting a region
+******************
 
 Via the dashboard
 =================
 
-The web dashboard has a region selector dropbox on the top bar. It indicates
-the current region you are connected to and allows you to easily switch
-between regions.
+The web dashboard has a region selector dropbox on the top left corner. It
+indicates the current region you are connected to and allows you to easily
+switch to another region.
 
-Via the command line tools
-==========================
+.. image:: ../_static/region_dropdown.png
 
-The command line tools pick up the region from the $OS_REGION_NAME environment
-variable. To define the variable:
+Via the CLI
+===========
+
+The command line interface picks up the region configuration from the
+``$OS_REGION_NAME`` environment variable. To define the variable:
 
 .. code-block:: bash
 
@@ -96,3 +58,25 @@ Via the APIs
 The API request you use to authenticate with the Catalyst Cloud allows you to
 scope a token on a given region. The token can then be used to interact with
 the API endpoints of the other services hosted in the same region.
+
+
+****************************
+Data traffic between regions
+****************************
+
+The connectivity between compute instances hosted on different regions takes
+place over either our wide area network (WAN) or the Internet, when allowed by
+your security groups and network configuration.
+
+Contrary to data traffic within a given region, there are data transfer costs
+applicable to data traffic between regions.
+
+
+****************
+Data replication
+****************
+
+With the exception of multi-region object storage service, resources are not
+replicated automatically across regions unless you do so. This provides users
+the flexibility to introduce replication where required and to fail-over
+resources independently when needed.

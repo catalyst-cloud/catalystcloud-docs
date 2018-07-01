@@ -142,7 +142,7 @@ cost anything.
 With the Catalyst Cloud, you have total control over your infrastructure. You
 have root/console access to your instances, and Catalyst Cloud places no
 restrictions on what software you use. This is because each
-:ref:`project<project_info>` on the Catalyst Cloud is isolated from all the
+:ref:`project<projects>` on the Catalyst Cloud is isolated from all the
 other projects. Isolation means that the resources and the actions taken in one
 project can't effect anything else outside of that project.
 
