@@ -13,9 +13,9 @@ a ``tenancy``.
 
 .. _find-project-id:
 
-********************
-Finding a project ID
-********************
+**********************
+Finding the project ID
+**********************
 
 Every project on the Catalyst Cloud has a ``project name`` (a user friendly
 name) and a ``project id`` (an auto-generated UUID). There are a number of ways
