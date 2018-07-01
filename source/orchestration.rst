@@ -1,8 +1,9 @@
 .. _cloud-orchestration:
 
-###################
-Cloud orchestration
-###################
+#############
+Orchestration
+#############
+
 
 ********
 Overview

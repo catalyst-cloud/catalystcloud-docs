@@ -1,5 +1,5 @@
 #############
-Load Balancer
+Load balancer
 #############
 
 Load balancing is the action of taking front-end requests and distributing these

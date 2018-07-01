@@ -4,9 +4,9 @@
 Overview
 ********
 
-This section will demonstrate how to build an Ubuntu 14.04 server in a new
-OpenStack project. After you have completed the steps, you will be able to log
-on to the server via SSH from anywhere on the internet using an SSH key.
+This section will demonstrate how to build an Ubuntu 14.04 server. After you
+have completed the steps, you will be able to log in to the server via SSH from
+anywhere on the internet using an SSH key.
 
 The following is assumed:
 
@@ -14,9 +14,9 @@ The following is assumed:
 * You have been assigned a project
 * Your user in that project has permissions to create the required resources.
 
-When a new project is created, a network, subnet, and router are built by default.
-The process below outlines the steps required to do this if the
-default setup has been deleted or an additional network is required.
+When a new project is created, a network, subnet, and router are built by
+default. The process below outlines the steps required to do this if the default
+setup has been deleted or an additional network is required.
 
 .. note::
 

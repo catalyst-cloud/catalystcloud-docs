@@ -1,6 +1,6 @@
-###############
-Network service
-###############
+#######
+Network
+#######
 
 The network service allows you to create your own private networks, subnets,
 routers, security groups and site-to-site VPNs.

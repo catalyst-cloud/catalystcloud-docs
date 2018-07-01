@@ -11,10 +11,10 @@ Getting started tutorials:
 .. toctree::
    :maxdepth: 1
 
-   getting-started/basics/the-basics-of-catalyst-cloud
-   getting-started/basics/the-basics-of-catalyst-cloud-services
-   getting-started/basics/the-basics-of-catalyst-cloud-access
-   getting-started/basics/the-basics-of-catalyst-cloud-admin
+   getting-started/basics/intro
+   getting-started/basics/services
+   getting-started/basics/access
+   getting-started/basics/admin
 
 In-depth information:
 

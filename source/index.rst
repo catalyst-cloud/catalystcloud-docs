@@ -2,6 +2,8 @@
 Catalyst Cloud documentation
 ############################
 
+Kia ora and a warm welcome to the Catalyst Cloud!
+
 Contents:
 
 .. toctree::
@@ -9,18 +11,18 @@ Contents:
 
    getting-started
    first-instance
-   best-practices
-   block-storage
+   dashboard
    compute
+   image
+   block-storage
+   object-storage
    network
    load-balancer
-   dashboard
-   image
-   object-storage
-   cloud-orchestration
-   backups
    billing
+   orchestration
+   backups
    management
+   best-practices
    tutorials
    contributing
 
