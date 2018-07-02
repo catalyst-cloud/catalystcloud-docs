@@ -23,9 +23,9 @@ https://docs.ansible.com/ansible/list_of_cloud_modules.html#openstack
 Install Ansible
 ===============
 
-A script is provided by Catalyst which installs the required Ansible and OpenStack
-libraries within a Python virtual environment. This script is part of the
-`catalystcloud-ansible`_ git repository. Clone this repository and run the
+A script is provided by Catalyst which installs the required Ansible and
+OpenStack libraries within a Python virtual environment. This script is part of
+the `catalystcloud-ansible`_ git repository. Clone this repository and run the
 install script in order to install Ansible.
 
 .. _catalystcloud-ansible: https://github.com/catalyst/catalystcloud-ansible
@@ -61,9 +61,9 @@ OpenStack credentials
 Before running the Ansible playbooks, ensure your OpenStack credentials have
 been set up. The easiest way to achieve this is by making use of environment
 variables. Use the standard variables provided by an OpenStack RC file as
-described in :ref:`source-rc-file`. These variables are read by the Ansible
-``os_auth`` module, and will provide Ansible with the credentials required
-to access the Catalyst Cloud APIs.
+described in :ref:`source-rc-file`. These variables are read by the
+Ansible ``os_auth`` module, and will provide Ansible with the credentials
+required to access the Catalyst Cloud APIs.
 
 .. note::
 
@@ -77,7 +77,8 @@ OpenStack credentials have been set up, a first instance may be built.
 The first instance playbooks are located under the `example-playbooks`
 directory and have been split up as follows:
 
-* The first playbook, ``create-network.yml`` creates the required network components.
+* The first playbook, ``create-network.yml`` creates the required network
+  components.
 * The second playbook, ``launch-instance.yml`` launches the instance.
 
 
@@ -104,9 +105,9 @@ These are the tasks the ``create-network.yml`` playbook will perform:
 
 
 
-In order for this playbook to work, the path to a valid SSH key must be provided.
-Edit ``create-network.yml`` and update the ``ssh_public_key`` variable, or override
-the variable when running the playbook as shown below:
+In order for this playbook to work, the path to a valid SSH key must be
+provided. Edit ``create-network.yml`` and update the ``ssh_public_key``
+variable, or override the variable when running the playbook as shown below:
 
 .. code-block:: bash
 
@@ -181,9 +182,10 @@ After the network has been set up successfully, run the ``launch-instance.yml`` 
 
 
 
-The new instance is accessible using SSH. Retrieve the instance's IP address from
-the console output. It is echoed by the example ``Output floating IP`` task above
-as "150.242.41.75". Login using SSH (using the username appropriate to the build image):
+The new instance is accessible using SSH. Retrieve the instance's IP address
+from the console output. It is echoed by the example ``Output floating IP`` task
+above as "150.242.41.75". Login using SSH (using the username appropriate to the
+build image):
 
 .. code-block:: bash
 
@@ -192,8 +194,8 @@ as "150.242.41.75". Login using SSH (using the username appropriate to the build
 
 .. tip::
 
-  Additional Ansible playbooks may now be used to configure this instance further,
-  as required.
+  Additional Ansible playbooks may now be used to configure this instance
+  further, as required.
 
 
 Resource cleanup with an Ansible playbook
@@ -215,13 +217,13 @@ Run the playbook to remove all resources created previously:
 
  $ ansible-playbook remove-stack.yml --extra-vars "floating_ip=<ip-address>"
 
-Replace ``<ip-address>`` with the floating-ip assigned by the ``launch-instance.yml``
-playbook.
+Replace ``<ip-address>`` with the floating-ip assigned by
+the ``launch-instance.yml`` playbook.
 
 
 .. note::
 
  This cleanup playbook assumes that all resources have been created using the
  default names defined in the original playbooks. If the original names have
- been changed, it will be necessary to edit the cleanup playbook to reflect these
- changes.
+ been changed, it will be necessary to edit the cleanup playbook to reflect
+ these changes.

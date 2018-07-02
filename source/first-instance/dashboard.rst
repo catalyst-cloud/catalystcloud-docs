@@ -88,8 +88,8 @@ Navigate to the ``Security Groups`` tab.
 
 .. image:: dashboard_assets/security-group-tab.png
 
-Now we'll create a new security group, specific to allowing SSH access. Select
-``Create Security Group`` , give it a name, and create it.
+Now we'll create a new security group, specific to allowing SSH access.
+Select ``Create Security Group`` , give it a name, and create it.
 
 .. image:: dashboard_assets/create-security-group.png
 
@@ -220,6 +220,13 @@ SSH tunnel so you can start using it.
 ***************************
 Connect to the new Instance
 ***************************
+
+Before we SSH in, we should give the private SSH key the correct, more secure
+permissions.
+
+.. code-block:: bash
+
+  $ chmod 600 <path to private key>
 
 You can now connect to the SSH service using the floating IP that you
 associated with your instance. This address is visible in
