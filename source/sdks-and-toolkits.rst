@@ -7,3 +7,4 @@ SDKs & Toolkits
 
    sdks-and-toolkits/cli
    sdks-and-toolkits/sdks
+   sdks-and-toolkits/apis
