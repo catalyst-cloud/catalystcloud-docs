@@ -421,7 +421,7 @@ monitor examle.
 
 
 ************
-Assing a VIP
+Assign a VIP
 ************
 
 The final step is to assign a floating ip address to the VIP port on the

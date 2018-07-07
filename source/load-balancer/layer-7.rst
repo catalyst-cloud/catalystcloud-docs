@@ -26,10 +26,12 @@ back-end servers from different pools will have different content. Layer
 7 load balancers are capable of directing requests based on URI, host, HTTP
 headers, and other data in the application message.
 
+********
+Overview
+********
 
-*******
 L7 rule
-*******
+=======
 
 An L7 rule is a single, simple logical test that evaluates to true or false.
 It consists of a rule type, a comparison type, a value and an optional key that
@@ -58,17 +60,58 @@ Comparison types
 * ``EQUAL_TO``: String is equal to
 
 
-*********
 L7 policy
-*********
+=========
 
 An L7 Policy is a collection of L7 rules associated with a Listener, and which
 may also have an association to a back-end pool. Policies describe actions that
 should be taken by the load balancing software if all of the rules in the
 policy return true.
 
-L7 policy example
-=================
+
+***********
+Preparation
+***********
+
+If you already have two or more compute instances running a web application
+listening on port 80, you can skip this step. Otherwise, launch two compute
+instances and follow the instructions below to run a simple Flask web
+application in each.
+
+Place a copy of the files below on to each of the compute instances.
+
+Compute instance 1
+
+.. code-block:: python
+
+  from flask import Flask
+  app = Flask(__name__)
+
+  @app.route("/")
+  def hello():
+      return "Welcome to login.example.com"
+
+  if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=80)
+
+Compute instance 2
+
+.. code-block:: python
+
+  from flask import Flask
+  app = Flask(__name__)
+
+  @app.route("/")
+  def hello():
+      return "Welcome to shop.example.com"
+
+  if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=80)
+
+
+**********************
+Create a load balancer
+**********************
 
 First lets create the loadbalancer. It will be called **lb_test_2** and it’s
 virtual IP address (VIP) will be attached to the local subnet
@@ -100,6 +143,11 @@ virtual IP address (VIP) will be attached to the local subnet
   | vip_qos_policy_id   |                                      |
   | vip_subnet_id       | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
   +---------------------+--------------------------------------+
+
+
+*******************
+Create the listener
+*******************
 
 Once the ``provisioning_status`` of the load balancer is ``Active``, create the
 listener.
@@ -142,6 +190,11 @@ listener.
   | updated_at                | None                                 |
   +---------------------------+--------------------------------------+
 
+
+****************
+Create the pools
+****************
+
 Create the first pool.
 
 .. code-block:: bash
@@ -166,30 +219,6 @@ Create the first pool.
   | provisioning_status | PENDING_CREATE                       |
   | session_persistence | None                                 |
   | updated_at          | None                                 |
-  +---------------------+--------------------------------------+
-
-Add the member to the pool.
-
-.. code-block:: bash
-
-  $ openstack loadbalancer member create --name login.example.com --subnet private-subnet --address 10.0.0.5 --protocol-port 80  http_pool
-  +---------------------+--------------------------------------+
-  | Field               | Value                                |
-  +---------------------+--------------------------------------+
-  | address             | 10.0.0.5                             |
-  | admin_state_up      | True                                 |
-  | created_at          | 2018-06-27T04:02:06                  |
-  | id                  | d2497d5a-0c80-4037-84bf-6e3cb498126e |
-  | name                | login.example.com                    |
-  | operating_status    | NO_MONITOR                           |
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
-  | protocol_port       | 80                                   |
-  | provisioning_status | PENDING_CREATE                       |
-  | subnet_id           | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
-  | updated_at          | None                                 |
-  | weight              | 1                                    |
-  | monitor_port        | None                                 |
-  | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
 Create the second pool.
@@ -218,7 +247,37 @@ Create the second pool.
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
 
-Add the other member to the second pool.
+
+***************
+Add the members
+***************
+
+Add the first member to the first pool.
+
+.. code-block:: bash
+
+  $ openstack loadbalancer member create --name login.example.com --subnet private-subnet --address 10.0.0.5 --protocol-port 80  http_pool
+  +---------------------+--------------------------------------+
+  | Field               | Value                                |
+  +---------------------+--------------------------------------+
+  | address             | 10.0.0.5                             |
+  | admin_state_up      | True                                 |
+  | created_at          | 2018-06-27T04:02:06                  |
+  | id                  | d2497d5a-0c80-4037-84bf-6e3cb498126e |
+  | name                | login.example.com                    |
+  | operating_status    | NO_MONITOR                           |
+  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | protocol_port       | 80                                   |
+  | provisioning_status | PENDING_CREATE                       |
+  | subnet_id           | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
+  | updated_at          | None                                 |
+  | weight              | 1                                    |
+  | monitor_port        | None                                 |
+  | monitor_address     | None                                 |
+  +---------------------+--------------------------------------+
+
+
+Add the second member to the second pool.
 
 .. code-block:: bash
 
@@ -241,6 +300,11 @@ Add the other member to the second pool.
   | monitor_port        | None                                 |
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
+
+
+********************
+Create the L7 policy
+********************
 
 Create the layer 7 policy.
 
@@ -267,6 +331,11 @@ Create the layer 7 policy.
   | name                | policy1                              |
   +---------------------+--------------------------------------+
 
+
+******************
+Create the L7 rule
+******************
+
 Create a rule for the policy.
 
 .. code-block:: bash
@@ -289,6 +358,11 @@ Create a rule for the policy.
   | operating_status    | OFFLINE                              |
   +---------------------+--------------------------------------+
 
+
+************
+Assign a VIP
+************
+
 The final step is to assign a floating ip address to the VIP port on the
 loadbalancer. In order to do this we need to create a floating ip, find the
 VIP Port ID and then assign it a floating ip address.
@@ -300,43 +374,14 @@ VIP Port ID and then assign it a floating ip address.
   openstack floating ip set --port $VIP_PORT_ID $FIP
 
 
-*****************
-Testing the setup
-*****************
+**************
+Test the setup
+**************
 
-Place a copy of the files below on to each of the compute instances.
-
-Compute instance 1
-
-.. code-block:: python
-
-  from flask import Flask
-  app = Flask(__name__)
-
-  @app.route("/")
-  def hello():
-      return "Welcome to login.example.com"
-
-  if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80)
-
-Compute instance 2
-
-.. code-block:: python
-
-  from flask import Flask
-  app = Flask(__name__)
-
-  @app.route("/")
-  def hello():
-      return "Welcome to shop.example.com"
-
-  if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80)
-
-In your workstation or test compute instance add entries to /etc/hosts to
-provide name resolution. The value for <loadbalancer_floating_ip> will be the
-value of $FIP from the final step of setting up the loadbalancer above.
+In your workstation or in a separate test compute instance add entries to
+/etc/hosts to provide name resolution. The value for <loadbalancer_floating_ip>
+will be the value of $FIP from the final step of setting up the loadbalancer
+above.
 
 /etc/host entries
 
