@@ -21,8 +21,6 @@ to this service:
   their state and divert traffic away from members that are not responding
   properly. Health monitors are associated with a pool.
 
-See this `glossary`_ for more information and terminology.
-
 
 *****************
 High availability
