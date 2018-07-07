@@ -2,9 +2,86 @@
 Layer 4 load balancing
 ######################
 
-In this example we will create a simple scenario that load balances traffic
-based on TCP port numbers to different service endpoints. There will be 2
-servers both with services running on ports 80 & 443.
+This example illustrates how to load balance traffic on port 80 and 443 to two
+compute instances running a mock Python Flask web application.
+
+
+***********
+Preparation
+***********
+
+If you already have two or more compute instances running a web application
+listening on ports 80 and 443, you can skip this step. Otherwise, launch two
+compute instances and follow the instructions below to run a simple Flask web
+application in each.
+
+The Flask app binds to ports 80 and 443 respectively and will send a simple HTTP
+response when a request is received on the listening ports.
+
+Create a copy of the flask_app.py script (shown below) on each server.
+
+**script** flask_app.py
+
+.. literalinclude:: ../_scripts/flask_app.py
+
+Follow the instructions below to install the required dependencies.
+
+.. note::
+
+  In order to be able to bind to ports 80 & 443 the application needs to run as
+  the root user.
+
+.. code-block:: bash
+
+  # sudo to the root account
+  $ sudo -i
+  # install the required system packages
+  $ apt install virtualenv python-pip
+
+  # create a virtual environment
+  $ virtualenv venv
+
+  # activate the virtual environment
+  $ source venv/bin/activate
+
+  # install Flask into the virtul environment
+  $ pip install flask
+
+  # exit the virtual environment
+  $ deactivate
+
+In each compute instance, start two instances of the application (each in their
+own terminal session) ensuring that there is one listening on port 80 and the
+other on port 443.
+
+.. code-block:: bash
+
+  # sudo to the root account
+  $ sudo -i
+
+  # activate the virtual environment
+  $ source venv/bin/activate
+
+  # run the flask app - providing the correct port numbers
+  $ python flask_app.py -p <port_number>
+
+The output for the services running on port 80 will look similar to this
+
+.. code-block:: bash
+
+  root@server-1:~# python flask_app.py -p 80
+   * Serving Flask app "flask_app" (lazy loading)
+   * Environment: production
+     WARNING: Do not use the development server in a production environment.
+     Use a production WSGI server instead.
+   * Debug mode: off
+   * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
+  10.0.0.9 - - [28/Jun/2018 06:09:43] "GET /health HTTP/1.0" 200 -
+
+
+**********************
+Create a load balancer
+**********************
 
 First lets create the loadbalancer. It will be called **lb_test_1** and it's
 virtual IP address (VIP) will be attached to the local subnet
@@ -42,6 +119,10 @@ virtual IP address (VIP) will be attached to the local subnet
   | vip_port_id         | 693039f6-1896-4094-8f96-18d0fbcfb99e |
   | vip_subnet_id       | 1c221166-3cb3-4534-915a-b75220ec1873 |
   +---------------------+--------------------------------------+
+
+*****************
+Create a listener
+*****************
 
 Once the ``operating_status`` of the load balancer is ``ACTIVE``, we will create
 two listeners, both will use TCP as their protocol and they will listen on ports
@@ -124,6 +205,10 @@ To view the newly created listeners
   | 724816cc-2dbd-42c8-9b61-19f49fa48165 | None            | 443_listener | eac679e4896146e6827ce29d755fe289 | TCP      |           443 | True           |
   +--------------------------------------+-----------------+--------------+----------------------------------+----------+---------------+----------------+
 
+*************
+Create a pool
+*************
+
 Then add a pool to each listener
 
 .. code-block:: bash
@@ -173,6 +258,10 @@ Then add a pool to each listener
   | session_persistence | None                                 |
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
+
+***********
+Add members
+***********
 
 Now add the members to the pools.
 
@@ -286,45 +375,12 @@ Now repeat for the service on port 443
   | f91e7d8e-a932-43da-8c9f-c37c0d58d864 | 443_member_2 | eac679e4896146e6827ce29d755fe289 | ACTIVE              | 10.0.0.6 |           443 | NO_MONITOR       |      1 |
   +--------------------------------------+--------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
 
-***********************
-Adding a health monitor
-***********************
+********************
+Add a health monitor
+********************
 
-While it is possible to create a listener without a health monitor this is not
-considered best practice to do so, especially for production load balancers.
-The reason behind this is that should a back-end pool member go offline it will
-not be detected or removed from the pool for a while leading to possible
-service disruption for web clients.
-
-The health monitors role is to perform pro-active checks on each back-end
-server to pre-emptively detect failed servers and temporarily take them out of
-the pool.
-
-
-HTTP health monitors
-====================
-
-By default, the Catalyst load balancer service will check the “/” path on the
-application server but this may not appropriate because that location may
-require authorisation, be cached or cause the server to perform too much work
-for a simle health check.
-
-Typically the web application that is being load balanced will provide an
-endpoint such as ``/health`` specifically for health checks. This could be as
-simple as providing a basic static page which returns an HTTP status code of
-200 to far more elaborate setups that provide a JSON packet containing a
-variety of server status metrics.
-
-There are also other health monitor types available including
-
-* PING
-* TCP
-* HTTPS
-* TLS-HELLO
-
-To create a health monitor to check the state of the back-end servers providing
-the on port 80. These services are proving a simple static response at the URL
-path '/health'
+Create a health monitor to check the state of the members of the pool. This
+example performs a simple static request at the URL path '/health'.
 
 .. code-block:: bash
 
@@ -364,9 +420,10 @@ monitor examle.
   must pass to be considered up again.
 
 
-*****************
-Assigning the VIP
-*****************
+************
+Assing a VIP
+************
+
 The final step is to assign a floating ip address to the VIP port on the
 loadbalancer. In order to do this we need to create a floating ip, find the
 VIP Port ID and then assign it a floating ip address.
@@ -377,86 +434,9 @@ VIP Port ID and then assign it a floating ip address.
   export VIP_PORT_ID=`openstack loadbalancer show lb_test_1 -f value -c vip_port_id`
   openstack floating ip set --port $VIP_PORT_ID $FIP
 
-*****************
-Testing the setup
-*****************
-As a simple mockup we have the setup shown below running on each of the
-member servers.
-
-We have two copies of a basic python Flask app running on each instance, they
-bind to ports 80 and 443 respectively and  will send a response when a request
-is received on the listening port.
-
-To try out the example, create a copy of the flask_app.py script (shown below)
-on each server.
-
-Ideally these should be run in a `virtual environment`_, below are the basic
-steps required to do this and install the required `Flask`_ package.
-
-.. _virtual environment: https://virtualenv.pypa.io/en/stable/
-.. _Flask: http://flask.pocoo.org/
-
-.. note::
-
-  In order to be able to bind to ports 80 & 443 the virtualenv needs to be
-  created for the root user.
-
-.. code-block:: bash
-
-  # sudo to the root account
-  $ sudo -i
-  # install the required system packages
-  $ apt install virtualenv python-pip
-
-  # create a virtual environment
-  $ virtualenv venv
-
-  # activate the virtual environment
-  $ source venv/bin/activate
-
-  # install Flask into the virtul environment
-  $ pip install flask
-
-  # exit the virtual environment
-  $ deactivate
-
-
-**script** flask_app.py
-
-.. literalinclude:: ../_scripts/flask_app.py
-
-Run 2 copies of the script, each in their own terminal session, on each of the
-member servers in the following manner, ensuring that there is one listening on
-port 80 and the other on port 443.
-
-.. code-block:: bash
-
-  # sudo to the root account
-  $ sudo -i
-
-  # activate the virtual environment
-  $ source venv/bin/activate
-
-  # run the flask app - providing the correct port numbers
-  $ python flask_app.py -p <port_number>
-
-The output for the services running on port 80 will look similar to this
-
-.. code-block:: bash
-
-  root@server-1:~# python flask_app.py -p 80
-   * Serving Flask app "flask_app" (lazy loading)
-   * Environment: production
-     WARNING: Do not use the development server in a production environment.
-     Use a production WSGI server instead.
-   * Debug mode: off
-   * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
-  10.0.0.9 - - [28/Jun/2018 06:09:43] "GET /health HTTP/1.0" 200 -
-  10.0.0.10 - - [28/Jun/2018 06:09:45] "GET /health HTTP/1.0" 200 -
-
-The first few 'GET' requests are the loadbalancer's health check querying the
-service on port 80, once this has been successful the member will be added to
-the pool.
+**************
+Test the setup
+**************
 
 If you need to retrieve the VIP for the loadbalancer
 
@@ -467,8 +447,7 @@ If you need to retrieve the VIP for the loadbalancer
 
 Test the following:
 
-* connect to the loadbalancer VIP from a browser. The output
-  should alternate between both back-end servers on port 80.
-
-* connect to the healtmonitor url on $VIP/health
-* connect to $VIP:443 to confirm that the second service is also loadbalanced
+* Connect to the loadbalancer VIP from a browser. The output should alternate
+  between both back-end servers on port 80.
+* Connect to the healtmonitor url on $VIP/health
+* Connect to $VIP:443 to confirm that the second service is also loadbalanced

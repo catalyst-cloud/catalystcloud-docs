@@ -26,9 +26,11 @@ back-end servers from different pools will have different content. Layer
 7 load balancers are capable of directing requests based on URI, host, HTTP
 headers, and other data in the application message.
 
+
 *******
 L7 rule
 *******
+
 An L7 rule is a single, simple logical test that evaluates to true or false.
 It consists of a rule type, a comparison type, a value and an optional key that
 gets used depending on the rule type. An L7 rule must always be associated
@@ -36,24 +38,25 @@ with an L7 policy.
 
 Rule types
 
-* HOST_NAME: The rule does a comparison between the HTTP/1.1 hostname in the
+* ``HOST_NAME``: The rule does a comparison between the HTTP/1.1 hostname in the
   request against the value parameter in the rule.
-* PATH: The rule compares the path portion of the HTTP URI against the value
+* ``PATH``: The rule compares the path portion of the HTTP URI against the value
   parameter in the rule.
-* FILE_TYPE: The rule compares the last portion of the URI against the value
+* ``FILE_TYPE``: The rule compares the last portion of the URI against the value
   parameter in the rule. (eg. “txt”, “jpg”, etc.)
-* HEADER: The rule looks for a header defined in the key parameter and compares
+* ``HEADER``: The rule looks for a header defined in the key parameter and compares
   it against the value parameter in the rule.
-* COOKIE: The rule looks for a cookie named by the key parameter and compares
+* ``COOKIE``: The rule looks for a cookie named by the key parameter and compares
   it against the value parameter in the rule.
 
 Comparison types
 
-- REGEX: Perl type regular expression matching
-- STARTS_WITH: String starts with
-- ENDS_WITH: String ends with
-- CONTAINS: String contains
-- EQUAL_TO: String is equal to
+* ``REGEX``: Perl type regular expression matching
+* ``STARTS_WITH``: String starts with
+* ``ENDS_WITH``: String ends with
+* ``CONTAINS``: String contains
+* ``EQUAL_TO``: String is equal to
+
 
 *********
 L7 policy
@@ -296,14 +299,14 @@ VIP Port ID and then assign it a floating ip address.
   export VIP_PORT_ID=`openstack loadbalancer show lb_test_2 -f value -c vip_port_id`
   openstack floating ip set --port $VIP_PORT_ID $FIP
 
+
 *****************
 Testing the setup
 *****************
-Place a copy of the files below on to each of the endpoint servers.
 
-Server 1
+Place a copy of the files below on to each of the compute instances.
 
-**script** flask_login.py
+Compute instance 1
 
 .. code-block:: python
 
@@ -317,9 +320,7 @@ Server 1
   if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
 
-Server 2
-
-**script** flask_shop.py
+Compute instance 2
 
 .. code-block:: python
 
@@ -333,11 +334,9 @@ Server 2
   if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
 
-
-
-On the test server add entries to /etc/hosts to provide name resolution. The
-value for <loadbalancer_floating_ip> will be the value of $FIP from the final
-step of setting up the loadbalancer above.
+In your workstation or test compute instance add entries to /etc/hosts to
+provide name resolution. The value for <loadbalancer_floating_ip> will be the
+value of $FIP from the final step of setting up the loadbalancer above.
 
 /etc/host entries
 
