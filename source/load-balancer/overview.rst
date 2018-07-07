@@ -33,16 +33,6 @@ balancer instances are clustered using VRRP, allowing them to fail-over
 connections between the load balancers in around five seconds.
 
 
-******************
-Layer 4 vs Layer 7
-******************
-
-Load balancers are typically grouped into two categories: Layer 4 or Layer 7,
-which correspond to the layers of the `OSI model`_. The Layer 4 type act upon
-data such as IP, TCP, UDP which are protocols found in the network and
-transport layers whereas the Layer 7 type act upon requests that contain data
-from application layer protocols such as HTTP.
-
 *************************
 Load balancing algorithms
 *************************
@@ -57,6 +47,17 @@ the behaviour of the load balancer:
   using the hash to connect it to the matching server.
 * ``Least Connection`` algorithm This algorithm selects the server with few
   active transactions and then forwards the user request to the back end.
+
+
+******************
+Layer 4 vs Layer 7
+******************
+
+Load balancers are typically grouped into two categories: Layer 4 or Layer 7,
+which correspond to the layers of the `OSI model`_. The Layer 4 type act upon
+data such as IP, TCP, UDP which are protocols found in the network and
+transport layers whereas the Layer 7 type act upon requests that contain data
+from application layer protocols such as HTTP.
 
 .. _OSI model: https://en.wikipedia.org/wiki/OSI_model
 .. _glossary: https://docs.openstack.org/octavia/queens/reference/glossary.html
