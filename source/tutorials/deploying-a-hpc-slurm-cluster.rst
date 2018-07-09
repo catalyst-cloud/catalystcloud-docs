@@ -233,3 +233,68 @@ List the jobs in the queue:
 .. code-block:: bash
 
   squeue
+
+
+Using anti-affinity groups
+==========================
+There is an options to use elasticluster with server group anti-affinity groups to
+ensure best load distribution in Opentack cluster.
+To use this feature clone elasticluster from the repository shown below, this is a 
+temporary step until the feature gets merged upstream.
+
+.. code-block:: bash
+
+  git clone https://github.com/flashvoid/elasticluster --branch=feature/openstack-aaf
+  cd src
+  pip install -e .
+  pip install ndg-httpsclient
+
+And then set `anti_affinity_group_prefix` property in `[cloud/catalyst]` section.
+
+.. code-block:: ini
+
+  [cloud/catalyst]
+  provider=openstack
+  auth_url=auth_url
+  username=username
+  password=password
+  project_name=projectname
+  request_floating_ip=True
+  anti_affinity_group_prefix=elasticluster
+
+  [login/ubuntu]
+  image_user=ubuntu
+  image_user_sudo=root
+  image_sudo=True
+  user_key_name=elasticluster
+  user_key_private=~/elasticluster/id_rsa
+  user_key_public=~/elasticluster/id_rsa.pub
+
+  [setup/slurm]
+  provider=ansible
+  frontend_groups=slurm_master
+  compute_groups=slurm_worker
+
+  [cluster/slurm]
+  cloud=catalyst
+  login=ubuntu
+  setup_provider=slurm
+  security_group=default
+  # Ubuntu image - Use the ID from running (as of June 2018, 18.04 doesn't work):
+  #   openstack image show -c id ubuntu-16.04-x86_64
+  image_id=<image UUID>
+  # Use the correct network UUID from: openstack network list
+  network_ids=<network UUID>
+  flavor=c1.c1r1
+  frontend_nodes=1
+  compute_nodes=2
+  ssh_to=frontend
+
+  [cluster/slurm/frontend]
+  # The frontend shares /home via NFS to the compute nodes.
+  boot_disk_type=b1.standard
+  boot_disk_size=50
+
+  [cluster/slurm/compute]
+  # Use whatever flavour you'd like to use for your compute nodes.
+  flavor=c1.c16r64
