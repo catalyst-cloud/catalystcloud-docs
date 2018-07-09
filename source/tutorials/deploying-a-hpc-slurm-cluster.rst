@@ -239,8 +239,8 @@ Using anti-affinity groups
 ==========================
 There is an options to use elasticluster with server group anti-affinity groups to
 ensure best load distribution in Opentack cluster.
-To use feature clone elasticluster from from the different repository (until feature
-gets merged upstream).
+To use this feature clone elasticluster from the repository shown below, this is a 
+temporary step until the feature gets merged upstream.
 
 .. code-block:: bash
 
