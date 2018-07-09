@@ -78,36 +78,68 @@ listening on port 80, you can skip this step. Otherwise, launch two compute
 instances and follow the instructions below to run a simple Flask web
 application in each.
 
-Place a copy of the files below on to each of the compute instances.
+Create a copy of the flask_app.py script (shown below) on each server.
 
-Compute instance 1
+**script** flask_app.py
 
-.. code-block:: python
+.. literalinclude:: ../_scripts/flask_app.py
 
-  from flask import Flask
-  app = Flask(__name__)
+Follow the instructions below to install the required dependencies.
 
-  @app.route("/")
-  def hello():
-      return "Welcome to login.example.com"
+.. note::
 
-  if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80)
+  In order to be able to bind to ports 80 & 443 the application needs to run as
+  the root user.
 
-Compute instance 2
+.. code-block:: bash
 
-.. code-block:: python
+  # sudo to the root account
+  $ sudo -i
+  # install the required system packages
+  $ apt install virtualenv python-pip
 
-  from flask import Flask
-  app = Flask(__name__)
+  # create a virtual environment
+  $ virtualenv venv
 
-  @app.route("/")
-  def hello():
-      return "Welcome to shop.example.com"
+  # activate the virtual environment
+  $ source venv/bin/activate
 
-  if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80)
+  # install Flask into the virtul environment
+  $ pip install flask
 
+  # exit the virtual environment
+  $ deactivate
+
+In each compute instance, start a copy of the application (each in their own
+terminal session) ensuring that both listening on port 80 and that each is
+given a unique endpoint_url. If you are intending on following along with
+the example below these will be:
+
+* live.example.com
+* shop.example.com
+
+.. code-block:: bash
+
+  # sudo to the root account
+  $ sudo -i
+
+  # activate the virtual environment
+  $ source venv/bin/activate
+
+  # run the flask app - providing the correct port number and url
+  $ python flask_app.py -p <port_number> -u <endpoint_url>
+
+The output for the services running on port 80 will look similar to this
+
+.. code-block:: bash
+
+  root@server-1:~# python flask_app.py -p 80
+   * Serving Flask app "flask_app" (lazy loading)
+   * Environment: production
+     WARNING: Do not use the development server in a production environment.
+     Use a production WSGI server instead.
+   * Debug mode: off
+   * Running on http://0.0.0.0:80/ (Press CTRL+C to quit)
 
 **********************
 Create a load balancer
