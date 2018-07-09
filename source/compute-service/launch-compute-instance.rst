@@ -228,14 +228,12 @@ format to overwrite the index.html file of the default website:
 
 .. code-block:: bash
 
-  From nobody Sun Jul 12 18:59:36 2015
-  Content-Type: multipart/mixed;
-  boundary="===============6187713584654397420=="
+  Content-Type: multipart/mixed; boundary="===============1123581321345589144=="
   MIME-Version: 1.0
 
-  --===============6187713584654397420==
+  --===============1123581321345589144==
   MIME-Version: 1.0
-  Content-Type: text/text/cloud-config; charset="us-ascii"
+  Content-Type: text/cloud-config; charset="us-ascii"
   Content-Transfer-Encoding: 7bit
   Content-Disposition: attachment; filename="cloud-config.init"
 
@@ -244,20 +242,31 @@ format to overwrite the index.html file of the default website:
   packages:
    - apache2
 
-   --===============6187713584654397420==
-   MIME-Version: 1.0
-   Content-Type: text/text/x-shellscript; charset="us-ascii"
-   Content-Transfer-Encoding: 7bit
-   Content-Disposition: attachment; filename="script.sh"
+  --===============1123581321345589144==
+  MIME-Version: 1.0
+  Content-Type: text/x-shellscript; charset="us-ascii"
+  Content-Transfer-Encoding: 7bit
+  Content-Disposition: attachment; filename="script.sh"
 
-   #!/bin/bash
-   echo "<h1>Hello world!</h1>" > /var/www/html/index.html
+  #!/bin/bash
+  echo "<h1>Hello world!</h1>" > /var/www/html/index.html
 
-   --===============6187713584654397420==--
+  --===============1123581321345589144==--
+
+Content type options
+--------------------
+
+Some of the content types supported by the MIME format include:
+
+* ``text/cloud-config``: cloud config format
+* ``text/x-shellscript``: shell script (written in any language)
+* ``text/x-include-url``: read content from a URL
+* ``text/upstart-job``: upstart job
 
 Cloud-init official docs
 ========================
 
 For other formats and more detailed information on how to use cloud-init to
-initialise your compute instances, please read:
-http://cloudinit.readthedocs.org/en/latest/index.html.
+initialise your compute instances, please refer to the `cloud-init official
+documentation <http://cloudinit.readthedocs.org/en/latest/index.html>`_.
+
