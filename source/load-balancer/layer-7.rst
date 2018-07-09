@@ -391,7 +391,8 @@ above.
   <loadbalancer_floating_ip> shop.example.com
 
 
-Test connectivity to the 2 web endpoints.
+Test connectivity to the 2 web endpoints either through your browser or using
+curl from the command line.
 
 .. code-block:: bash
 
