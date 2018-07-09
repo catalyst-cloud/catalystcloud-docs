@@ -237,7 +237,7 @@ List the jobs in the queue:
 
 Using anti-affinity groups
 ==========================
-There is an options to use elasticluster with server group anti-affinity gorups to
+There is an options to use elasticluster with server group anti-affinity groups to
 ensure best load distribution in Opentack cluster.
 To use feature clone elasticluster from from the different repository (until feature
 gets merged upstream).
