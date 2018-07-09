@@ -1,19 +1,21 @@
-from flask import Flask
-
 import argparse
 import socket
 import sys
 
+from flask import Flask
+
 
 def check_arg(args=None):
     parser = argparse.ArgumentParser(
-            description='Simple Flask app to test load balancer service')
+        description='Simple Flask app to test load balancer service')
     parser.add_argument('-p', '--port',
                         required='True',
                         help='port for the web server to bind to')
-
+    parser.add_argument('-u', '--url',
+                        default=None,
+                        help='url for the server to respond with')
     results = parser.parse_args(args)
-    return (results.port)
+    return (results.port, results.url)
 
 
 host_name = socket.gethostname()
@@ -24,7 +26,10 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "Server : {} @ {}".format(host_name, host_ip)
+    if server_url is None:
+        return "Server : {} @ {}".format(host_name, host_ip)
+    else:
+        return "Welcome to {} @ {}".format(server_url, host_ip)
 
 
 @app.route("/health")
@@ -33,5 +38,5 @@ def health():
 
 
 if __name__ == '__main__':
-    p = check_arg(sys.argv[1:])
-    app.run(host='0.0.0.0', port=p)
+    server_port, server_url = check_arg(sys.argv[1:])
+    app.run(host='0.0.0.0', port=server_port)
