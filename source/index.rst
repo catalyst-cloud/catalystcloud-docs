@@ -26,6 +26,7 @@ Contents:
    management
    best-practices
    tutorials
+   releasenotes
    contributing
 
 ******************
