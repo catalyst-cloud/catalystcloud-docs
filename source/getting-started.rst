@@ -9,9 +9,7 @@ section before using our cloud services.
 .. toctree::
    :maxdepth: 1
 
-   getting-started/basics/intro
-   getting-started/basics/services
-   getting-started/basics/access
-   getting-started/basics/admin
+   getting-started/intro
+   getting-started/services
    getting-started/access
-   getting-started/support
+   getting-started/admin

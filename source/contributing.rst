@@ -2,6 +2,21 @@
 Contributing to the documentation
 #################################
 
+.. example-code::
+
+  .. code-block:: perl
+
+    code content
+
+  .. code-block:: java
+
+    This style guide describes the conventions that are followed by our
+    documentation project. If you follow them, your documents will pass the doc8
+    tests and compile cleanly.
+
+    This documentation uses `Python-sphinx <http://sphinx.pocoo.org/>`_, which
+    itself uses `reStructuredText <http://sphinx-doc.org/rest.html>`_ syntax.
+
 
 ***********
 Style guide
