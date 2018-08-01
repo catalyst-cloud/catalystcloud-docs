@@ -62,7 +62,8 @@ The next step is to create a ``Vagrantfile`` in the root of your repository:
 
 .. note::
 
- You are referencing environment variables in this configuration. Ensure you have followed the steps described at :ref:`source-rc-file`
+ You are referencing environment variables in this configuration. Ensure you have followed the steps described at :ref:`source-rc-file`.
+ Also note that the auth api has updated to v3. This Vagrantfile has been updated to use this version of the api. If your Vagrantfile has stopped working, compare it to the following. The changes are minor.
 
 .. code-block:: ruby
 
@@ -70,21 +71,29 @@ The next step is to create a ``Vagrantfile`` in the root of your repository:
 
  Vagrant.configure("2") do |config|
 
-   config.vm.box       = 'openstack'
    config.ssh.username = 'ubuntu'
    config.vm.provision :shell, path: "bootstrap.sh"
 
    config.vm.provider :openstack do |os|
-     os.openstack_auth_url  = "#{ENV['OS_AUTH_URL']}/tokens"
-     os.username            = "#{ENV['OS_USERNAME']}"
-     os.password            = "#{ENV['OS_PASSWORD']}"
-     os.server_name         = 'my-vagrant-box'
-     os.flavor              = 'c1.c1r1'
-     os.image               = 'ubuntu-14.04-x86_64'
-     os.tenant_name         = "#{ENV['OS_TENANT_NAME']}"
-     os.region              = "#{ENV['OS_REGION_NAME']}"
-     os.security_groups     = ['default','my-sg']
-     os.floating_ip_pool    = 'public-net'
+     os.identity_api_version = "3"
+     os.openstack_auth_url   = "#{ENV['OS_AUTH_URL']}/auth/tokens"
+     os.domain_name          = "#{ENV['OS_USER_DOMAIN_NAME']}"
+     os.username             = "#{ENV['OS_USERNAME']}"
+     os.password             = "#{ENV['OS_PASSWORD']}"
+     os.project_name         = "#{ENV['OS_PROJECT_NAME']}"
+     os.region               = "#{ENV['OS_REGION_NAME']}"
+     # Set your own hostname.
+     os.server_name          = "a-host-for-#{ENV['OS_USERNAME']}"
+     # Select a flavour from the list.
+     # https://catalystcloud.nz/pricing/price-list/
+     os.flavor               = 'c1.c1r1'
+     # Select an image to start with.
+     # https://dashboard.cloud.catalyst.net.nz/project/images
+     os.image                = 'ubuntu-14.04-x86_64'
+     # Select from what you have available.
+     # https://dashboard.cloud.catalyst.net.nz/project/security_groups/
+     os.security_groups      = ['default', 'dev']
+     os.floating_ip_pool     = 'public-net'
    end
 
  end
