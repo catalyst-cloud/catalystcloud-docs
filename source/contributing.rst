@@ -2,7 +2,6 @@
 Contributing to the documentation
 #################################
 
-
 ***********
 Style guide
 ***********
