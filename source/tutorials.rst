@@ -28,3 +28,5 @@ Contents:
    tutorials/kubernetes-getting-started-kubeadm-guide-on-the-catalyst-cloud
    tutorials/terraform-lifecycle-to-prevent-resource-re-creation
    tutorials/using-python-virtual-environments
+   tutorials/deploying-rocketchat-on-catalyst-cloud
+   tutorials/deploying-matrixchat-on-catalyst-cloud
