@@ -100,26 +100,26 @@ space.
 
 .. code-block:: bash
 
- # Allocate addresses 10.0.0.10-10.0.0.20 from our private network to our 
- # rocketchat subnet.
- NETWORK="10.0.0"
- POOL_START_OCT="10"
- POOL_END_OCT="20"
+  # Allocate addresses 10.0.0.10-10.0.0.20 from our private network to our 
+  # rocketchat subnet.
+  NETWORK="10.0.0"
+  POOL_START_OCT="10"
+  POOL_END_OCT="20"
 
- PRIVATE_SUBNET_NAME="${PREFIX}-private-subnet"
- # Create a subnet of our existing virtual network.
- openstack subnet create \
- --allocation-pool "start=${NETWORK}.${POOL_START_OCT},end=${NETWORK}.${POOL_END_OCT}" \
- --dns-nameserver "$CC_NAMESERVER_1" \
- --dns-nameserver "$CC_NAMESERVER_2" \
- --dns-nameserver "$CC_NAMESERVER_3" \
- --dhcp \
- --network "$PRIVATE_NETWORK_NAME" \
- --subnet-range "$NETWORK.0/24" \
- "$PRIVATE_SUBNET_NAME" \
+  PRIVATE_SUBNET_NAME="${PREFIX}-private-subnet"
+  # Create a subnet of our existing virtual network.
+  openstack subnet create \
+  --allocation-pool "start=${NETWORK}.${POOL_START_OCT},end=${NETWORK}.${POOL_END_OCT}" \
+  --dns-nameserver "$CC_NAMESERVER_1" \
+  --dns-nameserver "$CC_NAMESERVER_2" \
+  --dns-nameserver "$CC_NAMESERVER_3" \
+  --dhcp \
+  --network "$PRIVATE_NETWORK_NAME" \
+  --subnet-range "$NETWORK.0/24" \
+  "$PRIVATE_SUBNET_NAME" \
 
- # Add our subnet to the router
- openstack router add subnet "$ROUTER_NAME" "$PRIVATE_SUBNET_NAME"
+  # Add our subnet to the router
+  openstack router add subnet "$ROUTER_NAME" "$PRIVATE_SUBNET_NAME"
 
 The network is now fully set up and configured. We'll connect our rocketchat 
 instance up later on. For now we need to create some security rules.
@@ -135,12 +135,12 @@ First we need to create the security group and grab it's id:
 
 .. code-block:: bash
 
- # Create Security Group
- SECURITY_GROUP_NAME="${PREFIX}-security-group"
- openstack security group create \
- --description 'HTTP/S and SSH access to our rocketchat instance.' \
- $SECURITY_GROUP_NAME
- CC_SECURITY_GROUP_ID=$( openstack security group show "$SECURITY_GROUP_NAME" -f value -c id )
+  # Create Security Group
+  SECURITY_GROUP_NAME="${PREFIX}-security-group"
+  openstack security group create \
+  --description 'HTTP/S and SSH access to our rocketchat instance.' \
+  $SECURITY_GROUP_NAME
+  CC_SECURITY_GROUP_ID=$( openstack security group show "$SECURITY_GROUP_NAME" -f value -c id )
 
 We need to create 3 simple rules. 
 
@@ -153,31 +153,31 @@ SSH (port 22):
 
 .. code-block:: bash
 
- # SSH Rule
- openstack security group rule create \
- --ingress \
- --protocol tcp \
- --dst-port 22 \
- "$CC_SECURITY_GROUP_ID"
+  # SSH Rule
+  openstack security group rule create \
+  --ingress \
+  --protocol tcp \
+  --dst-port 22 \
+  "$CC_SECURITY_GROUP_ID"
 
 Next, because Rocket.Chat uses an in-browser client so we also need to allow 
 access on ports 80 and 443 for HTTP/S access.
 
 .. code-block:: bash
 
- # HTTP Rule
- openstack security group rule create \
- --ingress \
- --protocol tcp \
- --dst-port 80 \
- "$CC_SECURITY_GROUP_ID"
+  # HTTP Rule
+  openstack security group rule create \
+  --ingress \
+  --protocol tcp \
+  --dst-port 80 \
+  "$CC_SECURITY_GROUP_ID"
 
- # HTTPS Rule
- openstack security group rule create \
- --ingress \
- --protocol tcp \
- --dst-port 443 \
- "$CC_SECURITY_GROUP_ID"
+  # HTTPS Rule
+  openstack security group rule create \
+  --ingress \
+  --protocol tcp \
+  --dst-port 443 \
+  "$CC_SECURITY_GROUP_ID"
 
 SSH Keys
 --------
@@ -187,10 +187,9 @@ applied to the :code:`ubuntu` user on the Rocket.Chat instance.
 
 .. code-block:: bash
 
- # Set Key Pair
- SSH_KEY_NAME="$PREFIX-key"
- openstack keypair create --public-key ~/.ssh/id_rsa.pub $SSH_KEY_NAME
-
+  # Set Key Pair
+  SSH_KEY_NAME="$PREFIX-key"
+  openstack keypair create --public-key ~/.ssh/id_rsa.pub $SSH_KEY_NAME
 
 Automating our install using Cloud-Init
 ============================================
@@ -213,11 +212,11 @@ Our cloud init file begins with some basic, straightforward settings.
 
 .. code-block:: yaml
 
- #cloud-config
- hostname: HOST
- manage_etc_hosts: true
- apt_mirror: http://ubuntu.catalyst.net.nz/ubuntu
- timezone: Pacific/Auckland
+  #cloud-config
+  hostname: HOST
+  manage_etc_hosts: true
+  apt_mirror: http://ubuntu.catalyst.net.nz/ubuntu
+  timezone: Pacific/Auckland
 
 Any packages we might need can be put in the next section. We only need to 
 get nginx from our package manager as we'll be getting Rocket.Chat as a snap
@@ -225,55 +224,55 @@ package.
 
 .. code-block:: yaml
 
- packages:
-   - nginx
+  packages:
+    - nginx
 
 We're going to configure out nginx proxy to redirect all HTTP traffic to HTTPS,
 and pass all HTTPS traffic to our Rocket.Chat instance on port 3000.
 
 .. code-block:: yaml
 
- write_files:
-   - path: /etc/nginx/sites-available/rocketchat
-     content: |
-       server { 
-         listen 80;
-         listen [::]:80;
-             
-         server_name IP_ADDRESS;
-         return 301 https://$server_name$request_uri;
-       } 
- 
-       server {
-         listen 443 ssl;
-         listen [::]443 ssl; 
- 
-         server_name IP_ADDRESS;
+  write_files:
+    - path: /etc/nginx/sites-available/rocketchat
+      content: |
+        server { 
+          listen 80;
+          listen [::]:80;
+              
+          server_name IP_ADDRESS;
+          return 301 https://$server_name$request_uri;
+        } 
 
-         ssl_certificate /etc/ssl/certs/nginx-self-signed.crt;
-         ssl_certificate_key /etc/ssl/private/nginx-self-signed.key;
+        server {
+          listen 443 ssl;
+          listen [::]443 ssl; 
 
-         #SSL Settings for added security.
-         ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-         ssl_prefer_server_ciphers on;
-         ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
-         ssl_ecdh_curve secp384r1;
-         ssl_session_cache shared:SSL:10m;
-         ssl_session_tickets off;
-         ssl_stapling on;
-         ssl_stapling_verify on;
-         resolver 8.8.8.8 8.8.4.4 valid=300s;
-         resolver_timeout 5s;
-         add_header Strict-Transport-Security "max-age=63072000;";
-         add_header X-Frame-Options DENY;
-         add_header X-Content-Type-Options nosniff;
+          server_name IP_ADDRESS;
 
-         ssl_dhparam /etc/ssl/certs/dhparam.pem;
+          ssl_certificate /etc/ssl/certs/nginx-self-signed.crt;
+          ssl_certificate_key /etc/ssl/private/nginx-self-signed.key;
 
-         location / {
-           proxy_pass http://127.0.0.1:3000/;
-         }
-       }
+          #SSL Settings for added security.
+          ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+          ssl_prefer_server_ciphers on;
+          ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
+          ssl_ecdh_curve secp384r1;
+          ssl_session_cache shared:SSL:10m;
+          ssl_session_tickets off;
+          ssl_stapling on;
+          ssl_stapling_verify on;
+          resolver 8.8.8.8 8.8.4.4 valid=300s;
+          resolver_timeout 5s;
+          add_header Strict-Transport-Security "max-age=63072000;";
+          add_header X-Frame-Options DENY;
+          add_header X-Content-Type-Options nosniff;
+
+          ssl_dhparam /etc/ssl/certs/dhparam.pem;
+
+          location / {
+            proxy_pass http://127.0.0.1:3000/;
+          }
+        }
 
 Finally, we need to install the Rocket.Chat server, enable our nginx config, 
 and generate our SSL certificates. We'll finish with a reboot so that we can
@@ -281,25 +280,24 @@ restart everything.
 
 .. code-block:: yaml
 
- runcmd:
-   - apt-get update
-   - snap install rocketchat-server
-   - touch /etc/nginx/sites-available/rocketchat
-   - ln -s /etc/nginx/sites-available/rocketchat 
-     /etc/nginx/sites-enabled/rocketchat
-   - openssl req -x509 -nodes -days 365 -newkey rsa:2048 
-     -keyout /etc/ssl/private/nginx-self-signed.key 
-     -out /etc/ssl/certs/nginx-self-signed.crt 
-     -subj "HTTPS_CERT_SETTINGS"
-   - openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
-   - reboot
- #
+  runcmd:
+    - apt-get update
+    - snap install rocketchat-server
+    - touch /etc/nginx/sites-available/rocketchat
+    - ln -s /etc/nginx/sites-available/rocketchat 
+      /etc/nginx/sites-enabled/rocketchat
+    - openssl req -x509 -nodes -days 365 -newkey rsa:2048 
+      -keyout /etc/ssl/private/nginx-self-signed.key 
+      -out /etc/ssl/certs/nginx-self-signed.crt 
+      -subj "HTTPS_CERT_SETTINGS"
+    - openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+    - reboot
+  #
 
 Save this file as :code:`rocketchat.xenial`. This naming convention means if
 we wanted to install this on another version of Ubuntu, such as Bionic(18.04) 
 or Trusty(14.04), then we can just make another cloud init file with that
 distro as the file extension.
-
 
 Creating the Rocket.Chat instance
 =================================
@@ -313,32 +311,32 @@ private network, so that we can generate an IP address for the instance.
 
 .. code-block:: bash 
 
- # Parameters for instance
- INSTANCE_NAME="${PREFIX}-chat1"
- FLAVOR="c1.c1r1"
- IMAGE_NAME="ubuntu-16.04-x86_64"
+  # Parameters for instance
+  INSTANCE_NAME="${PREFIX}-chat1"
+  FLAVOR="c1.c1r1"
+  IMAGE_NAME="ubuntu-16.04-x86_64"
 
- # Relevant ID values for instance parameters
- CC_FLAVOR_ID=$( openstack flavor show "$FLAVOR" -f value -c id )
- CC_IMAGE_ID=$( openstack image show "$IMAGE_NAME" -f value -c id )
- CC_PRIVATE_NETWORK_ID=$( openstack network show "$PRIVATE_NETWORK_NAME" -f value -c id )
+  # Relevant ID values for instance parameters
+  CC_FLAVOR_ID=$( openstack flavor show "$FLAVOR" -f value -c id )
+  CC_IMAGE_ID=$( openstack image show "$IMAGE_NAME" -f value -c id )
+  CC_PRIVATE_NETWORK_ID=$( openstack network show "$PRIVATE_NETWORK_NAME" -f value -c id )
 
 We need an IP address so we're going to check if we have any free, or request
 that one be allocated to us.
 
 .. code-block:: bash
 
- # Get an IP address.
- CC_FLOATING_IP_ID=$( openstack floating ip list -f value -c ID --status 'DOWN' | head -n 1 )
- if [ -z "$CC_FLOATING_IP_ID" ]; then
-     echo No floating ip found creating a floating ip:
-     CC_PUBLIC_NETWORK_ID=$( openstack network show public-net -f value -c id )
-     openstack floating ip create "$CC_PUBLIC_NETWORK_ID"
-     echo Getting floating ip id:
-     CC_FLOATING_IP_ID=$( openstack floating ip list -f value -c ID --status 'DOWN' | head -n 1 )
- fi
+  # Get an IP address.
+  CC_FLOATING_IP_ID=$( openstack floating ip list -f value -c ID --status 'DOWN' | head -n 1 )
+  if [ -z "$CC_FLOATING_IP_ID" ]; then
+      echo No floating ip found creating a floating ip:
+      CC_PUBLIC_NETWORK_ID=$( openstack network show public-net -f value -c id )
+      openstack floating ip create "$CC_PUBLIC_NETWORK_ID"
+      echo Getting floating ip id:
+      CC_FLOATING_IP_ID=$( openstack floating ip list -f value -c ID --status 'DOWN' | head -n 1 )
+  fi
 
- CC_PUBLIC_IP=$( openstack floating ip show "$CC_FLOATING_IP_ID" -f value -c floating_ip_address )
+  CC_PUBLIC_IP=$( openstack floating ip show "$CC_FLOATING_IP_ID" -f value -c floating_ip_address )
 
 We have all the necessary details to set up our SSL Certificate. 
 You should modify these values to your own, bearing in mind that the 
@@ -346,14 +344,14 @@ You should modify these values to your own, bearing in mind that the
 
 .. code-block:: bash
 
- # OpenSSL settings so we can have a self signed certificate
- COUNTRY="NZ"
- STATE="Canterbury"
- LOCALITY="Christchurch"
- ORG_NAME="Catalyst NZ"
- ORG_DEPT="Catalyst Cloud"
+  # OpenSSL settings so we can have a self signed certificate
+  CN="NZ"                     #Country
+  ST="My Province"            #State
+  LC="My City"                #Locality
+  ON="My Organisation"        #Organisation Name
+  OD="My Organisations Dept"  #Organisation Dept
 
- HTTPS_SETTINGS="\/C=${COUNTRY}\/ST=${STATE}\/L=${LOCALITY}\/O=${ORG_NAME}\/OU=${ORG_DEPT}\/CN=${CC_PUBLIC_IP}"
+  CERT_SETTINGS="\/C=${CN}\/ST=${S}\/L=${LC}\/O=${ON}\/OU=${OD}\/CN=${CC_PUBLIC_IP}"
 
 Now, we need to overwrite a few of the default settings we put in the 
 cloud init file. These are related to our hostname, ip address and ssl cert 
@@ -361,37 +359,37 @@ details.
 
 .. code-block:: bash
 
- sed -i "s/HOST/${INSTANCE_NAME}/" $CLOUD_INIT_FILE
- sed -i "s/IP_ADDRESS/${CC_PUBLIC_IP}/" $CLOUD_INIT_FILE
- sed -i "s/HTTPS_CERT_SETTINGS/${HTTPS_SETTINGS}/" $CLOUD_INIT_FILE
+  sed -i "s/HOST/${INSTANCE_NAME}/" $CLOUD_INIT_FILE
+  sed -i "s/IP_ADDRESS/${CC_PUBLIC_IP}/" $CLOUD_INIT_FILE
+  sed -i "s/HTTPS_CERT_SETTINGS/${CERT_SETTINGS}/" $CLOUD_INIT_FILE
 
 Now we can create our Rocket.Chat instance.
 
 .. code-block:: bash
 
- openstack server create \
- --flavor "$CC_FLAVOR_ID" \
- --image "$CC_IMAGE_ID" \
- --key-name "$SSH_KEY_NAME" \
- --security-group default \
- --security-group "$SECURITY_GROUP_NAME" \
- --nic "net-id=$CC_PRIVATE_NETWORK_ID" \
- --user-data "`pwd`/rocketchat.xenial" \
- "$INSTANCE_NAME"
-
- until [ "$INSTANCE_STATUS" == 'ACTIVE' ]
- do
-     INSTANCE_STATUS=$( openstack server show "$INSTANCE_NAME" -f value -c status )
-     sleep 2;
- done
+  openstack server create \
+  --flavor "$CC_FLAVOR_ID" \
+  --image "$CC_IMAGE_ID" \
+  --key-name "$SSH_KEY_NAME" \
+  --security-group default \
+  --security-group "$SECURITY_GROUP_NAME" \
+  --nic "net-id=$CC_PRIVATE_NETWORK_ID" \
+  --user-data "`pwd`/rocketchat.xenial" \
+  "$INSTANCE_NAME"
+  
+  until [ "$INSTANCE_STATUS" == 'ACTIVE' ]
+  do
+    INSTANCE_STATUS=$( openstack server show "$INSTANCE_NAME" -f value -c status )
+    sleep 2;
+  done
 
 The last thing to do is apply our floating IP address to our server, so 
 that we can SSH into it. 
 
 .. code-block:: bash
 
- openstack server add floating ip "$INSTANCE_NAME" "$CC_PUBLIC_IP"
- echo "ssh ubuntu@${CC_PUBLIC_IP}"
+  openstack server add floating ip "$INSTANCE_NAME" "$CC_PUBLIC_IP"
+  echo "ssh ubuntu@${CC_PUBLIC_IP}"
 
 Run from a shell using :code:`bash setup.sh`
 

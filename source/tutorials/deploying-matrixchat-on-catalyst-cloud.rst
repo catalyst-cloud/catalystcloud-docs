@@ -8,10 +8,7 @@ This tutorial assumes the following:
 * Comfortable using SSH to access an instance and run commands.
 * Have an instance set up already to host your chat server, with port 8448
   open in addition to ports 80 and 443.
-* A domain with an A record with the hostname :code:`@` on the instance
-
-  **OR**
-
+* A domain with an A record with the hostname :code:`@` on the instance **OR**
 * A sub-domain  with an A record with the hostname set to the subdomain and a 
   SRV record with the hostname :code:`_matrix._tcp` pointing to port 
   :code:`8448` on the target instance. 
@@ -49,8 +46,8 @@ the end:
 
 .. code-block:: yaml
 
- [chatservers]
- mydomain.com ansible_user:ubuntu
+  [chatservers]
+  mydomain.com ansible_user:ubuntu
 
 This will tell Ansible which set of hosts to run our playbook on. If we 
 wanted to deploy to multiple hosts they could all be added to the chatservers 
@@ -69,32 +66,31 @@ gathering gathering facts about the machine.
 
 .. code-block:: yaml
 
- - name: Setup the Matrix Server
-   hosts: chatservers
-   become: yes
-   gather_facts: no
-   vars:
-     server_name: "{{ inventory_hostname }}"
-   pre_tasks:
-     - name: 'Install Python 2'
-       raw: sudo apt-get update && sudo apt-get -y install python-minimal
-     - action: setup
+  - name: Setup the Matrix Server
+    hosts: chatservers
+    become: yes
+    gather_facts: no
+    vars:
+      server_name: "{{ inventory_hostname }}"
+    pre_tasks:
+      - name: 'Install Python 2'
+        raw: sudo apt-get update && sudo apt-get -y install python-minimal
+      - action: setup
 
 We're going to want to use HTTPS later so we'll add the repository for certbot.
 
 .. code-block:: yaml
 
-   tasks:
-     - name: Add certbot repo for Let's Encrypt Certs
-       apt_repository:
-         validate_certs: no
-         repo: 'ppa:certbot/certbot'
-         state: present
- 
-     - name: update aptitude cache
-       apt:
-         update_cache: yes
+  tasks:
+    - name: Add certbot repo for Let's Encrypt Certs
+      apt_repository:
+        validate_certs: no
+        repo: 'ppa:certbot/certbot'
+        state: present
 
+    - name: update aptitude cache
+      apt:
+        update_cache: yes
 
 Installing Synapse & Dependencies
 =================================
@@ -105,28 +101,27 @@ to enable web access to the built in matrix client.
 
 .. code-block:: yaml
 
-     - name: Install Synapse Prerequisites and Nginx
-       action: apt pkg={{ item }} state=present
-       with_items:
-         - nginx
-         - python2.7-dev
-         - build-essential
-         - libffi-dev
-         - python-pip
-         - python-setuptools
-         - sqlite3
-         - libssl-dev
-         - python-virtualenv
-         - libjpeg-dev
-         - libxslt1-dev
-         - python-certbot-nginx
- 
-     - name: Install Synapse
-       shell: |
-         pip install --upgrade pip 
-         pip install --upgrade setuptools 
-         pip install https://github.com/matrix-org/synapse/tarball/master
+  - name: Install Synapse Prerequisites and Nginx
+    action: apt pkg={{ item }} state=present
+    with_items:
+      - nginx
+      - python2.7-dev
+      - build-essential
+      - libffi-dev
+      - python-pip
+      - python-setuptools
+      - sqlite3
+      - libssl-dev
+      - python-virtualenv
+      - libjpeg-dev
+      - libxslt1-dev
+      - python-certbot-nginx
 
+  - name: Install Synapse
+    shell: |
+      pip install --upgrade pip 
+      pip install --upgrade setuptools 
+      pip install https://github.com/matrix-org/synapse/tarball/master
 
 Applying Configurations
 =======================
@@ -134,70 +129,71 @@ Applying Configurations
 Before our system can do anything, we need to configure it. We're going 
 to point our server at port 8008 as this is the port our matrix client runs at.
 We don't need to configure an SSL certificate or anything like that just yet, 
-we'll do that later. We also need to enable the configuration and restart nginx.
+we'll do that later. We also need to enable the configuration and restart 
+nginx.
 
 .. code-block:: yaml
 
-     - name: Configure Nginx
-       copy:
-         dest: "/etc/nginx/sites-available/matrixchat"
-         content: |
-           server {
-               listen 80;
-               listen [::]:80;
+  - name: Configure Nginx
+    copy:
+      dest: "/etc/nginx/sites-available/matrixchat"
+      content: |
+        server {
+            listen 80;
+            listen [::]:80;
+
+            root /var/www/html;
+            index index.html index.htm index.nginx-debian.html;
+
+            server_name {{ server_name }};
+
+            location / {
+                return 302 https://$server_name/_matrix/client/;
+            }
+
+            location /_matrix {
+                proxy_pass http://localhost:8008;
+            }
+
+            location ~ /.well-known {
+                allow all;
+            }
+        }
  
-               root /var/www/html;
-               index index.html index.htm index.nginx-debian.html;
- 
-               server_name {{ server_name }};
- 
-               location / {
-                   return 302 https://$server_name/_matrix/client/;
-               }
- 
-               location /_matrix {
-                   proxy_pass http://localhost:8008;
-               }
- 
-               location ~ /.well-known {
-                   allow all;
-               }
-           }
- 
-     - name: Enable nginx configuration
-       file:
-         src: "/etc/nginx/sites-available/matrixchat"
-         dest: "/etc/nginx/sites-enabled/matrixchat"
-         state: link
-       notify: 
-         - Restart nginx
+  - name: Enable nginx configuration
+    file:
+      src: "/etc/nginx/sites-available/matrixchat"
+      dest: "/etc/nginx/sites-enabled/matrixchat"
+      state: link
+    notify: 
+      - Restart nginx
 
 We'll also need to start synapse, generate the keys and configuration and 
 also modify the configuration to allow registration. 
 
 .. code-block:: yaml
 
-     - name: Create Synapse Directory
-       file: 
-         path: /home/ubuntu/.synapse
-         state: directory
+  - name: Create Synapse Directory
+    file: 
+      path: /home/ubuntu/.synapse
+      state: directory
 
-     - name: Start Synapse
-       shell: | 
-         python -m synapse.app.homeserver \ 
-           --server-name {{ server_name }} \
-           --config-path /home/ubuntu/.synapse/homeserver.yaml \
-           --generate-config \
-           --report-stats=no
- 
-     - name: Enable Registration
-       lineinfile:
-         path: /home/ubuntu/.synapse/homeserver.yaml
-         regexp: '^enable_registration: False'
-         line: 'enable_registration: True'
-       notify:
-         - Restart Synapse
-         - Restart nginx
+  - name: Start Synapse
+    shell: | 
+      python -m synapse.app.homeserver \ 
+        --server-name {{ server_name }} \
+        --config-path /home/ubuntu/.synapse/homeserver.yaml \
+        --generate-config \
+        --report-stats=no
+
+  - name: Enable Registration
+    lineinfile:
+      path: /home/ubuntu/.synapse/homeserver.yaml
+      regexp: '^enable_registration: False'
+      line: 'enable_registration: True'
+    notify:
+      - Restart Synapse
+      - Restart nginx
 
 Once you've reached this point, and hopefully you've been following along 
 and saving each block of code as we go, should be able to run the playbook like
@@ -207,7 +203,6 @@ Hopefully nothing breaks and you should be able to go navigate a web browser to
 :code:`http://yourdomain.com/_matrix/client/` and see the login for the 
 default matrix client. This is served over http and currently HTTPS will fail.
 We'll set that up next.
-
 
 Free HTTPS with Certbot and Let's Encrypt
 =========================================
@@ -221,7 +216,7 @@ To begin, SSH into your compute instance and run the following command:
 
 .. code-block:: bash
 
- $ certbot --nginx -d www.example.com -d example.com
+  certbot --nginx -d www.example.com -d example.com
 
 You'll be greeted by a couple of prompts that you'll want to read and answer. 
 This automatically modifies the nginx configuration we created earlier. Once 
@@ -229,11 +224,10 @@ this is done we need to restart nginx:
 
 .. code-block:: bash
 
- $ systemctl restart nginx.service 
+  systemctl restart nginx.service 
 
 Navigate to :code:`https://yourdomain.com` and you should see the exact same 
 thing as before.
-
 
 Registering a User
 ==================
@@ -244,8 +238,7 @@ like the user you are creating to become an admin (for this server) as well.
 
 .. code-block:: bash
 
- $ register_new_matrix_user -c ~/.synapse/homeserver.yaml https://localhost:8448
-
+  register_new_matrix_user -c ~/.synapse/homeserver.yaml https://localhost:8448
 
 Testing
 ========
