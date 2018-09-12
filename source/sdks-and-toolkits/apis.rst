@@ -27,14 +27,16 @@ http://developer.openstack.org/api-ref.html
 API endpoints
 *************
 
-Once authenticated, you can obtain the service catalogue and the list of API
-endpoints on the current region from the identity service.
+Once authenticated and operating from a :ref:`whitelisted IP address
+<access-and-whitelist>`, you can obtain the service catalogue and the list of
+API endpoints on the current region from the identity service.
 
 From the dashboard, you can find the endpoints under Access and Security, API
 endpoints.
 
 From the command line tools, you can run ``openstack catalog list`` to list the
 services and API endpoints of the current region.
+
 
 Endpoints for “nz-por-1”
 ------------------------

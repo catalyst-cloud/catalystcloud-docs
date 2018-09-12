@@ -1,10 +1,12 @@
+.. _installing-the-cli:
+
 ###############
 Install the CLI
 ###############
 
 
 *********************
-Intall (using Docker)
+Install (using Docker)
 *********************
 
 The Catalyst Cloud CLI is available as a Docker container that is easy to use,
