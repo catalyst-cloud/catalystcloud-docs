@@ -5,7 +5,7 @@ Deploying RocketChat on Catalyst Cloud using Cloud-init
 Rocket.Chat is an open source alternative to other chat apps such as Slack. It
 allows us to install our own server and have control over its configuration.
 
-Cloud-init is a system configuration tool that can be utilised to apply a 
+Cloud-init is a system configuration tool that can be utilised to apply a
 configuration to a system automatically upon initialisation.
 
 This tutorial assumes the following:
@@ -22,24 +22,24 @@ In this tutorial we're going to set up Rocket.Chat on a Catalyst Cloud instance
 using nginx as an HTTPS reverse proxy to handle requests to and from the chat
 server.
 
-We'll be using a self signed certificate for HTTPS encryption. 
-Setting up a certificate from a CA such as `Let's Encrypt 
-<https://letsencrypt.org/>`_ is very easy and packages such as `Certbot 
-<http://certbot.eff.org>`_ make this process extremely user friendly. 
+We'll be using a self signed certificate for HTTPS encryption.
+Setting up a certificate from a CA such as `Let's Encrypt
+<https://letsencrypt.org/>`_ is very easy and packages such as `Certbot
+<http://certbot.eff.org>`_ make this process extremely user friendly.
 This will require a domain name set up, and is outside the scope of this
 tutorial.
 
-For the purpose of this tutorial it's recommended that you follow along, create 
-a file to copy each code snippet into and try to understand what commands are 
-being executed.  Small code comments have been included so that the script is 
+For the purpose of this tutorial it's recommended that you follow along, create
+a file to copy each code snippet into and try to understand what commands are
+being executed.  Small code comments have been included so that the script is
 more readable if you are not familiar with the OpenStack CLI or bash. Try to
 hold off on running your script until you've reached the end and understand
 what the entire script is trying to do.
 
 Instructions for setting up the instances and related networks on Catalyst
-Cloud have been included here for convenience. If you've already completed the 
+Cloud have been included here for convenience. If you've already completed the
 process of :ref:`launch-first-instance` and :ref:`using-a-bash-script`
-then this part of the process may be extremely familiar to you, and you can 
+then this part of the process may be extremely familiar to you, and you can
 choose to skip to `Automating our install using Cloud-Init`_
 if you wish.
 
@@ -47,7 +47,7 @@ Setting up the Network
 ======================
 
 First we want to set a prefix value for all of our object names so we can avoid
-future name conflicts. :code:`rocketchat` is a great choice because that's what 
+future name conflicts. :code:`rocketchat` is a great choice because that's what
 we're going to be installing on our system, although you might want to change
 this.
 
@@ -71,36 +71,13 @@ to the public internet.
  PRIVATE_NETWORK_NAME="${PREFIX}-private-net"
  openstack network create "$PRIVATE_NETWORK_NAME"
 
-Next we'll determine our Catalyst Cloud region and nameservers.
+Now we can create the subnet that our rocketchat instance will reside on.
+In this case we're going to allocate the address range 10.0.0.10 - 10.0.0.20
+of the 10.0.0.0/24 address space.
 
 .. code-block:: bash
 
- # Get correct nameserver for Cat-Cloud region.
- if [[ $OS_REGION_NAME == "nz_wlg_2" ]]; then
-     CC_NAMESERVER_1=202.78.240.213
-     CC_NAMESERVER_2=202.78.240.214
-     CC_NAMESERVER_3=202.78.240.215
- elif [[ $OS_REGION_NAME == "nz-por-1" ]]; then
-     CC_NAMESERVER_1=202.78.247.197
-     CC_NAMESERVER_2=202.78.247.198
-     CC_NAMESERVER_3=202.78.247.199
- elif [[ $OS_REGION_NAME == "nz-hlz-1" ]]; then
-     CC_NAMESERVER_1=202.78.244.85
-     CC_NAMESERVER_2=202.78.244.86
-     CC_NAMESERVER_3=202.78.244.87
- else
-     echo "OS_REGION_NAME does not point at a valid region";
- EXIT=1;
- fi;
-
-Now that we know the nameservers we want to use, we can create the subnet 
-that our rocketchat instance will reside on. In this case we're going to 
-allocate the address range 10.0.0.10 - 10.0.0.20 of the 10.0.0.0/24 address 
-space.
-
-.. code-block:: bash
-
-  # Allocate addresses 10.0.0.10-10.0.0.20 from our private network to our 
+  # Allocate addresses 10.0.0.10-10.0.0.20 from our private network to our
   # rocketchat subnet.
   NETWORK="10.0.0"
   POOL_START_OCT="10"
@@ -110,9 +87,6 @@ space.
   # Create a subnet of our existing virtual network.
   openstack subnet create \
   --allocation-pool "start=${NETWORK}.${POOL_START_OCT},end=${NETWORK}.${POOL_END_OCT}" \
-  --dns-nameserver "$CC_NAMESERVER_1" \
-  --dns-nameserver "$CC_NAMESERVER_2" \
-  --dns-nameserver "$CC_NAMESERVER_3" \
   --dhcp \
   --network "$PRIVATE_NETWORK_NAME" \
   --subnet-range "$NETWORK.0/24" \
@@ -121,7 +95,7 @@ space.
   # Add our subnet to the router
   openstack router add subnet "$ROUTER_NAME" "$PRIVATE_SUBNET_NAME"
 
-The network is now fully set up and configured. We'll connect our rocketchat 
+The network is now fully set up and configured. We'll connect our rocketchat
 instance up later on. For now we need to create some security rules.
 
 Security Settings
@@ -142,11 +116,11 @@ First we need to create the security group and grab it's id:
   $SECURITY_GROUP_NAME
   CC_SECURITY_GROUP_ID=$( openstack security group show "$SECURITY_GROUP_NAME" -f value -c id )
 
-We need to create 3 simple rules. 
+We need to create 3 simple rules.
 
-Firstly, SSH. It's important that we can administer the server via 
-SSH (potentially to apply updates or changes in future). We could harden these 
-rules further by restricting SSH access to our own ip address, but we're 
+Firstly, SSH. It's important that we can administer the server via
+SSH (potentially to apply updates or changes in future). We could harden these
+rules further by restricting SSH access to our own ip address, but we're
 assuming we don't have a static IP address.
 
 SSH (port 22):
@@ -160,7 +134,7 @@ SSH (port 22):
   --dst-port 22 \
   "$CC_SECURITY_GROUP_ID"
 
-Next, because Rocket.Chat uses an in-browser client so we also need to allow 
+Next, because Rocket.Chat uses an in-browser client so we also need to allow
 access on ports 80 and 443 for HTTP/S access.
 
 .. code-block:: bash
@@ -182,7 +156,7 @@ access on ports 80 and 443 for HTTP/S access.
 SSH Keys
 --------
 
-We'll use this key to access the Rocket.Chat instance via SSH. These will be 
+We'll use this key to access the Rocket.Chat instance via SSH. These will be
 applied to the :code:`ubuntu` user on the Rocket.Chat instance.
 
 .. code-block:: bash
@@ -194,10 +168,10 @@ applied to the :code:`ubuntu` user on the Rocket.Chat instance.
 Automating our install using Cloud-Init
 ============================================
 
-Cloud Init is a system for configuring a new instance when it is first 
+Cloud Init is a system for configuring a new instance when it is first
 created. It takes all it's directives from a simple YAML file.
 
-Before we start, we should determine all the steps involved so we know exactly 
+Before we start, we should determine all the steps involved so we know exactly
 what is happening on our new instance.
 
 Our plan is to :
@@ -218,7 +192,7 @@ Our cloud init file begins with some basic, straightforward settings.
   apt_mirror: http://ubuntu.catalyst.net.nz/ubuntu
   timezone: Pacific/Auckland
 
-Any packages we might need can be put in the next section. We only need to 
+Any packages we might need can be put in the next section. We only need to
 get nginx from our package manager as we'll be getting Rocket.Chat as a snap
 package.
 
@@ -235,17 +209,17 @@ and pass all HTTPS traffic to our Rocket.Chat instance on port 3000.
   write_files:
     - path: /etc/nginx/sites-available/rocketchat
       content: |
-        server { 
+        server {
           listen 80;
           listen [::]:80;
-              
+
           server_name IP_ADDRESS;
           return 301 https://$server_name$request_uri;
-        } 
+        }
 
         server {
           listen 443 ssl;
-          listen [::]443 ssl; 
+          listen [::]443 ssl;
 
           server_name IP_ADDRESS;
 
@@ -274,9 +248,9 @@ and pass all HTTPS traffic to our Rocket.Chat instance on port 3000.
           }
         }
 
-Finally, we need to install the Rocket.Chat server, enable our nginx config, 
+Finally, we need to install the Rocket.Chat server, enable our nginx config,
 and generate our SSL certificates. We'll finish with a reboot so that we can
-restart everything. 
+restart everything.
 
 .. code-block:: yaml
 
@@ -284,18 +258,18 @@ restart everything.
     - apt-get update
     - snap install rocketchat-server
     - touch /etc/nginx/sites-available/rocketchat
-    - ln -s /etc/nginx/sites-available/rocketchat 
+    - ln -s /etc/nginx/sites-available/rocketchat
       /etc/nginx/sites-enabled/rocketchat
-    - openssl req -x509 -nodes -days 365 -newkey rsa:2048 
-      -keyout /etc/ssl/private/nginx-self-signed.key 
-      -out /etc/ssl/certs/nginx-self-signed.crt 
+    - openssl req -x509 -nodes -days 365 -newkey rsa:2048
+      -keyout /etc/ssl/private/nginx-self-signed.key
+      -out /etc/ssl/certs/nginx-self-signed.crt
       -subj "HTTPS_CERT_SETTINGS"
     - openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
     - reboot
   #
 
 Save this file as :code:`rocketchat.xenial`. This naming convention means if
-we wanted to install this on another version of Ubuntu, such as Bionic(18.04) 
+we wanted to install this on another version of Ubuntu, such as Bionic(18.04)
 or Trusty(14.04), then we can just make another cloud init file with that
 distro as the file extension.
 
@@ -303,13 +277,13 @@ Creating the Rocket.Chat instance
 =================================
 
 When we create an instance we have to decide what specifications we want.
-In this case we're going to install Ubuntu 16.04 (Xenial), with a 1vCPU and 
+In this case we're going to install Ubuntu 16.04 (Xenial), with a 1vCPU and
 1GB RAM setup. This should be enough resources for a Rocket.Chat install.
 
-We're also going to set the name of our instance, and get the id of our 
+We're also going to set the name of our instance, and get the id of our
 private network, so that we can generate an IP address for the instance.
 
-.. code-block:: bash 
+.. code-block:: bash
 
   # Parameters for instance
   INSTANCE_NAME="${PREFIX}-chat1"
@@ -338,8 +312,8 @@ that one be allocated to us.
 
   CC_PUBLIC_IP=$( openstack floating ip show "$CC_FLOATING_IP_ID" -f value -c floating_ip_address )
 
-We have all the necessary details to set up our SSL Certificate. 
-You should modify these values to your own, bearing in mind that the 
+We have all the necessary details to set up our SSL Certificate.
+You should modify these values to your own, bearing in mind that the
 :code:`COUNTRY` value will always be a 2 letter code.
 
 .. code-block:: bash
@@ -353,8 +327,8 @@ You should modify these values to your own, bearing in mind that the
 
   CERT_SETTINGS="\/C=${CN}\/ST=${S}\/L=${LC}\/O=${ON}\/OU=${OD}\/CN=${CC_PUBLIC_IP}"
 
-Now, we need to overwrite a few of the default settings we put in the 
-cloud init file. These are related to our hostname, ip address and ssl cert 
+Now, we need to overwrite a few of the default settings we put in the
+cloud init file. These are related to our hostname, ip address and ssl cert
 details.
 
 .. code-block:: bash
@@ -376,31 +350,35 @@ Now we can create our Rocket.Chat instance.
   --nic "net-id=$CC_PRIVATE_NETWORK_ID" \
   --user-data "`pwd`/rocketchat.xenial" \
   "$INSTANCE_NAME"
-  
+
   until [ "$INSTANCE_STATUS" == 'ACTIVE' ]
   do
     INSTANCE_STATUS=$( openstack server show "$INSTANCE_NAME" -f value -c status )
     sleep 2;
   done
 
-The last thing to do is apply our floating IP address to our server, so 
-that we can SSH into it. 
+The last thing to do is apply our floating IP address to our server, so
+that we can SSH into it.
 
 .. code-block:: bash
 
   openstack server add floating ip "$INSTANCE_NAME" "$CC_PUBLIC_IP"
   echo "ssh ubuntu@${CC_PUBLIC_IP}"
 
-Run from a shell using :code:`bash setup.sh`
+Run from a shell using
 
-The cloud-init script may take some time to run, so hold tight and wait for 
-the server to complete its set up.
+.. code-block:: bash
 
-If the install has worked, you should be able to open your IP address in a 
-browser and see an SSL certificate warning. You can add an exception as we know 
+  $ bash setup.sh
+
+The cloud-init script may take some time to run, so hold tight and wait for
+the server to complete its set up and reboot.
+
+If the install has worked, you should be able to open your IP address in a
+browser and see an SSL certificate warning. You can add an exception as we know
 that we signed the certificate ourselves. After that you should see the setup
 for your Rocket.Chat server.
 
-If anything goes wrong, you should be able to find a log file under 
-:code:`/var/log/cloud-init-output.log` which may help determine which 
+If anything goes wrong, you should be able to find a log file under
+:code:`/var/log/cloud-init-output.log` which may help determine which
 command isn't running properly.
