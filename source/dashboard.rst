@@ -1,7 +1,8 @@
+.. _cloud-dashboard:
+
 #########
 Dashboard
 #########
-
 
 ********
 Overview
