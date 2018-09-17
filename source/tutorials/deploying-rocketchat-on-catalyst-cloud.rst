@@ -325,13 +325,15 @@ You should modify these values to your own, bearing in mind that the
   ON="My Organisation"        #Organisation Name
   OD="My Organisations Dept"  #Organisation Dept
 
-  CERT_SETTINGS="\/C=${CN}\/ST=${S}\/L=${LC}\/O=${ON}\/OU=${OD}\/CN=${CC_PUBLIC_IP}"
+  CERT_SETTINGS="\/C=${CN}\/ST=${ST}\/L=${LC}\/O=${ON}\/OU=${OD}\/CN=${CC_PUBLIC_IP}"
 
 Now, we need to overwrite a few of the default settings we put in the
 cloud init file. These are related to our hostname, ip address and ssl cert
 details.
 
 .. code-block:: bash
+
+  CLOUD_INIT_FILE=`pwd`/rocketchat.xenial
 
   sed -i "s/HOST/${INSTANCE_NAME}/" $CLOUD_INIT_FILE
   sed -i "s/IP_ADDRESS/${CC_PUBLIC_IP}/" $CLOUD_INIT_FILE
@@ -348,7 +350,7 @@ Now we can create our Rocket.Chat instance.
   --security-group default \
   --security-group "$SECURITY_GROUP_NAME" \
   --nic "net-id=$CC_PRIVATE_NETWORK_ID" \
-  --user-data "`pwd`/rocketchat.xenial" \
+  --user-data "$CLOUD_INIT_FILE" \
   "$INSTANCE_NAME"
 
   until [ "$INSTANCE_STATUS" == 'ACTIVE' ]
