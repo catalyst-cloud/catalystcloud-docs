@@ -1,3 +1,5 @@
+.. _using-a-bash-script:
+
 *******************
 Using a bash script
 *******************
