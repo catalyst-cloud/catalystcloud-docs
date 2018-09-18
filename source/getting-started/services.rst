@@ -179,7 +179,7 @@ Now that we've discussed what services are available on the Catalyst Cloud, we
 can discuss how to use them.
 
 
-:ref:`Next page <access_to_catalyst_cloud>`
+:ref:`Previous page <introduction-to-catalyst-cloud>` - :ref:`Next page <access_to_catalyst_cloud>`
 
 ..
   This next page link is a temporary solution. Eventually, I will add a next
