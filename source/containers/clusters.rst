@@ -4,19 +4,28 @@ Clusters
 
 What is a cluster?
 ==================
-A container cluster is the foundation of the Kubernetes Engine: it is the set
-of Kubernetes objects that are required to run your containerized applications.
+A container cluster is the foundation of the Kubernetes Engine, it consists of at least one
+**master** server and one or more **node** servers. It is made up of a collection of compute,
+networking and storage resources necessary to run any given workloads. Communication between them is by way of a
+shared network. An entire system may be comprised of multiple clusters.
 
-A cluster requires at least one **master** server and one or more **node**
-servers. It makes use of a shared network to communicate between them.
+The **master** server is the control plane of the cluster consisting of a collection of services
+responsible for providing the centralised scheduling, logic and management of all aspects of the
+cluster. While it is possible to run a cluster with a single master that hosts all of the required
+services it is more advisable, especially for production environments, to deploy them in a
+multi-master HA configuration.
 
-The master server is the primary point of contact within the cluster and it is
-responsible for providing the centralised scheduling, logic and management of
-all aspects of the cluster.
+Some of the key services running on the master are:
 
-The machines designated as nodes are responsible for accepting and running
-workloads assigned by the master using appropriate local and external
-resources.
+- The interface to the cluster is via the ``API Server``, which provides a RESTful API frontend to
+  the control plane.
+- Configuration and state of the cluster is managed by the ``cluster store``. This is based on
+  **etcd**, which is a distributed key-value store, and provides the single source of truth for
+  the cluster and as such is the only stateful component within the cluster.
+- The ``scheduler``
+
+The machines designated as **nodes** are responsible for accepting and running
+workloads assigned by the master using appropriate local and external resources.
 
 
 The Cluster Template
@@ -32,7 +41,7 @@ use of the pre-defined templates.
 
 Viewing templates
 -----------------
-When running openstack commandline tools ensure that you have sourced a valid openrc file first.
+When running openstack command line tools ensure that you have sourced a valid openrc file first.
 For more information on this see :ref:`source-rc-file`
 
 .. code-block:: bash
@@ -91,7 +100,7 @@ To view the details of a particular template.
   +-----------------------+--------------------------------------+
 
 
-There are some key parameters that are worth mentioning in the abopve template:
+There are some key parameters that are worth mentioning in the above template:
 
 * **coe: kubernetes**
   Specifies the container orchestration engine, such as kubernetes, swarm and mesos. Currently the
@@ -102,29 +111,39 @@ There are some key parameters that are worth mentioning in the abopve template:
   is not available, this option can be set to ‘false’ thus creating a cluster without the load
   balancer. In this case, one of the masters will serve as the API endpoint. The default is True.
 * **network_driver: calico**
-  This is the driver used to provide networking services to the containers. This is independant
+  This is the driver used to provide networking services to the containers. This is independent
   from the Neutron networking that the cluster uses. Calico is the Catalyst Cloud recommended
   network driver as it provides secure network connectivity for containers and virtual machine
   workloads.
 * **labels**
   These are arbitrary labels (defined by the cluster drivers)  in the form of key=value pairs as a
   way to pass additional parameters to the cluster driver. Currently only
-  ``prometheus_monitoring`` is supported and if set to True the monitoring stack will be set up
-  and Node Exporter it automatically picked up and launched as a regular Kubernetes POD. By
-  default this is False
+  ``prometheus_monitoring`` is supported and if set to ``true`` the monitoring stack will be set
+  up and Node Exporter will automatically be picked up and launched as a regular Kubernetes POD.
+  By default this is False.
 
 Creating a cluster
 ==================
 
-To create a new cluster simply run t
+//TODO: update required user role info
+
+.. note::
+
+  ``coe-cluster-admin`` role needs to be given to a user to perform CRUD operations
+
+
+To create a new cluster we run the **openstack coe cluster create** command, providing the name of
+the cluster that we wish to create along with any possible additonal or over-riding parameters
+that are necessary.
+
 
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-cluster \
   --cluster-template k8s \
-  -- keypair testkey
+  --keypair testkey
   --node-count 4 \
-  --master-count 1
+  --master-count 1 \
 
   Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
 
@@ -146,6 +165,11 @@ Once the cluster is active access to server nodes in the cluster is via ssh, the
 
   Once a cluster template is in use it cannot be updated or deleted until all of the clusters
   using it have been terminated.
+
+Enabling container monitoring
+-----------------------------
+
+  --labels prometheus_monitoring=true
 
 
 Setting up Kubernetes CLI

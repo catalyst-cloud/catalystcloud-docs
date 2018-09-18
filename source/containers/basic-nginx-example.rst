@@ -2,11 +2,22 @@
 Basic nginx example
 ####################
 
-create deployment
-=================
-In this example we will create a simple nginx container.
+In this example we will create a simple nginx application using the standard nginx container
+image.
 
-.. literalinclude:: ../_scripts/nginx-deployment.yaml
+
+Create deployment
+=================
+The manifest file
+
+- apiVersion
+- knd
+- metadata
+- spec
+
+.. literalinclude:: _containers_assets/nginx-deployment.yaml
+  :emphasize-lines: 1-3,7
+  :linenos:
 
 .. code-block:: bash
 
@@ -17,7 +28,7 @@ create service
 --------------
 
 
-.. literalinclude:: ../_scripts/nginx-service.yaml
+.. literalinclude:: _containers_assets/nginx-service.yaml
 
 .. code-block:: bash
 
@@ -32,3 +43,15 @@ Other commands
   kubectl delete service nginx-service
   kubectl delete deployment nginx-deployment
   kubectl get deployments
+
+
+
+better output
+-------------
+//TODO getting better output from kubectl
+
+get pods with
+  -o wide
+  -o yaml or -o json
+
+kubectl exec podname ps aux

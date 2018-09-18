@@ -10,7 +10,10 @@ Table of Contents:
   containers/overview
   containers/clusters
   containers/workloads
-  containers/basic-nginx-example.rst
+  containers/services
+  containers/basic-nginx-example
+  containers/basic-rolling-upgrade-example
+  containers/dashborad-console
 
 ********
 Overview

@@ -5,29 +5,30 @@ A More Advanced Example
 Flask Hello World Example
 =========================
 For this example we are going to deploy a container running a simple flask app that will
-respond with a basic 'Hello World' message that includes the host name and ip of the node the
+respond with a basic 'Hello World' message that includes the host name and IP of the node
 responding to the request. Once the initial deployment has been successful we will investigate
 how to do a rolling update on the existing deployment and scale it out at the same time.
 
-Each pod will run th following simple flask app that will expose the app on port 5000 which
-will in turn be mapped to port
+Each pod will run the following simple flask app that will expose the app on port 5000 which
+will in turn be mapped to port 80
 
 .. literalinclude:: ../_scripts/app.py
 
-create the deployment
+Create the deployment
 ---------------------
-
+The deployment
 3 replicas
 helloworld version_1.1
-deploy using helloworld-deployment_1.yaml with helloworld-service.yaml
 
-.. literalinclude:: ../_scripts/helloworld-deployment_1.yaml
+deploy using helloworld-deployment_1.yaml
 
-.. literalinclude:: ../_scripts/helloworld-service.yaml
+
+.. literalinclude:: _containers_assets/helloworld-deployment_1.yaml
+
 
 .. code-block:: bash
 
-  kubectl create -f helloworld-deployment_1.yaml
+  $ kubectl create -f helloworld-deployment_1.yaml
   deployment.apps/helloworld-deployment created
 
 .. code-block:: bash
@@ -63,7 +64,8 @@ deploy using helloworld-deployment_1.yaml with helloworld-service.yaml
   Events:
     Type    Reason             Age   From                   Message
     ----    ------             ----  ----                   -------
-    Normal  ScalingReplicaSet  7s    deployment-controller  Scaled up replica set helloworld-deployment-58d59d965b to 3
+    Normal  ScalingReplicaSet  7s    deployment-controller  Scaled up replica set
+    helloworld-deployment-58d59d965b to 3
 
 create service
 --------------
@@ -209,7 +211,7 @@ deploy using helloworld-deployment_2.yaml with helloworld-service.yaml
   deployment.apps/helloworld-deployment created
 
 
-.. code-block:: bash
+::
 
   kubectl describe deployment helloworld-deployment
   Name:                   helloworld-deployment
@@ -242,7 +244,8 @@ deploy using helloworld-deployment_2.yaml with helloworld-service.yaml
   Events:
     Type    Reason             Age   From                   Message
     ----    ------             ----  ----                   -------
-    Normal  ScalingReplicaSet  9s    deployment-controller  Scaled up replica set helloworld-deployment-7c49cc6dc4 to 6
+    Normal  ScalingReplicaSet  9s    deployment-controller  Scaled up replica set
+    helloworld-deployment-7c49cc6dc4 to 6
 
 .. code-block:: bash
 
@@ -332,10 +335,13 @@ deploy using helloworld-deployment_2.yaml with helloworld-service.yaml
 .. code-block:: bash
 
   kubectl apply -f helloworld-deployment_2.yaml  --record
-  Warning: kubectl apply should be used on resource created by either kubectl create --save-config or kubectl apply
+  Warning: kubectl apply should be used on resource created by either kubectl create --save-config
+  or kubectl apply
   deployment.apps/helloworld-deployment configured
 
-.. code-block:: bash
+
+
+::
 
   kubectl rollout status  deployment helloworld-deployment
   Waiting for deployment "helloworld-deployment" rollout to finish: 2 out of 6 new replicas have been updated...
@@ -347,57 +353,21 @@ deploy using helloworld-deployment_2.yaml with helloworld-service.yaml
   deployment "helloworld-deployment" successfully rolled out
 
 
-.. code-block:: bash
+Check the deployment
+
+::
 
   kubectl get deploy helloworld-deployment
   NAME                    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
   helloworld-deployment   6         6         6            6           4h
 
-::
 
-  kubectl describe deployment helloworld-deployment
-  Name:                   helloworld-deployment
-  Namespace:              default
-  CreationTimestamp:      Mon, 16 Jul 2018 15:32:11 +1200
-  Labels:                 app=helloworld
-  Annotations:            deployment.kubernetes.io/revision=2
-                          kubectl.kubernetes.io/last-applied-configuration={ "apiVersion":"apps/v1","kind":"Deployment","metadata":{ "annotations":{"kubernetes.io/change-cause": "kubectl apply --filename=helloworld-deployment_2.y...
-                          kubernetes.io/change-cause=kubectl apply --filename=helloworld-deployment_2.yaml --record=true
-  Selector:               app=helloworld
-  Replicas:               6 desired | 6 updated | 6 total | 6 available | 0 unavailable
-  StrategyType:           RollingUpdate
-  MinReadySeconds:        20
-  RollingUpdateStrategy:  1 max unavailable, 1 max surge
-  Pod Template:
-    Labels:  app=helloworld
-    Containers:
-     helloworld:
-      Image:        chelios/helloworld-flask:latest
-      Port:         5000/TCP
-      Host Port:    0/TCP
-      Environment:  <none>
-      Mounts:       <none>
-    Volumes:        <none>
-  Conditions:
-    Type           Status  Reason
-    ----           ------  ------
-    Available      True    MinimumReplicasAvailable
-    Progressing    True    NewReplicaSetAvailable
-  OldReplicaSets:  <none>
-  NewReplicaSet:   helloworld-deployment-5896b9988 (6/6 replicas created)
-  Events:
-    Type    Reason             Age   From                   Message
-    ----    ------             ----  ----                   -------
-    Normal  ScalingReplicaSet  6m    deployment-controller Scaled up replica set helloworld-deployment-58d59d965b to 3
-    Normal  ScalingReplicaSet  2m    deployment-controller Scaled up replica set helloworld-deployment-58d59d965b to 6
-    Normal  ScalingReplicaSet  2m    deployment-controller Scaled up replica set helloworld-deployment-5896b9988 to 1
-    Normal  ScalingReplicaSet  2m    deployment-controller Scaled down replica set helloworld-deployment-58d59d965b to 5
-    Normal  ScalingReplicaSet  2m    deployment-controller Scaled up replica set helloworld-deployment-5896b9988 to 2
-    Normal  ScalingReplicaSet  2m    deployment-controller Scaled down replica set helloworld-deployment-58d59d965b to 3
-    Normal  ScalingReplicaSet  2m    deployment-controller Scaled up replica set helloworld-deployment-5896b9988 to 4
-    Normal  ScalingReplicaSet  1m    deployment-controller Scaled down replica set helloworld-deployment-58d59d965b to 1
-    Normal  ScalingReplicaSet  1m    deployment-controller Scaled up replica set helloworld-deployment-5896b9988 to 6
-    Normal  ScalingReplicaSet  1m    deployment-controller (combined from similar events): Scaled down replica set helloworld-deployment-58d59d965b to 0
+View the details of the deployment
+
+.. literalinclude:: _containers_assets/stdout_desc_hw_deploy.txt
+  :emphasize-lines: 1, 11
+  :linenos:
+
 
 .. code-block:: bash
 
@@ -425,7 +395,7 @@ deploy using helloworld-deployment_2.yaml with helloworld-service.yaml
   NAME                    DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
   helloworld-deployment   6         7         2            5           4d
 
-.. code-block:: bash
+::
 
   kubectl rollout status deployment helloworld-deployment
   Waiting for deployment "helloworld-deployment" rollout to finish: 1 old replicas are pending termination...
