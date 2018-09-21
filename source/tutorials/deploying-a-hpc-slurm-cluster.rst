@@ -63,7 +63,7 @@ Install Elasticluster on the virtual environment:
 
 .. code-block:: bash
 
-  git clone git://github.com/gc3-uzh-ch/elasticluster.git src
+  git clone https://github.com/gc3-uzh-ch/elasticluster src
   cd src
   pip install -e .
   pip install ndg-httpsclient
