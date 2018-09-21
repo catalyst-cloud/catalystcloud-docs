@@ -147,11 +147,16 @@ Create SSH keys for ElastiCluster (no passphrase):
 
 Source your openrc file, as explained on :ref:`command-line-interface`.
 
-Allow ElastiCluster to connect to instances over SSH:
+Allow ElastiCluster to connect to instances over SSH (if the nova command fails,
+then try the openstack command):
 
 .. code-block:: bash
 
   nova secgroup-add-group-rule default default tcp 22 22
+
+  or
+
+  openstack security group rule create --dst-port 22 default
 
 Using ElastiCluster
 ===================
