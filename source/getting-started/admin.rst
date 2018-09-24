@@ -1,4 +1,4 @@
-.. _c:
+.. _administrating_the_catalyst_cloud:
 
 #################################
 Administrating the Catalyst Cloud
