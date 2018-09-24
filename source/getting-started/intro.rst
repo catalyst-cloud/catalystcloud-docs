@@ -14,19 +14,21 @@ What is the Catalyst Cloud?
 Catalyst Cloud is a cloud computing platform, based entirely in New Zealand.
 
 Catalyst Cloud was built with the open source project, `OpenStack`_. OpenStack
-is a piece of software that allows users like yourself to rent servers. You can
-rent things such as storage space, compute capacity, or internet access. The
-building blocks you need to run a business's applications.
+is a piece of software that allows users like yourself to provision servers.
+Provisioning is similar to renting. You can provision things such as storage
+space, compute capacity, or internet access. The building blocks you need to run
+a business's applications.
 
 .. _`OpenStack`: https://www.openstack.org/software/
 
-OpenStack gives you the ability to rent exactly what you need, without
-wastefully renting capacity you don't need, by allowing you to change how much
-you're renting quickly, easily, and automatically, through a variety of tools.
+OpenStack gives you the ability to provision exactly what you need, without
+wastefully provisioning capacity you don't need, by allowing you to change how
+much you're provisioning quickly, easily, and automatically, through a variety
+of tools.
 
 .. image:: assets/access_methods.png
 
-To rent resources on Catalyst Cloud, you provision services. Catalyst Cloud
+To obtain resources on Catalyst Cloud, you provision services. Catalyst Cloud
 services are pieces of hardware and software that we have in one of our data
 centres, that we make easy and convenient to use by controlling them with
 OpenStack.
@@ -60,7 +62,7 @@ public IP address. You open a terminal and run:
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
 
-Now you've rented a public IP address. Now you run:
+Now you've provisioned a public IP address. Now you run:
 
 .. code-block:: console
 
