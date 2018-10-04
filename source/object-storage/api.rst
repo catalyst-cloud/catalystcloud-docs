@@ -3,17 +3,16 @@ Object storage with the APIs
 ############################
 
 
-===================
-Using the Swift API
-===================
+=======================
+Using the OpenStack API
+=======================
 
-The Swift object storage service has a feature API that is fully documented on
-the OpenStack website
+OpenStack's object storage service is often referred to it's codename: Swift.
 
 .. seealso::
 
-  The features supported by the Swift can be found on the `OpenStack
-  documentation
+  The features supported by the object storage API can be found on the
+  `OpenStack documentation
   <http://developer.openstack.org/api-ref/object-storage/>`_
 
 API endpoints
@@ -38,12 +37,12 @@ API endpoints
 Requirements
 ============
 
-You need valid OpenStack credentials to interact using the Swift API.
-These can be obtained from the RC file (under Access &
-Security, API Access, or using the command line tools).
+You need valid OpenStack credentials to interact with the OpenStack API. These
+can be obtained from the RC file (under Access & Security, API Access, or using
+the command line tools).
 
-The standard client library is Python Swiftclient. This can be installed
-into your current Python environment. The example below illustrates how:
+The standard client library is the python SDK. This can be installed into your
+current Python environment. The example below illustrates how:
 
 .. code-block:: bash
 
@@ -54,85 +53,21 @@ into your current Python environment. The example below illustrates how:
   virtualenv venv
   source venv/bin/activate
 
-  # Install Python Swiftclient library on your virtual environment
-  pip install python-swiftclient
+  # Install Python OpenStack SDK library on your virtual environment
+  pip install openstacksdk
 
 Sample code
 ===========
 
-The code below demonstrates how you can use Swiftclient to interact
-with Swift via the version 2 compatible (auth) API. This version uses
-the same endpoint for both regions, but you tell it which one you want
-when connecting.
+The code below demonstrates how you can use the OpenStack python SDK to interact
+with object storage.
 
 Before running this example, ensure that you have sourced an openrc file, as
-explained in :ref:`command-line-interface`.
+explained in :ref:`command-line-interface`, and are working from a whitelisted
+IP address.
 
-.. code-block:: python
-
-  #!/usr/bin/env python
-  import os
-  import swiftclient
-
-  # Read configuration from environment variables (openstack.rc)
-  auth_username = os.environ['OS_USERNAME']
-  auth_password = os.environ['OS_PASSWORD']
-  auth_url = os.environ['OS_AUTH_URL']
-  project_name = os.environ['OS_TENANT_NAME']
-  region_name = os.environ['OS_REGION_NAME']
-  options = {'tenant_name': project_name, 'region_name': region_name}
-
-  # Establish the connection with the object storage API
-  conn = swiftclient.Connection(
-          user = auth_username,
-          key = auth_password,
-          authurl = auth_url,
-          insecure = False,
-          auth_version = 2,
-          os_options = options,
-  )
-
-  # Create a new container
-  container_name = 'mycontainer'
-  conn.put_container(container_name)
-
-
-  # Put an object in it
-  conn.put_object(container_name, 'hello.txt',
-                  contents='Hello World!',
-                  content_type='text/plain')
-
-  # List all containers and objects
-  for container in conn.get_account()[1]:
-      cname = container['name']
-      print 'container\t{0}'.format(cname)
-
-      for data in conn.get_container(cname)[1]:
-          print '\t{0}\t{1}\t{2}'.format(data['name'], data['bytes'],
-          data['last_modified'])
-
-
-To use the version 1 (auth) API you need to have previously authenticated,
-and have remembered your token id (e.g using the keystone client). Also the
-endpoint for the desired region must be used (por in this case).::
-
-  https://object-storage.nz-por-1.catalystcloud.io:443/swift/v1/auth_tenant_id/container_name/object_name
-
-.. code-block:: python
-
-  #!/usr/bin/env python
-  import swiftclient
-  token = 'thetokenid'
-  stourl = 'https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_<tenant_id>'
-
-  conn = swiftclient.Connection(
-          preauthtoken = token,
-          preauthurl = stourl,
-          insecure = False,
-          auth_version = 1,
-  )
-
-  # ...rest of program is unchanged
+.. literalinclude:: assets/api-python-example.py
+   :language: python
 
 .. _s3-api-documentation:
 
