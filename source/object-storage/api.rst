@@ -3,11 +3,15 @@ Object storage with the APIs
 ############################
 
 
-=======================
+***********************
 Using the OpenStack API
-=======================
+***********************
 
-OpenStack's object storage service is often referred to it's codename: Swift.
+The standard means of interacting with object storage is using the Python
+OpenStack SDK, however, you can also use the Swift Python SDK. Note that
+OpenStack's object storage service is often referred to it's code-name: Swift,
+hence the Swift SDK. We recommend the OpenStack Python SDK over the Swift python
+SDK.
 
 .. seealso::
 
@@ -41,8 +45,8 @@ You need valid OpenStack credentials to interact with the OpenStack API. These
 can be obtained from the RC file (under Access & Security, API Access, or using
 the command line tools).
 
-The standard client library is the python SDK. This can be installed into your
-current Python environment. The example below illustrates how:
+The standard client library is the OpenStack python SDK. This can be installed
+into your current Python environment. The example below illustrates how:
 
 .. code-block:: bash
 
@@ -62,25 +66,25 @@ Sample code
 The code below demonstrates how you can use the OpenStack python SDK to interact
 with object storage.
 
-Before running this example, ensure that you have sourced an openrc file, as
-explained in :ref:`command-line-interface`, and are working from a whitelisted
-IP address.
+Before running this example, ensure that you have sourced an openrc file and are
+working from a whitelisted IP address, as explained in
+:ref:`access-and-whitelist`.
 
 .. literalinclude:: assets/api-python-example.py
    :language: python
 
 .. _s3-api-documentation:
 
-================
+****************
 Using the S3 API
-================
+****************
 
-The Swift object storage service has an Amazon S3 emulation layer that supports
+The object storage service also has an Amazon S3 emulation layer that supports
 common S3 calls and operations.
 
 .. seealso::
 
-  Swift3 middleware emulates the S3 REST API on top of OpenStack. Swift is
+  Swift3 middleware emulates the S3 REST API on top of OpenStack. It is
   documented fully `here
   <http://docs.openstack.org/mitaka/config-reference/object-storage/configure-s3.html>`_.
 
@@ -101,12 +105,12 @@ Requirements
 ============
 
 You need valid EC2 credentials in order to interact with the S3 compatible API.
-You can obtain your EC2 credentials from the dashboard (under Access &
-Security, API Access), or using the command line tools:
+You can obtain your EC2 credentials from the dashboard (under Access & Security,
+API Access), or using the :ref:`OpenStack CLI <command-line-interface>`:
 
 .. code-block:: bash
 
-  keystone ec2-credentials-create
+  openstack ec2 credentials create
 
 If you are using boto to interact with the API, you need boto installed on your
 current Python environment. The example below illustrates how to install boto
@@ -176,7 +180,7 @@ To access object storage using cURL it will be necessary to provide credentials
 to authenticate the request.
 
 This can be done by sourcing a valid RC file ( see
-:ref:`command-line-interface` ), retrieving the account specific detail via the
+:ref:`access-and-whitelist` ), retrieving the account specific detail via the
 Swift command line tools, then exporting the required variables as shown below.
 
 .. code-block:: bash

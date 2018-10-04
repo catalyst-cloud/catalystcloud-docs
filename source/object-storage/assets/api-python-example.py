@@ -22,7 +22,7 @@ connection.object_store.upload_object(
 all_containers = [x for x in connection.object_store.containers()]
 
 for container in all_containers:
-    print("{name}\tObject count: {obj_num}\tBytes: {bytes}".format(
+    print("{name} - Object count: {obj_num} - Bytes: {bytes}".format(
         name=container.name,
         obj_num=container.object_count,
         bytes=container.bytes_used
