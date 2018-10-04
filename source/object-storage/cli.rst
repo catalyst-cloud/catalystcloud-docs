@@ -73,12 +73,12 @@ To download an object to your computer, use ``openstack object save <container>
 
 .. code-block:: bash
 
-   $ openstack object save mynewcontainer test.css
-   +----------+----------------+----------------------------------+
-   | object   | container      | etag                             |
-   +----------+----------------+----------------------------------+
-   | test.css | mynewcontainer | 3e1e451d6eaaf8682d0cebd7e867920d |
-   +----------+----------------+----------------------------------+
+   $ openstack object save mynewcontainer hello.txt
+   +-----------+----------------+----------------------------------+
+   | object    | container      | etag                             |
+   +-----------+----------------+----------------------------------+
+   | hello.txt | mynewcontainer | d41d8cd98f00b204e9800998ecf8427e |
+   +-----------+----------------+----------------------------------+
 
 
 To specify a specific path to save the file to, use ``openstack object save
