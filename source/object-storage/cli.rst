@@ -64,6 +64,27 @@ To add a new object to a container, use ``openstack object create
     | hello.txt | mynewcontainer | d41d8cd98f00b204e9800998ecf8427e |
     +-----------+----------------+----------------------------------+
 
+*******************************
+Downloading from object storage
+*******************************
+
+To download an object to your computer, use ``openstack object save <container>
+<object>``.
+
+.. code-block:: bash
+
+   $ openstack object save mynewcontainer test.css
+   +----------+----------------+----------------------------------+
+   | object   | container      | etag                             |
+   +----------+----------------+----------------------------------+
+   | test.css | mynewcontainer | 3e1e451d6eaaf8682d0cebd7e867920d |
+   +----------+----------------+----------------------------------+
+
+
+To specify a specific path to save the file to, use ``openstack object save
+--file <file_path> <container> <object>``.
+
+
 *********************************
 Deleting from your object storage
 *********************************
@@ -81,7 +102,7 @@ mind this will only work if the container is empty.
 
     $ openstack container delete mycontainer-1
 
-However, to delete a container and all of the objects within the
+However, to delete all of the objects within a container, and then the
 container, use ``openstack container delete --recursive <container>``.
 
 .. code-block:: bash
