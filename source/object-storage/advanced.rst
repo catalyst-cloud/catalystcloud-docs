@@ -10,9 +10,7 @@ It is possible to host simple websites that contain only static content from
 within a container.
 
 To demonstrate this, we'll be using the `Python OpenStack SDK
-<https://docs.openstack.org/openstacksdk/latest/index.html>`_. Unfortunately,
-some of the features we need to serve the bucket as a static site are
-unavailable from the standard :ref:`OpenStack CLI <command-line-interface>`.
+<https://docs.openstack.org/openstacksdk/latest/index.html>`_.
 
 First, insure you've :ref:`sourced an RC file <source-rc-file>`. Create a
 container:
@@ -58,114 +56,73 @@ Object Versioning
 This provides a means by which multiple versions of your content can be stored
 allowing for recovery from unintended overwrites.
 
-First, you need to create an archive container to store the older versions of our
-objects:
+To demonstrate this, we'll be using the `Python OpenStack SDK
+<https://docs.openstack.org/openstacksdk/latest/index.html>`_.
+
+First, insure you've :ref:`sourced an RC file <source-rc-file>`. We'll create a
+main container, and a container that will act as our archive.
+
+.. literalinclude:: assets/versioning-container-example.py
+   :language: python
+   :lines: 7-11
+
+Now, set the ``versions_location`` metadata, to point the main container to the
+archive container.
+
+.. literalinclude:: assets/versioning-container-example.py
+   :language: python
+   :lines: 13-15
+
+Now when we upload an object to the main container, a copy will by automatically
+transferred to the archive container. As an example, let's upload an object, and
+then overwrite the object with a new version.
+
+.. literalinclude:: assets/versioning-container-example.py
+   :language: python
+   :lines: 17-24
+
+When we print the contents, we can see there's a copy of each revision in the
+archive.
+
+.. literalinclude:: assets/versioning-container-example.py
+   :language: python
+   :lines: 26-37
 
 .. code-block:: bash
 
-  $ curl -i -X PUT -H "X-Auth-Token: $token" $storageURL/archive
+   $ python3 versioning-container-example.py
+   mycontainer contents:
+   Name: test.txt - Hash: ee4ef965d44e9a172cbb49e43b274798
 
-Now you can create a container to hold your objects. You must include the
-``X-Versions-Location`` header, which defines the container that holds the
-previous versions of your objects.
+   mycontainer-archive contents:
+   Name: 008test.txt/1538706227.70524 - Hash: ee4ef965d44e9a172cbb49e43b274798
+   Name: 008test.txt/1538706252.58966 - Hash: cba9567e501f4ab6f6cab74ed81ade69
 
-.. code-block:: bash
+The backed up version will have the following format:
+```<length><object_name>/<timestamp>```
 
-  $ curl -i -X PUT -H "X-Auth-Token: $token" -H 'X-Versions-Location: archive' $storageURL/my-container
-  HTTP/1.1 201 Created
-  Server: nginx/1.10.1
-  Date: Mon, 05 Dec 2016 23:50:00 GMT
-  Content-Type: text/html; charset=UTF-8
-  Content-Length: 0
-  X-Trans-Id: txe6d2f4e289654d02a7329-005845fd28
-
-Once the ``X-Versions-Location`` header has been applied to the container, any
-changes to objects in the container automatically result in a copy of the
-original object being placed in the archive container. The backed up version
-will have the following format:
-
-.. code-block:: bash
-
-  <length><object_name>/<timestamp>
-
-Where <length> is the length of the object name ( as a three character zero padded
-hex number ), <object_name> is the original object name and <timestamp> is the
+Where ``<length>`` is the length of the object name ( as a three character zero padded
+hex number ), ``<object_name>`` is the original object name and ``<timestamp>`` is the
 unix timestamp of the original file creation.
 
-<length> and <object_name> are then combined to make a new container
+``<length>`` and ``<object_name>`` are then combined to make a new container
 (pseudo-folder in the dashboard) with the backed up object stored within using
 the timestamp as its name.
 
-.. note::
+To demonstrate that the archive is a real backup, we can delete the file in the
+main container, and then print the contents of the archive container.
 
-  You must UTF-8-encode and then URL-encode the container name before you
-  include it in the X-Versions-Location header.
+.. literalinclude:: assets/versioning-container-example.py
+   :language: python
+   :lines: 39-43
 
-If you list your current containers, you can see you now have two empty
-containers.
-
-.. code-block:: bash
-
-  $ openstack container list --long
-  +--------------+-------+-------+
-  | Name         | Bytes | Count |
-  +--------------+-------+-------+
-  | archive      |     0 |     0 |
-  | my-container |     0 |     0 |
-  +--------------+-------+-------+
-
-If you upload a sample file into my-container, you can see the confirmation of
-this operation. This includes the etag, which is an MD5 hash of the object's
-contents.
+As you can see, the contents of the archive container has not changed:
 
 .. code-block:: bash
 
-  $ openstack object create my-container file1.txt
-  +-----------+--------------+----------------------------------+
-  | object    | container    | etag                             |
-  +-----------+--------------+----------------------------------+
-  | file1.txt | my-container | 2767104ea585e1a98a23c52addeeae4a |
-  +-----------+--------------+----------------------------------+
-
-Now if the original file is modified and uploaded to the same container, you
-get a successful confirmation, except this time you get a new etag, as the
-contents of the file have changed.
-
-.. code-block:: bash
-
-  $ openstack object create my-container file1.txt
-  +-----------+--------------+----------------------------------+
-  | object    | container    | etag                             |
-  +-----------+--------------+----------------------------------+
-  | file1.txt | my-container | 9673f4c3efc2ee8dd9edbc2ba60c76c4 |
-  +-----------+--------------+----------------------------------+
-
-If you show the containers again, you can see now that even though you only
-uploaded the file into my-container, you now also have a file present in the
-archive container.
-
-.. code-block:: bash
-
-  $ os container list --long
-  +--------------+-------+-------+
-  | Name         | Bytes | Count |
-  +--------------+-------+-------+
-  | archive      |    70 |     1 |
-  | my-container |    73 |     1 |
-  +--------------+-------+-------+
-
-Further investigation of the archive container reveals that you have a new
-object, which was created automatically, and named in accordance with the
-convention outlined above.
-
-.. code-block:: bash
-
-  $ openstack object list archive
-  +-------------------------------+
-  | Name                          |
-  +-------------------------------+
-  | 009file1.txt/1480982072.29403 |
-  +-------------------------------+
+   mycontainer-archive contents:
+   Name: 008test.txt/1538706227.70524 - Hash: ee4ef965d44e9a172cbb49e43b274798
+   Name: 008test.txt/1538706252.58966 - Hash: cba9567e501f4ab6f6cab74ed81ade69
 
 
 *************
