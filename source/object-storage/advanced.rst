@@ -2,84 +2,58 @@
 Advanced object storage features
 ################################
 
-
-========================================
+****************************************
 Static websites hosted in object storage
-========================================
+****************************************
 
 It is possible to host simple websites that contain only static content from
 within a container.
 
-First set up a container, and configure the read ACL to allow read access and
-optionally allow files to be listed.
+To demonstrate this, we'll be using the `Python OpenStack SDK
+<https://docs.openstack.org/openstacksdk/latest/index.html>`_. Unfortunately,
+some of the features we need to serve the bucket as a static site are
+unavailable from the standard :ref:`OpenStack CLI <command-line-interface>`.
 
-.. code-block:: bash
+First, insure you've :ref:`sourced an RC file <source-rc-file>`. Create a
+container:
 
-  swift post con0
-  swift post -r '.r:*,.rlistings' con0
+.. literalinclude:: assets/static-site-container-example.py
+   :language: python
+   :lines: 7-9
 
-To confirm the ACL settings, or any of the other metadata settings that follow
-run the following command:
+Configure the `read ACL
+<https://docs.openstack.org/swift/latest/overview_acl.html>`_ to allow read
+access and optionally allow files to be listed:
 
-.. code-block:: bash
+.. literalinclude:: assets/static-site-container-example.py
+   :language: python
+   :lines: 11-13
 
-  swift stat con0
-           Account: AUTH_b24e9ee3447e48eab1bc99cb894cac6f
-         Container: con0
-           Objects: 3
-             Bytes: 35354
-          Read ACL: .r:*,.rlistings
-         Write ACL:
-           Sync To:
-          Sync Key:
-     Accept-Ranges: bytes
-        X-Trans-Id: tx54e1341d5fd74634b19c5-005906aaf6
-            Server: nginx/1.10.1
-       X-Timestamp: 1493608620.58190
-  X-Storage-Policy: Policy-0
-      Content-Type: text/plain; charset=utf-8
+Next upload the files you wish to host as a static site:
 
-Next upload the files you wish to host:
-
-.. code-block:: bash
-
-  swift upload con0 index.html error.html image.png styles.css
-
-It is possible to allow listing of all files in the container by enabling
-web-listings. It is also possible to style these listings using a separate CSS
-file to the one you would use to style the actual website.
-
-Upload the CSS file and enable the web listing and styling for the listing.
-
-.. code-block:: bash
-
-  swift upload con0 listing.css
-  swift post -m 'web-listings: true' con0
-  swift post -m 'web-listings-css:listings.css' con0
+.. literalinclude:: assets/static-site-container-example.py
+   :language: python
+   :lines: 44-46
 
 You should now be able to view the files in the container by visiting
-the container's URL, where %AUTH_ID% & %container_name% are replaced by
-your values.
+the container's URL:
 
-https://object-storage.nz-por-1.catalystcloud.io:443/v1/%AUTH_ID%/%container_name%/
-
-To enable the container to work as a full website, it is also necessary to
-enable the index and optionally the error settings:
+.. literalinclude:: assets/static-site-container-example.py
+   :language: python
+   :lines: 48-52
 
 .. code-block:: bash
 
-  swift post -m 'web-index:index.html' con0
-  swift post -m 'web-error:error.html' con0
+   $ python3 static-site-container-example.py
+   https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_8ciuas90998049cbasdas0f023eba693b4/mystaticsite/index.html
 
-You should now be able to view the index file as a website.
+Now that you have a URL, you should be able to redirect a domain name to it. By
+using domain name masking, you'll be able to hide the long object storage URL in
+your visitor's browser, and replace it with your domain name.
 
-https://object-storage.nz-por-1.catalystcloud.io:443/v1/%AUTH_ID%/%container_name%/
-
-
-
-=================
+*****************
 Object Versioning
-=================
+*****************
 
 This provides a means by which multiple versions of your content can be stored
 allowing for recovery from unintended overwrites.
@@ -194,9 +168,9 @@ convention outlined above.
   +-------------------------------+
 
 
-=============
+*************
 Temporary URL
-=============
+*************
 
 This is a means by which a temporary URL can be generated, to allow
 unauthenticated access to the Swift object at the given path. The
@@ -230,6 +204,7 @@ should expire.
 
 Creating Temporary URLs in the Catalyst Cloud
 =============================================
+
 At the time of writing, the only method currently available for the creation
 of temporary URLs is using the command line tools.
 
@@ -289,9 +264,9 @@ successful, the request should return the contents of the object.
 You could also access the object by taking the same URL that you passed to cURL
 and pasting it into a web browser.
 
-==========================
+**************************
 Working with Large Objects
-==========================
+**************************
 
 Typically, the size of a single object cannot exceed 5GB. It is possible,
 however, to use several smaller objects to break up the large object. When this
@@ -327,6 +302,7 @@ is used in the example.
 
 example 1 : DLO
 ---------------
+
 The default mode for the tool is the ``dynamic large object`` type, so in this
 example, the only other parameter that is required is the segment size.
 The ``-S`` flag is used to specify the size of each chunk, in this case
@@ -347,6 +323,7 @@ The ``-S`` flag is used to specify the size of each chunk, in this case
 
 example 2 : SLO
 ---------------
+
 In the second example, the same segment size as above is used, but you specify
 that the object type must now be the ``static large object`` type.
 
@@ -367,9 +344,10 @@ uploaded in parallel. Once all the segments are uploaded, the manifest file
 will be created so that the segments can be downloaded as a single
 object.
 
-The Swift tool uses a strict convention for its segmented object support.
-All segments that are uploaded are placed into a second container that has
-``_segments`` appended to the original container name, in this case it would be mycontainer_segments. The segment names follow the format of
+The Swift tool uses a strict convention for its segmented object support. All
+segments that are uploaded are placed into a second container that has
+``_segments`` appended to the original container name, in this case it would be
+mycontainer_segments. The segment names follow the format of
 ``<name>/<timestamp>/<object_size>/<segment_size>/<segment_name>``.
 
 If you check on the segments created in example 1, you can see this:
@@ -403,7 +381,7 @@ option if desired; this is useful if you want to have multiple versions of
 the same large object available.
 
 Dynamic Large Objects (DLO) vs Static Large Objects (SLO)
-==========================================================
+=========================================================
 
 The main difference between the two object types is to do with the associated
 manifest file that describes the overall object structure within Swift.
