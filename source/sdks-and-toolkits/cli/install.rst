@@ -60,7 +60,7 @@ Python 2.7.x, so the procedure below will also install it as a dependency.
   source venv/bin/activate
 
   # Install the Python openstack client libraries into your virtual environment
-  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient}
+  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
 
 If you would like to test the CLI with Python 3.x, please use this
 procedure instead:
@@ -77,7 +77,7 @@ procedure instead:
   source venv/bin/activate
 
   # Install the Python openstack client libraries into your virtual environment
-  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient}
+  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
 
 .. note::
 
@@ -105,7 +105,7 @@ need to install a different version of Python.
 
   # Install the Python openstack client libraries and the Python timezone definitions
   # into your virtual environment
-  pip install pytz python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient}
+  pip install pytz python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
 
 Debian Linux 8
 --------------
@@ -123,7 +123,7 @@ Debian Linux 8
 
   # Install the Python openstack client libraries and the Python timezone definitions
   # into your virtual environment
-  pip install pytz python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient}
+  pip install pytz python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
 
 CentOS Linux 7
 --------------
@@ -145,7 +145,7 @@ CentOS Linux 7
   source venv/bin/activate
 
   # Install the Python openstack client libraries into your virtual environment
-  pip install Python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient}
+  pip install Python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
 
 Mac OS X
 --------
@@ -161,7 +161,7 @@ Mac OS X
   source venv/bin/activate
 
   # Install the Python openstack client libraries into your virtual environment
-  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient}
+  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
 
 Windows Server 2012 R2
 ----------------------
@@ -179,7 +179,7 @@ Assuming that Python and pip have successfully been installed then
   .\venv\scripts\activate
 
   Install the Python openstack client libraries into your virtual environment
-  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient}
+  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
 
 
 If any errors are encountered while pip is building packages it may be
