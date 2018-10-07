@@ -1,6 +1,6 @@
-######################
-Container as a Service
-######################
+#################
+Container Service
+#################
 
 Table of Contents:
 
@@ -11,9 +11,12 @@ Table of Contents:
   containers/clusters
   containers/workloads
   containers/services
+  containers/storage
+  containers/controllers
   containers/basic-nginx-example
   containers/basic-rolling-upgrade-example
-  containers/dashborad-console
+  containers/namespaces
+  containers/dashboard-console
 
 ********
 Overview

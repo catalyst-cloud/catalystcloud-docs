@@ -6,8 +6,8 @@ What is a cluster?
 ==================
 A container cluster is the foundation of the Kubernetes Engine, it consists of at least one
 **master** server and one or more **node** servers. It is made up of a collection of compute,
-networking and storage resources necessary to run any given workloads. Communication between them is by way of a
-shared network. An entire system may be comprised of multiple clusters.
+networking and storage resources necessary to run any given workloads. Communication between them
+is by way of a shared network. An entire system may be comprised of multiple clusters.
 
 The **master** server is the control plane of the cluster consisting of a collection of services
 responsible for providing the centralised scheduling, logic and management of all aspects of the
@@ -24,8 +24,9 @@ Some of the key services running on the master are:
   the cluster and as such is the only stateful component within the cluster.
 - The ``scheduler``
 
-The machines designated as **nodes** are responsible for accepting and running
-workloads assigned by the master using appropriate local and external resources.
+The machines designated as **nodes**, previously referred to as minions, are responsible for
+accepting and running workloads assigned by the master using appropriate local and external
+resources.
 
 
 The Cluster Template
@@ -159,7 +160,7 @@ Once the cluster is active access to server nodes in the cluster is via ssh, the
 
 .. code-block:: bash
 
-  ssh fedora@<node_ip>
+  $ ssh fedora@<node_ip>
 
 .. note::
 
@@ -172,6 +173,8 @@ Enabling container monitoring
   --labels prometheus_monitoring=true
 
 
+.. _kube_cli:
+
 Setting up Kubernetes CLI
 =========================
 
@@ -180,8 +183,10 @@ Getting kubectl
 
 To deploy and manage applications on kubernetes use the Kubernetes command-line tool, `kubectl`_.
 With this tool you can inspect cluster resources; create, delete, and update components; and look
-at your new cluster and bring up example apps. The details for getting the latest version of
-kubectl can be found `here`_.
+at your new cluster and bring up example apps. It's basically the Kubernertes Swiss
+army knife.
+
+The details for getting the latest version of kubectl can be found `here`_.
 
 .. _`kubectl`: https://kubernetes.io/docs/reference/kubectl/kubectl/
 .. _`here`: https://kubernetes.io/docs/tasks/tools/install-kubectl/#kubectl-install-1
@@ -195,6 +200,21 @@ To install on Linux via the commandline perform the following steps:
 
   $ chmod +x ./kubectl
   $ sudo mv ./kubectl /usr/local/bin/kubectl
+
+
+The basic format of kubectl commands looks like this:
+
+.. code-block:: bash
+
+  kubectl [command] [TYPE] [NAME] [flags]
+
+where command, TYPE, NAME, and flags are:
+
+- **command**: the operation to perform
+- **TYPE**: the resource type to act on
+- **NAME**: the name of the resource in question
+- **flags**: optional flags to provide extra
+
 
 Cluster Access Using kubeconfig Files
 -------------------------------------
@@ -212,12 +232,12 @@ Example: ``eval $(openstack coe cluster config <cluster-name>)``
 
 .. code-block:: bash
 
-  eval $(openstack coe cluster config k8s-cluster)
+  $ eval $(openstack coe cluster config k8s-cluster)
 
 Viewing the cluster
 -------------------
 It is possible to view details of the cluster with the following command. This will return the
-address of the master and the services runnig there.
+address of the master and the services running there.
 
 .. code-block:: bash
 
@@ -235,4 +255,4 @@ By default, it redirects everything to stdout.
   $ kubectl cluster-info dump
 
 Now that we have a cluster up and running and have confirmed our access lets take a look at
-running :ref:`kubernetes-workloads` on Kubernetes.
+running :ref:`workloads` on Kubernetes.

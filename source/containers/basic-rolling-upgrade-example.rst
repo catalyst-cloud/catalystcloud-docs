@@ -400,18 +400,3 @@ View the details of the deployment
   kubectl rollout status deployment helloworld-deployment
   Waiting for deployment "helloworld-deployment" rollout to finish: 1 old replicas are pending termination...
   deployment "helloworld-deployment" successfully rolled out
-
-Kubernetes Best Paractices
-==========================
-
-small compact images
---------------------
-
-namespaces
-----------
-
-resource quotas and limits
---------------------------
-
-exposing external services
---------------------------
