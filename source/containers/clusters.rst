@@ -57,7 +57,7 @@ Then list all of the available cluster templates.
   +--------------------------------------+------+
   | uuid                                 | name |
   +--------------------------------------+------+
-  | 43791a50-5dbc-4584-a36b-98fa9359d374 | k8s  |
+  | cf6f8cab-8d22-4f38-a88b-25f8a41e5b77 | k8s  |
   +--------------------------------------+------+
 
 To view the details of a particular template.
@@ -69,36 +69,37 @@ To view the details of a particular template.
   | Field                 | Value                                |
   +-----------------------+--------------------------------------+
   | insecure_registry     | -                                    |
-  | labels                | {}                                   |
-  | updated_at            | -                                    |
+  | labels                | {u'kube_tag': u'v1.11.2-1'}          |
+  | updated_at            | 2018-10-05T01:06:15+00:00            |
   | floating_ip_enabled   | True                                 |
   | fixed_subnet          | -                                    |
-  | master_flavor_id      | ds1G                                 |
-  | uuid                  | 43791a50-5dbc-4584-a36b-98fa9359d374 |
+  | master_flavor_id      | c1.c2r2                              |
+  | uuid                  | cf6f8cab-8d22-4f38-a88b-25f8a41e5b77 |
   | no_proxy              | -                                    |
   | https_proxy           | -                                    |
   | tls_disabled          | False                                |
-  | keypair_id            | testkey                              |
+  | keypair_id            | -                                    |
   | public                | True                                 |
   | http_proxy            | -                                    |
   | docker_volume_size    | -                                    |
   | server_type           | vm                                   |
-  | external_network_id   | public                               |
+  | external_network_id   | e0ba6b88-5360-492c-9c3d-119948356fd3 |
   | cluster_distro        | fedora-atomic                        |
-  | image_id              | 169623d9-f521-4f18-afeb-0e2728b3482f |
-  | volume_driver         | -                                    |
+  | image_id              | 83833f4f-5d09-44cd-9e23-b0786fc580fd |
+  | volume_driver         | cinder                               |
   | registry_enabled      | False                                |
-  | docker_storage_driver | devicemapper                         |
+  | docker_storage_driver | overlay2                             |
   | apiserver_port        | -                                    |
-  | name                  | k8s                                  |
-  | created_at            | 2018-04-05T23:18:10+00:00            |
+  | name                  | kubernetes-v1.11.2-development       |
+  | created_at            | 2018-10-05T00:25:19+00:00            |
   | network_driver        | calico                               |
   | fixed_network         | -                                    |
   | coe                   | kubernetes                           |
-  | flavor_id             | ds1G                                 |
+  | flavor_id             | c1.c2r2                              |
   | master_lb_enabled     | False                                |
-  | dns_nameserver        | 8.8.8.8                              |
+  | dns_nameserver        | 202.78.240.215                       |
   +-----------------------+--------------------------------------+
+
 
 
 There are some key parameters that are worth mentioning in the above template:
@@ -126,13 +127,6 @@ There are some key parameters that are worth mentioning in the above template:
 Creating a cluster
 ==================
 
-//TODO: update required user role info
-
-.. note::
-
-  ``coe-cluster-admin`` role needs to be given to a user to perform CRUD operations
-
-
 To create a new cluster we run the **openstack coe cluster create** command, providing the name of
 the cluster that we wish to create along with any possible additonal or over-riding parameters
 that are necessary.
@@ -143,7 +137,7 @@ that are necessary.
   $ openstack coe cluster create k8s-cluster \
   --cluster-template k8s \
   --keypair testkey
-  --node-count 4 \
+  --node-count 1 \
   --master-count 1 \
 
   Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
@@ -152,7 +146,7 @@ that are necessary.
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
   | uuid                                 | name        | keypair  | node_count | master_count | status             |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
-  | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          4 |            1 | CREATE_IN_PROGRESS |
+  | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
 
 Once the cluster is active access to server nodes in the cluster is via ssh, the ssh user will be
@@ -191,7 +185,7 @@ The details for getting the latest version of kubectl can be found `here`_.
 .. _`kubectl`: https://kubernetes.io/docs/reference/kubectl/kubectl/
 .. _`here`: https://kubernetes.io/docs/tasks/tools/install-kubectl/#kubectl-install-1
 
-To install on Linux via the commandline perform the following steps:
+To install on Linux via the command line perform the following steps:
 
 .. code-block:: bash
 
@@ -242,9 +236,9 @@ address of the master and the services running there.
 .. code-block:: bash
 
   $ kubectl cluster-info
-  Kubernetes master is running at https://172.24.4.9:6443
-  Heapster is running at https://172.24.4.9:6443/api/v1/namespaces/kube-system/services/heapster/proxy
-  CoreDNS is running at https://172.24.4.9:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+  Kubernetes master is running at https://103.254.156.157:6443
+  Heapster is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/heapster/proxy
+  CoreDNS is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 
 In order to view more in depth information about the cluster simply add the dump option to the
 above example. This generates output suitable for debugging and diagnosing cluster problems.
