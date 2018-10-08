@@ -131,7 +131,6 @@ To create a new cluster we run the **openstack coe cluster create** command, pro
 the cluster that we wish to create along with any possible additonal or over-riding parameters
 that are necessary.
 
-
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-cluster \
@@ -247,6 +246,55 @@ By default, it redirects everything to stdout.
 .. code-block:: bash
 
   $ kubectl cluster-info dump
+
+Accessing the Kubernetes Dashboard
+----------------------------------
+By default Kubernetes provides a web based dashboard that exposes the details of a given cluster.
+In order to access this it is first necessary to to retrieve the admin token for the cluster you
+wish to examine.
+
+The following command will extract the correct value from the secretes in the kube-system
+namespace.
+
+::
+
+  $ kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-token | awk '{print $1}')
+  Name:         admin-token-f5728
+  Namespace:    kube-system
+  Labels:       <none>
+  Annotations:  kubernetes.io/service-account.name=admin
+                kubernetes.io/service-account.uid=cc4416d1-ca82-11e8-8993-123456789012
+
+  Type:  kubernetes.io/service-account-token
+
+  Data
+  ====
+  ca.crt:     1054 bytes
+  namespace:  11 bytes
+  token:      1234567890123456789012.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi10b2tlbi1mNTcyOCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJhZG1pbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImNjNDQxNmQxLWNhODItMTFlOC04OTkzLWZhMTYzZTEwZWY3NiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTphZG1pbiJ9.ngUnhjCOnIQYOAMzyx9TbX7dM2l4ne_AMiJmUDT9fpLGaJexVuq7EHq6FVfdzllgaCINFC2AF0wlxIscqFRWgF1b1SPIdL05XStJZ9tMg4cyr6sm0XXpzgkMLsuAzsltt5GfOzMoK3o5_nqn4ijvXJiWLc4XkQ3_qEPHUtWPK9Jem7p-GDQLfF7IvxafJpBbbCR3upBQpFzn0huZlpgdo46NAuzTT6iKhccnB0IyTFVgvItHtFPFKTUAr4jeuCDNlIVfho99NBSNYM_IwI-jTMkDqIQ-cLEfB2rHD42R-wOEWztoKeuXVkGdPBGEiWNw91ZWuWKkfslYIFE5ntwHgA
+
+Next run the ``kubectl proxy`` command from the CLI.
+
+.. code-block:: bash
+
+  $ kubectl proxy
+  Starting to serve on 127.0.0.1:8001
+
+Once the proxy is ready browse to the following URL:
+
+``http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy``
+
+You will be prompted with a login screen, select **token** as the type and paste in the
+authentication token acquired in the step above.
+
+.. image:: _containers_assets/kubernetes_dashboard_login.png
+   :align: center
+
+Once successfully authenticated you will be able to view the cluster console.
+
+.. image:: _containers_assets/kubernetes_dashboard1.png
+   :align: center
+
 
 Now that we have a cluster up and running and have confirmed our access lets take a look at
 running :ref:`workloads` on Kubernetes.
