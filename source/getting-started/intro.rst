@@ -21,10 +21,9 @@ a business's applications.
 
 .. _`OpenStack`: https://www.openstack.org/software/
 
-OpenStack gives you the ability to provision exactly what you need, without
-wastefully provisioning capacity you don't need, by allowing you to change how
-much you're provisioning quickly, easily, and automatically, through a variety
-of tools.
+OpenStack gives you the ability to provision no more or less than what you need,
+by allowing you to change how much you're using quickly, easily, and
+automatically, through a variety of tools.
 
 .. image:: assets/access_methods.png
 
