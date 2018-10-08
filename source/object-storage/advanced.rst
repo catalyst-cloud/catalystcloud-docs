@@ -129,6 +129,22 @@ As you can see, the contents of the archive container has not changed:
 Temporary URL
 *************
 
+https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html
+
+A temporary URL gives users temporary access to objects. For example, a website
+might want to provide a link to download a large object in Object Storage, but
+the Object Storage account has no public access. The website can generate a URL
+that provides time-limited GET access to the object. When the web browser user
+clicks on the link, the browser downloads the object directly from Object
+Storage, eliminating the need for the website to act as a proxy for the request.
+
+Furthermore, a temporary URL can be prefix-based. These URLs contain a signature
+which is valid for all objects which share a common prefix. They are useful for
+sharing a set of objects.
+
+
+
+
 This is a means by which a temporary URL can be generated, to allow
 unauthenticated access to the Swift object at the given path. The
 access is via the given HTTP method (e.g. GET, PUT) and is valid
