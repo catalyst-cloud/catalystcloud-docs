@@ -1,56 +1,40 @@
-############
-Introduction
-############
+.. _introduction-to-catalyst-cloud:
+
+############################
+The basics of Catalyst Cloud
+############################
 
 This section of the documentation is for people that are entirely new to cloud
 computing and/or the Catalyst Cloud.
-
 
 ***************************
 What is the Catalyst Cloud?
 ***************************
 
-Catalyst Cloud is a New Zealand cloud computing platform with three regions
-on-shore and prices comparable to global cloud providers.
+Catalyst Cloud is a cloud computing platform, based entirely in New Zealand.
 
-The Catalyst Cloud provides you with all the building blocks you need to deliver
-digital services to New Zealanders. You can, for example, allocate compute
-capacity, storage space, and network access to run your applications.
-
-Every service on the Catalyst Cloud is charged by the hour. It is easy and quick
-to change the amount of resources you allocate, so you can prevent waste and
-reduce operational costs.
-
-
-**************
-Open by nature
-**************
-
-We strongly believe that open source software and open standards deliver
-superior value and freedom to customers. Our cloud is built on `OpenStack`_ and
-has an open API standard used by many cloud providers world-wide.
+Catalyst Cloud was built with the open source project, `OpenStack`_. OpenStack
+is a piece of software that allows users like yourself to provision servers.
+Provisioning is similar to renting. You can provision things such as storage
+space, compute capacity, or internet access. The building blocks you need to run
+a business's applications.
 
 .. _`OpenStack`: https://www.openstack.org/software/
 
-The OpenStack API standard is supported by favourite DevOps tools, such as
-Ansible, Terraform, Chef, Puppet, etc.
-
-
-***********
-Ease of use
-***********
-
-We remove a lot of complexity from your day to day work, through services that
-are easy to use. There are multiple ways you can interact with our services, as
-demonstrated on the image below.
+OpenStack gives you the ability to provision no more or less than what you need,
+by allowing you to change how much you're using quickly, easily, and
+automatically, through a variety of tools.
 
 .. image:: assets/access_methods.png
 
-While the dashboard is the easiest interface, the command line and the APIs are
-also straightforward and intuitive to use.
+To obtain resources on Catalyst Cloud, you provision services. Catalyst Cloud
+services are pieces of hardware and software that we have in one of our data
+centres, that we make easy and convenient to use by controlling them with
+OpenStack.
 
-For example, if you need to expose a compute instance to the public internet,
-you can open a terminal and run the following command to obtain a public IP.
+By exposing our hardware and software as services, we remove a lot of complexity
+from your day to day work. For example: you need to give a server it's own
+public IP address. You open a terminal and run:
 
 .. code-block:: console
 
@@ -77,18 +61,16 @@ you can open a terminal and run the following command to obtain a public IP.
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
 
-Now that you have a public IP, you can associate it to one of your compute
-instances using the following command:
+Now you've provisioned a public IP address. Now you run:
 
 .. code-block:: console
 
   $ openstack server add floating ip my_server_name 150.242.41.224
 
-Just like that, your compute instance has a public IP address in seconds. Quick,
-easy, and powerful. Every action on Catalyst Cloud can be performed just as
-quickly.
+Just like that, your server has a public IP address in seconds. Quick, easy, and
+powerful. Every action on Catalyst Cloud can be performed just as quickly.
 
-Now that we understand the basic idea behind Catalyst Cloud, let's explore what
+Now we understand the basic idea behind Catalyst Cloud, let's explore what
 services Catalyst Cloud provides.
 
 :ref:`Next page <services_on_the_catalyst_cloud>`
