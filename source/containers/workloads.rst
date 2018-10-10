@@ -233,7 +233,7 @@ To pick up the changes to the ports delete the existing pod and recreate it as w
 .. code-block:: bash
 
   $ kubectl delete pod basic-pod
-  $ kubectl create -f pod.yaml
+  $ kubectl create -f pod2.yaml
 
 This now exposes port 8080 on the pod itself. If we look at the **describe** output above we can
 see a line similar to the following
