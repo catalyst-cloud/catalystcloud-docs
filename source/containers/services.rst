@@ -55,7 +55,7 @@ To test that we can now access our Nginx instance via this port we can simply ru
 
 //TODO CC example of curling result from IP:nodeport
 
-This approach has its downsides and as such would only really be useful for s demo app or where
+This approach has its downsides and as such would only really be useful for a demo app or where
 cost is a big consideration. The more acceptable, standard approach would be to use the
 ``LoadBalancer`` type which we will cover in more details when we discuss
 :ref:`Controllers <controllers>`

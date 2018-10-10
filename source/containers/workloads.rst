@@ -161,49 +161,50 @@ It is also possible to see more detailed information about a pod by using the de
   $ kubectl describe pod basic-pod
   Name:         basic-pod
   Namespace:    default
-  Node:         minikube/192.168.122.135
-  Start Time:   Tue, 25 Sep 2018 14:17:34 +1200
+  Node:         k8s-cluster-qxgl5fcthdel-minion-0/
+  Start Time:   Tue, 09 Oct 2018 09:30:25 +1300
   Labels:       app=basic-pod
   Annotations:  <none>
   Status:       Running
-  IP:           172.17.0.4
+  IP:           192.168.26.7
   Containers:
     server:
-      Container ID:   docker://fe5ab688d680e1dccc090d7488a41597194c05372e631378217b61d46c41e153
+      Container ID:   docker://b2a007e433a44533402611f32d50927f88e921b51a547a4b2bc7e0d177e06e36
       Image:          nginx:latest
-      Image ID:       docker-pullable://nginx@sha256:24a0c4b4a4c0eb97a1aabb8e29f18e917d05abfe1b7a7c07857230879ce7d3d3
+      Image ID:       docker-pullable://docker.io/nginx@sha256:9ad0746d8f2ea6df3a17ba89eca40b48c47066dfab55a75e08e2b70fc80d929e
       Port:           80/TCP
       Host Port:      0/TCP
       State:          Running
-        Started:      Tue, 25 Sep 2018 14:17:51 +1200
+        Started:      Tue, 09 Oct 2018 09:30:36 +1300
       Ready:          True
       Restart Count:  0
       Environment:    <none>
       Mounts:
-        /var/run/secrets/kubernetes.io/serviceaccount from default-token-f4b8q (ro)
+        /var/run/secrets/kubernetes.io/serviceaccount from default-token-h8sqt (ro)
   Conditions:
-    Type           Status
-    Initialized    True
-    Ready          True
-    PodScheduled   True
+    Type              Status
+    Initialized       True
+    Ready             True
+    ContainersReady   True
+    PodScheduled      True
   Volumes:
-    default-token-f4b8q:
+    default-token-h8sqt:
       Type:        Secret (a volume populated by a Secret)
-      SecretName:  default-token-f4b8q
+      SecretName:  default-token-h8sqt
       Optional:    false
   QoS Class:       BestEffort
   Node-Selectors:  <none>
   Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
                    node.kubernetes.io/unreachable:NoExecute for 300s
   Events:
-    Type    Reason                 Age   From               Message
-    ----    ------                 ----  ----               -------
-    Normal  Scheduled              30m   default-scheduler  Successfully assigned basic-pod to minikube
-    Normal  SuccessfulMountVolume  30m   kubelet, minikube  MountVolume.SetUp succeeded for volume "default-token-f4b8q"
-    Normal  Pulling                30m   kubelet, minikube  pulling image "nginx:latest"
-    Normal  Pulled                 29m   kubelet, minikube  Successfully pulled image "nginx:latest"
-    Normal  Created                29m   kubelet, minikube  Created container
-    Normal  Started                29m   kubelet, minikube  Started container
+    Type    Reason     Age   From                                        Message
+    ----    ------     ----  ----                                        -------
+    Normal  Scheduled  8m    default-scheduler                           Successfully assigned default/basic-pod to k8s-cluster-qxgl5fcthdel-minion-0
+    Normal  Pulling    8m    kubelet, k8s-cluster-qxgl5fcthdel-minion-0  pulling image "nginx:latest"
+    Normal  Pulled     8m    kubelet, k8s-cluster-qxgl5fcthdel-minion-0  Successfully pulled image "nginx:latest"
+    Normal  Created    8m    kubelet, k8s-cluster-qxgl5fcthdel-minion-0  Created container
+    Normal  Started    8m    kubelet, k8s-cluster-qxgl5fcthdel-minion-0  Started container
+
 
 This provides lots of useful information and is a great way to check or confirm settings. The
 upper section displays the settings such as pod name, labels, container image and ports, that we
@@ -224,7 +225,7 @@ to our pod's configuration file
 
 .. Note::
 
-  KUbernetes cannot update ports on a running pod, to detect these changes the pod will need to
+  Kubernetes cannot update ports on a running pod, to detect these changes the pod will need to
   be deleted and recreated
 
 To pick up the changes to the ports delete the existing pod and recreate it as we did earlier.
@@ -234,46 +235,17 @@ To pick up the changes to the ports delete the existing pod and recreate it as w
   $ kubectl delete pod basic-pod
   $ kubectl create -f pod.yaml
 
-This now exposes port 8080 on the pod itself. If we look at the **describe** output about we can
+This now exposes port 8080 on the pod itself. If we look at the **describe** output above we can
 see a line similar to the following
 
 .. code-block:: bash
 
-  Node:         minikube/192.168.122.135
+  IP:           192.168.26.7
 
-This is the actual IP address of the node itself. Now with this information we should be able to
-connect to the Nginx instance in our pod and see the standard Nginx success message.
+This is the actual IP address of the node. Now with this information we would expect that we
+should be able to connect to the Nginx instance in our pod and see the standard Nginx success
+message. This is not the case however as that IP address is the the addess of the pod network
+which is not available outside of the node.
 
-.. code-block:: bash
-
-  $ curl 192.168.122.148:8080
-  <!DOCTYPE html>
-  <html>
-  <head>
-  <title>Welcome to nginx!</title>
-  <style>
-      body {
-          width: 35em;
-          margin: 0 auto;
-          font-family: Tahoma, Verdana, Arial, sans-serif;
-      }
-  </style>
-  </head>
-  <body>
-  <h1>Welcome to nginx!</h1>
-  <p>If you see this page, the nginx web server is successfully installed and
-  working. Further configuration is required.</p>
-
-  <p>For online documentation and support please refer to
-  <a href="http://nginx.org/">nginx.org</a>.<br/>
-  Commercial support is available at
-  <a href="http://nginx.com/">nginx.com</a>.</p>
-
-  <p><em>Thank you for using nginx.</em></p>
-  </body>
-  </html>
-
-
-The problem with this approach is that it is not permanent. If the pod dies and gets recreated it
-will come back with a new ID and IP making referring to them in this manner unreliable. This is
-where :ref:`Services <services>` come in to the picture.
+In order to overcome this obstacle we will need a different approach. This is where
+:ref:`Services <services>` come in to the picture.

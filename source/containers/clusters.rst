@@ -215,8 +215,8 @@ The kubectl command-line tool uses kubeconfig files to find the information it n
 to choose a cluster and communicate with the API server of a cluster. These files to provide
 information about clusters, users, namespaces, and authentication mechanisms.
 
-Get cluster config
-------------------
+Getting the cluster config
+--------------------------
 Configure native client to access cluster. You can source the output of this
 command to get the native client of the corresponding COE configured to access
 the cluster.
@@ -226,6 +226,16 @@ Example: ``eval $(openstack coe cluster config <cluster-name>)``
 .. code-block:: bash
 
   $ eval $(openstack coe cluster config k8s-cluster)
+
+This will download the necessary certificates and create a config file within the directory
+that you are running the command from. If you wish to save the configuration to a different
+location you can use the **--dir <directory_name>** parameter to select a different destination.
+
+.. Note::
+
+  If you are running multiple clusters or are deleting and re-creating cluster it is necessary to
+  ensure that the current ``kubectl configuration`` is referencing the right cluster. The
+  following section will outline this in more detail.
 
 Viewing the cluster
 -------------------
@@ -295,6 +305,141 @@ Once successfully authenticated you will be able to view the cluster console.
 .. image:: _containers_assets/kubernetes_dashboard1.png
    :align: center
 
-
 Now that we have a cluster up and running and have confirmed our access lets take a look at
 running :ref:`workloads` on Kubernetes.
+
+Managing cluster configurations
+===============================
+
+When working with multiple clusters or a cluster that has been torn down and recreated it is
+necessary to ensure that you have the correct ``cluster context`` loaded in order for kubectl to
+interact with the intended cluster.
+
+In order to see the current configuration and context that **kubectl** is using, run the
+following.
+
+.. code-block:: bash
+
+  $ kubectl config view
+  apiVersion: v1
+  clusters:
+  - cluster:
+      certificate-authority: /home/testuser/tmp/ca.pem
+      server: https://202.49.241.204:6443
+    name: k8s-m1-n1
+  contexts:
+  - context:
+      cluster: k8s-m1-n1
+      user: admin
+    name: default
+  current-context: default
+  kind: Config
+  preferences: {}
+  users:
+  - name: admin
+    user:
+      client-certificate: /home/testuser/tmp/cert.pem
+      client-key: /home/testuser/tmp/key.pem
+
+  $ kubectl config current-context
+  default
+
+This shows us the details of the current configuration file that kubectl is referencing and also
+the specific cluster context within that, in this case *default*. There is also an environment
+variable called ``$KUBECONFIG`` that stores the path or paths to the various configurations that
+are available.
+
+If we had run the command to retrieve the cluster configuration from a directory called
+tmp within our home directory then the output would look  like this.
+
+.. code-block:: bash
+
+  echo $KUBECONFIG
+  /home/testuser/tmp/config
+
+If there was a second cluster that we wished to also be able to work with then we need to retrieve
+the configuration and store it to a local directory.
+
+.. Note::
+
+  At the current time it is not possible to store multiple cluster configurations within the same
+  directory. There is a change coming in a future release that will make this possible using a
+  converged configuration file.
+
+If you run ``eval $(openstack coe cluster config <cluster-name>)`` within a directory that already
+contains the configuration for a cluster it will fail. If this is intentional, as in the case of
+upgrading a cluster that has been rebuilt, then this is possible by adding the ``--force`` flag,
+like this.
+
+.. code-block:: bash
+
+  $ eval $(openstack coe cluster config --force k8s-cluster )
+
+If you are wanting to download the configuration for another cluster then we can use the ``-dir``
+flag and pass in the location for the configuration to be saved. Here we will save our new
+configuration into a directory called *.kube/* under the users home directory.
+
+.. code-block:: bash
+
+  $ eval $(openstack coe cluster config --dir ~/.kube/ k8s-cluster-2)
+
+If we now check the current config we will see that is also says **default**, this is because that
+is the naming convention used in the creation of the local config.
+
+.. code-block:: bash
+
+  $ kubectl config current-context
+  default
+
+If we view the actual config however we can see that this is indeed a different file to the one
+we view previously.
+
+.. code-block:: bash
+
+  $ kubectl config view
+  apiVersion: v1
+  clusters:
+  - cluster:
+      certificate-authority: /home/testuser/.kube/ca.pem
+      server: https://202.49.240.103:6443
+    name: k8s-cluster-2
+  contexts:
+  - context:
+      cluster: k8s-cluster-2
+      user: admin
+    name: default
+  current-context: default
+  kind: Config
+  preferences: {}
+  users:
+  - name: admin
+    user:
+      client-certificate: /home/testuser/.kube/cert.pem
+      client-key: /home/testuser/.kube/key.pem
+
+To make things more useful we can change and confirm the new name of the context in the following
+manner.
+
+.. code-block:: bash
+
+  $ kubectl config rename-context default test
+  $ kubectl config current-context
+  test
+
+The final step needed to give us access to both of our clusters is to update the **$KUBECONFIG**
+environment variable so that it knows about both and allows us to see them in a single view.
+
+.. code-block:: bash
+
+  $ export KUBECONFIG=~/tmp/config:~/.kube/config
+  $ kubectl config get-contexts
+  CURRENT   NAME      CLUSTER        AUTHINFO   NAMESPACE
+            default   k8s-cluster    admin
+  *         test      k8s-cluster-2  admin
+
+
+Now we can simply switch between the various contexts available to us in the following manner.
+
+.. code-block:: bash
+
+  kubectl config use-context default
