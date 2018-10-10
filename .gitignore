@@ -4,3 +4,4 @@ venv/
 .build-tools.cson
 docs_wip
 .DS_Store
+docs-wip-notes.rst
