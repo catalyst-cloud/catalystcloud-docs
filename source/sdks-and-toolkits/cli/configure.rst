@@ -1,6 +1,11 @@
+.. _configuring-the-cli:
+
 ###################
 Configuring the CLI
 ###################
+
+Prior to using the CLI, ensure you are working from a whitelisted IP address.
+More information can be found under :ref:`access-and-whitelist`
 
 .. _source-rc-file:
 

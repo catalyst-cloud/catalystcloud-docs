@@ -60,4 +60,4 @@ More info on projects :ref:`here <projects>`.
 Now that you understand the basics of the Catalyst Cloud, lets dive into a hands
 on example using the web dashboard!
 
-:ref:`Next page <first-instance-with-dashboard>`
+:ref:`Previous page <access_to_catalyst_cloud>` - :ref:`Next page <first-instance-with-dashboard>`

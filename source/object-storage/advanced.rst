@@ -225,7 +225,7 @@ should expire.
 
 - sets the expiry using the absolute method to be Jan 1 2017
 - for the object : quux.md
-- in the nested container structure : bar_container/quux.mdbar_container/
+- in the nested container structure : bar_container/quux.md
 - with key : my_secret_tempurl_key
 
 Creating Temporary URLs in the Catalyst Cloud
