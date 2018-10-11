@@ -154,8 +154,12 @@ location you can use the **--dir <directory_name>** parameter to select a differ
 
 Viewing the cluster
 -------------------
-It is possible to view details of the cluster with the following command. This will return the
-address of the master and the services running there.
+
+Once the cluster state is **CREATE_COMPLETE** and you have successfully retrieved the cluster
+config you can safely proceed with deploying your applications into the cluster using kubectl or
+whatever your preferred mechanism may be.
+
+As a quick check, run the ``kubectl cluster-info`` command to confirm that your setup is correct.
 
 .. code-block:: bash
 
@@ -164,9 +168,8 @@ address of the master and the services running there.
   Heapster is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/heapster/proxy
   CoreDNS is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 
-In order to view more in depth information about the cluster simply add the dump option to the
-above example. This generates output suitable for debugging and diagnosing cluster problems.
-By default, it redirects everything to stdout.
+In order to view more in depth information run the above command with the **dump** sub-command to
+generate output suitable for debugging and diagnosing cluster problems.
 
 .. code-block:: bash
 
