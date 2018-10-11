@@ -20,6 +20,7 @@ Contents:
    object-storage
    network
    load-balancer
+   containers
    billing
    orchestration
    backups
