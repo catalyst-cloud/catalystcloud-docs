@@ -308,6 +308,8 @@ Once successfully authenticated you will be able to view the cluster console.
 Now that we have a cluster up and running and have confirmed our access lets take a look at
 running :ref:`workloads` on Kubernetes.
 
+.. _cluster_config:
+
 Managing cluster configurations
 ===============================
 

@@ -8,6 +8,7 @@ Table of Contents:
   :maxdepth: 1
 
   containers/overview
+  containers/quickstart
   containers/clusters
   containers/workloads
   containers/services
