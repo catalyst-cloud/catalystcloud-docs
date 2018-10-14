@@ -30,3 +30,26 @@ orchestration. Orchestration can include a number of features, including:
 
 Catalyst Cloud currently only offers ``Kubernetes`` so we will focus on that as our default
 container orchestration engine (COE).
+
+Kubernetes on Catalyst Cloud
+============================
+Catalyst Cloud is now providing a `certified Kubernetes`_ container service which has been
+approved by the Cloud Native Computing Foundation (`CNCF`_).
+
+.. Note::
+
+  The Catalyst Cloud Container Service is currently a **Technical (Alpha) Preview**. As such it is
+  possible that failures will be encountered as we move towards our production ready state.
+
+.. _`CNCF`: www.cncf.io
+.. _`certified Kubernetes`: www.cncf.io/certification/kcsp/
+
+Identifying and Reporting Issues
+--------------------------------
+If you encounter issues while deploying a cluster please raise a ticket via the Support Panel and
+provide the output from the following command to assist our support team in helping you resolve
+your issues.
+
+.. code-block:: dash
+
+  $ openstack coe cluster show <cluster_name>
