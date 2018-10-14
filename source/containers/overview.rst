@@ -50,6 +50,6 @@ If you encounter issues while deploying a cluster please raise a ticket via the 
 provide the output from the following command to assist our support team in helping you resolve
 your issues.
 
-.. code-block:: dash
+.. code-block:: bash
 
   $ openstack coe cluster show <cluster_name>
