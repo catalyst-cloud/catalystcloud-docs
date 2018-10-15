@@ -20,14 +20,14 @@ Contents:
    object-storage
    network
    load-balancer
-   containers
-   billing
    orchestration
+   kubernetes
+   billing
    backups
    management
    best-practices
    tutorials
-   releasenotes
+   release-notes
    contributing
 
 ******************

@@ -4,15 +4,18 @@ Clusters
 
 What is a cluster?
 ==================
-A container cluster is the foundation of the Kubernetes Engine, it consists of at least one
-**master** server and one or more **node** servers. It is made up of a collection of compute,
-networking and storage resources necessary to run any given workloads. Communication between them
-is by way of a shared network. An entire system may be comprised of multiple clusters.
 
-The **master** server is the control plane of the cluster consisting of a collection of services
-responsible for providing the centralised scheduling, logic and management of all aspects of the
-cluster. While it is possible to run a cluster with a single master that hosts all of the required
-services it is more advisable, especially for production environments, to deploy them in a
+A container cluster is the foundation of the Kubernetes Engine, it consists of
+at least one **master** server and one or more **node** servers. It is made up
+of a collection of compute, networking and storage resources necessary to run
+any given workloads. Communication between them is by way of a shared network.
+An entire system may be comprised of multiple clusters.
+
+The **master** server is the control plane of the cluster consisting of a
+collection of services responsible for providing the centralised scheduling,
+logic and management of all aspects of the cluster. While it is possible to run
+a cluster with a single master that hosts all of the required services it is
+more advisable, especially for production environments, to deploy them in a
 multi-master HA configuration.
 
 Some of the key services running on the master are:
@@ -24,13 +27,14 @@ Some of the key services running on the master are:
   the cluster and as such is the only stateful component within the cluster.
 - The ``scheduler``
 
-The machines designated as **nodes**, previously referred to as minions, are responsible for
-accepting and running workloads assigned by the master using appropriate local and external
-resources.
+The machines designated as **nodes**, previously referred to as minions, are
+responsible for accepting and running workloads assigned by the master using
+appropriate local and external resources.
 
 
 The Cluster Template
 ====================
+
 A cluster template is a collection of parameters to describe how a cluster can
 be constructed. Some parameters are relevant to the infrastructure of the
 cluster, while others are for the particular COE.
@@ -42,6 +46,7 @@ use of the pre-defined templates.
 
 Viewing templates
 -----------------
+
 When running openstack command line tools ensure that you have sourced a valid openrc file first.
 For more information on this see :ref:`source-rc-file`
 
@@ -99,8 +104,6 @@ To view the details of a particular template.
   | master_lb_enabled     | False                                |
   | dns_nameserver        | 202.78.240.215                       |
   +-----------------------+--------------------------------------+
-
-
 
 There are some key parameters that are worth mentioning in the above template:
 
