@@ -2,6 +2,9 @@
 Kubernetes
 ##########
 
+Catalyst Kubernetes Service makes it easy for you to deploy, manage, and scale
+Kubernetes clusters to run containerised applications on the Catalyst Cloud.
+
 .. warning::
 
   This service is in Technical Preview (ALPHA) and is not recommended for
@@ -16,16 +19,9 @@ Table of Contents:
   kubernetes/introduction
   kubernetes/clusters
 
-
-********
-Overview
-********
-
-Catalyst Kubernetes Service makes it easy for you to deploy, manage, and scale
-Kubernetes clusters to run containerised applications on the Catalyst Cloud.
-
+******************
 Providing feedback
-------------------
+******************
 
 Our goal with this alpha release is to establish a feedback loop and collaborate
 with early adopters of the technology, to ensure it meets the unique needs of
