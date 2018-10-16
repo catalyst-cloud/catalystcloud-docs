@@ -50,6 +50,11 @@ Viewing templates
 When running openstack command line tools ensure that you have sourced a valid openrc file first.
 For more information on this see :ref:`source-rc-file`
 
+.. Note::
+
+  In order to be able to create a Kubernetes cluster the user needs to ensure that they have been
+  allocated the ``heat_stack_owner`` role.
+
 .. code-block:: bash
 
   $ source keystonerc

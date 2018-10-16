@@ -17,6 +17,11 @@ A cluster template is a blue-print to build a Kubernetes cluster (similar to
 machine images for the compute service). The cluster template specifies what
 version of Kubernetes will be installed and the features that will be enabled.
 
+.. Note::
+
+  In order to be able to create a Kubernetes cluster the user needs to ensure that they have been
+  allocated the ``heat_stack_owner`` role.
+
 The following command will list all cluster templates available:
 
 .. code-block:: bash
