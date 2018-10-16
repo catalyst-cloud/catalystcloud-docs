@@ -202,7 +202,8 @@ The details for getting the latest version of kubectl can be found `here`_.
 .. _`kubectl`: https://kubernetes.io/docs/reference/kubectl/kubectl/
 .. _`here`: https://kubernetes.io/docs/tasks/tools/install-kubectl/#kubectl-install-1
 
-To install on Linux via the command line perform the following steps:
+To install on Linux via the command line as a simple binary, perform the
+following steps:
 
 .. code-block:: bash
 
