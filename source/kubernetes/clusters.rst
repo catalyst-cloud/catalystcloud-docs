@@ -6,12 +6,12 @@ What is a cluster?
 ==================
 
 A container cluster is the foundation of the Kubernetes Engine, it consists of
-at least one **master** server and one or more **node** servers. It is made up
+at least one ``master`` server and one or more ``node`` servers. It is made up
 of a collection of compute, networking and storage resources necessary to run
 any given workloads. Communication between them is by way of a shared network.
 An entire system may be comprised of multiple clusters.
 
-The **master** server is the control plane of the cluster consisting of a
+The ``master`` server is the control plane of the cluster consisting of a
 collection of services responsible for providing the centralised scheduling,
 logic and management of all aspects of the cluster. While it is possible to run
 a cluster with a single master that hosts all of the required services it is
@@ -23,11 +23,11 @@ Some of the key services running on the master are:
 - The interface to the cluster is via the ``API Server``, which provides a RESTful API frontend to
   the control plane.
 - Configuration and state of the cluster is managed by the ``cluster store``. This is based on
-  **etcd**, which is a distributed key-value store, and provides the single source of truth for
+  ``etcd``, which is a distributed key-value store, and provides the single source of truth for
   the cluster and as such is the only stateful component within the cluster.
 - The ``scheduler``
 
-The machines designated as **nodes**, previously referred to as minions, are
+The machines designated as ``nodes``, previously referred to as minions, are
 responsible for accepting and running workloads assigned by the master using
 appropriate local and external resources.
 
@@ -112,20 +112,20 @@ To view the details of a particular template.
 
 There are some key parameters that are worth mentioning in the above template:
 
-* **coe: kubernetes**
+* ``coe: kubernetes``
   Specifies the container orchestration engine, such as kubernetes, swarm and mesos. Currently the
   the only option available on the Catalyst Cloud is Kubernetes.
-* **master_lb_enabled: true**
+* ``master_lb_enabled: true``
   As multiple masters may exist in a cluster, a load balancer is created to provide the API
   endpoint for the cluster and to direct requests to the masters. Where the load balancer service
   is not available, this option can be set to ‘false’ thus creating a cluster without the load
   balancer. In this case, one of the masters will serve as the API endpoint. The default is True.
-* **network_driver: calico**
+* ``network_driver: calico``
   This is the driver used to provide networking services to the containers. This is independent
   from the Neutron networking that the cluster uses. Calico is the Catalyst Cloud recommended
   network driver as it provides secure network connectivity for containers and virtual machine
   workloads.
-* **labels**
+* ``labels``
   These are arbitrary labels (defined by the cluster drivers)  in the form of key=value pairs as a
   way to pass additional parameters to the cluster driver. Currently only
   ``prometheus_monitoring`` is supported and if set to ``true`` the monitoring stack will be set
@@ -135,7 +135,7 @@ There are some key parameters that are worth mentioning in the above template:
 Creating a cluster
 ==================
 
-To create a new cluster we run the **openstack coe cluster create** command, providing the name of
+To create a new cluster we run the ``openstack coe cluster create`` command, providing the name of
 the cluster that we wish to create along with any possible additonal or over-riding parameters
 that are necessary.
 
@@ -211,10 +211,10 @@ The basic format of kubectl commands looks like this:
 
 where command, TYPE, NAME, and flags are:
 
-- **command**: the operation to perform
-- **TYPE**: the resource type to act on
-- **NAME**: the name of the resource in question
-- **flags**: optional flags to provide extra
+- ``command``: the operation to perform
+- ``TYPE``: the resource type to act on
+- ``NAME``: the name of the resource in question
+- ``flags``: optional flags to provide extra
 
 
 Cluster Access Using kubeconfig Files
@@ -229,7 +229,7 @@ Configure native client to access cluster. You can source the output of this
 command to get the native client of the corresponding COE configured to access
 the cluster.
 
-Example: ``eval $(openstack coe cluster config <cluster-name>)``
+For example: ``eval $(openstack coe cluster config <cluster-name>)``
 
 .. code-block:: bash
 
@@ -237,7 +237,7 @@ Example: ``eval $(openstack coe cluster config <cluster-name>)``
 
 This will download the necessary certificates and create a config file within the directory
 that you are running the command from. If you wish to save the configuration to a different
-location you can use the **--dir <directory_name>** parameter to select a different destination.
+location you can use the ``--dir <directory_name>`` parameter to select a different destination.
 
 .. Note::
 
@@ -302,7 +302,7 @@ Once the proxy is ready browse to the following URL:
 
 ``http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy``
 
-You will be prompted with a login screen, select **token** as the type and paste in the
+You will be prompted with a login screen, select ``token`` as the type and paste in the
 authentication token acquired in the step above.
 
 .. image:: _containers_assets/kubernetes_dashboard_login.png
@@ -325,7 +325,7 @@ When working with multiple clusters or a cluster that has been torn down and rec
 necessary to ensure that you have the correct ``cluster context`` loaded in order for kubectl to
 interact with the intended cluster.
 
-In order to see the current configuration and context that **kubectl** is using, run the
+In order to see the current configuration and context that ``kubectl`` is using, run the
 following.
 
 .. code-block:: bash
@@ -355,7 +355,7 @@ following.
   default
 
 This shows us the details of the current configuration file that kubectl is referencing and also
-the specific cluster context within that, in this case *default*. There is also an environment
+the specific cluster context within that, in this case ``default``. There is also an environment
 variable called ``$KUBECONFIG`` that stores the path or paths to the various configurations that
 are available.
 
@@ -387,13 +387,13 @@ like this.
 
 If you are wanting to download the configuration for another cluster then we can use the ``-dir``
 flag and pass in the location for the configuration to be saved. Here we will save our new
-configuration into a directory called *.kube/* under the users home directory.
+configuration into a directory called ``.kube/`` under the users home directory.
 
 .. code-block:: bash
 
   $ eval $(openstack coe cluster config --dir ~/.kube/ k8s-cluster-2)
 
-If we now check the current config we will see that is also says **default**, this is because that
+If we now check the current config we will see that is also says ``default``, this is because that
 is the naming convention used in the creation of the local config.
 
 .. code-block:: bash
@@ -436,7 +436,7 @@ manner.
   $ kubectl config current-context
   test
 
-The final step needed to give us access to both of our clusters is to update the **$KUBECONFIG**
+The final step needed to give us access to both of our clusters is to update the ``$KUBECONFIG``
 environment variable so that it knows about both and allows us to see them in a single view.
 
 .. code-block:: bash
