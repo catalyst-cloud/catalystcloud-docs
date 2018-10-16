@@ -173,8 +173,12 @@ Once the cluster is active access to server nodes in the cluster is via ssh, the
 Enabling container monitoring
 =============================
 
-  --labels prometheus_monitoring=true
+To enable monitoring with Prometheus, pass the following label ``key=value``
+pair when running ``openstack coe cluster create``:
 
+.. code-block:: bash
+
+  --labels prometheus_monitoring=true
 
 .. _kube_cli:
 
