@@ -2,8 +2,9 @@
 Clusters
 ########
 
+******************
 What is a cluster?
-==================
+******************
 
 A container cluster is the foundation of the Kubernetes Engine, it consists of
 at least one ``master`` server and one or more ``node`` servers. It is made up
@@ -31,9 +32,9 @@ The machines designated as ``nodes``, previously referred to as minions, are
 responsible for accepting and running workloads assigned by the master using
 appropriate local and external resources.
 
-
-The Cluster Template
-====================
+********************
+The cluster template
+********************
 
 A cluster template is a collection of parameters to describe how a cluster can
 be constructed. Some parameters are relevant to the infrastructure of the
@@ -45,7 +46,7 @@ use of the pre-defined templates.
 
 
 Viewing templates
------------------
+=================
 
 When running openstack command line tools ensure that you have sourced a valid openrc file first.
 For more information on this see :ref:`source-rc-file`
@@ -132,8 +133,9 @@ There are some key parameters that are worth mentioning in the above template:
   up and Node Exporter will automatically be picked up and launched as a regular Kubernetes POD.
   By default this is False.
 
+******************
 Creating a cluster
-==================
+******************
 
 To create a new cluster we run the ``openstack coe cluster create`` command, providing the name of
 the cluster that we wish to create along with any possible additonal or over-riding parameters
@@ -169,18 +171,19 @@ Once the cluster is active access to server nodes in the cluster is via ssh, the
   using it have been terminated.
 
 Enabling container monitoring
------------------------------
+=============================
 
   --labels prometheus_monitoring=true
 
 
 .. _kube_cli:
 
+*************************
 Setting up Kubernetes CLI
-=========================
+*************************
 
 Getting kubectl
----------------
+===============
 
 To deploy and manage applications on kubernetes use the Kubernetes command-line tool, `kubectl`_.
 With this tool you can inspect cluster resources; create, delete, and update components; and look
@@ -218,13 +221,15 @@ where command, TYPE, NAME, and flags are:
 
 
 Cluster Access Using kubeconfig Files
--------------------------------------
+=====================================
+
 The kubectl command-line tool uses kubeconfig files to find the information it needs
 to choose a cluster and communicate with the API server of a cluster. These files to provide
 information about clusters, users, namespaces, and authentication mechanisms.
 
 Getting the cluster config
---------------------------
+==========================
+
 Configure native client to access cluster. You can source the output of this
 command to get the native client of the corresponding COE configured to access
 the cluster.
@@ -246,7 +251,8 @@ location you can use the ``--dir <directory_name>`` parameter to select a differ
   following section will outline this in more detail.
 
 Viewing the cluster
--------------------
+===================
+
 It is possible to view details of the cluster with the following command. This will return the
 address of the master and the services running there.
 
@@ -266,7 +272,8 @@ By default, it redirects everything to stdout.
   $ kubectl cluster-info dump
 
 Accessing the Kubernetes Dashboard
-----------------------------------
+==================================
+
 By default Kubernetes provides a web based dashboard that exposes the details of a given cluster.
 In order to access this it is first necessary to to retrieve the admin token for the cluster you
 wish to examine.
@@ -318,8 +325,9 @@ workloads in your Kubernetes cluster.
 
 .. _cluster_config:
 
+*******************************
 Managing cluster configurations
-===============================
+*******************************
 
 When working with multiple clusters or a cluster that has been torn down and recreated it is
 necessary to ensure that you have the correct ``cluster context`` loaded in order for kubectl to
