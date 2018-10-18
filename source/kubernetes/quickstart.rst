@@ -5,7 +5,6 @@ Quick start
 This quick start guide assumes you have working knowledge of Catalyst Cloud
 :ref:`command-line-interface` and familiarity with Kubernetes.
 
-
 ******************************
 Deploying a Kubernetes cluster
 ******************************
@@ -19,8 +18,8 @@ version of Kubernetes will be installed and the features that will be enabled.
 
 .. Note::
 
-  In order to be able to create a Kubernetes cluster the user needs to ensure that they have been
-  allocated the ``heat_stack_owner`` role.
+  In order to be able to create a Kubernetes cluster the user needs to ensure
+  that they have been allocated the ``heat_stack_owner`` role.
 
 The following command will list all cluster templates available:
 
@@ -199,10 +198,11 @@ browser to connect to the Kubernetes dashboard.
   Starting to serve on 127.0.0.1:8001
 
 Once the proxy is ready, open following URL on your browser:
-http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
+
+``http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy``
 
 You will be presented with a login screen, as illustrated below. Select
-**Token** as the authentication type and paste in the authentication token
+``Token`` as the authentication type and paste in the authentication token
 acquired in the previous step.
 
 .. image:: _containers_assets/kubernetes_dashboard_login.png
