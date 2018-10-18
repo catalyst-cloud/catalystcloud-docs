@@ -19,7 +19,7 @@ the data is not cached.
 Data stored on the ``b1.standard`` storage tier is replicated on three
 different storage nodes on the same region.
 
-Each ``b1.standard`` volume is limited to 1000 IOPS. You can stripe multiple
+Each ``b1.standard`` volume is limited to 500 IOPS. You can stripe multiple
 volumes together (using RAID 0) to achieve higher IOPS.
 
 Additional storage tiers
