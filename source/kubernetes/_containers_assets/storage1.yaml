@@ -1,0 +1,18 @@
+# storage1.yaml
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cinder-standard
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+    kubernetes.io/description: "Use OpenStack Cinder as default storage backend"
+  labels:
+    kubernetes.io/cluster-service: "true"
+    addonmanager.kubernetes.io/mode: EnsureExists
+provisioner: kubernetes.io/cinder
+reclaimPolicy: Delete
+parameters:
+  type: b1.standard
+  availability: nz-hlz-la
+  fstype: ext4

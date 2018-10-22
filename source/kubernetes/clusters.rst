@@ -173,16 +173,6 @@ provided in the cluster template.
   Once a cluster template is in use it cannot be updated or deleted until all of
   the clusters using it have been terminated.
 
-Enabling container monitoring
-=============================
-
-To enable monitoring with Prometheus, pass the following label ``key=value``
-pair when running ``openstack coe cluster create``:
-
-.. code-block:: bash
-
-  --labels prometheus_monitoring=true
-
 .. _kube_cli:
 
 *************************

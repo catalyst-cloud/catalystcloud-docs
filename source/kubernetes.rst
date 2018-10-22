@@ -18,6 +18,7 @@ Table of Contents:
   kubernetes/quickstart
   kubernetes/introduction
   kubernetes/clusters
+  kubernetes/storage
 
 ******************
 Providing feedback
