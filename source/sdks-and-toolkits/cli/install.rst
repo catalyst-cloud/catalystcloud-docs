@@ -22,8 +22,27 @@ Run the following command to install the Catalyst Cloud CLI:
 
   bash <(wget -qO - https://raw.githubusercontent.com/catalyst-cloud/openstackclient-container/master/fetch-installer.sh) -a ccloud -u https://api.cloud.catalyst.net.nz:5000/v3
 
+
+.. Note::
+
+  If you are intending to use the containerised tools you will need to obtain
+  the non MFA enabled openrc file for authentication.
+
+To get a copy of the non MFA enabled openrc file, select the dropdown in the
+upper right corner of the dash board and click on ``OpenStack RC File v3``.
+Select ``Save As`` when prompted to select the location on your machine to
+save this file to.
+
+.. image:: ../../_static/openrc-no-mfa.png
+   :align: center
+
+If you need more information on using the file see :ref:`source-rc-file`.
+
 .. _instructions on how to install and configure Docker here: https://docs.docker.com/install/
 .. _CLI docker container: https://github.com/catalyst-cloud/openstackclient-container
+
+
+
 
 
 *******************
