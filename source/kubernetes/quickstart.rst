@@ -213,3 +213,123 @@ dashboard, as illustrated below.
 
 .. image:: _containers_assets/kubernetes_dashboard1.png
    :align: center
+
+
+**********************************************
+Creating a simple deployment with loadbalancer
+**********************************************
+
+It is possible to have a loadbalancer created on your behalf by Kubernetes
+through the underlying Catalyst Cloud infrastructure services.
+
+For this example we are going to deploy a container running a simple flask app
+that will respond with a basic 'Hello World' message that includes the host
+name and IP of the node responding to the request. This will sit behind a
+loadbalancer that will be publicly available on the internet via a floating ip
+and will serve requests to the application servers using the ``round robin``
+algorithm.
+
+The container image in question **chelios/helloworld version_1.1** runs the
+following application
+
+.. literalinclude:: _containers_assets/app.py
+
+Creating the application deployment
+===================================
+
+First we need to create a manifest like this.
+
+.. literalinclude:: _containers_assets/helloworld-deployment_1.yaml
+
+This provides the following parameters for a deployment:
+
+* number of ``replicas`` - 3
+* deployment ``image`` - chelios/helloworld version_1.1.
+* pod ``labels``, to identify the app to the service - app: helloworld
+* ``containerPort`` to expose the application on - 5000
+
+  - This port also uses a name, in this case **helloworld-port**, which
+    allows us to refer to it by name rather than value in the service.
+
+To deploy the application run the following command.
+
+.. code-block:: bash
+
+  $ kubectl create -f helloworld-deployment_1.yaml
+  deployment.apps/helloworld-deployment created
+
+Check the state of the pods to confirm that they have all been deployed
+correctly.
+
+.. code-block:: bash
+
+  $ kubectl get pods
+  NAME                                     READY   STATUS              RESTARTS   AGE
+  helloworld-deployment-5bdfcbb467-648bd   1/1     Running             0          43s
+  helloworld-deployment-5bdfcbb467-wlb6n   0/1     ContainerCreating   0          43s
+  helloworld-deployment-5bdfcbb467-zrlvl   1/1     Running             0          43s
+
+Creating the loadbalancer service
+=================================
+
+The deployment itself however does not provide a means for us to expose the
+application outside of the cluster. In order to do this we need to
+create a service to act as a go between.
+
+The manifest for our service definition will look like this.
+
+.. literalinclude:: _containers_assets/helloworld-service.yaml
+
+The parameters of interest here are:
+
+- the ``selector`` which links the service to the app using the label
+  **helloworld**.
+- The ``port`` that it exposes externally - 80.
+- The ``targetPort`` on the pods to link back to, in this case the named port,
+  **helloworld-port** that we created on the deployment.
+
+To create the service run the following command.
+
+.. code-block:: bash
+
+  kubectl create -f helloworld-service.yaml
+  service/helloworld-service created
+
+The final step is to check on the state of the service and wait until the
+loadbalancer is active and the ``LoadBalancer Ingress`` field has received a
+publicly accessible flaoting IP address.
+
+.. code-block:: bash
+
+  kubectl describe svc helloworld-service
+  Name:                     helloworld-service
+  Namespace:                default
+  Labels:                   <none>
+  Annotations:              <none>
+  Selector:                 app=helloworld
+  Type:                     LoadBalancer
+  IP:                       10.254.241.125
+  LoadBalancer Ingress:     202.49.241.67
+  Port:                     <unset>  80/TCP
+  TargetPort:               helloworld-port/TCP
+  NodePort:                 <unset>  32548/TCP
+  Endpoints:                192.168.209.128:5000,192.168.209.129:5000,192.168.43.65:5000
+  Session Affinity:         None
+  External Traffic Policy:  Cluster
+  Events:
+    Type     Reason                      Age                From                Message
+    ----     ------                      ----               ----                -------
+    Normal   EnsuringLoadBalancer        10m (x2 over 12m)  service-controller  Ensuring load balancer
+    Normal   EnsuringLoadBalancer        60s                service-controller  Ensuring load balancer
+
+Once your service is in this state you should be able to browse to the IP
+address assign to the LoadBalancer Ingress field and see a simple text output
+similar to the following.
+
+.. code-block:: bash
+
+  Hello World! From Server : helloworld-deployment-5bdfcbb467-c7rln @ 192.168.209.129
+
+If you refresh the browser you should also see the response update to reflect
+different host responses as the loadbalancer attempts to round robin the
+requests.
