@@ -19,6 +19,7 @@ Table of Contents:
   kubernetes/introduction
   kubernetes/clusters
   kubernetes/storage
+  kubernetes/tech_preview_issues
 
 ******************
 Providing feedback
