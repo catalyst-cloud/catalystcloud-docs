@@ -1,7 +1,7 @@
 build/
+_build/
 venv/
-.idea/
 .build-tools.cson
-docs_wip
+docs-wip-notes.rst
 .DS_Store
 docs-wip-notes.rst
