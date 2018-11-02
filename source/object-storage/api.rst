@@ -7,17 +7,10 @@ Object storage with the APIs
 Using the OpenStack API
 ***********************
 
-The standard means of interacting with object storage is using the Python
-OpenStack SDK, however, you can also use the Swift Python SDK. Note that
-OpenStack's object storage service is often referred to it's code-name: Swift,
-hence the Swift SDK. We recommend the OpenStack Python SDK over the Swift python
-SDK.
+The features supported by the object storage API can be found on the `OpenStack
+documentation <http://developer.openstack.org/api-ref/object-storage/>`_
 
-.. seealso::
-
-  The features supported by the object storage API can be found on the
-  `OpenStack documentation
-  <http://developer.openstack.org/api-ref/object-storage/>`_
+.. _object-store-endpoints:
 
 API endpoints
 =============
@@ -38,12 +31,21 @@ API endpoints
 |          | 2       | https://api.nz-hlz-1.catalystcloud.io:5000/v2.0                          |
 +----------+---------+--------------------------------------------------------------------------+
 
+OpenStack Python SDK example
+============================
+
+The standard means of interacting with object storage is using the Python
+OpenStack SDK, however, you can also use the Swift Python SDK. Note that
+OpenStack's object storage service is often referred to it's code-name: Swift,
+hence the Swift SDK. We recommend the OpenStack Python SDK over the Swift python
+SDK.
+
+
 Requirements
-============
+------------
 
 You need valid OpenStack credentials to interact with the OpenStack API. These
-can be obtained from the RC file (under Access & Security, API Access, or using
-the command line tools).
+can be obtained from the :ref:`rc file <source-rc-file>`.
 
 The standard client library is the OpenStack python SDK. This can be installed
 into your current Python environment. The example below illustrates how:
@@ -61,7 +63,7 @@ into your current Python environment. The example below illustrates how:
   pip install openstacksdk
 
 Sample code
-===========
+-----------
 
 The code below demonstrates how you can use the OpenStack python SDK to interact
 with object storage.
@@ -80,13 +82,9 @@ Using the S3 API
 ****************
 
 The object storage service also has an Amazon S3 emulation layer that supports
-common S3 calls and operations.
-
-.. seealso::
-
-  Swift3 middleware emulates the S3 REST API on top of OpenStack. It is
-  documented fully `here
-  <http://docs.openstack.org/mitaka/config-reference/object-storage/configure-s3.html>`_.
+common S3 calls and operations. Swift3 middleware emulates the S3 REST API on
+top of OpenStack. It is documented fully `here
+<http://docs.openstack.org/mitaka/config-reference/object-storage/configure-s3.html>`_.
 
 API endpoints
 =============
@@ -101,8 +99,11 @@ API endpoints
 | nz-hlz-1 | https://object-storage.nz-hlz-1.catalystcloud.io:443 |
 +----------+------------------------------------------------------+
 
+Boto library example
+====================
+
 Requirements
-============
+------------
 
 You need valid EC2 credentials in order to interact with the S3 compatible API.
 You can obtain your EC2 credentials from the dashboard (under Access & Security,
@@ -129,7 +130,7 @@ on a virtual environment:
   pip install boto
 
 Sample code
-===========
+-----------
 
 The code below demonstrates how you can use boto to interact with the S3
 compatible API.

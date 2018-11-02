@@ -2,7 +2,7 @@
 import os
 import openstack
 
-# Connect to openstack using enviroment variables
+# Connect to openstack using auth data in enviroment variables
 connection = openstack.connect()
 
 # Create a new container

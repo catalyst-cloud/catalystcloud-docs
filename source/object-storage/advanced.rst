@@ -10,7 +10,8 @@ It is possible to host simple websites that contain only static content from
 within a container.
 
 To demonstrate this, we'll be using the `Python OpenStack SDK
-<https://docs.openstack.org/openstacksdk/latest/index.html>`_.
+<https://docs.openstack.org/openstacksdk/latest/index.html>`_, and a
+:download:`short python 3 script <assets/static-site-container-example.py>`.
 
 First, insure you've :ref:`sourced an RC file <source-rc-file>`. Create a
 container:
@@ -57,7 +58,8 @@ This provides a means by which multiple versions of your content can be stored
 allowing for recovery from unintended overwrites.
 
 To demonstrate this, we'll be using the `Python OpenStack SDK
-<https://docs.openstack.org/openstacksdk/latest/index.html>`_.
+<https://docs.openstack.org/openstacksdk/latest/index.html>`_, and a
+:download:`short python 3 script <assets/versioning-container-example.py>`.
 
 First, insure you've :ref:`sourced an RC file <source-rc-file>`. We'll create a
 main container, and a container that will act as our archive.
