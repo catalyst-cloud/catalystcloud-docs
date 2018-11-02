@@ -173,59 +173,74 @@ compatible API.
           created = bucket.creation_date,
       )
 
-==========
+**********
 Using cURL
-==========
+**********
 
-To access object storage using cURL it will be necessary to provide credentials
-to authenticate the request.
+To access object storage using cURL, or tools like cURL, it will be necessary to
+provide credentials to authenticate the request. Specifically, we'll need an
+object store endpoint and a token.
 
-This can be done by sourcing a valid RC file ( see
-:ref:`access-and-whitelist` ), retrieving the account specific detail via the
-Swift command line tools, then exporting the required variables as shown below.
+Among several methods, we can do this with the :ref:`OpenStack CLI
+<command-line-interface>`.
 
-.. code-block:: bash
-
-    $ source openstack-openrc.sh
-
-    $ swift stat -v
-     StorageURL: https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda
-                      Auth Token: 5f5a043e1bd24a8fa84b8785cca8e0fc
-                      Containers: 48
-                         Account: AUTH_0ef8ecaa78684c399d1d514b61698fda
-                         Objects: 156
-                           Bytes: 11293750551
- Containers in policy "policy-0": 48
-    Objects in policy "policy-0": 156
-      Bytes in policy "policy-0": 11293750551
-     X-Account-Project-Domain-Id: default
-                          Server: nginx/1.8.1
-                     X-Timestamp: 1466047859.45584
-                      X-Trans-Id: tx4bdb5d859f8c47f18b44d-00578c0e63
-                    Content-Type: text/plain; charset=utf-8
-                   Accept-Ranges: bytes
-
-    $ export storageURL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda"
-    $ export token="5f5a043e1bd24a8fa84b8785cca8e0fc"
-
-Then run the following command to get a list of all available containers for
-that tenant:
+Remember the API endpoints :ref:`earlier in the page? <object-store-endpoints>`
+We can use the OpenStack CLI to get the `AUTH_%tenantid%` part of the endpoint:
 
 .. code-block:: bash
 
-    curl -i -X GET -H "X-Auth-Token: $token" $storageURL
+  $ openstack object store account show
+
+  +------------+---------------------------------------+
+  | Field      | Value                                 |
+  +------------+---------------------------------------+
+  | Account    | AUTH_8cbc3296ASDsad90aDSn90asD89085SA |
+  | Bytes      | 14002294                              |
+  | Containers | 5                                     |
+  | Objects    | 17                                    |
+  +------------+---------------------------------------+
+
+We can also use the OpenStack CLI to fetch a new token:
+
+.. code-block:: bash
+
+  $ openstack token issue
+
+  +------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | Field      | Value                                                                                                                                                                                   |
+  +------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | expires    | 2018-11-02T15:13:58+0000                                                                                                                                                                |
+  | id         | gAAAAABb26TW-gWcM_tV7pdfhcR-SFIWA9hjkP4SDkUiQeboX8hD7rdUwG69jtqiNZxDzlqmCesAQys-kTy8ekWit7DVumgJ2X-xOaGkR2bCX3dHWH9aT63jOze_cgd5fFFl90OE_izG1Tzw8v6SvOn65yO_sfcLH7O3thjrUwfazMxRRR_ebLY |
+  | project_id | 8ccc3286887e49cb9a40f023eba693b4                                                                                                                                                        |
+  | user_id    | cc46fc021fe044c9b7bf2f9295a85019                                                                                                                                                        |
+  +------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+By assigning the url and token to environment variables, we can use them more
+easily in cURL commands:
+
+.. code-block:: bash
+
+  $ export storageURL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_8cbc3296ASDsad90aDSn90asD89085SA"
+  $ export token="gAAAAABb26TW-gWcM_tV7pdfhcR-SFIWA9hjkP4SDkUiQeboX8hD7rdUwG69jtqiNZxDzlqmCesAQys-kTy8ekWit7DVumgJ2X-xOaGkR2bCX3dHWH9aT63jOze_cgd5fFFl90OE_izG1Tzw8v6SvOn65yO_sfcLH7O3thjrUwfazMxRRR_ebLY"
+
+With these environment variables, we can now run the following command to get a
+list of all available containers for that tenant:
+
+.. code-block:: bash
+
+  curl -i -X GET -H "X-Auth-Token: $token" $storageURL
 
 You can optionally specify alternative output formats; for example to use XML
 or JSON using the following syntax:
 
 .. code-block:: bash
 
-    curl -i -X GET -H "X-Auth-Token: $token" $storageURL?format=xml
-    curl -i -X GET -H "X-Auth-Token: $token" $storageURL?format=json
+  curl -i -X GET -H "X-Auth-Token: $token" $storageURL?format=xml
+  curl -i -X GET -H "X-Auth-Token: $token" $storageURL?format=json
 
 To view the objects within a container, simply append the container name to
 the cURL request:
 
 .. code-block:: bash
 
-    curl -i -X GET -H "X-Auth-Token: $token" $storageURL/mycontainer
+  curl -i -X GET -H "X-Auth-Token: $token" $storageURL/mycontainer
