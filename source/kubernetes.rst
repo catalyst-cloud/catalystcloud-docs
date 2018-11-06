@@ -138,3 +138,23 @@ Workaround
 ----------
 
 There is currently an interim workaround in place to address the issue.
+
+
+Cluster takes a long time to deploy
+===================================
+
+Description
+-----------
+
+Currently the time taken to deploy a cluster from commandline or dashbard is
+in the vicinity of 15-25 minutes.
+
+Status
+------
+
+The cause of the problem is known and a fix is being investigated.
+
+Workaround
+----------
+
+None.
