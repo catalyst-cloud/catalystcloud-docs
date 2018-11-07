@@ -131,54 +131,114 @@ As you can see, the contents of the archive container has not changed:
 Temporary URL
 *************
 
-https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html
+A temporary URL gives users temporary access to objects.
 
-A temporary URL gives users temporary access to objects. For example, a website
-might want to provide a link to download a large object in Object Storage, but
-the Object Storage account has no public access. The website can generate a URL
-that provides time-limited GET access to the object. When the web browser user
-clicks on the link, the browser downloads the object directly from Object
-Storage, eliminating the need for the website to act as a proxy for the request.
+For example, a website might want to provide a link to download an object in
+Object Storage, but the Object Storage bucket it's in has no public access. To
+resolve this issue, the website can generate a URL that provides time-limited
+GET access to the object. When the web browser user clicks on the link, the
+browser downloads the object directly from Object Storage, eliminating the need
+for the website to act as a proxy for the request.
 
 Furthermore, a temporary URL can be prefix-based. These URLs contain a signature
 which is valid for all objects which share a common prefix. They are useful for
 sharing a set of objects.
 
+Further information can be found on the `temporary url middleware documentation
+<https://docs.openstack.org/swift/latest/api/temporary_url_middleware.html>`_.
 
 
+.. This is a means by which a temporary URL can be generated, to allow
+.. unauthenticated access to the Swift object at the given path. The
+.. access is via the given HTTP method (e.g. GET, PUT) and is valid
+.. for the number of seconds specified when the URL is created.
+..
+.. The expiry time can be expressed as valid for the given number of seconds from
+.. now or if the optional --absolute argument is provided, seconds is instead
+.. interpreted as a Unix timestamp at which the URL should expire.
+..
+.. The syntax for the tempurl creation command is:
+..
+.. **swift tempurl [command-option] method seconds path key**
+..
+.. This generates a temporary URL allowing unauthenticated access to the Swift
+.. object at the given path, using the given HTTP method, for the given number of
+.. seconds, using the given TempURL key. If the optional --absolute argument is
+.. provided, seconds is instead interpreted as a Unix timestamp at which the URL
+.. should expire.
+..
+.. **Example:**
+..
+.. .. code-block:: bash
+..
+..   swift tempurl GET $(date -d "Jan 1 2017" +%s) /v1/AUTH_foo/bar_container/quux.md my_secret_tempurl_key --absolute
+..
+.. - sets the expiry using the absolute method to be Jan 1 2017
+.. - for the object : quux.md
+.. - in the nested container structure : bar_container/quux.md
+.. - with key : my_secret_tempurl_key
 
-This is a means by which a temporary URL can be generated, to allow
-unauthenticated access to the Swift object at the given path. The
-access is via the given HTTP method (e.g. GET, PUT) and is valid
-for the number of seconds specified when the URL is created.
 
-The expiry time can be expressed as valid for the given number of seconds from
-now or if the optional --absolute argument is provided, seconds is instead
-interpreted as a Unix timestamp at which the URL should expire.
+Temporary URLs using Python
+===========================
 
-The syntax for the tempurl creation command is:
+This will be a simple demonstration of one way to implement temporary urls,
+using the `Python OpenStack SDK
+<https://docs.openstack.org/openstacksdk/latest/index.html>`_, the :ref:`CLI
+<command-line-interface>`, and a :download:`short python 3 script
+<assets/temporary-url-example.py>`.
 
-**swift tempurl [command-option] method seconds path key**
+In order to create a temporary url, we need to choose:
 
-This generates a temporary URL allowing unauthenticated access to the Swift
-object at the given path, using the given HTTP method, for the given number of
-seconds, using the given TempURL key. If the optional --absolute argument is
-provided, seconds is instead interpreted as a Unix timestamp at which the URL
-should expire.
+- an object path (or prefix);
+- an expiry time for the temporary url;
+- the allowed http method;
+- and a secret key.
 
-**Example:**
+We will then compute a cryptographic signature (HMAC-SHA1) that we can send to
+an untrusted client (IE: the user), which will allow temporary access to the
+object.
+
+First, let's create our secret key using the CLI.
 
 .. code-block:: bash
 
-  swift tempurl GET $(date -d "Jan 1 2017" +%s) /v1/AUTH_foo/bar_container/quux.md my_secret_tempurl_key --absolute
+   $ openstack object store account set --property Temp-Url-Key='my-super-secret-key'
 
-- sets the expiry using the absolute method to be Jan 1 2017
-- for the object : quux.md
-- in the nested container structure : bar_container/quux.md
-- with key : my_secret_tempurl_key
+Now, let's assume we have an object called `secrets.txt`, in a bucket called
+`private_bucket`.
 
-Creating Temporary URLs in the Catalyst Cloud
-=============================================
+We want to give a user access to download this object for 600 seconds.
+
+First, let's define the method, duration, path to the object, and the key:
+
+.. literalinclude:: assets/temporary-url-example.py 
+   :language: python
+   :lines: 27-42
+
+Using this, we can construct the body of the HMAC signature: 
+
+.. literalinclude:: assets/temporary-url-example.py
+   :language: python
+   :lines: 44-45
+
+Using the body and key value, we can generate the signature:
+
+.. literalinclude:: assets/temporary-url-example.py
+   :language: python
+   :lines: 47-48
+
+Using the HMAC signature, and the expiry time in a request, we can ``GET``
+the object, just like an object in a public bucket:
+
+
+|
+|
+|
+
+
+
+
 
 At the time of writing, the only method currently available for the creation
 of temporary URLs is using the command line tools.
