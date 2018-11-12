@@ -15,7 +15,6 @@ Contents:
    tutorials/region-failover-using-the-fastly-cdn
    tutorials/using-an-openstack-vagrant-provider-on-the-catalyst-cloud
    tutorials/using-docker-machine-on-the-catalyst-cloud
-   tutorials/kubernetes-cluster-on-the-catalyst-cloud
    tutorials/ansible-openstack-dynamic-inventory
    tutorials/bootstrapping-puppet
    tutorials/cloud-socks-proxy-over-ssh
@@ -25,7 +24,6 @@ Contents:
    tutorials/deploying-a-turnkey-image
    tutorials/creating-an-instance-with-interfaces-on-different-networks-with-heat
    tutorials/docker-getting-started-with-swarm-mode-tutorial-on-the-catalyst-cloud
-   tutorials/kubernetes-getting-started-kubeadm-guide-on-the-catalyst-cloud
    tutorials/terraform-lifecycle-to-prevent-resource-re-creation
    tutorials/using-python-virtual-environments
    tutorials/deploying-rocketchat-on-catalyst-cloud

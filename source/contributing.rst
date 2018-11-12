@@ -66,46 +66,51 @@ Headings
 
 Use the following symbols to create headings:
 
-#. ``#`` with overline
-#. ``*`` with overline
-#. ``=``
-#. ``-``
-#. ``^``
-#. ``"``
+#. H1: ``#`` with overline
+#. H2: ``*`` with overline
+#. H3: ``=``
+#. H4: ``-``
+#. H5: ``^``
+#. H6: ``"``
 
 As an example:
 
 .. code-block:: rst
 
-  ##################
-  H1: document title
-  ##################
+  ##############
+  Document title
+  ##############
 
-  Introduction text.
-
-
-  *********
-  Sample H2
-  *********
-
-  Sample content.
+  Introduction text. Note the empty line after the heading.
 
 
-  **********
-  Another H2
-  **********
+  ***********
+  Heading two
+  ***********
 
-  Sample H3
-  =========
+  Sample content. Note two empty lines before a heading two.
 
-  Sample H4
-  ---------
 
-  Sample H5
-  ^^^^^^^^^
+  *******************
+  Another heading two
+  *******************
 
-  Sample H6
-  """""""""
+  Note how headings only have the first letter capitalised.
+
+  Sample heading three
+  ====================
+
+  Note how from heading three onward we only have one empty line between
+  headings.
+
+  Sample heading four
+  -------------------
+
+  Sample heading five
+  ^^^^^^^^^^^^^^^^^^^
+
+  Sample heading six
+  """"""""""""""""""
 
   And some text.
 

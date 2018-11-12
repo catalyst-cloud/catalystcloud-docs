@@ -20,9 +20,9 @@ Compute service
 
 The compute service provides compute power on demand, in the form of
 "instances". If you like to think about physical computers, you can imagine an
-instance as one or more CPUs and GB of RAM that you have rented the right to
-use. Instances come in many sizes, as you can see on the Catalyst Cloud's
-`compute page`_.
+instance as one or more CPUs and GB of RAM that you have provisioned usage of.
+Instances come in many sizes, as you can see on the Catalyst Cloud's `compute
+page`_.
 
 .. _`compute page`: https://catalystcloud.nz/services/iaas/compute/#prices
 
@@ -179,7 +179,7 @@ Now that we've discussed what services are available on the Catalyst Cloud, we
 can discuss how to use them.
 
 
-:ref:`Next page <access_to_catalyst_cloud>`
+:ref:`Previous page <introduction-to-catalyst-cloud>` - :ref:`Next page <access_to_catalyst_cloud>`
 
 ..
   This next page link is a temporary solution. Eventually, I will add a next

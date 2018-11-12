@@ -1,0 +1,20 @@
+# pvc-example1.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cinder
+spec:
+  volumes:
+    - name: cinder-storage
+       persistentVolumeClaim:
+       claimName: cinder-pvc
+  containers:
+    - name: cinder-storage-container
+      image: lingxiankong/alpine-test
+      ports:
+        - containerPort: 8080
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/data"
+          name: cinder-storage
