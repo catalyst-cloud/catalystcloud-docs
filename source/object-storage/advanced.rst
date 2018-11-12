@@ -214,23 +214,45 @@ First, let's define the method, duration, path to the object, and the key:
 
 .. literalinclude:: assets/temporary-url-example.py 
    :language: python
-   :lines: 27-42
+   :lines: 28-43
 
 Using this, we can construct the body of the HMAC signature: 
 
 .. literalinclude:: assets/temporary-url-example.py
    :language: python
-   :lines: 44-45
+   :lines: 45-46
 
 Using the body and key value, we can generate the signature:
 
 .. literalinclude:: assets/temporary-url-example.py
    :language: python
-   :lines: 47-48
+   :lines: 48-53
 
-Using the HMAC signature, and the expiry time in a request, we can ``GET``
-the object, just like an object in a public bucket:
+Using the HMAC signature, and the expiry time in a request, we can ``GET`` the
+object, just like an object in a public bucket:
 
+.. literalinclude:: assets/temporary-url-example.py
+   :language: python
+   :lines: 56-61
+
+.. code:: bash
+
+   $ python3 temporary-url-example.py
+   
+   Request: https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_52213f2d28354f499d85ec4722164456/private_bucket/secrets.txt?temp_url_sig=91ac7091ef7b6bc5662829ea2c8a0bc0ca170e27&temp_url_expires=1542064628
+
+   Response: Hello world! This is the contents of my very secret file!
+
+
+To verify that this is a private bucket that cannot be accessed without our
+temporary signature, lets see what happens if we try to access it without the
+signatue:
+
+.. code:: bash
+   
+   Request: https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_52213f2d28354f499d85ec4722164456/private_bucket/secrets.txt
+
+   Response: <html><h1>Unauthorized</h1><p>This server could not verify that you are authorized to access the document you requested.</p></html>
 
 |
 |

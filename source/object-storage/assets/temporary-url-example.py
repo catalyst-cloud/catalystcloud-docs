@@ -43,16 +43,32 @@ full_path = '/'.join([base_path, container_name, file_name])
 private_key_value = "my-super-secret-key"
 
 # Create body of HMAC signature, seperated by newline characters
-hmac_body = '\n'.join([method, expiry_time, full_path])
+hmac_body = '{}\n{}\n{}'.format(method, expiry_time, full_path)
 
 # Generate signature
-signature = hmac.new(str.encode(private_key_value), str.encode(hmac_body), hashlib.sha1).hexdigest()
+signature = hmac.new(
+        str.encode(private_key_value),
+        str.encode(hmac_body), 
+        hashlib.sha1
+    ).hexdigest()
+
 
 # Request object from bucket
-r = requests.get('/'.join([base_url, container_name, file_name]),
+r_temp = requests.get('/'.join([base_url, container_name, file_name]),
     params={
         'temp_url_sig': signature,
         'temp_url_expires': expiry_time
         })
 
-print(r.text)
+r_no_temp = requests.get('/'.join([base_url, container_name, file_name]))
+
+
+reponse_print_template = """
+Request: {}
+
+{}
+"""
+
+print(reponse_print_template.format(r_temp.url, r_temp.text)) 
+
+print(reponse_print_template.format(r_no_temp.url, r_no_temp.text)) 
