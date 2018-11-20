@@ -133,12 +133,18 @@ this occurs.
 Status
 ------
 
-The cause of the problem has been identified and a fix is being investigated.
+This is a known Kubernetes issue that is due to some incompatibility between
+overlay2 and docker_volume_size. A fix is being investigated.
 
 Workaround
 ----------
 
 There is currently an interim workaround in place to address the issue.
+
+.. Note::
+
+  Using ``--docker-volume-size`` for the cluster creation, either from the
+  dashboard or the cli, will cause the this error state to occur.
 
 
 Cluster takes a long time to deploy
