@@ -197,8 +197,8 @@ options during boot time, such as the hostname, locale and timezone.
    mode: reboot
    message: Rebooting to apply new settings
 
-  # Log all cloud-init process output (info & errors) to a logfile
-  output: {all: ">> /var/log/cloud-init-output.log"}
+  # Save a copy of cloud-init's process output (info & errors) to a logfile
+  output: {all: '| tee -a /var/log/cloud-init-output.log'}
 
 Script format
 =============
