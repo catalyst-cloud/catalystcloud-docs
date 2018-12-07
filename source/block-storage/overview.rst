@@ -69,20 +69,11 @@ It is designed for development, test and ephemeral workloads
 The performance tier
 ====================
 
-The ``performance`` tier makes sole use of direct SSD drive access for both
-read and write operations.
+The ``performance`` tier makes sole use of direct NVME SSD drive access for both
+read and write operations. This tier offers three options for IO throughput,
+which provide a burstable limit of 1000, 2500 and 5000 IOPS.
 
-
-
-
-Additional storage tiers
-========================
-
-Catalyst is prepared to introduce additional storage tiers and is currently
-waiting for demand from customers to introduce a faster tier backed purely by
-SSDs. If you are interested and would like to see this available as soon as
-possible, please contact your account manager.
-
+All options in this tier provide 3 replicas in a single region.
 
 .. list-table::
    :widths: 20 20 10 16 11
@@ -112,6 +103,13 @@ possible, please contact your account manager.
 [1] Please note that the IOPS described on the table above are not guaranteed
 or provisioned IOPS, but rather the burst limit (ceiling) that each volume can
 reach from time to time.
+
+Migrating data between tiers
+============================
+
+If you are interested in moving data from a volume in the standard tier to an
+NVME volume please checkout :ref:`migrating-volumes`
+
 
 **************
 Best practices
