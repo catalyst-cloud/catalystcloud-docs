@@ -111,6 +111,13 @@ If you are interested in moving data from a volume in the standard tier to an
 NVME volume please checkout :ref:`migrating-volumes`
 
 
+Creating an instance with an NVME root disk
+===========================================
+
+If you want to launch an instance using an NVME root volume check out
+:ref:`boot-with-nvme-volume` for more information.
+
+
 **************
 Best practices
 **************

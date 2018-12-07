@@ -4,7 +4,7 @@
 Using Volumes
 #############
 
-Once you have attached a vlume, as explained in :ref:`via-cli` to a compute
+Once you have attached a volume, as explained in :ref:`via-cli` to a compute
 instance, a block volume behaves like a raw unformatted disk.
 
 ********

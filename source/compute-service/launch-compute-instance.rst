@@ -84,6 +84,50 @@ deleted. To do so, select "Yes" for "Delete Volume on Instance Delete".
   For production workloads it is not recommended to delete volumes automatically
   when compute instances are deleted.
 
+.. _boot-with-nvme-volume:
+
+Launching an instance from an NVME volume
+=========================================
+
+In order to launch an instance from an NVME volume we need to create a volume
+of the right type based on the image that we need to run. Once this is done we
+can launch a new instance from that volume.
+
+Got into the ``Volumes`` screen and select Create Volume and set the following
+as explained
+
+* ``Volume Name``: something meaningful so it can be easily identified in
+  subsequent steps.
+* ``Volume Source``: needs to be set to ``Image``.
+* ``Use image as source``: this option is made visible by the previous choice,
+  select the OS image that you wish to run.
+* ``Type``: select one of the NVME storage tier options from the dropdown.
+
+Here is an example using Ubuntu 18.04 as the image on a b1.sr-r3-nvme-1000
+volume.
+
+.. image:: ../_static/nvme-root-vol-test-1.png
+   :align: center
+
+Once the volume has been successfully created we can launch the instance.
+
+Go to the Instances page and select Launch Instance. Populate the Details
+section as required.
+
+On the Source page set ``Select Boot Source`` to ``Volume``, you should now be
+able to see the volume you created in the previous step under ``Available``.
+
+.. image:: ../_static/nvme-root-vol-test-2.png
+   :align: center
+
+Select your volume and ensure it now appears under Allocated like this.
+
+.. image:: ../_static/nvme-root-vol-test-3.png
+   :align: center
+
+Complete the rest of the Launch Instance dialogue as required and launch the
+instance.
+
 
 ******
 Flavor
@@ -269,4 +313,3 @@ Cloud-init official docs
 For other formats and more detailed information on how to use cloud-init to
 initialise your compute instances, please refer to the `cloud-init official
 documentation <http://cloudinit.readthedocs.org/en/latest/index.html>`_.
-
