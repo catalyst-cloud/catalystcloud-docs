@@ -86,10 +86,10 @@ deleted. To do so, select "Yes" for "Delete Volume on Instance Delete".
 
 .. _boot-with-nvme-volume:
 
-Launching an instance from an NVME volume
+Launching an instance from an NVMe volume
 =========================================
 
-In order to launch an instance from an NVME volume we need to create a volume
+In order to launch an instance from an NVMe volume we need to create a volume
 of the right type based on the image that we need to run. Once this is done we
 can launch a new instance from that volume.
 
@@ -101,7 +101,7 @@ as explained
 * ``Volume Source``: needs to be set to ``Image``.
 * ``Use image as source``: this option is made visible by the previous choice,
   select the OS image that you wish to run.
-* ``Type``: select one of the NVME storage tier options from the dropdown.
+* ``Type``: select one of the NVMe storage tier options from the dropdown.
 
 Here is an example using Ubuntu 18.04 as the image on a b1.sr-r3-nvme-1000
 volume.

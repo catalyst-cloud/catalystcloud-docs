@@ -69,7 +69,7 @@ It is designed for development, test and ephemeral workloads
 The performance tier
 ====================
 
-The ``performance`` tier makes sole use of direct NVME SSD drive access for both
+The ``performance`` tier makes sole use of direct NVMe SSD drive access for both
 read and write operations. This tier offers three options for IO throughput,
 which provide a burstable limit of 1000, 2500 and 5000 IOPS.
 
@@ -87,17 +87,17 @@ All options in this tier provide 3 replicas in a single region.
    * - b1.sr-r3-nvme-1000
      - Single region
      - 3
-     - NVME
+     - NVMe
      - 1000
    * - b1.sr-r3-nvme-2000
      - Single region
      - 3
-     - NVME
+     - NVMe
      - 2000
    * - b1.sr-r3-nvme-5000
      - Single region
      - 3
-     - NVME
+     - NVMe
      - 5000
 
 [1] Please note that the IOPS described on the table above are not guaranteed
@@ -108,13 +108,13 @@ Migrating data between tiers
 ============================
 
 If you are interested in moving data from a volume in the standard tier to an
-NVME volume please checkout :ref:`migrating-volumes`
+NVMe volume please checkout :ref:`migrating-volumes`
 
 
-Creating an instance with an NVME root disk
+Creating an instance with an NVMe root disk
 ===========================================
 
-If you want to launch an instance using an NVME root volume check out
+If you want to launch an instance using an NVMe root volume check out
 :ref:`boot-with-nvme-volume` for more information.
 
 

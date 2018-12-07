@@ -5,7 +5,7 @@ FAQ
 .. _migrating-volumes:
 
 *****************************************
-How to migrate between HDD and NVME disks
+How to migrate between HDD and NVMe disks
 *****************************************
 
 At the current time, support for a cloud native migration option between storage
@@ -15,7 +15,7 @@ transferring data between 2 disks in different tiers.
 For the purpose of this example we will assume:
 
 * there is an exiting HDD volume attached to the instance and mounted on /data
-* a new NVME volume has been attached to the instance and
+* a new NVMe volume has been attached to the instance and
 
   - has been partitioned
   - has a file system created
