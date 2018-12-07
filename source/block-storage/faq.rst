@@ -12,13 +12,6 @@ At the current time, support for a cloud native migration option between storage
 tiers is not supported. With that in mind here is our recommended approach for
 transferring data between 2 disks in different tiers.
 
-.. Warning::
-
-  Please be aware that due to the inherent IO throughput limitations on the
-  standard tier we request that users do not try to experiment with varying
-  block sizes in order to maximise throughput as this can potentially impact
-  all users and will result in the offending transfers being rate limited.
-
 For the purpose of this example we will assume:
 
 * there is an exiting HDD volume attached to the instance and mounted on /data
@@ -34,7 +27,7 @@ that may exist on the original disk.
 
 .. code-block:: bash
 
-  rsync -avxHAXSW --numeric-ids --info=progress2 /data/ /mnt/data_new/,
+  rsync -avxHAXSW --numeric-ids --info=progress2 /data/ /mnt/data_new/
 
 Where the options are:
 
