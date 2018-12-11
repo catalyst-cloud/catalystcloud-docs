@@ -14,5 +14,5 @@ provisioner: kubernetes.io/cinder
 reclaimPolicy: Delete
 parameters:
   type: b1.standard
-  availability: nz-hlz-la
+  availability: nz-hlz-1a
   fstype: ext4
