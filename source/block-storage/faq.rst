@@ -14,15 +14,15 @@ transferring data between 2 disks in different tiers.
 
 For the purpose of this example we will assume:
 
-* there is an exiting HDD volume attached to the instance and mounted on /data
+* there is an existing HDD volume attached to the instance and mounted on /data
 * a new NVMe volume has been attached to the instance and
 
   - has been partitioned
   - has a file system created
   - is mounted on /mnt/data_new
 
-We will be using `rsync`_ to perform the transfer as it allows us to maintained
-the volumes thin provisioned nature, preserve the nature of any sparse files
+We will be using `rsync`_ to perform the transfer as it allows us to maintain
+the volumes thin provisioned nature, and preserve the nature of any sparse files
 that may exist on the original disk.
 
 .. code-block:: bash
