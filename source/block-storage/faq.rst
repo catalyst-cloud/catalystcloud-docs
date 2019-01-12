@@ -60,7 +60,7 @@ Well, as always, that depends.
 Boot Volumes
 ************
 
-This is difficult in OpenStack, as there is not an easy and obvious choice.
+There are a number of different options, the best option for you to use will depend on your circumstances.
 
 Create New Instance
 ===================
