@@ -60,7 +60,8 @@ Well, as always, that depends.
 Boot Volumes
 ************
 
-There are a number of different options, the best option for you to use will depend on your circumstances.
+There are a number of different options, the best option for you to use will 
+depend on your circumstances.
 
 Create New Instance
 ===================
