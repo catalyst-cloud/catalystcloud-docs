@@ -4,4 +4,4 @@ venv/
 .build-tools.cson
 docs-wip-notes.rst
 .DS_Store
-docs-wip-notes.rst
+.vscode/

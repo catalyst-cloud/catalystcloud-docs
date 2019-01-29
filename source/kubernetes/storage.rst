@@ -60,8 +60,11 @@ First we need to create a storage class, for the Catalyst Cloud these will initi
 our usual block storage tier so the parameter for the ``volume type`` must be set to
 ``b1.standard``.
 
-It is also necessary to specify the availability zone for the storage class to be defined in. To
-find the availability zone your cluster is in run the following.
+.. Note::
+
+  It is necessary to specify the availability zone for the storage class to be defined in.
+
+To find the availability zone your cluster is in run the following.
 
 .. code-block:: bash
 
@@ -72,6 +75,42 @@ find the availability zone your cluster is in run the following.
   | nz-hlz-1a | available   |
   | nz-hlz-1a | available   |
   +-----------+-------------+
+
+The current availability zones for all regions are as follows, please be aware
+that case matters in the name.
+
+Availability zones for “nz-hlz-1”
+---------------------------------
+
++-----------+-------------+
+| Zone Name | Zone Status |
++===========+=============+
+| nz-hlz-1a | available   |
++-----------+-------------+
+| nz-hlz-1a | available   |
++-----------+-------------+
+
+Availability zones for “nz-por-1”
+---------------------------------
+
++-----------+-------------+
+| Zone Name | Zone Status |
++===========+=============+
+| nz-por-1a | available   |
++-----------+-------------+
+| nz-por-1a | available   |
++-----------+-------------+
+
+Availability zones for “nz_wlg_2”
+---------------------------------
+
++-----------+-------------+
+| Zone Name | Zone Status |
++===========+=============+
+| NZ-WLG-2  | available   |
++-----------+-------------+
+| NZ-WLG-2  | available   |
++-----------+-------------+
 
 Create the definition file for your storage type. We will call this storage class
 *cinder-standard* and update the availability and type parameters as discussed above.
