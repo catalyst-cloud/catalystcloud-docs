@@ -50,34 +50,6 @@ This is an overview of the issues encountered in the process of testing this
 Technical Preview release.
 
 
-Nodes lose their IP addresses
-=============================
-
-Description
------------
-
-This issue initially appears to be related to DNS as the error messages
-encountered when running kubectl will normally contain something similar to
-the following..
-
-.. code-block:: bash
-
-  error getting address for node <nodename>: no address found for host
-
-The actual problem however is related to the fact that the InternalIP and/or
-ExternalIP addresses are lost for some nodes.
-
-Status
-------
-
-The cause of the problem has been identified and a fix has been proposed.
-
-Workaround
-----------
-
-Run docker restart for the kubelet container.
-
-
 Cluster fails to delete
 =======================
 
