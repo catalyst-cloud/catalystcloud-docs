@@ -1,0 +1,48 @@
+$ kubectl describe pod pod-cinder
+Name:         pod-cinder
+Namespace:    default
+Node:         k8s-dev-pvc-test-3-y4gcy3oygsil-minion-0/10.0.0.5
+Start Time:   Wed, 27 Feb 2019 10:26:25 +1300
+Labels:       <none>
+Annotations:  <none>
+Status:       Pending
+IP:
+Containers:
+  cinder-storage-container:
+    Container ID:
+    Image:          lingxiankong/alpine-test
+    Image ID:
+    Port:           8080/TCP
+    Host Port:      0/TCP
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /data from cinder-storage (rw)
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-kjqdd (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  cinder-storage:
+    Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+    ClaimName:  existing-cinder-pv-claim
+    ReadOnly:   false
+  default-token-kjqdd:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-kjqdd
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type    Reason                  Age   From                     Message
+  ----    ------                  ----  ----                     -------
+  Normal  Scheduled               9s    default-scheduler        Successfully assigned default/pod-cinder to k8s-dev-pvc-test-3-y4gcy3oygsil-minion-0
+  Normal  SuccessfulAttachVolume  3s    attachdetach-controller  AttachVolume.Attach succeeded for volume "cinder-pv"

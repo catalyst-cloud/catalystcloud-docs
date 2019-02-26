@@ -1,0 +1,18 @@
+# pv-existing.yaml
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: cinder-pv
+  labels:
+    type: existing-pv
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  cinder:
+    fsType: ext4
+    volumeID: 6b1903ea-d1aa-452d-93cc-184537d538bd

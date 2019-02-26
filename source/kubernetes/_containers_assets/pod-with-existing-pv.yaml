@@ -1,0 +1,20 @@
+# pod-with-existing-pv.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cinder
+spec:
+  volumes:
+    - name: cinder-storage
+      persistentVolumeClaim:
+        claimName: existing-cinder-pv-claim
+  containers:
+    - name: cinder-storage-container
+      image: lingxiankong/alpine-test
+      ports:
+        - containerPort: 8080
+          name: "http-server"
+      volumeMounts:
+        - mountPath: "/data"
+          name: cinder-storage
