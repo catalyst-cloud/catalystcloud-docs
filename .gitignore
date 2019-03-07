@@ -2,6 +2,6 @@ build/
 _build/
 venv/
 .build-tools.cson
-docs-wip-notes.rst
+docs_wip/
 .DS_Store
 .vscode/

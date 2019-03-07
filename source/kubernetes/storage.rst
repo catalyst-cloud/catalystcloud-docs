@@ -16,6 +16,11 @@ these volumes and access them as if they were a local filesystem.
 This also provides a mechanism for containers within a pod to be able to share
 data by mounting the volume in a shared manner.
 
+.. Note::
+
+  Volumes are ephemeral and they are tied to the lifetime of the pod. Once the
+  pod terminates and volumes and associated data within it are gone.
+
 To use a volume, a Pod specifies what volumes to provide for the Pod and where
 to mount them in the containers. The containers themselves see these presented
 as filesystems. Kubernetes supports several different `volume types`_ , for
@@ -121,7 +126,7 @@ Availability zones for “nz_wlg_2”
 +-----------+-------------+
 
 Create the definition file for your storage type. We will call this storage
-class *cinder-standard* and update the availability and type parameters as
+class *block-storage-class* and update the availability and type parameters as
 discussed above.
 
 .. literalinclude:: _containers_assets/storage1.yaml
@@ -130,7 +135,8 @@ Then create the storage class within your cluster.
 
 .. code-block:: bash
 
-  $ kubectl create -f storage.yaml
+  $ kubectl create -f storage1.yaml
+  storageclass.storage.k8s.io/block-storage-class created
 
 Next create a definition file for a PersistentVolumeClaim using the new
 storage class. As there is only the one storage class we can omit naming it in
@@ -145,6 +151,7 @@ Now create a claim for the volume.
 .. code-block:: bash
 
   $ kubectl create -f pvc1.yaml
+  persistentvolumeclaim/test-persistentvolumeclaim created
 
 To access this from with in our pod we need to add a ``volumes`` entry
 specifying the PersistentVolumeClaim and giving it a name, then a
@@ -154,44 +161,56 @@ be mounted in the container.
 
 .. literalinclude:: _containers_assets/pvc-example1.yaml
 
-Create the new pod and once it is available exec a bash shell into it to
-confirm that the new volume is present.
+Create the new pod.
 
 .. code-block:: bash
 
   $ kubectl create -f pvc-example1.yaml
+  pod/pod-pv-test created
 
-Now if we describe the pod we can see under the ``Mounts:`` section that it
-has a volume mounted from the storage class cinder-storage and the ``Volumes:``
-section shows the related persistent volume claim for this storage.
+Once the pod is available exec a bash shell into it to confirm that the new
+volume is present on the /data .
 
 .. code-block:: bash
 
-  $ kubectl describe pod pod-cinder
+  $ kubectl exec -it pod-pv-test -- /bin/bash
+
+  root@pod-pv-test:/# mount |grep data
+  /dev/vdb on /data type ext4 (rw,relatime,seclabel,data=ordered)
+
+If we describe the pod we can see under the ``Mounts:`` section that it
+has a volume mounted from the storage class **block-storage-class** and the
+``Volumes:`` section shows the related persistent volume claim for this storage.
+
+.. code-block:: bash
+
+  $ kubectl describe pod pod-pv-test
 
 ::
 
-  Name:         pod-cinder
+  Name:         pod-pv-test
   Namespace:    default
-  Node:         k8s-m3-n3-pw6k57d7glg6-minion-1/10.0.0.14
-
-    <-- output truncated for brevity -->
-
+  Node:         k8s-m3-n3-u6zyxknksxcs-minion-0/10.0.0.13
+  Start Time:   Thu, 07 Mar 2019 10:19:56 +1300
+  Labels:       <none>
+  Annotations:  <none>
+  Status:       Running
+  IP:           192.168.206.134
   Containers:
-    cinder-storage-container:
-      Container ID:   docker://d4cc2a5e02b1e907a0e7a75a7bc40b690e383932ca71001372463fd0383dec23
-      Image:          lingxiankong/alpine-test
-      Image ID:       docker-pullable://docker.io/lingxiankong/alpine-test@sha256:71e08da2e5761059d93fa2354b99958042406b308552b0b739325988e99d8e27
+    test-storage-container:
+      Container ID:   docker://e9fc4a3ec04e9777134f7ebbd624422efc8b67ca27567464e8d584f5be85df73
+      Image:          nginx:latest
+      Image ID:       docker-pullable://docker.io/nginx@sha256:98efe605f61725fd817ea69521b0eeb32bef007af0e3d0aeb6258c6e6fe7fc1a
       Port:           8080/TCP
       Host Port:      0/TCP
       State:          Running
-        Started:      Sun, 21 Oct 2018 12:13:11 +1300
+        Started:      Thu, 07 Mar 2019 10:20:20 +1300
       Ready:          True
       Restart Count:  0
       Environment:    <none>
       Mounts:
-        /data from cinder-storage (rw)
-        /var/run/secrets/kubernetes.io/serviceaccount from default-token-5nfhn (ro)
+        /data from test-persistentvolume (rw)
+        /var/run/secrets/kubernetes.io/serviceaccount from default-token-6kv8n (ro)
   Conditions:
     Type              Status
     Initialized       True
@@ -199,12 +218,20 @@ section shows the related persistent volume claim for this storage.
     ContainersReady   True
     PodScheduled      True
   Volumes:
-    cinder-storage:
+    test-persistentvolume:
       Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
-      ClaimName:  cinder-pvc
+      ClaimName:  test-persistentvolumeclaim
       ReadOnly:   false
+    default-token-6kv8n:
+      Type:        Secret (a volume populated by a Secret)
+      SecretName:  default-token-6kv8n
+      Optional:    false
+  QoS Class:       BestEffort
+  Node-Selectors:  <none>
+  Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                   node.kubernetes.io/unreachable:NoExecute for 300s
+  Events:          <none>
 
-    <-- output truncated for brevity -->
 
 ***************************
 Persistent volume retention

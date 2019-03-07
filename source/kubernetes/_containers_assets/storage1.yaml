@@ -3,10 +3,10 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: cinder-standard
+  name: block-storage-class
   annotations:
     storageclass.kubernetes.io/is-default-class: "true"
-    kubernetes.io/description: "Use OpenStack Cinder as default storage backend"
+    kubernetes.io/description: "Use Catalyst Cloud block storage as default storage backend"
   labels:
     kubernetes.io/cluster-service: "true"
     addonmanager.kubernetes.io/mode: EnsureExists

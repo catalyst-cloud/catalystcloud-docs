@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: cinder-pvc
+  name: test-persistentvolumeclaim
 spec:
   accessModes:
     - ReadWriteOnce

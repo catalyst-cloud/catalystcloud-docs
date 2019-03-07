@@ -3,18 +3,18 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pod-cinder
+  name: pod-pv-test
 spec:
   volumes:
-    - name: cinder-storage
+    - name: test-persistentvolume
       persistentVolumeClaim:
-        claimName: cinder-pvc
+        claimName: test-persistentvolumeclaim
   containers:
-    - name: cinder-storage-container
-      image: lingxiankong/alpine-test
+    - name: test-storage-container
+      image: nginx:latest
       ports:
         - containerPort: 8080
           name: "http-server"
       volumeMounts:
         - mountPath: "/data"
-          name: cinder-storage
+          name: test-persistentvolume

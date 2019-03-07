@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: cinder-pv
+  name: existing-pv
   labels:
     type: existing-pv
 spec:
@@ -15,4 +15,4 @@ spec:
   persistentVolumeReclaimPolicy: Delete
   cinder:
     fsType: ext4
-    volumeID: 6b1903ea-d1aa-452d-93cc-184537d538bd
+    volumeID: 119f5f68-585e-41dd-b1a4-883fae7df74a
