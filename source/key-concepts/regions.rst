@@ -16,7 +16,7 @@ https://catalystcloud.nz/about/national-infrastructure/
 +=============+=================+====================+======================+
 | nz-por-1    | NZ Porirua 1    | Yes                | In progress          |
 +-------------+-----------------+--------------------+----------------------+
-| nz_wlg_2    | NZ Wellington 2 | Compliant          | In progress          |
+| nz_wlg_2    | NZ Wellington 2 | Yes                | In progress          |
 +-------------+-----------------+--------------------+----------------------+
 | nz-hlz-1    | NZ Hamilton 1   | Yes                | Yes                  |
 +-------------+-----------------+--------------------+----------------------+
