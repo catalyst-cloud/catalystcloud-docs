@@ -278,4 +278,18 @@ A simple example would look like this.
 
 .. literalinclude:: _containers_assets/loadbalancer_internal_ip.yaml
 
-The resulting loadbalancer
+The resulting loadbalancer would be provisioned with a VIP from the existing
+Kubernetes host network.
+
+If we examine the node we can see that it's internal network address is in the
+10.0.0.0/24 subnet and a simple query of the the new service shows that it too
+has now been assigned an addressfrom this same range as it's VIP.
+
+.. code-block:: bash
+
+  $ kubectl describe nodes k8s-m3-n3-4elkr4e46fng-minion-0 | grep InternalIP
+  InternalIP:  10.0.0.15
+
+  $ kubectl get svc lb-internal-ip
+  NAME             TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+  lb-internal-ip   LoadBalancer   10.254.229.121   10.0.0.38     80:32500/TCP   138m
