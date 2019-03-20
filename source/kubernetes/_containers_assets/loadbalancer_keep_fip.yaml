@@ -1,0 +1,19 @@
+cat <<EOF > loadbalancer_keep_fip.yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: lb-keep-fip
+  namespace: default
+  annotations:
+    loadbalancer.openstack.org/keep-floatingip: "true"
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 202.49.243.13 # an existing FIP allocated to the project
+  selector:
+    app: nginx-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+EOF
+kubectl apply -f loadbalancer_keep_fip.yaml

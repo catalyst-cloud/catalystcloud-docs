@@ -19,7 +19,9 @@ Table of Contents:
   kubernetes/introduction
   kubernetes/clusters
   kubernetes/storage
+  kubernetes/access
   kubernetes/network_policies
+
 
 .. note::
 

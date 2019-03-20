@@ -214,6 +214,7 @@ dashboard, as illustrated below.
 .. image:: _containers_assets/kubernetes_dashboard1.png
    :align: center
 
+.. _simple_lb_deployment:
 
 **********************************************
 Creating a simple deployment with loadbalancer
