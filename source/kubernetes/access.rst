@@ -72,7 +72,7 @@ it to test connectivity in our upcoming examples.
 ClusterIP
 *********
 
-First we will define a define a service using the ClusterIP type. This service
+First we will define a service using the ClusterIP type. This service
 will expose port 80 on the pod by mapping it to port 80 on the cluster IP that
 will get assigned to the service when it is created.
 
@@ -110,10 +110,11 @@ Now we can connect back into our pod and run curl to query this.
   </body>
   </html>
 
-If all went as expected we should see the html for the default Nginx welcome page.
+If all went as expected we should see the html for the default Nginx welcome
+page.
 
-As mentioned earlier ``this type of service is only accessible to other cluster
-members``, in order to expose it outside of the cluster we will need to look at
+As mentioned earlier ``this type of service is only accessible inside the
+cluster``, in order to expose it outside of the cluster we will need to look at
 our other access options.
 
 To remove the clusterip-service run the following.
@@ -180,8 +181,8 @@ Alternatively this could also be accessed by any other server instance that was
 deployed on the 10.0.0.0/24 host network that had appropriate security group
 access.
 
-For example if we have an Ubuntu 18 instance that is attached to that network
-on 10.0.0.16 and both it and the node running the Nginx application belong to a
+For example if we have another instance that is attached to that network on
+10.0.0.16 and both it and the node running the Nginx application belong to a
 security group that allows access to TCP/30001 then the following will be
 possible.
 
