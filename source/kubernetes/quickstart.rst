@@ -298,7 +298,7 @@ To create the service run the following command.
 
 The final step is to check on the state of the service and wait until the
 loadbalancer is active and the ``LoadBalancer Ingress`` field has received a
-publicly accessible flaoting IP address.
+publicly accessible floating IP address.
 
 .. code-block:: bash
 
