@@ -239,9 +239,9 @@ dashboard, as illustrated below.
 
 .. _simple_lb_deployment:
 
-************************************
-Deploying a hellow world application
-************************************
+***********************************
+Deploying a hello world application
+***********************************
 
 It is possible to have a loadbalancer created on your behalf by Kubernetes
 through the underlying Catalyst Cloud infrastructure services.
