@@ -49,6 +49,29 @@ There are currently two types of templates available on the Catalyst Cloud:
   service on the Catalyst Cloud is still in alpha and should not be used for
   production workloads.
 
+Ensure quota is sufficient
+==========================
+
+A small quota is sufficient to deploy the production cluster template if your
+project is empty. However, if you already have some resources allocated, you
+may want to increase your quota to ensure there is sufficient capacity available
+to deploy Kubernetes.
+
+By default, the production Kubernetes template allocates:
+
+* 6 compute instances
+* 18 vCPUs
+* 36 GB of RAM
+* 8 floating IPs
+* 3 security groups
+* 3 volumes
+* 60 GB of block storage space
+
+As a ``project admin`` you can change your quota using the `quota management`_
+panel in the dashboard.
+
+.. _`quota management`: https://dashboard.cloud.catalyst.net.nz/management/quota/
+
 Creating a cluster
 ==================
 
@@ -216,9 +239,9 @@ dashboard, as illustrated below.
 
 .. _simple_lb_deployment:
 
-**********************************************
-Creating a simple deployment with loadbalancer
-**********************************************
+************************************
+Deploying a hellow world application
+************************************
 
 It is possible to have a loadbalancer created on your behalf by Kubernetes
 through the underlying Catalyst Cloud infrastructure services.
