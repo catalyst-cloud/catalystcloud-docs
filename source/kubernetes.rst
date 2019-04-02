@@ -132,7 +132,8 @@ Cluster takes a long time to deploy
 Description
 -----------
 
-Currently the time taken to deploy a cluster from commandline or dashbard is
+Currently the time taken to deploy a cluster from commandline or dashboard is
+
 in the vicinity of 15-25 minutes.
 
 Status
