@@ -133,7 +133,6 @@ Description
 -----------
 
 Currently the time taken to deploy a cluster from commandline or dashboard is
-
 in the vicinity of 15-25 minutes.
 
 Status
