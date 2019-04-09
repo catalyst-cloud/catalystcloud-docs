@@ -31,7 +31,7 @@ that may exist on the original disk.
 
 Where the options are:
 
-.. code-block:: bash
+.. code-block:: text
 
   -a  : all files, with permissions, etc..
   -v  : verbose, mention files

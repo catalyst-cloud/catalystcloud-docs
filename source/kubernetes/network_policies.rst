@@ -85,7 +85,7 @@ the same context as the application pods.
 Once in the shell use ``wget`` to query the application service and confirm it is
 accessible.
 
-.. code-block:: shell
+.. code-block:: text
 
   $ kubectl run --generator=run-pod/v1 -it --rm  busybox \--image=busybox -- sh
   If you don't see a command prompt, try pressing enter.
@@ -151,7 +151,7 @@ allowed and that this will apply to all pods.
 Let's connect to the busybox pod again and try to access the app-pod service.
 This time we will add a timeout to our wget command as it will not succeed.
 
-.. code-block:: bash
+.. code-block:: text
 
   $ kubectl run --generator=run-pod/v1 -it --rm  busybox --image=busybox -- sh
   If you don't see a command prompt, try pressing enter.
@@ -189,7 +189,7 @@ will limit this access to only pods with the label ``run: busybox``.
 The final step is to run the busybox pod again and confirm that our access to
 the application pods has been restored.
 
-.. code-block:: bash
+.. code-block:: text
 
   $ kubectl run --generator=run-pod/v1 -it --rm  busybox --image=busybox -- sh
   If you don't see a command prompt, try pressing enter.
