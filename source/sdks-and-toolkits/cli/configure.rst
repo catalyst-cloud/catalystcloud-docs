@@ -23,7 +23,7 @@ To download an OpenStack RC file from the dashboard:
 * Log in to your project on the dashboard and select your preferred region.
 
 * From the left hand menu select "API Access" and click on
-  "Download OpenStack RC File v2.0". Save this file on the host where the client
+  "Download OpenStack RC File v3.0". Save this file on the host where the client
   tools are going to be used from.
 
 * Source the configuration from the OpenStack RC file:

@@ -2,8 +2,16 @@
 Using the CLI
 #############
 
-Before using the CLI, always remember to :ref:`activate-venv` and
-:ref:`source-rc-file`.
+**If you installed the CLI using pip:**
+
+1. :ref:`activate-venv`
+2. :ref:`source-rc-file`
+3. Invoke the CLI with the ``openstack`` command
+
+**If you installed the CLI using docker:**
+
+1. :ref:`source-rc-file`
+2. Invoke the CLI with the ``ccloud`` alias anywhere the ``openstack`` command is otherwise used.
 
 For a reference of all commands supported by the CLI, refer to the `OpenStack
 Client documentation <https://docs.openstack.org/python-openstackclient>`_.
