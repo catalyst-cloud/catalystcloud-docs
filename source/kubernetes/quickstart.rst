@@ -271,9 +271,9 @@ format.
 
 In the ``config`` file example below replace the necessary fields as follows:
 
-for certificate-authority-data  use the output from test-cluster_ca.pem
-for client-certificate-data use the output from test-cluster_cert.pem
-for client-key-data use the output from test-cluster.key
+* for **certificate-authority-data**  use the output from **test-cluster_ca.pem**
+* for **client-certificate-data** use the output from **test-cluster_cert.pem**
+* for **client-key-data** use the output from **test-cluster.key**
 
 .. code-block:: bash
 
