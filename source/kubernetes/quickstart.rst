@@ -233,7 +233,7 @@ certificates and keys.
 First we will need to create a certificate signing request (CSR). We will do
 that with the following command.
 
-.. code_block:: bash
+.. code-block:: bash
 
   openssl req -new -newkey rsa:2048 -nodes -keyout test-cluster.key -out test-cluster.csr -subj "/CN=admin/O=system:masters"
 
@@ -262,7 +262,7 @@ cluster. When prompted save the file as ``test-cluster_ca.pem``.
 Back on the command line we need to convert our new certificates and key to a
 base64 format to use in our kubeconfig file. To do this run the following.
 
-.. code_block:: bash
+.. code-block:: bash
 
   for i in test-cluster*; do echo $i; cat $i | base64; done
 
@@ -275,7 +275,7 @@ for certificate-authority-data  use the output from test-cluster_ca.pem
 for client-certificate-data use the output from test-cluster_cert.pem
 for client-key-data use the output from test-cluster.key
 
-.. code_block:: bash
+.. code-block:: bash
 
   # kubectl config file
   apiVersion: v1
@@ -304,7 +304,7 @@ Now let's set the KUBECONFIG variable so that ``kubectl`` knows where to find
 it's configuration. To do this run the following from the current working
 directory.
 
-.. code_block:: bash
+.. code-block:: bash
 
   export KUBECONFIG=/path/to/file/config
 
