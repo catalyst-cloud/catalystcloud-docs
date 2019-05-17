@@ -36,18 +36,31 @@ The following command will list all cluster templates available:
 Template types
 --------------
 
-There are currently two types of templates available on the Catalyst Cloud:
+The naming convention used for the templates is broken down as follows:
+
+* ``kubernetes-v1.11.2`` : this is the version of kubernetes that the template
+  will use to create the cluster.
+* ``-dev`` or ``-prod`` : this create either a minimalist cluster for proof of
+  oncept or development work, whereas the prod option creates a more production
+  ready cluster (see below).
+* ``-20181008`` the final portion of the name is the date on which the template
+  was created.
+
+The difference between between the  development and production templates are:
 
 * ``dev`` creates a small Kubernetes cluster with a single master and a single
   worker node. As the name suggests, it should not be used for production.
-* ``prod`` creates a Kubernetes cluster with three master nodes (in high
-  availability) and three worker nodes.
+* ``prod`` creates a Kubernetes cluster that is intended for production
+  workloads. It expects a minimum three master nodes and three worker nodes.
+  The master nodes will have two loadbalancers deployed in front of them in
+  order to provide HA for the API and etcd services. This template also deploys
+  Prometheus and Grafana to provide cluster metrics.
 
 .. warning::
 
-  Please note that despite having a template called "production", the Kubernetes
-  service on the Catalyst Cloud is still in alpha and should not be used for
-  production workloads.
+  Please note that despite having a template called "production", the
+  Kubernetes service on the Catalyst Cloud is still in alpha and should not be
+  used for production workloads.
 
 Ensure quota is sufficient
 ==========================
@@ -72,8 +85,8 @@ panel in the dashboard.
 
 .. _`quota management`: https://dashboard.cloud.catalyst.net.nz/management/quota/
 
-Creating a cluster
-==================
+Creating a cluster from the command line
+========================================
 
 To create a new **development** cluster run the following command:
 
@@ -117,6 +130,196 @@ You can use the following command to check the status of the cluster:
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
 
 Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
+
+
+Creating a cluster from the dashboard
+=====================================
+
+This section outlines how to create a cluster throught the Catalyst Cloud
+dashboard with needing to use the open stack command line tools. It will still
+require the use of the the commandline to handle certificates and use kubectl
+to interact with the cluster.
+
+Whether you are creating a **development** or a **production** cluster, the
+steps from the dashboard are almost identical.
+
+Once logged into the dashboard select ``Cluster Templates`` from the ``
+Container Infra`` section of the left hand menu.
+
+.. image:: _containers_assets/menu_item.png
+   :align: center
+
+From here you can select the template that you would like to use to deploy your
+cluster from. For this example we will use the latest version of the production
+template, **kubernetes-v1.12.7-prod-20190403**.
+
+.. image:: _containers_assets/cluster_templates.png
+   :align: center
+
+Next we click on ``Create Cluster`` to launch the cluster wizard. We can add
+a name for our cluster and also select a different cluster template if we wish.
+
+Click **Next** to proceed.
+
+.. image:: _containers_assets/cluster_create_1.png
+   :align: center
+
+On this screen we have the option of overriding the default node counts and
+docker volume size supplied by the template. Here we have entered values
+identical to those in the template as an illustration.
+
+For the ``Docker Volume`` size it is recommended to leave this as the default
+value defined by the template.
+
+Click **Next** to proceed.
+
+.. image:: _containers_assets/cluster_create_2.png
+   :align: center
+
+On this final screen we have the ability to provide custome discovery URLs and
+also creation time values. Again unless you have a very specific requirement
+around these then the default values should be sufficient.
+
+The final setting is the ``Keypair`` which is the SSH key that will be used in
+creation of each of the cluster nodes. This is required and is used when
+commandline access is required to the cluster nodes.
+
+.. image:: _containers_assets/cluster_create_3.png
+   :align: center
+
+Click **Submit** to launch the cluster.
+
+Once the cluster's status is ``CREATE_COMPLETE``, as shown below, you can begin
+deploying your applications to your cluster.
+
+.. image:: _containers_assets/create_complete.png
+   :align: center
+
+To see more information about your deployed cluster you can click on the link
+in the Clusters page, and it will drill down to show the details of the cluster
+template and related resources.
+
+.. image:: _containers_assets/cluster_link.png
+   :align: center
+
+Take note of the ``API Address`` in the Nodes section as we will need this when
+we create the ``kubeconfig`` file further down.
+
+.. image:: _containers_assets/cluster_details.png
+   :align: center
+
+There is also some very useful information in the associated ``Stack`` that was
+responsible for creating the cluster. You can either click on the ``Stack ID``
+link shown at the bottom of the page in the image above. Alternatively you can
+navigate to the corresponding stack from the left hand menu under
+Orchestration -> Stacks then click on the ``Stack Name`` that corresponds to
+the cluster name with an random string appended, then select the Overview tab.
+
+.. image:: _containers_assets/stack_details.png
+   :align: center
+
+Obtaining certificates for cluster authentication
+=================================================
+
+As we are not using the Openstack commandline tools in this example we will
+need anther way to authenticate with our new cluster. We will do this using
+certificates and keys.
+
+.. Note::
+
+  All commands outlined in this section will assume that any files created or
+  reference are located in the users current working directory.
+
+First we will need to create a certificate signing request (CSR). We will do
+that with the following command.
+
+.. code_block:: bash
+
+  openssl req -new -newkey rsa:2048 -nodes -keyout test-cluster.key -out test-cluster.csr -subj "/CN=admin/O=system:masters"
+
+Now go back to the cluster page in the dashboard and click on the dropdown to
+the left of the cluster and select ``Sign Certificate``.
+
+.. image:: _containers_assets/sign_client_cert_1.png
+   :align: center
+
+Select **Choose file** and add the ``test-cluster.csr`` file we created in the
+previous step.
+
+Click **Sign Certificate** and when prompted save the new file as
+``test-cluster_cert.pem``.
+
+.. image:: _containers_assets/sign_client_cert_2.png
+   :align: center
+
+Before we leave the dashboard we also need to save a copy of the clusters CA
+certificate. To do this click on ``Show Certificate`` to the left of the
+cluster. When prompted save the file as ``test-cluster_ca.pem``.
+
+.. image:: _containers_assets/get_ca_cert.png
+   :align: center
+
+Back on the command line we need to convert our new certificates and key to a
+base64 format to use in our kubeconfig file. To do this run the following.
+
+.. code_block:: bash
+
+  for i in test-cluster*; do echo $i; cat $i | base64; done
+
+The output will be the name of each file followed by the the base64 converted
+format.
+
+In the ``config`` file example below replace the necessary fields as follows:
+
+for certificate-authority-data  use the output from test-cluster_ca.pem
+for client-certificate-data use the output from test-cluster_cert.pem
+for client-key-data use the output from test-cluster.key
+
+.. code_block:: bash
+
+  # kubectl config file
+  apiVersion: v1
+  clusters:
+  - cluster:
+      certificate-authority-data: LS0tLS1CRUdJT<redacted>==
+      server: https://150.242.43.187:6443
+    name: test-cluster
+  contexts:
+  - context:
+      cluster: test-cluster
+      user: admin
+    name: default
+  current-context: default
+  kind: Config
+  preferences: {}
+  users:
+  - name: admin
+    user:
+      client-certificate-data: LS0tLS1CRUdJT<redacted>==
+      client-key-data: LS0tLS1CRUdJT<redacted>
+
+Save this file as ``config``.
+
+Now let's set the KUBECONFIG variable so that ``kubectl`` knows where to find
+it's configuration. To do this run the following from the current working
+directory.
+
+.. code_block:: bash
+
+  export KUBECONFIG=/path/to/file/config
+
+As a quick check, you can run the following command to confirm that Kubernetes
+is working as expected:
+
+.. code-block:: bash
+
+  $ kubectl cluster-info
+  Kubernetes master is running at https://150.242.43.187:6443
+  Heapster is running at https://150.242.43.187:6443/api/v1/namespaces/kube-system/services/heapster/proxy
+  CoreDNS is running at https://150.242.43.187:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+  To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+
 
 
 *****************************
