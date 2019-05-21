@@ -5,62 +5,16 @@ Quick start
 This quick start guide assumes you have working knowledge of Catalyst Cloud
 :ref:`command-line-interface` and familiarity with Kubernetes.
 
-******************************
-Deploying a Kubernetes cluster
-******************************
 
-Choosing a cluster template
-===========================
+**************
+Pre-requisites
+**************
 
-A cluster template is a blue-print to build a Kubernetes cluster (similar to
-machine images for the compute service). The cluster template specifies what
-version of Kubernetes will be installed and the features that will be enabled.
+Ensure user has the required privileges
+=======================================
 
-.. Note::
-
-  In order to be able to create a Kubernetes cluster the user needs to ensure
-  that they have been allocated the ``heat_stack_owner`` role.
-
-The following command will list all cluster templates available:
-
-.. code-block:: bash
-
-  $ openstack coe cluster template list
-  +--------------------------------------+----------------------------------+
-  | uuid                                 | name                             |
-  +--------------------------------------+----------------------------------+
-  | cf6f8cab-8d22-4f38-a88b-25f8a41e5b77 | kubernetes-v1.11.2-dev-20181008  |
-  | 53b3e77f-b004-437c-9626-2d25ddb15329 | kubernetes-v1.11.2-prod-20181008 |
-  +--------------------------------------+----------------------------------+
-
-Template types
---------------
-
-The naming convention used for the templates is broken down as follows:
-
-* ``kubernetes-v1.11.2`` : this is the version of kubernetes that the template
-  will use to create the cluster.
-* ``-dev`` or ``-prod`` : this create either a minimalist cluster for proof of
-  oncept or development work, whereas the prod option creates a more production
-  ready cluster (see below).
-* ``-20181008`` the final portion of the name is the date on which the template
-  was created.
-
-The difference between between the  development and production templates are:
-
-* ``dev`` creates a small Kubernetes cluster with a single master and a single
-  worker node. As the name suggests, it should not be used for production.
-* ``prod`` creates a Kubernetes cluster that is intended for production
-  workloads. It expects a minimum three master nodes and three worker nodes.
-  The master nodes will have two loadbalancers deployed in front of them in
-  order to provide HA for the API and etcd services. This template also deploys
-  Prometheus and Grafana to provide cluster metrics.
-
-.. warning::
-
-  Please note that despite having a template called "production", the
-  Kubernetes service on the Catalyst Cloud is still in alpha and should not be
-  used for production workloads.
+In order to be able to create a Kubernetes cluster you need to ensure the user
+has been allocated the ``heat_stack_owner`` role.
 
 Ensure quota is sufficient
 ==========================
@@ -80,13 +34,78 @@ By default, the production Kubernetes template allocates:
 * 3 volumes
 * 60 GB of block storage space
 
-As a ``project admin`` you can change your quota using the `quota management`_
-panel in the dashboard.
+As a ``project admin`` you can change your quota using the `Quota Management`_
+panel in the dashboard, under the ``Management`` section.
 
-.. _`quota management`: https://dashboard.cloud.catalyst.net.nz/management/quota/
+.. _`Quota Management`: https://dashboard.cloud.catalyst.net.nz/management/quota/
 
-Creating a cluster from the command line
-========================================
+Choosing a cluster template
+===========================
+
+A cluster template is a blue-print to build a Kubernetes cluster (similar to
+machine images for the compute service). The cluster template specifies what
+version of Kubernetes will be installed and the features that will be enabled.
+
+The following command will list all cluster templates available:
+
+.. code-block:: bash
+
+  $ openstack coe cluster template list
+  +--------------------------------------+----------------------------------+
+  | uuid                                 | name                             |
+  +--------------------------------------+----------------------------------+
+  | cf6f8cab-8d22-4f38-a88b-25f8a41e5b77 | kubernetes-v1.11.2-dev-20181008  |
+  | 53b3e77f-b004-437c-9626-2d25ddb15329 | kubernetes-v1.11.2-prod-20181008 |
+  +--------------------------------------+----------------------------------+
+
+Alternatively, a list of cluster templates available can be seen in the
+`Cluster Templates`_ panel in the dashboard, under the ``Container Infra``
+section.
+
+.. _`Cluster Templates`: https://dashboard.cloud.catalyst.net.nz/project/cluster_templates
+
+Template types
+--------------
+
+The naming convention used for the templates is broken down as follows:
+
+* ``kubernetes-v1.11.2`` : this is the version of kubernetes that the template
+  will use to create the cluster.
+* ``-dev`` or ``-prod`` : this create either a minimalist cluster for proof of
+  concept or development work, whereas the prod option creates a more production
+  ready cluster (see below).
+* ``-20181008`` the final portion of the name is the date on which the template
+  was created.
+
+The difference between between the  development and production templates are:
+
+* ``dev`` creates a small Kubernetes cluster with a single master and a single
+  worker node. As the name suggests, it should not be used for production.
+* ``prod`` creates a Kubernetes cluster that is intended for production
+  workloads. It expects a minimum three master nodes and three worker nodes.
+  The master nodes will have two loadbalancers deployed in front of them in
+  order to provide HA for the API and etcd services. This template also deploys
+  Prometheus and Grafana to provide cluster metrics.
+
+.. warning::
+
+  Please note that despite having a template called "production", the
+  Kubernetes service on the Catalyst Cloud is still in alpha (Tech Preview) and
+  should not be used for production workloads.
+
+
+******************************
+Deploying a Kubernetes cluster
+******************************
+
+This tutorial demonstrates two alternatives to deploy the cluster: via the CLI
+and via the Dashboard.
+
+We encourage customers to use the CLI (or DevOps tools like Terraform) to
+interact with our cloud APIs, to promote cloud best practices and automation.
+
+Creating a cluster via the CLI
+===============================
 
 To create a new **development** cluster run the following command:
 
@@ -112,33 +131,16 @@ To create a new **production** cluster, run the following command:
 
   Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
 
-Checking the status of the cluster
-==================================
+Creating a cluster via the dashboard
+====================================
 
-Depending on the template used, it will take 5 to 15 minutes for the cluster to
-be created.
+.. note::
 
-You can use the following command to check the status of the cluster:
-
-.. code-block:: bash
-
-  $ openstack coe cluster list
-  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
-  | uuid                                 | name        | keypair  | node_count | master_count | status             |
-  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
-  | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
-  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
-
-Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
-
-
-Creating a cluster from the dashboard
-=====================================
+  Please skip this section if you have already deployed the cluster via the CLI.
 
 This section outlines how to create a cluster throught the Catalyst Cloud
-dashboard with needing to use the open stack command line tools. It will still
-require the use of the the commandline to handle certificates and use kubectl
-to interact with the cluster.
+dashboard. It will still require the use of the the commandline to handle
+certificates and use kubectl to interact with the cluster.
 
 Whether you are creating a **development** or a **production** cluster, the
 steps from the dashboard are almost identical.
@@ -320,6 +322,29 @@ is working as expected:
 
   To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
+Checking the status of the cluster
+==================================
+
+Depending on the template used, it will take 5 to 15 minutes for the cluster to
+be created.
+
+You can use the following command to check the status of the cluster:
+
+.. code-block:: bash
+
+  $ openstack coe cluster list
+  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
+  | uuid                                 | name        | keypair  | node_count | master_count | status             |
+  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
+  | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
+  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
+
+Alternatively, you can check the status of the cluster on the `Clusters`_ panel,
+in the ``Container Infra`` section of the Dashboard.
+
+.. _`Clusters`: https://dashboard.cloud.catalyst.net.nz/project/clusters
+
+Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
 
 
 *****************************
@@ -441,6 +466,7 @@ dashboard, as illustrated below.
    :align: center
 
 .. _simple_lb_deployment:
+
 
 ***********************************
 Deploying a hello world application
