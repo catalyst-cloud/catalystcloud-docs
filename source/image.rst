@@ -15,19 +15,21 @@ The table below lists the images provided by Catalyst and our partners, as well
 as the default user name you should use to log in to each one of them
 (unless you have overwritten the default user name with cloud-init).
 
-+------------------+-----------+
-| Operating system | User-name |
-+==================+===========+
-| Atomic Linux     | centos    |
-+------------------+-----------+
-| CentOS Linux     | centos    |
-+------------------+-----------+
-| CoreOS Linux     | core      |
-+------------------+-----------+
-| Debian Linux     | debian    |
-+------------------+-----------+
-| Ubuntu Linux     | ubuntu    |
-+------------------+-----------+
++---------------------+--------------------+-----------+
+| Operating system    | Image name prefix  | User-name |
++=====================+====================+===========+
+| Atomic Linux        | atomic-*           | centos    |
++---------------------+--------------------+-----------+
+| CentOS Linux        | centos-*           | centos    |
++---------------------+--------------------+-----------+
+| CoreOS Linux        | coreos-*           | core      |
++---------------------+--------------------+-----------+
+| Debian Linux        | debian-*           | debian    |
++---------------------+--------------------+-----------+
+| Fedora Atomic Linux | fedora-atomic-*    | fedora    |
++---------------------+--------------------+-----------+
+| Ubuntu Linux        | ubuntu-*           | ubuntu    |
++---------------------+--------------------+-----------+
 
 .. note::
 
