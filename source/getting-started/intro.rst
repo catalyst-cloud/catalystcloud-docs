@@ -17,7 +17,9 @@ Catalyst Cloud was built with the open source project, `OpenStack`_. OpenStack
 is a piece of software that allows users like yourself to provision servers.
 Provisioning is similar to renting. You can provision things such as storage
 space, compute capacity, or internet access. The building blocks you need to run
-a business's applications.
+a business's applications. Openstack requires a python enterpriter to function and 
+is currently phasing out it's support for python2 and will eventually only support
+python3.
 
 .. _`OpenStack`: https://www.openstack.org/software/
 
