@@ -11,14 +11,14 @@ When creating a new compute instance, the preference is to use a
 ``Persistent Volume`` for its root disk. Persistent volumes have several
 benefits, such as:
 
-* Snapshots oare created in seconds and use less space.
+* Snapshots are created in seconds and use less space.
 * The volume and it's associated data can continue to exist after the compute
   instace is deleted.
 
 When launching an instance via the dashboard the default behaviour is to create
 a ``Persistent Volume`` for its root disk. Other methods of instance creation
-vary and some will equire the volume to be created ahead of the instance being
-launched, so please consult the relevant documentation for clarification.
+vary and some will require the volume to be created ahead of the instance being
+launched, if this is the case please consult the relevant documentation for clarification.
 
 Typically an ``Ephemeral Disk`` should only be used for cloud native workloads,
 that use the immutable infrastructure principle, or workloads that are temporary

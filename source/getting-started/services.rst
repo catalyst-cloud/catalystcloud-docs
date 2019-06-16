@@ -135,7 +135,7 @@ don't need to wait for a human to do things for you.
   We intend to automate these in the future.
 
 Resources on the Catalyst Cloud can be created, deleted, assigned, resized,
-copied, and edited at your convenience using one of the many tools used to
+copied, and edited at your convenience using one of the many tools available to
 interact with the Catalyst Cloud. Performing these administrative actions do not
 cost anything.
 
