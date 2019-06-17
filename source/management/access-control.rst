@@ -21,8 +21,8 @@ has accepted their invitation to the project.
 Project Admin
 -------------
 
-The *Project Admin* role allows users to have full control over your project, including adding
-moderators and inviting other people to join it.
+The *Project Admin* role allows users to have full control over who has access to the project,
+including adding moderators and inviting other people to join it.
 
 Project Moderator
 -----------------
