@@ -18,9 +18,13 @@ be found at https://dashboard.cloud.catalyst.net.nz.
 
 .. image:: assets/dashboard_view.png
 
-One advantage to the web dashboard is that it is accessible from any IP address,
-making it a quick way to perform tasks on the Catalyst Cloud while you're away
-from your normal work station.
+Our web dashboard is a great tool that we recommend you have a look at before progressing.
+You'll notice on the left hand side the different tabs for services that are available to you as a user,
+services like our images, volumes and networking options. These are all explained in detail later, but getting
+used to the layout of the dashboard can give insight into their functionality too.
+
+For more information on the Dashboard you can view it :ref:`here
+<cloud-dashboard>`
 
 
 **************************
