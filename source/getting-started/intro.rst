@@ -5,7 +5,7 @@ The basics of Catalyst Cloud
 ############################
 
 This section of the documentation is for people that are entirely new to cloud
-computing and/or the Catalyst Cloud.
+computing and/or the Catalyst Cloud.!
 
 ***************************
 What is the Catalyst Cloud?
@@ -18,6 +18,9 @@ is a piece of software that allows users like yourself to provision servers.
 Provisioning is similar to renting. You can provision things such as storage
 space, compute capacity, or internet access. The building blocks you need to run
 a business's applications.
+Openstack requires a python enterpriter to function and
+is currently phasing out it's support for python2, so we therefore recommend running
+Openstack using python3.
 
 .. _`OpenStack`: https://www.openstack.org/software/
 
@@ -72,5 +75,6 @@ powerful. Every action on Catalyst Cloud can be performed just as quickly.
 
 Now we understand the basic idea behind Catalyst Cloud, let's explore what
 services Catalyst Cloud provides.
+
 
 :ref:`Next page <services_on_the_catalyst_cloud>`
