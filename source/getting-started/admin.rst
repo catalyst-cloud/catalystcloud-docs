@@ -12,8 +12,10 @@ into the Catalyst Cloud.
 Getting support
 ***************
 
-If you experience issues with the Catalyst Cloud, please check to see if the problem(s) are covered further on in this documentation.
-If no solution is found you will need to raise a support request with the support dropdown in the top right corner of the dashboard.
+If you experience issues with the Catalyst Cloud, please check to see if the
+problem(s) are covered further on in this documentation. If no solution is
+found you will need to raise a support request with the support dropdown in
+the top right corner of the dashboard.
 
 If you're an organisation with more complex support needs, you may want to get
 premium support.

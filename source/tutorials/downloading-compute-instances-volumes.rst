@@ -83,7 +83,8 @@ To take a snapshot of an active volume we first need to find the volume ID:
   | volume_id   | 9a7d2ce9-c2c5-41d7-9e4e-83df2ccb58ff |
   +-------------+--------------------------------------+
 
-Now that we have created a snapshot of a running volume, we can view the list of snapshots to confirm its creation.
+Now that we have created a snapshot of a running volume, we can view the list
+of snapshots to confirm its creation.
 
 .. code-block:: bash
 
