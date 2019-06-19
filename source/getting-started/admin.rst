@@ -12,11 +12,13 @@ into the Catalyst Cloud.
 Getting support
 ***************
 
-If you experience issues with the Catalyst Cloud, please check to see if the problem(s) are covered further on in this documentation.
-If no solution is found you will need to raise a support request with the support dropdown in the top right corner of the dashboard.
+If you experience issues with the Catalyst Cloud, please check to
+see if the problem(s) are covered further on in this documentation.
+If no solution is found you will need to raise a support request with
+the support dropdown in the top right corner of the dashboard.
 
-If you are an organisation with more complex support needs, you may want to consider our
-premium support.
+If you are an organisation with more complex support needs, you may
+want to consider our premium support.
 
 .. image:: assets/support_dropdown.png
 
@@ -46,13 +48,15 @@ times for priority one incidents are listed on the `premium support page
 Contacting your account manager
 -------------------------------
 
-Customers that have a premium support contract from Catalyst have a technical account
-manager. You should have received the contact details for your account manager when you
+Customers that have a premium support contract from
+Catalyst have a technical account manager. You
+should have received the contact details for your
+account manager when you
 applied for premium support.
 
 
 Contacting a solutions architect
--------------------------------
+--------------------------------
 
 Premium support customers have access to cloud solution architects who can
 provide guidance on the best way to implement your applications on the cloud.
@@ -68,24 +72,26 @@ Catalyst provides training on how to use the Catalyst Cloud in Auckland,
 Wellington and Christchurch. Upcoming training sessions can be found at
 https://catalyst.net.nz/training/upcoming-training.
 
-You can also request training to be delivered on your premises or customised for the
-needs of your team. Please contact Catalyst via our training page to discuss
-your needs: https://catalyst.net.nz/training-services
+You can also request training to be delivered on your premises or customised
+for the needs of your team. Please contact Catalyst via our training page
+to discuss your needs: https://catalyst.net.nz/training-services
 
 *******
 Regions
 *******
 
-The Catalyst Cloud is delivered out of three data centres across New Zealand. On
-the dashboard, you can specify which data centre to host your resources in
-depending on your needs, with the dropdown in the top left corner. Each region is
-completely independant and isolated (each with their own *control plane*), providing
+The Catalyst Cloud is delivered out of three data centres across
+New Zealand. On the dashboard, you can specify which data centre
+to host your resources in depending on your needs, with the dropdown
+in the top left corner. Each region is completely independant
+and isolated (each with their own *control plane*), providing
 fault tolerance and geographic diversity.
 
 
 .. image:: assets/region_dropdown.png
 
-Please visit our website for more information about our national infrastructure:
+Please visit our website for more information about our national
+infrastructure:
 https://catalystcloud.nz/about/national-infrastructure/
 
 |
@@ -176,7 +182,6 @@ dropdown in the top left corner.
 Information on how to invite new people to your project can be found :ref:`here
 <access_control>`.
 
-More info on projects :ref:`here <projects>`.
 
 .. image:: assets/project_dropdown.png
 
@@ -189,16 +194,16 @@ a ``tenancy``.
 
 .. _find-project-id:
 
-*********************
+
 Finding my project ID
-*********************
+=====================
 
 Every project on the Catalyst Cloud has a ``project name`` (a user friendly
 name) and a ``project id`` (an auto-generated UUID). There are a number of ways
 to find your project ID and name.
 
 Via the Dashboard
-=================
+-----------------
 
 The project ID and name can be found on the `API Access`_ panel by clicking on
 the `View Credentials`_ button.
@@ -207,7 +212,7 @@ the `View Credentials`_ button.
 .. _View Credentials: https://dashboard.cloud.catalyst.net.nz/project/api_access/view_credentials/
 
 Via the CLI
-===========
+-----------
 
 If you are using the OpenStack command line interface you have most likely
 sourced an openrc file, as explained in :ref:`command-line-interface`. If this
@@ -232,9 +237,8 @@ Alternatively, you can use the ``openstack configuration show`` command:
  My-Example-Company-Ltd
 
 
-*********************
 Creating new projects
-*********************
+=====================
 
 You can request the creation of more projects via the `Support
 Requests`_ panel.
@@ -242,12 +246,12 @@ Requests`_ panel.
 .. _Support Requests: https://dashboard.cloud.catalyst.net.nz/management/tickets/
 
 
-****************
+
 Changing project
-****************
+================
 
 Via the dashboard
-=================
+-----------------
 
 On the dashboard, you can change which project you are working on using the
 dropdown on the top left corner.
@@ -255,7 +259,7 @@ dropdown on the top left corner.
 .. image:: ../_static/project_dropdown.png
 
 Via the CLI
-===========
+-----------
 
 The command line interface picks up the project configuration from the
 ``$OS_PROJECT_NAME`` and ``$OS_PROJECT_ID`` environment variables.
@@ -274,9 +278,9 @@ Alternatively you can use the ``--os-project-name`` and ``--os-project-id``
 options to specify the project on each call.
 
 
-**************
+
 Project access
-**************
+==============
 
 The person who signed up to the Catalyst Cloud gets by default the ``Project
 Administrator`` role.
@@ -287,9 +291,9 @@ your projects using the `Project Users Panel`_.
 .. _Project Users Panel: https://dashboard.cloud.catalyst.net.nz/management/project_users/
 
 
-**************
+
 Project quotas
-**************
+==============
 
 Each project comes with an initial ``quota`` that sets a limit on the amount of
 cloud resources that you can initially consume. This can be expanded if you need
@@ -299,9 +303,8 @@ Please refer to the :ref:`quota section of the documentation<quotas>` for more
 information on quotas.
 
 
-*****************
 Project isolation
-*****************
+=================
 
 While projects are inherently secure, it is considered better to use
 multiple projects where it's feasible to do so. For example, it is sensible

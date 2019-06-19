@@ -9,9 +9,6 @@ following key concepts:
    :maxdepth: 1
 
    key-concepts/access
-   key-concepts/regions
    key-concepts/availability-zones
-   key-concepts/projects
    key-concepts/quotas
-   key-concepts/support
    key-concepts/terminology
