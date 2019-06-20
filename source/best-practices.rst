@@ -62,16 +62,17 @@ designed for high availability and allow for maintenance to be performed
 without service disruptions to customers.
 
 For more information about our regions, please consult the
-:ref:`regions` section of the documentation.
+:ref:`regions <admin-region>` section of the documentation.
 
 
 Compute
 =======
 
-If a physical compute node fails, our monitoring systems will detect the failure and
-trigger an “evacuate” process that will restart all affected virtual compute instances
-on a healthy physical server. This process usually takes between 5 to 20 minutes which
-allows us to meet our 99.95% availability SLA for individual compute instances.
+If a physical compute node fails, our monitoring systems will detect the
+failure and trigger an “evacuate” process that will restart all affected
+virtual compute instances on a healthy physical server. This process usually
+takes between 5 to 20 minutes which allows us to meet our 99.95% availability
+SLA for individual compute instances.
 
 Customers that require more than 99.95% availability can combine multiple
 compute instances within the same region using anti-affinity groups.
@@ -88,11 +89,12 @@ support this architecture.
 Block storage
 =============
 
-We run a distributed storage system that by default retains three copies of your
-data on different servers spread across a region (a datacenter). We can afford
-to lose many disks and multiple storage nodes without losing any data. As soon
-as a disk or storage node fails, our storage solution begins recovering the
-data from an existing copy, always ensuring that three replicas are present.
+We run a distributed storage system that by default retains three copies of
+your data on different servers spread across a region (a datacenter).
+We can afford to lose many disks and multiple storage nodes without losing any
+data. As soon as a disk or storage node fails, our storage solution begins
+recovering the data from an existing copy, always ensuring that three replicas
+are present.
 
 The storage solution is self managing and self healing, constantily placing
 your data in optimal locations for data survival and resiliency. It runs
@@ -119,16 +121,16 @@ being quickly recovered from another disk, server or region.
 Virtual routers
 ===============
 
-In the same way that if a compute instance fails, if a physical network node fails our
-monitoring systems will detect the failure and trigger the evacuate process that will
-ensure all affected virtual router instances are restarted on a healthy server.
-This process usually takes between 5 to 20 minutes.
+In the same way that if a compute instance fails, if a physical network node
+fails our monitoring systems will detect the failure and trigger the evacuate
+process that will ensure all affected virtual router instances are restarted on
+a healthy server. This process usually takes between 5 to 20 minutes.
 
-We are working on a new feature that launches two virtual routers on separate network
-nodes responding on the same IP address. Once this is complete the failover between
-routers will take milliseconds which will most likely not be noticed.
-Meanwhile customers requiring Higher availability are advised to combine compute
-instances from multiple regions where possible.
+We are working on a new feature that launches two virtual routers on separate
+network nodes responding on the same IP address. Once this is complete the
+failover between routers will take milliseconds which will most likely not be
+noticed. Meanwhile customers requiring Higher availability are advised to
+combine compute instances from multiple regions where possible.
 
 HA Tutorials
 ============

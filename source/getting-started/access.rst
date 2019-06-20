@@ -13,15 +13,19 @@ these services.
 The web dashboard
 *****************
 
-The web dashboard is a simple way to interact with The Catalyst Cloud. It can
-be found at https://dashboard.cloud.catalyst.net.nz.
+The :ref:`cloud dashboard <cloud-dashboard>` is a simple way to interact with
+The Catalyst Cloud. It is publicly available on the Internet and can be reached
+at: https://dashboard.cloud.catalyst.net.nz
+
 
 .. image:: assets/dashboard_view.png
 
-Our web dashboard is a great tool that we recommend you have a look at before progressing.
-You'll notice on the left hand side the different tabs for services that are available to you as a user,
-services like our images, volumes and networking options. These are all explained in detail later, but getting
-used to the layout of the dashboard can give insight into their functionality too.
+Our web dashboard is a great tool that we recommend you have a look at before
+progressing. You'll notice on the left hand side the different tabs for
+services that are available to you as a user, services like our images, volumes
+and networking options. These are all explained in detail later, but getting
+used to the layout of the dashboard can give insight into their functionality
+too.
 
 For more information on the Dashboard you can view it :ref:`here
 <cloud-dashboard>`
@@ -36,8 +40,8 @@ with Catalyst Cloud. To use the CLI you will need to:
 
 1. Install the OpenStack CLI.
 2. Tell the OpenStack CLI who you are, and which OpenStack cloud you want to
-   connect to. This is typically done by sourcing a configuration file that sets
-   environment variables to configure the CLI.
+   connect to. This is typically done by sourcing a configuration file that
+   sets environment variables to configure the CLI.
 
 You can find instructions on how to install and set up the CLI :ref:`here
 <command-line-interface>`. After which, you may want to familiarise yourself
@@ -84,8 +88,37 @@ modify your infrastructure. This is important for `SaaS
 <https://en.wikipedia.org/wiki/Software_as_a_service>`_ applications, or
 applications that otherwise need to scale to meet demand.
 To make this integration easier, the OpenStack community has developed a range
-of software development kits (SDKs) for numerious languages. You can find a list
-`here <https://wiki.openstack.org/wiki/SDKs>`_.
+of software development kits (SDKs) for numerious languages. You can find a
+list `here <https://wiki.openstack.org/wiki/SDKs>`_.
+
+
+As an additional security measure, the Catalyst Cloud APIs only accept requests
+from whitelisted IP addresses. If you have provided an IP address during sign
+up, you should be able to reach the APIs from that IP. Otherwise, you can `open
+a support request
+<https://dashboard.cloud.catalyst.net.nz/management/tickets/>`_ via the
+dashboard at any time to request a change to the white-listed IPs.
+
+.. _access-and-whitelist:
+
+|
+
+Whitelisting and access
+=========================
+
+All compute instances on the Catalyst Cloud have whitelisted IP addresses by
+default. Because compute instances are whitelisted, you can use them as a
+"jumpbox" by creating an instance using the :ref:`cloud dashboard
+<cloud-dashboard>`, SSH-ing into the instance, and :ref:`installing
+<installing-the-cli>` and :ref:`configuring <configuring-the-cli>` the CLI
+tools there. An explanation of launching an instance using the web dashboard
+can be found :ref:`here <first-instance-with-dashboard>`.
+
+The compute instances you launch on the Catalyst Cloud are created in your
+private network by default. You have the option to associate a floating IP
+(public IP) with your compute instances to expose them to the Internet. You can
+use security groups (similar to firewalls) to define who has access to your
+compute instances, as explained in :ref:`security-groups`.
 
 |
 

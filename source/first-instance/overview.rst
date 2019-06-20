@@ -15,8 +15,8 @@ The following is assumed:
 * Your user in that project has permissions to create the required resources.
 
 When a new project is created, a network, subnet, and router are built by
-default. The process below outlines the steps required to do this if the default
-setup has been deleted or an additional network is required.
+default. The process below outlines the steps required to do this if the
+default setup has been deleted or an additional network is required.
 
 .. note::
 
@@ -44,6 +44,9 @@ You are free to use whichever method suits you. You can use these methods in
 isolation or they can be combined. If you do not use the dashboard to launch
 the compute instance, it can still be useful to use it to verify the
 stack you have created via another method.
+
+By the end of this process you should have an instance running of an Ubuntu
+image that you're able to use however you'd like.
 
 Network Requirements
 ====================
@@ -80,11 +83,11 @@ cloud region for use by Catalyst Cloud instances. They are:
 |          | | 202.78.244.87                                |
 +----------+------------------------------------------------+
 
-When creating a router and network/subnet, keep any network requirements in mind
-when choosing addressing for your networks. You may want to build a tunnel-mode
-VPN in the future to connect your OpenStack private network to another private
-network. Choosing a unique subnet now will ensure you will not experience
-collisions that need renumbering in the future.
+When creating a router and network/subnet, keep any network requirements in
+mind when choosing addressing for your networks. You may want to build a
+tunnel-mode VPN in the future to connect your OpenStack private network to
+another private network. Choosing a unique subnet now will ensure you will not
+experience collisions that need renumbering in the future.
 
 Compute Flavors
 ===============
@@ -135,8 +138,8 @@ Security Groups
 Security groups are akin to a virtual firewall. All new instances are put in
 the 'default' security group. When unchanged, the default security group allows
 all egress (outbound) traffic, but will drop all ingress (inbound) traffic. In
-order to allow inbound access to your instance via SSH, a security group rule is
-required.
+order to allow inbound access to your instance via SSH, a security group rule
+is required.
 
 While you could create security group rules within the default group to allow
 access to your instance, it is sensible to create a new group to hold the rules
@@ -159,6 +162,6 @@ Floating IPs
 ============
 
 In order to connect to your instance, you will need to allocate a floating IP
-to the instance. Alternately, you could create a VPN and save some money by
-avoiding floating IPs altogether. VPNs are not feasible when the instance
-will be offering a service to the greater internet.
+to the instance. Alternately, you could create a :ref:`VPN <vpn>` and save
+some money by avoiding floating IPs altogether. VPNs are not feasible when the
+instance will be offering a service to the greater internet.

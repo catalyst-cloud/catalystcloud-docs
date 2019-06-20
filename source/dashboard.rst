@@ -13,29 +13,35 @@ be found at https://dashboard.cloud.catalyst.net.nz.
 
 .. image:: assets/dashboard_view.png
 
-As mentioned earlier, our web dashboard is a great tool that provides easy access to most of the services
-that the Catalyst Cloud provides. All of the standerd services are able
-to be controlled via the Dashboard. There are some more advanced abilities that the
-cloud environment is capable of, however these require the use of the :ref:`CLI
-<command-line-interface>` or interacting with our API's directly; which is discussed elsewhere in the :ref:`documentation
+As mentioned earlier, our web dashboard is a great tool that provides easy
+access to most of the services that the Catalyst Cloud provides. All of the
+standerd services are able to be controlled via the Dashboard. There are some
+more advanced abilities that the cloud environment is capable of, however these
+require the use of the :ref:`CLI <command-line-interface>` or interacting with
+our API's directly; which is discussed elsewhere in the :ref:`documentation
 <apis>`
 
-As previously mention in the getting started section, you can see most of the services provided
-on the left hand sidebar. These services have their own guides and tutorials that are featured
-later in this documentation. Things such as creating compute instances, partitioning block storage or objects storage etc.
-Before going on to use these services, we recommend going through our :ref:`first instance tutorial. <launch-first-instance>`
+As previously mention in the getting started section, you can see most of the
+services provided on the left hand sidebar. These services have their own
+guides and tutorials that are featured later in this documentation. Things such
+as creating compute instances, partitioning block storage or objects storage
+etc. Before going on to use these services, we recommend going through our
+:ref:`first instance tutorial. <launch-first-instance>`
 
 Some of the dashboard functionality beyond these services are in the
-buttons along the top bar. From left to right, these let you select which project you are working on,
-change what region your operating in, access our support functions and change accounts or your account settings.
+buttons along the top bar. From left to right, these let you select which
+project you are working on, change what region your operating in, access our
+support functions and change accounts or your account settings.
 
-The major appeal of using the dashboard is it requires very little programming expertise or knowledge.
-There is an assumed level of understanding about the products you are trying to create or outcomes you seek to achieve. But you can use
-most of the services provided by the Catalyst Cloud simply by navigating through the dashboard.
+The major appeal of using the dashboard is it requires very little programming
+expertise or knowledge. There is an assumed level of understanding about the
+products you are trying to create or outcomes you seek to achieve. But you can
+use most of the services provided by the Catalyst Cloud simply by navigating
+through the dashboard.
 
-Another  major advantage to the web dashboard is that it is accessible from any IP address,
-making it a quick way to perform tasks on the Catalyst Cloud while you're away
-from your normal work station.
+Another  major advantage to the web dashboard is that it is accessible from any
+IP address, making it a quick way to perform tasks on the Catalyst Cloud while
+you're away from your normal work station.
 
 
 .. note::

@@ -7,6 +7,9 @@ Administrating the Catalyst Cloud
 There are a few small points that are important to be aware of before diving
 into the Catalyst Cloud.
 
+.. _admin-support:
+
+|
 
 ***************
 Getting support
@@ -75,6 +78,11 @@ https://catalyst.net.nz/training/upcoming-training.
 You can also request training to be delivered on your premises or customised
 for the needs of your team. Please contact Catalyst via our training page
 to discuss your needs: https://catalyst.net.nz/training-services
+
+
+.. _admin-region:
+
+|
 
 *******
 Regions
@@ -166,6 +174,20 @@ replicated automatically across regions unless you do so. This provides users
 the flexibility to introduce replication where required and to fail-over
 resources independently when needed.
 
+|
+
+Availability zones
+==================
+
+The Catalyst Cloud does not use availability zones as a construct for
+high-availability within regions. Instead, it uses server groups with
+anti-affinity polices to ensure compute instances are scheduled in different
+physical servers.
+
+For more information, please refer to the :ref:`anti-affinity` section of the
+documentation.
+
+.. _admin-projects:
 
 ********
 Projects
@@ -296,10 +318,11 @@ Project quotas
 ==============
 
 Each project comes with an initial ``quota`` that sets a limit on the amount of
-cloud resources that you can initially consume. This can be expanded if you need
-more resources.
+cloud resources that you can initially consume. This can be expanded if you
+need more resources.
 
-Please refer to the :ref:`quota section of the documentation<quotas>` for more
+Please refer to the :ref:`quota section of the
+documentation <additional-info>` for more
 information on quotas.
 
 
@@ -314,7 +337,8 @@ impacting your business.
 
 |
 
-Now that you understand the basics of the Catalyst Cloud, lets dive into a hands
-on example using the web dashboard!
+Now that you understand the basics of the Catalyst Cloud, lets dive into a
+hands on example using the web dashboard!
 
-:ref:`Previous page <access_to_catalyst_cloud>` - :ref:`Next page <first-instance-with-dashboard>`
+:ref:`Previous page <access_to_catalyst_cloud>` -
+:ref:`Next page <first-instance-with-dashboard>`
