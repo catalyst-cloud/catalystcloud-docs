@@ -8,9 +8,9 @@ FAQ
 How to migrate between HDD and NVMe disks
 *****************************************
 
-At the current time, support for a cloud native migration option between storage
-tiers is not supported. With that in mind here is our recommended approach for
-transferring data between 2 disks in different tiers.
+At the current time, support for a cloud native migration option between
+storage tiers is not supported. With that in mind here is our recommended
+approach for transferring data between 2 disks in different tiers.
 
 For the purpose of this example we will assume:
 
@@ -22,8 +22,8 @@ For the purpose of this example we will assume:
   - is mounted on /mnt/data_new
 
 We will be using `rsync`_ to perform the transfer as it allows us to maintain
-the volumes thin provisioned nature, and preserve the nature of any sparse files
-that may exist on the original disk.
+the volumes thin provisioned nature, and preserve the nature of any sparse
+files that may exist on the original disk.
 
 .. code-block:: bash
 
@@ -82,7 +82,7 @@ Another method which is quick and safe is to perform a volume snapshot.
 The process is as follows:
 
 1) Shut down the instance.
-2) Take a volume snapshot.
+2) Take a volume snapshot. (as documented :ref:`here <using-volumes>`
 3) Create volume from snapshot.
 4) Boot instance from volume.
 

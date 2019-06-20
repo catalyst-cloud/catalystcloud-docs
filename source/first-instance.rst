@@ -27,5 +27,3 @@ further information:
    first-instance/ansible
    first-instance/terraform
    first-instance/shade-sdk
-   first-instance/command-line-cleanup
-   first-instance/bash-script-cleanup

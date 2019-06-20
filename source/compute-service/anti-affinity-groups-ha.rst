@@ -14,13 +14,14 @@ different physical servers.
 ..
   Server affinity is useful when you want to ensure that the data transfer
   amongst compute instances is as fast as possible. On the other hand it may
-  reduce the availability of your application (a single server going down affects
-  all compute instances in the group) or increase CPU contention.
+  reduce the availability of your application (a single server going down
+  affects all compute instances in the group) or increase CPU contention.
 
 Server anti-affinity is useful when you want to increase the availability of an
-application within a region. Compute instances in an anti-affinity group are
-placed on different physical servers, ensuring that the failure of a server
-will not affect all your compute instances simultaneously.
+application within a region and create redundancy for your compute instances.
+Compute instances in an anti-affinity group are placed on different physical
+servers, ensuring that the failure of a server will not affect all your compute
+instances simultaneously.
 
 **********************
 Managing server groups

@@ -21,6 +21,31 @@ Download and run this script using the following commands:
  function, and impact is thoroughly understood. The script may require editing to
  add a prefix, for example.
  See the "VARS" section at the top of the script for more details.
+ In addition to this, we no longer use the variable name "OS_TENANT" we use "OS_PROJECT"
+ so you may have to change that before running this script.
 
 .. literalinclude:: ../_scripts/create-first-instance.sh
+  :language: bash
+
+
+
+Resource cleanup using a bash script
+====================================
+
+This script includes all the commands from the CLI cleanup previously mentioned
+in a single bash script.
+
+You can download and run this script using the following commands:
+
+.. code-block:: bash
+
+ $ wget -q https://raw.githubusercontent.com/catalyst/catalystcloud-docs/master/scripts/delete-first-instance.sh
+ $ chmod 744 delete-first-instance.sh
+ $ ./delete-first-instance.sh
+
+.. note::
+
+ You may wish to edit the script before executing, for example to add a prefix.
+
+.. literalinclude:: ../_scripts/delete-first-instance.sh
   :language: bash

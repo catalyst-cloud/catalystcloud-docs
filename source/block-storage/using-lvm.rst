@@ -6,9 +6,10 @@ Creating volumes using LVM
 What is LVM?
 ------------
 
-The Logical Volume Manager (LVM) is a userspace toolset designed to provide a higher level
-management of disk storage on a linux system than the traditional approach of disks and
-partitions by creating a software abstraction of those physical devices.
+The Logical Volume Manager (LVM) is a userspace toolset designed to provide a
+higher level management of disk storage on a linux system than the traditional
+approach of disks and partitions by creating a software abstraction of those
+physical devices.
 
 This virtualisation of the disks provides the following benefits:
 
@@ -23,14 +24,16 @@ This virtualisation of the disks provides the following benefits:
 Working with logical volumes
 ============================
 
-While it is possible to create a logical volume using an unpartitioned disk we recommend that you
-create one anyway, if for no other reason than to inform software such as partitioning utilities
-that the disk is is being used. This avoids the possibiliy of someone firing up a partitioning
-program, seeing an unpartitioned disk and attempting to use it for some other purpose.
+While it is possible to create a logical volume using an unpartitioned disk we
+recommend that you create one anyway, if for no other reason than to inform
+software such as partitioning utilities that the disk is is being used. This
+avoids the possibiliy of someone firing up a partitioning program, seeing an
+unpartitioned disk and attempting to use it for some other purpose.
 
 Creating a logical volume on a single disk
 ------------------------------------------
-The first thing to do is identify the disks available for use, to do this use **lvmdiskscan**
+The first thing to do is identify the disks available for use, to do this
+use **lvmdiskscan** while on a compute instance.
 
 .. code-block:: shell
 
@@ -50,8 +53,9 @@ This shows us that there are currently three disks available
 
 For this example /dev/vdb will be used to create the logical volume.
 
-There are several tools available for creating disk partitions, these include tools such as
-fdisk , parted and the GNU Parted. This example will use gdisk and the steps are as follows:
+There are several tools available for creating disk partitions, these include
+tools such as fdisk , parted and the GNU Parted. This example will use gdisk
+and the steps are as follows:
 
 - load gdisk and select the disk to partition
 - type **n** to create a new partition
@@ -154,12 +158,13 @@ Now checking the disk status should show that there is a new partition
     0 LVM physical volume whole disks
     0 LVM physical volumes
 
-In order to use a storage device in a logical volume the disks must first be labelled as LVM
-physical volumes, this can be done this using **pvcreate**. While there is only /dev/vdb1 being
-added at this time it is possible to pass multiple devices at once.
+In order to use a storage device in a logical volume the disks must first be
+labelled as LVM physical volumes, this can be done this using **pvcreate**.
+While there is only /dev/vdb1 being added at this time it is possible to pass
+multiple devices at once.
 
-The **pvs** (or **pvdisplay**) command can then be used to confirm the status of the available
-physical volumes.
+The **pvs** (or **pvdisplay**) command can then be used to confirm the status
+of the available physical volumes.
 
 .. code-block:: shell
 
@@ -170,22 +175,24 @@ physical volumes.
   PV         VG   Fmt  Attr PSize  PFree
   /dev/vdb1       lvm2 ---  10.00g 10.00g
 
-The next step is to create a volume group. Once again, though only a single initial physical volume
-is being added it is possible to add multiple physical volumes at a time.
+The next step is to create a volume group. Once again, though only a single
+initial physical volume is being added it is possible to add multiple physical
+volumes at a time.
 
-It is possible to use a single volume group per server to create a pool of LVM managed storage, and
-then allocate all logical volumes from that. Some possible scenarios where multiple volume groups
-are necessary are:
+It is possible to use a single volume group per server to create a pool of LVM
+managed storage, and then allocate all logical volumes from that. Some possible
+scenarios where multiple volume groups are necessary are:
 
 - to achieve a sense of separation between operating system and user disks.
 - a need for disks with different extent sizes.
 - isolating data for performance reasons
 
-Multiple volume groups also require separate physical groups as they cannot be shared across volume
-groups.
+Multiple volume groups also require separate physical groups as they cannot be
+shared across volume groups.
 
-Using **vgcreate**, create the volume group. If no value is provided for the extents it will use
-the default of 4MiB. Volume group status can be confirmed using vgs (or vgdisplay).
+Using **vgcreate**, create the volume group. If no value is provided for the
+extents it will use the default of 4MiB. Volume group status can be confirmed
+using vgs (or vgdisplay).
 
 .. code-block:: shell
 
@@ -196,13 +203,14 @@ the default of 4MiB. Volume group status can be confirmed using vgs (or vgdispla
   VG      #PV #LV #SN Attr   VSize  VFree
   vg_data   1   0   0 wz--n- 10.00g 10.00g
 
-The final step is to create a new logical volume using the **lvcreate** command, we will call it
-'data' and create it in the volume group 'vg_data'.
+The final step is to create a new logical volume using the **lvcreate** command
+, we will call it 'data' and create it in the volume group 'vg_data'.
 
-In the output above it shows that the volume group has 10GB available. That means that a logical
-volume could be created with any size up to that limit,  To create a 5GB partition for instance
-specify the the size argument ``-l 5G`` . For this example the new volume will use all of the
-available free space with the following parameter ``-l 100%FREE``.
+In the output above it shows that the volume group has 10GB available. That
+means that a logical volume could be created with any size up to that limit,
+To create a 5GB partition for instance specify the the size argument ``-l 5G``
+. For this example the new volume will use all of the available free space with
+the following parameter ``-l 100%FREE``.
 
 .. code-block:: shell
 
@@ -241,8 +249,9 @@ Running **lvmdiskscan** now should show that the new LVM volume is present.
       0 LVM physical volume whole disks
       1 LVM physical volume
 
-All that remains to be done now is add a filesystem to the LVM volume and create a mount point and
-a mount point entry in /etc/fstab and test that the volume mounts correctly.
+All that remains to be done now is add a filesystem to the LVM volume and
+create a mount point and a mount point entry in /etc/fstab and test that the
+volume mounts correctly.
 
 .. code-block:: shell
 

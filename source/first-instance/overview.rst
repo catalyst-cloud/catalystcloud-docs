@@ -4,7 +4,7 @@
 Overview
 ********
 
-This section will demonstrate how to build an Ubuntu 14.04 server. After you
+This section will demonstrate how to build an Ubuntu 18.04 server. After you
 have completed the steps, you will be able to log in to the server via SSH from
 anywhere on the internet using an SSH key.
 
@@ -39,6 +39,13 @@ Cloud. We will show you how to complete these steps using the dashboard and the
 command line tools. If you are not comfortable with the command line, it will
 be easier to use the dashboard. As you become more familiar with the Catalyst
 Cloud it is worth learning how to provision resources programmatically.
+
+Each of the different methods have pro's and cons. Some are easier to
+impliment than others, some give you more information on the creation process
+as a whole and Some let you have more customisation options. So even if you are
+comfortable with just using one method at the beginning, we recommend taking a
+look at the others over time as your needs may change and the other methods may
+provide and easier solution.
 
 You are free to use whichever method suits you. You can use these methods in
 isolation or they can be combined. If you do not use the dashboard to launch
