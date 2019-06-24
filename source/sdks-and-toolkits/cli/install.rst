@@ -72,7 +72,7 @@ over to Python3 is a necessity.
 .. code-block:: bash
 
   # Install python 3.x and virtualenv
-  sudo apt-get install python3 python3-ven
+  sudo apt-get install python3 python3-venv
 
   # Create a new virtual environment and activate it
   python3 -m venv vevn
