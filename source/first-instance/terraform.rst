@@ -93,18 +93,19 @@ Download the configuration file:
  $ wget https://raw.githubusercontent.com/catalyst/catalystcloud-orchestration/master/terraform/first-instance/first-instance.tf
 
 
+.. note::
 
-In order for the pre-prepared configuration to work, a number of changes must
-be made:
+  In order for the pre-prepared configuration to work, a number of changes must
+  be made:
 
-* Edit the file and change the ``public_key`` under the ``openstack_compute_keypair_v2``
-  resource. Use the actual public key string, not a path to the public key
-  file.
+  * Edit the file and change the ``public_key`` under the ``openstack_compute_keypair_v2``
+    resource. Use the actual public key string, not a path to the public key
+    file.
 
-* Ensure that variables referred to in the file match the correct OpenStack region.
-  The pre-prepared file has been set up to work with Catalyst's Porirua region.
-  Pay   particular attention to ``external_gateway``, ``dns_nameservers``,
-  ``image_id``,   and ``flavor_id``.
+  * Ensure that variables referred to in the file match the correct OpenStack region.
+    The pre-prepared file has been set up to work with Catalyst's Porirua region.
+    Pay   particular attention to ``external_gateway``, ``dns_nameservers``,
+    ``image_id``,   and ``flavor_id``.
 
 
 Run Terraform plan

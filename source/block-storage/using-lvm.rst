@@ -33,7 +33,7 @@ unpartitioned disk and attempting to use it for some other purpose.
 Creating a logical volume on a single disk
 ------------------------------------------
 The first thing to do is identify the disks available for use, to do this
-use **lvmdiskscan** while on a compute instance.
+use ``lvmdiskscan`` while on a **compute instance**.
 
 .. code-block:: shell
 

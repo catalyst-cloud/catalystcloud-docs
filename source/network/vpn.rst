@@ -243,7 +243,7 @@ This script currently only supports single CIDR ranges. If you are wanting to
 tunnel multiple ranges then it will require some modification.
 
 .. note::
- This script makes used of the `jq`_ command line utility for parsing JSON.
+ This script makes use of the `jq`_ command line utility for parsing JSON.
  You will need to install it before using the script.
 
  .. _jq: https://stedolan.github.io/jq/

@@ -43,8 +43,9 @@ the behaviour of the load balancer:
   to the first server in the list.
 * ``Source`` This algorithm selects the server based on the source IP address
   using the hash to connect it to the matching server.
-* ``Least Connection`` algorithm This algorithm selects the server with few
-  active transactions and then forwards the user request to the back end.
+* ``Least Connection`` algorithm This algorithm selects the server with the
+  fewest active transactions and then forwards the user request to the back
+  end.
 
 
 ******************
