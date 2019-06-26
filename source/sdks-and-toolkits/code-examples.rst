@@ -1,6 +1,54 @@
 .. _code-examples:
 
+#############
+Code examples
+#############
+
+
+
 .. tabs::
+
+   .. tab:: Video
+
+      .. raw:: html
+
+            <style>
+                  video{
+                        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+                        margin: 0;
+                        padding: 0;
+                        border: 0;
+                  }
+            </style>
+
+            <div id="my custom container" align="center">
+
+            <video id="video" autoplay muted width="320" height="240">
+                  <source src="/home/danielobyrne/Documents/code_directory/catalystcloud-docs/source/assets/Danheim-ulfhednar.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+            </video>
+            </div>
+
+   .. tab:: Video2
+
+      .. raw:: html
+
+            <style>
+                  video{
+                        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+                        border-left: 5;
+                  }
+            </style>
+
+            <div id="my custom container2" align="center">
+
+            <video id="video" autoplay muted width="320" height="240">
+                  <source src="/home/danielobyrne/Documents/code_directory/catalystcloud-docs/source/assets/Go-to-the-light-Murder-by-Death.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+            </video>
+            </div>
+
+
 
    .. code-tab:: py
 
@@ -16,6 +64,7 @@
 
       # print current region to prove conectivity successful
       print(conn.get_region())
+
 
    .. code-tab:: go
 

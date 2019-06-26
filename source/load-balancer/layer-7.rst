@@ -40,16 +40,16 @@ with an L7 policy.
 
 Rule types
 
-* ``HOST_NAME``: The rule does a comparison between the HTTP/1.1 hostname in the
-  request against the value parameter in the rule.
-* ``PATH``: The rule compares the path portion of the HTTP URI against the value
-  parameter in the rule.
-* ``FILE_TYPE``: The rule compares the last portion of the URI against the value
-  parameter in the rule. (eg. “txt”, “jpg”, etc.)
-* ``HEADER``: The rule looks for a header defined in the key parameter and compares
-  it against the value parameter in the rule.
-* ``COOKIE``: The rule looks for a cookie named by the key parameter and compares
-  it against the value parameter in the rule.
+* ``HOST_NAME``: The rule does a comparison between the HTTP/1.1 hostname in
+  the request against the value parameter in the rule.
+* ``PATH``: The rule compares the path portion of the HTTP URI against the
+  value parameter in the rule.
+* ``FILE_TYPE``: The rule compares the last portion of the URI against the
+  value parameter in the rule. (eg. “txt”, “jpg”, etc.)
+* ``HEADER``: The rule looks for a header defined in the key parameter and
+  compares it against the value parameter in the rule.
+* ``COOKIE``: The rule looks for a cookie named by the key parameter and
+  compares it against the value parameter in the rule.
 
 Comparison types
 
@@ -284,7 +284,10 @@ Create the second pool.
 Add the members
 ***************
 
-Add the first member to the first pool.
+Add the first member to the first pool. When creating members, make sure that
+you use the local addresses of your instances. In our example we use
+``10.0.0.5`` and ``10.0.0.7``
+
 
 .. code-block:: bash
 
