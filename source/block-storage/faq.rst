@@ -25,6 +25,9 @@ We will be using `rsync`_ to perform the transfer as it allows us to maintain
 the volumes thin provisioned nature, and preserve the nature of any sparse
 files that may exist on the original disk.
 
+The following code block is a template for you to fill in with your
+requirements:
+
 .. code-block:: bash
 
   rsync -avxHAXSW --numeric-ids --info=progress2 /data/ /mnt/data_new/

@@ -16,7 +16,7 @@ Orchestration Template (HOT). The orchestration service manages the life-cycle
 of application stacks on your behalf. When a template is modified, the service
 orchestrates the required changes to the infrastructure in the appropriate
 order. Templates can be managed like code and stored in your preferred version
-control system.More information about Heat can be found in the OpenStack wiki:
+control system. More information about Heat can be found in the OpenStack wiki:
 https://wiki.openstack.org/wiki/Heat
 
 .. Heat makes auto-scaling easy. You can define a scaling group and a scaling
@@ -51,7 +51,7 @@ https://github.com/catalyst/catalystcloud-orchestration.
   orchestration service (Heat) is "ec2-user". This is done to retain
   compatibility with the AWS CloudFormation service.
 
-The following heat Heat Orchestration Template (HOT) is a simple example
+The following Heat Orchestration Template (HOT) is a simple example
 that illustrates how to launch a single instance on the Catalyst Cloud
 using the Heat orchestration service. For a more interactive
 example of how to create an instance using a HOT template, please refer to

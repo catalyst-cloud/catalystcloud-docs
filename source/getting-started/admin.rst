@@ -9,8 +9,6 @@ into the Catalyst Cloud.
 
 .. _admin-support:
 
-|
-
 ***************
 Getting support
 ***************
@@ -57,7 +55,6 @@ should have received the contact details for your
 account manager when you
 applied for premium support.
 
-
 Contacting a solutions architect
 --------------------------------
 
@@ -65,8 +62,6 @@ Premium support customers have access to cloud solution architects who can
 provide guidance on the best way to implement your applications on the cloud.
 Please contact your account manager to arrange a discussion with a cloud
 solutions architect.
-
-
 
 Training
 ========
@@ -81,8 +76,6 @@ to discuss your needs: https://catalyst.net.nz/training-services
 
 
 .. _admin-region:
-
-|
 
 *******
 Regions
@@ -142,6 +135,12 @@ The command line interface picks up the region configuration from the
 
   export OS_REGION_NAME="region-code"
 
+The easiest way to get this information set is to download the RC file for your
+project from the drop down tab at the top right of the dashboard; and use it as
+your source file while working on the command line. The RC file sets a number
+of variables like ``OS_REGION_NAME``. There is a comprehensive tutorial on
+:ref:`how to configure the CLI <source-rc-file>` in our documentation
+
 Alternatively you can use the ``--os-region-name`` option to specify the region
 on each call.
 
@@ -193,7 +192,7 @@ documentation.
 Projects
 ********
 
-Everything you do on the Catalyst Cloud is in a project. Use projects to
+Everything you do on the Catalyst Cloud is in a ``project``. Use projects to
 separate the different things you work on. For example, have a project for each
 organisation you work with, or one for each branch of your organisation.
 Something done in one project cannot effect any other projects.
@@ -207,7 +206,6 @@ Information on how to invite new people to your project can be found :ref:`here
 
 .. image:: assets/project_dropdown.png
 
-Everything you do and host on the Catalyst Cloud is in a ``project``.
 
 The Catalyst Cloud provides an isolated and multi-tenanted approach to creating
 workspaces. These workspaces are typically referred to as a ``project`` but for
@@ -299,6 +297,10 @@ name is specified, the CLI will perform a lookup for the name to find the ID.
 Alternatively you can use the ``--os-project-name`` and ``--os-project-id``
 options to specify the project on each call.
 
+.. note::
+
+  Both of these variables are set
+  when your source your project from an RC file in the command line.
 
 
 Project access

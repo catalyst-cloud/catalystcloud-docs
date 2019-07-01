@@ -153,7 +153,8 @@ Label the partition:
   /dev/vdb1: LABEL="extra-disk" UUID="7dec7fb6-ff38-453b-9335-0c240d179262" TYPE="ext4" PARTUUID="235ac0e4-01"
 
 If you want the new file system to be mounted when the system reboots then you
-should add an entry to ``/etc/fstab``, for example:
+should add an entry to ``/etc/fstab``, for example making sure you have sudo
+privilage:
 
 .. code-block:: console
 

@@ -19,7 +19,6 @@ This virtualisation of the disks provides the following benefits:
 -  Allows for easy filesystem resizing without having to migrate data.
 -  Create filesystem backups by taking snapshots of logical volumes.
 
-|
 
 Working with logical volumes
 ============================
@@ -33,7 +32,8 @@ unpartitioned disk and attempting to use it for some other purpose.
 Creating a logical volume on a single disk
 ------------------------------------------
 The first thing to do is identify the disks available for use, to do this
-use ``lvmdiskscan`` while on a **compute instance**.
+use ``lvmdiskscan`` while on a **compute instance**. and while having ``Sudo``
+privilages.
 
 .. code-block:: shell
 

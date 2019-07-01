@@ -2,6 +2,12 @@
 Clusters
 ########
 
+This section shows a more in depth view of clusters and their uses. It
+goes over the process of creating clusters, which is already covered in
+quick start section of this documentation. So if you've gone through that you
+don't need to follow all of the examples again if you've already
+done them in the other section.
+
 ******************
 What is a cluster?
 ******************
@@ -21,11 +27,12 @@ multi-master HA configuration.
 
 Some of the key services running on the master are:
 
-- The interface to the cluster is via the ``API Server``, which provides a RESTful API frontend to
-  the control plane.
-- Configuration and state of the cluster is managed by the ``cluster store``. This is based on
-  ``etcd``, which is a distributed key-value store, and provides the single source of truth for
-  the cluster and as such is the only stateful component within the cluster.
+- The interface to the cluster is via the ``API Server``, which provides a
+  RESTful API frontend to the control plane.
+- Configuration and state of the cluster is managed by the ``cluster store``.
+  This is based on ``etcd``, which is a distributed key-value store, and
+  provides the single source of truth for the cluster and as such is the only
+  stateful component within the cluster.
 - The ``scheduler``
 
 The machines designated as ``nodes``, previously referred to as minions, are
@@ -40,9 +47,9 @@ A cluster template is a collection of parameters to describe how a cluster can
 be constructed. Some parameters are relevant to the infrastructure of the
 cluster, while others are for the particular COE.
 
-The cloud provider may supply pre-defined templates for users and it may also be
-possible, in some situations, for user to create their own templates. Initially
-Catalyst Cloud will only allow the use of the pre-defined templates.
+The cloud provider may supply pre-defined templates for users and it may also
+be possible, in some situations, for user to create their own templates.
+Initially Catalyst Cloud will only allow the use of the pre-defined templates.
 
 
 Viewing templates
@@ -50,6 +57,7 @@ Viewing templates
 
 When running openstack command line tools ensure that you have sourced a valid
 openrc file first. For more information on this see :ref:`source-rc-file`
+
 
 .. Note::
 
@@ -124,10 +132,10 @@ There are some key parameters that are worth mentioning in the above template:
   set to ‘false’ thus creating a cluster without the load balancer. In this
   case, one of the masters will serve as the API endpoint. The default is True.
 * ``network_driver: calico``
-  This is the driver used to provide networking services to the containers. This
-  is independent from the Neutron networking that the cluster uses. Calico is
-  the Catalyst Cloud recommended network driver as it provides secure network
-  connectivity for containers and virtual machine workloads.
+  This is the driver used to provide networking services to the containers.
+  This is independent from the Neutron networking that the cluster uses. Calico
+  is the Catalyst Cloud recommended network driver as it provides secure
+  network connectivity for containers and virtual machine workloads.
 * ``labels``
   These are arbitrary labels (defined by the cluster drivers)  in the form of
   key=value pairs as a way to pass additional parameters to the cluster driver.
@@ -140,8 +148,8 @@ Creating a cluster
 ******************
 
 To create a new cluster we run the ``openstack coe cluster create`` command,
-providing the name of the cluster that we wish to create along with any possible
-additonal or over-riding parameters that are necessary.
+providing the name of the cluster that we wish to create along with any
+possible additonal or over-riding parameters that are necessary.
 
 .. code-block:: bash
 
@@ -160,8 +168,8 @@ additonal or over-riding parameters that are necessary.
   | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
 
-Once the cluster is active access to server nodes in the cluster is via ssh, the
-ssh user will be 'fedora' and the authentication will be using the ssh key
+Once the cluster is active access to server nodes in the cluster is via ssh,
+the ssh user will be 'fedora' and the authentication will be using the ssh key
 provided in the cluster template.
 
 .. code-block:: bash
@@ -184,8 +192,8 @@ Getting kubectl
 
 To deploy and manage applications on kubernetes use the Kubernetes command-line
 tool, `kubectl`_. With this tool you can inspect cluster resources; create,
-delete, and update components; and look at your new cluster and bring up example
-apps. It's basically the Kubernertes Swiss army knife.
+delete, and update components; and look at your new cluster and bring up
+example apps. It's basically the Kubernertes Swiss army knife.
 
 The details for getting the latest version of kubectl can be found `here`_.
 
@@ -223,7 +231,7 @@ Cluster Access Using kubeconfig Files
 
 The kubectl command-line tool uses kubeconfig files to find the information it
 needs to choose a cluster and communicate with the API server of a cluster.
-These files to provide information about clusters, users, namespaces, and
+These files provide information about clusters, users, namespaces, and
 authentication mechanisms.
 
 Getting the cluster config
@@ -241,8 +249,8 @@ For example: ``eval $(openstack coe cluster config <cluster-name>)``
 
 This will download the necessary certificates and create a config file within
 the directory that you are running the command from. If you wish to save the
-configuration to a different location you can use the ``--dir <directory_name>``
-parameter to select a different destination.
+configuration to a different location you can use the
+``--dir <directory_name>`` parameter to select a different destination.
 
 .. Note::
 
@@ -263,9 +271,9 @@ will return the address of the master and the services running there.
   Heapster is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/heapster/proxy
   CoreDNS is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 
-In order to view more in depth information about the cluster simply add the dump
-option to the above example. This generates output suitable for debugging and
-diagnosing cluster problems. By default, it redirects everything to stdout.
+In order to view more in depth information about the cluster simply add the
+dump option to the above example. This generates output suitable for debugging
+and diagnosing cluster problems. By default, it redirects everything to stdout.
 
 .. code-block:: bash
 
@@ -274,9 +282,9 @@ diagnosing cluster problems. By default, it redirects everything to stdout.
 Accessing the Kubernetes Dashboard
 ==================================
 
-By default Kubernetes provides a web based dashboard that exposes the details of
-a given cluster. In order to access this it is first necessary to to retrieve
-the admin token for the cluster you wish to examine.
+By default Kubernetes provides a web based dashboard that exposes the details
+of a given cluster. In order to access this it is first necessary to to
+retrieve the admin token for the cluster you wish to examine.
 
 The following command will extract the correct value from the secretes in the
 kube-system namespace.
@@ -309,8 +317,8 @@ Once the proxy is ready browse to the following URL:
 
 ``http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy``
 
-You will be prompted with a login screen, select ``token`` as the type and paste
-in the authentication token acquired in the step above.
+You will be prompted with a login screen, select ``token`` as the type and
+paste in the authentication token acquired in the step above.
 
 .. image:: _containers_assets/kubernetes_dashboard_login.png
    :align: center
@@ -333,8 +341,8 @@ When working with multiple clusters or a cluster that has been torn down and
 recreated it is necessary to ensure that you have the correct ``cluster
 context`` loaded in order for kubectl to interact with the intended cluster.
 
-In order to see the current configuration and context that ``kubectl`` is using,
-run the following.
+In order to see the current configuration and context that ``kubectl`` is
+using, run the following.
 
 .. code-block:: bash
 
@@ -367,8 +375,9 @@ referencing and also the specific cluster context within that, in this case
 ``default``. There is also an environment variable called ``$KUBECONFIG`` that
 stores the path or paths to the various configurations that are available.
 
-If we had run the command to retrieve the cluster configuration from a directory
-called tmp within our home directory then the output would look  like this.
+If we had run the command to retrieve the cluster configuration from a
+directory called tmp within our home directory then the output would look
+like this.
 
 .. code-block:: bash
 
@@ -385,16 +394,16 @@ we need to retrieve the configuration and store it to a local directory.
   release that will make this possible using a converged configuration file.
 
 If you run ``eval $(openstack coe cluster config <cluster-name>)`` within a
-directory that already contains the configuration for a cluster it will fail. If
-this is intentional, as in the case of upgrading a cluster that has been
+directory that already contains the configuration for a cluster it will fail.
+If this is intentional, as in the case of upgrading a cluster that has been
 rebuilt, then this is possible by adding the ``--force`` flag, like this.
 
 .. code-block:: bash
 
   $ eval $(openstack coe cluster config --force k8s-cluster )
 
-If you are wanting to download the configuration for another cluster then we can
-use the ``-dir`` flag and pass in the location for the configuration to be
+If you are wanting to download the configuration for another cluster then we
+can use the ``-dir`` flag and pass in the location for the configuration to be
 saved. Here we will save our new configuration into a directory called
 ``.kube/`` under the users home directory.
 
@@ -402,17 +411,17 @@ saved. Here we will save our new configuration into a directory called
 
   $ eval $(openstack coe cluster config --dir ~/.kube/ k8s-cluster-2)
 
-If we now check the current config we will see that is also says ``default``,
-this is because that is the naming convention used in the creation of the local
-config.
+If we now check the current config we will see that it also says ``default``,
+this is because the naming convention used in the creation of the local config
+automatically is loaded with **default** as its value.
 
 .. code-block:: bash
 
   $ kubectl config current-context
   default
 
-If we view the actual config however we can see that this is indeed a different file to the one
-we view previously.
+If we view the actual config however we can see that this is indeed a different
+file to the one we view previously.
 
 .. code-block:: bash
 
@@ -437,8 +446,8 @@ we view previously.
       client-certificate: /home/testuser/.kube/cert.pem
       client-key: /home/testuser/.kube/key.pem
 
-To make things more useful we can change and confirm the new name of the context
-in the following manner.
+To make things more useful we can change and confirm the new name of the
+context in the following manner.
 
 .. code-block:: bash
 
@@ -446,9 +455,9 @@ in the following manner.
   $ kubectl config current-context
   test
 
-The final step needed to give us access to both of our clusters is to update the
-``$KUBECONFIG`` environment variable so that it knows about both and allows us
-to see them in a single view.
+The final step needed to give us access to both of our clusters is to update
+the ``$KUBECONFIG`` environment variable so that it knows about both and allows
+us to see them in a single view.
 
 .. code-block:: bash
 

@@ -13,7 +13,7 @@ these services.
 The web dashboard
 *****************
 
-The :ref:`cloud dashboard <cloud-dashboard>` is a simple way to interact with
+The cloud dashboard is a simple way to interact with
 The Catalyst Cloud. It is publicly available on the Internet and can be reached
 at: https://dashboard.cloud.catalyst.net.nz
 

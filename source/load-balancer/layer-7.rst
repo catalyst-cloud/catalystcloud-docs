@@ -413,10 +413,12 @@ VIP Port ID and then assign it a floating ip address.
 Test the setup
 **************
 
-In your workstation or in a separate test compute instance add entries to
-/etc/hosts to provide name resolution. The value for <loadbalancer_floating_ip>
+In your workstation or in a separate test compute instance add entries to the
+/etc/hosts file to provide name resolution. The value for
+<loadbalancer_floating_ip> in the following examples
 will be the value of $FIP from the final step of setting up the loadbalancer
-above.
+above.These entries essentially become an aliase for these IPs when added to
+/etc/hosts in this way.
 
 /etc/host entries
 
