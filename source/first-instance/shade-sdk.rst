@@ -29,30 +29,31 @@ information is provided.
 Installing Shade
 ================
 
-The recommended way to install an up to date version of Shade is to use Python's
-pip installer. The easiest way to achieve this is to follow the instructions
-for installing Ansible at :ref:`install-ansible` as Shade will be installed as
-a dependency.
+The recommended way to install an up to date version of Shade is to use
+Python's pip installer. The easiest way to achieve this is to follow the
+instructions for installing Ansible at :ref:`install-ansible` as Shade will be
+installed as a dependency.
 
 .. note::
 
   Ansible relies on python2 in order to provide long term backwards
   compatibilty, consequently this tutorial is using a python2 virtual
-  environemnt. Shade can make use of python3 if you prefer.
+  environemnt. Shade can make use of python3 if you prefer and we recommend
+  doing so as python2 is being retired.
 
 OpenStack credentials
 =====================
 
 The first step in getting an instance running is to provide your Python script
-with the correct credentials and configuration appropriate for your project. The
-easiest way to achieve this is to make use of environment variables. You will
-make use of the standard variables provided by an OpenStack RC file as
+with the correct credentials and configuration appropriate for your project.
+The easiest way to achieve this is to make use of environment variables. You
+will make use of the standard variables provided by an OpenStack RC file as
 described at :ref:`source-rc-file`.
 
 You will use the `os_client_config`_ OpenStack client configuration library.
-This library reads environment variables and config files. In this case you will
-use environment variables. Ensure you have sourced an OpenStack RC file before
-running the following code
+This library reads environment variables and config files. In this case you
+will use environment variables. Ensure you have sourced an OpenStack RC file
+before running the following code
 
 .. _os_client_config: https://pypi.python.org/pypi/os-client-config
 
@@ -152,7 +153,7 @@ System in the form of an Image. Use ``cloud.list_images()`` to get a list and
 
 .. code-block:: python
 
- >>> image = cloud.get_image('ubuntu-16.04-x86_64')
+ >>> image = cloud.get_image('ubuntu-18.04-x86_64')
  >>> cloud.pprint(image)
  {'checksum': u'50cbac72860d9370b38af822936677ab',
   'container_format': u'bare',
@@ -178,7 +179,7 @@ System in the form of an Image. Use ``cloud.list_images()`` to get a list and
   'minRam': 1024,
   'min_disk': 10,
   'min_ram': 1024,
-  'name': u'ubuntu-16.04-x86_64',
+  'name': u'ubuntu-18.04-x86_64',
   'owner': u'94b566de52f9423fab80ceee8c0a4a23',
   'properties': {u'schema': u'/v2/schemas/image',
                  u'self': u'/v2/images/d105d837-67b7-4db6-8aeb-41d92ecb31e1'},
@@ -197,7 +198,7 @@ Let's store the image name in a variable:
 
 .. code-block:: python
 
- image_name = 'ubuntu-16.04-x86_64'
+ image_name = 'ubuntu-18.04-x86_64'
 
 Uploading an SSH key
 ====================
@@ -305,8 +306,8 @@ Connect to the new Instance
 ===========================
 
 You can connect to the SSH service using the floating public IP that has been
-associated with your instance. The script will print this address if it succeeds
-in associating a floating IP with the newly created instance:
+associated with your instance. The script will print this address if it
+succeeds in associating a floating IP with the newly created instance:
 
 .. code-block:: bash
 

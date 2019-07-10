@@ -418,7 +418,7 @@ As the Instance builds, its details will be provided. This includes its ID
  | flavor                               | c1.c1r1 (28153197-6690-4485-9dbc-fc24489b0683)             |
  | hostId                               |                                                            |
  | id                                   | <INSTANCE_ID>                                              |
- | image                                | ubuntu-14.04-x86_64 (cab9f3f4-a3a5-488b-885e-892873c15f53) |
+ | image                                | ubuntu-18.04-x86_64 (cab9f3f4-a3a5-488b-885e-892873c15f53) |
  | key_name                             | glyndavies                                                 |
  | name                                 | first-instance                                             |
  | os-extended-volumes:volumes_attached | []                                                         |
@@ -461,7 +461,7 @@ As the Instance builds, its details will be provided. This includes its ID
  | flavor                               | c1.c1r1 (28153197-6690-4485-9dbc-fc24489b0683)             |
  | hostId                               | 4f39b132f41c2ab6113d5bbeedab6e1bc0b1a1095949dd64df815077   |
  | id                                   | <INSTANCE_ID>                                              |
- | image                                | ubuntu-16.04-x86_64 (49fb1409-c88e-4750-a394-56ddea80231d) |
+ | image                                | ubuntu-18.04-x86_64 (49fb1409-c88e-4750-a394-56ddea80231d) |
  | key_name                             | first-instance-key                                         |
  | name                                 | first-instance                                             |
  | os-extended-volumes:volumes_attached | []                                                         |

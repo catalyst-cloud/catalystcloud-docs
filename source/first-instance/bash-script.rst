@@ -21,8 +21,9 @@ Download and run this script using the following commands:
  function, and impact is thoroughly understood. The script may require editing to
  add a prefix, for example.
  See the "VARS" section at the top of the script for more details.
- In addition to this, we no longer use the variable name "OS_TENANT" we use "OS_PROJECT"
- so you may have to change that before running this script.
+ In addition to this, you are able to change the default DNS settings if you
+ have your own that you wish to use. Otherwise the script will use the
+ catalyst cloud DNS by default.
 
 .. literalinclude:: ../_scripts/create-first-instance.sh
   :language: bash
