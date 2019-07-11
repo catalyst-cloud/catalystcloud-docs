@@ -33,12 +33,7 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.imgmath',
     'sphinx.ext.ifconfig',
-    'sphinx_tabs.tabs'
-<<<<<<< HEAD
-
-=======
->>>>>>> 4da004018ee477248681fa4edae16719f0f7e0c9
-]
+    'sphinx_tabs.tabs']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
