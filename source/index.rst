@@ -17,6 +17,7 @@ Contents:
    image
    block-storage
    object-storage
+   database
    network
    load-balancer
    orchestration
