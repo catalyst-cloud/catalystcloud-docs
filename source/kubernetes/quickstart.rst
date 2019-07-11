@@ -21,8 +21,8 @@ Ensure quota is sufficient
 
 A small quota is sufficient to deploy the production cluster template if your
 project is empty. However, if you already have some resources allocated, you
-may want to increase your quota to ensure there is sufficient capacity available
-to deploy Kubernetes.
+may want to increase your quota to ensure there is sufficient capacity
+available to deploy Kubernetes.
 
 By default, the production Kubernetes template allocates:
 
@@ -39,6 +39,31 @@ panel in the dashboard, under the ``Management`` section.
 
 .. _`Quota Management`: https://dashboard.cloud.catalyst.net.nz/management/quota/
 
+*****************************
+Setting up the Kubernetes CLI
+*****************************
+
+Getting kubectl
+===============
+
+This tool is important and needed to manage and configure any of the clusters
+that you create.
+Detailed instructions for downloading and setting up the latest version of
+kubectl can be found `here`_.
+
+.. _`here`: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+
+Run the following commands to install kubectl on Linux as a static binary:
+
+.. code-block:: bash
+
+  $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s \
+  https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  $ chmod +x ./kubectl
+  $ sudo mv ./kubectl /usr/local/bin/kubectl
+
+
+
 Choosing a cluster template
 ===========================
 
@@ -51,12 +76,23 @@ The following command will list all cluster templates available:
 .. code-block:: bash
 
   $ openstack coe cluster template list
-  +--------------------------------------+----------------------------------+
-  | uuid                                 | name                             |
-  +--------------------------------------+----------------------------------+
-  | cf6f8cab-8d22-4f38-a88b-25f8a41e5b77 | kubernetes-v1.11.2-dev-20181008  |
-  | 53b3e77f-b004-437c-9626-2d25ddb15329 | kubernetes-v1.11.2-prod-20181008 |
-  +--------------------------------------+----------------------------------+
+ +--------------------------------------+----------------------------------+
+ | uuid                                 | name                             |
+ +--------------------------------------+----------------------------------+
+ | c5b5a636-0066-4291-8da9-5190915f5a76 | kubernetes-v1.11.6-prod-20190130 |
+ | 5cb74603-4ad3-4e3b-a1d4-4539c392dbf0 | kubernetes-v1.11.6-dev-20190130  |
+ | 5e17bc87-27b2-4c61-ba58-c064fd10245d | kubernetes-v1.11.9-dev-20190402  |
+ | bd116a49-4381-4cb6-adf8-cd442e1a713f | kubernetes-v1.11.9-prod-20190402 |
+ | be25ca0c-2bf6-4bef-a234-4e073b187d71 | kubernetes-v1.12.7-dev-20190403  |
+ | 81d0f765-62fe-4c99-b7f8-284ffddac861 | kubernetes-v1.12.7-prod-20190403 |
+ +--------------------------------------+----------------------------------+
+
+.. Note::
+
+  Make sure that when you use one of these names a command that
+  you use them precisely as written. There are no warning messages to tell
+  you that the template name doesn't exist and so you must double check before
+  inputting any commands.
 
 Alternatively, a list of cluster templates available can be seen in the
 `Cluster Templates`_ panel in the dashboard, under the ``Container Infra``
@@ -72,8 +108,8 @@ The naming convention used for the templates is broken down as follows:
 * ``kubernetes-v1.11.2`` : this is the version of kubernetes that the template
   will use to create the cluster.
 * ``-dev`` or ``-prod`` : this create either a minimalist cluster for proof of
-  concept or development work, whereas the prod option creates a more production
-  ready cluster (see below).
+  concept or development work, whereas the prod option creates a more
+  production ready cluster (see below).
 * ``-20181008`` the final portion of the name is the date on which the template
   was created.
 
@@ -104,6 +140,11 @@ and via the Dashboard.
 We encourage customers to use the CLI (or DevOps tools like Terraform) to
 interact with our cloud APIs, to promote cloud best practices and automation.
 
+.. Note::
+  As with almost all of the documentation. Make sure that when you are trying
+  to create and deploy clusters, that you have source an RC file for your
+  project. Otherwise you will run into issues later.
+
 Creating a cluster via the CLI
 ===============================
 
@@ -130,6 +171,30 @@ To create a new **production** cluster, run the following command:
   --master-count 3
 
   Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
+
+Checking the status of the cluster
+==================================
+
+Depending on the template used, it will take 5 to 15 minutes for the cluster to
+be created.
+
+You can use the following command to check the status of the cluster:
+
+.. code-block:: bash
+
+  $ openstack coe cluster list
+  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
+  | uuid                                 | name        | keypair  | node_count | master_count | status             |
+  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
+  | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
+  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
+
+Alternatively, you can check the status of the cluster on the `Clusters`_ panel
+, in the ``Container Infra`` section of the Dashboard.
+
+.. _`Clusters`: https://dashboard.cloud.catalyst.net.nz/project/clusters
+
+Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
 
 Creating a cluster via the dashboard
 ====================================
@@ -178,7 +243,7 @@ Click **Next** to proceed.
 .. image:: _containers_assets/cluster_create_2.png
    :align: center
 
-On this final screen we have the ability to provide custome discovery URLs and
+On this final screen we have the ability to provide custom discovery URLs and
 also creation time values. Again unless you have a very specific requirement
 around these then the default values should be sufficient.
 
@@ -255,11 +320,15 @@ Click **Sign Certificate** and when prompted save the new file as
    :align: center
 
 Before we leave the dashboard we also need to save a copy of the clusters CA
-certificate. To do this click on ``Show Certificate`` to the left of the
+certificate. To do this click on ``Show Certificate`` to the right of the
 cluster. When prompted save the file as ``test-cluster_ca.pem``.
 
 .. image:: _containers_assets/get_ca_cert.png
    :align: center
+
+
+Configuring the KUBECTL
+=======================
 
 Back on the command line we need to convert our new certificates and key to a
 base64 format to use in our kubeconfig file. To do this run the following.
@@ -269,13 +338,21 @@ base64 format to use in our kubeconfig file. To do this run the following.
   for i in test-cluster*; do echo $i; cat $i | base64; done
 
 The output will be the name of each file followed by the the base64 converted
-format.
+format. After they are outputed you will need to copy them into the config file
+which is templated below, however you will need to remove the new line
+characters that exist when copying the output of the base64 conversion
+from the command line.
 
 In the ``config`` file example below replace the necessary fields as follows:
+
 
 * for **certificate-authority-data**  use the output from **test-cluster_ca.pem**
 * for **client-certificate-data** use the output from **test-cluster_cert.pem**
 * for **client-key-data** use the output from **test-cluster.key**
+
+The following should not be converted to base64
+
+* for **server** use the IP address you saved when your cluster was first made.
 
 .. code-block:: bash
 
@@ -304,11 +381,17 @@ Save this file as ``config``.
 
 Now let's set the KUBECONFIG variable so that ``kubectl`` knows where to find
 it's configuration. To do this run the following from the current working
-directory.
+directory, with the correct path to your config file.
 
 .. code-block:: bash
 
   export KUBECONFIG=/path/to/file/config
+
+.. Warning::
+  If you do not execute the above code kubectl will return an error about not
+  having access to the correct port. You must do the above before using
+  kubectl.
+
 
 As a quick check, you can run the following command to confirm that Kubernetes
 is working as expected:
@@ -322,70 +405,21 @@ is working as expected:
 
   To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
-Checking the status of the cluster
-==================================
-
-Depending on the template used, it will take 5 to 15 minutes for the cluster to
-be created.
-
-You can use the following command to check the status of the cluster:
-
-.. code-block:: bash
-
-  $ openstack coe cluster list
-  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
-  | uuid                                 | name        | keypair  | node_count | master_count | status             |
-  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
-  | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
-  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
-
-Alternatively, you can check the status of the cluster on the `Clusters`_ panel,
-in the ``Container Infra`` section of the Dashboard.
-
-.. _`Clusters`: https://dashboard.cloud.catalyst.net.nz/project/clusters
-
-Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
-
-
-*****************************
-Setting up the Kubernetes CLI
-*****************************
-
-Getting kubectl
-===============
-
-Detailed instructions for downloading and setting up the latest version of
-kubectl can be found `here`_.
-
-.. _`here`: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-
-Run the following commands to install kubectl on Linux as a static binary:
-
-.. code-block:: bash
-
-  $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s \
-  https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-  $ chmod +x ./kubectl
-  $ sudo mv ./kubectl /usr/local/bin/kubectl
-
-
-******************************
-Configuring the Kubernetes CLI
-******************************
-
-The kubectl command-line tool uses kubeconfig files to determine how to coonect
-to the APIs of the Kubernetes cluster.
 
 Getting the cluster config
 ==========================
 
-The following command will download the necessary certificates and create a
-configuration file on your current directory. It will also export the
-``KUBECONFIG`` variable on your behalf:
+We encourage you to do this manually at first, so that you understand the
+process and what is going on in the background with the config file. Once
+you have done it once as in the tutorial above,
+the following command will download the necessary certificates and create a
+configuration file on your current directory automatically.
+It will also export the ``KUBECONFIG`` variable on your behalf:
 
 .. code-block:: bash
 
   $ eval $(openstack coe cluster config k8s-cluster)
+  # where k8s-cluster is the name of your cluster
 
 If you wish to save the configuration to a different location you can use the
 ``--dir <directory_name>`` parameter to select a different destination.
@@ -412,6 +446,8 @@ is working as expected:
   Kubernetes master is running at https://103.254.156.157:6443
   Heapster is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/heapster/proxy
   CoreDNS is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+
 
 **********************************
 Accessing the Kubernetes dashboard
@@ -483,14 +519,16 @@ and will serve requests to the application servers using the ``round robin``
 algorithm.
 
 The container image in question **chelios/helloworld version_1.1** runs the
-following application
+following application. You do not need to copy this, it already exists in
+the cloud.
 
 .. literalinclude:: _containers_assets/app.py
 
 Creating the application deployment
 ===================================
 
-First we need to create a manifest like this.
+First we need to create a manifest like this. If you're folliwing along with
+this example you should save this file as ``helloworld-deployment_1.yaml``
 
 .. literalinclude:: _containers_assets/helloworld-deployment_1.yaml
 
@@ -512,7 +550,8 @@ To deploy the application run the following command.
   deployment.apps/helloworld-deployment created
 
 Check the state of the pods to confirm that they have all been deployed
-correctly.
+correctly. Once the status of all of them shows that they are running and
+ready, this may take a few seconds, continue to the next section.
 
 .. code-block:: bash
 

@@ -5,7 +5,7 @@ The basics of Catalyst Cloud
 ############################
 
 This section of the documentation is for people that are entirely new to cloud
-computing and/or the Catalyst Cloud.!
+computing and/or the Catalyst Cloud.
 
 ***************************
 What is the Catalyst Cloud?
@@ -13,31 +13,34 @@ What is the Catalyst Cloud?
 
 Catalyst Cloud is a cloud computing platform, based entirely in New Zealand.
 
-Catalyst Cloud was built with the open source project, `OpenStack`_. OpenStack
-is a piece of software that allows users like yourself to provision servers.
+Catalyst Cloud was built with the open source project, `OpenStack`_. Using
+OpenStack our Cloud allows users like yourself to provision services.
 Provisioning is similar to renting. You can provision things such as storage
-space, compute capacity, or internet access. The building blocks you need to run
-a business's applications.
-Openstack requires a python enterpriter to function and
-is currently phasing out it's support for python2, so we therefore recommend running
-Openstack using python3.
+space, compute capacity, or internet access. The building blocks you need to
+run a business's applications.
+
+.. note::
+   Openstack requires a python enterpriter to function and
+   is currently phasing out it's support for Python2. We therefore recommend
+   running Openstack using Python3.
 
 .. _`OpenStack`: https://www.openstack.org/software/
 
-OpenStack gives you the ability to provision no more or less than what you need,
-by allowing you to change how much you're using quickly, easily, and
+OpenStack gives you the ability to provision no more or less than what you
+need, by allowing you to change how much you're using quickly, easily, and
 automatically, through a variety of tools.
 
 .. image:: assets/access_methods.png
 
 To obtain resources on Catalyst Cloud, you provision services. Catalyst Cloud
 services are pieces of hardware and software that we have in one of our data
-centres, that we make easy and convenient to use by controlling them with
-OpenStack.
+centres. We make these easy and convenient to use through
+a variety of tools including our Dashboard web application, the command
+line interface or a number of ochestration services.
 
-By exposing our hardware and software as services, we remove a lot of complexity
-from your day to day work. For example: you need to give a server it's own
-public IP address. You open a terminal and run:
+By exposing our hardware and software as services, we remove a lot of
+complexity from your day to day work. For example: you need to give a
+server it's own public IP address. You open a terminal and run:
 
 .. code-block:: console
 
@@ -70,8 +73,8 @@ Now you've provisioned a public IP address. Now you run:
 
   $ openstack server add floating ip my_server_name 150.242.41.224
 
-Just like that, your server has a public IP address in seconds. Quick, easy, and
-powerful. Every action on Catalyst Cloud can be performed just as quickly.
+Just like that, your server has a public IP address in seconds. Quick, easy
+and powerful. Every action on Catalyst Cloud can be performed just as quickly.
 
 Now we understand the basic idea behind Catalyst Cloud, let's explore what
 services Catalyst Cloud provides.

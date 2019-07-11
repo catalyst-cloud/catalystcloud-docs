@@ -10,7 +10,6 @@ Contents:
    :maxdepth: 2
 
    getting-started
-   key-concepts
    sdks-and-toolkits
    first-instance
    dashboard
@@ -18,6 +17,7 @@ Contents:
    image
    block-storage
    object-storage
+   database
    network
    load-balancer
    orchestration

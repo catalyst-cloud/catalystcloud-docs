@@ -4,19 +4,19 @@
 Using Terraform
 ***************
 
-`Terraform`_ is an open source infrastructure configuration and provisioning tool
-developed by `Hashicorp`_. Terraform supports the configuration of many kinds of
-infrastructure, including the Catalyst Cloud. It achieves this by using components
-known as `providers`_. In the case of the Catalyst Cloud, this is the `Openstack
-provider`_.
+`Terraform`_ is an open source infrastructure configuration and provisioning
+tool developed by `Hashicorp`_. Terraform supports the configuration of many
+kinds of infrastructure, including the Catalyst Cloud. It achieves this by
+using components known as `providers`_. In the case of the Catalyst Cloud, this
+is the `Openstack provider`_.
 
 .. _Terraform: https://www.terraform.io/
 .. _Hashicorp: https://www.hashicorp.com/
 .. _providers: https://www.terraform.io/docs/providers/index.html
 .. _Openstack provider: https://www.terraform.io/docs/providers/openstack/index.html
 
-For further information on using Terraform with OpenStack, see the linked `video`_ and
-`blog`_ post:
+For further information on using Terraform with OpenStack, see the linked
+`video`_ and `blog`_ post:
 
 * https://www.openstack.org/videos/tokio-2015/tokyo-3141
 * http://blog.scottlowe.org/2015/11/25/intro-to-terraform/
@@ -28,12 +28,12 @@ For further information on using Terraform with OpenStack, see the linked `video
 Install Terraform
 =================
 
-Installation of Terraform is very simple. Go to the `Terraform download`_ page and
-choose the zip file that matches your operating system and architecture. Unzip this
-file to the location where Terraform's binaries will reside on your system.
-Terraform is written in `Go`_, so it has minimal dependencies. Please refer to
-https://www.terraform.io/intro/getting-started/install.html for detailed install
-instructions.
+Installation of Terraform is very simple. Go to the `Terraform download`_
+page and choose the zip file that matches your operating system and
+architecture. Unzip this file to the location where Terraform's binaries
+will reside on your system. Terraform is written in `Go`_, so it has minimal
+dependencies. Please refer to https://www.terraform.io/intro/getting-started/install.html
+for detailed install instructions.
 
 .. _Terraform download: https://www.terraform.io/downloads.html
 .. _Go: https://golang.org/
@@ -51,10 +51,11 @@ OpenStack credentials
 =====================
 
 Before running Terraform, ensure your OpenStack credentials have been
-set up. The easiest way to achieve this is by making use of environment variables.
-Use the standard variables provided by an OpenStack RC file as described in
-:ref:`source-rc-file`. These variables are read by the `OpenStack provider`_ and
-will provide Terraform with permissions to access the Catalyst Cloud APIs.
+set up. The easiest way to achieve this is by making use of environment
+variables. Use the standard variables provided by an OpenStack RC file as
+described in :ref:`source-rc-file`. These variables are read by the
+`OpenStack provider`_ and will provide Terraform with permissions to access the
+Catalyst Cloud APIs.
 
 .. _OpenStack provider: https://www.terraform.io/docs/providers/openstack/index.html
 
@@ -65,20 +66,20 @@ will provide Terraform with permissions to access the Catalyst Cloud APIs.
  required authentication arguments must be set in the OpenStack provider.
  See the Configuration Reference section of the OpenStack provider documentation.
 
-Once Terraform had been installed and the OpenStack credentials have been set up,
-a first instance may be built.
+Once Terraform had been installed and the OpenStack credentials have been set
+up, a first instance may be built.
 
 
 Download the Terraform first instance configuration file
 ========================================================
 
-It is beyond the scope of this documentation to explain how Terraform configuration
-files are written. A pre-prepared example is provided in the `catalystcloud-orchestration`_
-git repository.
+It is beyond the scope of this documentation to explain how Terraform
+configuration files are written. A pre-prepared example is provided in the
+`catalystcloud-orchestration`_ git repository.
 
-For more information on writing Terraform configuration files, please consult the
-`Terraform documentation`_. The configuration file used here can be used as a
-template from which you can build your own configurations.
+For more information on writing Terraform configuration files, please consult
+the `Terraform documentation`_. The configuration file used here can be used as
+a template from which you can build your own configurations.
 
 .. _catalystcloud-orchestration: https://github.com/catalyst/catalystcloud-orchestration
 
@@ -92,16 +93,19 @@ Download the configuration file:
  $ wget https://raw.githubusercontent.com/catalyst/catalystcloud-orchestration/master/terraform/first-instance/first-instance.tf
 
 
+.. note::
 
-In order for the pre-prepared configuration to work, a number of changes must be made:
+  In order for the pre-prepared configuration to work, a number of changes must
+  be made:
 
-* Edit the file and change the ``public_key`` under the ``openstack_compute_keypair_v2``
-  resource. Use the actual public key string, not a path to the public key file.
+  * Edit the file and change the ``public_key`` under the ``openstack_compute_keypair_v2``
+    resource. Use the actual public key string, not a path to the public key
+    file.
 
-* Ensure that variables referred to in the file match the correct OpenStack region.
-  The pre-prepared file has been set up to work with Catalyst's Porirua region. Pay
-  particular attention to ``external_gateway``, ``dns_nameservers``, ``image_id``,
-  and ``flavor_id``.
+  * Ensure that variables referred to in the file match the correct OpenStack region.
+    The pre-prepared file has been set up to work with Catalyst's Porirua region.
+    Pay   particular attention to ``external_gateway``, ``dns_nameservers``,
+    ``image_id``,   and ``flavor_id``.
 
 
 Run Terraform plan
@@ -225,7 +229,8 @@ The "./terraform plan" command outlines the plan that Terraform will execute:
 Run Terraform apply
 ===================
 
-The "./terraform apply" command executes the plan, creating OpenStack resources:
+The "./terraform apply" command executes the plan, creating OpenStack
+resources:
 
 .. code-block:: bash
 

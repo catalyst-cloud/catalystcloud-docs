@@ -197,9 +197,9 @@ running
 
 Automating backup tasks with cron
 =================================
-In order to make this process more useful, we could automate our backup tasks by
-creating a cronjob to run the Duplicity backups on a regular basis, by means of
-a shell script.
+In order to make this process more useful, we could automate our backup tasks
+by creating a cronjob to run the Duplicity backups on a regular basis, by means
+of a shell script.
 
 It is also best practice to create a separate backup user account in your cloud
 project that is only given rights to access object storage. The main
@@ -273,9 +273,9 @@ have been written to disk prior to the backup task running.
 
   PRE_BACKUP_CMD="CRON=1 /opt/gitlab/bin/gitlab-rake gitlab:backup:create"
 
-Finally you'll create a new file called ``duplicity-backup-cron`` in /etc/cron.d/.
-This is the cron job that will be responsible for running the backups.
-See (`cron`_) for more information on this.
+Finally you'll create a new file called ``duplicity-backup-cron``
+in /etc/cron.d/. This is the cron job that will be responsible for running the
+backups. See (`cron`_) for more information on this.
 
 .. _cron: http://man7.org/linux/man-pages/man8/cron.8.html
 

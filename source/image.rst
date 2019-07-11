@@ -50,7 +50,8 @@ take a snapshot of ours and modify it the way you need.
 How can I identify the images provided by Catalyst?
 ===================================================
 
-The images provided by Catalyst are uploaded to project (tenant) ID
+The images provided by Catalyst are uploaded to projectID (also known as tenant
+previously)
 ``94b566de52f9423fab80ceee8c0a4a23`` and are made public. With the command line
 tools, you can easily located them by running:
 
@@ -258,17 +259,18 @@ displayed as shown below:
 
 .. image:: _static/image-create.png
 
-1) On the image source, select "Image Location" to provide the URL that the image
-should be downloaded from, or select "Image File" to upload an image from your
-file system.
+1) On the image source, select "Image Location" to provide the URL that the
+image should be downloaded from, or select "Image File" to upload an image from
+your file system.
 
-2) Select the appropriate format for your image. We strongly recommend the use of
-RAW images.
+2) Select the appropriate format for your image. We strongly recommend the use
+of RAW images.
 
-3) Set the minimum disk size to at least the size of the image. If you are using a
-compressed format, like QCOW2, use the expanded size of the image.
+3) Set the minimum disk size to at least the size of the image. If you are
+using a compressed format, like QCOW2, use the expanded size of the image.
 
-Finally, click on create image and wait until the image has been downloaded or uploaded.
+Finally, click on create image and wait until the image has been downloaded or
+uploaded.
 
 Via the command line tools
 ==========================

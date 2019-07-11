@@ -2,18 +2,6 @@
 Block storage
 #############
 
-Table of Contents:
-
-.. toctree::
-  :maxdepth: 1
-
-  block-storage/overview
-  block-storage/via-cli
-  block-storage/using-volumes
-  block-storage/using-lvm.rst
-  block-storage/max-disk-performance
-  block-storage/faq
-
 Block volumes are similar to virtual disks that can be attached to any compute
 instance in a region to provide additional storage. They are highly available
 and extremely resilient.
@@ -27,3 +15,16 @@ The loss of a node or disk leads to the data being quickly recovered on
 another node or disk. The system runs frequent CRC checks to protect data
 from soft corruption. The corruption of a single bit can be detected and
 automatically restored to a healthy state.
+
+Table of Contents:
+
+.. toctree::
+  :maxdepth: 1
+
+  block-storage/overview
+  block-storage/using-volumes
+  block-storage/using-lvm.rst
+  block-storage/max-disk-performance
+  block-storage/faq
+
+

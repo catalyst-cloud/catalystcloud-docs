@@ -29,7 +29,7 @@ What are the various service types
   cluster and associates this with an IP address and port. Any traffic that is
   then directed to this port is forwarded on to the application's service.
 * A ``LoadBalancer`` is the typical way to expose an application to the
-  internet. It relies on the cloud provide to create an external load balancer
+  internet. It relies on the cloud to create an external load balancer
   with an IP address in the relevant network space. Any traffic that is then
   directed to this IP address is forwarded on to the application's service.
 * An ``Ingress controller`` differs from the previous options in that it is

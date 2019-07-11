@@ -16,9 +16,9 @@ Before you begin
 2) Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
 3) As a new user to the Catalyst Cloud your initial cloud project will come with
    a pre-configured private network and a router connected to the internet. We
-   assume this is the case for this tutorial. If you have deleted this, or would
-   like to create additional networks then please see :ref:`creating networks
-   <creating_networks>` for details on how to do that.
+   assume this is the case for this tutorial. If you have deleted this, or
+   would like to create additional networks then please see
+   :ref:`creating networks <creating_networks>` for details on how to do that.
 
 Otherwise, let's proceed with building your first instance.
 
@@ -31,8 +31,8 @@ create. Typcially this is done by a Secure Shell tunnel, or SSH. To allow our
 instance to accept our workstation's SSH tunnel request, we must add our SSH
 public key to our instance. We can do this right from the dashboard.
 
-You can either import an existing public key or have the Catalyst Cloud create a
-key pair for you. We document both below.
+You can either import an existing public key or have the Catalyst Cloud
+create a key pair for you. We document both below.
 
 Creating a new key pair
 =======================
@@ -58,8 +58,8 @@ secure location. Make sure the file is saved as plain text.
 Importing an existing key pair
 ==============================
 
-If you already have an SSH key pair, you can import the public key into Catalyst
-Cloud.
+If you already have an SSH key pair, you can import the public key into
+Catalyst Cloud.
 
 Navigate to the ``Key Pairs`` tab.
 
@@ -112,9 +112,9 @@ Here we can see the add rule screen. Many options are available to us.
 
 Change the ``Rule`` dropdown to ``SSH``. If you'd like to restrict SSH requests
 to just your IP address, you could change the ``CIDR`` option to your IP
-address. Here however, I've left it as ``0.0.0.0/0``, to allow SSH access **from
-all IP addresses**. Obviously, this would be an insecure thing to do when
-working in a real production environment, but I'm leaving it like this for
+address. Here however, I've left it as ``0.0.0.0/0``, to allow SSH access
+**from all IP addresses**. Obviously, this would be an insecure thing to do
+when working in a real production environment, but I'm leaving it like this for
 convenience.
 
 When you're happy, select ``Add`` to add the rule to the security group.
@@ -160,8 +160,8 @@ We'll increase it to 100GB so we have enough space for later.
 
 .. image:: dashboard_assets/ubuntu-source.png
 
-Navigate to the ``Flavor`` tab. This is where we select the compute resources we
-want to assign to our compute instance.
+Navigate to the ``Flavor`` tab. This is where we select the compute resources
+we want to assign to our compute instance.
 
 Order the flavors by ``VCPUS``, and select an appropriate size.
 
@@ -243,8 +243,8 @@ any Ubuntu server.
 Learning more from here
 ***********************
 
-Now you've learned a great deal about Catalyst Cloud instances, security groups,
-floating ips, SSH key pairs, and images. To move forward from here, you might
+Now you've learned a great deal about Catalyst Cloud instances, security groups
+, floating ips, SSH key pairs, and images. To move forward from here, you might
 want to:
 
 * :ref:`Install the command line interface. <command-line-interface>`

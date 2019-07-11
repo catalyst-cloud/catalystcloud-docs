@@ -15,10 +15,20 @@ listening on ports 80 and 443, you can skip this step. Otherwise, launch two
 compute instances and follow the instructions below to run a simple Flask web
 application in each.
 
-The Flask app binds to ports 80 and 443 respectively and will send a simple HTTP
-response when a request is received on the listening ports.
+The Flask app binds to ports 80 and 443 respectively and will send a simple
+HTTP response when a request is received on the listening ports.
 
-Create a copy of the flask_app.py script (shown below) on each server.
+Create a copy of the flask_app.py script (shown below) on each server. The
+easiest way to do this, is to have a program like vim so you can copy paste
+the code into the new file you create on your instances.
+
+.. note::
+
+  You must also make sure that you have a security instance that allows access
+  to your instances from both the HTTP port (80) and the HTTPS port (443)
+  otherwise the listeners and members (which are explained further on) won't be
+  able to access your instances, meaning you will not be able to test the
+  results of the load-balancer.
 
 **script** flask_app.py
 
@@ -50,9 +60,11 @@ Follow the instructions below to install the required dependencies.
   # exit the virtual environment
   $ deactivate
 
-In each compute instance, start two instances of the application (each in their
-own terminal session) ensuring that there is one listening on port 80 and the
-other on port 443.
+|
+
+In **each** compute instance, start **two** instances of the application
+(each in their own terminal session) ensuring that there is one listening on
+port 80 and the other on port 443.
 
 .. code-block:: bash
 
@@ -65,7 +77,7 @@ other on port 443.
   # run the flask app - providing the correct port numbers
   $ python flask_app.py -p <port_number>
 
-The output for the services running on port 80 will look similar to this
+The output for the services running on port 80 will look similar to this:
 
 .. code-block:: bash
 
@@ -124,9 +136,9 @@ virtual IP address (VIP) will be attached to the local subnet
 Create a listener
 *****************
 
-Once the ``operating_status`` of the load balancer is ``ACTIVE``, we will create
-two listeners, both will use TCP as their protocol and they will listen on ports
-80 and 443 respectively.
+Once the ``operating_status`` of the load balancer is ``ACTIVE``, we will
+create two listeners, both will use TCP as their protocol and they will listen
+on ports 80 and 443 respectively.
 
 .. code-block:: bash
 
@@ -193,7 +205,7 @@ two listeners, both will use TCP as their protocol and they will listen on ports
   | updated_at                | None                                 |
   +---------------------------+--------------------------------------+
 
-To view the newly created listeners
+To view the newly created listeners.
 
 .. code-block:: bash
 
@@ -209,7 +221,7 @@ To view the newly created listeners
 Create a pool
 *************
 
-Then add a pool to each listener
+Then add a pool to each listener.
 
 .. code-block:: bash
 
@@ -263,7 +275,12 @@ Then add a pool to each listener
 Add members
 ***********
 
-Now add the members to the pools.
+Now add the members to the pools... When creating members, make sure that you
+use the local addresses of your instances. In our example we use ``10.0.0.4``
+and ``10.0.0.6``
+however this may be different for your instances, it almost certainly will be
+different, so you should double check the following code before putting it in
+the command line.
 
 .. code-block:: bash
 

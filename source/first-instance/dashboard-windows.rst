@@ -4,11 +4,21 @@ Windows instance using the web interface
 
 Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
 
-As a new user to the Catalyst Cloud, your initial cloud project will come with a pre-configured
-private network and a router connected to the internet. If you have deleted this, or would like to
-create additional networks then please see :ref:`creating_networks` for details on how to do that.
+As a new user to the Catalyst Cloud, your initial cloud project will come
+with a pre-configured private network and a router connected to the internet.
+If you have deleted this, or would like to create additional networks then
+please see :ref:`creating_networks` for details on how to do that.
+In addition, before trying to create a windows instance you should make sure
+that a windows image exists on the server you're trying to create and instance
+on. At the moment we only have our Windows images on our Porirua server.
 
-Otherwise, let's proceed with building your first instance.
+Otherwise, let's proceed with building a windows instance.
+
+.. Note::
+  Some of the following pictures, have
+  files or various servers/security groups etc. That are not standard on the
+  catalyst cloud. Do not worry about their absence on your system, they will
+  not affect this tutorial.
 
 Configure Instance Security Group
 =================================
@@ -16,20 +26,21 @@ Configure Instance Security Group
 You will add  a security group and a rule for your instance so that it can be
 accessed using SSH.
 
-Navigate to the "Security Groups" tab of the "Access & Security" section and
-click "Create Security Group":
+Navigate to the "Security Groups" tab of the left sidebar under the "Network"
+section. From there, in the upper right of the screen, click the "Create
+Security Group" button.
 
-.. image:: ../_static/fi-security-group-create-1.png
+.. image:: dashboard_assets/windows-dashboard/Security-groups.png
    :align: center
 
 
 Enter a name and description and click "Create Security Group":
 
-.. image:: ../_static/fi-security-group-create-2.png
+.. image:: dashboard_assets/windows-dashboard/create-security-group.png
    :align: center
 
 
-Now click on "Manage Rules" for the group you have created:
+Now click on "Manage Rules" for the group you have created
 
 .. image:: ../_static/fi-security-group-rules-manage.png
    :align: center
@@ -44,7 +55,7 @@ Click on “Add Rule”:
 Create a rule to allow RDP access. This can be selected from the Rule drop down
 menu, leave the defaults for the other fields. Click "Add".
 
-.. image:: ../_static/fi-rdp-rule.png
+.. image:: dashboard_assets/windows-dashboard/Add-rules.png
    :align: center
 
 
@@ -65,37 +76,41 @@ Booting an Instance
 We are now ready to launch your first instance. Select launch instance from the
 instances list:
 
-.. image:: ../_static/fi-instance-launch.png
+.. image:: dashboard_assets/windows-dashboard/instance-overview.png
    :align: center
 
+First thing that we do when creating this instance, is give it a name. For this
+example we will use fi-windows. An important thing to note here also is that
+at the moment our windows images are only available in certain regions. This
+demonstration uses the nz-por-1a region.
+
+.. image:: dashboard_assets/windows-dashboard/name-instance-screen.png
+   :align: center
 
 When creating a Windows instance you need to select the
-``windows-server-2012r2-x86_64`` image from the image list first, then select
-"Yes" to create a new volume.  An alert symbol will appear alongside the Size(GB)
-selector. If you hover the mouse on this it will show the minimum size of the
-volume required to host the windows image. Set an appropriate volume size,
-select "No" to Delete Volume on Terminate then click "Next".
+``windows-server-2016r2-x86_64`` image from the image list first. The volume
+size should automatically update to what is needed to run this image.
 
-.. image:: ../_static/fi-windows-volume.png
+.. image:: dashboard_assets/windows-dashboard/windows-image.png
    :align: center
 
+Next we pick the flavor.
+We recommended a minimum flavor of ``c1.c2r2`` for our Windows instances.
+Select this from the list and click "Next":
 
-For a Windows instance the recommended minimum flavor is ``c1.c2r2``. Select
-this from the list and click "Next":
-
-.. image:: ../_static/fi-windows-flavor.png
+.. image:: dashboard_assets/windows-dashboard/flavors.png
    :align: center
 
 
 Select the ``private-net`` network from the list and click "Next":
 
-.. image:: ../_static/fi-launch-instance-networks.png
+.. image:: dashboard_assets/windows-dashboard/networks.png
    :align: center
 
 
 Select the ``first-instance-sg`` security group from the list and click "Next":
 
-.. image:: ../_static/fi-launch-instance-security-groups.png
+.. image:: dashboard_assets/windows-dashboard/instance-security-group.png
    :align: center
 
 
@@ -115,11 +130,11 @@ Allocate a Floating IP
 To associate a floating IP with your instance, you need to navigate to the
 "Floating IPs" tab of the "Access & Security" section.
 
-If an IP address has not yet been allocated, click on "Allocate IP to Project" to
-obtain a public IP. Then, select an IP that is not currently mapped and click
-on "Associate":
+If an IP address has not yet been allocated, click on "Allocate IP to Project"
+to obtain a public IP. Then, select an IP that is not currently mapped and
+click on "Associate":
 
-.. image:: ../_static/fi-floating-ip.png
+.. image:: dashboard_assets/windows-dashboard/floating-ip.png
    :align: center
 
 
@@ -129,15 +144,15 @@ after the compute instance that owns them.
 
 In this example, select the "first-instance" port and click "Associate":
 
-.. image:: ../_static/fi-floating-ip-associate.png
+.. image:: dashboard_assets/windows-dashboard/manage-floating-ip.png
    :align: center
 
 
 Connect to the new Instance
 ===========================
-First you must set the Administrator password. To do this, go to the "Instances"
-section, click on first-instance under "Instance Name" and select the "Console"
-tab.
+First you must set the Administrator password. To do this, go to the
+"Instances" section, click on first-instance under "Instance Name" and select
+the "Console" tab.
 
 Once the following screen loads, click on OK to continue.
 
