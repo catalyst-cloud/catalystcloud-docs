@@ -292,7 +292,7 @@ loadbalancer that will be publicly available on the internet via a floating ip
 and will serve requests to the application servers using the ``round robin``
 algorithm.
 
-The container image in question **chelios/helloworld version_1.1** runs the
+The container image in question **catalystcloud/helloworld version_1.1** runs the
 following application. You do not need to copy this, it already exists in
 the cloud.
 
@@ -309,7 +309,7 @@ this example you should save this file as ``helloworld-deployment_1.yaml``
 This provides the following parameters for a deployment:
 
 * number of ``replicas`` - 3
-* deployment ``image`` - chelios/helloworld version_1.1.
+* deployment ``image`` - catalystcloud/helloworld version_1.1.
 * pod ``labels``, to identify the app to the service - app: helloworld
 * ``containerPort`` to expose the application on - 5000
 
