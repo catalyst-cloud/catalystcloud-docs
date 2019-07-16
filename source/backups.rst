@@ -3,8 +3,6 @@ Backups
 #######
 
 
-Backup to Object Storage with Duplicity
-=======================================
 
 Introduction
 ============
