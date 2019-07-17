@@ -33,8 +33,9 @@ uploaded.
 Via the command line tools
 ==========================
 
-If the image is larger than 5GB, we recommend using the OpenStack CLI to upload
-it to the cloud. Ensure that you have the OpenStack command line tools
+If the image is larger than 5GB, then you will have to use the OpenStack CLI to
+upload it to the cloud. This is due to a cap being placed on the dashboard.
+Ensure that you have the OpenStack command line tools
 installed and that you have sourced an openrc file, as explained on
 :ref:`command-line-interface`.
 

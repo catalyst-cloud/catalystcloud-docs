@@ -10,7 +10,6 @@ Contents:
    :maxdepth: 2
 
    getting-started
-   sdks-and-toolkits
    first-instance
    dashboard
    compute
@@ -26,6 +25,7 @@ Contents:
    management
    best-practices
    tutorials
+   sdks-and-toolkits
    release-notes
    contributing
 
