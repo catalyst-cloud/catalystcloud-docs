@@ -22,7 +22,7 @@ Contents:
    kubernetes
    billing
    backups
-   management
+   #management
    best-practices
    tutorials
    sdks-and-toolkits
