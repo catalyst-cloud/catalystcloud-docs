@@ -2,12 +2,18 @@
 Using the CLI
 #############
 
-The CLI is a powerful tool that allows you to control all parts of the Catalyst
-Cloud.
-Now that we have all the necessary components to run the CLI, we can get to
-using it. Two important things to not before continuing:
-remember to :ref:`activate-venv` and
-:ref:`source-rc-file`.
+
+**If you installed the CLI using pip:**
+
+1. :ref:`activate-venv`
+2. :ref:`source-rc-file`
+3. Invoke the CLI with the ``openstack`` command
+
+**If you installed the CLI using docker:**
+
+1. :ref:`source-rc-file`
+2. Invoke the CLI with the ``ccloud`` alias anywhere the ``openstack`` command is otherwise used.
+
 
 For a reference of all commands supported by the CLI, refer to the `OpenStack
 Client documentation <https://docs.openstack.org/python-openstackclient>`_.
