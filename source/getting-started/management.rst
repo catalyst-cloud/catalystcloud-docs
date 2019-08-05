@@ -104,24 +104,49 @@ project and the permissions that they will be assigned.
 
 .. image:: ../_static/project_users.png
 
-
 Roles
 =====
-There are several roles that can be given to a user and these are able to be
-amended once a user has accepted their invitation to the project.
+
+Roles are given out to different accounts by a project administrator or
+moderator. These allow the accounts
+to perform actions that the role has security permissions for. This insures
+that you as an ``Project admin`` can be sure of the accountability of the
+users that you add.
+
+On the catalyst cloud there are several key roles that you need to learn when
+you're wanting to add more users to your project. More than one role can be
+given to a user and some cases such as the Heat Stack Owner role,
+these are necesarry to have full control of the project. These roles can be
+ammended once a user has accepted your invitation to the
+project.
+
+The roles are addative meaning that you can hold a lesser role like 'auth_only'
+that is supposed to restrict permissions and a role like 'member' that *allows*
+those same restricted permissions. The one that allows them supercedes the
+other.
+
+The roles available are split up between General roles, that control your
+ability to make changes to the project as a whole. And Kubernetes roles are
+all to do with Kubernetes and the control of clusters.
+
+General Roles:
+==============
 
 Project Admin
 -------------
 
 The *Project Admin* role allows users to have full control over who has access
 to the project, including adding moderators and inviting other people to join
-it.
+it. However, this role is purely for administrating purposes. It does not
+allow you to access or view all resources, you still need the member role for
+that.
 
 Project Moderator
 -----------------
 
 The *Project Moderator* role can invite other people to join your project and
-update their roles, but cannot change the project admin.
+update their roles, but cannot change the project admin. Has the same problem
+as the Admin role in regards to resource access.
 
 Project Member
 --------------
@@ -146,8 +171,22 @@ Compute Start/Stop
 ------------------
 
 The *Compute Start/Stop* role allows users to start, stop, hard reboot and soft
-reboot compute instances. Other, more destructive or creative actions will fail
-. This role is implied when a user also has *Project Member*.
+reboot compute instances. In addition, this role now also supports shellving
+and unshelving an instance. This is useful because.
+
+- Shelved instances are not billed for compute resources
+- storage resources are still billed since they are still being stored on
+  a server.
+- "stopped" instances are still billed as if they were running because they are
+  still schedualed to a hypervisor host.
+
+However this role still cannot sleep/suspend an instance. Other than these
+actions it is equivilant to auth_only.
+A good example of when to give this role to a user that is ment to automate
+access to start or stop an instance.
+
+This role is implied when a user also has *Project Member*.
+
 
 Object Storage
 --------------
@@ -156,6 +195,17 @@ The *Object Storage* role allows users to create, update and delete containers,
 and objects within those containers. Creative and destructive actions related
 to compute, network and block storage will fail. This role is implied when a
 user also has *Project Member*.
+
+
+Auth only
+---------
+
+The *Auth Only* role is the most restrictive role. Users can manage their own
+account information. A good use case for this would be giving someone this
+role when adding them to a project and requiring them to change their password
+and setting up MFA before giving them a more powerful role. This role cannot
+see, create or destroy project resources. It cannot upload or view SSH keys.
+It cannot see project usage or quata information.
 
 Adding a new user
 =================

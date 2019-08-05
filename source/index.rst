@@ -14,9 +14,9 @@ Contents:
    dashboard
    compute
    image
-   storage-total
-   #block-storage
-   #object-storage
+   #storage-total
+   block-storage
+   object-storage
    network
    load-balancer
    orchestration
