@@ -29,7 +29,7 @@ What are the various service types
   cluster and associates this with an IP address and port. Any traffic that is
   then directed to this port is forwarded on to the application's service.
 * A ``LoadBalancer`` is the typical way to expose an application to the
-  internet. It relies on the cloud provide to create an external load balancer
+  internet. It relies on the cloud to create an external load balancer
   with an IP address in the relevant network space. Any traffic that is then
   directed to this IP address is forwarded on to the application's service.
 * An ``Ingress controller`` differs from the previous options in that it is
@@ -294,3 +294,57 @@ has now been assigned an addressfrom this same range as it's VIP.
   $ kubectl get svc lb-internal-ip
   NAME             TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
   lb-internal-ip   LoadBalancer   10.254.229.121   10.0.0.38     80:32500/TCP   138m
+
+Retaining the loadbalancer floating IP address
+==============================================
+
+There may be occasions, such as exisitng DNS entries for example, where it is
+desireable to retain the floating IP that has been assigned to a loadbalancer
+that is assigned to a Kubernetes service.
+
+To do this we can add the following annotation to our service manifest.
+
+.. code-block:: bash
+
+  annotations:
+    loadbalancer.openstack.org/keep-floatingip: "true"
+
+
+This can also be used in conjunction with an IP address that is already
+allocated to your cloud project.
+
+.. code-block:: bash
+
+  spec:
+    type: LoadBalancer
+    loadBalancerIP: 103.197.60.157
+
+Here is an example service that creates a loadbalancer for an Nginx application.
+It will use the existing ip address 103.197.60.157 for the load balancer and
+sets the ``keep-floatingip`` flag to true.
+
+.. code-block:: bash
+
+  $ cat <<EOF > lb-retain-fip.yaml
+  ---
+  kind: Service
+  apiVersion: v1
+  metadata:
+    name: svc-nginx-retain-fip
+    namespace: default
+    annotations:
+      loadbalancer.openstack.org/keep-floatingip: "true"
+  spec:
+    type: LoadBalancer
+    loadBalancerIP: 103.197.60.157
+    selector:
+      app: nginx-app
+    ports:
+      - protocol: TCP
+        port: 80
+        targetPort: 80
+  EOF
+
+Now, when we remove the service, the 103.197.60.157 address will remain
+allocated to our cloud project rather than being released back to the public
+address pool.

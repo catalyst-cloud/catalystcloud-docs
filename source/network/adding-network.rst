@@ -88,3 +88,13 @@ You should now have a network topology that looks like this:
 
 .. image:: ../_static/fi-network-topology.png
    :align: center
+
+|
+
+Using the CLI
+===============
+
+You are also able to create a network using the CLI. If you look through
+:ref:`this <using-the-command-line-interface>` section of the documentation.
+While it talks about setting up your first instance there are steps at the
+beginning showing you how to create routers and networks using the CLI.

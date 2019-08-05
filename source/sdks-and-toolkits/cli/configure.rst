@@ -5,7 +5,7 @@ Configuring the CLI
 ###################
 
 Prior to using the CLI, ensure you are working from a whitelisted IP address.
-More information can be found under :ref:`access-and-whitelist`
+More information can be found under :ref:`here <access-and-whitelist>`
 
 .. _source-rc-file:
 
@@ -15,14 +15,15 @@ Source an OpenStack RC file
 
 When no configuration arguments are passed, the OpenStack client tools will try
 to obtain their configuraton from environment variables. To help you define
-these variables, the cloud dashboard allows you to download an OpenStack RC file
-from which you can easily source the required configuration.
+these variables, the cloud dashboard allows you to download an OpenStack RC
+file from which you can easily source the required configuration.
 
 To download an OpenStack RC file from the dashboard:
 
 * Log in to your project on the dashboard and select your preferred region.
 
 * From the left hand menu select "API Access" and click on
+
   "Download OpenStack RC File v3.0". Save this file on the host where the client
   tools are going to be used from.
 
@@ -45,6 +46,14 @@ To download an OpenStack RC file from the dashboard:
 
 * You can confirm the configuration works by running a simple command, such as
   ``openstack network list`` and ensuring it returns no errors.
+
+.. Note::
+
+  You are also able to download the Openstack RC file from the top-right
+  corner where your login details are display as shown below:
+
+.. image:: ../../_static/openrc-no-mfa.png
+  :align: right
 
 Setting up the command line environment on Windows
 ==================================================

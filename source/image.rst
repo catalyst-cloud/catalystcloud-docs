@@ -15,19 +15,21 @@ The table below lists the images provided by Catalyst and our partners, as well
 as the default user name you should use to log in to each one of them
 (unless you have overwritten the default user name with cloud-init).
 
-+------------------+-----------+
-| Operating system | User-name |
-+==================+===========+
-| Atomic Linux     | centos    |
-+------------------+-----------+
-| CentOS Linux     | centos    |
-+------------------+-----------+
-| CoreOS Linux     | core      |
-+------------------+-----------+
-| Debian Linux     | debian    |
-+------------------+-----------+
-| Ubuntu Linux     | ubuntu    |
-+------------------+-----------+
++---------------------+--------------------+-----------+
+| Operating system    | Image name prefix  | User-name |
++=====================+====================+===========+
+| Atomic Linux        | atomic-*           | centos    |
++---------------------+--------------------+-----------+
+| CentOS Linux        | centos-*           | centos    |
++---------------------+--------------------+-----------+
+| CoreOS Linux        | coreos-*           | core      |
++---------------------+--------------------+-----------+
+| Debian Linux        | debian-*           | debian    |
++---------------------+--------------------+-----------+
+| Fedora Atomic Linux | fedora-atomic-*    | fedora    |
++---------------------+--------------------+-----------+
+| Ubuntu Linux        | ubuntu-*           | ubuntu    |
++---------------------+--------------------+-----------+
 
 .. note::
 
@@ -41,14 +43,15 @@ software exactly as provided by the software providers.
 
 Before using the images provided by Catalyst, you should always confirm that
 they are suitable for your needs and fit for purpose. Catalyst provides them
-"as is", without warranty of any kind. If there is something you need to
+*"as is"*, without warranty of any kind. If there is something you need to
 change, you can always upload your own images, crafted the way you like, or
 take a snapshot of ours and modify it the way you need.
 
 How can I identify the images provided by Catalyst?
 ===================================================
 
-The images provided by Catalyst are uploaded to project (tenant) ID
+The images provided by Catalyst are uploaded to projectID (also known as tenant
+previously)
 ``94b566de52f9423fab80ceee8c0a4a23`` and are made public. With the command line
 tools, you can easily located them by running:
 
@@ -256,17 +259,18 @@ displayed as shown below:
 
 .. image:: _static/image-create.png
 
-On the image source, select "Image Location" to provide the URL that the image
-should be downloaded from, or select "Image File" to upload an image from your
-file system.
+1) On the image source, select "Image Location" to provide the URL that the
+image should be downloaded from, or select "Image File" to upload an image from
+your file system.
 
-Select the appropriate format for your image. We strongly recommend the use of
-RAW images.
+2) Select the appropriate format for your image. We strongly recommend the use
+of RAW images.
 
-Set the minimum disk size to at least the size of the image. If you are using a
-compressed format, like QCOW2, use the expanded size of the image.
+3) Set the minimum disk size to at least the size of the image. If you are
+using a compressed format, like QCOW2, use the expanded size of the image.
 
-Click on create image and wait until the image has been downloaded or uploaded.
+Finally, click on create image and wait until the image has been downloaded or
+uploaded.
 
 Via the command line tools
 ==========================
@@ -332,7 +336,7 @@ under your private images. Click on the Launch button and:
 Sharing images between projects
 *******************************
 
-You may need to share custom images created in one project (tenant) with
+You may need to share custom images created in one project with
 another project, the following section describes how to achieve this.
 
 .. note::

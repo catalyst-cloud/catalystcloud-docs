@@ -13,7 +13,7 @@
     Labels:  app=helloworld
     Containers:
      helloworld:
-      Image:        chelios/helloworld-flask:latest
+      Image:        catalystcloud/helloworld-flask:latest
       Port:         5000/TCP
       Host Port:    0/TCP
       Environment:  <none>

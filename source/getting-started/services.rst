@@ -6,7 +6,8 @@ Services on the Catalyst Cloud
 
 In the previous section, we learned that services on the Catalyst Cloud are
 pieces of hardware and software that we make easy and convinent to use by
-controling them with OpenStack. Now we'll learn about the various services
+controling them through means such as our Dashboard or the CLI (Command line
+interface). Now we'll discuss the various services
 offered by Catalyst Cloud so that we know *what* we can do on the Catalyst
 Cloud, even if right now we don't know *how* we can do it yet.
 
@@ -26,35 +27,6 @@ page`_.
 
 .. _`compute page`: https://catalystcloud.nz/services/iaas/compute/#prices
 
-
-Block storage service
-=====================
-
-The block storage service provides volumes of data storage that you can attach
-to instances. You could imagine block storage volumes as hard disk drives and
-solid state drives on a physical computer. Block storage volumes can be as large
-or as small as you want them to be.
-
-By attaching a volume to an instance, you mount it, making the file system
-available to the CPU and memory.
-
-Block volumes are automatically replicated multiple times across the data centre
-to make your data very durable, and very available.
-
-Network service
-===============
-
-The network service allows you to perform networking tasks easily, flexibly, and
-quickly. You are given the ability to create, edit, assign, and delete the basic
-elements of a network, like:
-
-* Private networks;
-* Sub-networks;
-* Routers;
-* Firewalls (called security groups);
-* IP addresses;
-* Site-to-site VPNs.
-
 Image service
 =============
 
@@ -65,13 +37,28 @@ was created to make this as easy as possible.
 An image is a "pre-made" operating system installation that can be used
 immediately by an instance, rather than spending time installing the operating
 system, the drivers, miscellaneous files, and configurations that help the
-instance integrate better with the Catalyst Cloud. Images allow you to know that
-your preferred operating system will work on the Catalyst Cloud the first time
-you try.
+instance integrate better with the Catalyst Cloud. Images allow you to know
+that your preferred operating system will work on the Catalyst Cloud the first
+time you try.
 
 Among the operating systems provided out of the box on the Catalyst Cloud image
 service are Ubuntu, Microsoft Windows 2012-2016, Debian, and CentOS. You can
 also create your own custom images to account for your own specific needs.
+
+Block storage service
+=====================
+
+The block storage service provides volumes of data storage that you can attach
+to instances. You could imagine block storage volumes as hard disk drives and
+solid state drives on a physical computer. Block storage volumes can be as
+large or as small as you want them to be, however they are not dynamic; you
+decide beforehand how much storage you want to particion. In addition,
+block volumes are automatically replicated multiple times across the data
+centre to make your data very durable, and very available.
+
+By attaching a volume to an instance, you mount it, making the file system
+available to the CPU and memory.
+
 
 Object storage service
 ======================
@@ -88,19 +75,19 @@ files are using, not any empty, unproductive bits. This allows you to minimise
 your costs. Secondarily, data stored in object storage can be more efficiently
 stored than block storage, allowing Catalyst Cloud to charge less for it.
 
-Orchestration service
-=====================
+Network service
+===============
 
-The orchestration service allows you to upload a template defining an
-application's infrastructure stack. The orchestration service will then work to
-deploy infrastructure that matches the definition in the template.
+The network service allows you to perform networking tasks easily, flexibly,
+and quickly. You are given the ability to create, edit, assign, and delete the
+basic elements of a network, like:
 
-Interestingly, you don't need to tell the orchestration service how to achieve
-your definition. Instead, the orchestration service will intelligently determine
-the actions it needs to take to make the stack match your definition.
-
-The orchestration service can either be used on it's own, or as another resource
-that automation tools can make use of to more easily do their job.
+* Private networks;
+* Sub-networks;
+* Routers;
+* Firewalls (called security groups);
+* IP addresses;
+* Site-to-site VPNs.
 
 Load balancer service
 =====================
@@ -118,6 +105,21 @@ to assure compute instances are still available, handles the durability and
 updates for the load balancer, and provides a convenient interface to make
 setting up load balancing is as smooth and intuitive as possible.
 
+Orchestration service
+=====================
+
+The orchestration service allows you to upload a template defining an
+application's infrastructure stack. The orchestration service will then work to
+deploy infrastructure that matches the definition in the template.
+
+Interestingly, you don't need to tell the orchestration service how to achieve
+your definition. Instead, the orchestration service will intelligently
+determine the actions it needs to take to make the stack match your definition.
+
+The orchestration service can either be used on it's own, or as another
+resource that automation tools can make use of to more easily do their job.
+
+
 ******************************
 What can you do with services?
 ******************************
@@ -131,28 +133,29 @@ don't need to wait for a human to do things for you.
 .. note::
   There are a few exceptions where human help *is* required for security
   reasons. Signing up for the first time, increasing your
-  :ref:`quota<quotas>`, and whitelisting IP addresses are the most common.
+  :ref:`quota <additional-info>`, and whitelisting IP addresses are the most common.
   We intend to automate these in the future.
 
 Resources on the Catalyst Cloud can be created, deleted, assigned, resized,
-copied, and edited at your convenience using one of the many tools used to
-interact with the Catalyst Cloud. Performing these administrative actions do not
-cost anything.
+copied, and edited at your convenience using one of the many tools available to
+interact with the Catalyst Cloud. Performing these administrative actions do
+not cost anything.
 
 With the Catalyst Cloud, you have total control over your infrastructure. You
 have root/console access to your instances, and Catalyst Cloud places no
 restrictions on what software you use. This is because each
-:ref:`project<projects>` on the Catalyst Cloud is isolated from all the
-other projects. Isolation means that the resources and the actions taken in one
-project can't effect anything else outside of that project.
+:ref:`project <admin-projects>` on the Catalyst Cloud is
+isolated from all theother projects. Isolation means that the resources and the
+actions taken in one project can't effect anything else outside of that project
+.
 
 ***************************************
 How much do I need to pay for services?
 ***************************************
 
-It's important to discuss how a true cloud computing platform like Catalyst
-Cloud charges you for the resources you use, because it strongly effects the way
-you'll use it.
+It's important to discuss how a true cloud computing platform like, Catalyst
+Cloud charges you for the resources you use; because it strongly effects the
+way you'll use it.
 
 Catalyst Cloud charges by the hour. Each hour, we check what resources you're
 using, and add a small amount to your bill. Each month, we send you an invoice
@@ -165,13 +168,13 @@ will deploy their application to test it before applying changes to the main,
 production server. Running the staging server 24/7 is wasteful, however.
 Instead, the organisation could implement an automated process that will only
 create a staging server when they are actively testing their application. This
-will provide great cost savings.
+will save costs greatly.
 
 There is no minimum limit for the resources you need to consume on the Catalyst
-Cloud per hour. In fact, we encourage you to disable your resources if you don't
-need them. This flexibility is one of the biggest reasons so many in-the-know
-organisations are building and migrating their applications to the Catalyst
-Cloud.
+Cloud per hour. In fact, we encourage you to disable your resources if you
+don't need them. This flexibility is one of the biggest reasons so many
+in-the-know organisations are building and migrating their applications to the
+Catalyst Cloud.
 
 |
 
@@ -179,7 +182,8 @@ Now that we've discussed what services are available on the Catalyst Cloud, we
 can discuss how to use them.
 
 
-:ref:`Previous page <introduction-to-catalyst-cloud>` - :ref:`Next page <access_to_catalyst_cloud>`
+:ref:`Previous page <introduction-to-catalyst-cloud>` -
+:ref:`Next page <access_to_catalyst_cloud>`
 
 ..
   This next page link is a temporary solution. Eventually, I will add a next

@@ -30,7 +30,8 @@ Heat templates:
 Uploading an SSH key
 ====================
 
-Heat does not support uploading an SSH key. This step must be performed manually.
+Heat does not support uploading an SSH key. This step must be performed
+manually.
 
 When an instance is created, OpenStack passes an SSH key to the instance which
 can be used for shell access. By default, Ubuntu will install this key for the
@@ -77,7 +78,7 @@ to check that the template is valid:
 
 .. code-block:: bash
 
- $ openstack orchestration template validate -t $ORCHESTRATION_DIR/hot/ubuntu-14.04/first-instance/first-instance.yaml
+ $ openstack orchestration template validate -t $ORCHESTRATION_DIR/hot/ubuntu-18.04/first-instance/first-instance.yaml
 
 
 This command will echo the yaml if it succeeds and will return an error if it
@@ -85,7 +86,7 @@ does not. If the template validates, it may be used to build the stack:
 
 .. code-block:: bash
 
-  $ openstack stack create -t $ORCHESTRATION_DIR/hot/ubuntu-14.04/first-instance/first-instance.yaml first-instance-stack
+  $ openstack stack create -t $ORCHESTRATION_DIR/hot/ubuntu-18.04/first-instance/first-instance.yaml first-instance-stack
   +---------------------+-------------------------------------------------------------------------------------------+
   | Field               | Value                                                                                     |
   +---------------------+-------------------------------------------------------------------------------------------+
@@ -131,7 +132,7 @@ View the output of the ``stack show`` command for further details:
   |                       | OS::stack_name: first-instance-stack                                                                                                                    |
   |                       | domain_name: localdomain                                                                                                                                |
   |                       | host_name: first-instance                                                                                                                               |
-  |                       | image: ubuntu-14.04-x86_64                                                                                                                              |
+  |                       | image: ubuntu-18.04-x86_64                                                                                                                              |
   |                       | key_name: first-instance-key                                                                                                                            |
   |                       | private_net_cidr: 10.0.0.0/24                                                                                                                           |
   |                       | private_net_dns_servers: 202.78.247.197,202.78.247.198,202.78.247.199                                                                                   |
@@ -189,6 +190,6 @@ To delete the ``first-instance-stack`` created previously, proceed as follows:
  $ openstack stack delete first-instance-stack
  Are you sure you want to delete this stack(s) [y/N]? y
 
-Check that the stack has been deleted properly using the ``openstack stack list``
-command. If there is an error, or if deleting the stack is taking a long time,
-check the output of ``openstack stack event list first-instance-stack``.
+Check that the stack has been deleted properly using the ``openstack stack
+list`` command. If there is an error, or if deleting the stack is taking a long
+time, check the output of ``openstack stack event list first-instance-stack``.

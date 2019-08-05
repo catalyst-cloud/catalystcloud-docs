@@ -9,12 +9,14 @@ Storage
 Volumes
 *******
 
-In Kubernetes volumes are tied to pods and their lifecycles. They are the most
+In Kubernetes volumes are tied to `pods`_  and their lifecycles. They are the most
 basic storage abstraction, where volumes are bound to pods and containers mount
 these volumes and access them as if they were a local filesystem.
 
 This also provides a mechanism for containers within a pod to be able to share
 data by mounting the volume in a shared manner.
+
+.. _`pods`: https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/
 
 .. Note::
 
@@ -43,8 +45,8 @@ Persistent Volumes
 ``Persistent volumes`` on the other hand exist within Kubernetes but outside of
 the pods. They work differently in that pods need to claim a volume, based on
 a ``storage class``, to use it and will retain it throughout their lifetime
-until it is released. They will also have the option to retain the volume
-even if the their pods are destroyed.
+until it is released. Persistent volumes will also have the option to retain
+the volume even if the their pods are destroyed.
 
 The cluster administrator can create pre-configured static PersistentVolumes
 (PV) that define a particular size and type of volume and these in turn can be
@@ -246,7 +248,7 @@ physical volume assigned to the claim will persist if the cluster is removed.
   The persistence of the underlying volume is not affected by the setting
   of the StorageClass ``Reclaim Policy`` setting in this scenario.
 
-If the PersistenVolumeClaim resource was intentionally released prior to the
+If the PersistentVolumeClaim resource was intentionally released prior to the
 cluster being terminated however then the usual retention policy for that
 storage class will apply.
 
@@ -288,8 +290,8 @@ Once we have the PV created we need to create a corresponding
 
 The key point to note here is that our claim needs to reference the specific
 PersistentVolume we created in the previous step. To do this we use a selector
-with the ``matchLabels`` argument to refer to a corresponding label that we had in
-the PersistentVolume declaration.
+with the ``matchLabels`` argument to refer to a corresponding label that we had
+in the PersistentVolume declaration.
 
 .. literalinclude:: _containers_assets/pvc-existing-pv.yaml
     :emphasize-lines: 15
@@ -323,3 +325,5 @@ Accessing PersistentVolume data without a cluster
 If it is necessary to access the data on the PersistentVolume device without
 creating a new cluster, the volume in question will need to be attached to an
 existing cloud instance and then mounted as a new volume within the filesystem.
+From here you should be able to follow the steps in the orphaned PVC section.
+

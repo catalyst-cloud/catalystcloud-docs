@@ -10,7 +10,7 @@ import socket
 network_prefix = '10.10.0'
 # add a string like foo- in order to add a prefix to all named resources
 name_prefix = ''
-image_name = 'ubuntu-16.04-x86_64'
+image_name = 'ubuntu-18.04-x86_64'
 flavor_name = 'c1.c1r1'
 # Variables that you are less likely to wish to change
 private_network_name = name_prefix + 'private-net'

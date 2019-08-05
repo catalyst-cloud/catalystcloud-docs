@@ -10,8 +10,8 @@ delete unwanted items.
 Deleting an entire network
 ==========================
 
-One area where this crops up from time to time is while removing network elements,
-so here is the recommended process for deleting an entire network and
+One area where this crops up from time to time is while removing network
+elements, so here is the recommended process for deleting an entire network and
 associated parts.
 
 - first ensure that there are no instances connected to the network in question
@@ -20,7 +20,9 @@ associated parts.
 - delete the network
 
 If you had security groups that were only required by the network just deleted
-you could also remove these at this stage.
+you could also remove these at this stage. This process is most easily done via
+the Dashboard in the network section as it shows you in the topoplogy what the
+dependencies are via the lines to one another.
 
 Deleting specific network elements
 ==================================

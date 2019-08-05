@@ -15,7 +15,7 @@ NETWORK="10.0.0"
 POOL_START_OCT="10"
 POOL_END_OCT="200"
 FLAVOR_NAME="c1.c1r1"
-IMAGE_NAME="ubuntu-16.04-x86_64"
+IMAGE_NAME="ubuntu-18.04-x86_64"
 SSH_PUBLIC_KEY=~/.ssh/id_rsa.pub
 
 # valid ip function
@@ -39,8 +39,8 @@ if [ -z "$OS_AUTH_URL" ]; then
     EXIT=1;
 fi
 
-if [ -z "$OS_TENANT_NAME" ]; then
-    echo OS_TENANT_NAME not set please ensure you have sourced an OpenStack RC file.
+if [ -z "$OS_PROJECT_NAME" ]; then
+    echo OS_PROJECT_NAME not set please ensure you have sourced an OpenStack RC file.
     EXIT=1;
 fi
 
@@ -118,10 +118,6 @@ if [ "$EXIT" -eq 1 ]; then
     exit 1;
 fi
 
-echo Finding your external ip:
-hash dig 2>/dev/null && {
-    CC_REMOTE_IP=$(dig +short myip.opendns.com @resolver1.opendns.com)
-}
 for curl_ip in http://ipinfo.io/ip http://ifconfig.me/ip http://curlmyip.com; do
     CC_REMOTE_IP=$( curl -s $curl_ip )
     if valid_ip "$CC_REMOTE_IP"; then

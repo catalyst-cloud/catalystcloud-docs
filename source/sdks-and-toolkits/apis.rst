@@ -1,3 +1,5 @@
+.. _apis:
+
 #########################################
 Application Programming Interfaces (APIs)
 #########################################
@@ -46,7 +48,7 @@ Endpoints for “nz-por-1”
 +================+=========================================================================+
 | cloudformation | https://api.nz-por-1.catalystcloud.io:8000/v1/                          |
 +----------------+-------------------------------------------------------------------------+
-| compute        | https://api.nz-por-1.catalystcloud.io:8774/v2/%tenantid%                |
+| compute        | https://api.nz-por-1.catalystcloud.io:8774/v2/%projectid%               |
 +----------------+-------------------------------------------------------------------------+
 | computev3      | https://api.nz-por-1.catalystcloud.io:8774/v3                           |
 +----------------+-------------------------------------------------------------------------+
@@ -60,17 +62,17 @@ Endpoints for “nz-por-1”
 +----------------+-------------------------------------------------------------------------+
 | network        | https://api.nz-por-1.catalystcloud.io:9696/                             |
 +----------------+-------------------------------------------------------------------------+
-| object-store   | https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_%tenantid% |
+| object-store   | https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_%projectid%|
 +----------------+-------------------------------------------------------------------------+
-| orchestration  | https://api.nz-por-1.catalystcloud.io:8004/v1/%tenantid%                |
+| orchestration  | https://api.nz-por-1.catalystcloud.io:8004/v1/%projectid%               |
 +----------------+-------------------------------------------------------------------------+
 | rating         | https://api.nz-por-1.catalystcloud.io:8788/                             |
 +----------------+-------------------------------------------------------------------------+
 | s3             | https://object-storage.nz-por-1.catalystcloud.io:443/swift/v1           |
 +----------------+-------------------------------------------------------------------------+
-| volume         | https://api.nz-por-1.catalystcloud.io:8776/v1/%tenantid%                |
+| volume         | https://api.nz-por-1.catalystcloud.io:8776/v1/%projectid%               |
 +----------------+-------------------------------------------------------------------------+
-| volumev2       | https://api.nz-por-1.catalystcloud.io:8776/v2/%tenantid%                |
+| volumev2       | https://api.nz-por-1.catalystcloud.io:8776/v2/%projectid%               |
 +----------------+-------------------------------------------------------------------------+
 
 Endpoints for “nz_wlg_2”
@@ -81,7 +83,7 @@ Endpoints for “nz_wlg_2”
 +================+=========================================================================+
 | cloudformation | https://api.cloud.catalyst.net.nz:8000/v1/                              |
 +----------------+-------------------------------------------------------------------------+
-| compute        | https://api.cloud.catalyst.net.nz:8774/v2/%tenantid%                    |
+| compute        | https://api.cloud.catalyst.net.nz:8774/v2/%projectid%                   |
 +----------------+-------------------------------------------------------------------------+
 | computev3      | https://api.cloud.catalyst.net.nz:8774/v3                               |
 +----------------+-------------------------------------------------------------------------+
@@ -95,17 +97,17 @@ Endpoints for “nz_wlg_2”
 +----------------+-------------------------------------------------------------------------+
 | network        | https://api.cloud.catalyst.net.nz:9696/                                 |
 +----------------+-------------------------------------------------------------------------+
-| object-store   | https://object-storage.nz-wlg-2.catalystcloud.io:443/v1/AUTH_%tenantid% |
+| object-store   | https://object-storage.nz-wlg-2.catalystcloud.io:443/v1/AUTH_%projectid%|
 +----------------+-------------------------------------------------------------------------+
-| orchestration  | https://api.cloud.catalyst.net.nz:8004/v1/%tenantid%                    |
+| orchestration  | https://api.cloud.catalyst.net.nz:8004/v1/%projectid%                   |
 +----------------+-------------------------------------------------------------------------+
 | rating         | https://api.cloud.catalyst.net.nz:8788/                                 |
 +----------------+-------------------------------------------------------------------------+
 | s3             | https://object-storage.nz-wlg-2.catalystcloud.io:443/swift/v1           |
 +----------------+-------------------------------------------------------------------------+
-| volume         | https://api.cloud.catalyst.net.nz:8776/v1/%tenantid%                    |
+| volume         | https://api.cloud.catalyst.net.nz:8776/v1/%projectid%                   |
 +----------------+-------------------------------------------------------------------------+
-| volumev2       | https://api.cloud.catalyst.net.nz:8776/v2/%tenantid%                    |
+| volumev2       | https://api.cloud.catalyst.net.nz:8776/v2/%projectid%                   |
 +----------------+-------------------------------------------------------------------------+
 
 Endpoints for “nz-hlz-1”
@@ -116,7 +118,7 @@ Endpoints for “nz-hlz-1”
 +================+=========================================================================+
 | cloudformation | https://api.nz-hlz-1.catalystcloud.io:8000/v1/                          |
 +----------------+-------------------------------------------------------------------------+
-| compute        | https://api.nz-hlz-1.catalystcloud.io:8774/v2/%tenantid%                |
+| compute        | https://api.nz-hlz-1.catalystcloud.io:8774/v2/%projectid%               |
 +----------------+-------------------------------------------------------------------------+
 | computev3      | https://api.nz-hlz-1.catalystcloud.io:8774/v3                           |
 +----------------+-------------------------------------------------------------------------+
@@ -130,17 +132,17 @@ Endpoints for “nz-hlz-1”
 +----------------+-------------------------------------------------------------------------+
 | network        | https://api.nz-hlz-1.catalystcloud.io:9696/                             |
 +----------------+-------------------------------------------------------------------------+
-| object-store   | https://object-storage.nz-hlz-1.catalystcloud.io:443/v1/AUTH_%tenantid% |
+| object-store   | https://object-storage.nz-hlz-1.catalystcloud.io:443/v1/AUTH_%projectid%|
 +----------------+-------------------------------------------------------------------------+
-| orchestration  | https://api.nz-hlz-1.catalystcloud.io:8004/v1/%tenantid%                |
+| orchestration  | https://api.nz-hlz-1.catalystcloud.io:8004/v1/%projectid%               |
 +----------------+-------------------------------------------------------------------------+
 | rating         | https://api.nz-hlz-1.catalystcloud.io:8788/                             |
 +----------------+-------------------------------------------------------------------------+
 | s3             | https://object-storage.nz-hlz-1.catalystcloud.io:443/swift/v1           |
 +----------------+-------------------------------------------------------------------------+
-| volume         | https://api.nz-hlz-1.catalystcloud.io:8776/v1/%tenantid%                |
+| volume         | https://api.nz-hlz-1.catalystcloud.io:8776/v1/%projectid%               |
 +----------------+-------------------------------------------------------------------------+
-| volumev2       | https://api.nz-hlz-1.catalystcloud.io:8776/v2/%tenantid%                |
+| volumev2       | https://api.nz-hlz-1.catalystcloud.io:8776/v2/%projectid%               |
 +----------------+-------------------------------------------------------------------------+
-| volumev3       | https://api.nz-hlz-1.catalystcloud.io:8776/v3/%tenantid%                |
+| volumev3       | https://api.nz-hlz-1.catalystcloud.io:8776/v3/%projectid%               |
 +----------------+-------------------------------------------------------------------------+

@@ -16,6 +16,9 @@ for instance configuration.
 
 Comprehensive documentation of the Ansible OpenStack modules is available at
 https://docs.ansible.com/ansible/list_of_cloud_modules.html#openstack
+And for any troubleshooting issues you may face using ansbile you can refer to
+the following https://docs.ansible.com/ansible-tower/2.2.0/html/administration/troubleshooting.html
+
 
 
 .. _install-ansible:
@@ -152,7 +155,8 @@ variable, or override the variable when running the playbook as shown below:
 Run the launch instance playbook
 ================================
 
-After the network has been set up successfully, run the ``launch-instance.yml`` playbook:
+After the network has been set up successfully, run the ``launch-instance.yml``
+playbook:
 
 .. code-block:: bash
 

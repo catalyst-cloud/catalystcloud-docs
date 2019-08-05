@@ -10,7 +10,6 @@ Contents:
    :maxdepth: 2
 
    getting-started
-   key-concepts
    sdks-and-toolkits
    first-instance
    dashboard

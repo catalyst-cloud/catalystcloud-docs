@@ -9,9 +9,13 @@ The following is assumed:
 * You have installed the OpenStack command line tools
 * You have sourced an OpenRC file
 
-If you haven't done the above, please refer to the :ref:`command-line-interface` section for
-details on how to do so.
+If you haven't done the above, please refer to the
+:ref:`command-line-interface` section for details on how to do so.
 
+The following steps are broken down to show you how each individual part is
+done. Even if you already have the required elements to create an
+instance, we recommend going through all these steps and completing them to
+give you a full view of how the individual pieces work together.
 
 .. note::
 
@@ -28,6 +32,10 @@ Creating the required network elements
 
 Create a router called "border-router" with a gateway to "public-net".
 Also create what will be a private network, called "private-net":
+
+.. note::
+ If you have completed one of the other tutorials, make sure that when you create
+ your networks and routers with a different name to the ones in the previous tutorials.
 
 .. code-block:: bash
 
@@ -104,18 +112,22 @@ Now create a router interface on the "private-subnet" subnet:
  $ openstack router add subnet border-router private-subnet
 
 
+
+
 Choosing a Flavor
 =================
 
 The Flavor of an instance specifies the disk, CPU, and memory allocated to  an
-instance. Use ``openstack flavor list`` to see a list of available configurations.
+instance. Use ``openstack flavor list`` to see a list of available
+configurations.
 
 .. note::
 
   Catalyst flavors are named 'cX.cYrZ', where X is the "compute generation", Y is
   the number of vCPUs, and Z is the number of gigabytes of memory.
 
-Choose a Flavor ID, assign it to an environment variable, then export for later use:
+Choose a Flavor ID, assign it to an environment variable, then export for later
+use:
 
 .. code-block:: bash
 
@@ -167,7 +179,8 @@ known as an Image. Images are stored in the Glance service.
   Catalyst provides a number of popular images for general use. If your preferred image
   is not available, you may upload a custom image to Glance.
 
-Choose an Image ID, assign it to an environment variable, then export for later use:
+Choose an Image ID, assign it to an environment variable, then export for later
+use:
 
 .. code-block:: bash
 
@@ -175,6 +188,7 @@ Choose an Image ID, assign it to an environment variable, then export for later 
  +--------------------------------------+---------------------------------+--------+
  | ID                                   | Name                            | Status |
  +--------------------------------------+---------------------------------+--------+
+ | 5892a80a-abc4-46f0-b39a-ecb4c0cb5d36 | ubuntu-18.04-x86_64             | active |
  | 49fb1409-c88e-4750-a394-56ddea80231d | ubuntu-16.04-x86_64             | active |
  | c75df558-7d84-4f97-9a5d-6eb58aeadcce | ubuntu-12.04-x86_64             | active |
  | cab9f3f4-a3a5-488b-885e-892873c15f53 | ubuntu-14.04-x86_64             | active |
@@ -202,12 +216,15 @@ Choose an Image ID, assign it to an environment variable, then export for later 
  | f641e7f8-c8ac-4667-9a84-8653716fc1ad | centos-6.5-x86_64               | active |
  +--------------------------------------+---------------------------------+--------+
 
- $ export CC_IMAGE_ID=$( openstack image show ubuntu-16.04-x86_64 -f value -c id )
+ $ export CC_IMAGE_ID=$( openstack image show ubuntu-18.04-x86_64 -f value -c id )
 
 This example uses the Ubuntu image to create an instance.
 
 .. note::
 
+  The amount of images that Catalyst Provides can be quiete large, if you know what Operating System you want for your
+  image you can use the command ``opentsack image list -- public | grep <OPERATING SYSTEM>``
+  to find it quicker than looking through this list. Another thing to note is that;
   Image IDs will be different in each region. Furthermore, images are periodically updated so
   Image IDs will change over time. Remember always to check what is available
   using ``openstack image list --public``.
@@ -304,8 +321,9 @@ Create a security group called "first-instance-sg".
 
 Create a rule within the "first-instance-sg" security group.
 
-Issue the ``openstack security group list`` command to find the ``SECURITY_GROUP_ID``.
-Assign the Security Group ID to an environment variable and export it for later use.
+Issue the ``openstack security group list`` command to find the
+``SECURITY_GROUP_ID``. Assign the Security Group ID to an environment variable
+and export it for later use.
 
 .. code-block:: bash
 
@@ -320,7 +338,8 @@ Assign the Security Group ID to an environment variable and export it for later 
  $ export CC_SECURITY_GROUP_ID=$( openstack security group show first-instance-sg -f value -c id )
 
 
-Assign the local external IP address to an environment variable and export it for later use:
+Assign the local external IP address to an environment variable and export it
+for later use:
 
 .. code-block:: bash
 
@@ -335,7 +354,8 @@ Assign the local external IP address to an environment variable and export it fo
  to allow traffic only from your current effective IP.
 
 
-Create a rule to restrict SSH access to your instance to the current public IP address:
+Create a rule to restrict SSH access to your instance to the current public IP
+address:
 
 .. code-block:: bash
 
@@ -398,7 +418,7 @@ As the Instance builds, its details will be provided. This includes its ID
  | flavor                               | c1.c1r1 (28153197-6690-4485-9dbc-fc24489b0683)             |
  | hostId                               |                                                            |
  | id                                   | <INSTANCE_ID>                                              |
- | image                                | ubuntu-14.04-x86_64 (cab9f3f4-a3a5-488b-885e-892873c15f53) |
+ | image                                | ubuntu-18.04-x86_64 (cab9f3f4-a3a5-488b-885e-892873c15f53) |
  | key_name                             | glyndavies                                                 |
  | name                                 | first-instance                                             |
  | os-extended-volumes:volumes_attached | []                                                         |
@@ -441,7 +461,7 @@ As the Instance builds, its details will be provided. This includes its ID
  | flavor                               | c1.c1r1 (28153197-6690-4485-9dbc-fc24489b0683)             |
  | hostId                               | 4f39b132f41c2ab6113d5bbeedab6e1bc0b1a1095949dd64df815077   |
  | id                                   | <INSTANCE_ID>                                              |
- | image                                | ubuntu-16.04-x86_64 (49fb1409-c88e-4750-a394-56ddea80231d) |
+ | image                                | ubuntu-18.04-x86_64 (49fb1409-c88e-4750-a394-56ddea80231d) |
  | key_name                             | first-instance-key                                         |
  | name                                 | first-instance                                             |
  | os-extended-volumes:volumes_attached | []                                                         |
@@ -459,8 +479,8 @@ Allocate a Floating IP
 ======================
 
 In order to connect to the instance, first allocate a Floating IP.
-Use the ID of "public-net" (obtained previously with ``openstack network list``)
-to request a new Floating IP.
+Use the ID of "public-net" (obtained previously with ``openstack network
+list``) to request a new Floating IP.
 
 .. code-block:: bash
 
@@ -504,3 +524,39 @@ Connecting to the Instance should be as easy as:
 .. code-block:: bash
 
  $ ssh ubuntu@$CC_PUBLIC_IP
+
+
+Resource cleanup using the command line
+=======================================
+
+At this point you may want to clean up the OpenStack resources that have been
+created. Running the following commands should remove all networks, routers,
+ports, security groups and instances. These commands will work regardless of
+the method you used to create the resources. Note that the order in which you
+delete resources is important.
+
+.. warning::
+
+ The following commands will delete all the resources you have created
+ including networks and routers. Do not run these commands unless you wish to
+ delete all these resources.
+
+.. code-block:: bash
+
+ # delete the instances
+ $ openstack server delete first-instance
+
+ # delete router interface
+ $ openstack router remove port border-router $( openstack port list -f value -c ID --router border-router )
+
+ # delete router
+ $ openstack router delete border-router
+
+ # delete network
+ $ openstack network delete private-net
+
+ # delete security group
+ $ openstack security group delete first-instance-sg
+
+ # delete ssh key
+ $ openstack keypair delete first-instance-key

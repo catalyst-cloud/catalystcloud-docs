@@ -5,57 +5,24 @@ Quick start
 This quick start guide assumes you have working knowledge of Catalyst Cloud
 :ref:`command-line-interface` and familiarity with Kubernetes.
 
-******************************
-Deploying a Kubernetes cluster
-******************************
 
-Choosing a cluster template
-===========================
+**************
+Pre-requisites
+**************
 
-A cluster template is a blue-print to build a Kubernetes cluster (similar to
-machine images for the compute service). The cluster template specifies what
-version of Kubernetes will be installed and the features that will be enabled.
+Ensure user has the required privileges
+=======================================
 
-.. Note::
-
-  In order to be able to create a Kubernetes cluster the user needs to ensure
-  that they have been allocated the ``heat_stack_owner`` role.
-
-The following command will list all cluster templates available:
-
-.. code-block:: bash
-
-  $ openstack coe cluster template list
-  +--------------------------------------+----------------------------------+
-  | uuid                                 | name                             |
-  +--------------------------------------+----------------------------------+
-  | cf6f8cab-8d22-4f38-a88b-25f8a41e5b77 | kubernetes-v1.11.2-dev-20181008  |
-  | 53b3e77f-b004-437c-9626-2d25ddb15329 | kubernetes-v1.11.2-prod-20181008 |
-  +--------------------------------------+----------------------------------+
-
-Template types
---------------
-
-There are currently two types of templates available on the Catalyst Cloud:
-
-* ``dev`` creates a small Kubernetes cluster with a single master and a single
-  worker node. As the name suggests, it should not be used for production.
-* ``prod`` creates a Kubernetes cluster with three master nodes (in high
-  availability) and three worker nodes.
-
-.. warning::
-
-  Please note that despite having a template called "production", the Kubernetes
-  service on the Catalyst Cloud is still in alpha and should not be used for
-  production workloads.
+In order to be able to create a Kubernetes cluster you need to ensure the user
+has been allocated the ``heat_stack_owner`` role.
 
 Ensure quota is sufficient
 ==========================
 
 A small quota is sufficient to deploy the production cluster template if your
 project is empty. However, if you already have some resources allocated, you
-may want to increase your quota to ensure there is sufficient capacity available
-to deploy Kubernetes.
+may want to increase your quota to ensure there is sufficient capacity
+available to deploy Kubernetes.
 
 By default, the production Kubernetes template allocates:
 
@@ -67,10 +34,101 @@ By default, the production Kubernetes template allocates:
 * 3 volumes
 * 60 GB of block storage space
 
-As a ``project admin`` you can change your quota using the `quota management`_
-panel in the dashboard.
+As a ``project admin`` you can change your quota using the `Quota Management`_
+panel in the dashboard, under the ``Management`` section.
 
-.. _`quota management`: https://dashboard.cloud.catalyst.net.nz/management/quota/
+.. _`Quota Management`: https://dashboard.cloud.catalyst.net.nz/management/quota/
+
+Download and install kubectl
+============================
+
+Kubectl is the command line interface to the Kubernetes API and the canonical
+way to interact with Kubernetes clusters.
+
+The instructions below can be used to quickly install kubectl on Linux as a
+static binary:
+
+.. code-block:: bash
+
+  $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s \
+  https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+  $ chmod +x ./kubectl
+  $ sudo mv ./kubectl /usr/local/bin/kubectl
+
+For other platforms or installations methods, please refer to the `detailed
+instructions on how to install kubectl`_.
+
+.. _`detailed instructions on how to install kubectl`: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+
+Choosing a cluster template
+===========================
+
+A cluster template is a blue-print to build a Kubernetes cluster (similar to
+machine images for the compute service). The cluster template specifies what
+version of Kubernetes will be installed and the features that will be enabled.
+
+The following command will list all cluster templates available:
+
+.. code-block:: bash
+
+  $ openstack coe cluster template list
+ +--------------------------------------+----------------------------------+
+ | uuid                                 | name                             |
+ +--------------------------------------+----------------------------------+
+ | c5b5a636-0066-4291-8da9-5190915f5a76 | kubernetes-v1.11.6-prod-20190130 |
+ | 5cb74603-4ad3-4e3b-a1d4-4539c392dbf0 | kubernetes-v1.11.6-dev-20190130  |
+ | 5e17bc87-27b2-4c61-ba58-c064fd10245d | kubernetes-v1.11.9-dev-20190402  |
+ | bd116a49-4381-4cb6-adf8-cd442e1a713f | kubernetes-v1.11.9-prod-20190402 |
+ | be25ca0c-2bf6-4bef-a234-4e073b187d71 | kubernetes-v1.12.7-dev-20190403  |
+ | 81d0f765-62fe-4c99-b7f8-284ffddac861 | kubernetes-v1.12.7-prod-20190403 |
+ +--------------------------------------+----------------------------------+
+
+.. Note::
+
+  Make sure that when you use one of these names a command that you use them
+  precisely as written. There are no warning messages to tell you that the
+  template name doesn't exist and so you must double check before inputting any
+  commands.
+
+Alternatively, a list of cluster templates available can be seen in the
+`Cluster Templates`_ panel in the dashboard, under the ``Container Infra``
+section.
+
+.. _`Cluster Templates`: https://dashboard.cloud.catalyst.net.nz/project/cluster_templates
+
+Template types
+--------------
+
+The naming convention used for the templates is broken down as follows:
+
+* ``kubernetes-v1.11.2`` : this is the version of kubernetes that the template
+  will use to create the cluster.
+* ``-dev`` or ``-prod`` : this create either a minimalist cluster for proof of
+  concept or development work, whereas the prod option creates a more
+  production ready cluster (see below).
+* ``-20181008`` the final portion of the name is the date on which the template
+  was created.
+
+The difference between between the  development and production templates are:
+
+* ``dev`` creates a small Kubernetes cluster with a single master and a single
+  worker node. As the name suggests, it should not be used for production.
+* ``prod`` creates a Kubernetes cluster that is intended for production
+  workloads. It expects a minimum three master nodes and three worker nodes.
+  The master nodes will have two loadbalancers deployed in front of them in
+  order to provide HA for the API and etcd services. This template also deploys
+  Prometheus and Grafana to provide cluster metrics.
+
+.. warning::
+
+  Please note that despite having a template called "production", the
+  Kubernetes service on the Catalyst Cloud is still in alpha (Tech Preview) and
+  should not be used for production workloads.
+
+
+******************************
+Deploying a Kubernetes cluster
+******************************
 
 Creating a cluster
 ==================
@@ -116,34 +174,12 @@ You can use the following command to check the status of the cluster:
   | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
 
+Alternatively, you can check the status of the cluster on the `Clusters`_ panel
+, in the ``Container Infra`` section of the Dashboard.
+
+.. _`Clusters`: https://dashboard.cloud.catalyst.net.nz/project/clusters
+
 Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
-
-
-*****************************
-Setting up the Kubernetes CLI
-*****************************
-
-Getting kubectl
-===============
-
-Detailed instructions for downloading and setting up the latest version of
-kubectl can be found `here`_.
-
-.. _`here`: https://kubernetes.io/docs/tasks/tools/install-kubectl/
-
-Run the following commands to install kubectl on Linux as a static binary:
-
-.. code-block:: bash
-
-  $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s \
-  https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-  $ chmod +x ./kubectl
-  $ sudo mv ./kubectl /usr/local/bin/kubectl
-
-
-******************************
-Configuring the Kubernetes CLI
-******************************
 
 The kubectl command-line tool uses kubeconfig files to determine how to coonect
 to the APIs of the Kubernetes cluster.
@@ -184,6 +220,8 @@ is working as expected:
   Kubernetes master is running at https://103.254.156.157:6443
   Heapster is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/heapster/proxy
   CoreDNS is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+
 
 **********************************
 Accessing the Kubernetes dashboard
@@ -239,6 +277,7 @@ dashboard, as illustrated below.
 
 .. _simple_lb_deployment:
 
+
 ***********************************
 Deploying a hello world application
 ***********************************
@@ -253,22 +292,24 @@ loadbalancer that will be publicly available on the internet via a floating ip
 and will serve requests to the application servers using the ``round robin``
 algorithm.
 
-The container image in question **chelios/helloworld version_1.1** runs the
-following application
+The container image in question **catalystcloud/helloworld version_1.1** runs the
+following application. You do not need to copy this, it already exists in
+the cloud.
 
 .. literalinclude:: _containers_assets/app.py
 
 Creating the application deployment
 ===================================
 
-First we need to create a manifest like this.
+First we need to create a manifest like this. If you're folliwing along with
+this example you should save this file as ``helloworld-deployment_1.yaml``
 
 .. literalinclude:: _containers_assets/helloworld-deployment_1.yaml
 
 This provides the following parameters for a deployment:
 
 * number of ``replicas`` - 3
-* deployment ``image`` - chelios/helloworld version_1.1.
+* deployment ``image`` - catalystcloud/helloworld version_1.1.
 * pod ``labels``, to identify the app to the service - app: helloworld
 * ``containerPort`` to expose the application on - 5000
 
@@ -283,7 +324,8 @@ To deploy the application run the following command.
   deployment.apps/helloworld-deployment created
 
 Check the state of the pods to confirm that they have all been deployed
-correctly.
+correctly. Once the status of all of them shows that they are running and
+ready, this may take a few seconds, continue to the next section.
 
 .. code-block:: bash
 

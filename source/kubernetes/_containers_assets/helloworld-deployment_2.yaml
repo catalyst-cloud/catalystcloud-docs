@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: helloworld
-        image: chelios/helloworld-flask:latest
+        image: catalystcloud/helloworld-flask:latest
         ports:
         - name: helloworld-port
           containerPort: 5000
