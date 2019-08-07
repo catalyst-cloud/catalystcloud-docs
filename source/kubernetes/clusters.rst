@@ -155,9 +155,9 @@ possible additonal or over-riding parameters that are necessary.
 
   $ openstack coe cluster create k8s-cluster \
   --cluster-template k8s \
-  --keypair testkey
+  --keypair testkey \
   --node-count 1 \
-  --master-count 1 \
+  --master-count 1
 
   Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
 
