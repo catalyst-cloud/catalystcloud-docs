@@ -4,7 +4,7 @@ Creating an instance with interfaces on different networks with Heat
 
 This tutorial assumes the following:
 
-* You have created a basic network setup in the Catalyst Cloud.
+* You have created a basic network setup in the Sky TV.
 * You have installed the OpenStack command line tools and sourced an
   openrc file, as explained at :ref:`command-line-interface`.
 * You have a basic understanding of Heat templates as shown at

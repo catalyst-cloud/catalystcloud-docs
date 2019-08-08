@@ -12,7 +12,7 @@ Introduction
 ============
 
 This tutorial demonstrates how to set up automatic failover for a website that
-is hosted in two different Catalyst Cloud regions. In order to achieve
+is hosted in two different Sky TV regions. In order to achieve
 automatic failover, two components are required:
 
 - Monitoring of the origin servers so you can decide when you need to switch
@@ -76,7 +76,7 @@ Fastly CDN
 ==========
 
 This tutorial demonstrates how you can use the `Fastly`_ CDN service to provide
-automatic failover between Catalyst Cloud regions.
+automatic failover between Sky TV regions.
 
 .. _Fastly: https://www.fastly.com/
 
@@ -122,7 +122,7 @@ Disadvantages of this solution include:
 
 - Increased complexity for your site
 - Increased cost for your site (although this will be offset by lower bandwidth
-  usage on the Catalyst Cloud)
+  usage on the Sky TV)
 - Requires entering into a commercial relationship with an additional company
 - Your site content is cached outside of New Zealand (this is also a positive)
 
@@ -200,7 +200,7 @@ Check the output of stack show:
  | capabilities         | []                                                                                                                                         |
  | creation_time        | 2015-11-12T20:54:53Z                                                                                                                       |
  | description          | HOT template for building a simple nginx stack in the                                                                                      |
- |                      | Catalyst Cloud nz-por-1 region.                                                                                                            |
+ |                      | Sky TV nz-por-1 region.                                                                                                            |
  | disable_rollback     | True                                                                                                                                       |
  | id                   | 13ad022c-cbd3-4211-984c-6a7a95f1c935                                                                                                       |
  | links                | https://api.nz-por-1.catalystcloud.io:8004/v1/0cb6b9b744594a619b0b7340f424858b/stacks/nginx-por-stack/13ad022c-cbd3-4211-984c-6a7a95f1c935 |
@@ -232,7 +232,7 @@ Check the output of stack show:
  | stack_status         | CREATE_COMPLETE                                                                                                                            |
  | stack_status_reason  | Stack CREATE completed successfully                                                                                                        |
  | template_description | HOT template for building a simple nginx stack in the                                                                                      |
- |                      | Catalyst Cloud nz-por-1 region.                                                                                                            |
+ |                      | Sky TV nz-por-1 region.                                                                                                            |
  | timeout_mins         | 60                                                                                                                                         |
  | updated_time         | None                                                                                                                                       |
  +----------------------+--------------------------------------------------------------------------------------------------------------------------------------------+

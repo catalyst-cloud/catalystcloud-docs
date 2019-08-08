@@ -4,7 +4,7 @@ Windows instance using the web interface
 
 Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
 
-As a new user to the Catalyst Cloud, your initial cloud project will come
+As a new user to the Sky TV, your initial cloud project will come
 with a pre-configured private network and a router connected to the internet.
 If you have deleted this, or would like to create additional networks then
 please see :ref:`creating_networks` for details on how to do that.
@@ -17,7 +17,7 @@ Otherwise, let's proceed with building a windows instance.
 .. Note::
   Some of the following pictures, have
   files or various servers/security groups etc. That are not standard on the
-  catalyst cloud. Do not worry about their absence on your system, they will
+  Sky TV. Do not worry about their absence on your system, they will
   not affect this tutorial.
 
 Configure Instance Security Group
@@ -169,7 +169,7 @@ port
 ^^^^
 - 6080 (TCP)
 
-for the following Catalyst Cloud API hosts
+for the following Sky TV API hosts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 - nz-por-1: 202.78.247.202
 - nz-hlz-1: 202.78.244.90

@@ -74,7 +74,7 @@ Preapproved sizes changes can be made as follows:
   multiple times in the current 30 day time period.
 - for an increase in quota size, one preapproved change can be made within the
   current 30 day time period. All subsequent increases, regardless of whether
-  they would normally be preapproved, will require approval from the Catalyst Cloud team.
+  they would normally be preapproved, will require approval from the Sky TV team.
 
 |
 

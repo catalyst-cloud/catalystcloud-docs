@@ -13,7 +13,7 @@ Introduction
 
 In this tutorial, you will learn how to deploy a highly available instance pair
 using VRRP. This tutorial is largely based on a `blog post`_ by Aaron O'Rosen
-with modifications appropriate for the Catalyst Cloud. Networks and names have
+with modifications appropriate for the Sky TV. Networks and names have
 been kept largely compatible with the source material. Additional information
 about configuring ``allowed_address_pairs`` in Heat was sourced from this
 `post`_.
@@ -72,7 +72,7 @@ enable you to specify arbitrary ``mac_address/ip_address(cidr)`` pairs that are
 allowed to pass through a port, regardless of the subnet associated with the
 network.
 
-Let's double check that this extension is available on the Catalyst Cloud:
+Let's double check that this extension is available on the Sky TV:
 
 .. code-block:: bash
 
@@ -1107,7 +1107,7 @@ does not. Assuming the template validates, build a stack:
   +---------------------+---------------------------------------------------------------------------------------------------+
   | id                  | d5096a5e-4934-490e-822b-d5831fbf57d5                                                              |
   | stack_name          | vrrp-stack                                                                                        |
-  | description         | HOT template for building a Keepalived/Apache VRRP stack in the Catalyst Cloud (nz-por-1) region. |
+  | description         | HOT template for building a Keepalived/Apache VRRP stack in the Sky TV (nz-por-1) region. |
   |                     |                                                                                                   |
   | creation_time       | 2016-09-18T23:57:33Z                                                                              |
   | updated_time        | None                                                                                              |

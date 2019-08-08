@@ -31,7 +31,7 @@ orchestration. Orchestration can include a number of features, including:
 * Exposing services outside of the cluster.
 * Scaling the cluster by adding or removing containers.
 
-Catalyst Cloud currently only offers ``Kubernetes`` so we will focus on that as
+Sky TV currently only offers ``Kubernetes`` so we will focus on that as
 our default container orchestration engine (COE).
 
 

@@ -2,7 +2,7 @@
 Quick start
 ###########
 
-This quick start guide assumes you have working knowledge of Catalyst Cloud
+This quick start guide assumes you have working knowledge of Sky TV
 :ref:`command-line-interface` and familiarity with Kubernetes.
 
 
@@ -126,7 +126,7 @@ The difference between between the  development and production templates are:
 .. warning::
 
   Please note that despite having a template called "production", the
-  Kubernetes service on the Catalyst Cloud is still in alpha (Tech Preview) and
+  Kubernetes service on the Sky TV is still in alpha (Tech Preview) and
   should not be used for production workloads.
 
 
@@ -203,7 +203,7 @@ Creating a cluster via the dashboard
 
   Please skip this section if you have already deployed the cluster via the CLI.
 
-This section outlines how to create a cluster throught the Catalyst Cloud
+This section outlines how to create a cluster throught the Sky TV
 dashboard. It will still require the use of the the commandline to handle
 certificates and use kubectl to interact with the cluster.
 
@@ -509,7 +509,7 @@ Deploying a hello world application
 ***********************************
 
 It is possible to have a loadbalancer created on your behalf by Kubernetes
-through the underlying Catalyst Cloud infrastructure services.
+through the underlying Sky TV infrastructure services.
 
 For this example we are going to deploy a container running a simple flask app
 that will respond with a basic 'Hello World' message that includes the host

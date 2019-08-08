@@ -1,11 +1,11 @@
 .. _using-docker-machine:
 
 ##########################################
-Using Docker Machine on the Catalyst Cloud
+Using Docker Machine on the Sky TV
 ##########################################
 
 This tutorial shows you how to use Docker Machine with the OpenStack driver
-to provision Docker Engines on Catalyst Cloud compute instances.
+to provision Docker Engines on Sky TV compute instances.
 
 `Docker Engine`_ is the daemon at the core of the `Docker`_ platform. It is
 responsible for providing the lightweight runtime on which containers are run.
@@ -17,7 +17,7 @@ responsible for providing the lightweight runtime on which containers are run.
 `Docker Machine`_ is a tool that allows you to provision Docker Engines either
 locally or hosted with a cloud provider. Docker Machine has a number of
 different drivers to facilitate installing the Docker Engine on different cloud
-providers. On the Catalyst Cloud we will be making use of the OpenStack
+providers. On the Sky TV we will be making use of the OpenStack
 `driver`_.
 
 .. _driver: https://docs.docker.com/machine/drivers/openstack/
@@ -35,9 +35,9 @@ Setup
 This tutorial assumes a number of things:
 
 * You are familiar with Docker and its use case and wish to make use of
-  Catalyst Cloud compute instances to run Docker Engines
+  Sky TV compute instances to run Docker Engines
 * You already have Docker installed on your machine
-* You are familiar with basic usage of the Catalyst Cloud (e.g. you have
+* You are familiar with basic usage of the Sky TV (e.g. you have
   created your first instance as described at
   :ref:`launching-your-first-instance`)
 * You have a single private network and subnet within your project

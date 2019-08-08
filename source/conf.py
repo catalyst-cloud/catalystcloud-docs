@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# Catalyst Cloud documentation build configuration file, created by
+# Sky TV documentation build configuration file, created by
 # sphinx-quickstart on Fri Jul 18 14:05:39 2014.
 #
 # This file is execfile()d with the current directory set to its
@@ -48,7 +48,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Catalyst Cloud'
+project = u'Sky TV'
 copyright = u'2016-2018, Catalyst IT'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -202,7 +202,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'CatalystCloudDocumentation.tex', u'Catalyst Cloud Documentation',
+  ('index', 'CatalystCloudDocumentation.tex', u'Sky TV Documentation',
    u'Catalyst IT', 'manual'),
 ]
 
@@ -232,7 +232,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'catalystclouddocumentation', u'Catalyst Cloud Documentation',
+    ('index', 'catalystclouddocumentation', u'Sky TV Documentation',
      [u'Catalyst IT'], 1)
 ]
 
@@ -246,7 +246,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'CatalystCloudDocumentation', u'Catalyst Cloud Documentation',
+  ('index', 'CatalystCloudDocumentation', u'Sky TV Documentation',
    u'Catalyst IT', 'CatalystCloudDocumentation', 'One line description of project.',
    'Miscellaneous'),
 ]
@@ -267,13 +267,13 @@ texinfo_documents = [
 # -- Options for Epub output ----------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'Catalyst Cloud'
+epub_title = u'Sky TV'
 epub_author = u'Catalyst IT'
 epub_publisher = u'Catalyst IT'
 epub_copyright = u'2016, Catalyst IT'
 
 # The basename for the epub file. It defaults to the project name.
-#epub_basename = u'Catalyst Cloud'
+#epub_basename = u'Sky TV'
 
 # The HTML theme for the epub output. Since the default themes are not optimized
 # for small screen space, using the same theme for HTML and epub output is

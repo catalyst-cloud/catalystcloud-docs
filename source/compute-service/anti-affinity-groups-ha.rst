@@ -95,7 +95,7 @@ Ansible playbook using the os_server module:
 
 .. code-block:: yaml
 
-  - name: Create a compute instance on the Catalyst Cloud
+  - name: Create a compute instance on the Sky TV
     os_server:
       state: present
       name: "{{ instance_name }}"

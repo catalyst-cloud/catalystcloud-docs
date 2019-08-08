@@ -2,7 +2,7 @@
 Adding a network
 ################
 
-By default all new Catalyst Cloud projects in the Porirua region (nz-por-1)
+By default all new Sky TV projects in the Porirua region (nz-por-1)
 are created with a router and network. If you have removed this, or simply
 wish to create additional networks, then the following guide will show you
 the steps required to achieve this.

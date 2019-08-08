@@ -92,7 +92,7 @@ does not. If the template validates, it may be used to build the stack:
   +---------------------+-------------------------------------------------------------------------------------------+
   | id                  | cb956f56-536a-4244-930d-62ae1eb2b182                                                      |
   | stack_name          | first-instance-stack                                                                      |
-  | description         | HOT template for building the first instance stack on the Catalyst Cloud nz-por-1 region. |
+  | description         | HOT template for building the first instance stack on the Sky TV nz-por-1 region. |
   |                     |                                                                                           |
   | creation_time       | 2016-08-18T22:39:25Z                                                                      |
   | updated_time        | None                                                                                      |
@@ -121,7 +121,7 @@ View the output of the ``stack show`` command for further details:
   +-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
   | id                    | cb956f56-536a-4244-930d-62ae1eb2b182                                                                                                                    |
   | stack_name            | first-instance-stack                                                                                                                                    |
-  | description           | HOT template for building the first instance stack on the Catalyst Cloud nz-por-1 region.                                                               |
+  | description           | HOT template for building the first instance stack on the Sky TV nz-por-1 region.                                                               |
   |                       |                                                                                                                                                         |
   | creation_time         | 2016-08-18T22:39:25Z                                                                                                                                    |
   | updated_time          | None                                                                                                                                                    |

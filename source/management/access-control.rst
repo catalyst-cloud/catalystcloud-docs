@@ -68,7 +68,7 @@ user also has *Project Member*.
 auth-only
 ---------
 The *auth-only* is a means to allow an unprivilieged user to be able to log
-into the Catalyst Cloud. While this may not have any obvious purpose it does
+into the Sky TV. While this may not have any obvious purpose it does
 allow for the use of Access Control Lists in conjunction with object storage.
 For more details on this see :ref:`here <object-storage-acl>`../
 

@@ -24,7 +24,7 @@ DNS servers
 ***********
 
 Catalyst operates a number of recursive DNS servers in each cloud region for
-use by Catalyst Cloud instances, free of charge. They are:
+use by Sky TV instances, free of charge. They are:
 
 +----------+------------------------------------------------+
 |  Region  | DNS Servers                                    |

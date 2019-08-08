@@ -1,11 +1,11 @@
 .. _administrating_the_catalyst_cloud:
 
 #################################
-Administrating the Catalyst Cloud
+Administrating the Sky TV
 #################################
 
 There are a few small points that are important to be aware of before diving
-into the Catalyst Cloud.
+into the Sky TV.
 
 .. _admin-support:
 
@@ -13,7 +13,7 @@ into the Catalyst Cloud.
 Getting support
 ***************
 
-If you experience issues with the Catalyst Cloud, please check to
+If you experience issues with the Sky TV, please check to
 see if the problem(s) are covered further on in this documentation.
 If no solution is found you will need to raise a support request with
 the support dropdown in the top right corner of the dashboard.
@@ -66,7 +66,7 @@ solutions architect.
 Training
 ========
 
-Catalyst provides training on how to use the Catalyst Cloud in Auckland,
+Catalyst provides training on how to use the Sky TV in Auckland,
 Wellington and Christchurch. Upcoming training sessions can be found at
 https://catalyst.net.nz/training/upcoming-training.
 
@@ -81,7 +81,7 @@ to discuss your needs: https://catalyst.net.nz/training-services
 Regions
 *******
 
-The Catalyst Cloud is delivered out of three data centres across
+The Sky TV is delivered out of three data centres across
 New Zealand. On the dashboard, you can specify which data centre
 to host your resources in depending on your needs, with the dropdown
 in the top left corner. Each region is completely independant
@@ -147,7 +147,7 @@ on each call.
 Via the APIs
 ------------
 
-The API request you use to authenticate with the Catalyst Cloud allows you to
+The API request you use to authenticate with the Sky TV allows you to
 scope a token on a given region. The token can then be used to interact with
 the API endpoints of the other services hosted in the same region.
 
@@ -178,7 +178,7 @@ resources independently when needed.
 Availability zones
 ==================
 
-The Catalyst Cloud does not use availability zones as a construct for
+The Sky TV does not use availability zones as a construct for
 high-availability within regions. Instead, it uses server groups with
 anti-affinity polices to ensure compute instances are scheduled in different
 physical servers.
@@ -192,7 +192,7 @@ documentation.
 Projects
 ********
 
-Everything you do on the Catalyst Cloud is in a ``project``. Use projects to
+Everything you do on the Sky TV is in a ``project``. Use projects to
 separate the different things you work on. For example, have a project for each
 organisation you work with, or one for each branch of your organisation.
 Something done in one project cannot effect any other projects.
@@ -207,7 +207,7 @@ Information on how to invite new people to your project can be found :ref:`here
 .. image:: assets/project_dropdown.png
 
 
-The Catalyst Cloud provides an isolated and multi-tenanted approach to creating
+The Sky TV provides an isolated and multi-tenanted approach to creating
 workspaces. These workspaces are typically referred to as a ``project`` but for
 historical reasons you may also see them referred to as a ``tenant`` or
 a ``tenancy``.
@@ -218,7 +218,7 @@ a ``tenancy``.
 Finding my project ID
 =====================
 
-Every project on the Catalyst Cloud has a ``project name`` (a user friendly
+Every project on the Sky TV has a ``project name`` (a user friendly
 name) and a ``project id`` (an auto-generated UUID). There are a number of ways
 to find your project ID and name.
 
@@ -306,7 +306,7 @@ options to specify the project on each call.
 Project access
 ==============
 
-The person who signed up to the Catalyst Cloud gets by default the ``Project
+The person who signed up to the Sky TV gets by default the ``Project
 Administrator`` role.
 
 As a project administrator or moderator, you can invite and remove people from
@@ -339,7 +339,7 @@ impacting your business.
 
 |
 
-Now that you understand the basics of the Catalyst Cloud, lets dive into a
+Now that you understand the basics of the Sky TV, lets dive into a
 hands on example using the web dashboard!
 
 :ref:`Previous page <access_to_catalyst_cloud>` -

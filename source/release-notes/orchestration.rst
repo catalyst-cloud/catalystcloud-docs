@@ -4,7 +4,7 @@
 Orchestration
 #############
 
-This is the release notes/changes list for Catalyst Cloud Orchestration service.
+This is the release notes/changes list for Sky TV Orchestration service.
 
 .. note::
   Latest API version: ``v1``

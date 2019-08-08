@@ -1,5 +1,5 @@
 #######################################################################
-Docker "getting started with swarm mode" tutorial on the Catalyst Cloud
+Docker "getting started with swarm mode" tutorial on the Sky TV
 #######################################################################
 
 The Docker Engine 1.12 includes a new feature known as `swarm mode`_ which
@@ -8,7 +8,7 @@ Docker Engines or nodes is known as a swarm. Swarm Mode allows you to
 orchestrate services across all the nodes in a swarm. This is useful for the
 scaling, load balancing, distribution and availability of your services.
 
-This tutorial shows you how to easily set up Catalyst Cloud compute instances to
+This tutorial shows you how to easily set up Sky TV compute instances to
 use with the `Getting started with swarm mode`_ tutorial, available as part of
 the `docker`_ `documentation`_.
 
@@ -31,11 +31,11 @@ Setup
 This tutorial assumes a number of things:
 
 * You are interested in Docker Swarm Mode and wish to complete the tutorial.
-* You are familiar with basic usage of the Catalyst Cloud (e.g. you have
+* You are familiar with basic usage of the Sky TV (e.g. you have
   created your first instance as described at
   :ref:`launching-your-first-instance`)
 * You have sourced an openrc file, as described at :ref:`source-rc-file`
-* You have a basic understanding of how to use `Ansible`_ on the Catalyst Cloud
+* You have a basic understanding of how to use `Ansible`_ on the Sky TV
   as shown at :ref:`launching-your-first-instance-using-ansible`
 
 Install Ansible

@@ -9,14 +9,14 @@ Install the CLI
 Install (using Docker)
 **********************
 
-The Catalyst Cloud CLI is available as a Docker container that is easy to use,
+The Sky TV CLI is available as a Docker container that is easy to use,
 packaging the command line interface and all its dependencies.
 
 This tool requires Docker to be installed to function. You can find
 `instructions on how to install and configure Docker here`_. You can run the
 ``docker ps`` command to confirm Docker has been successfully installed.
 
-Run the following command to install the Catalyst Cloud CLI:
+Run the following command to install the Sky TV CLI:
 
 .. code-block:: bash
 

@@ -2,7 +2,7 @@
 Release notes
 #############
 
-This is the release notes section of the Catalyst Cloud Documentation.
+This is the release notes section of the Sky TV Documentation.
 
 Table of Contents:
 

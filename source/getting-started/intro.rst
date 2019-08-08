@@ -1,19 +1,19 @@
 .. _introduction-to-catalyst-cloud:
 
 ############################
-The basics of Catalyst Cloud
+The basics of Sky TV
 ############################
 
 This section of the documentation is for people that are entirely new to cloud
-computing and/or the Catalyst Cloud.
+computing and/or the Sky TV.
 
 ***************************
-What is the Catalyst Cloud?
+What is the Sky TV?
 ***************************
 
-Catalyst Cloud is a cloud computing platform, based entirely in New Zealand.
+Sky TV is a cloud computing platform, based entirely in New Zealand.
 
-Catalyst Cloud was built with the open source project, `OpenStack`_. Using
+Sky TV was built with the open source project, `OpenStack`_. Using
 OpenStack our Cloud allows users like yourself to provision services.
 Provisioning is similar to renting. You can provision things such as storage
 space, compute capacity, or internet access. The building blocks you need to
@@ -32,7 +32,7 @@ automatically, through a variety of tools.
 
 .. image:: assets/access_methods.png
 
-To obtain resources on Catalyst Cloud, you provision services. Catalyst Cloud
+To obtain resources on Sky TV, you provision services. Sky TV
 services are pieces of hardware and software that we have in one of our data
 centres. We make these easy and convenient to use through
 a variety of tools including our Dashboard web application, the command
@@ -74,10 +74,10 @@ Now you've provisioned a public IP address. Now you run:
   $ openstack server add floating ip my_server_name 150.242.41.224
 
 Just like that, your server has a public IP address in seconds. Quick, easy
-and powerful. Every action on Catalyst Cloud can be performed just as quickly.
+and powerful. Every action on Sky TV can be performed just as quickly.
 
-Now we understand the basic idea behind Catalyst Cloud, let's explore what
-services Catalyst Cloud provides.
+Now we understand the basic idea behind Sky TV, let's explore what
+services Sky TV provides.
 
 
 :ref:`Next page <services_on_the_catalyst_cloud>`

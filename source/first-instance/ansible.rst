@@ -55,7 +55,7 @@ install script in order to install Ansible.
 .. note::
 
   Catalyst recommends customers use Ansible >= 2.0 and Shade >= 1.4 with the
-  Catalyst Cloud.
+  Sky TV.
 
 
 OpenStack credentials
@@ -66,7 +66,7 @@ been set up. The easiest way to achieve this is by making use of environment
 variables. Use the standard variables provided by an OpenStack RC file as
 described in :ref:`source-rc-file`. These variables are read by the
 Ansible ``os_auth`` module, and will provide Ansible with the credentials
-required to access the Catalyst Cloud APIs.
+required to access the Sky TV APIs.
 
 .. note::
 
@@ -96,9 +96,9 @@ These are the tasks the ``create-network.yml`` playbook will perform:
 
  playbook: create-network.yml
 
-  play #1 (localhost): Create a network in the Catalyst Cloud   TAGS: []
+  play #1 (localhost): Create a network in the Sky TV   TAGS: []
     tasks:
-      Connect to the Catalyst Cloud TAGS: []
+      Connect to the Sky TV TAGS: []
       Create a network  TAGS: []
       Create a subnet   TAGS: []
       Create a router   TAGS: []
@@ -121,7 +121,7 @@ variable, or override the variable when running the playbook as shown below:
  TASK [setup] *******************************************************************
  ok: [localhost]
 
- TASK [Connect to the Catalyst Cloud] *******************************************
+ TASK [Connect to the Sky TV] *******************************************
  ok: [localhost]
 
  TASK [Create a network] ********************************************************
@@ -167,10 +167,10 @@ playbook:
  TASK [setup] *******************************************************************
  ok: [localhost]
 
- TASK [Connect to the Catalyst Cloud] *******************************************
+ TASK [Connect to the Sky TV] *******************************************
  ok: [localhost]
 
- TASK [Create a compute instance on the Catalyst Cloud] *************************
+ TASK [Create a compute instance on the Sky TV] *************************
  changed: [localhost]
 
  TASK [Assign a floating IP] ****************************************************

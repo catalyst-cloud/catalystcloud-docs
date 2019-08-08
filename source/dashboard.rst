@@ -5,13 +5,13 @@ Dashboard
 #########
 
 
-The web dashboard is a simple way to interact with The Catalyst Cloud. It can
+The web dashboard is a simple way to interact with The Sky TV. It can
 be found at https://dashboard.cloud.catalyst.net.nz.
 
 .. image:: assets/dashboard_view.png
 
 Our web dashboard is a great tool that provides easy
-access to most of the services that the Catalyst Cloud provides. All of the
+access to most of the services that the Sky TV provides. All of the
 standerd services are able to be controlled via the Dashboard. There are some
 more advanced abilities that the cloud environment is capable of; however these
 require the use of the :ref:`CLI <command-line-interface>` or interacting with
@@ -36,11 +36,11 @@ buttons along the top bar. From left to right, these:
 The major appeal of using the dashboard is it requires very little programming
 expertise or knowledge. There is an assumed level of understanding about the
 products you are trying to create or outcomes you seek to achieve, but you can
-use most of the services provided by the Catalyst Cloud simply by navigating
+use most of the services provided by the Sky TV simply by navigating
 through the dashboard.
 
 Another  major advantage to the web dashboard is that it is accessible from any
-IP address, making it a quick way to perform tasks on the Catalyst Cloud while
+IP address, making it a quick way to perform tasks on the Sky TV while
 you're away from your normal work station.
 
 
@@ -68,7 +68,7 @@ public Internet). We ask for your IP address during sign up, so we can provide
 you with access to the APIs. If your IP address has changed or you would like
 to add more IPs, please contact us to change the information provided.
 
-Please note you can access the Catalyst Cloud from a dynamic IP by proxying
+Please note you can access the Sky TV from a dynamic IP by proxying
 your connectivity through one of your cloud instances. When it comes to your
 compute instances, you are in full control of your own firewall rules and can
 expose them to the Internet.

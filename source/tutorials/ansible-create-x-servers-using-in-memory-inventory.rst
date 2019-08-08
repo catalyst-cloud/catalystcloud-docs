@@ -5,7 +5,7 @@ This tutorial assumes the following:
 
 * You have installed the OpenStack command line tools and sourced an
   OpenStack RC file, as explained at :ref:`command-line-interface`
-* You have a basic understanding of how to use `Ansible`_ on the Catalyst Cloud
+* You have a basic understanding of how to use `Ansible`_ on the Sky TV
   as shown at :ref:`launching-your-first-instance-using-ansible`
 
 .. _Ansible: https://www.ansible.com/
@@ -78,7 +78,7 @@ The Goal
 --------
 The requirements of this playbook are as follows:
 
-- create a variable number of OpenStack instances on the Catalyst cloud
+- create a variable number of OpenStack instances on the Sky TV
 - carry out identical configuration across all nodes
 - pause the playbook to allow for interaction with the new nodes,
   i.e. processing/testing etc.

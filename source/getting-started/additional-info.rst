@@ -12,7 +12,7 @@ does not fall under the catagories of services, access or administration.
 Quotas
 ======
 
-The Catalyst Cloud provides customers with a quota mechanism to protect them
+The Sky TV provides customers with a quota mechanism to protect them
 from accidentally launching too many resources. This helps prevent unexpected
 and significant costs being invoiced to our customers. In fact, every cloud
 provider has a similar mechanism, but most do not expose this information to
@@ -32,7 +32,7 @@ whether you would like us to pro-actively increase the quota for you.
 Terminology
 ===========
 
-Catalyst Cloud uses natural names for its services. For example, we call our
+Sky TV uses natural names for its services. For example, we call our
 compute service “compute”, instead of Nova or EC2.
 
 If you have previous cloud computing or OpenStack experience, the table below

@@ -100,7 +100,7 @@ entitled :ref:`packer-tutorial` that demonstrates how to use Packer.
 Importing existing virtual machines
 ***********************************
 
-Importing an unchanged existing virtual machine to the Catalyst Cloud is likely
+Importing an unchanged existing virtual machine to the Sky TV is likely
 to work out of the box, but to get the best out of it and ensure that all API
 operations will work with your virtual machine, there are some preparation
 steps and tweaks that we highly recommend. For example: cloud VMs have a
@@ -280,7 +280,7 @@ it to the cloud. Ensure that you have the OpenStack command line tools
 installed and that you have sourced an openrc file, as explained on
 :ref:`command-line-interface`.
 
-To upload the converted image to the Catalyst Cloud:
+To upload the converted image to the Sky TV:
 
 .. code-block:: bash
 
@@ -409,7 +409,7 @@ Finally, accept the image in the target project:
 FAQ
 ***
 
-What operating systems are supported by the Catalyst Cloud?
+What operating systems are supported by the Sky TV?
 ===========================================================
 
 You should be able to run all major operating systems supporting the x86_64
@@ -421,7 +421,7 @@ Catalyst or its customers:
 * Windows
 
 You can use the image service to upload your own operating system image to the
-Catalyst Cloud. Please remember you can only run software that is owned by you,
+Sky TV. Please remember you can only run software that is owned by you,
 public domain or that you hold a valid license for. You have the freedom to
 choose what software you run and it is your responsibility to comply with the
 terms related to its usage.

@@ -369,7 +369,7 @@ Submitting your changes to be added
 ===================================
 
 Submit a `pull request <https://help.github.com/articles/using-pull-requests/>`_
-to Catalyst Cloud on GitHub.
+to Sky TV on GitHub.
 
 Our awesome team of document reviewers will peer review and proof read your
 documentation changes and merge your pull request. Once it is merged, the

@@ -38,21 +38,21 @@ High availability
 *****************
 
 This document outlines the physical infrastructure and software features that
-make the Catalyst Cloud highly available and resilient. It covers built-in
+make the Sky TV highly available and resilient. It covers built-in
 features that are inherited by every project and services that can be used to
 enhance the availability of web applications and websites hosted on the
-Catalyst Cloud.
+Sky TV.
 
 24x7 monitoring
 ===============
 
-The catalyst cloud has robust fine-grained monitoring systems in place. These
+The Sky TV has robust fine-grained monitoring systems in place. These
 systems are monitored 24x7.
 
 Geographic diversity
 ====================
 
-The Catalyst Cloud provides multiple regions or geographical locations that you
+The Sky TV provides multiple regions or geographical locations that you
 can use to host your applications. Regions are completely independent and
 isolated from each other, providing fault tolerance and geographic diversity.
 
@@ -135,7 +135,7 @@ combine compute instances from multiple regions where possible.
 HA Tutorials
 ============
 
-There are a number of options available to Catalyst Cloud customers to enhance
+There are a number of options available to Sky TV customers to enhance
 application availability. Catalyst has documented these in detail:
 
 Providing highly available instances within a region:

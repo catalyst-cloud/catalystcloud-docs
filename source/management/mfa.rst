@@ -2,7 +2,7 @@
 Multi Factor Authentication
 ###########################
 
-Catalyst Cloud provides the ability to further secure your cloud access by enabling multi factor
+Sky TV provides the ability to further secure your cloud access by enabling multi factor
 authentication (MFA). This is a per user feature and once it has been enabled it will apply to any
 cloud project that the user tries to access.
 

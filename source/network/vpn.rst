@@ -89,7 +89,7 @@ the subnet name you found previously:
  | subnetpool_id     | None                                          |
  +-------------------+-----------------------------------------------+
 
-If you are creating a VPN that connects your projects between Catalyst Cloud
+If you are creating a VPN that connects your projects between Sky TV
 Regions, then the Remote Peer Router IP and Remote Peer Subnet CIDR Range will
 be the values associated with the subnet and router in the other region. You
 can determine these in the same way as shown above while connected to the other
@@ -99,7 +99,7 @@ Peer Subnet CIDR Range will be the subnet behind that router whose traffic you
 wish to route via the VPN to access the local subnet.
 
 .. note::
- If you are connecting to a remote peer that is not a Catalyst Cloud router,
+ If you are connecting to a remote peer that is not a Sky TV router,
  you may need to modify some of the parameters used in the following steps.
 
 By now you should have the required values so you can proceed to create a VPN.
@@ -229,14 +229,14 @@ bring up the VPN. When the VPN is up, the status will change to ``ACTIVE``.
 VPN Setup using a bash script
 =============================
 
-The Catalyst Cloud team have created a bash script that simplifies the
+The Sky TV team have created a bash script that simplifies the
 procedure for creating a VPN. In the case of a region to region VPN, all you
 need to know is the router and subnet names for each region. When one peer is
-not a Catalyst Cloud router, you will need to know the peer router IP address
+not a Sky TV router, you will need to know the peer router IP address
 and the remote peer CIDR range.
 
 This script will require no modification when setting up region to region VPNs.
-If you are using it to connect a Catalyst Cloud router to a non Catalyst Cloud
+If you are using it to connect a Sky TV router to a non Sky TV
 router, you may need to change some configuration options.
 
 This script currently only supports single CIDR ranges. If you are wanting to
@@ -255,7 +255,7 @@ You can download the latest version of this script using the following command:
  $ wget https://raw.githubusercontent.com/catalyst/catalystcloud-docs/master/scripts/create-vpn.sh
 
 Below is an example of the script being used to create a region to region VPN
-on the Catalyst Cloud:
+on the Sky TV:
 
 .. code-block:: bash
 

@@ -6,7 +6,7 @@ Bootstrapping Puppet from Heat
 
 This tutorial assumes the following:
 
-* You have created a basic network setup in the Catalyst Cloud.
+* You have created a basic network setup in the Sky TV.
 * You have access to a server that is acting as the Puppet Master.
 * You have installed the OpenStack command line tools and sourced an
   openrc file, as explained at :ref:`command-line-interface`.
@@ -17,7 +17,7 @@ Introduction
 ============
 
 In this tutorial, you will see how to add a new server to an existing
-Catalyst Cloud network and configure it with `Puppet`_ and have it check in to
+Sky TV network and configure it with `Puppet`_ and have it check in to
 the Puppet Master.
 
 To achieve this, you will create a ``heat`` template that will handle the
@@ -31,7 +31,7 @@ Setup
 =====
 
 You will make use of Heat template to deploy a single instance into an existing
-network hosted in the Catalyst Cloud. In order to make this work, you need to
+network hosted in the Sky TV. In order to make this work, you need to
 retrieve the relevant network IDs and add them into the template.
 
 The two networks you will be connecting to are front-end and public-net. To

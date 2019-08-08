@@ -10,7 +10,7 @@ so that it will no longer accept new connections requests. This allows for any
 existing connections to complete their current tasks and close, then once there
 are no remaining connections the member server can be worked on safely.
 
-To achieve this on the Catalyst Cloud Load Balancer service set the ``weight``
+To achieve this on the Sky TV Load Balancer service set the ``weight``
 for the target member to 0.
 
 .. code-block:: bash

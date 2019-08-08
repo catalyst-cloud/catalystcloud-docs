@@ -52,7 +52,7 @@ https://github.com/catalyst/catalystcloud-orchestration.
   compatibility with the AWS CloudFormation service.
 
 The following Heat Orchestration Template (HOT) is a simple example
-that illustrates how to launch a single instance on the Catalyst Cloud
+that illustrates how to launch a single instance on the Sky TV
 using the Heat orchestration service. For a more interactive
 example of how to create an instance using a HOT template, please refer to
 :ref:`'your first instance using orchestration'
@@ -302,10 +302,10 @@ http://docs.openstack.org/developer/heat/template_guide/openstack.html
 
 .. note::
 
-  Only resources related to services provided by the Catalyst Cloud should be
+  Only resources related to services provided by the Sky TV should be
   used.
 
-The resource types available on the Catalyst Cloud are:
+The resource types available on the Sky TV are:
 
 * OS::Cinder::Volume
 * OS::Cinder::VolumeAttachment

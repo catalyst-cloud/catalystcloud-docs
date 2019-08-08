@@ -1,5 +1,5 @@
 ########################################################
-Deploying Matrix Synapse on Catalyst Cloud using Ansible
+Deploying Matrix Synapse on Sky TV using Ansible
 ########################################################
 
 This tutorial assumes the following:
@@ -33,7 +33,7 @@ you can find more information at matrix.org/docs/guides/faq.html
 We're going to use Ansible to automatically install Synapse, the reference
 server implementation of the Matrix protocol. It is implemented in Python and,
 at the time of writing, is the most installed Matrix homeserver implementation.
-We're not going set up an instance on Catalyst Cloud as this has already been
+We're not going set up an instance on Sky TV as this has already been
 covered by the first-instance tutorials.
 
 Creating our Playbook

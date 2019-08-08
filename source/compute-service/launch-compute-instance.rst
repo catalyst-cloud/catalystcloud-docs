@@ -14,12 +14,12 @@ Choosing a source
 =================
 
 When creating a new instance via the dashboard you are asked to select a
-`Boot Source`. You can choose to use an image provided by Catalyst Cloud,
+`Boot Source`. You can choose to use an image provided by Sky TV,
 images uploaded by you, instance snapshots, existing volumes, or volume
 snapshots:
 
 * ``Image``: Public images are pre-configured operating system images provided
-  by Catalyst Cloud or our partners. Private images are images you have
+  by Sky TV or our partners. Private images are images you have
   uploaded yourself.
 * ``Instance Snapshot``: Assuming you have previously created a snapshot of
   another compute instance, this option will create a new compute instance that
@@ -147,7 +147,7 @@ prepared to introduce new flavors if required.
 A virtual CPU (vCPU), also known as a virtual processor, is a time slice of a
 physical processing unit assigned to a compute instance or virtual machine. The
 mapping of virtual CPUs to physical cores is part of the performance and
-capacity management services performed by the Catalyst Cloud on your behalf. We
+capacity management services performed by the Sky TV on your behalf. We
 aim to deliver the performance required by applications, and to increase cost
 efficiency to our customers by optimising hardware utilisation.
 
@@ -171,7 +171,7 @@ configures the network of your compute instance as defined by you via our APIs.
 Cloud-init is very powerful. It's a de facto multi-distribution and multi-cloud
 way of handling the early initialisation of a cloud instance.
 
-When you launch a compute instance on the Catalyst Cloud, you can pass
+When you launch a compute instance on the Sky TV, you can pass
 initialisation configuration to cloud-init via "user-data" (either using the
 ``--user-data`` parameter of ``openstack server create``, or as a post-creation
 customisation script via the web dashboard).
@@ -200,7 +200,7 @@ options during boot time, such as the hostname, locale and timezone.
 
   #cloud-config
 
-  # On the Catalyst Cloud, the default username for access to your instances is:
+  # On the Sky TV, the default username for access to your instances is:
   # - CentOS: centos
   # - CoreOS: core
   # - Debian: debian

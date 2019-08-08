@@ -5,16 +5,16 @@ Using the web dashboard
 #######################
 
 Now we're going to take you step by step on the process of creating a Linux
-instance on the Catalyst Cloud.
+instance on the Sky TV.
 
 ****************
 Before you begin
 ****************
 
 1) We assume you've already `signed up <https://catalystcloud.nz/signup/>`_ to
-   the Catalyst Cloud.
+   the Sky TV.
 2) Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
-3) As a new user to the Catalyst Cloud your initial cloud project will come with
+3) As a new user to the Sky TV your initial cloud project will come with
    a pre-configured private network and a router connected to the internet. We
    assume this is the case for this tutorial. If you have deleted this, or
    would like to create additional networks then please see
@@ -31,13 +31,13 @@ create. Typcially this is done by a Secure Shell tunnel, or SSH. To allow our
 instance to accept our workstation's SSH tunnel request, we must add our SSH
 public key to our instance. We can do this right from the dashboard.
 
-You can either import an existing public key or have the Catalyst Cloud
+You can either import an existing public key or have the Sky TV
 create a key pair for you. We document both below.
 
 Creating a new key pair
 =======================
 
-If you haven't generated a SSH key pair before, Catalyst Cloud can create one
+If you haven't generated a SSH key pair before, Sky TV can create one
 for you.
 
 Navigate to the ``Key Pairs`` tab.
@@ -59,7 +59,7 @@ Importing an existing key pair
 ==============================
 
 If you already have an SSH key pair, you can import the public key into
-Catalyst Cloud.
+Sky TV.
 
 Navigate to the ``Key Pairs`` tab.
 
@@ -243,7 +243,7 @@ any Ubuntu server.
 Learning more from here
 ***********************
 
-Now you've learned a great deal about Catalyst Cloud instances, security groups
+Now you've learned a great deal about Sky TV instances, security groups
 , floating ips, SSH key pairs, and images. To move forward from here, you might
 want to:
 

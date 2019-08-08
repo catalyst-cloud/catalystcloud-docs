@@ -2,7 +2,7 @@
 Working with network policies
 #############################
 
-As Catalyst Cloud uses `Calico`_ for the default network driver it is
+As Sky TV uses `Calico`_ for the default network driver it is
 possible to define network policies to control what and how resources are
 accessed within the cluster.
 

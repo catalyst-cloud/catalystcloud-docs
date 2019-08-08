@@ -1,5 +1,5 @@
 #########################################################
-Using an OpenStack Vagrant Provider on the Catalyst Cloud
+Using an OpenStack Vagrant Provider on the Sky TV
 #########################################################
 
 `Vagrant`_ is a popular development tool that makes it easy to create and
@@ -35,7 +35,7 @@ This tutorial assumes a number of things:
 
 * You are familiar with Vagrant and its use case and wish to make use of
   OpenStack as a provider
-* You are familiar with basic usage of the Catalyst Cloud (e.g. you have
+* You are familiar with basic usage of the Sky TV (e.g. you have
   created your first instance as described at
   :ref:`launching-your-first-instance`)
 * You already have Vagrant installed on your machine

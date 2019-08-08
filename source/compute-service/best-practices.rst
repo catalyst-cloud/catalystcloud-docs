@@ -52,7 +52,7 @@ support this architecture.
 Automatic restart on failure
 ****************************
 
-When server failures occur, the Catalyst Cloud will attempt to restart the
+When server failures occur, the Sky TV will attempt to restart the
 affected compute instances on a healthy server to minimise their downtime.
 
 To benefit from this feature, your application must be configured and prepared

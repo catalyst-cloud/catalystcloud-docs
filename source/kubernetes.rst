@@ -3,7 +3,7 @@ Kubernetes
 ##########
 
 Catalyst Kubernetes Service makes it easy for you to deploy, manage, and scale
-Kubernetes clusters to run containerised applications on the Catalyst Cloud.
+Kubernetes clusters to run containerised applications on the Sky TV.
 
 .. warning::
 

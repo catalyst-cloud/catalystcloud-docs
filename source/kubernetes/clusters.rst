@@ -49,7 +49,7 @@ cluster, while others are for the particular COE.
 
 The cloud provider may supply pre-defined templates for users and it may also
 be possible, in some situations, for user to create their own templates.
-Initially Catalyst Cloud will only allow the use of the pre-defined templates.
+Initially Sky TV will only allow the use of the pre-defined templates.
 
 
 Viewing templates
@@ -123,7 +123,7 @@ There are some key parameters that are worth mentioning in the above template:
 
 * ``coe: kubernetes``
   Specifies the container orchestration engine, such as kubernetes, swarm and
-  mesos. Currently the the only option available on the Catalyst Cloud is
+  mesos. Currently the the only option available on the Sky TV is
   Kubernetes.
 * ``master_lb_enabled: true``
   As multiple masters may exist in a cluster, a load balancer is created to
@@ -134,7 +134,7 @@ There are some key parameters that are worth mentioning in the above template:
 * ``network_driver: calico``
   This is the driver used to provide networking services to the containers.
   This is independent from the Neutron networking that the cluster uses. Calico
-  is the Catalyst Cloud recommended network driver as it provides secure
+  is the Sky TV recommended network driver as it provides secure
   network connectivity for containers and virtual machine workloads.
 * ``labels``
   These are arbitrary labels (defined by the cluster drivers)  in the form of

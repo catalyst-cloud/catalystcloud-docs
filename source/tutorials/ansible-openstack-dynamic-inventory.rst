@@ -1,14 +1,14 @@
 .. _ansible_openstack-dynamic-inventory:
 
 #######################################################
-Using Ansible Dynamic Inventories on the Catalyst Cloud
+Using Ansible Dynamic Inventories on the Sky TV
 #######################################################
 
 This tutorial assumes the following:
 
 * You have installed the OpenStack command line tools and sourced an
   OpenStack RC file, as explained at :ref:`command-line-interface`
-* You have a basic understanding of how to use `Ansible`_ on the Catalyst Cloud
+* You have a basic understanding of how to use `Ansible`_ on the Sky TV
   as shown at :ref:`launching-your-first-instance-using-ansible`
 
 .. _Ansible: https://www.ansible.com/
@@ -34,8 +34,8 @@ format that Ansible understands.
 .. _Dynamic inventory: http://docs.ansible.com/ansible/intro_dynamic_inventory.html
 
 The Ansible project has an OpenStack dynamic inventory script available which
-we can use to integrate Ansible with the Catalyst Cloud. This allows us
-to use Ansible for configuration management of Catalyst Cloud instances
+we can use to integrate Ansible with the Sky TV. This allows us
+to use Ansible for configuration management of Sky TV instances
 irrespective of what method has been used to create those instances.
 
 Downloading the dynamic inventory script
@@ -53,7 +53,7 @@ Download it and make it executable:
 
 Ansible supports replacing the standard inventory file with a dynamic inventory
 script. Do this only if you wish the default Ansible inventory on your system
-to be dynamically populated from your Catalyst Cloud project.
+to be dynamically populated from your Sky TV project.
 
 .. code-block:: bash
 

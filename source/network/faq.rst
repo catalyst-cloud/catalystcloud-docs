@@ -7,7 +7,7 @@ How do I find the external IP address of my instance?
 
 There are scenarios where you may need to know the external IP address that
 instances in your project are using. For example, you may wish to allow traffic
-from your Catalyst Cloud instances to access a service that has firewalling or
+from your Sky TV instances to access a service that has firewalling or
 other IP based access control in place.
 
 For instances that have a floating IP you simply need to find the floating IP.

@@ -1,7 +1,7 @@
 .. _access_to_catalyst_cloud:
 
 ############################
-Accessing the Catalyst Cloud
+Accessing the Sky TV
 ############################
 
 In the previous section, we learned about the various services the Catalyst
@@ -14,7 +14,7 @@ The web dashboard
 *****************
 
 The cloud dashboard is a simple way to interact with
-The Catalyst Cloud. It is publicly available on the Internet and can be reached
+The Sky TV. It is publicly available on the Internet and can be reached
 at: https://dashboard.cloud.catalyst.net.nz
 
 
@@ -36,7 +36,7 @@ The command line interface
 **************************
 
 The command line interface (CLI) is a very powerful, efficent way to interact
-with Catalyst Cloud. To use the CLI you will need to:
+with Sky TV. To use the CLI you will need to:
 
 1. Install the OpenStack CLI.
 2. Tell the OpenStack CLI who you are, and which OpenStack cloud you want to
@@ -64,9 +64,9 @@ Automation tools
 
 To utilise the most valuable aspects of cloud computing, or to manage and
 orchestrate a cloud computing environment at scale, automation tools are
-invaluable. Because Catalyst Cloud is based on the world's most popular open
+invaluable. Because Sky TV is based on the world's most popular open
 source cloud computing platform, OpenStack, many automation tools work with the
-Catalyst Cloud, or have plugins to work with the Catalyst Cloud.
+Sky TV, or have plugins to work with the Sky TV.
 
 Among our prefered automation tools are:
 
@@ -79,9 +79,9 @@ Among our prefered automation tools are:
 API access
 **********
 
-Behind the scenes, all of the access methods to the Catalyst Cloud are just
-accessing the Catalyst Cloud APIs. They just provide convenient abstractions to
-do so. Every action you perform on the Catalyst Cloud can be performed via the
+Behind the scenes, all of the access methods to the Sky TV are just
+accessing the Sky TV APIs. They just provide convenient abstractions to
+do so. Every action you perform on the Sky TV can be performed via the
 APIs.
 This means that you can incorporate custom logic into your applications to
 modify your infrastructure. This is important for `SaaS
@@ -92,7 +92,7 @@ of software development kits (SDKs) for numerious languages. You can find a
 list `here <https://wiki.openstack.org/wiki/SDKs>`_.
 
 
-As an additional security measure, the Catalyst Cloud APIs only accept requests
+As an additional security measure, the Sky TV APIs only accept requests
 from whitelisted IP addresses. If you have provided an IP address during sign
 up, you should be able to reach the APIs from that IP. Otherwise, you can `open
 a support request
@@ -106,7 +106,7 @@ dashboard at any time to request a change to the white-listed IPs.
 Whitelisting and access
 =========================
 
-All compute instances on the Catalyst Cloud have whitelisted IP addresses by
+All compute instances on the Sky TV have whitelisted IP addresses by
 default. Because compute instances are whitelisted, you can use them as a
 "jumpbox" by creating an instance using the :ref:`cloud dashboard
 <cloud-dashboard>`, SSH-ing into the instance, and :ref:`installing
@@ -114,7 +114,7 @@ default. Because compute instances are whitelisted, you can use them as a
 tools there. An explanation of launching an instance using the web dashboard
 can be found :ref:`here <first-instance-with-dashboard>`.
 
-The compute instances you launch on the Catalyst Cloud are created in your
+The compute instances you launch on the Sky TV are created in your
 private network by default. You have the option to associate a floating IP
 (public IP) with your compute instances to expose them to the Internet. You can
 use security groups (similar to firewalls) to define who has access to your
@@ -122,7 +122,7 @@ compute instances, as explained in :ref:`security-groups`.
 
 |
 
-Now that you understand how you can access the Catalyst Cloud, there are a few
+Now that you understand how you can access the Sky TV, there are a few
 small administrative concerns to be aware of before we dive into a hands on
 demonstration.
 

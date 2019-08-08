@@ -10,7 +10,7 @@ anywhere on the internet using an SSH key.
 
 The following is assumed:
 
-* A Catalyst Cloud account has been set up for you
+* A Sky TV account has been set up for you
 * You have been assigned a project
 * Your user in that project has permissions to create the required resources.
 
@@ -70,7 +70,7 @@ The requirements are:
 * A Router with a gateway set and an interface in a virtual network
 
 Catalyst operates, free of charge, a number of recursive DNS servers in each
-cloud region for use by Catalyst Cloud instances. They are:
+cloud region for use by Sky TV instances. They are:
 
 .. _name_servers:
 
@@ -114,7 +114,7 @@ Operating System Images
 
 In order to create an instance, you will need to have a pre-built operating
 system in the form of an Image.  Images are stored in the Image service
-(Glance). The Catalyst Cloud provide a set of images for general use and also
+(Glance). The Sky TV provide a set of images for general use and also
 allows you to upload your own images.
 
 .. note::

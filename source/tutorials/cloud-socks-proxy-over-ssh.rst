@@ -2,7 +2,7 @@
 Setting up a SOCKS Proxy using SSH on a cloud instance
 ######################################################
 
-A generic HTTP proxy can be created using a Catalyst Cloud instance. This proxy
+A generic HTTP proxy can be created using a Sky TV instance. This proxy
 utilises the native SOCKS5 support in OpenSSH.
 
 ****************************

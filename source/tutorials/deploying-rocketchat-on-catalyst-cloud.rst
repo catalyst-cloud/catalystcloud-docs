@@ -1,5 +1,5 @@
 #######################################################
-Deploying RocketChat on Catalyst Cloud using Cloud-init
+Deploying RocketChat on Sky TV using Cloud-init
 #######################################################
 
 Rocket.Chat is an open source alternative to other chat apps such as Slack. It
@@ -18,7 +18,7 @@ This tutorial assumes the following:
 Introduction
 ============
 
-In this tutorial we're going to set up Rocket.Chat on a Catalyst Cloud instance
+In this tutorial we're going to set up Rocket.Chat on a Sky TV instance
 using nginx as an HTTPS reverse proxy to handle requests to and from the chat
 server.
 

@@ -22,7 +22,7 @@ give you a full view of how the individual pieces work together.
  This documentation refers to values using placeholders (such as ``<PRIVATE_SUBNET_ID>``)
  in example command output. The majority of these values will be displayed as UUIDs
  in your output. Many of these values will be stored in bash variables prefixed with
- ``CC_`` so you do not have to cut and paste them. The prefix ``CC_`` (Catalyst Cloud)
+ ``CC_`` so you do not have to cut and paste them. The prefix ``CC_`` (Sky TV)
  is used to  distinguish these variables from the ``OS_`` (OpenStack) variables obtained
  from an OpenRC file.
 
@@ -435,7 +435,7 @@ As the Instance builds, its details will be provided. This includes its ID
 
 .. note::
 
- Observe that the status is ``BUILD`` Catalyst Cloud instances build very quickly,
+ Observe that the status is ``BUILD`` Sky TV instances build very quickly,
  but it still takes a few seconds. Wait a few seconds and ask for the status of
  this instance using the ``<INSTANCE_ID>`` or name (if unique) of this instance.
 

@@ -2,7 +2,7 @@
 Using the shade SDK
 *******************
 
-The Catalyst Cloud is built on top of the OpenStack project. There are many
+The Sky TV is built on top of the OpenStack project. There are many
 Software Development Kits for a variety of different languages available for
 OpenStack. Some of these SDKs are written specifically for OpenStack while
 others are multi cloud SDKs that have an OpenStack provider. Some of these
@@ -75,7 +75,7 @@ Using an interactive interpreter
  This section is optional. If you do not wish to engage with the Catalyst
  Cloud interactively, you can safely skip it.
 
-The following code allows you to engage with the Catalyst Cloud via
+The following code allows you to engage with the Sky TV via
 the Python interactive interpreter. First, define a cloud object called
 ``cloud``:
 

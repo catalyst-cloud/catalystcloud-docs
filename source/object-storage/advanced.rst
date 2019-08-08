@@ -228,7 +228,7 @@ should expire.
 - in the nested container structure : bar_container/quux.md
 - with key : my_secret_tempurl_key
 
-Creating Temporary URLs in the Catalyst Cloud
+Creating Temporary URLs in the Sky TV
 =============================================
 At the time of writing, the only method currently available for the creation
 of temporary URLs is using the command line tools.

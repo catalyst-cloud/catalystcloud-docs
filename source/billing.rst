@@ -6,7 +6,7 @@ Billing service
 Billing API
 ***********
 
-Catalyst Cloud now provides a RESTful API to access our billing service. With
+Sky TV now provides a RESTful API to access our billing service. With
 the billing API, it's easy to get historical invoices and the cost for the
 current month. We have released an official Python client to help you consume
 the API, see https://pypi.python.org/pypi/python-distilclient.
@@ -65,7 +65,7 @@ reference for how to consume the billing API, see
 https://github.com/catalyst-cloud/catalystcloud-billing
 
 This script provides a means to get itemised billing based on the prefix of a
-set of resources so that a Catalyst Cloud customer can easily on-charge their
+set of resources so that a Sky TV customer can easily on-charge their
 hosted customers based on that customers usage.
 
 .. note::
@@ -92,7 +92,7 @@ command line tool in it.
 Get billing information based on the prefix of customer
 -------------------------------------------------------
 
-Source an openrc file with your credentials to access the Catalyst Cloud, as
+Source an openrc file with your credentials to access the Sky TV, as
 described at
 http://docs.catalystcloud.io/getting-started/cli.html#source-an-openstack-rc-file.
 

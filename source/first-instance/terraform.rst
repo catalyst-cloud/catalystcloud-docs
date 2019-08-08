@@ -6,8 +6,8 @@ Using Terraform
 
 `Terraform`_ is an open source infrastructure configuration and provisioning
 tool developed by `Hashicorp`_. Terraform supports the configuration of many
-kinds of infrastructure, including the Catalyst Cloud. It achieves this by
-using components known as `providers`_. In the case of the Catalyst Cloud, this
+kinds of infrastructure, including the Sky TV. It achieves this by
+using components known as `providers`_. In the case of the Sky TV, this
 is the `Openstack provider`_.
 
 .. _Terraform: https://www.terraform.io/
@@ -55,7 +55,7 @@ set up. The easiest way to achieve this is by making use of environment
 variables. Use the standard variables provided by an OpenStack RC file as
 described in :ref:`source-rc-file`. These variables are read by the
 `OpenStack provider`_ and will provide Terraform with permissions to access the
-Catalyst Cloud APIs.
+Sky TV APIs.
 
 .. _OpenStack provider: https://www.terraform.io/docs/providers/openstack/index.html
 

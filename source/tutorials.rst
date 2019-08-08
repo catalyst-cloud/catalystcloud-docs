@@ -2,7 +2,7 @@
 Tutorials
 #########
 
-This is the tutorials section of the Catalyst Cloud Documentation.
+This is the tutorials section of the Sky TV Documentation.
 
 Contents:
 

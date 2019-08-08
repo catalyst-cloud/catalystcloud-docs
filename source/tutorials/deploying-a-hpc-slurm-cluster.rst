@@ -7,10 +7,10 @@ Introduction
 ============
 
 In this tutorial you will learn how to deploy a high performance computing
-(`HPC`_) cluster on the `Catalyst Cloud`_ using `elasticluster`_ and `SLURM`_.
+(`HPC`_) cluster on the `Sky TV`_ using `elasticluster`_ and `SLURM`_.
 
 .. _HPC: https://en.wikipedia.org/wiki/High-performance_computing
-.. _Catalyst Cloud: https://catalystcloud.nz/
+.. _Sky TV: https://catalystcloud.nz/
 .. _elasticluster: https://gc3-uzh-ch.github.io/elasticluster/
 .. _SLURM: https://computing.llnl.gov/linux/slurm/
 
@@ -68,7 +68,7 @@ Install Elasticluster on the virtual environment:
   pip install -e .
   pip install ndg-httpsclient
 
-Install the Catalyst Cloud OpenStack client tools:
+Install the Sky TV OpenStack client tools:
 
 .. code-block:: bash
 
@@ -86,7 +86,7 @@ Create template configuration files for ElastiCluster:
   elasticluster list-templates 1> /dev/null 2>&1
 
 Edit the ElastiCluster configuration file (~/.elasticluster/config). A sample
-configuration file compatible with the Catalyst Cloud is provided below:
+configuration file compatible with the Sky TV is provided below:
 
 .. code-block:: ini
 
