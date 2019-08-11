@@ -1,7 +1,0 @@
-# namespace1.yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: development
-  labels:
-    name: development

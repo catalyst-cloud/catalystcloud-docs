@@ -1,11 +1,11 @@
 .. _administrating_the_catalyst_cloud:
 
 #################################
-Administrating the Sky TV
+Administrating the Sky TV Cloud
 #################################
 
 There are a few small points that are important to be aware of before diving
-into the Sky TV.
+into the Sky TV cloud.
 
 .. _admin-support:
 
