@@ -5,18 +5,19 @@ Dashboard
 #########
 
 
-The web dashboard is a simple way to interact with The Sky TV. It can
-be found at https://dashboard.cloud.catalyst.net.nz.
+The web dashboard is a simple way to interact with The Sky TV Cloud. It can
+be found at https://openstack.skytv.co.nz.
 
-.. image:: assets/dashboard_view.png
+.. image:: assets/dashboard_screenshot.png
 
 Our web dashboard is a great tool that provides easy
-access to most of the services that the Sky TV provides. All of the
+access to most of the services that the Sky TV Cloud provides. All of the
 standerd services are able to be controlled via the Dashboard. There are some
 more advanced abilities that the cloud environment is capable of; however these
 require the use of the :ref:`CLI <command-line-interface>` or interacting with
-our API's directly; which is discussed elsewhere in the :ref:`documentation
-<apis>`
+our API's directly; which is discussed elsewhere in the :ref:`Catalyst Cloud
+Documentation
+<https://docs.catalystcloud.nz/>`
 
 As previously mention in the getting started section, you can see most of the
 services provided on the left hand sidebar. These services have their own
