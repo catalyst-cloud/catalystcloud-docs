@@ -5,8 +5,8 @@ Accessing the Sky TV Cloud
 ############################
 
 In the previous section, we learned about the various services the available to
-Sky TV's cloud. Now we'll show you how to access the Dashboard so that you
-can start using them.
+Sky TV's cloud. Now we'll show you how to use access these services via the
+Sky TV dashboard.
 
 
 *****************
@@ -17,16 +17,16 @@ The cloud dashboard is a simple way to interact with
 The Sky TV Cloud. It is only available on the internal network and can be
 reached at: https://openstack.skytv.co.nz
 
-.. image:: assets/dashboard-screenshot.png
-
 .. _cloud-dashboard:
 
-Our web dashboard is a great tool that provides easy
+.. image:: .. /assets/dashboard-screenshot.png
+
+
+The web dashboard is a great tool that provides easy
 access to most of the services that the Sky TV Cloud provides. All of the
 standerd services are able to be controlled via the Dashboard. There are some
 more advanced abilities that the cloud environment is capable of; however these
-require the use of the :ref:`CLI <command-line-interface>` or interacting with
-our API's directly; which is discussed elsewhere in the :ref:`Catalyst Cloud
+are discussed elsewhere in the :ref:`Catalyst Cloud
 Documentation
 <https://docs.catalystcloud.nz/>`
 
@@ -63,19 +63,9 @@ FAQ
 I cannot connect to the dashboard
 =================================
 
-The dashboard is open to the public Internet, however various mechanisms are in
-place to protect the service. If you are having difficulty accessing the
-dashboard, please contact us.
-
-Our APIs are currently exposed to customers only (not open to the
-public Internet). We ask for your IP address during sign up, so we can provide
-you with access to the APIs. If your IP address has changed or you would like
-to add more IPs, please contact us to change the information provided.
-
-Please note you can access the Sky TV from a dynamic IP by proxying
-your connectivity through one of your cloud instances. When it comes to your
-compute instances, you are in full control of your own firewall rules and can
-expose them to the Internet.
+The dashboard is only available while connected to the Sky-TV network.
+If you are having issues with connecting to the dashboard, contact your local
+systems administrator.
 
 Failed to delete resource
 =========================

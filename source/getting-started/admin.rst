@@ -1,4 +1,4 @@
-.. _administrating_the_catalyst_cloud:
+.. _administrating_the_sky-tv_cloud:
 
 #################################
 Administrating the Sky TV Cloud
@@ -77,117 +77,6 @@ to discuss your needs: https://catalyst.net.nz/training-services
 
 .. _admin-region:
 
-*******
-Regions
-*******
-
-The Sky TV is delivered out of three data centres across
-New Zealand. On the dashboard, you can specify which data centre
-to host your resources in depending on your needs, with the dropdown
-in the top left corner. Each region is completely independant
-and isolated (each with their own *control plane*), providing
-fault tolerance and geographic diversity.
-
-
-.. image:: assets/region_dropdown.png
-
-Please visit our website for more information about our national
-infrastructure:
-https://catalystcloud.nz/about/national-infrastructure/
-
-|
-
-+-------------+-----------------+--------------------+----------------------+
-| Region Code | Name            | PCI DSS certified? | ISO 27001 certified? |
-+=============+=================+====================+======================+
-| nz-por-1    | NZ Porirua 1    | Yes                | In progress          |
-+-------------+-----------------+--------------------+----------------------+
-| nz_wlg_2    | NZ Wellington 2 | Yes                | In progress          |
-+-------------+-----------------+--------------------+----------------------+
-| nz-hlz-1    | NZ Hamilton 1   | Yes                | Yes                  |
-+-------------+-----------------+--------------------+----------------------+
-
-.. note::
-
-  We encourage customers to use Porirua as their primary region, as it has the
-  greatest capacity of all our regions.
-
-
-Selecting a region
-==================
-
-Via the dashboard
------------------
-
-The web dashboard has a region selector dropbox on the top left corner. It
-indicates the current region you are connected to and allows you to easily
-switch to another region.
-
-.. image:: ../_static/region_dropdown.png
-
-Via the CLI
------------
-
-The command line interface picks up the region configuration from the
-``$OS_REGION_NAME`` environment variable. To define the variable:
-
-.. code-block:: bash
-
-  export OS_REGION_NAME="region-code"
-
-The easiest way to get this information set is to download the RC file for your
-project from the drop down tab at the top right of the dashboard; and use it as
-your source file while working on the command line. The RC file sets a number
-of variables like ``OS_REGION_NAME``. There is a comprehensive tutorial on
-:ref:`how to configure the CLI <source-rc-file>` in our documentation
-
-Alternatively you can use the ``--os-region-name`` option to specify the region
-on each call.
-
-Via the APIs
-------------
-
-The API request you use to authenticate with the Sky TV allows you to
-scope a token on a given region. The token can then be used to interact with
-the API endpoints of the other services hosted in the same region.
-
-
-
-Data traffic between regions
-============================
-
-The connectivity between compute instances hosted on different regions takes
-place over either our wide area network (WAN) or the Internet, when allowed by
-your security groups and network configuration.
-
-Contrary to data traffic within a given region, there are data transfer costs
-applicable to data traffic between regions.
-
-
-
-Data replication
-================
-
-With the exception of multi-region object storage service, resources are not
-replicated automatically across regions unless you do so. This provides users
-the flexibility to introduce replication where required and to fail-over
-resources independently when needed.
-
-|
-
-Availability zones
-==================
-
-The Sky TV does not use availability zones as a construct for
-high-availability within regions. Instead, it uses server groups with
-anti-affinity polices to ensure compute instances are scheduled in different
-physical servers.
-
-For more information, please refer to the :ref:`anti-affinity` section of the
-documentation.
-
-.. _admin-projects:
-
 ********
 Projects
 ********
@@ -231,31 +120,6 @@ the `View Credentials`_ button.
 .. _API Access: https://dashboard.cloud.catalyst.net.nz/project/api_access/
 .. _View Credentials: https://dashboard.cloud.catalyst.net.nz/project/api_access/view_credentials/
 
-Via the CLI
------------
-
-If you are using the OpenStack command line interface you have most likely
-sourced an openrc file, as explained in :ref:`command-line-interface`. If this
-is the case, you can find your project ID by issuing the following command:
-
-.. code-block:: bash
-
- $ echo $OS_PROJECT_ID
- 1234567892b04ed38247bab7d808e214
-
- $ echo $OS_Project_NAME
- My-Example-Company-Ltd
-
-Alternatively, you can use the ``openstack configuration show`` command:
-
-.. code-block:: bash
-
- $ openstack configuration show -c auth.project_id -f value
- 1234567892b04ed38247bab7d808e214
-
- $ openstack configuration show -c auth.project_name -f value
- My-Example-Company-Ltd
-
 
 Creating new projects
 =====================
@@ -264,8 +128,6 @@ You can request the creation of more projects via the `Support
 Requests`_ panel.
 
 .. _Support Requests: https://dashboard.cloud.catalyst.net.nz/management/tickets/
-
-
 
 Changing project
 ================
@@ -278,69 +140,5 @@ dropdown on the top left corner.
 
 .. image:: ../_static/project_dropdown.png
 
-Via the CLI
------------
 
-The command line interface picks up the project configuration from the
-``$OS_PROJECT_NAME`` and ``$OS_PROJECT_ID`` environment variables.
-
-To define these variable:
-
-.. code-block:: bash
-
-  export OS_PROJECT_NAME="project-name"
-  export OS_PROJECT_ID="UUID"
-
-If a project ID is specified, the project name is not used. If only the project
-name is specified, the CLI will perform a lookup for the name to find the ID.
-
-Alternatively you can use the ``--os-project-name`` and ``--os-project-id``
-options to specify the project on each call.
-
-.. note::
-
-  Both of these variables are set
-  when your source your project from an RC file in the command line.
-
-
-Project access
-==============
-
-The person who signed up to the Sky TV gets by default the ``Project
-Administrator`` role.
-
-As a project administrator or moderator, you can invite and remove people from
-your projects using the `Project Users Panel`_.
-
-.. _Project Users Panel: https://dashboard.cloud.catalyst.net.nz/management/project_users/
-
-
-
-Project quotas
-==============
-
-Each project comes with an initial ``quota`` that sets a limit on the amount of
-cloud resources that you can initially consume. This can be expanded if you
-need more resources.
-
-Please refer to the :ref:`quota section of the
-documentation <additional-info>` for more
-information on quotas.
-
-
-Project isolation
-=================
-
-While projects are inherently secure, it is considered better to use
-multiple projects where it's feasible to do so. For example, it is sensible
-and useful to separate production workloads from development and testing
-environments, if only to help mitigate the possibility of human error
-impacting your business.
-
-|
-
-Now that you understand the basics of the Sky TV, lets dive into a
-hands on example using the web dashboard!
-
-:ref:`Previous page <access_to_catalyst_cloud>` -
-:ref:`Next page <first-instance-with-dashboard>`
+:ref:`Previous page <access_to_sky-tv_cloud>` -

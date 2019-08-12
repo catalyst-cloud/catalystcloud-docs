@@ -1,4 +1,4 @@
-.. _introduction-to-catalyst-cloud:
+.. _introduction-to-sky-tv-cloud:
 
 ############################
 The basics of Sky TV cloud
@@ -30,4 +30,4 @@ Now we understand the basic idea behind the Sky TV cloud, let's explore what
 services are provided.
 
 
-:ref:`Next page <services_on_the_catalyst_cloud>`
+:ref:`Next page <services_on_the_sky-tv_cloud>`

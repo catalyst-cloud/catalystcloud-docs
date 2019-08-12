@@ -2,7 +2,7 @@
 Sky TV documentation
 #####################
 
-Kia ora and a warm welcome to the Sky TV Cloud docs!
+Kia ora and a warm welcome to the Sky TV Cloud docs.
 
 Contents:
 
@@ -11,7 +11,7 @@ Contents:
 
    getting-started
    dashboard
-   databse
+   database
    alarm-service
 
 
