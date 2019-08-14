@@ -1,21 +1,12 @@
 # Catalyst Cloud Documentation
 
-This is the official documentation for the [Catalyst Cloud](https://catalystcloud.nz/), written by [Catalyst IT Limited](https://catalyst.net.nz/) with community contributions.
+**Due to changes in our information storage requirements this public repository is no longer in use.**
 
 ## Contributions
 
-If you have anything to fix or details to add, please consult [Contributing to the documentation](http://docs.catalystcloud.nz/contributing.html).
+As we no longer provide public access to our documentation repository we are unable to accept pull requests for changes directly. 
 
-To start a live reloading server, run:
-
-```
-./live_compile.sh
-```
-Then navigate in your preferred browser to `localhost:8000`.
-
-Changes from files edited in the `source` directory will now be updated in the browser
-after a brief delay. This makes editing the documentation and judging the effects
-of your changes much easier.
+If you do have anything to fix or details to add, please email the team at support@catalystcloud.nz and we will ensure that your input is included.
 
 ## Licence
 
