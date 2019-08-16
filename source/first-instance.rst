@@ -20,10 +20,10 @@ further information:
 
    first-instance/overview
    first-instance/dashboard
-   first-instance/dashboard-windows
    first-instance/command-line
    first-instance/bash-script
    first-instance/heat
    first-instance/ansible
    first-instance/terraform
    first-instance/shade-sdk
+   first-instance/dashboard-windows

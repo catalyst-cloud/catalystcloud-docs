@@ -51,14 +51,21 @@ notation and click "Next":
 
 |
 
-The Subnet Details page is normally, by default, empty. This example sets
-additional attributes for the subnet including:
+The Subnet Details page is normally, by default, empty. However you can define
+the different fields however you'd like. Specifications like:
 
 - enabling DHCP
-- defining a DHCP ip address allocation pool
+   - Dynamic Host Configuration Protocol. Allows you to assign IP's dynamically
+     to devices on your network.
+- defining a DHCP ip address allocation pool.
+   - This is the range of IP's that you are going to be allocating. For example
+     from 10.0.0.10 to 10.0.0.200
 - specifying the :ref:`DNS Name Servers <name_servers>` for the required region
 
-.. image:: ../_static/fi-network-detail.png
+At the moment if you leave the DNS field blank the dashboard will automatically
+allocate it to the catalyst cloud DNS. So it is entirely optional.
+
+.. image:: ../_static/Create-network-subnetdetails.png
    :align: center
 
 |

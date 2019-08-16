@@ -10,7 +10,6 @@ Contents:
    :maxdepth: 2
 
    getting-started
-   sdks-and-toolkits
    first-instance
    dashboard
    compute
@@ -23,9 +22,10 @@ Contents:
    kubernetes
    billing
    backups
-   management
+   #management
    best-practices
    tutorials
+   sdks-and-toolkits
    release-notes
    contributing
 
