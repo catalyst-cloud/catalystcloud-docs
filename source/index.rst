@@ -14,7 +14,6 @@ Contents:
    dashboard
    compute
    image
-   #storage-total
    block-storage
    object-storage
    network
