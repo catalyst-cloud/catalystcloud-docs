@@ -4,16 +4,18 @@ Database creation and access
 
 
 In this section we will work through the steps required to create a new
-database instance through the database service.
+database instance through the database service and cover different common
+topics to do with our Databases.
 
 *********************************
 Gathering
 *********************************
 
 In order to launch a new database instance we need to first decide on a few
-options, these include.
+options, these include:
 
 * The ``datastore type`` which defines the type of database to be deployed.
+  In this instance we are using a mySQL.
 * The datastore type will in turn define the  ``database version`` we are able
   to pick.
 * The ``database flavor``, which determines the vCPU and RAM assigned to the
@@ -36,7 +38,7 @@ First lets determine what datastore types and version are available to us.
 
 Now lets see what versions of mysql are available to us. We can do this a
 couple of ways, either by looking at the full description of the datastore type
-or by explicitly querying the version of a particular datastore type
+or by explicitly querying the version of a particular datastore type:
 
 .. code-block:: bash
 
@@ -61,7 +63,7 @@ or by explicitly querying the version of a particular datastore type
   +--------------------------------------+----------+
 
 Next we need to decide on the resource requirements for our database instance.
-First let's view the available database instance flavors.
+We do  this by picking out a flavor from the list available.
 
 .. code-block:: bash
 
@@ -108,8 +110,8 @@ Launching the new database instance
 ***********************************
 
 Based on the information we gathered in the previous section we will now create
-
-This requires a private network.
+our database instance. This requires a private network on your cloud, to
+attatch the database instance to.
 
 .. code-block:: bash
 
@@ -119,6 +121,10 @@ This requires a private network.
   +--------------------------------------+-----------------+--------------------------------------+
   | 908816f1-933c-4ff2-8595-f0f57c689e48 | glyn-network    | af0f251c-0a36-4bde-b3bc-e6167eda3d1e |
   +--------------------------------------+-----------------+--------------------------------------+
+
+After finding a suitable network to host our database. We combine take the
+subnet ID, alongside the information on our preferred flavor and we construct
+the following command to create our new instance:
 
 .. code-block:: bash
 
@@ -130,6 +136,7 @@ This requires a private network.
   --users dbusr:dbpassword \
   --volume_type b1.standard \
   --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48
+
   +-------------------+--------------------------------------+
   | Field             | Value                                |
   +-------------------+--------------------------------------+
@@ -205,7 +212,7 @@ We can confirm this by doing the following.
 
 .. code-block:: bash
 
-  $ openstack database root show db1
+  $ openstack database root show db-instance-1
   +-----------------+-------+
   | Field           | Value |
   +-----------------+-------+
@@ -217,7 +224,7 @@ instance.
 
 .. code-block:: bash
 
-  $ openstack database root enable db1
+  $ openstack database root enable db-instance-1
   +----------+--------------------------------------+
   | Field    | Value                                |
   +----------+--------------------------------------+
@@ -244,6 +251,12 @@ as above.
   | is_root_enabled | True  |
   +-----------------+-------+
 
+.. This section below didn't work when I tried to run it on my instance on
+   preprod.
+
+We can check that this has worked if we are able to access the database and run
+the following query:
+
 .. code-block:: bash
 
   $ mysql -h 10.0.0.14 -u root -p -e 'SELECT USER()'
@@ -256,18 +269,6 @@ as above.
 
 
 
-.. code-block:: bash
-
-  $ openstack database user create db-instance-1 newuser userpass --databases myDB
-  $ openstack database user list db-instance-1
-  +---------+------+-----------+
-  | Name    | Host | Databases |
-  +---------+------+-----------+
-  | dbusr   | %    | myDB      |
-  | newuser | %    | myDB      |
-  +---------+------+-----------+
-
-
 Creating new users
 ==================
 
@@ -276,12 +277,12 @@ instance using the ``--users <username>:<password>`` argument it is more than
 likely that further users will need to be added over time.
 
 This can be done using the opensrack commandline. Below we can see two example
-of how we can add a new user to our myDB databse. The first example creates a
+of how we can add a new user to our myDB databse. One example creates a
 user that access the databse from any location. This is the same behaviour that
 is displayed when the user is created as part of the initial database instance
 creation.
 
-The second example uses the ``--host`` argument which allows a user to be
+The other example uses the ``--host`` argument which allows a user to be
 created that only can only connect from the specified IP address.
 
 .. code-block:: bash
@@ -328,15 +329,39 @@ remove databases from it.
 
   $ openstack database db create db-instance-1 myDB2
 
+To check the results we use the command from before:
+
+.. code-block:: bash
+
+  $ openstack database db list db-instance-1
+  +-------+
+  | Name  |
+  +-------+
+  | myDB  |
+  | myDB2 |
+  | sys   |
+  +-------+
+
+To delete a database, you need the following command:
+
+.. code-block:: bash
+
+  openstack database instance delete db1
+  #wait until the console returns, it will reply with a message saying
+  #your database was deleted.
+
+
+
+
+.. _backups-for-database-on-Sky-tv_cloud:
 
 ********************
 Working with backups
 ********************
-The following is an
-example of how to set up and recreate an instance using a backup as a source.
-You can do this with the database you've already created using this guide, or
-create another one for the purposes of testing (since we will be deleting a
-database to test the backup process)
+The following is an example of how to set up and recreate an instance using a
+backup as a source. You can do this with the database you've already created
+during this guide, or create another one for the purposes of testing (since we
+will be deleting the database to test the recovery process)
 
 .. code-block:: bash
 
@@ -354,17 +379,22 @@ Destroy instance and recreate using the backup as source:
 .. code-block:: bash
 
   $ openstack database instance delete db1     # wait for it to be deleted...
-  $ openstack database instance create --size 4 --volume b1.standard \
-      --databases db --users usr:pass  --datastore mysql --datastore_version 5.7 \
-      --backup db1-backup \
-      --nic net-id=27f9e799-b936-41c5-b136-018616b062f5 db1 c1.c2r2
+  $ openstack database instance create db-instance-1 c1.c1r4 \
+    --size 3 \
+    --volume_type b1.standard \
+    --databases myDB \
+    --users dbusr:dbpassword \
+    --datastore mysql \
+    --datastore_version 5.7 \
+    --backup db1-backup \
+    --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48
 
   $ openstack database instance list
-  +--------------------------------------+------+-----------+-------------------+--------+--------------------------------------+------+--------+
-  | ID                                   | Name | Datastore | Datastore Version | Status | Flavor ID                            | Size | Region |
-  +--------------------------------------+------+-----------+-------------------+--------+--------------------------------------+------+--------+
-  | 6bd114d1-7251-42d6-9426-db598c085472 | db1  | mysql     | 5.7               | ACTIVE | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    4 | test-1 |
-  +--------------------------------------+------+-----------+-------------------+--------+--------------------------------------+------+--------+
+  +--------------------------------------+----------------+-----------+-------------------+--------+--------------------------------------+------+--------+
+  | ID                                   | Name           | Datastore | Datastore Version | Status | Flavor ID                            | Size | Region |
+  +--------------------------------------+----------------+-----------+-------------------+--------+--------------------------------------+------+--------+
+  | 6bd114d1-7251-42d6-9426-db598c085472 | db-instance-1  | mysql     | 5.7               | ACTIVE | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    4 | test-1 |
+  +--------------------------------------+----------------+-----------+-------------------+--------+--------------------------------------+------+--------+
 
   Connect and check data in there:
 
@@ -385,8 +415,116 @@ Destroy instance and recreate using the backup as source:
 Creating replicas
 *****************
 
+Replicating a database
+instance allows you to make a copy of said instance and by default has it run
+alongside your original. You can set a replica to use it to perform a variety
+of different tasks. You could have it run on standby and have it updated
+periodically to keep up to date with the master. You could use it to run
+your queries so that the master isn't burdened with the load of large queries.
+There are many different uses for having such a replica.
+
+While similar a replica and a backup are very different.
+The main difference between the two is that, a backup takes
+what is equivocal to a snapshot of your database and has the
+commands/information stored.
+to reform a database to the snapshot point in time.
+Where as a replica will be copied
+and can then be set up to receive updates or perform a number of functions as
+mentioned earlier.
+
+The first step is:
+
+.. code-block:: bash
+
+  $ openstack database instance create --size 4 --volume b1.standard  \
+      --datastore mysql --datastore_version 5.7 \
+      --nic net-id=27f9e799-b936-41c5-b136-018616b062f5 \
+      --replica_of db1 db2 c1.c2r2
+
+  $ openstack database instance list
+  +--------------------------------------+------+-----------+-------------------+--------+--------------------------------------+------+--------+
+  | ID                                   | Name | Datastore | Datastore Version | Status | Flavor ID                            | Size | Region |
+  +--------------------------------------+------+-----------+-------------------+--------+--------------------------------------+------+--------+
+  | 6bd114d1-7251-42d6-9426-db598c085472 | db1  | mysql     | 5.7               | ACTIVE | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    4 | test-1 |
+  | 8ddd73b2-939c-496d-906a-4eab4000fff0 | db2  | mysql     | 5.7               | ACTIVE | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    4 | test-1 |
+  +--------------------------------------+------+-----------+-------------------+--------+--------------------------------------+------+--------+
+
 
 
 ************
 Viewing logs
 ************
+
+Logging is important for keeping a well maintained database. In the following
+example we will be showing how to publish a slow_query log. These are a
+performance log that consists of SQL statements that have taken longer than
+the specified long_query_time to executre.
+
+First thing we have to do is check whether we have logging enabled on our
+instance or not.
+
+.. code-block:: bash
+
+  $ openstack database log list db-instance-1
+  +------------+------+----------+-----------+---------+-----------+--------+
+  | Name       | Type | Status   | Published | Pending | Container | Prefix |
+  +------------+------+----------+-----------+---------+-----------+--------+
+  | slow_query | USER | Disabled |         0 |       0 | None      | None   |
+  | general    | USER | Disabled |         0 |       0 | None      | None   |
+  +------------+------+----------+-----------+---------+-----------+--------+
+
+At the moment our, database instance doesn't have logging enabled. The
+following shows how to enable slow_query specifically.
+
+.. code-block:: bash
+
+  $ openstack database log enable db-instance-1 slow_query
+  +-----------+----------------------------------------------------------------+
+  | Field     | Value                                                          |
+  +-----------+----------------------------------------------------------------+
+  | container | None                                                           |
+  | metafile  | 6bd114d1-7251-42d6-9426-db598c085472/mysql-slow_query_metafile |
+  | name      | slow_query                                                     |
+  | pending   | 182                                                            |
+  | prefix    | None                                                           |
+  | published | 0                                                              |
+  | status    | Ready                                                          |
+  | type      | USER                                                           |
+  +-----------+----------------------------------------------------------------+
+
+  #Check to confirm this action
+
+  $ openstack database log list db1
+  +------------+------+----------+-----------+---------+-----------+--------+
+  | Name       | Type | Status   | Published | Pending | Container | Prefix |
+  +------------+------+----------+-----------+---------+-----------+--------+
+  | slow_query | USER | Ready    |         0 |     182 | None      | None   |
+  | general    | USER | Disabled |         0 |       0 | None      | None   |
+  +------------+------+----------+-----------+---------+-----------+--------+
+
+Finally we publish the log using:
+
+.. code-block:: bash
+
+  $ trove log-publish db1 slow_query
+  +-----------+----------------------------------------------------------------+
+  | Property  | Value                                                          |
+  +-----------+----------------------------------------------------------------+
+  | container | database_logs                                                  |
+  | metafile  | 6bd114d1-7251-42d6-9426-db598c085472/mysql-slow_query_metafile |
+  | name      | slow_query                                                     |
+  | pending   | 0                                                              |
+  | prefix    | 6bd114d1-7251-42d6-9426-db598c085472/mysql-slow_query/         |
+  | published | 182                                                            |
+  | status    | Published                                                      |
+  | type      | USER                                                           |
+  +-----------+----------------------------------------------------------------+
+
+
+  $ openstack object list database_logs
+  +--------------------------------------------------------------------------------------+
+  | Name                                                                                 |
+  +--------------------------------------------------------------------------------------+
+  | 6bd114d1-7251-42d6-9426-db598c085472/mysql-slow_query/log-2019-03-28T01:25:32.259223 |
+  | 6bd114d1-7251-42d6-9426-db598c085472/mysql-slow_query_metafile                       |
+  +--------------------------------------------------------------------------------------+
