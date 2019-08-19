@@ -9,14 +9,14 @@ script we provide in the section below.
 .. toctree::
    :maxdepth: 1
 
-   Billing/API
-   Billing/Seperate-billing
-   Billing/FAQ
+   billing/API
+   billing/Seperate-billing
+   billing/FAQ
 
 There is also a tool_ on our dashboard that you can view
 your costs over time:
 
-.. image:: Billing/resources/usage-cost.png
+.. image:: billing/resources/usage-cost.png
    :align: center
 
 .. _tool: https://dashboard.cloud.catalyst.net.nz/management/billing/

@@ -1,7 +1,7 @@
 
-################################
-Management on the catalyst cloud
-################################
+####################################
+Managing your Catalyst Cloud account
+####################################
 
 ****************
 Quota Management
@@ -200,12 +200,18 @@ user also has *Project Member*.
 Auth only
 ---------
 
-The *Auth Only* role is the most restrictive role. Users can manage their own
-account information. A good use case for this would be giving someone this
-role when adding them to a project and requiring them to change their password
-and setting up MFA before giving them a more powerful role. This role cannot
-see, create or destroy project resources. It cannot upload or view SSH keys.
-It cannot see project usage or quata information.
+The *Auth Only* role is the most restrictive role. Users are able to manage
+their own account information. This role cannot view, create or destroy project
+resources. It does not permit the uploading of SSH keys or the viewing of
+project usage and quota information.
+
+There are a couple of possible use cases where this restricted alevel of access
+might be desired.  The first would be giving when adding a new user to a
+sensitive project and requiring them to change their password and setting up
+MFA before giving them a more powerful role. The second would be when there is
+a need to create users with restricted object storage access. For more
+information on this please see :ref:`object-storage-access`.
+
 
 Adding a new user
 =================

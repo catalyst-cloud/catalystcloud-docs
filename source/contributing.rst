@@ -10,6 +10,6 @@ documentation.
 .. toctree::
    :maxdepth: 1
 
-  Contributing/style-guide
-  Contributing/submitting-patch
-  Contributing/git-hooks
+   contributing/style-guide
+   contributing/submitting-patch
+   contributing/git-hooks

@@ -1,3 +1,4 @@
+.. _images:
 
 ***************
 Types of images

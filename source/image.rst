@@ -2,8 +2,6 @@
 Image service
 #############
 
-.. _images:
-
 They are an 'image' of the
 operating system while in a certain state. This is different to just a
 copy of an operating system that is entirely blank; as an image can contain
@@ -22,10 +20,10 @@ of your own in the future, this is discussed later in this section.
 .. toctree::
    :maxdepth: 1
 
-   images/Images-by-catalyst
+   images/images-by-catalyst
    images/importing-vms
-   images/converting-maching-image
+   images/converting-machine-image
    images/uploading-image
    images/launching-from-custom-image
    images/sharing-images
-   images/FAQ
+   images/faq

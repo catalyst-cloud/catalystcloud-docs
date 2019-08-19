@@ -15,7 +15,7 @@ Via the web dashboard
 On the images panel, click on create image. The create image dialogue will be
 displayed as shown below:
 
-.. image:: _static/image-create.png
+.. image:: ../_static/image-create.png
 
 1) On the image source, select "Image Location" to provide the URL that the
 image should be downloaded from, or select "Image File" to upload an image from

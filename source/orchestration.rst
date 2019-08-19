@@ -34,11 +34,11 @@ You will only pay for the resources consumed by your running application stacks
 |
 
 .. toctree::
-   :maxdepth: 1
+  :maxdepth: 1
 
-  Orchestration/Using-heat-CLI
-  Orchestration/HOT-format
-  Orchestration/FAQ
+  orchestration/using-heat-cli
+  orchestration/hot-format
+  orchestration/faq
 
 
 
