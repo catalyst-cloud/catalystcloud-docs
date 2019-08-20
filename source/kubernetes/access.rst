@@ -244,9 +244,9 @@ For a more complete example that shows connections being load balanced between
 many identical application pods take a look at :ref:`simple_lb_deployment`
 
 
-********************************
-Modifying loadbalancer behaviour
-********************************
+****************************************
+Modifying loadbalancers with annotations
+****************************************
 
 While the default behaviour of the loadbalancer service may be fine for a large
 majority of typical use cases, there are times when this behaviour will need to
