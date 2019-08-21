@@ -13,14 +13,15 @@ Kubernetes clusters to run containerised applications on the Catalyst Cloud.
 Table of Contents:
 
 .. toctree::
-  :maxdepth: 1
+   :maxdepth: 1
 
-  kubernetes/overview
-  kubernetes/quickstart
-  kubernetes/clusters
-  kubernetes/storage
-  kubernetes/access
-  kubernetes/network_policies
+   kubernetes/overview
+   kubernetes/quickstart
+   kubernetes/clusters
+   kubernetes/storage
+   kubernetes/access
+   kubernetes/network_policies
+   kubernetes/nginx-ingress
 
 
 .. note::
