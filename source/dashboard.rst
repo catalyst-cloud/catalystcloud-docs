@@ -54,4 +54,4 @@ you're away from your normal work station.
 .. toctree::
    :maxdepth: 1
 
-   dashboard/FAQ
+   dashboard/faq

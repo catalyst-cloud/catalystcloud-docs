@@ -26,5 +26,5 @@ specific issues.
 
    backups/duplicity
    backups/prerequisites
-   backups/Simple-example
+   backups/simple-example
    backups/automating

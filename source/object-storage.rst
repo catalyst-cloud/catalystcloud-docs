@@ -35,6 +35,5 @@ Table of Contents:
   object-storage/dashboard
   object-storage/cli
   object-storage/api
-  object-storage/access
   object-storage/advanced
   object-storage/faq

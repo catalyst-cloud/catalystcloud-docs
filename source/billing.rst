@@ -9,9 +9,9 @@ script we provide in the section below.
 .. toctree::
    :maxdepth: 1
 
-   billing/API
-   billing/Seperate-billing
-   billing/FAQ
+   billing/api
+   billing/seperate-billing
+   billing/faq
 
 There is also a tool_ on our dashboard that you can view
 your costs over time:
