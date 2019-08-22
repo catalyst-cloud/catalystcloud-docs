@@ -89,8 +89,8 @@ The following command will list all cluster templates available:
 
 .. Note::
 
-  Make sure that when you use one of these names a command that
-  you use them precisely as written. There are no warning messages to tell
+  Make sure that when using one of these names in a command that
+  the name is written precisely. There are no warning messages to tell
   you that the template name doesn't exist and so you must double check before
   inputting any commands.
 
@@ -153,7 +153,7 @@ To create a new **development** cluster run the following command:
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-dev-cluster \
-  --cluster-template kubernetes-v1.11.2-dev-20181008 \
+  --cluster-template kubernetes-v1.12.7-dev-20190403 \
   --keypair my-ssh-key \
   --node-count 1 \
   --master-count 1
@@ -165,7 +165,7 @@ To create a new **production** cluster, run the following command:
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-prod-cluster \
-  --cluster-template kubernetes-v1.11.2-prod-20181008 \
+  --cluster-template kubernetes-v1.12.7-prod-20190403 \
   --keypair my-ssh-key \
   --node-count 3 \
   --master-count 3
