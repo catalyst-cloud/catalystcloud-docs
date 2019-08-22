@@ -73,51 +73,59 @@ Then list all of the available cluster templates.
 .. code-block:: bash
 
   $ openstack coe cluster template list
-  +--------------------------------------+------+
-  | uuid                                 | name |
-  +--------------------------------------+------+
-  | cf6f8cab-8d22-4f38-a88b-25f8a41e5b77 | k8s  |
-  +--------------------------------------+------+
+  +--------------------------------------+----------------------------------+
+  | uuid                                 | name                             |
+  +--------------------------------------+----------------------------------+
+  | c5b5a636-0066-4291-8da9-5190915f5a76 | kubernetes-v1.11.6-prod-20190130 |
+  | 5cb74603-4ad3-4e3b-a1d4-4539c392dbf0 | kubernetes-v1.11.6-dev-20190130  |
+  | 5e17bc87-27b2-4c61-ba58-c064fd10245d | kubernetes-v1.11.9-dev-20190402  |
+  | bd116a49-4381-4cb6-adf8-cd442e1a713f | kubernetes-v1.11.9-prod-20190402 |
+  | be25ca0c-2bf6-4bef-a234-4e073b187d71 | kubernetes-v1.12.7-dev-20190403  |
+  | 81d0f765-62fe-4c99-b7f8-284ffddac861 | kubernetes-v1.12.7-prod-20190403 |
+  +--------------------------------------+----------------------------------+
+
 
 To view the details of a particular template.
 
 .. code-block:: bash
 
-  $ openstack coe cluster template show k8s
-  +-----------------------+--------------------------------------+
-  | Field                 | Value                                |
-  +-----------------------+--------------------------------------+
-  | insecure_registry     | -                                    |
-  | labels                | {u'kube_tag': u'v1.11.2-1'}          |
-  | updated_at            | 2018-10-05T01:06:15+00:00            |
-  | floating_ip_enabled   | True                                 |
-  | fixed_subnet          | -                                    |
-  | master_flavor_id      | c1.c2r2                              |
-  | uuid                  | cf6f8cab-8d22-4f38-a88b-25f8a41e5b77 |
-  | no_proxy              | -                                    |
-  | https_proxy           | -                                    |
-  | tls_disabled          | False                                |
-  | keypair_id            | -                                    |
-  | public                | True                                 |
-  | http_proxy            | -                                    |
-  | docker_volume_size    | -                                    |
-  | server_type           | vm                                   |
-  | external_network_id   | e0ba6b88-5360-492c-9c3d-119948356fd3 |
-  | cluster_distro        | fedora-atomic                        |
-  | image_id              | 83833f4f-5d09-44cd-9e23-b0786fc580fd |
-  | volume_driver         | cinder                               |
-  | registry_enabled      | False                                |
-  | docker_storage_driver | overlay2                             |
-  | apiserver_port        | -                                    |
-  | name                  | kubernetes-v1.11.2-development       |
-  | created_at            | 2018-10-05T00:25:19+00:00            |
-  | network_driver        | calico                               |
-  | fixed_network         | -                                    |
-  | coe                   | kubernetes                           |
-  | flavor_id             | c1.c2r2                              |
-  | master_lb_enabled     | False                                |
-  | dns_nameserver        | 202.78.240.215                       |
-  +-----------------------+--------------------------------------+
+  $ openstack coe cluster template show kubernetes-v1.12.7-prod-20190403
+  +-----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | Field                 | Value                                                                                                                                                                                                                                                                                                                                              |
+  +-----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  | insecure_registry     | -                                                                                                                                                                                                                                                                                                                                                  |
+  | labels                | {'kube_tag': 'v1.12.7', 'cloud_provider_enabled': 'true', 'prometheus_monitoring': 'true', 'cloud_provider_tag': '1.14.0-catalyst', 'container_infra_prefix': 'docker.io/catalystcloud/', 'ingress_controller': 'octavia', 'octavia_ingress_controller_tag': '1.14.0-catalyst', 'heat_container_agent_tag': 'stein-dev', 'etcd_volume_size': '20'} |
+  | updated_at            | 2019-04-03T10:26:47+00:00                                                                                                                                                                                                                                                                                                                          |
+  | floating_ip_enabled   | True                                                                                                                                                                                                                                                                                                                                               |
+  | fixed_subnet          | -                                                                                                                                                                                                                                                                                                                                                  |
+  | master_flavor_id      | c1.c2r4                                                                                                                                                                                                                                                                                                                                            |
+  | uuid                  | 81d0f765-62fe-4c99-b7f8-284ffddac861                                                                                                                                                                                                                                                                                                               |
+  | no_proxy              | -                                                                                                                                                                                                                                                                                                                                                  |
+  | https_proxy           | -                                                                                                                                                                                                                                                                                                                                                  |
+  | tls_disabled          | False                                                                                                                                                                                                                                                                                                                                              |
+  | keypair_id            | -                                                                                                                                                                                                                                                                                                                                                  |
+  | public                | True                                                                                                                                                                                                                                                                                                                                               |
+  | http_proxy            | -                                                                                                                                                                                                                                                                                                                                                  |
+  | docker_volume_size    | 20                                                                                                                                                                                                                                                                                                                                                 |
+  | server_type           | vm                                                                                                                                                                                                                                                                                                                                                 |
+  | external_network_id   | e0ba6b88-5360-492c-9c3d-119948356fd3                                                                                                                                                                                                                                                                                                               |
+  | cluster_distro        | fedora-atomic                                                                                                                                                                                                                                                                                                                                      |
+  | image_id              | 83833f4f-5d09-44cd-9e23-b0786fc580fd                                                                                                                                                                                                                                                                                                               |
+  | volume_driver         | cinder                                                                                                                                                                                                                                                                                                                                             |
+  | registry_enabled      | False                                                                                                                                                                                                                                                                                                                                              |
+  | docker_storage_driver | overlay2                                                                                                                                                                                                                                                                                                                                           |
+  | apiserver_port        | -                                                                                                                                                                                                                                                                                                                                                  |
+  | name                  | kubernetes-v1.12.7-prod-20190403                                                                                                                                                                                                                                                                                                                   |
+  | created_at            | 2019-04-03T08:40:10+00:00                                                                                                                                                                                                                                                                                                                          |
+  | network_driver        | calico                                                                                                                                                                                                                                                                                                                                             |
+  | fixed_network         | -                                                                                                                                                                                                                                                                                                                                                  |
+  | coe                   | kubernetes                                                                                                                                                                                                                                                                                                                                         |
+  | flavor_id             | c1.c4r8                                                                                                                                                                                                                                                                                                                                            |
+  | master_lb_enabled     | True                                                                                                                                                                                                                                                                                                                                               |
+  | dns_nameserver        | 202.78.240.215                                                                                                                                                                                                                                                                                                                                     |
+  | hidden                | False                                                                                                                                                                                                                                                                                                                                              |
+  +-----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 
 There are some key parameters that are worth mentioning in the above template:
 
@@ -139,9 +147,6 @@ There are some key parameters that are worth mentioning in the above template:
 * ``labels``
   These are arbitrary labels (defined by the cluster drivers)  in the form of
   key=value pairs as a way to pass additional parameters to the cluster driver.
-  Currently only ``prometheus_monitoring`` is supported and if set to ``true``
-  the monitoring stack will be set up and Node Exporter will automatically be
-  picked up and launched as a regular Kubernetes POD. By default this is False.
 
 ******************
 Creating a cluster
@@ -154,7 +159,7 @@ possible additonal or over-riding parameters that are necessary.
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-cluster \
-  --cluster-template k8s \
+  --cluster-template kubernetes-v1.12.7-dev-20190403 \
   --keypair testkey \
   --node-count 1 \
   --master-count 1

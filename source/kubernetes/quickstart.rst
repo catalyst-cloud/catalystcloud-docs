@@ -83,6 +83,7 @@ The following command will list all cluster templates available:
  | 81d0f765-62fe-4c99-b7f8-284ffddac861 | kubernetes-v1.12.7-prod-20190403 |
  +--------------------------------------+----------------------------------+
 
+
 .. Note::
 
   Make sure that when you use one of these names a command that you use them
@@ -138,7 +139,7 @@ To create a new **development** cluster run the following command:
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-dev-cluster \
-  --cluster-template kubernetes-v1.11.2-dev-20181008 \
+  --cluster-template kubernetes-v1.12.7-dev-20190403 \
   --keypair my-ssh-key \
   --node-count 1 \
   --master-count 1
@@ -150,7 +151,7 @@ To create a new **production** cluster, run the following command:
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-prod-cluster \
-  --cluster-template kubernetes-v1.11.2-prod-20181008 \
+  --cluster-template kubernetes-v1.12.7-prod-20190403 \
   --keypair my-ssh-key \
   --node-count 3 \
   --master-count 3
@@ -292,8 +293,8 @@ loadbalancer that will be publicly available on the internet via a floating ip
 and will serve requests to the application servers using the ``round robin``
 algorithm.
 
-The container image in question **catalystcloud/helloworld version_1.1** runs the
-following application. You do not need to copy this, it already exists in
+The container image in question **catalystcloud/helloworld version_1.1** runs
+the following application. You do not need to copy this, it already exists in
 the cloud.
 
 .. literalinclude:: _containers_assets/app.py
