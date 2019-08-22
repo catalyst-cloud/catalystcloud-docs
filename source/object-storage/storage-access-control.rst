@@ -6,7 +6,7 @@ Managing object storage access
 ##############################
 
 The typical user roles, such as ``Project Member`` or ``Object Storage``, that
-allow access to people that need work with object storage do not provide for
+allow access to people that need to work with object storage do not provide for
 any level of granular control in regard to limiting a users level of access to
 individual object storage containers and the objects within them.
 
@@ -268,8 +268,8 @@ The ``READ ACL`` does not however give the user rights to create or delete
 objects in the container they can view. In order to do this they will need to
 be included in the ``WRITE ACL``
 
-First let's add a write access rule to the access_1 container for
-restricted-user-2.
+First let's repeat the process we used earlier to add the read access rule and
+add a write access rule to the access_1 container for restricted-user-2.
 
 .. code-block:: bash
 
