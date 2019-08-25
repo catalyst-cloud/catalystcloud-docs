@@ -9,9 +9,9 @@ Storage
 Volumes
 *******
 
-In Kubernetes volumes are tied to `pods`_  and their lifecycles. They are the most
-basic storage abstraction, where volumes are bound to pods and containers mount
-these volumes and access them as if they were a local filesystem.
+In Kubernetes volumes are tied to `pods`_  and their lifecycles. They are the
+most basic storage abstraction, where volumes are bound to pods and containers
+mount these volumes and access them as if they were a local filesystem.
 
 This also provides a mechanism for containers within a pod to be able to share
 data by mounting the volume in a shared manner.
