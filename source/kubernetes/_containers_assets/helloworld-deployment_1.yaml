@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: helloworld
-        image: catalystcloud/helloworld-flask:version_1.1
+        image: catalystcloud/helloworld-flask:1.1
         ports:
         - name: helloworld-port
           containerPort: 5000

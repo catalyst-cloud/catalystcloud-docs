@@ -365,9 +365,9 @@ ahead and deploy the ingress controller.
 Once the loadbalancer is active and has an external IP we can create an
 ingress, the same as the previous example, that routes the incoming requests
 for test.example.com to the echo service based on the the URL path "/ping".
-This time we will also add configuration for support.  This adds the hosts that
-the ingress will accept traffic for and the cluster secret that will provide the
-certificate used for the encryption.
+This time we will also add configuration for TLS support.  This adds the hosts
+that the ingress will accept traffic for and the cluster secret that will
+provide the certificate used for the encryption.
 
 .. code-block:: bash
 
@@ -461,12 +461,11 @@ There are 2 sets of configuration we need to enable for this to support to
 function.
 
 The configuration for the Nginx ingress requires the following parameters to be
-enabled. (
+enabled.
 
 * ``use-proxy-protocol``
   Enables or disables the PROXY protocol to receive client connection (real IP
-  address) information passed through proxy servers and load balancers such as
-  HAProxy and Amazon Elastic Load Balancer (ELB).
+  address) information passed through proxy servers and load balancers.
 
 * ``use-forwarded-headers``
   If true, NGINX passes the incoming X-Forwarded-* headers to upstreams. Use this
