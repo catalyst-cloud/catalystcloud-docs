@@ -4,9 +4,8 @@ Clusters
 
 This section shows a more in depth view of clusters and their uses. It
 goes over the process of creating clusters, which is already covered in
-quick start section of this documentation. So if you've gone through that you
-don't need to follow all of the examples again if you've already
-done them in the other section.
+quick start section of this documentation.If you've gone through that you
+don't need to follow all of the examples again.
 
 ******************
 What is a cluster?
@@ -138,7 +137,8 @@ There are some key parameters that are worth mentioning in the above template:
   provide the API endpoint for the cluster and to direct requests to the
   masters. Where the load balancer service is not available, this option can be
   set to ‘false’ thus creating a cluster without the load balancer. In this
-  case, one of the masters will serve as the API endpoint. The default is True.
+  case, one of the masters will serve as the API endpoint. The default for
+  load balancer is True.
 * ``network_driver: calico``
   This is the driver used to provide networking services to the containers.
   This is independent from the Neutron networking that the cluster uses. Calico
@@ -311,7 +311,9 @@ kube-system namespace.
   namespace:  11 bytes
   token:      1234567890123456789012.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi10b2tlbi1mNTcyOCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJhZG1pbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImNjNDQxNmQxLWNhODItMTFlOC04OTkzLWZhMTYzZTEwZWY3NiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTphZG1pbiJ9.ngUnhjCOnIQYOAMzyx9TbX7dM2l4ne_AMiJmUDT9fpLGaJexVuq7EHq6FVfdzllgaCINFC2AF0wlxIscqFRWgF1b1SPIdL05XStJZ9tMg4cyr6sm0XXpzgkMLsuAzsltt5GfOzMoK3o5_nqn4ijvXJiWLc4XkQ3_qEPHUtWPK9Jem7p-GDQLfF7IvxafJpBbbCR3upBQpFzn0huZlpgdo46NAuzTT6iKhccnB0IyTFVgvItHtFPFKTUAr4jeuCDNlIVfho99NBSNYM_IwI-jTMkDqIQ-cLEfB2rHD42R-wOEWztoKeuXVkGdPBGEiWNw91ZWuWKkfslYIFE5ntwHgA
 
-Next run the ``kubectl proxy`` command from the CLI.
+Next run the ``kubectl proxy`` command from the CLI. You can run this command
+in a seperate window, however you will need to source the CONFIG file in said
+window.
 
 .. code-block:: bash
 

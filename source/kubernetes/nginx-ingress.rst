@@ -365,8 +365,8 @@ ahead and deploy the ingress controller.
 Once the loadbalancer is active and has an external IP we can create an
 ingress, the same as the previous example, that routes the incoming requests
 for test.example.com to the echo service based on the the URL path "/ping".
-This time we will also add configuration for TLS support.  This adds the hosts
-that the ingress will accept traffic for and the cluster secret that will
+This time we will also add configuration for TLS support.  This change adds the
+hosts that the ingress will accept traffic for and the cluster secret that will
 provide the certificate used for the encryption.
 
 .. code-block:: bash
@@ -394,7 +394,7 @@ provide the certificate used for the encryption.
   EOF
 
 
-Once the ingress is active and has been assigned anexternal IP address we can
+Once the ingress is active and has been assigned an external IP address we can
 test the service
 
 .. code-block:: bash
@@ -457,7 +457,7 @@ For the final example we will enable support for the PROXY protocol. This
 provides visibility of the originating servers IP address to the backend
 services.
 
-There are 2 sets of configuration we need to enable for this to support to
+There are 2 sets of configuration we need to enable for this support to
 function.
 
 The configuration for the Nginx ingress requires the following parameters to be
@@ -468,14 +468,14 @@ enabled.
   address) information passed through proxy servers and load balancers.
 
 * ``use-forwarded-headers``
-  If true, NGINX passes the incoming X-Forwarded-* headers to upstreams. Use this
-  option when NGINX is behind another L7 proxy / load balancer that is setting
-  these headers.
+  If true, NGINX passes the incoming X-Forwarded-* headers to upstreams. Use
+  this option when NGINX is behind another L7 proxy / load balancer that is
+  setting these headers.
 
   If false, NGINX ignores incoming X-Forwarded-* headers, filling them with the
   request information it sees. Use this option if NGINX is exposed directly to
-  the internet, or it's behind a L3/packet-based load balancer that doesn't alter
-  the source IP in the packets.
+  the internet, or it's behind a L3/packet-based load balancer that doesn't
+  alter the source IP in the packets.
 
 * ``compute-full-forwarded-for``
   Will append the remote address to the X-Forwarded-For header instead of
@@ -488,12 +488,12 @@ For the cluster itself the following annotation needs to be added to the
 configuration.
 
 * ``PROXY protocol``
-  This option provides support so that you can use a Service in LoadBalancer mode
-  to configure a load balancer outside of Kubernetes itself, that will forward
-  connections prefixed with PROXY protocol.
+  This option provides support so that you can use a Service in LoadBalancer
+  mode to configure a load balancer outside of Kubernetes itself, that will
+  forward connections prefixed with PROXY protocol.
 
-  The load balancer will send an initial series of octets describing the incoming
-  connection.
+  The load balancer will send an initial series of octets describing the
+  incoming connection.
 
 This is the actual configuration that will be used by the helm chart.
 
