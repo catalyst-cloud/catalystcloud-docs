@@ -1,4 +1,4 @@
-.. _services_on_the_catalyst_cloud:
+.. _services_on_the_sky-tv_cloud:
 
 ##############################
 Services on the Sky TV Cloud
@@ -45,11 +45,36 @@ Object storage service
 ======================
 
 Object storage is a storage system unique to cloud computing. Instead of
-provisioning a volume of storage capacity, you just upload a file, and The
-Cloud handles it's storage.
+provisioning a volume of storage capacity, you just upload a file, and the
+cloud handles it's storage.
 
 With object storage, you only pay for bits your
 files are using, not any empty, unproductive bits. This allows you to minimise
 your costs. Secondarily, data stored in object storage can be more efficiently
 stored than block storage.
 
+Database service
+================
+
+The Database service allows you to create, organise and manage database
+instances on networks that you have on the cloud. These database instances
+run on a datastore that you are able to create and define using `trove`_
+,a service that can be entirely run using OpenStack. For more information on
+how to create and manage a database, please refer
+to the :ref:`section in this documentation <database_page>`
+
+.. _`trove`: https://wiki.openstack.org/wiki/Trove
+
+Alarm service
+=============
+
+This service is provided with
+`AODH`_ It exists to alert you
+when a specified condition is met. This can be an important function for any
+business as it allows you to keep a closer eye on how effective your other
+services are being used, so that you can make decision that will effect your
+costs for each instance. The most common use case of the Alarm service
+is auto-scalling of instances. More information can be found in our
+:ref:`Alarm service section <alarm-service-on-Sky-tv_cloud>`
+
+.. _`AODH`: https://docs.openstack.org/aodh/latest/

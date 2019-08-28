@@ -18,9 +18,7 @@ increase the amount of VCPU's your instance is using. Whatever your goal is
 the alarm keeps you informed of the state of your machine so you can impliment
 things such as auto-scaling.
 
+For more information on the Alarm service, you can visit `the openstack
+documentation on aodh`_
 
-
-
-For more information on the Alarm service, you can visit :ref:`the openstack
-documentation on aodh
-<https://docs.openstack.org/aodh/latest/admin/telemetry-alarms.html>`.
+.. _`the openstack documentation on aodh`: https://docs.openstack.org/aodh/latest/admin/telemetry-alarms.html

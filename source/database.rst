@@ -1,3 +1,5 @@
+.. _database_page:
+
 ############################
 Database creation and access
 ############################
@@ -122,7 +124,7 @@ attatch the database instance to.
   | 908816f1-933c-4ff2-8595-f0f57c689e48 | glyn-network    | af0f251c-0a36-4bde-b3bc-e6167eda3d1e |
   +--------------------------------------+-----------------+--------------------------------------+
 
-After finding a suitable network to host our database. We combine take the
+After finding a suitable network to host our database. We take the
 subnet ID, alongside the information on our preferred flavor and we construct
 the following command to create our new instance:
 
@@ -153,7 +155,7 @@ the following command to create our new instance:
   +-------------------+--------------------------------------+
 
 
-Check on the status os the new instance, once it ia ``ACTIVE`` we can continue.
+Check on the status of the new instance, once it is ``ACTIVE`` we can continue.
 
 .. code-block:: bash
 
@@ -187,7 +189,7 @@ that has been assigned to it.
   | volume            | 3                                    |
   +-------------------+--------------------------------------+
 
-The final step is this section is to see what databases we have running within
+The final step in this section is to see what databases we have running within
 this instance.
 
 .. code-block:: bash
@@ -206,9 +208,10 @@ Configuring access
 ******************
 
 If a user was not added when the instance was created then the only
-user account that exists is the ``root`` user. This is disabled by default.
+user account that exists is the ``root`` user. However this is disabled by
+default.
 
-We can confirm this by doing the following.
+We can confirm this is the case by doing the following:
 
 .. code-block:: bash
 
@@ -251,8 +254,6 @@ as above.
   | is_root_enabled | True  |
   +-----------------+-------+
 
-.. This section below didn't work when I tried to run it on my instance on
-   preprod.
 
 We can check that this has worked if we are able to access the database and run
 the following query:
@@ -276,11 +277,11 @@ While it is possible to create a database user when launching your database
 instance using the ``--users <username>:<password>`` argument it is more than
 likely that further users will need to be added over time.
 
-This can be done using the opensrack commandline. Below we can see two example
-of how we can add a new user to our myDB databse. One example creates a
-user that access the databse from any location. This is the same behaviour that
-is displayed when the user is created as part of the initial database instance
-creation.
+This can be done using the openstack commandline. Below we can see two example
+of how we can add a new user to our myDB database. One example creates a
+user that can access the databse from any location. This is the same behaviour
+that is displayed when the user is created as part of the initial database
+instance creation.
 
 The other example uses the ``--host`` argument which allows a user to be
 created that only can only connect from the specified IP address.
@@ -347,8 +348,7 @@ To delete a database, you need the following command:
 .. code-block:: bash
 
   openstack database instance delete db1
-  #wait until the console returns, it will reply with a message saying
-  #your database was deleted.
+  #wait until the console returns, it will reply with a message saying your database was deleted.
 
 
 
@@ -365,7 +365,7 @@ will be deleting the database to test the recovery process)
 
 .. code-block:: bash
 
-  $ openstack database backup create db1 db1-backup
+  $ openstack database backup create db-instance-1 db1-backup
 
   $ openstack database backup list
   +--------------------------------------+--------------------------------------+------------+-----------+-----------+---------------------+
@@ -378,7 +378,7 @@ Destroy instance and recreate using the backup as source:
 
 .. code-block:: bash
 
-  $ openstack database instance delete db1     # wait for it to be deleted...
+  $ openstack database instance delete db-instance-1     # wait for it to be deleted...
   $ openstack database instance create db-instance-1 c1.c1r4 \
     --size 3 \
     --volume_type b1.standard \
@@ -398,7 +398,7 @@ Destroy instance and recreate using the backup as source:
 
   Connect and check data in there:
 
-  app1 $ mysql -h db1 -uusr -p db
+  $ mysql -h db-instance-2 -uusr -p db
   Enter password:
 
   mysql> SELECT count(*) FROM sbtest1;
@@ -415,39 +415,39 @@ Destroy instance and recreate using the backup as source:
 Creating replicas
 *****************
 
-Replicating a database
-instance allows you to make a copy of said instance and by default has it run
-alongside your original. You can set a replica to use it to perform a variety
-of different tasks. You could have it run on standby and have it updated
-periodically to keep up to date with the master. You could use it to run
-your queries so that the master isn't burdened with the load of large queries.
-There are many different uses for having such a replica.
+Replicating a database instance allows you to make a copy of an instance and,
+by default, have it run alongside the original. You can also setup a replica
+to perform a variety of different tasks. You could have it run on standby
+and periodically update to keep up to date with the master. Or you could use
+it to run your queries so that the master isn't burdened with the load of large
+operations. There are many different uses for having a replica.
 
-While similar a replica and a backup are very different.
-The main difference between the two is that, a backup takes
-what is equivocal to a snapshot of your database and has the
-commands/information stored.
-to reform a database to the snapshot point in time.
-Where as a replica will be copied
-and can then be set up to receive updates or perform a number of functions as
-mentioned earlier.
+While similar to a backup, a replica is very different.
+The main difference between the two is that, a backup takes what is essentially
+a snapshot, of your current database and stores away a list of commands and
+values able to restore a new instance to the snapshoted point in time of your
+original. While a replica will be a full copy of your database when created and
+from there is an independant database instance. It can then be set up to
+receive updates or perform a number of functions as mentioned earlier.
 
-The first step is:
+The command to create a replica is:
 
 .. code-block:: bash
 
-  $ openstack database instance create --size 4 --volume b1.standard  \
-      --datastore mysql --datastore_version 5.7 \
-      --nic net-id=27f9e799-b936-41c5-b136-018616b062f5 \
-      --replica_of db1 db2 c1.c2r2
+  $ openstack database instance create db-replica-1 c1.c1r4 --size 3 \
+    --volume_type b1.standard  \
+    --datastore mysql \
+    --datastore_version 5.7 \
+    --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48 \
+    --replica_of db-instance-1
 
   $ openstack database instance list
-  +--------------------------------------+------+-----------+-------------------+--------+--------------------------------------+------+--------+
-  | ID                                   | Name | Datastore | Datastore Version | Status | Flavor ID                            | Size | Region |
-  +--------------------------------------+------+-----------+-------------------+--------+--------------------------------------+------+--------+
-  | 6bd114d1-7251-42d6-9426-db598c085472 | db1  | mysql     | 5.7               | ACTIVE | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    4 | test-1 |
-  | 8ddd73b2-939c-496d-906a-4eab4000fff0 | db2  | mysql     | 5.7               | ACTIVE | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    4 | test-1 |
-  +--------------------------------------+------+-----------+-------------------+--------+--------------------------------------+------+--------+
+  +--------------------------------------+---------------+-----------+-------------------+--------+--------------------------------------+------+--------+
+  | ID                                   | Name          | Datastore | Datastore Version | Status | Flavor ID                            | Size | Region |
+  +--------------------------------------+---------------+-----------+-------------------+--------+--------------------------------------+------+--------+
+  | 6bd114d1-7251-42d6-9426-db598c085472 | db-instance-1 | mysql     | 5.7               | ACTIVE | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    4 | test-1 |
+  | 8ddd73b2-939c-496d-906a-4eab4000fff0 | db-replica-1  | mysql     | 5.7               | ACTIVE | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    4 | test-1 |
+  +--------------------------------------+---------------+-----------+-------------------+--------+--------------------------------------+------+--------+
 
 
 
