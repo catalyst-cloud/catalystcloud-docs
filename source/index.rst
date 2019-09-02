@@ -21,6 +21,7 @@ Contents:
    orchestration
    kubernetes
    billing
+   identity-access-management
    backups
    best-practices
    sdks-and-toolkits
