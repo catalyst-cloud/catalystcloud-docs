@@ -15,7 +15,6 @@ Contents:
    :maxdepth: 2
 
    getting-started
-   dashboard
    database
    alarm-service
 

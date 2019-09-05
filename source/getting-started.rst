@@ -13,4 +13,3 @@ section before using the cloud services.
    getting-started/services
    getting-started/access
    getting-started/admin
-   getting-started/additional-info

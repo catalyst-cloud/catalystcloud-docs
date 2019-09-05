@@ -1,4 +1,4 @@
-.. _access_to_catalyst_cloud:
+.. _access_to_sky-tv_cloud:
 
 ############################
 Accessing the Sky TV Cloud

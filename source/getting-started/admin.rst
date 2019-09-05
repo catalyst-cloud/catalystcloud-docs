@@ -21,7 +21,7 @@ the support dropdown in the top right corner of the dashboard.
 If you are an organisation with more complex support needs, you may
 want to consider our premium support.
 
-.. image:: assets/support_dropdown.png
+.. image:: ../assets/support_dropdown.png
 
 Status page
 ===========
@@ -66,7 +66,7 @@ solutions architect.
 Training
 ========
 
-Catalyst provides training on how to use the Sky TV in Auckland,
+Catalyst provides training on how to use the Sky TV cloud in Auckland,
 Wellington and Christchurch. Upcoming training sessions can be found at
 https://catalyst.net.nz/training/upcoming-training.
 
@@ -81,7 +81,7 @@ to discuss your needs: https://catalyst.net.nz/training-services
 Projects
 ********
 
-Everything you do on the Sky TV is in a ``project``. Use projects to
+Everything you do on the Sky TV cloud is in a ``project``. Use projects to
 separate the different things you work on. For example, have a project for each
 organisation you work with, or one for each branch of your organisation.
 Something done in one project cannot effect any other projects.
@@ -89,14 +89,14 @@ Something done in one project cannot effect any other projects.
 You can change which project you're working in on the dashboard, with the
 dropdown in the top left corner.
 
-Information on how to invite new people to your project can be found :ref:`here
-<access_control>`.
+Information on how to invite new people to your project can be found on
+the catalyst cloud documentation.
 
 
-.. image:: assets/project_dropdown.png
+.. image:: ../assets/project_dropdown.png
 
 
-The Sky TV provides an isolated and multi-tenanted approach to creating
+The Sky TV cloud provides an isolated and multi-tenanted approach to creating
 workspaces. These workspaces are typically referred to as a ``project`` but for
 historical reasons you may also see them referred to as a ``tenant`` or
 a ``tenancy``.
@@ -107,7 +107,7 @@ a ``tenancy``.
 Finding my project ID
 =====================
 
-Every project on the Sky TV has a ``project name`` (a user friendly
+Every project on the Sky TV cloud has a ``project name`` (a user friendly
 name) and a ``project id`` (an auto-generated UUID). There are a number of ways
 to find your project ID and name.
 
@@ -128,17 +128,6 @@ You can request the creation of more projects via the `Support
 Requests`_ panel.
 
 .. _Support Requests: https://dashboard.cloud.catalyst.net.nz/management/tickets/
-
-Changing project
-================
-
-Via the dashboard
------------------
-
-On the dashboard, you can change which project you are working on using the
-dropdown on the top left corner.
-
-.. image:: ../_static/project_dropdown.png
 
 
 :ref:`Previous page <access_to_sky-tv_cloud>` -
