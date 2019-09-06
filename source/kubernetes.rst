@@ -22,6 +22,7 @@ Table of Contents:
    kubernetes/access
    kubernetes/network_policies
    kubernetes/nginx-ingress
+   kubernetes/rolling-upgrade
 
 
 .. note::
