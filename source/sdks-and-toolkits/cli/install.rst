@@ -62,6 +62,8 @@ refer to the :ref:`python-virtual-env` tutorial for more information on
 Operating System Specific Steps
 ===============================
 
+.. _installing_ubuntu_cli:
+
 Ubuntu Linux 18.04
 ------------------
 
@@ -140,11 +142,17 @@ Mac OS X
   # Install the Python openstack client libraries into your virtual environment
   pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
 
-Windows Server 2012 R2
+Windows (Powershell)
 ----------------------
 
-A good overview for the setup and configuration of Python, pip and virtualenv
+A good overview for the setup and configuration of Python and pip
 on Windows can be found at http://www.tylerbutler.com/2012/05/how-to-install-python-pip-and-virtualenv-on-windows-with-powershell/
+
+.. Note::
+  The guide above mentions how to download virtualenv for powershell, however
+  this is assuming you are using python2 which has been discontinued. For this
+  reason, we recommend using pip to install the normal `virutalenvwrapper.`
+  using `pip install virtualenvwrapper`
 
 Assuming that Python and pip have successfully been installed then
 
@@ -155,11 +163,45 @@ Assuming that Python and pip have successfully been installed then
   virtualenv.exe venv
   .\venv\scripts\activate
 
-  Install the Python openstack client libraries into your virtual environment
-  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
+  # Install the Python openstack client libraries into your virtual environment
+  pip install python-openstackclient python-ceilometerclient python-heatclient python-neutronclient python-swiftclient python-octaviaclient python-magnumclient
 
 
 If any errors are encountered while pip is building packages it may be
 necessary to install the `Microsoft Visual C++ Compiler for Python 2.7`_ and retry.
 
 .. _Microsoft Visual C++ Compiler for Python 2.7: https://www.microsoft.com/en-gb/download/details.aspx?id=44266
+
+Windows (Linux Subsystem)
+-------------------------
+This is a much easier method to using the Command Line Interface on a windows
+machine. It allows you to create a virtual instance of a linux operating
+system of your choice, then complete the rest of this tutorial as if you were
+running said operating system.
+For this example we will be using Ubuntu 18.04
+
+.. Note::
+ This method is only available if you currently run a 64bit version of windows.
+
+First, you will need to open PowerShell as an Administrator and run:
+
+.. code-block:: powershell
+
+ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+
+You will then need to download a versoin of Ubuntu from either the Microsoft
+store, from a command line script, or to manually unpack it and install it from
+their release website. For our purposes we will be using the Microsoft Store.
+
+.. image:: ../assets/windows-store.png
+
+I've chosen to use Ubuntu 18.04. Once installed, you open the application
+and set up an Unix account. An Unix account is only relevent on your machine
+and once set up you won't need to use your login details again (but hold on to
+them for security purposes) Once that is done you will be met with a screen
+somewhat like this:
+
+.. image:: ../assets/unix-shell.png
+
+Then you simply need to follow the guide on how to install the CLI on ubuntu
+detailed :ref:`earlier on this page.<installing_ubuntu_cli>`
