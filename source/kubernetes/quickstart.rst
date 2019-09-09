@@ -1,3 +1,6 @@
+
+.. _k8s-quickstart:
+
 ###########
 Quick start
 ###########

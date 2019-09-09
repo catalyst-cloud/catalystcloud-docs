@@ -121,11 +121,13 @@ Kubernetes cluster while monitoring the availability of a running application
 Prerequisites:
 
 #. An existing Kubernetes cluster running a cluster template older than the
-   latest template available. {TODO: Link to quick start guide}
-#. The Kubernetes and the OpenStack CLI installed. {TODO: Link to CLI
-   install guide}
-#. An OpenStack and Kubernetes environment configuration set up.
-   {TODO: Link to sourcing openrc and link to setting kube env}
+   latest template available. See the :ref:`quick start guide <k8s-quickstart>`
+   for more information.
+#. The `Kubernetes`_ and :ref:`OpenStack CLI installed <installing-the-cli>`.
+#. An OpenStack and Kubernetes environment configuration set up. Check out
+   :ref:`this guide <source-rc-file>` for setting up the OpenStack environment.
+
+.. _`Kubernetes`: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
 Deploying a sample application
 ==============================
@@ -139,9 +141,6 @@ container, with a replica count of 2. It also defines:
 * A PodDisruptionBudget that ensure that there is a minimum of one pod
   running for this service at all times.
 * A service of type loadbalancer to expose the application to the world.
-
-{TODO: Create anchor "YAML_TEMPLATE" so this can be linked from other sections
-of the document}
 
 .. _example-yaml:
 
@@ -264,9 +263,13 @@ present in the current project and region:
 show only the version of the tempalte being used by the k8s-upgrade-test
 cluster}}
 
+We can check the current Kubernetes version that our cluster is running by
+looking at the ``kube_tag`` label, like this.
+
 .. code-block:: bash
 
-  $openstack coe cluster show k8s-upgrade-test
+  $ openstack coe cluster show k8s-upgrade-test -c labels -f yaml | grep kube_tag
+  kube_tag: v1.11.9
 
 The ``openstack coe cluster template list`` command will list the available
 template versions:
@@ -312,38 +315,7 @@ Once the ``openstack coe cluster upgrade`` completes we can confirm that our
 cluster now has a new Kubernetes version. The value we need to check is the
 ``kube_tag`` in the labels field.
 
-{{TODO: Change the below to use -c "kube_tag" and avoid having to display the
-complete output}}
-
 .. code-block:: bash
 
-  $openstack coe cluster show k8s-upgrade-test
-  +----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | Field                | Value                                                                                                                                                                                                                                                                                                                                                         |
-  +----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | status               | UPDATE_COMPLETE                                                                                                                                                                                                                                                                                                                                               |
-  | health_status        | HEALTHY                                                                                                                                                                                                                                                                                                                                                       |
-  | cluster_template_id  | 7f01d58a-ba9b-41a4-b53a-b5064c235852                                                                                                                                                                                                                                                                                                                          |
-  | node_addresses       | ['103.197.61.112', '103.197.61.114', '103.197.61.113']                                                                                                                                                                                                                                                                                                        |
-  | uuid                 | b43ffae2-2d35-4951-b3f1-17a7acec3ade                                                                                                                                                                                                                                                                                                                          |
-  | stack_id             | 63bc0612-83fd-4c61-bd6c-b73ebf07320d                                                                                                                                                                                                                                                                                                                          |
-  | status_reason        | Stack UPDATE completed successfully                                                                                                                                                                                                                                                                                                                           |
-  | created_at           | 2019-08-21T19:05:16+00:00                                                                                                                                                                                                                                                                                                                                     |
-  | updated_at           | 2019-08-26T00:45:40+00:00                                                                                                                                                                                                                                                                                                                                     |
-  | coe_version          | v1.11.9                                                                                                                                                                                                                                                                                                                                                       |
-  | labels               | {'cloud_provider_tag': '1.14.0-catalyst', 'cloud_provider_enabled': 'true', 'prometheus_monitoring': 'true', 'kube_tag': 'v1.12.7', 'container_infra_prefix': 'docker.io/catalystcloud/', 'ingress_controller': 'octavia', 'octavia_ingress_controller_tag': '1.14.0-catalyst', 'heat_container_agent_tag': 'stein-dev', 'etcd_volume_size': '20'}            |
-  | faults               |                                                                                                                                                                                                                                                                                                                                                               |
-  | keypair              | glyndavies                                                                                                                                                                                                                                                                                                                                                    |
-  | api_address          | https://103.197.61.0:6443                                                                                                                                                                                                                                                                                                                                     |
-  | master_addresses     | ['103.197.61.111', '103.197.61.1', '103.197.61.10']                                                                                                                                                                                                                                                                                                           |
-  | create_timeout       | 60                                                                                                                                                                                                                                                                                                                                                            |
-  | node_count           | 3                                                                                                                                                                                                                                                                                                                                                             |
-  | discovery_url        | https://discovery.etcd.io/a9d7ad4dcc8ed9cdbc5a37d00b012c3d                                                                                                                                                                                                                                                                                                    |
-  | master_count         | 3                                                                                                                                                                                                                                                                                                                                                             |
-  | container_version    | 1.12.6                                                                                                                                                                                                                                                                                                                                                        |
-  | name                 | k8s-upgrade-test                                                                                                                                                                                                                                                                                                                                              |
-  | master_flavor_id     | c1.c2r4                                                                                                                                                                                                                                                                                                                                                       |
-  | flavor_id            | c1.c4r8                                                                                                                                                                                                                                                                                                                                                       |
-  | health_status_reason | {'k8s-upgrade-test-zcuuaiib6nqt-minion-1.Ready': 'True', 'k8s-upgrade-test-zcuuaiib6nqt-minion-0.Ready': 'True', 'k8s-upgrade-test-zcuuaiib6nqt-minion-2.Ready': 'True', 'k8s-upgrade-test-zcuuaiib6nqt-master-1.Ready': 'True', 'api': 'ok', 'k8s-upgrade-test-zcuuaiib6nqt-master-0.Ready': 'True', 'k8s-upgrade-test-zcuuaiib6nqt-master-2.Ready': 'True'} |
-  | project_id           | eac679e4896146e6827ce29d755fe289                                                                                                                                                                                                                                                                                                                              |
-  +----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+  $ openstack coe cluster show k8s-upgrade-test -c labels -f yaml | grep kube_tag
+  kube_tag: v1.12.7
