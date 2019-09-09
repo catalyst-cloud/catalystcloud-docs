@@ -187,6 +187,7 @@ First, you will need to open PowerShell as an Administrator and run:
 
 .. code-block:: powershell
 
+ # Running as Administrator
  Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
 You will then need to download a versoin of Ubuntu from either the Microsoft
