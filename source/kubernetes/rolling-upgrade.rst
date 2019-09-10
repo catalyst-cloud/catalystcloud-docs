@@ -10,13 +10,13 @@ running applications will have no downtime during the upgrade.
 When an upgrade is triggered, the following steps are \ performed to master and
 worker nodes (one by one):
 
-1. Cordon: The node becomes unavaialble to schedule new workloads.
-2. Drain: All workloads are evicted from the node.
-3. Upgrade: The Kubernetes components are upgraded on the node.
-4. Uncordon: The node becomes available to schedule workloads.
+1. **Cordon**: The node becomes unavaialble to schedule new workloads.
+2. **Drain**: All workloads are evicted from the node.
+3. **Upgrade**: The Kubernetes components are upgraded on the node.
+4. **Uncordon**: The node becomes available to schedule workloads.
 
 The updgrade process will safely evict all of the pods from the node before
-performing maintenance on the node. Safe evictions allow the pod?s containers
+performing maintenance on the node. Safe evictions allow the pod's containers
 to gracefully terminate and will respect the ``PodDisruptionBudgets`` defined.
 
 .. note::
@@ -35,7 +35,7 @@ below have to  be followed:
 
 1. The application must be deployed and managed by a controller
    (such as a Deployement or ReplicaSet) with multiple replicas (replicas > 1).
-2. A pod disruption budget policy must be applied and require the minimum
+2. A pod disruption budget policy must be applied and define the minimum
    number of pods required for the application to function properly
    (such as minAvailable > 1).
 3. The container definition must have a liveness probe defined, to ensure the
@@ -43,7 +43,7 @@ below have to  be followed:
 4. The container definition must have a readiness probes defined, preventing
    pods from being re-introduced to the loadbalancer prematurely (before the
    application is ready to respond to requests).
-5. Ideally the application should support the SIGTERM signal for graceful
+5. Ideally the application should support the ``SIGTERM`` signal for graceful
    shutdown, or alternatively a ``preStop`` hook should be defined.
 
 A :ref:`sample yaml file <example-yaml>` following these best practices is
@@ -65,7 +65,7 @@ the ID of the cluster that needs to be upgraded:
     +--------------------------------------+------------------------------+-----------------+------------+--------------+-----------------+---------------+
     | uuid                                 | name                         | keypair         | node_count | master_count | status          | health_status |
     +--------------------------------------+------------------------------+-----------------+------------+--------------+-----------------+---------------+
-    | b2b13567-2441-40da-852a-8a92f178ea42 | test_cluster                 | my_keypair      |          3 |            3 | CREATE_COMPLETE | UNHEALTHY     |
+    | b2b13567-2441-40da-852a-8a92f178ea42 | test_cluster                 | my_keypair      |          3 |            3 | CREATE_COMPLETE | HEALTHY       |
     +--------------------------------------+------------------------------+-----------------+------------+--------------+-----------------+---------------+
 
 Identify the version of Kubernetes you want to upgrade to
@@ -138,9 +138,9 @@ container, with a replica count of 2. It also defines:
 
 * A ``postStart`` task to replace the standard Nginx welcome.
 * A ``preStop`` command that allows the pod to shutdown in a graceful manner.
-* A PodDisruptionBudget that ensure that there is a minimum of one pod
+* A ``PodDisruptionBudget`` that ensure that there is a minimum of one pod
   running for this service at all times.
-* A service of type loadbalancer to expose the application to the world.
+* A service of type ``LoadBalancer`` to expose the application to the world.
 
 .. _example-yaml:
 
@@ -236,7 +236,7 @@ Running the upgrade
 ===================
 
 In this example we will be upgrading an existing cluster called
-**k8s-upgrade-test** from template version **v1.11.9** to **v1.12.7** .
+**k8s-upgrade-test** from template version **v1.11.9** to **v1.12.7**.
 
 In preparation for the upgrade, we need to identify the ID of the cluter we
 wish to upgrade and the ID of the new cluster template we wish to upgrade to.
@@ -258,10 +258,6 @@ present in the current project and region:
     Note the status of the cluster is ``CREATE_COMPLETE``, indicating an
     upgrade can be performed. Upgrades cannot be performed to a cluster while
     other orchestration actions are in progress.
-
-{{TODO: Add an openstack coe cluster show command using the -c "kube_tag" to
-show only the version of the tempalte being used by the k8s-upgrade-test
-cluster}}
 
 We can check the current Kubernetes version that our cluster is running by
 looking at the ``kube_tag`` label, like this.
