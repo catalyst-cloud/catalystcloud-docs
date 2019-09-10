@@ -204,5 +204,13 @@ somewhat like this:
 
 .. image:: ../assets/unix-shell.png
 
+Once you have this up and running, you'll need to change directory to be
+able to find files you download onto your windows machine.
+The following code should get you to your root folder, aka 'My Computer'
+
+.. code-block:: bash
+
+  $ cd /mnt/c
+
 Then you simply need to follow the guide on how to install the CLI on ubuntu
 detailed :ref:`earlier on this page.<installing_ubuntu_cli>`
