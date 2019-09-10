@@ -2,17 +2,17 @@
 Private Cluster
 ###############
 
-As one of the security best practices, isolating Kubernetes clusters from
-internet access is the most desired feature by enterprise users.
-On Catalyst Cloud, all the public templates after our Beta relase (since
-10 September, 2019) will create private clusters by default.
+As a security best practice, isolating Kubernetes clusters from internet
+access is one of the most desired features for enterprise users. On Catalyst
+Cloud, all the public templates after our Beta relase (from 10 September, 2019)
+will create private clusters by default.
 
-**************************************
-Attributes/Labels of cluster isolation
-**************************************
+***************************************
+Controlling levels of cluster isolation
+***************************************
 
 There are several attributes and labels related to this topic and they can be
-set on both cluster template and clusters.
+set on both the cluster template and cluster level.
 
 .. note::
 
@@ -30,32 +30,33 @@ set on both cluster template and clusters.
   creating cluster.
 
 * ``floating_ip_enabled: false``
-  Whether enable or not assigning floating IP for cluster master and worker
-  nodes. When it's set with True, which means the node is accessible from
-  Internet. That's is not recommended.
+  When enabled it will assign a floating IP to all cluster master and worker
+  nodes. This means that all nodes are accessible from the internet, which
+  is not recommended.
 
   It's an attribute of cluster template, but it *can* be override when creating
   cluster.
 
 * ``master_lb_floating_ip_enabled: false``
-  If it's allowed to allocate floating IP for the load balancer of master
-  nodes. This label only takes effect when the template property
-  master_lb_enabled is set. If not specified, the default value is the same as
-  template property floating_ip_enabled.
+  If it is enabled it will allocate a floating IP on the load balancer of the
+  master nodes. This label only takes effect when the template property
+  master_lb_enabled is set. If not specified, the default value is the same
+  as template property floating_ip_enabled.
 
-  This is a label, and it can be override when creating cluster.
+  This is a label, and it can be override when creating the cluster.s
 
 * ``fixed_network``
-  The name or network ID of a Neutron network to provide connectivity to the
+  The name or network ID of a network to provide connectivity to the
   internal network for the cluster.
 
   When creating cluster, you can set the fixed_network to create the cluster
   in an existing network.
 
 * ``fixed_subnet``
-  Fixed subnet that are using to allocate network address for nodes in cluster.
+  This defines the fixed subnet that will be used to allocate network addresses
+  for nodes in the cluster.
 
-  When creating cluster, you can set the fixed_subnet to create the cluster
+  When creating a cluster, you can set the fixed_subnet to create the cluster
   in an existing subnet.
 
 ***************************
@@ -64,19 +65,17 @@ Cluster isolation scenarios
 
 There are 4 typical scenarios as below:
 
-.. code-block:: bash
-
- +-----------------+---------------------------------------+---------------------------------------+
- |                 | prod template                         | dev template                          |
- +=================+=======================================+=======================================+
- | private cluster | master_lb_enabled = True              | master_lb_enabled = False             |
- |                 | floating_ip_enabled = False           | floating_ip_enabled = False           |
- |                 | master_lb_floating_ip_enabled = False | master_lb_floating_ip_enabled = False |
- +-----------------+---------------------------------------+---------------------------------------+
- | public cluster  | master_lb_enabled = True              | master_lb_enabled = False             |
- |                 | floating_ip_enabled = False           | floating_ip_enabled = True            |
- |                 | master_lb_floating_ip_enabled = True  | master_lb_floating_ip_enabled = False |
- +-----------------+---------------------------------------+---------------------------------------+
++-----------------+---------------------------------------+---------------------------------------+
+|                 | prod template                         | dev template                          |
++=================+=======================================+=======================================+
+| private cluster | master_lb_enabled = True              | master_lb_enabled = False             |
+|                 | floating_ip_enabled = False           | floating_ip_enabled = False           |
+|                 | master_lb_floating_ip_enabled = False | master_lb_floating_ip_enabled = False |
++-----------------+---------------------------------------+---------------------------------------+
+| public cluster  | master_lb_enabled = True              | master_lb_enabled = False             |
+|                 | floating_ip_enabled = False           | floating_ip_enabled = True            |
+|                 | master_lb_floating_ip_enabled = True  | master_lb_floating_ip_enabled = False |
++-----------------+---------------------------------------+---------------------------------------+
 
 
 
@@ -89,9 +88,9 @@ and subnet:
                                             --fixed-network <network ID> \
                                             --fixed-subnet <subnet ID>
 
-Meanwhile, you can enable or disable floating IP when creating a new cluster,
-no matter what's the setting for floating IP in the cluste template. To enable
-floating IP you can run command as below:
+It is also possible to enable or disable floating IP when creating a new
+cluster. This will override the floating IP behaviour defined in the cluster
+template. To enable floating IP you can run command as below:
 
 .. code-block:: console
 
