@@ -4,54 +4,63 @@
 Dashboard
 #########
 
+************
+Introduction
+************
 
-The web dashboard is a simple way to interact with The Catalyst Cloud. It can
-be found at https://dashboard.cloud.catalyst.net.nz.
+The web dashboard is a simple and convenient way to interact with the Catalyst
+Cloud. It can be found at https://dashboard.cloud.catalyst.net.nz.
 
 .. image:: assets/dashboard_view.png
 
-Our web dashboard is a great tool that provides easy
-access to most of the services that the Catalyst Cloud provides. All of the
-standerd services are able to be controlled via the Dashboard. There are some
-more advanced abilities that the cloud environment is capable of; however these
-require the use of the :ref:`CLI <command-line-interface>` or interacting with
-our API's directly; which is discussed elsewhere in the :ref:`documentation
-<apis>`
-
-As previously mention in the getting started section, you can see most of the
-services provided on the left hand sidebar. These services have their own
-guides and tutorials that are featured later on. Things such
-as creating compute instances, partitioning block storage or object storage
-etc. Before going on to use these services, we recommend going through our
-:ref:`first instance tutorial. <launch-first-instance>`
-
-Some of the dashboard functionality beyond these services are in the
-buttons along the top bar. From left to right, these:
-
-* Let you select which project you are working on
-* Change what region your operating in
-* Access our support functions
-* Change accounts or access your account settings.
-
-The major appeal of using the dashboard is it requires very little programming
-expertise or knowledge. There is an assumed level of understanding about the
-products you are trying to create or outcomes you seek to achieve, but you can
-use most of the services provided by the Catalyst Cloud simply by navigating
-through the dashboard.
-
-Another  major advantage to the web dashboard is that it is accessible from any
-IP address, making it a quick way to perform tasks on the Catalyst Cloud while
-you're away from your normal work station.
-
+The dashboard provides a friendly and simplified interface for commonly used
+services and functionality available on the Catalyst Cloud. There are however
+more advanced features that are only available via the :ref:`Command Line
+Interface (CLI) <command-line-interface>` or by interacting with our :ref:`APIs
+<apis>`.
 
 .. note::
 
-  When a new feature is introduced to our cloud, it is first exposed via a REST
-  API, followed by the command line clients and finally the web dashboard. It
-  usually takes 3-6 months for it to reach the dashboard, but it can be used
-  well ahead of that via the API and command line clients.
+  When a new feature is introduced to the Catalyst Cloud, it is first exposed
+  via a REST API, followed by the Command Line Interface and finally the web
+  dashboard. It usually takes a few months for it to reach the dashboard.
+
+The major appeal of using the dashboard is it requires no programming expertise
+or familiarity with command line tools. Another advantage is that the dashboard
+is accessible from anywhere (not restricted to specific IP addresses like the
+APIs).
+
+*******************
+Using the dashboard
+*******************
+
+There is an assumed level of understanding about the nature of the services you
+are interacting with. That said, most users should be able to achieve thier
+desired outcomes by simply by navigating through and playing around with the
+dashboard.
+
+You can see the services provided on the left-hand sidebar. Each service has a
+corresponding section in this documentation, with their own guides and
+tutorials. If this is your first time interacting with our services, we
+recommend you going through our :ref:`first instance tutorial
+<launch-first-instance>`.
+
+Some of the dashboard functionality beyond these services are in the buttons
+along the top bar. From left to right, they let you:
+
+* Select which project you are working on;
+* Change what region your operating in;
+* Access our support functions;
+* Change accounts or access your account settings.
+
+**************************
+Frequently asked questions
+**************************
+
+Please refer to the FAQ items listed below before raising a support request for
+the web dashbaord:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    dashboard/faq
