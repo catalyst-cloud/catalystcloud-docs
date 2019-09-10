@@ -166,9 +166,15 @@ Assuming that Python and pip have successfully been installed then
   # Install the Python openstack client libraries into your virtual environment
   pip install python-openstackclient python-ceilometerclient python-heatclient python-neutronclient python-swiftclient python-octaviaclient python-magnumclient
 
+Now that you have installed the required libraries to work with the Catalyst
+Cloud onto your virtual environment; You have to make sure that whenever you
+use powershell to interact with the cloud, you work on your Virtual
+Environment. It may save time to make a short python script that runs the
+activation command for you when you start powershell up.
 
 If any errors are encountered while pip is building packages it may be
-necessary to install the `Microsoft Visual C++ Compiler for Python 2.7`_ and retry.
+necessary to install the `Microsoft Visual C++ Compiler for Python 2.7`_
+and retry.
 
 .. _Microsoft Visual C++ Compiler for Python 2.7: https://www.microsoft.com/en-gb/download/details.aspx?id=44266
 

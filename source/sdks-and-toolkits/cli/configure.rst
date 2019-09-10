@@ -76,8 +76,8 @@ above.
   $password = Read-Host 'Please enter your OpenStack Password' -AsSecureString
   $env:OS_PASSWORD = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))
 
-Save the file and run it from a PowerShell session. To confirm if the variables
-were set correctly, run the following command
+Save the file as a '.ps1' file and run it from a PowerShell session. To confirm
+if the variables were set correctly, run the following command:
 
 .. code-block:: bash
 
