@@ -1,6 +1,6 @@
-##########################
-Kubernetes rolling upgrade
-##########################
+###############
+Rolling upgrade
+###############
 
 You can easily upgrade the version of a running Kubernetes cluster with minimum
 or no impact to running applications. As long as the application deployment
