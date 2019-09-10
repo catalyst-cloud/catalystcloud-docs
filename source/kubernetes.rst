@@ -23,6 +23,7 @@ Table of Contents:
    kubernetes/network_policies
    kubernetes/nginx-ingress
    kubernetes/rolling-upgrade
+   kubernetes/private-cluster
 
 
 .. note::
