@@ -63,9 +63,7 @@ of Helm.
 
 .. code-block:: bash
 
-  cat <<EOF | kubectl apply -f -
-  apiVersion: v1
-  kind: ServiceAccount
+  cat <<EOF | kubectl apply -f -apiVersion: v1 kind: ServiceAccount
   metadata:
     name: tiller
     namespace: kube-system
