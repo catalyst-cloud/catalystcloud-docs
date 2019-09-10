@@ -1,6 +1,6 @@
-**********************************
+##################################
 Using the Nginx ingress controller
-**********************************
+##################################
 
 This guide explains how to deploy an Nginx ingress controller in to a
 Kubernetes cluster running on an Openstack cloud.
@@ -13,8 +13,9 @@ This guide makes the following assumptions.
 
 .. _`kubectl`: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
+******************************
 What is an Ingress Controller?
-==============================
+******************************
 
 In Kubernetes, Ingress allows external users and client applications access
 to HTTP services. Ingress consists of two components.
@@ -29,7 +30,7 @@ properly configured to route traffic from an outside client to a Kubernetes
 Service.
 
 Some working examples
----------------------
+=====================
 
 In order to use the Nginx ingress controller we first need to  install it into
 our cluster. While this can be done by hand creating all of the required
