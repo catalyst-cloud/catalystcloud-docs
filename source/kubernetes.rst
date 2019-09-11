@@ -20,7 +20,7 @@ Table of Contents:
    kubernetes/clusters
    kubernetes/storage
    kubernetes/access
-   kubernetes/network_policies
+   kubernetes/network-policies
    kubernetes/nginx-ingress
    kubernetes/rolling-upgrade
    kubernetes/private-cluster
