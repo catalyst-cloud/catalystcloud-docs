@@ -14,15 +14,15 @@ There are four different ways you can stop a compute instance:
   The **only** state where an instance will not be incurring compute charges is
   when it has been ``SHELVED``.
 
-* ``Shelve`` will prompt the operating system to shutdown gracefully, power off
-  the virtual machine, preserve the disk and deallocate the compute resources
-  (CPU and RAM) from our compute nodes. **Instances in this state are not
-  charged for, as their compute aspect is not operational**. We only charge for
-  the disks (for example: root disk or additional volumes connected to it),
-  as we still need to retain the data while the instance is powered off. When
-  re-started it may be allocated to a different compute node.
+* ``Shelve`` will prompt the operating system to shut down gracefully, power
+  off the virtual machine, preserve the disk and deallocate the compute
+  resources (CPU and RAM) from our compute nodes. **Instances in this state
+  are not charged for, as their compute aspect is not operational**. We only
+  charge for the disks (for example: root disk or additional volumes connected
+  to it), as we still need to retain the data while the instance is powered
+  off. When re-started it may be allocated to a different compute node.
 
-* ``Shut off`` will prompt the operating system to shutdown gracefully, power
+* ``Shut off`` will prompt the operating system to shut down gracefully, power
   off the virtual machine, but preserve the compute resources (CPU and RAM)
   allocated on a compute node. Instances in this state are still charged as if
   they were running. When re-started it will continue to be hosted on the same

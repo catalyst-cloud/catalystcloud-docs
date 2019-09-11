@@ -28,6 +28,6 @@ Table of Contents:
 
 .. note::
 
-  If working from the commandline with the OpenStack tools please ensure that
+  If working from the command line with the OpenStack tools please ensure that
   the version of the python-magnumclient is 2.12.0 or above.
 

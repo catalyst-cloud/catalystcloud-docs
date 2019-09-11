@@ -15,7 +15,7 @@ element has been identified. While it is very rare, it should be noted that it
 is possible for underlying system generated cloud objects, such as flavor and
 image IDs to also change.
 
-With this in mind, if you are running comands from the CLI tools or one of the
+With this in mind, if you are running commands from the CLI tools or one of the
 support SDKs, it is recommended to lookup the ID before using it to ensure that
 the correct object is referenced.
 
@@ -29,7 +29,7 @@ it can be reused in subsequent commands.
     export CC_IMAGE_ID=$( openstack image show ubuntu-16.04-x86_64 -f value -c id )
     export CC_FLAVOR_ID=$( openstack flavor show c1.c1r2 -f value -c id )
 
-Similar mechanisms exist for doing this with other toolsets such as Ansible,
+Similar mechanisms exist for doing this with other tool sets such as Ansible,
 Terraform and the various supported development SDKs.
 
 
@@ -96,7 +96,7 @@ data. As soon as a disk or storage node fails, our storage solution begins
 recovering the data from an existing copy, always ensuring that three replicas
 are present.
 
-The storage solution is self managing and self healing, constantily placing
+The storage solution is self managing and self healing, constantly placing
 your data in optimal locations for data survival and resiliency. It runs
 automated error checks in the background that can detect and recover a single
 bit of incorrect data (bit rot), by comparing the three copies of the data and

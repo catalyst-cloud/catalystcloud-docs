@@ -99,7 +99,7 @@ Simple ingress with Nginx
 
 For the first example we will create a straight forward HTTP ingress controller
 that will direct traffic to a backend pod that will simply echo back details
-of the pod, the request and the associated headers it recieved.
+of the pod, the request and the associated headers it received.
 
 .. code-block:: bash
 
@@ -546,7 +546,7 @@ Finally we can set up the ingress as we have for the previous examples.
             path: /ping
   EOF
 
-Once the external IP is availale we can test it with curl as we have
+Once the external IP is available we can test it with curl as we have
 previously. The important thing to note here is that now we can see the
 originating IP address included in the request headers.
 

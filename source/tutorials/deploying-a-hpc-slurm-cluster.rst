@@ -147,8 +147,8 @@ Create SSH keys for ElastiCluster (no passphrase):
 
 Source your openrc file, as explained on :ref:`command-line-interface`.
 
-Allow ElastiCluster to connect to instances over SSH (if the nova command fails,
-then try the openstack command):
+Allow ElastiCluster to connect to instances over SSH (if the nova command
+fails, then try the openstack command):
 
 .. code-block:: bash
 
@@ -242,10 +242,10 @@ List the jobs in the queue:
 
 Using anti-affinity groups
 ==========================
-There is an options to use elasticluster with server group anti-affinity groups to
-ensure best load distribution in Opentack cluster.
-To use this feature clone elasticluster from the repository shown below, this is a
-temporary step until the feature gets merged upstream.
+There is an options to use elasticluster with server group anti-affinity
+groups to ensure best load distribution in Openstack cluster.
+To use this feature clone elasticluster from the repository shown below, this
+is a temporary step until the feature gets merged upstream.
 
 .. code-block:: bash
 
@@ -254,7 +254,8 @@ temporary step until the feature gets merged upstream.
   pip install -e .
   pip install ndg-httpsclient
 
-And then set `anti_affinity_group_prefix` property in `[cloud/catalyst]` section.
+And then set `anti_affinity_group_prefix` property in `[cloud/catalyst]`
+section.
 
 .. code-block:: ini
 

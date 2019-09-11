@@ -6,7 +6,7 @@ Additional information
 **********************
 
 This section is to inform you on other information that we deem important but
-does not fall under the catagories of services, access or administration.
+does not fall under the categories of services, access or administration.
 
 
 Quotas

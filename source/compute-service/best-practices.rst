@@ -13,27 +13,28 @@ benefits, such as:
 
 * Snapshots are created in seconds and use less space.
 * The volume and it's associated data can continue to exist after the compute
-  instace is deleted.
+  instance is deleted.
 
 When launching an instance via the dashboard the default behaviour is to create
 a ``Persistent Volume`` for its root disk. Other methods of instance creation
 vary and some will require the volume to be created ahead of the instance being
-launched, if this is the case please consult the relevant documentation for clarification.
+launched, if this is the case please consult the relevant documentation for
+clarification.
 
 Typically an ``Ephemeral Disk`` should only be used for cloud native workloads,
-that use the immutable infrastructure principle, or workloads that are temporary
-in nature, such as batch jobs.
+that use the immutable infrastructure principle, or workloads that are
+temporary in nature, such as batch jobs.
 
 
 *****************
 High availability
 *****************
 
-If a physical compute node fails, our monitoring systems will detect the failure
-and trigger a process that restarts the affected virtual compute instances on a
-healthy physical server. This process usually takes between 5 to 20 minutes
-which allows us to meet our 99.95% availability SLA for individual compute
-instances.
+If a physical compute node fails, our monitoring systems will detect the
+failure and trigger a process that restarts the affected virtual compute
+instances on a healthy physical server. This process usually takes between 5 to
+20 minutes which allows us to meet our 99.95% availability SLA for individual
+compute instances.
 
 Customers that require more than 99.95% availability can combine multiple
 compute instances within the same region using anti-affinity groups.
@@ -53,7 +54,7 @@ Automatic restart on failure
 ****************************
 
 When server failures occur, the Catalyst Cloud will attempt to restart the
-affected compute instances on a healthy server to minimise their downtime.
+affected compute instances on a healthy server to minimize their downtime.
 
 To benefit from this feature, your application must be configured and prepared
 to start automatically and resume its normal operation at boot time and your

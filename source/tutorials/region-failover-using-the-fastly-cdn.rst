@@ -102,7 +102,7 @@ in depth coverage of how their service works.
 Fastly has a number of features that make it useful for us:
 
 - Fastly has POPs in New Zealand
-- Fastlys POPs are Anycasted meaning that you avoid DNS propagation issues as
+- Fastly's POPs are Anycasted meaning that you avoid DNS propagation issues as
   the IP address and domain name remain static for clients
 - Fastly provides a global network of Anycasted POPs that provides good
   resiliency and availability at the CDN layer
@@ -131,8 +131,8 @@ Website setup
 
 Now that you understand what you are trying to achieve here, your first task is
 to set up your website in both regions. You are going to configure a simple
-Nginx webserver to serve the default Nginx webpage. As this tutorial is not
-focused on how to set up webservers, you will configure the required stacks
+Nginx webserver to serve the default Nginx web page. As this tutorial is not
+focused on how to set up web servers, you will configure the required stacks
 using the Heat cloud orchestration system.
 
 It is beyond the scope of this tutorial to explain the syntax of writing Heat
@@ -308,7 +308,8 @@ Fastly signup
 
 You need to `signup`_ to Fastly in order to configure your service. You can use
 the free developer trial to evaluate the service: you get $50 of traffic for
-free. After this you will be billed according to the `pricing`_ plan you select.
+free. After this you will be billed according to the `pricing`_ plan you
+select.
 
 .. _signup: https://www.fastly.com/signup
 
@@ -509,8 +510,8 @@ Now you will repeat the process to create a header for the backup:
    :align: center
 
 The final step is to configure a header condition that specifies exactly when
-to use the failover server. To do this, click on the gear icon next to the **Set
-backup backend** Header and select **Request Conditions**:
+to use the failover server. To do this, click on the gear icon next to the
+**Set backup backend** Header and select **Request Conditions**:
 
 .. image:: ../_static/rf-headers-request-conditions.png
    :align: center

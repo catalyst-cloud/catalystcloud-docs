@@ -69,9 +69,9 @@ It is designed for development, test and ephemeral workloads
 The performance tier
 ====================
 
-The ``performance`` tier makes sole use of direct NVMe SSD drive access for both
-read and write operations. This tier offers three options for IO throughput,
-which provide a burstable limit of 1000, 2500 and 5000 IOPS.
+The ``performance`` tier makes sole use of direct NVMe SSD drive access for
+both read and write operations. This tier offers three options for IO
+throughput, which provide a burstable limit of 1000, 2500 and 5000 IOPS.
 
 All options in this tier provide 3 replicas in a single region.
 

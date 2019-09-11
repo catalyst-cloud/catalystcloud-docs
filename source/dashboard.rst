@@ -12,7 +12,7 @@ be found at https://dashboard.cloud.catalyst.net.nz.
 
 Our web dashboard is a great tool that provides easy
 access to most of the services that the Catalyst Cloud provides. All of the
-standerd services are able to be controlled via the Dashboard. There are some
+standard services are able to be controlled via the Dashboard. There are some
 more advanced abilities that the cloud environment is capable of; however these
 require the use of the :ref:`CLI <command-line-interface>` or interacting with
 our API's directly; which is discussed elsewhere in the :ref:`documentation

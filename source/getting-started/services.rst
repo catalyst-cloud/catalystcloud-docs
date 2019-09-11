@@ -5,8 +5,8 @@ Services on the Catalyst Cloud
 ##############################
 
 In the previous section, we learned that services on the Catalyst Cloud are
-pieces of hardware and software that we make easy and convinent to use by
-controling them through means such as our Dashboard or the CLI (Command line
+pieces of hardware and software that we make easy and convenient to use by
+controlling them through means such as our Dashboard or the CLI (Command line
 interface). Now we'll discuss the various services
 offered by Catalyst Cloud so that we know *what* we can do on the Catalyst
 Cloud, even if right now we don't know *how* we can do it yet.
@@ -52,7 +52,7 @@ The block storage service provides volumes of data storage that you can attach
 to instances. You could imagine block storage volumes as hard disk drives and
 solid state drives on a physical computer. Block storage volumes can be as
 large or as small as you want them to be, however they are not dynamic; you
-decide beforehand how much storage you want to particion. In addition,
+decide beforehand how much storage you want to partition. In addition,
 block volumes are automatically replicated multiple times across the data
 centre to make your data very durable, and very available.
 
@@ -145,9 +145,9 @@ With the Catalyst Cloud, you have total control over your infrastructure. You
 have root/console access to your instances, and Catalyst Cloud places no
 restrictions on what software you use. This is because each
 :ref:`project <admin-projects>` on the Catalyst Cloud is
-isolated from all theother projects. Isolation means that the resources and the
-actions taken in one project can't effect anything else outside of that project
-.
+isolated from all the other projects. Isolation means that the resources and
+the actions taken in one project can't effect anything else outside of that
+project.
 
 ***************************************
 How much do I need to pay for services?

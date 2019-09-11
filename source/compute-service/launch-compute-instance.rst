@@ -23,14 +23,14 @@ snapshots:
   uploaded yourself.
 * ``Instance Snapshot``: Assuming you have previously created a snapshot of
   another compute instance, this option will create a new compute instance that
-  is a clone of an existing compute instance (at the point the snapshoot was
+  is a clone of an existing compute instance (at the point the snapshot was
   taken).
 * ``Volume``: Will re-attach an existing volume as the root disk of the new
   compute instance. This option assumes that the existing volume is a valid
   boot source (i.e.: contains an operating system).
 * ``Volume Snapshot``: Assuming you have previously created a snapshot of a
   volume, this option will create a new root disk that is a clone of an
-  existing volume (at the point in time the snapshoot was taken).
+  existing volume (at the point in time the snapshot was taken).
 
 Choosing the root disk type
 ============================

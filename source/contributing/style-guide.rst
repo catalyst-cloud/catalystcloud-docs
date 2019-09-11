@@ -31,7 +31,7 @@ Except:
 Blank lines
 -----------
 
-Two blank lines before overlined sections, i.e. before H1 and H2.
+Two blank lines before over lined sections, i.e. before H1 and H2.
 One blank line before other sections.
 See `Headings`_ for an example.
 
@@ -62,8 +62,8 @@ Headings
 
 Use the following symbols to create headings:
 
-#. H1: ``#`` with overline
-#. H2: ``*`` with overline
+#. H1: ``#`` with over line
+#. H2: ``*`` with over line
 #. H3: ``=``
 #. H4: ``-``
 #. H5: ``^``

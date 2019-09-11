@@ -3,7 +3,7 @@ Connection draining
 ###################
 
 When needing to perform maintenance tasks on an active pool member it is
-preferrable to be able to remove that member from the pool in a graceful manner
+preferable to be able to remove that member from the pool in a graceful manner
 which does not abruptly terminate client connections. The usual approach to
 this is a process known as connection draining, where a member's state is set
 so that it will no longer accept new connections requests. This allows for any

@@ -185,7 +185,7 @@ Alternatively, you can check the status of the cluster on the `Clusters`_ panel
 
 Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
 
-The kubectl command-line tool uses kubeconfig files to determine how to coonect
+The kubectl command-line tool uses kubeconfig files to determine how to connect
 to the APIs of the Kubernetes cluster.
 
 Getting the cluster config
@@ -305,7 +305,7 @@ the cloud.
 Creating the application deployment
 ===================================
 
-First we need to create a manifest like this. If you're folliwing along with
+First we need to create a manifest like this. If you're following along with
 this example you should save this file as ``helloworld-deployment_1.yaml``
 
 .. literalinclude:: _containers_assets/helloworld-deployment_1.yaml

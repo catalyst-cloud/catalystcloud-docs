@@ -7,7 +7,7 @@ How do I find the external IP address of my instance?
 
 There are scenarios where you may need to know the external IP address that
 instances in your project are using. For example, you may wish to allow traffic
-from your Catalyst Cloud instances to access a service that has firewalling or
+from your Catalyst Cloud instances to access a service that has fire-walling or
 other IP based access control in place.
 
 For instances that have a floating IP you simply need to find the floating IP.
@@ -136,9 +136,11 @@ Security Group misconfiguration. If you are experiencing this issue check the
 following:
 
 * Are you using the correct floating IP address when connecting?
-* Do you have a security group that has a rule that allows incoming connections to port 22?
+* Do you have a security group that has a rule that allows incoming
+  connections to port 22?
 * Is your instance a member of the security group that allows SSH access?
-* Is your source IP address within the CIDR IP range defined in the security group rule?
+* Is your source IP address within the CIDR IP range defined in the security
+  group rule?
 
 You can check your floating IP address with the following command:
 
@@ -237,8 +239,9 @@ ensure it now appears as one of the Instance Security Groups.
 Testing Network Access
 ======================
 
-If you want to test you have set up security groups properly for SSH access, you
-can check port 22 on the floating IP for an SSH banner using telnet or netcat:
+If you want to test you have set up security groups properly for SSH access,
+you can check port 22 on the floating IP for an SSH banner using telnet or
+netcat:
 
 .. code-block:: bash
 

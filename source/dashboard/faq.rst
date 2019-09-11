@@ -46,7 +46,7 @@ to be created.
 The default option (on the Dashboard, Compute -> Images -> Launch) to launch
 an instance is to 'boot from image'. This is correct, *unless* the original
 instance also created a new volume at start-up (the instance will boot, but not
-itself be able to be snapshotted without additional metadata).
+itself be able to take a snapshot without additional metadata).
 
 In the latter case, where the initial instance was created along with a new
 volume, the snapshot needs to be booted with the Instance Boot Source set to

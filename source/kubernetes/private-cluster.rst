@@ -4,8 +4,8 @@ Private Cluster
 
 As a security best practice, isolating Kubernetes clusters from internet
 access is one of the most desired features for enterprise users. On Catalyst
-Cloud, all the public templates after our Beta relase (from 10 September, 2019)
-will create private clusters by default.
+Cloud, all the public templates after our Beta release
+(from 10 September, 2019) will create private clusters by default.
 
 ***************************************
 Controlling levels of cluster isolation

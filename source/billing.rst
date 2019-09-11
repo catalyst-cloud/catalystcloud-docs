@@ -10,7 +10,7 @@ script we provide in the section below.
    :maxdepth: 1
 
    billing/api
-   billing/seperate-billing
+   billing/separate-billing
    billing/faq
 
 There is also a tool_ on our dashboard that you can view

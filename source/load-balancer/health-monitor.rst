@@ -76,7 +76,7 @@ Creating a health monitor
 By default, HTTP health monitor will check the “/” path on the application
 server but this may not appropriate because that location may require
 authorisation, be cached or cause the server to perform too much work for a
-simle health check.
+simple health check.
 
 Typically the web application that is being load balanced will provide an
 endpoint such as ``/health`` specifically for health checks. This could be as

@@ -10,12 +10,12 @@ running applications will have no downtime during the upgrade.
 When an upgrade is triggered, the following steps are \ performed to master and
 worker nodes (one by one):
 
-1. **Cordon**: The node becomes unavaialble to schedule new workloads.
+1. **Cordon**: The node becomes unavailable to schedule new workloads.
 2. **Drain**: All workloads are evicted from the node.
 3. **Upgrade**: The Kubernetes components are upgraded on the node.
 4. **Uncordon**: The node becomes available to schedule workloads.
 
-The updgrade process will safely evict all of the pods from the node before
+The upgrade process will safely evict all of the pods from the node before
 performing maintenance on the node. Safe evictions allow the pod's containers
 to gracefully terminate and will respect the ``PodDisruptionBudgets`` defined.
 
@@ -34,7 +34,7 @@ downtime to applications during the process. To do so, the best practices
 below have to  be followed:
 
 1. The application must be deployed and managed by a controller
-   (such as a Deployement or ReplicaSet) with multiple replicas (replicas > 1).
+   (such as a Deployment or ReplicaSet) with multiple replicas (replicas > 1).
 2. A pod disruption budget policy must be applied and define the minimum
    number of pods required for the application to function properly
    (such as minAvailable > 1).

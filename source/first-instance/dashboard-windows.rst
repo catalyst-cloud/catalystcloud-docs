@@ -180,7 +180,7 @@ for the following Catalyst Cloud API hosts
    :align: center
 
 
-You will then be prompted by the following screen to create a new administator
+You will then be prompted by the following screen to create a new administrator
 password.
 
 .. image:: ../_static/fi-windows-login-2.png

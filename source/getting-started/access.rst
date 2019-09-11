@@ -35,7 +35,7 @@ For more information on the Dashboard you can view it :ref:`here
 The command line interface
 **************************
 
-The command line interface (CLI) is a very powerful, efficent way to interact
+The command line interface (CLI) is a very powerful, efficient way to interact
 with Catalyst Cloud. To use the CLI you will need to:
 
 1. Install the OpenStack CLI.
@@ -68,7 +68,7 @@ invaluable. Because Catalyst Cloud is based on the world's most popular open
 source cloud computing platform, OpenStack, many automation tools work with the
 Catalyst Cloud, or have plugins to work with the Catalyst Cloud.
 
-Among our prefered automation tools are:
+Among our preferred automation tools are:
 
 - :ref:`Ansible <launching-your-first-instance-using-ansible>`
 - :ref:`Puppet <bootstrapping-puppet-from-heat>`
@@ -88,7 +88,7 @@ modify your infrastructure. This is important for `SaaS
 <https://en.wikipedia.org/wiki/Software_as_a_service>`_ applications, or
 applications that otherwise need to scale to meet demand.
 To make this integration easier, the OpenStack community has developed a range
-of software development kits (SDKs) for numerious languages. You can find a
+of software development kits (SDKs) for numerous languages. You can find a
 list `here <https://wiki.openstack.org/wiki/SDKs>`_.
 
 
@@ -108,7 +108,7 @@ Whitelisting and access
 
 All compute instances on the Catalyst Cloud have whitelisted IP addresses by
 default. Because compute instances are whitelisted, you can use them as a
-"jumpbox" by creating an instance using the :ref:`cloud dashboard
+"jump box" by creating an instance using the :ref:`cloud dashboard
 <cloud-dashboard>`, SSH-ing into the instance, and :ref:`installing
 <installing-the-cli>` and :ref:`configuring <configuring-the-cli>` the CLI
 tools there. An explanation of launching an instance using the web dashboard

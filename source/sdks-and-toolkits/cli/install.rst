@@ -68,7 +68,7 @@ Ubuntu Linux 18.04
 ------------------
 
 Ubuntu 18.04 uses Python 3.x by default. We recommended using Python3.x
-because python2 has been schedualed for retirement soon and therefore migrating
+because python2 has been scheduled for retirement soon and therefore migrating
 over to Python3 is a necessity.
 
 .. code-block:: bash
@@ -151,7 +151,7 @@ on Windows can be found at http://www.tylerbutler.com/2012/05/how-to-install-pyt
 .. Note::
   The guide above mentions how to download virtualenv for powershell, however
   this is assuming you are using python2 which has been discontinued. For this
-  reason, we recommend using pip to install the normal `virutalenvwrapper.`
+  reason, we recommend using pip to install the normal `virtualenvwrapper.`
   using `pip install virtualenvwrapper`
 
 Assuming that Python and pip have successfully been installed then
@@ -196,14 +196,14 @@ First, you will need to open PowerShell as an Administrator and run:
  # Running as Administrator
  Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
-You will then need to download a versoin of Ubuntu from either the Microsoft
+You will then need to download a version of Ubuntu from either the Microsoft
 store, from a command line script, or to manually unpack it and install it from
 their release website. For our purposes we will be using the Microsoft Store.
 
 .. image:: ../assets/windows-store.png
 
 I've chosen to use Ubuntu 18.04. Once installed, you open the application
-and set up an Unix account. An Unix account is only relevent on your machine
+and set up an Unix account. An Unix account is only relevant on your machine
 and once set up you won't need to use your login details again (but hold on to
 them for security purposes) Once that is done you will be met with a screen
 somewhat like this:

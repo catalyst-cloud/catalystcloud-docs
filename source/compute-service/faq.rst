@@ -45,7 +45,7 @@ quite significant. If you were to apply this to a compute instance with
 **$285.43 / month**
 
 so it would definitely make sense to shelve instances you don't need
-to run fulltime.
+to run full time.
 
 
 *****************************
@@ -158,9 +158,9 @@ box. Ensure you scroll to the bottom to get everything.
 .. image:: ../_static/ssh-with-putty_4.png
    :align: center
 
-Next, log into the cloud dashboard, select **Key Pairs** from left hand menu and
-then **Import Key Pair**. Enter a meaningful name for the key and paste in the public key
-text from the previous step and **Import Key Pair**
+Next, log into the cloud dashboard, select **Key Pairs** from left
+hand menu and then **Import Key Pair**. Enter a meaningful name for the key and
+paste in the public key text from the previous step and **Import Key Pair**
 
 .. image:: ../_static/ssh-with-putty_5.png
    :align: center
@@ -196,7 +196,7 @@ address of the cloud instance you wish to connect to and click Open.
 .. image:: ../_static/ssh-with-putty_8.png
    :align: center
 
-In the terminal seesion that appears enter the default username for the OS that
+In the terminal session that appears enter the default username for the OS that
 you have deployed. As we have assumed that we are running an Ubuntu instance
 our username will be **ubuntu**.
 

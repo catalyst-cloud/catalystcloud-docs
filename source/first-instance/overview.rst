@@ -41,7 +41,7 @@ be easier to use the dashboard. As you become more familiar with the Catalyst
 Cloud it is worth learning how to provision resources programmatically.
 
 Each of the different methods have pro's and cons. Some are easier to
-impliment than others, some give you more information on the creation process
+implement than others, some give you more information on the creation process
 as a whole and Some let you have more customisation options. So even if you are
 comfortable with just using one method at the beginning, we recommend taking a
 look at the others over time as your needs may change and the other methods may
@@ -60,7 +60,7 @@ Network Requirements
 
 Before launching an instance, it is necessary to have some network resources in
 place. These may have already been created for you. In this documentation we
-will assume you are starting from an unconfigured project and will demonstrate
+will assume you are starting from an un-configured project and will demonstrate
 how to set these up from scratch.
 
 The requirements are:

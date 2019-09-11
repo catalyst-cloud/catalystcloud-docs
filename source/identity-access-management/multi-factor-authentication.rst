@@ -69,7 +69,7 @@ and prompted to re-login using MFA.
 
 |
 
-Place a tick in the **MFA Enabled** checkbox and enter a valid passcode from
+Place a tick in the **MFA Enabled** check box and enter a valid passcode from
 your authentication app and click **Sign In**.
 
 |

@@ -23,8 +23,8 @@ about configuring ``allowed_address_pairs`` in Heat was sourced from this
 .. _post: https://www.hastexo.com/blogs/syed/2014/08/05/orchestrating-highly-available-load-balancers-openstack-heat
 
 
-You will be using two different methods to set up this stack. Initially you will
-use the ``openstack`` command line tool to complete the setup
+You will be using two different methods to set up this stack. Initially you
+will use the ``openstack`` command line tool to complete the setup
 manually. You will then replicate the manual configuration using a ``heat``
 template to instantiate the same stack automatically.
 
@@ -43,10 +43,10 @@ Instances use priorities from 1 (lowest) to 255 (highest). Devices running
 VRRP dynamically elect master and backup routers based on their respective
 priorities. Only the router that is acting as the master sends out VRRP
 advertisements at any given point in time. The master router sends
-advertisements to backup routers at regular intervals (default is every second).
-If a backup router does not receive an advertisement for a set period, the
-backup router with the next highest priority takes over as master and begins
-forwarding packets.
+advertisements to backup routers at regular intervals (default is every
+second). If a backup router does not receive an advertisement for a set period,
+the backup router with the next highest priority takes over as master and
+begins forwarding packets.
 
 VRRP instances communicate using packets with multicast IP address 224.0.0.18
 and IP protocol number 112. The protocol is defined in `RFC3768`_.
@@ -196,8 +196,8 @@ this case, the pool addresses are in the range 2-200, while the remainder of the
   | updated_at        | None                                 |
   +-------------------+--------------------------------------+
 
-Now you will create a router. You will give this router an interface on your new
-subnet and set its gateway as your public network:
+Now you will create a router. You will give this router an interface on your
+new subnet and set its gateway as your public network:
 
 .. code-block:: bash
 
@@ -445,11 +445,11 @@ each other via VRRP broadcasts:
 Instance Creation
 =================
 
-The next step is to boot two instances where you will run Keepalived and Apache.
-You will be using the Ubuntu 14.04 image and ``c1.c1r1`` flavor. You will assign
-these instances to the ``vrrp-sec-group`` security group. You will also provide
-the name of your SSH key so you can log in to these machines via SSH once they are
-created:
+The next step is to boot two instances where you will run Keepalived and
+Apache. You will be using the Ubuntu 14.04 image and ``c1.c1r1`` flavor. You
+will assign these instances to the ``vrrp-sec-group`` security group. You will
+also provide the name of your SSH key so you can log in to these machines via
+SSH once they are created:
 
 .. note::
  You will need to substitute the name of your SSH key.
@@ -668,8 +668,8 @@ router:
 
 
 
-Now you need to create a floating IP and point it to your virtual router IP using
-its port ID:
+Now you need to create a floating IP and point it to your virtual router IP
+using its port ID:
 
 .. code-block:: bash
 
@@ -767,8 +767,8 @@ You should now have a stack that looks something like this:
 Updating Existing VRRP Instances To Use Fixed IP
 ================================================
 
-To update **existing** VRRP instances to use fixed IP on their interfaces, obtain
-the port ID of the instances and update the port:
+To update **existing** VRRP instances to use fixed IP on their interfaces,
+obtain the port ID of the instances and update the port:
 
 .. code-block:: bash
 
@@ -793,7 +793,8 @@ the port ID of the instances and update the port:
 
  $ openstack port set --fixed-ip $VRRP_SUBNET_ID,ip_address=10.0.0.5 $VRRP_BACKUP_PORT
 
-Then log in to the instances and edit their network interfaces and resolv.conf files:
+Then log in to the instances and edit their network interfaces and resolv.conf
+files:
 
 .. code-block:: bash
 
@@ -852,9 +853,9 @@ Instance Access
 
 If you want to take a closer look at what is happening when you switch between
 VRRP hosts, you need to SSH to the instances. You won't use the floating IP
-associated with your virtual router, as that will be switching between instances,
-which will make our SSH client unhappy. Consequently, we will assign a floating
-IP to each instance for SSH access.
+associated with your virtual router, as that will be switching between
+instances, which will make our SSH client unhappy. Consequently, we will assign
+a floating IP to each instance for SSH access.
 
 .. code-block:: bash
 
@@ -898,9 +899,9 @@ IP to each instance for SSH access.
   +---------------------+--------------------------------------+
 
 
-Now you can SSH to your instances. You will connect using the default ``ubuntu``
-user that is configured on Ubuntu cloud images. You will need to substitute the
-correct floating IP address.
+Now you can SSH to your instances. You will connect using the default
+``ubuntu`` user that is configured on Ubuntu cloud images. You will need to
+substitute the correct floating IP address.
 
 You can tail syslog in order to see what Keepalived is doing. For example, here
 you can see the backup instance switch from backup to master state:
@@ -953,10 +954,10 @@ stop here.
 Resource Cleanup
 ================
 
-At this point many people will want to clean up the OpenStack resources you have
-been using in this tutorial. Running the following commands should remove all
-networks, routers, ports, security groups and instances. Note that the order
-in which you delete resources is important.
+At this point many people will want to clean up the OpenStack resources you
+have been using in this tutorial. Running the following commands should remove
+all networks, routers, ports, security groups and instances. Note that the
+order in which you delete resources is important.
 
 .. code-block:: bash
 

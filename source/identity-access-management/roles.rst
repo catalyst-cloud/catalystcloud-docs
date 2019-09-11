@@ -24,13 +24,13 @@ actions, or limit users ability to perform potentially harmful actions.
 On the catalyst cloud there are several key roles that you need to learn when
 you're wanting to add more users to your project. More than one role can be
 given to a user and some cases such as the Heat Stack Owner role,
-these are necesarry to have full control of the project. These roles can be
-ammended once a user has accepted your invitation to the
+these are necessary to have full control of the project. These roles can be
+amended once a user has accepted your invitation to the
 project.
 
-The roles are addative meaning that you can hold a lesser role like 'auth_only'
+The roles are additive meaning that you can hold a lesser role like 'auth_only'
 that is supposed to restrict permissions and a role like 'member' that *allows*
-those same restricted permissions. The one that allows them supercedes the
+those same restricted permissions. The one that allows them supersedes the
 other.
 
 The roles available are split up between General roles, that control your
@@ -61,8 +61,8 @@ Project Member
 
 The *Project Member* role gives people access to all services on your project,
 but does not allow them to invite other people to join the project or update
-roles. This role encompases a number of others on this list. As mentioned
-earlier because our roles are adative you do not need all of them to have full
+roles. This role encompasses a number of others on this list. As mentioned
+earlier because our roles are additive you do not need all of them to have full
 control over the project.
 
 Heat Stack Owner
@@ -81,17 +81,17 @@ Compute Start/Stop
 ------------------
 
 The *Compute Start/Stop* role allows users to start, stop, hard reboot and soft
-reboot compute instances. In addition, this role now also supports shellving
-and unshelving an instance. This is useful because.
+reboot compute instances. In addition, this role now also supports shelving
+and un-shelving an instance. This is useful because.
 
 - Shelved instances are not billed for compute resources
 - Storage resources are still billed since they are still being stored on
   a server.
 - "stopped" instances are still billed as if they were running because they are
-  still schedualed to a hypervisor host.
+  still scheduled to a hypervisor host.
 
 However this role still cannot sleep/suspend an instance. Other than these
-actions it is equivilant to auth_only.
+actions it is equivalent to auth_only.
 
 
 This role is implied when a user also has *Project Member*.

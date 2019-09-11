@@ -9,7 +9,7 @@ Storage
 Volumes
 *******
 
-In Kubernetes volumes are tied to `pods`_  and their lifecycles. They are the
+In Kubernetes volumes are tied to `pods`_  and their life cycles. They are the
 most basic storage abstraction, where volumes are bound to pods and containers
 mount these volumes and access them as if they were a local filesystem.
 
@@ -25,7 +25,7 @@ data by mounting the volume in a shared manner.
 
 To use a volume, a Pod specifies what volumes to provide for the Pod and where
 to mount them in the containers. The containers themselves see these presented
-as filesystems. Kubernetes supports several different `volume types`_ , for
+as file systems. Kubernetes supports several different `volume types`_ , for
 this example we will use an ``emptyDir`` volume which is essentially an empty
 directory mounted on the host.
 
@@ -240,7 +240,7 @@ Persistent volume retention
 ***************************
 
 When a PersistentVolume is used as a resource within a cluster through the
-creation of a PersistenVolumeClaim it is important to know that the underlying
+creation of a PersistentVolumeClaim it is important to know that the underlying
 physical volume assigned to the claim will persist if the cluster is removed.
 
 .. Note::
@@ -301,8 +301,8 @@ in the PersistentVolume declaration.
   $ kubectl create -f pvc-existing-pv.yaml
   persistentvolumeclaim/existing-cinder-pv-claim created
 
-Finally we can create a new Pod that uses our PersistenVolumeClaim to mount the
-required volume on this pod.
+Finally we can create a new Pod that uses our PersistentVolumeClaim to mount
+the required volume on this pod.
 
 .. literalinclude:: _containers_assets/pod-with-existing-pv.yaml
     :emphasize-lines: 10-11

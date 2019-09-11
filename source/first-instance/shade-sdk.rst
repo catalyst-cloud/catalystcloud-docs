@@ -37,8 +37,8 @@ installed as a dependency.
 .. note::
 
   Ansible relies on python2 in order to provide long term backwards
-  compatibilty, consequently this tutorial is using a python2 virtual
-  environemnt. Shade can make use of python3 if you prefer and we recommend
+  compatibility, consequently this tutorial is using a python2 virtual
+  environment. Shade can make use of python3 if you prefer and we recommend
   doing so as python2 is being retired.
 
 OpenStack credentials
@@ -233,7 +233,7 @@ The following code will create a security group and a rule within that group:
      remote_ip_prefix=restricted_cidr_range,
  )
 
-The code above specifys 0.0.0.0/0 as the source. In doing so, you are allowing
+The code above specifies 0.0.0.0/0 as the source. In doing so, you are allowing
 access from any IP to your compute instance on the port and protocol selected.
 This is often desirable when exposing a web server (eg: allow HTTP and HTTPs
 access from the Internet), but is insecure when exposing other protocols, such

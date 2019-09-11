@@ -12,7 +12,7 @@ per region basis.
 
 The **Current Quotas** block provides a view of the current quota limits that
 are applied to each region in the current project. It also shows the available
-**Preapproved Quota Sizes** that can be selected and the actions that can be
+**Pre-approved Quota Sizes** that can be selected and the actions that can be
 taken for the quota in each region.
 
 .. image:: ../_static/current_quotas.png
@@ -50,7 +50,7 @@ Select the new quota value and click submit
 
 |
 
-If your requested change does not fall into the preapproved category the
+If your requested change does not fall into the - category the
 **Previous Quota Changes** area will display a message showing the current
 state of your request.
 
@@ -58,7 +58,7 @@ state of your request.
 
 |
 
-For preapproved and accepted changes the display will update to show the new
+For pre-approved and accepted changes the display will update to show the new
 *Current Quota Size* next to the appropriate region and the **Previous Quota
 Changes** will
 
@@ -67,20 +67,20 @@ Changes** will
 |
 
 
-Preapproved vs requires approval
-================================
+Pre-approved vs requires approval
+=================================
 
-Preapproved changes do not require any intervention from Catalyst to be
+Pre-approved changes do not require any intervention from Catalyst to be
 actioned and include any changes that would be a step down in quota size or any
 single step up to the next size tier.
 
-Preapproved sizes changes can be made as follows:
+Pre-approved sizes changes can be made as follows:
 
 - for a decrease in quota size, no approval is necessary and this can be done
   multiple times in the current 30 day time period.
-- for an increase in quota size, one preapproved change can be made within the
+- for an increase in quota size, one pre-approved change can be made within the
   current 30 day time period. All subsequent increases, regardless of whether
-  they would normally be preapproved, will require approval from the Catalyst
+  they would normally be pre-approved, will require approval from the Catalyst
   Cloud team.
 
 |

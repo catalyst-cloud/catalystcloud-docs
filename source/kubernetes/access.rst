@@ -230,7 +230,7 @@ status is no longer <pending>.
   loadbalanced-service   LoadBalancer   10.254.28.183   202.49.242.3   80:31177/TCP   2m18s
 
 Once we can see that our service is active and has been assigned an external IP
-address we should be able to retrive the "Welcome Page" via the browser or
+address we should be able to retrieve the "Welcome Page" via the browser or
 simply via curl from any internet accessible machine.
 
 .. code-block:: bash
@@ -284,7 +284,7 @@ Kubernetes host network.
 
 If we examine the node we can see that it's internal network address is in the
 10.0.0.0/24 subnet and a simple query of the the new service shows that it too
-has now been assigned an addressfrom this same range as it's VIP.
+has now been assigned an address from this same range as it's VIP.
 
 .. code-block:: bash
 
@@ -298,8 +298,8 @@ has now been assigned an addressfrom this same range as it's VIP.
 Retaining the loadbalancer floating IP address
 ==============================================
 
-There may be occasions, such as exisitng DNS entries for example, where it is
-desireable to retain the floating IP that has been assigned to a loadbalancer
+There may be occasions, such as existing DNS entries for example, where it is
+desirable to retain the floating IP that has been assigned to a loadbalancer
 that is assigned to a Kubernetes service.
 
 To do this we can add the following annotation to our service manifest.
@@ -319,9 +319,9 @@ allocated to your cloud project.
     type: LoadBalancer
     loadBalancerIP: 103.197.60.157
 
-Here is an example service that creates a loadbalancer for an Nginx application.
-It will use the existing ip address 103.197.60.157 for the load balancer and
-sets the ``keep-floatingip`` flag to true.
+Here is an example service that creates a loadbalancer for an Nginx
+application. It will use the existing ip address 103.197.60.157 for the load
+balancer and sets the ``keep-floatingip`` flag to true.
 
 .. code-block:: bash
 

@@ -14,7 +14,7 @@ Source an OpenStack RC file
 ***************************
 
 When no configuration arguments are passed, the OpenStack client tools will try
-to obtain their configuraton from environment variables. To help you define
+to obtain their configuration from environment variables. To help you define
 these variables, the cloud dashboard allows you to download an OpenStack RC
 file from which you can easily source the required configuration.
 
@@ -62,7 +62,7 @@ As the standard OpenStack RC file will not work in its current form, it is
 necessary to take a different approach.
 
 To do this we will need to create the equivalent script using PowerShell. Add
-the following lines, replacing the placeholder entries with the appropriate
+the following lines, replacing the place holder entries with the appropriate
 details from your OpenStack RC file which can be obtained following the steps
 above.
 
