@@ -78,6 +78,9 @@ There are 4 typical scenarios as below:
 +-----------------+---------------------------------------+---------------------------------------+
 
 
+**********************************
+Create cluster in existing network
+**********************************
 
 Use the ``openstack coe cluster create`` command to set the existing network
 and subnet:
@@ -88,18 +91,52 @@ and subnet:
                                             --fixed-network <network ID> \
                                             --fixed-subnet <subnet ID>
 
-It is also possible to enable or disable floating IP when creating a new
-cluster. This will override the floating IP behaviour defined in the cluster
-template. To enable floating IP you can run command as below:
+*********************************************
+Turn on/off floating ip when creating cluster
+*********************************************
+
+Though it's not recommended, but it is possible to enable or disable floating
+IP when creating a new cluster. This will override the floating IP behaviour
+defined in the cluster template. To enable floating IP you can run command
+as below:
 
 .. code-block:: console
 
   $ openstack coe cluster create my-cluster --cluster-template <Template ID> \
-                                            --floatingip-enabled
+                                            --floating-ip-enabled
 
-or
+or disable floating IP (if it's enabled in the cluster template):
 
 .. code-block:: console
 
   $ openstack coe cluster create my-cluster --cluster-template <Template ID> \
-                                            --floatingip-disabled
+                                            --floating-ip-disabled
+
+***********************************
+Access Kubernetes API from Internet
+***********************************
+
+.. warning::
+
+  Again, it's not recommended to make your Kubernetes cluster accessible from
+  the Internet for security reasons.
+
+As mentioned above, by default cluster created based on Catalyst Cloud prod
+templates are not accessible from Internet. It can be reachable by adding a
+label `master_lb_floating_ip_enabled=True` to allocate a floating IP address
+to the load balancer of Kubernetes API with below command:
+
+.. code-block:: console
+
+  $ openstack coe cluster create my-cluster --cluster-template <Template ID> \
+                                            --labels <existing labels>,master_lb_floating_ip_enabled=True
+
+.. note::
+
+  To update a label when creating a cluster, you have to set all the labels
+  from the template to do override.
+
+For clusters created based on dev cluster, instead of setting the
+`master_lb_floating_ip_enabled` label, you have to enable the floating IP
+as we mentioned above and manually changed security group rule for master nodes
+to allow ingress traffic from 0.0.0.0/0 for port 6443.
