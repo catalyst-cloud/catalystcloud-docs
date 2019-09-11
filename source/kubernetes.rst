@@ -24,6 +24,8 @@ Table of Contents:
    kubernetes/nginx-ingress
    kubernetes/rolling-upgrade
    kubernetes/private-cluster
+   kubernetes/auto-healing
+   kubernetes/autoscaling
 
 
 .. note::
