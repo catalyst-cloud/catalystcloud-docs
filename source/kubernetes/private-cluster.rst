@@ -140,3 +140,4 @@ For clusters created based on dev cluster, instead of setting the
 `master_lb_floating_ip_enabled` label, you have to enable the floating IP
 as we mentioned above and manually changed security group rule for master nodes
 to allow ingress traffic from 0.0.0.0/0 for port 6443.
+
