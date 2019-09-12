@@ -305,7 +305,7 @@ the cloud.
 Creating the application deployment
 ===================================
 
-First we need to create a manifest like this. If you're folliwing along with
+First we need to create a manifest like this. If you're following along with
 this example you should save this file as ``helloworld-deployment_1.yaml``
 
 .. literalinclude:: _containers_assets/helloworld-deployment_1.yaml
