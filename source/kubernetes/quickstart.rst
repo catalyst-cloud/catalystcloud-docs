@@ -6,8 +6,15 @@ Quick start
 ###########
 
 This quick start guide assumes you have working knowledge of Catalyst Cloud
-:ref:`command-line-interface` and familiarity with Kubernetes.
+:ref:`command-line-interface` and some familiarity with Kubernetes.
 
+.. note::
+
+  Due to active development of this service, we recommend the use of the latest
+  version of the CLI to interact with it. Please refer to the
+  :ref:`upgrading-the-cli` section of the documentation for upgrade
+  instructions. This documentation assumes ``python-magnumclient`` is 2.12.0 or
+  above.
 
 **************
 Pre-requisites
@@ -16,8 +23,8 @@ Pre-requisites
 Ensure user has the required privileges
 =======================================
 
-In order to be able to create a Kubernetes cluster you need to ensure the user
-has been allocated the ``heat_stack_owner`` role.
+In order to create a Kubernetes cluster you need to ensure the user has been
+allocated the ``heat_stack_owner`` role.
 
 Ensure quota is sufficient
 ==========================
@@ -32,13 +39,13 @@ By default, the production Kubernetes template allocates:
 * 6 compute instances
 * 18 vCPUs
 * 36 GB of RAM
-* 8 floating IPs
-* 3 security groups
-* 3 volumes
+* 3 block storage volumes
 * 60 GB of block storage space
+* 3 security groups
+* 1 load balancer
 
 As a ``project admin`` you can change your quota using the `Quota Management`_
-panel in the dashboard, under the ``Management`` section.
+panel in the dashboard, under the Management section.
 
 .. _`Quota Management`: https://dashboard.cloud.catalyst.net.nz/management/quota/
 
@@ -75,27 +82,28 @@ The following command will list all cluster templates available:
 .. code-block:: bash
 
   $ openstack coe cluster template list
- +--------------------------------------+----------------------------------+
- | uuid                                 | name                             |
- +--------------------------------------+----------------------------------+
- | c5b5a636-0066-4291-8da9-5190915f5a76 | kubernetes-v1.11.6-prod-20190130 |
- | 5cb74603-4ad3-4e3b-a1d4-4539c392dbf0 | kubernetes-v1.11.6-dev-20190130  |
- | 5e17bc87-27b2-4c61-ba58-c064fd10245d | kubernetes-v1.11.9-dev-20190402  |
- | bd116a49-4381-4cb6-adf8-cd442e1a713f | kubernetes-v1.11.9-prod-20190402 |
- | be25ca0c-2bf6-4bef-a234-4e073b187d71 | kubernetes-v1.12.7-dev-20190403  |
- | 81d0f765-62fe-4c99-b7f8-284ffddac861 | kubernetes-v1.12.7-prod-20190403 |
- +--------------------------------------+----------------------------------+
+  +--------------------------------------+-----------------------------------+
+  | uuid                                 | name                              |
+  +--------------------------------------+-----------------------------------+
+  | b1d124db-b7cc-4085-8e56-859a0a7796e6 | kubernetes-v1.11.9-dev-20190402   |
+  | cf337c0a-86e6-45de-9985-17914e78f181 | kubernetes-v1.11.9-prod-20190402  |
+  | 967a2b86-8709-4c07-ae89-c0fe6d69d62d | kubernetes-v1.12.7-dev-20190403   |
+  | f8fc0c67-84af-4bb8-89fb-d29f4c926975 | kubernetes-v1.12.7-prod-20190403  |
+  | bfde711c-655c-4de9-b37e-847fc635b734 | kubernetes-v1.12.10-dev-20190912  |
+  | 38382877-957e-4667-9851-838eef892b64 | kubernetes-v1.12.10-prod-20190912 |
+  | d319cc8e-e27d-4ef9-be84-a6d431800215 | kubernetes-v1.13.10-dev-20190912  |
+  | e8257719-b209-40bf-9619-2895698d5a73 | kubernetes-v1.13.10-prod-20190912 |
+  +--------------------------------------+-----------------------------------+
 
+.. Warning::
 
-.. Note::
-
-  Make sure that when you use one of these names a command that you use them
-  precisely as written. There are no warning messages to tell you that the
-  template name doesn't exist and so you must double check before inputting any
-  commands.
+  When creating a new cluster, make sure the exact name listed by the command
+  above is used. The CLI will provide no warning messages to tell you that the
+  template name doesn't exist (resulting in the cluster creation to fail). This
+  is a known bug and should be fixed soon.
 
 Alternatively, a list of cluster templates available can be seen in the
-`Cluster Templates`_ panel in the dashboard, under the ``Container Infra``
+`Cluster Templates`_ panel in the dashboard, under the **Container Infra**
 section.
 
 .. _`Cluster Templates`: https://dashboard.cloud.catalyst.net.nz/project/cluster_templates
@@ -105,29 +113,21 @@ Template types
 
 The naming convention used for the templates is broken down as follows:
 
-* ``kubernetes-v1.11.2`` : this is the version of kubernetes that the template
+* **kubernetes-v1.11.2** : this is the version of kubernetes that the template
   will use to create the cluster.
-* ``-dev`` or ``-prod`` : this create either a minimalist cluster for proof of
-  concept or development work, whereas the prod option creates a more
-  production ready cluster (see below).
-* ``-20181008`` the final portion of the name is the date on which the template
-  was created.
+* **-prod** or **-dev**: the type of environment to be created (see below).
+* **-20181008**: the date on which the template was created.
 
-The difference between between the  development and production templates are:
+The difference between between the development and production templates are:
 
-* ``dev`` creates a small Kubernetes cluster with a single master and a single
-  worker node. As the name suggests, it should not be used for production.
-* ``prod`` creates a Kubernetes cluster that is intended for production
-  workloads. It expects a minimum three master nodes and three worker nodes.
-  The master nodes will have two loadbalancers deployed in front of them in
-  order to provide HA for the API and etcd services. This template also deploys
+* **Production**: creates a Kubernetes cluster that is intended for production
+  workloads. It creates three or more master nodes and three or more worker
+  nodes. The master nodes will have a loadbalancer deployed in front of them to
+  provide high availability for the Kubernetes API. This template also deploys
   Prometheus and Grafana to provide cluster metrics.
-
-.. warning::
-
-  Please note that despite having a template called "production", the
-  Kubernetes service on the Catalyst Cloud is still in alpha (Tech Preview) and
-  should not be used for production workloads.
+* **Development**: creates a minimal Kubernetes cluster with a single master and
+  a single worker node. As the name suggests, it should not be used for
+  production.
 
 
 ******************************
@@ -137,27 +137,27 @@ Deploying a Kubernetes cluster
 Creating a cluster
 ==================
 
-To create a new **development** cluster run the following command:
-
-.. code-block:: bash
-
-  $ openstack coe cluster create k8s-dev-cluster \
-  --cluster-template kubernetes-v1.12.7-dev-20190403 \
-  --keypair my-ssh-key \
-  --node-count 1 \
-  --master-count 1
-
-  Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
-
 To create a new **production** cluster, run the following command:
 
 .. code-block:: bash
 
-  $ openstack coe cluster create k8s-prod-cluster \
-  --cluster-template kubernetes-v1.12.7-prod-20190403 \
+  $ openstack coe cluster create k8s-cluster \
+  --cluster-template kubernetes-v1.13.10-prod-20190912 \
   --keypair my-ssh-key \
   --node-count 3 \
   --master-count 3
+
+  Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
+
+To create a new **development** cluster run the following command:
+
+.. code-block:: bash
+
+  $ openstack coe cluster create k8s-cluster \
+  --cluster-template kubernetes-v1.13.10-dev-20190912 \
+  --keypair my-ssh-key \
+  --node-count 1 \
+  --master-count 1
 
   Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
 
@@ -185,15 +185,13 @@ Alternatively, you can check the status of the cluster on the `Clusters`_ panel
 
 Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
 
-The kubectl command-line tool uses kubeconfig files to determine how to connect
-to the APIs of the Kubernetes cluster.
-
 Getting the cluster config
 ==========================
 
-The following command will download the necessary certificates and create a
-configuration file on your current directory. It will also export the
-``KUBECONFIG`` variable on your behalf:
+The kubectl command-line tool uses kubeconfig files to determine how to connect
+to the APIs of the Kubernetes cluster. The following command will download the
+necessary certificates and create a configuration file on your current
+directory. It will also export the ``KUBECONFIG`` variable on your behalf:
 
 .. code-block:: bash
 
@@ -263,11 +261,10 @@ browser to connect to the Kubernetes dashboard.
   Starting to serve on 127.0.0.1:8001
 
 Once the proxy is ready, open following URL on your browser:
-
-``http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy``
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
 
 You will be presented with a login screen, as illustrated below. Select
-``Token`` as the authentication type and paste in the authentication token
+**Token** as the authentication type and paste in the authentication token
 acquired in the previous step.
 
 .. image:: _containers_assets/kubernetes_dashboard_login.png

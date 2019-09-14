@@ -1,6 +1,6 @@
-###################
-Cluster Autoscaling
-###################
+############
+Auto scaling
+############
 
 ************
 Introduction

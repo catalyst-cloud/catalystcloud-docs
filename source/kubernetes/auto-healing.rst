@@ -1,19 +1,19 @@
-####################
-Cluster Auto-healing
-####################
+############
+Auto healing
+############
 
 ************
 Introduction
 ************
 
-Cluster auto-healing is a feature of the Kubernetes service on the Catalyst
+Cluster auto healing is a feature of the Kubernetes service on the Catalyst
 Cloud that monitors the health state of the cluster and automatically repairs
 Kubernetes' components (for example: etcd, kubelet) or nodes (master or
 worker) that are unhealthy. This is distinct and complementary to the
 self-healing that Kubernetes performs for pods.
 
 Auto-healing is enabled by default. If desirable, auto-healing can be disabled
- at cluster creation time via the label ``auto_healing_enabled=false``.
+at cluster creation time via the label ``auto_healing_enabled=false``.
 
 *****************
 How does it work?
