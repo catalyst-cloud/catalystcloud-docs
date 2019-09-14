@@ -40,7 +40,7 @@ following command to assist our support team in helping you to resolve it.
 
 .. code-block:: bash
 
-  $ openstack coe cluster show <cluster_name>
+  $ openstack coe cluster show <cluster_name> -f json
 
 
 Known Issues
