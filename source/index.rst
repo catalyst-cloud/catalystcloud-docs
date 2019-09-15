@@ -6,26 +6,32 @@ Kia ora and a warm welcome to the Catalyst Cloud!
 
 Contents:
 
+.. Please note the ToC is broken down in three sections: documents pinned at
+   the top, documentation for services listed in alphabetical order, documents
+   pinned at the bottom.
+
 .. toctree::
    :maxdepth: 2
 
    getting-started
    first-instance
-   dashboard
-   compute
-   image
-   block-storage
-   object-storage
-   network
-   load-balancer
-   orchestration
-   kubernetes
-   billing
-   identity-access-management
-   backups
    best-practices
    sdks-and-toolkits
+
+   backups
+   billing
+   block-storage
+   compute
+   dashboard
+   identity-access-management
+   image
+   kubernetes
+   load-balancer
+   network
+   object-storage
+   orchestration
    tutorials
+
    release-notes
    contributing
 

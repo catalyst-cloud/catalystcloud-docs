@@ -1,6 +1,6 @@
-#############################
-Working with network policies
-#############################
+################
+Network policies
+################
 
 As Catalyst Cloud uses `Calico`_ for the default network driver it is
 possible to define network policies to control what and how resources are

@@ -12,8 +12,8 @@ What is a cluster?
 ******************
 
 A container cluster is the foundation of the Kubernetes Engine, it consists of
-at least one ``master`` server and one or more ``node`` servers. It is made up
-of a collection of compute, networking and storage resources necessary to run
+one or more **master node(s)** and one or more **woker node(s)**. It is made up
+of a collection of compute, networking, and storage resources necessary to run
 any given workloads. Communication between them is by way of a shared network.
 An entire system may be comprised of multiple clusters.
 
