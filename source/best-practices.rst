@@ -26,7 +26,7 @@ it can be reused in subsequent commands.
 
 .. code-block:: bash
 
-    export CC_IMAGE_ID=$( openstack image show ubuntu-16.04-x86_64 -f value -c id )
+    export CC_IMAGE_ID=$( openstack image show ubuntu-18.04-x86_64 -f value -c id )
     export CC_FLAVOR_ID=$( openstack flavor show c1.c1r2 -f value -c id )
 
 Similar mechanisms exist for doing this with other tool sets such as Ansible,

@@ -238,7 +238,7 @@ Running the upgrade
 In this example we will be upgrading an existing cluster called
 **k8s-upgrade-test** from template version **v1.11.9** to **v1.12.7**.
 
-In preparation for the upgrade, we need to identify the ID of the cluter we
+In preparation for the upgrade, we need to identify the ID of the cluster we
 wish to upgrade and the ID of the new cluster template we wish to upgrade to.
 
 The ``openstack coe cluster list`` command will list all Kubernetes clusters

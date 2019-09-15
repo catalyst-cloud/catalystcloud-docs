@@ -125,8 +125,8 @@ The difference between between the development and production templates are:
   nodes. The master nodes will have a loadbalancer deployed in front of them to
   provide high availability for the Kubernetes API. This template also deploys
   Prometheus and Grafana to provide cluster metrics.
-* **Development**: creates a minimal Kubernetes cluster with a single master and
-  a single worker node. As the name suggests, it should not be used for
+* **Development**: creates a minimal Kubernetes cluster with a single master
+  and a single worker node. As the name suggests, it should not be used for
   production.
 
 

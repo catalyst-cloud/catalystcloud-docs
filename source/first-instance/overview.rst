@@ -188,9 +188,9 @@ instance.
 For example, if you were trying to connect to an ubuntu image with the floating
 IP 103.255.251.140. You would use the command:
 
-.. code-block::
+.. code-block:: bash
 
-   $ ssh -i <path/to/private/key> ubuntu@103.255.251.140
+  $ ssh -i <path/to/private/key> ubuntu@103.255.251.140
 
 In this example we use the '-i' flag to explicitly state where our private key
 is. We also make sure that we are SSH-ing to the correct operating system on

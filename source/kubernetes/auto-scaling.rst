@@ -180,7 +180,7 @@ Once the required changes have been made save the file and exit. This will
 cause the deployment to create a new ``cluster-autoscaler pod`` and once it is
 ``RUNNING`` it will remove the original one .
 
-For more detailed information about the Cluster Autoscaler please take a look
+For more detailed information about the Cluster-Autoscaler please take a look
 at the `FAQ`_ .
 
 .. _`FAQ`: https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md

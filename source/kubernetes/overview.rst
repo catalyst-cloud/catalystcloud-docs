@@ -14,8 +14,8 @@ system. You can link containers together, set security policies, limit resource
 utilisation and more.
 
 `Docker`_ is a tool designed to make it easier to create, deploy, and run Linux
-containers. The Kubernetes service offered by the Catalyst Cloud supports Docker
-container format.
+containers. The Kubernetes service offered by the Catalyst Cloud supports
+Docker container format.
 
 .. _`Docker`: https://www.docker.com/
 
