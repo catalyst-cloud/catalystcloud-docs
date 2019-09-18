@@ -4,6 +4,7 @@
 Access Control
 **************
 
+.. _project_users:
 
 Project Users
 =============
