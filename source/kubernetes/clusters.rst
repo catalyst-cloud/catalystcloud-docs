@@ -50,6 +50,12 @@ The cloud provider may supply pre-defined templates for users and it may also
 be possible, in some situations, for user to create their own templates.
 Initially Catalyst Cloud will only allow the use of the pre-defined templates.
 
+.. Note::
+
+  From cluster template version ``v1.12.10`` onwards, as a security best
+  practice, the behaviour when creating a new cluster is for it to be
+  created as a :ref:`private-cluster`. This means that the cluster will not be
+  reachable directly from the internet by default.
 
 Viewing templates
 =================
