@@ -1,3 +1,5 @@
+.. _auto-scaling:
+
 ############
 Auto scaling
 ############

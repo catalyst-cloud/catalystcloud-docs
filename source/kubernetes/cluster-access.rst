@@ -1,3 +1,5 @@
+.. _cluster-access-roles:
+
 ####################
 Cluster access roles
 ####################

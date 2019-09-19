@@ -1,3 +1,5 @@
+.. _rolling-upgrade:
+
 ###############
 Rolling upgrade
 ###############

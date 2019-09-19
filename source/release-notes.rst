@@ -10,3 +10,4 @@ Table of Contents:
   :maxdepth: 1
 
   release-notes/orchestration
+  release-notes/release_20190827
