@@ -25,14 +25,15 @@ Via the Dashboard
 Create snapshot
 ---------------
 
-The first step is creating the snapshot of your instance. This is done using
-from the dropdown menu on the ephemeral instance:
+The first step is creating the snapshot of your instance, which is
+automatically done when you shelve an instance:
 
 .. image:: block-storage-assets/Snapshot-ephemeral.png
 
 After this, navigate to the **Images** section of the dashboard and locate your
-named snapshot, for this example we named ours 'Ephemeral-Snapshot'. Click
-create volume and follow the steps to creating a volume from this snapshot.
+snapshot, for this example ours is named 'Ephemeral-instance-shelved'.
+Click create volume and follow the steps to creating a volume from this
+snapshot.
 
 .. image:: block-storage-assets/images-create-volume-red.png
 
@@ -42,13 +43,14 @@ launch as instance on your selected volume. In this case "Ephemeral-Snapshot"
 .. image:: block-storage-assets/volume-create-as-instance-red.png
 
 Then go through the steps to create a new instance, making sure that when you
-arrive at picking a Source, you make sure to have 'Create New Volume' set to
-yes.
+arrive at picking a Source, you make sure to use the volume as a source not
+an image. This should be the default when making an instance from a volume.
 
-.. image:: block-storage-assets/create-with-vol-red.png
+.. image:: block-storage-assets/create-with-vol.png
 
 That should be it, once your new instance is up and running you should be able
-to see all of your files on the new instance, and it will have the new volume.
+to see all of your files on the new instance, and it will have the new volume
+as it's boot source.
 
 Via the CLI
 ===========
@@ -83,13 +85,11 @@ After this you create a volume from your snapshot.
 .. code-block:: bash
 
    #find the correct snapshot, (the list has been truncated for readability)
-   $ openstack image list
+   $ openstack image list | grep ephemeral
    +--------------------------------------+--------------------------------------+--------+
    | ID                                   | Name                                 | Status |
    +--------------------------------------+--------------------------------------+--------+
-   | ...                                  |                                      |        |
    | aa1e6f8d-0689-4eaf-9a13-c2c16391a82c | ephemeral-instance-shelved           | active |
-   | ...                                  |                                      |        |
    +--------------------------------------+--------------------------------------+--------+
 
 
@@ -99,12 +99,9 @@ After this you create a volume from your snapshot.
    --availability-zone NZ-WLG-2 --type b1.standard
 
 
-So at this point we now have a volume that has all of the information from your
-instance snapshot stored on it. From here we need to create the new instance,
-using the --volume flag to set that as the boot device.
-
-To recreate your instance exactly, you are able to use the following to get
-the relevant ID's etc:
+At this point we now have a volume that contains all of the information from
+your instance instance stored on it. From here we need to create the new
+instance, using the --volume flag:
 
 .. code-block:: bash
 
@@ -116,7 +113,7 @@ the relevant ID's etc:
    | 9896d5e5-116f-4aa2-b962-f7b473b080d8 | ephemeral-instance | SHELVED_OFFLOADED | private-net-1=10.0.0.17, 103.254.156.188 | ubuntu-18.04-x86_64          | c1.c1r1 |
    +--------------------------------------+--------------------+-------------------+------------------------------------------+------------------------------+---------+
 
-   # then we get the flavor and image ID's along with the security information from the previous instance
+   # then we get the flavor and image ID's along with the security and network information from the previous instance
    $ openstack server show 9896d5e5-116f-4aa2-b962-f7b473b080d8
    +-----------------------------+------------------------------------------------------------+
    | Field                       | Value                                                      |
@@ -149,14 +146,29 @@ the relevant ID's etc:
    | volumes_attached            | id='09975851-7bb4-4935-814b-2e65d19fd433'                  |
    +-----------------------------+------------------------------------------------------------+
 
+   #You also need to get your private-net id using the following command:
+   $ openstack network show private-net -f value -c id
 
    #We then create our new instance with these parameters.
    $ openstack server create --flavor 6371ec4a-47d1-4159-a42f-83b84b80eea7 \
-   --volume b2285b91-3521-454c-8e4f-91c1e2f7ba9c --nic net-id=550677db-0232-418b-aeb5-f461cf907967 \
-   persistent-volume-instance
+   --volume 666707a2-0835-449a-a093-b14015773cd3 --nic net-id=550677db-0232-418b-aeb5-f461cf907967 \
+   --security-group default --security-group security-group persistent-volume-instance
 
+After this is completed, you should be able to assign a floating IP to your
+instance and SSH to it and you'll find all of your data in tact. The only
+difference now being that your instance now has a persistent volume for
+storage.
 
-   openstack server create --flavor 6371ec4a-47d1-4159-a42f-83b84b80eea7 \
-   --key-name security-key --security-group default --security-group security-group \
-   --volume b2285b91-3521-454c-8e4f-91c1e2f7ba9c --nic net-id=550677db-0232-418b-aeb5-f461cf907967 \
-   persistent-volume-instance
+.. code-block:: bash
+
+   $ openstack floating ip list
+   +--------------------------------------+---------------------+------------------+------+--------------------------------------+----------------------------------+
+   | ID                                   | Floating IP Address | Fixed IP Address | Port | Floating Network                     | Project                          |
+   +--------------------------------------+---------------------+------------------+------+--------------------------------------+----------------------------------+
+   | 50e0c050-db2a-47bf-a478-871a84d1faa9 | 103.254.156.188     | None             | None | e0ba6b88-5360-492c-9c3d-119948356fd3 | eac679e4896146e6827ce29d755fe289 |
+   +--------------------------------------+---------------------+------------------+------+--------------------------------------+----------------------------------+
+
+   $ openstack server add floating ip persistent-volume-instance 103.254.156.188
+
+   #Then you can SSH to your instance
+   $ ssh ubuntu@103.254.156.188
