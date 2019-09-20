@@ -19,9 +19,9 @@ This release introduced the following new functionality and improvements.
   allocation
 * As a **security best practice** all Catalyst Cloud cluster templates will
   create and new cluster as a :ref:`private-cluster`.
-* New :ref:`cluster-access-roles` were added to provide a mechanism for
-  handling cluster authentication based on the cloud user's login and
-  associated roles.
+* Cluster :ref:`kubernetes-access-control` roles were added to provide a
+  mechanism for handling cluster authentication and authorization based on the
+  cloud user's login and associated roles.
 * The following new cluster template versions were introduced. The
   **v.1.xx.xx** tag in the template name refers to the associated Kubernetes
   version that will be deployed in the cluster by the template.

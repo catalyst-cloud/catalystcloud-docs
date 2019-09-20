@@ -1,8 +1,8 @@
-.. _cluster-access-roles:
+.. _kubernetes-access-control:
 
-####################
-Cluster access roles
-####################
+##############
+Access control
+##############
 
 ************
 Introduction

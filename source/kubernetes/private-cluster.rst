@@ -1,7 +1,7 @@
 .. _private-cluster:
 
 ###############
-Private Cluster
+Private cluster
 ###############
 
 As a security best practice, isolating Kubernetes clusters from internet
