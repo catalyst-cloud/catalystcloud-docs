@@ -113,7 +113,7 @@ Launching the new database instance
 
 Based on the information we gathered in the previous section we will now create
 our database instance. This requires a private network on your cloud, to
-attatch the database instance to.
+attach the database instance to.
 
 .. code-block:: bash
 
@@ -279,7 +279,7 @@ likely that further users will need to be added over time.
 
 This can be done using the openstack commandline. Below we can see two example
 of how we can add a new user to our myDB database. One example creates a
-user that can access the databse from any location. This is the same behaviour
+user that can access the database from any location. This is the same behaviour
 that is displayed when the user is created as part of the initial database
 instance creation.
 
@@ -425,9 +425,9 @@ operations. There are many different uses for having a replica.
 While similar to a backup, a replica is very different.
 The main difference between the two is that, a backup takes what is essentially
 a snapshot, of your current database and stores away a list of commands and
-values able to restore a new instance to the snapshoted point in time of your
-original. While a replica will be a full copy of your database when created and
-from there is an independant database instance. It can then be set up to
+values able to restore a new instance to the that snapshot's point in time.
+While a replica will be a full copy of your database when created and
+from there is an independent database instance. It can then be set up to
 receive updates or perform a number of functions as mentioned earlier.
 
 The command to create a replica is:
@@ -458,7 +458,7 @@ Viewing logs
 Logging is important for keeping a well maintained database. In the following
 example we will be showing how to publish a slow_query log. These are a
 performance log that consists of SQL statements that have taken longer than
-the specified long_query_time to executre.
+the specified long_query_time to execute.
 
 First thing we have to do is check whether we have logging enabled on our
 instance or not.

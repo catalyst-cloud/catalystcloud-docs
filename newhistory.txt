@@ -1,0 +1,1000 @@
+ 1018  git remote -v
+ 1019  git push origin master
+ 1020  cd Documents/code_directory/
+ 1021  ls
+ 1022  cd sky-tv-docs/
+ 1023  ls
+ 1024  cd catalystcloud-docs/
+ 1025  ./live_compile.sh 
+ 1026  git status
+ 1027  git remote rename origin old-origin
+ 1028  git remote add origin ssh://git@gitlab.int.catalystcloud.nz:10022/catalystcloud/catalystcloud-docs.git
+ 1029  git status
+ 1030  ls
+ 1031  git status
+ 1032  git checkout master
+ 1033  git checkout storage-changes
+ 1034  git diff master
+ 1035  ./live_compile.sh 
+ 1036  ./compile.sh 
+ 1037  firefox build/html/index.html
+ 1038  ./compile.sh 
+ 1039  firefox build/html/index.html
+ 1040  ./compile.sh 
+ 1041  firefox build/html/index.html
+ 1042  git status
+ 1043  git add .
+ 1044  git commit -m 'removed storage total'
+ 1045  git checkout master
+ 1046  git pull
+ 1047  ./compile.sh 
+ 1048  firefox build/html/index.html
+ 1049  ./compile.sh 
+ 1050  firefox build/html/index.html
+ 1051  git merge --help
+ 1052  git merge storage-changes 
+ 1053  git status
+ 1054  git reset --hard HEAD
+ 1055  git status
+ 1056  git add .gitignore 
+ 1057  git status
+ 1058  git commit -m 'updated ignore'
+ 1059  git merge storage-changes 
+ 1060  git reset --hard HEAD
+ 1061  git checkout storage-changes 
+ 1062  git status
+ 1063  git add .
+ 1064  git commit -m 'deleted outdated files'
+ 1065  git checkout master
+ 1066  git merge storage-changes 
+ 1067  git status
+ 1068  git add .
+ 1069  git status
+ 1070  git merge storage-changes 
+ 1071  git commit -m 'fix merge conflict'
+ 1072  git merge storage-changes 
+ 1073  ./compile.sh 
+ 1074  firefox build/html/index.html
+ 1075  git push origin master
+ 1076  workon CLI
+ 1077  git status
+ 1078  cd catalystcloud-docs/
+ 1079  git status
+ 1080  git add .
+ 1081  git commit -m 'changes to databse.rst'
+ 1082  git status
+ 1083  clear
+ 1084  ssh cloudops
+ 1085  ssh cloudops
+ 1086  ssh -AA cloudops
+ 1087  clear
+ 1088  adminsrc
+ 1089  workon CLI
+ 1090  adminsource
+ 1091  adminsrc
+ 1092  srcadmin
+ 1093  clear
+ 1094  openstack user create --domain default \
+ 1095  openstack user create --domain catalyst/drupal/tehaeata --password-prompt sysadmins+tehaeata@catalyst.net.nz
+ 1096  openstack domain list
+ 1097  openstack project list
+ 1098  openstack user create --domain default --password-prompt sysadmins+tehaeata@catalyst.net.nz
+ 1099  openstack project list | grep catalyst/drupal
+ 1100  openstack role list
+ 1101  openstack role add --project catalyst/drupal/tehaeata --user sysadmins+tehaeata@catalyst.net.nz Member
+ 1102  openstack project user list
+ 1103  openstack project catalyst/drupal/tehaeata user list
+ 1104  openstack project 
+ 1105  openstack role list
+ 1106  openstack user list | grep sysadmin
+ 1107  openstack role add --project catalyst/drupal/tehaeata --user sysadmins+tehaeata@catalyst.net.nz project_mod
+ 1108  openstack user set --password UK7utHdWDh8ZbBMVxQlf sysadmins+tehaeata@catalyst.net.nz
+ 1109  clear
+ 1110  osenv
+ 1111  openstack role list
+ 1112  openstack server list
+ 1113  clear
+ 1114  osenv
+ 1115  clear
+ 1116  openstack server list
+ 1117  sourceadmin
+ 1118  srcadmin
+ 1119  osenv
+ 1120  srcadmin
+ 1121  openstack server list
+ 1122  openstack role list
+ 1123  openstack role add --project catalyst/drupal/tehaeata --user sysadmins+tehaeata@catalyst.net.nz project_admin
+ 1124  openstack role add --project catalyst/drupal/tehaeata --user sysadmins+tehaeata@catalyst.net.nz heat_stack_owner
+ 1125  openstack role assignment sysadmins+tehaeata@catalyst.net.nz
+ 1126  openstack role assignment --user sysadmins+tehaeata@catalyst.net.nz
+ 1127  openstack role assignment list --user sysadmins+tehaeata@catalyst.net.nz
+ 1128  openstack role assignment list --user sysadmins+tehaeata@catalyst.net.nz --names
+ 1129  openstack role add --project catalyst/drupal/tehaeata --user sysadmins+tehaeata@catalyst.net.nz _member_
+ 1130  openstack role rm --project catalyst/drupal/tehaeata --user sysadmins+tehaeata@catalyst.net.nz Member
+ 1131  openstack role remove --project catalyst/drupal/tehaeata --user sysadmins+tehaeata@catalyst.net.nz Member
+ 1132  openstack role assignment list --user sysadmins+tehaeata@catalyst.net.nz --names
+ 1133  openstack role assignment list --role Member --names
+ 1134  osenv
+ 1135  srcadmin
+ 1136  openstack role assignment list --role Member --names
+ 1137  openstack role assignment list --user glyndavies@catalyst.net.nz --project catalyst-cloud/windows --names
+ 1138  openstack role assignment list --user liz@catalyst.net.nz --project catalyst-cloud/windows --names
+ 1139  openstack role assignment list --user liz@catalyst.net.nz --project catalyst/charteredaccountantsanz --names
+ 1140  openstack role assignment list --user shannon@catalyst --project catalyst/drupal/shared_production --names
+ 1141  openstack role assignment list --user shannon@catalyst.net --project catalyst/drupal/shared_production --names
+ 1142  openstack role assignment list --user shannon@catalyst.net.nz --project catalyst/drupal/shared_production --names
+ 1143  openstack role assignment list --user samub@catalyst.net.nz --project qa.catalyst.net.nz --names
+ 1144  openstack role assignment list --user samub@catalyst.net.nz --project koha.catalyst.net.nz --names
+ 1145  openstack role assignment list --role Member --names
+ 1146  openstack role assignment list --user samub@catalyst.net.nz --project prod.vodafone.co.nz --names
+ 1147  openstack role assignment list --user samub@catalyst.net.nz --project build.elearning.catalyst.net.nz --names
+ 1148  openstack role assignment list --user samub@catalyst.net.nz --project elearning.catalyst.net.nz --names
+ 1149  openstack role assignment list --user bruno@catalyst.net.nz --project demo.intergration.works --names
+ 1150  openstack role assignment list --user bruno@catalyst.net.nz --project demo.integration.works --names
+ 1151  openstack role assignment list --user xingchaoyu@catalyst.net.nz --project openstack-dev.catalyst.net.nz --names
+ 1152  openstack role assignment list --user bruno+admin@catalyst.net.nz --project ska-sdp.opg --names
+ 1153  openstack role assignment list --user bruno+admin@catalyst.net.nz --project ska-sdp.org --names
+ 1154  openstack role assignment list --role Member --names
+ 1155  openstack role remove --project catalyst-cloud/windows@Default  --user glyndavies@catalyst.net.nz Member
+ 1156  openstack role remove --project catalyst-cloud/windows  --user glyndavies@catalyst.net.nz Member
+ 1157  openstack role assignment list --user glyndavies@catalyst.net.nz --project catalyst-cloud/windows --names
+ 1158  openstack role remove --project catalyst/charteredaccountantsanz  --user liz@catalyst.net.nz Member
+ 1159  openstack role remove --project catalyst/drupal/shared_production  --user shannon@catalyst.net.nz Member
+ 1160  openstack role remove --project qa.catalyst.net.nz  --user samub@catalyst.net.nz Member
+ 1161  openstack role remove --project koha.catalyst.net.nz  --user samub@catalyst.net.nz Member
+ 1162  openstack role remove --project prod.vodafone.co.nz  --user samub@catalyst.net.nz Member
+ 1163  openstack role remove --project build.elearning.catalyst.net.nz  --user samub@catalyst.net.nz Member
+ 1164  openstack role remove --project elearning.catalyst.net.nz  --user samub@catalyst.net.nz Member
+ 1165  openstack role remove --project demo.integration.works  --user bruno@catalyst.net.nz Member
+ 1166  openstack role remove --project openstack-dev.catalyst.net.nz  --user xingchaoyu@catalyst.net.nz Member
+ 1167  openstack role add --project ska-sdp.org  --user bruno+admin@catalyst.net.nz _member_
+ 1168  openstack role remove --project ska-sdp.org  --user bruno+admin@catalyst.net.nz Member
+ 1169  history | grep assignment
+ 1170  openstack role assignment list --user glyndavies@catalyst.net.nz --project catalyst-cloud/windows --names
+ 1171  openstack role assignment list --user liz@catalyst.net.nz --project catalyst-cloud/windows --names
+ 1172  openstack role assignment list --user liz@catalyst.net.nz --project catalyst/charteredaccountantsanz --names
+ 1173  openstack role assignment list --user shannon@catalyst.net.nz --project catalyst/drupal/shared_production --names
+ 1174  openstack role assignment list --user samub@catalyst.net.nz --project qa.catalyst.net.nz --names
+ 1175  openstack role assignment list --user samub@catalyst.net.nz --project koha.catalyst.net.nz --names
+ 1176  openstack role assignment list --user samub@catalyst.net.nz --project prod.vodafone.co.nz --names
+ 1177  openstack role assignment list --user samub@catalyst.net.nz --project build.elearning.catalyst.net.nz --names
+ 1178  openstack role assignment list --user samub@catalyst.net.nz --project elearning.catalyst.net.nz --names
+ 1179  openstack role assignment list --user bruno@catalyst.net.nz --project demo.intergration.works --names
+ 1180  openstack role assignment list --user bruno@catalyst.net.nz --project demo.integration.works --names
+ 1181  openstack role assignment list --user xingchaoyu@catalyst.net.nz --project openstack-dev.catalyst.net.nz --names
+ 1182  openstack role assignment list --user bruno+admin@catalyst.net.nz --project ska-sdp.opg --names
+ 1183  openstack role assignment list --user bruno+admin@catalyst.net.nz --project ska-sdp.org --names
+ 1184  openstack role assignment list --role Member --names
+ 1185  sudo groupadd docker
+ 1186  sudo group docker
+ 1187  sudo usermod -aG docker $danielobyrne
+ 1188  sudo usermod -a -G docker $danielobyrne
+ 1189  newgrp docker
+ 1190  docker run hello-world
+ 1191  clear
+ 1192  docker
+ 1193  docker container
+ 1194  docker image ls
+ 1195  docker run hello-world
+ 1196  touch Dockerfile
+ 1197  ls
+ 1198  vim Dockerfile
+ 1199  touch requirements.txt
+ 1200  vim requirements.txt 
+ 1201  touch app.py
+ 1202  vim app.py 
+ 1203  clear
+ 1204  ls
+ 1205  sudo docker build --tag=friendlyhello
+ 1206  sudo docker build -t=friendlyhello
+ 1207  docker image ls
+ 1208  sudo docker build -t=friendlyhello2
+ 1209  sudo docker build -t=friendlyhello2 .
+ 1210  sudo docker build -t=friendlyhello .
+ 1211  docker image ls
+ 1212  docker run -p 4000:80 friendlyhello
+ 1213  curl http://localhost:4000
+ 1214  docker container ls
+ 1215  docker container stop 6de88b4d6d82
+ 1216  curl http://localhost:4000
+ 1217  clear
+ 1218  docker login
+ 1219  docker id
+ 1220  docker --help
+ 1221  docker login
+ 1222  sudo docker login
+ 1223  docker tag friendlyhello2 danielobyrne/august-learning:part1
+ 1224  docker image ls
+ 1225  docker push danielobyrne/august-learning
+ 1226  sudo docker push danielobyrne/august-learning
+ 1227  clear
+ 1228  touch docker-compose.yml
+ 1229  vim docker-compose.yml 
+ 1230  docker swarm init
+ 1231  sudo docker swarm init
+ 1232  curl -L https://github.com/docker/compose/releases/download/1.25.0-rc2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+ 1233  sudo curl -L https://github.com/docker/compose/releases/download/1.25.0-rc2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+ 1234  sudo chmod +x /usr/local/bin/docker-compose
+ 1235  sudo docker swarm init
+ 1236  clear
+ 1237  sudo docker swarm init
+ 1238  sudo docker swarm init --advertise-addr fd14:a51a:89a:d300:51c9:1da6:6e48:95e6
+ 1239  docker stack deploy -c docker-compose.yml getstartedlab
+ 1240  docker service ls
+ 1241  sudo docker service ps getstartedlab_web
+ 1242  sudo docker container ls -q
+ 1243  docker stack ps getstartedlab_web
+ 1244  sudo docker service ps getstartedlab_web
+ 1245  sudo docker stack rm getstartedlab
+ 1246  docker swarm leave --force
+ 1247  sudo docker service list
+ 1248  sudo docker list
+ 1249  docker stack ls
+ 1250  clear
+ 1251  ls
+ 1252  docker ls
+ 1253  docker --help
+ 1254  docker container ls
+ 1255  docker network ls
+ 1256  history | docker
+ 1257  history | grep docker
+ 1258  docker service list
+ 1259  docker image ls
+ 1260  docker run -p 80:80 danielobyrne/august-learning:part1
+ 1261  sudo docker run -p 80:80 danielobyrne/august-learning:part1
+ 1262  docker run hello-world
+ 1263  docker run -p 4000:80 friendlyhello2
+ 1264  docker run -p 4000:80 danielobyrne/august-learning:part1
+ 1265  history | grep curl
+ 1266  curl http://localhost:4000
+ 1267  docker container ls
+ 1268  docker service ls
+ 1269  docker service list
+ 1270  docker swarm init
+ 1271  docker swarm init --advertise-addr 10.255.220.126
+ 1272  docker stack deploy -c docker-compose.yml getstartedlab
+ 1273  docker service ls
+ 1274  docker service ps getstartedlab_web
+ 1275  docker container ls -q
+ 1276  docker stack ps getstartedlab
+ 1277  curl -4 http://localhost:4000
+ 1278  curl http://localhost:4000
+ 1279  ls
+ 1280  vim docker-compose.yml 
+ 1281  docker stack deploy -c docker-compose.yml getstartedlab
+ 1282  docker container ls -q
+ 1283  sudo docker container ls -q
+ 1284  docker service ls
+ 1285  curl http://localhost:4000
+ 1286  docker stack rm getstartedlab
+ 1287  part1 : docker run -p 80:80 danielobyrne/august-learning:part1
+ 1288  docker run -p 80:80 danielobyrne/august-learning:part1
+ 1289  docker run -p 4000:80 danielobyrne/august-learning:part1
+ 1290  ls
+ 1291  cat app.py
+ 1292  coker-machine ls
+ 1293  docker swarm init
+ 1294  docker-machine create --driver virturalbox myvm1
+ 1295  docker-machine create --driver virtualbox myvm1
+ 1296  sudo docker-machine create --driver virtualbox myvm1
+ 1297  sudo apt-get install virtualbox
+ 1298  sudo docker-machine create --driver virtualbox myvm1
+ 1299  sudo apt-get update
+ 1300  sudo apt-get upgrade
+ 1301  sudo docker-machine create --driver virtualbox myvm1
+ 1302  sudo apt-get install virtualbox-dkms
+ 1303  workon CLI
+ 1304  sudo apt-get install virtualbox-dkms
+ 1305  sudo apt-get install virtualbox
+ 1306  sudo docker-machine create --driver virtualbox myvm1
+ 1307  sudo apt-get install virtualbox-5.2
+ 1308  sudo apt-get install virtualbox-6
+ 1309  sudo apt-get install virtualbox-6.0
+ 1310  sudo apt-get update
+ 1311  sudo apt-get install virtualbox-6.0
+ 1312  virtualbox --version
+ 1313  sudo apt install virtualbox-qt
+ 1314  virtualbox --version
+ 1315  sudo docker-machine create --driver virtualbox myvm1
+ 1316  sudo apt install virtualbox-dkms
+ 1317  virtualbox --version
+ 1318  virtualbox --help
+ 1319  which virtualbox
+ 1320  sudo docker-machine create --driver virtualbox myvm1
+ 1321  sudo apt-get remove virtualbox
+ 1322  sudo apt-get virtualbox-6.0
+ 1323  sudo apt-get install virtualbox-6.0
+ 1324  sudo apt-get install virtualbox-5.2
+ 1325  sudo apt-get update
+ 1326  sudo apt-get upgrade
+ 1327  sudo apt-get install virtualbox-6.0
+ 1328  sudo apt-get update
+ 1329  sudo apt-get install virtualbox-6.0
+ 1330  sudo apt-get --help
+ 1331  sudo apt-get install virtualbox
+ 1332  sudo apt-get install virtualbox-qt
+ 1333  sudo docker-machine create --driver virtualbox myvm1
+ 1334  sudo apt-get install virtualbox-dkms
+ 1335  sudo dpkg-reconfigure virtualbox-dkms
+ 1336  sudo dpkg-reconfigure virtualbox
+ 1337  sudo modprobe vboxdrv
+ 1338  sudo docker-machine create --driver virtualbox myvm1
+ 1339  sudo apt-get update
+ 1340  sudo apt-get upgrade
+ 1341  sudo apt-get remove virtualbox
+ 1342  sudo apt-get install virtualbox.5.2
+ 1343  sudo apt-get install virtualbox.5.
+ 1344  sudo apt-get install virtualbox-5.0
+ 1345  sudo apt-get install virtualbox-5.
+ 1346  sudo apt-get install virtualbox-5.2
+ 1347  sudo apt-get install virtualbox-6.0
+ 1348  sudo apt-get install virtualbox-6
+ 1349  sudo apt-get install virtualbox-6.0
+ 1350  sudo apt-get install virtualbox
+ 1351  sudo apt-get update virtualbox
+ 1352  sudo apt-get upgrade virtualbox
+ 1353  sudo apt-get upgrade virtualbox-
+ 1354  sudo apt-get upgrade virtualbox-qt
+ 1355  cd Documents/code_directory/sky-tv-docs/catalystcloud-docs/
+ 1356  ./compile.sh 
+ 1357  firefox build/html/index.html 
+ 1358  ./live_compile.sh 
+ 1359  cd Documents/code_directory/
+ 1360  ls
+ 1361  cd docker-tutorial/
+ 1362  ls
+ 1363  clear
+ 1364  sudo apt-get install virtualbox
+ 1365  sudo apt-get install virtualbox-qt
+ 1366  sudo docker-machine create --driver virtualbox myvm1
+ 1367  sudo docker-machine create --driver virtualbox myvm2
+ 1368  docker-machine ls
+ 1369  sudo docker-machine ls
+ 1370  sudo docker-machine create --driver virtualbox myvm1
+ 1371  sudo docker-machine start myvm1
+ 1372  sudo docker-machine ls
+ 1373  docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.101.2377
+ 1374  docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.101.2377"
+ 1375  sudo docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.101.2377"
+ 1376  sudo docker-machine ssh myvm1 "docker swarm init --advertise-addr <192.168.99.101.2377>"
+ 1377  sudo docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.101.2377 "
+ 1378  docker-machine ssh myvm1 "docker swarm init --advertise-addr <192.168.99.101:2377>"
+ 1379  sudo docker-machine ssh myvm1 "docker swarm init --advertise-addr <192.168.99.101:2377>"
+ 1380  sudo docker-machine ssh myvm1 "docker swarm init --advertise-addr <tcp://192.168.99.101:2377>"
+ 1381  sudo docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.101:2377"
+ 1382  docker-machine ssh myvm2 "docker swarm join \
+ 1383  --token SWMTKN-1-03sks9edsaqm26txrk1krbf61z5wndleupxm9bwnxcyl6pfn9q-eq0k96qzs8bhsdif4duuoypae \
+ 1384  192.168.99.101.2377
+ 1385  "
+ 1386  sudo docker-machine ssh myvm2 "docker swarm join \
+ 1387  --token SWMTKN-1-03sks9edsaqm26txrk1krbf61z5wndleupxm9bwnxcyl6pfn9q-eq0k96qzs8bhsdif4duuoypae \
+ 1388  192.168.99.101.2377
+ 1389  "
+ 1390  sudo docker-machin ssh myvm2 "docker swarm join --token SWMTKN-1-03sks9edsaqm26txrk1krbf61z5wndleupxm9bwnxcyl6pfn9q-eq0k96qzs8bhsdif4duuoypae 192.168.99.101:2377
+ 1391  "
+ 1392  sudo docker-machine ssh myvm2 "docker swarm join --token SWMTKN-1-03sks9edsaqm26txrk1krbf61z5wndleupxm9bwnxcyl6pfn9q-eq0k96qzs8bhsdif4duuoypae 192.168.99.101:2377
+ 1393  "
+ 1394  docker node ls
+ 1395  sudo docker node ls
+ 1396  docker-machine ssh myvm1 "docker node ls"
+ 1397  sudo docker-machine ssh myvm1 "docker node ls"
+ 1398  docker-machine env myvm1
+ 1399  sudo docker-machine env myvm1
+ 1400  docker-machine regenerate-certs myvm1
+ 1401  sudo docker-machine regenerate-certs myvm1
+ 1402  sudo docker-machine env myvm1
+ 1403  docker-machine ls
+ 1404  sudo docker-machine ls
+ 1405  docker stack deploy -c docker-compose.yml getstartedlab
+ 1406  sudo docker stack ps getstartedlab
+ 1407  curl https://192.168.99.101
+ 1408  curl https://192.168.99.100
+ 1409  sudo docker stack ps getstartedlab
+ 1410  docker-machine ls
+ 1411  sudo docker-machine ls
+ 1412  curl https://192.168.99.100:4000
+ 1413  docker stack rm getstartedlab
+ 1414  sudo docker stack rm getstartedlab
+ 1415  docker-machine ls
+ 1416  sudo docker-machine ls
+ 1417  sudo docker stack rm getstartedlab
+ 1418  sudo docker stack ps getstartedlab
+ 1419  eval $(docker-machine env -u)
+ 1420  docker-machine ls
+ 1421  sudo docker-machine ls
+ 1422  docker run hello-world
+ 1423  newgrp docker
+ 1424  git status
+ 1425  git add .
+ 1426  git commit -m 'changes to kubernetes page'
+ 1427  git status
+ 1428  clear
+ 1429  ./compile.sh 
+ 1430  history | grep firefox
+ 1431  ~1925
+ 1432  firefox build/html/index.html 
+ 1433  clear
+ 1434  git status
+ 1435  git push origin
+ 1436  git status
+ 1437  git origin
+ 1438  git --help
+ 1439  git branch
+ 1440  git remote
+ 1441  git remote origin
+ 1442  git remote get-url
+ 1443  git remote get-url origin
+ 1444  git pull ssh://git@gitlab.int.catalystcloud.nz:10022/catalystcloud/catalystcloud-docs.git
+ 1445  git pull ssh://git@gitlab.int.catalystcloud.nz:10022/catalystcloud/catalystcloud-docs
+ 1446  git status
+ 1447  git init
+ 1448  git status
+ 1449  git remode add origin ssh://git@gitlab.int.catalystcloud.nz:10022/catalystcloud/catalystcloud-docs.git
+ 1450  git remote add origin ssh://git@gitlab.int.catalystcloud.nz:10022/catalystcloud/catalystcloud-docs.git
+ 1451  git remote 
+ 1452  git remote -h
+ 1453  git remote remove origin
+ 1454  git remote
+ 1455  git remote add git@github.com:catalyst-cloud/catalystcloud-docs.git
+ 1456  git remote add ssh://git@github.com:catalyst-cloud/catalystcloud-docs.git
+ 1457  git remote add origin ssh://git@github.com:catalyst-cloud/catalystcloud-docs.git
+ 1458  git status
+ 1459  git pull origin
+ 1460  git fetch origin
+ 1461  git pull git@github.com:catalyst-cloud/catalystcloud-docs.git
+ 1462  ls
+ 1463  ./compile.sh 
+ 1464  firefox build.html
+ 1465  history | grep firefox
+ 1466  firefox build/html/index.html 
+ 1467  history | grep firefox
+ 1468  ./compile.sh 
+ 1469  firefox build/html/index.html 
+ 1470  ./compile.sh 
+ 1471  firefox build/html/index.html 
+ 1472  git status
+ 1473  git add .
+ 1474  git status
+ 1475  git commit -m 'changed file names so that the toctrees compile correctly'
+ 1476  git status
+ 1477  git push origin
+ 1478  git push --set-upstream origin master
+ 1479  git push origin
+ 1480  git remote
+ 1481  git origin
+ 1482  git push origin
+ 1483  git status
+ 1484  docker run hello-world
+ 1485  newgrp docker
+ 1486  docker run hello-world
+ 1487  docker-machine ls
+ 1488  pkill -f tmux
+ 1489  docker run hello-world
+ 1490  sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+ 1491  sudo chmod g+rwx "/home/$USER/.docker" -R
+ 1492  docker run hello-world
+ 1493  docker-machine ls
+ 1494  clear
+ 1495  docker swarm init
+ 1496  docker swarm init --address-addr 10.255.220.126
+ 1497  docker swarm init --advertise-addr 10.255.220.126
+ 1498  docker swarm join
+ 1499  docker swarm leave
+ 1500  docker swarm leave --force
+ 1501  docker-machine ls
+ 1502  docker-machine create --driver virtualbox myvm1
+ 1503  docker-machine create --driver virtualbox myvm2
+ 1504  docker-machine ls
+ 1505  docker-machine ssh myvm1 "docker swarm init --advertise-addr 192.168.99.100"
+ 1506  docker-machine ssh myvm2 "docker swarm join --token SWMTKN-1-0midede46vsiaap35xe8i9rpwxdzrao0zsrasn80phs61kc9m7-78zwb5irvicxhchzb32pci915 192.168.99.100:2377 192.168.99.101:2377"
+ 1507  docker-machine ssh myvm2 "docker swarm join --token SWMTKN-1-0midede46vsiaap35xe8i9rpwxdzrao0zsrasn80phs61kc9m7-78zwb5irvicxhchzb32pci915 192.168.99.100:2377:2377"
+ 1508  docker-machine ssh myvm2 "docker swarm join --token SWMTKN-1-0midede46vsiaap35xe8i9rpwxdzrao0zsrasn80phs61kc9m7-78zwb5irvicxhchzb32pci915 192.168.99.100:2377"
+ 1509  docker node ls
+ 1510  docker-machine ls
+ 1511  docker node ls
+ 1512  docker-machine ssh myvm1 "docker node ls"
+ 1513  docker-machine env myvm1
+ 1514  eval $(docker-machine env myvm1)
+ 1515  docker stack deploy -c docker-compose.yml getstartedlab
+ 1516  cd Documents/code_directory/docker-tutorial/
+ 1517  docker-machine ls
+ 1518  docker stack deploy -c docker-compose.yml getstartedlab
+ 1519  docker stack rm getstartedlab
+ 1520  docker-machine ssh myvm1 "mkdir ./data"
+ 1521  docker-machine ls
+ 1522  docker stack deploy -c docker-compose.yml getstartedlab
+ 1523  docker service ls
+ 1524  cat docker-compose.yml 
+ 1525  curl 192.168.99.100
+ 1526  docker service ls
+ 1527  docker stack rm getstartedlab
+ 1528  eval $(Docker-machine env -u)
+ 1529  eval $(docker-machine env -u)
+ 1530  docker-machine ls
+ 1531  docker-machine stop myvm1
+ 1532  docker-machine stop myvm2
+ 1533  docker-machine ls
+ 1534  clear
+ 1535  cd ..
+ 1536  ls
+ 1537  cd kubernetes-tests/
+ 1538  srcsup
+ 1539  openstack coe cluster list
+ 1540  openstack coe cluster template list
+ 1541  curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s \
+ 1542  https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+ 1543  chmod +x ./kubectl
+ 1544  sudo mv ./kubectl /usr/local/bin/kubectl
+ 1545  openstack coe cluster create k8s-dev-cluster --cluster-template kubernetes-v1.11.2-dev-20181008 --keypair my-ssh-key --node-count 1 \
+ 1546  openstack coe cluster create k8s-dev-cluster --cluster-template kubernetes-v1.12.7-dev-20190403 --keypair my-ssh-key --node-count 1 --master-count 1
+ 1547  osenv
+ 1548  openstack coe cluster create k8s-dev-cluster --cluster-template kubernetes-v1.12.7-dev-20190403 --keypair security-key --node-count 1 --master-count 1
+ 1549  openstack coe cluster list
+ 1550  docker run hello-world
+ 1551  sudo groupadd docker
+ 1552  sudo gpasswd -a $USER docker
+ 1553  newgrp docker
+ 1554  cd /etc/profile.d/
+ 1555  ls
+ 1556  cp vte-2.91.sh vte.sh
+ 1557  sudo cp vte-2.91.sh vte.sh
+ 1558  cd
+ 1559  newgrp docker
+ 1560  sudo groupadd docker
+ 1561  sudo usermod -aG docker $USER
+ 1562  newgrp docker
+ 1563  git clone
+ 1564  git clone 
+ 1565  git clone git@github.com:catalyst-cloud/catalystcloud-docs.git
+ 1566  git status
+ 1567  cd catalystcloud-docs/
+ 1568  git status
+ 1569  git restore source/orchestration
+ 1570  git restore source/Orchestration/FAQ.rst
+ 1571  git restore source/Orchestration/HOT-format.rst
+ 1572  git restore source/Orchestration/Using-heat-CLI.rst
+ 1573  git status
+ 1574  ./compile.sh 
+ 1575  firefox build/html/index.html 
+ 1576  git status
+ 1577  git commit -m 'fixed upper case issues'
+ 1578  git add .
+ 1579  git status
+ 1580  git commit -m 'fixed upper case issues'
+ 1581  git status
+ 1582  git push origin master
+ 1583  ls
+ 1584  cd Documents/
+ 1585  cd code_directory/
+ 1586  ls
+ 1587  cd kubernetes-tests/
+ 1588  ls
+ 1589  workon CLI
+ 1590  openstack coe cluster template list
+ 1591  srcsup
+ 1592  openstack coe cluster template list
+ 1593  openstack coe cluster template show kubernetes-v1.12.7-prod-20190403
+ 1594  clear
+ 1595  openstack coe cluster template list
+ 1596  git status
+ 1597  git add .
+ 1598  git commit -m 'updated kubernetes cluster code'
+ 1599  git status
+ 1600  cd catalystcloud-docs/
+ 1601  git status
+ 1602  git push origin master
+ 1603  git pull origin
+ 1604  git status
+ 1605  git status --ammend -m 'update kuberentes with more up to date code'
+ 1606  git commit --ammend -m 'update kuberentes with more up to date code'
+ 1607  git commit --mmend -m 'update kuberentes with more up to date code'
+ 1608  git commit --amend -m 'update kuberentes with more up to date code'
+ 1609  git status
+ 1610  git add .
+ 1611  git status
+ 1612  git commit --amend -m 'update kuberentes with more up to date code'
+ 1613  git status
+ 1614  git push origin master
+ 1615  kubectl proxy
+ 1616  kubectl cluster-info
+ 1617  srcsup 
+ 1618  eval $(openstack coe cluster config k8s-dev-cluster)
+ 1619  kubectl proxy
+ 1620  cluster info
+ 1621  kubectl cluster-info
+ 1622  eval $(openstack coe cluster config k8s-dev-cluster)
+ 1623  export KUBECONFIG="/home/danielobyrne/Documents/code_directory/kubernetes-tests/config"
+ 1624  kubectl cluster-info
+ 1625  kubectl proxy
+ 1626  cd Documents/code_directory/catalyst-cloud-docs-august-CURRENT/catalystcloud-docs/
+ 1627  ./live_compile.sh 
+ 1628  git status
+ 1629  cd catalystcloud-docs/
+ 1630  git status
+ 1631  git add .
+ 1632  git commit --amend -m 'changes to helloworld from Kubernetes'
+ 1633  git status
+ 1634  git push origin master
+ 1635  git pull origin
+ 1636  git push origin master
+ 1637  git status
+ 1638  ./live_compile.sh 
+ 1639  cd catalystcloud-docs/
+ 1640  ./live_compile.sh 
+ 1641  cd catalystcloud-docs/
+ 1642  cd Documents/code_directory/catalyst-cloud-docs-august-CURRENT/catalystcloud-docs/
+ 1643  ./live_compile.sh 
+ 1644  kubectl cluster-info
+ 1645  export KUBECONFIG="/home/danielobyrne/Documents/code_directory/kubernetes-tests/config"
+ 1646  kubectl cluster-info
+ 1647  kubectl proxy
+ 1648  clear
+ 1649  kubectl cluster-info
+ 1650  kubectl proxy
+ 1651  clear
+ 1652  kubectl cluster-info
+ 1653  kubectl proxy
+ 1654  clear
+ 1655  srcsup
+ 1656  cd Documents/code_directory/kubernetes-tests/
+ 1657  ls
+ 1658  kubectl cluster-info
+ 1659  export KUBECONFIG="/home/danielobyrne/Documents/code_directory/kubernetes-tests/config"
+ 1660  kubectl cluster-info
+ 1661  openstack coe cluster list
+ 1662  kubectl get pods
+ 1663  kubectl describe pod pod-pv-test
+ 1664  touch nginx-app.yaml
+ 1665  vim nginx-app.yaml 
+ 1666  kubectl apply -f nginx-app.yaml 
+ 1667  kubectl get pods
+ 1668  kubectl exec -it nginx-test-app-65b8cd96c4-w5bhx /bin/bash
+ 1669  touch clusterip.yaml
+ 1670  vim clusterip.yaml 
+ 1671  kubectl apply -f clusterip.yaml
+ 1672  kubectl get service clusterip-service
+ 1673  kubectl exec -it nginx-test-app-65b8cd96c4-w5bhx curl 10.254.111.19:80
+ 1674  kubectl delete service clusterip-service
+ 1675  touch nodeport.yaml
+ 1676  vim nodeport.yaml 
+ 1677  kubectl apply -f nodeport.yaml
+ 1678  kubectl apply -f clusterip.yaml
+ 1679  kubectl get service clusterip-service
+ 1680  kubectl get pods
+ 1681  kubectl exec -it nginx-test-app-65b8cd96c4-w5bhx /bin/bash
+ 1682  kubectl exec -it nginx-test-app-65b8cd96c4-w5bhx curl 10.254.111.19:80
+ 1683  kubectl exec -it nginx-test-app-65b8cd96c4-w5bhx curl 10.254.108.69:80
+ 1684  kubectl get service nodeport-service
+ 1685  kubectl get service 
+ 1686  kubectl exec -it nginx-test-app-65b8cd96c4-w5bhx curl 10.254.44.41
+ 1687  kubectl get pod nginx-test-app-65b8cd96c4-w5bhx -o wide
+ 1688  kubectl describe node k8s-dev-cluster-jfdrl2rz4dio-minion-0 | grep IP
+ 1689  touch loadbalancer.yaml
+ 1690  vim loadbalancer.yaml 
+ 1691  kubectl apply -f loadbalancer.yaml
+ 1692  kubectl get service loadbalanced-service
+ 1693  curl 103.254.156.100
+ 1694  touch loadbalancer_internal_ip.yaml
+ 1695  vim loadbalancer_internal_ip.yaml 
+ 1696  kubectl apply -f loadbalancer_internal_ip.yaml 
+ 1697  kubectl describe nodes k8s-dev-cluster-jfdrl2rz4dio-minion-0 | grep InternalIP
+ 1698  kubectl get svc lb-internal-ip
+ 1699  kubectl get pods
+ 1700  kubectl get service
+ 1701  kubectl delete service clusterip-service
+ 1702  kubectl delete service lb-internal-ip
+ 1703  kubectl delete service loadbalanced-service
+ 1704  kubectl delete service nodeport-service
+ 1705  kubectl get service
+ 1706  kubectl delete pod pod-pv-test
+ 1707  workon CLI
+ 1708  sudo snap install heml --classic
+ 1709  sudo snap install helm --classic
+ 1710  kubectl config current-context
+ 1711  export KUBECONFIG="/home/danielobyrne/Documents/code_directory/kubernetes-tests/config"
+ 1712  kubectl config current-context
+ 1713  helm init --history-max 200
+ 1714  osenv
+ 1715  kubectl get services
+ 1716  kubectl get pods
+ 1717  kubectl get clusters
+ 1718  openstack coe clusters
+ 1719  openstack coe cluster
+ 1720  openstack coe cluster list
+ 1721  kubectl config current-context
+ 1722  cat <<EOF | kubectl apply -f -
+ 1723  apiVersion: v1
+ 1724  kind: ServiceAccount
+ 1725  metadata:
+ 1726    name: tiller
+ 1727    namespace: kube-system
+ 1728  ---
+ 1729  apiVersion: rbac.authorization.k8s.io/v1
+ 1730  kind: ClusterRoleBinding
+ 1731  metadata:
+ 1732    name: tiller
+ 1733  roleRef:
+ 1734    apiGroup: rbac.authorization.k8s.io
+ 1735    kind: ClusterRole
+ 1736    name: cluster-admin
+ 1737  subjects:
+ 1738    - kind: ServiceAccount
+ 1739      name: tiller
+ 1740      namespace: kube-system
+ 1741  EOF
+ 1742  helm init --service-account tiller --history-max 200
+ 1743  kubectl -n kube-system get pods
+ 1744  kubectl run echoserver --image=gcr.io/google-containers/echoserver:1.10 --port=8080 --expose
+ 1745  kubectl get pod,service
+ 1746  cat <<EOF > nginx-ingress-controller-helm-values.yaml
+ 1747  controller:
+ 1748      publishService:
+ 1749          enabled: true
+ 1750  EOF
+ 1751  helm install stable/nginx-ingress --name nginx-ingress -f nginx-ingress-controller-helm-values.yaml 
+ 1752  helm install stable/nginx-ingress --name nginx-ingress -f nginx-ingress-controller-helm-values.yaml
+ 1753  helm install --name nginx-ingress --set rbac.create=true stable/nginx-ingress -f nginx-ingress-controller-helm-values.yaml 
+ 1754  kubectl get pod,service
+ 1755  helm install --name nginx-ingress  stable/nginx-ingress -f nginx-ingress-controller-helm-values.yaml 
+ 1756  touch rbac-config.yaml
+ 1757  vim rbac-config.yaml 
+ 1758  kubectl create -f rbac-config.yaml 
+ 1759  helm init --service-account tiller --history-max 200
+ 1760  helm install --name nginx-ingress  stable/nginx-ingress -f nginx-ingress-controller-helm-values.yaml 
+ 1761  helm init --upgrade
+ 1762  helm install --name nginx-ingress  stable/nginx-ingress -f nginx-ingress-controller-helm-values.yaml 
+ 1763  kubectl get pods
+ 1764  kubectl delete pods
+ 1765  kubectl delete pod echoserver-7cc8b87c6f-gfhg6
+ 1766  kubectl delete pod nginx-test-app-65b8cd96c4-w5bhx
+ 1767  kubectl get pods
+ 1768  helm delete --purge nginx-ingress
+ 1769  kubectl delete pod nginx-test-app-65b8cd96c4-2p5rs
+ 1770  kubectl get pods
+ 1771  kubectl get services
+ 1772  kubectl delete service echoserver
+ 1773  kubectl get services
+ 1774  kubectl delete pod echoserver-7cc8b87c6f-46xk2
+ 1775  kubectl get services
+ 1776  kubectl get pods
+ 1777  ls
+ 1778  kubectl delete -f nginx-ingress-controller-helm-values.yaml
+ 1779  kubectl delete -f nginx-app.yaml 
+ 1780  kubectl get deployments
+ 1781  kubectl delete -f nginx-ingress-controller-helm-values.yaml 
+ 1782  kubectl stop echoserver
+ 1783  kubectl delete echoserver
+ 1784  kubectl kill echoserver
+ 1785  ls -a
+ 1786  kubectl delete -f echoserver
+ 1787  kubectl delete -f .apps/echoserver
+ 1788  kubectl get pod,service
+ 1789  clear
+ 1790  cd catalystcloud-docs/
+ 1791  if [ ! -f ./certs/tls.key ]; then   mkdir certs;   openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048       -keyout certs/tls.key       -out certs/tls.crt       -subj "/CN=test.example.com/O=Integration"; fi
+ 1792  kubectl create secret tls tls-secret-test-example-com --key certs/tls.key --cert certs/tls.crt
+ 1793  ls
+ 1794  rm certs
+ 1795  rm -r certs
+ 1796  ls
+ 1797  git status
+ 1798  cd catalystcloud-docs/
+ 1799  git status
+ 1800  git add .
+ 1801  git status
+ 1802  git commit -m 'changes to kubernetes '
+ 1803  git status
+ 1804  git push origin master
+ 1805  git status
+ 1806  git commit -m 'mass changes to docs'
+ 1807  git add .
+ 1808  git commit -m 'mass changes to docs'
+ 1809  git status
+ 1810  git push origin 
+ 1811  /usr/bin/python /home/danielobyrne/Documents/code_directory/Automated-dashboard-test/exported-selenium/test_accountManagement.py
+ 1812  workon CLI
+ 1813  ls
+ 1814  cd exported-selenium/
+ 1815  ls
+ 1816  test accountManagement.py
+ 1817  python3 test_accountManagement.py 
+ 1818  srcsup
+ 1819  osenv
+ 1820  clear
+ 1821  cd Documents/code_directory/kubernetes-tests/
+ 1822  ls
+ 1823  openstack coe cluster list
+ 1824  kubectl get pods
+ 1825  history | grep eval
+ 1826  history | grep export
+ 1827  export KUBECONFIG="/home/danielobyrne/Documents/code_directory/kubernetes-tests/config"
+ 1828  kubectl get pods
+ 1829  kubectl get services
+ 1830  clear
+ 1831  osenv
+ 1832  clear
+ 1833  openstack coe cluster list
+ 1834  kubectl get pods
+ 1835  kubectl get service
+ 1836  source /home/danielobyrne/.virtualenvs/CLI/bin/activate
+ 1837  "sudo apt-get install exuberant-ctags"
+ 1838  /usr/bin/python -m pip install -U pytest --user
+ 1839  workon clie
+ 1840  workon cli
+ 1841  workon CLI
+ 1842  python3 test_accountManagement.py
+ 1843  ls
+ 1844  cd exported-selenium/
+ 1845  python3 test_accountManagement.py
+ 1846  sudo apt-get update
+ 1847  sudo apt-get upgrade
+ 1848  sudo apt-get install python-pytest
+ 1849  sudo apt-get update
+ 1850  python3 test_accountManagement.py
+ 1851  which pytest
+ 1852  pip install pytest
+ 1853  python3 test_websiteloginsuite.py 
+ 1854  pip3 install pytest
+ 1855  pip3 install --upgrade pip
+ 1856  python3 test_websiteloginsuite.py 
+ 1857  export PATH=$PATH://home/danielobyrne/Documents/code_directory/Automated-dashboard-test/exported-selenium/geckodriver.exe
+ 1858  python3 test_websiteloginsuite.py 
+ 1859  export PATH=$PATH://home/danielobyrne/Documents/code_directory/Automated-dashboard-test/exported-selenium/
+ 1860  python3 test_websiteloginsuite.py 
+ 1861  export PATH=$PATH://home/danielobyrne/Documents/code_directory/Automated-dashboard-test/exported-selenium/geckodriver.exe
+ 1862  python3 test_websiteloginsuite.py 
+ 1863  export PATH=$PATH://home/danielobyrne/Documents/code_directory/Automated-dashboard-test/exported-selenium/
+ 1864  python3 test_websiteloginsuite.py 
+ 1865  git status
+ 1866  git add .
+ 1867  git status
+ 1868  python3 test_dashboardSuite.py 
+ 1869  python3 test_accountManagement.py 
+ 1870  python3 test_network.py 
+ 1871  workon CLI
+ 1872  python3 test_websiteloginsuite.py 
+ 1873  cd exported-selenium/
+ 1874  python3 test_websiteloginsuite.py 
+ 1875  python3 test_accountManagement.py 
+ 1876  workon CLI
+ 1877  srcsup
+ 1878  osenv
+ 1879  clear
+ 1880  ls
+ 1881  ./compile.sh 
+ 1882  firefox build/html/index.html 
+ 1883  clear
+ 1884  ./compile.sh 
+ 1885  firefox build/html/index.html 
+ 1886  ./compile.sh 
+ 1887  firefox build/html/index.html 
+ 1888  ./compile.sh 
+ 1889  firefox build/html/index.html 
+ 1890  git status
+ 1891  git add .
+ 1892  git status
+ 1893  git add .
+ 1894  git status
+ 1895  git commit -m 'created idientity-access-management'
+ 1896  git status
+ 1897  workon CLI
+ 1898  ls
+ 1899  ./live_compile.sh 
+ 1900  sudo apt get update
+ 1901  sudo apt-get update
+ 1902  workon CLI
+ 1903  sudo apt-get update
+ 1904  sudo apt-get upgrade
+ 1905  sudo apt-get update
+ 1906  sudo apt-get upgrade
+ 1907  deactivate
+ 1908  sudo apt-get update
+ 1909  sudo apt-get upgrade
+ 1910  ls
+ 1911  cd build
+ 1912  ls
+ 1913  rm html
+ 1914  rm -r html
+ 1915  ls
+ 1916  cd ..
+ 1917  clear
+ 1918  ./compile.sh 
+ 1919  firefox build/html/index.html 
+ 1920  ./live_compile.sh 
+ 1921  workon CLI
+ 1922  srcsup
+ 1923  osenv
+ 1924  clear
+ 1925  git status
+ 1926  ./compile.sh 
+ 1927  firefox build/html/index.html 
+ 1928  ./compile.sh 
+ 1929  firefox build/html/index.html 
+ 1930  ./compile.sh 
+ 1931  firefox build/html/index.html 
+ 1932  workon CLI
+ 1933  git status
+ 1934  git add .
+ 1935  git status
+ 1936  git commit -m 'changes to dash network login accountMan so that they work in python'
+ 1937  got status
+ 1938  git status
+ 1939  clear
+ 1940  cd exported-selenium/
+ 1941  python3 test_network.py 
+ 1942  python3 test_image.py 
+ 1943  python3 test_compute.py 
+ 1944  python3 test_network.py 
+ 1945  python3 test_compute.py 
+ 1946  workon CLI
+ 1947  cd exported-selenium/
+ 1948  python3 test_compute.py 
+ 1949  workon CLI
+ 1950  srcsup 
+ 1951  osenv
+ 1952  clear
+ 1953  workon CLI
+ 1954  srcsup
+ 1955  clear
+ 1956  ls
+ 1957  ./compile.sh 
+ 1958  firefox build/html/index.html 
+ 1959  ./compile.sh 
+ 1960  firefox build/html/index.html 
+ 1961  git status
+ 1962  git branch sphinx-tabs
+ 1963  git status
+ 1964  git checkout sphinx-tabs 
+ 1965  git status
+ 1966  git add .
+ 1967  git status
+ 1968  git commit -m 'add code-exmaples where the tabs are'
+ 1969  git staus
+ 1970  git status
+ 1971  git checkout master
+ 1972  git status
+ 1973  git branch
+ 1974  git checkout sphinx-tabs 
+ 1975  git status
+ 1976  ./compile.sh 
+ 1977  firefox build/html/index.html 
+ 1978  git status
+ 1979  git branch openstacksdk
+ 1980  git checkout openstacksdk 
+ 1981  git status
+ 1982  git add .
+ 1983  git status
+ 1984  git commit -m 'added: openstacksdk.rst. Removed: code-examples which was from the tabs branch'
+ 1985  git status
+ 1986  git compare
+ 1987  git --help
+ 1988  git diff
+ 1989  git diff sphinx-tabs 
+ 1990  clear
+ 1991  ls
+ 1992  ./compile.sh 
+ 1993  git status
+ 1994  git add .
+ 1995  git commit -m 'fixed up images for support and projcet. Also fixed some grammatical errors'
+ 1996  git status
+ 1997  git push origin skytv-minimal
+ 1998  firefox build/html/index.html 
+ 1999  history |grep cloud ops
+ 2000  history | grep cloud
+ 2001  ssh -AA cloudops
+ 2002  workon CLI
+ 2003  srcsup 
+ 2004  osenv
+ 2005  ssh -AA cloudops
+ 2006  vim hosts/etc
+ 2007  vim etc/hosts
+ 2008  history | grep hosts
+ 2009  history | grep etc
+ 2010  sudo getit /etc/hostname
+ 2011  sudo cat /etc/hostname
+ 2012  sudo cat /etc/hosts
+ 2013  vim /etc/hosts
+ 2014  history | cloudops
+ 2015  history | grep cloudops
+ 2016  history | grep sky
+ 2017  history > newhistory.txt

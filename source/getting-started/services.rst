@@ -5,8 +5,8 @@ Services on the Sky TV Cloud
 ##############################
 
 This documentation covers services and protocols specific to Sky TV. For
-information on the other services that this tool provides, we reccomend
-refering to the `Catalyst Cloud documentation`_.
+information on the other services that this tool provides, we recommend
+referring to the `Catalyst Cloud documentation`_.
 
 Below we will briefly discuss some of the relevant services:
 
@@ -38,7 +38,7 @@ The block storage service provides volumes of data storage that you can attach
 to instances. You could imagine block storage volumes as hard disk drives and
 solid state drives on a physical computer. Block storage volumes can be as
 large or as small as you want them to be, however they are not dynamic; you
-decide beforehand how much storage you want to particion.
+decide beforehand how much storage you want to partition.
 
 
 Object storage service
@@ -74,7 +74,7 @@ when a specified condition is met. This can be an important function for any
 business as it allows you to keep a closer eye on how effective your other
 services are being used, so that you can make decision that will effect your
 costs for each instance. The most common use case of the Alarm service
-is auto-scalling of instances. More information can be found in our
+is auto-scaling of instances. More information can be found in our
 :ref:`Alarm service section <alarm-service-on-Sky-tv_cloud>`
 
 .. _`AODH`: https://docs.openstack.org/aodh/latest/

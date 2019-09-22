@@ -12,10 +12,10 @@ specific parameters to occur. The alarm then changes their state from either
 
 For example: If you wanted to monitor a compute instance to see if the CPU
 utilization exceeds 70% for more than 10 minutes. You could use an alarm to do
-so. Then once the allarm has met this requirement, it can tell your system to
-perform some action, parhaps spin up a new instance with more CPU power, or
+so. Then once the alarm has met this requirement, it can tell your system to
+perform some action, perhaps spin up a new instance with more CPU power, or
 increase the amount of VCPU's your instance is using. Whatever your goal is
-the alarm keeps you informed of the state of your machine so you can impliment
+the alarm keeps you informed of the state of your machine so you can implement
 things such as auto-scaling.
 
 For more information on the Alarm service, you can visit `the openstack

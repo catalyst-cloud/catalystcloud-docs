@@ -24,7 +24,7 @@ reached at: https://openstack.skytv.co.nz
 
 The web dashboard is a great tool that provides easy
 access to most of the services that the Sky TV Cloud provides. All of the
-standerd services are able to be controlled via the Dashboard. There are some
+standard services are able to be controlled via the Dashboard. There are some
 more advanced abilities that the cloud environment is capable of; however these
 are discussed elsewhere in the :ref:`Catalyst Cloud
 Documentation
@@ -41,11 +41,11 @@ we recommend going through the catalyst
 Some of the dashboard functionality beyond these services are in the
 buttons along the top bar.
 
-The lefthand button lets you:
+The left-hand button lets you:
 
 * Let you select which project you are working on
 
-The righthand button lets you:
+The right-hand button lets you:
 
 * Access our support functions
 * Change accounts or access your account settings.
@@ -93,8 +93,8 @@ to be created.
 
 The default option (on the Dashboard, Compute -> Images -> Launch) to launch
 an instance is to 'boot from image'. This is correct, *unless* the original
-instance also created a new volume at start-up (the instance will boot, but not
-itself be able to be snapshotted without additional metadata).
+instance also created a new volume at start-up (the instance will boot, but a
+snapshot won't be able to be created without additional metadata).
 
 In the latter case, where the initial instance was created along with a new
 volume, the snapshot needs to be booted with the Instance Boot Source set to
