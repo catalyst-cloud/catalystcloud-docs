@@ -6,7 +6,8 @@ When creating an instance, you have the option to attach a persistent volume
 to it, or use an ephemeral volume. If you chose an ephemeral volume this means
 that when you shelve your instance, to keep your data from being flushed and
 deleted, the system creates a snapshot. But each time you shelve an instance,
-it creates a new snapshot that only contains a list of changes from the last.
+it creates a new snapshot that only contains a list of changes from the
+previous.
 
 These start to stack up if you consistently shelve your instance, which in turn
 slows the process of booting up from its shelved state.
@@ -42,8 +43,8 @@ launch as instance on your selected volume. In this case "Ephemeral-Snapshot"
 
 .. image:: block-storage-assets/volume-create-as-instance-red.png
 
-Then go through the steps to create a new instance, making sure that when you
-arrive at picking a Source, you make sure to use the volume as a source not
+Then create a new instance, making sure that when you
+arrive at picking a source, you make sure to use the volume as a source not
 an image. This should be the default when making an instance from a volume.
 
 .. image:: block-storage-assets/create-with-vol.png
@@ -64,7 +65,7 @@ Shelving instance
 -----------------
 
 The first thing you need to do is shelve your instance which will create a
-current snapshot of your instance.
+current snapshot.
 
 .. code-block:: bash
 
@@ -76,7 +77,7 @@ current snapshot of your instance.
    | 9896d5e5-116f-4aa2-b962-f7b473b080d8 | ephemeral-instance | ACTIVE            | private-net-1=10.0.0.17, 103.254.156.188 | ubuntu-18.04-x86_64          | c1.c1r1 |
    +--------------------------------------+--------------------+-------------------+------------------------------------------+------------------------------+---------+
 
-   #then you shelve this instance
+   #then use the shelve command with the instance ID
    $ openstack server shelve 9896d5e5-116f-4aa2-b962-f7b473b080d8
 
 
@@ -84,7 +85,7 @@ After this you create a volume from your snapshot.
 
 .. code-block:: bash
 
-   #find the correct snapshot, (the list has been truncated for readability)
+   #find the correct snapshot (replace 'ephemeral' with your instance name)
    $ openstack image list | grep ephemeral
    +--------------------------------------+--------------------------------------+--------+
    | ID                                   | Name                                 | Status |
@@ -156,8 +157,7 @@ instance, using the --volume flag:
 
 After this is completed, you should be able to assign a floating IP to your
 instance and SSH to it and you'll find all of your data in tact. The only
-difference now being that your instance now has a persistent volume for
-storage.
+difference now being that your instance has a persistent volume for storage.
 
 .. code-block:: bash
 
