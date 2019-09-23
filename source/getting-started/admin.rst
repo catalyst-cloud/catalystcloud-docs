@@ -18,9 +18,6 @@ see if the problem(s) are covered further on in this documentation.
 If no solution is found you will need to raise a support request with
 the support dropdown in the top right corner of the dashboard.
 
-If you are an organisation with more complex support needs, you may
-want to consider our premium support.
-
 .. image:: ../assets/support_dropdown.png
 
 Status page
@@ -49,11 +46,9 @@ times for priority one incidents are listed on the `premium support page
 Contacting your account manager
 -------------------------------
 
-Customers that have a premium support contract from
-Catalyst have a technical account manager. You
-should have received the contact details for your
-account manager when you
-applied for premium support.
+Customers that have a premium support contract from Catalyst have a technical
+account manager. You should have received the contact details for your account
+manager when you applied for premium support.
 
 Contacting a solutions architect
 --------------------------------
@@ -66,7 +61,7 @@ solutions architect.
 Training
 ========
 
-Catalyst provides training on how to use the Sky TV cloud in Auckland,
+Catalyst provides training on how to use the Catalyst cloud in Auckland,
 Wellington and Christchurch. Upcoming training sessions can be found at
 https://catalyst.net.nz/training/upcoming-training.
 

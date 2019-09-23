@@ -4,7 +4,7 @@
 Accessing the Sky TV Cloud
 ############################
 
-In the previous section, we learned about the various services the available to
+In the previous section, we learned about the various services available to
 Sky TV's cloud. Now we'll show you how to use access these services via the
 Sky TV dashboard.
 
@@ -37,17 +37,6 @@ object storage etc. Before going on to use these services,
 we recommend going through the catalyst
 `first instance tutorial. <https://docs.catalystcloud.nz/first-instance.html>`_
 
-Some of the dashboard functionality beyond these services are in the
-buttons along the top bar.
-
-The left-hand button lets you:
-
-* Let you select which project you are working on
-
-The right-hand button lets you:
-
-* Access our support functions
-* Change accounts or access your account settings.
 
 The major appeal of using the dashboard is it requires very little programming
 expertise or knowledge. There is an assumed level of understanding about the
