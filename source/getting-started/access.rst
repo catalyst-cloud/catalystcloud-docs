@@ -26,9 +26,8 @@ The web dashboard is a great tool that provides easy
 access to most of the services that the Sky TV Cloud provides. All of the
 standard services are able to be controlled via the Dashboard. There are some
 more advanced abilities that the cloud environment is capable of; however these
-are discussed elsewhere in the :ref:`Catalyst Cloud
-Documentation
-<https://docs.catalystcloud.nz/>`
+are discussed elsewhere in the `Catalyst Cloud
+Documentation <https://docs.catalystcloud.nz/>`_
 
 You'll notice on the left hand sidebar you are able to see all of the services
 that are provided. These services have their own
@@ -36,7 +35,7 @@ guides and tutorials that are featured in the catalyst documentation.
 Things such as creating compute instances, partitioning block storage or
 object storage etc. Before going on to use these services,
 we recommend going through the catalyst
-:ref:`first instance tutorial. <https://docs.catalystcloud.nz/first-instance.html>`
+`first instance tutorial. <https://docs.catalystcloud.nz/first-instance.html>`_
 
 Some of the dashboard functionality beyond these services are in the
 buttons along the top bar.
