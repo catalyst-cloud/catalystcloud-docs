@@ -138,8 +138,8 @@ to the load balancer of Kubernetes API with below command:
   To update a label when creating a cluster, you have to set all the labels
   from the template to do override.
 
-For clusters created based on dev cluster, instead of setting the
+For clusters created based on dev cluster template, instead of setting the
 `master_lb_floating_ip_enabled` label, you have to enable the floating IP
 as we mentioned above and manually changed security group rule for master nodes
-to allow ingress traffic from 0.0.0.0/0 for port 6443.
+to allow ingress traffic on port 6443.
 
