@@ -13,7 +13,7 @@ Table of Contents:
    kubernetes/quickstart
    kubernetes/overview
    kubernetes/clusters
-
+   kubernetes/access-control
    kubernetes/auto-healing
    kubernetes/auto-scaling
    kubernetes/network-policies

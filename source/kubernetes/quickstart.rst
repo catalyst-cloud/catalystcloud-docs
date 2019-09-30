@@ -16,6 +16,7 @@ This quick start guide assumes you have working knowledge of Catalyst Cloud
   instructions. This documentation assumes ``python-magnumclient`` is 2.12.0 or
   above.
 
+
 **************
 Pre-requisites
 **************
@@ -76,6 +77,13 @@ Choosing a cluster template
 A cluster template is a blue-print to build a Kubernetes cluster (similar to
 machine images for the compute service). The cluster template specifies what
 version of Kubernetes will be installed and the features that will be enabled.
+
+.. Note::
+
+  From cluster template version ``v1.12.10`` onwards, as a security best
+  practice, the behaviour when creating a new cluster is for it to be
+  created as a :ref:`private-cluster`. This means that the cluster will not be
+  reachable directly from the internet by default.
 
 The following command will list all cluster templates available:
 

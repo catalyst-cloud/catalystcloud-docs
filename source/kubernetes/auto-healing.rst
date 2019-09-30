@@ -1,3 +1,5 @@
+.. _auto-healing:
+
 ############
 Auto healing
 ############
