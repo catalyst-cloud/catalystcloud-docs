@@ -1,5 +1,5 @@
 ****************
-Separate Billing
+Separate billing
 ****************
 
 As mentioned above, with our billing API the user can easily deal with their

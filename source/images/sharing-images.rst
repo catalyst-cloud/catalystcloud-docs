@@ -1,7 +1,7 @@
 
-*******************************
-Sharing images between projects
-*******************************
+************************
+Sharing between projects
+************************
 
 You may need to share custom images created in one project with
 another project, the following section describes how to achieve this.

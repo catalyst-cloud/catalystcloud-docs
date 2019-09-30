@@ -1,7 +1,7 @@
 .. _access_control:
 
 **************
-Access Control
+Access control
 **************
 
 .. _project_users:

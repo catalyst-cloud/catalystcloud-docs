@@ -30,6 +30,7 @@ Contents:
    network
    object-storage
    orchestration
+   security-best-practice
    tutorials
 
    release-notes

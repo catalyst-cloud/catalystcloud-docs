@@ -1,7 +1,7 @@
 .. _using-volumes:
 
 ##########################
-Creating and using Volumes
+Creating and using volumes
 ##########################
 
 *****************************

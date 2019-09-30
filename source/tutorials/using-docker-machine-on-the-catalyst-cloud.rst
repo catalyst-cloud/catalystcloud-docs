@@ -1,7 +1,7 @@
 .. _using-docker-machine:
 
 ##########################################
-Using Docker Machine on the Catalyst Cloud
+Using docker machine on the Catalyst Cloud
 ##########################################
 
 This tutorial shows you how to use Docker Machine with the OpenStack driver

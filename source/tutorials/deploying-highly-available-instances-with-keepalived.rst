@@ -1,5 +1,5 @@
 ####################################################
-Deploying Highly Available instances with Keepalived
+Deploying highly available instances with keepalived
 ####################################################
 
 This tutorial assumes you have installed the OpenStack command line tools and

@@ -1,6 +1,6 @@
-##########################################
-Object storage with the command line tools
-##########################################
+##########################
+Via the command line tools
+##########################
 
 ===================================
 Using the command line client tools

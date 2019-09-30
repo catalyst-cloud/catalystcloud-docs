@@ -1,4 +1,4 @@
-Set up a Puppet master and clients with Ansible
+Set up a puppet master and clients with ansible
 ===============================================
 
 This tutorial will show you how to combine `Ansible`_ and `Puppet`_ to manage a

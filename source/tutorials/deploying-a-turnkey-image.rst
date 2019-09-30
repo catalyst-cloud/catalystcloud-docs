@@ -1,5 +1,5 @@
 #####################################################
-Deploying a Turnkey Linux Image on the Catalyst Cloud
+Deploying a turnkey Linux image on the Catalyst Cloud
 #####################################################
 
 This tutorial assumes you have installed the OpenStack command line tools and

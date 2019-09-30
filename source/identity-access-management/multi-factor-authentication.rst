@@ -1,6 +1,6 @@
 
 ***************************
-Multi Factor Authentication
+Multi factor authentication
 ***************************
 
 Catalyst Cloud provides the ability to further secure your cloud access by
