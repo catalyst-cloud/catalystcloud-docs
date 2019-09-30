@@ -1,5 +1,5 @@
 ################################
-Software Development Kits (SDKs)
+Software development kits (SDKs)
 ################################
 
 A rich set of software development kits (SDKs) are available for OpenStack,

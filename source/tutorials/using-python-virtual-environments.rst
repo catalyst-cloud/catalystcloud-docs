@@ -1,7 +1,7 @@
 .. _python-virtual-env:
 
 *********************************
-Using Python virtual environments
+Using python virtual environments
 *********************************
 
 If you're not familiar with Python virtual environments, we recommend

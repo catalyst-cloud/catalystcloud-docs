@@ -1,5 +1,5 @@
 ####################################
-Region failover using the Fastly CDN
+Region failover using the fastly CDN
 ####################################
 
 This tutorial assumes you have installed the OpenStack command line tools and

@@ -1,9 +1,9 @@
 
 .. _object-storage-access:
 
-##############################
-Managing object storage access
-##############################
+###############
+Managing access
+###############
 
 The typical user roles, such as ``Project Member`` or ``Object Storage``, that
 allow access to people that need to work with object storage do not provide for

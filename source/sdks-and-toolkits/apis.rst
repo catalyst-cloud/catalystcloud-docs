@@ -1,7 +1,7 @@
 .. _apis:
 
 #########################################
-Application Programming Interfaces (APIs)
+Application programming interfaces (APIs)
 #########################################
 
 

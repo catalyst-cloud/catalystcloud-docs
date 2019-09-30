@@ -1,7 +1,7 @@
 .. _launching-your-first-instance-using-terraform:
 
 ***************
-Using Terraform
+Using terraform
 ***************
 
 `Terraform`_ is an open source infrastructure configuration and provisioning

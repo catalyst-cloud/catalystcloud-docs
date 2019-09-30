@@ -1,5 +1,5 @@
 ########################################################
-Deploying Matrix Synapse on Catalyst Cloud using Ansible
+Deploying matrix synapse on Catalyst Cloud using ansible
 ########################################################
 
 This tutorial assumes the following:

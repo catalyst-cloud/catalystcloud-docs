@@ -1,5 +1,5 @@
 ######################################################
-Setting up a SOCKS Proxy using SSH on a cloud instance
+Setting up a SOCKS proxy using SSH on a cloud instance
 ######################################################
 
 A generic HTTP proxy can be created using a Catalyst Cloud instance. This proxy

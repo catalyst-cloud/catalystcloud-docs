@@ -1,5 +1,5 @@
 #######################################################
-Deploying RocketChat on Catalyst Cloud using Cloud-init
+Deploying rocketchat on Catalyst Cloud using cloud-init
 #######################################################
 
 Rocket.Chat is an open source alternative to other chat apps such as Slack. It

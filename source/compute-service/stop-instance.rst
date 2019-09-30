@@ -1,8 +1,8 @@
 .. _stopping compute:
 
-###########################
-Stopping a compute instance
-###########################
+####################
+Stopping an instance
+####################
 
 *****************
 Options available

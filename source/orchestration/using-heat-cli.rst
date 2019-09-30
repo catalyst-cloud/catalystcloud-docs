@@ -1,4 +1,4 @@
-Using Heat via the command line tools
+Using heat via the command line tools
 =====================================
 
 Sample templates

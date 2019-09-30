@@ -1,7 +1,7 @@
 .. _bootstrapping-puppet-from-heat:
 
 ##############################
-Bootstrapping Puppet from Heat
+Bootstrapping puppet from heat
 ##############################
 
 This tutorial assumes the following:

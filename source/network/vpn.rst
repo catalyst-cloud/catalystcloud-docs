@@ -1,7 +1,7 @@
 .. _vpn:
 
 ########################
-Virtual Private Networks
+Virtual private networks
 ########################
 
 VPN as a Service is an OpenStack Networking (Neutron) extension that provides
