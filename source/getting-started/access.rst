@@ -5,7 +5,7 @@ Accessing the Sky TV Cloud
 ############################
 
 In the previous section, we learned about the various services available to
-Sky TV's cloud. Now we'll show you how to use access these services via the
+Sky TV's cloud. Now we'll show you how to use these services via the
 Sky TV dashboard.
 
 

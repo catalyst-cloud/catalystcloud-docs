@@ -123,6 +123,3 @@ You can request the creation of more projects via the `Support
 Requests`_ panel.
 
 .. _Support Requests: https://dashboard.cloud.catalyst.net.nz/management/tickets/
-
-
-:ref:`Previous page <access_to_sky-tv_cloud>` -

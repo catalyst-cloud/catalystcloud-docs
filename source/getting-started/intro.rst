@@ -10,7 +10,7 @@ computing.
 The Sky TV cloud is a computing platform built
 with the open source project, `OpenStack`_ using Catalyst Cloud
 infrastructure. OpenStack allows users like yourself to provision services.
-Provisioning is similar to renting. You can provision things such as storage
+Provisioning is similar to renting, you can provision things such as storage
 space, compute capacity, or internet access. The building blocks you need to
 run a business's applications.
 

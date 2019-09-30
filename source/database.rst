@@ -17,7 +17,7 @@ In order to launch a new database instance we need to first decide on a few
 options, these include:
 
 * The ``datastore type`` which defines the type of database to be deployed.
-  In this instance we are using a mySQL.
+  In this instance we are using mySQL.
 * The datastore type will in turn define the  ``database version`` we are able
   to pick.
 * The ``database flavor``, which determines the vCPU and RAM assigned to the
@@ -374,7 +374,7 @@ will be deleting the database to test the recovery process)
   | 09e93fcd-c384-4be1-b9ec-c6101d960f45 | bfe87861-5780-4a4a-af4b-47b045400de6 | db1-backup | COMPLETED | None      | 2019-03-28T00:22:42 |
   +--------------------------------------+--------------------------------------+------------+-----------+-----------+---------------------+
 
-Destroy instance and recreate using the backup as source:
+Destroy the instance and recreate using the backup as source:
 
 .. code-block:: bash
 
@@ -425,7 +425,7 @@ operations. There are many different uses for having a replica.
 While similar to a backup, a replica is very different.
 The main difference between the two is that, a backup takes what is essentially
 a snapshot, of your current database and stores away a list of commands and
-values able to restore a new instance to the that snapshot's point in time.
+values able to restore a new instance to that snapshot's point in time.
 While a replica will be a full copy of your database when created and
 from there is an independent database instance. It can then be set up to
 receive updates or perform a number of functions as mentioned earlier.
