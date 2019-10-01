@@ -2,6 +2,7 @@
 Backups
 #######
 
+.. _backups:
 
 This is a basic overview showing how to create server backups in OpenStack
 Swift object storage using `Duplicity`_.
