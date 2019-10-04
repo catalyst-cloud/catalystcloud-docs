@@ -42,9 +42,9 @@ below have to  be followed:
    (such as minAvailable > 1).
 3. The container definition must have a liveness probe defined, to ensure the
    pod disruption policy budget is accounting for healthy replicas only.
-4. The container definition must have a readiness probes defined, preventing
-   pods from being re-introduced to the loadbalancer prematurely (before the
-   application is ready to respond to requests).
+4. The container definition must have a readiness probe or probes defined,
+   preventing pods from being re-introduced to the loadbalancer prematurely
+   (before the application is ready to respond to requests).
 5. Ideally the application should support the ``SIGTERM`` signal for graceful
    shutdown, or alternatively a ``preStop`` hook should be defined.
 

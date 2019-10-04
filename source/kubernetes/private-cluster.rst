@@ -97,7 +97,7 @@ and subnet:
 Turn on/off floating ip when creating cluster
 *********************************************
 
-Though it's not recommended, but it is possible to enable or disable floating
+Though it's not recommended, it is possible to enable or disable floating
 IP when creating a new cluster. This will override the floating IP behaviour
 defined in the cluster template. To enable floating IP you can run command
 as below:

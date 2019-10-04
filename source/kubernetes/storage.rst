@@ -21,7 +21,7 @@ data by mounting the volume in a shared manner.
 .. Note::
 
   Volumes are ephemeral and they are tied to the lifetime of the pod. Once the
-  pod terminates and volumes and associated data within it are gone.
+  pod terminates all volumes and associated data within it are gone.
 
 To use a volume, a Pod specifies what volumes to provide for the Pod and where
 to mount them in the containers. The containers themselves see these presented
@@ -45,8 +45,8 @@ Persistent Volumes
 ``Persistent volumes`` on the other hand exist within Kubernetes but outside of
 the pods. They work differently in that pods need to claim a volume, based on
 a ``storage class``, to use it and will retain it throughout their lifetime
-until it is released. Persistent volumes will also have the option to retain
-the volume even if the their pods are destroyed.
+until it is released. Persistent volumes however, also have the option to
+retain the volume even if the their pods are destroyed.
 
 The cluster administrator can create pre-configured static PersistentVolumes
 (PV) that define a particular size and type of volume and these in turn can be
@@ -155,7 +155,7 @@ Now create a claim for the volume.
   $ kubectl create -f pvc1.yaml
   persistentvolumeclaim/test-persistentvolumeclaim created
 
-To access this from with in our pod we need to add a ``volumes`` entry
+To access this from within our pod we need to add a ``volumes`` entry
 specifying the PersistentVolumeClaim and giving it a name, then a
 ``volumeMounts`` entry to the container that links to the PVC by its name and
 finally a ``mountPath`` entry that defines the target path for the volume to
@@ -249,7 +249,7 @@ physical volume assigned to the claim will persist if the cluster is removed.
   of the StorageClass ``Reclaim Policy`` setting in this scenario.
 
 If the PersistentVolumeClaim resource was intentionally released prior to the
-cluster being terminated however then the usual retention policy for that
+cluster being terminated however, the usual retention policy for that
 storage class will apply.
 
 Retrieving data from an orphaned PersistentVolume
