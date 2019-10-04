@@ -4,7 +4,7 @@ Clusters
 
 This section shows a more in depth view of clusters and their uses. It
 goes over the process of creating clusters, which is already covered in
-quick start section of this documentation. If you've gone through that you
+quick start section of this documentation. If you have gone through that you
 don't need to follow all of the examples again.
 
 ******************
