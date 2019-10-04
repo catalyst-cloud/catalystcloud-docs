@@ -8,7 +8,7 @@ Quick start
 This quick start guide assumes you have working knowledge of Catalyst Cloud
 :ref:`command-line-interface` and some familiarity with Kubernetes.
 
-.. note::
+.. warning::
 
   Due to active development of this service, we recommend the use of the latest
   version of the CLI to interact with it. Please refer to the
@@ -66,7 +66,7 @@ static binary:
   $ chmod +x ./kubectl
   $ sudo mv ./kubectl /usr/local/bin/kubectl
 
-For other platforms or installations methods, please refer to the `detailed
+For other platforms or installation methods, please refer to the `detailed
 instructions on how to install kubectl`_.
 
 .. _`detailed instructions on how to install kubectl`: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -124,9 +124,9 @@ The naming convention used for the templates is broken down as follows:
 * **kubernetes-v1.11.2** : this is the version of kubernetes that the template
   will use to create the cluster.
 * **-prod** or **-dev**: the type of environment to be created (see below).
-* **-20181008**: the date on which the template was created.
+* **-20190912**: the date on which the template was created.
 
-The difference between between the development and production templates are:
+The difference between the development and production templates are:
 
 * **Production**: creates a Kubernetes cluster that is intended for production
   workloads. It creates three or more master nodes and three or more worker
@@ -209,10 +209,10 @@ You can use the following command to check the status of the cluster:
   | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
 
-Alternatively, you can check the status of the cluster on the `Clusters`_ panel
+Alternatively, you can check the status of the cluster on the `Clusters panel`_
 , in the ``Container Infra`` section of the Dashboard.
 
-.. _`Clusters`: https://dashboard.cloud.catalyst.net.nz/project/clusters
+.. _`Clusters panel`: https://dashboard.cloud.catalyst.net.nz/project/clusters
 
 Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
 
@@ -263,8 +263,8 @@ Accessing the Kubernetes dashboard
 The Catalyst Kubernetes Service enables the Kubernetes web dashboard by default
 (this behaviour can be overwritten if desirable).
 
-In order to access the Kubernetes dashboard, you will need retrieve the admin
-token for the cluster using the following command:
+In order to access the Kubernetes dashboard, you will need to retrieve the
+admin token for the cluster using the following command:
 
 ::
 

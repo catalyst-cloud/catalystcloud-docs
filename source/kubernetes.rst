@@ -52,5 +52,5 @@ Known Issues
 * **Description:** Time to deploy a cluster is in the vicinity of 15-25
   minutes.
 * **Status:** The cause of the problem is known and a release that reduces
-  deployment times being planned.
+  deployment times is being planned.
 * **Workaround:** None.
