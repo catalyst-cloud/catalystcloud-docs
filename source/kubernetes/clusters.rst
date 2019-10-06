@@ -4,7 +4,7 @@ Clusters
 
 This section shows a more in depth view of clusters and their uses. It
 goes over the process of creating clusters, which is already covered in
-quick start section of this documentation.If you've gone through that you
+quick start section of this documentation. If you have gone through that you
 don't need to follow all of the examples again.
 
 ******************
@@ -179,8 +179,8 @@ possible additional or over-riding parameters that are necessary.
   | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
 
-Once the cluster is active access to server nodes in the cluster is via ssh,
-the ssh user will be 'fedora' and the authentication will be using the ssh key
+Once the cluster is active, access to server nodes in the cluster is via ssh.
+The ssh user will be 'fedora' and the authentication will be using the ssh key
 provided in the cluster template.
 
 .. code-block:: bash
@@ -189,7 +189,7 @@ provided in the cluster template.
 
 .. note::
 
-  Once a cluster template is in use it cannot be updated or deleted until all of
+  Once a cluster template is in use, it cannot be updated or deleted until all of
   the clusters using it have been terminated.
 
 .. _kube_cli:
@@ -297,7 +297,7 @@ By default Kubernetes provides a web based dashboard that exposes the details
 of a given cluster. In order to access this it is first necessary to to
 retrieve the admin token for the cluster you wish to examine.
 
-The following command will extract the correct value from the secretes in the
+The following command will extract the correct value from the secrets in the
 kube-system namespace.
 
 ::

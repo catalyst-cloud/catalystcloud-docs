@@ -6,10 +6,8 @@ Overview
 Storage tiers
 *************
 Catalyst provides several tiers of storage to suit the varying needs of our
-customers.
-
-Data stored on the storage tiers is replicated on three different storage
-nodes on the same region.
+customers. All data regardless of the storage tier is replicated on three
+different storage nodes on the same region.
 
 
 The standard tier

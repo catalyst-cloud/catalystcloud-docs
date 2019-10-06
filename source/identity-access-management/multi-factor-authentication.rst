@@ -11,8 +11,8 @@ access.
 .. note::
 
     For users enabling MFA, you will find that version 2 of the Keystone API no longer allows
-    authentication and you will have to authenticate with the v3 API to use this feature, or not
-    turn it on. This will only affect users that are consuming the APIs directly, users who only
+    authentication and you will have to authenticate with the v3 API to use this feature.
+    This will only affect users that are consuming the APIs directly, users who only
     login through the dashboard will automatically be authenticating with the version 3 API.
 
 

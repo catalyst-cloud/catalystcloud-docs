@@ -6,8 +6,8 @@ Cluster access with Services
 Ingress in Kubernetes
 *********************
 
-Kubernetes ingress is a collection of strategies that provide ways by which to
-define how access to services running in a cluster is achieved.
+Kubernetes ingress is a collection of strategies that provide ways to
+define access to services running in a cluster.
 
 Though they all work slightly differently, typically they are implemented as a
 service that provides a mapping to a given port or ports that are exposed on
@@ -220,7 +220,7 @@ simply run the following.
 
 .. literalinclude:: _containers_assets/loadbalancer.yaml
 
-Check the state the status of the loadbalanced-service until the EXTERNAL-IP
+Check the state of the loadbalanced-service until the EXTERNAL-IP
 status is no longer <pending>.
 
 .. code-block:: bash

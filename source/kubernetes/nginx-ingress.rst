@@ -20,11 +20,11 @@ What is an Ingress Controller?
 In Kubernetes, Ingress allows external users and client applications access
 to HTTP services. Ingress consists of two components.
 
-Ingress Resource is a collection of rules for the inbound traffic to reach
+`Ingress Resource` is a collection of rules for the inbound traffic to reach
 Services. These are Layer 7 (L7) rules that allow hostnames (and optionally
 paths) to be directed to specific Services in Kubernetes.
 
-Ingress Controller which acts upon the rules set by the Ingress Resource,
+`Ingress Controller` which acts upon the rules set by the Ingress Resource,
 typically via an HTTP or L7 load balancer. It is vital that both pieces are
 properly configured to route traffic from an outside client to a Kubernetes
 Service.

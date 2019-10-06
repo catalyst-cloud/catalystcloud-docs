@@ -25,8 +25,8 @@ Working with logical volumes
 ============================
 
 While it is possible to create a logical volume using an un-partitioned disk we
-recommend that you create one anyway, if for no other reason than to inform
-software such as partitioning utilities that the disk is is being used. This
+recommend that you use a partitioned one, if for no other reason than to inform
+software such as partitioning utilities that the disk is being used. This
 avoids the possibility of someone firing up a partitioning program, seeing an
 un-partitioned disk and attempting to use it for some other purpose.
 
