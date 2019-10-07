@@ -241,7 +241,7 @@ Another thing to note about passwords:
 
 If you ever need to send the output of some code to a support staff member and
 that code contains a password or other sensitive information; Be sure that you
-censor the password before sending it as done below.
+censor the password before sending it, as done below.
 
 .. code-block:: bash
 
@@ -254,11 +254,9 @@ censor the password before sending it as done below.
   OS_INTERFACE=public
   OS_USERNAME=danielobyrne@catalyst.net.nz
   OS_PROJECT_ID=eac679e4896146e6827ce29d755fe289
-  OS_PASSWORD=QXXXXXXXXXXXXX
+  OS_PASSWORD=XXXXXXXXXXXXX
 
-My password has been censored with 'X'. In this case the first letter is still
-revealed, this is so that I personally know that the password imputed was
-correct.
+
 
 Update systems often
 ====================
