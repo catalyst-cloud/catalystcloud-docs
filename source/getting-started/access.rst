@@ -21,7 +21,6 @@ reached at: https://openstack.skytv.co.nz
 
 .. image:: .. /assets/dashboard-screenshot.png
 
-
 The web dashboard is a great tool that provides easy
 access to most of the services that the Sky TV Cloud provides. All of the
 standard services are able to be controlled via the Dashboard. There are some
@@ -36,7 +35,6 @@ Things such as creating compute instances, partitioning block storage or
 object storage etc. Before going on to use these services,
 we recommend going through the catalyst
 `first instance tutorial. <https://docs.catalystcloud.nz/first-instance.html>`_
-
 
 The major appeal of using the dashboard is it requires very little programming
 expertise or knowledge. There is an assumed level of understanding about the
@@ -98,3 +96,9 @@ either of the following:
 .. code-block:: bash
 
  $ glance image-update <image-name-or-id> --container-format bare --disk-format raw
+
+|
+
+:ref:`Previous page <services_on_the_sky-tv_cloud>`
+|
+:ref:`Next page <administrating_the_sky-tv_cloud>`

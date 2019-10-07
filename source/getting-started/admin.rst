@@ -7,6 +7,59 @@ Administrating the Sky TV Cloud
 There are a few small points that are important to be aware of before diving
 into the Sky TV cloud.
 
+********
+Projects
+********
+
+Everything you do on the Sky TV cloud is in a ``project``. Use projects to
+separate the different things you work on. For example, have a project for each
+organisation you work with, or one for each branch of your organisation.
+Something done in one project cannot effect any other projects.
+
+You can change which project you're working in on the dashboard, with the
+dropdown in the top left corner.
+
+Information on how to invite new people to your project can be found on
+the `Catalyst Cloud Documentation <https://docs.catalystcloud.nz/>`_.
+
+
+.. image:: ../assets/project_dropdown.png
+
+.. Note::
+  These workspaces are typically referred to as a ``project`` but for
+  historical reasons you may also see them referred to as a ``tenant`` or
+  a ``tenancy``.
+
+.. _find-project-id:
+
+
+Finding my project ID
+=====================
+
+Every project on the Sky TV cloud has a ``project name`` (a user friendly
+name) and a ``project id`` (an auto-generated UUID). There are a number of ways
+to find your project ID and name.
+
+Via the Dashboard
+-----------------
+
+The project ID and name can be found on the `API Access`_ panel by clicking on
+the `View Credentials`_ button.
+
+.. _API Access: https://dashboard.cloud.catalyst.net.nz/project/api_access/
+.. _View Credentials: https://dashboard.cloud.catalyst.net.nz/project/api_access/view_credentials/
+
+
+Creating new projects
+=====================
+
+You can request the creation of more projects via the `Support
+Requests`_ panel.
+
+.. _Support Requests: https://dashboard.cloud.catalyst.net.nz/management/tickets/
+
+
+
 .. _admin-support:
 
 ***************
@@ -14,11 +67,16 @@ Getting support
 ***************
 
 If you experience issues with the Sky TV, please check to
-see if the problem(s) are covered further on in this documentation.
-If no solution is found you will need to raise a support request with
+see if the problem(s) are covered further on in this documentation or the
+public catalyst cloud documentation.
+If no solution is found you will need to raise a support ticket with
 the support dropdown in the top right corner of the dashboard.
 
+
 .. image:: ../assets/support_dropdown.png
+
+You can also reach the support service via `this link
+<https://dashboard.cloud.catalyst.net.nz/management/tickets/>`_
 
 Status page
 ===========
@@ -70,56 +128,6 @@ for the needs of your team. Please contact Catalyst via our training page
 to discuss your needs: https://catalyst.net.nz/training-services
 
 
-.. _admin-region:
+|
 
-********
-Projects
-********
-
-Everything you do on the Sky TV cloud is in a ``project``. Use projects to
-separate the different things you work on. For example, have a project for each
-organisation you work with, or one for each branch of your organisation.
-Something done in one project cannot effect any other projects.
-
-You can change which project you're working in on the dashboard, with the
-dropdown in the top left corner.
-
-Information on how to invite new people to your project can be found on
-the catalyst cloud documentation.
-
-
-.. image:: ../assets/project_dropdown.png
-
-
-The Sky TV cloud provides an isolated and multi-tenanted approach to creating
-workspaces. These workspaces are typically referred to as a ``project`` but for
-historical reasons you may also see them referred to as a ``tenant`` or
-a ``tenancy``.
-
-.. _find-project-id:
-
-
-Finding my project ID
-=====================
-
-Every project on the Sky TV cloud has a ``project name`` (a user friendly
-name) and a ``project id`` (an auto-generated UUID). There are a number of ways
-to find your project ID and name.
-
-Via the Dashboard
------------------
-
-The project ID and name can be found on the `API Access`_ panel by clicking on
-the `View Credentials`_ button.
-
-.. _API Access: https://dashboard.cloud.catalyst.net.nz/project/api_access/
-.. _View Credentials: https://dashboard.cloud.catalyst.net.nz/project/api_access/view_credentials/
-
-
-Creating new projects
-=====================
-
-You can request the creation of more projects via the `Support
-Requests`_ panel.
-
-.. _Support Requests: https://dashboard.cloud.catalyst.net.nz/management/tickets/
+:ref:`Previous page <access_to_sky-tv_cloud>`

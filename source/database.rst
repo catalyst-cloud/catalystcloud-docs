@@ -6,11 +6,10 @@ Database creation and access
 
 
 In this section we will work through the steps required to create a new
-database instance through the database service and cover different common
-topics to do with our Databases.
+database instance and cover different common topics to do with our Databases.
 
 *********************************
-Gathering
+Gathering necessary information
 *********************************
 
 In order to launch a new database instance we need to first decide on a few
@@ -23,10 +22,11 @@ options, these include:
 * The ``database flavor``, which determines the vCPU and RAM assigned to the
   instance.
 
-It is also necessary to have an existing network in the project and region
-that you wish to deploy the database instance to.
+.. Note::
+  It is also necessary to have an existing network in the project and region
+  that you wish to deploy the database instance to.
 
-First lets determine what datastore types and version are available to us.
+First lets determine what datastore types and versions are available to us.
 
 .. code-block:: bash
 
@@ -242,7 +242,7 @@ instance.
   only option is to re-run the enable command which will generate a new
   random password.
 
-To confirm the the root account is now enabled simply re-run the same command
+To confirm the root account is now enabled simply re-run the same command
 as above.
 
 .. code-block:: bash
@@ -284,7 +284,7 @@ that is displayed when the user is created as part of the initial database
 instance creation.
 
 The other example uses the ``--host`` argument which allows a user to be
-created that only can only connect from the specified IP address.
+created that can only connect from the specified IP address.
 
 .. code-block:: bash
 
@@ -422,7 +422,7 @@ and periodically update to keep up to date with the master. Or you could use
 it to run your queries so that the master isn't burdened with the load of large
 operations. There are many different uses for having a replica.
 
-While similar to a backup, a replica is very different.
+While similar to a backup, a replica has some key differences.
 The main difference between the two is that, a backup takes what is essentially
 a snapshot, of your current database and stores away a list of commands and
 values able to restore a new instance to that snapshot's point in time.

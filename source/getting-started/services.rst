@@ -61,15 +61,14 @@ instances on networks that you have on the cloud. These database instances
 run on a datastore that you are able to create and define using `trove`_,
 a service that can be entirely run using OpenStack. For more information on
 how to create and manage a database, please refer
-to :ref:`this section of the documentation <database_page>`
+to :ref:`this section of the documentation <database_page>`.
 
 .. _`trove`: https://wiki.openstack.org/wiki/Trove
 
 Alarm service
 =============
 
-This service is provided with
-`AODH`_. It exists to alert you
+This service is provided with `AODH`_. It exists to alert you
 when a specified condition is met. This can be an important function for any
 business as it allows you to keep a closer eye on how effective your other
 services are being used, so that you can make decision that will effect your
@@ -78,3 +77,9 @@ is auto-scaling of instances. More information can be found in our
 :ref:`Alarm service section <alarm-service-on-Sky-tv_cloud>`
 
 .. _`AODH`: https://docs.openstack.org/aodh/latest/
+
+|
+
+:ref:`Previous page <introduction-to-sky-tv-cloud>`
+|
+:ref:`Next page <access_to_sky-tv_cloud>`
