@@ -237,15 +237,130 @@ If you wish to save the configuration to a different location you can use the
   cluster, it is necessary to ensure that the current ``kubectl configuration``
   is referencing the correct cluster configuration.
 
-Testing the cluster
-===================
+Accessing a private cluster
+===========================
 
 Once the cluster state is ``CREATE_COMPLETE`` and you have successfully
-retrieved the cluster config, you can proceed with deploying your applications
-into the cluster using kubectl or whatever your preferred mechanism may be.
+retrieved the cluster config, we need to confirm that we are able to access the
+cluster.
 
-As a quick check, you can run the following command to confirm that Kubernetes
-is working as expected:
+If you did not override the default behaviour you will have created a **private
+cluster**. In order to access this you will need to create a bastion host
+within your cloud project to allow you to reach the Kubernetes API.
+
+.. Note::
+
+  The use of the bastion server is unnecessary if you created a public cluster
+  that is directly accessible from the internet.
+
+For the purpose of this example let's assume we deployed a bastion host with
+the following characteristics:
+
+* name - bastion
+* flavor - c1.c1r1
+* image - ubuntu-18.04-x86_64
+* network - attached to the Kubernetes cluster network
+* security group - bastion-ssh-access
+* security group rules - ingress TCP/22 from 114.110.xx.xx ( public IP to allow
+  traffic from)
+
+The following commands are to check our setup and gather the information we
+need to set up our SSH forward in order to reach the API endpoint.
+
+Find the instance's external public IP address
+
+.. code-block:: bash
+
+  $ openstack server show bastion -c addresses -f value
+  private=10.0.0.16, 103.197.62.38
+
+Confirm that we have a security group applied to our instance that allows
+inbound TCP connections on port 22 from our current public IP address. In this
+case our security group is called bastion-ssh-access and out public IP is
+114.110.xx.xx.
+
+.. code-block:: bash
+
+  $ openstack server show bastion -c security_groups -f value
+  name='bastion-ssh-access'
+  name='default'
+
+  $ openstack security group rule list bastion-ssh-access
+  +--------------------------------------+-------------+-----------+------------------+------------+-----------------------+
+  | ID                                   | IP Protocol | Ethertype | IP Range         | Port Range | Remote Security Group |
+  +--------------------------------------+-------------+-----------+------------------+------------+-----------------------+
+  | 42c1320c-98d5-4275-9c2d-b81b0eadac29 | tcp         | IPv4      | 114.110.xx.xx/32 | 22:22      | None                  |
+  +--------------------------------------+-------------+-----------+------------------+------------+-----------------------+
+
+Finally we need the IP address for the Kubernetes API endpoint
+
+.. code-block:: bash
+
+  $ openstack coe cluster show k8s-prod -c api_address -f value
+  https://10.0.0.5:6443
+
+We will make use of SSH's port forwarding ability in order to allow us to
+connect from our local machine's environment. To do this run the following
+command in your shell.
+
+.. code-block:: bash
+
+  ssh -f -L 6443:10.0.0.5:6443 ubuntu@103.197.62.38 -N
+
+* -f fork the process in background
+* -N do not execute any commands
+* -L specifies what connections are given to the localhost. In this example we use the
+   ``port:host:hostport`` to bind 6443 on localhost to 6443 on the API endpoint at 10.0.0.5
+* The **ubuntu@103.197.62.38** is the credentials for SSH to log into the bastion host.
+
+.. Note::
+
+  Setting up the SSH forwarding is optional. You can choose to deploy a cloud
+  instance on the Kubernetes cluster network with appropriate remote access
+  and SSH on it and run all of your cluster interactions from there.
+
+As a quick test we can run the following curl command to check that we get a
+response from the API server.
+
+.. code-block:: bash
+
+  $ curl https://localhost:6443 --insecure
+  {
+    "kind": "Status",
+    "apiVersion": "v1",
+    "metadata": {
+
+    },
+    "status": "Failure",
+    "message": "forbidden: User \"system:anonymous\" cannot get path \"/\"",
+    "reason": "Forbidden",
+    "details": {
+
+    },
+    "code": 403
+  }
+
+If the curl request returned a JSON response similar to that shown above you
+can run the following command to confirm that Kubernetes is working as
+expected.
+
+First, if you are running a private cluster and connecting over the SSH tunnel
+you will need to edit the kubeconfig file you retrieved earlier and make the
+following change.
+
+Find the ``server`` entry that points to the Kubernetes API.
+
+.. code-block:: bash
+
+  server: https://10.0.0.5:6443
+
+Change it so that it points to the localhost address instead.
+
+.. code-block:: bash
+
+  server: https://127.0.0.1:6443
+
+Then run kubectl to confirm that the cluster responds correctly.
 
 .. code-block:: bash
 
@@ -254,6 +369,8 @@ is working as expected:
   Heapster is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/heapster/proxy
   CoreDNS is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 
+You can now proceed with deploying your applications into the cluster using
+kubectl or whatever your preferred mechanism may be.
 
 
 **********************************
@@ -343,7 +460,7 @@ This provides the following parameters for a deployment:
 * number of ``replicas`` - 3
 * deployment ``image`` - catalystcloud/helloworld version_1.1.
 * pod ``labels``, to identify the app to the service - app: helloworld
-* ``containerPort`` to expose the application on - 5000
+* ``containerPort`` to expose the application on - 8080
 
   - This port also uses a name, in this case **helloworld-port**, which
     allows us to refer to it by name rather than value in the service.
@@ -411,7 +528,7 @@ publicly accessible floating IP address.
   Port:                     <unset>  80/TCP
   TargetPort:               helloworld-port/TCP
   NodePort:                 <unset>  32548/TCP
-  Endpoints:                192.168.209.128:5000,192.168.209.129:5000,192.168.43.65:5000
+  Endpoints:                192.168.209.128:8080,192.168.209.129:8080,192.168.43.65:8080
   Session Affinity:         None
   External Traffic Policy:  Cluster
   Events:
