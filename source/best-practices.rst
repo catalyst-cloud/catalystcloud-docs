@@ -237,6 +237,29 @@ about passwords:
 - Never use a previously used password.
 - Change your password once every year.
 
+Another thing to note about passwords:
+
+If you ever need to send the output of some code to a support staff member and
+that code contains a password or other sensitive information; Be sure that you
+censor the password before sending it as done below.
+
+.. code-block:: bash
+
+  OS_AUTH_URL=https://api.cloud.catalyst.net.nz:5000/v3
+  OS_PROJECT_DOMAIN_ID=default
+  OS_REGION_NAME=nz_wlg_2
+  OS_PROJECT_NAME=catalyst-cloud/support
+  OS_USER_DOMAIN_NAME=Default
+  OS_IDENTITY_API_VERSION=3
+  OS_INTERFACE=public
+  OS_USERNAME=danielobyrne@catalyst.net.nz
+  OS_PROJECT_ID=eac679e4896146e6827ce29d755fe289
+  OS_PASSWORD=QXXXXXXXXXXXXX
+
+My password has been censored with 'X'. In this case the first letter is still
+revealed, this is so that I personally know that the password imputed was
+correct.
+
 Update systems often
 ====================
 
