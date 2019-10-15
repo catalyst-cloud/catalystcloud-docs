@@ -103,13 +103,6 @@ The following command will list all cluster templates available:
   | e8257719-b209-40bf-9619-2895698d5a73 | kubernetes-v1.13.10-prod-20190912 |
   +--------------------------------------+-----------------------------------+
 
-.. Warning::
-
-  When creating a new cluster, make sure the exact name listed by the command
-  above is used. The CLI will provide no warning messages to tell you that the
-  template name doesn't exist (resulting in the cluster creation to fail). This
-  is a known bug and should be fixed soon.
-
 Alternatively, a list of cluster templates available can be seen in the
 `Cluster Templates`_ panel in the dashboard, under the **Container Infra**
 section.
