@@ -1,0 +1,61 @@
+heat_template_version: 2016-10-14
+
+description: |
+  The heat template is used to create a server as a load balancer member.
+parameters:
+  keypair:
+    type: string
+    default: <KEY-PAIR>
+  image_id:
+    type: string
+    default: <WEBSERVER IMAGE ID>
+  flavor_id:
+    type: string
+    default: m1.tiny
+  network_id:
+    type: string
+    default: <NETWORK ID>
+  sg_ids:
+    type: comma_delimited_list
+  public_network:
+    type: string
+  pool_id:
+    type: string
+    default: no_default
+    hidden: true
+  metadata:
+    type: json
+
+resources:
+  server:
+    type: OS::Nova::Server
+    properties:
+      image: { get_param: image_id }
+      flavor: { get_param: flavor_id }
+      networks:
+        - network: {get_param: network_id}
+      key_name: {get_param: keypair}
+      security_groups: {get_param: sg_ids}
+      metadata: {get_param: metadata}
+      config_drive: true
+      user_data_format: RAW
+      user_data: |
+          #!/bin/sh
+          MYIP=$(/sbin/ifconfig eth0 |grep 'inet addr'|awk -F: '{print $2}'| awk '{print $1}');
+          OUTPUT="Welcome to my $MYIP"
+          while true; do echo -e "HTTP/1.1 200 OK\r\n\r\n${OUTPUT}\r" | sudo nc -l -p 80; done
+  pool_member:
+    type: OS::Octavia::PoolMember
+    properties:
+      address: {get_attr: [server, first_address]}
+      pool: {get_param: pool_id}
+      protocol_port: 80
+  server_public_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network: {get_param: public_network}
+      port_id: {get_attr: [server, addresses, {get_param: network_id}, 0, port]}
+
+outputs:
+  server_id:
+    value: {get_resource: server}
