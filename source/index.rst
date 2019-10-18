@@ -16,7 +16,7 @@ Contents:
 
    getting-started
    database
-   alarm-service
+   alarm-service/alarm-service
 
 
 ******************
