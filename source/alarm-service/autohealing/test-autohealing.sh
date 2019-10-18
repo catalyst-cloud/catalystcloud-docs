@@ -4,7 +4,7 @@ alias lb="openstack loadbalancer"
 alias osrl="openstack stack resource list"
 sudo apt install -y jq
 
-# Download the autohealing examples to a folder, go to that folder
+# Download the autohealing example yamls to a folder, go to that folder
 
 # First, create the Head stack using the template files and wait until it's created successfully
 # Change the default value of the parameters defined in autohealing.yaml
@@ -85,7 +85,7 @@ $ curl localhost
 Welcome to my 192.168.2.201
 $ sudo kill -9 284
 $ curl localhost
-curl: (7) couldn't connect to host
+curl: (7) couldnt connect to host
 
 # After a few seconds, you should see there is one load balancer member in ERROR operating_status.
 $ lb member list $poolid

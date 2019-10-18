@@ -1,33 +1,33 @@
 heat_template_version: 2016-10-14
 
 description: |
-  The heat template is used to demo the autoscaling and autohealing for a webserver.
+  The heat template is used to demo the autoscaling and auto-healing for a webserver.
 parameters:
   keypair:
     type: string
-    default: 'Dan-Aodh'
+    default: security-key
   webserver_image_id:
     description: Need to be a cirros image.
     type: string
-    default: 08a29966-85b9-4056-8d97-b51b7f862d01
+    default: 102172df-9872-47df-b66b-2bcecb3a74b7
   webserver_flavor_id:
     type: string
-    default: m1.tiny
+    default: c1.c1r1
   webserver_network_id:
     type: string
-    default: f171db43-56fd-41cf-82d7-4e91d741762e
+    default: 550677db-0232-418b-aeb5-f461cf907967
   webserver_sg_ids:
     description: Security groups that allows TCP 22 access
     type: comma_delimited_list
-    default: ["bd19b821-2577-462a-96a0-d07a0ece226a"]
+    default: ["c54f5fcf-0161-4a01-999a-5013714751b7"]
   vip_subnet_id:
     description: Should be a subnet of webserver_network_id
     type: string
-    default: 573d3b2f-c4a1-469c-a725-c40dd0d218cb
+    default: 0cc9ef08-6627-454f-842f-ecb84687cf92
   public_network:
     description: Public network name, could get by 'openstack network list --external'
     type: string
-    default: public
+    default: public-net
   # scaleup_cpu_threshold:
   #   type: number
   #   default: 80
