@@ -7,7 +7,7 @@ parameters:
     type: string
     default: security-key
   webserver_image_id:
-    description: Need to be a cirros image.
+    description: Need to be an Ubuntu image.
     type: string
     default: 102172df-9872-47df-b66b-2bcecb3a74b7
   webserver_flavor_id:

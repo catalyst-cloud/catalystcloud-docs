@@ -43,11 +43,7 @@ resources:
           #!/bin/sh
           MYIP=$(/sbin/ifconfig ens3 | grep 'inet '| awk '{print $2}');
           OUTPUT="Welcome to my $MYIP";
-<<<<<<< HEAD
           while true; do echo "HTTP/1.1 200 OK\r\n\r\n${OUTPUT}\r" | sudo nc -l -p 80; done
-=======
-          while true; do echo -e "HTTP/1.1 200 OK\r\n\r\n${OUTPUT}\r" | sudo nc -l -p 80; done
->>>>>>> 1c3f285505f8f8606984d3c1d13d6552f8b029c0
   pool_member:
     type: OS::Octavia::PoolMember
     properties:
