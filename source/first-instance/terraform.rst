@@ -43,8 +43,8 @@ for detailed install instructions.
  $ mkdir terraform-first-instance
  $ export TERRAFORM_DIR="$(pwd)/terraform-first-instance"
  $ cd $TERRAFORM_DIR
- $ wget https://releases.hashicorp.com/terraform/0.6.16/terraform_0.6.16_linux_amd64.zip
- $ unzip terraform_0.6.16_linux_amd64.zip
+ $ wget https://releases.hashicorp.com/terraform/0.12.12/terraform_0.12.12_linux_amd64.zip
+ $ unzip unzip terraform_0.12.12_linux_amd64.zip
 
 
 OpenStack credentials
@@ -111,11 +111,12 @@ Download the configuration file:
 Run Terraform plan
 ==================
 
-The "./terraform plan" command outlines the plan that Terraform will execute:
+The "terraform plan" command outlines the plan that Terraform will execute:
 
 .. code-block:: bash
 
- $ ./terraform plan
+ $ terraform init
+ $ terraform plan
  Refreshing Terraform state prior to plan...
 
 
@@ -229,12 +230,12 @@ The "./terraform plan" command outlines the plan that Terraform will execute:
 Run Terraform apply
 ===================
 
-The "./terraform apply" command executes the plan, creating OpenStack
+The "terraform apply" command executes the plan, creating OpenStack
 resources:
 
 .. code-block:: bash
 
- $ ./terraform apply
+ $ terraform apply
  openstack_compute_keypair_v2.keypair_1: Creating...
    name:       "" => "first-instance-key"
    public_key: "" => "ssh-rsa AAAAB3......"
@@ -340,7 +341,7 @@ resources:
 Run Terraform delete
 ====================
 
-The "./terraform destroy" command will delete the OpenStack resources created
+The "terraform destroy" command will delete the OpenStack resources created
 previously.
 
 .. note::
