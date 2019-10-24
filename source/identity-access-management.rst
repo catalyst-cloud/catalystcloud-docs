@@ -1,7 +1,7 @@
 .. _identity-access-management:
 
 ##############################
-Identity and Access Management
+Identity and access management
 ##############################
 
 
