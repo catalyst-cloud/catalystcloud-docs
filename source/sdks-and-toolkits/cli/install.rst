@@ -37,7 +37,7 @@ over to Python3 is a necessity.
   sudo apt-get install python3 python3-venv
 
   # Create a new virtual environment and activate it
-  python3 -m venv vevn
+  python3 -m venv venv
 
   # Activate the virtual environment
   source venv/bin/activate
