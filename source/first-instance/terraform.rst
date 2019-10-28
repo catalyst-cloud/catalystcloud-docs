@@ -90,7 +90,7 @@ Download the configuration file:
 .. code-block:: bash
 
  $ cd $TERRAFORM_DIR
- $ wget https://raw.githubusercontent.com/catalyst/catalystcloud-orchestration/master/terraform/first-instance/first-instance.tf
+ $ wget https://raw.githubusercontent.com/catalyst-cloud/catalystcloud-orchestration/master/terraform/first-instance/first-instance-variables.tf
 
 
 .. note::
