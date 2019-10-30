@@ -16,7 +16,7 @@ you predefine for the alarm take effect.
 
 For example: You want to monitor a compute instance to see if the CPU
 utilization exceeds 70% for more than 10 minutes. Once the alarm has met
-this requirement, it changes its state to 'alarm'. The aodh-notifier then tells
+this requirement, it changes its state to 'alarm'. The alarm notifier then tells
 your system to perform some action. In this scenario it could be to: spin up a
 new instance with more CPU power, or increase the amount of VCPUs your
 instance is using. Whatever your goal is the alarm keeps you informed of the
@@ -364,7 +364,7 @@ expected. Now we need to check that our loadbalancers are healthy.
 
 If your loadbalancer's operating_status is not ONLINE then you may have to wait
 for the cloud init scripts to finish. Once the loadbalancers are healthy you
-are able to create the AODH alarm.
+are able to create the alarm.
 
 .. code-block:: bash
 
@@ -385,7 +385,7 @@ are able to create the AODH alarm.
   }
   EOF
 
-We have now created our aodh listener and set it to listen on our stack. To
+We have now created our alarm listener and set it to watch our stack. To
 make sure our alarm is working as intended, we need to force an event that
 would trigger the threshold rule of our alarm. Since we have set up autohealing
 in this example, we are going to kill one of the 'webserver' processes running
@@ -427,7 +427,7 @@ operating_status.
   | 2f358812-02c1-4bf5-a7c5-578b66b7feca | eac679e4896146e6827ce29d755fe289 | ACTIVE              | 10.0.0.81 | ERROR            |      1 |             80 |
   +--------------------------------------+----------------------------------+---------------------+-----------+------------------+--------+----------------+
 
-  # Aodh will automatically trigger Heat stack update and will monitor the autoscaling_group resource status.
+  # Alarm will automatically trigger Heat stack update and will monitor the autoscaling_group resource status.
   # while this is happening there should only be one IP in the http response
   $ while true; do curl $vip; sleep 2; done
   Welcome to my 10.0.0.80
