@@ -20,12 +20,6 @@ python-openstacksdk. They each have their own history on how they
 were created but after awhile it was clear that there was a lot
 to be gained by merging the three projects.
 
-Documentation for Shade is available at
-https://docs.openstack.org/openstacksdk/latest/index.html. Comprehensive
-`usage`_ information is provided.
-
-.. _usage: https://docs.openstack.org/openstacksdk/latest/user/index.html#user-guides
-
 Installing OpenstackSDK
 =======================
 
@@ -36,7 +30,7 @@ use Python's pip installer. Simply run:
 
  pip install openstacksdk.
 
-it is recommended however that you use the openstack sdk from a virtual
+It is recommended that you use the openstack sdk from a virtual
 environment. Therefore if you already have one, it is suggested that you
 install it there.
 
@@ -49,10 +43,12 @@ The easiest way to achieve this is to make use of environment variables. You
 will make use of the standard variables provided by an OpenStack RC file as
 described at :ref:`source-rc-file`.
 
-To get your environment variables into your python file you can use the
-following code:
+Once you have sourced your file and your env variables are set; to get them
+into your python file you can use the following code:
 
 .. code-block:: bash
+
+ import os
 
  auth = os.environ['OS_AUTH_URL']
  region_name = os.environ['OS_REGION_NAME']
@@ -61,7 +57,8 @@ following code:
  password = os.environ['OS_PASSWORD']
 
 .. Note::
- to ensure this work, you must have imported the 'os' library into your file first.
+
+  To ensure this works, you must have imported the 'os' library into your file first.
 
 Connecting to your project
 ==========================
@@ -71,6 +68,9 @@ able to access all the resources provided. This is done by running the
 following code block, after retrieving your environment variables.
 
 .. code-bloc:: bash
+
+ from openstack import connection
+
  conn = openstack.connect(
         auth_url=auth,
         project_name=project_name,
