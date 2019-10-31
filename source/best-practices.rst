@@ -256,11 +256,6 @@ censor the password before sending it, as done below.
   OS_PROJECT_ID=eac679e4896146e6827ce29d755fe289
   OS_PASSWORD=XXXXXXXXXXXXX
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> master
 Update systems often
 ====================
 
