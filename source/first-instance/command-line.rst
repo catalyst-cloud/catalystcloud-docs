@@ -19,7 +19,7 @@ give you a full view of how the individual pieces work together.
 
 .. note::
 
- This documentation refers to values using placeholders (such as ``<PRIVATE_SUBNET_ID>``)
+ This documentation refers to values using place holders (such as ``<PRIVATE_SUBNET_ID>``)
  in example command output. The majority of these values will be displayed as UUIDs
  in your output. Many of these values will be stored in bash variables prefixed with
  ``CC_`` so you do not have to cut and paste them. The prefix ``CC_`` (Catalyst Cloud)
@@ -222,8 +222,8 @@ This example uses the Ubuntu image to create an instance.
 
 .. note::
 
-  The amount of images that Catalyst Provides can be quiete large, if you know what Operating System you want for your
-  image you can use the command ``opentsack image list -- public | grep <OPERATING SYSTEM>``
+  The amount of images that Catalyst Provides can be quite large, if you know what Operating System you want for your
+  image you can use the command ``openstack image list -- public | grep <OPERATING SYSTEM>``
   to find it quicker than looking through this list. Another thing to note is that;
   Image IDs will be different in each region. Furthermore, images are periodically updated so
   Image IDs will change over time. Remember always to check what is available

@@ -1,7 +1,7 @@
 .. _packer-tutorial:
 
 ##################################################################
-Using Packer to build custom bootable images on the Catalyst Cloud
+Using packer to build custom bootable images on the Catalyst Cloud
 ##################################################################
 
 This tutorial shows you how to use `Packer`_ to build custom bootable images on
@@ -24,7 +24,7 @@ Provisioners
 
 `Provisioners`_ provide a way to configure a base image such that a new custom
 image can be created. Many provisioners are available, including shell
-provisoners and provisioners that use DevOps tools like Ansible, Puppet and
+provisioners and provisioners that use DevOps tools like Ansible, Puppet and
 Chef.
 
 Setup
@@ -99,7 +99,7 @@ template:
 .. code-block:: console
 
  $ ./packer build domain-check-packer.json
- openstack output will be in this color.
+ openstack output will be in this colour.
 
  ==> openstack: Discovering enabled extensions...
  ==> openstack: Loading flavor: c1.c1r1
@@ -148,7 +148,7 @@ template:
  ==> openstack: Deleting temporary keypair: packer 57c659c0-081a-3bef-2bdb-6cdba8fdaaf3 ...
  Build 'openstack' finished.
 
- ==> Builds finished. The artifacts of successful builds are:
+ ==> Builds finished. The artefacts of successful builds are:
  --> openstack: An image was created: e81c38a0-6fbf-4f62-b873-79af33e4f246
 
 .. note::
@@ -273,7 +273,7 @@ Using Packer with Windows on the Catalyst Cloud
   instance, you need to say Yes to ``Create New Volume`` when selecting
   the ``Instance Source``.
 
-  Once the image has booted succesfully, take a snapshot of it. This new
+  Once the image has booted successfully, take a snapshot of it. This new
   snapshot can now be used as the source image for your Packer build. It is
   not necessary to keep the temporary Windows instance once the snapshot has
   been successfully taken.

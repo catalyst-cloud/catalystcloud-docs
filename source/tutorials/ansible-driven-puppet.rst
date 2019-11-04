@@ -1,4 +1,4 @@
-Set up a Puppet master and clients with Ansible
+Set up a puppet master and clients with ansible
 ===============================================
 
 This tutorial will show you how to combine `Ansible`_ and `Puppet`_ to manage a
@@ -11,8 +11,8 @@ available with Puppet.
 
 You will need:
 
--  The OpenStack command line tools, and will have sourced an OpenStack RC file,
-   as explained at :ref:`command-line-interface`
+-  The OpenStack command line tools, and will have sourced an OpenStack RC
+   file, as explained at :ref:`command-line-interface`
 -  A basic understanding of how to use Ansible, and ideally have done the other
    Ansible tutorials first.
 -  A good enough understanding of Puppet that you know why you're following
@@ -79,7 +79,7 @@ We set up Puppet to run on demand, and never in the background.
         shell: puppet agent --enable
         become: yes
 
-We also copy our local modules directory into the Puppet Master's modulepath.
+We also copy our local modules directory into the Puppet Master's module-path.
 For now, there is very little in there other than an empty manifest for
 ``roles::puppetmaster``, but this is where you could keep your army of Puppet
 modules for whatever.
@@ -150,8 +150,8 @@ OK, take a deep breath and get ready for part two - creating some hosts!
 Create some hosts
 -----------------
 
-In this step, you are going to quickly add two hosts and provision them with your
-Puppet Master. In your working copy, run:
+In this step, you are going to quickly add two hosts and provision them with
+your Puppet Master. In your working copy, run:
 
 .. code-block:: bash
 

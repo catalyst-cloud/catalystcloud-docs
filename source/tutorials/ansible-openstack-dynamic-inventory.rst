@@ -1,7 +1,7 @@
 .. _ansible_openstack-dynamic-inventory:
 
 #######################################################
-Using Ansible Dynamic Inventories on the Catalyst Cloud
+Using ansible dynamic inventories on the Catalyst Cloud
 #######################################################
 
 This tutorial assumes the following:
@@ -16,9 +16,9 @@ This tutorial assumes the following:
 Introduction
 ============
 
-In order for Ansible to run playbooks and tasks, it needs to know which machines
-to operate on. The standard way that Ansible achieves this is to use an
-`inventory file`_ which lists the hosts and groups that playbooks will run
+In order for Ansible to run playbooks and tasks, it needs to know which
+machines to operate on. The standard way that Ansible achieves this is to use
+an `inventory file`_ which lists the hosts and groups that playbooks will run
 against. This inventory is a plain text ini file that lives at
 ``/etc/ansible/hosts`` by default.
 
@@ -190,8 +190,8 @@ metadata items to each instance:
    "example": "foobar"
  }
 
-In the example below, you are using ``jq`` to remove the data associated with the
-``_meta`` key so you can view just the instance lists.
+In the example below, you are using ``jq`` to remove the data associated with
+the ``_meta`` key so you can view just the instance lists.
 
 .. code-block:: bash
 
@@ -253,13 +253,14 @@ In the example below, you are using ``jq`` to remove the data associated with th
    ]
  }
 
-You can see a number of different groupings of instances are available, including
-groupings based on the metadata you passed. Metadata with the key ``group`` is a
-special case that will be translated directly into an Ansible host group of that
-name.
+You can see a number of different groupings of instances are available,
+including groupings based on the metadata you passed. Metadata with the key
+``group`` is a special case that will be translated directly into an Ansible
+host group of that name.
 
-Any of these groups may be used within a playbook. For example, let's make use of
-the ``group01`` group to run our playbook against only ``example-instance-01``:
+Any of these groups may be used within a playbook. For example, let's make use
+of the ``group01`` group to run our playbook against only
+``example-instance-01``:
 
 .. code-block:: yaml
 

@@ -1,4 +1,4 @@
-Using Ansible's in-memory inventory to create a variable number of instances
+Using ansible's in-memory inventory to create a variable number of instances
 ############################################################################
 
 This tutorial assumes the following:

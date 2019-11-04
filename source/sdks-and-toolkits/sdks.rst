@@ -1,5 +1,5 @@
 ################################
-Software Development Kits (SDKs)
+Software development kits (SDKs)
 ################################
 
 A rich set of software development kits (SDKs) are available for OpenStack,
@@ -20,4 +20,4 @@ https://wiki.openstack.org/wiki/SDKs
 
 Prior to accessing the Catalyst Cloud API endpoints, ensure you are working
 from a whitelisted IP address.  More information can be found under
-:ref:`Acess and whitelist <access-and-whitelist>`
+:ref:`Access and whitelist <access-and-whitelist>`

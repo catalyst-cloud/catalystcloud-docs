@@ -20,7 +20,7 @@ space, compute capacity, or internet access. The building blocks you need to
 run a business's applications.
 
 .. note::
-   Openstack requires a python enterpriter to function and
+   Openstack requires a python interpreter to function and
    is currently phasing out it's support for Python2. We therefore recommend
    running Openstack using Python3.
 
@@ -36,7 +36,7 @@ To obtain resources on Catalyst Cloud, you provision services. Catalyst Cloud
 services are pieces of hardware and software that we have in one of our data
 centres. We make these easy and convenient to use through
 a variety of tools including our Dashboard web application, the command
-line interface or a number of ochestration services.
+line interface or a number of orchestration services.
 
 By exposing our hardware and software as services, we remove a lot of
 complexity from your day to day work. For example: you need to give a

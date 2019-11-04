@@ -1,9 +1,6 @@
-
-
-
-*******************************
-Uploading an image to the cloud
-*******************************
+**********************
+Uploading to the cloud
+**********************
 
 Please make sure you have converted your image to RAW before uploading it to
 our cloud. The previous section provides instructions on how to convert images

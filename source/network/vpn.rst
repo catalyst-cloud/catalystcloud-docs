@@ -1,7 +1,7 @@
 .. _vpn:
 
 ########################
-Virtual Private Networks
+Virtual private networks
 ########################
 
 VPN as a Service is an OpenStack Networking (Neutron) extension that provides
@@ -25,7 +25,7 @@ In order to setup a VPN, you need to know a number of parameters:
 .. note::
  IPSec relies on symmetrical encryption where both sides use the same private
  key. This key is known as a Pre Shared Key (PSK). You should ensure that you
- manage this key appropriately, so for example be sure that it is not commited
+ manage this key appropriately, so for example be sure that it is not committed
  to your configuration management system source control in plain text.
 
 VPN Setup from the Command Line

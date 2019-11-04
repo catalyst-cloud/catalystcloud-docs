@@ -1,7 +1,7 @@
 .. _using-volumes:
 
 ##########################
-Creating and using Volumes
+Creating and using volumes
 ##########################
 
 *****************************
@@ -63,7 +63,7 @@ The example below illustrates the use of a volume without LVM.
   but rather a demonstration that block volumes behave like regular disk drives
   attached to a server.
 
-Check that the disk is recognised by the OS on the instance using ``fdisk``:
+Check that the disk is recognized by the OS on the instance using ``fdisk``:
 
 .. code-block:: console
 
@@ -154,7 +154,7 @@ Label the partition:
 
 If you want the new file system to be mounted when the system reboots then you
 should add an entry to ``/etc/fstab``, for example making sure you have sudo
-privilage:
+privilege:
 
 .. code-block:: console
 

@@ -1,5 +1,5 @@
 #####################################################
-Deploying a Turnkey Linux Image on the Catalyst Cloud
+Deploying a turnkey Linux image on the Catalyst Cloud
 #####################################################
 
 This tutorial assumes you have installed the OpenStack command line tools and
@@ -23,7 +23,7 @@ example you will use the following image ``turnkey-core-14.1-jessie-amd64``.
 
 The following steps need to be completed on a machine that has API access to
 the Catalyst Cloud. If your location has not been whitelisted to allow for this
-you can deploy a barebones Linux instance in the Catalyst Cloud and
+you can deploy a bare bones Linux instance in the Catalyst Cloud and
 complete the following steps from there.
 
 Download the ``Turnkey Linux`` image to your machine, extract the archive and

@@ -21,7 +21,7 @@ associated parts.
 
 If you had security groups that were only required by the network just deleted
 you could also remove these at this stage. This process is most easily done via
-the Dashboard in the network section as it shows you in the topoplogy what the
+the Dashboard in the network section as it shows you in the topology what the
 dependencies are via the lines to one another.
 
 Deleting specific network elements

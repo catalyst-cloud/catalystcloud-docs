@@ -1,7 +1,7 @@
 .. _using-docker-machine:
 
 ##########################################
-Using Docker Machine on the Catalyst Cloud
+Using docker machine on the Catalyst Cloud
 ##########################################
 
 This tutorial shows you how to use Docker Machine with the OpenStack driver
@@ -71,8 +71,8 @@ Create a Security Group and rules
  Assumptions: your project has a private network, subnet and router set up. Please see    consult :ref:`launching-your-first-instance` if you do not have this configured already.
  It is also assumed that you have spare floating IPs available in your quota.
 
-The next step is to set up a security group for your docker host. You will use the
-command line clients to achieve this. First create a security group:
+The next step is to set up a security group for your docker host. You will use
+the command line clients to achieve this. First create a security group:
 
 .. code-block:: bash
 
@@ -191,8 +191,8 @@ progress and see any errors that may occur.
   than one private network defined, then ``PRIVATE-NET-NAME`` should be replaced
   with the network you wish to connect the docker-engine-host to
 
-Now you need to tell your local client how to connect to the remote Docker Engine
-you have created:
+Now you need to tell your local client how to connect to the remote Docker
+Engine you have created:
 
 .. code-block:: bash
 
@@ -249,10 +249,10 @@ interacting with the Docker daemon in the cloud instance:
 Create a test container
 =======================
 
-Next, create a test image from which you will instantiate a container running in
-the cloud. You will run a simple webserver by basing your image on the official
-Nginx image. To create a custom index page and a ``Dockerfile`` for our
-image:
+Next, create a test image from which you will instantiate a container running
+in the cloud. You will run a simple webserver by basing your image on the
+official Nginx image. To create a custom index page and a ``Dockerfile`` for
+our image:
 
 .. code-block:: bash
 

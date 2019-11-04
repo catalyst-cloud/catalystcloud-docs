@@ -82,8 +82,6 @@ def list_keypairs(conn):
     for keypair in conn.compute.keypairs():
         print(keypair)
 
-
-
 #print the current network to prove that the connectivity is successful
 print(conn)
 '''

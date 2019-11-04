@@ -104,7 +104,7 @@ Follow the instructions below to install the required dependencies.
   # activate the virtual environment
   $ source venv/bin/activate
 
-  # install Flask into the virtul environment
+  # install Flask into the virtual environment
   $ pip install flask
 
   # exit the virtual environment
@@ -145,7 +145,7 @@ The output for the services running on port 80 will look similar to this
 Create a load balancer
 **********************
 
-First lets create the loadbalancer. It will be called **lb_test_2** and it’s
+First lets create the loadbalancer. It will be called **lb_test_2** and it's
 virtual IP address (VIP) will be attached to the local subnet
 **private-subnet**.
 
@@ -417,7 +417,7 @@ In your workstation or in a separate test compute instance add entries to the
 /etc/hosts file to provide name resolution. The value for
 <loadbalancer_floating_ip> in the following examples
 will be the value of $FIP from the final step of setting up the loadbalancer
-above.These entries essentially become an aliase for these IPs when added to
+above.These entries essentially become an alias for these IPs when added to
 /etc/hosts in this way.
 
 /etc/host entries

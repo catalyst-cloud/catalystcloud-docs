@@ -1,53 +1,13 @@
 .. _installing-the-cli:
 
-###############
-Install the CLI
-###############
+##################
+Installing the CLI
+##################
 
 
-**********************
-Install (using Docker)
-**********************
-
-The Catalyst Cloud CLI is available as a Docker container that is easy to use,
-packaging the command line interface and all its dependencies.
-
-This tool requires Docker to be installed to function. You can find
-`instructions on how to install and configure Docker here`_. You can run the
-``docker ps`` command to confirm Docker has been successfully installed.
-
-Run the following command to install the Catalyst Cloud CLI:
-
-.. code-block:: bash
-
-  bash <(wget -qO - https://raw.githubusercontent.com/catalyst-cloud/openstackclient-container/master/fetch-installer.sh) -a ccloud -u https://api.cloud.catalyst.net.nz:5000/v3
-
-
-.. Note::
-
-  If you are intending to use the containerised tools you will need to obtain
-  the non MFA enabled openrc file for authentication.
-
-To get a copy of the non MFA enabled openrc file, select the dropdown in the
-upper right corner of the dash board and click on ``OpenStack RC File v3``.
-Select ``Save As`` when prompted to select the location on your machine to
-save this file to.
-
-.. image:: ../../_static/openrc-no-mfa.png
-   :align: center
-
-If you need more information on using the file see :ref:`source-rc-file`.
-
-.. _instructions on how to install and configure Docker here: https://docs.docker.com/install/
-.. _CLI docker container: https://github.com/catalyst-cloud/openstackclient-container
-
-
-
-
-
-*******************
-Install (using pip)
-*******************
+*********************
+Using pip (recommend)
+*********************
 
 When installing the CLI using pip, it is recommended to use a python virtual
 environment to contain the required dependencies.
@@ -59,7 +19,7 @@ The examples all make reference to the use of virtual environments. Please
 refer to the :ref:`python-virtual-env` tutorial for more information on
 ``venv``.
 
-Operating System Specific Steps
+Operating system specific steps
 ===============================
 
 .. _installing_ubuntu_cli:
@@ -68,7 +28,7 @@ Ubuntu Linux 18.04
 ------------------
 
 Ubuntu 18.04 uses Python 3.x by default. We recommended using Python3.x
-because python2 has been schedualed for retirement soon and therefore migrating
+because python2 has been scheduled for retirement soon and therefore migrating
 over to Python3 is a necessity.
 
 .. code-block:: bash
@@ -77,7 +37,7 @@ over to Python3 is a necessity.
   sudo apt-get install python3 python3-venv
 
   # Create a new virtual environment and activate it
-  python3 -m venv vevn
+  python3 -m venv venv
 
   # Activate the virtual environment
   source venv/bin/activate
@@ -85,6 +45,7 @@ over to Python3 is a necessity.
   # Install the Python openstack client libraries into your virtual environment
   pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
 
+.. _installing_debian_cli:
 
 Debian Linux 8
 --------------
@@ -103,6 +64,8 @@ Debian Linux 8
   # Install the Python openstack client libraries and the Python timezone definitions
   # into your virtual environment
   pip install pytz python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
+
+.. _installing_centos_cli:
 
 CentOS Linux 7
 --------------
@@ -124,10 +87,12 @@ CentOS Linux 7
   source venv/bin/activate
 
   # Install the Python openstack client libraries into your virtual environment
-  pip install Python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
+  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
 
-Mac OS X
---------
+.. _installing_macos_cli:
+
+MacOS
+-----
 
 .. code-block:: bash
 
@@ -142,8 +107,10 @@ Mac OS X
   # Install the Python openstack client libraries into your virtual environment
   pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
 
+.. _installing_windows_powershell_cli:
+
 Windows (Powershell)
-----------------------
+--------------------
 
 A good overview for the setup and configuration of Python and pip
 on Windows can be found at http://www.tylerbutler.com/2012/05/how-to-install-python-pip-and-virtualenv-on-windows-with-powershell/
@@ -151,7 +118,7 @@ on Windows can be found at http://www.tylerbutler.com/2012/05/how-to-install-pyt
 .. Note::
   The guide above mentions how to download virtualenv for powershell, however
   this is assuming you are using python2 which has been discontinued. For this
-  reason, we recommend using pip to install the normal `virutalenvwrapper.`
+  reason, we recommend using pip to install the normal `virtualenvwrapper.`
   using `pip install virtualenvwrapper`
 
 Assuming that Python and pip have successfully been installed then
@@ -166,11 +133,19 @@ Assuming that Python and pip have successfully been installed then
   # Install the Python openstack client libraries into your virtual environment
   pip install python-openstackclient python-ceilometerclient python-heatclient python-neutronclient python-swiftclient python-octaviaclient python-magnumclient
 
+Now that you have installed the required libraries to work with the Catalyst
+Cloud onto your virtual environment; You have to make sure that whenever you
+use powershell to interact with the cloud, you work on your Virtual
+Environment. It may save time to make a short python script that runs the
+activation command for you when you start powershell up.
 
 If any errors are encountered while pip is building packages it may be
-necessary to install the `Microsoft Visual C++ Compiler for Python 2.7`_ and retry.
+necessary to install the `Microsoft Visual C++ Compiler for Python 2.7`_
+and retry.
 
 .. _Microsoft Visual C++ Compiler for Python 2.7: https://www.microsoft.com/en-gb/download/details.aspx?id=44266
+
+.. _installing_windows_linux_subsystem_cli:
 
 Windows (Linux Subsystem)
 -------------------------
@@ -190,19 +165,68 @@ First, you will need to open PowerShell as an Administrator and run:
  # Running as Administrator
  Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
-You will then need to download a versoin of Ubuntu from either the Microsoft
+You will then need to download a version of Ubuntu from either the Microsoft
 store, from a command line script, or to manually unpack it and install it from
 their release website. For our purposes we will be using the Microsoft Store.
 
 .. image:: ../assets/windows-store.png
 
 I've chosen to use Ubuntu 18.04. Once installed, you open the application
-and set up an Unix account. An Unix account is only relevent on your machine
+and set up an Unix account. An Unix account is only relevant on your machine
 and once set up you won't need to use your login details again (but hold on to
 them for security purposes) Once that is done you will be met with a screen
 somewhat like this:
 
 .. image:: ../assets/unix-shell.png
 
+Once you have this up and running, you'll need to change directory to be
+able to find files you download onto your windows machine.
+The following code should get you to your root folder, aka 'My Computer'
+
+.. code-block:: bash
+
+  $ cd /mnt/c
+
 Then you simply need to follow the guide on how to install the CLI on ubuntu
 detailed :ref:`earlier on this page.<installing_ubuntu_cli>`
+
+.. _installing_docker_cli:
+
+
+***************************
+Using Docker (experimental)
+***************************
+
+The Catalyst Cloud CLI is available as a Docker container that is easy to use,
+packaging the command line interface and all its dependencies.
+
+This tool requires Docker to be installed to function. You can find
+`instructions on how to install and configure Docker here`_. You can run the
+``docker ps`` command to confirm Docker has been successfully installed.
+
+Run the following command to install the Catalyst Cloud CLI:
+
+.. code-block:: bash
+
+  bash <(wget -qO - https://raw.githubusercontent.com/catalyst-cloud/openstackclient-container/master/fetch-installer.sh) -a ccloud -u https://api.cloud.catalyst.net.nz:5000/v3
+
+
+.. Note::
+
+  Our documentation currently refers to the CLI command as ``openstack``. When
+  using the containerised version of the CLI, this command must be replaced with
+  ``ccloud`` in the provided examples.
+
+If you are intending to use the containerised tools you will need to obtain the
+non MFA enabled openrc file for authentication.To get a copy of the non MFA
+enabled openrc file, select the dropdown in the upper right corner of the dash
+board and click on ``OpenStack RC File v3``. Select ``Save As`` when prompted to
+select the location on your machine to save this file to.
+
+.. image:: ../../_static/openrc-no-mfa.png
+   :align: center
+
+If you need more information on using the file see :ref:`source-rc-file`.
+
+.. _instructions on how to install and configure Docker here: https://docs.docker.com/install/
+.. _CLI docker container: https://github.com/catalyst-cloud/openstackclient-container

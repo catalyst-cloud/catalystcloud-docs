@@ -12,7 +12,8 @@ Using the CLI
 **If you installed the CLI using docker:**
 
 1. :ref:`source-rc-file`
-2. Invoke the CLI with the ``ccloud`` alias anywhere the ``openstack`` command is otherwise used.
+2. Invoke the CLI with the ``ccloud`` alias anywhere the ``openstack`` command
+   is otherwise used.
 
 
 For a reference of all commands supported by the CLI, refer to the `OpenStack

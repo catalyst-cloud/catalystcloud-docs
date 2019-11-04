@@ -31,8 +31,7 @@ use Python's pip installer. Simply run:
  pip install openstacksdk.
 
 It is recommended that you use the openstack sdk from a virtual
-environment. Therefore if you already have one, it is suggested that you
-install it there.
+environment. More information can be found here: :ref:`python-virtual-env`
 
 OpenStack credentials
 =====================
@@ -40,7 +39,7 @@ OpenStack credentials
 The first step in getting an instance running is to provide your Python script
 with the correct credentials and configuration appropriate for your project.
 The easiest way to achieve this is to make use of environment variables. You
-will make use of the standard variables provided by an OpenStack RC file as
+can make use of the standard variables provided by an OpenStack RC file as
 described at :ref:`source-rc-file`.
 
 Once you have sourced your file and your env variables are set; to get them

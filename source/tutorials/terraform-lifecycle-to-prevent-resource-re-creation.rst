@@ -15,7 +15,7 @@ Problem
 =======
 
 In Catalyst Cloud we provide OS images that users can use to start their
-virtual machines. We update our images regularily so the image name stays
+virtual machines. We update our images regularly so the image name stays
 the same but the image contents change. Users who manage Catalyst Cloud using
 Terraform, will notice that when they use certain images to start compute
 instances Terraform will periodically offer to re-create an entire instance
@@ -85,4 +85,5 @@ Terraform to ignore changes in `image_name`
     }
   }
 
-This will prevent Terraform from re-creating the instance when image_id changes.
+This will prevent Terraform from re-creating the instance when image_id
+changes.

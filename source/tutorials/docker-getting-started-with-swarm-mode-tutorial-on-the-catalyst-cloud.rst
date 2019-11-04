@@ -8,18 +8,18 @@ Docker Engines or nodes is known as a swarm. Swarm Mode allows you to
 orchestrate services across all the nodes in a swarm. This is useful for the
 scaling, load balancing, distribution and availability of your services.
 
-This tutorial shows you how to easily set up Catalyst Cloud compute instances to
-use with the `Getting started with swarm mode`_ tutorial, available as part of
-the `docker`_ `documentation`_.
+This tutorial shows you how to easily set up Catalyst Cloud compute instances
+to use with the `Getting started with swarm mode`_ tutorial, available as part
+of the `docker`_ `documentation`_.
 
 .. _swarm mode: https://docs.docker.com/engine/swarm/
 .. _Getting started with swarm mode: https://docs.docker.com/engine/swarm/swarm-tutorial/
 .. _docker: https://www.docker.com/
 .. _documentation: https://docs.docker.com/
 
-This tutorial will use `Ansible`_ to create three swarm nodes that correspond to
-the examples used in the Docker tutorial. After running the playbook, you will
-have access to three hosts exactly as described in the tutorial. A cleanup
+This tutorial will use `Ansible`_ to create three swarm nodes that correspond
+to the examples used in the Docker tutorial. After running the playbook, you
+will have access to three hosts exactly as described in the tutorial. A cleanup
 playbook is provided to remove all resources when you have completed the
 tutorial.
 

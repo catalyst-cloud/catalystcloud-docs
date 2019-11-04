@@ -27,7 +27,7 @@ Uploading an SSH key
 ********************
 
 The first thing we need to do is to have a way to access the instances we
-create. Typcially this is done by a Secure Shell tunnel, or SSH. To allow our
+create. Typically this is done by a Secure Shell tunnel, or SSH. To allow our
 instance to accept our workstation's SSH tunnel request, we must add our SSH
 public key to our instance. We can do this right from the dashboard.
 
@@ -186,7 +186,7 @@ Wait for your instance to launch.
 
 .. image:: dashboard_assets/launching-instance.png
 
-Finally, to make your instance accessable, we need to give it a publicly
+Finally, to make your instance accessible, we need to give it a publicly
 available, static IP address, because currently the instance only has an
 internal IP address from instance's subnet. These are ``Floating IPs``.
 

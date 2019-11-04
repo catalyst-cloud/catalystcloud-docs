@@ -2,7 +2,7 @@
 Network
 #######
 
-The network service allows you to create your own private networks, subnets,
+The network service allows you to create your own private networks, sub-nets,
 routers, security groups and site-to-site VPNs.
 
 .. toctree::

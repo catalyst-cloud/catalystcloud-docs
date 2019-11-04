@@ -1,9 +1,9 @@
 
 .. _object-storage-access:
 
-##############################
-Managing object storage access
-##############################
+###############
+Managing access
+###############
 
 The typical user roles, such as ``Project Member`` or ``Object Storage``, that
 allow access to people that need to work with object storage do not provide for
@@ -18,7 +18,7 @@ role. This role is described in more detail here.
 * You have installed the OpenStack command line tools and understand how to
   work with an OpenStack RC file, as explained at :ref:`command-line-interface`
 
-This walkthrough will make use of the following, preconfigured setup.
+This walk through will make use of the following, preconfigured setup.
 
 **Users**
 For the purposes of this tutorial we have 3 users available, they are
@@ -32,7 +32,7 @@ assigned to them. The clouduser will have the ``Project Member`` role assigned.
 
 **Object Storage**
 There are 2 object storage containers available, these are access_1 and
-access_2. They have no exisitng ACLs assigned to them. The container access_1
+access_2. They have no existing ACLs assigned to them. The container access_1
 has a single file stored within it called foo.txt.
 
 **************************
@@ -67,7 +67,7 @@ only role that has been checked is the ``Auth Only`` option.
     where an additional text string is appended with a "+" symbol to an
     existing email address. e.g. operations+restricted-storage@example.com
 
-    This will send the email to the exisiting address of operations@example.com
+    This will send the email to the existing address of operations@example.com
     allowing it to be filtered and managed without the need to create a whole
     new email account.
 
@@ -112,7 +112,7 @@ containers we will receive a 403 error as access is currently forbidden.
 
     Once you have the restricted user's ID value you will need to swap to using a
     user with the Project Member or object storage role in order to assign ACLs to
-    the storge containers.
+    the storage containers.
 
 
 Creating a READ access rule
@@ -176,7 +176,7 @@ Where:
     container.
 
 The following table describes how the permissions are defined. These can be
-applied singularly or as a comma seperated list to both the --read-acl and
+applied singularly or as a comma separated list to both the --read-acl and
 --write-acl parameters.
 
 +--------------------------+----------------------------------------------------------+
@@ -189,14 +189,14 @@ applied singularly or as a comma seperated list to both the --read-acl and
 | \*:<user-id>             | The specified user has access                            |
 +--------------------------+----------------------------------------------------------+
 
-Let's add read access for restricted-user-1 to the container access-1. As names are
-not supported for ACL definitions we will use the user id instead.
+Let's add read access for restricted-user-1 to the container access-1. As names
+are not supported for ACL definitions we will use the user id instead.
 
 .. code-block:: bash
 
   swift post access_1 --read-acl "*:11d1cb41f05140ebadcec49b9a67a2d7"
 
-An if we chack the state of the container now we can see that there is a
+And if we check the state of the container now we can see that there is a
 ``read_acl`` field present with the user's id associated with it.
 
 .. code-block:: bash
@@ -214,7 +214,7 @@ An if we chack the state of the container now we can see that there is a
   | read_acl     | *:11d1cb41f05140ebadcec49b9a67a2d7    |
   +--------------+---------------------------------------+
 
-If we now source the credentials for the user that has been granted acces they
+If we now source the credentials for the user that has been granted access they
 should now be able to run the following command and see the details of the
 container.
 

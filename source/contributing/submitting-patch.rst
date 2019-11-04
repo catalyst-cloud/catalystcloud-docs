@@ -26,7 +26,7 @@ Sync your branch with GitHub::
   Branch naming convention: ``new|bug|?/<shortdesc>#<ticket-num>``
 
   Branch names starts with "new" or "bug". New is used when adding a new
-  document or new sections to existing documents. Bug is using when ammending
+  document or new sections to existing documents. Bug is using when amending
   content of an existing document.
 
   ``<shortdesc>``: is something brief that indicates what the change is.

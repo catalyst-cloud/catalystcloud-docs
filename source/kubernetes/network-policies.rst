@@ -1,6 +1,6 @@
-#############################
-Working with network policies
-#############################
+################
+Network policies
+################
 
 As Catalyst Cloud uses `Calico`_ for the default network driver it is
 possible to define network policies to control what and how resources are
@@ -82,8 +82,8 @@ Now create a simple busybox pod that will allow us to access a shell
 environment within the cluster so that we can see and test the network from
 the same context as the application pods.
 
-Once in the shell use ``wget`` to query the application service and confirm it is
-accessible.
+Once in the shell use ``wget`` to query the application service and confirm it
+is accessible.
 
 .. code-block:: text
 
@@ -105,8 +105,8 @@ As the policy does not explicitly specify policyTypes for ingress or egress
 they will both be enabled by default with no rules defined which means that
 all traffic is blocked.
 
-The empty podSelector ``matchLabels: {}`` means that this policy applies to all pods in this
-namespace.
+The empty podSelector ``matchLabels: {}`` means that this policy applies to all
+pods in this namespace.
 
 .. code-block:: bash
 

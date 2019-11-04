@@ -6,7 +6,15 @@ Quick start
 ###########
 
 This quick start guide assumes you have working knowledge of Catalyst Cloud
-:ref:`command-line-interface` and familiarity with Kubernetes.
+:ref:`command-line-interface` and some familiarity with Kubernetes.
+
+.. warning::
+
+  Due to active development of this service, we recommend the use of the latest
+  version of the CLI to interact with it. Please refer to the
+  :ref:`upgrading-the-cli` section of the documentation for upgrade
+  instructions. This documentation assumes ``python-magnumclient`` is 2.12.0 or
+  above.
 
 
 **************
@@ -16,8 +24,8 @@ Pre-requisites
 Ensure user has the required privileges
 =======================================
 
-In order to be able to create a Kubernetes cluster you need to ensure the user
-has been allocated the ``heat_stack_owner`` role.
+In order to create a Kubernetes cluster you need to ensure the user has been
+allocated the ``heat_stack_owner`` role.
 
 Ensure quota is sufficient
 ==========================
@@ -32,13 +40,13 @@ By default, the production Kubernetes template allocates:
 * 6 compute instances
 * 18 vCPUs
 * 36 GB of RAM
-* 8 floating IPs
-* 3 security groups
-* 3 volumes
+* 3 block storage volumes
 * 60 GB of block storage space
+* 3 security groups
+* 1 load balancer
 
 As a ``project admin`` you can change your quota using the `Quota Management`_
-panel in the dashboard, under the ``Management`` section.
+panel in the dashboard, under the Management section.
 
 .. _`Quota Management`: https://dashboard.cloud.catalyst.net.nz/management/quota/
 
@@ -58,7 +66,7 @@ static binary:
   $ chmod +x ./kubectl
   $ sudo mv ./kubectl /usr/local/bin/kubectl
 
-For other platforms or installations methods, please refer to the `detailed
+For other platforms or installation methods, please refer to the `detailed
 instructions on how to install kubectl`_.
 
 .. _`detailed instructions on how to install kubectl`: https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -70,32 +78,33 @@ A cluster template is a blue-print to build a Kubernetes cluster (similar to
 machine images for the compute service). The cluster template specifies what
 version of Kubernetes will be installed and the features that will be enabled.
 
+.. Note::
+
+  From cluster template version ``v1.12.10`` onwards, as a security best
+  practice, the behaviour when creating a new cluster is for it to be
+  created as a :ref:`private-cluster`. This means that the cluster will not be
+  reachable directly from the internet by default.
+
 The following command will list all cluster templates available:
 
 .. code-block:: bash
 
   $ openstack coe cluster template list
- +--------------------------------------+----------------------------------+
- | uuid                                 | name                             |
- +--------------------------------------+----------------------------------+
- | c5b5a636-0066-4291-8da9-5190915f5a76 | kubernetes-v1.11.6-prod-20190130 |
- | 5cb74603-4ad3-4e3b-a1d4-4539c392dbf0 | kubernetes-v1.11.6-dev-20190130  |
- | 5e17bc87-27b2-4c61-ba58-c064fd10245d | kubernetes-v1.11.9-dev-20190402  |
- | bd116a49-4381-4cb6-adf8-cd442e1a713f | kubernetes-v1.11.9-prod-20190402 |
- | be25ca0c-2bf6-4bef-a234-4e073b187d71 | kubernetes-v1.12.7-dev-20190403  |
- | 81d0f765-62fe-4c99-b7f8-284ffddac861 | kubernetes-v1.12.7-prod-20190403 |
- +--------------------------------------+----------------------------------+
-
-
-.. Note::
-
-  Make sure that when you use one of these names a command that you use them
-  precisely as written. There are no warning messages to tell you that the
-  template name doesn't exist and so you must double check before inputting any
-  commands.
+  +--------------------------------------+-----------------------------------+
+  | uuid                                 | name                              |
+  +--------------------------------------+-----------------------------------+
+  | b1d124db-b7cc-4085-8e56-859a0a7796e6 | kubernetes-v1.11.9-dev-20190402   |
+  | cf337c0a-86e6-45de-9985-17914e78f181 | kubernetes-v1.11.9-prod-20190402  |
+  | 967a2b86-8709-4c07-ae89-c0fe6d69d62d | kubernetes-v1.12.7-dev-20190403   |
+  | f8fc0c67-84af-4bb8-89fb-d29f4c926975 | kubernetes-v1.12.7-prod-20190403  |
+  | bfde711c-655c-4de9-b37e-847fc635b734 | kubernetes-v1.12.10-dev-20190912  |
+  | 38382877-957e-4667-9851-838eef892b64 | kubernetes-v1.12.10-prod-20190912 |
+  | d319cc8e-e27d-4ef9-be84-a6d431800215 | kubernetes-v1.13.10-dev-20190912  |
+  | e8257719-b209-40bf-9619-2895698d5a73 | kubernetes-v1.13.10-prod-20190912 |
+  +--------------------------------------+-----------------------------------+
 
 Alternatively, a list of cluster templates available can be seen in the
-`Cluster Templates`_ panel in the dashboard, under the ``Container Infra``
+`Cluster Templates`_ panel in the dashboard, under the **Container Infra**
 section.
 
 .. _`Cluster Templates`: https://dashboard.cloud.catalyst.net.nz/project/cluster_templates
@@ -105,59 +114,74 @@ Template types
 
 The naming convention used for the templates is broken down as follows:
 
-* ``kubernetes-v1.11.2`` : this is the version of kubernetes that the template
+* **kubernetes-v1.11.2** : this is the version of kubernetes that the template
   will use to create the cluster.
-* ``-dev`` or ``-prod`` : this create either a minimalist cluster for proof of
-  concept or development work, whereas the prod option creates a more
-  production ready cluster (see below).
-* ``-20181008`` the final portion of the name is the date on which the template
-  was created.
+* **-prod** or **-dev**: the type of environment to be created (see below).
+* **-20190912**: the date on which the template was created.
 
-The difference between between the  development and production templates are:
+The difference between the development and production templates are:
 
-* ``dev`` creates a small Kubernetes cluster with a single master and a single
-  worker node. As the name suggests, it should not be used for production.
-* ``prod`` creates a Kubernetes cluster that is intended for production
-  workloads. It expects a minimum three master nodes and three worker nodes.
-  The master nodes will have two loadbalancers deployed in front of them in
-  order to provide HA for the API and etcd services. This template also deploys
+* **Production**: creates a Kubernetes cluster that is intended for production
+  workloads. It creates three or more master nodes and three or more worker
+  nodes. The master nodes will have a loadbalancer deployed in front of them to
+  provide high availability for the Kubernetes API. This template also deploys
   Prometheus and Grafana to provide cluster metrics.
-
-.. warning::
-
-  Please note that despite having a template called "production", the
-  Kubernetes service on the Catalyst Cloud is still in alpha (Tech Preview) and
-  should not be used for production workloads.
+* **Development**: creates a minimal Kubernetes cluster with a single master
+  and a single worker node. As the name suggests, it should not be used for
+  production.
 
 
 ******************************
 Deploying a Kubernetes cluster
 ******************************
 
-Creating a cluster
-==================
+Private vs Public cluster API access
+====================================
 
-To create a new **development** cluster run the following command:
+Any cluster created using one of the predefined templates will, by default, be
+created as a ``private cluster``. This means that the Kubernetes API will
+**not** be accessible from the internet and access will need to be via a
+bastion or jumphost server within the cloud project.
+
+If you would prefer to create a ``publicly accessible cluster`` then simply
+add the following option to the cluster creation command.
 
 .. code-block:: bash
 
-  $ openstack coe cluster create k8s-dev-cluster \
-  --cluster-template kubernetes-v1.12.7-dev-20190403 \
-  --keypair my-ssh-key \
-  --node-count 1 \
-  --master-count 1
+  --floating-ip-enabled
 
-  Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
+The actual usage would look like this.
+
+.. code-block:: console
+
+  $ openstack coe cluster create <Cluster name> \
+    --cluster-template <Template ID> \
+    --floating-ip-enabled
+
+Creating a cluster
+==================
 
 To create a new **production** cluster, run the following command:
 
 .. code-block:: bash
 
-  $ openstack coe cluster create k8s-prod-cluster \
-  --cluster-template kubernetes-v1.12.7-prod-20190403 \
+  $ openstack coe cluster create k8s-cluster \
+  --cluster-template kubernetes-v1.13.10-prod-20190912 \
   --keypair my-ssh-key \
   --node-count 3 \
   --master-count 3
+
+  Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
+
+To create a new **development** cluster run the following command:
+
+.. code-block:: bash
+
+  $ openstack coe cluster create k8s-cluster \
+  --cluster-template kubernetes-v1.13.10-dev-20190912 \
+  --keypair my-ssh-key \
+  --node-count 1 \
+  --master-count 1
 
   Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
 
@@ -178,22 +202,20 @@ You can use the following command to check the status of the cluster:
   | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
 
-Alternatively, you can check the status of the cluster on the `Clusters`_ panel
+Alternatively, you can check the status of the cluster on the `Clusters panel`_
 , in the ``Container Infra`` section of the Dashboard.
 
-.. _`Clusters`: https://dashboard.cloud.catalyst.net.nz/project/clusters
+.. _`Clusters panel`: https://dashboard.cloud.catalyst.net.nz/project/clusters
 
 Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
-
-The kubectl command-line tool uses kubeconfig files to determine how to coonect
-to the APIs of the Kubernetes cluster.
 
 Getting the cluster config
 ==========================
 
-The following command will download the necessary certificates and create a
-configuration file on your current directory. It will also export the
-``KUBECONFIG`` variable on your behalf:
+The kubectl command-line tool uses kubeconfig files to determine how to connect
+to the APIs of the Kubernetes cluster. The following command will download the
+necessary certificates and create a configuration file on your current
+directory. It will also export the ``KUBECONFIG`` variable on your behalf:
 
 .. code-block:: bash
 
@@ -208,15 +230,130 @@ If you wish to save the configuration to a different location you can use the
   cluster, it is necessary to ensure that the current ``kubectl configuration``
   is referencing the correct cluster configuration.
 
-Testing the cluster
-===================
+Accessing a private cluster
+===========================
 
 Once the cluster state is ``CREATE_COMPLETE`` and you have successfully
-retrieved the cluster config, you can proceed with deploying your applications
-into the cluster using kubectl or whatever your preferred mechanism may be.
+retrieved the cluster config, we need to confirm that we are able to access the
+cluster.
 
-As a quick check, you can run the following command to confirm that Kubernetes
-is working as expected:
+If you did not override the default behaviour you will have created a **private
+cluster**. In order to access this you will need to create a bastion host
+within your cloud project to allow you to reach the Kubernetes API.
+
+.. Note::
+
+  The use of the bastion server is unnecessary if you created a public cluster
+  that is directly accessible from the internet.
+
+For the purpose of this example let's assume we deployed a bastion host with
+the following characteristics:
+
+* name - bastion
+* flavor - c1.c1r1
+* image - ubuntu-18.04-x86_64
+* network - attached to the Kubernetes cluster network
+* security group - bastion-ssh-access
+* security group rules - ingress TCP/22 from 114.110.xx.xx ( public IP to allow
+  traffic from)
+
+The following commands are to check our setup and gather the information we
+need to set up our SSH forward in order to reach the API endpoint.
+
+Find the instance's external public IP address
+
+.. code-block:: bash
+
+  $ openstack server show bastion -c addresses -f value
+  private=10.0.0.16, 103.197.62.38
+
+Confirm that we have a security group applied to our instance that allows
+inbound TCP connections on port 22 from our current public IP address. In this
+case our security group is called bastion-ssh-access and out public IP is
+114.110.xx.xx.
+
+.. code-block:: bash
+
+  $ openstack server show bastion -c security_groups -f value
+  name='bastion-ssh-access'
+  name='default'
+
+  $ openstack security group rule list bastion-ssh-access
+  +--------------------------------------+-------------+-----------+------------------+------------+-----------------------+
+  | ID                                   | IP Protocol | Ethertype | IP Range         | Port Range | Remote Security Group |
+  +--------------------------------------+-------------+-----------+------------------+------------+-----------------------+
+  | 42c1320c-98d5-4275-9c2d-b81b0eadac29 | tcp         | IPv4      | 114.110.xx.xx/32 | 22:22      | None                  |
+  +--------------------------------------+-------------+-----------+------------------+------------+-----------------------+
+
+Finally we need the IP address for the Kubernetes API endpoint
+
+.. code-block:: bash
+
+  $ openstack coe cluster show k8s-prod -c api_address -f value
+  https://10.0.0.5:6443
+
+We will make use of SSH's port forwarding ability in order to allow us to
+connect from our local machine's environment. To do this run the following
+command in your shell.
+
+.. code-block:: bash
+
+  ssh -f -L 6443:10.0.0.5:6443 ubuntu@103.197.62.38 -N
+
+* -f fork the process in background
+* -N do not execute any commands
+* -L specifies what connections are given to the localhost. In this example we use the
+   ``port:host:hostport`` to bind 6443 on localhost to 6443 on the API endpoint at 10.0.0.5
+* The **ubuntu@103.197.62.38** is the credentials for SSH to log into the bastion host.
+
+.. Note::
+
+  Setting up the SSH forwarding is optional. You can choose to deploy a cloud
+  instance on the Kubernetes cluster network with appropriate remote access
+  and SSH on it and run all of your cluster interactions from there.
+
+As a quick test we can run the following curl command to check that we get a
+response from the API server.
+
+.. code-block:: bash
+
+  $ curl https://localhost:6443 --insecure
+  {
+    "kind": "Status",
+    "apiVersion": "v1",
+    "metadata": {
+
+    },
+    "status": "Failure",
+    "message": "forbidden: User \"system:anonymous\" cannot get path \"/\"",
+    "reason": "Forbidden",
+    "details": {
+
+    },
+    "code": 403
+  }
+
+If the curl request returned a JSON response similar to that shown above you
+can run the following command to confirm that Kubernetes is working as
+expected.
+
+First, if you are running a private cluster and connecting over the SSH tunnel
+you will need to edit the kubeconfig file you retrieved earlier and make the
+following change.
+
+Find the ``server`` entry that points to the Kubernetes API.
+
+.. code-block:: bash
+
+  server: https://10.0.0.5:6443
+
+Change it so that it points to the localhost address instead.
+
+.. code-block:: bash
+
+  server: https://127.0.0.1:6443
+
+Then run kubectl to confirm that the cluster responds correctly.
 
 .. code-block:: bash
 
@@ -225,6 +362,8 @@ is working as expected:
   Heapster is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/heapster/proxy
   CoreDNS is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 
+You can now proceed with deploying your applications into the cluster using
+kubectl or whatever your preferred mechanism may be.
 
 
 **********************************
@@ -234,8 +373,8 @@ Accessing the Kubernetes dashboard
 The Catalyst Kubernetes Service enables the Kubernetes web dashboard by default
 (this behaviour can be overwritten if desirable).
 
-In order to access the Kubernetes dashboard, you will need retrieve the admin
-token for the cluster using the following command:
+In order to access the Kubernetes dashboard, you will need to retrieve the
+admin token for the cluster using the following command:
 
 ::
 
@@ -263,11 +402,10 @@ browser to connect to the Kubernetes dashboard.
   Starting to serve on 127.0.0.1:8001
 
 Once the proxy is ready, open following URL on your browser:
-
-``http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy``
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
 
 You will be presented with a login screen, as illustrated below. Select
-``Token`` as the authentication type and paste in the authentication token
+**Token** as the authentication type and paste in the authentication token
 acquired in the previous step.
 
 .. image:: _containers_assets/kubernetes_dashboard_login.png
@@ -305,7 +443,7 @@ the cloud.
 Creating the application deployment
 ===================================
 
-First we need to create a manifest like this. If you're folliwing along with
+First we need to create a manifest like this. If you're following along with
 this example you should save this file as ``helloworld-deployment_1.yaml``
 
 .. literalinclude:: _containers_assets/helloworld-deployment_1.yaml
@@ -315,7 +453,7 @@ This provides the following parameters for a deployment:
 * number of ``replicas`` - 3
 * deployment ``image`` - catalystcloud/helloworld version_1.1.
 * pod ``labels``, to identify the app to the service - app: helloworld
-* ``containerPort`` to expose the application on - 5000
+* ``containerPort`` to expose the application on - 8080
 
   - This port also uses a name, in this case **helloworld-port**, which
     allows us to refer to it by name rather than value in the service.
@@ -383,7 +521,7 @@ publicly accessible floating IP address.
   Port:                     <unset>  80/TCP
   TargetPort:               helloworld-port/TCP
   NodePort:                 <unset>  32548/TCP
-  Endpoints:                192.168.209.128:5000,192.168.209.129:5000,192.168.43.65:5000
+  Endpoints:                192.168.209.128:8080,192.168.209.129:8080,192.168.43.65:8080
   Session Affinity:         None
   External Traffic Policy:  Cluster
   Events:

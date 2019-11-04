@@ -4,7 +4,7 @@ Clusters
 
 This section shows a more in depth view of clusters and their uses. It
 goes over the process of creating clusters, which is already covered in
-quick start section of this documentation.If you've gone through that you
+quick start section of this documentation. If you have gone through that you
 don't need to follow all of the examples again.
 
 ******************
@@ -12,8 +12,8 @@ What is a cluster?
 ******************
 
 A container cluster is the foundation of the Kubernetes Engine, it consists of
-at least one ``master`` server and one or more ``node`` servers. It is made up
-of a collection of compute, networking and storage resources necessary to run
+one or more **master node(s)** and one or more **woker node(s)**. It is made up
+of a collection of compute, networking, and storage resources necessary to run
 any given workloads. Communication between them is by way of a shared network.
 An entire system may be comprised of multiple clusters.
 
@@ -50,6 +50,12 @@ The cloud provider may supply pre-defined templates for users and it may also
 be possible, in some situations, for user to create their own templates.
 Initially Catalyst Cloud will only allow the use of the pre-defined templates.
 
+.. Note::
+
+  From cluster template version ``v1.12.10`` onwards, as a security best
+  practice, the behaviour when creating a new cluster is for it to be
+  created as a :ref:`private-cluster`. This means that the cluster will not be
+  reachable directly from the internet by default.
 
 Viewing templates
 =================
@@ -154,7 +160,7 @@ Creating a cluster
 
 To create a new cluster we run the ``openstack coe cluster create`` command,
 providing the name of the cluster that we wish to create along with any
-possible additonal or over-riding parameters that are necessary.
+possible additional or over-riding parameters that are necessary.
 
 .. code-block:: bash
 
@@ -173,8 +179,8 @@ possible additonal or over-riding parameters that are necessary.
   | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
 
-Once the cluster is active access to server nodes in the cluster is via ssh,
-the ssh user will be 'fedora' and the authentication will be using the ssh key
+Once the cluster is active, access to server nodes in the cluster is via ssh.
+The ssh user will be 'fedora' and the authentication will be using the ssh key
 provided in the cluster template.
 
 .. code-block:: bash
@@ -183,7 +189,7 @@ provided in the cluster template.
 
 .. note::
 
-  Once a cluster template is in use it cannot be updated or deleted until all of
+  Once a cluster template is in use, it cannot be updated or deleted until all of
   the clusters using it have been terminated.
 
 .. _kube_cli:
@@ -291,7 +297,7 @@ By default Kubernetes provides a web based dashboard that exposes the details
 of a given cluster. In order to access this it is first necessary to to
 retrieve the admin token for the cluster you wish to examine.
 
-The following command will extract the correct value from the secretes in the
+The following command will extract the correct value from the secrets in the
 kube-system namespace.
 
 ::
@@ -312,7 +318,7 @@ kube-system namespace.
   token:      1234567890123456789012.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJhZG1pbi10b2tlbi1mNTcyOCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJhZG1pbiIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImNjNDQxNmQxLWNhODItMTFlOC04OTkzLWZhMTYzZTEwZWY3NiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTphZG1pbiJ9.ngUnhjCOnIQYOAMzyx9TbX7dM2l4ne_AMiJmUDT9fpLGaJexVuq7EHq6FVfdzllgaCINFC2AF0wlxIscqFRWgF1b1SPIdL05XStJZ9tMg4cyr6sm0XXpzgkMLsuAzsltt5GfOzMoK3o5_nqn4ijvXJiWLc4XkQ3_qEPHUtWPK9Jem7p-GDQLfF7IvxafJpBbbCR3upBQpFzn0huZlpgdo46NAuzTT6iKhccnB0IyTFVgvItHtFPFKTUAr4jeuCDNlIVfho99NBSNYM_IwI-jTMkDqIQ-cLEfB2rHD42R-wOEWztoKeuXVkGdPBGEiWNw91ZWuWKkfslYIFE5ntwHgA
 
 Next run the ``kubectl proxy`` command from the CLI. You can run this command
-in a seperate window, however you will need to source the CONFIG file in said
+in a separate window, however you will need to source the CONFIG file in said
 window.
 
 .. code-block:: bash

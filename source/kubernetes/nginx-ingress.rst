@@ -1,6 +1,6 @@
-**********************************
+##################################
 Using the Nginx ingress controller
-**********************************
+##################################
 
 This guide explains how to deploy an Nginx ingress controller in to a
 Kubernetes cluster running on an Openstack cloud.
@@ -13,23 +13,24 @@ This guide makes the following assumptions.
 
 .. _`kubectl`: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
+******************************
 What is an Ingress Controller?
-==============================
+******************************
 
 In Kubernetes, Ingress allows external users and client applications access
 to HTTP services. Ingress consists of two components.
 
-Ingress Resource is a collection of rules for the inbound traffic to reach
+`Ingress Resource` is a collection of rules for the inbound traffic to reach
 Services. These are Layer 7 (L7) rules that allow hostnames (and optionally
 paths) to be directed to specific Services in Kubernetes.
 
-Ingress Controller which acts upon the rules set by the Ingress Resource,
+`Ingress Controller` which acts upon the rules set by the Ingress Resource,
 typically via an HTTP or L7 load balancer. It is vital that both pieces are
 properly configured to route traffic from an outside client to a Kubernetes
 Service.
 
 Some working examples
----------------------
+=====================
 
 In order to use the Nginx ingress controller we first need to  install it into
 our cluster. While this can be done by hand creating all of the required
@@ -62,9 +63,7 @@ of Helm.
 
 .. code-block:: bash
 
-  cat <<EOF | kubectl apply -f -
-  apiVersion: v1
-  kind: ServiceAccount
+  cat <<EOF | kubectl apply -f -apiVersion: v1 kind: ServiceAccount
   metadata:
     name: tiller
     namespace: kube-system
@@ -100,7 +99,7 @@ Simple ingress with Nginx
 
 For the first example we will create a straight forward HTTP ingress controller
 that will direct traffic to a backend pod that will simply echo back details
-of the pod, the request and the associated headers it recieved.
+of the pod, the request and the associated headers it received.
 
 .. code-block:: bash
 
@@ -547,7 +546,7 @@ Finally we can set up the ingress as we have for the previous examples.
             path: /ping
   EOF
 
-Once the external IP is availale we can test it with curl as we have
+Once the external IP is available we can test it with curl as we have
 previously. The important thing to note here is that now we can see the
 originating IP address included in the request headers.
 

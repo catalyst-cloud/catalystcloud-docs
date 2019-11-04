@@ -1,6 +1,6 @@
 
 *********
-Git Hooks
+Git hooks
 *********
 
 In order to avoid committing reStructuredText code that does not compile we

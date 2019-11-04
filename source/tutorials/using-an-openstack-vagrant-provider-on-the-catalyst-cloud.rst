@@ -1,5 +1,5 @@
 #########################################################
-Using an OpenStack Vagrant Provider on the Catalyst Cloud
+Using an openstack vagrant provider on the Catalyst Cloud
 #########################################################
 
 `Vagrant`_ is a popular development tool that makes it easy to create and

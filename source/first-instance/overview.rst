@@ -41,8 +41,8 @@ be easier to use the dashboard. As you become more familiar with the Catalyst
 Cloud it is worth learning how to provision resources programmatically.
 
 Each of the different methods have pro's and cons. Some are easier to
-impliment than others, some give you more information on the creation process
-as a whole and Some let you have more customisation options. So even if you are
+implement than others, some give you more information on the creation process
+as a whole and some let you have more customisation options. So even if you are
 comfortable with just using one method at the beginning, we recommend taking a
 look at the others over time as your needs may change and the other methods may
 provide and easier solution.
@@ -60,7 +60,7 @@ Network Requirements
 
 Before launching an instance, it is necessary to have some network resources in
 place. These may have already been created for you. In this documentation we
-will assume you are starting from an unconfigured project and will demonstrate
+will assume you are starting from an un-configured project and will demonstrate
 how to set these up from scratch.
 
 The requirements are:
@@ -172,3 +172,26 @@ In order to connect to your instance, you will need to allocate a floating IP
 to the instance. Alternately, you could create a :ref:`VPN <vpn>` and save
 some money by avoiding floating IPs altogether. VPNs are not feasible when the
 instance will be offering a service to the greater internet.
+
+.. _connecting-to-instance:
+
+Connecting to an instance
+=========================
+
+Once all of the previous things are set up, there are a few things to note
+about connecting to your instance via the CLI. One is that you need to make
+sure you reference the correct operating system that you are trying to connect
+to. Another things is that you accurately source where your ssh private key is,
+making sure that said key matches the public one you used to create your
+instance.
+
+For example, if you were trying to connect to an ubuntu image with the floating
+IP 103.255.251.140. You would use the command:
+
+.. code-block:: bash
+
+  $ ssh -i <path/to/private/key> ubuntu@103.255.251.140
+
+In this example we use the '-i' flag to explicitly state where our private key
+is. We also make sure that we are SSH-ing to the correct operating system on
+the floating IP we have acquired.
