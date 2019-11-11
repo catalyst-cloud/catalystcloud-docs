@@ -10,70 +10,14 @@ categories based on what services they relate to.
 
 You can see the list below:
 
-Compute
-
 .. toctree::
    :maxdepth: 1
 
-   tutorials/compute/deploying-highly-available-instances-with-keepalived
-   tutorials/compute/ansible-openstack-dynamic-inventory
-   tutorials/compute/ansible-create-x-servers-using-in-memory-inventory
+   tutorials/compute
+   tutorials/image
+   tutorials/containers
+   tutorials/network
+   tutorials/orchestration
+   tutorials/storage
+   tutorials/other
 
-Images
-
-.. toctree::
-   :maxdepth: 1
-
-   tutorials/images/using-packer-to-build-custom-bootable-images-on-the-catalyst-cloud
-   tutorials/images/deploying-a-turnkey-image
-
-Containers
-
-.. toctree::
-   :maxdepth: 1
-
-   tutorials/kubernetes/deploying-a-hpc-slurm-cluster
-   tutorials/kubernetes/using-docker-machine-on-the-catalyst-cloud
-   tutorials/kubernetes/docker-getting-started-with-swarm-mode-tutorial-on-the-catalyst-cloud
-
-Network
-
-.. toctree::
-   :maxdepth: 1
-
-   tutorials/network/creating-an-instance-with-interfaces-on-different-networks-with-heat
-
-Security
-
-.. toctree::
-   :maxdepth: 1
-
-   tutorials/security/cloud-socks-proxy-over-ssh
-
-Storage
-
-.. toctree::
-   :maxdepth: 1
-
-   tutorials/storage/downloading-compute-instances-volumes
-
-Orchestration
-
-.. toctree::
-   :maxdepth: 1
-
-   tutorials/orchestration/bootstrapping-puppet
-   tutorials/orchestration/ansible-driven-puppet
-
-
-Other
-
-.. toctree::
-   :maxdepth: 1
-
-   tutorials/other/region-failover-using-the-fastly-cdn
-   tutorials/other/using-an-openstack-vagrant-provider-on-the-catalyst-cloud
-   tutorials/other/terraform-lifecycle-to-prevent-resource-re-creation
-   tutorials/other/using-python-virtual-environments
-   tutorials/other/deploying-rocketchat-on-catalyst-cloud
-   tutorials/other/deploying-matrixchat-on-catalyst-cloud
