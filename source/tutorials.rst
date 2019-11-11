@@ -57,6 +57,15 @@ Storage
 
    tutorials/storage/downloading-compute-instances-volumes
 
+Orchestration
+
+.. toctree::
+   :maxdepth: 1
+
+   tutorials/orchestration/bootstrapping-puppet
+   tutorials/orchestration/ansible-driven-puppet
+
+
 Other
 
 .. toctree::
@@ -65,8 +74,6 @@ Other
    tutorials/other/region-failover-using-the-fastly-cdn
    tutorials/other/using-an-openstack-vagrant-provider-on-the-catalyst-cloud
    tutorials/other/terraform-lifecycle-to-prevent-resource-re-creation
-   tutorials/other/bootstrapping-puppet
-   tutorials/other/ansible-driven-puppet
    tutorials/other/using-python-virtual-environments
    tutorials/other/deploying-rocketchat-on-catalyst-cloud
    tutorials/other/deploying-matrixchat-on-catalyst-cloud
