@@ -1,6 +1,6 @@
-#######################################
-Tutorials relating to the image service
-#######################################
+##############
+Image services
+##############
 
 .. toctree::
    :maxdepth: 1

@@ -1,6 +1,6 @@
-##################################################
-Tutorials relating to miscellaneous other services
-##################################################
+############################
+Miscellaneous other services
+############################
 
 .. toctree::
    :maxdepth: 1

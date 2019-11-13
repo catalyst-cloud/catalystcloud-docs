@@ -1,6 +1,6 @@
-############################################
-Tutorials relating to containerised services
-############################################
+#########################
+Containerisation services
+#########################
 
 .. toctree::
    :maxdepth: 1

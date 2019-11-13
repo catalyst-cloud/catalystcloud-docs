@@ -1,6 +1,6 @@
-#########################################
-Tutorials relating to the compute service
-#########################################
+################
+Compute services
+################
 
 .. toctree::
    :maxdepth: 1

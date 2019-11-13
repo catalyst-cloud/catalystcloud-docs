@@ -1,9 +1,9 @@
-#########################################
-Tutorials relating to the network service
-#########################################
+################
+Network services
+################
 
 .. toctree::
    :maxdepth: 1
 
    network/creating-an-instance-with-interfaces-on-different-networks-with-heat
-   security/cloud-socks-proxy-over-ssh
+   network/cloud-socks-proxy-over-ssh

@@ -14,4 +14,3 @@ routers, security groups and site-to-site VPNs.
    network/security-groups
    network/vpn
    network/faq
-   network/best-practice-network

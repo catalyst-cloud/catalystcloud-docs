@@ -1,16 +1,21 @@
 ################################
-Best-practices for block storage
+Block storage
 ################################
+We run a distributed storage system that by default retains three copies of
+your data on different servers spread across a region (a datacenter).
+We can afford to lose many disks and multiple storage nodes without losing any
+data. As soon as a disk or storage node fails, our storage solution begins
+recovering the data from an existing copy, always ensuring that three replicas
+are present.
 
-Follow standard security precautions
-====================================
+The storage solution is self managing and self healing, constantly placing
+your data in optimal locations for data survival and resiliency. It runs
+automated error checks in the background that can detect and recover a single
+bit of incorrect data (bit rot), by comparing the three copies of the data and
+ensuring they are identical.
 
-Under the :ref:`best-practices` there are a number of security
-precautions that we recommended you follow when conducting any work on your
-cloud projects. The important ones to consider for storage are
-:ref:`access_control`, and password protection/strength. Following these and
-the other security best practices will help to ensure your projects are as safe
-as possible.
+The solution is designed and implemented with very high availability and data
+resiliency in mind. It has no single points of failure.
 
 Volume names should be unique
 =============================
@@ -27,17 +32,6 @@ different instance, but you're not sure which volume holds which data.
   should use '-'
 
 
-Backup data locally not just on the cloud
-=========================================
-
-It is a best practice to backup data of your project. This pertains more to
-highly important data that you cannot afford to lose, as opposed to backing up
-all data present on the cloud. Because of our high availability and
-geographic diversity, data backup for storage in the large majority of cases
-will not be an issue. It is still however a best practice in the industry to
-create physical backups locally in the event of a catastrophe across the
-country.
-
 Deletion policies
 =================
 
@@ -53,7 +47,6 @@ more common policies.
   your volume. Meaning should your volume become corrupt or be deleted
   unintentionally, you will still have the old version so that you haven't lost
   everything. This is a mixture of a delete and backup policy.
-
 
 
 Best Practice for maximising disk performance

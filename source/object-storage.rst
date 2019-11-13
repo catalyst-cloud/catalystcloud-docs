@@ -38,4 +38,3 @@ Table of Contents:
   object-storage/advanced
   object-storage/storage-access-control
   object-storage/faq
-  object-storage/best-practice-object-storage

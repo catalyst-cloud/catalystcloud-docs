@@ -1,6 +1,6 @@
-###############################################
-Tutorials relating to the orchestration service
-###############################################
+######################
+Orchestration services
+######################
 
 .. toctree::
    :maxdepth: 1

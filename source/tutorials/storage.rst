@@ -1,6 +1,6 @@
-#########################################
-Tutorials relating to the storage service
-#########################################
+################
+Storage services
+################
 
 .. toctree::
    :maxdepth: 1
