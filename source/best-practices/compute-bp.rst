@@ -58,7 +58,6 @@ affected compute instances on a healthy server to minimize their downtime.
 To benefit from this feature, your application must be configured and prepared
 to start automatically and resume its normal operation at boot time and your
 guest operating system to respond to ACPI power events.
-
 The operating system images supplied by Catalyst or our partners already have
 ACPI configured to respond to power events by default.
 

@@ -14,23 +14,23 @@ being quickly recovered from another disk, server or region.
 Data Location
 =============
 
-When using object storage, the normal practice for where to keep your data
-is the region closest to your physical location. This is so that the speed to
-access your data is the quickest it can be.
-While this is usually the case, because of Catalyst Cloud's data replication
-across our regions the time it takes to access any storage object from any
-geographical location should be consistent.
+When using object storage, the normal practice for where to hold your data is
+the region closest to your physical location. This is so that the
+speed it takes to access your data is the quickest it can possibly be.
+However because of Catalyst Cloud's data replication across our regions the
+time it takes to access any storage object from across any of our regions
+should be consistent. That means you won't have to worry about where to
+upload your data, it will always be available to you with no drop in access
+speed regardless of where you are.
 
 Logging access
 ==============
 
-Logging who has accessed your storage objects and what actions the took on them
-is a standard best practice. This is so that you can clearly see who took
-these actions and when they took place. This is especially useful for auditing
-purposes.
+For both security and auditing reasons, logging who has accessed your storage
+objects and what actions the took on them is a standard best practice.
 
-Schedule uploading to not slow traffic
-======================================
+Schedule actions to not slow traffic
+====================================
 
 If many different users are trying to upload or download to/from the same
 container in object storage; the multiple actions will slow each other down. If
@@ -46,12 +46,13 @@ more common policies.
 
 - Retention policy: This policy dictates that a volume/object cannot be deleted
   until it reaches a certain age.
-- Object lock policy: A specific user holds the 'key' to the object and only
-  they can choose to delete the instance.
-- Versioning policy: When updating a volume it creates a previous version.
-  Meaning should your volume become corrupt or be deleted unintentionally, you
-  will still have the old version so that you haven't lost everything. This is
-  a mixture of a delete and backup policy.
+- Object lock policy: The storage object is 'locked' and a specific user holds
+  the 'key' to the instance and only they can choose to delete data from
+  the instance or the instance itself.
+- Versioning policy: Whenever your volume is changed a new version is created
+  and the previous state of the storage object is saved. Should your newest
+  version suffer some failure, you have the option to reload the previous
+  saved state. This is a mixture of a delete and backup policy.
 
 Additionally for object storage, you are able to give different users
 permissions for your containers.

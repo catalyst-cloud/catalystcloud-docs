@@ -3,8 +3,8 @@ Networks
 ########
 
 
-Virtual routers
-===============
+Virtual router high availability
+================================
 
 In the same way that if a compute instance fails, if a physical network node
 fails our monitoring systems will detect the failure and trigger the evacuate
@@ -22,9 +22,10 @@ Networks are isolated between regions
 =====================================
 
 By default your networks and instance cannot access or connect to one another
-across different regions. This ensures that if an instance or network were
-compromised in some way that the instances in other regions would not be
-affected.
-If you have a need to connect two or more networks across regions you
-can do so using a :ref:`vpn`
+across different regions. Regions are completely independent and isolated from
+each other, providing fault tolerance and geographic diversity. This ensures
+that if an instance or network were compromised by some disaster natural or
+otherwise; the instances in separate regions would not be affected. There are
+ways to go around this if you need to connect instances or networks across a
+region for some purpose. This can be done using :ref:`vpn`
 

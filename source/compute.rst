@@ -20,5 +20,4 @@ Table of Contents
   compute-service/resize-instance
   compute-service/stop-instance
   compute-service/anti-affinity-groups-ha
-  compute-service/best-practices
   compute-service/faq

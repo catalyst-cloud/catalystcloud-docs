@@ -5,9 +5,9 @@ Best practices
 ###############
 
 The following is the best practice section for the Catalyst Cloud
-documentation. The following documents cover more than the best practices that
+documentation. These documents cover more than the best practices that
 pertain to just the Catalyst Cloud. The general best practice pages
-contain information useful to use in a wider context. We highly
+contain information useful to use in a wider business context. We highly
 recommend reading through these sections before progressing further as the
 practices contained in them relate to all services you will find on the
 Catalyst Cloud.

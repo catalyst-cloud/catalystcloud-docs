@@ -20,10 +20,12 @@ resiliency in mind. It has no single points of failure.
 Volume names should be unique
 =============================
 
-All volumes have a UUID, however it is a best practice to make sure that
-you also name your volumes uniquely. This is so that you avoid a situation
-where you have two volumes with the same name and you mean to attach them to
-different instance, but you're not sure which volume holds which data.
+All volumes have a UUID that differentiate between them, however these are not
+very easy to read for human users. Therefore it is a best practice to make sure
+that you name your volumes uniquely. This is to avoid a situation
+where you have multiple volumes with the same name (or UUIDs that you don't
+recognise) which you plan to attach to different instance, but you are not able
+to tell which volume holds which data.
 
 .. note::
 
@@ -35,18 +37,19 @@ different instance, but you're not sure which volume holds which data.
 Deletion policies
 =================
 
-There are a number of polices that you may wish to use when it comes to dealing
-with deleting data from your storage options. The following are three of the
-more common policies.
+There are a number of polices that you may wish to use when it comes to
+deleting data from your storage options. The following are three of the most
+common policies.
 
 - Retention policy: This policy dictates that a volume/object cannot be deleted
   until it reaches a certain age.
-- Object lock policy: A specific user holds the 'key' to the instance and only
-  they can choose to delete the instance.
-- Versioning policy: When updating a volume it creates a previous 'version' of
-  your volume. Meaning should your volume become corrupt or be deleted
-  unintentionally, you will still have the old version so that you haven't lost
-  everything. This is a mixture of a delete and backup policy.
+- Object lock policy: The storage object is 'locked' and a specific user holds
+  the 'key' to the instance and only they can choose to delete data from
+  the instance or the instance itself.
+- Versioning policy: Whenever your volume is changed a new version is created
+  and the previous state of the storage object is saved. Should your newest
+  version suffer some failure, you have the option to reload the previous
+  saved state. This is a mixture of a delete and backup policy.
 
 
 Best Practice for maximising disk performance
