@@ -34,24 +34,6 @@ to tell which volume holds which data.
   should use '-'
 
 
-Deletion policies
-=================
-
-There are a number of polices that you may wish to use when it comes to
-deleting data from your storage options. The following are three of the most
-common policies.
-
-- Retention policy: This policy dictates that a volume/object cannot be deleted
-  until it reaches a certain age.
-- Object lock policy: The storage object is 'locked' and a specific user holds
-  the 'key' to the instance and only they can choose to delete data from
-  the instance or the instance itself.
-- Versioning policy: Whenever your volume is changed a new version is created
-  and the previous state of the storage object is saved. Should your newest
-  version suffer some failure, you have the option to reload the previous
-  saved state. This is a mixture of a delete and backup policy.
-
-
 Best Practice for maximising disk performance
 =============================================
 

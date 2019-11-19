@@ -13,7 +13,7 @@ What is different about a Cloud platform?
 *****************************************
 
 While on the surface there appears to be many similarities between the
-purchasing of VMs from a data store and using a cloud provider to provision
+purchasing of VMs from a host provider and using a cloud provider to provision
 compute instances; looking closer at both platforms reveals that they have some
 striking differences.
 

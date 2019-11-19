@@ -64,12 +64,12 @@ censor the password before sending it, as done below.
   OS_AUTH_URL=https://api.cloud.catalyst.net.nz:5000/v3
   OS_PROJECT_DOMAIN_ID=default
   OS_REGION_NAME=nz_wlg_2
-  OS_PROJECT_NAME=catalyst-cloud/support
+  OS_PROJECT_NAME=XXXXXXXXXXXXX/XXXXXXXXXXXXXXX
   OS_USER_DOMAIN_NAME=Default
   OS_IDENTITY_API_VERSION=3
   OS_INTERFACE=public
-  OS_USERNAME=danielobyrne@catalyst.net.nz
-  OS_PROJECT_ID=eac679e4896146e6827ce29d755fe289
+  OS_USERNAME=XXXXXXXXXXXXX@catalyst.net.nz
+  OS_PROJECT_ID=fha98835bhnae8092n4388ujf
   OS_PASSWORD=XXXXXXXXXXXXX
 
 Update systems often

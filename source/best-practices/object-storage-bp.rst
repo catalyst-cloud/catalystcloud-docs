@@ -53,10 +53,6 @@ more common policies.
   and the previous state of the storage object is saved. Should your newest
   version suffer some failure, you have the option to reload the previous
   saved state. This is a mixture of a delete and backup policy.
-
-Additionally for object storage, you are able to give different users
-permissions for your containers.
-
 - Role policy: Only users that have the correct permissions may see, use,
   access or delete objects in the container (or the container itself) more
   information on this can be found under the :ref:`object-storage-access`
