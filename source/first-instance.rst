@@ -25,5 +25,5 @@ further information:
    first-instance/heat
    first-instance/ansible
    first-instance/terraform
-   first-instance/shade-sdk
+   first-instance/openstack-sdk
    first-instance/dashboard-windows

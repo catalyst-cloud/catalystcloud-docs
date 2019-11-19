@@ -1,7 +1,8 @@
+.. _iam-best-practices:
+
 ************************
 Best Practices for roles
 ************************
-
 
 Project Admin
 =============

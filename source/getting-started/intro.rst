@@ -7,6 +7,43 @@ The basics of Catalyst Cloud
 This section of the documentation is for people that are entirely new to cloud
 computing and/or the Catalyst Cloud.
 
+
+*****************************************
+What is different about a Cloud platform?
+*****************************************
+
+While on the surface there appears to be many similarities between the
+purchasing of VMs from a data store and using a cloud provider to provision
+compute instances; looking closer at both platforms reveals that they have some
+striking differences.
+
+In the past you may have purchased a series of virtual machines with a
+specific size for RAM and storage space and you would pay a predefined amount
+for these virtual machines on a monthly basis. If you wanted to increase the
+size of your storage, RAM or the amount of virtual machines you are using,
+you would have to renegotiate the price for your monthly bill.
+While you had this 'subscription' the virtual machines were yours and
+you paid the same price regardless of how much you used them, meaning that
+if you only used them for a week or less than 24/7 you were not getting the
+most out of your monthly bill.
+
+On a cloud based system you only pay for what you use and you can change your
+resources on the fly. If you need to horizontally scale an instance, you can
+simply spin up more compute nodes. If you need to increase the size of your
+block storage, then you can add more on top or use the object storage service.
+In a cloud environment your instances and other resources are scheduled by the
+cloud and you are only billed for the amount of resources you use.
+
+For example if you only need an instance to crunch numbers for a day,
+you don't have to end up paying for a month to use a virtual machine. In fact
+you only pay for how long you use that instance for down to the minute. And if
+you need more power for the instance during your number crunching you can
+increase the compute capacity without having to confirm with your provider
+first. Saving yourself money and the hassle of negotiating changes. Once you
+are done with your task you can turn off your instance, release all the other
+resources and your bill stops there. This is discussed further as the
+documentation continues.
+
 ***************************
 What is the Catalyst Cloud?
 ***************************

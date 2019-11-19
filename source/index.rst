@@ -17,7 +17,6 @@ Contents:
    first-instance
    best-practices
    sdks-and-toolkits
-
    backups
    billing
    block-storage
@@ -30,9 +29,7 @@ Contents:
    network
    object-storage
    orchestration
-   security-best-practice
    tutorials
-
    release-notes
    contributing
 

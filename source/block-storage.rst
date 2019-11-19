@@ -24,7 +24,7 @@ Table of Contents:
   block-storage/overview
   block-storage/using-volumes
   block-storage/using-lvm.rst
-  block-storage/max-disk-performance
   block-storage/faq
+
 
 
