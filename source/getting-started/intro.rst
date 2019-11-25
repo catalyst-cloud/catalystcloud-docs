@@ -35,7 +35,7 @@ In a cloud environment your instances and other resources are scheduled by the
 cloud and you are only billed for the amount of resources you use.
 
 For example if you only need an instance to crunch numbers for a day,
-you don't have to end up paying for a month to use a virtual machine. In fact
+you do not have to end up paying for a month to use a virtual machine. In fact
 you only pay for how long you use that instance for down to the minute. And if
 you need more power for the instance during your number crunching you can
 increase the compute capacity without having to confirm with your provider
@@ -64,7 +64,7 @@ run a business's applications.
 .. _`OpenStack`: https://www.openstack.org/software/
 
 OpenStack gives you the ability to provision no more or less than what you
-need, by allowing you to change how much you're using quickly, easily, and
+need, by allowing you to change how much you are using quickly, easily, and
 automatically, through a variety of tools.
 
 .. image:: assets/access_methods.png
@@ -104,7 +104,7 @@ server it's own public IP address. You open a terminal and run:
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
 
-Now you've provisioned a public IP address. Now you run:
+Now you have provisioned a public IP address. Now you run:
 
 .. code-block:: console
 
