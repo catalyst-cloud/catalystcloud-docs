@@ -5,16 +5,16 @@ description: |
 parameters:
   keypair:
     type: string
-    default: security-key
+    default: glyndavies
   image_id:
     type: string
-    default: 102172df-9872-47df-b66b-2bcecb3a74b7
+    default: 0da75c8a-787d-48cd-bb74-e979fc5ceb58
   flavor_id:
     type: string
     default: c1.c1r1
   network_id:
     type: string
-    default: 550677db-0232-418b-aeb5-f461cf907967
+    default: 452fc8b7-218d-4279-99b2-3d46f9d016b7
   sg_ids:
     type: comma_delimited_list
   public_network:
@@ -40,10 +40,10 @@ resources:
       config_drive: true
       user_data_format: RAW
       user_data: |
-          #!/bin/sh
+          #!/bin/bash
           MYIP=$(/sbin/ifconfig ens3 | grep 'inet '| awk '{print $2}');
           OUTPUT="Welcome to my $MYIP";
-          while true; do echo "HTTP/1.1 200 OK\r\n\r\n${OUTPUT}\r" | sudo nc -l -p 80; done
+          while true; do echo -e "HTTP/1.1 200 OK\r\n\r\n${OUTPUT}\r" | sudo nc -q0 -l -p 80; done
   pool_member:
     type: OS::Octavia::PoolMember
     properties:

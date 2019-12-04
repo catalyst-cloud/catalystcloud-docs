@@ -1,39 +1,45 @@
 heat_template_version: 2016-10-14
 
 description: |
-  The heat template is used to demo the autoscaling and auto-healing for a webserver.
+  The heat template is used to demo the autoscaling and autohealing for a webserver.
 parameters:
   keypair:
     type: string
-    default: security-key
+    default: glyndavies
   webserver_image_id:
-    description: Need to be an Ubuntu image.
+    description: changed to use ubuntu 18.04.
     type: string
-    default: 102172df-9872-47df-b66b-2bcecb3a74b7
+    default: 0da75c8a-787d-48cd-bb74-e979fc5ceb58
   webserver_flavor_id:
     type: string
     default: c1.c1r1
   webserver_network_id:
     type: string
-    default: 550677db-0232-418b-aeb5-f461cf907967
+    default: 452fc8b7-218d-4279-99b2-3d46f9d016b7
   webserver_sg_ids:
-    description: Security groups that allows TCP 22 access
+    description: |
+      Security groups that allows 22/TCP from public and 80/TCP from the local network to allow
+      the loadbalancer healthchecks through.
     type: comma_delimited_list
-    default: ["c54f5fcf-0161-4a01-999a-5013714751b7"]
+    default: ["4c8c6c80-2b3b-4258-8e96-cb5ddc70189d"]
+  # webserver_sg_name:
+  #   description: Security groups name for an SG defined above that will hold the LB access rule
+  #   type: string
+  #   default: aodh-alarms
   vip_subnet_id:
     description: Should be a subnet of webserver_network_id
     type: string
-    default: 0cc9ef08-6627-454f-842f-ecb84687cf92
+    default: 0d10e475-045b-4b90-a378-d0dc2f66c150
   public_network:
     description: Public network name, could get by 'openstack network list --external'
     type: string
     default: public-net
-  # scaleup_cpu_threshold:
-  #   type: number
-  #   default: 80
-  # scaledown_cpu_threshold:
-  #   type: number
-  #   default: 5
+  scaleup_cpu_threshold:
+    type: number
+    default: 80
+  scaledown_cpu_threshold:
+    type: number
+    default: 5
 
 resources:
   autoscaling_group:
@@ -62,6 +68,15 @@ resources:
     properties:
       floating_network: {get_param: public_network}
       port_id: {get_attr: [loadbalancer, vip_port_id]}
+  # security_group_1:
+  #   type: OS::Neutron::SecurityGroupRule
+  #   properties:
+  #     security_group: { get_param: webserver_sg_name }
+  #     remote_ip_prefix: 10.0.0.0/24
+  #     direction: ingress
+  #     protocol: tcp
+  #     port_range_min: 80
+  #     port_range_max: 80
   listener:
     type: OS::Octavia::Listener
     properties:
@@ -85,20 +100,20 @@ resources:
       type: HTTP
       http_method: GET
       expected_codes: 200
-  # scaleup_policy:
-  #   type: OS::Heat::ScalingPolicy
-  #   properties:
-  #     adjustment_type: change_in_capacity
-  #     auto_scaling_group_id: {get_resource: autoscaling_group}
-  #     scaling_adjustment: 1
-  #     cooldown: 60
-  # scaledown_policy:
-  #   type: OS::Heat::ScalingPolicy
-  #   properties:
-  #     adjustment_type: change_in_capacity
-  #     auto_scaling_group_id: {get_resource: autoscaling_group}
-  #     scaling_adjustment: -1
-  #     cooldown: 60
+  scaleup_policy:
+    type: OS::Heat::ScalingPolicy
+    properties:
+      adjustment_type: change_in_capacity
+      auto_scaling_group_id: {get_resource: autoscaling_group}
+      scaling_adjustment: 1
+      cooldown: 60
+  scaledown_policy:
+    type: OS::Heat::ScalingPolicy
+    properties:
+      adjustment_type: change_in_capacity
+      auto_scaling_group_id: {get_resource: autoscaling_group}
+      scaling_adjustment: -1
+      cooldown: 60
   # cpu_high_alarm:
   #   type: OS::Aodh::GnocchiAggregationByResourcesAlarm
   #   properties:
@@ -131,32 +146,32 @@ resources:
   #       list_join:
   #         - ''
   #         - - {'=': {server_group: {get_param: "OS::stack_id"}}}
-  # ceilometer_cpu_high_alarm:
-  #   type: OS::Aodh::Alarm
-  #   properties:
-  #     meter_name: cpu_util
-  #     period: 60
-  #     evaluation_periods: 1
-  #     statistic: avg
-  #     comparison_operator: gt
-  #     threshold: 5.0
-  #     alarm_actions:
-  #       - {get_attr: [ scaleup_policy, signal_url ] }
-  #     repeat_actions: false
-  #     matching_metadata: { 'metadata.user_metadata.server_group': { get_param: "OS::stack_id" } }
-  # ceilometer_cpu_low_alarm:
-  #   type: OS::Aodh::Alarm
-  #   properties:
-  #     meter_name: cpu_util
-  #     period: 60
-  #     evaluation_periods: 1
-  #     statistic: avg
-  #     comparison_operator: lt
-  #     threshold: 1.0
-  #     alarm_actions:
-  #       - {get_attr: [ scaledown_policy, signal_url ] }
-  #     repeat_actions: false
-  #     matching_metadata: { 'metadata.user_metadata.server_group': { get_param: "OS::stack_id" } }
+  ceilometer_cpu_high_alarm:
+    type: OS::Aodh::Alarm
+    properties:
+      meter_name: cpu_util
+      period: 60
+      evaluation_periods: 1
+      statistic: avg
+      comparison_operator: gt
+      threshold: 5.0
+      alarm_actions:
+        - {get_attr: [ scaleup_policy, signal_url ] }
+      repeat_actions: false
+      matching_metadata: { 'metadata.user_metadata.server_group': { get_param: "OS::stack_id" } }
+  ceilometer_cpu_low_alarm:
+    type: OS::Aodh::Alarm
+    properties:
+      meter_name: cpu_util
+      period: 60
+      evaluation_periods: 1
+      statistic: avg
+      comparison_operator: lt
+      threshold: 1.0
+      alarm_actions:
+        - {get_attr: [ scaledown_policy, signal_url ] }
+      repeat_actions: false
+      matching_metadata: { 'metadata.user_metadata.server_group': { get_param: "OS::stack_id" } }
 
 outputs:
   # scale_up_url:
@@ -165,3 +180,5 @@ outputs:
   #   value: {get_attr: [scaledown_policy, alarm_url]}
   lb_ip:
     value: {get_attr: [loadbalancer_public_ip, floating_ip_address]}
+  lb_vip:
+    value: {get_attr: [loadbalancer, vip_address]}

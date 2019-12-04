@@ -8,19 +8,17 @@ Alarm Service
 Overview
 ========
 
-The alarm service, available through the SKY-TV cloud, allows a user to set
-up alarms that are listening on certain objects in the cloud. The alarms wait
-for specific events to occur; then they change their state depending on pre set
-parameters. If a state change occurs then actions that you predefine for the
-alarm take effect.
+The alarm service allows a user to set up alarms that listen to user created
+objects in the cloud. The alarms wait for specific events to occur; then they
+change their state depending on pre set parameters. If a state change occurs
+then actions that you predefine for the alarm take effect.
 
 For example: You want to monitor a compute instance to see if the CPU
-utilization exceeds 70% for more than 10 minutes. Once the alarm has met
-this requirement, it changes its state to 'alarm'. The aodh-notifier then tells
+utilization exceeds 70% for more than 10 minutes. If this requirement has been
+met, the alarm changes its state to 'alarm'. The aodh-notifier then tells
 your system to perform some action. In this scenario it could be to: spin up a
 new instance with more CPU power, or increase the amount of VCPUs your
-instance is using. Whatever your goal is the alarm keeps you informed of the
-state of your machine so you can implement things such as auto-scaling.
+instance is using.
 
 Threshold rules
 ===============
@@ -62,7 +60,7 @@ A working example
 =================
 
 For this working example, we will be creating an alarm that monitors a
-webserver and autoheals should the server go down for some reason.
+webserver and should the webserver go down, implements autohealing.
 
 Prerequisites
 -------------
@@ -78,11 +76,12 @@ will be doing. For the purposes of this example, we will be using an Ubuntu
 image to simulate a webserver in our project. The Ubuntu instance responds to
 requests with the message: "Welcome to my <IP address>".
 
-The following is a yaml file that is used to set up a webserver when we create
-our stack. You will have to change some of the variables in this script for it
+We will be using the orchestration service provided on the cloud to create the
+webserver. The following is a yaml file that governs the rules for our
+webserver. You will have to change some of the variables in this script for it
 to function properly.
 
-You will need to save the following script as a yaml file named webserver.yaml
+Save the following script as a yaml file named webserver.yaml
 
 .. code-block:: bash
 
@@ -148,7 +147,7 @@ You will need to save the following script as a yaml file named webserver.yaml
     server_id:
       value: {get_resource: server}
 
-Next, we need to set up a load balancer. The following yaml will create a
+Next, we need to set up a load balancer. The code block below will create a
 loadbalancer, an autoscaling group and a health monitor. This script also
 communicates with the webserver yaml to spin up 2 ubuntu instances to
 simulate a webserver. After these are created we will attach an AODH Alarm.
@@ -308,9 +307,9 @@ This can take some time and so you may have to re-run the previous command to
 see the status of your resources. You can also view the stack progress on the
 dashboard via
 `the orchestration tab <https://dashboard.cloud.catalyst.net.nz/project/stacks/>`_.
-You will have to wait until all resources are at the status CREATE_COMPLETE.
-Once your stack is completed and ready to access, we do the following to
-acquire the VIP for the loadbalancer:
+Once all resources are at the status CREATE_COMPLETE they are
+ready to be accessed; we do the following to acquire the VIP for the
+loadbalancer:
 
 .. code-block:: bash
 
@@ -325,6 +324,8 @@ acquire the VIP for the loadbalancer:
   |       |   "description": "No description given" |
   |       | }                                       |
   +-------+-----------------------------------------+
+  # create another variable name for VIP
+  $ vip=(103.254.156.149)
 
 Once we have the VIP we can curl our webserver to make sure that it is working
 correctly.
@@ -332,7 +333,7 @@ correctly.
 .. code-block:: bash
 
   # replace the IP here with the results from the previous output.
-  $ while true; do curl 103.254.156.149; sleep 2; done
+  $ while true; do curl $vip; sleep 2; done
   Welcome to my 10.0.0.80
   Welcome to my 10.0.0.81
   Welcome to my 10.0.0.80
@@ -386,12 +387,12 @@ are able to create the AODH alarm.
 We have now created our aodh listener and set it to listen on our stack. To
 make sure our alarm is working as intended, we need to force an event that
 would trigger the threshold rule of our alarm. Since we have set up autohealing
-in this example, we are going to kill one of our instances and then monitor to
-see how our autohealing handles it.
+in this example, we are going to kill one of our instances. This will
+cause the alarm to trigger and then the autohealing should start.
 
 .. code-block:: bash
 
-  # chose one of the instances created with the previous commands
+  # choose one of the instances created with the previous commands
   $ openstack server list
   +--------------------------------------+-------------------------------------------------------+-------------------+------------------------------------------+------------------------------+---------+
   | ID                                   | Name                                                  | Status            | Networks                                 | Image                        | Flavor  |
@@ -410,7 +411,7 @@ see how our autohealing handles it.
   Welcome to my 10.0.0.81
   $ sudo kill -9 284
   $ curl localhost
-  curl: (7) couldn't connect to host
+  curl: (7) could not connect to host
 
 After this you will see that one of your load balancer members in ERROR
 operating_status.
