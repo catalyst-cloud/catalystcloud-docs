@@ -8,16 +8,17 @@ Alarm Service
 Overview
 ========
 
-The alarm service allows a user to set up alarms that listen to user created
-objects in the cloud. The alarms wait for specific events to occur; then they
-change their state depending on pre set parameters. If a state change occurs
-then actions that you predefine for the alarm take effect.
+The alarm service, available through the SKY-TV cloud, allows a user to set
+up alarms that are monitoring the state of various objects in the cloud. The
+alarms wait for specific events to occur; then they change their state
+depending on pre set parameters. If a state change occurs then actions that
+you predefine for the alarm take effect.
 
 For example: You want to monitor a compute instance to see if the CPU
-utilization exceeds 70% for more than 10 minutes. If this requirement has been
-met, the alarm changes its state to 'alarm'. The aodh-notifier then tells
-your system to perform some action. In this scenario it could be to: spin up a
-new instance with more CPU power, or increase the amount of VCPUs your
+utilization exceeds 70% for more than 10 minutes. Once the alarm has met
+this requirement, it changes its state to 'alarm'. The alarm notifier then
+tells your system to perform some action. In this scenario it could be to: spin
+up a new instance with more CPU power, or increase the amount of VCPUs your
 instance is using.
 
 Threshold rules
@@ -72,14 +73,13 @@ Process
 -------
 
 The first thing that we need to understand is what our webserver
-will be doing. For the purposes of this example, we will be using an Ubuntu
-image to simulate a webserver in our project. The Ubuntu instance responds to
-requests with the message: "Welcome to my <IP address>".
+will be doing. For the purposes of this example, we will be using netcat on an
+Ubuntu image to simulate a webserver in our project. The Ubuntu instance
+responds to requests with the message: "Welcome to my <IP address>".
 
-We will be using the orchestration service provided on the cloud to create the
-webserver. The following is a yaml file that governs the rules for our
-webserver. You will have to change some of the variables in this script for it
-to function properly.
+The following is a yaml file that is used to set up the webserver instances
+when we create our stack. You will have to change some of the variables in
+this script for it to function properly.
 
 Save the following script as a yaml file named webserver.yaml
 
@@ -147,10 +147,11 @@ Save the following script as a yaml file named webserver.yaml
     server_id:
       value: {get_resource: server}
 
-Next, we need to set up a load balancer. The code block below will create a
-loadbalancer, an autoscaling group and a health monitor. This script also
-communicates with the webserver yaml to spin up 2 ubuntu instances to
-simulate a webserver. After these are created we will attach an AODH Alarm.
+Next, we need to set up the constructs required to have our loadbalanced self
+healing webservers. The following yaml will create a loadbalancer, an
+autoscaling group and a health monitor. This script also communicates with the
+webserver yaml to spin up the two Ubuntu instances to simulate the webservers.
+After these are created we will attach an alarm.
 
 Save this yaml as autohealing.yaml
 
@@ -175,7 +176,9 @@ Save this yaml as autohealing.yaml
       type: string
       default: <WEBSERVER NETWORK ID>
     webserver_sg_ids:
-      description: Security groups that allows TCP 22 access
+      description: |
+        Security groups that allows 22/TCP access from public network and
+        80/TCP from the <WEBSERVER NETWORK ID> CIDR
       type: comma_delimited_list
       default: ["<SECURITY GROUP ID>"]
     vip_subnet_id:
@@ -239,11 +242,10 @@ Save this yaml as autohealing.yaml
         expected_codes: 200
 
 
-
 To connect both of these yaml files we will make a third one that allows the
-webserver.yaml to be used as an environment for the auto-healing.yaml. It is
-one line of code, but the separation of the webserver artefacts and the
-loadbalancer artefacts makes it easier to track when editing and is
+webserver.yaml to be used as an resource for the auto-healing.yaml. It is
+one line of code, but the separation of the webserver artifacts and the
+loadbalancer artifacts makes it easier to track when editing and is
 a good practice.
 
 Save this file as env.yaml:
@@ -287,7 +289,7 @@ creating the stack.
   +---------------------+-------------------------------------------------------------------------------------+
 
   # Make a variable for the stack id to use in future commands:
-  stackid=(94dd128a-3a9a-4473-96c6-77591e39e5ed)
+  export stackid=$(o stack show autohealing-test -c id -f value) && echo $stackid
 
   $ openstack stack resource list $stackid
 
@@ -363,7 +365,7 @@ expected. Now we need to check that our loadbalancers are healthy.
 
 If your loadbalancer's operating_status is not ONLINE then you may have to wait
 for the cloud init scripts to finish. Once the loadbalancers are healthy you
-are able to create the AODH alarm.
+are able to create the alarm.
 
 .. code-block:: bash
 
@@ -384,11 +386,11 @@ are able to create the AODH alarm.
   }
   EOF
 
-We have now created our aodh listener and set it to listen on our stack. To
+We have now created our alarm listener and set it to watch our stack. To
 make sure our alarm is working as intended, we need to force an event that
 would trigger the threshold rule of our alarm. Since we have set up autohealing
-in this example, we are going to kill one of our instances. This will
-cause the alarm to trigger and then the autohealing should start.
+in this example, we are going to kill one of the 'webserver' processes running
+on our instances and then monitor to see how our autohealing handles it.
 
 .. code-block:: bash
 
@@ -403,13 +405,13 @@ cause the alarm to trigger and then the autohealing should start.
 
   # SSH to that instance and kill the program that posts 'welcome to my IP'
 
-  ssh ubuntu@103.254.156.166
-  $ ps -ef | grep user-data | grep -v grep
-  284 root     {user-data} /bin/sh /run/ubuntu/datasource/data/user-data
-
+  $ ssh ubuntu@103.254.156.166
   $ curl localhost
-  Welcome to my 10.0.0.81
-  $ sudo kill -9 284
+  Welcome to my 10.0.0.105
+  $ ps -ef |grep bash|grep script|grep -v grep
+  root      1149  1117  0 19:24 ?        00:00:00 /bin/bash /var/lib/cloud/instance/scripts/part-001
+  ubuntu    3233  3230  0 19:50 pts/0    00:00:00 -bash
+  $ sudo kill -9 1149
   $ curl localhost
   curl: (7) could not connect to host
 
@@ -426,7 +428,7 @@ operating_status.
   | 2f358812-02c1-4bf5-a7c5-578b66b7feca | eac679e4896146e6827ce29d755fe289 | ACTIVE              | 10.0.0.81 | ERROR            |      1 |             80 |
   +--------------------------------------+----------------------------------+---------------------+-----------+------------------+--------+----------------+
 
-  # Aodh will automatically trigger Heat stack update and will monitor the autoscaling_group resource status.
+  # Alarm will automatically trigger Heat stack update and will monitor the autoscaling_group resource status.
   # while this is happening there should only be one IP in the http response
   $ while true; do curl $vip; sleep 2; done
   Welcome to my 10.0.0.80
@@ -471,7 +473,6 @@ operating_status.
   Welcome to my 10.0.0.80
   Welcome to my 10.0.0.81
   Welcome to my 10.0.0.80
-
 
 
 For more information on the Alarm service, you can visit `the openstack
