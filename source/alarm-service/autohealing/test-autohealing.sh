@@ -129,7 +129,7 @@ root      1149  1117  0 19:24 ?        00:00:00 /bin/bash /var/lib/cloud/instanc
 ubuntu    3233  3230  0 19:50 pts/0    00:00:00 -bash
 $ sudo kill -9 1149
 $ curl localhost
-curl: (7) couldn't connect to host
+curl: (7) couldnt connect to host
 
 
 # After a few seconds, you should see there is one load balancer member in ERROR operating_status.
@@ -190,7 +190,7 @@ $ o stack delete $stackid
 
 # Auto-scaling example
 
-As for auto-healing  :
+As for auto-scaling  :
 
 Once scaling group deployed
 
