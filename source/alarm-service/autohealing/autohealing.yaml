@@ -5,23 +5,23 @@ description: |
 parameters:
   keypair:
     type: string
-    default: DO-First-Computer
+    default: Dan-porirua
   webserver_image_id:
     description: changed to use ubuntu 18.04.
     type: string
-    default: e044255f-40c2-48e5-a5f2-60d423e3ec54 # image ID of ubuntu instance
+    default: 514fe561-bc07-4d7a-aa57-43ea280d445e # image ID of ubuntu instance
   webserver_flavor_id:
     type: string
     default: c1.c1r1 # Flavor with 1GB RAM and 10GB disk space
   webserver_network_id:
     type: string
-    default: 550677db-0232-418b-aeb5-f461cf907967
+    default: 039c1a63-8772-47ef-9a71-7844228367a9
   webserver_sg_ids:
     description: |
       Security groups that allows 22/TCP from public and 80/TCP from the local network to allow
       the loadbalancer health checks through.
     type: comma_delimited_list
-    default: ["7b815d78-d977-4158-8659-a495119d6e34"]
+    default: ["d9fb48a0-559a-4b92-befb-81cf4a7e9700"]
   # webserver_sg_name:
   #   description: Security groups name for an SG defined above that will hold the LB access rule
   #   type: string
@@ -29,7 +29,7 @@ parameters:
   vip_subnet_id:
     description: Should be a subnet of webserver_network_id
     type: string
-    default: 0cc9ef08-6627-454f-842f-ecb84687cf92
+    default: 37069aaa-96fe-424e-9d51-582ed18f4c6b
   public_network:
     description: Public network name, could get by 'openstack network list --external'
     type: string

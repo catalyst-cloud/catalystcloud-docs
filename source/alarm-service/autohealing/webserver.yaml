@@ -5,16 +5,16 @@ description: |
 parameters:
   keypair:
     type: string
-    default: DO-First-Computer
+    default: Dan-porirua
   image_id:
     type: string
-    default: e044255f-40c2-48e5-a5f2-60d423e3ec54 # an ubuntu18 image ID
+    default: 514fe561-bc07-4d7a-aa57-43ea280d445e # an ubuntu18 image ID
   flavor_id:
     type: string
     default: c1.c1r1 # Flavor with 1GB RAM and 10GB disk space
   network_id:
     type: string
-    default: 550677db-0232-418b-aeb5-f461cf907967
+    default: 039c1a63-8772-47ef-9a71-7844228367a9
   sg_ids:
     type: comma_delimited_list
   public_network:

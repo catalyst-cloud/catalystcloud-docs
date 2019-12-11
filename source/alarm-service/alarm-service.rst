@@ -61,7 +61,10 @@ Prerequisites
 -------------
 - You must have a working server on your project.
 - You must have the ``heat stack owner`` role.
-- You must have jq installed
+- You must have jq installed.
+- You must have a security group with rules to allow ingress on port 22 and 80.
+- You must have a network set up that can host the webserver.
+- Currently aodh is only available in HLZ and Porirua regions.
 
 Process
 -------
@@ -88,7 +91,7 @@ Save the following script as a yaml file named webserver.yaml
    parameters:
      keypair:
        type: string
-       default: [KEYPAIR NAME]
+       default: KEYPAIR NAME
      image_id:
        type: string
        default: 0da75c8a-787d-48cd-bb74-e979fc5ceb58 # an ubuntu18 image ID
@@ -97,7 +100,7 @@ Save the following script as a yaml file named webserver.yaml
        default: c1.c1r1 # Flavor with 1GB RAM and 10GB disk space
      network_id:
        type: string
-       default: [NETWORK ID]
+       default: NETWORK ID
      sg_ids:
        type: comma_delimited_list
      public_network:
@@ -161,7 +164,7 @@ Save this yaml as autohealing.yaml
    parameters:
      keypair:
        type: string
-       default: [KEYPAIR NAME]
+       default: KEYPAIR NAME
      webserver_image_id:
        description: changed to use ubuntu 18.04.
        type: string
@@ -171,7 +174,7 @@ Save this yaml as autohealing.yaml
        default: c1.c1r1 # Flavor with 1GB RAM and 10GB disk space
      webserver_network_id:
        type: string
-       default: [NETWORK ID]
+       default: NETWORK ID
      webserver_sg_ids:
        description: |
          Security groups that allows 22/TCP from public and 80/TCP from the local network to allow
@@ -339,7 +342,7 @@ creating the stack.
 
 
    # Set some command aliases and install jq
-   alias os="openstack"
+   alias o="openstack"
    alias lb="openstack loadbalancer"
    alias osrl="openstack stack resource list"
    alias osl="openstack stack list"
@@ -347,6 +350,7 @@ creating the stack.
 
    # First, create the Head stack using the template files and wait until it's created successfully
    # Change the default value of the parameters defined in autohealing.yaml
+
    o stack create autohealing-test -t autohealing.yaml -e env.yaml
    export stackid=$(o stack show autohealing-test -c id -f value) && echo $stackid
 
@@ -365,16 +369,22 @@ creating the stack.
    # Verify that we could send HTTP request to the load balancer VIP, the backend VMs IP addresses are shown alternatively.
    # The VIP floating IP could be found in the stack output.
    $ o stack output show $stackid --all
-   +-------+-----------------------------------------+
-   | Field | Value                                   |
-   +-------+-----------------------------------------+
-   | lb_ip | {                                       |
-   |       |   "output_value": "10.17.9.145",        |
-   |       |   "output_key": "lb_ip",                |
-   |       |   "description": "No description given" |
-   |       | }                                       |
-   +-------+-----------------------------------------+
-   $ while true; do curl $vip; sleep 2; done
+   +--------+-----------------------------------------+
+   | Field  | Value                                   |
+   +--------+-----------------------------------------+
+   | lb_vip | {                                       |
+   |        |   "output_value": "10.17.9.145",        |
+   |        |   "output_key": "lb_ip",                |
+   |        |   "description": "No description given" |
+   |        | }                                       |
+   | lb_ip  | {                                       |
+   |        |   "output_value": "103.254.157.70",     |
+   |        |   "output_key": "lb_ip",                |
+   |        |   "description": "No description given" |
+   |        | }                                       |
+   +--------+-----------------------------------------+
+   $ export lb_ip=103.254.157.70
+   $ while true; do curl $lb_ip; sleep 2; done
    Welcome to my 192.168.2.200
    Welcome to my 192.168.2.201
    Welcome to my 192.168.2.200
