@@ -5,16 +5,16 @@ description: |
 parameters:
   keypair:
     type: string
-    default: Dan-porirua
+    default: dans-key
   image_id:
     type: string
-    default: 514fe561-bc07-4d7a-aa57-43ea280d445e # an ubuntu18 image ID
+    default: 0da75c8a-787d-48cd-bb74-e979fc5ceb58 # an ubuntu18 image ID
   flavor_id:
     type: string
     default: c1.c1r1 # Flavor with 1GB RAM and 10GB disk space
   network_id:
     type: string
-    default: 039c1a63-8772-47ef-9a71-7844228367a9
+    default: 452fc8b7-218d-4279-99b2-3d46f9d016b7
   sg_ids:
     type: comma_delimited_list
   public_network:
