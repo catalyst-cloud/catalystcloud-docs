@@ -37,4 +37,5 @@ Table of Contents:
   object-storage/api
   object-storage/advanced
   object-storage/storage-access-control
+  object-storage/replication-policy
   object-storage/faq

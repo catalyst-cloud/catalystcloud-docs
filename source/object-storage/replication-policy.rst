@@ -2,10 +2,9 @@
 Replication Policy
 ##################
 
-Any container you make through our object storage service
-has a default replication policy applied to it. This policy ensures that
-each container has three replicas, one held on each region of the
-Catalyst Cloud.
+Any container you make through our object storage service has a default
+replication policy applied to it. This policy ensures that each container has
+three replicas, one held on each region of the Catalyst Cloud.
 
 However, there are some scenarios where you may not need your data to be
 replicated across regions and you therefore wish to change this policy. Instead
@@ -71,14 +70,16 @@ it.
        X-Account-Project-Domain-Id: default
                         X-Trans-Id: tx5deb854e32d94eec8c658-005dd47fc0
 
-    # Once we have the storageURL, the token and the policy we need. We export them for use in our curl command.
+    # Once we have the storageURL, the token and the policy we need.
+    # We export them for use in our curl command.
 
     $ export storageURL="https://object-storage.ostst.wgtn.cat-it.co.nz:443/v1/AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
     $ export token="gAAAAABdwJ5KkgWpKIHN_4xaFxkqPpvivOO2Qc4kavx832WC3GNws74icYXvzGUQy7eHxkSgbSpbPzj-j2PikiY6KmbwaqFdlStRSUXbmW0ZR6edoKzw8fDy7FXedR1kWR-j83HQfICzw802Z1zbnZw1Tho7F6vDVo5OEyQw6ORQTSINl6diBD4"
     $ export policy="nz-wlg-2--o1--sr-r3"
 
-    # To create a container with a non-default policy we have to specify our policy when we use the curl command.
-    # Make sure that you end the storage url with  "/[name of the container]"
+    # To create a container with a non-default policy we have to specify our
+    # policy when we use the curl command.
+    # Make sure that you end the storage url with  "/name of the container"
 
     $ curl -v -X PUT -H "X-Auth-Token: $token" -H "X-Storage-Policy: $policy" $storageURL/cont-pol
 

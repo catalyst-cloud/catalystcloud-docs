@@ -1,8 +1,8 @@
 .. _autoscaling-on-catalyst-cloud:
 
-************
-Autoscaling
-************
+*******************
+Autoscaling example
+*******************
 
 Prerequisites
 -------------
@@ -327,7 +327,7 @@ already pre installed. We will have to install it manually.
   | time_constraints          | []                                                                                                                                                                                                                                                                                                                                                                          |
   | timestamp                 | 2019-11-07T01:02:52.083002                                                                                                                                                                                                                                                                                                                                                  |
   | type                      | threshold                                                                                                                                                                                                                                                                                                                                                                   |
-  | user_id                   | 4b934c44d8b24e60acad9609b641bee3                                                                                                                                                                                                                                                                                                                                            |
+  | user_id                   | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                                                                                                                                                                                                                                                                                                                            |
   +---------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
   # Once the state has been changed to 'alarm' the scaleup_policy is activated

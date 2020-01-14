@@ -1,8 +1,8 @@
 .. _autohealing-on-catalyst-cloud:
 
-*************
-Autohealing
-*************
+*******************
+Autohealing example
+*******************
 
 Prerequisites
 -------------
@@ -387,7 +387,7 @@ creating the stack.
   | time_constraints          | []                                    |
   | timestamp                 | 2019-10-31T01:19:22.992154            |
   | type                      | loadbalancer_member_health            |
-  | user_id                   | 4b934c44d8b24e60acad9609b641bee3      |
+  | user_id                   | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX      |
   +---------------------------+---------------------------------------+
 
   # Log into one of the VMs and manually kill the webserver process
