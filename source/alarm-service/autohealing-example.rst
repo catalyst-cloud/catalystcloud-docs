@@ -6,9 +6,8 @@ Autohealing example
 
 Prerequisites
 -------------
-- You must have a working server on your project.
-- You must have the ``heat stack owner`` role.
-- You must have jq installed.
+- You must have the ``Heat Stack Owner`` role.
+- You must have ``aodhclient`` installed via ``pip``
 - You must have a security group with rules to allow ingress on port 22 and 80.
 - You must have a network set up that can host the webserver.
 
