@@ -13,10 +13,10 @@ Prerequisites
 Overview
 --------
 
-- Create a heat stack with two loadbalanced webservers.
+- Create a heat stack with two loadbalanced web servers.
 - Create a ``loadbalancer_member_health`` alarm
-- Induce failure to one or more of the webservers.
-- Observe as the alarm is triggered and the `errored` webserver is replaced.
+- Induce failure to one or more of the web servers.
+- Observe as the alarm is triggered and the `errored` server is replaced.
 
 Process
 -------
@@ -61,16 +61,15 @@ the ``CREATE_COMPLETE`` status.
 
 .. note::
 
-    In case of any ``CREATE_FAILED`` statuses you can interrogate the stack for
-    the error reasons with the command below.
+    A common reason for resources failing to be created is due to quota limits
+    being exceeded. In case of any ``CREATE_FAILED`` statuses you can
+    interrogate heat for the reasons why with the following command.
 
     .. code-block:: bash
 
         $ openstack stack failures list autohealing-stack
 
-    A common reason for resources failing to be created is due to quotas being
-    exceeded while attempting to create the stack. Address any actionable error
-    messages then delete the stack and try again.
+    Address any actionable error messages then delete the stack and try again.
 
 Assign the physical_resource_id's of ``loadbalancer_pool`` and
 ``autoscaling_group`` to variables for convenience. We'll need to refer to them
@@ -114,10 +113,10 @@ making ``curl`` requests to the public IP address.
 The loadbalncer is alternating traffic between the two servers on every request
 resulting in a corresponding pattern of alternating responses.
 
-To keep our service up and running and make it resilient to failure,
-we can create a ``loadbalancer_member_health`` alarm. The alarms function is
-to watch for failures in any of the loadbalancer members and initiate
-an autohealing action on them.
+To keep our service up and rning and make it resilient to failure,
+we can create a ``loadbalancer_member_health`` alarm. The alarm's function is
+to watch for an ``ERROR`` status on any of the loadbalancer members in the pool
+and initiate an autohealing action on them.
 
 .. code-block:: bash
 
@@ -133,15 +132,14 @@ an autohealing action on them.
 Below is a brief explanation of the various arguments we have constructed the
 alarm with.
 
-- ``--pool-id`` is he loadbalancer pool that the alarm will monitor for
+- ``--pool-id`` is the loadbalancer pool that the alarm will monitor for
   unhealthy members.
-- ``trust+heat://`` tells the alarm to notify heat when loadbalancer pool
-  member is unhealthy. This is what initiates the healing action.
+- ``--alarm-action trust+heat://`` tells the alarm to notify heat when the
+  alarm transitions to the ``alarm`` state. This is what initiates the healing action.
 - ``--stack-id`` is the name or ID of the stack which the alarm will initiate
   an update on.
 - ``--autoscaling-group-id`` is the autoscaling group which the resources
   belong to.
-
 
 The newly created alarm will start off in the ``insufficient_data`` state
 before moving to the ``ok`` state shortly after.
@@ -179,8 +177,8 @@ the stack resource list starting from the ``autoscaling_group``.
   |               |                             | lanced_webserver.yaml       |                 |                      |
   +---------------+-----------------------------+-----------------------------+-----------------+----------------------+
 
-Repeat the command again, this time using either of the
-``physical_resource_id``s as the argument.
+Repeat the command again, this time using the ``physical_resource_id`` of
+either of the items in the table as the argument.
 
 .. code-block:: bash
 
@@ -195,7 +193,8 @@ Repeat the command again, this time using either of the
   |                  | ec77789aaac               |                         |                 |                      |
   +------------------+---------------------------+-------------------------+-----------------+----------------------+
 
-For this demo, server failure can be emulated by simply stopping the server.
+Now that we have found the id of one of the servers we can emulate
+failure by simply stopping the server.
 
 .. code-block:: bash
 
@@ -245,8 +244,8 @@ are satisfied and the alarm has transitioned from ``ok`` to ``alarm``.
     | fb8c58ef-433f-4583-819d-16c189305869 | loadbalancer_member_health | autohealing_alarm | alarm             | low      |
     +--------------------------------------+----------------------------+-------------------+-------------------+----------+
 
-For the loadbalancer member health alarm the ``trust+heat://`` action will
-mark the failed server as an unhealthy stack resource and then initiate
+For the loadbalancer member health alarm the ``trust+heat://`` alarm action
+will mark the failed server as an unhealthy stack resource and then initiate
 a stack update.
 
 .. code-block:: bash
@@ -285,11 +284,17 @@ private IP address it was assigned by the private networks DHCP server.
   Welcome to 192.168.0.6
   Welcome to 192.168.0.7
 
-Don't forget to cleanup your stack to avoid any unnecessary charges.
+That's it. Now every time one of our loadbalancer members reaches an ``ERROR``
+state we can rest assured that our ``loadbalancer_member_health`` alarm will
+replace it with a new healthy instance.
 
-.. code-block:: bash
+.. warning::
 
-    $ openstack stack delete autohealing-stack
+  **Don't forget to cleanup your stack to avoid any unnecessary charges.**
+
+  .. code-block:: bash
+
+      $ openstack stack delete autohealing-stack
 
 For more information on the Alarm service, you can visit `the openstack
 documentation on aodh`_
