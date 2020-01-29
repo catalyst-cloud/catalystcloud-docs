@@ -64,7 +64,6 @@ Prerequisites
 - You must have jq installed.
 - You must have a security group with rules to allow ingress on port 22 and 80.
 - You must have a network set up that can host the webserver.
-- Currently aodh is only available in HLZ and Porirua regions.
 
 Process
 -------
@@ -297,7 +296,7 @@ Save this yaml as autohealing.yaml
 
 
 To connect both of these yaml files we will make a third one that allows the
-webserver.yaml to be used as an resource for the auto-healing.yaml. It is
+webserver.yaml to be used as a resource for the auto-healing.yaml. It is
 one line of code, but the separation of the webserver artefacts and the
 loadbalancer artefacts makes it easier to track when editing and is
 a good practice.
@@ -458,7 +457,7 @@ creating the stack.
    $ ps -ef |grep bash|grep script|grep -v grep
    root      1149  1117  0 19:24 ?        00:00:00 /bin/bash /var/lib/cloud/instance/scripts/part-001
    ubuntu    3233  3230  0 19:50 pts/0    00:00:00 -bash
-   $ sudo kill -9 1149
+   $ sudo kill -9 1117
    $ curl localhost
    curl: (7) couldn't connect to host
 
@@ -471,12 +470,14 @@ creating the stack.
    | 2acbd21e-39d5-41fe-8fb9-b3d61333f0c9 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.201 |            80 | ERROR            |      1 |
    +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
 
-   # Aodh will automatically trigger Heat stack update, keep checking the autoscaling_group resource status. At the same time, there should be only one IP address in the http response.
+   # Aodh will automatically trigger Heat stack update, keep checking the autoscaling_group resource status.
+   # At the same time, there should be only one IP address in the http response.
    $ while true; do curl $lb_ip; sleep 2; done
    Welcome to my 192.168.2.200
    Welcome to my 192.168.2.200
    Welcome to my 192.168.2.200
    Welcome to my 192.168.2.200
+
    $ osrl $stackid
    +----------------------------+--------------------------------------+----------------------------+--------------------+----------------------+
    | resource_name              | physical_resource_id                 | resource_type              | resource_status    | updated_time         |
@@ -525,11 +526,7 @@ An autoscaling example
 Prerequisites
 -------------
 
-The prerequisites for this example are the same as the previous with the
-following additions:
-
-- stress (a stress testing program) is installed on one of the webserver
-  instances.
+The prerequisites for this example are the same as the previous one.
 
 Process
 -------
@@ -538,7 +535,7 @@ In this example we will be showing you how to set up auto-scaling for our
 webservers using AODH. We will be using ubuntu images just like the previous
 example to simulate our webservers. The following script should be saved and
 run from the command line, the webserver.yaml and env.yaml from the previous
-example can also be reused.
+example can be reused.
 
 Save the following file as autoscaling.yaml
 
@@ -577,10 +574,10 @@ Save the following file as autoscaling.yaml
     scaleup_cpu_threshold:
       description: These are the CPU levels in percentages that must be met before the any scaling will occur.
       type: number
-      default: 4
+      default: 80
     scaledown_cpu_threshold:
       type: number
-      default: 2
+      default: 5
 
   resources:
     autoscaling_group:
@@ -684,9 +681,9 @@ Save the following file as autoscaling.yaml
       value: {get_attr: [loadbalancer_public_ip, floating_ip_address]}
 
 The process going forward will create a stack with two webserver images and
-create an alarm that will monitor them, scaling them up if their CPU usage
-exceeds 80%. This alarm is created when the stack is created, so you don't have
-to do it manually in the following steps:
+create an alarm that will monitor them; scaling them up if their CPU usage
+exceeds 80%. Unlike the previous example, the alarm is created at the same time
+as the stack, so you will not have to manually create it yourself:
 
 .. code-block:: bash
 
@@ -708,14 +705,13 @@ to do it manually in the following steps:
   alias lb="openstack loadbalancer"
   alias osrl="openstack stack resource list"
   alias osl="openstack stack list"
-  $ sudo apt install -y jq
+  sudo apt install -y jq
 
-  # Following the first couple of steps from the previous example.
+  # Following the first few steps from the previous example; the only change being we are
+  # using autoscaling.yaml instead of autohealing.yaml
 
   $ o stack create autoscaling-test -t autoscaling.yaml -e env.yaml
   $ export stackid=$(o stack show autoscaling-test -c id -f value) && echo $stackid
-
-  # The autoscaling.yaml file also sets up our alarms for us as well. So we can skip that step from the previous example.
 
   $ watch openstack stack resource list $stackid
   +----------------------------+--------------------------------------+----------------------------+-----------------+----------------------+
@@ -783,6 +779,8 @@ to do it manually in the following steps:
   | 2acbd21e-39d5-41fe-8fb9-b3d61333f0c9 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.201 |            80 | ONLINE           |      1 |
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
 
+  # The autoscaling.yaml file has already set up our alarms. So we can skip that step from the previous example.
+
   # When we look at our alarms before increasing the CPU workload we see the following:
 
   $ o alarm list
@@ -794,12 +792,13 @@ to do it manually in the following steps:
   +--------------------------------------+-----------+---------------------------------------------------------+-------------------+----------+---------+
 
 Next we have to trigger one of the alarms that we created. To do this we SSH to
-one of our instances and use stress. Because our images are from a base Ubuntu
-image, we will have to install stress directly on the instance.
+one of our instances and use "stress" which is a simple stress testing program.
+Because our images are from a base Ubuntu image they do not come with stress
+already pre installed. We will have to install it manually.
 
 .. code-block:: bash
 
-  $ o server list
+  $ o server list #to find the floating IP of the instance
   $ ssh ubuntu@103.197.60.167
   $ sudo apt update
   $ sudo apt upgrade
@@ -807,8 +806,8 @@ image, we will have to install stress directly on the instance.
   $ stress -c 8 -t 1200s &
   $ exit
 
-  # After a few minutes your alarm should trigger and go from the 'insufficient data' to 'alarm'
-  # The alarm will then cause a new instance to be scaled up to keep up with the increased CPU load.
+  # After a few minutes your alarm should trigger and go from 'insufficient data' to 'alarm'
+  # The alarm will then create a new instance to keep up with the increased CPU load.
 
   $ o alarm list
   +--------------------------------------+-----------+---------------------------------------------------------+-------+----------+---------+
@@ -817,6 +816,8 @@ image, we will have to install stress directly on the instance.
   | 9c245bcc-d31e-4219-ab50-f19d2dd8d0e9 | threshold | autoscaling-test-ceilometer_cpu_high_alarm-hpik52fcq7xc | alarm | low      | True    |
   | 11578915-f140-4095-a977-51ae861f1cd2 | threshold | autoscaling-test-ceilometer_cpu_low_alarm-xzclw6ejci64  | ok    | low      | True    |
   +--------------------------------------+-----------+---------------------------------------------------------+-------+----------+---------+
+
+  # looking at our alarm specifically we can see information on what actions its going to take.
 
   $ o alarm show autohealing-test-ceilometer_cpu_high_alarm-hpik52fcq7xc
   +---------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -842,6 +843,9 @@ image, we will have to install stress directly on the instance.
   | user_id                   | 4b934c44d8b24e60acad9609b641bee3                                                                                                                                                                                                                                                                                                                                            |
   +---------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+  # Once the state has been changed to 'alarm' the scaleup_policy is activated
+  # which goes on to create the new instance.
+
   $ o stack resource show autoscaling-test scaleup_policy
   +------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
   | Field                  | Value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -860,6 +864,8 @@ image, we will have to install stress directly on the instance.
   | updated_time           | 2019-11-07T01:01:19Z                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
   +------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+  # Finally, we can see this new instance when we list our servers.
+
   $ o server list
   +--------------------------------------+-------------------------------------------------------+--------+----------------------------------------+---------------------+---------+
   | ID                                   | Name                                                  | Status | Networks                               | Image               | Flavor  |
@@ -869,7 +875,22 @@ image, we will have to install stress directly on the instance.
   | 56591ff3-b2a6-431c-9d48-29a49fabfedd | au-a3zs-dqs5ofwuqegp-5uqp34rwzszb-server-qexfzb23qjxl | ACTIVE | private-net=10.0.0.160, 103.197.60.159 | ubuntu-18.04-x86_64 | c1.c1r1 |
   +--------------------------------------+-------------------------------------------------------+--------+----------------------------------------+---------------------+---------+
 
-  # We now have three instances instead of only two
+Our new instance is live and the load balancers ensure that the workload is
+spread evenly. You can see this if you try to curl the instances like earlier.
+
+.. code-block:: bash
+
+  $ while true; do curl $lb_ip; sleep 2; done
+  Welcome to my 192.168.2.200
+  Welcome to my 192.168.2.201
+  Welcome to my 192.168.2.202
+  Welcome to my 192.168.2.200
+  Welcome to my 192.168.2.201
+  Welcome to my 192.168.2.202
+
+  # Now we can clean up this stack
+
+  $ o stack delete autoscaling-test
 
 
 For more information on the Alarm service, you can visit `the openstack
