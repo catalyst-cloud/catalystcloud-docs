@@ -8,295 +8,67 @@ Prerequisites
 -------------
 - You must have the ``Heat Stack Owner`` role.
 - You must have ``aodhclient`` installed via ``pip``
-- You must have a security group with rules to allow ingress on port 22 and 80.
 - You must have a network set up that can host the webserver.
+- You must have sourced an RC file on your command line
+
+Bullet point overview
+---------------------
+
+- Create a heat stack with two loadbalanced webservers.
+- Create a ``loadbalancer_member_health`` alarm
+- Induce failure to one or more of the webservers.
+- Observe as the alarm is triggered and the `errored` webserver is replaced.
 
 Process
 -------
 
-For this working example, we will be creating an alarm that monitors a
-simulated webserver. We will configure our alarm so that should the webserver
-go down the alarm will trigger and implement an autohealing feature.
-To create this simulated webserver, we will be using netcat on an Ubuntu image
-in our project. The Ubuntu instance will respond to requests with the message:
-"Welcome to my <IP address>".
+This example will create an alarm that monitors a set of simulated webservers.
+We will configure our alarm so that should a webserver go down the alarm will
+trigger and inform the heat stack, which created the webservers, to activate an
+autohealing feature. The webservers will be simulated by using netcat on an
+Ubuntu image in our project, these ubuntu instances will respond to requests
+with the message: "Welcome to my <IP address>".
 
-The following is a yaml file that is used to set up the webserver instances
-when we create our stack. You will have to change some of the variables in
-this script for it to function properly.
-
-Save the following script as a yaml file named webserver.yaml
-
-.. code-block:: bash
-
-   heat_template_version: 2016-10-14
-
-   description: |
-     The heat template is used to create a server as a load balancer member.
-   parameters:
-     keypair:
-       type: string
-       default: KEYPAIR NAME
-     image_id:
-       type: string
-       default: 0da75c8a-787d-48cd-bb74-e979fc5ceb58 # an ubuntu18 image ID
-     flavor_id:
-       type: string
-       default: c1.c1r1 # Flavor with 1GB RAM and 10GB disk space
-     network_id:
-       type: string
-       default: NETWORK ID
-     sg_ids:
-       type: comma_delimited_list
-     public_network:
-       type: string
-     pool_id:
-       type: string
-       default: no_default
-       hidden: true
-     metadata:
-       type: json
-
-   resources:
-     server:
-       type: OS::Nova::Server
-       properties:
-         image: { get_param: image_id }
-         flavor: { get_param: flavor_id }
-         networks:
-           - network: {get_param: network_id}
-         key_name: {get_param: keypair}
-         security_groups: {get_param: sg_ids}
-         metadata: {get_param: metadata}
-         config_drive: true
-         user_data_format: RAW
-         user_data: |
-             #!/bin/bash
-             MYIP=$(/sbin/ifconfig ens3 | grep 'inet '| awk '{print $2}');
-             OUTPUT="Welcome to my $MYIP";
-             while true; do echo -e "HTTP/1.1 200 OK\r\n\r\n${OUTPUT}\r" | sudo nc -q0 -l -p 80; done
-     pool_member:
-       type: OS::Octavia::PoolMember
-       properties:
-         address: {get_attr: [server, first_address]}
-         pool: {get_param: pool_id}
-         protocol_port: 80
-     server_public_ip:
-       type: OS::Neutron::FloatingIP
-       properties:
-         floating_network: {get_param: public_network}
-         port_id: {get_attr: [server, addresses, {get_param: network_id}, 0, port]}
-
-   outputs:
-     server_id:
-       value: {get_resource: server}
-
-Next, we need to set up the constructs required to have our loadbalanced self
-healing webservers. The following yaml will create a loadbalancer, an
-autoscaling group and a health monitor. This script also communicates with the
-webserver yaml to spin up the two Ubuntu instances to simulate the webservers.
-After these are created we will attach an alarm.
-
-Save this yaml as autohealing.yaml
+To get started we need to clone our example templates. These templates
+create most of the resources that are required for this example. However, this
+example still requires a network already created before hand for the resources
+to function.
 
 .. code-block:: bash
 
-      heat_template_version: 2016-10-14
+  $ git clone https://github.com/catalyst-cloud/catalystcloud-orchestration/
+  $ cd catalystcloud-orchestration/hot/autohealing/autohealing-single-server
 
-   description: |
-     The heat template is used to demo the autoscaling and autohealing for a webserver.
-   parameters:
-     keypair:
-       type: string
-       default: KEYPAIR NAME
-     webserver_image_id:
-       description: changed to use ubuntu 18.04.
-       type: string
-       default: 0da75c8a-787d-48cd-bb74-e979fc5ceb58 # image ID of ubuntu instance
-     webserver_flavor_id:
-       type: string
-       default: c1.c1r1 # Flavor with 1GB RAM and 10GB disk space
-     webserver_network_id:
-       type: string
-       default: NETWORK ID
-     webserver_sg_ids:
-       description: |
-         Security groups that allows 22/TCP from public and 80/TCP from the local network to allow
-         the loadbalancer health checks through.
-       type: comma_delimited_list
-       default: ["SECURITY GROUP ID"]
-     vip_subnet_id:
-       description: Should be a subnet of webserver_network_id
-       type: string
-       default: SUBNET ID
-     public_network:
-       description: Public network name, could get by 'openstack network list --external'
-       type: string
-       default: public-net
-     scaleup_cpu_threshold:
-       type: number
-       default: 80
-     scaledown_cpu_threshold:
-       type: number
-       default: 5
+Next, you will need to change some of the variables in these files. The
+``KEY NAME, NETWORK ID, SUBNET ID``, and the ``IMAGE ID`` if you are in a
+project outside the hamilton region; All will need to be changed in the
+"autohealing.yaml" file. Similarly, the ``KEYNAME, NETWORK ID, and IMAGE ID``
+will also need to be changed in the "webserver.yaml"
 
-   resources:
-     autoscaling_group:
-       type: OS::Heat::AutoScalingGroup
-       properties:
-         min_size: 2
-         max_size: 4
-         resource:
-           type: OS::LB::Server
-           properties:
-             keypair: {get_param: keypair}
-             image_id: {get_param: webserver_image_id}
-             flavor_id: {get_param: webserver_flavor_id}
-             network_id: {get_param: webserver_network_id}
-             sg_ids: {get_param: webserver_sg_ids}
-             public_network: {get_param: public_network}
-             pool_id: {get_resource: loadbalancer_pool}
-             metadata: {"metering.server_group": {get_param: "OS::stack_id"}}
-     loadbalancer:
-       type: OS::Octavia::LoadBalancer
-       properties:
-         vip_subnet: {get_param: vip_subnet_id}
-         name: webserver_lb
-     loadbalancer_public_ip:
-       type: OS::Neutron::FloatingIP
-       properties:
-         floating_network: {get_param: public_network}
-         port_id: {get_attr: [loadbalancer, vip_port_id]}
-       listener:
-       type: OS::Octavia::Listener
-       properties:
-         name: webserver_listener
-         protocol: HTTP
-         protocol_port: 80
-         loadbalancer: {get_resource: loadbalancer}
-     loadbalancer_pool:
-       type: OS::Octavia::Pool
-       properties:
-         lb_algorithm: ROUND_ROBIN
-         protocol: HTTP
-         listener: {get_resource: listener}
-     loadbalancer_healthmonitor:
-       type: OS::Octavia::HealthMonitor
-       properties:
-         delay: 5
-         max_retries: 3
-         pool: {get_resource: loadbalancer_pool}
-         timeout: 15
-         type: HTTP
-         http_method: GET
-         expected_codes: 200
-     scaleup_policy:
-       type: OS::Heat::ScalingPolicy
-       properties:
-         adjustment_type: change_in_capacity
-         auto_scaling_group_id: {get_resource: autoscaling_group}
-         scaling_adjustment: 1
-         cooldown: 60
-     scaledown_policy:
-       type: OS::Heat::ScalingPolicy
-       properties:
-         adjustment_type: change_in_capacity
-         auto_scaling_group_id: {get_resource: autoscaling_group}
-         scaling_adjustment: -1
-         cooldown: 60
-       type: OS::Aodh::Alarm
-       properties:
-         meter_name: cpu_util
-         period: 60
-         evaluation_periods: 1
-         statistic: avg
-         comparison_operator: gt
-         threshold: 5.0
-         alarm_actions:
-           - {get_attr: [ scaleup_policy, signal_url ] }
-         repeat_actions: false
-         matching_metadata: { 'metadata.user_metadata.server_group': { get_param: "OS::stack_id" } }
-     ceilometer_cpu_low_alarm:
-       type: OS::Aodh::Alarm
-       properties:
-         meter_name: cpu_util
-         period: 60
-         evaluation_periods: 1
-         statistic: avg
-         comparison_operator: lt
-         threshold: 1.0
-         alarm_actions:
-           - {get_attr: [ scaledown_policy, signal_url ] }
-         repeat_actions: false
-         matching_metadata: { 'metadata.user_metadata.server_group': { get_param: "OS::stack_id" } }
-
-   outputs:
-     # scale_up_url:
-     #   value: {get_attr: [scaleup_policy, alarm_url]}
-     # scale_down_url:
-     #   value: {get_attr: [scaledown_policy, alarm_url]}
-     lb_ip:
-       value: {get_attr: [loadbalancer_public_ip, floating_ip_address]}
-     lb_vip:
-       value: {get_attr: [loadbalancer, vip_address]}
-
-
-To connect both of these yaml files we will make a third one that allows the
-webserver.yaml to be used as a resource for the auto-healing.yaml. It is
-one line of code, but the separation of the webserver artefacts and the
-loadbalancer artefacts makes it easier to track when editing and is
-a good practice.
-
-Save this file as env.yaml:
-
-.. code-block:: bash
-
- resource_registry:
-   OS::LB::Server: webserver.yaml
-
-Once all of these yaml files are saved, you will see parts of them need to be
-replaced by information specific to your project. After you have changed
-these variables, we need to check whether our templates are
-valid. This is done with the following commands:
+Once these changes have been made and your yaml files have been saved, we want
+to make sure that they are valid for use. To do this, we can use the
+openstack commands below.
 
 .. code-block:: bash
 
   $ openstack orchestration template validate -f yaml -t autohealing.yaml
   $ openstack orchestration template validate -f yaml -t webserver.yaml
 
-If your template is valid the console will print out the template, if the
+If your template is valid the console will output the template, if the
 template is invalid the console will return an error message instead.
-
 As long as our templates are valid, we can go to the next step which is
 creating the stack.
 
 .. code-block:: bash
 
-  # WGTN parameters
-  e044255f-40c2-48e5-a5f2-60d423e3ec54 | ubuntu-18.04-x86_64
-  e0ba6b88-5360-492c-9c3d-119948356fd3 | public-net
+  $ openstack stack create autohealing-test -t autohealing.yaml -e env.yaml
+  $ export stackid=$(openstack stack show autohealing-test -c id -f value) && echo $stackid
 
-  # HLZ parameters
-  0da75c8a-787d-48cd-bb74-e979fc5ceb58 | ubuntu-18.04-x86_64
-  f10ad6de-a26d-4c29-8c64-2a7418d47f8f | public-net
+We have now created the stack and exported a variable for repeated use
+throughout this example. Next we will want to list the stack resources so we
+can see what is being created.
 
-  # POR parameters
-  514fe561-bc07-4d7a-aa57-43ea280d445e | ubuntu-18.04-x86_64
-  2e69dea1-53f4-46be-b0e6-74467cf5cc88 | public-net
-
-
-  # Set some command aliases and install jq
-  $ alias o="openstack"
-  $ alias lb="openstack loadbalancer"
-  $ alias osrl="openstack stack resource list"
-  $ alias osl="openstack stack list"
-  $ sudo apt install -y jq
-
-  # First, create the Head stack using the template files and wait until it's created successfully
-  # Change the default value of the parameters defined in autohealing.yaml
-
-  $ o stack create autohealing-test -t autohealing.yaml -e env.yaml
-  $ export stackid=$(o stack show autohealing-test -c id -f value) && echo $stackid
+.. code-block:: bash
 
   $ watch openstack stack resource list $stackid
   +----------------------------+--------------------------------------+----------------------------+-----------------+----------------------+
@@ -309,10 +81,41 @@ creating the stack.
   | loadbalancer_pool          | 30129a16-f6b7-434f-9648-09c306d699f8 | OS::Octavia::Pool          | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
   | loadbalancer               | 5f9ea90e-97ae-4844-867e-3de70b32abf3 | OS::Octavia::LoadBalancer  | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
   +----------------------------+--------------------------------------+----------------------------+-----------------+----------------------+
+.. note::
 
-  # Verify that we could send HTTP request to the load balancer VIP, the backend VMs IP addresses are shown alternatively.
-  # The VIP floating IP could be found in the stack output.
-  $ o stack output show $stackid --all
+  In case of any ``CREATE_FAILED`` statuses you can interrogate the stack for
+  the error reasons with the command below.
+
+  .. code-block:: bash
+
+    $ openstack stack failures list autohealing-stack
+
+  A common reason for resources failing to be created is due to quotas being
+  exceeded while attempting to create the stack. Address any actionable error
+  messages then delete the stack and try again.
+
+
+Once these resources reach "CREATE_COMPLETE" the stack has finished and we
+can move on to testing our webservers.
+However before this, we are going to create some variables as we will need to
+refer to certain resource IDs many times throughout this example. These are the
+'Load balancer ID', 'Autoscaling Group ID', and the 'Load balancer pool ID'
+
+.. code-block:: bash
+
+  $ lbid=$(openstack loadbalancer list | grep webserver_lb | awk '{print $2}');
+  $ asgid=$(openstack stack resource list $stackid | grep autoscaling_group | awk '{print $4}');
+  $ poolid=$(openstack loadbalancer status show $lbid | jq -r '.loadbalancer.listeners[0].pools[0].id')
+
+Next we are going to test our webservers. The service running on each webserver
+simply responds with a short message including the private IP address of the
+current server, so we can tell which server has responded to our request. We
+can interact with the service by making ``curl`` requests to the public IP
+address.
+
+.. code-block:: bash
+
+  $ openstack stack output show $stackid --all
   +--------+-----------------------------------------+
   | Field  | Value                                   |
   +--------+-----------------------------------------+
@@ -335,26 +138,22 @@ creating the stack.
   Welcome to my 192.168.2.200
   Welcome to my 192.168.2.201
 
-  # Get the resources IDs
-  $ lbid=$(lb list | grep webserver_lb | awk '{print $2}');
-  $ asgid=$(o stack resource list $stackid | grep autoscaling_group | awk '{print $4}');
-  $ poolid=$(lb status show $lbid | jq -r '.loadbalancer.listeners[0].pools[0].id')
+The loadbalancer is alternating the traffic between these two servers on every
+request. To keep our service up and running and make it resilient to failure,
+we are going to create a ``loadbalancer_member_health`` alarm. The alarms
+function is to watch for failures in any of the loadbalancer members and
+initiate an autohealing action on them.
 
-  # Verify the load balancer members are all healthy
-  $ lb member list $poolid
+.. code-block:: bash
+
+  # We check that our loadbalancer members are all healthy before creating our alarm.
+  $ openstack loadbalancer member list $poolid
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
   | id                                   | name | project_id                       | provisioning_status | address       | protocol_port | operating_status | weight |
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
   | 4eeac1a8-7837-41d9-8299-8d8f9f691b69 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.200 |            80 | ONLINE           |      1 |
   | 2acbd21e-39d5-41fe-8fb9-b3d61333f0c9 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.201 |            80 | ONLINE           |      1 |
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
-
-  # perform the alarm setup using openstack cli
-  $ echo $lbid $asgid $poolid $stackid
-  0db8dcc8-77c1-4682-8213-21f4e90cafd1
-  9ec5bb8c-3b7f-4a71-858d-cb73d0d03b4e
-  0da0911a-0b07-4937-99ab-c6f6e3404c39
-  cc55271e-ddcd-4db0-8803-265f23297849
 
   $ openstack alarm create --name test_lb_alarm \
   --type loadbalancer_member_health \
@@ -389,8 +188,39 @@ creating the stack.
   | user_id                   | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX      |
   +---------------------------+---------------------------------------+
 
-  # Log into one of the VMs and manually kill the webserver process
-  $ o server list
+Below is a brief explanation of the various arguments we have constructed the
+alarm with:
+
+- ``--pool-id`` is the loadbalancer pool that the alarm will monitor for
+  unhealthy members.
+- ``trust+heat://`` tells the alarm to notify heat when loadbalancer pool
+  member is unhealthy. This is what initiates the healing action.
+- ``--stack-id`` is the name or ID of the stack which the alarm will initiate
+  an update on.
+- ``--autoscaling-group-id`` is the autoscaling group which the resources
+  belong to.
+
+We can now view the alarm and see that its status is ``insufficient data`` this
+is normal as the alarm has not been created to recognise any state of the
+loadbalancer that is not the ``ERROR`` state.
+
+.. code-block:: bash
+
+  $ openstack alarm list
+  +--------------------------------------+----------------------------+---------------+-------------------+----------+---------+
+  | alarm_id                             | type                       | name          | state             | severity | enabled |
+  +--------------------------------------+----------------------------+---------------+-------------------+----------+---------+
+  | 18be0104-feed-4415-b9a5-55dcda0332ab | loadbalancer_member_health | test_lb_alarm | insufficient data | low      | True    |
+  +--------------------------------------+----------------------------+---------------+-------------------+----------+---------+
+
+Now that the alarm is in place we can test it out by simulating the failure of
+one of our application servers. For this example we can simulate a failure by
+'stopping' a server.
+
+.. code-block:: bash
+
+  # Find one of the server ids
+  $ openstack server list
   +--------------------------------------+-------------------------------------------------------+--------+-----------------------------------------+---------------------+---------+
   | ID                                   | Name                                                  | Status | Networks                                | Image               | Flavor  |
   +--------------------------------------+-------------------------------------------------------+--------+-----------------------------------------+---------------------+---------+
@@ -398,27 +228,14 @@ creating the stack.
   | b80aa773-7330-4a00-9666-12980059050b | au-5z37-hlzbc66r2vrc-h6qxnp7n5wru-server-wyf3dksa6w3v | ACTIVE | private_net=192.168.2.201, 10.17.9.147  | cirros-0.3.1-x86_64 | m1.tiny |
   +--------------------------------------+-------------------------------------------------------+--------+-----------------------------------------+---------------------+---------+
 
-  $ ssh ubuntu@103.197.62.142
-  $ curl localhost
-  Welcome to my 10.0.0.105
-  $ ps -ef |grep bash|grep script|grep -v grep
-  root      1149  1117  0 19:24 ?        00:00:00 /bin/bash /var/lib/cloud/instance/scripts/part-001
-  ubuntu    3233  3230  0 19:50 pts/0    00:00:00 -bash
-  $ sudo kill -9 1117
-  $ curl localhost
-  curl: (7) could not connect to host
+  # Then we 'stop' this server
+  $ openstack server stop 4a35a813-ac9a-4195-9b25-ad5d9381f68e
 
-  # After a few seconds, you should see there is one load balancer member in ERROR operating_status.
-  $ lb member list $poolid
-  +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
-  | id                                   | name | project_id                       | provisioning_status | address       | protocol_port | operating_status | weight |
-  +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
-  | 4eeac1a8-7837-41d9-8299-8d8f9f691b69 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.200 |            80 | ONLINE           |      1 |
-  | 2acbd21e-39d5-41fe-8fb9-b3d61333f0c9 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.201 |            80 | ERROR            |      1 |
-  +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
+If we curl our service again we can see that ``192.168.2.201`` has stopped
+responding to our request and the one remaining server is receiving all the
+traffic.
 
-  # Aodh will automatically trigger Heat stack update, keep checking the autoscaling_group resource status.
-  # At the same time, there should be only one IP address in the http response.
+.. code-block:: bash
 
   $ while true; do curl $lb_ip; sleep 2; done
   Welcome to my 192.168.2.200
@@ -426,7 +243,38 @@ creating the stack.
   Welcome to my 192.168.2.200
   Welcome to my 192.168.2.200
 
-  $ osrl $stackid
+Querying the loadbalancer member pool also shows that one of the members
+status is now reporting ``ERROR``.
+
+.. code-block:: bash
+
+  $ openstack loadbalancer member list $poolid
+  +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
+  | id                                   | name | project_id                       | provisioning_status | address       | protocol_port | operating_status | weight |
+  +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
+  | 4eeac1a8-7837-41d9-8299-8d8f9f691b69 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.200 |            80 | ONLINE           |      1 |
+  | 2acbd21e-39d5-41fe-8fb9-b3d61333f0c9 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.201 |            80 | ERROR            |      1 |
+  +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
+
+Now that at least one member of the loadbalancer pool is reporting an
+operating status of ``ERROR``, the conditions for the alarm to be triggered
+are satisfied and the alarm has transitioned from ``ok`` to ``alarm``.
+
+.. code-block:: bash
+
+  +--------------------------------------+----------------------------+---------------+------------+----------+---------+
+  | alarm_id                             | type                       | name          | state      | severity | enabled |
+  +--------------------------------------+----------------------------+---------------+------------+----------+---------+
+  | 18be0104-feed-4415-b9a5-55dcda0332ab | loadbalancer_member_health | test_lb_alarm | alarm      | low      | True    |
+  +--------------------------------------+----------------------------+---------------+------------+----------+---------+
+
+For the loadbalancer member health alarm the ``trust+heat://`` action will
+mark the failed server as an unhealthy stack resource and then initiate
+a stack update.
+
+.. code-block:: bash
+
+  $ openstack stack resource list $stackid
   +----------------------------+--------------------------------------+----------------------------+--------------------+----------------------+
   | resource_name              | physical_resource_id                 | resource_type              | resource_status    | updated_time         |
   +----------------------------+--------------------------------------+----------------------------+--------------------+----------------------+
@@ -439,7 +287,7 @@ creating the stack.
   +----------------------------+--------------------------------------+----------------------------+--------------------+----------------------+
 
   # After a few minutes, the stack status goes back to healthy. The ERROR load balancer member is replaced.
-  $ osrl $stackid
+  $ openstack stack resource list $stackid
   +----------------------------+--------------------------------------+----------------------------+-----------------+----------------------+
   | resource_name              | physical_resource_id                 | resource_type              | resource_status | updated_time         |
   +----------------------------+--------------------------------------+----------------------------+-----------------+----------------------+
@@ -451,7 +299,7 @@ creating the stack.
   | loadbalancer               | 5f9ea90e-97ae-4844-867e-3de70b32abf3 | OS::Octavia::LoadBalancer  | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
   +----------------------------+--------------------------------------+----------------------------+-----------------+----------------------+
 
-  $ lb member list $poolid
+  $ openstack loadbalancer member list $poolid
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
   | id                                   | name | project_id                       | provisioning_status | address       | protocol_port | operating_status | weight |
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
@@ -459,15 +307,22 @@ creating the stack.
   | f354fe18-c801-4729-90bb-0af29048ef46 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.202 |            80 | ONLINE           |      1 |
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
 
+Now that the stack update is complete the new server will start responding to
+requests with a different IP then the failed member.
+
+.. code-block:: bash
+
   $ while true; do curl $lb_ip; sleep 2; done
   Welcome to my 192.168.2.200
   Welcome to my 192.168.2.202
   Welcome to my 192.168.2.200
   Welcome to my 192.168.2.202
 
-  # Now we can clean up this stack:
+Now we can clean up this stack:
 
-  $ o stack delete $stackid
+.. code-block:: bash
+
+  $ openstack stack delete $stackid
 
 
 For more information on the Alarm service, you can visit `the openstack
