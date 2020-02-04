@@ -16,4 +16,3 @@ autoscale its instances.
 
    alarm-service/alarm-service-intro
    alarm-service/autohealing-example
-   alarm-service/autoscaling-example

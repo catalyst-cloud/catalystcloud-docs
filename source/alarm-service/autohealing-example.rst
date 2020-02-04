@@ -7,8 +7,8 @@ Autohealing example
 Prerequisites
 -------------
 - You must have the ``Heat Stack Owner`` role.
-- You must have ``aodhclient`` installed via ``pip``
-- You must have a network set up that can host the webserver.
+- You must have ``aodhclient``, which you can install via ``pip``
+- You must have a network set up that can host webservers.
 - You must have sourced an RC file on your command line
 
 Bullet point overview
@@ -26,7 +26,7 @@ This example will create an alarm that monitors a set of simulated webservers.
 We will configure our alarm so that should a webserver go down the alarm will
 trigger and inform the heat stack, which created the webservers, to activate an
 autohealing feature. The webservers will be simulated by using netcat on an
-Ubuntu image in our project, these ubuntu instances will respond to requests
+Ubuntu image in our project, these Ubuntu instances will respond to requests
 with the message: "Welcome to my <IP address>".
 
 To get started we need to clone our example templates. These templates
@@ -139,9 +139,9 @@ address.
   Welcome to my 192.168.2.201
 
 The loadbalancer is alternating the traffic between these two servers on every
-request. To keep our service up and running and make it resilient to failure,
-we are going to create a ``loadbalancer_member_health`` alarm. The alarms
-function is to watch for failures in any of the loadbalancer members and
+request. To keep our service up and running and to make our service resilient
+to failure, we are going to create a ``loadbalancer_member_health`` alarm. The
+alarms function is to watch for failures in any of the loadbalancer members and
 initiate an autohealing action on them.
 
 .. code-block:: bash
@@ -193,15 +193,15 @@ alarm with:
 
 - ``--pool-id`` is the loadbalancer pool that the alarm will monitor for
   unhealthy members.
-- ``trust+heat://`` tells the alarm to notify heat when loadbalancer pool
+- ``trust+heat://`` tells the alarm to notify heat when a loadbalancer pool
   member is unhealthy. This is what initiates the healing action.
 - ``--stack-id`` is the name or ID of the stack which the alarm will initiate
   an update on.
 - ``--autoscaling-group-id`` is the autoscaling group which the resources
   belong to.
 
-We can now view the alarm and see that its status is ``insufficient data`` this
-is normal as the alarm has not been created to recognise any state of the
+We can now view the alarm and see that its status is ``insufficient data.``
+This is normal as the alarm has not been created to recognise any state of the
 loadbalancer that is not the ``ERROR`` state.
 
 .. code-block:: bash
@@ -318,7 +318,8 @@ requests with a different IP then the failed member.
   Welcome to my 192.168.2.200
   Welcome to my 192.168.2.202
 
-Now we can clean up this stack:
+Now that we've shown you can create an autohealing service using aodh,
+we can clean up this stack:
 
 .. code-block:: bash
 
