@@ -229,7 +229,7 @@ one of our application servers. For this example we can simulate a failure by
   +--------------------------------------+-------------------------------------------------------+--------+-----------------------------------------+---------------------+---------+
 
   # Then we 'stop' this server
-  $ openstack server stop 4a35a813-ac9a-4195-9b25-ad5d9381f68e
+  $ openstack server stop b80aa773-7330-4a00-9666-12980059050b
 
 If we curl our service again we can see that ``192.168.2.201`` has stopped
 responding to our request and the one remaining server is receiving all the
