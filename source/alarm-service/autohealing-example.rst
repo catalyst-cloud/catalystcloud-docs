@@ -318,15 +318,12 @@ requests with a different IP then the failed member.
   Welcome to my 192.168.2.200
   Welcome to my 192.168.2.202
 
-Now that we've shown you can create an autohealing service using aodh,
-we can clean up this stack:
+Now that we've shown you can create an autohealing service using the alarm
+service, we can clean up this stack:
 
 .. code-block:: bash
 
   $ openstack stack delete $stackid
 
 
-For more information on the Alarm service, you can visit `the openstack
-documentation on aodh`_
 
-.. _`the openstack documentation on aodh`: https://docs.openstack.org/aodh/latest/admin/telemetry-alarms.html
