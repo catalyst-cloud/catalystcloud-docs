@@ -111,9 +111,6 @@ Now create a router interface on the "private-subnet" subnet:
 
  $ openstack router add subnet border-router private-subnet
 
-
-
-
 Choosing a Flavor
 =================
 
@@ -300,6 +297,7 @@ be booted on this network. Choose "private-net" when assigning a network to the 
 
 Configure Instance Security Group
 =================================
+.. _security-group-first-instance:
 
 Create a security group called "first-instance-sg".
 
