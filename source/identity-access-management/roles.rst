@@ -117,6 +117,14 @@ manage their own account information. This role cannot view, create or destroy
 project resources and it does not permit the uploading of SSH keys or the
 viewing of project usage and quota information.
 
+Kubernetes specific roles
+=========================
+
+There are certain roles that are used for kubernetes actions only and are
+required to perform specific actions on kubernetes clusters. They can be
+found in the :ref:`kubernetes <kubernetes-access-control>` section of the
+documentation.
+
 
 Adding a new user
 =================
