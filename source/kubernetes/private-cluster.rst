@@ -79,6 +79,7 @@ There are 4 typical scenarios as below:
 |                 | master_lb_floating_ip_enabled = True  | master_lb_floating_ip_enabled = False |
 +-----------------+---------------------------------------+---------------------------------------+
 
+.. _cluster-on-existing-net:
 
 **********************************
 Create cluster in existing network

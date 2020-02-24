@@ -158,6 +158,14 @@ The actual usage would look like this.
     --cluster-template <Template ID> \
     --floating-ip-enabled
 
+.. Note::
+
+  This quickstart guide covers the steps to creating a kubernetes cluster
+  from scratch. But if you wish to create a cluster on an existing
+  private network then you can refer to the relevant section in
+  :ref:`the private-cluster <cluster-on-existing-net>` documentation.
+
+
 Creating a cluster
 ==================
 
