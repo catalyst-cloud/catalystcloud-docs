@@ -4,7 +4,7 @@
 Code examples
 #############
 
-
+Testing the size of words outside vs inside the tabs
 
 .. tabs::
 
@@ -113,3 +113,11 @@ Code examples
 
          PROGRAM main
          END PROGRAM main
+
+   .. tab:: Text
+
+      This is a test for the text size of tabs?
+
+      ***********************
+      do titles work in tabs?
+      ***********************
