@@ -92,6 +92,7 @@ explained in :ref:`command-line-interface`.
           os_options = options,
   )
 
+
   # Create a new container
   container_name = 'mycontainer'
   conn.put_container(container_name)
@@ -105,11 +106,9 @@ explained in :ref:`command-line-interface`.
   # List all containers and objects
   for container in conn.get_account()[1]:
       cname = container['name']
-      print 'container\t{0}'.format(cname)
-
+      print ("container\t{0}".format(cname))
       for data in conn.get_container(cname)[1]:
-          print '\t{0}\t{1}\t{2}'.format(data['name'], data['bytes'],
-          data['last_modified'])
+          print ('\t{0}\t{1}\t{2}'.format(data['name'], data['bytes'], data['last_modified']))
 
 
 To use the version 1 (auth) API you need to have previously authenticated,
