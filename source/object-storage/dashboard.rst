@@ -33,7 +33,7 @@ content.
    :align: center
 
 Click on the "Browse" button to select the file you wish to upload and click
-"Upload Object".
+"Upload File".
 
 .. image:: assets/doing_upload.png
    :align: center
