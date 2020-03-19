@@ -85,20 +85,19 @@ To use this file, save it as a '.py' and run it from your command line.
   auth_username = os.environ['OS_USERNAME']
   auth_password = os.environ['OS_PASSWORD']
   auth_url = os.environ['OS_AUTH_URL']
-  project_name = os.environ['OS_TENANT_NAME']
+  project_name = os.environ['OS_PROJECT_NAME']
   region_name = os.environ['OS_REGION_NAME']
   options = {'tenant_name': project_name, 'region_name': region_name}
 
   # Establish the connection with the object storage API
   conn = swiftclient.Connection(
+          authurl = auth_url,
           user = auth_username,
           key = auth_password,
-          authurl = auth_url,
           insecure = False,
-          auth_version = 2,
           os_options = options,
+          auth_version = '3'
   )
-
 
   # Create a new container
   container_name = 'mycontainer'
@@ -255,10 +254,10 @@ Swift command line tools, then exporting the required variables as shown below.
     $ source openstack-openrc.sh
 
     $ swift stat -v
-     StorageURL: https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda
+     StorageURL: https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                       Auth Token: 5f5a043e1bd24a8fa84b8785cca8e0fc
                       Containers: 48
-                         Account: AUTH_0ef8ecaa78684c399d1d514b61698fda
+                         Account: AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                          Objects: 156
                            Bytes: 11293750551
  Containers in policy "policy-0": 48
@@ -271,7 +270,7 @@ Swift command line tools, then exporting the required variables as shown below.
                     Content-Type: text/plain; charset=utf-8
                    Accept-Ranges: bytes
 
-    $ export storageURL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda"
+    $ export storageURL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
     $ export token="5f5a043e1bd24a8fa84b8785cca8e0fc"
 
 Then run the following command to get a list of all available containers for
