@@ -16,7 +16,7 @@ fi
 
 # Create a Python virtual environment if needed
 if [ ! -d venv ]; then
-  virtualenv venv
+  virtualenv -p $(which python3) venv
 fi
 
 # Activate the virtual environment
