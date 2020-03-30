@@ -8,7 +8,7 @@ behind it by applying IP address based restrictions by providing the CIDR of the
 allowed network.
 
 **************************
-Enabling CIDR Resrtictions
+Enabling CIDR Restrictions
 **************************
 
 By default the listeners associated with a loadbalancer will accept traffic
