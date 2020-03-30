@@ -22,7 +22,7 @@ range/s.
 
 To apply it when the listener is created.
 
-.. code-block::
+.. code-block:: bash
 
     openstack loadbalancer listener create --name http_listener \
     --protocol HTTP \
@@ -32,7 +32,7 @@ To apply it when the listener is created.
 
 If we then view the listener we should see
 
-.. code-block::
+.. code-block:: bash
 
     +-----------------------------+--------------------------------------+
     | Field                       | Value                                |
@@ -68,7 +68,7 @@ If we then view the listener we should see
 If we wanted to add an allowed CIDR range to an existing listener we can do that
 using the set command, like so.
 
-.. code-block::
+.. code-block:: bash
 
     openstack loadbalancer listener set \
     --allowed-cidr 203.0.113.0/25 \
@@ -83,7 +83,7 @@ one for each address range that needs to be added.
     they need to be included in the **set** command as it will override the
     settings with what gets passed in.
 
-.. code-block::
+.. code-block:: bash
 
     openstack loadbalancer listener set \
     --allowed-cidr 203.0.113.0/25 \
@@ -93,7 +93,7 @@ one for each address range that needs to be added.
 Viewing the listener, we can see that we now have 2 allowed network address
 ranges applied to the listener.
 
-.. code-block::
+.. code-block:: bash
 
     olb listener show http_listener
     +-----------------------------+--------------------------------------+
