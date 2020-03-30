@@ -1,7 +1,7 @@
 .. _orchestration:
 
 #############
-Orchestration
+July 25, 2018
 #############
 
 This is the release notes/changes list for Catalyst Cloud Orchestration
@@ -14,9 +14,9 @@ service.
   Latest Heat Template version: ``heat_template_version.2018-03-02``
 
 
-*************
-July 25, 2018
-*************
+********************************
+Container Orchestration (Magnum)
+********************************
 
   * Upgrade Heat template version from ``heat_template_version.2015-04-30``
     to ``heat_template_version.2018-03-02``
