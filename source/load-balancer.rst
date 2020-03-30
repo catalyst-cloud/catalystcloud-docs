@@ -20,4 +20,5 @@ Table of Contents:
   load-balancer/layer-7
   load-balancer/health-monitor
   load-balancer/connection-draining
+  load-balancer/access-control
   load-balancer/tls-termination
