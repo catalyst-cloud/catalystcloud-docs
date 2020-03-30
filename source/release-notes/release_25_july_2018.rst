@@ -1,7 +1,7 @@
 .. _orchestration:
 
 #############
-July 25, 2018
+25 July 2018
 #############
 
 This is the release notes/changes list for Catalyst Cloud Orchestration
