@@ -21,7 +21,10 @@ New Features
 One if the key new features included in this release is:
 
 * Support to VIP access control list. Users can now limit incoming traffic to
-  a set of allowed CIDRs.
+  a set of allowed CIDRs. For details on using this feature refer to
+  `Enabling CIDR Restrictions`_
+
+.. _`Enabling CIDR Restrictions`:  https://docs.catalystcloud.nz/load-balancer/access-control.html#access-control
 
 Bug Fixes
 =========
