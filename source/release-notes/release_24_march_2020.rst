@@ -18,7 +18,7 @@ notes`_
 New Features
 ============
 
-One if the key new features included in this release is:
+One of the key new features included in this release is:
 
 * Support to VIP access control list. Users can now limit incoming traffic to
   a set of allowed CIDRs. For details on using this feature refer to
