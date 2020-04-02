@@ -99,6 +99,7 @@ Then convert this into a comma separated key value list like so.
   ensure there is **no whitespace** added around commas ","  or equal signs '='
   when creating the list
 
+
 .. code-block:: bash
 
   auto_healing_controller=magnum-auto-healer,auto_healing_enabled=true, \
