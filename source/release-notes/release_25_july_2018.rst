@@ -14,9 +14,9 @@ service.
   Latest Heat Template version: ``heat_template_version.2018-03-02``
 
 
-********************************
-Container Orchestration (Magnum)
-********************************
+********************
+Orchestration (Heat)
+********************
 
   * Upgrade Heat template version from ``heat_template_version.2015-04-30``
     to ``heat_template_version.2018-03-02``
