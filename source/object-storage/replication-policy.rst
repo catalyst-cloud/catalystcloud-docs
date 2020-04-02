@@ -1,5 +1,5 @@
 ##################
-Replication Policy
+Replication policy
 ##################
 
 Any container you make through our object storage service has a default

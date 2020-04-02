@@ -1,5 +1,5 @@
 ##############
-Access Control
+Access control
 ##############
 
 
@@ -7,15 +7,15 @@ It is possible to have the load balancer restrict access to the content sitting
 behind it by applying IP address based restrictions by providing the CIDR of the
 allowed network.
 
-**************************
-Enabling CIDR Restrictions
-**************************
+*****************
+Traffic filtering
+*****************
 
 By default the listeners associated with a loadbalancer will accept traffic
 from all network addresses. If you wish to restrict access this can be enabled
 on a per CIDR basis.
 
-To do this we can use the **--allowed-cidr** parameter. It can be passed
+To do this we can use the **allowed-cidr** parameter. It can be passed
 either at creation time or subsequently applied to an existing listener. Setting
 this parameter will deny any access from addresses outside of the allowed
 range/s.
