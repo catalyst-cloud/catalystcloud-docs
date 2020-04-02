@@ -48,7 +48,7 @@ cluster, while others are for the particular COE.
 
 The cloud provider may supply pre-defined templates for users and it may also
 be possible, in some situations, for user to create their own templates.
-Initially Catalyst Cloud will only allow the use of the pre-defined templates.
+Initially Catalyst Cloud will only support the use of the pre-defined templates.
 
 .. Note::
 
