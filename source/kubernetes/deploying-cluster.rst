@@ -57,6 +57,77 @@ To create a new **development** cluster run the following command:
 
   Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
 
+Modifying cluster template behaviour
+====================================
+
+It is possible to override the behaviour of a template by adding or modifying
+the labels supplied by the template. To do this the entire list of existing
+labels in the template must be provided as a set of key=value pairs, overriding
+the required ones as necessary.
+
+To get the list of existing labels on a template simple view the template like
+so.
+
+.. code-block:: bash
+
+  openstack coe cluster template show kubernetes-v1.15.6-dev-20191129 -f yaml
+  insecure_registry: '-'
+  labels:
+    auto_healing_controller: magnum-auto-healer
+    auto_healing_enabled: 'true'
+    auto_scaling_enabled: 'false'
+    cloud_provider_enabled: 'true'
+    cloud_provider_tag: 1.14.0-catalyst
+    container_infra_prefix: docker.io/catalystcloud/
+    heat_container_agent_tag: stein-dev
+    ingress_controller: octavia
+    k8s_keystone_auth_tag: v1.15.0
+    keystone_auth_enabled: 'true'
+    kube_dashboard_enabled: 'true'
+    kube_tag: v1.15.6
+    magnum_auto_healer_tag: v1.15.0-catalyst.0
+    master_lb_floating_ip_enabled: 'false'
+    octavia_ingress_controller_tag: 1.14.0-catalyst
+    prometheus_monitoring: 'true'
+
+  <-- truncated for brevity -->
+
+Then convert this into a comma separated key value list like so.
+
+.. warning::
+
+  ensure there is **no whitespace** added around commas ","  or equal signs '='
+  when creating the list
+
+.. code-block:: bash
+
+  auto_healing_controller=magnum-auto-healer,auto_healing_enabled=true, \
+  auto_scaling_enabled=false,cloud_provider_enabled=true, \
+  cloud_provider_tag=1.14.0-catalyst, \
+  container_infra_prefix=docker.io/catalystcloud/, \
+  heat_container_agent_tag=stein-dev,ingress_controller=octavia, \
+  k8s_keystone_auth_tag=v1.15.0,keystone_auth_enabled=true, \
+  kube_dashboard_enabled=true,kube_tag=v1.15.6, \
+  magnum_auto_healer_tag=v1.15.0-catalyst.0, \
+  master_lb_floating_ip_enabled=false, \
+  octavia_ingress_controller_tag=1.14.0-catalyst,prometheus_monitoring=true
+
+This will then be passed as the argument to the **labels** parameter.
+
+.. code-block:: bash
+
+  openstack coe cluster create k8s-cluster \
+  --cluster-template kubernetes-v1.13.10-prod-20190912 \
+  --labels auto_healing_controller=magnum-auto-healer,auto_healing_enabled=true,<-- truncated -->
+  --keypair my-ssh-key \
+  --node-count 3 \
+  --master-count 3
+
+.. warning::
+
+  If the complete list of labels is not provided it is likely that the cluster
+  will fail to deploy correctly and will end up in a FAILED or UNHEALTHY state.
+
 Checking the status of the cluster
 ==================================
 

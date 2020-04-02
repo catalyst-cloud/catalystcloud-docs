@@ -77,6 +77,7 @@ Choosing a cluster template
 A cluster template is a blue-print to build a Kubernetes cluster (similar to
 machine images for the compute service). The cluster template specifies what
 version of Kubernetes will be installed and the features that will be enabled.
+Initially Catalyst Cloud will only support the use of the pre-defined templates.
 
 .. Note::
 
