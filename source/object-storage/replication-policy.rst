@@ -35,9 +35,10 @@ suggest) are related to one of the regions on the Catalyst cloud:
   You cannot change the storage policy of an already existing container. The
   only way to change the policy of a container is during it's creation.
 
-There are two ways to create containers that use a single region policy. You
-can create your container via the Dashboard or through the use of the command
-line, both of which are detailed below.
+There are multiple ways to create containers that use a single region policy.
+You can create your container via the Dashboard or through the use of the
+command line, making use of the openstack CLI or by making calls to the object
+storage API directly. All of which are detailed below.
 
 Dashboard method
 ================
@@ -64,34 +65,74 @@ our regions.
 
 .. image:: assets/create-container-dropdown.png
 
-After you've created your container, it will function as normal. Unfortunately
-at present there is no way to tell via the dashboard what policy your
-containers have after they have been created. However, you can check your
-containers via the command line, which is detailed below.
+After you've created your container, it will function as normal. You should be
+able to see the policy that your container has when selecting it from the
+dashboard as seen below
+
+.. image:: assets/container-after-create.png
 
 Command line method
 ===================
 
-.. Note::
- Before continuing please ensure that you have sourced an OpenRC file that
- does not use MFA; otherwise the object storage API will not function
- correctly. Additionally, ensure that you have the Swift command line tools
- installed.
-
 The following is a tutorial that will show you how to create a container that
-has a single region replication policy. Then we will upload a test file to the
-container and check via the command line if the region policy is working
-correctly.
+has a single region replication policy, using the openstack command line tools.
+There are a number of prerequisites you will need to meet before we can
+continue with this tutorial:
 
-Before we create our new container, we need to find out our storage URL and
-Auth token. These will allow us to 'curl' the object storage API. After we have
-both of these, we can construct a curl command to create our new single
-region container. In this example we will use the Wellington region.
+- You must have version 5.2.0 or above of the openstack command line tools installed.
+- You need to have sourced an OpenRC file in your console.
+
+Once you have met these requirements we can create our container. For this
+container we are going to be using the Hamilton region. This means that when
+we use the command ``openstack container create`` we need to specify our
+policy with the ``--storage-policy`` flag.
 
 .. Note::
   Even if a container only uses a single region for it's replication policy,
   you are still able to access the container from any region on the Catalyst
   Cloud.
+
+.. code-block:: bash
+
+   $ openstack container create --storage-policy nz-hlz-1--o1--sr-r3 single-region-cli
+   +---------------------------------------+-------------------+------------------------------------+
+   | account                               | container         | x-trans-id                         |
+   +---------------------------------------+-------------------+------------------------------------+
+   | AUTH_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx | single-region-cli | tx4e6c8d8ec77248279a74a-005e94d751 |
+   +---------------------------------------+-------------------+------------------------------------+
+
+That is it. We have created a container with the single region policy. We can
+see this if we use the following command:
+
+.. code-block:: bash
+
+   $ openstack container show single-region-cli
+   +----------------+---------------------------------------+
+   | Field          | Value                                 |
+   +----------------+---------------------------------------+
+   | account        | AUTH_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx |
+   | bytes_used     | 0                                     |
+   | container      | single-region-cli                     |
+   | object_count   | 0                                     |
+   | storage_policy | nz-hlz-1--o1--sr-r3                  |
+   +----------------+---------------------------------------+
+
+
+API method
+==========
+
+.. Note::
+  Like the command line method, we are going to need to have a valid OpenRC file
+  sourced for this tutorial. However, you must use an RC file that does not use
+  MFA, otherwise you will not be able to communicate with the swift API
+  correctly. Additionally, you will also need to have the python swiftclient
+  installed.
+
+Because we are using the swift API's themselves instead of the openstack
+command line, we will need to find out our storage URL and Auth token. These
+will allow us to 'curl' the object storage API. After we have
+both of these, we can construct a curl command to create our new single
+region container. In this example we will use the Wellington region.
 
 .. code-block:: bash
 
@@ -130,8 +171,9 @@ region container. In this example we will use the Wellington region.
 
 To create a container with a non-default policy we have to specify which
 policy we want to use in our curl command. Make sure that you end the storage
-url with "/name-of-the-container" In this example we are creating a container
-called "cont-pol"
+url with "/name-of-the-container" otherwise the API will not know what
+container you a referring to when you try to define it's storage policy.
+In this example we are creating a container called "cont-pol"
 
 .. code-block:: bash
 
