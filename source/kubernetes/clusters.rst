@@ -57,6 +57,7 @@ Initially Catalyst Cloud will only support the use of the pre-defined templates.
   created as a :ref:`private-cluster`. This means that the cluster will not be
   reachable directly from the internet by default.
 
+
 Viewing templates
 =================
 
@@ -160,6 +161,7 @@ Deploying a Kubernetes cluster
 
 .. include:: deploying-cluster.rst
 
+.. include:: dashboard-creation.rst
 
 .. _setting_up_kubectl:
 
