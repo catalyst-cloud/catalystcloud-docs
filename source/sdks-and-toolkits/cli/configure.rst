@@ -90,7 +90,7 @@ above.
 
 .. code-block:: bash
 
-  $env:OS_AUTH_URL = "https://api.cloud.catalyst.net.nz:5000/v2.0"
+  $env:OS_AUTH_URL = "https://api.cloud.catalyst.net.nz:5000/v3"
   $env:OS_TENANT_NAME = "<tenant-name>"
   $env:OS_TENANT_ID = "<tenant-id>"
   $env:OS_USERNAME = "<username>"
