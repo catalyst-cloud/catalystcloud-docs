@@ -30,6 +30,7 @@ The actual usage would look like this.
   :ref:`the private-cluster <cluster-on-existing-net>` documentation.
 
 
+
 Creating a cluster
 ==================
 
@@ -56,6 +57,8 @@ To create a new **development** cluster run the following command:
   --master-count 1
 
   Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
+
+.. _modifying_a_cluster_with_labels:
 
 Modifying cluster template behaviour
 ====================================

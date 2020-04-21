@@ -155,6 +155,7 @@ There are some key parameters that are worth mentioning in the above template:
   These are arbitrary labels (defined by the cluster drivers)  in the form of
   key=value pairs as a way to pass additional parameters to the cluster driver.
 
+
 ******************************
 Deploying a Kubernetes cluster
 ******************************
