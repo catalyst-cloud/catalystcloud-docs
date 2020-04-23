@@ -1,0 +1,26 @@
+.. code-block:: yaml
+
+  # deployment-echoserver.yml
+
+  ---
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: echoserver-deployment
+    labels:
+      app: echoserver
+  spec:
+    replicas: 3
+    selector:
+      matchLabels:
+        app: echoserver
+    template:
+      metadata:
+        labels:
+          app: echoserver
+      spec:
+        containers:
+        - name: echoserver
+          image: gcr.io/google-containers/echoserver:1.10
+          ports:
+          - containerPort: 8080

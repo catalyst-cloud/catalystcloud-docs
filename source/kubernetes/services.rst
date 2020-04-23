@@ -348,3 +348,208 @@ balancer and sets the ``keep-floatingip`` flag to true.
 Now, when we remove the service, the 103.197.60.157 address will remain
 allocated to our cloud project rather than being released back to the public
 address pool.
+
+.. _annotations:
+
+
+Getting the source IP address for web requests
+==============================================
+
+There are occasions where an application needs to be able to determine the
+original IP address for requests it receives. In order to do this we need to
+enable ``X-Forwarded-For`` support.
+
+The ``X-Forwarded-For`` is an HTTP header field that can be used for
+identifying the originating IP address of a client connecting to a web server
+through a loadbalancer or an HTTP proxy.
+
+If we deploy a standard LoadBalancer service in front of our echoserver
+application using the default settings we can confirm that the IP address of the
+originating server is not visible.
+
+Here is the echoserver deployment manifest. We can deploy this using the
+following command:
+
+.. code-block:: bash
+
+  kubectl apply -f deployment-echoserver.yml
+
+.. include:: _containers_assets/deployment-echoserver.yml
+
+The echoserver loaadbalancer manifest can be deployed in the same manner:
+
+.. code-block:: bash
+
+  kubectl apply -f lb-echoserver-1.yml
+
+.. include:: _containers_assets/lb-echoserver-1.yml
+
+we can see by querying with curl that there is no source information available
+in the ``Request Headers`` section.
+
+.. code-block::  bash
+
+    $ curl -i 103.197.62.236
+    HTTP/1.1 200 OK
+    Date: Fri, 17 Apr 2020 01:34:59 GMT
+    Content-Type: text/plain
+    Transfer-Encoding: chunked
+    Connection: keep-alive
+    Server: echoserver
+
+    Hostname: echoserver-deployment-7b98d7c584-8fpbq
+
+    Pod Information:
+        -no pod information available-
+
+    Server values:
+        server_version=nginx: 1.13.3 - lua: 10008
+
+    Request Information:
+        client_address=10.0.0.13
+        method=GET
+        real path=/
+        query=
+        request_version=1.1
+        request_scheme=http
+        request_uri=http://103.197.62.236:8080/
+
+    Request Headers:
+        accept=*/*
+        host=103.197.62.236
+        user-agent=curl/7.58.0
+
+    Request Body:
+        -no body in request-
+
+
+If we now add the **annotation** ``loadbalancer.openstack.org/x-forwarded-for: "true"``
+to our loadbalancer manifest, like so:
+
+.. include:: _containers_assets/lb-echoserver-2.yml
+
+and deploy,
+
+.. code-block:: console
+
+  kubectl apply -f lb-echoserver-2.yml
+
+
+we can see by rerunning our curl query that there is source information available in
+the ``Request Headers`` section under the ``x-forwarded-for`` header.
+
+.. code-block:: bash
+
+  $ curl -i 103.197.62.230
+  HTTP/1.1 200 OK
+  Date: Fri, 17 Apr 2020 01:23:59 GMT
+  Content-Type: text/plain
+  Transfer-Encoding: chunked
+  Server: echoserver
+
+  Hostname: echoserver-deployment-7b98d7c584-pv685
+
+  Pod Information:
+      -no pod information available-
+
+  Server values:
+      server_version=nginx: 1.13.3 - lua: 10008
+
+  Request Information:
+      client_address=10.0.0.14
+      method=GET
+      real path=/
+      query=
+      request_version=1.1
+      request_scheme=http
+      request_uri=http://103.197.62.230:8080/
+
+  Request Headers:
+      accept=*/*
+      host=103.197.62.230
+      user-agent=curl/7.58.0
+      x-forwarded-for=202.78.240.7
+
+  Request Body:
+      -no body in request-
+
+
+
+Assigning a pre-defined port to a loadbalancer
+==============================================
+
+In certain cases, such as when using automation, it may be desireable to be able
+to re-use an existing floating IP address. Through the use of the ``port-id``
+annotation this can be achived
+
+Assume we have created a port on our cluster network with the following
+characteristics:
+
+* name: lb-vip-10-0-0-212
+* fixed ip: 10.0.0.212
+* floating ip: 103.197.60.184
+
+.. code-block:: bash
+
+  $ openstack port show lb-vip-10-0-0-212 -f yaml -c fixed_ips -c id -c name
+  fixed_ips:
+  - ip_address: 10.0.0.212
+    subnet_id: 6ddad590-3a57-4fd1-990b-be067e3f657d
+  id: ca981484-22f8-4e9d-94f5-e43594afb15e
+  name: lb-vip-10-0-0-212
+
+  $ openstack floating ip show 103.197.60.184 -f yaml -c fixed_ip_address -c floating_ip_address
+  fixed_ip_address: 10.0.0.212
+  floating_ip_address: 103.197.60.184
+
+If we add the **annotation** ``loadbalancer.openstack.org/port-id:`` to our
+loadbalancer manifest and provide the **port id** as the value we can then
+make use of this existing port as the VIP on our loadbalancer.
+
+.. include:: _containers_assets/lb-echoserver-port-id.yml
+
+Deploy the loadbalancer,
+
+.. code-block:: bash
+
+  kubectl apply -f lb-echoserver-port-id.yml
+
+and test connectivity with curl to confirm that the echoserver app is accessible
+via our existing port's floating IP.
+
+.. code-block:: bash
+
+  $ curl -i 103.197.60.184
+  HTTP/1.1 200 OK
+  Date: Thu, 23 Apr 2020 02:29:08 GMT
+  Content-Type: text/plain
+  Transfer-Encoding: chunked
+  Connection: keep-alive
+  Server: echoserver
+
+
+
+  Hostname: echoserver-deployment-7b98d7c584-kzpkv
+
+  Pod Information:
+    -no pod information available-
+
+  Server values:
+    server_version=nginx: 1.13.3 - lua: 10008
+
+  Request Information:
+    client_address=10.0.0.13
+    method=GET
+    real path=/
+    query=
+    request_version=1.1
+    request_scheme=http
+    request_uri=http://103.197.60.184:8080/
+
+  Request Headers:
+    accept=*/*
+    host=103.197.60.184
+    user-agent=curl/7.58.0
+
+  Request Body:
+    -no body in request-

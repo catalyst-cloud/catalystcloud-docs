@@ -1,0 +1,18 @@
+.. code-block:: yaml
+
+  # lb-echoserver-1.yml
+
+  ---
+  kind: Service
+  apiVersion: v1
+  metadata:
+    name: echoserver-lb-service
+  spec:
+    selector:
+      app:  echoserver
+    type: LoadBalancer
+    ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP
