@@ -57,6 +57,7 @@ Initially Catalyst Cloud will only support the use of the pre-defined templates.
   created as a :ref:`private-cluster`. This means that the cluster will not be
   reachable directly from the internet by default.
 
+
 Viewing templates
 =================
 
@@ -154,12 +155,14 @@ There are some key parameters that are worth mentioning in the above template:
   These are arbitrary labels (defined by the cluster drivers)  in the form of
   key=value pairs as a way to pass additional parameters to the cluster driver.
 
+
 ******************************
 Deploying a Kubernetes cluster
 ******************************
 
 .. include:: deploying-cluster.rst
 
+.. include:: dashboard-creation.rst
 
 .. _setting_up_kubectl:
 

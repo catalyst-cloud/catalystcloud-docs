@@ -37,6 +37,57 @@ Here we can see we have 2 containers in the pod both which mount the volume,
 *shared-volume*. The web container mounts it as */data* while the logger
 container mounts it as */logs*.
 
+Default volume types and sizes
+==============================
+
+Here we discuss the defaults settings of our volumes across the different
+regions of the Catalyst Cloud. Additionally, we cover where to find information
+on changing these defaults using labels, and the best practices concerning
+NVME.
+
+The following is a table that shows you the different sizes and types of
+volumes that are used by default across the different regions:
+
++------------------+--------------+--------+----------------------+
+| Volume           | Region       |  Size  |  Type                |
++==================+==============+========+======================+
+| docker volume    | Hamilton     | 20GB   | b1.sr-r3-nvme-1000   |
++------------------+--------------+--------+----------------------+
+|                  | Porirua      | 20GB   | b1.sr-r3-nvme-1000   |
++------------------+--------------+--------+----------------------+
+|                  | Wellington   | 20GB   | b1.standard          |
++------------------+--------------+--------+----------------------+
+| etcd volume      | Hamilton     | 20GB   | b1.sr-r3-nvme-1000   |
++------------------+--------------+--------+----------------------+
+|                  | Porirua      | 20GB   | b1.sr-r3-nvme-1000   |
++------------------+--------------+--------+----------------------+
+|                  | Wellington   | 20GB   | b1.standard          |
++------------------+--------------+--------+----------------------+
+| boot volume      | Hamilton     | 10GB   | b1.sr-r3-nvme-1000   |
++------------------+--------------+--------+----------------------+
+|                  | Porirua      | 10GB   | b1.sr-r3-nvme-1000   |
++------------------+--------------+--------+----------------------+
+|                  | Wellington   | 10GB   | b1.standard          |
++------------------+--------------+--------+----------------------+
+
+You will notice that for the the volumes in the Hamilton and Porirua region,
+they use an NVMe volume type but the Wellington region does not. This is
+because we have not yet set up NVMe in our Wellington region, however we are
+working on implementing NVMe across all our regions and hope to update this
+soon.
+
+To change these defaults you will have to change the labels for your template.
+The process of which is detailed under: :ref:`modifying_a_cluster_with_labels`.
+
+Best practices with NVMe
+------------------------
+
+We use NVMe for our volumes because it reduces the time it takes to pull and
+start your pods, making for an overall faster cluster. In addition, using NVME
+ensures that the IOPS for the etcd volume are sufficient to a point that they
+will not fail due to disk pressure, making for a more reliable and resilient
+cluster overall.
+
 
 ******************
 Persistent Volumes
