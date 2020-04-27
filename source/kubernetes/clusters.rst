@@ -132,6 +132,12 @@ To view the details of a particular template.
   | hidden                | False                                                                                                                                                                                                                                                                                                                                              |
   +-----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
+To go alongside the information that you can gain from viewing the template,
+another page that we recommended checking before nailing down which template
+you want to use, is :ref:`the volume types and sizes<volume-sizes-kube>`
+section under the kubernetes tab of this documentation. It has information
+on the default sizes for each of our volumes and the difference between the
+different types of volumes that are used for each of our templates.
 
 There are some key parameters that are worth mentioning in the above template:
 

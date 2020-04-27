@@ -110,6 +110,11 @@ section.
 
 .. _`Cluster Templates`: https://dashboard.cloud.catalyst.net.nz/project/cluster_templates
 
+When considering which template to use it is also useful to know what volume
+size and type the standard templates come with. For more information on the
+volumes our cluster templates use, see
+:ref:`the storage section of the kubernetes docs<volume-sizes-kube>`
+
 Template types
 --------------
 

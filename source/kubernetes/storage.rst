@@ -40,6 +40,8 @@ container mounts it as */logs*.
 Default volume types and sizes
 ==============================
 
+.. _volume-sizes-kube:
+
 Here we discuss the defaults settings of our volumes across the different
 regions of the Catalyst Cloud. Additionally, we cover where to find information
 on changing these defaults using labels, and the best practices concerning
