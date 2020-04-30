@@ -38,6 +38,9 @@ Worker nodes, which is three of each.
 Next we have the final required settings which is the network we want to deploy
 our cluster on. We can either choose an existing network that we have already
 prepared, or create a new network that will be attached to the cluster.
+Additionally while in this tab, we can select whether we want our cluster to
+be visible from only our private network or visible to the public and we can
+choose the type of ingress controller that we want our cluster to utilize.
 
 .. image:: _containers_assets/cluster-network.png
 
