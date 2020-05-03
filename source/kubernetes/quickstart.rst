@@ -5,8 +5,15 @@
 Quick start
 ###########
 
-This quick start guide assumes you have working knowledge of Catalyst Cloud
-:ref:`command-line-interface` and some familiarity with Kubernetes.
+The purpose of this quick start is to create a cluster that you are able to
+test and experiment with, so that you can gain a better understanding of how
+the Kubernetes platform works. We are going to be creating a cluster using the
+development template with network access from the public internet. We chose
+these options because it creates a small cluster, meaning less of a price tag,
+and the wider access that is provided by a publicly accessible cluster means
+that it's easier for us to conduct tests on the cluster with multiple people
+and from multiple locations. However, because of the public access this cluster
+will have, this guide should **not** be used to create a production ready cluster.
 
 .. warning::
 
@@ -30,18 +37,18 @@ allocated the ``heat_stack_owner`` role.
 Ensure quota is sufficient
 ==========================
 
-A small quota is sufficient to deploy the production cluster template if your
+A small quota is sufficient to deploy the development cluster template if your
 project is empty. However, if you already have some resources allocated, you
 may want to increase your quota to ensure there is sufficient capacity
 available to deploy Kubernetes.
 
-By default, the production Kubernetes template allocates:
+By default, the development Kubernetes template allocates:
 
-* 6 compute instances
-* 18 vCPUs
-* 36 GB of RAM
-* 3 block storage volumes
-* 60 GB of block storage space
+* 4 compute instances
+* 8 vCPUs
+* 16 GB of RAM
+* 4 block storage volumes
+* 40 GB of block storage space
 * 3 security groups
 * 1 load balancer
 
@@ -53,8 +60,10 @@ panel in the dashboard, under the Management section.
 Download and install kubectl
 ============================
 
-Kubectl is the command line interface to the Kubernetes API and the canonical
-way to interact with Kubernetes clusters.
+This quickstart will cover two ways to start your cluster. The Kubectl is only
+required for the command line example as Kubectl is the command line interface
+to the Kubernetes API and the canonical way to interact with Kubernetes
+clusters.
 
 The instructions below can be used to quickly install kubectl on Linux as a
 static binary:
@@ -140,6 +149,8 @@ The difference between the development and production templates are:
 ******************************
 Deploying a Kubernetes cluster
 ******************************
+
+.. include:: dashboard-creation.rst
 
 .. include:: deploying-cluster.rst
 
