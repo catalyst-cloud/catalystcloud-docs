@@ -9,8 +9,8 @@ The purpose of this quick start is to create a cluster that you are able to
 test and experiment with, so that you can gain a better understanding of how
 the Kubernetes platform works. We are going to be creating a cluster using the
 development template with network access from the public internet. We chose
-these options because it creates a small cluster, meaning less of a price tag,
-and the wider access that is provided by a publicly accessible cluster means
+these options because it creates a small cluster, meaning less of a price tag.
+And the wider access that is provided by a publicly accessible cluster means
 that it's easier for us to conduct tests on the cluster with multiple people
 and from multiple locations. However, because of the public access this cluster
 will have, this guide should **not** be used to create a production ready cluster.
@@ -86,7 +86,9 @@ Choosing a cluster template
 A cluster template is a blue-print to build a Kubernetes cluster (similar to
 machine images for the compute service). The cluster template specifies what
 version of Kubernetes will be installed and the features that will be enabled.
-Initially Catalyst Cloud will only support the use of the pre-defined templates.
+For this example, we are going to be using a development template. In
+comparison to a production template, the dev templates are locked to one master
+node rather than three, they have smaller sizes for the NVMe volumes they use.
 
 .. Note::
 
@@ -103,14 +105,13 @@ The following command will list all cluster templates available:
   +--------------------------------------+-----------------------------------+
   | uuid                                 | name                              |
   +--------------------------------------+-----------------------------------+
-  | b1d124db-b7cc-4085-8e56-859a0a7796e6 | kubernetes-v1.11.9-dev-20190402   |
-  | cf337c0a-86e6-45de-9985-17914e78f181 | kubernetes-v1.11.9-prod-20190402  |
-  | 967a2b86-8709-4c07-ae89-c0fe6d69d62d | kubernetes-v1.12.7-dev-20190403   |
-  | f8fc0c67-84af-4bb8-89fb-d29f4c926975 | kubernetes-v1.12.7-prod-20190403  |
-  | bfde711c-655c-4de9-b37e-847fc635b734 | kubernetes-v1.12.10-dev-20190912  |
-  | 38382877-957e-4667-9851-838eef892b64 | kubernetes-v1.12.10-prod-20190912 |
-  | d319cc8e-e27d-4ef9-be84-a6d431800215 | kubernetes-v1.13.10-dev-20190912  |
-  | e8257719-b209-40bf-9619-2895698d5a73 | kubernetes-v1.13.10-prod-20190912 |
+  | 18a9fa94-95f4-46a4-be3c-c8fae025ce97 | kubernetes-v1.13.12-dev-20191129  |
+  | a04e8d58-bd81-4eae-9242-144dc75b3821 | kubernetes-v1.13.12-prod-20191129 |
+  | 681241fd-682a-418e-aa1e-8238ceca834e | kubernetes-v1.15.11-dev-20200330  |
+  | 77b71c57-7ad3-49fc-a5c2-80962325e7a1 | kubernetes-v1.15.11-prod-20200330 |
+  | e7be8a37-c5a6-4dfa-853c-8ff0653ede31 | kubernetes-v1.14.10-dev-20200422  |
+  | 9ab35677-8644-4d3c-bb81-281f7ec52e31 | kubernetes-v1.14.10-prod-20200422 |
+  | 2cb17a1a-bafd-48c4-a466-c690524d325d | kubernetes-v1.15.11-dev-20200501  |
   +--------------------------------------+-----------------------------------+
 
 Alternatively, a list of cluster templates available can be seen in the
@@ -119,48 +120,79 @@ section.
 
 .. _`Cluster Templates`: https://dashboard.cloud.catalyst.net.nz/project/cluster_templates
 
-When considering which template to use it is also useful to know what volume
-size and type the standard templates come with. For more information on the
-volumes our cluster templates use, see
-:ref:`the storage section of the kubernetes docs<volume-sizes-kube>`
-
-Template types
---------------
-
-The naming convention used for the templates is broken down as follows:
-
-* **kubernetes-v1.11.2** : this is the version of kubernetes that the template
-  will use to create the cluster.
-* **-prod** or **-dev**: the type of environment to be created (see below).
-* **-20190912**: the date on which the template was created.
-
-The difference between the development and production templates are:
-
-* **Production**: creates a Kubernetes cluster that is intended for production
-  workloads. It creates three or more master nodes and three or more worker
-  nodes. The master nodes will have a loadbalancer deployed in front of them to
-  provide high availability for the Kubernetes API. This template also deploys
-  Prometheus and Grafana to provide cluster metrics.
-* **Development**: creates a minimal Kubernetes cluster with a single master
-  and a single worker node. As the name suggests, it should not be used for
-  production.
-
 
 ******************************
 Deploying a Kubernetes cluster
 ******************************
 
-.. include:: dashboard-creation.rst
+.. _dashboard-cluster-creation:
+
+Creating a cluster from the Catalyst Cloud Dashboard
+====================================================
+
+One of the ways to create a kubernetes cluster is by using the section on our
+dashboard labelled **Clusters** under the **Container Infra** tab. From here
+you will see the following screen:
+
+.. image:: _containers_assets/cluster-main-screen.png
+
+This screen gives you an overview of your clusters, their status and how many
+clusters you have measured against your quota. To create a new cluster from
+here, click on the *+ Create Cluster* button and you will be met with this
+screen:
+
+.. image:: _containers_assets/create-cluster.png
+
+Pick a name for your new cluster, add a keypair, choose the region you want
+to deploy this cluster in, and choose from the dropdown list one of the
+templates that we have available. In our case, we are going to be using
+kubernetes-v1.14.10-dev-20200422. Once that is done your screen should look
+something like this:
+
+.. image:: _containers_assets/quickstart-template-picked.png
+
+We then move on to the size of our cluster. If you leave these fields free they
+will take on the default outlined in the template, which is fine for our
+purposes. You should see that for the master nodes, we are already locked to
+only one node; This is because we are using the dev template, however we can
+still choose the number of worker nodes.
+
+.. Note::
+
+  When manually selecting a size, make sure that the flavor of your master
+  nodes is larger than c1.r1 if the default has not already been set higher.
+
+.. image:: _containers_assets/quickstart-size.png
+
+Next we have the final required settings which is the network we want to deploy
+our cluster on. We can either choose an existing network that we have already
+prepared, or create a new network that will be attached to the cluster.
+Additionally while in this tab, we can select whether we want our cluster to
+be visible from only our private network or visible to the public and we can
+choose the type of ingress controller that we want our cluster to utilize.
+
+For our quickstart, we are going to be creating a new network for our cluster
+to sit on and we are going to make it available publicly.
+
+.. image:: _containers_assets/quickstart-network.png
+
+The other tabs ``management`` and ``advanced`` allow you to set autohealing on
+your nodes and add labels to your cluster respectfully.
+
+Once you have set all of these parameters, you can click submit and your
+cluster will start creating. This process can take up to 20 minutes
+depending on the size of the cluster you are trying to build. Once it is built
+however, you will be able to access the cluster in the ways detailed below.
+
+
 
 .. include:: deploying-cluster.rst
-
 
 **********************************
 Accessing the Kubernetes dashboard
 **********************************
 
 .. include:: dashboard-access.rst
-
 
 .. _simple_lb_deployment:
 

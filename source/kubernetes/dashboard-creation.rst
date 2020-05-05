@@ -3,24 +3,25 @@ Creating a cluster from the Catalyst Cloud Dashboard
 ====================================================
 
 One of the ways to create a kubernetes cluster is by using the section on our
-dashboard labelled ``Clusters`` under the ``Container Infra`` tab. From here
+dashboard labelled **Clusters** under the **Container Infra** tab. From here
 you will see the following screen:
 
 .. image:: _containers_assets/cluster-main-screen.png
 
 This screen gives you an overview of your clusters, their status and how many
 clusters you have measured against your quota. To create a new cluster from
-here, click on the ``+ Create Cluster`` button and you will be met with this
+here, click on the *+ Create Cluster* button and you will be met with this
 screen:
 
 .. image:: _containers_assets/create-cluster.png
 
 Pick a name for your new cluster, add a keypair, choose the region you want
 to deploy this cluster in, and choose from the dropdown list one of the
-templates that we have available. Once that is done your screen should look
+templates that we have available. In our case, we are going to be using
+kubernetes-v1.14.10-dev-20200422. Once that is done your screen should look
 something like this:
 
-.. image:: _containers_assets/create-cluster-fields-full.png
+.. image:: _containers_assets/quickstart-template-picked.png
 
 We then move on to the size of our cluster. If you leave these fields free they
 will take on the default outlined in the template. But for these purposes we
