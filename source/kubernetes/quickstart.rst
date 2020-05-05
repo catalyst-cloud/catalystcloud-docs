@@ -18,7 +18,7 @@ will have, this guide should **not** be used to create a production ready cluste
 .. warning::
 
   Due to active development of this service, we recommend the use of the latest
-  version of the CLI to interact with it. Please refer to the
+  version of the CLI to interact with the service. Please refer to the
   :ref:`upgrading-the-cli` section of the documentation for upgrade
   instructions. This documentation assumes ``python-magnumclient`` is 2.12.0 or
   above.
@@ -88,14 +88,7 @@ machine images for the compute service). The cluster template specifies what
 version of Kubernetes will be installed and the features that will be enabled.
 For this example, we are going to be using a development template. In
 comparison to a production template, the dev templates are locked to one master
-node rather than three, they have smaller sizes for the NVMe volumes they use.
-
-.. Note::
-
-  From cluster template version ``v1.12.10`` onwards, as a security best
-  practice, the behaviour when creating a new cluster is for it to be
-  created as a :ref:`private-cluster`. This means that the cluster will not be
-  reachable directly from the internet by default.
+node rather than three and they have smaller sizes for their NVMe volumes.
 
 The following command will list all cluster templates available:
 
@@ -127,7 +120,7 @@ Deploying a Kubernetes cluster
 
 .. _dashboard-cluster-creation:
 
-Creating a cluster from the Catalyst Cloud Dashboard
+Creating a cluster from the Catalyst Cloud dashboard
 ====================================================
 
 One of the ways to create a kubernetes cluster is by using the section on our
@@ -153,9 +146,10 @@ something like this:
 
 We then move on to the size of our cluster. If you leave these fields free they
 will take on the default outlined in the template, which is fine for our
-purposes. You should see that for the master nodes, we are already locked to
-only one node; This is because we are using the dev template, however we can
-still choose the number of worker nodes.
+purposes. Since we already have selected a development template our number of
+master nodes is already locked to only one node. If we wanted to we can still
+specify the number of worker nodes, for this example we are using three nodes,
+which is the standard anyway.
 
 .. Note::
 
@@ -164,26 +158,25 @@ still choose the number of worker nodes.
 
 .. image:: _containers_assets/quickstart-size.png
 
-Next we have the final required settings which is the network we want to deploy
-our cluster on. We can either choose an existing network that we have already
-prepared, or create a new network that will be attached to the cluster.
+Next we have the final required parameter, which is the network we want to
+deploy our cluster on. We can either choose an existing network that we have
+already prepared, or create a new network that the cluster will sit on.
 Additionally while in this tab, we can select whether we want our cluster to
 be visible from only our private network or visible to the public and we can
 choose the type of ingress controller that we want our cluster to utilize.
 
 For our quickstart, we are going to be creating a new network for our cluster
-to sit on and we are going to make it available publicly.
+and we are going to make it available publicly:
 
 .. image:: _containers_assets/quickstart-network.png
 
-The other tabs ``management`` and ``advanced`` allow you to set autohealing on
+The other tabs **management** and **advanced** allow you to set autohealing on
 your nodes and add labels to your cluster respectfully.
 
 Once you have set all of these parameters, you can click submit and your
 cluster will start creating. This process can take up to 20 minutes
 depending on the size of the cluster you are trying to build. Once it is built
-however, you will be able to access the cluster in the ways detailed below.
-
+however, you will be able to access the cluster.
 
 
 .. include:: deploying-cluster.rst
