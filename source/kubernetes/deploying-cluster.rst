@@ -1,3 +1,32 @@
+  Private vs Public cluster API access
+====================================
+
+Any cluster created using one of the predefined templates will, by default, be
+created as a ``private cluster``. This means that the Kubernetes API will
+**not** be accessible from the internet and access will need to be via a
+bastion or jumphost server within the cloud project.
+
+If you would prefer to create a ``publicly accessible cluster`` then simply
+add the following option to the cluster creation command.
+
+.. code-block:: bash
+
+  --floating-ip-enabled
+
+The actual usage would look like this.
+
+.. code-block:: console
+
+  $ openstack coe cluster create <Cluster name> \
+    --cluster-template <Template ID> \
+    --floating-ip-enabled
+
+.. Note::
+
+  This quickstart guide covers the steps to creating a kubernetes cluster
+  from scratch. But if you wish to create a cluster on an existing
+  private network then you can refer to the relevant section in
+  :ref:`the private-cluster <cluster-on-existing-net>` documentation.
 
 
 Creating a cluster

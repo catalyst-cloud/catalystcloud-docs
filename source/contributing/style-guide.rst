@@ -16,6 +16,31 @@ Use only lowercase alphanumeric characters and ``-`` (minus) symbol.
 
 Suffix filenames with the ``.rst`` extension.
 
+Text Style
+==========
+
+Bold
+----
+
+We use bold text when we are referring to something important or when we are
+directly talking about an element of a service that we want to direct the user
+to. To make some text bold, you need to put the text between two sets of
+asterisks without any spaces between the starting and ending letter of your
+word: ** text you want to be bold **
+
+Example: "You will find this under the **Container Infra** section of the
+dashboard" OR "Remember **DO NOT** delete this file until after..."
+
+Highlighting
+------------
+
+We use this when we are referring to a specific command piece of code that we
+are talking about, but we do not want to use a code-block for. To use this
+you need to place the string between two sets of tilde
+`` text to be highlighted ``
+
+Example: " Now you should have your ``token`` sourced..."
+
 Whitespaces
 ===========
 

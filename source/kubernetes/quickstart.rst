@@ -5,15 +5,16 @@
 Quick start
 ###########
 
-The purpose of this quick start is to create a cluster that you are able to
+The purpose of this quick start is to help you create a cluster that you can
 test and experiment with, so that you can gain a better understanding of how
-the Kubernetes platform works. We are going to be creating a cluster using the
-development template with network access from the public internet. We chose
-these options because it creates a small cluster, meaning less of a price tag.
-And the wider access that is provided by a publicly accessible cluster means
-that it's easier for us to conduct tests on the cluster with multiple people
-and from multiple locations. However, because of the public access this cluster
-will have, this guide should **not** be used to create a production ready cluster.
+the Kubernetes platform works. To do this, we are going to be creating a
+cluster using the development template with network access from the public
+internet. We are using these options because the template creates a small
+cluster, meaning less of an operational cost, and the wider access that is
+provided by a publicly accessible cluster means that it's easier for us to
+conduct tests with multiple people and from multiple locations. However,
+because the cluster will be publicly accessible, this guide should **not** be
+used to create a production ready cluster.
 
 .. warning::
 
@@ -86,7 +87,7 @@ Choosing a cluster template
 A cluster template is a blue-print to build a Kubernetes cluster (similar to
 machine images for the compute service). The cluster template specifies what
 version of Kubernetes will be installed and the features that will be enabled.
-For this example, we are going to be using a development template. In
+For this quickstart, we are going to be using a development template. In
 comparison to a production template, the dev templates are locked to one master
 node rather than three and they have smaller sizes for their NVMe volumes.
 
@@ -107,6 +108,8 @@ The following command will list all cluster templates available:
   | 2cb17a1a-bafd-48c4-a466-c690524d325d | kubernetes-v1.15.11-dev-20200501  |
   +--------------------------------------+-----------------------------------+
 
+We will be using the template: kubernetes-v1.14.10-dev-20200422
+
 Alternatively, a list of cluster templates available can be seen in the
 `Cluster Templates`_ panel in the dashboard, under the **Container Infra**
 section.
@@ -123,9 +126,12 @@ Deploying a Kubernetes cluster
 Creating a cluster from the Catalyst Cloud dashboard
 ====================================================
 
-One of the ways to create a kubernetes cluster is by using the section on our
-dashboard labelled **Clusters** under the **Container Infra** tab. From here
-you will see the following screen:
+The simplest way to create a kubernetes cluster is through the Catalyst Cloud
+interactive dashboard. The dashbaord allows you to both create, and monitor the
+current status of your clusters. For our quickstart, we are going to stick
+mostly to the default development template but we will make some changes
+through the process. From the **cluster** screen under the **container infra**
+tab, you will see the following:
 
 .. image:: _containers_assets/cluster-main-screen.png
 
@@ -144,9 +150,9 @@ something like this:
 
 .. image:: _containers_assets/quickstart-template-picked.png
 
-We then move on to the size of our cluster. If you leave these fields free they
-will take on the default outlined in the template, which is fine for our
-purposes. Since we already have selected a development template our number of
+We then move on to the size of our cluster. If you leave these fields empty
+they will take on the defaults outlined in the template, which is fine for our
+purposes. Since we have selected a development template, our number of
 master nodes is already locked to only one node. If we wanted to we can still
 specify the number of worker nodes, for this example we are using three nodes,
 which is the standard anyway.
@@ -170,16 +176,95 @@ and we are going to make it available publicly:
 
 .. image:: _containers_assets/quickstart-network.png
 
-The other tabs **management** and **advanced** allow you to set autohealing on
+The other tabs: **management** and **advanced** allow you to set autohealing on
 your nodes and add labels to your cluster respectfully.
 
 Once you have set all of these parameters, you can click submit and your
 cluster will start creating. This process can take up to 20 minutes
 depending on the size of the cluster you are trying to build. Once it is built
-however, you will be able to access the cluster.
+however, you will be able to access the cluster. To follow up on the creation
+of your new cluster, we recommend checking out the guide at the end of this
+page on creating a hello world application and deploying it on your cluster.
 
+Creating a cluster using the CLI
+================================
 
-.. include:: deploying-cluster.rst
+The second method of creating a cluster on the Catalyst Cloud is via the
+command line. There are a number of prerequisites that are needed before you
+can begin taking this approach. The majority of these prerequisites were
+mentioned at the beginning of this quickstart, but some specific ones for the
+following example are:
+to make sure that you have the correct version of the command line tools
+installed and that you have sourced an open RC file in your environment. Once
+these have been taken care of you can start building your new cluster.
+
+To create a new **development** cluster that is publicly accessible run the
+following command:
+
+.. code-block:: bash
+
+  $ openstack coe cluster create k8s-cluster \
+  --cluster-template kubernetes-v1.14.10-dev-20200422 \
+  --keypair my-ssh-key \
+  --node-count 3 \
+  --floating-ip-enabled \
+  --master-count 1
+
+  Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
+
+This command will create a cluster that should be identical to the one we
+created using the dashboard method.
+
+Checking the status of the cluster
+==================================
+
+Since we are using the development template, our cluster will take 10 to 15
+minutes to be created. Because it takes some time to create, it is
+important to know what the current status of the cluster is.
+
+You can use the following command to monitor the status of the cluster:
+
+.. code-block:: bash
+
+  $ openstack coe cluster list
+  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
+  | uuid                                 | name        | keypair  | node_count | master_count | status             |
+  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
+  | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
+  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
+
+Alternatively, you can check the status of the cluster on the `Clusters panel`_
+, in the **Container Infra** section of the Dashboard.
+
+.. _`Clusters panel`: https://dashboard.cloud.catalyst.net.nz/project/clusters
+
+Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
+
+Getting the cluster config
+==========================
+
+The kubectl command-line tool uses kubeconfig files to determine how to connect
+to the APIs of the Kubernetes cluster. The following command will download the
+necessary certificates and create a configuration file in your current
+directory. It will also export the ``KUBECONFIG`` variable on your behalf:
+
+.. code-block:: bash
+
+  $ eval $(openstack coe cluster config k8s-cluster)
+
+If you wish to save the configuration to a different location you can use the
+``--dir <directory_name>`` parameter to select a different destination.
+
+.. Note::
+
+  If you are running multiple clusters, or are deleting and re-creating a
+  cluster, it is necessary to ensure that the current ``kubectl configuration``
+  is referencing the correct cluster configuration.
+
+Once these steps have been followed you will have a cluster created that is
+accessible via the public internet. For an example of what you can do with the
+cluster now you have created it, follow the "Hello World" guide at the end
+of this quickstart.
 
 **********************************
 Accessing the Kubernetes dashboard
