@@ -184,7 +184,7 @@ cluster will start creating. This process can take up to 20 minutes
 depending on the size of the cluster you are trying to build. Once it is built
 however, you will be able to access the cluster. To follow up on the creation
 of your new cluster, we recommend checking out the guide at the end of this
-page on creating a hello world application and deploying it on your cluster.
+page on creating a hello world application.
 
 Creating a cluster using the CLI
 ================================
@@ -262,9 +262,7 @@ If you wish to save the configuration to a different location you can use the
   is referencing the correct cluster configuration.
 
 Once these steps have been followed you will have a cluster created that is
-accessible via the public internet. For an example of what you can do with the
-cluster now you have created it, follow the "Hello World" guide at the end
-of this quickstart.
+accessible via the public internet.
 
 **********************************
 Accessing the Kubernetes dashboard
@@ -278,14 +276,11 @@ Accessing the Kubernetes dashboard
 Deploying a hello world application
 ***********************************
 
-It is possible to have a loadbalancer created on your behalf by Kubernetes
-through the underlying Catalyst Cloud infrastructure services.
-
 For this example we are going to deploy a container running a simple flask app
 that will respond with a basic 'Hello World' message that includes the host
 name and IP of the node responding to the request. This will sit behind a
 loadbalancer that will be publicly available on the internet via a floating ip
-and will serve requests to the application servers using the ``round robin``
+and will serve requests to the application servers using the **round robin**
 algorithm.
 
 The container image in question **catalystcloud/helloworld version_1.1** runs
