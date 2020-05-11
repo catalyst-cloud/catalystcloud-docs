@@ -3,19 +3,19 @@ Clusters
 ########
 
 This section shows a more in depth view of clusters and their uses. It
-goes over the process of creating clusters, which is already covered in
-quick start section of this documentation. If you have gone through that you
-don't need to follow all of the examples again.
+goes over the process of creating clusters, similar to the quickstart section
+but the difference in the following example is that it covers information more
+relevant to a production ready cluster.
 
 ******************
 What is a cluster?
 ******************
 
 A container cluster is the foundation of the Kubernetes Engine, it consists of
-one or more **master node(s)** and one or more **woker node(s)**. It is made up
-of a collection of compute, networking, and storage resources necessary to run
-any given workloads. Communication between them is by way of a shared network.
-An entire system may be comprised of multiple clusters.
+one or more **master node(s)** and one or more **worker node(s)**. It is made
+up of a collection of compute, networking, and storage resources necessary to
+run any given workloads. Communication between them is achieved by way of a
+shared network.
 
 The ``master`` server is the control plane of the cluster consisting of a
 collection of services responsible for providing the centralised scheduling,
@@ -46,9 +46,10 @@ A cluster template is a collection of parameters to describe how a cluster can
 be constructed. Some parameters are relevant to the infrastructure of the
 cluster, while others are for the particular COE.
 
-The cloud provider may supply pre-defined templates for users and it may also
-be possible, in some situations, for user to create their own templates.
-Initially Catalyst Cloud will only support the use of the pre-defined templates.
+Traditionally a cloud provider may supply pre-defined templates for users and
+it may also be possible, in some situations, for users to create their own
+templates. Initially Catalyst Cloud will only support the use of the
+pre-defined templates.
 
 .. Note::
 
@@ -83,8 +84,8 @@ The difference between the development and production templates are:
 Viewing templates
 =================
 
-When running openstack command line tools ensure that you have sourced a valid
-openrc file first. For more information on this see :ref:`source-rc-file`
+When running the openstack command line tools ensure that you have sourced a
+valid openrc file first. For more information on this see :ref:`source-rc-file`
 
 
 .. Note::
@@ -94,72 +95,34 @@ openrc file first. For more information on this see :ref:`source-rc-file`
 
 .. code-block:: bash
 
-  $ source keystonerc
+  $ source user-rc-file
 
 Then list all of the available cluster templates.
 
 .. code-block:: bash
 
   $ openstack coe cluster template list
-  +--------------------------------------+----------------------------------+
-  | uuid                                 | name                             |
-  +--------------------------------------+----------------------------------+
-  | c5b5a636-0066-4291-8da9-5190915f5a76 | kubernetes-v1.11.6-prod-20190130 |
-  | 5cb74603-4ad3-4e3b-a1d4-4539c392dbf0 | kubernetes-v1.11.6-dev-20190130  |
-  | 5e17bc87-27b2-4c61-ba58-c064fd10245d | kubernetes-v1.11.9-dev-20190402  |
-  | bd116a49-4381-4cb6-adf8-cd442e1a713f | kubernetes-v1.11.9-prod-20190402 |
-  | be25ca0c-2bf6-4bef-a234-4e073b187d71 | kubernetes-v1.12.7-dev-20190403  |
-  | 81d0f765-62fe-4c99-b7f8-284ffddac861 | kubernetes-v1.12.7-prod-20190403 |
-  +--------------------------------------+----------------------------------+
+  +--------------------------------------+-----------------------------------+
+  | uuid                                 | name                              |
+  +--------------------------------------+-----------------------------------+
+  | 18a9fa94-95f4-46a4-be3c-c8fae025ce97 | kubernetes-v1.13.12-dev-20191129  |
+  | a04e8d58-bd81-4eae-9242-144dc75b3821 | kubernetes-v1.13.12-prod-20191129 |
+  | 681241fd-682a-418e-aa1e-8238ceca834e | kubernetes-v1.15.11-dev-20200330  |
+  | 77b71c57-7ad3-49fc-a5c2-80962325e7a1 | kubernetes-v1.15.11-prod-20200330 |
+  | e7be8a37-c5a6-4dfa-853c-8ff0653ede31 | kubernetes-v1.14.10-dev-20200422  |
+  | 9ab35677-8644-4d3c-bb81-281f7ec52e31 | kubernetes-v1.14.10-prod-20200422 |
+  | 2cb17a1a-bafd-48c4-a466-c690524d325d | kubernetes-v1.15.11-dev-20200501  |
+  +--------------------------------------+-----------------------------------+
 
-
-To view the details of a particular template.
-
-.. code-block:: bash
-
-  $ openstack coe cluster template show kubernetes-v1.12.7-prod-20190403
-  +-----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | Field                 | Value                                                                                                                                                                                                                                                                                                                                              |
-  +-----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | insecure_registry     | -                                                                                                                                                                                                                                                                                                                                                  |
-  | labels                | {'kube_tag': 'v1.12.7', 'cloud_provider_enabled': 'true', 'prometheus_monitoring': 'true', 'cloud_provider_tag': '1.14.0-catalyst', 'container_infra_prefix': 'docker.io/catalystcloud/', 'ingress_controller': 'octavia', 'octavia_ingress_controller_tag': '1.14.0-catalyst', 'heat_container_agent_tag': 'stein-dev', 'etcd_volume_size': '20'} |
-  | updated_at            | 2019-04-03T10:26:47+00:00                                                                                                                                                                                                                                                                                                                          |
-  | floating_ip_enabled   | True                                                                                                                                                                                                                                                                                                                                               |
-  | fixed_subnet          | -                                                                                                                                                                                                                                                                                                                                                  |
-  | master_flavor_id      | c1.c2r4                                                                                                                                                                                                                                                                                                                                            |
-  | uuid                  | 81d0f765-62fe-4c99-b7f8-284ffddac861                                                                                                                                                                                                                                                                                                               |
-  | no_proxy              | -                                                                                                                                                                                                                                                                                                                                                  |
-  | https_proxy           | -                                                                                                                                                                                                                                                                                                                                                  |
-  | tls_disabled          | False                                                                                                                                                                                                                                                                                                                                              |
-  | keypair_id            | -                                                                                                                                                                                                                                                                                                                                                  |
-  | public                | True                                                                                                                                                                                                                                                                                                                                               |
-  | http_proxy            | -                                                                                                                                                                                                                                                                                                                                                  |
-  | docker_volume_size    | 20                                                                                                                                                                                                                                                                                                                                                 |
-  | server_type           | vm                                                                                                                                                                                                                                                                                                                                                 |
-  | external_network_id   | e0ba6b88-5360-492c-9c3d-119948356fd3                                                                                                                                                                                                                                                                                                               |
-  | cluster_distro        | fedora-atomic                                                                                                                                                                                                                                                                                                                                      |
-  | image_id              | 83833f4f-5d09-44cd-9e23-b0786fc580fd                                                                                                                                                                                                                                                                                                               |
-  | volume_driver         | cinder                                                                                                                                                                                                                                                                                                                                             |
-  | registry_enabled      | False                                                                                                                                                                                                                                                                                                                                              |
-  | docker_storage_driver | overlay2                                                                                                                                                                                                                                                                                                                                           |
-  | apiserver_port        | -                                                                                                                                                                                                                                                                                                                                                  |
-  | name                  | kubernetes-v1.12.7-prod-20190403                                                                                                                                                                                                                                                                                                                   |
-  | created_at            | 2019-04-03T08:40:10+00:00                                                                                                                                                                                                                                                                                                                          |
-  | network_driver        | calico                                                                                                                                                                                                                                                                                                                                             |
-  | fixed_network         | -                                                                                                                                                                                                                                                                                                                                                  |
-  | coe                   | kubernetes                                                                                                                                                                                                                                                                                                                                         |
-  | flavor_id             | c1.c4r8                                                                                                                                                                                                                                                                                                                                            |
-  | master_lb_enabled     | True                                                                                                                                                                                                                                                                                                                                               |
-  | dns_nameserver        | 202.78.240.215                                                                                                                                                                                                                                                                                                                                     |
-  | hidden                | False                                                                                                                                                                                                                                                                                                                                              |
-  +-----------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-To go alongside the information that you can gain from viewing the template,
-another page that we recommended checking before nailing down which template
-you want to use, is :ref:`the volume types and sizes<volume-sizes-kube>`
+To find more information on which template you want to use, you can view each
+template via the `Cluster Templates`_ tab on our dashboard. And for more
+information on how volumes work in a cluster refer to
+:ref:`the volume types and sizes<volume-sizes-kube>`
 section under the kubernetes tab of this documentation. It has information
 on the default sizes for each of our volumes and the difference between the
 different types of volumes that are used for each of our templates.
+
+.. _`Cluster Templates`: https://dashboard.cloud.catalyst.net.nz/project/cluster_templates
 
 There are some key parameters that are worth mentioning in the above template:
 
