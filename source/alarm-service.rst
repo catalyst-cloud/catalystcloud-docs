@@ -1,5 +1,5 @@
 #############
-Alarm Service
+Alarm service
 #############
 
 .. _alarm-service:
