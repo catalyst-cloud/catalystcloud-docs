@@ -80,7 +80,7 @@ The difference between the development and production templates are:
   production.
 
 Viewing templates
-=================
+-----------------
 
 When running the openstack command line tools ensure that you have sourced a
 valid openrc file first. For more information on this see :ref:`source-rc-file`
@@ -126,9 +126,9 @@ different types of volumes that are used for each of our templates.
 
 .. _setting_up_kubectl:
 
-****************************************
+***************************************
 Interacting with the Kubernetes service
-****************************************
+***************************************
 
 There are two main ways, Catalyst Cloud supports, when wanting to interact with
 the kubernetes service. There is the kubernetes CLI and the Container infra
@@ -178,7 +178,7 @@ where command, TYPE, NAME, and flags are:
 
 
 Cluster Access Using kubeconfig Files
-=====================================
+-------------------------------------
 
 The kubectl command-line tool uses kubeconfig files to find the information it
 needs to choose a cluster and communicate with the API server of a cluster.
@@ -186,7 +186,7 @@ These files provide information about clusters, users, namespaces, and
 authentication mechanisms.
 
 Getting the cluster config
-==========================
+--------------------------
 
 We use our cluster config to configure our native command line to communicate
 with our cluster. To do so we have to source the config file of our
@@ -210,7 +210,7 @@ configuration to a different location you can use the
   following section will outline this in more detail.
 
 Viewing the cluster
-===================
+-------------------
 
 It is possible to view details of the cluster with the following command. This
 will return the address of the master and the services running there.
@@ -241,7 +241,7 @@ can follow.
 
 
 Private vs Public cluster API access
-====================================
+------------------------------------
 
 Any cluster created using one of the predefined templates will, by default, be
 created as a ``private cluster``. This means that the Kubernetes API will
@@ -271,7 +271,7 @@ The actual usage would look like this.
   :ref:`the private-cluster <cluster-on-existing-net>` documentation.
 
 Creating a cluster
-==================
+------------------
 
 To create a new **production** cluster run the following command:
 
@@ -297,8 +297,8 @@ To create a new **development** cluster run the following command:
 
 .. _modifying_a_cluster_with_labels:
 
-Customizing clusters using labels.
-------------------------------------
+Customizing clusters using labels
+---------------------------------
 
 It is possible to override the behaviour of a template by adding or modifying
 the labels supplied by the template. To do this the entire list of existing
@@ -370,7 +370,7 @@ This will then be passed as the argument to the **labels** parameter.
   will fail to deploy correctly and will end up in a FAILED or UNHEALTHY state.
 
 Checking the status of the cluster
-==================================
+----------------------------------
 
 A cluster will take on average 10 to 15 minutes be created.
 
@@ -393,7 +393,7 @@ Alternatively, you can check the status of the cluster on the `Clusters panel`_
 Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
 
 Accessing a private cluster
-===========================
+---------------------------
 
 Once the cluster state is ``CREATE_COMPLETE`` and you have successfully
 retrieved the cluster config, we need to confirm that we are able to access the
