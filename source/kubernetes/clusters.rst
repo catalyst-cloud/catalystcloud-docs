@@ -124,49 +124,37 @@ different types of volumes that are used for each of our templates.
 
 .. _`Cluster Templates`: https://dashboard.cloud.catalyst.net.nz/project/cluster_templates
 
-There are some key parameters that are worth mentioning in the above template:
 
-* ``coe: kubernetes``
-  Specifies the container orchestration engine, such as kubernetes, swarm and
-  mesos. Currently the the only option available on the Catalyst Cloud is
-  Kubernetes.
-* ``master_lb_enabled: true``
-  As multiple masters may exist in a cluster, a load balancer is created to
-  provide the API endpoint for the cluster and to direct requests to the
-  masters. Where the load balancer service is not available, this option can be
-  set to ‘false’ thus creating a cluster without the load balancer. In this
-  case, one of the masters will serve as the API endpoint. The default for
-  load balancer is True.
-* ``network_driver: calico``
-  This is the driver used to provide networking services to the containers.
-  This is independent from the Neutron networking that the cluster uses. Calico
-  is the Catalyst Cloud recommended network driver as it provides secure
-  network connectivity for containers and virtual machine workloads.
-* ``labels``
-  These are arbitrary labels (defined by the cluster drivers)  in the form of
-  key=value pairs as a way to pass additional parameters to the cluster driver.
 
 .. _setting_up_kubectl:
 
-*************************
-Setting up Kubernetes CLI
-*************************
+****************************************
+Interacting with the Kubernetes service
+****************************************
+
+There are two main ways, Catalyst Cloud supports, when wanting to interact with
+the kubernetes service. There is the kubernetes CLI and the Container infra
+section on the  Catalyst Cloud dashboard. In this section of the documentation
+we will cover the command line methods in greater depth. To know more about
+the dashboard approach, please see the :ref:`k8s-quickstart` section of the
+documents.
 
 Getting kubectl
-===============
+---------------
 
-To deploy and manage applications on kubernetes use the Kubernetes command-line
-tool, `kubectl`_. With this tool you can inspect cluster resources; create,
-delete, and update components; and look at your new cluster and bring up
-example apps. It's basically the Kubernertes Swiss army knife.
+To deploy and manage applications on kubernetes through the command line,
+we use the Kubernetes command-line tool, `kubectl`_. With this tool you can
+inspect cluster resources; create, delete, and update components; and look at
+your new cluster and bring up example apps. It's basically the Kubernertes
+Swiss army knife.
 
 The details for getting the latest version of kubectl can be found `here`_.
 
 .. _`kubectl`: https://kubernetes.io/docs/reference/kubectl/kubectl/
 .. _`here`: https://kubernetes.io/docs/tasks/tools/install-kubectl/#kubectl-install-1
 
-To install on Linux via the command line as a simple binary, perform the
-following steps:
+To install these tools on Linux via the command line as a simple binary,
+perform the following steps:
 
 .. code-block:: bash
 
@@ -177,7 +165,7 @@ following steps:
   $ sudo mv ./kubectl /usr/local/bin/kubectl
 
 
-The basic format of kubectl commands looks like this:
+The basic format of a kubectl command looks like this:
 
 .. code-block:: bash
 
@@ -202,9 +190,9 @@ authentication mechanisms.
 Getting the cluster config
 ==========================
 
-Configure native client to access cluster. You can source the output of this
-command to get the native client of the corresponding COE configured to access
-the cluster.
+We use our cluster config to configure our native command line to communicate
+with our cluster. To do so we have to source the config file of our
+cluster using the following command.
 
 For example: ``eval $(openstack coe cluster config <cluster-name>)``
 
@@ -311,8 +299,8 @@ To create a new **development** cluster run the following command:
 
 .. _modifying_a_cluster_with_labels:
 
-Modifying cluster template behaviour
-====================================
+Customizing clusters using labels.
+------------------------------------
 
 It is possible to override the behaviour of a template by adding or modifying
 the labels supplied by the template. To do this the entire list of existing
@@ -386,8 +374,7 @@ This will then be passed as the argument to the **labels** parameter.
 Checking the status of the cluster
 ==================================
 
-Since we are using the development template, the cluster will take 10 to 15
-minutes be created.
+A cluster will take on average 10 to 15 minutes be created.
 
 You can use the following command to check the status of the cluster:
 
