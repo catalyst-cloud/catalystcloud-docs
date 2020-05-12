@@ -79,8 +79,6 @@ The difference between the development and production templates are:
   and a single worker node. As the name suggests, it should not be used for
   production.
 
-
-
 Viewing templates
 =================
 
