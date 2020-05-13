@@ -16,13 +16,12 @@ conduct tests with multiple people and from multiple locations. However,
 because the cluster will be publicly accessible, this guide should **not** be
 used to create a production ready cluster.
 
-.. warning::
+.. Note::
 
-  Due to active development of this service, we recommend the use of the latest
-  version of the CLI to interact with the service. Please refer to the
-  :ref:`upgrading-the-cli` section of the documentation for upgrade
-  instructions. This documentation assumes ``python-magnumclient`` is 2.12.0 or
-  above.
+  This documentation assumes python-magnumclient is 2.12.0 or above please
+  refer to the :ref:`upgrading-the-cli` section of the documentation for
+  upgrade instructions as we recommend the use of the latest
+  version of the CLI to interact with the service.
 
 
 **************

@@ -4,8 +4,8 @@ Clusters
 
 This section shows a more in depth view of clusters and their uses. It
 goes over the process of creating clusters, similar to the quickstart section
-but the difference in the following example is that it covers information more
-relevant to a production ready cluster.
+but the difference in the following example is that it covers private clusters
+and more production ready clusters.
 
 ******************
 What is a cluster?
@@ -20,13 +20,13 @@ shared network.
 The ``master`` server is the control plane of the cluster consisting of a
 collection of services responsible for providing the centralised scheduling,
 logic and management of all aspects of the cluster. While it is possible to run
-a cluster with a single master that hosts all of the required services it is
-more advisable, especially for production environments, to deploy them in a
-multi-master HA configuration.
+a cluster with a single master which hosts all of the required services it is
+more advisable, especially for production environments, to deploy your clusters
+in a multi-master *highly available* configuration.
 
 Some of the key services running on the master are:
 
-- The interface to the cluster is via the ``API Server``, which provides a
+- The interface to the cluster via the ``API Server``, which provides a
   RESTful API frontend to the control plane.
 - Configuration and state of the cluster is managed by the ``cluster store``.
   This is based on ``etcd``, which is a distributed key-value store, and
@@ -34,9 +34,10 @@ Some of the key services running on the master are:
   stateful component within the cluster.
 - The ``scheduler``
 
-The machines designated as ``nodes``, previously referred to as minions, are
-responsible for accepting and running workloads assigned by the master using
-appropriate local and external resources.
+The other half of the cluster is the machines designated as ``nodes``,
+previously referred to as minions. They are responsible for accepting and
+running workloads assigned by the master using appropriate local and external
+resources.
 
 ********************
 The cluster template
@@ -44,7 +45,8 @@ The cluster template
 
 A cluster template is a collection of parameters to describe how a cluster can
 be constructed. Some parameters are relevant to the infrastructure of the
-cluster, while others are for the particular COE.
+cluster, while others are for the particular COE. These templates work as a
+blueprint for cluster creation, changing certain parameters for your cluster.
 
 Traditionally a cloud provider may supply pre-defined templates for users and
 it may also be possible, in some situations, for users to create their own
