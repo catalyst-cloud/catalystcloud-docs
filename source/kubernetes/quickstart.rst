@@ -60,12 +60,11 @@ panel in the dashboard, under the Management section.
 Download and install kubectl
 ============================
 
-This quickstart will cover two ways to start your cluster. The Kubectl is only
-required for the command line example as Kubectl is the command line interface
-to the Kubernetes API and the canonical way to interact with Kubernetes
-clusters.
+``Kubectl`` is the command line interface for the Kubernetes API and the
+canonical way to interact with Kubernetes clusters. You will need to install it
+to be able to interact with your clusters after they have been created.
 
-The instructions below can be used to quickly install kubectl on Linux as a
+The instructions below can be used to quickly install ``Kubectl`` on Linux as a
 static binary:
 
 .. code-block:: bash
@@ -122,8 +121,8 @@ Deploying a Kubernetes cluster
 
 .. _dashboard-cluster-creation:
 
-Creating a cluster from the Catalyst Cloud dashboard
-====================================================
+Creating a cluster using the dashboard
+======================================
 
 The simplest way to create a kubernetes cluster is through the Catalyst Cloud
 interactive dashboard. The dashbaord allows you to both create, and monitor the
@@ -179,11 +178,20 @@ The other tabs: **management** and **advanced** allow you to set autohealing on
 your nodes and add labels to your cluster respectfully.
 
 Once you have set all of these parameters, you can click submit and your
-cluster will start creating. This process can take up to 20 minutes
-depending on the size of the cluster you are trying to build. Once it is built
-however, you will be able to access the cluster. To follow up on the creation
-of your new cluster, we recommend checking out the guide at the end of this
-page on creating a hello world application.
+cluster will begin creation. This process can take up to 20 minutes
+depending on the size of the cluster you are trying to build. You can monitor
+the progress of the cluster on the *Stack* screen under the *Orchestration*
+tab.
+
+.. image:: _containers_assets/stack-progress.png
+
+Once the cluster has reached the ``CREATE_COMPLETE`` stage, you will be able
+to see it's status on the main *container infra* tab along with any other
+clusters you have made in the past.
+
+.. image:: _containers_assets/cluster-create-complete.png
+
+
 
 Creating a cluster using the CLI
 ================================
@@ -193,9 +201,15 @@ command line. There are a number of prerequisites that are needed before you
 can begin taking this approach. The majority of these prerequisites were
 mentioned at the beginning of this quickstart, but some specific ones for the
 following example are:
-to make sure that you have the correct version of the command line tools
-installed and that you have sourced an open RC file in your environment. Once
-these have been taken care of you can start building your new cluster.
+
+- To make sure that you have the correct version of the command line tools
+  installed
+- To ensure that you have sourced an open RC file in your environment.
+
+Documentation for both of these can be found under their respective sections:
+:ref:`installing-the-cli` for installation and :ref:`configuring-the-cli` for
+sourcing the open RC file.
+Once these prerequisites have been met we can begin to create a cluster.
 
 To create a new **development** cluster that is publicly accessible run the
 following command:
@@ -237,10 +251,16 @@ Alternatively, you can check the status of the cluster on the `Clusters panel`_
 
 .. _`Clusters panel`: https://dashboard.cloud.catalyst.net.nz/project/clusters
 
-Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
+Once these steps have been followed you will and your cluster state becomes
+``CREATE_COMPLETE``, you will have a publicly accessible cluster
+created and ready to use.
 
-Getting the cluster config
-==========================
+********************************
+Accessing the Kubernetes Cluster
+********************************
+
+Cluster access via CLI
+======================
 
 The kubectl command-line tool uses kubeconfig files to determine how to connect
 to the APIs of the Kubernetes cluster. The following command will download the
@@ -260,12 +280,33 @@ If you wish to save the configuration to a different location you can use the
   cluster, it is necessary to ensure that the current ``kubectl configuration``
   is referencing the correct cluster configuration.
 
-Once these steps have been followed you will have a cluster created that is
-accessible via the public internet.
+Viewing the cluster via CLI
+===========================
 
-**********************************
-Accessing the Kubernetes dashboard
-**********************************
+Once we have our command line configured using the ``KUBECONFIG`` file we can
+then begin to use ``Kubectl`` to access our cluster. For now we will issue a
+command that will let us view the details of the cluster. This will return the
+address of the master and the services running there.
+
+.. code-block:: bash
+
+  $ kubectl cluster-info
+  Kubernetes master is running at https://103.254.156.157:6443
+  Heapster is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/heapster/proxy
+  CoreDNS is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+In order to view more in depth information about the cluster simply add the
+dump option to the above example. This generates output suitable for debugging
+and diagnosing cluster problems. By default, it redirects everything to stdout.
+
+.. code-block:: bash
+
+  $ kubectl cluster-info dump
+
+
+
+Cluster access via the Kubernetes dashboard
+===========================================
 
 .. include:: dashboard-access.rst
 
