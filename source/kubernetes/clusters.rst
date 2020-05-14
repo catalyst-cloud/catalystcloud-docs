@@ -24,6 +24,13 @@ a cluster with a single master which hosts all of the required services it is
 more advisable, especially for production environments, to deploy your clusters
 in a multi-master *highly available* configuration.
 
+The following diagram shows the relation more clearly
+*(image sourced from rancher.com)*
+
+.. image:: _containers_assets/kubernetes-architecture-cluster.png
+
+
+
 Some of the key services running on the master are:
 
 - The interface to the cluster via the ``API Server``, which provides a
@@ -87,7 +94,6 @@ Viewing templates
 When running the openstack command line tools ensure that you have sourced a
 valid openrc file first. For more information on this see :ref:`source-rc-file`
 
-
 .. Note::
 
   In order to be able to create a Kubernetes cluster the user needs to ensure
@@ -123,8 +129,6 @@ on the default sizes for each of our volumes and the difference between the
 different types of volumes that are used for each of our templates.
 
 .. _`Cluster Templates`: https://dashboard.cloud.catalyst.net.nz/project/cluster_templates
-
-
 
 .. _setting_up_kubectl:
 

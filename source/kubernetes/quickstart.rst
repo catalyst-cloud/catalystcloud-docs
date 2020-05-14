@@ -191,8 +191,6 @@ clusters you have made in the past.
 
 .. image:: _containers_assets/cluster-create-complete.png
 
-
-
 Creating a cluster using the CLI
 ================================
 
