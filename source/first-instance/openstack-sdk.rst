@@ -28,7 +28,7 @@ use Python's pip installer. Simply run:
 
 .. code-block:: bash
 
- pip install openstacksdk.
+ pip install openstacksdk
 
 It is recommended that you use the openstack sdk from a virtual
 environment. More information can be found here: :ref:`python-virtual-env`
@@ -56,12 +56,14 @@ create your own scripts on the `OpenstackSDK documentation`_:
 
 The following code block assumes a few things:
 
-- You are using an RC file that does not use 2-factor-authentication.
+* Your external IP address has been whitelisted for API access as explained
+  under :ref:`Access and whitelist <access-and-whitelist>`.
+* You are using an RC file that does not use 2-factor-authentication.
   if you are using 2FA then you would need to change the `password` variable
   to be a `token`
-- The region your instance is going to be made is the Porirua region.
-- You have downloaded and installed a version of python3 on your machine.
-- You don't already have a private SSH key that you want to associate with your
+* The region your instance is going to be made is the Porirua region.
+* You have downloaded and installed a version of python3 on your machine.
+* You don't already have a private SSH key that you want to associate with your
   instance. To change this you will have to alter the code relating to the
   'create_keypair' function.
 
