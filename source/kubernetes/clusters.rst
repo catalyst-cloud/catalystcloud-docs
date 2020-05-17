@@ -99,10 +99,6 @@ valid openrc file first. For more information on this see :ref:`source-rc-file`
   In order to be able to create a Kubernetes cluster the user needs to ensure
   that they have been allocated the ``heat_stack_owner`` role.
 
-.. code-block:: bash
-
-  $ source user-rc-file
-
 Then list all of the available cluster templates.
 
 .. code-block:: bash
@@ -121,12 +117,61 @@ Then list all of the available cluster templates.
   +--------------------------------------+-----------------------------------+
 
 To find more information on which template you want to use, you can view each
-template via the `Cluster Templates`_ tab on our dashboard. And for more
-information on how volumes work in a cluster refer to
-:ref:`the volume types and sizes<volume-sizes-kube>`
-section under the kubernetes tab of this documentation. It has information
-on the default sizes for each of our volumes and the difference between the
-different types of volumes that are used for each of our templates.
+template via the `Cluster Templates`_ tab on our dashboard. For information
+on how volumes work and storage types in a cluster refer to the
+:ref:`storage<storage>` section under the kubernetes documentation.
+
+Default volume types and sizes
+==============================
+
+Here we outline the defaults settings of our volumes across the different
+regions of the Catalyst Cloud. Additionally, we cover where to find
+information on changing these defaults using labels, and the best practices
+concerning NVMe.
+
+The following is a table that shows you the different sizes and types of
+volumes that are used by default across the different regions:
+
++------------------+--------------+--------+----------------------+
+| Volume           | Region       |  Size  |  Type                |
++==================+==============+========+======================+
+| docker volume    | Hamilton     | 20GB   | b1.sr-r3-nvme-1000   |
++------------------+--------------+--------+----------------------+
+|                  | Porirua      | 20GB   | b1.sr-r3-nvme-1000   |
++------------------+--------------+--------+----------------------+
+|                  | Wellington   | 20GB   | b1.standard          |
++------------------+--------------+--------+----------------------+
+| etcd volume      | Hamilton     | 20GB   | b1.sr-r3-nvme-1000   |
++------------------+--------------+--------+----------------------+
+|                  | Porirua      | 20GB   | b1.sr-r3-nvme-1000   |
++------------------+--------------+--------+----------------------+
+|                  | Wellington   | 20GB   | b1.standard          |
++------------------+--------------+--------+----------------------+
+| boot volume      | Hamilton     | 10GB   | b1.sr-r3-nvme-1000   |
++------------------+--------------+--------+----------------------+
+|                  | Porirua      | 10GB   | b1.sr-r3-nvme-1000   |
++------------------+--------------+--------+----------------------+
+|                  | Wellington   | 10GB   | b1.standard          |
++------------------+--------------+--------+----------------------+
+
+You will notice that for the the volumes in the Hamilton and Porirua region,
+they use an NVMe volume type but the Wellington region does not. This is
+because we have not yet set up NVMe in our Wellington region, however we are
+working on implementing NVMe across all our regions and hope to update this
+soon.
+
+To change these defaults you will have to change the labels for your template.
+The process of which is detailed under: :ref:`modifying_a_cluster_with_labels`.
+
+Best practices with NVMe
+------------------------
+
+We use NVMe for our volumes because it reduces the time it takes to pull and
+start your pods, making for an overall faster cluster. In addition, using NVMe
+ensures that the IOPS for the etcd volume are sufficient to a point that they
+will not fail due to disk pressure, making for a more reliable and resilient
+cluster overall.
+
 
 .. _`Cluster Templates`: https://dashboard.cloud.catalyst.net.nz/project/cluster_templates
 

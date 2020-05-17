@@ -8,9 +8,9 @@ if ! which virtualenv; then
   exit 1
 fi
 
-if ! which pip; then
+if ! which pip3; then
   echo "Could not find pip on the PATH."
-  echo "Try: apt-get install python-pip"
+  echo "Try: apt-get install python3-pip"
   exit 1
 fi
 
