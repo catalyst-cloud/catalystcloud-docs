@@ -37,59 +37,6 @@ Here we can see we have 2 containers in the pod both which mount the volume,
 *shared-volume*. The web container mounts it as */data* while the logger
 container mounts it as */logs*.
 
-Default volume types and sizes
-==============================
-
-.. _volume-sizes-kube:
-
-Here we discuss the defaults settings of our volumes across the different
-regions of the Catalyst Cloud. Additionally, we cover where to find information
-on changing these defaults using labels, and the best practices concerning
-NVME.
-
-The following is a table that shows you the different sizes and types of
-volumes that are used by default across the different regions:
-
-+------------------+--------------+--------+----------------------+
-| Volume           | Region       |  Size  |  Type                |
-+==================+==============+========+======================+
-| docker volume    | Hamilton     | 20GB   | b1.sr-r3-nvme-1000   |
-+------------------+--------------+--------+----------------------+
-|                  | Porirua      | 20GB   | b1.sr-r3-nvme-1000   |
-+------------------+--------------+--------+----------------------+
-|                  | Wellington   | 20GB   | b1.standard          |
-+------------------+--------------+--------+----------------------+
-| etcd volume      | Hamilton     | 20GB   | b1.sr-r3-nvme-1000   |
-+------------------+--------------+--------+----------------------+
-|                  | Porirua      | 20GB   | b1.sr-r3-nvme-1000   |
-+------------------+--------------+--------+----------------------+
-|                  | Wellington   | 20GB   | b1.standard          |
-+------------------+--------------+--------+----------------------+
-| boot volume      | Hamilton     | 10GB   | b1.sr-r3-nvme-1000   |
-+------------------+--------------+--------+----------------------+
-|                  | Porirua      | 10GB   | b1.sr-r3-nvme-1000   |
-+------------------+--------------+--------+----------------------+
-|                  | Wellington   | 10GB   | b1.standard          |
-+------------------+--------------+--------+----------------------+
-
-You will notice that for the the volumes in the Hamilton and Porirua region,
-they use an NVMe volume type but the Wellington region does not. This is
-because we have not yet set up NVMe in our Wellington region, however we are
-working on implementing NVMe across all our regions and hope to update this
-soon.
-
-To change these defaults you will have to change the labels for your template.
-The process of which is detailed under: :ref:`modifying_a_cluster_with_labels`.
-
-Best practices with NVMe
-------------------------
-
-We use NVMe for our volumes because it reduces the time it takes to pull and
-start your pods, making for an overall faster cluster. In addition, using NVME
-ensures that the IOPS for the etcd volume are sufficient to a point that they
-will not fail due to disk pressure, making for a more reliable and resilient
-cluster overall.
-
 
 ******************
 Persistent Volumes
@@ -117,89 +64,52 @@ class will be used.
   defined for a new cluster in the Catalyst Cloud. This will need to be created
   prior to using PersistentVolumes.
 
+Storage classes
+===============
+
+Catalyst Cloud provides pre-defined storage classes for all of the block
+storage tiers in each region. There are storage classes available for the
+default `standard storage tier`_ and for each of the
+`performance storage tiers`_.
+
+.. _`standard storage tier`: https://docs.catalystcloud.nz/block-storage/overview.html#the-standard-tier
+.. _`performance storage tiers`: https://docs.catalystcloud.nz/block-storage/overview.html#the-performance-tier
+
+The storage class names and their availability by region are as follows:
+
++--------------------+--------------+
+| Storage class name | Availability |
++====================+==============+
+| b1.standard        | | nz-hlz-1a  |
+|                    | | nz-por-1a  |
+|                    | | NZ-WLG-2   |
++--------------------+--------------+
+| b1.sr-r3-nvme-1000 | | nz-hlz-1a  |
+|                    | | nz-por-1a  |
++--------------------+--------------+
+| b1.sr-r3-nvme-2500 | | nz-hlz-1a  |
+|                    | | nz-por-1a  |
++--------------------+--------------+
+| b1.sr-r3-nvme-5000 | | nz-hlz-1a  |
+|                    | | nz-por-1a  |
++--------------------+--------------+
+
 Dynamic Allocation
 ==================
 
 Lets look at the steps involved in dynamically allocating a PersistentVolume to
 a pod.
 
-First we need to create a storage class, for the Catalyst Cloud these will
-initially be limited to our usual block storage tier so the parameter for the
-``volume type`` must be set to ``b1.standard``.
+Next create a definition file for a PersistentVolumeClaim using a
+storage class class from the table above. We also need to specify a name for
+the claim and a size for the volume. In our example we will use the following:
 
-.. Note::
-
-  It is necessary to specify the availability zone for the storage class to be
-  defined in.
-
-To find the availability zone your cluster is in run the following.
-
-.. code-block:: bash
-
-  $ openstack availability zone list
-  +-----------+-------------+
-  | Zone Name | Zone Status |
-  +-----------+-------------+
-  | nz-hlz-1a | available   |
-  | nz-hlz-1a | available   |
-  +-----------+-------------+
-
-The current availability zones for all regions are as follows, please be aware
-that case matters in the name.
-
-Availability zones for “nz-hlz-1”
----------------------------------
-
-+-----------+-------------+
-| Zone Name | Zone Status |
-+===========+=============+
-| nz-hlz-1a | available   |
-+-----------+-------------+
-| nz-hlz-1a | available   |
-+-----------+-------------+
-
-Availability zones for “nz-por-1”
----------------------------------
-
-+-----------+-------------+
-| Zone Name | Zone Status |
-+===========+=============+
-| nz-por-1a | available   |
-+-----------+-------------+
-| nz-por-1a | available   |
-+-----------+-------------+
-
-Availability zones for “nz_wlg_2”
----------------------------------
-
-+-----------+-------------+
-| Zone Name | Zone Status |
-+===========+=============+
-| NZ-WLG-2  | available   |
-+-----------+-------------+
-| NZ-WLG-2  | available   |
-+-----------+-------------+
-
-Create the definition file for your storage type. We will call this storage
-class *block-storage-class* and update the availability and type parameters as
-discussed above.
-
-.. literalinclude:: _containers_assets/storage1.yaml
-
-Then create the storage class within your cluster.
-
-.. code-block:: bash
-
-  $ kubectl create -f storage1.yaml
-  storageclass.storage.k8s.io/block-storage-class created
-
-Next create a definition file for a PersistentVolumeClaim using the new
-storage class. As there is only the one storage class we can omit naming it in
-the definition as it will be used by default. Though we do need to specify a
-name for the claim and a size for the resulting volume, in this example we will
-use 1GB.
+* storage class : b1.standard
+* volume name : test-persistentvolumeclaim
+* volume size : 1 GB
 
 .. literalinclude:: _containers_assets/pvc1.yaml
+    :emphasize-lines: 6,10,13
 
 Now create a claim for the volume.
 
@@ -379,4 +289,5 @@ If it is necessary to access the data on the PersistentVolume device without
 creating a new cluster, the volume in question will need to be attached to an
 existing cloud instance and then mounted as a new volume within the filesystem.
 From here you should be able to follow the steps in the orphaned PVC section.
+
 
