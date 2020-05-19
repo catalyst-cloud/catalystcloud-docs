@@ -29,8 +29,6 @@ The following diagram shows the relation more clearly
 
 .. image:: _containers_assets/kubernetes-architecture-cluster.png
 
-
-
 Some of the key services running on the master are:
 
 - The interface to the cluster via the ``API Server``, which provides a

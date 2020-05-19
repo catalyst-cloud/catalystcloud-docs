@@ -3,6 +3,8 @@
 Managing your Catalyst Cloud account
 ####################################
 
+.. _quota_management:
+
 ****************
 Quota Management
 ****************
