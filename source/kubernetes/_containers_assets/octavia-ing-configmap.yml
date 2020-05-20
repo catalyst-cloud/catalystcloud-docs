@@ -1,0 +1,21 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: octavia-ingress-controller-config
+  namespace: kube-system
+data:
+  config: |
+    cluster-name: fluentd-test
+    openstack:
+      auth-url: https://api.nz-hlz-1.catalystcloud.io:5000/v3
+      user-id: 4b934c44d8b24e60acad9609b641bee3
+      password: puff properly admit grown flight align
+      project-id: eac679e4896146e6827ce29d755fe289
+      region: nz-hlz-1
+    octavia:
+      subnet-id: 6ddad590-3a57-4fd1-990b-be067e3f657d
+      floating-network-id: f10ad6de-a26d-4c29-8c64-2a7418d47f8f
+
+
+

@@ -1,0 +1,17 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: test-octavia-ingress
+  annotations:
+    kubernetes.io/ingress.class: "openstack"
+    octavia.ingress.kubernetes.io/internal: "false"
+spec:
+  rules:
+  - host: api.sample.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: echoserver-svc
+          servicePort: 80
