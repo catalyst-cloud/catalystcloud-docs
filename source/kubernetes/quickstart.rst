@@ -60,12 +60,9 @@ panel in the dashboard, under the Management section.
 Download and install kubectl
 ============================
 
-``Kubectl`` is the command line interface for the Kubernetes API and the
-canonical way to interact with Kubernetes clusters. You will need to install it
-to be able to interact with your clusters after they have been created.
-
-The instructions below can be used to quickly install ``Kubectl`` on Linux as a
-static binary:
+The ``kubectl`` command line tool is the canonical way to interact with
+Kubernetes clusters and required by this tutorial. The instructions below can
+be used to quickly install ``kubectl`` on Linux as a static binary:
 
 .. code-block:: bash
 
@@ -99,14 +96,12 @@ The following command will list all cluster templates available:
   +--------------------------------------+-----------------------------------+
   | 18a9fa94-95f4-46a4-be3c-c8fae025ce97 | kubernetes-v1.13.12-dev-20191129  |
   | a04e8d58-bd81-4eae-9242-144dc75b3821 | kubernetes-v1.13.12-prod-20191129 |
-  | 681241fd-682a-418e-aa1e-8238ceca834e | kubernetes-v1.15.11-dev-20200330  |
-  | 77b71c57-7ad3-49fc-a5c2-80962325e7a1 | kubernetes-v1.15.11-prod-20200330 |
   | e7be8a37-c5a6-4dfa-853c-8ff0653ede31 | kubernetes-v1.14.10-dev-20200422  |
   | 9ab35677-8644-4d3c-bb81-281f7ec52e31 | kubernetes-v1.14.10-prod-20200422 |
-  | 2cb17a1a-bafd-48c4-a466-c690524d325d | kubernetes-v1.15.11-dev-20200501  |
   +--------------------------------------+-----------------------------------+
 
-We will be using the template: kubernetes-v1.14.10-dev-20200422
+We want to use the latest development template (which in the example above is
+``kubernetes-v1.14.10-dev-20200422``).
 
 Alternatively, a list of cluster templates available can be seen in the
 `Cluster Templates`_ panel in the dashboard, under the **Container Infra**
@@ -115,36 +110,31 @@ section.
 .. _`Cluster Templates`: https://dashboard.cloud.catalyst.net.nz/project/cluster_templates
 
 
-******************************
-Deploying a Kubernetes cluster
-******************************
-
 .. _dashboard-cluster-creation:
 
-Creating a cluster using the dashboard
-======================================
+***********************************************
+Creating a Kubernetes cluster via the dashboard
+***********************************************
 
 The simplest way to create a kubernetes cluster is through the Catalyst Cloud
-interactive dashboard. The dashbaord allows you to both create, and monitor the
-current status of your clusters. For our quickstart, we are going to stick
-mostly to the default development template but we will make some changes
-through the process. From the **cluster** screen under the **container infra**
-tab, you will see the following:
+dashboard. The dashboard allows you to create, manage and monitor the current
+status of your clusters. For our quickstart, we are going to stick mostly to
+the default development template but we will make some changes through the
+process. From the **cluster** screen under the **container infra** tab, you
+will see the following:
 
 .. image:: _containers_assets/cluster-main-screen.png
 
 This screen gives you an overview of your clusters, their status and how many
 clusters you have measured against your quota. To create a new cluster from
-here, click on the *+ Create Cluster* button and you will be met with this
-screen:
+here, click on the *+ Create Cluster* button:
 
 .. image:: _containers_assets/create-cluster.png
 
-Pick a name for your new cluster, add a keypair, choose the region you want
-to deploy this cluster in, and choose from the dropdown list one of the
-templates that we have available. In our case, we are going to be using
-kubernetes-v1.14.10-dev-20200422. Once that is done your screen should look
-something like this:
+Pick a name for your new cluster, add a keypair, choose the availability zone
+you want to deploy this cluster in, and choose from the dropdown list the
+latest development template available. Once that is done your screen should
+look something like this:
 
 .. image:: _containers_assets/quickstart-template-picked.png
 
@@ -153,7 +143,7 @@ they will take on the defaults outlined in the template, which is fine for our
 purposes. Since we have selected a development template, our number of
 master nodes is already locked to only one node. If we wanted to we can still
 specify the number of worker nodes, for this example we are using three nodes,
-which is the standard anyway.
+which is the default anyway.
 
 .. Note::
 
@@ -163,19 +153,19 @@ which is the standard anyway.
 .. image:: _containers_assets/quickstart-size.png
 
 Next we have the final required parameter, which is the network we want to
-deploy our cluster on. We can either choose an existing network that we have
-already prepared, or create a new network that the cluster will sit on.
-Additionally while in this tab, we can select whether we want our cluster to
-be visible from only our private network or visible to the public and we can
-choose the type of ingress controller that we want our cluster to utilize.
+deploy our cluster on. We can either choose an existing network or to create a
+new one. Additionally, we can select whether we want our cluster API to be
+accessible on the internet or only from our private network.
 
 For our quickstart, we are going to be creating a new network for our cluster
 and we are going to make it available publicly:
 
 .. image:: _containers_assets/quickstart-network.png
 
-The other tabs: **management** and **advanced** allow you to set autohealing on
-your nodes and add labels to your cluster respectfully.
+The other tabs: **management** and **advanced** allow you to set auto healing
+on your nodes and use labels to customise more advanced settings and features
+of the cluster. There is no need to change anything in these tabs for this
+tutorial.
 
 Once you have set all of these parameters, you can click submit and your
 cluster will begin creation. This process can take up to 20 minutes
@@ -187,27 +177,22 @@ tab.
 
 Once the cluster has reached the ``CREATE_COMPLETE`` stage, you will be able
 to see it's status on the main *container infra* tab along with any other
-clusters you have made in the past.
+clusters you have created in the past.
 
 .. image:: _containers_assets/cluster-create-complete.png
 
-Creating a cluster using the CLI
-================================
 
-The second method of creating a cluster on the Catalyst Cloud is via the
-command line. There are a number of prerequisites that are needed before you
-can begin taking this approach. The majority of these prerequisites were
-mentioned at the beginning of this quickstart, but some specific ones for the
-following example are:
+*****************************************
+Creating a Kubernetes cluster via the CLI
+*****************************************
 
-- To make sure that you have the correct version of the command line tools
-  installed
-- To ensure that you have sourced an open RC file in your environment.
+If you have already created the cluster using the dashboard, you can safely
+skip this step of the tutorial. In this section we illustrate how the same
+operation can be done using the more powerful (and easier to automate) CLI.
 
-Documentation for both of these can be found under their respective sections:
-:ref:`installing-the-cli` for installation and :ref:`configuring-the-cli` for
-sourcing the open RC file.
-Once these prerequisites have been met we can begin to create a cluster.
+Before proceeding, please ensure you have :ref:`installed the
+CLI<installing-the-cli>` and :ref:`sourced an openrc file
+<configuring-the-cli>`.
 
 To create a new **development** cluster that is publicly accessible run the
 following command:
@@ -229,11 +214,9 @@ created using the dashboard method.
 Checking the status of the cluster
 ==================================
 
-Since we are using the development template, our cluster will take 10 to 15
-minutes to be created. Because it takes some time to create, it is
-important to know what the current status of the cluster is.
-
-You can use the following command to monitor the status of the cluster:
+Cluster creation may take up to 20 minutes, depending on the size of the
+cluster. You can use the following command to monitor the status of the
+cluster:
 
 .. code-block:: bash
 
@@ -244,47 +227,51 @@ You can use the following command to monitor the status of the cluster:
   | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
 
-Alternatively, you can check the status of the cluster on the `Clusters panel`_
-, in the **Container Infra** section of the Dashboard.
+Alternatively, you can check the status of the cluster on the `Clusters`_
+panel, in the **Container Infra** section of the Dashboard.
 
-.. _`Clusters panel`: https://dashboard.cloud.catalyst.net.nz/project/clusters
+.. _`Clusters`: https://dashboard.cloud.catalyst.net.nz/project/clusters
 
 Once these steps have been followed you will and your cluster state becomes
-``CREATE_COMPLETE``, you will have a publicly accessible cluster
-created and ready to use.
+``CREATE_COMPLETE``, you will be ready to use.
 
-********************************
-Accessing the Kubernetes Cluster
-********************************
 
-Cluster access via CLI
-======================
+***************************
+Interacting with Kubernetes
+***************************
 
-The kubectl command-line tool uses kubeconfig files to determine how to connect
-to the APIs of the Kubernetes cluster. The following command will download the
-necessary certificates and create a configuration file in your current
-directory. It will also export the ``KUBECONFIG`` variable on your behalf:
+Cluster access via the CLI
+==========================
+
+The ``kubectl`` command-line tool uses kubeconfig files to determine how to
+connect to the APIs of the Kubernetes cluster. The following command will
+download the necessary certificates and create a configuration file in your
+current directory. It will also export the ``KUBECONFIG`` variable on your
+behalf:
 
 .. code-block:: bash
 
   $ eval $(openstack coe cluster config k8s-cluster)
 
+.. note::
+
+  If you close your terminal session, the ``$KUBECONFIG`` variable exported by
+  the command above will be lost. For convenience, you may want to add this
+  environment variable to your shell profile, so it is always set.
+
 If you wish to save the configuration to a different location you can use the
 ``--dir <directory_name>`` parameter to select a different destination.
 
-.. Note::
+.. warning::
 
   If you are running multiple clusters, or are deleting and re-creating a
   cluster, it is necessary to ensure that the current ``kubectl configuration``
   is referencing the correct cluster configuration.
 
-Viewing the cluster via CLI
-===========================
-
-Once we have our command line configured using the ``KUBECONFIG`` file we can
-then begin to use ``Kubectl`` to access our cluster. For now we will issue a
-command that will let us view the details of the cluster. This will return the
-address of the master and the services running there.
+Once we have the CLI configured by pointing the ``$KUBECONFIG`` variable to a
+configuration file, we can then begin to use ``kubectl`` to interact with the
+cluster. To test everything works, we can issue a simple command show the
+details of the cluster:
 
 .. code-block:: bash
 
@@ -301,8 +288,6 @@ and diagnosing cluster problems. By default, it redirects everything to stdout.
 
   $ kubectl cluster-info dump
 
-
-
 Cluster access via the Kubernetes dashboard
 ===========================================
 
@@ -310,9 +295,9 @@ Cluster access via the Kubernetes dashboard
 
 .. _simple_lb_deployment:
 
-***********************************
-Deploying a hello world application
-***********************************
+*********************************
+Running a hello world application
+*********************************
 
 For this example we are going to deploy a container running a simple flask app
 that will respond with a basic 'Hello World' message that includes the host
@@ -321,9 +306,9 @@ loadbalancer that will be publicly available on the internet via a floating ip
 and will serve requests to the application servers using the **round robin**
 algorithm.
 
-The container image in question **catalystcloud/helloworld version_1.1** runs
-the following application. You do not need to copy this, it already exists in
-the cloud.
+The container image in question (**catalystcloud/helloworld version_1.1**) will
+be pulled by Kubernetes from the Docker Hub. The code below illustrates what
+this simple flask application does (there is no need to copy it):
 
 .. literalinclude:: _containers_assets/app.py
 
@@ -335,17 +320,10 @@ this example you should save this file as ``helloworld-deployment_1.yaml``
 
 .. literalinclude:: _containers_assets/helloworld-deployment_1.yaml
 
-This provides the following parameters for a deployment:
+Note how the deployment specifies three replicas and exposes the application on
+port 8080.
 
-* number of ``replicas`` - 3
-* deployment ``image`` - catalystcloud/helloworld version_1.1.
-* pod ``labels``, to identify the app to the service - app: helloworld
-* ``containerPort`` to expose the application on - 8080
-
-  - This port also uses a name, in this case **helloworld-port**, which
-    allows us to refer to it by name rather than value in the service.
-
-To deploy the application run the following command.
+To deploy the application run the following command:
 
 .. code-block:: bash
 
@@ -353,8 +331,8 @@ To deploy the application run the following command.
   deployment.apps/helloworld-deployment created
 
 Check the state of the pods to confirm that they have all been deployed
-correctly. Once the status of all of them shows that they are running and
-ready, this may take a few seconds, continue to the next section.
+correctly. Once the status of all pods is ``Running`` you can continue to the
+next section.
 
 .. code-block:: bash
 
@@ -368,20 +346,15 @@ Creating the loadbalancer service
 =================================
 
 The deployment itself however does not provide a means for us to expose the
-application outside of the cluster. In order to do this we need to
-create a service to act as a go between.
+application outside of the cluster. In order to do this we need to create a
+service to act as a go between.
 
 The manifest for our service definition will look like this.
 
 .. literalinclude:: _containers_assets/helloworld-service.yaml
 
-The parameters of interest here are:
-
-- the ``selector`` which links the service to the app using the label
-  **helloworld**.
-- The ``port`` that it exposes externally - 80.
-- The ``targetPort`` on the pods to link back to, in this case the named port,
-  **helloworld-port** that we created on the deployment.
+Note how it binds to port 80 TCP and uses a selector to direct traffic to pods
+that match the label ``helloworld``.
 
 To create the service run the following command.
 
@@ -389,6 +362,9 @@ To create the service run the following command.
 
   kubectl create -f helloworld-service.yaml
   service/helloworld-service created
+
+Behind the scenes, Kubernetes will create a load balancer on the Catalyst Cloud
+and configure it to direct traffic to the application pods inside the cluster.
 
 The final step is to check on the state of the service and wait until the
 loadbalancer is active and the ``LoadBalancer Ingress`` field has received a
@@ -418,7 +394,7 @@ publicly accessible floating IP address.
     Normal   EnsuringLoadBalancer        60s                service-controller  Ensuring load balancer
 
 Once your service is in this state you should be able to browse to the IP
-address assign to the LoadBalancer Ingress field and see a simple text output
+address shown in the LoadBalancer Ingress field and see a simple text output
 similar to the following.
 
 .. code-block:: bash
@@ -426,5 +402,5 @@ similar to the following.
   Hello World! From Server : helloworld-deployment-5bdfcbb467-c7rln @ 192.168.209.129
 
 If you refresh the browser you should also see the response update to reflect
-different host responses as the loadbalancer attempts to round robin the
+different host responses as the load balancer attempts to round robin the
 requests.
