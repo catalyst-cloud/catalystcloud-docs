@@ -24,70 +24,92 @@ Operating system specific steps
 
 .. _installing_ubuntu_cli:
 
-Ubuntu Linux 18.04
+Ubuntu Linux 20.04
 ------------------
-
-Ubuntu 18.04 uses Python 3.x by default. We recommended using Python3.x
-because python2 has been scheduled for retirement soon and therefore migrating
-over to Python3 is a necessity.
 
 .. code-block:: bash
 
-  # Install python 3.x and virtualenv
-  sudo apt-get install python3 python3-venv
+  # Make sure the package cache is up to date and ensure you have
+  # Python3 installed
+  sudo apt update
+  sudo apt install -y python3-venv python3-dev
 
-  # Create a new virtual environment and activate it
+  # create a virtual environment using the Python3 virtual environment module
   python3 -m venv venv
 
-  # Activate the virtual environment
+  # activate the virtual environment
   source venv/bin/activate
 
-  # Install the Python openstack client libraries into your virtual environment
-  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
+  # install the Openstack commandline tools into the virtual environment
+  pip install -U pip \
+  wheel \
+  python-openstackclient \
+  python-ceilometerclient \
+  python-heatclient \
+  python-neutronclient \
+  python-swiftclient \
+  python-octaviaclient \
+  python-magnumclient \
+  aodhclient
 
 .. _installing_debian_cli:
 
-Debian Linux 8
+Debian Linux 9
 --------------
 
 .. code-block:: bash
 
-  # Make sure you have virtualenv and pip code dependencies installed
-  sudo apt-get install gcc python-dev python-virtualenv
+  # Make sure the package cache is up to date and ensure you have
+  # Python3 installed
+  sudo apt update
+  sudo apt install -y python3-venv
 
-  # Create a new virtual environment for Python 3.x and activate it
-  virtualenv venv
+  # create a virtual environment using the Python3 virtual environment module
+  python3 -m venv venv
 
-  # Activate the virtual environment
+  # activate the virtual environment
   source venv/bin/activate
 
-  # Install the Python openstack client libraries and the Python timezone definitions
-  # into your virtual environment
-  pip install pytz python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
+  # install the Openstack commandline tools into the virtual environment
+  pip install -U pip \
+  python-openstackclient \
+  python-ceilometerclient \
+  python-heatclient \
+  python-neutronclient \
+  python-swiftclient \
+  python-octaviaclient \
+  python-magnumclient \
+  aodhclient
+
 
 .. _installing_centos_cli:
 
-CentOS Linux 7
+CentOS Linux 8
 --------------
 
 .. code-block:: bash
 
-  # Make sure you have Python development tools and wget installed
-  sudo yum install python-devel gcc wget
+  # Make sure the package cache is up to date and ensure you have
+  # Python3 installed
+  sudo yum update -y
+  sudo yum install -y python3
 
-  # retrieve the pip installer script and install pip and virtualenv
-  wget https://bootstrap.pypa.io/get-pip.py
-  sudo python get-pip.py
-  sudo pip install virtualenv
+  # create a virtual environment using the Python3 virtual environment module
+  python3 -m venv venv
 
-  # Create a new virtual environment for Python 3.x and activate it
-  virtualenv venv
-
-  # Activate the virtual environment
+  # activate the virtual environment
   source venv/bin/activate
 
-  # Install the Python openstack client libraries into your virtual environment
-  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
+  # install the Openstack commandline tools into the virtual environment
+  pip install -U pip \
+  python-openstackclient \
+  python-ceilometerclient \
+  python-heatclient \
+  python-neutronclient \
+  python-swiftclient \
+  python-octaviaclient \
+  python-magnumclient \
+  aodhclient
 
 .. _installing_macos_cli:
 
