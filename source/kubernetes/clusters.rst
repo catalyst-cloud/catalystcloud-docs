@@ -350,73 +350,78 @@ Customizing clusters using labels
 ---------------------------------
 
 It is possible to override the behaviour of a template by adding or modifying
-the labels supplied by the template. To do this the entire list of existing
+the labels supplied by the template. To do this, the entire list of existing
 labels in the template must be provided as a set of key=value pairs, overriding
 the required ones as necessary.
 
-To get the list of existing labels on a template simple view the template like
-so.
+The following code block will return the labels from a template in a comma
+separated key value list.
 
 .. code-block:: bash
 
-  openstack coe cluster template show kubernetes-v1.15.6-dev-20191129 -f yaml
-  insecure_registry: '-'
-  labels:
-    auto_healing_controller: magnum-auto-healer
-    auto_healing_enabled: 'true'
-    auto_scaling_enabled: 'false'
-    cloud_provider_enabled: 'true'
-    cloud_provider_tag: 1.14.0-catalyst
-    container_infra_prefix: docker.io/catalystcloud/
-    heat_container_agent_tag: stein-dev
-    ingress_controller: octavia
-    k8s_keystone_auth_tag: v1.15.0
-    keystone_auth_enabled: 'true'
-    kube_dashboard_enabled: 'true'
-    kube_tag: v1.15.6
-    magnum_auto_healer_tag: v1.15.0-catalyst.0
-    master_lb_floating_ip_enabled: 'false'
-    octavia_ingress_controller_tag: 1.14.0-catalyst
-    prometheus_monitoring: 'true'
+  $ export TEMPLATENAME="kubernetes-v1.15.11-prod-20200330"
+  $ openstack coe cluster template show $TEMPLATENAME -c labels -f value | sed -e "s/': '/=/g" | sed -e "s/', '/,/g" | sed -e "s/{'//g" | sed -e "s/'}//" | sed -e "s/,/, \\\\\n/g"
 
-  <-- truncated for brevity -->
+  magnum_auto_healer_tag=v1.15.0-catalyst.0, \
+  cloud_provider_enabled=true, \
+  etcd_volume_size=20, \
+  kube_dashboard_enabled=true, \
+  prometheus_monitoring=true, \
+  cloud_provider_tag=1.14.0-catalyst, \
+  auto_healing_controller=magnum-auto-healer, \
+  calico_ipv4pool=10.100.0.0/16, \
+  container_infra_prefix=docker.io/catalystcloud/, \
+  k8s_keystone_auth_tag=v1.15.0, \
+  auto_scaling_enabled=false, \
+  master_lb_floating_ip_enabled=false, \
+  ingress_controller=octavia, \
+  keystone_auth_enabled=true, \
+  auto_healing_enabled=true, \
+  heat_container_agent_tag=stein-dev, \
+  kube_tag=v1.15.11, \
+  octavia_ingress_controller_tag=v1.18.0-catalyst
 
-Then convert this into a comma separated key value list like so.
+
+Once you have this list, you can customize the value for any of the labels you
+want before passing the whole list as an argument to the **labels** parameter
+in the ``coe cluster create`` command. For our example we are going to be
+changing the ``auto_scaling_enabled`` label to true:
 
 .. warning::
 
-  ensure there is **no whitespace** added around commas ","  or equal signs '='
-  when creating the list
-
-
-.. code-block:: bash
-
-  auto_healing_controller=magnum-auto-healer,auto_healing_enabled=true, \
-  auto_scaling_enabled=false,cloud_provider_enabled=true, \
-  cloud_provider_tag=1.14.0-catalyst, \
-  container_infra_prefix=docker.io/catalystcloud/, \
-  heat_container_agent_tag=stein-dev,ingress_controller=octavia, \
-  k8s_keystone_auth_tag=v1.15.0,keystone_auth_enabled=true, \
-  kube_dashboard_enabled=true,kube_tag=v1.15.6, \
-  magnum_auto_healer_tag=v1.15.0-catalyst.0, \
-  master_lb_floating_ip_enabled=false, \
-  octavia_ingress_controller_tag=1.14.0-catalyst,prometheus_monitoring=true
-
-This will then be passed as the argument to the **labels** parameter.
+  If the complete list of labels is not provided it is likely that
+  the cluster will fail to deploy correctly and will end up in a FAILED or
+  UNHEALTHY state. To avoid this, make sure that when you are changing the list
+  of labels that changes have not been made to any labels that you did not
+  intend. Another thing you need to check is that when you are finished
+  inputting the the labels that you end with a "\" or else the command will
+  fail to create the cluster correctly.
 
 .. code-block:: bash
 
   openstack coe cluster create k8s-cluster \
-  --cluster-template kubernetes-v1.13.10-prod-20190912 \
-  --labels auto_healing_controller=magnum-auto-healer,auto_healing_enabled=true,<-- truncated -->
+  --cluster-template kubernetes-v1.15.11-prod-20200330 \
+  --labels magnum_auto_healer_tag=v1.15.0-catalyst.0, \
+  cloud_provider_enabled=true, \
+  etcd_volume_size=20, \
+  kube_dashboard_enabled=true, \
+  prometheus_monitoring=true, \
+  cloud_provider_tag=1.14.0-catalyst, \
+  auto_healing_controller=magnum-auto-healer, \
+  calico_ipv4pool=10.100.0.0/16, \
+  container_infra_prefix=docker.io/catalystcloud/, \
+  k8s_keystone_auth_tag=v1.15.0, \
+  auto_scaling_enabled=false, \
+  master_lb_floating_ip_enabled=false, \
+  ingress_controller=octavia, \
+  keystone_auth_enabled=true, \
+  auto_healing_enabled=true, \
+  heat_container_agent_tag=stein-dev, \
+  kube_tag=v1.15.11, \
+  octavia_ingress_controller_tag=v1.18.0-catalyst \
   --keypair my-ssh-key \
   --node-count 3 \
   --master-count 3
-
-.. warning::
-
-  If the complete list of labels is not provided it is likely that the cluster
-  will fail to deploy correctly and will end up in a FAILED or UNHEALTHY state.
 
 Checking the status of the cluster
 ----------------------------------
