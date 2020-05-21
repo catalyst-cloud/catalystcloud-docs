@@ -258,6 +258,20 @@ configuration to a different location you can use the
   ensure that the current ``kubectl configuration`` is referencing the right cluster. The
   following section will outline this in more detail.
 
+Production consideration for config files
+-----------------------------------------
+
+Because the initial config file that you create contains all the certifications
+for your cluster, it is recommended that for production clusters you safely
+store this config file away and then create another config file that you
+can share between your staff. This new file allows people access to the cluster
+by authenticating with their openrc credentials. To create this new file,
+you can use the following:
+
+.. code-block:: bash
+
+  $ eval $(openstack coe cluster config k8s-cluster --use-keystone)
+
 Viewing the cluster
 -------------------
 
