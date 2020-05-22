@@ -63,7 +63,7 @@ Deploy this to the cluster with the following command.
 
 The create a service to expose the pods on port 80.
 
-.. code-block:: concole
+.. code-block:: console
 
   $ kubectl expose deployment echoserver --type=NodePort --target-port=8080 --port 80 --name=echoserver-svc
 
