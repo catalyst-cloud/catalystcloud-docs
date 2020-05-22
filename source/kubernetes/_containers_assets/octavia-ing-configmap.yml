@@ -1,0 +1,23 @@
+# octavia-ing-configmap.yml
+
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: octavia-ingress-controller-config
+  namespace: kube-system
+data:
+  config: |
+    cluster-name: fluentd-test
+    openstack:
+      auth-url: <cloud_regions_authentication_url>
+      user-id: <cloud_user_id>
+      password: <cloud_user_password>
+      project-id: <cloud_project_id>
+      region: nz-hlz-1
+    octavia:
+      subnet-id: <cluster_subnet_id>
+      floating-network-id: <cloud_regions_public_net_id>
+
+
+
