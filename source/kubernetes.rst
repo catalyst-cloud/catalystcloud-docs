@@ -18,7 +18,6 @@ Table of Contents:
    kubernetes/auto-scaling
    kubernetes/ingress
    kubernetes/network-policies
-   kubernetes/nginx-ingress
    kubernetes/private-cluster
    kubernetes/logging
    kubernetes/rolling-upgrade
