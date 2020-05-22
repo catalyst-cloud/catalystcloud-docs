@@ -10,14 +10,13 @@ Using pip (recommend)
 *********************
 
 When installing the CLI using pip, it is recommended to use a python virtual
-environment to contain the required dependencies.
+environment to contain the required dependencies. The examples below all make
+reference to the use of a virtual environment. If you require more information
+on the basic functions of the python virtual environment, please refer to the
+:ref:`python-virtual-env` tutorial.
 
 The following provides the basics of manually installing the OpenStack command
 line tools on common operating systems.
-
-The examples all make reference to the use of virtual environments. Please
-refer to the :ref:`python-virtual-env` tutorial for more information on
-``venv``.
 
 Operating system specific steps
 ===============================
@@ -252,3 +251,30 @@ If you need more information on using the file see :ref:`source-rc-file`.
 
 .. _instructions on how to install and configure Docker here: https://docs.docker.com/install/
 .. _CLI docker container: https://github.com/catalyst-cloud/openstackclient-container
+
+.. _upgrading-the-cli:
+
+******************
+Upgrading the CLI
+******************
+
+Using pip
+---------
+
+To keep the command line tools up to date, you will need to perform upgrades
+on them after changes have come out. The following code snippet will upgrade
+all of the tools listed above;
+make sure that you have activated your virtual environment before running the
+command below:
+
+.. code-block:: bash
+
+  pip install --upgrade pip \
+  python-openstackclient \
+  python-ceilometerclient \
+  python-heatclient \
+  python-neutronclient \
+  python-swiftclient \
+  python-octaviaclient \
+  python-magnumclient \
+  aodhclient

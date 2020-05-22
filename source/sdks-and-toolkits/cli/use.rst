@@ -2,10 +2,17 @@
 Using the CLI
 #############
 
+This page assumes that you have installed the python virtual environment and
+other dependencies from the :ref:`installing-the-cli` page earlier in this
+section of the documentation. If you have, then the following should make
+sense. If you want more information about how to use the python virtual
+environment then please check the :ref:`activate-venv` section of our
+documentation under tutorials.
+
 
 **If you installed the CLI using pip:**
 
-1. :ref:`activate-venv`
+1. Activate your virtual environment.
 2. :ref:`source-rc-file`
 3. Invoke the CLI with the ``openstack`` command
 

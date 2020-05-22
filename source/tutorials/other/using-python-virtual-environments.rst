@@ -7,8 +7,8 @@ Using python virtual environments
 If you're not familiar with Python virtual environments, we recommend
 reading `the virtualenv section of the Python documentation`_ for an overview.
 
-Below we provide a cheat sheet for the actions and commands you will use the
-most.
+This page was made to provide a cheat sheet for the most commonly used commands
+and actions that you can take when using a python virtual environment.
 
 .. _the virtualenv section of the Python documentation: http://docs.python-guide.org/en/latest/dev/virtualenvs/
 

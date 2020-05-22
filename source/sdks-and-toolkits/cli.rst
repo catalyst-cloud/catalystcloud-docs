@@ -13,4 +13,3 @@ cloud APIs using the command line.
    cli/install
    cli/configure
    cli/use
-   cli/upgrade
