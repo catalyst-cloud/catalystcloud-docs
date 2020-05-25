@@ -18,115 +18,120 @@ on the basic functions of the python virtual environment, please refer to the
 The following provides the basics of manually installing the OpenStack command
 line tools on common operating systems.
 
+
+.. _installing_cli_os:
+
 Operating system specific steps
 ===============================
 
-.. _installing_ubuntu_cli:
+Here is an outline for installing the Openstack command line tools on the
+common Linux/Unix based systems. This includes OSX as it runs a BSD based
+system.
 
-Ubuntu Linux 20.04
-------------------
+.. tabs::
 
-.. code-block:: bash
+    .. tab:: Ubuntu 20.04
 
-  # Make sure the package cache is up to date and ensure you have
-  # Python3 installed
-  sudo apt update
-  sudo apt install -y python3-venv python3-dev
+        .. code-block:: bash
 
-  # create a virtual environment using the Python3 virtual environment module
-  python3 -m venv venv
+          # Make sure the package cache is up to date and ensure you have
+          # Python3 installed
+          sudo apt update
+          sudo apt install -y python3-venv python3-dev
 
-  # activate the virtual environment
-  source venv/bin/activate
+          # create a virtual environment using the Python3 virtual environment module
+          python3 -m venv venv
 
-  # install the Openstack commandline tools into the virtual environment
-  pip install -U pip \
-  wheel \
-  python-openstackclient \
-  python-ceilometerclient \
-  python-heatclient \
-  python-neutronclient \
-  python-swiftclient \
-  python-octaviaclient \
-  python-magnumclient \
-  aodhclient
+          # activate the virtual environment
+          source venv/bin/activate
 
-.. _installing_debian_cli:
+          # install the Openstack commandline tools into the virtual environment
+          pip install -U pip \
+          wheel \
+          python-openstackclient \
+          python-ceilometerclient \
+          python-heatclient \
+          python-neutronclient \
+          python-swiftclient \
+          python-octaviaclient \
+          python-magnumclient \
+          aodhclient
 
-Debian Linux 9
---------------
+    .. tab:: Debian 9
 
-.. code-block:: bash
+        .. code-block:: bash
 
-  # Make sure the package cache is up to date and ensure you have
-  # Python3 installed
-  sudo apt update
-  sudo apt install -y python3-venv
+          # Make sure the package cache is up to date and ensure you have
+          # Python3 installed
+          sudo apt update
+          sudo apt install -y python3-venv
 
-  # create a virtual environment using the Python3 virtual environment module
-  python3 -m venv venv
+          # create a virtual environment using the Python3 virtual environment module
+          python3 -m venv venv
 
-  # activate the virtual environment
-  source venv/bin/activate
+          # activate the virtual environment
+          source venv/bin/activate
 
-  # install the Openstack commandline tools into the virtual environment
-  pip install -U pip \
-  python-openstackclient \
-  python-ceilometerclient \
-  python-heatclient \
-  python-neutronclient \
-  python-swiftclient \
-  python-octaviaclient \
-  python-magnumclient \
-  aodhclient
+          # install the Openstack commandline tools into the virtual environment
+          pip install -U pip \
+          python-openstackclient \
+          python-ceilometerclient \
+          python-heatclient \
+          python-neutronclient \
+          python-swiftclient \
+          python-octaviaclient \
+          python-magnumclient \
+          aodhclient
 
+    .. tab:: Centos 8
 
-.. _installing_centos_cli:
+        .. code-block:: bash
 
-CentOS Linux 8
---------------
+          # Make sure the package cache is up to date and ensure you have
+          # Python3 installed
+          sudo yum update -y
+          sudo yum install -y python3
 
-.. code-block:: bash
+          # create a virtual environment using the Python3 virtual environment module
+          python3 -m venv venv
 
-  # Make sure the package cache is up to date and ensure you have
-  # Python3 installed
-  sudo yum update -y
-  sudo yum install -y python3
+          # activate the virtual environment
+          source venv/bin/activate
 
-  # create a virtual environment using the Python3 virtual environment module
-  python3 -m venv venv
+          # install the Openstack commandline tools into the virtual environment
+          pip install -U pip \
+          python-openstackclient \
+          python-ceilometerclient \
+          python-heatclient \
+          python-neutronclient \
+          python-swiftclient \
+          python-octaviaclient \
+          python-magnumclient \
+          aodhclient
 
-  # activate the virtual environment
-  source venv/bin/activate
+    .. tab:: Mac OSX
 
-  # install the Openstack commandline tools into the virtual environment
-  pip install -U pip \
-  python-openstackclient \
-  python-ceilometerclient \
-  python-heatclient \
-  python-neutronclient \
-  python-swiftclient \
-  python-octaviaclient \
-  python-magnumclient \
-  aodhclient
+        .. code-block:: bash
 
-.. _installing_macos_cli:
+          # from a terminal session install pip and virtualenv
+          sudo easy_install pip
+          sudo pip install virtualenv
 
-MacOS
------
+          # Create a new virtual environment and activate it
+          virtualenv venv
+          source venv/bin/activate
 
-.. code-block:: bash
+          # Install the Python openstack client libraries into your virtual environment
+                    pip install -U pip \
+          python-openstackclient \
+          python-ceilometerclient \
+          python-heatclient \
+          python-neutronclient \
+          python-swiftclient \
+          python-octaviaclient \
+          python-magnumclient \
+          aodhclient
 
-  # from a terminal session install pip and virtualenv
-  sudo easy_install pip
-  sudo pip install virtualenv
-
-  # Create a new virtual environment and activate it
-  virtualenv venv
-  source venv/bin/activate
-
-  # Install the Python openstack client libraries into your virtual environment
-  pip install python-{openstackclient,ceilometerclient,heatclient,neutronclient,swiftclient,octaviaclient,magnumclient}
 
 .. _installing_windows_powershell_cli:
 
@@ -209,7 +214,7 @@ The following code should get you to your root folder, aka 'My Computer'
   $ cd /mnt/c
 
 Then you simply need to follow the guide on how to install the CLI on ubuntu
-detailed :ref:`earlier on this page.<installing_ubuntu_cli>`
+detailed :ref:`earlier on this page.<installing_cli_os>`
 
 .. _installing_docker_cli:
 
