@@ -38,7 +38,7 @@ The roles available are split up between General roles, that control your
 ability to make changes to the project as a whole. And Kubernetes roles which
 are as the name suggests all to do with Kubernetes and the control of clusters.
 Information on the Kubernetes roles can be found
-:ref:`here <kubernetes-access-control>`
+:ref:`here <kubernetes-user-access>`
 
 General Roles:
 ==============
@@ -122,7 +122,7 @@ Kubernetes specific roles
 
 There are certain roles that are used for kubernetes actions only and are
 required to perform specific actions on kubernetes clusters. They can be
-found in the :ref:`kubernetes <kubernetes-access-control>` section of the
+found in the :ref:`kubernetes <kubernetes-user-access>` section of the
 documentation.
 
 

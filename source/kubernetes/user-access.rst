@@ -1,8 +1,8 @@
-.. _kubernetes-access-control:
+.. _kubernetes-user-access:
 
-##############
-Access control
-##############
+###########
+User Access
+###########
 
 ************
 Introduction

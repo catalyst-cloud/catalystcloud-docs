@@ -32,7 +32,7 @@ Contents:
    orchestration
    tutorials
    release-notes
-   contributing
+
 
 ******************
 External resources
