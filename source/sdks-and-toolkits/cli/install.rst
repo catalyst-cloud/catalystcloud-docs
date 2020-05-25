@@ -259,7 +259,7 @@ Upgrading the CLI
 ******************
 
 Using pip
----------
+=========
 
 To keep the command line tools up to date, you will need to perform upgrades
 on them after changes have come out. The following code snippet will upgrade

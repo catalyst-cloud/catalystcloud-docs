@@ -14,3 +14,4 @@ Table of Contents:
   release-notes/release_24_march_2020
   release-notes/release_31_march_2020
   release-notes/release_09_april_2020
+  release-notes/release_25_may_2020
