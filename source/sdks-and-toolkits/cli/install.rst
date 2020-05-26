@@ -139,35 +139,39 @@ Windows (Powershell)
 --------------------
 
 The following guide will take you through the process of setting up a virtual
-instance inside windows powershell and installing the necessary tools for
-interacting with your project on the Catalyst Cloud. There are some
-prerequisites that you need to have before we start however:
+environment inside of your windows powershell, and installing the necessary
+tools for interacting with your project on the Catalyst Cloud. Before we can
+start, there are some prerequisites that you need to have:
 
 
-- You must have a version of python3 installed and accessible from your
-  powershell's active path.
+- You must have a version of python3 installed and accessible from your windows
+  powershell active path.
 - You need to have downloaded a version of `microsoft visual studio`_ 14 or above and ensured that you have installed the optional C++ tools
   with it, or else some of the commands further down in this tutorial will not function correctly.
 
 .. _microsoft visual studio: https://visualstudio.microsoft.com/visual-cpp-build-tools/
 
-To start, you will need to open your windows powershell instance and navigate
-to a directory that you want to hold your virtual environment and various other
-files in. After this is done we are going to install pip using the following:
+To start, you will need to open windows powershell and navigate to a directory
+that you want to hold your virtual environment and various other files in.
+After this is done we are going to install pip using the following:
 
 .. code-block:: powershell
 
+  # Navigate to your new folder
   $ cd .\CLI-folder\
-  $ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-  $ python get-pip.py
+
+  # Download and install pip
+  $ curl "https://bootstrap.pypa.io/get-pip.py" -o get-pip.py
+  $ python .\get-pip.py
 
 We then install the python virtual environment package using pip and create our
-new virtual environment.
+new virtual environment. In this example, we call our virtual environment
+"ccloud" but this name is arbitrary and you can use whichever name you want.
 
 .. code-block:: powershell
 
   $ pip install virtualenv
-  $ python virtualenv ccloud
+  $ virtualenv ccloud
 
 Once we have created our new virtual environment, we are going to activate it
 and install our command line tools.
