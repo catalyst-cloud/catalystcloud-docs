@@ -138,38 +138,53 @@ system.
 Windows (Powershell)
 --------------------
 
-A good overview for the setup and configuration of Python and pip
-on Windows can be found at http://www.tylerbutler.com/2012/05/how-to-install-python-pip-and-virtualenv-on-windows-with-powershell/
+The following guide will take you through the process of setting up a virtual
+instance inside windows powershell and installing the necessary tools for
+interacting with your project on the Catalyst Cloud. There are some
+prerequisites that you need to have before we start however:
 
-.. Note::
-  The guide above mentions how to download virtualenv for powershell, however
-  this is assuming you are using python2 which has been discontinued. For this
-  reason, we recommend using pip to install the normal `virtualenvwrapper.`
-  using `pip install virtualenvwrapper`
 
-Assuming that Python and pip have successfully been installed then
+- You must have a version of python3 installed and accessible from your
+  powershell's active path.
+- You need to have downloaded a version of `microsoft visual studio`_ 14 or above and ensured that you have installed the optional C++ tools
+  with it, or else some of the commands further down in this tutorial will not function correctly.
+
+.. _microsoft visual studio: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+
+To start, you will need to open your windows powershell instance and navigate
+to a directory that you want to hold your virtual environment and various other
+files in. After this is done we are going to install pip using the following:
 
 .. code-block:: powershell
 
-  # From a PowerShell session started with administration rights
-  # create and activate a virtual environment
-  virtualenv.exe venv
-  .\venv\scripts\activate
+  $ cd .\CLI-folder\
+  $ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+  $ python get-pip.py
 
-  # Install the Python openstack client libraries into your virtual environment
-  pip install python-openstackclient python-ceilometerclient python-heatclient python-neutronclient python-swiftclient python-octaviaclient python-magnumclient
+We then install the python virtual environment package using pip and create our
+new virtual environment.
 
-Now that you have installed the required libraries to work with the Catalyst
+.. code-block:: powershell
+
+  $ pip install virtualenv
+  $ python virtualenv ccloud
+
+Once we have created our new virtual environment, we are going to activate it
+and install our command line tools.
+
+.. code-block:: powershell
+
+  # From a PowerShell session started with administration rights activate your virtual environment
+  $ .\ccloud\scripts\activate
+
+  # Now we install the Python openstack client libraries into our virtual environment
+  $ pip install python-openstackclient python-ceilometerclient python-heatclient python-neutronclient python-swiftclient python-octaviaclient python-magnumclient
+
+Once you have installed the required libraries to work with the Catalyst
 Cloud onto your virtual environment; You have to make sure that whenever you
 use powershell to interact with the cloud, you work on your Virtual
 Environment. It may save time to make a short python script that runs the
 activation command for you when you start powershell up.
-
-If any errors are encountered while pip is building packages it may be
-necessary to install the `Microsoft Visual C++ Compiler for Python 2.7`_
-and retry.
-
-.. _Microsoft Visual C++ Compiler for Python 2.7: https://www.microsoft.com/en-gb/download/details.aspx?id=44266
 
 .. _installing_windows_linux_subsystem_cli:
 
