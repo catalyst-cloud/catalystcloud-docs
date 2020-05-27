@@ -146,8 +146,10 @@ start, there are some prerequisites that you need to have:
 
 - You must have a version of python3 installed and accessible from your windows
   powershell active path.
-- You need to have downloaded a version of `microsoft visual studio`_ 14 or above and ensured that you have installed the optional C++ tools
-  with it, or else some of the commands further down in this tutorial will not function correctly.
+- You need to have downloaded a version of `microsoft visual studio`_ 14 or
+  above and ensured that you have installed the optional C++ tools with it, or
+  else some of the commands further down in this tutorial will not function
+  correctly.
 
 .. _microsoft visual studio: https://visualstudio.microsoft.com/visual-cpp-build-tools/
 
@@ -178,8 +180,9 @@ and install our command line tools.
 
 .. code-block:: powershell
 
-  # From a PowerShell session started with administration rights activate your virtual environment
-  $ .\ccloud\scripts\activate
+  # From a PowerShell session started with administration rights activate your
+  virtual environment
+    $ .\ccloud\scripts\activate
 
   # Now we install the Python openstack client libraries into our virtual environment
   $ pip install python-openstackclient python-ceilometerclient python-heatclient python-neutronclient python-swiftclient python-octaviaclient python-magnumclient
