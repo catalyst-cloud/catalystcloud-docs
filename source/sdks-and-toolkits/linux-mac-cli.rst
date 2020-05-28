@@ -1,8 +1,10 @@
 ##################################
-The CLI using Linux or Mac systems
+Linux or Mac OS
 ##################################
 
 .. _installing_cli_os:
+.. _command-line-interface:
+
 
 *****************************
 Installation on Linux and Mac

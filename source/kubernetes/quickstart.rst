@@ -191,7 +191,7 @@ skip this step of the tutorial. In this section we illustrate how the same
 operation can be done using the more powerful (and easier to automate) CLI.
 
 Before proceeding, please ensure you have :ref:`installed the
-CLI<installing-the-cli>` and :ref:`sourced an openrc file
+CLI<installing_cli_os>` and :ref:`sourced an openrc file
 <configuring-the-cli>`.
 
 To create a new **development** cluster that is publicly accessible run the

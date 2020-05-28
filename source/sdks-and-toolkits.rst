@@ -1,8 +1,7 @@
-###############
-SDKs & Toolkits
-###############
+##################
+CLI Tools and SDKs
+##################
 
-.. _command-line-interface:
 
 .. toctree::
    :maxdepth: 1
@@ -11,4 +10,3 @@ SDKs & Toolkits
    sdks-and-toolkits/windows-cli
    sdks-and-toolkits/sdks
    sdks-and-toolkits/apis
-
