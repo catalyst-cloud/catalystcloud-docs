@@ -225,8 +225,9 @@ and install our command line tools.
 
 .. code-block:: powershell
 
-  # From a PowerShell session started with administration rights activate your virtual environment
-  $ .\ccloud\scripts\activate
+  # From a PowerShell session started with administration rights activate your
+  virtual environment
+    $ .\ccloud\scripts\activate
 
   # Now we install the Python openstack client libraries into our virtual environment
   $ pip install python-openstackclient python-ceilometerclient python-heatclient python-neutronclient python-swiftclient python-octaviaclient python-magnumclient
