@@ -138,40 +138,87 @@ system.
 Windows (Powershell)
 --------------------
 
-The following guide will take you through the process of setting up a virtual
-environment inside of your windows powershell, and installing the necessary
-tools for interacting with your project on the Catalyst Cloud. Before we can
-start, there are some prerequisites that you need to have:
+The following guide will take you through the process, from beginning to end of
+installing python3 and all other dependencies that are needed for your command
+line to function correctly when interacting with the Catalyst Cloud.
+The process also includes installing visual studio, installing pip and creating
+a python virtual environment on your command line.
 
+First, we need to install python3 onto our windows machine. We can find the
+download for `python3 here`_. The downloads page looks like this:
 
-- You must have a version of python3 installed and accessible from your windows
-  powershell active path.
-- You need to have downloaded a version of `microsoft visual studio`_ 14 or above and ensured that you have installed the optional C++ tools
-  with it, or else some of the commands further down in this tutorial will not function correctly.
+.. image:: assets/python-download-screen.png
+
+Under *Stable releases* select *Windows x86 executable installer* if you are
+using a 32 bit system or *Windows x86-64 executable installer* if you have a
+64 bit system. Once the file is downloaded we need to run the installer, which
+will open up a wizard:
+
+.. image:: assets/python-installer.png
+
+Before progressing any further, you need to make sure that you select the box
+at the bottom of this screen. This will add python to your powershell's path,
+meaning we can access it further on in this tutorial.
+
+.. image:: assets/python-install-path.png
+
+Once that is selected we click on custom installation and are brought to this
+screen:
+
+.. image:: assets/python-advanced-install.png
+
+This screen lists all the additional options for your installation. It is
+recommended that you do not change these and for the purposes of this tutorial,
+you will need both **pip** and the **python test suite** going forward.
+
+After this screen you have some additional configuration options. You can
+specify where you are installing the python binaries and if you want them to
+be preconfigured in a certain way. For now, select the ones displayed below
+and then hit install.
+
+.. image:: assets/config-options.png
+
+Once the installation is done, if you load up a powershell window and type
+**python** you should be met with this sort of message; indicating that our
+installation has been a success:
+
+.. image:: assets/python-command-line.png
+
+Now that we have python3 installed, we can move on to installing
+`microsoft visual studio`_ version 14 or higher. The reason we do this is
+because some of the commands later on require certain packages from this
+software. Once you click on the link, follow the prompt on screen to download
+the visual studio installer.
+
+Once the installer is downloaded, we start it up and we hit the continue
+button. After some automated configuration is done we are met with the
+following:
+
+.. image:: assets/visualstudio-install.png
+
+The real thing we are concerned about here is the **C++ Build tools** So select
+those and then hit install.
 
 .. _microsoft visual studio: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+.. _python3 here: https://www.python.org/downloads/windows/
 
-To start, you will need to open windows powershell and navigate to a directory
-that you want to hold your virtual environment and various other files in.
-After this is done we are going to install pip using the following:
+Now that we have our prerequisite tools sorted, we can move on to preparing the
+actual powershell command line. You will need to open windows powershell and
+navigate to a directory that you want to hold your virtual environment and
+various other files in. We then install the python virtual environment package
+using pip and create our new virtual environment. In this example, we call our
+virtual environment "ccloud" but this name is arbitrary and you can use
+whichever name you find easy to remember.
 
 .. code-block:: powershell
 
-  # Navigate to your new folder
+  # Create your new folder and navigate to it
+  $ mkdir CLI-folder
   $ cd .\CLI-folder\
 
-  # Download and install pip
-  $ curl "https://bootstrap.pypa.io/get-pip.py" -o get-pip.py
-  $ python .\get-pip.py
-
-We then install the python virtual environment package using pip and create our
-new virtual environment. In this example, we call our virtual environment
-"ccloud" but this name is arbitrary and you can use whichever name you want.
-
-.. code-block:: powershell
-
+  #Now we install the python virtualenv using pip and create a new virtual environment
   $ pip install virtualenv
-  $ virtualenv ccloud
+  $ python -m venv ccloud
 
 Once we have created our new virtual environment, we are going to activate it
 and install our command line tools.
@@ -211,7 +258,7 @@ First, you will need to open PowerShell as an Administrator and run:
  Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 
 You will then need to download a version of Ubuntu from either the Microsoft
-store, from a command line script, or to manually unpack it and install it from
+store, from a command line script, or manually unpack and install it from
 their release website. For our purposes we will be using the Microsoft Store.
 
 .. image:: ../assets/windows-store.png
