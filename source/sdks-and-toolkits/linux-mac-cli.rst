@@ -272,7 +272,7 @@ Using the CLI on Linux and Mac
 ******************************
 
 This page assumes that you have installed the python virtual environment and
-other dependencies from the :ref:`installing-the-cli` page earlier in this
+other dependencies from the :ref:`installing_cli_os` page earlier in this
 section of the documentation. If you have, then the following should make
 sense. If you want more information about how to use the python virtual
 environment then please check the :ref:`activate-venv` section of our

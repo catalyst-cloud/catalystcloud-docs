@@ -2,6 +2,8 @@
 SDKs & Toolkits
 ###############
 
+.. _command-line-interface:
+
 .. toctree::
    :maxdepth: 1
 
