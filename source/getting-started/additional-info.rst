@@ -12,6 +12,8 @@ does not fall under the categories of services, access or administration.
 Quotas
 ======
 
+.. _quota-info:
+
 The Catalyst Cloud provides customers with a quota mechanism to protect them
 from accidentally launching too many resources. This helps prevent unexpected
 and significant costs being invoiced to our customers. In fact, every cloud
