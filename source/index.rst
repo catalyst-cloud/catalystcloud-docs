@@ -32,6 +32,7 @@ Contents:
    orchestration
    tutorials
    release-notes
+   contributing
 
 
 ******************

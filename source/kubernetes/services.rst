@@ -1,38 +1,39 @@
-############################
-Cluster access with Services
-############################
+########
+Services
+########
 
-*********************
-Ingress in Kubernetes
-*********************
+***************************
+Controlling inbound traffic
+***************************
 
-Kubernetes ingress is a collection of strategies that provide ways to
+Kubernetes has a collection of strategies that provide ways to
 define access to services running in a cluster.
 
 Though they all work slightly differently, typically they are implemented as a
 service that provides a mapping to a given port or ports that are exposed on
 pods or nodes within the cluster and associated with an IP address.
 
-The only real exception to this approach is the ingress controller.
+The only real exception to this approach is the
+:ref:`Ingress controller <ingress-controller>`
 
 
 What are the various service types
 ==================================
 
-* The ``ClusterIP`` is the default Kubernetes service type. It provides access
+* The **ClusterIP** is the default Kubernetes service type. It provides access
   to an application's services via an internal cluster IP address that is
   reachable by all other nodes within the cluster. It is not accessible
   from outside of the cluster.
-* The ``NodePort`` service is the simplest way to get external access to an
+* The **NodePort** service is the simplest way to get external access to an
   application's service endpoint within a cluster. This approach opens an
   identical port, typically in the range 30000–32767, across all Nodes in the
   cluster and associates this with an IP address and port. Any traffic that is
   then directed to this port is forwarded on to the application's service.
-* A ``LoadBalancer`` is the typical way to expose an application to the
+* A **LoadBalancer** is the typical way to expose an application to the
   internet. It relies on the cloud to create an external load balancer
   with an IP address in the relevant network space. Any traffic that is then
   directed to this IP address is forwarded on to the application's service.
-* An ``Ingress controller`` differs from the previous options in that it is
+* An **Ingress controller** differs from the previous options in that it is
   not implemented as a Kubernetes service and instead behaves in a manner
   similar to a router that can make rule based routing decisions about which
   service to deliver traffic to.
@@ -45,9 +46,10 @@ Using the various service types
 The following sections will explain the various types of service currently
 supported and where these might typically be used.
 
-Before looking further at the types of ingress available to us lets create a
-simple 1 replica Nginx application based on the default Nginx image. This will
-spin up the default Nginx container that will listen, by default, on port 80.
+Before looking further at the types of inbound control available to us let's
+create a simple 1 replica Nginx application based on the default Nginx image.
+This will spin up the default Nginx container that will listen, by default, on
+port 80.
 
 .. literalinclude:: _containers_assets/nginx-app.yaml
 

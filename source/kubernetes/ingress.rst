@@ -2,6 +2,8 @@
 Ingress
 #######
 
+.. _ingress-controller:
+
 ******************************
 What is an Ingress Controller?
 ******************************
