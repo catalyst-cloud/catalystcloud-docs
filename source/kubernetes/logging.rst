@@ -2,6 +2,8 @@
 Logging
 #######
 
+.. _kubernetes-logging:
+
 This section is aims to provide guidance around what logging solutions are
 available to be used in conjunction with a kubernetes cluster and it's
 applications.

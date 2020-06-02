@@ -17,6 +17,7 @@ Table of Contents:
    kubernetes/auto-healing
    kubernetes/auto-scaling
    kubernetes/ingress
+   kubernetes/production-considerations
    kubernetes/network-policies
    kubernetes/private-cluster
    kubernetes/logging
