@@ -1,4 +1,5 @@
-Using ansible's in-memory inventory to create a variable number of instances
+############################################################################
+Using Ansible's in-memory inventory to create a variable number of instances
 ############################################################################
 
 This tutorial assumes the following:
@@ -10,8 +11,9 @@ This tutorial assumes the following:
 
 .. _Ansible: https://www.ansible.com/
 
+************
 Introduction
-============
+************
 
 Normally Ansible requires an `inventory file`_ to be created, to know which
 machines it is meant to operate on.
@@ -36,32 +38,33 @@ generates while creating new instances.
 
 .. _add_host: http://docs.ansible.com/ansible/add_host_module.html
 
+*****************
 How does it work?
-=================
+*****************
 
-The add_host module makes use of variables to create an in-memory inventory of
-new hosts and groups that can be used in subsequent plays within the same
+The *add_host* module makes use of variables to create an in-memory inventory
+of new hosts and groups that can be used in subsequent plays within the same
 playbook.
 
-+-----------+----------+---------------------------------+
-| parameter | required | comments                        |
-+===========+==========+=================================+
-| groups    | no       |The groups to add the hostname   |
-|           |          |to, comma separated.             |
-|           |          |aliases: groupname, group        |
-+-----------+----------+---------------------------------+
-| name      |yes       |The hostname/ip of the host to   |
-|           |          |add to the inventory, can include|
-|           |          |a colon and a port number.       |
-|           |          |aliases: hostname, host          |
-+-----------+----------+---------------------------------+
++-----------+----------+-----------------------------------+
+| Parameter | Required | Comments                          |
++===========+==========+===================================+
+| groups    | no       | The groups to add the hostname    |
+|           |          | to, comma separated.              |
+|           |          | aliases: groupname, group         |
++-----------+----------+-----------------------------------+
+| name      | yes      | The hostname/ip of the host to    |
+|           |          | add to the inventory, can include |
+|           |          | a colon and a port number.        |
+|           |          | aliases: hostname, host           |
++-----------+----------+-----------------------------------+
 
-The table above shows the basic parameters required for using add_host:
+The table above shows the basic parameters required for using *add_host*:
 
-- name can be the hostname or IP address that will be used to reference the
+- *name* can be the hostname or IP address that will be used to reference the
   newly created instances
-- groups is optional and creates group labels to access the new instances using
-  the *'host:'* directive in subsequent plays
+- *groups* is optional and creates group labels to access the new instances
+  using the *'host:'* directive in subsequent plays
 
 It is also possible to add custom variables at this time to help further
 define the new hosts.
@@ -69,45 +72,50 @@ define the new hosts.
 .. code-block:: yaml
 
   # add host to group 'created_vms' with a variable foo=42
-  - add_host: name={{ public_v4 }} groups=created_vms foo=42
+  - add_host:
+      name: "{{ public_v4 }}"
+      groups: created_vms
+      foo: 42
 
+*****************
 A working example
-=================
+*****************
 
 The Goal
---------
+========
+
 The requirements of this playbook are as follows:
 
-- create a variable number of OpenStack instances on the Catalyst cloud
-- carry out identical configuration across all nodes
-- pause the playbook to allow for interaction with the new nodes,
+* create a variable number of OpenStack instances on the Catalyst cloud
+* carry out identical configuration across all nodes
+* pause the playbook to allow for interaction with the new nodes,
   i.e. processing/testing etc.
-- on resuming playback, terminate all new instances
+* on resuming playback, terminate all new instances
 
 This makes the following assumptions:
 
-- an RC file has already been sourced
-- a private network called example-net already exists
-- a security-group called example-sg already exists
-- an access key called example-key has already been uploaded
+* an RC file has already been sourced
+* a private network called *example-net* already exists
+* a security group called *example-sg* already exists
+* an access key called *example-key* has already been uploaded
 
 The Approach
-------------
+============
 
-Play 1:
-*******
+Play 1
+------
 
 The number of instances to be created is controlled by a *'count'* variable. As
 the instances are created, the results are captured in a registered variable
-called 'newnodes'. This is in turn iterated over using a *'with_items'* loop to
-add the required details to the in-memory inventory, as shown in this snippet:
+called *'newnodes'*. This is in turn iterated over using a *'loop'* to add the
+required details to the in-memory inventory, as shown in this snippet:
 
 .. literalinclude:: ../../../playbooks/create-x-servers.yml
   :language: yaml
-  :lines: 39-43
+  :lines: 36-42
 
-Play 2:
-*******
+Play 2
+------
 
 The newly created group *'created_nodes'* is used to iterate over the new
 instances. Firstly it checks to see that SSH is responding and then it begins
@@ -117,15 +125,15 @@ For the purposes of this example, the configuration involves simply installing
 some packages onto each node. Once this has been completed, the playbook is
 paused and will remain that way until told to either continue or abort.
 
-Play 3:
-*******
+Play 3
+------
 
 Assuming that playback is continued rather than aborted, the final play will
-delete all of the nodes in the created_nodes group.
-
+delete all of the nodes in the *'created_nodes'* group.
 
 The Playbook
-------------
+============
+
 Here is the complete playbook containing the three plays outlined above:
 
 .. literalinclude:: ../../../playbooks/create-x-servers.yml
