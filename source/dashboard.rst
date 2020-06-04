@@ -4,9 +4,6 @@
 Dashboard
 #########
 
-************
-Introduction
-************
 
 The web dashboard is a simple and convenient way to interact with the Catalyst
 Cloud. It can be found at https://dashboard.cloud.catalyst.net.nz.

@@ -12,9 +12,9 @@ is self-healing and self-managing. Data is seamlessly replicated on three
 different servers in the same region, making it fault tolerant and resilient.
 
 The loss of a node or disk leads to the data being quickly recovered on
-another node or disk. The system runs frequent CRC checks to protect data
-from soft corruption. The corruption of a single bit can be detected and
-automatically restored to a healthy state.
+another node or disk. Additionally, the system runs frequent CRC checks to
+protect data from soft corruption. The corruption of a single bit can be
+detected and automatically restored to a healthy state.
 
 Table of Contents:
 
