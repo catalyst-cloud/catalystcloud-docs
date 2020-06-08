@@ -2,6 +2,8 @@
 CLI Tools and SDKs
 ##################
 
+The command line tools are a set of packages that allow you to interact with
+the Catalyst Cloud from the command line.
 
 .. toctree::
    :maxdepth: 1
