@@ -3,12 +3,14 @@ Credit Card payment
 ###################
 
 .. note::
-   Only users with the Project Admin role will be able to view and modify the billing details
+   Only users with the Project Admin role will be able to view and modify the
+   billing details
 
 The Catalyst Cloud now accept payments via credit card. This section will explain how you
 can setup a credit card to pay your invoices.
 
-You and/or your billing contact will still receive a usage summary from us each month with your usage details and a confirmation that your invoice has been paid.
+You and/or your billing contact will still receive a usage summary from us
+each month with your usage details and a confirmation that your invoice has been paid.
 
 Adding and switching to credit card payment
 ===========================================
@@ -22,7 +24,8 @@ To setup a credit card, please login_ to the dashboard and follow these steps:
    :align: center
 
 As you can see from the screenshot, your payment method should be as "Invoice".
-There are a few different ways to setup your credit card payment. You can also add a credit card without changing the payment method.
+There are a few different ways to setup your credit card payment. You can also
+add a credit card without changing the payment method.
 
 To change your active payment method to a credit card, you will need to click on
 "Change payment method":
@@ -31,7 +34,7 @@ To change your active payment method to a credit card, you will need to click on
    :align: center
 
 
-1) Under Payment Method, select Credit Card 
+1) Under Payment Method, select Credit Card
 2) As you can see you should have the message: "No credit cards added"
 3) Click on "+", this will allow you to add a new credit card
 
