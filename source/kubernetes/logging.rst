@@ -10,7 +10,7 @@ applications.
 
 
 *******************
-Centralised Logging
+Centralised logging
 *******************
 
 Given the nature of today's multi-cloud, distributed working it can be a

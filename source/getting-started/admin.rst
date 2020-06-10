@@ -314,8 +314,6 @@ your projects using the `Project Users Panel`_.
 
 .. _Project Users Panel: https://dashboard.cloud.catalyst.net.nz/management/project_users/
 
-
-
 Project quotas
 ==============
 
@@ -326,7 +324,6 @@ need more resources.
 Please refer to the :ref:`quota section of the
 documentation <additional-info>` for more
 information on quotas.
-
 
 Project isolation
 =================

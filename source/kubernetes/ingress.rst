@@ -5,7 +5,7 @@ Ingress
 .. _ingress-controller:
 
 ******************************
-What is an Ingress Controller?
+What is an ingress controller?
 ******************************
 
 In Kubernetes, Ingress allows external users and client applications access

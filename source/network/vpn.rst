@@ -28,7 +28,7 @@ In order to setup a VPN, you need to know a number of parameters:
  manage this key appropriately, so for example be sure that it is not committed
  to your configuration management system source control in plain text.
 
-VPN Setup from the Command Line
+VPN setup from the command line
 ===============================
 
 In order to find these parameters you first need to know the name of the router
@@ -226,7 +226,7 @@ the other end using the same configuration options and PSK. Once both sides of
 the VPN are configured, the peers should automatically detect each other and
 bring up the VPN. When the VPN is up, the status will change to ``ACTIVE``.
 
-VPN Setup using a bash script
+VPN setup using a bash script
 =============================
 
 The Catalyst Cloud team have created a bash script that simplifies the

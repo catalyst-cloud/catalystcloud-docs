@@ -46,7 +46,7 @@ This tutorial assumes a number of things:
 * You will be letting the driver create an SSH keypair for you
 * You have sourced an openrc file, as described at :ref:`source-rc-file`
 
-Install Docker Machine
+Install docker machine
 ======================
 
 The first thing you need to do is install Docker Machine locally:
@@ -63,7 +63,7 @@ Check that Docker Machine is working:
  $ docker-machine -v
  docker-machine version 0.7.0, build a650a40
 
-Create a Security Group and rules
+Create a security group and rules
 =================================
 
 .. note::
@@ -166,7 +166,7 @@ admin, or visit http://ifconfig.me and get your IP address. Use
 "IP_ADDRESS/32" as YOUR_CIDR_NETWORK to allow traffic only from your current
 effective IP.
 
-Create a Cloud VM using Docker Machine
+Create a Cloud VM using docker machine
 ======================================
 
 The next step is to provision a compute instance using Docker Machine. Docker

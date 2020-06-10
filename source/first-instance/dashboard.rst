@@ -77,7 +77,7 @@ Name the key pair, and paste your public key into the box.
 Now that you've either imported or created an SSH key pair, we can continue.
 
 *********************************
-Configure Instance Security Group
+Configure instance security group
 *********************************
 
 By default, instances are inaccessible from all external IP addresses on all
@@ -125,10 +125,8 @@ When you're happy, select ``Add`` to add the rule to the security group.
 We now have a security group that will allow SSH access to our soon to be
 created instance.
 
-
-
 *******************
-Booting an Instance
+Booting an instance
 *******************
 
 We are now ready to launch our first instance! Navigate to the ``Instances``
@@ -218,7 +216,7 @@ Congratulations, you've now booted an instance. Now we'll connect to it with an
 SSH tunnel so you can start using it.
 
 ***************************
-Connect to the new Instance
+Connect to the new instance
 ***************************
 
 Before we SSH in, we should give the private SSH key the correct, more secure

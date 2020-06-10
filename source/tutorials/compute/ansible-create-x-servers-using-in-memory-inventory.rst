@@ -81,7 +81,7 @@ define the new hosts.
 A working example
 *****************
 
-The Goal
+The goal
 ========
 
 The requirements of this playbook are as follows:
@@ -99,7 +99,7 @@ This makes the following assumptions:
 * a security group called *example-sg* already exists
 * an access key called *example-key* has already been uploaded
 
-The Approach
+The approach
 ============
 
 Play 1
@@ -131,7 +131,7 @@ Play 3
 Assuming that playback is continued rather than aborted, the final play will
 delete all of the nodes in the *'created_nodes'* group.
 
-The Playbook
+The playbook
 ============
 
 Here is the complete playbook containing the three plays outlined above:

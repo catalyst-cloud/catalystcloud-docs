@@ -11,7 +11,7 @@ rot). The corruption of a single bit can be detected and automatically restored
 to a healthy state. The loss of a region, server or a disk leads to the data
 being quickly recovered from another disk, server or region.
 
-Data Location
+Data location
 =============
 
 When using object storage, the normal practice for where to hold your data is

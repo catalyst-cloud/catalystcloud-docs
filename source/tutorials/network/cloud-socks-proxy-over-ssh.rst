@@ -154,7 +154,7 @@ Using the proxy with other clients
 Many HTTP clients offer support for SOCKS proxying. Please consult the
 documentation for your library.
 
-OpenStack Clients
+OpenStack clients
 =================
 
 Most OpenStack command line clients use the urllib3 library. SOCKS5 support is

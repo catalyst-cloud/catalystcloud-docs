@@ -16,7 +16,7 @@ Use only lowercase alphanumeric characters and ``-`` (minus) symbol.
 
 Suffix filenames with the ``.rst`` extension.
 
-Text Style
+Text style
 ==========
 
 Bold

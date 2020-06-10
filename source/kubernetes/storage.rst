@@ -39,7 +39,7 @@ container mounts it as */logs*.
 
 
 ******************
-Persistent Volumes
+Persistent volumes
 ******************
 
 ``Persistent volumes`` on the other hand exist within Kubernetes but outside of
@@ -94,7 +94,7 @@ The storage class names and their availability by region are as follows:
 |                    | | nz-por-1a  |
 +--------------------+--------------+
 
-Dynamic Allocation
+Dynamic allocation
 ==================
 
 Lets look at the steps involved in dynamically allocating a PersistentVolume to

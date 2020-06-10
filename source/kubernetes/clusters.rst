@@ -226,7 +226,7 @@ where command, TYPE, NAME, and flags are:
 - ``flags``: optional flags to provide extra
 
 
-Cluster Access Using kubeconfig Files
+Cluster access using kubeconfig files
 -------------------------------------
 
 The kubectl command-line tool uses kubeconfig files to find the information it
@@ -613,7 +613,6 @@ Accessing the Kubernetes dashboard
 **********************************
 
 .. include:: dashboard-access.rst
-
 
 *******************************
 Managing cluster configurations

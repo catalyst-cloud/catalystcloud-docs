@@ -4,7 +4,7 @@
 Best Practices for roles
 ************************
 
-Project Admin
+Project admin
 =============
 It is recommended by Catalyst that you keep an admin account and a user
 account with moderation privileges. Separating your working account from the
@@ -21,7 +21,7 @@ look like: **youremail+admin@...** This ensures a clear distinction between
 which account is which but it also allows your to receive mail for both account
 at a single email address.
 
-Start/Stop Instance
+Start/Stop instance
 ===================
 The most common use for the start/stop instance role is for automated start up
 or shut down. You are able to add an automated user to the project that will
@@ -32,7 +32,7 @@ changed in some way to try and make changes to the project outside start/stop
 commands, they would all fail.
 
 
-Auth Only
+Auth only
 =========
 The auth only role is a restrictive role and has a number of use cases.
 The most common would be when adding a new user to a

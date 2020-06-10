@@ -90,7 +90,7 @@ option, you can still select it in the Project Billing Details tab:
    :align: center
 
 
-Switching to Invoice payment
+Switching to invoice payment
 ============================
 
 .. note::

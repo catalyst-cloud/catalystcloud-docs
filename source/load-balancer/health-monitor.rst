@@ -14,7 +14,6 @@ the pool.
   connections to unhealthy (offline) members of the pool, causing service
   disruption to clients.
 
-
 ************************
 Types of health monitors
 ************************
@@ -38,7 +37,6 @@ The following health monitor types are supported by the load balancer service.
   port. Your custom TCP application should be written to respond OK to the load
   balancer connecting, opening a TCP connection, and closing it again after the
   TCP handshake without sending any data.
-
 
 **********************
 Health monitor options

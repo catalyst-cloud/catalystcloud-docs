@@ -219,7 +219,7 @@ It performs the following tasks:
   # Useful for troubleshooting cloud-init issues
   output: {all: '| tee -a /var/log/cloud-init-output.log'}
 
-Creating the Server
+Creating the server
 ===================
 
 To create the server, run the following Heat command. This will create a new
@@ -235,7 +235,7 @@ Here's how to check the progress of your deployment:
 
   openstack console log show server1
 
-Final Note
+Final note
 ==========
 
 Unless your Puppet Master is configured to automatically sign agent certificate

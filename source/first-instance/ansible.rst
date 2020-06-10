@@ -23,7 +23,7 @@ the following https://docs.ansible.com/ansible-tower/2.2.0/html/administration/t
 
 .. _install-ansible:
 
-Install Ansible
+Install ansible
 ===============
 
 A script is provided by Catalyst which installs the required Ansible and
@@ -202,7 +202,7 @@ build image):
   further, as required.
 
 
-Resource cleanup with an Ansible playbook
+Resource cleanup with an ansible playbook
 =========================================
 
 This playbook will remove all resources created by the previous playbooks.

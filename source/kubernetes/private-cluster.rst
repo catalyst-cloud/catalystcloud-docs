@@ -115,9 +115,9 @@ or disable floating IP (if it's enabled in the cluster template):
   $ openstack coe cluster create my-cluster --cluster-template <Template ID> \
                                             --floating-ip-disabled
 
-***********************************
-Access Kubernetes API from Internet
-***********************************
+***************************************
+Access Kubernetes API from the internet
+***************************************
 
 .. warning::
 

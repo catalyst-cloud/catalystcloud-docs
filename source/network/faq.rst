@@ -55,7 +55,7 @@ You can download and run this script on an instance:
  finding your external ip ...
  Your external IP address is: 150.242.43.13
 
-Using the OpenStack Command Line Tools
+Using the OpenStack command line tools
 ======================================
 
 The method you use to find the external IP address will depend on whether the
@@ -180,7 +180,7 @@ commands:
 There are also numerous web sites that provide this information:
 https://www.google.co.nz/search?q=whats%20my%20ip.
 
-Security Group setup for SSH access
+Security group setup for SSH access
 ===================================
 
 Assuming you have already assigned a floating IP address to your instance,
@@ -236,7 +236,7 @@ Return to the instance page, from the Actions drop-down menu on the right
 select ``Edit Security Groups``. Click the plus on your new security group and
 ensure it now appears as one of the Instance Security Groups.
 
-Testing Network Access
+Testing network access
 ======================
 
 If you want to test you have set up security groups properly for SSH access,
@@ -265,7 +265,7 @@ then check the following:
 
 .. _ssh-user:
 
-SSH User
+SSH user
 ========
 
 As stated previously a typical SSH connection command looks like this:
@@ -280,7 +280,7 @@ change this as required for the distribution you are using as explained at
 
 .. _ssh_keypairs:
 
-SSH Key Pairs
+SSH key pairs
 =============
 
 SSH key pairs are required for SSH access to instances. You can either import
@@ -293,7 +293,7 @@ and will be injected into the authorised keys (``~/.ssh/authorized_keys``) for
 the default user of the cloud image you are using (see :ref:`ssh-user`) when
 your instance is created.
 
-Default Key Pair
+Default key pair
 ----------------
 
 If you have imported a default SSH key pair (eg ``~/.ssh/id_rsa*``), then you
@@ -303,7 +303,7 @@ should be able to SSH using the standard SSH command:
 
   $ ssh ubuntu@103.254.156.248
 
-Alternate Key Pair
+Alternate key pair
 ------------------
 
 If your SSH key pair is not in the standard location, you will need to use
@@ -317,7 +317,7 @@ the ``-i`` flag to SSH to indicate the key you wish to use.
 
   The ``-i`` flag should reference the private key.
 
-Created Key Pair
+Created key pair
 ----------------
 
 If you selected ``+ Create Key Pair`` from the dashboard, your browser

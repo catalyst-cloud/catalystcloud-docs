@@ -6,7 +6,7 @@ Access control
 
 .. _project_users:
 
-Project Users
+Project users
 =============
 From this screen it is possible to manage which users have access to the
 project and the permissions that they will be assigned.
@@ -40,10 +40,10 @@ are as the name suggests all to do with Kubernetes and the control of clusters.
 Information on the Kubernetes roles can be found
 :ref:`here <kubernetes-user-access>`
 
-General Roles:
+General roles:
 ==============
 
-Project Admin
+Project admin
 -------------
 
 The *Project Admin* role allows users to have full control over who has access
@@ -52,14 +52,14 @@ it. However, this role is purely for administrating purposes. It does not
 allow you to access or view all resources, you still need the member role for
 that.
 
-Project Moderator
+Project moderator
 -----------------
 
 The *Project Moderator* role can invite other people to join your project and
 update their roles, but cannot change the project admin. Has the same problem
 as the Admin role in regards to resource access.
 
-Project Member
+Project member
 --------------
 
 The *Project Member* role gives users access to all services on your project.
@@ -69,7 +69,7 @@ others in terms of the privileges that it allows. As
 mentioned earlier, because our roles are additive you do not need all of them
 to have full control over the project.
 
-Heat Stack Owner
+Heat stack owner
 ----------------
 
 The *Heat Stack Owner* role allows users access to the Heat Cloud Orchestration
@@ -81,7 +81,7 @@ other roles.
 For more information on this service, please consult the documentation at
 :ref:`Cloud orchestration. <cloud-orchestration>`
 
-Compute Start/Stop
+Compute start/stop
 ------------------
 
 The *Compute Start/Stop* role allows users to start, stop, hard reboot and soft
@@ -100,7 +100,7 @@ actions it is equivalent to auth_only.
 This role is implied when a user also has *Project Member*.
 
 
-Object Storage
+Object storage
 --------------
 
 The *Object Storage* role allows users to create, update and delete containers,

@@ -536,7 +536,7 @@ this point.
 .. image:: ../_static/rf-valid-activate.png
    :align: center
 
-Testing Region Failover
+Testing region failover
 =======================
 
 To test region failover, you will log in to your primary server and issue

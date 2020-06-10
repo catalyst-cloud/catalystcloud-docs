@@ -26,7 +26,6 @@ to gracefully terminate and will respect the ``PodDisruptionBudgets`` defined.
     Rolling upgrades are only supported when using production Kubernetes
     cluster templates provided by the Catalyst Cloud without modifications.
 
-
 *****************************
 Avoiding application downtime
 *****************************

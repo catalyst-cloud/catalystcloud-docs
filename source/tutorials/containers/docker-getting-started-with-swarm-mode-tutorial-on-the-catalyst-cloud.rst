@@ -38,7 +38,7 @@ This tutorial assumes a number of things:
 * You have a basic understanding of how to use `Ansible`_ on the Catalyst Cloud
   as shown at :ref:`launching-your-first-instance-using-ansible`
 
-Install Ansible
+Install ansible
 ===============
 
 Firstly you need to install Ansible as shown at

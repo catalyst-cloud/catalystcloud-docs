@@ -1,5 +1,5 @@
 ###############################
-Windows
+Windows CLI
 ###############################
 
 *****************************
@@ -245,7 +245,7 @@ For a reference of all commands supported by the CLI, refer to the `OpenStack
 Client documentation <https://docs.openstack.org/python-openstackclient>`_.
 
 *************
-The Next Step
+The next step
 *************
 
 We highly recommend that if you are going to be using the CLI often that you
