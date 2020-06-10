@@ -58,12 +58,6 @@ is found Kubernetes will attempt to dynamically provision the storage based
 on the volume claim. If no storage class is defined then the default storage
 class will be used.
 
-.. Note::
-
-  In the current Technical Preview there is no ``default storage class``
-  defined for a new cluster in the Catalyst Cloud. This will need to be created
-  prior to using PersistentVolumes.
-
 Storage classes
 ===============
 
