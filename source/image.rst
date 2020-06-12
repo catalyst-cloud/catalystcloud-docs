@@ -1,5 +1,5 @@
 #############
-Image service
+Image
 #############
 
 Images contain the information needed to install an operating system on a cloud

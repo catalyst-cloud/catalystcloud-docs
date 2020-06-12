@@ -1,5 +1,5 @@
 ###################
-Credit Card payment
+Credit card payment
 ###################
 
 .. note::

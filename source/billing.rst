@@ -1,5 +1,5 @@
 ###############
-Billing service
+Billing
 ###############
 
 There are many different ways to get your billing details using our system. The usage
