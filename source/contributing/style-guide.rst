@@ -16,6 +16,9 @@ Use only lowercase alphanumeric characters and ``-`` (minus) symbol.
 
 Suffix filenames with the ``.rst`` extension.
 
+Do not add 'example' or 'service' to titles of pages as these should be self
+evident.
+
 Text style
 ==========
 
