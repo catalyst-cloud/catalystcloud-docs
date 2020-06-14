@@ -48,11 +48,3 @@ following command to assist our support team in helping you to resolve it.
 Known Issues
 ************
 
-**Cluster takes 15-25 minutes to deploy**
-
-
-* **Description:** Time to deploy a cluster is in the vicinity of 15-25
-  minutes.
-* **Status:** The cause of the problem is known and a release that reduces
-  deployment times is being planned.
-* **Workaround:** None.
