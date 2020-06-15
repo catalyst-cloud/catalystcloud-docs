@@ -23,7 +23,8 @@ Table of Contents:
 
   block-storage/overview
   block-storage/using-volumes
-  block-storage/using-lvm.rst
+  block-storage/uuid-mount
+  block-storage/using-lvm
   block-storage/faq
 
 
