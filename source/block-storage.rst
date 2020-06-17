@@ -3,7 +3,7 @@ Block storage
 #############
 
 Block volumes are similar to virtual disks that can be attached to any compute
-instance in a region to provide additional storage. They are highly available
+instance, in a region, to provide additional storage. They are highly available
 and extremely resilient.
 
 Our block storage service is provided by a fully distributed storage system,

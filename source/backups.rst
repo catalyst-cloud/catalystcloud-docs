@@ -11,7 +11,7 @@ Having a well maintained backup of your system is vital to helping your
 business get back to a high operational standard quickly.
 
 The following section covers a basic overview, showing you how to create a
-server backup utilizing `Duplicity`_ and our object storage service and a
+server backup utilizing `Duplicity`_, our object storage service and a
 more advanced tutorial on how to automate the backup process.
 
 .. _Duplicity: http://duplicity.nongnu.org/
