@@ -53,9 +53,9 @@ along the top bar. From left to right, they let you:
 * Access our support functions;
 * Change accounts or access your account settings.
 
-**************************
-Frequently asked questions
-**************************
+***
+FAQ
+***
 
 Please refer to the FAQ items listed below before raising a support request for
 the web dashbaord:
