@@ -63,7 +63,8 @@ The example below illustrates the use of a volume without LVM.
   but rather a demonstration that block volumes behave like regular disk drives
   attached to a server.
 
-Check that the disk is recognized by the OS on the instance using ``fdisk``:
+Once we have a command line that is connected via ssh to our instance, we check
+that our disk is recognized by the OS using ``fdisk``:
 
 .. code-block:: console
 
@@ -153,7 +154,7 @@ Label the partition:
   /dev/vdb1: LABEL="extra-disk" UUID="7dec7fb6-ff38-453b-9335-0c240d179262" TYPE="ext4" PARTUUID="235ac0e4-01"
 
 If you want the new file system to be mounted when the system reboots then you
-should add an entry to ``/etc/fstab``, for example making sure you have sudo
+should add an entry to ``/etc/fstab``. For example, making sure you have sudo
 privilege:
 
 .. code-block:: console

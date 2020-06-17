@@ -20,10 +20,10 @@ Use the ``openstack volume create`` command to create a new volume:
   | availability_zone   | nz-por-1a                            |
   | bootable            | false                                |
   | consistencygroup_id | None                                 |
-  | created_at          | 2016-08-18T23:08:40.021641           |
+  | created_at          | 2020-05-18T23:08:40.021641           |
   | description         | database volume                      |
   | encrypted           | False                                |
-  | id                  | 7e94a2f6-b4d2-47f1-83f7-a200e963404a |
+  | id                  | 29375489-2399-4065-bae0-0b7fc9bd795e |
   | multiattach         | False                                |
   | name                | db-vol-02                            |
   | properties          |                                      |
@@ -41,27 +41,28 @@ Attach a volume to a compute instance
 =====================================
 
 Use the ``openstack server add volume`` command to attach the volume to an
-instance. For this example we are going to use the volume ID that we can find
-in the previous command:
+instance. For this example we are going to use the volume ID,which we can find
+in our previous command:
 
 .. code-block:: console
 
   $ openstack server add volume INSTANCE_NAME VOLUME_UUID
 
-Unlike the command in our previous example, we are using the specific UUID of
-our volume. This means we do not have to worry about our command failing due to
-volumes with conflicting labels or names trying to be attached to our instance.
+In this example, we are using the specific UUID of our volume to attach it to
+our instance. This is because we do not want our command potentially failing
+due to volumes with conflicting labels or names trying to be attached to our
+instance.
 
 ******************************************************
 Configuring and mounting your volume on a Linux system
 ******************************************************
 
-The example below illustrates the use of a volume without LVM, and we assign
-our volume to our instance using its UUID. The reason you would want to do this
-is to guarantee that there will be no conflicts when your instance tries to
-locate the correct volume to mount on your file system. Using the UUID, you can
-ensure that even if you have multiple volumes with the same name, that each of
-them will be mounted in the correct location.
+The example below illustrates the use of a volume without LVM that we assign
+to our instance using its UUID. The reason you would want to do this
+is to guarantee that there will be no conflicts when mounting volumes
+on your file system. Using the UUID, you can ensure that even if you have
+multiple volumes with the same name, each of them will be mounted in the
+correct location.
 
 .. warning::
 
@@ -69,8 +70,8 @@ them will be mounted in the correct location.
   but rather a demonstration that block volumes behave like regular disk drives
   attached to a server.
 
-Once we have a command line that is sourced on our instance,
-we check that our disk is recognized by the OS using ``fdisk``:
+Once we have a command line that is connected via ssh to our instance, we check
+that our disk is recognized by the OS using ``fdisk``:
 
 .. code-block:: console
 
@@ -160,7 +161,7 @@ Mount the file system:
   $ sudo mount UUID=02bea4be-22c7-4e34-ad2f-a7a42848c38d /mnt/extra-disk
 
 If you want the new file system to be mounted when the system reboots then you
-should add an entry to ``/etc/fstab``, for example making sure you have sudo
+should add an entry to ``/etc/fstab``. For example, making sure you have sudo
 privilege:
 
 .. code-block:: console
