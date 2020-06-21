@@ -5,7 +5,8 @@ Database creation and access
 ############################
 
 In this section we will work through the steps required to create a new
-database instance and cover different common topics to do with our Databases.
+database instance and cover different common topics to do with the database
+service.
 
 *********************************
 Gathering necessary information
@@ -22,10 +23,10 @@ options, these include:
   instance.
 
 .. Note::
-  It is also necessary to have an existing network in the project and region
-  that you wish to deploy the database instance to.
+  It is also necessary to have an existing network on the project that you
+  wish to deploy the database instance to.
 
-First lets determine what datastore types and versions are available to us.
+First, lets determine what datastore types and versions are available to us.
 
 .. code-block:: bash
 
@@ -64,7 +65,7 @@ or by explicitly querying the version of a particular datastore type:
   +--------------------------------------+----------+
 
 Next we need to decide on the resource requirements for our database instance.
-We do this by picking out a flavor from the list available.
+We do this by picking a flavor from the available list:
 
 .. code-block:: bash
 
@@ -91,7 +92,7 @@ We do this by picking out a flavor from the list available.
   | e3feb785-af2e-41f7-899b-6bbc4e0b526e | c1.c2r2          |  2048 |     2 |   10 |         0 |
   +--------------------------------------+------------------+-------+-------+------+-----------+
 
-Minimum requirements for databases
+Here is a table of the minimum requirements for databases based on their type:
 
 +---------+----------+-----------+-------+
 |Database | RAM (MB) | Disk (GB) | VCPUs |
@@ -105,14 +106,13 @@ Minimum requirements for databases
 |Redis    |512       | 5         |1      |
 +---------+----------+-----------+-------+
 
-
 ***********************************
 Launching the new database instance
 ***********************************
 
-Based on the information we gathered in the previous section we will now create
-our database instance. This requires a private network on your project, to
-attach the database instance to.
+Based on the information we gathered in the previous section we are now
+able to create our database instance. This will require a private network from
+your project, that we can attach the database instance to.
 
 .. code-block:: bash
 
@@ -123,8 +123,8 @@ attach the database instance to.
   | 908816f1-933c-4ff2-8595-f0f57c689e48 | database-network    | af0f251c-0a36-4bde-b3bc-e6167eda3d1e |
   +--------------------------------------+---------------------+--------------------------------------+
 
-After finding a suitable network to host our database. We take the
-subnet ID, alongside the information on our preferred flavor and we construct
+After finding a suitable network to host our database. We take the network ID,
+alongside the information on our preferred flavor and we construct
 the following command to create our new instance:
 
 .. code-block:: bash
@@ -153,8 +153,8 @@ the following command to create our new instance:
   | volume            | 3                                    |
   +-------------------+--------------------------------------+
 
-
-Check on the status of the new instance, once it is ``ACTIVE`` we can continue.
+We have to wait while the instance builds. Keep checking on the status of the
+new instance, once it is ``ACTIVE`` we can continue.
 
 .. code-block:: bash
 
@@ -164,7 +164,6 @@ Check on the status of the new instance, once it is ``ACTIVE`` we can continue.
   +--------------------------------------+---------------+-----------+-------------------+--------+--------------------------------------+------+--------+
   | b14d5ed3-b4d0-4906-b68d-58d882f2cd09 | db-instance-1 | mysql     | 5.7               | BUILD  | 746b8230-b763-41a6-954c-b11a29072e52 |    3 | test-1 |
   +--------------------------------------+---------------+-----------+-------------------+--------+--------------------------------------+------+--------+
-
 
 Now let's view the details of our instance so that we can find the IP address
 that has been assigned to it.
@@ -246,7 +245,7 @@ above.
 
 .. code-block:: bash
 
-  $openstack database root show db1
+  $ openstack database root show db-instance-1
   +-----------------+-------+
   | Field           | Value |
   +-----------------+-------+
@@ -258,7 +257,7 @@ the following query:
 
 .. code-block:: bash
 
-  $ mysql -h 10.0.0.14 -u root -p -e 'SELECT USER()'
+  $ mysql -h 10.0.0.16 -u root -p -e 'SELECT USER()'
   Enter password:
   +----------------+
   | USER()         |
@@ -270,7 +269,7 @@ Creating new users
 ==================
 
 While it is possible to create a database user when launching your database
-instance using the ``--users <username>:<password>`` argument it is more than
+instance (using the ``--users <username>:<password>`` argument) it is more than
 likely that further users will need to be added over time.
 
 This can be done using the openstack commandline. Below we can see two example
@@ -284,7 +283,7 @@ created that can only connect from the specified IP address.
 
 .. code-block:: bash
 
-  $$ openstack database user create db-instance-1 newuser userpass --databases myDB
+  $ openstack database user create db-instance-1 newuser userpass --databases myDB
 
   $ openstack database user list db-instance-1
   +---------+-----------+-----------+
@@ -342,7 +341,7 @@ To delete a database, you need the following command:
 
 .. code-block:: bash
 
-  openstack database instance delete db1
+  $ openstack database instance delete db1
   # wait until the console returns, it will reply with a message saying your database was deleted.
 
 .. _backups-for-databases:
@@ -445,7 +444,7 @@ Viewing logs
 ************
 
 Logging is important for keeping a well maintained database. In the following
-example we will be showing how to publish a slow_query log. These are a
+example we will explain how to publish a slow_query log. These are a
 performance log that consists of SQL statements that have taken longer than
 the specified long_query_time to execute.
 
@@ -508,7 +507,6 @@ Finally we publish the log using:
   | status    | Published                                                      |
   | type      | USER                                                           |
   +-----------+----------------------------------------------------------------+
-
 
   $ openstack object list database_logs
   +--------------------------------------------------------------------------------------+
