@@ -8,8 +8,8 @@ This section of the documentation will discuss different common practices and
 considerations that are important to creating a cluster that is able to handle
 the demands of a production environment.
 
-Network consideration
-=====================
+Network considerations
+======================
 The first things you need to consider before creating your cluster is the
 specifications around networking. The following are common and important
 questions that you must answer before you begin building any production
@@ -44,26 +44,29 @@ The final thing to consider about networking is the actual address of the
 cluster itself. Before creating a cluster it is important to consider which
 subnet you are going to use for the network that the kubernetes cluster
 creates; both for the cluster address itself and the internal supernet that
-the cluster creates. The internal supernet uses the address 10.1.0.0/16 and
+the cluster creates. The internal supernet uses the address 10.100.0.0/16 and
 shouldn't conflict with any networks that you normally use but you do need to
 be mindful of this in the event that it does clash. If you maintain a table of
 the subnets that your company has in use, it is recommended that you update
 this list to include the new subnet space that is created with your cluster.
 
-It is possible to modify this default address space by supplying a new value
-a the time the cluster is created. In order to do this we need to override
-the label ``calico_ipv4pool``, this label defines the IPv4 network IP pool, in
-CIDR format, from which Pod IPs will be chosen
+There are two important CIDR ranges that are defined in the cluster template.
+The first is the ``fixed_subnet_cidr`` which controls the address range that
+is used by the cluster nodes. The default value for this is **10.0.0.0/24**.
+The second is ``calico_ipv4pool`` which controls the address range used for
+the Pod IP address pool. The default for this **10.100.0.0./16**.
 
-For example if we wished to use the range 172.16.0.0/24 for out pod IP
-addresses we would change the label to the following:
+It is possible to modify either of these two address space by supplying a new
+label value a the time the cluster is created. For example, if we wished to
+use the range 172.16.0.0/24 for our pod IP addresses we would change the label
+to the following:
 
 .. code-block:: bash
 
     calico_ipv4pool=172.16.0.0/24
 
-For more information on how to change label values in a cluster template
-see :ref:`here<modifying_a_cluster_with_labels>`
+For the specifics on how to change label values in a cluster template when
+creating your cluster please see :ref:`here<modifying_a_cluster_with_labels>`.
 
 Security
 ========
