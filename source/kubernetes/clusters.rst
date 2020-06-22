@@ -374,25 +374,25 @@ separated key value list.
 .. code-block:: bash
 
   $ export TEMPLATENAME="kubernetes-v1.15.11-prod-20200330"
-  $ openstack coe cluster template show $TEMPLATENAME -c labels -f value | sed -e "s/': '/=/g" | sed -e "s/', '/,/g" | sed -e "s/{'//g" | sed -e "s/'}//" | sed -e "s/,/, \\\\\n/g"
+  $ openstack coe cluster template show $TEMPLATENAME -c labels -f value | sed -e "s/': '/=/g" | sed -e "s/', '/,/g" | sed -e "s/{'//g" | sed -e "s/'}//" | sed -e "s/,/,\\\\\n/g"
 
-  magnum_auto_healer_tag=v1.15.0-catalyst.0, \
-  cloud_provider_enabled=true, \
-  etcd_volume_size=20, \
-  kube_dashboard_enabled=true, \
-  prometheus_monitoring=true, \
-  cloud_provider_tag=1.14.0-catalyst, \
-  auto_healing_controller=magnum-auto-healer, \
-  calico_ipv4pool=10.100.0.0/16, \
-  container_infra_prefix=docker.io/catalystcloud/, \
-  k8s_keystone_auth_tag=v1.15.0, \
-  auto_scaling_enabled=false, \
-  master_lb_floating_ip_enabled=false, \
-  ingress_controller=octavia, \
-  keystone_auth_enabled=true, \
-  auto_healing_enabled=true, \
-  heat_container_agent_tag=stein-dev, \
-  kube_tag=v1.15.11, \
+  magnum_auto_healer_tag=v1.15.0-catalyst.0,\
+  cloud_provider_enabled=true,\
+  etcd_volume_size=20,\
+  kube_dashboard_enabled=true,\
+  prometheus_monitoring=true,\
+  cloud_provider_tag=1.14.0-catalyst,\
+  auto_healing_controller=magnum-auto-healer,\
+  calico_ipv4pool=10.100.0.0/16,\
+  container_infra_prefix=docker.io/catalystcloud/,\
+  k8s_keystone_auth_tag=v1.15.0,\
+  auto_scaling_enabled=false,\
+  master_lb_floating_ip_enabled=false,\
+  ingress_controller=octavia,\
+  keystone_auth_enabled=true,\
+  auto_healing_enabled=true,\
+  heat_container_agent_tag=stein-dev,\
+  kube_tag=v1.15.11,\
   octavia_ingress_controller_tag=v1.18.0-catalyst
 
 
@@ -415,23 +415,23 @@ changing the ``auto_scaling_enabled`` label to true:
 
   openstack coe cluster create k8s-cluster \
   --cluster-template kubernetes-v1.15.11-prod-20200330 \
-  --labels magnum_auto_healer_tag=v1.15.0-catalyst.0, \
-  cloud_provider_enabled=true, \
-  etcd_volume_size=20, \
-  kube_dashboard_enabled=true, \
-  prometheus_monitoring=true, \
-  cloud_provider_tag=1.14.0-catalyst, \
-  auto_healing_controller=magnum-auto-healer, \
-  calico_ipv4pool=10.100.0.0/16, \
-  container_infra_prefix=docker.io/catalystcloud/, \
-  k8s_keystone_auth_tag=v1.15.0, \
-  auto_scaling_enabled=false, \
-  master_lb_floating_ip_enabled=false, \
-  ingress_controller=octavia, \
-  keystone_auth_enabled=true, \
-  auto_healing_enabled=true, \
-  heat_container_agent_tag=stein-dev, \
-  kube_tag=v1.15.11, \
+  --labels magnum_auto_healer_tag=v1.15.0-catalyst.0,\
+  cloud_provider_enabled=true,\
+  etcd_volume_size=20,\
+  kube_dashboard_enabled=true,\
+  prometheus_monitoring=true,\
+  cloud_provider_tag=1.14.0-catalyst,\
+  auto_healing_controller=magnum-auto-healer,\
+  calico_ipv4pool=10.100.0.0/16,\
+  container_infra_prefix=docker.io/catalystcloud/,\
+  k8s_keystone_auth_tag=v1.15.0,\
+  auto_scaling_enabled=false,\
+  master_lb_floating_ip_enabled=false,\
+  ingress_controller=octavia,\
+  keystone_auth_enabled=true,\
+  auto_healing_enabled=true,\
+  heat_container_agent_tag=stein-dev,\
+  kube_tag=v1.15.11,\
   octavia_ingress_controller_tag=v1.18.0-catalyst \
   --keypair my-ssh-key \
   --node-count 3 \

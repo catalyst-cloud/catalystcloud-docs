@@ -50,6 +50,21 @@ be mindful of this in the event that it does clash. If you maintain a table of
 the subnets that your company has in use, it is recommended that you update
 this list to include the new subnet space that is created with your cluster.
 
+It is possible to modify this default address space by supplying a new value
+a the time the cluster is created. In order to do this we need to override
+the label ``calico_ipv4pool``, this label defines the IPv4 network IP pool, in
+CIDR format, from which Pod IPs will be chosen
+
+For example if we wished to use the range 172.16.0.0/24 for out pod IP
+addresses we would change the label to the following:
+
+.. code-block:: bash
+
+    calico_ipv4pool=172.16.0.0/24
+
+For more information on how to change label values in a cluster template
+see :ref:`here<modifying_a_cluster_with_labels>`
+
 Security
 ========
 The security of a cluster is mainly affected by how many access points there
