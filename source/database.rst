@@ -324,7 +324,7 @@ remove databases from it.
 
   $ openstack database db create db-instance-1 myDB2
 
-To check the results we use the command from before:
+To check the results we use the following command:
 
 .. code-block:: bash
 
@@ -337,7 +337,7 @@ To check the results we use the command from before:
   | sys   |
   +-------+
 
-To delete a database, you need the following command:
+To delete a database, you can use the following command:
 
 .. code-block:: bash
 
@@ -366,12 +366,12 @@ will be deleting the database to test the recovery process)
   | 09e93fcd-c384-4be1-b9ec-c6101d960f45 | bfe87861-5780-4a4a-af4b-47b045400de6 | db1-backup | COMPLETED | None      | 2019-03-28T00:22:42 |
   +--------------------------------------+--------------------------------------+------------+-----------+-----------+---------------------+
 
-Destroy the instance and recreate using the backup as source:
+Destroy the instance and create a new one using the backup as a source:
 
 .. code-block:: bash
 
   $ openstack database instance delete db-instance-1     # wait for it to be deleted...
-  $ openstack database instance create db-instance-1 c1.c1r4 \
+  $ openstack database instance create db-instance-1-rebuild c1.c1r4 \
     --size 3 \
     --volume_type b1.standard \
     --databases myDB \
@@ -382,15 +382,15 @@ Destroy the instance and recreate using the backup as source:
     --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48
 
   $ openstack database instance list
-  +--------------------------------------+----------------+-----------+-------------------+--------+--------------------------------------+------+--------+
-  | ID                                   | Name           | Datastore | Datastore Version | Status | Flavor ID                            | Size | Region |
-  +--------------------------------------+----------------+-----------+-------------------+--------+--------------------------------------+------+--------+
-  | 6bd114d1-7251-42d6-9426-db598c085472 | db-instance-1  | mysql     | 5.7               | ACTIVE | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    4 | test-1 |
-  +--------------------------------------+----------------+-----------+-------------------+--------+--------------------------------------+------+--------+
+  +--------------------------------------+------------------------+-----------+-------------------+--------+--------------------------------------+------+--------+
+  | ID                                   | Name                   | Datastore | Datastore Version | Status | Flavor ID                            | Size | Region |
+  +--------------------------------------+------------------------+-----------+-------------------+--------+--------------------------------------+------+--------+
+  | 6bd114d1-7251-42d6-9426-db598c085472 | db-instance-1-rebuild  | mysql     | 5.7               | ACTIVE | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    4 | test-1 |
+  +--------------------------------------+------------------------+-----------+-------------------+--------+--------------------------------------+------+--------+
 
   Connect and check data in there:
 
-  $ mysql -h db-instance-2 -uusr -p db
+  $ mysql -h db-instance-1-rebuild -uusr -p db
   Enter password:
 
   mysql> SELECT count(*) FROM sbtest1;
@@ -448,7 +448,7 @@ example we will explain how to publish a slow_query log. These are a
 performance log that consists of SQL statements that have taken longer than
 the specified long_query_time to execute.
 
-First thing we have to do is check whether we have logging enabled on our
+The first thing we have to do is check whether we have logging enabled on our
 instance or not.
 
 .. code-block:: bash
@@ -461,7 +461,7 @@ instance or not.
   | general    | USER | Disabled |         0 |       0 | None      | None   |
   +------------+------+----------+-----------+---------+-----------+--------+
 
-At the moment our, database instance doesn't have logging enabled. The
+At the moment our, database instance does not have logging enabled. The
 following shows how to enable slow_query specifically.
 
 .. code-block:: bash
