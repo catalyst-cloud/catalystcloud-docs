@@ -79,7 +79,7 @@ use UUIDs or rename the devices to /dev/vd[a,b,c,...] instead.
 
 Renaming the file system on the original virtual machine will probably prevent
 you from booting it. To safely rename the devices, you should mount the image
-on a loopback device and then change it as required.
+on a loop-back device and then change it as required.
 
 .. code-block:: bash
 

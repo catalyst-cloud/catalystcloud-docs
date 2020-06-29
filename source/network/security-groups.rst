@@ -25,7 +25,10 @@ Creating a security group
 *************************
 
 The default behaviour of security groups is to deny all traffic. Rules added to
-security groups are all "allow" rules.
+security groups are all "allow" rules. To create your own security group rules
+you can follow the guide from the
+:ref:`first instance section<security-group-first-instance>` of the
+documentation.
 
 .. note::
 

@@ -20,7 +20,7 @@ Otherwise, let's proceed with building a windows instance.
   catalyst cloud. Do not worry about their absence on your system, they will
   not affect this tutorial.
 
-Configure Instance Security Group
+Configure instance security group
 =================================
 
 You will add  a security group and a rule for your instance so that it can be
@@ -70,7 +70,7 @@ menu, leave the defaults for the other fields. Click "Add".
   trusted.
 
 
-Booting an Instance
+Booting an instance
 ===================
 
 We are now ready to launch your first instance. Select launch instance from the
@@ -124,7 +124,7 @@ be "Active". You now have a running instance, but there are a few more steps
 required before you can log in.
 
 
-Allocate a Floating IP
+Allocate a floating IP
 ======================
 
 To associate a floating IP with your instance, you need to navigate to the
@@ -148,7 +148,7 @@ In this example, select the "first-instance" port and click "Associate":
    :align: center
 
 
-Connect to the new Instance
+Connect to the new instance
 ===========================
 First you must set the Administrator password. To do this, go to the
 "Instances" section, click on first-instance under "Instance Name" and select
@@ -180,7 +180,7 @@ for the following Catalyst Cloud API hosts
    :align: center
 
 
-You will then be prompted by the following screen to create a new administator
+You will then be prompted by the following screen to create a new administrator
 password.
 
 .. image:: ../_static/fi-windows-login-2.png

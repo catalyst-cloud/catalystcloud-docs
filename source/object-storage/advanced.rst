@@ -1,6 +1,6 @@
-################################
-Advanced object storage features
-################################
+#################
+Advanced features
+#################
 
 
 ========================================
@@ -75,17 +75,15 @@ You should now be able to view the index file as a website.
 
 https://object-storage.nz-por-1.catalystcloud.io:443/v1/%AUTH_ID%/%container_name%/
 
-
-
 =================
-Object Versioning
+Object versioning
 =================
 
 This provides a means by which multiple versions of your content can be stored
 allowing for recovery from unintended overwrites.
 
-First, you need to create an archive container to store the older versions of our
-objects:
+First, you need to create an archive container to store the older versions of
+our objects:
 
 .. code-block:: bash
 
@@ -114,9 +112,9 @@ will have the following format:
 
   <length><object_name>/<timestamp>
 
-Where <length> is the length of the object name ( as a three character zero padded
-hex number ), <object_name> is the original object name and <timestamp> is the
-unix timestamp of the original file creation.
+Where <length> is the length of the object name ( as a three character zero
+padded hex number ), <object_name> is the original object name and <timestamp>
+is the unix timestamp of the original file creation.
 
 <length> and <object_name> are then combined to make a new container
 (pseudo-folder in the dashboard) with the backed up object stored within using
@@ -228,7 +226,7 @@ should expire.
 - in the nested container structure : bar_container/quux.md
 - with key : my_secret_tempurl_key
 
-Creating Temporary URLs in the Catalyst Cloud
+Creating temporary URLs in the Catalyst Cloud
 =============================================
 At the time of writing, the only method currently available for the creation
 of temporary URLs is using the command line tools.
@@ -290,7 +288,7 @@ You could also access the object by taking the same URL that you passed to cURL
 and pasting it into a web browser.
 
 ==========================
-Working with Large Objects
+Working with large objects
 ==========================
 
 Typically, the size of a single object cannot exceed 5GB. It is possible,
@@ -298,12 +296,12 @@ however, to use several smaller objects to break up the large object. When this
 approach is taken, the resulting large object is made out of two types of
 objects:
 
-- **Segment Objects** which store the actual content. You need to split your content into chunks
-  and then upload each piece as its own segment object.
+- **Segment Objects** which store the actual content. You need to split your
+  content into chunks and then upload each piece as its own segment object.
 
-- A **manifest object** then links the segment objects into a single logical object. To download
-  the object, you download the manifest. Object storage then concatenates the segments and
-  returns the contents.
+- A **manifest object** then links the segment objects into a single logical
+  object. To download the object, you download the manifest. Object storage
+  then concatenates the segments and returns the contents.
 
 There are tools available, both GUI and CLI, that will handle the segmentation
 of large objects for you. For all other cases, you must manually split the
@@ -369,7 +367,8 @@ object.
 
 The Swift tool uses a strict convention for its segmented object support.
 All segments that are uploaded are placed into a second container that has
-``_segments`` appended to the original container name, in this case it would be mycontainer_segments. The segment names follow the format of
+``_segments`` appended to the original container name, in this case it would be
+mycontainer_segments. The segment names follow the format of
 ``<name>/<timestamp>/<object_size>/<segment_size>/<segment_name>``.
 
 If you check on the segments created in example 1, you can see this:
@@ -393,12 +392,12 @@ large_file/1290206778.25/21474836480/00000001, etc.
 The main benefit for using a separate container is that the main container
 listings will not be polluted with all the segment names. The reason for using
 the segment name format of <name>/<timestamp>/<size>/<segment> is so that
-an upload of a new file with the same name won’t overwrite the contents of the
-first until the last moment when the manifest file is updated.
+an upload of a new file with the same name will not overwrite the contents of
+the first until the last moment when the manifest file is updated.
 
 
 Swift will manage these segment files for you, deleting old segments on deletes
-and overwrites, etc. You can override this behavior with the --leave-segments
+and overwrites, etc. You can override this behaviour with the --leave-segments
 option if desired; this is useful if you want to have multiple versions of
 the same large object available.
 
@@ -412,7 +411,7 @@ In both of the examples above, the file would be split into 100MB chunks
 and uploaded. This can happen concurrently if desired. Once the segments
 are uploaded, it is then necessary to create a manifest file to describe
 the object and allow it to be downloaded as a single file. When using
-Swift, the manifest fles are created for you.
+Swift, the manifest files are created for you.
 
 The manifest for the ``DLO`` is an empty file and all segments must be
 stored in the same container, though depending on the object store
@@ -460,8 +459,8 @@ manifest.
   curl -i $storageURL/lgfile/split_ab -X PUT -H "X-Auth-Token: $token" -T split-ab
   curl -i -X PUT -H "X-Auth-Token: $token" -H "X-Object-Manifest: lgfile/split_" -H "Content-Length: 0"  $storageURL/lgfile/manifest/1gb_sample.txt
 
-A similar approach can also be taken to use the SLO type, but this is a lot more involved. A
-detailed description of the process can be seen `here`_
+A similar approach can also be taken to use the SLO type, but this is a lot
+more involved. A detailed description of the process can be seen `here`_
 
 
 .. _here: https://docs.openstack.org/swift/latest/overview_large_objects.html#module-swift.common.middleware.slo

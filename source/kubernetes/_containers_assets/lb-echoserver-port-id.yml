@@ -1,0 +1,20 @@
+.. code-block:: yaml
+
+  # lb-echoserver-port-id.yml
+
+  ---
+  kind: Service
+  apiVersion: v1
+  metadata:
+    name: echoserver-lb-service
+    annotations:
+      loadbalancer.openstack.org/port-id: "ca981484-22f8-4e9d-94f5-e43594afb15e"
+  spec:
+    selector:
+      app:  echoserver
+    type: LoadBalancer
+    ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP

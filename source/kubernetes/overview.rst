@@ -1,9 +1,10 @@
-********
+########
 Overview
-********
+########
 
-What is a container?
-====================
+**********
+Containers
+**********
 
 Linux containers are self-contained execution environments with their own,
 isolated CPU, memory, block I/O, and network resources that share the kernel of
@@ -12,9 +13,16 @@ machine, but sheds all the weight and startup overhead of a guest operating
 system. You can link containers together, set security policies, limit resource
 utilisation and more.
 
+`Docker`_ is a tool designed to make it easier to create, deploy, and run Linux
+containers. The Kubernetes service offered by the Catalyst Cloud supports
+Docker container format.
 
-The Container Orchestration Engine
-==================================
+.. _`Docker`: https://www.docker.com/
+
+
+******************************
+Container orchestration engine
+******************************
 
 Container Orchestration refers to the automated arrangement, coordination, and
 management of software containers.
@@ -31,47 +39,8 @@ orchestration. Orchestration can include a number of features, including:
 * Exposing services outside of the cluster.
 * Scaling the cluster by adding or removing containers.
 
-Catalyst Cloud currently only offers ``Kubernetes`` so we will focus on that as
-our default container orchestration engine (COE).
+`Kubernetes`_ (or k8s) is an open-source container orchestration system (COE)
+for automating deployment, scaling, and management of containerised
+applications. It became the de-facto COE standard in the industry.
 
-
-
-Providing feedback
-==================
-
-Our goal with this alpha release is to establish a feedback loop and
-collaborate with early adopters of the technology, to ensure it meets the
-unique needs of our customers in NZ.
-
-At this stage, the service is expected to have some rough edges and bugs. If
-you encounter an issue or have a suggestion on how we can improve it, please
-raise a ticket via the `Support Centre`_.
-
-.. _`Support Centre`: https://catalystcloud.nz/support/support-centre/
-
-Where possible, when creating support tickets, please include the output of the
-following command to assist our support team in helping you to resolve it.
-
-.. code-block:: bash
-
-  $ openstack coe cluster show <cluster_name>
-
-
-Known Issues
-============
-
-This is an overview of the issues encountered in the process of testing this
-Technical Preview release.
-
-Cluster takes a long time to deploy
------------------------------------
-
-**Description:**
-Currently the time taken to deploy a cluster from commandline or dashboard is
-in the vicinity of 15-25 minutes.
-
-
-**Status:** The cause of the problem is known and a fix is being investigated.
-
-
-**Workaround:** None.
+.. _`Kubernetes`: https://kubernetes.io/

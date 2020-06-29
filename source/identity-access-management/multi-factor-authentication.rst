@@ -1,6 +1,6 @@
 
 ***************************
-Multi Factor Authentication
+Multi factor authentication
 ***************************
 
 Catalyst Cloud provides the ability to further secure your cloud access by
@@ -11,8 +11,8 @@ access.
 .. note::
 
     For users enabling MFA, you will find that version 2 of the Keystone API no longer allows
-    authentication and you will have to authenticate with the v3 API to use this feature, or not
-    turn it on. This will only affect users that are consuming the APIs directly, users who only
+    authentication and you will have to authenticate with the v3 API to use this feature.
+    This will only affect users that are consuming the APIs directly, users who only
     login through the dashboard will automatically be authenticating with the version 3 API.
 
 
@@ -69,7 +69,7 @@ and prompted to re-login using MFA.
 
 |
 
-Place a tick in the **MFA Enabled** checkbox and enter a valid passcode from
+Place a tick in the **MFA Enabled** check box and enter a valid passcode from
 your authentication app and click **Sign In**.
 
 |

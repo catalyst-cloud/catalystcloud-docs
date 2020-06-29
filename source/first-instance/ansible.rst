@@ -1,7 +1,7 @@
 .. _launching-your-first-instance-using-ansible:
 
 *************
-Using Ansible
+Using ansible
 *************
 
 `Ansible`_ is a popular open source configuration management and application
@@ -16,14 +16,14 @@ for instance configuration.
 
 Comprehensive documentation of the Ansible OpenStack modules is available at
 https://docs.ansible.com/ansible/list_of_cloud_modules.html#openstack
-And for any troubleshooting issues you may face using ansbile you can refer to
+And for any troubleshooting issues you may face using Ansible you can refer to
 the following https://docs.ansible.com/ansible-tower/2.2.0/html/administration/troubleshooting.html
 
 
 
 .. _install-ansible:
 
-Install Ansible
+Install ansible
 ===============
 
 A script is provided by Catalyst which installs the required Ansible and
@@ -202,7 +202,7 @@ build image):
   further, as required.
 
 
-Resource cleanup with an Ansible playbook
+Resource cleanup with an ansible playbook
 =========================================
 
 This playbook will remove all resources created by the previous playbooks.

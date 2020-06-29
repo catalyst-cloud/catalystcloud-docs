@@ -55,10 +55,10 @@ The Subnet Details page is normally, by default, empty. However you can define
 the different fields however you'd like. Specifications like:
 
 - enabling DHCP
-   - Dynamic Host Configuration Protocol. Allows you to assign IP's dynamically
+   - Dynamic Host Configuration Protocol. Allows you to assign IPs dynamically
      to devices on your network.
 - defining a DHCP ip address allocation pool.
-   - This is the range of IP's that you are going to be allocating. For example
+   - This is the range of IPs that you are going to be allocating. For example
      from 10.0.0.10 to 10.0.0.200
 - specifying the :ref:`DNS Name Servers <name_servers>` for the required region
 

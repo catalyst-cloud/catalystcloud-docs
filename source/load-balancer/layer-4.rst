@@ -54,7 +54,7 @@ Follow the instructions below to install the required dependencies.
   # activate the virtual environment
   $ source venv/bin/activate
 
-  # install Flask into the virtul environment
+  # install Flask into the virtual environment
   $ pip install flask
 
   # exit the virtual environment
@@ -103,7 +103,7 @@ virtual IP address (VIP) will be attached to the local subnet
 
   If you wish to run the tests included with this example, you will need to
   root access on the test instances. If you do not have that level of access
-  then substitute 8080 and 8443 whereever you see 80 and 443 respectively.
+  then substitute 8080 and 8443 wherever you see 80 and 443 respectively.
 
 .. code-block:: bash
 
@@ -425,7 +425,7 @@ example performs a simple static request at the URL path '/health'.
   +---------------------+--------------------------------------+
 
 Here is a brief description of some of the parameters used in the health
-monitor examle.
+monitor example.
 
 * ``url_path`` : Path part of the URL that should be retrieved from the
   back-end server. By default this is “/”.

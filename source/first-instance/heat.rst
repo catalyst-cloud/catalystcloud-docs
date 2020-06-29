@@ -69,7 +69,7 @@ Use ``openstack keypair create`` to upload your Public SSH key.
  Keypairs must be created in each region being used.
 
 
-Building the First Instance Stack using a Heat Template
+Building the first instance stack using a Heat template
 =======================================================
 
 Select the following Heat template from the catalystcloud-orchestration
@@ -172,7 +172,7 @@ Floating IP of the instance:
  $ ssh ubuntu@$CC_PUBLIC_IP
 
 
-Deleting the First Instance Stack using Heat
+Deleting the first instance stack using Heat
 ============================================
 
 .. warning::

@@ -6,11 +6,13 @@ Additional information
 **********************
 
 This section is to inform you on other information that we deem important but
-does not fall under the catagories of services, access or administration.
+does not fall under the categories of services, access or administration.
 
 
 Quotas
 ======
+
+.. _quota-info:
 
 The Catalyst Cloud provides customers with a quota mechanism to protect them
 from accidentally launching too many resources. This helps prevent unexpected

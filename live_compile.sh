@@ -8,15 +8,15 @@ if ! which virtualenv; then
   exit 1
 fi
 
-if ! which pip; then
+if ! which pip3; then
   echo "Could not find pip on the PATH."
-  echo "Try: apt-get install python-pip"
+  echo "Try: apt-get install python3-pip"
   exit 1
 fi
 
 # Create a Python virtual environment if needed
 if [ ! -d venv ]; then
-  virtualenv venv
+  virtualenv -p $(which python3) venv
 fi
 
 # Activate the virtual environment

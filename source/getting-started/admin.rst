@@ -84,7 +84,7 @@ Regions
 The Catalyst Cloud is delivered out of three data centres across
 New Zealand. On the dashboard, you can specify which data centre
 to host your resources in depending on your needs, with the dropdown
-in the top left corner. Each region is completely independant
+in the top left corner. Each region is completely independent
 and isolated (each with their own *control plane*), providing
 fault tolerance and geographic diversity.
 
@@ -314,8 +314,6 @@ your projects using the `Project Users Panel`_.
 
 .. _Project Users Panel: https://dashboard.cloud.catalyst.net.nz/management/project_users/
 
-
-
 Project quotas
 ==============
 
@@ -326,7 +324,6 @@ need more resources.
 Please refer to the :ref:`quota section of the
 documentation <additional-info>` for more
 information on quotas.
-
 
 Project isolation
 =================

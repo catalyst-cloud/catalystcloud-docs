@@ -1,4 +1,4 @@
-Using Heat via the command line tools
+Using heat via the command line tools
 =====================================
 
 Sample templates
@@ -112,7 +112,7 @@ provided is valid. The following command can be used to validate a HOT:
 
 .. code-block:: bash
 
- $ openstack orchestration template validate-f template-file.hot
+ $ openstack orchestration template validate -f hot -t template-file.HOT
 
 This command will return the yaml if it validates and will return an error with
 a message if it is invalid.

@@ -41,8 +41,8 @@ be easier to use the dashboard. As you become more familiar with the Catalyst
 Cloud it is worth learning how to provision resources programmatically.
 
 Each of the different methods have pro's and cons. Some are easier to
-impliment than others, some give you more information on the creation process
-as a whole and Some let you have more customisation options. So even if you are
+implement than others, some give you more information on the creation process
+as a whole and some let you have more customisation options. So even if you are
 comfortable with just using one method at the beginning, we recommend taking a
 look at the others over time as your needs may change and the other methods may
 provide and easier solution.
@@ -55,12 +55,12 @@ stack you have created via another method.
 By the end of this process you should have an instance running of an Ubuntu
 image that you're able to use however you'd like.
 
-Network Requirements
+Network requirements
 ====================
 
 Before launching an instance, it is necessary to have some network resources in
 place. These may have already been created for you. In this documentation we
-will assume you are starting from an unconfigured project and will demonstrate
+will assume you are starting from an un-configured project and will demonstrate
 how to set these up from scratch.
 
 The requirements are:
@@ -96,7 +96,7 @@ tunnel-mode VPN in the future to connect your OpenStack private network to
 another private network. Choosing a unique subnet now will ensure you will not
 experience collisions that need renumbering in the future.
 
-Compute Flavors
+Compute flavors
 ===============
 
 The flavor of an instance is the CPU, memory and disk specifications of a
@@ -109,7 +109,7 @@ gigabytes of memory.
   Flavor names are identical across all regions, but the flavor IDs will
   vary.
 
-Operating System Images
+Operating system images
 =======================
 
 In order to create an instance, you will need to have a pre-built operating
@@ -139,7 +139,7 @@ listed here: :ref:`images`
 
 Keypairs must be created in each region being used.
 
-Security Groups
+Security groups
 ===============
 
 Security groups are akin to a virtual firewall. All new instances are put in
@@ -172,3 +172,26 @@ In order to connect to your instance, you will need to allocate a floating IP
 to the instance. Alternately, you could create a :ref:`VPN <vpn>` and save
 some money by avoiding floating IPs altogether. VPNs are not feasible when the
 instance will be offering a service to the greater internet.
+
+.. _connecting-to-instance:
+
+Connecting to an instance
+=========================
+
+Once all of the previous things are set up, there are a few things to note
+about connecting to your instance via the CLI. One is that you need to make
+sure you reference the correct operating system that you are trying to connect
+to. Another things is that you accurately source where your ssh private key is,
+making sure that said key matches the public one you used to create your
+instance.
+
+For example, if you were trying to connect to an ubuntu image with the floating
+IP 103.255.251.140. You would use the command:
+
+.. code-block:: bash
+
+  $ ssh -i <path/to/private/key> ubuntu@103.255.251.140
+
+In this example we use the '-i' flag to explicitly state where our private key
+is. We also make sure that we are SSH-ing to the correct operating system on
+the floating IP we have acquired.

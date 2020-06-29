@@ -19,7 +19,7 @@ give you a full view of how the individual pieces work together.
 
 .. note::
 
- This documentation refers to values using placeholders (such as ``<PRIVATE_SUBNET_ID>``)
+ This documentation refers to values using place holders (such as ``<PRIVATE_SUBNET_ID>``)
  in example command output. The majority of these values will be displayed as UUIDs
  in your output. Many of these values will be stored in bash variables prefixed with
  ``CC_`` so you do not have to cut and paste them. The prefix ``CC_`` (Catalyst Cloud)
@@ -111,10 +111,7 @@ Now create a router interface on the "private-subnet" subnet:
 
  $ openstack router add subnet border-router private-subnet
 
-
-
-
-Choosing a Flavor
+Choosing a flavor
 =================
 
 The Flavor of an instance specifies the disk, CPU, and memory allocated to  an
@@ -156,7 +153,7 @@ use:
  | b4a3f931-dc86-480c-b7a7-c34b2283bfe7 | c1.c4r32  | 32768 |   10 |         0 |     4 | True      |
  | c093745c-a6c7-4792-9f3d-085e7782eca6 | c1.c2r4   |  4096 |   10 |         0 |     2 | True      |
  | e3feb785-af2e-41f7-899b-6bbc4e0b526e | c1.c2r2   |  2048 |   10 |         0 |     2 | True      |
- +--------------------------------------+-----------+-------+------+-----------+-------+-----------|
+ +--------------------------------------+-----------+-------+------+-----------+-------+-----------+
 
  $ export CC_FLAVOR_ID=$( openstack flavor show c1.c1r1 -f value -c id )
 
@@ -168,7 +165,7 @@ This example assigns a c1.c1r1 flavor to the instance.
  using ``openstack flavor list``.
 
 
-Choosing an Image
+Choosing an image
 =================
 
 In order to create an instance, you will use a pre-built Operating System
@@ -222,8 +219,8 @@ This example uses the Ubuntu image to create an instance.
 
 .. note::
 
-  The amount of images that Catalyst Provides can be quiete large, if you know what Operating System you want for your
-  image you can use the command ``opentsack image list -- public | grep <OPERATING SYSTEM>``
+  The amount of images that Catalyst Provides can be quite large, if you know what Operating System you want for your
+  image you can use the command ``openstack image list -- public | grep <OPERATING SYSTEM>``
   to find it quicker than looking through this list. Another thing to note is that;
   Image IDs will be different in each region. Furthermore, images are periodically updated so
   Image IDs will change over time. Remember always to check what is available
@@ -270,7 +267,7 @@ Use ``openstack keypair create`` to upload your Public SSH key.
  Keypairs must be created in each region being used.
 
 
-Choosing a Network
+Choosing a network
 ==================
 
 List the available networks and choose the appropriate network to use.
@@ -298,8 +295,9 @@ be booted on this network. Choose "private-net" when assigning a network to the 
   using ``openstack network list``.
 
 
-Configure Instance Security Group
+Configure instance security group
 =================================
+.. _security-group-first-instance:
 
 Create a security group called "first-instance-sg".
 
@@ -377,7 +375,7 @@ address:
  +-------------------+--------------------------------------+
 
 
-Booting an Instance
+Booting an instance
 ===================
 
 Use the ``openstack server create`` command, supplying the information
@@ -475,7 +473,7 @@ As the Instance builds, its details will be provided. This includes its ID
  +--------------------------------------+------------------------------------------------------------+
 
 
-Allocate a Floating IP
+Allocate a floating IP
 ======================
 
 In order to connect to the instance, first allocate a Floating IP.
@@ -516,7 +514,7 @@ Associate this Floating IP with the instance:
  $ openstack server add floating ip first-instance $CC_PUBLIC_IP
 
 
-Connect to the new Instance
+Connect to the new instance
 ===========================
 
 Connecting to the Instance should be as easy as:

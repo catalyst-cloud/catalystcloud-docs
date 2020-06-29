@@ -6,16 +6,17 @@ Creating volumes using LVM
 What is LVM?
 ------------
 
-The Logical Volume Manager (LVM) is a userspace toolset designed to provide a
+The Logical Volume Manager (LVM) is a user space tool set designed to provide a
 higher level management of disk storage on a linux system than the traditional
 approach of disks and partitions by creating a software abstraction of those
 physical devices.
 
-This virtualisation of the disks provides the following benefits:
+This virtualization of the disks provides the following benefits:
 
--  The ability to create single logical volumes from multiple physical volumes or entire disks.
--  Managment of large disk clusters by allowing hot swappabble disks to be added and replaced
-   without service downtime.
+-  The ability to create single logical volumes from multiple physical
+   volumes or entire disks.
+-  Management of large disk clusters by allowing hot swappable disks to be
+   added and replaced without service downtime.
 -  Allows for easy filesystem resizing without having to migrate data.
 -  Create filesystem backups by taking snapshots of logical volumes.
 
@@ -23,17 +24,17 @@ This virtualisation of the disks provides the following benefits:
 Working with logical volumes
 ============================
 
-While it is possible to create a logical volume using an unpartitioned disk we
-recommend that you create one anyway, if for no other reason than to inform
-software such as partitioning utilities that the disk is is being used. This
-avoids the possibiliy of someone firing up a partitioning program, seeing an
-unpartitioned disk and attempting to use it for some other purpose.
+While it is possible to create a logical volume using an un-partitioned disk we
+recommend that you use a partitioned one, if for no other reason than to inform
+software such as partitioning utilities that the disk is being used. This
+avoids the possibility of someone firing up a partitioning program, seeing an
+un-partitioned disk and attempting to use it for some other purpose.
 
 Creating a logical volume on a single disk
 ------------------------------------------
 The first thing to do is identify the disks available for use, to do this
 use ``lvmdiskscan`` while on a **compute instance**. and while having ``Sudo``
-privilages.
+privileges.
 
 .. code-block:: shell
 
@@ -49,7 +50,7 @@ privilages.
 This shows us that there are currently three disks available
 
 - /dev/vda1, which is a partition on the disk /dev/vda
-- /dev/vdb and /dev/vdc, which are unpartitioned disks
+- /dev/vdb and /dev/vdc, which are un-partitioned disks
 
 For this example /dev/vdb will be used to create the logical volume.
 
@@ -59,7 +60,7 @@ and the steps are as follows:
 
 - load gdisk and select the disk to partition
 - type **n** to create a new partition
-- accept the deafaults for partition number, first sector and last sector
+- accept the defaults for partition number, first sector and last sector
 - type **L** to list the available partition types
 - type **8e00** to select Linux LVM
 - type **p** to view the partition information

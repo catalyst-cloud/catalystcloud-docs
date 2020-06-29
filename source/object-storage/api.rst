@@ -1,20 +1,18 @@
-############################
-Object storage with the APIs
-############################
+############
+Via the APIs
+############
 
 
 ===================
 Using the Swift API
 ===================
 
-The Swift object storage service has a feature API that is fully documented on
-the OpenStack website
+For this section of the documentation, we will cover the basic features for
+using the Swift object storage API. For a more in depth understanding of the
+features that are offered via this API we recommend reading through the
+official `OpenStack documentation
+<http://developer.openstack.org/api-ref/object-storage/>`_
 
-.. seealso::
-
-  The features supported by the Swift can be found on the `OpenStack
-  documentation
-  <http://developer.openstack.org/api-ref/object-storage/>`_
 
 API endpoints
 =============
@@ -38,12 +36,14 @@ API endpoints
 Requirements
 ============
 
-You need valid OpenStack credentials to interact using the Swift API.
-These can be obtained from the RC file (under Access &
-Security, API Access, or using the command line tools).
+To be able to interact with the Swift API directly you will need to have
+sourced a set of valid OpenStack credentials. These can be obtained from the
+RC file (under Access & Security, API Access, or using the command line tools).
 
-The standard client library is Python Swiftclient. This can be installed
-into your current Python environment. The example below illustrates how:
+In addition to sourcing the correct environment variables, you will also need
+to have installed the standard client library for swift, which in this case is
+Python Swiftclient. This can be added to your current Python environment.
+The example below illustrates how:
 
 .. code-block:: bash
 
@@ -60,13 +60,20 @@ into your current Python environment. The example below illustrates how:
 Sample code
 ===========
 
-The code below demonstrates how you can use Swiftclient to interact
-with Swift via the version 2 compatible (auth) API. This version uses
-the same endpoint for both regions, but you tell it which one you want
-when connecting.
+The code below demonstrates how you can use the Python-Swiftclient to interact
+with swift via the version 2 compatible (auth) API. This version uses
+the same endpoint for both regions, but you have to specify which one you want
+to use when connecting.
 
-Before running this example, ensure that you have sourced an openrc file, as
-explained in :ref:`command-line-interface`.
+The code block will use the environment variables sourced from your openrc
+file, explained in :ref:`command-line-interface`, to :
+
+1) create a container on your project
+2) add a file to the container
+3) list all of your containers and their contents.
+
+To use this file, save it as a '.py' and run it from your command line.
+
 
 .. code-block:: python
 
@@ -78,18 +85,18 @@ explained in :ref:`command-line-interface`.
   auth_username = os.environ['OS_USERNAME']
   auth_password = os.environ['OS_PASSWORD']
   auth_url = os.environ['OS_AUTH_URL']
-  project_name = os.environ['OS_TENANT_NAME']
+  project_name = os.environ['OS_PROJECT_NAME']
   region_name = os.environ['OS_REGION_NAME']
   options = {'tenant_name': project_name, 'region_name': region_name}
 
   # Establish the connection with the object storage API
   conn = swiftclient.Connection(
+          authurl = auth_url,
           user = auth_username,
           key = auth_password,
-          authurl = auth_url,
           insecure = False,
-          auth_version = 2,
           os_options = options,
+          auth_version = '3'
   )
 
   # Create a new container
@@ -105,11 +112,9 @@ explained in :ref:`command-line-interface`.
   # List all containers and objects
   for container in conn.get_account()[1]:
       cname = container['name']
-      print 'container\t{0}'.format(cname)
-
+      print ("container\t{0}".format(cname))
       for data in conn.get_container(cname)[1]:
-          print '\t{0}\t{1}\t{2}'.format(data['name'], data['bytes'],
-          data['last_modified'])
+          print ('\t{0}\t{1}\t{2}'.format(data['name'], data['bytes'], data['last_modified']))
 
 
 To use the version 1 (auth) API you need to have previously authenticated,
@@ -249,10 +254,10 @@ Swift command line tools, then exporting the required variables as shown below.
     $ source openstack-openrc.sh
 
     $ swift stat -v
-     StorageURL: https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda
+     StorageURL: https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                       Auth Token: 5f5a043e1bd24a8fa84b8785cca8e0fc
                       Containers: 48
-                         Account: AUTH_0ef8ecaa78684c399d1d514b61698fda
+                         Account: AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                          Objects: 156
                            Bytes: 11293750551
  Containers in policy "policy-0": 48
@@ -265,7 +270,7 @@ Swift command line tools, then exporting the required variables as shown below.
                     Content-Type: text/plain; charset=utf-8
                    Accept-Ranges: bytes
 
-    $ export storageURL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_0ef8ecaa78684c399d1d514b61698fda"
+    $ export storageURL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
     $ export token="5f5a043e1bd24a8fa84b8785cca8e0fc"
 
 Then run the following command to get a list of all available containers for

@@ -11,7 +11,7 @@ Download and run this script using the following commands:
 
 .. code-block:: bash
 
- $ wget -q https://raw.githubusercontent.com/catalyst/catalystcloud-docs/master/scripts/create-first-instance.sh
+ $ wget -q https://raw.githubusercontent.com/catalyst/catalystcloud-docs/master/source/_scripts/create-first-instance.sh
  $ chmod 744 create-first-instance.sh
  $ ./create-first-instance.sh
 
@@ -40,7 +40,7 @@ You can download and run this script using the following commands:
 
 .. code-block:: bash
 
- $ wget -q https://raw.githubusercontent.com/catalyst/catalystcloud-docs/master/scripts/delete-first-instance.sh
+ $ wget -q https://raw.githubusercontent.com/catalyst/catalystcloud-docs/master/source/_scripts/delete-first-instance.sh
  $ chmod 744 delete-first-instance.sh
  $ ./delete-first-instance.sh
 

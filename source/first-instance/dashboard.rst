@@ -27,7 +27,7 @@ Uploading an SSH key
 ********************
 
 The first thing we need to do is to have a way to access the instances we
-create. Typcially this is done by a Secure Shell tunnel, or SSH. To allow our
+create. Typically this is done by a Secure Shell tunnel, or SSH. To allow our
 instance to accept our workstation's SSH tunnel request, we must add our SSH
 public key to our instance. We can do this right from the dashboard.
 
@@ -77,7 +77,7 @@ Name the key pair, and paste your public key into the box.
 Now that you've either imported or created an SSH key pair, we can continue.
 
 *********************************
-Configure Instance Security Group
+Configure instance security group
 *********************************
 
 By default, instances are inaccessible from all external IP addresses on all
@@ -125,10 +125,8 @@ When you're happy, select ``Add`` to add the rule to the security group.
 We now have a security group that will allow SSH access to our soon to be
 created instance.
 
-
-
 *******************
-Booting an Instance
+Booting an instance
 *******************
 
 We are now ready to launch our first instance! Navigate to the ``Instances``
@@ -186,7 +184,7 @@ Wait for your instance to launch.
 
 .. image:: dashboard_assets/launching-instance.png
 
-Finally, to make your instance accessable, we need to give it a publicly
+Finally, to make your instance accessible, we need to give it a publicly
 available, static IP address, because currently the instance only has an
 internal IP address from instance's subnet. These are ``Floating IPs``.
 
@@ -218,7 +216,7 @@ Congratulations, you've now booted an instance. Now we'll connect to it with an
 SSH tunnel so you can start using it.
 
 ***************************
-Connect to the new Instance
+Connect to the new instance
 ***************************
 
 Before we SSH in, we should give the private SSH key the correct, more secure

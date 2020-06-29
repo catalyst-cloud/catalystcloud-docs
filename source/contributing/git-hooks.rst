@@ -1,6 +1,6 @@
 
 *********
-Git Hooks
+Git hooks
 *********
 
 In order to avoid committing reStructuredText code that does not compile we
@@ -35,7 +35,7 @@ repo:
 If you prefer, you can symlink hooks as described `here
 <https://stackoverflow.com/questions/4592838/symbolic-link-to-a-hook-in-git>`_.
 
-Output Verbosity
+Output verbosity
 ================
 
 The commit hook currently displays the output of ``compile.sh``. If you would
