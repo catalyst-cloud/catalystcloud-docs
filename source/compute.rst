@@ -32,6 +32,7 @@ Table of Contents
   :maxdepth: 1
 
   compute-service/launch-compute-instance
+  compute-service/compute-create-tabs
   compute-service/resize-instance
   compute-service/stop-instance
   compute-service/anti-affinity-groups-ha

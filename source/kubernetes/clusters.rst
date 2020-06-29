@@ -373,11 +373,6 @@ separated key value list.
 
 .. code-block:: bash
 
-<<<<<<< HEAD
-Next run the ``kubectl proxy`` command from the CLI. You can run this command
-in a separate window, however you will need to source the CONFIG file in said
-window.
-=======
   $ export TEMPLATENAME="kubernetes-v1.15.11-prod-20200330"
   $ openstack coe cluster template show $TEMPLATENAME -c labels -f value | sed -e "s/': '/=/g" | sed -e "s/', '/,/g" | sed -e "s/{'//g" | sed -e "s/'}//" | sed -e "s/,/,\\\\\n/g"
 
@@ -415,7 +410,6 @@ changing the ``auto_scaling_enabled`` label to true:
   intend. Another thing you need to check is that when you are finished
   inputting the the labels that you end with a "\" or else the command will
   fail to create the cluster correctly.
->>>>>>> 3b55f7a892d653b7a06809f8293138fdd585e741
 
 .. code-block:: bash
 
