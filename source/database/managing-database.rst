@@ -11,6 +11,13 @@ activate and track the logging of your instances.
 Configuring access
 ******************
 
+.. Note::
+
+  Users can't access the underlying compute instance that the database lies on,
+  they can only access the database if they have permissions. This is for
+  security purposes.
+
+
 If a user was not added when the instance was created then the only
 user account that exists is the ``root`` user. However this is disabled by
 default.
@@ -205,6 +212,12 @@ resize is complete.
 .. code-block::
 
   $ openstack database instance resize volume myDB 10
+
+
+.. Note::
+
+  When you upgrade the size of an instance, if it has any replicas; there is an
+  option so that they are also upgraded to the same size.
 
 ************
 Viewing logs
