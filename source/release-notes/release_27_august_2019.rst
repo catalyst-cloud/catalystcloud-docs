@@ -2,6 +2,10 @@
 27 August 2019
 ##############
 
+***************************
+Kubernetes Service (Magnum)
+***************************
+
 The main focus for this release was around our Kubernetes service. With this
 release the Catalyst Cloud Kubernetes service has been promoted to a ``Beta``
 status.

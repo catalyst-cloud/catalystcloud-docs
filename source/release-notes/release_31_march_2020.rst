@@ -4,9 +4,9 @@
 
 Minor release to update the Kubernetes templates in the Container Infra service.
 
-************************
-Container Infra (Magnum)
-************************
+***************************
+Kubernetes Service (Magnum)
+***************************
 
 Two new templates were added to provide support for Kubernetes 1.15.11, the
 template names are:
