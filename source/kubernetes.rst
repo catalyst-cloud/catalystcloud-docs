@@ -24,6 +24,7 @@ Table of Contents:
    kubernetes/rolling-upgrade
    kubernetes/services
    kubernetes/storage
+   kubernetes/versions
 
 
 ******************
