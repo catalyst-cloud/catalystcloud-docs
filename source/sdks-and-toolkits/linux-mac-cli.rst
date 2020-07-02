@@ -16,9 +16,6 @@ reference to the use of a virtual environment. If you require more information
 on the basic functions of the python virtual environment, please refer to the
 :ref:`python-virtual-env` tutorial.
 
-The following provides the basics of manually installing the OpenStack command
-line tools on common operating systems.
-
 Operating system specific steps
 ===============================
 
