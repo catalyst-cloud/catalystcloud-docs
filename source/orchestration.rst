@@ -38,7 +38,7 @@ You will only pay for the resources consumed by your running application stacks
 
   orchestration/using-heat-cli
   orchestration/hot-format
+  orchestration/auto-healing
+  orchestration/auto-scaling
   orchestration/faq
-
-
 

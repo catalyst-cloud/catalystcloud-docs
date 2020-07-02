@@ -15,5 +15,5 @@ instances.
    :maxdepth: 1
 
    alarm/overview
-   alarm/autohealing
-   alarm/autoscaling
+   orchestration/auto-healing
+   orchestration/auto-scaling
