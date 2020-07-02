@@ -14,6 +14,6 @@ instances.
 .. toctree::
    :maxdepth: 1
 
-   alarm-service/alarm-service-intro
-   alarm-service/autohealing-example
-   alarm-service/autoscaling
+   alarm/overview
+   alarm/autohealing
+   alarm/autoscaling

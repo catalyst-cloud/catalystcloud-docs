@@ -17,7 +17,7 @@ Contents:
    first-instance
    best-practices
    sdks-and-toolkits
-   alarm-service
+   alarm
    backups
    billing
    block-storage

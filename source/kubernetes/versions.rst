@@ -42,7 +42,7 @@ For example:
 .. code-block:: bash
 
   [major].[minor].[patch]
-  
+
   v1.18.2
   v1.17.5
   v1.16.9
@@ -77,7 +77,7 @@ Catalyst Cloud Kubernetes Service supports the latest stable patch versions
 for each minor version. As long as there is a patch version released, the oldest
 patch version will be hidded/removed. For example, if current versions
 supported for v1.16.x are v1.16.9, then v1.16.9 will be hidded/removed in
-favor of the release of v1.16.10. 
+favor of the release of v1.16.10.
 
 .. note::
 
@@ -89,7 +89,7 @@ favor of the release of v1.16.10.
 Users should always aim to run the latest patch version for each minor version
 to get the latest security enhancements. For example, if the current Kubernetes
 cluster is running on v1.16.9 and the new patch version is v1.16.10, then it
-is highly recommended to upgrade to v1.16.10 as soon as possible. 
+is highly recommended to upgrade to v1.16.10 as soon as possible.
 
 .. note::
 
@@ -133,3 +133,4 @@ CNI Version
 
 The only supported CNI on Catalyst Cloud Kubernetes Service is Calico and the
 current versions is v3.13.1
+

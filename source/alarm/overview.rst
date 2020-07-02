@@ -1,8 +1,8 @@
 .. _alarm-service-on-catalyst-cloud:
 
-************
-Introduction
-************
+********
+Overview
+********
 
 The alarm service allows a user to set up alarms that monitor the state of
 various objects in the cloud. The alarms wait for specific events to occur;
