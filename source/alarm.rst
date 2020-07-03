@@ -1,8 +1,8 @@
-#############
-Alarm service
-#############
+#####
+Alarm
+#####
 
-.. _alarm-service:
+.. _alarm:
 
 The alarm service allows you to create alarms that monitor objects on your
 project and can inform other services or programs of any state changes that
