@@ -1,0 +1,13 @@
+parameters:
+  public_net_id: f10ad6de-a26d-4c29-8c64-2a7418d47f8f
+  private_net: c9325762-8181-4030-9a23-a73b843360b8
+  image: ubuntu-18.04-x86_64
+  servers_flavor: c1.c1r1
+  key_name: glyndavies
+  host_name: gd-test
+
+
+
+
+# Heat
+# o stack create wp-test -t wordpress-2instances-vpc.yaml -e env-wp.yaml

@@ -1,7 +1,7 @@
 export CC_PRIVATE_NETWORK=private-net
 export CC_FLAVOR=c1.c1r1
 export CC_IMAGE=ubuntu-20.04-x86_64
-export CC_KEYPAIR=<YOUR_KAY_NAME>
+export CC_KEYPAIR=<YOUR_KEY_NAME>
 export CC_SEC_GROUP_NAME=first-instance-sg
 export CC_SERVERNAME=first-instance
 

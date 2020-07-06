@@ -31,9 +31,9 @@ Table of Contents
 .. toctree::
   :maxdepth: 1
 
-  compute-service/launch-compute-instance
-  compute-service/compute-create-tabs
-  compute-service/resize-instance
-  compute-service/stop-instance
-  compute-service/anti-affinity-groups-ha
-  compute-service/faq
+  compute/quickstart
+  compute/launch-compute-instance
+  compute/resize-instance
+  compute/stop-instance
+  compute/anti-affinity-groups-ha
+  compute/faq
