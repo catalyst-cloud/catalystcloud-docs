@@ -35,7 +35,7 @@ parameters:
   image:
     type: string
     description: Image ID or image name to use for the server
-    default: ubuntu-18.04-x86_64
+    default: ubuntu-20.04-x86_64
     constraints:
       - custom_constraint: glance.image
 

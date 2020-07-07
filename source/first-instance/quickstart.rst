@@ -108,8 +108,8 @@ begin.
     .. tab:: Heat
 
         .. literalinclude:: _scripts/heat/heat_env.yaml
-        :language: yaml
-        :caption: heat_env.yaml
+            :language: yaml
+            :caption: heat_env.yaml
 
         .. literalinclude:: _scripts/heat/heat_basic_compute.yaml
             :language: yaml

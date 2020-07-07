@@ -1,4 +1,3 @@
-# Configure the OpenStack Provider
 # This example relies on OpenStack environment variables
 # If you wish to set these credentials manualy please consult
 # https://www.terraform.io/docs/providers/openstack/index.html
@@ -30,7 +29,7 @@ variable "compute_flavor_ID" {
   default = "<INSERT THE FLAVOR ID FOR YOUR REGION>"
 }
 
-# insert a valid SSH public key that you wish to use in default
+# Insert a valid SSH public key that you wish to use in default
 variable "public_ssh_key" {
   default = "<INSERT YOUR PUBLIC SSH KEY HERE>"
 }
@@ -45,7 +44,7 @@ resource "openstack_networking_router_v2" "router_1" {
 
 # Create a Network
 resource "openstack_networking_network_v2" "network_1" {
-    name ="private_net_terraform"
+    name = "private_net_terraform"
     admin_state_up = "true"
 }
 

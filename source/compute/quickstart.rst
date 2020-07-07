@@ -10,13 +10,14 @@ The purpose of this quickstart is to help you launch a compute instance that
 you can test and experiment with, in order to get a better understanding of
 how the compute service works.
 
-In order to this, we will provide a simple, single instance example using some
-of the most common options that are being used by our customers. These are:
+In order to do this, we will provide a simple, single instance example using
+some of the most common methods that are being used by our customers. These
+are:
 
 - The Catalyst Cloud `web dashboard`_.
 - The Openstack `command line tools`_.
 - The Openstack `Heat`_ orchestration tool.
-- Red hat `Ansible`_ orchestration tool.
+- The Red hat `Ansible`_ orchestration tool.
 - The Hashicorp `Terraform`_ orchestration tool.
 
 .. _command line tools: https://docs.openstack.org/newton/user-guide/cli.html
@@ -32,8 +33,8 @@ The configuration we will use for these examples, is based on the settings that
 would be found in a brand new cloud project, which will have been provisioned
 with a single network.
 
-We will launch a compute instance using an Ubuntu 20.04 image and will
-connected it to the default network mentioned above. We will also create a
+We will launch a compute instance using an Ubuntu 20.04 image and connect
+it to the default network mentioned above. We will also create a
 security group to allow inbound SSH traffic
 
 The configuration details are as follows:
@@ -48,7 +49,7 @@ The configuration details are as follows:
 Assumptions
 ===========
 
-These guides assume the following:
+These examples assume the following:
 
 - You have whitelisted the public facing IP address that you will be using to
   access the Catalyst Cloud APIs. Alternatively you can work from or via an
@@ -58,8 +59,8 @@ These guides assume the following:
   interact with your Catalyst Cloud project. There are several options
   available to you depending on your tool of choice, some of these are:
 
-  - Using the openrc file
-  - Using a clouds.yaml
+  - Using an :ref:`openrc file<source-rc-file>`
+  - Using a clouds.yaml file
 
 - You have uploaded or created an SSH key.
 
@@ -68,9 +69,9 @@ your own compute instances. These instances will be the same as if you followed
 the instructions from the :ref:`first instance <launch-first-instance>` section
 of the documents.
 
-You will need to change some of the variables in these templates so that they
-fit your own project variables; and you will need to :ref:`source-rc-file` so
-you can interact correctly with your project.
+This documentation refers to values using place holders
+(such as <PRIVATE_SUBNET_ID>) You will need to change these to whichever UUID
+fits your project before you run these examples.
 
 .. tabs::
 
@@ -99,7 +100,7 @@ you can interact correctly with your project.
         The following assumes that you have already sourced an openRC file and
         that you have downloaded and installed terraform.
 
-        The template file that you will be running is:
+        The template file that you need to save is:
 
         .. literalinclude:: _scripts/terraform/terraform-variables.tf
             :language: shell
