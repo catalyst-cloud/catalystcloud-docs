@@ -46,6 +46,101 @@ assigned to their account.
 |               | admin namespace.                                                 |
 +---------------+------------------------------------------------------------------+
 
+More information
+----------------
+
+.. raw:: html
+
+   <details>
+   <summary>For a more comprehensive list of the exact permissions that each
+   role gives, you can <a>click here</a> to view a full list for the kubernetes
+   roles.</summary>
+
+.. code-block:: console
+
+   +----------------------+-----------------------------------------------------+
+   | Role                 | Permissions                                         |
+   +======================+=====================================================+
+   | k8s_admin            | container.*                                         |
+   |                      | resourcemanager.projects.get                        |
+   |                      | resourcemanager.projects.list                       |
+   +----------------------+-----------------------------------------------------+
+   | k8s_developer        | container.apiServices.*                             |
+   |                      | container.backendConfigs.*                          |
+   |                      | container.bindings.*                                |
+   |                      | container.certificateSigningRequests.create         |
+   |                      | container.certificateSigningRequests.delete         |
+   |                      | container.certificateSigningRequests.get            |
+   |                      | container.certificateSigningRequests.list           |
+   |                      | container.certificateSigningRequests.update         |
+   |                      | container.certificateSigningRequests.updateStatus   |
+   |                      | container.clusterRoleBindings.get                   |
+   |                      | container.clusterRoleBindings.list                  |
+   |                      | container.clusterRoles.get                          |
+   |                      | container.clusterRoles.list                         |
+   |                      | container.clusters.get                              |
+   |                      | container.clusters.list                             |
+   |                      | container.componentStatuses.*                       |
+   |                      | container.configMaps.*                              |
+   |                      | container.controllerRevisions.get                   |
+   |                      | container.controllerRevisions.list                  |
+   |                      | container.cronJobs.*                                |
+   |                      | container.csiDrivers.*                              |
+   |                      | container.csiNodes.*                                |
+   |                      | container.customResourceDefinitions.*               |
+   |                      | container.daemonSets.*                              |
+   |                      | container.deployments.*                             |
+   |                      | container.endpoints.*                               |
+   |                      | container.events.*                                  |
+   |                      | container.horizontalPodAutoscalers.*                |
+   |                      | container.ingresses.*                               |
+   |                      | container.initializerConfigurations.*               |
+   |                      | container.jobs.*                                    |
+   |                      | container.limitRanges.*                             |
+   |                      | container.localSubjectAccessReviews.*               |
+   |                      | container.namespaces.*                              |
+   |                      | container.networkPolicies.*                         |
+   |                      | container.nodes.*                                   |
+   |                      | container.persistentVolumeClaims.*                  |
+   |                      | container.persistentVolumes.*                       |
+   |                      | container.petSets.*                                 |
+   |                      | container.podDisruptionBudgets.*                    |
+   |                      | container.podPresets.*                              |
+   |                      | container.podSecurityPolicies.get                   |
+   |                      | container.podSecurityPolicies.list                  |
+   |                      | container.podTemplates.*                            |
+   |                      | container.pods.*                                    |
+   |                      | container.replicaSets.*                             |
+   |                      | container.replicationControllers.*                  |
+   |                      | container.resourceQuotas.*                          |
+   |                      | container.roleBindings.get                          |
+   |                      | container.roleBindings.list                         |
+   |                      | container.roles.get                                 |
+   |                      | container.roles.list                                |
+   |                      | container.runtimeClasses.*                          |
+   |                      | container.scheduledJobs.*                           |
+   |                      | container.secrets.*                                 |
+   |                      | container.selfSubjectAccessReviews.*                |
+   |                      | container.serviceAccounts.*                         |
+   |                      | container.services.*                                |
+   |                      | container.statefulSets.*                            |
+   |                      | container.storageClasses.*                          |
+   |                      | container.subjectAccessReviews.*                    |
+   |                      | container.thirdPartyObjects.*                       |
+   |                      | container.thirdPartyResources.*                     |
+   |                      | container.tokenReviews.*                            |
+   |                      | resourcemanager.projects.get                        |
+   |                      | resourcemanager.projects.list                       |
+   +----------------------+-----------------------------------------------------+
+   | k8s_viewer           | container.clusters.get                              |
+   |                      | container.clusters.list                             |
+   |                      | resourcemanager.projects.get                        |
+   |                      | resourcemanager.projects.list                       |
+   +----------------------+-----------------------------------------------------+
+
+.. raw:: html
+
+   </details>
 
 *********************************
 Generating Kubernetes config file
