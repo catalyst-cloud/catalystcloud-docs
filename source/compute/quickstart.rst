@@ -29,8 +29,8 @@ are:
 Configuration
 =============
 
-The configuration we will use for these examples, is based on the settings that
-would be found in a brand new cloud project, which will have been provisioned
+The configuration we will use for these examples is based on the settings that
+would be found in a brand new cloud project; which will have been provisioned
 with a single network.
 
 We will launch a compute instance using an Ubuntu 20.04 image and connect
@@ -71,7 +71,7 @@ of the documents.
 
 This documentation refers to values using place holders
 (such as <PRIVATE_SUBNET_ID>) You will need to change these to whichever UUID
-fits your project before you run these examples.
+fits your project before you run any of these templates.
 
 .. tabs::
 
@@ -86,6 +86,9 @@ fits your project before you run these examples.
             :caption: cli_basic_compute_destroy.sh
 
     .. tab:: Heat
+
+        The following assumes that you are familiar with the Heat template and
+        have installed all required dependencies.
 
         .. literalinclude:: _scripts/heat/heat_env.yaml
             :language: yaml

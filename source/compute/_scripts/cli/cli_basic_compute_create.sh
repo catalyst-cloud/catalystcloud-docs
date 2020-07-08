@@ -4,6 +4,7 @@ export CC_IMAGE=ubuntu-20.04-x86_64
 export CC_KEYPAIR=<YOUR_KEY_NAME>
 export CC_SEC_GROUP_NAME=first-instance-sg
 export CC_SERVERNAME=first-instance
+export CC_PUBLIC_NETWORK_ID=f10ad6de-a26d-4c29-8c64-2a7418d47f8f
 
 $ openstack security group create $CC_SEC_GROUP_NAME
 
@@ -23,3 +24,10 @@ $ openstack server create --flavor $CC_FLAVOR \
 --network $CC_PRIVATE_NETWORK  \
 --boot-from-volume 10 \
 $CC_SERVERNAME
+
+$ openstack floating ip create $CC_PUBLIC_NETWORK_ID
+
+$ export CC_FLOATING_IP_ID=$( openstack floating ip list -f value | grep -m 1 'None None' | awk '{ print $1 }' )
+$ export CC_PUBLIC_IP=$( openstack floating ip show $CC_FLOATING_IP_ID -f value -c floating_ip_address )
+
+$ openstack server add floating ip first-instance $CC_PUBLIC_IP
