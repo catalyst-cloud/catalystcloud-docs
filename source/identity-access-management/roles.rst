@@ -370,7 +370,11 @@ More information
    |                       |  openstack.orchestration.stacks:List_outputs                           |
    |                       |  openstack.orchestration.stacks:show_output                            |
    +-----------------------+------------------------------------------------------------------------+
+<<<<<<< HEAD
    | Object Storage        | Swift.*                                                                |
+=======
+   | Object Storage        | Swift.                                                                 |
+>>>>>>> e20abfea90f4a4b96edf588e31a9fa4153797a96
    +-----------------------+------------------------------------------------------------------------+
 
 
