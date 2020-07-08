@@ -38,5 +38,6 @@ New Features
   by means of merging changes rather than having to provide the entire label
   list.
 * Enable visibility of the cluster health status for private clusters.
-* Provide a means to limit access to the cluster API through the use of the
+* Provide a means to limit access to the Kubernetes API through the use of the
   the ``master_lb_allowed_cidrs`` label.
+
