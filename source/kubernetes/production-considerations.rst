@@ -79,6 +79,7 @@ am I going to be able to access the cluster? Because you have the option to
 make the cluster publicly accessible, you could create it so that you and those
 who need access to the cluster can do so wherever they are. This does come with
 the same risks as exposing anything to the public internet however.
+
 Alternatively, if you are creating a private cluster, you can refine the
 location from where you are able to access the cluster. This customization goes
 beyond just your internal network. You could limit the access to the API's from
@@ -86,6 +87,50 @@ only a fixed ip address range, whether this is for your entire company's subnet
 or you may only want the APIs visible from a management subnet? Or an office
 specific subnet? Regardless of where you may want the cluster exposed, the
 options are there for you to decide.
+
+
+.. _limiting_access:
+
+Limiting access to the API
+--------------------------
+
+If you have already opted to go with a private cluster then this consideration
+is of less importance to you. If, however, you have deployed a publicly
+accessible cluster you can minimise your exposure to risk by applying the
+following.
+
+To restrict access to the cluster API we can supply a comma separated list of
+CIDR values to the ``master_lb_allowed_cidrs`` label when we create the cluster.
+This limits which IP addresses the load balancer will accept external requests
+from.
+
+The default value is “” which means access is open to 0.0.0.0/0.
+
+.. Note::
+
+    This will only work when the cluster has been deployed with a loadbalancer
+    in front of the Kubernetes API as is the case for all of the Catalyst Cloud
+    production templates.
+
+As an example of what the create command could look like, let's assume we wish
+to create a cluster based on the following conditions:
+
+- It is based on a production template
+- It is publicly accessible via the internet
+- That access will be restricted to to a single IP address
+
+The resulting command would look like this.
+
+.. code-block:: console
+
+    $ openstack coe cluster create k8s-cluster \
+    --cluster-template kubernetes-v1.18.2-prod-20200630 \
+    --labels master_lb_floating_ip_enabled=true,master_lb_allowed_cidrs=203.109.145.15/32 \
+    --merge-labels \
+    --keypair glyndavies \
+    --node-count 2 \
+    --master-count 3
+
 
 Capacity
 ========

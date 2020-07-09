@@ -48,6 +48,25 @@ resources.
 The cluster template
 ********************
 
+.. Warning::
+
+  In an effort to make the process of getting started with Kubernetes on the
+  Catalyst Cloud a much simpler process, we have decided to modify the default
+  behaviour of the **development templates** we provide.
+
+  Effective from 1 July 2020, when one of these templates is used in the
+  creation of a new cluster it will, by default, provision a **floating IP** on
+  the Kubernetes API endpoint meaning that the resulting cluster will be
+  **publicly accessible over the internet**. It is possible to restrict access
+  to a public cluster, see :ref:`limiting_access` for more details.
+
+  If you wish to revert to the original behaviour of having a private cluster
+  please launch your cluster with the following flag
+  ``--floating-ip-disabled``
+
+  As a reminder, it is considered best practice that production workloads are
+  **not** deployed on a publicly accessible cluster.
+
 A cluster template is a collection of parameters to describe how a cluster can
 be constructed. Some parameters are relevant to the infrastructure of the
 cluster, while others are for the particular COE. These templates work as a
@@ -58,39 +77,32 @@ it may also be possible, in some situations, for users to create their own
 templates. Initially Catalyst Cloud will only support the use of the
 pre-defined templates.
 
-.. Note::
-
-  From cluster template version ``v1.12.10`` onwards, as a security best
-  practice, the behaviour when creating a new cluster is for it to be
-  created as a :ref:`private-cluster`. This means that the cluster will not be
-  reachable directly from the internet by default.
-
 Template types
---------------
+==============
 
 The naming convention used for the templates is broken down as follows:
 
-* **kubernetes-v1.11.2** : this is the version of kubernetes that the template
+* **kubernetes-v1.18.2** : this is the version of kubernetes that the template
   will use to create the cluster.
 * **-prod** or **-dev**: the type of environment to be created (see below).
-* **-20190912**: the date on which the template was created.
+* **-20200615**: the date on which the template was created.
 
 The difference between the development and production templates are:
 
-* **Production**: creates a Kubernetes cluster that is intended for production
-  workloads. It creates three or more master nodes and three or more worker
-  nodes. The master nodes will have a loadbalancer deployed in front of them to
-  provide high availability for the Kubernetes API. This template also deploys
-  Prometheus and Grafana to provide cluster metrics.
-* **Development**: creates a minimal Kubernetes cluster with a single master
-  and a single worker node. As the name suggests, it should not be used for
-  production.
+* **Production**: creates a **private** Kubernetes cluster that is intended
+  for production workloads. It creates three or more master nodes and three or
+  more worker nodes. The master nodes will have a loadbalancer deployed in
+  front of them to provide high availability for the Kubernetes API. This
+  template also deploys Prometheus and Grafana to provide cluster metrics.
+* **Development**: creates a minimal, **publicly accessible** Kubernetes
+  cluster with a single master and a single worker node. As the name suggests,
+  it should not be used for production.
 
 Viewing templates
------------------
+=================
 
 When running the openstack command line tools ensure that you have sourced a
-valid openrc file first. For more information on this see :ref:`source-rc-file`
+valid openrc fil$ e first. For more information on this see :ref:`source-rc-file`
 
 .. Note::
 
@@ -102,17 +114,16 @@ Then list all of the available cluster templates.
 .. code-block:: bash
 
   $ openstack coe cluster template list
-  +--------------------------------------+-----------------------------------+
-  | uuid                                 | name                              |
-  +--------------------------------------+-----------------------------------+
-  | 18a9fa94-95f4-46a4-be3c-c8fae025ce97 | kubernetes-v1.13.12-dev-20191129  |
-  | a04e8d58-bd81-4eae-9242-144dc75b3821 | kubernetes-v1.13.12-prod-20191129 |
-  | 681241fd-682a-418e-aa1e-8238ceca834e | kubernetes-v1.15.11-dev-20200330  |
-  | 77b71c57-7ad3-49fc-a5c2-80962325e7a1 | kubernetes-v1.15.11-prod-20200330 |
-  | e7be8a37-c5a6-4dfa-853c-8ff0653ede31 | kubernetes-v1.14.10-dev-20200422  |
-  | 9ab35677-8644-4d3c-bb81-281f7ec52e31 | kubernetes-v1.14.10-prod-20200422 |
-  | 2cb17a1a-bafd-48c4-a466-c690524d325d | kubernetes-v1.15.11-dev-20200501  |
-  +--------------------------------------+-----------------------------------+
+  +$ --------------------------------------+----------------------------------+
+  | uuid                                 | name                             |
+  +--------------------------------------+----------------------------------+
+  | bc493321-6d30-44a1-b767-2196e523dd8e | kubernetes-v1.16.9-dev-20200602  |
+  | 99f51180-cdcb-4492-9163-5453f2a8998f | kubernetes-v1.16.9-prod-20200602 |
+  | c06970d9-0926-4e07-8042-01601d68a2a1 | kubernetes-v1.17.5-dev-20200615  |
+  | 2efc83d2-e6d6-4c3a-af3b-17463387d314 | kubernetes-v1.17.5-prod-20200615 |
+  | 228d392b-79e9-4472-8981-8947e2de1285 | kubernetes-v1.18.2-dev-20200630  |
+  | 903b954d-667a-45ca-8e5c-bab3bcf310f7 | kubernetes-v1.18.2-prod-20200630 |
+  +--------------------------------------+----------------------------------+
 
 To find more information on which template you want to use, you can view each
 template via the `Cluster Templates`_ tab on our dashboard. For information
@@ -120,7 +131,7 @@ on how volumes work and storage types in a cluster refer to the
 :ref:`storage<storage>` section under the kubernetes documentation.
 
 Default volume types and sizes
-==============================
+------------------------------
 
 Here we outline the defaults settings of our volumes across the different
 regions of the Catalyst Cloud. Additionally, we cover where to find
@@ -162,7 +173,7 @@ To change these defaults you will have to change the labels for your template.
 The process of which is detailed under: :ref:`modifying_a_cluster_with_labels`.
 
 Best practices with NVMe
-------------------------
+========================
 
 We use NVMe for our volumes because it reduces the time it takes to pull and
 start your pods, making for an overall faster cluster. In addition, using NVMe
@@ -187,7 +198,7 @@ the dashboard approach, please see the :ref:`k8s-quickstart` section of the
 documents.
 
 Getting kubectl
----------------
+===============
 
 To deploy and manage applications on kubernetes through the command line,
 we use the Kubernetes command-line tool, `kubectl`_. With this tool you can
@@ -227,7 +238,7 @@ where command, TYPE, NAME, and flags are:
 
 
 Cluster access using kubeconfig files
--------------------------------------
+=====================================
 
 The kubectl command-line tool uses kubeconfig files to find the information it
 needs to choose a cluster and communicate with the API server of a cluster.
@@ -235,7 +246,7 @@ These files provide information about clusters, users, namespaces, and
 authentication mechanisms.
 
 Getting the cluster config
---------------------------
+==========================
 
 We use our cluster config to configure our native command line to communicate
 with our cluster. To do so we have to source the config file of our
@@ -259,7 +270,7 @@ configuration to a different location you can use the
   following section will outline this in more detail.
 
 Production consideration for config files
------------------------------------------
+=========================================
 
 Because the initial config file that you create contains all the certifications
 for your cluster, it is recommended that for production clusters you safely
@@ -273,7 +284,7 @@ you can use the following:
   $ eval $(openstack coe cluster config k8s-cluster --use-keystone)
 
 Viewing the cluster
--------------------
+===================
 
 It is possible to view details of the cluster with the following command. This
 will return the address of the master and the services running there.
@@ -304,15 +315,16 @@ can follow.
 
 
 Private vs Public cluster API access
-------------------------------------
+====================================
 
-Any cluster created using one of the predefined templates will, by default, be
+Any cluster created using one of the production templates will, by default, be
 created as a ``private cluster``. This means that the Kubernetes API will
 **not** be accessible from the internet and access will need to be via a
 bastion or jumphost server within the cloud project.
 
-If you would prefer to create a ``publicly accessible cluster`` then simply
-add the following option to the cluster creation command.
+If you would prefer to create a ``publicly accessible cluster`` using one of
+the production templates then simply add the following option to the cluster
+creation command.
 
 .. code-block:: bash
 
@@ -323,25 +335,25 @@ The actual usage would look like this.
 .. code-block:: console
 
   $ openstack coe cluster create <Cluster name> \
-    --cluster-template <Template ID> \
-    --floating-ip-enabled
+  --cluster-template <Template ID> \
+  --floating-ip-enabled
 
 .. Note::
 
-  This quickstart guide covers the steps to creating a kubernetes cluster
+  This guide covers the steps to creating a kubernetes cluster
   from scratch. But if you wish to create a cluster on an existing
   private network then you can refer to the relevant section in
   :ref:`the private-cluster <cluster-on-existing-net>` documentation.
 
 Creating a cluster
-------------------
+==================
 
 To create a new **production** cluster run the following command:
 
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-cluster \
-  --cluster-template kubernetes-v1.14.10-prod-20200422 \
+  -$ -cluster-template kubernetes-v1.18.2-prod-20200630 \
   --keypair my-ssh-key \
   --node-count 3 \
   --master-count 3
@@ -351,94 +363,49 @@ To create a new **development** cluster run the following command:
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-cluster \
-  --cluster-template kubernetes-v1.14.10-dev-20200422 \
+  -$ -cluster-template kubernetes-v1.18.2-dev-20200630 \
   --keypair my-ssh-key \
   --node-count 3 \
   --master-count 1
 
-  Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
 
 .. _modifying_a_cluster_with_labels:
 
 Customizing clusters using labels
----------------------------------
+=================================
 
 It is possible to override the behaviour of a template by adding or modifying
-the labels supplied by the template. To do this, the entire list of existing
-labels in the template must be provided as a set of key=value pairs, overriding
-the required ones as necessary.
+the labels supplied by the template.
 
-The following code block will return the labels from a template in a comma
-separated key value list.
+To do this, we need to provide the ``--merge-labels`` parameter along with the
+``--labels`` parameter followed by the desired label or labels to modify. The
+label values need to be provide as a list of key/value pairs, separated by
+commas if more than one is provided.
 
-.. code-block:: bash
+.. Note::
 
-  $ export TEMPLATENAME="kubernetes-v1.15.11-prod-20200330"
-  $ openstack coe cluster template show $TEMPLATENAME -c labels -f value | sed -e "s/': '/=/g" | sed -e "s/', '/,/g" | sed -e "s/{'//g" | sed -e "s/'}//" | sed -e "s/,/,\\\\\n/g"
+  Be careful to ensure that no whitespace is included in the list, like so:
+  *key=value,key=value*
 
-  magnum_auto_healer_tag=v1.15.0-catalyst.0,\
-  cloud_provider_enabled=true,\
-  etcd_volume_size=20,\
-  kube_dashboard_enabled=true,\
-  prometheus_monitoring=true,\
-  cloud_provider_tag=1.14.0-catalyst,\
-  auto_healing_controller=magnum-auto-healer,\
-  calico_ipv4pool=10.100.0.0/16,\
-  container_infra_prefix=docker.io/catalystcloud/,\
-  k8s_keystone_auth_tag=v1.15.0,\
-  auto_scaling_enabled=false,\
-  master_lb_floating_ip_enabled=false,\
-  ingress_controller=octavia,\
-  keystone_auth_enabled=true,\
-  auto_healing_enabled=true,\
-  heat_container_agent_tag=stein-dev,\
-  kube_tag=v1.15.11,\
-  octavia_ingress_controller_tag=v1.18.0-catalyst
-
-
-Once you have this list, you can customize the value for any of the labels you
-want before passing the whole list as an argument to the **labels** parameter
-in the ``coe cluster create`` command. For our example we are going to be
-changing the ``auto_scaling_enabled`` label to true:
-
-.. warning::
-
-  If the complete list of labels is not provided it is likely that
-  the cluster will fail to deploy correctly and will end up in a FAILED or
-  UNHEALTHY state. To avoid this, make sure that when you are changing the list
-  of labels that changes have not been made to any labels that you did not
-  intend. Another thing you need to check is that when you are finished
-  inputting the the labels that you end with a "\" or else the command will
-  fail to create the cluster correctly.
+So if we wanted to enable to auto_scaling feature on our cluster we would
+use a cluster creation command like this:
 
 .. code-block:: bash
 
-  openstack coe cluster create k8s-cluster \
-  --cluster-template kubernetes-v1.15.11-prod-20200330 \
-  --labels magnum_auto_healer_tag=v1.15.0-catalyst.0,\
-  cloud_provider_enabled=true,\
-  etcd_volume_size=20,\
-  kube_dashboard_enabled=true,\
-  prometheus_monitoring=true,\
-  cloud_provider_tag=1.14.0-catalyst,\
-  auto_healing_controller=magnum-auto-healer,\
-  calico_ipv4pool=10.100.0.0/16,\
-  container_infra_prefix=docker.io/catalystcloud/,\
-  k8s_keystone_auth_tag=v1.15.0,\
-  auto_scaling_enabled=false,\
-  master_lb_floating_ip_enabled=false,\
-  ingress_controller=octavia,\
-  keystone_auth_enabled=true,\
-  auto_healing_enabled=true,\
-  heat_container_agent_tag=stein-dev,\
-  kube_tag=v1.15.11,\
-  octavia_ingress_controller_tag=v1.18.0-catalyst \
+  $ openstack coe cluster create k8s-cluster \
+  --cluster-template kubernetes-v1.18.2-prod-20200630 \
+  --labels auto_scaling_enabled=true\
+  --merge-labels \
   --keypair my-ssh-key \
   --node-count 3 \
   --master-count 3
 
+
 Checking the status of the cluster
-----------------------------------
+==================================
+
+Cluster deployment status
+-------------------------
 
 A cluster will take on average 10 to 15 minutes be created.
 
@@ -447,7 +414,7 @@ You can use the following command to check the status of the cluster:
 .. code-block:: bash
 
   $ openstack coe cluster list
-  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
+  +$ --------------------------------------+-------------+----------+------------+--------------+--------------------+
   | uuid                                 | name        | keypair  | node_count | master_count | status             |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
   | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
@@ -460,8 +427,25 @@ Alternatively, you can check the status of the cluster on the `Clusters panel`_
 
 Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
 
+Cluster health status
+---------------------
+
+The other check worth mentioning here is that of the health of the cluster. This
+can be viewed by drilling down into the details of the cluster in the dashboard
+by clicking on the link that is it's name. From here
+
+Alternatively, if you are working from the command line you can query state of
+all current clusters with the following command.
+
+.. code-block:: console
+
+  $ openstack coe cluster list -c name  -f value -c health_status -f value -f yaml
+  -$  health_status: UNKNOWN
+    name: dev-cluster
+
+
 Accessing a private cluster
----------------------------
+===========================
 
 Once the cluster state is ``CREATE_COMPLETE`` and you have successfully
 retrieved the cluster config, we need to confirm that we are able to access the
@@ -504,7 +488,7 @@ Find the instance's external public IP address
 .. code-block:: bash
 
   $ openstack server show bastion -c addresses -f value
-  private=10.0.0.16, 103.197.62.38
+  p$ rivate=10.0.0.16, 103.197.62.38
 
 Confirm that we have a security group applied to our instance that allows
 inbound TCP connections on port 22 from our current public IP address. In this
@@ -514,11 +498,11 @@ case our security group is called bastion-ssh-access and out public IP is
 .. code-block:: bash
 
   $ openstack server show bastion -c security_groups -f value
-  name='bastion-ssh-access'
+  n$ ame='bastion-ssh-access'
   name='default'
 
   $ openstack security group rule list bastion-ssh-access
-  +--------------------------------------+-------------+-----------+------------------+------------+-----------------------+
+  +$ --------------------------------------+-------------+-----------+------------------+------------+-----------------------+
   | ID                                   | IP Protocol | Ethertype | IP Range         | Port Range | Remote Security Group |
   +--------------------------------------+-------------+-----------+------------------+------------+-----------------------+
   | 42c1320c-98d5-4275-9c2d-b81b0eadac29 | tcp         | IPv4      | 114.110.xx.xx/32 | 22:22      | None                  |
@@ -529,7 +513,7 @@ Finally we need the IP address for the Kubernetes API endpoint
 .. code-block:: bash
 
   $ openstack coe cluster show k8s-prod -c api_address -f value
-  https://10.0.0.5:6443
+  h$ ttps://10.0.0.5:6443
 
 We will make use of SSH's port forwarding ability in order to allow us to
 connect from our local machine's environment. To do this run the following
@@ -675,7 +659,7 @@ we need to retrieve the configuration and store it to a local directory.
   release that will make this possible using a converged configuration file.
 
 If you run ``eval $(openstack coe cluster config <cluster-name>)`` within a
-directory that already contains the configuration for a cluster it will fail.
+directory that alre$ ady contains the configuration for a cluster it will fail.
 If this is intentional, as in the case of upgrading a cluster that has been
 rebuilt, then this is possible by adding the ``--force`` flag, like this.
 
@@ -755,3 +739,133 @@ following manner.
 .. code-block:: bash
 
   kubectl config use-context default
+
+******************
+Resizing a cluster
+******************
+
+As the default behaviour for the Catalyst Cloud cluster templates is to have
+**cluster auto-scaling** disabled by default, it is useful to be aware that it
+is possible to manually modify the number of worker nodes within an existing
+cluster.
+
+
+Growing or shrinking a cluster
+==============================
+
+This is the most obvious use case and relates to adding or removing worker nodes
+from a cluster in order to keep available resources in line with demand on the
+cluster.
+
+Using the following command we can take a look at the nodes currently assigned
+to the cluster and can see that we have a single master and three workers.
+
+.. code-block:: console
+
+  $ openstack server list --name dev-cluster
+  +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
+  | ID                                   | Name                              | Status | Networks                               | Image | Flavor  |
+  +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
+  | 73222f7c-9219-4b64-809a-4d87700170e2 | dev-cluster-ipzptyqqnoje-node-2   | ACTIVE | private=10.0.0.6                       |       | c1.c2r2 |
+  | 83a75000-178c-4d5e-9e2f-a3b005ec4438 | dev-cluster-ipzptyqqnoje-node-1   | ACTIVE | private=10.0.0.5                       |       | c1.c2r2 |
+  | 94b2603e-cb0f-4292-8f3d-51bd475442dd | dev-cluster-ipzptyqqnoje-node-0   | ACTIVE | private=10.0.0.7                       |       | c1.c2r2 |
+  | 63f5206c-2105-489c-8fd8-a493876277e5 | dev-cluster-ipzptyqqnoje-master-0 | ACTIVE | private=10.0.0.4                       |       | c1.c2r2 |
+  +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
+
+Let's assume that due to current demand we only require 2 worker nodes in our
+cluster.  If we issue the following command, the cluster will scale down the
+worker node count from three to two.
+
+.. code-block:: console
+
+  $ openstack coe cluster resize dev-cluster 2
+  Request to resize cluster dev-cluster has been accepted.
+
+If we check the cluster state we can see it is now showing
+``UPDATE_IN_PROGRESS``.
+
+
+.. code-block:: console
+
+  $ openstack coe cluster list
+  +--------------------------------------+-------------+------------+------------+--------------+--------------------+---------------+
+  | uuid                                 | name        | keypair    | node_count | master_count | status             | health_status |
+  +--------------------------------------+-------------+------------+------------+--------------+--------------------+---------------+
+  | d9d767eb-d94a-4a0b-baad-edc137250c11 | dev-cluster | glyndavies |          4 |            1 | UPDATE_IN_PROGRESS | UNKNOWN       |
+  +--------------------------------------+-------------+------------+------------+--------------+--------------------+---------------+
+
+Once this changes to ``UPDATE_COMPLETE`` we can recheck the servers belonging to
+our cluster and confirm that we now only have two worker nodes present.
+
+.. code-block:: console
+
+  $ openstack server list --name dev-cluster
+  +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
+  | ID                                   | Name                              | Status | Networks                               | Image | Flavor  |
+  +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
+  | 73222f7c-9219-4b64-809a-4d87700170e2 | dev-cluster-ipzptyqqnoje-node-2   | ACTIVE | private=10.0.0.6                       |       | c1.c2r2 |
+  | 83a75000-178c-4d5e-9e2f-a3b005ec4438 | dev-cluster-ipzptyqqnoje-node-1   | ACTIVE | private=10.0.0.5                       |       | c1.c2r2 |
+  | 63f5206c-2105-489c-8fd8-a493876277e5 | dev-cluster-ipzptyqqnoje-master-0 | ACTIVE | private=10.0.0.4                       |       | c1.c2r2 |
+  +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
+
+The case for increasing the number of worker nodes works in exactly the same
+manner, with the resize count simply being the number of nodes that you wish to
+increase the count to.
+
+For example if we now wanted to increase from two workers
+up to four we would issue the following command.
+
+
+.. code-block:: console
+
+  $ openstack coe cluster resize dev-cluster 4
+  Request to resize cluster dev-cluster has been accepted.
+
+
+
+Repairing a worker node
+=======================
+
+While the default behaviour of the Catalyst Cloud cluster templates has the
+cluster auto-heal functionality enabled by default it is useful to know that if
+you had disabled this for some reason you can still force a rebuild of a
+worker node using the cluster resize command.
+
+If we take a look at the nodes in our cluster
+
+.. code-block:: console
+
+  $ openstack server list --name dev-cluster
+  +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
+  | ID                                   | Name                              | Status | Networks                               | Image | Flavor  |
+  +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
+  | 73222f7c-9219-4b64-809a-4d87700170e2 | dev-cluster-ipzptyqqnoje-node-2   | ACTIVE | private=10.0.0.6                       |       | c1.c2r2 |
+  | 83a75000-178c-4d5e-9e2f-a3b005ec4438 | dev-cluster-ipzptyqqnoje-node-1   | ACTIVE | private=10.0.0.5                       |       | c1.c2r2 |
+  | 94b2603e-cb0f-4292-8f3d-51bd475442dd | dev-cluster-ipzptyqqnoje-node-0   | ACTIVE | private=10.0.0.7                       |       | c1.c2r2 |
+  | 63f5206c-2105-489c-8fd8-a493876277e5 | dev-cluster-ipzptyqqnoje-master-0 | ACTIVE | private=10.0.0.4                       |       | c1.c2r2 |
+  +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
+
+Let's assume for the purpose of this example, assume that
+**dev-cluster-ipzptyqqnoje-node-0** is unhealthy. We can target this specific
+node via it's UUID and force a resize with the same number of cluster nodes.
+This will result in that node being removed and recreated.
+
+.. code-block:: console
+
+  $ openstack coe cluster resize --nodes-to-remove 94b2603e-cb0f-4292-8f3d-51bd475442dd dev-cluster 3
+  Request to resize cluster dev-cluster has been accepted.
+
+The result is that we still have 3 worker nodes, but the problematic node-0 has
+been replaced by node-3.
+
+.. code-block:: console
+
+  $ openstack server list --name dev-cluster
+  +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
+  | ID                                   | Name                              | Status | Networks                               | Image | Flavor  |
+  +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
+  | 82624fd4-6ff9-4fa7-9be7-c038db0d0893 | dev-cluster-ipzptyqqnoje-node-3   | BUILD  |                                        |       | c1.c2r2 |
+  | 73222f7c-9219-4b64-809a-4d87700170e2 | dev-cluster-ipzptyqqnoje-node-2   | ACTIVE | private=10.0.0.6                       |       | c1.c2r2 |
+  | 83a75000-178c-4d5e-9e2f-a3b005ec4438 | dev-cluster-ipzptyqqnoje-node-1   | ACTIVE | private=10.0.0.5                       |       | c1.c2r2 |
+  | 63f5206c-2105-489c-8fd8-a493876277e5 | dev-cluster-ipzptyqqnoje-master-0 | ACTIVE | private=10.0.0.4                       |       | c1.c2r2 |
+  +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
