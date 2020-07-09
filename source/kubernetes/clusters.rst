@@ -114,7 +114,7 @@ Then list all of the available cluster templates.
 .. code-block:: bash
 
   $ openstack coe cluster template list
-  +$ --------------------------------------+----------------------------------+
+  +--------------------------------------+----------------------------------+
   | uuid                                 | name                             |
   +--------------------------------------+----------------------------------+
   | bc493321-6d30-44a1-b767-2196e523dd8e | kubernetes-v1.16.9-dev-20200602  |
@@ -353,7 +353,7 @@ To create a new **production** cluster run the following command:
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-cluster \
-  -$ -cluster-template kubernetes-v1.18.2-prod-20200630 \
+  --cluster-template kubernetes-v1.18.2-prod-20200630 \
   --keypair my-ssh-key \
   --node-count 3 \
   --master-count 3
@@ -363,7 +363,7 @@ To create a new **development** cluster run the following command:
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-cluster \
-  -$ -cluster-template kubernetes-v1.18.2-dev-20200630 \
+  --cluster-template kubernetes-v1.18.2-dev-20200630 \
   --keypair my-ssh-key \
   --node-count 3 \
   --master-count 1
@@ -414,7 +414,7 @@ You can use the following command to check the status of the cluster:
 .. code-block:: bash
 
   $ openstack coe cluster list
-  +$ --------------------------------------+-------------+----------+------------+--------------+--------------------+
+  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
   | uuid                                 | name        | keypair  | node_count | master_count | status             |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
   | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
@@ -440,7 +440,7 @@ all current clusters with the following command.
 .. code-block:: console
 
   $ openstack coe cluster list -c name  -f value -c health_status -f value -f yaml
-  -$  health_status: UNKNOWN
+    health_status: UNKNOWN
     name: dev-cluster
 
 
@@ -488,7 +488,7 @@ Find the instance's external public IP address
 .. code-block:: bash
 
   $ openstack server show bastion -c addresses -f value
-  p$ rivate=10.0.0.16, 103.197.62.38
+  private=10.0.0.16, 103.197.62.38
 
 Confirm that we have a security group applied to our instance that allows
 inbound TCP connections on port 22 from our current public IP address. In this
@@ -498,11 +498,11 @@ case our security group is called bastion-ssh-access and out public IP is
 .. code-block:: bash
 
   $ openstack server show bastion -c security_groups -f value
-  n$ ame='bastion-ssh-access'
+  name='bastion-ssh-access'
   name='default'
 
   $ openstack security group rule list bastion-ssh-access
-  +$ --------------------------------------+-------------+-----------+------------------+------------+-----------------------+
+  +--------------------------------------+-------------+-----------+------------------+------------+-----------------------+
   | ID                                   | IP Protocol | Ethertype | IP Range         | Port Range | Remote Security Group |
   +--------------------------------------+-------------+-----------+------------------+------------+-----------------------+
   | 42c1320c-98d5-4275-9c2d-b81b0eadac29 | tcp         | IPv4      | 114.110.xx.xx/32 | 22:22      | None                  |
@@ -513,7 +513,7 @@ Finally we need the IP address for the Kubernetes API endpoint
 .. code-block:: bash
 
   $ openstack coe cluster show k8s-prod -c api_address -f value
-  h$ ttps://10.0.0.5:6443
+  https://10.0.0.5:6443
 
 We will make use of SSH's port forwarding ability in order to allow us to
 connect from our local machine's environment. To do this run the following
