@@ -21,8 +21,7 @@ to be performed on the physical components your system lies on, there should
 be no impact to your instances or your business while it is performed. This
 means that your system is overall more resilient and reliable.
 
-For more information and an example of how to create your first instance,
-please refer to the :ref:`launch-first-instance` tutorial for step by step
+Please refer to the :ref:`launch-first-instance` tutorial for step by step
 guidance on how to launch your first compute instance (and the pre-requisites
 to do so).
 

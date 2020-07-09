@@ -117,6 +117,213 @@ manage their own account information. This role cannot view, create or destroy
 project resources and it does not permit the uploading of SSH keys or the
 viewing of project usage and quota information.
 
+More information
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. raw:: html
+
+   <details>
+   <summary>For a more comprehensive list of the exact permissions that each
+   role gives, you can <a>click here</a> to view a full list for the
+   non-kubernetes roles.</summary>
+
+.. code-block:: console
+
+   +-----------------------+------------------------------------------------------------------------+
+   | Role                  | Permissions                                                            |
+   +=======================+========================================================================+
+   | Project Member        | ALARM SERVICE                                                          |
+   |                       | openstack.alarm.create                                                 |
+   |                       | openstack.alarm.delete                                                 |
+   |                       | openstack.alarm.list                                                   |
+   |                       | openstack.alarm.show                                                   |
+   |                       | openstack.alarm.state get                                              |
+   |                       | openstack.alarm.state set                                              |
+   |                       | openstack.alarm-history.search                                         |
+   |                       | openstack.alarm-history.show                                           |
+   |                       |                                                                        |
+   |                       | COMPUTE SERVICE                                                        |
+   |                       | openstack.compute.create                                               |
+   |                       | openstack.compute.attach_network                                       |
+   |                       | openstack.compute.attach_volume                                        |
+   |                       | openstack.compute.detach_volume                                        |
+   |                       | openstack.compute.get_all                                              |
+   |                       | openstack.compute.start                                                |
+   |                       | openstack.compute.stop                                                 |
+   |                       | openstack.compute.get                                                  |
+   |                       | openstack.compute.shelve                                               |
+   |                       | openstack.compute.unshelve                                             |
+   |                       | openstack.compute.resize                                               |
+   |                       | openstack.compute.confirm_resize                                       |
+   |                       | openstack.compute.revert_resize                                        |
+   |                       | openstack.compute.rebuild                                              |
+   |                       | openstack.compute.reboot                                               |
+   |                       | openstack.compute.volume_snapshot_create                               |
+   |                       | openstack.compute.volume_snapshot_delete                               |
+   |                       | openstack.compute.add_fixed_ip                                         |
+   |                       | openstack.compute.remoive_fixed_ip                                     |
+   |                       | openstack.compute.attach_interface                                     |
+   |                       | openstack.compute.delete_interface                                     |
+   |                       | openstack.compute.backup                                               |
+   |                       | openstack.compute.lock                                                 |
+   |                       | openstack.compute.unlock                                               |
+   |                       | openstack.compute.pause                                                |
+   |                       | openstack.compute.unpause                                              |
+   |                       | openstack.compute.rescue                                               |
+   |                       | openstack.compute.unrescue                                             |
+   |                       | openstack.compute.resume                                               |
+   |                       | openstack.compute.security_groups:add_to_instance                      |
+   |                       | openstack.compute.security_groups:remove_from_instance                 |
+   |                       | openstack.compute.network.associate                                    |
+   |                       | openstack.compute.network.disassociate                                 |
+   |                       | openstack.compute.network.allocate_for_instance                        |
+   |                       | openstack.compute.network.deallocate_for_instance                      |
+   |                       | openstack.compute.snapshot                                             |
+   |                       | openstack.compute.suspend                                              |
+   |                       | openstack.compute.swap_volume                                          |
+   |                       | openstack.compute.compute_extension:keypairs.create                    |
+   |                       | openstack.compute.compute_extension:keypairs.delete                    |
+   |                       | openstack.compute.compute_extension:keypairs.index                     |
+   |                       | openstack.compute.compute_extension:keypairs.show                      |
+   |                       |                                                                        |
+   |                       | IMAGES                                                                 |
+   |                       | openstack.image.add_image                                              |
+   |                       | openstack.image.delete_image                                           |
+   |                       | openstack.image.get_image                                              |
+   |                       | openstack.image.get_images                                             |
+   |                       | openstack.image.modify_image                                           |
+   |                       | openstack.image.copy_from                                              |
+   |                       | openstack.image.download_image                                         |
+   |                       | openstack.image.upload_image                                           |
+   |                       | openstack.image.delete_image_location                                  |
+   |                       | openstack.image.get_image_location                                     |
+   |                       | openstack.image.set_image_location                                     |
+   |                       |                                                                        |
+   |                       | NETWORK SERVICE                                                        |
+   |                       | openstack.subnet.create_subnet                                         |
+   |                       | openstack.subnet.get_subnet                                            |
+   |                       | openstack.subnet.update_subnet                                         |
+   |                       | openstack.subnet.delete_subnet                                         |
+   |                       | openstack.subnet.create_subnetpool                                     |
+   |                       | openstack.subnet.get_subnetpool                                        |
+   |                       | openstack.subnet.update_subnetpool                                     |
+   |                       | openstack.subnet.delete_subnetpool                                     |
+   |                       | openstack.address.create_address_scope                                 |
+   |                       | openstack.address.get_address_scope                                    |
+   |                       | openstack.address.update_address_scope                                 |
+   |                       | openstack.address.delete_address_scope                                 |
+   |                       | openstack.network.create_network                                       |
+   |                       | openstack.network.get_network                                          |
+   |                       | openstack.network.update_network                                       |
+   |                       | openstack.network.delete_network                                       |
+   |                       | openstack.port.create_port                                             |
+   |                       | openstack.port.create_port:device                                      |
+   |                       | openstack.port.create_port:mac_address                                 |
+   |                       | openstack.port.create_port:fixed_ips                                   |
+   |                       | openstack.port.create_port:security_port_enabled                       |
+   |                       | openstack.port.create_port:mac_learning_enabled                        |
+   |                       | openstack.port.create_port:allowed_address_pairs                       |
+   |                       | openstack.port.get_port                                                |
+   |                       | openstack.port.update_port                                             |
+   |                       | openstack.port.update_port:device_owner                                |
+   |                       | openstack.port.update_port:fixed_ips                                   |
+   |                       | openstack.port.update_port:port_security_enabled                       |
+   |                       | openstack.port.update_port:mac_learning_enabled                        |
+   |                       | openstack.port.update_port:allowed_address_pairs                       |
+   |                       | openstack.port.delete_port                                             |
+   |                       | openstack.router.create_router                                         |
+   |                       | openstack.router.get_router                                            |
+   |                       | openstack.router.delete_router                                         |
+   |                       | openstack.router.add_router_interface                                  |
+   |                       | openstack.router.remove_router_interface                               |
+   |                       | firewall.create_firewall                                               |
+   |                       | firewall.get_firewall                                                  |
+   |                       | firewall.update_firewall                                               |
+   |                       | firewall.delete_firewall                                               |
+   |                       | firewall.create_firewall_policy                                        |
+   |                       | firewall.get_firewall_policy                                           |
+   |                       | firewall.create_firewall_policy:shared                                 |
+   |                       | firewall.update_firewall_policy                                        |
+   |                       | firewall.delete_firewall_policy                                        |
+   |                       | firewall.create_firewall_rule                                          |
+   |                       | firewall.get_firewall_rule                                             |
+   |                       | firewall.update_firewall_rule                                          |
+   |                       | firewall.delete_firewall_rule                                          |
+   |                       | openstack.floatingip.create_floating_ip                                |
+   |                       | openstack.floatingip.update_floating_ip                                |
+   |                       | openstack.floatingip.delete_floating_ip                                |
+   |                       | openstack.floatingip.get_floating_ip                                   |
+   |                       |                                                                        |
+   |                       | LOAD BALANCER SERVICE                                                  |
+   |                       | openstack.loadbalancer.read                                            |
+   |                       | openstack.loadbalancer.write                                           |
+   |                       | openstack.loadbalancer.read-quota                                      |
+   |                       | openstack.loadbalancer.healthmonitor.get_all                           |
+   |                       | openstack.loadbalancer.healthmonitor.post                              |
+   |                       | openstack.loadbalancer.healthmonitor.get_one                           |
+   |                       | openstack.loadbalancer.healthmonitor.put                               |
+   |                       | openstack.loadbalancer.healthmonitor.delete                            |
+   |                       | openstack.loadbalancer.policy.*                                        |
+   |                       | openstack.loadbalancer.rule.*                                          |
+   |                       | openstack.loadbalancer.loadbalancer.*                                  |
+   |                       | openstack.loadbalancer.pool.*                                          |
+   |                       |                                                                        |
+   |                       | VOLUME SERVICE                                                         |
+   |                       | openstack.volume.create                                                |
+   |                       | openstack.volume.delete                                                |
+   |                       | openstack.volume.get                                                   |
+   |                       | openstack.volume.get_all                                               |
+   |                       | openstack.volume.get_volume_metadata                                   |
+   |                       | openstack.volume.get_snapshot                                          |
+   |                       | openstack.volume.get_all_snapshots                                     |
+   |                       | openstack.volume.create_snapshot                                       |
+   |                       | openstack.volume.delete_snapshot                                       |
+   |                       | openstack.volume.update_snapshot                                       |
+   |                       | openstack.volume.extend                                                |
+   |                       | openstack.volume.update                                                |
+   |                       | openstack.volume_extension.volume_type_access                          |
+   |                       | openstack.volume_extension.encryption_metadata                         |
+   |                       | openstack.volume_extension.snapshot_attributes                         |
+   |                       | openstack.volume_extension.volume_image_metadata                       |
+   |                       | openstack.volume_extension.quota.show                                  |
+   |                       | openstack.volume_extension.volume_tenant_attribute                     |
+   |                       | openstack.volume.create_transfer                                       |
+   |                       | openstack.volume.accept_transfer                                       |
+   |                       | openstack.volume.delete_transfer                                       |
+   |                       | openstack.volume.get_all_transfers                                     |
+   |                       | openstack.backup.create                                                |
+   |                       | openstack.backup.delete                                                |
+   |                       | openstack.backup.get                                                   |
+   |                       | openstack.backup.get_all                                               |
+   |                       | openstack.backup.restore                                               |
+   |                       | openstack.snapshot_extension.snapshot_actions.update_snapshot_status   |
+   |                       |                                                                        |
+   |                       | ORCHESTRATION SERVICE                                                  |
+   |                       | openstack.stacks.lookup                                                |
+   +-----------------------+------------------------------------------------------------------------+
+   | Authentication Only   | openstack.keypair.create                                               |
+   |                       | openstack.quota.show                                                   |
+   +-----------------------+------------------------------------------------------------------------+
+   | Project Administrator | openstack.volume.get                                                   |
+   |                       | openstack.volume.initialize_connection                                 |
+   |                       | keystone.identity.project_users_access                                 |
+   +-----------------------+------------------------------------------------------------------------+
+   | Project Moderator     | keystone.identity.project_users_access                                 |
+   +-----------------------+------------------------------------------------------------------------+
+   | Compute Start/Stop    | openstack.compute.start                                                |
+   |                       | openstack.compute.stop                                                 |
+   |                       | openstack.compute.shelve                                               |
+   |                       | openstack.compute.unshelve                                             |
+   +-----------------------+------------------------------------------------------------------------+
+   | Heat Stack Owner      | openstack.Orchestration.*                                              |
+   +-----------------------+------------------------------------------------------------------------+
+   | Object Storage        | Swift.*                                                                |
+   +-----------------------+------------------------------------------------------------------------+
+
+
+.. raw:: html
+
+   </details>
+
 Kubernetes specific roles
 =========================
 
