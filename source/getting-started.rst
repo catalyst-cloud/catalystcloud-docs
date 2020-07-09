@@ -15,4 +15,3 @@ section before using our cloud services.
    getting-started/admin
    getting-started/management
    getting-started/additional-info
-   getting-started/code-examples
