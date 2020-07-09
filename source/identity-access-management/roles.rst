@@ -52,12 +52,46 @@ it. However, this role is purely for administrating purposes. It does not
 allow you to access or view all resources, you still need the member role for
 that.
 
+.. raw:: html
+
+   <details>
+   <summary>For the list of explicit permissions this role gives
+   <a>click here</a></summary>
+
+.. code-block:: console
+
+   +-----------------------+------------------------------------------------------------------------+
+   | Project Administrator | openstack.volume.get                                                   |
+   |                       | openstack.volume.initialize_connection                                 |
+   |                       | keystone.identity.project_users_access                                 |
+   +-----------------------+------------------------------------------------------------------------+
+
+.. raw:: html
+
+   </details>
+
 Project moderator
 -----------------
 
 The *Project Moderator* role can invite other people to join your project and
 update their roles, but cannot change the project admin. Has the same problem
 as the Admin role in regards to resource access.
+
+.. raw:: html
+
+   <details>
+   <summary>For the list of explicit permissions this role gives
+   <a>click here</a></summary>
+
+.. code-block:: console
+
+   +-----------------------+------------------------------------------------------------------------+
+   | Project Moderator     | keystone.identity.project_users_access                                 |
+   +-----------------------+------------------------------------------------------------------------+
+
+.. raw:: html
+
+   </details>
 
 Project member
 --------------
@@ -69,62 +103,12 @@ others in terms of the privileges that it allows. As
 mentioned earlier, because our roles are additive you do not need all of them
 to have full control over the project.
 
-Heat stack owner
-----------------
-
-The *Heat Stack Owner* role allows users access to the Heat Cloud Orchestration
-Service. Users who attempt to use Heat when they do not have this role will
-receive an error stating they are missing the required role. This role is
-required for interacting with the Cloud Orchestration Service, regardless of
-other roles.
-
-For more information on this service, please consult the documentation at
-:ref:`Cloud orchestration. <cloud-orchestration>`
-
-Compute start/stop
-------------------
-
-The *Compute Start/Stop* role allows users to start, stop, hard reboot and soft
-reboot compute instances. In addition, this role now also supports shelving
-and un-shelving an instance. This is useful because.
-
-- Shelved instances are not billed for compute resources.
-- Storage resources are still billed since they are still being stored on
-  a server.
-- "stopped" instances are still billed as if they were running because they are
-  still scheduled to a hypervisor host.
-
-However this role still cannot sleep/suspend an instance. Other than these
-actions it is equivalent to auth_only.
-
-This role is implied when a user also has *Project Member*.
-
-
-Object storage
---------------
-
-The *Object Storage* role allows users to create, update and delete containers,
-and objects within those containers. Creative and destructive actions related
-to compute, network and block storage will fail. This role is implied when a
-user also has *Project Member*.
-
-
-Auth only
----------
-
-The *Auth Only* role is the most restrictive role. Users are only able to
-manage their own account information. This role cannot view, create or destroy
-project resources and it does not permit the uploading of SSH keys or the
-viewing of project usage and quota information.
-
-More information
-^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. raw:: html
 
    <details>
-   <summary>For a more comprehensive list of the exact permissions that each
-   role gives, you can <a>click here</a> to view a full list for the
-   non-kubernetes roles.</summary>
+   <summary>For the list of explicit permissions this role gives
+   <a>click here</a> This list is quite long as it contains almost all
+   the permissions you need for your project.</summary>
 
 .. code-block:: console
 
@@ -299,20 +283,53 @@ More information
    |                       |                                                                        |
    |                       | ORCHESTRATION SERVICE                                                  |
    |                       | openstack.stacks.lookup                                                |
+   |                       |                                                                        |
+   |                       | OBJECT STORAGE                                                         |
+   |                       | swift.delete.container                                                 |
+   |                       | swift.delete.object                                                    |
+   |                       | swift.download.container                                               |
+   |                       | swift.download.object                                                  |
+   |                       | swift.list.container                                                   |
+   |                       | swift.post.container                                                   |
+   |                       | swift.post.object                                                      |
+   |                       | swift.post.account                                                     |
+   |                       | swift.copy.container                                                   |
+   |                       | swift.copy.object                                                      |
+   |                       | swift.stat.container                                                   |
+   |                       | swift.stat.object                                                      |
+   |                       | swift.upload.file                                                      |
+   |                       | swift.upload.folder                                                    |
+   |                       | swift.capabilities.proxy_url                                           |
+   |                       | swift.tempurl.container                                                |
+   |                       | swift.tempurl.object                                                   |
+   |                       | swift.auth.storage_url                                                 |
+   |                       | swift.auth.auth_token                                                  |
    +-----------------------+------------------------------------------------------------------------+
-   | Authentication Only   | openstack.keypair.create                                               |
-   |                       | openstack.quota.show                                                   |
-   +-----------------------+------------------------------------------------------------------------+
-   | Project Administrator | openstack.volume.get                                                   |
-   |                       | openstack.volume.initialize_connection                                 |
-   |                       | keystone.identity.project_users_access                                 |
-   +-----------------------+------------------------------------------------------------------------+
-   | Project Moderator     | keystone.identity.project_users_access                                 |
-   +-----------------------+------------------------------------------------------------------------+
-   | Compute Start/Stop    | openstack.compute.start                                                |
-   |                       | openstack.compute.stop                                                 |
-   |                       | openstack.compute.shelve                                               |
-   |                       | openstack.compute.unshelve                                             |
+
+.. raw:: html
+
+   </details>
+
+Heat stack owner
+----------------
+
+The *Heat Stack Owner* role allows users access to the Heat Cloud Orchestration
+Service. Users who attempt to use Heat when they do not have this role will
+receive an error stating they are missing the required role. This role is
+required for interacting with the Cloud Orchestration Service, regardless of
+other roles.
+
+For more information on this service, please consult the documentation at
+:ref:`Cloud orchestration. <cloud-orchestration>`
+
+.. raw:: html
+
+   <details>
+   <summary>For the list of explicit permissions this role gives
+   <a>click here</a></summary>
+
+.. code-block:: console
+
    +-----------------------+------------------------------------------------------------------------+
    | Heat Stack Owner      | openstack.orchestration.actions:action                                 |
    |                       | openstack.orchestration.build_info:build_info                          |
@@ -370,6 +387,66 @@ More information
    |                       | openstack.orchestration.stacks:List_outputs                            |
    |                       | openstack.orchestration.stacks:show_output                             |
    +-----------------------+------------------------------------------------------------------------+
+
+.. raw:: html
+
+   </details>
+
+Compute start/stop
+------------------
+
+The *Compute Start/Stop* role allows users to start, stop, hard reboot and soft
+reboot compute instances. In addition, this role now also supports shelving
+and un-shelving an instance. This is useful because.
+
+- Shelved instances are not billed for compute resources.
+- Storage resources are still billed since they are still being stored on
+  a server.
+- "stopped" instances are still billed as if they were running because they are
+  still scheduled to a hypervisor host.
+
+However this role still cannot sleep/suspend an instance. Other than these
+actions it is equivalent to auth_only.
+
+This role is implied when a user also has *Project Member*.
+
+.. raw:: html
+
+   <details>
+   <summary>For the list of explicit permissions this role gives
+   <a>click here</a></summary>
+
+.. code-block:: console
+
+   +-----------------------+------------------------------------------------------------------------+
+   | Compute Start/Stop    | openstack.compute.start                                                |
+   |                       | openstack.compute.stop                                                 |
+   |                       | openstack.compute.shelve                                               |
+   |                       | openstack.compute.unshelve                                             |
+   +-----------------------+------------------------------------------------------------------------+
+
+.. raw:: html
+
+   </details>
+
+
+Object storage
+--------------
+
+The *Object Storage* role allows users to create, update and delete containers,
+and objects within those containers. Creative and destructive actions related
+to compute, network and block storage will fail. This role is implied when a
+user also has *Project Member*.
+
+.. raw:: html
+
+   <details>
+   <summary>For the list of explicit permissions this role gives
+   <a>click here</a></summary>
+
+.. code-block:: console
+
+   +-----------------------+------------------------------------------------------------------------+
    | Object Storage        | swift.delete.container                                                 |
    |                       | swift.delete.object                                                    |
    |                       | swift.download.container                                               |
@@ -391,6 +468,30 @@ More information
    |                       | swift.auth.auth_token                                                  |
    +-----------------------+------------------------------------------------------------------------+
 
+.. raw:: html
+
+   </details>
+
+Auth only
+---------
+
+The *Auth Only* role is the most restrictive role. Users are only able to
+manage their own account information. This role cannot view, create or destroy
+project resources and it does not permit the uploading of SSH keys or the
+viewing of project usage and quota information.
+
+.. raw:: html
+
+   <details>
+   <summary>For the list of explicit permissions this role gives
+   <a>click here</a></summary>
+
+.. code-block:: console
+
+   +-----------------------+------------------------------------------------------------------------+
+   | Authentication Only   | openstack.keypair.create                                               |
+   |                       | openstack.quota.show                                                   |
+   +-----------------------+------------------------------------------------------------------------+
 
 .. raw:: html
 
