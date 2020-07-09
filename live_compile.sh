@@ -1,29 +1,36 @@
 #!/bin/bash
 # Demonstrates how to compile the documentation for local testing
 
+platform='unknown'
+unamestr=`uname`
+
 # Check dependencies are installed
-if ! which virtualenv; then
-  echo "Could not find virtualenv on the PATH."
-  echo "Try: apt-get install python-virtualenv"
-  exit 1
+if [[ "$unamestr" == 'Linux' ]]; then
+  if [[ -z $(dpkg -l |grep python3-venv) ]]; then
+    echo "Could not find python3-venv on the PATH."
+    echo "Try: apt install python3-venv"
+    exit 1
+  fi
+elif [[ "$unamestr" == 'Darwin' ]]; then
+  echo "pass"
 fi
 
 if ! which pip3; then
-  echo "Could not find pip on the PATH."
-  echo "Try: apt-get install python3-pip"
+  echo "Could not find pip3 on the PATH."
+  echo "Try: apt install python3-pip"
   exit 1
 fi
 
 # Create a Python virtual environment if needed
 if [ ! -d venv ]; then
-  virtualenv -p $(which python3) venv
+    python3 -m venv venv
 fi
 
 # Activate the virtual environment
 source venv/bin/activate
 
 # Install the Python requirements on the virtual environment
-pip install -r autobuild_requirements.txt
+pip install -r requirements.txt
 
 # Compile the documentation
 make livehtml
