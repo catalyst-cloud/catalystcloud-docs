@@ -19,7 +19,6 @@ further information:
    :maxdepth: 1
 
    first-instance/overview
-   first-instance/quickstart
    first-instance/dashboard
    first-instance/command-line
    first-instance/bash-script
