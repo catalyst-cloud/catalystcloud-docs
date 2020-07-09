@@ -47,7 +47,7 @@ assigned to their account.
 +---------------+------------------------------------------------------------------+
 
 More information
-----------------
+================
 
 .. raw:: html
 
@@ -250,6 +250,7 @@ More information
 .. raw:: html
 
    </details>
+
 
 *********************************
 Generating Kubernetes config file
