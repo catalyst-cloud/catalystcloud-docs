@@ -64,7 +64,7 @@ These examples assume the following:
 
 - You have uploaded or created an SSH key.
 
-The following is a set of different templates that you can use as create
+The following is a set of different templates that you can use to create
 your own compute instances. These instances will be the same as if you followed
 the instructions from the :ref:`first instance <launch-first-instance>` section
 of the documents.
