@@ -34,16 +34,16 @@ commands, they would all fail.
 
 Auth only
 =========
-In order to ensure that the security of your project remains intact, we
-created the *auth only* role. This allows you to add users to your project,
+This allows you to add users to your project,
 without giving them the ability to change or even see its contents. This role's
-main purpose is for a user to be able to connect to your project but first
-change their password or enable MFA before an moderator gives them a more
-powerful role.
+main purpose is for a user to be able to connect to your project then
+change their password and enable MFA. Then a moderator can give the user a more
+powerful role. This helps to ensure a higher level of security for your
+project.
 
 Another practice of the *auth only* role is to partially expose
 containers or files from object storage to a user, without providing them
-a more powerful role. With restricted object storage access the user can be
-given read or write privileges for a specific container (or all) but still have
-no access to the rest of the project. For a more
-thorough guide on this please see :ref:`object-storage-access`.
+access to the rest of your project. With restricted object storage access the
+user can be given read or write privileges for a specific container
+(or all containers) but still have no access to the rest of the project. For a
+more thorough guide on this please see :ref:`object-storage-access`.
