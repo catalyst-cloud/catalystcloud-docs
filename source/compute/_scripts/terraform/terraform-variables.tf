@@ -5,16 +5,17 @@ provider "openstack" {
 }
 
 variable "public_network_id" {
-  default = "<INSERT YOUR REGION NETWORK ID FROM THE BELOW LIST>"
+  default = "f10ad6de-a26d-4c29-8c64-2a7418d47f8f"
 }
 
 # From: http://docs.catalystcloud.io/network.html?highlight=public%20network
+# These are the different public network ID's if you were wanting to repurpose this script for other regions
 #nz-por-1	849ab1e9-7ac5-4618-8801-e6176fbbcf30
 #nz_wlg_2	e0ba6b88-5360-492c-9c3d-119948356fd3
 #nz-hlz-1	f10ad6de-a26d-4c29-8c64-2a7418d47f8f
 
 variable "volume_image_ID" {
-  default = "<INSERT THE UBUNTU 20.0 IMAGE ID FROM YOUR REGION>"
+  default = "964801a1-a1e9-4ab0-8166-a5c9456bca86 "
 }
 
 variable "volume_type" {
@@ -22,11 +23,11 @@ variable "volume_type" {
 }
 
 variable "compute_image_ID" {
-  default = "<INSERT THE UBUNTU 20.0 IMAGE ID FROM YOUR REGION>"
+  default = "964801a1-a1e9-4ab0-8166-a5c9456bca86 "
 }
 
 variable "compute_flavor_ID" {
-  default = "<INSERT THE FLAVOR ID FOR YOUR REGION>"
+  default = "6371ec4a-47d1-4159-a42f-83b84b80eea7"
 }
 
 # Insert a valid SSH public key that you wish to use in default
