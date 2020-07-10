@@ -14,17 +14,17 @@ To achieve this, we will provide a simple, single instance example using
 some of the most common methods that are being used by our customers. These
 are:
 
-- The Catalyst Cloud `web ../first-instance/dashboard`_.
+- The Catalyst Cloud `web dashboard`_.
 - The Openstack `command line tools`_.
 - The Openstack `Heat`_ orchestration tool.
 - The Hashicorp `Terraform`_ orchestration tool.
 
 .. _command line tools: https://docs.openstack.org/newton/user-guide/cli.html
-.. _web ../first-instance/dashboard: https://../first-instance/dashboard.cloud.catalyst.net.nz
+.. _web dashboard: https://../first-instance/dashboard.cloud.catalyst.net.nz
 .. _Heat: https://wiki.openstack.org/wiki/Heat
 .. _Terraform: https://www.terraform.io/
 
-../first-instance/dashboard example
+Dashboard example
 =================
 
 Uploading an SSH key
