@@ -79,6 +79,25 @@ instructions on how to install kubectl`_.
 Choosing a cluster template
 ===========================
 
+.. Warning::
+
+  In an effort to make the process of getting started with Kubernetes on the
+  Catalyst Cloud a much simpler process, we have decided to modify the default
+  behaviour of the **development templates** we provide.
+
+  Effective from 1 July 2020, when one of these templates is used in the
+  creation of a new cluster it will, by default, provision a **floating IP** on
+  the Kubernetes API endpoint meaning that the resulting cluster will be
+  **publicly accessible over the internet**. It is possible to restrict access
+  to a public cluster, see :ref:`limiting_access` for more details.
+
+  If you wish to revert to the original behaviour of having a private cluster
+  please launch your cluster with the following flag
+  ``--floating-ip-disabled``
+
+  As a reminder, it is considered best practice that production workloads are
+  **not** deployed on a publicly accessible cluster.
+
 A cluster template is a blue-print to build a Kubernetes cluster (similar to
 machine images for the compute service). The cluster template specifies what
 version of Kubernetes will be installed and the features that will be enabled.
@@ -94,21 +113,20 @@ The following command will list all cluster templates available:
   +--------------------------------------+-----------------------------------+
   | uuid                                 | name                              |
   +--------------------------------------+-----------------------------------+
-  | 18a9fa94-95f4-46a4-be3c-c8fae025ce97 | kubernetes-v1.13.12-dev-20191129  |
-  | a04e8d58-bd81-4eae-9242-144dc75b3821 | kubernetes-v1.13.12-prod-20191129 |
-  | e7be8a37-c5a6-4dfa-853c-8ff0653ede31 | kubernetes-v1.14.10-dev-20200422  |
-  | 9ab35677-8644-4d3c-bb81-281f7ec52e31 | kubernetes-v1.14.10-prod-20200422 |
+  | 9a3f08e2-6091-490c-b423-f5c9fb425541 | kubernetes-v1.15.11-dev-20200330  |
+  | f2ac9cfc-30a8-42c9-89e4-e48f53c4fbe1 | kubernetes-v1.15.11-prod-20200330 |
+  | bc493321-6d30-44a1-b767-2196e523dd8e | kubernetes-v1.16.9-dev-20200602   |
+  | 99f51180-cdcb-4492-9163-5453f2a8998f | kubernetes-v1.16.9-prod-20200602  |
+  | c06970d9-0926-4e07-8042-01601d68a2a1 | kubernetes-v1.17.5-dev-20200615   |
+  | 2efc83d2-e6d6-4c3a-af3b-17463387d314 | kubernetes-v1.17.5-prod-20200615  |
   +--------------------------------------+-----------------------------------+
 
 We want to use the latest development template (which in the example above is
-``kubernetes-v1.14.10-dev-20200422``).
+``kubernetes-v1.17.5-dev-20200615``).
 
-Alternatively, a list of cluster templates available can be seen in the
-`Cluster Templates`_ panel in the dashboard, under the **Container Infra**
-section.
-
-.. _`Cluster Templates`: https://dashboard.cloud.catalyst.net.nz/project/cluster_templates
-
+Alternatively, a list of cluster templates can be seen in the
+**Cluster Template** dropdown of the **Create New Cluster** dialogue in the
+dashboard, under the **Container Infra** section.
 
 .. _dashboard-cluster-creation:
 
@@ -200,10 +218,9 @@ following command:
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-cluster \
-  --cluster-template kubernetes-v1.14.10-dev-20200422 \
+  --cluster-template kubernetes-v1.17.5-dev-20200615 \
   --keypair my-ssh-key \
   --node-count 3 \
-  --floating-ip-enabled \
   --master-count 1
 
   Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
@@ -277,8 +294,9 @@ details of the cluster:
 
   $ kubectl cluster-info
   Kubernetes master is running at https://103.254.156.157:6443
-  Heapster is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/heapster/proxy
   CoreDNS is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+
+  To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
 In order to view more in depth information about the cluster simply add the
 dump option to the above example. This generates output suitable for debugging
