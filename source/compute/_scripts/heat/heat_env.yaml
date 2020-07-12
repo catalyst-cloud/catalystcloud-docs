@@ -1,0 +1,13 @@
+parameters:
+  public_net_id: <PUBLIC-NETWORK-ID>
+  private_net: <PRIVATE-NETWORK-ID>
+  image: ubuntu-20.04-x86_64
+  servers_flavor: c1.c1r1
+  key_name: <YOUR-KEY-NAME>
+  host_name: <HOST-NAME>
+
+
+
+
+# Heat
+# o stack create wp-test -t wordpress-2instances-vpc.yaml -e env-wp.yaml
