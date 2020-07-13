@@ -8,48 +8,52 @@ Creating and using volumes
 Creating a volume via the CLI
 *****************************
 
-Use the ``openstack volume create`` command to create a new volume:
+To create and attach a new volume, you can use one of the methods below:
 
-.. code-block:: console
+.. Note::
 
-  $ openstack volume create --description 'database volume' --size 50 db-vol-01
-  +---------------------+--------------------------------------+
-  | Field               | Value                                |
-  +---------------------+--------------------------------------+
-  | attachments         | []                                   |
-  | availability_zone   | nz-por-1a                            |
-  | bootable            | false                                |
-  | consistencygroup_id | None                                 |
-  | created_at          | 2016-08-18T23:08:40.021641           |
-  | description         | database volume                      |
-  | encrypted           | False                                |
-  | id                  | 7e94a2f6-b4d2-47f1-83f7-a200e963404a |
-  | multiattach         | False                                |
-  | name                | db-vol-01                            |
-  | properties          |                                      |
-  | replication_status  | disabled                             |
-  | size                | 50                                   |
-  | snapshot_id         | None                                 |
-  | source_volid        | None                                 |
-  | status              | creating                             |
-  | type                | b1.standard                          |
-  | updated_at          | None                                 |
-  | user_id             | 4b934c44d8b24e60acad9609b641bee3     |
-  +---------------------+--------------------------------------+
+  You must have :ref:`source and openrc file<source-rc-file>` before using any
+  of the following methods to create or attach a volume.
 
-Attach a volume to a compute instance
-=====================================
+.. tabs::
 
-Use the ``openstack server add volume`` command to attach the volume to an
-instance:
+    .. tab:: Openstack CLI
 
-.. code-block:: console
+        The following script will create a volume on your project:
 
-  $ openstack server add volume INSTANCE_NAME VOLUME_NAME
+        .. literalinclude:: _scripts/cli/create-volume.sh
+            :language: shell
+            :caption: create-volume.sh
 
-The command above assumes that your volume name is unique. If you have volumes
-with duplicate names, you will need to use the volume ID to attach it to a
-compute instance.
+        The next script will attach the previous volume to your instance. This
+        command assumes that your volume name is unique; If you have volumes
+        with duplicate names you will need to use the volume ID to attach the
+        correct volume to your compute instance.
+
+        .. literalinclude:: _scripts/cli/attach-volume.sh
+            :language: shell
+            :caption: attach-volume.sh
+
+    .. tab:: Terraform
+
+        The following assumes that you have already sourced an openRC file and
+        that you have downloaded and installed terraform.
+
+        The template file that you need to save is:
+
+        .. literalinclude:: _scripts/terraform/terraform-block-storage.tf
+            :language: shell
+            :caption: terraform-block-storage.tf
+
+        The commands you will need to use are:
+
+        .. literalinclude:: _scripts/terraform/terraform-create.sh
+            :language: shell
+            :caption: terraform-create.sh
+
+        .. literalinclude:: _scripts/terraform/terraform-destroy.sh
+            :language: shell
+            :caption: terraform-destroy.sh
 
 **********************
 Using volumes on Linux
