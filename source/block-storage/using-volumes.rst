@@ -4,16 +4,29 @@
 Creating and using volumes
 ##########################
 
-*****************************
-Creating a volume via the CLI
-*****************************
+***********************************
+Creating a volume via the dashboard
+***********************************
+
+The easiest method to create and attach a volume to an instance would be to use
+the Catalyst Cloud `web dashboard`_. From the volumes tab on the dashboard you
+can create, delete, and manage your block storage volumes.
+
+.. _web dashboard: https://../first-instance/dashboard.cloud.catalyst.net.nz
+
+.. image:: _assets/volume-page.png
+
+
+*******************************************
+Creating a volume via from the command line
+*******************************************
 
 To create and attach a new volume, you can use one of the methods below:
 
 .. Note::
 
-  You must have :ref:`source and openrc file<source-rc-file>` before using any
-  of the following methods to create or attach a volume.
+  You must have :ref:`sourced an openrc file<source-rc-file>` before you can
+  use any of the following methods to create or attach a volume.
 
 .. tabs::
 
@@ -50,6 +63,9 @@ To create and attach a new volume, you can use one of the methods below:
         .. literalinclude:: _scripts/terraform/terraform-create.sh
             :language: shell
             :caption: terraform-create.sh
+
+        To remove all resources associated with this terraform plan, you can use the
+        following:
 
         .. literalinclude:: _scripts/terraform/terraform-destroy.sh
             :language: shell
