@@ -79,7 +79,7 @@ access.
 
 The list of explicit permissions for the project moderator role:
 
-.. code-block:: console
+   .. code-block:: console
 
    +-----------------------+------------------------------------------------------------------------+
    | Project Moderator     | keystone.identity.project_users_access                                 |
