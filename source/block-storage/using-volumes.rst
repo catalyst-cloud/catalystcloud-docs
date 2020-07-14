@@ -16,6 +16,33 @@ can create, delete, and manage your block storage volumes.
 
 .. image:: _assets/volume-page.png
 
+Once you are here we we navigate to the **Create Volume** button on the top
+right. We are then met with this screen.
+
+.. image:: _assets/create-vol.png
+
+From this example I have already filled out the requirements to create the
+instance:
+
+#. A name
+#. The volume type
+#. The size (in this example 50 GB)
+#. The region
+
+Once we have all of these set, then we are create our volume.
+
+After we have our new volume, we then are going to attach our volume to an
+instance. To do this we have to go to the **Manage Attachments** section.
+
+.. image:: _assets/manage-attachments.png
+
+From this screen we select the instance we want to attach our volume to. The
+dropdown from this pop up will display all your instances; for this example I
+am using an instance called "basic-instance". We also provide the path in the
+file structure where we want our volume to be available from; in this example I
+use /dev/vdb.
+
+.. image:: _assets/attach-to-instance.png
 
 *******************************************
 Creating a volume via from the command line
