@@ -44,6 +44,9 @@ use /dev/vdb.
 
 .. image:: _assets/attach-to-instance.png
 
+Once this is done, then you should be able to see your new volume attached
+to your instance.
+
 *******************************************
 Creating a volume via from the command line
 *******************************************
