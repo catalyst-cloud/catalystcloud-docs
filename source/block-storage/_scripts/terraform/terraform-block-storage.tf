@@ -18,6 +18,10 @@ variable "volume_image_ID" {
   default = "<INSERT THE UBUNTU 20.0 IMAGE ID FROM YOUR REGION>"
 }
 
+variable "instance_id" {
+  default = "<INSERT INSTANCE ID>"
+}
+
 variable "volume_type" {
   default = "b1.standard"
 }
@@ -25,20 +29,13 @@ variable "volume_type" {
 #-----------------------------------------------------------------------------------------------
 
 #Create an NVME storage volume
-resource "openstack_blockstorage_volume_v3" "testvol" {
-  size          = 20
+resource "openstack_blockstorage_volume_v2" "testvol" {
+  size          = 50
   image_id      = "${var.volume_image_ID}"
   volume_type   = "${var.volume_type}"
 }
 
-#Create a compute instance?
-resource "openstack_compute_instance_v2" "instance_1" {
-  name            = "instance_1"
-  security_groups = ["default"]
-}
-
 #Explicitely attach the storage volume to the instance
 resource "openstack_compute_volume_attach_v2" "va_1" {
-  instance_id = "${openstack_compute_instance_v2.instance_1.id}"
-  volume_id   = "${openstack_blockstorage_volume_v2.volume_1.id}"
-}
+  instance_id = "${var.instance_id}"
+  volume_id   = "${openstack_blockstorage_volume_v2.testvol.id}"
