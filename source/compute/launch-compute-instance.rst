@@ -180,126 +180,131 @@ In the following sections, we provide examples that illustrate how to perform
 common initialisation tasks with cloud-init, using different configuration
 formats.
 
-Cloud config format
-===================
 
-The cloud config format is the simplest way to accomplish initialisation tasks
-using the cloud-config syntax. The example below illustrates how to upgrade
-all packages on the first boot.
+.. tabs::
 
-.. code-block:: bash
+    .. tab:: Cloud config format
 
-  #cloud-config
-  # Run a package upgrade on the first boot
-  package_upgrade: true
+      The following assumes that you are familiar with the Heat template and
+      have installed all required dependencies.
 
-The example below shows cloud-init being used to change various configuration
-options during boot time, such as the hostname, locale and timezone.
+      The cloud config format is the simplest way to accomplish initialisation tasks
+      using the cloud-config syntax. The example below illustrates how to upgrade
+      all packages on the first boot.
 
-.. code-block:: bash
+      .. code-block:: bash
 
-  #cloud-config
+        #cloud-config
+        # Run a package upgrade on the first boot
+        package_upgrade: true
 
-  # On the Catalyst Cloud, the default username for access to your instances is:
-  # - CentOS: centos
-  # - CoreOS: core
-  # - Debian: debian
-  # - Ubuntu: ubuntu
-  # - Instances deployed by Heat: ec2-user
-  # You can chose a different username with the "user" parameter as shown below.
-  user: username
+      The example below shows cloud-init being used to change various configuration
+      options during boot time, such as the hostname, locale and timezone.
 
-  # Set the hostname and FQDN
-  fqdn: hostname.example.com
-  manage_etc_hosts: true
+      .. code-block:: bash
 
-  # Set the timezone to UTC (strongly recommended)
-  timezone: UTC
+        #cloud-config
 
-  # Set the locale
-  locale: en_US.UTF-8
+        # On the Catalyst Cloud, the default username for access to your instances is:
+        # - CentOS: centos
+        # - CoreOS: core
+        # - Debian: debian
+        # - Ubuntu: ubuntu
+        # - Instances deployed by Heat: ec2-user
+        # You can chose a different username with the "user" parameter as shown below.
+        user: username
 
-  # Run package update and upgrade on first boot
-  package_upgrade: true
+        # Set the hostname and FQDN
+        fqdn: hostname.example.com
+        manage_etc_hosts: true
 
-  # Mount additional volumes
-  mounts:
-   - [ /dev/vdb, /mnt, auto ]
+        # Set the timezone to UTC (strongly recommended)
+        timezone: UTC
 
-  # Install packages
-  packages:
-   - git
-   - sysstat
-   - htop
-   - apache2
+        # Set the locale
+        locale: en_US.UTF-8
 
-  # Run commands (in order, output displayed on the console)
-  runcmd:
-   - echo "Sample command"
+        # Run package update and upgrade on first boot
+        package_upgrade: true
 
-  # Reboot when finished
-  power_state:
-   mode: reboot
-   message: Rebooting to apply new settings
+        # Mount additional volumes
+        mounts:
+         - [ /dev/vdb, /mnt, auto ]
 
-  # Save a copy of cloud-init's process output (info & errors) to a logfile
-  output: {all: '| tee -a /var/log/cloud-init-output.log'}
+        # Install packages
+        packages:
+         - git
+         - sysstat
+         - htop
+         - apache2
 
-Script format
-=============
+        # Run commands (in order, output displayed on the console)
+        runcmd:
+         - echo "Sample command"
 
-Cloud init can be used to run scripts written in any language (bash, python,
-ruby, perl, ...) at boot time. Scripts must begin with ``#!``.
+        # Reboot when finished
+        power_state:
+         mode: reboot
+         message: Rebooting to apply new settings
 
-.. code-block:: bash
+        # Save a copy of cloud-init's process output (info & errors) to a logfile
+        output: {all: '| tee -a /var/log/cloud-init-output.log'}
 
-  #!/bin/bash
 
-  # Upgrade all packages
-  apt-get update
-  apt-get -y upgrade
+    .. tab:: Script format
 
-  # Install apache
-  apt-get -y install apache2
+      Cloud init can be used to run scripts written in any language (bash, python,
+      ruby, perl, ...) at boot time. Scripts must begin with ``#!``.
 
-MIME format
-===========
+      .. code-block:: bash
 
-The mime multi part archive format allows you to combine multiple cloud-init
-formats, files and scripts into a single file.
+        #!/bin/bash
 
-The example below uses the cloud-config format to install apache and the script
-format to overwrite the index.html file of the default website:
+        # Upgrade all packages
+        apt-get update
+        apt-get -y upgrade
 
-.. code-block:: bash
+        # Install apache
+        apt-get -y install apache2
 
-  Content-Type: multipart/mixed; boundary="===============1123581321345589144=="
-  MIME-Version: 1.0
+    .. tab:: MIME format
 
-  --===============1123581321345589144==
-  MIME-Version: 1.0
-  Content-Type: text/cloud-config; charset="us-ascii"
-  Content-Transfer-Encoding: 7bit
-  Content-Disposition: attachment; filename="cloud-config.init"
+      The mime multi part archive format allows you to combine multiple cloud-init
+      formats, files and scripts into a single file.
 
-  #cloud-config
-  # Install packages
-  packages:
-   - apache2
+      The example below uses the cloud-config format to install apache and the script
+      format to overwrite the index.html file of the default website:
 
-  --===============1123581321345589144==
-  MIME-Version: 1.0
-  Content-Type: text/x-shellscript; charset="us-ascii"
-  Content-Transfer-Encoding: 7bit
-  Content-Disposition: attachment; filename="script.sh"
+      .. code-block:: bash
 
-  #!/bin/bash
-  echo "<h1>Hello world!</h1>" > /var/www/html/index.html
+        Content-Type: multipart/mixed; boundary="===============1123581321345589144=="
+        MIME-Version: 1.0
 
-  --===============1123581321345589144==--
+        --===============1123581321345589144==
+        MIME-Version: 1.0
+        Content-Type: text/cloud-config; charset="us-ascii"
+        Content-Transfer-Encoding: 7bit
+        Content-Disposition: attachment; filename="cloud-config.init"
+
+        #cloud-config
+        # Install packages
+        packages:
+         - apache2
+
+        --===============1123581321345589144==
+        MIME-Version: 1.0
+        Content-Type: text/x-shellscript; charset="us-ascii"
+        Content-Transfer-Encoding: 7bit
+        Content-Disposition: attachment; filename="script.sh"
+
+        #!/bin/bash
+        echo "<h1>Hello world!</h1>" > /var/www/html/index.html
+
+        --===============1123581321345589144==--
+
 
 Content type options
---------------------
+====================
 
 Some of the content types supported by the MIME format include:
 

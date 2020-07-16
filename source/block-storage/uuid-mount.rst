@@ -53,9 +53,9 @@ our instance. This is because we do not want our command potentially failing
 due to volumes with conflicting labels or names trying to be attached to our
 instance.
 
-******************************************************
-Configuring and mounting your volume on a Linux system
-******************************************************
+*****************************************************************
+Configuring and mounting your volume on a Linux system using UUID
+*****************************************************************
 
 The example below illustrates the use of a volume without LVM that we assign
 to our instance using its UUID. The reason you would want to do this
