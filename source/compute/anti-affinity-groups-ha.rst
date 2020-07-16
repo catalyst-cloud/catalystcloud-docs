@@ -62,7 +62,7 @@ Managing server groups
 
       |
 
-      Now we will discuss how to add a compute instance to a server group:
+      Adding a compute instance to a server group:
 
       When launching a compute instance, you can pass a hint to our cloud scheduler
       to indicate it belongs to a server group. This is done using the ``--hint
