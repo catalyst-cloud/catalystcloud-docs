@@ -34,6 +34,7 @@ VPN setup methods
 .. tabs::
 
   .. tab:: Command line
+
     In order to find these parameters you first need to know the name of the router
     you wish to use and a subnet connected to that router.
 
@@ -44,8 +45,9 @@ VPN setup methods
      $ openstack router list
      $ openstack subnet list
 
-    To find the Project ID, Router ID and Router IP Address, you can issue the
-    following command using the name of the router you found previously:
+    To find the Project ID (tenant ID), Router ID and Router IP address, you
+    can issue the following command using the name of the router you found
+    previously:
 
     .. code-block:: bash
 
@@ -62,11 +64,11 @@ VPN setup methods
      | tenant_id             | 0cb6b9b744594a619b0b7340f424858b                                                                                                                                                           |
      +-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-    The Router IP Address is the value associated with the "ip_address" key within
-    the external_gateway_info JSON data.
+    The Router IP address is the value associated with the "ip_address" key
+    within the external_gateway_info JSON data.
 
-    To find the Subnet ID and Subnet CIDR Range, issue the following command using
-    the subnet name you found previously:
+    To find the Subnet ID and Subnet CIDR range, issue the following command
+    using the subnet name you found previously:
 
     .. code-block:: bash
 
@@ -92,20 +94,21 @@ VPN setup methods
      | subnetpool_id     | None                                          |
      +-------------------+-----------------------------------------------+
 
-    If you are creating a VPN that connects your projects between Catalyst Cloud
-    Regions, then the Remote Peer Router IP and Remote Peer Subnet CIDR Range will
-    be the values associated with the subnet and router in the other region. You
-    can determine these in the same way as shown above while connected to the other
-    region. If you are setting up a VPN to a different peer, then the Peer Router IP
-    will be the publicly accessible IPv4 address of that router, while the Remote
-    Peer Subnet CIDR Range will be the subnet behind that router whose traffic you
-    wish to route via the VPN to access the local subnet.
+    If you are creating a VPN that connects your projects between Catalyst
+    Cloud Regions, then the *remote peer router IP* and *remote peer subnet CIDR*
+    range will be the values associated with the subnet and router in the other
+    region. You can determine these in the same way as shown above while
+    connected to the other region. If you are setting up a VPN to a different
+    peer, then the *peer router IP* will be the publicly accessible IPv4
+    address of that router, while the *remote peer Subnet CIDR range* will be
+    the subnet behind that router whose traffic you wish to route via the VPN
+    to access the local subnet.
 
     .. note::
      If you are connecting to a remote peer that is not a Catalyst Cloud router,
      you may need to modify some of the parameters used in the following steps.
 
-    By now you should have the required values so you can proceed to create a VPN.
+    By now you should have the required values you need to create a VPN.
     There are four steps to creating a VPN:
 
     * Create a VPN Service
@@ -181,7 +184,7 @@ VPN setup methods
        | transform_protocol   | esp                                  |
        +----------------------+--------------------------------------+
 
-    Lastly create a VPN IPSec Site Connection. This command makes use of the
+    Lastly create a VPN IPSec site connection. This command makes use of the
     resources created in the last three steps. You will need to take note of these
     IDs to use within this command.
 
