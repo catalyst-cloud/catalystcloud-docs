@@ -66,8 +66,9 @@ Project moderator
 -----------------
 
 The *Project Moderator* role can invite other people to join your project and
-update their roles, but cannot change the project admin. Has the same problem
-as the Admin role in regards to resource access.
+update their roles, but cannot change any of the roles that a project admin has.
+This role also has the same problem as the Admin role in regards to resource
+access.
 
 The list of explicit permissions for the project moderator role:
 
