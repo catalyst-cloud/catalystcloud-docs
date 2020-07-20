@@ -19,7 +19,7 @@ Roles
 Roles are given out to different accounts by a project administrator or
 moderator. These allow the accounts
 to perform actions that the role has security permissions for. This
-insures that you as a ``Project admin`` can hold users to account for there
+insures that you as a ``Project admin`` can hold users to account for their
 actions, or limit users ability to perform potentially harmful actions.
 
 On the catalyst cloud there are several key roles that you need to learn when
