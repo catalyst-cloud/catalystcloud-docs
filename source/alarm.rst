@@ -29,5 +29,5 @@ whether it is scaling up or down.
    :maxdepth: 1
 
    alarm/overview
-   orchestration/auto-healing
-   orchestration/auto-scaling
+   orchestration/autohealing
+   orchestration/autoscaling

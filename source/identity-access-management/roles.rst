@@ -19,7 +19,7 @@ Roles
 Roles are given out to different accounts by a project administrator or
 moderator. These allow the accounts
 to perform actions that the role has security permissions for. This
-insures that you as a ``Project admin`` can hold users to account for there
+insures that you as a ``Project admin`` can hold users to account for their
 actions, or limit users ability to perform potentially harmful actions.
 
 On the catalyst cloud there are several key roles that you need to learn when
@@ -52,11 +52,7 @@ it. However, this role is purely for administrating purposes. It does not
 allow you to access or view all resources, you still need the member role for
 that.
 
-.. raw:: html
-
-   <details>
-   <summary>For the list of explicit permissions this role gives
-   <a>click here</a></summary>
+The list of explicit permissions for the project admin role:
 
 .. code-block:: console
 
@@ -66,10 +62,6 @@ that.
    |                       | keystone.identity.project_users_access                                 |
    +-----------------------+------------------------------------------------------------------------+
 
-.. raw:: html
-
-   </details>
-
 Project moderator
 -----------------
 
@@ -77,21 +69,13 @@ The *Project Moderator* role can invite other people to join your project and
 update their roles, but cannot change the project admin. Has the same problem
 as the Admin role in regards to resource access.
 
-.. raw:: html
-
-   <details>
-   <summary>For the list of explicit permissions this role gives
-   <a>click here</a></summary>
+The list of explicit permissions for the project moderator role:
 
 .. code-block:: console
 
    +-----------------------+------------------------------------------------------------------------+
    | Project Moderator     | keystone.identity.project_users_access                                 |
    +-----------------------+------------------------------------------------------------------------+
-
-.. raw:: html
-
-   </details>
 
 Project member
 --------------
@@ -103,12 +87,8 @@ others in terms of the privileges that it allows. As
 mentioned earlier, because our roles are additive you do not need all of them
 to have full control over the project.
 
-.. raw:: html
-
-   <details>
-   <summary>For the list of explicit permissions this role gives
-   <a>click here</a> This list is quite long as it contains almost all
-   the permissions you need for your project.</summary>
+The list of explicit permissions for the project member role. This list is
+quite extensive as the role covers almost all the service on the cloud:
 
 .. code-block:: console
 
@@ -306,10 +286,6 @@ to have full control over the project.
    |                       | swift.auth.auth_token                                                  |
    +-----------------------+------------------------------------------------------------------------+
 
-.. raw:: html
-
-   </details>
-
 Heat stack owner
 ----------------
 
@@ -322,11 +298,7 @@ other roles.
 For more information on this service, please consult the documentation at
 :ref:`Cloud orchestration. <cloud-orchestration>`
 
-.. raw:: html
-
-   <details>
-   <summary>For the list of explicit permissions this role gives
-   <a>click here</a></summary>
+The list of explicit permissions for the Heat stack owner role:
 
 .. code-block:: console
 
@@ -388,10 +360,6 @@ For more information on this service, please consult the documentation at
    |                       | openstack.orchestration.stacks:show_output                             |
    +-----------------------+------------------------------------------------------------------------+
 
-.. raw:: html
-
-   </details>
-
 Compute start/stop
 ------------------
 
@@ -410,11 +378,7 @@ actions it is equivalent to auth_only.
 
 This role is implied when a user also has *Project Member*.
 
-.. raw:: html
-
-   <details>
-   <summary>For the list of explicit permissions this role gives
-   <a>click here</a></summary>
+The list of explicit permissions for the compute start/stop role:
 
 .. code-block:: console
 
@@ -425,11 +389,6 @@ This role is implied when a user also has *Project Member*.
    |                       | openstack.compute.unshelve                                             |
    +-----------------------+------------------------------------------------------------------------+
 
-.. raw:: html
-
-   </details>
-
-
 Object storage
 --------------
 
@@ -438,11 +397,7 @@ and objects within those containers. Creative and destructive actions related
 to compute, network and block storage will fail. This role is implied when a
 user also has *Project Member*.
 
-.. raw:: html
-
-   <details>
-   <summary>For the list of explicit permissions this role gives
-   <a>click here</a></summary>
+The list of explicit permissions for the object storage role:
 
 .. code-block:: console
 
@@ -468,10 +423,6 @@ user also has *Project Member*.
    |                       | swift.auth.auth_token                                                  |
    +-----------------------+------------------------------------------------------------------------+
 
-.. raw:: html
-
-   </details>
-
 Auth only
 ---------
 
@@ -480,11 +431,7 @@ manage their own account information. This role cannot view, create or destroy
 project resources and it does not permit the uploading of SSH keys or the
 viewing of project usage and quota information.
 
-.. raw:: html
-
-   <details>
-   <summary>For the list of explicit permissions this role gives
-   <a>click here</a></summary>
+The list of explicit permissions for the auth only role:
 
 .. code-block:: console
 
@@ -492,10 +439,6 @@ viewing of project usage and quota information.
    | Authentication Only   | openstack.keypair.create                                               |
    |                       | openstack.quota.show                                                   |
    +-----------------------+------------------------------------------------------------------------+
-
-.. raw:: html
-
-   </details>
 
 Kubernetes specific roles
 =========================

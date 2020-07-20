@@ -14,9 +14,13 @@ The following is assumed:
 * You have been assigned a project
 * Your user in that project has permissions to create the required resources.
 
-When a new project is created, a network, subnet, and router are built by
+When you create your first project, a network, subnet, and router are built by
 default. The process below outlines the steps required to do this if the
-default setup has been deleted or an additional network is required.
+default setup has been deleted or an additional network is required. If in the
+future you create any more projects, they will not be created with the default
+router and network. An example of how to create these resources specifically
+can be found under the :ref:`Network <creating_networks>` section of the
+documentation.
 
 .. note::
 

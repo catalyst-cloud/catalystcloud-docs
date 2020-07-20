@@ -1,0 +1,116 @@
+heat_template_version: 2018-08-31
+
+description: >
+  Heat template for building the first instance stack in the Catalyst Cloud
+  Hamilton (nz-hlz-1) region.
+
+parameter_groups:
+- label: First Instance
+  description: First Instance configuration
+  parameters:
+  - key_name
+  - public_net
+  - public_net_id
+  - private_net
+  - secgroup_name
+  - host_name
+  - domain_name
+
+parameters:
+
+  key_name:
+    type: string
+    description: Name of an existing key pair to use for the server
+    default: first-instance-key
+    constraints:
+      - custom_constraint: nova.keypair
+
+  servers_flavor:
+    type: string
+    description: Flavour for the servers
+    default: c1.c1r1
+    constraints:
+      - custom_constraint: nova.flavor
+
+  image:
+    type: string
+    description: Image ID or image name to use for the server
+    default: ubuntu-18.04-x86_64
+    constraints:
+      - custom_constraint: glance.image
+
+  public_net:
+    type: string
+    description: >
+      Name of public network
+    default: public-net
+
+  public_net_id:
+    type: string
+    description: >
+      ID of public network
+    default: f10ad6de-a26d-4c29-8c64-2a7418d47f8f
+
+  private_net:
+    type: string
+    description: ID of existing private network to use
+    default: private-net
+
+  router_name:
+    type: string
+    description: >
+      Name of the router that will connect the private and public networks
+    default: border-router
+
+  secgroup_name:
+    type: string
+    description: network access for our first instance.
+    default: first-instance-sg
+
+  host_name:
+    type: string
+    description: Hostname
+    default: first-instance
+
+  domain_name:
+    type: string
+    description: Domain name of the organisation
+    default: localdomain
+
+resources:
+
+  first_instance_secgroup:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: { get_param: secgroup_name }
+      description: Network access for our first instance.
+      rules:
+        - direction: ingress
+          protocol: tcp
+          remote_ip_prefix: 0.0.0.0/0
+          port_range_min: 22
+          port_range_max: 22
+
+  first_instance_server:
+    type: OS::Nova::Server
+    properties:
+      name: { get_param: host_name }
+      image: { get_param: image }
+      flavor: { get_param: servers_flavor }
+      key_name: { get_param: key_name }
+      user_data_format: RAW
+      networks:
+        - port: { get_resource: first_instance_server_port }
+
+  first_instance_server_port:
+    type: OS::Neutron::Port
+    properties:
+      network_id: { get_param: private_net }
+      security_groups:
+        - { get_resource: first_instance_secgroup }
+
+  first_instance_server_floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network_id: { get_param: public_net_id }
+      port_id: { get_resource: first_instance_server_port }

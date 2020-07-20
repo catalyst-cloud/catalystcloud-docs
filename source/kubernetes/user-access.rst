@@ -1,7 +1,7 @@
 .. _kubernetes-user-access:
 
 ###########
-User Access
+User access
 ###########
 
 
@@ -49,208 +49,199 @@ assigned to their account.
 More information
 ================
 
-.. raw:: html
-
-   <details>
-   <summary>For a more comprehensive list of the exact permissions that each
-   role gives, you can <a>click here</a> to view a full list for the kubernetes
-   roles.</summary>
+The following is a comprehensive list of the exact permissions that each role
+gives a user:
 
 .. code-block:: console
 
-   +----------------------+-----------------------------------------------------+
-   | Role                 | Permissions                                         |
-   +======================+=====================================================+
-   | k8s_admin            | resourcemanager.projects.*                          |
-   +----------------------+-----------------------------------------------------+
-   | k8s_developer        | container.apiServices.*                             |
-   |                      | container.bindings.*                                |
-   |                      | container.certificateSigningRequests.create         |
-   |                      | container.certificateSigningRequests.delete         |
-   |                      | container.certificateSigningRequests.get            |
-   |                      | container.certificateSigningRequests.list           |
-   |                      | container.certificateSigningRequests.update         |
-   |                      | container.certificateSigningRequests.watch          |
-   |                      | container.clusterRoleBindings.get                   |
-   |                      | container.clusterRoleBindings.list                  |
-   |                      | container.clusterRoleBindings.watch                 |
-   |                      | container.clusterRoles.get                          |
-   |                      | container.clusterRoles.list                         |
-   |                      | container.clusterRoles.watch                        |
-   |                      | container.componentStatuses.*                       |
-   |                      | container.configMaps.*                              |
-   |                      | container.controllerRevisions.get                   |
-   |                      | container.controllerRevisions.list                  |
-   |                      | container.controllerRevisions.watch                 |
-   |                      | container.cronJobs.*                                |
-   |                      | container.customResourceDefinitions.*               |
-   |                      | container.deployments.*                             |
-   |                      | container.endpoints.*                               |
-   |                      | container.events.*                                  |
-   |                      | container.horizontalPodAutoscalers.*                |
-   |                      | container.ingresses.*                               |
-   |                      | container.initializerConfigurations.*               |
-   |                      | container.jobs.*                                    |
-   |                      | container.limitRanges.*                             |
-   |                      | container.localSubjectAccessReviews.*               |
-   |                      | container.namespaces.*                              |
-   |                      | container.networkPolicies.*                         |
-   |                      | container.nodes.get                                 |
-   |                      | container.nodes.list                                |
-   |                      | container.nodes.watch                               |
-   |                      | container.persistentVolumeClaims.*                  |
-   |                      | container.persistentVolumes.*                       |
-   |                      | container.podDisruptionBudgets.*                    |
-   |                      | container.podPresets.*                              |
-   |                      | container.podSecurityPolicies.get                   |
-   |                      | container.podSecurityPolicies.list                  |
-   |                      | container.podSecurityPolicies.watch                 |
-   |                      | container.podTemplates.*                            |
-   |                      | container.pods.*                                    |
-   |                      | container.replicaSets.*                             |
-   |                      | container.replicationControllers.*                  |
-   |                      | container.resourceQuotas.*                          |
-   |                      | container.roleBindings.get                          |
-   |                      | container.roleBindings.list                         |
-   |                      | container.roleBindings.watch                        |
-   |                      | container.roles.get                                 |
-   |                      | container.roles.list                                |
-   |                      | container.roles.watch                               |
-   |                      | container.secrets.*                                 |
-   |                      | container.selfSubjectAccessReviews.*                |
-   |                      | container.serviceAccounts.*                         |
-   |                      | container.services.*                                |
-   |                      | container.statefulSets.*                            |
-   |                      | container.storageClasses.*                          |
-   |                      | container.subjectAccessReviews.*                    |
-   |                      | container.tokenReviews.*                            |
-   +----------------------+-----------------------------------------------------+
-   | k8s_viewer           | container.apiServices.get                           |
-   |                      | container.apiServices.list                          |
-   |                      | container.apiServices.watch                         |
-   |                      | container.binding.get                               |
-   |                      | container.binding.list                              |
-   |                      | container.binding.watch                             |
-   |                      | container.clusterRoleBindings.get                   |
-   |                      | container.clusterRoleBindings.list                  |
-   |                      | container.clusterRoleBindings.watch                 |
-   |                      | container.clusterRoles.get                          |
-   |                      | container.clusterRoles.list                         |
-   |                      | container.clusterRoles.watch                        |
-   |                      | container.componentStatuses.get                     |
-   |                      | container.componentStatuses.list                    |
-   |                      | container.componentStatuses.watch                   |
-   |                      | container.configMaps.get                            |
-   |                      | container.configMaps.list                           |
-   |                      | container.configMaps.watch                          |
-   |                      | container.controllerRevisions.get                   |
-   |                      | container.controllerRevisions.list                  |
-   |                      | container.controllerRevisions.watch                 |
-   |                      | container.cronJobs.get                              |
-   |                      | container.cronJobs.list                             |
-   |                      | container.cronJobs.watch                            |
-   |                      | container.customResourceDefinitions.get             |
-   |                      | container.customResourceDefinitions.list            |
-   |                      | container.customResourceDefinitions.watch           |
-   |                      | container.deployments.get                           |
-   |                      | container.deployments.list                          |
-   |                      | container.deployments.watch                         |
-   |                      | container.endpoints.get                             |
-   |                      | container.endpoints.list                            |
-   |                      | container.endpoints.watch                           |
-   |                      | container.events.get                                |
-   |                      | container.events.list                               |
-   |                      | container.events.watch                              |
-   |                      | container.horizontalPodAutoscalers.get              |
-   |                      | container.horizontalPodAutoscalers.list             |
-   |                      | container.horizontalPodAutoscalers.watch            |
-   |                      | container.ingresses.get                             |
-   |                      | container.ingresses.list                            |
-   |                      | container.ingresses.watch                           |
-   |                      | container.initializerConfigurations.get             |
-   |                      | container.initializerConfigurations.list            |
-   |                      | container.initializerConfigurations.watch           |
-   |                      | container.jobs.get                                  |
-   |                      | container.jobs.list                                 |
-   |                      | container.jobs.watch                                |
-   |                      | container.limitRanges.get                           |
-   |                      | container.limitRanges.list                          |
-   |                      | container.limitRanges.watch                         |
-   |                      | container.localSubjectAccessReviews.get             |
-   |                      | container.localSubjectAccessReviews.list            |
-   |                      | container.localSubjectAccessReviews.watch           |
-   |                      | container.namespaces.get                            |
-   |                      | container.namespaces.list                           |
-   |                      | container.namespaces.watch                          |
-   |                      | container.networkPolicies.get                       |
-   |                      | container.networkPolicies.list                      |
-   |                      | container.networkPolicies.watch                     |
-   |                      | container.nodes.get                                 |
-   |                      | container.nodes.list                                |
-   |                      | container.nodes.watch                               |
-   |                      | container.persistentVolumeClaims.get                |
-   |                      | container.persistentVolumeClaims.list               |
-   |                      | container.persistentVolumeClaims.watch              |
-   |                      | container.persistentVolumes.get                     |
-   |                      | container.persistentVolumes.list                    |
-   |                      | container.persistentVolumes.watch                   |
-   |                      | container.podDisruptionBudgets.get                  |
-   |                      | container.podDisruptionBudgets.list                 |
-   |                      | container.podDisruptionBudgets.watch                |
-   |                      | container.podPresets.get                            |
-   |                      | container.podPresets.list                           |
-   |                      | container.podPresets.watch                          |
-   |                      | container.podTemplates.get                          |
-   |                      | container.podTemplates.list                         |
-   |                      | container.podTemplates.watch                        |
-   |                      | container.podSecurityPolicies.get                   |
-   |                      | container.podSecurityPolicies.list                  |
-   |                      | container.podSecurityPolicies.watch                 |
-   |                      | container.pods.get                                  |
-   |                      | container.pods.list                                 |
-   |                      | container.pods.watch                                |
-   |                      | container.replicaSets.get                           |
-   |                      | container.replicaSets.list                          |
-   |                      | container.replicaSets.watch                         |
-   |                      | container.replicationControllers.get                |
-   |                      | container.replicationControllers.list               |
-   |                      | container.replicationControllers.watch              |
-   |                      | container.resourceQuotas.get                        |
-   |                      | container.resourceQuotas.list                       |
-   |                      | container.resourceQuotas.watch                      |
-   |                      | container.roleBindings.get                          |
-   |                      | container.roleBindings.list                         |
-   |                      | container.roleBindings.watch                        |
-   |                      | container.roles.get                                 |
-   |                      | container.roles.list                                |
-   |                      | container.roles.watch                               |
-   |                      | container.secrets.get                               |
-   |                      | container.secrets.list                              |
-   |                      | container.secrets.watch                             |
-   |                      | container.selfSubjectAccessReviews.get              |
-   |                      | container.selfSubjectAccessReviews.list             |
-   |                      | container.selfSubjectAccessReviews.watch            |
-   |                      | container.serviceAccounts.get                       |
-   |                      | container.serviceAccounts.list                      |
-   |                      | container.serviceAccounts.watch                     |
-   |                      | container.services.get                              |
-   |                      | container.services.list                             |
-   |                      | container.services.watch                            |
-   |                      | container.statefulSets.get                          |
-   |                      | container.statefulSets.list                         |
-   |                      | container.statefulSets.watch                        |
-   |                      | container.storageClasses.get                        |
-   |                      | container.storageClasses.list                       |
-   |                      | container.storageClasses.watch                      |
-   |                      | container.subjectAccessReviews.get                  |
-   |                      | container.subjectAccessReviews.list                 |
-   |                      | container.subjectAccessReviews.watch                |
-   +----------------------+-----------------------------------------------------+
-
-.. raw:: html
-
-   </details>
-
+  +----------------------+-----------------------------------------------------+
+  | Role                 | Permissions                                         |
+  +======================+=====================================================+
+  | k8s_admin            | resourcemanager.projects.*                          |
+  +----------------------+-----------------------------------------------------+
+  | k8s_developer        | container.apiServices.*                             |
+  |                      | container.bindings.*                                |
+  |                      | container.certificateSigningRequests.create         |
+  |                      | container.certificateSigningRequests.delete         |
+  |                      | container.certificateSigningRequests.get            |
+  |                      | container.certificateSigningRequests.list           |
+  |                      | container.certificateSigningRequests.update         |
+  |                      | container.certificateSigningRequests.watch          |
+  |                      | container.clusterRoleBindings.get                   |
+  |                      | container.clusterRoleBindings.list                  |
+  |                      | container.clusterRoleBindings.watch                 |
+  |                      | container.clusterRoles.get                          |
+  |                      | container.clusterRoles.list                         |
+  |                      | container.clusterRoles.watch                        |
+  |                      | container.componentStatuses.*                       |
+  |                      | container.configMaps.*                              |
+  |                      | container.controllerRevisions.get                   |
+  |                      | container.controllerRevisions.list                  |
+  |                      | container.controllerRevisions.watch                 |
+  |                      | container.cronJobs.*                                |
+  |                      | container.customResourceDefinitions.*               |
+  |                      | container.deployments.*                             |
+  |                      | container.endpoints.*                               |
+  |                      | container.events.*                                  |
+  |                      | container.horizontalPodAutoscalers.*                |
+  |                      | container.ingresses.*                               |
+  |                      | container.initializerConfigurations.*               |
+  |                      | container.jobs.*                                    |
+  |                      | container.limitRanges.*                             |
+  |                      | container.localSubjectAccessReviews.*               |
+  |                      | container.namespaces.*                              |
+  |                      | container.networkPolicies.*                         |
+  |                      | container.nodes.get                                 |
+  |                      | container.nodes.list                                |
+  |                      | container.nodes.watch                               |
+  |                      | container.persistentVolumeClaims.*                  |
+  |                      | container.persistentVolumes.*                       |
+  |                      | container.podDisruptionBudgets.*                    |
+  |                      | container.podPresets.*                              |
+  |                      | container.podSecurityPolicies.get                   |
+  |                      | container.podSecurityPolicies.list                  |
+  |                      | container.podSecurityPolicies.watch                 |
+  |                      | container.podTemplates.*                            |
+  |                      | container.pods.*                                    |
+  |                      | container.replicaSets.*                             |
+  |                      | container.replicationControllers.*                  |
+  |                      | container.resourceQuotas.*                          |
+  |                      | container.roleBindings.get                          |
+  |                      | container.roleBindings.list                         |
+  |                      | container.roleBindings.watch                        |
+  |                      | container.roles.get                                 |
+  |                      | container.roles.list                                |
+  |                      | container.roles.watch                               |
+  |                      | container.secrets.*                                 |
+  |                      | container.selfSubjectAccessReviews.*                |
+  |                      | container.serviceAccounts.*                         |
+  |                      | container.services.*                                |
+  |                      | container.statefulSets.*                            |
+  |                      | container.storageClasses.*                          |
+  |                      | container.subjectAccessReviews.*                    |
+  |                      | container.tokenReviews.*                            |
+  +----------------------+-----------------------------------------------------+
+  | k8s_viewer           | container.apiServices.get                           |
+  |                      | container.apiServices.list                          |
+  |                      | container.apiServices.watch                         |
+  |                      | container.binding.get                               |
+  |                      | container.binding.list                              |
+  |                      | container.binding.watch                             |
+  |                      | container.clusterRoleBindings.get                   |
+  |                      | container.clusterRoleBindings.list                  |
+  |                      | container.clusterRoleBindings.watch                 |
+  |                      | container.clusterRoles.get                          |
+  |                      | container.clusterRoles.list                         |
+  |                      | container.clusterRoles.watch                        |
+  |                      | container.componentStatuses.get                     |
+  |                      | container.componentStatuses.list                    |
+  |                      | container.componentStatuses.watch                   |
+  |                      | container.configMaps.get                            |
+  |                      | container.configMaps.list                           |
+  |                      | container.configMaps.watch                          |
+  |                      | container.controllerRevisions.get                   |
+  |                      | container.controllerRevisions.list                  |
+  |                      | container.controllerRevisions.watch                 |
+  |                      | container.cronJobs.get                              |
+  |                      | container.cronJobs.list                             |
+  |                      | container.cronJobs.watch                            |
+  |                      | container.customResourceDefinitions.get             |
+  |                      | container.customResourceDefinitions.list            |
+  |                      | container.customResourceDefinitions.watch           |
+  |                      | container.deployments.get                           |
+  |                      | container.deployments.list                          |
+  |                      | container.deployments.watch                         |
+  |                      | container.endpoints.get                             |
+  |                      | container.endpoints.list                            |
+  |                      | container.endpoints.watch                           |
+  |                      | container.events.get                                |
+  |                      | container.events.list                               |
+  |                      | container.events.watch                              |
+  |                      | container.horizontalPodAutoscalers.get              |
+  |                      | container.horizontalPodAutoscalers.list             |
+  |                      | container.horizontalPodAutoscalers.watch            |
+  |                      | container.ingresses.get                             |
+  |                      | container.ingresses.list                            |
+  |                      | container.ingresses.watch                           |
+  |                      | container.initializerConfigurations.get             |
+  |                      | container.initializerConfigurations.list            |
+  |                      | container.initializerConfigurations.watch           |
+  |                      | container.jobs.get                                  |
+  |                      | container.jobs.list                                 |
+  |                      | container.jobs.watch                                |
+  |                      | container.limitRanges.get                           |
+  |                      | container.limitRanges.list                          |
+  |                      | container.limitRanges.watch                         |
+  |                      | container.localSubjectAccessReviews.get             |
+  |                      | container.localSubjectAccessReviews.list            |
+  |                      | container.localSubjectAccessReviews.watch           |
+  |                      | container.namespaces.get                            |
+  |                      | container.namespaces.list                           |
+  |                      | container.namespaces.watch                          |
+  |                      | container.networkPolicies.get                       |
+  |                      | container.networkPolicies.list                      |
+  |                      | container.networkPolicies.watch                     |
+  |                      | container.nodes.get                                 |
+  |                      | container.nodes.list                                |
+  |                      | container.nodes.watch                               |
+  |                      | container.persistentVolumeClaims.get                |
+  |                      | container.persistentVolumeClaims.list               |
+  |                      | container.persistentVolumeClaims.watch              |
+  |                      | container.persistentVolumes.get                     |
+  |                      | container.persistentVolumes.list                    |
+  |                      | container.persistentVolumes.watch                   |
+  |                      | container.podDisruptionBudgets.get                  |
+  |                      | container.podDisruptionBudgets.list                 |
+  |                      | container.podDisruptionBudgets.watch                |
+  |                      | container.podPresets.get                            |
+  |                      | container.podPresets.list                           |
+  |                      | container.podPresets.watch                          |
+  |                      | container.podTemplates.get                          |
+  |                      | container.podTemplates.list                         |
+  |                      | container.podTemplates.watch                        |
+  |                      | container.podSecurityPolicies.get                   |
+  |                      | container.podSecurityPolicies.list                  |
+  |                      | container.podSecurityPolicies.watch                 |
+  |                      | container.pods.get                                  |
+  |                      | container.pods.list                                 |
+  |                      | container.pods.watch                                |
+  |                      | container.replicaSets.get                           |
+  |                      | container.replicaSets.list                          |
+  |                      | container.replicaSets.watch                         |
+  |                      | container.replicationControllers.get                |
+  |                      | container.replicationControllers.list               |
+  |                      | container.replicationControllers.watch              |
+  |                      | container.resourceQuotas.get                        |
+  |                      | container.resourceQuotas.list                       |
+  |                      | container.resourceQuotas.watch                      |
+  |                      | container.roleBindings.get                          |
+  |                      | container.roleBindings.list                         |
+  |                      | container.roleBindings.watch                        |
+  |                      | container.roles.get                                 |
+  |                      | container.roles.list                                |
+  |                      | container.roles.watch                               |
+  |                      | container.secrets.get                               |
+  |                      | container.secrets.list                              |
+  |                      | container.secrets.watch                             |
+  |                      | container.selfSubjectAccessReviews.get              |
+  |                      | container.selfSubjectAccessReviews.list             |
+  |                      | container.selfSubjectAccessReviews.watch            |
+  |                      | container.serviceAccounts.get                       |
+  |                      | container.serviceAccounts.list                      |
+  |                      | container.serviceAccounts.watch                     |
+  |                      | container.services.get                              |
+  |                      | container.services.list                             |
+  |                      | container.services.watch                            |
+  |                      | container.statefulSets.get                          |
+  |                      | container.statefulSets.list                         |
+  |                      | container.statefulSets.watch                        |
+  |                      | container.storageClasses.get                        |
+  |                      | container.storageClasses.list                       |
+  |                      | container.storageClasses.watch                      |
+  |                      | container.subjectAccessReviews.get                  |
+  |                      | container.subjectAccessReviews.list                 |
+  |                      | container.subjectAccessReviews.watch                |
+  +----------------------+-----------------------------------------------------+
 
 *********************************
 Generating Kubernetes config file

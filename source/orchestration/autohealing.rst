@@ -1,8 +1,8 @@
 .. _autohealing-on-catalyst-cloud:
 
-********************
-Auto healing example
-********************
+************
+Auto healing
+************
 
 Prerequisites
 -------------

@@ -128,7 +128,7 @@ system.
           aodhclient
 
 
-Using Docker (experimental)
+Using docker (experimental)
 ===========================
 
 The Catalyst Cloud CLI is available as a Docker container that is easy to use,
@@ -199,7 +199,7 @@ More information can be found under :ref:`here <access-and-whitelist>`
 
 .. _source-rc-file:
 
-Source an OpenStack RC file
+Source an openstack RC file
 ===========================
 
 When no configuration arguments are passed, the OpenStack client tools will try
