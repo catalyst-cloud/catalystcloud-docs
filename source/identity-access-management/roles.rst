@@ -26,13 +26,16 @@ On the catalyst cloud there are several key roles that you need to learn when
 you're wanting to add more users to your project. More than one role can be
 given to a user and with some cases such as the Heat Stack Owner role,
 you need multiple roles to have full control of the project. These roles can be
-amended once a user has accepted your invitation to the
-project.
+amended once a user has accepted your invitation to the project.
 
 The roles are additive meaning that you can hold a lesser role like 'auth_only'
 that is supposed to restrict permissions and a role like 'member' that *allows*
-those same restricted permissions. The one that allows them supersedes the
-other.
+those same restricted permissions. The one that allows permissions supersedes
+the role that restricts. This also is relevant when you are talking about
+accounts that can add or remove permissions. An admin account has more
+permissions than a moderator account. Therefore an admin account cannot have
+it's roles removed by a moderator, but an admin **can** remove the roles of a
+moderator.
 
 The roles available are split up between General roles, that control your
 ability to make changes to the project as a whole. And Kubernetes roles which
