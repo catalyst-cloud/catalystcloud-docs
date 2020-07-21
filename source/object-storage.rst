@@ -33,6 +33,7 @@ Table of Contents:
   :maxdepth: 1
 
   object-storage/dashboard
+  object-storage/using-container
   object-storage/cli
   object-storage/api
   object-storage/advanced

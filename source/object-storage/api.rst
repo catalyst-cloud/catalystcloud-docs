@@ -42,8 +42,8 @@ RC file (under Access & Security, API Access, or using the command line tools).
 
 In addition to sourcing the correct environment variables, you will also need
 to have installed the standard client library for swift, which in this case is
-Python Swiftclient. This can be added to your current Python environment.
-The example below illustrates how:
+the Python Swiftclient. This can be added to your current Python environment;
+the example below illustrates how:
 
 .. code-block:: bash
 
