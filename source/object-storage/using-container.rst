@@ -341,14 +341,14 @@ method you choose; detailed below.
 
           # List all files in test bucket
           for key in bucket.list():
-              print key.name
+              print (key.name)
 
           # List all buckets
           for bucket in conn.get_all_buckets():
-              print "{name}\t{created}".format(
+              print ("{name}\t{created}".format(
                   name = bucket.name,
                   created = bucket.creation_date,
-              )
+              ))
 
     .. tab:: cURL
 
