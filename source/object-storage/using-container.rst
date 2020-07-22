@@ -1,11 +1,27 @@
 ##################################
-Using object storage containers
+Using containers
 ##################################
 
 There are several different methods available to you for interacting with the
 object storage service. The following tabs cover the most common tools that
 people use. Each of these examples shows some of the basic commands that you
 can use to create and edit your object storage containers.
+
+Prerequisites
+=============
+
+For several of the methods detailed below, you will have to prepare your
+command line environment before continuing with the examples. The key things
+that you have to prepare before continuing are:
+
+* You must :ref:`Source an OpenRC file <command-line-interface>`.
+* You must ensure that you have the correct role for using object storage on
+  your cloud project. See :ref:`here<access_control>` for more details.
+
+Once you have met these requirements, we you can continue with whichever
+method you choose; detailed below.
+
+|
 
 .. _s3-api-documentation:
 
@@ -15,9 +31,6 @@ can use to create and edit your object storage containers.
 
         The following is a list of the most commonly used commands that will help you
         interact with the object storage service via the openstack command line.
-        First, ensure that you have installed the correct version of the CLI tools for your
-        operating system and have sourced your OpenStack RC file. See
-        :ref:`installing the command line tools<command-line-interface>` for full details.
 
         |
 
@@ -342,8 +355,7 @@ can use to create and edit your object storage containers.
         To access object storage using cURL it will be necessary to provide credentials
         to authenticate the request.
 
-        This can be done by sourcing a valid RC file ( see :ref:`installing the command line tools <command-line-interface>` ),
-        retrieving the account specific detail via the
+        This can be done by sourcing your OpenRC file and retrieving the account specific details via the
         Swift command line tools, then exporting the required variables as shown below.
 
         .. code-block:: bash

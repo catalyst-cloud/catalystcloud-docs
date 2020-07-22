@@ -36,5 +36,5 @@ compatibility to S3 APIs.
 
 .. seealso::
 
-  It is also documented in the Catalyst Cloud documentation here:
-  :ref:`s3-api-documentation`.
+  It is also documented in the Catalyst Cloud documentation
+  :ref:`here<s3-api-documentation>`.
