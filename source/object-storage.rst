@@ -32,7 +32,6 @@ Table of Contents:
 .. toctree::
   :maxdepth: 1
 
-  object-storage/dashboard
   object-storage/using-container
   object-storage/advanced
   object-storage/storage-access-control
