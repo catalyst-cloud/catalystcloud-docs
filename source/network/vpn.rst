@@ -165,25 +165,6 @@ elements in order to avoid ambiguity when running commands.
 
     By now you should have the required values so you can proceed to create a
     VPN.
-=======
-In order to setup a VPN, you need to know a number of parameters:
-
-* Project (previously Tenant) ID
-* Router ID
-* Router IP Address
-* Subnet ID
-* Subnet CIDR Range
-* Remote Peer Router IP
-* Remote Peer Subnet CIDR Range
-* A Secret Pre Shared Key
-
-.. note::
- IPSec relies on symmetrical encryption where both sides use the same private
- key. This key is known as a Pre Shared Key (PSK). You should ensure that you
- manage this key appropriately, so for example be sure that it is not committed
- to your configuration management system source control in plain text.
-
-VPN setup methods
 
     There are four steps to creating a VPN:
 
