@@ -8,7 +8,13 @@ Mounting a volume using a UUID
 Creating a volume via the CLI
 *****************************
 
-Use the ``openstack volume create`` command to create a new volume:
+Unlike our previous example, we are going to be creating and attaching a
+volume using its **UUID**, rather than a unique volume name. This process is
+only uniquely different for the openstack CLI, if you wish to use another
+method to create and attach your instance; you can follow the examples on the
+:ref:`using-volumes` page.
+
+For this example we start off with creating a new volume:
 
 .. code-block:: console
 
@@ -37,12 +43,12 @@ Use the ``openstack volume create`` command to create a new volume:
   | user_id             | 4b934c44d8b24e60acad9609b641bee3     |
   +---------------------+--------------------------------------+
 
-Attach a volume to a compute instance
-=====================================
+Attaching a volume to a compute instance
+========================================
 
 Use the ``openstack server add volume`` command to attach the volume to an
-instance. For this example we are going to use the volume ID,which we can find
-in our previous command:
+instance. For this example we are going to use the volume ID, which we can find
+in the output of our previous command:
 
 .. code-block:: console
 
