@@ -23,6 +23,7 @@ Contents:
    block-storage
    compute
    dashboard
+   database
    identity-access-management
    image
    kubernetes
