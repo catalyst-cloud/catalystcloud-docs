@@ -76,7 +76,7 @@ Configuring the ACLs
 
 This part of the configuration will require the use of the command line tools.
 
-Getting the Auth Only users identity
+Getting the auth only users identity
 ------------------------------------
 
 First we need to retrieve the user ID for our Auth Only user. To do this you

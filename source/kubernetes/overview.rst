@@ -21,7 +21,7 @@ Docker container format.
 
 
 ******************************
-Container Orchestration Engine
+Container orchestration engine
 ******************************
 
 Container Orchestration refers to the automated arrangement, coordination, and

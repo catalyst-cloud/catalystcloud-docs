@@ -21,7 +21,7 @@ You will need to delve into the mysteries of 'cloud-init' a little to achieve
 this. You'll also learn how to perform another useful customisation -
 changing who the default user is for an instance.
 
-Heat Template
+Heat template
 =============
 
 We need to create a network, and a subnet - and then boot an instance using

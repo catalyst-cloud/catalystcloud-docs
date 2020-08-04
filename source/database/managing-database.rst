@@ -70,7 +70,7 @@ the following query:
 
 .. code-block:: bash
 
-  $ mysql -h 10.0.0.16 -u root -p -e 'SELECT USER()'
+  $   mysql -h 10.0.0.16 -u root -p -e 'SELECT USER()'
   Enter password:
   +----------------+
   | USER()         |
@@ -130,6 +130,7 @@ Going off of the examples we had before, we created a secondary database named
 to the database *mydb2* for *newuser2*
 
 .. code-block:: bash
+
   $ openstack database user grant access db-instance-1 newuser2 myDB2
 
   # if we now show the access for our user, we will see it has been given access to myDB2
@@ -196,11 +197,11 @@ your instances.
   Before making changes to the flavor of your instance, you should stop your
   instance and restart it after the resizing has been completed.
 
-The following code block will resize the flavor of *myDB* to c1.c1r4
+The following example will resize the flavor of *db-instance-1* to c1.c2r4
 
 .. code-block::
 
-  $ openstack database instance resize flavor myDB c1.c1r4
+  $ openstack database instance resize flavor db-instance-1 c1.c2r4
 
 This next code block allows you to resize the volume that you have attached to
 your instance. The command is formed similarly to the above command, you choose
@@ -211,7 +212,7 @@ resize is complete.
 
 .. code-block::
 
-  $ openstack database instance resize volume myDB 10
+  $ openstack database instance resize volume db-instance-1 10
 
 
 .. Note::
@@ -246,7 +247,7 @@ following shows how to enable slow_query specifically.
 
 .. code-block:: bash
 
-  $ openstack database log enable db-instance-1 slow_query
+  $ openstack database log set --enable db-instance-1 slow_query
   +-----------+----------------------------------------------------------------+
   | Field     | Value                                                          |
   +-----------+----------------------------------------------------------------+
@@ -295,4 +296,3 @@ Finally we publish the log using:
   | 6bd114d1-7251-42d6-9426-db598c085472/mysql-slow_query/log-2019-03-28T01:25:32.259223 |
   | 6bd114d1-7251-42d6-9426-db598c085472/mysql-slow_query_metafile                       |
   +--------------------------------------------------------------------------------------+
-

@@ -14,9 +14,13 @@ The following is assumed:
 * You have been assigned a project
 * Your user in that project has permissions to create the required resources.
 
-When a new project is created, a network, subnet, and router are built by
+When you create your first project, a network, subnet, and router are built by
 default. The process below outlines the steps required to do this if the
-default setup has been deleted or an additional network is required.
+default setup has been deleted or an additional network is required. If in the
+future you create any more projects, they will not be created with the default
+router and network. An example of how to create these resources specifically
+can be found under the :ref:`Network <creating_networks>` section of the
+documentation.
 
 .. note::
 
@@ -55,7 +59,7 @@ stack you have created via another method.
 By the end of this process you should have an instance running of an Ubuntu
 image that you're able to use however you'd like.
 
-Network Requirements
+Network requirements
 ====================
 
 Before launching an instance, it is necessary to have some network resources in
@@ -96,7 +100,7 @@ tunnel-mode VPN in the future to connect your OpenStack private network to
 another private network. Choosing a unique subnet now will ensure you will not
 experience collisions that need renumbering in the future.
 
-Compute Flavors
+Compute flavors
 ===============
 
 The flavor of an instance is the CPU, memory and disk specifications of a
@@ -109,7 +113,7 @@ gigabytes of memory.
   Flavor names are identical across all regions, but the flavor IDs will
   vary.
 
-Operating System Images
+Operating system images
 =======================
 
 In order to create an instance, you will need to have a pre-built operating
@@ -139,7 +143,7 @@ listed here: :ref:`images`
 
 Keypairs must be created in each region being used.
 
-Security Groups
+Security groups
 ===============
 
 Security groups are akin to a virtual firewall. All new instances are put in

@@ -39,7 +39,7 @@ container mounts it as */logs*.
 
 
 ******************
-Persistent Volumes
+Persistent volumes
 ******************
 
 ``Persistent volumes`` on the other hand exist within Kubernetes but outside of
@@ -57,12 +57,6 @@ If a PersistentVolumeClaim is made and no matching PersistentVolume type
 is found Kubernetes will attempt to dynamically provision the storage based
 on the volume claim. If no storage class is defined then the default storage
 class will be used.
-
-.. Note::
-
-  In the current Technical Preview there is no ``default storage class``
-  defined for a new cluster in the Catalyst Cloud. This will need to be created
-  prior to using PersistentVolumes.
 
 Storage classes
 ===============
@@ -94,7 +88,7 @@ The storage class names and their availability by region are as follows:
 |                    | | nz-por-1a  |
 +--------------------+--------------+
 
-Dynamic Allocation
+Dynamic allocation
 ==================
 
 Lets look at the steps involved in dynamically allocating a PersistentVolume to

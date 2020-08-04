@@ -15,7 +15,7 @@ Catalyst Cloud using the command line tools.
 
 .. _Turnkey Linux: https://www.turnkeylinux.org/
 
-Pre-requisites and Setup
+Pre-requisites and setup
 ========================
 
 First, retrieve the required image from `Turnkey Linux`_, for this
@@ -142,7 +142,7 @@ Finally we create the ``Turnkey`` image:
 
   $ TL_TURNKEY_ID=$(openstack image show turnkey-img -c id -f value) && echo $TL_TURNKEY_ID
 
-Deploy the Turnkey image
+Deploy the turnkey image
 ========================
 
 Now that you have a local version of the ``Turnkey Linux`` image hosted on the

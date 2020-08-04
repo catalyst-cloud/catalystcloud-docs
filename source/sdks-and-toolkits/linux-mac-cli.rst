@@ -1,5 +1,5 @@
 ##################################
-Linux or Mac OS
+Linux or Mac OS CLI
 ##################################
 
 .. _installing_cli_os:
@@ -15,9 +15,6 @@ environment to contain the required dependencies. The examples below all make
 reference to the use of a virtual environment. If you require more information
 on the basic functions of the python virtual environment, please refer to the
 :ref:`python-virtual-env` tutorial.
-
-The following provides the basics of manually installing the OpenStack command
-line tools on common operating systems.
 
 Operating system specific steps
 ===============================
@@ -131,7 +128,7 @@ system.
           aodhclient
 
 
-Using Docker (experimental)
+Using docker (experimental)
 ===========================
 
 The Catalyst Cloud CLI is available as a Docker container that is easy to use,
@@ -202,7 +199,7 @@ More information can be found under :ref:`here <access-and-whitelist>`
 
 .. _source-rc-file:
 
-Source an OpenStack RC file
+Source an openstack RC file
 ===========================
 
 When no configuration arguments are passed, the OpenStack client tools will try
@@ -298,7 +295,7 @@ For a reference of all commands supported by the CLI, refer to the `OpenStack
 Client documentation <https://docs.openstack.org/python-openstackclient>`_.
 
 *************
-The Next Step
+The next step
 *************
 
 We highly recommend that if you are going to be using the CLI often that you

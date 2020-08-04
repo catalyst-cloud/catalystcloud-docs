@@ -245,7 +245,6 @@ simply via curl from any internet accessible machine.
 For a more complete example that shows connections being load balanced between
 many identical application pods take a look at :ref:`simple_lb_deployment`
 
-
 ****************************************
 Modifying loadbalancers with annotations
 ****************************************
@@ -265,7 +264,7 @@ Some examples of where this might be applicable include such things as:
 Fortunately Kubernetes supplies a means to achieve these desired changes in
 behaviour through the use of ``annotations``.
 
-Using Internal IP only
+Using internal IP only
 ======================
 
 Although, by default, the loadbalancer is created with an externally
@@ -352,7 +351,6 @@ allocated to our cloud project rather than being released back to the public
 address pool.
 
 .. _annotations:
-
 
 Getting the source IP address for web requests
 ==============================================
@@ -475,14 +473,12 @@ the ``Request Headers`` section under the ``x-forwarded-for`` header.
   Request Body:
       -no body in request-
 
-
-
 Assigning a pre-defined port to a loadbalancer
 ==============================================
 
-In certain cases, such as when using automation, it may be desireable to be able
+In certain cases, such as when using automation, it may be desirable to be able
 to re-use an existing floating IP address. Through the use of the ``port-id``
-annotation this can be achived
+annotation this can be achieved
 
 Assume we have created a port on our cluster network with the following
 characteristics:

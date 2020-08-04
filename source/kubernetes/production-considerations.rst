@@ -8,8 +8,8 @@ This section of the documentation will discuss different common practices and
 considerations that are important to creating a cluster that is able to handle
 the demands of a production environment.
 
-Network consideration
-=====================
+Network considerations
+======================
 The first things you need to consider before creating your cluster is the
 specifications around networking. The following are common and important
 questions that you must answer before you begin building any production
@@ -44,11 +44,29 @@ The final thing to consider about networking is the actual address of the
 cluster itself. Before creating a cluster it is important to consider which
 subnet you are going to use for the network that the kubernetes cluster
 creates; both for the cluster address itself and the internal supernet that
-the cluster creates. The internal supernet uses the address 10.1.0.0/16 and
+the cluster creates. The internal supernet uses the address 10.100.0.0/16 and
 shouldn't conflict with any networks that you normally use but you do need to
 be mindful of this in the event that it does clash. If you maintain a table of
 the subnets that your company has in use, it is recommended that you update
 this list to include the new subnet space that is created with your cluster.
+
+There are two important CIDR ranges that are defined in the cluster template.
+The first is the ``fixed_subnet_cidr`` which controls the address range that
+is used by the cluster nodes. The default value for this is **10.0.0.0/24**.
+The second is ``calico_ipv4pool`` which controls the address range used for
+the Pod IP address pool. The default for this **10.100.0.0./16**.
+
+It is possible to modify either of these two address space by supplying a new
+label value a the time the cluster is created. For example, if we wished to
+use the range 172.16.0.0/24 for our pod IP addresses we would change the label
+to the following:
+
+.. code-block:: bash
+
+    calico_ipv4pool=172.16.0.0/24
+
+For the specifics on how to change label values in a cluster template when
+creating your cluster please see :ref:`here<modifying_a_cluster_with_labels>`.
 
 Security
 ========
@@ -61,6 +79,7 @@ am I going to be able to access the cluster? Because you have the option to
 make the cluster publicly accessible, you could create it so that you and those
 who need access to the cluster can do so wherever they are. This does come with
 the same risks as exposing anything to the public internet however.
+
 Alternatively, if you are creating a private cluster, you can refine the
 location from where you are able to access the cluster. This customization goes
 beyond just your internal network. You could limit the access to the API's from
@@ -68,6 +87,50 @@ only a fixed ip address range, whether this is for your entire company's subnet
 or you may only want the APIs visible from a management subnet? Or an office
 specific subnet? Regardless of where you may want the cluster exposed, the
 options are there for you to decide.
+
+
+.. _limiting_access:
+
+Limiting access to the API
+--------------------------
+
+If you have already opted to go with a private cluster then this consideration
+is of less importance to you. If, however, you have deployed a publicly
+accessible cluster you can minimise your exposure to risk by applying the
+following.
+
+To restrict access to the cluster API we can supply a comma separated list of
+CIDR values to the ``master_lb_allowed_cidrs`` label when we create the cluster.
+This limits which IP addresses the load balancer will accept external requests
+from.
+
+The default value is “” which means access is open to 0.0.0.0/0.
+
+.. Note::
+
+    This will only work when the cluster has been deployed with a loadbalancer
+    in front of the Kubernetes API as is the case for all of the Catalyst Cloud
+    production templates.
+
+As an example of what the create command could look like, let's assume we wish
+to create a cluster based on the following conditions:
+
+- It is based on a production template
+- It is publicly accessible via the internet
+- That access will be restricted to to a single IP address
+
+The resulting command would look like this.
+
+.. code-block:: console
+
+    $ openstack coe cluster create k8s-cluster \
+    --cluster-template kubernetes-v1.18.2-prod-20200630 \
+    --labels master_lb_floating_ip_enabled=true,master_lb_allowed_cidrs=203.109.145.15/32 \
+    --merge-labels \
+    --keypair glyndavies \
+    --node-count 2 \
+    --master-count 3
+
 
 Capacity
 ========

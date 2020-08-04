@@ -29,7 +29,7 @@ manually. You will then replicate the manual configuration using a ``heat``
 template to instantiate the same stack automatically.
 
 
-Virtual Router Redundancy Protocol
+Virtual router redundancy protocol
 ==================================
 `VRRP`_ provides hardware redundancy and automatic failover for routers. It
 allows specifying a virtual router which maps to two or more physical routers.
@@ -64,7 +64,7 @@ and IP protocol number 112. The protocol is defined in `RFC3768`_.
 
 .. _article: http://louwrentius.com/configuring-attacking-and-securing-vrrp-on-linux.html
 
-Allowed Address Pairs
+Allowed address pairs
 =====================
 
 Allowed Address Pairs is a Neutron Extension that extends the port attribute to
@@ -109,7 +109,7 @@ As you can see, the Allowed Address Pairs extension is available.
 
 .. _clone-orchestration-repo:
 
-Clone Orchestration Git Repository
+Clone orchestration git repository
 ==================================
 
 Before you start you should check out the
@@ -120,7 +120,7 @@ be using some scripts and Heat templates from this repository in this tutorial.
 
   $ git clone https://github.com/catalyst/catalystcloud-orchestration.git && ORCHESTRATION_DIR="$(pwd)/catalystcloud-orchestration" && echo $ORCHESTRATION_DIR
 
-Network Setup
+Network setup
 =============
 
 First, create a network called ``vrrp-net`` where you can run your highly
@@ -328,7 +328,7 @@ Then create the ports with your preferred IP addresses
   | updated_at            | None                                                                                  |
   +-----------------------+---------------------------------------------------------------------------------------+
 
-Security Group Setup
+Security group setup
 ====================
 
 Now create the ``vrrp-sec-group`` security group with rules to
@@ -441,8 +441,7 @@ each other via VRRP broadcasts:
   | updated_at        | None                                 |
   +-------------------+--------------------------------------+
 
-
-Instance Creation
+Instance creation
 =================
 
 The next step is to boot two instances where you will run Keepalived and
@@ -619,7 +618,7 @@ Check the instances have been created:
   +--------------------------------------+-------------+--------+------------------------------------------+---------------------+---------+
 
 
-Virtual Address Setup
+Virtual address setup
 =====================
 
 The next step is to create the IP address that will be used by your virtual
@@ -764,7 +763,7 @@ You should now have a stack that looks something like this:
 
 .. _updating-instance:
 
-Updating Existing VRRP Instances To Use Fixed IP
+Updating existing VRRP instances to use fixed IP
 ================================================
 
 To update **existing** VRRP instances to use fixed IP on their interfaces,
@@ -818,7 +817,7 @@ files:
 
 .. _vrrp-testing:
 
-VRRP Testing
+VRRP testing
 ============
 
 You should now have a working VRRP setup, so try it out! You should be able
@@ -848,7 +847,7 @@ Curl again:
 
 .. _instance-access:
 
-Instance Access
+Instance access
 ===============
 
 If you want to take a closer look at what is happening when you switch between
@@ -951,7 +950,7 @@ At this point you have successfully set up Keepalived with automatic failover
 between instances. If this is all that you require for your setup, you can
 stop here.
 
-Resource Cleanup
+Resource cleanup
 ================
 
 At this point many people will want to clean up the OpenStack resources you
@@ -984,7 +983,7 @@ order in which you delete resources is important.
   $ openstack security group delete vrrp-sec-group
 
 
-Setup Using Heat Templates
+Setup using heat templates
 ==========================
 
 Up to this point in this tutorial, you have been using the Nova and Neutron
@@ -1088,7 +1087,7 @@ set these, the assigned addresses will be inconsistent across Heat invocations.
 
 This configuration is mirrored for the backup instance.
 
-Building the VRRP Stack using Heat Templates
+Building the VRRP stack using heat templates
 ============================================
 
 Before we start, check that the template is valid:

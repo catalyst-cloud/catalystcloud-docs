@@ -59,7 +59,6 @@ centre to make your data very durable, and very available.
 By attaching a volume to an instance, you mount it, making the file system
 available to the CPU and memory.
 
-
 Object storage service
 ======================
 
@@ -118,7 +117,6 @@ determine the actions it needs to take to make the stack match your definition.
 
 The orchestration service can either be used on it's own, or as another
 resource that automation tools can make use of to more easily do their job.
-
 
 ******************************
 What can you do with services?

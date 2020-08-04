@@ -176,7 +176,6 @@ virtual IP address (VIP) will be attached to the local subnet
   | vip_subnet_id       | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
   +---------------------+--------------------------------------+
 
-
 *******************
 Create the listener
 *******************

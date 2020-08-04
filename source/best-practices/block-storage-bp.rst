@@ -34,7 +34,7 @@ to tell which volume holds which data.
   should use '-'
 
 
-Best Practice for maximising disk performance
+Best practice for maximising disk performance
 =============================================
 
 I/O Readahead

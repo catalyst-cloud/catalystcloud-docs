@@ -67,7 +67,7 @@ We do this by picking a flavor from the available list:
 
 .. code-block:: bash
 
-  $ openstack database flavor list
+  $ openstack flavor list --limit 10
   +--------------------------------------+------------------+-------+-------+------+-----------+
   | ID                                   | Name             |   RAM | vCPUs | Disk | Ephemeral |
   +--------------------------------------+------------------+-------+-------+------+-----------+
@@ -127,30 +127,32 @@ the following command to create our new instance:
 
 .. code-block:: bash
 
-  $ openstack database instance create db-instance-1 c1.c1r4 \
+  $ openstack database instance create  \
+  --flavor 746b8230-b763-41a6-954c-b11a29072e52 \
   --size 5 \
   --datastore mysql \
-  --datastore_version 5.7 \
+  --datastore_version 5.7.9 \
   --databases myDB \
   --users dbusr:dbpassword \
   --volume_type b1.standard \
-  --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48
+  --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48 \
+  db-instance-1
 
-  +-------------------+--------------------------------------+
-  | Field             | Value                                |
-  +-------------------+--------------------------------------+
-  | created           | 2020-06-24T23:57:11                  |
-  | datastore         | mysql                                |
-  | datastore_version | 5.7                                  |
-  | flavor            | 746b8230-b763-41a6-954c-b11a29072e52 |
-  | id                | 373b1bd0-31c8-4299-bb07-9abfcd57120b |
-  | name              | db-instance-1                        |
-  | region            | test-1                               |
-  | status            | BUILD                                |
-  | updated           | 2020-06-24T23:57:11                  |
-  | volume            | 5                                    |
-  +-------------------+--------------------------------------+
-
+  +------------------------+--------------------------------------+
+  | Field                  | Value                                |
+  +------------------------+--------------------------------------+
+  | created                | 2020-08-03T23:02:16                  |
+  | datastore              | mysql                                |
+  | datastore_version      | 5.7.29                               |
+  | flavor                 | 746b8230-b763-41a6-954c-b11a29072e52 |
+  | id                     | 8546dd23-4f5e-4151-9b33-db708dfd469a |
+  | name                   | db-instance-1                        |
+  | region                 | test-1                               |
+  | service_status_updated | 2020-08-03T23:02:16                  |
+  | status                 | BUILD                                |
+  | updated                | 2020-08-03T23:02:16                  |
+  | volume                 | 5                                    |
+  +------------------------+--------------------------------------+
 
 We have to wait while the instance builds. Keep checking on the status of the
 new instance, once it is ``ACTIVE`` we can continue.
@@ -158,11 +160,11 @@ new instance, once it is ``ACTIVE`` we can continue.
 .. code-block:: bash
 
   $ openstack database instance list
-  +--------------------------------------+---------------+-----------+-------------------+--------+--------------------------------------+------+--------+
-  | ID                                   | Name          | Datastore | Datastore Version | Status | Flavor ID                            | Size | Region |
-  +--------------------------------------+---------------+-----------+-------------------+--------+--------------------------------------+------+--------+
-  | b14d5ed3-b4d0-4906-b68d-58d882f2cd09 | db-instance-1 | mysql     | 5.7               | BUILD  | 746b8230-b763-41a6-954c-b11a29072e52 |    5 | test-1 |
-  +--------------------------------------+---------------+-----------+-------------------+--------+--------------------------------------+------+--------+
+  +--------------------------------------+---------------+-----------+-------------------+--------+-----------+--------------------------------------+------+--------+------+
+  | ID                                   | Name          | Datastore | Datastore Version | Status | Addresses | Flavor ID                            | Size | Region | Role |
+  +--------------------------------------+---------------+-----------+-------------------+--------+-----------+--------------------------------------+------+--------+------+
+  | 8546dd23-4f5e-4151-9b33-db708dfd469a | db-instance-1 | mysql     | 5.7.29            | BUILD  |           | 746b8230-b763-41a6-954c-b11a29072e52 |    5 | test-1 |      |
+  +--------------------------------------+---------------+-----------+-------------------+--------+-----------+--------------------------------------+------+--------+------+
 
 Now let's view the details of our instance so that we can find the IP address
 that has been assigned to it.
@@ -170,21 +172,23 @@ that has been assigned to it.
 .. code-block:: bash
 
   $ openstack database instance show db-instance-1
-  +-------------------+--------------------------------------+
-  | Field             | Value                                |
-  +-------------------+--------------------------------------+
-  | created           | 2020-06-24T23:57:11                  |
-  | datastore         | mysql                                |
-  | datastore_version | 5.7                                  |
-  | flavor            | 746b8230-b763-41a6-954c-b11a29072e52 |
-  | id                | 373b1bd0-31c8-4299-bb07-9abfcd57120b |
-  | ip                | 10.0.0.80                            |
-  | name              | db-instance-1                        |
-  | region            | test-1                               |
-  | status            | BUILD                                |
-  | updated           | 2020-06-24T23:57:42                  |
-  | volume            | 5                                    |
-  +-------------------+--------------------------------------+
+  +------------------------+--------------------------------------+
+  | Field                  | Value                                |
+  +------------------------+--------------------------------------+
+  | created                | 2020-08-03T23:02:16                  |
+  | datastore              | mysql                                |
+  | datastore_version      | 5.7.29                               |
+  | flavor                 | 746b8230-b763-41a6-954c-b11a29072e52 |
+  | id                     | 8546dd23-4f5e-4151-9b33-db708dfd469a |
+  | ip                     | 10.0.0.83                            |
+  | name                   | db-instance-1                        |
+  | region                 | test-1                               |
+  | service_status_updated | 2020-08-03T23:04:22                  |
+  | status                 | ACTIVE                               |
+  | updated                | 2020-08-03T23:02:30                  |
+  | volume                 | 5                                    |
+  | volume_used            | 0.13                                 |
+  +------------------------+--------------------------------------+
 
 
 The final step in this section is to see what databases we have running within
@@ -197,7 +201,6 @@ this instance.
   | Name |
   +------+
   | myDB |
-  | sys  |
   +------+
 
 *****************************
@@ -221,18 +224,15 @@ To check the results we use the following command:
   +-------+
   | myDB  |
   | myDB2 |
-  | sys   |
   +-------+
 
 To delete a database, you can use the following command:
 
 .. code-block:: bash
 
-  $ openstack database instance delete myDB2
-  # wait until the console returns, it will reply with a message saying your database was deleted.
+  $ openstack database db delete db-instance-1 myDB2
+  # once the console returns the database will have been deleted
 
-
-.. _backups-for-databases:
 
 **************************
 Creating a public database
@@ -242,18 +242,23 @@ By default the database instances that you create will only be available via
 your internal network on the cloud. If you are wanting to have your database
 open to a wider audience then you will need to expose it to the internet.
 
-The following command will demonstrate how to create a database instance that
+The following example shows how to create a database instance that
 is publicly available, but only from the specific cidr
-range: 10.1.0.1 - 202.37.199.1
+range: 202.37.199.1/24
 
 .. code-block:: bash
 
-  $ openstack database instance create db-instance-1 c1.c1r4 \
-  --size 5 --datastore mysql --datastore_version 5.7 \
-  --databases public-database --users dbusr:dbpassword \
-  --volume_type b1.standard --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48
+  $ openstack database instance create \
+  --flavor 746b8230-b763-41a6-954c-b11a29072e52 \
+  --size 5 \
+  --datastore mysql \
+  --datastore-version 5.7.29 \
+  --databases myDB \
+  --users dbusr:dbpassword \
+  --volume-type b1.standard \
+  --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48 \
   --is-public \
-  --allowed-cidr 10.1.0.1/24 \
-  --allowed-cidr 202.37.199.1/24
+  --allowed-cidr 202.37.199.1/24 \
+  db-instance-1
 
 

@@ -6,7 +6,7 @@ Managing your Catalyst Cloud account
 .. _quota_management:
 
 ****************
-Quota Management
+Quota management
 ****************
 
 Catalyst provides the ability to manage your own project resource quotas on a
@@ -37,7 +37,7 @@ adjustments that have been made within the current project.
 |
 
 
-Updating a Quota
+Updating a quota
 ================
 To change the current quota limit for a given region, click on the
 *Update Quota* action, the following form will be displayed
@@ -92,7 +92,7 @@ Pre-approved sizes changes can be made as follows:
     Quota limits do not apply to object storage usage at this time.
 
 
-Access Control
+Access control
 **************
 
 Please see the :ref:`identity-access-management` section of the documentation

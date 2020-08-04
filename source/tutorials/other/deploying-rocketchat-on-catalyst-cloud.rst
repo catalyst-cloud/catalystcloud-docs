@@ -43,7 +43,7 @@ then this part of the process may be extremely familiar to you, and you can
 choose to skip to `Automating our install using Cloud-Init`_
 if you wish.
 
-Setting up the Network
+Setting up the network
 ======================
 
 First we want to set a prefix value for all of our object names so we can avoid
@@ -98,7 +98,7 @@ of the 10.0.0.0/24 address space.
 The network is now fully set up and configured. We'll connect our rocketchat
 instance up later on. For now we need to create some security rules.
 
-Security Settings
+Security settings
 =================
 
 It's important to consider what access is needed for our server to serve its
@@ -153,7 +153,7 @@ access on ports 80 and 443 for HTTP/S access.
   --dst-port 443 \
   "$CC_SECURITY_GROUP_ID"
 
-SSH Keys
+SSH keys
 --------
 
 We'll use this key to access the Rocket.Chat instance via SSH. These will be

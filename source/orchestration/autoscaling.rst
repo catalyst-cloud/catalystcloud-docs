@@ -1,8 +1,8 @@
 .. _autoscaling-on-catalyst-cloud:
 
-*******************
-Autoscaling example
-*******************
+********************
+Auto scaling
+********************
 
 Prerequisites
 -------------

@@ -4,7 +4,7 @@
 Best Practices for roles
 ************************
 
-Project Admin
+Project admin
 =============
 It is recommended by Catalyst that you keep an admin account and a user
 account with moderation privileges. Separating your working account from the
@@ -21,7 +21,7 @@ look like: **youremail+admin@...** This ensures a clear distinction between
 which account is which but it also allows your to receive mail for both account
 at a single email address.
 
-Start/Stop Instance
+Start/Stop instance
 ===================
 The most common use for the start/stop instance role is for automated start up
 or shut down. You are able to add an automated user to the project that will
@@ -32,11 +32,18 @@ changed in some way to try and make changes to the project outside start/stop
 commands, they would all fail.
 
 
-Auth Only
+Auth only
 =========
-The auth only role is a restrictive role and has a number of use cases.
-The most common would be when adding a new user to a
-sensitive project and requiring them to change their password and setting up
-MFA before giving them a more powerful role. The second would be when there is
-a need to create users with restricted object storage access. For more
-information on this please see :ref:`object-storage-access`.
+This allows you to add users to your project,
+without giving them the ability to change or even see its contents. This role's
+main purpose is for a user to be able to connect to your project then
+change their password and enable MFA. Then a moderator can give the user a more
+powerful role. This helps to ensure a higher level of security for your
+project.
+
+Another practice of the *auth only* role is to partially expose
+containers or files from object storage to a user, without providing them
+access to the rest of your project. With restricted object storage access the
+user can be given read or write privileges for a specific container
+(or all containers) but still have no access to the rest of the project. For a
+more thorough guide on this please see :ref:`object-storage-access`.

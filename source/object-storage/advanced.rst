@@ -75,10 +75,8 @@ You should now be able to view the index file as a website.
 
 https://object-storage.nz-por-1.catalystcloud.io:443/v1/%AUTH_ID%/%container_name%/
 
-
-
 =================
-Object Versioning
+Object versioning
 =================
 
 This provides a means by which multiple versions of your content can be stored
@@ -228,7 +226,7 @@ should expire.
 - in the nested container structure : bar_container/quux.md
 - with key : my_secret_tempurl_key
 
-Creating Temporary URLs in the Catalyst Cloud
+Creating temporary URLs in the Catalyst Cloud
 =============================================
 At the time of writing, the only method currently available for the creation
 of temporary URLs is using the command line tools.
@@ -290,7 +288,7 @@ You could also access the object by taking the same URL that you passed to cURL
 and pasting it into a web browser.
 
 ==========================
-Working with Large Objects
+Working with large objects
 ==========================
 
 Typically, the size of a single object cannot exceed 5GB. It is possible,
