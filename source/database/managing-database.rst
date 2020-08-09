@@ -2,10 +2,12 @@
 Managing your databases
 #######################
 
-This section will cover different ways that you are able to manage different
-aspects of your database instances. These include configuring who has access to
+This section covers the ways that you are able to manage the different aspects
+of your database instances. These include configuring who has access to
 your instances, managing the size and flavor of your instances and how to
 activate and track the logging of your instances.
+This section follows on from the previous example in 'creating your database'
+It references the instance that was made in that example.
 
 ******************
 Configuring access
@@ -70,12 +72,12 @@ the following query:
 
 .. code-block:: bash
 
-  $ mysql -h 10.0.0.16 -u root -p -e 'SELECT USER()'
+  $   mysql -h 10.0.0.83 -u root -p -e 'SELECT USER()'
   Enter password:
   +----------------+
   | USER()         |
   +----------------+
-  | root@10.0.0.80 |
+  | root@10.0.0.83 |
   +----------------+
 
 Creating new users
@@ -165,7 +167,7 @@ show you the response we receive when trying to ping the database afterword:
 
 .. code-block:: bash
 
-  $ openstack database user revoke access db-instance newuser2 myDB2
+  $ openstack database user revoke access db-instance-1 newuser2 myDB2
 
   $ mysql -h IP_ADDRESS -u newuser2 -p myDB2
   Enter password:
@@ -198,7 +200,7 @@ your instances.
 
 The following code block will resize the flavor of *myDB* to c1.c1r4
 
-.. code-block::
+.. code-block:: bash
 
   $ openstack database instance resize flavor myDB c1.c1r4
 
@@ -209,7 +211,7 @@ resized to. Unlike the previous command you **do not** have to stop your
 instance and restart it, however there will be a dip in performance until the
 resize is complete.
 
-.. code-block::
+.. code-block:: bash
 
   $ openstack database instance resize volume myDB 10
 
@@ -262,7 +264,7 @@ following shows how to enable slow_query specifically.
 
   # Check to confirm this action
 
-  $ openstack database log list db1
+  $ openstack database log list db-instance-  1
   +------------+------+----------+-----------+---------+-----------+--------+
   | Name       | Type | Status   | Published | Pending | Container | Prefix |
   +------------+------+----------+-----------+---------+-----------+--------+
@@ -274,7 +276,7 @@ Finally we publish the log using:
 
 .. code-block:: bash
 
-  $ trove log-publish db1 slow_query
+  $ trove log-publish db-instance-1 slow_query
   +-----------+----------------------------------------------------------------+
   | Property  | Value                                                          |
   +-----------+----------------------------------------------------------------+
