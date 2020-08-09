@@ -25,6 +25,7 @@ Table of Contents:
   block-storage/using-volumes
   block-storage/uuid-mount
   block-storage/using-lvm
+  block-storage/volume-transfer
   block-storage/faq
 
 
