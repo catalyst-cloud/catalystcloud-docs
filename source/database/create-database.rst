@@ -14,17 +14,16 @@ In order to launch a new database instance we need to first decide on a few
 options, these include:
 
 * The **datastore type** which defines the type of database to be deployed.
-  In this instance we are using mySQL.
-* The datastore type will in turn define the  **database version** we are able
-  to pick.
-* The **database flavor**, which determines the vCPU and RAM assigned to the
+  For this instance we are using mySQL.
+* The **database version** which is informed by your datastore type.
+* The **flavor**, which determines the vCPU and RAM assigned to the
   instance.
 
 .. Note::
   It is also necessary to have an existing network on the project that you
   wish to deploy the database instance to.
 
-First, lets determine what datastore types and versions are available to us.
+First, lets determine what datastore types are available to us.
 
 .. code-block:: bash
 
@@ -36,31 +35,27 @@ First, lets determine what datastore types and versions are available to us.
   +--------------------------------------+-------+
 
 
-Now lets see what versions of mysql are available to us. We can do this a
+Now lets see what versions of mysql we can use. We can do this a
 couple of ways, either by looking at the full description of the datastore type
 or by explicitly querying the version of a particular datastore type:
 
 .. code-block:: bash
 
   $ openstack datastore show mysql
-  +---------------+-------------------------------------------------+
-  | Field         | Value                                           |
-  +---------------+-------------------------------------------------+
-  | id            | c681e699-5493-4599-9d9c-08eb7d21c2de            |
-  | name          | mysql                                           |
-  | versions (id) | 5.7 (0b845a75-a0cf-4354-b7a5-7bfdd7c1e758)      |
-  |               | 5.7-10.0 (2e1eca24-e365-4229-835e-76537220be81) |
-  |               | 5.7.11 (43a4c919-b03e-4534-a92a-c9cb10471ac3)   |
-  +---------------+-------------------------------------------------+
+  +---------------+-----------------------------------------------+
+  | Field         | Value                                         |
+  +---------------+-----------------------------------------------+
+  | id            | c681e699-5493-4599-9d9c-08eb7d21c2de          |
+  | name          | mysql                                         |
+  | versions (id) | 5.7.29 (8f2c5796-e1e1-4275-9917-4e3a61cbb76d) |
+  +---------------+-----------------------------------------------+
 
   $ openstack datastore version list mysql
-  +--------------------------------------+----------+
-  | ID                                   | Name     |
-  +--------------------------------------+----------+
-  | 0b845a75-a0cf-4354-b7a5-7bfdd7c1e758 | 5.7      |
-  | 2e1eca24-e365-4229-835e-76537220be81 | 5.7-10.0 |
-  | 43a4c919-b03e-4534-a92a-c9cb10471ac3 | 5.7.11   |
-  +--------------------------------------+----------+
+  +--------------------------------------+--------+
+  | ID                                   | Name   |
+  +--------------------------------------+--------+
+  | 8f2c5796-e1e1-4275-9917-4e3a61cbb76d | 5.7.29 |
+  +--------------------------------------+--------+
 
 Next we need to decide on the resource requirements for our database instance.
 We do this by picking a flavor from the available list:
@@ -127,16 +122,15 @@ the following command to create our new instance:
 
 .. code-block:: bash
 
-  $ openstack database instance create  \
-  --flavor 746b8230-b763-41a6-954c-b11a29072e52 \
+  $ openstack database instance create db-instance-1\
+  --flavor e3feb785-af2e-41f7-899b-6bbc4e0b526e \ # this is the flavor ID for your instance
   --size 5 \
   --datastore mysql \
-  --datastore_version 5.7.9 \
+  --datastore-version 5.7.29 \
   --databases myDB \
   --users dbusr:dbpassword \
-  --volume_type b1.standard \
-  --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48 \
-  db-instance-1
+  --volume-type b1.standard \
+  --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48
 
   +------------------------+--------------------------------------+
   | Field                  | Value                                |
@@ -144,7 +138,7 @@ the following command to create our new instance:
   | created                | 2020-08-03T23:02:16                  |
   | datastore              | mysql                                |
   | datastore_version      | 5.7.29                               |
-  | flavor                 | 746b8230-b763-41a6-954c-b11a29072e52 |
+  | flavor                 | e3feb785-af2e-41f7-899b-6bbc4e0b526e |
   | id                     | 8546dd23-4f5e-4151-9b33-db708dfd469a |
   | name                   | db-instance-1                        |
   | region                 | test-1                               |
@@ -155,7 +149,7 @@ the following command to create our new instance:
   +------------------------+--------------------------------------+
 
 We have to wait while the instance builds. Keep checking on the status of the
-new instance, once it is ``ACTIVE`` we can continue.
+new instance. Once it is ``ACTIVE`` we can continue.
 
 .. code-block:: bash
 
@@ -163,7 +157,7 @@ new instance, once it is ``ACTIVE`` we can continue.
   +--------------------------------------+---------------+-----------+-------------------+--------+-----------+--------------------------------------+------+--------+------+
   | ID                                   | Name          | Datastore | Datastore Version | Status | Addresses | Flavor ID                            | Size | Region | Role |
   +--------------------------------------+---------------+-----------+-------------------+--------+-----------+--------------------------------------+------+--------+------+
-  | 8546dd23-4f5e-4151-9b33-db708dfd469a | db-instance-1 | mysql     | 5.7.29            | BUILD  |           | 746b8230-b763-41a6-954c-b11a29072e52 |    5 | test-1 |      |
+  | 8546dd23-4f5e-4151-9b33-db708dfd469a | db-instance-1 | mysql     | 5.7.29            | BUILD  |           | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    5 | test-1 |      |
   +--------------------------------------+---------------+-----------+-------------------+--------+-----------+--------------------------------------+------+--------+------+
 
 Now let's view the details of our instance so that we can find the IP address
@@ -178,7 +172,7 @@ that has been assigned to it.
   | created                | 2020-08-03T23:02:16                  |
   | datastore              | mysql                                |
   | datastore_version      | 5.7.29                               |
-  | flavor                 | 746b8230-b763-41a6-954c-b11a29072e52 |
+  | flavor                 | e3feb785-af2e-41f7-899b-6bbc4e0b526e |
   | id                     | 8546dd23-4f5e-4151-9b33-db708dfd469a |
   | ip                     | 10.0.0.83                            |
   | name                   | db-instance-1                        |
@@ -189,7 +183,6 @@ that has been assigned to it.
   | volume                 | 5                                    |
   | volume_used            | 0.13                                 |
   +------------------------+--------------------------------------+
-
 
 The final step in this section is to see what databases we have running within
 this instance.
@@ -243,13 +236,12 @@ your internal network on the cloud. If you are wanting to have your database
 open to a wider audience then you will need to expose it to the internet.
 
 The following example shows how to create a database instance that
-is publicly available, but only from the specific cidr
-range: 202.37.199.1/24
+is publicly available, but only from the specific cidr range: 202.37.199.1/24
 
 .. code-block:: bash
 
   $ openstack database instance create \
-  --flavor 746b8230-b763-41a6-954c-b11a29072e52 \
+  --flavor e3feb785-af2e-41f7-899b-6bbc4e0b526e \
   --size 5 \
   --datastore mysql \
   --datastore-version 5.7.29 \
