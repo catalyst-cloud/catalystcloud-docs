@@ -43,3 +43,69 @@ Then we input our details from previously and our transfer will be complete.
 ***************************************
 Transferring a volume via the CLI
 ***************************************
+
+When using the CLI you will have to source two different shell environments
+that have been set up using the openRC files from your different projects.
+
+For the rest of this example we will refer to the shell that is sourced from
+the project that originally had the volume as ``console one`` and the shell
+that is sourced from our project that we are trying to move the volume too as
+``console two``.
+
+.. Note::
+
+  You must have both of your projects sourced in the same region to be able to
+  transfer a volume between them.
+
+In console one, we have to find the volume that we want to transfer:
+
+.. code-block:: bash
+
+   $ openstack volume list
+   +--------------------------------------+----------------------------+-----------+------+-------------------------------------------+
+   | ID                                   | Name                       | Status    | Size | Attached to                               |
+   +--------------------------------------+----------------------------+-----------+------+-------------------------------------------+
+   | e58527cf-34d2-42bc-85fd-e689cc088dbd | transfer-example           | available |   10 |                                           |
+   +--------------------------------------+----------------------------+-----------+------+-------------------------------------------+
+
+Once we have the volume that we want to transfer, in console one, we create the
+following transfer request:
+
+.. code-block:: bash
+
+   $ openstack volume transfer request create --name transfer_name <volume_ID>
+   +------------+--------------------------------------+
+   | Field      | Value                                |
+   +------------+--------------------------------------+
+   | auth_key   | XXXXXXXXXXXXXXXX                     |
+   | created_at | 2020-08-10T01:28:29.581644           |
+   | id         | 0ead79fc-62f2-482d-bb3e-75101843555b |
+   | name       | transfer_name                        |
+   | volume_id  | e58527cf-34d2-42bc-85fd-e689cc088dbd |
+   +------------+--------------------------------------+
+
+Now we have our transfer ID and our auth_key for our transfer. We swap over
+to console two and we use the following to accept the transfer request.
+
+.. code-block:: bash
+
+   $ openstack volume transfer request accept --auth-key XXXXXXXXXXXXXXXX 0ead79fc-62f2-482d-bb3e-75101843555b
+   +-----------+--------------------------------------+
+   | Field     | Value                                |
+   +-----------+--------------------------------------+
+   | id        | 0ead79fc-62f2-482d-bb3e-75101843555b |
+   | name      | transfer_name                        |
+   | volume_id | e58527cf-34d2-42bc-85fd-e689cc088dbd |
+   +-----------+--------------------------------------+
+
+If we then check on console two, for the volumes we have available, we can
+see that our volume has now been transferred to our second project:
+
+.. code-block:: bash
+
+   $ openstack volume list
+   +--------------------------------------+----------------------------+-----------+------+-------------------------------------------+
+   | ID                                   | Name                       | Status    | Size | Attached to                               |
+   +--------------------------------------+----------------------------+-----------+------+-------------------------------------------+
+   | e58527cf-34d2-42bc-85fd-e689cc088dbd | transfer-example           | available |   10 |                                           |
+   +--------------------------------------+----------------------------+-----------+------+-------------------------------------------+
