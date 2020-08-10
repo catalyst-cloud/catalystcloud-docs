@@ -149,7 +149,7 @@ the following command to create our new instance:
   +------------------------+--------------------------------------+
 
 We have to wait while the instance builds. Keep checking on the status of the
-new instance, once it is ``ACTIVE`` we can continue.
+new instance. Once it is ``ACTIVE`` we can continue.
 
 .. code-block:: bash
 

@@ -6,7 +6,11 @@ This section covers the ways that you are able to manage the different aspects
 of your database instances. These include configuring who has access to
 your instances, managing the size and flavor of your instances and how to
 activate and track the logging of your instances.
+<<<<<<< HEAD
 This section follows on from the previous example in 'creating your database.'
+=======
+This section follows on from the previous example in 'creating your database'
+>>>>>>> ae4cd10... Small changes to trove docs.  (#267)
 It references the instance that was made in that example.
 
 ******************
@@ -263,7 +267,7 @@ following shows how to enable slow_query specifically.
 
   # Check to confirm this action
 
-  $ openstack database log list db-instance-1
+  $ openstack database log list db-instance-  1
   +------------+------+----------+-----------+---------+-----------+--------+
   | Name       | Type | Status   | Published | Pending | Container | Prefix |
   +------------+------+----------+-----------+---------+-----------+--------+
