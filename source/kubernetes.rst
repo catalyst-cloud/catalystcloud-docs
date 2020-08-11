@@ -25,6 +25,7 @@ Table of Contents:
    kubernetes/services
    kubernetes/storage
    kubernetes/versions
+   kubernetes/security
 
 
 ******************
