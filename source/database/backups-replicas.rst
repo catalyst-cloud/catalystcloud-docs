@@ -76,6 +76,9 @@ Destroy the instance and create a new one using the backup as a source:
   +----------+
   1 row in set (0.41 sec)
 
+.. _database_replica:
+
+
 *****************
 Creating replicas
 *****************
