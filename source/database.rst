@@ -21,3 +21,4 @@ Table of contents:
   database/create-database
   database/managing-database
   database/backups-replicas
+  database/tuning
