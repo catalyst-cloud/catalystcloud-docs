@@ -253,7 +253,7 @@ following shows how to enable slow_query specifically.
   | Field     | Value                                                          |
   +-----------+----------------------------------------------------------------+
   | container | None                                                           |
-  | metafile  | 6bd114d1-7251-42d6-9426-db598c085472/mysql-slow_query_metafile |
+  | metafile  | 6f4e35e6-58fa-4812-a075-3a20a29edd0b/mysql-slow_query_metafile |
   | name      | slow_query                                                     |
   | pending   | 182                                                            |
   | prefix    | None                                                           |
@@ -264,7 +264,7 @@ following shows how to enable slow_query specifically.
 
   # Check to confirm this action
 
-  $ openstack database log list db-instance-  1
+  $ openstack database log list db-instance-1
   +------------+------+----------+-----------+---------+-----------+--------+
   | Name       | Type | Status   | Published | Pending | Container | Prefix |
   +------------+------+----------+-----------+---------+-----------+--------+
@@ -276,16 +276,16 @@ Finally we publish the log using:
 
 .. code-block:: bash
 
-  $ trove log-publish db-instance-1 slow_query
+  $ openstack database log set db-instance-1 --publish slow_query
   +-----------+----------------------------------------------------------------+
-  | Property  | Value                                                          |
+  | Field     | Value                                                          |
   +-----------+----------------------------------------------------------------+
   | container | database_logs                                                  |
-  | metafile  | 6bd114d1-7251-42d6-9426-db598c085472/mysql-slow_query_metafile |
+  | metafile  | 6f4e35e6-58fa-4812-a075-3a20a29edd0b/mysql-slow_query_metafile |
   | name      | slow_query                                                     |
   | pending   | 0                                                              |
-  | prefix    | 6bd114d1-7251-42d6-9426-db598c085472/mysql-slow_query/         |
-  | published | 182                                                            |
+  | prefix    | 6f4e35e6-58fa-4812-a075-3a20a29edd0b/mysql-slow_query          |
+  | published | 404                                                            |
   | status    | Published                                                      |
   | type      | USER                                                           |
   +-----------+----------------------------------------------------------------+
@@ -294,7 +294,7 @@ Finally we publish the log using:
   +--------------------------------------------------------------------------------------+
   | Name                                                                                 |
   +--------------------------------------------------------------------------------------+
-  | 6bd114d1-7251-42d6-9426-db598c085472/mysql-slow_query/log-2019-03-28T01:25:32.259223 |
-  | 6bd114d1-7251-42d6-9426-db598c085472/mysql-slow_query_metafile                       |
+  | 3bc0c29d-b6bc-4729-b6a8-b312fca5d3fc/mysql-slow_query/log-2020-08-05T22:19:09.621839 |
+  | 3bc0c29d-b6bc-4729-b6a8-b312fca5d3fc/mysql-slow_query_metafile                       |
   +--------------------------------------------------------------------------------------+
 
