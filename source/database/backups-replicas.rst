@@ -118,3 +118,50 @@ The command to create a replica is:
   | 6bd114d1-7251-42d6-9426-db598c085472 | db-instance-1 | mysql     | 5.7.29            | ACTIVE | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    5 | test-1 |
   | 8ddd73b2-939c-496d-906a-4eab4000fff0 | db-replica-1  | mysql     | 5.7.29            | ACTIVE | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    5 | test-1 |
   +--------------------------------------+---------------+-----------+-------------------+--------+--------------------------------------+------+--------+
+
+Once you have a replica up and running, there will be a relationship between
+the original, primary database and the secondary, replica database. You are
+able to change this relationship by promoting the replica to the primary
+database. You may wish to do this after performing some upgrades or tests with
+your replica, and now you want it to take over as the primary database. The
+process for this is detailed below:
+
+.. Note::
+
+   This method can also be used for failover between your database instances.
+
+.. code-block:: bash
+
+   $ openstack database instance promote db-replica-1
+
+   $ openstack database instance list
+   +--------------------------------------+-----------------------+-----------+-------------------+---------+-----------+--------------------------------------+------+--------+---------+
+   | ID                                   | Name                  | Datastore | Datastore Version | Status  | Addresses | Flavor ID                            | Size | Region | Role    |
+   +--------------------------------------+-----------------------+-----------+-------------------+---------+-----------+--------------------------------------+------+--------+---------+
+   | 6f4e35e6-58fa-4812-a075-3a20a29edd0b | db-replica-1          | mysql     | 5.7.29            | PROMOTE |           | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    5 | test-1 | replica |
+   | 96c3497f-2af4-442a-b5c5-da79b035cc09 | db-instance-1-rebuild | mysql     | 5.7.29            | PROMOTE |           | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    5 | test-1 |         |
+   +--------------------------------------+-----------------------+-----------+-------------------+---------+-----------+--------------------------------------+------+--------+---------+
+
+   # wait for status to change to ACTIVE
+
+And once the status reaches active you should be able to see the relationship
+between the two has changed by querying the database itself.
+
+.. code-block::
+
+   $ mysql -h IP_ADDRESS_OF_db-replica-1 -uroot -p
+
+   mysql> SHOW SLAVE STATUS\G
+   Empty set (0.00 sec)
+
+   $ mysql -h IP_ADDRESS_OF_db-instance-1-rebuild -uroot -p
+
+   mysql> SHOW SLAVE STATUS\G
+  *************************** 1. row ***************************
+               Slave_IO_State: Waiting for master to send event
+                  Master_Host: 10.0.0.91
+                  Master_User: slave_ff70425d
+                  Master_Port: 3306
+                  ...
+
+   (i.e. db-replica-1 is master and db-instance-1-rebuild is the slave now.)
