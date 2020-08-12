@@ -6,7 +6,7 @@ While our database instances are pre-tuned to make use of resources,
 there will still be times when select configuration parameters need to be
 amended for specific workloads or use cases for your database.
 
-The auto-tuned default parameters are:
+The auto-tuned parameters are:
 
 .. code-block:: bash
 
@@ -27,17 +27,29 @@ For most instances, these parameters will suite your needs. However, if you
 have particularly heavy read or write workloads, you are able to change these
 parameters to achieve a better performance.
 
-Changing the default parameters
-===============================
+.. Note::
 
-There are some trade offs with changing these default parameters. Increasing
-some of the values can lead to longer wait times if you need to recover from a
-backup due to some unrelated issue with the database. Before committing to
-these changes, you could test how long a backup restore would take by using a
-:ref:`replica<database_replica>` and performing the restore process,
-after it has been fully warmed up.
+   Not all of the parameters that you are able to change are present in our
+   list of auto-defined parameters above.
 
-For write heave workloads, the parameters to look at changing would be:
+What parameters to change?
+==========================
+
+The previous list is only what we auto-tune for a basic database instance. You
+are able to tune your database to have specifications that fit your needs. In
+the following section we will discuss what the common parameters are for
+configuring your instance to deal with heavy workloads for both reading and
+writing operations.
+
+There are some trade offs with changing some of these parameters. For example;
+increasing some of the values can lead to longer wait times if you need to
+recover from a backup, while the change itself will increase your write speed.
+Before committing to changing any of these parameters on you main database, you
+can test the behaviour of your new configuration by using a
+:ref:`replica<database_replica>`.
+
+That being said, for write heave workloads, the parameters to look at changing
+would be:
 
 .. code-block:: bash
 
@@ -55,6 +67,45 @@ For read heavy workloads, you could take a look at:
    # Be careful as this can be allocated in each connection.
    # You will run out of memory if you make it too big)!
 
+
+How to change parameters
+========================
+
+Configuration
+
+# Change configuration of the database to meet application requirements
+
+$ openstack database configuration create conf1 '{"innodb_buffer_pool_size" : 1073741824}' --datastore mysql --datastore_version 5.7
++------------------------+-----------------------------------------+
+| Field                  | Value                                   |
++------------------------+-----------------------------------------+
+| created                | 2019-03-28T23:30:08                     |
+| datastore_name         | mysql                                   |
+| datastore_version_name | 5.7                                     |
+| description            | None                                    |
+| id                     | aeccb007-9100-46bd-99b4-6020f9696ee7    |
+| instance_count         | 0                                       |
+| name                   | conf1                                   |
+| updated                | 2019-03-28T23:30:08                     |
+| values                 | {"innodb_buffer_pool_size": 1073741824} |
++------------------------+-----------------------------------------+
+
+$ openstack database configuration attach db1 conf1
+
+$ openstack database instance restart db1
+
+app1 $ mysql -h db1 -uusr -p db -e "SHOW VARIABLES LIKE 'innodb_buffer_pool_size'"
++-------------------------+------------+
+| Variable_name           | Value      |
++-------------------------+------------+
+| innodb_buffer_pool_size | 1073741824 |
++-------------------------+------------+
+
+
+
+
+Additional notes
+================
 
 While these are the parameters that affect the read/write commands to the
 database, there are some other actions you can take to improve general
