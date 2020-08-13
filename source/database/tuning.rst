@@ -2,9 +2,16 @@
 Tuning your database
 ####################
 
-While our database instances are pre-tuned to make use of resources,
-there will still be times when select configuration parameters need to be
-amended for specific workloads or use cases for your database.
+Tuning your database is an important part of database management and is
+essential to getting the best performance out of your resources. The following
+section covers some of the basic information around tuning, our best practices
+and our recommendations for custom tuning on the Catalyst Cloud.
+
+To start, its important to not that our database instances are pre-tuned. Our
+tuning is set up to make use of resources in an optimal way for a wide variety
+of use cases. There will still be times when specific configuration parameters
+need to be amended for specific workloads or use cases for your database.
+We'll discuss how to do this later on.
 
 The auto-tuned parameters are:
 
@@ -23,9 +30,18 @@ The auto-tuned parameters are:
    max_user_connections = {{ (100 * flavor['ram']/512)|int }}
    max_connections = {{ (100 * flavor['ram']/512)|int }}
 
-For most instances, these parameters will suite your needs. However, if you
-have particularly heavy read or write workloads, you are able to change these
-parameters to achieve a better performance.
+The above calculations are supposed to take the amount of RAM you receive
+from your flavor and return a value, in MB, for each parameter. For example,
+if we were to use the c1.c2r2 flavor which has 2048 MB of RAM and plug it into
+one of the equations below, we would find that:
+
+.. code-block:: bash
+
+   key_buffer_size = 50 * 2048 / 512 = 200MB
+
+Paired with the right flavor, these parameters will suit most of your needs.
+However, if you have particularly heavy read or write workloads, you are able
+to change these parameters to achieve a better performance.
 
 .. Note::
 
@@ -37,15 +53,27 @@ What parameters to change?
 
 The previous list is only what we auto-tune for a basic database instance. You
 are able to tune your database to have specifications that fit your needs. In
-the following section we will discuss what the common parameters are for
-configuring your instance to deal with heavy workloads for both reading and
-writing operations.
+the following section we will discuss some of the common parameters to change
+when wanting to improve performance with read/write operations.
+These are only some of the **common** parameters
+and a more comprehensive list is available from the `mySQL docs`_.
 
-There are some trade offs with changing some of these parameters. For example;
-increasing some of the values can lead to longer wait times if you need to
-recover from a backup, while the change itself will increase your write speed.
-Before committing to changing any of these parameters on you main database, you
-can test the behaviour of your new configuration by using a
+The mySQL documents have a much more in depth explanation of how tuning works
+and how to go about tuning your database. If you are considering tuning your
+database heavily to suite your needs at a very specific level, then reading
+through those documents will be a necessity.
+
+.. Note::
+
+  Another good resource to read when looking for more information on tuning and
+  how it works can be found on this `percona`_ blog about tuning.
+
+.. _`mySQL docs`: https://dev.mysql.com/doc/
+.. _`percona`: https://www.percona.com/blog/2017/10/18/chose-mysql-innodb_log_file_size/
+
+
+Before committing to changing any of these parameters on youe main database,
+you can test the behaviour of your new configuration by using a
 :ref:`replica<database_replica>`.
 
 That being said, for write heave workloads, the parameters to look at changing
@@ -56,8 +84,6 @@ would be:
    innodb_log_file_size  512MB -2GB
 
    innodb_log_buffer_size 32MB
-
-   innodb_io_capacity_max [increase from current value if flushing not keeping up]
 
 For read heavy workloads, you could take a look at:
 
