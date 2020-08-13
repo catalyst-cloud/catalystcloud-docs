@@ -30,7 +30,7 @@ parameters to achieve a better performance.
 .. Note::
 
    Not all of the parameters that you are able to change are present in our
-   list of auto-defined parameters above.
+   list of auto-defined parameters.
 
 What parameters to change?
 ==========================
@@ -71,38 +71,49 @@ For read heavy workloads, you could take a look at:
 How to change parameters
 ========================
 
-Configuration
+Now that we know what we are looking at changing, next we'll cover the process
+of implementing these changes. We go about this, by creating a configuration
+format, attaching it to our instance, and restarting the database. To begin,
+we need to create our new config file with our new parameters. In this example,
+we are going to be increasing the innodb_buffer_pool_size:
 
-# Change configuration of the database to meet application requirements
+.. code-block:: bash
 
-$ openstack database configuration create conf1 '{"innodb_buffer_pool_size" : 1073741824}' --datastore mysql --datastore_version 5.7
-+------------------------+-----------------------------------------+
-| Field                  | Value                                   |
-+------------------------+-----------------------------------------+
-| created                | 2019-03-28T23:30:08                     |
-| datastore_name         | mysql                                   |
-| datastore_version_name | 5.7                                     |
-| description            | None                                    |
-| id                     | aeccb007-9100-46bd-99b4-6020f9696ee7    |
-| instance_count         | 0                                       |
-| name                   | conf1                                   |
-| updated                | 2019-03-28T23:30:08                     |
-| values                 | {"innodb_buffer_pool_size": 1073741824} |
-+------------------------+-----------------------------------------+
+  $ openstack database configuration create conf1 '{"innodb_buffer_pool_size" : 1073741824}' --datastore mysql --datastore_version 5.7.29
+  +------------------------+-----------------------------------------+
+  | Field                  | Value                                   |
+  +------------------------+-----------------------------------------+
+  | created                | 2020-08-13T00:55:08                     |
+  | datastore_name         | mysql                                   |
+  | datastore_version_name | 5.7.29                                  |
+  | description            | None                                    |
+  | id                     | acef615c-81a1-4f60-85e9-b7787ceb57dd    |
+  | instance_count         | 0                                       |
+  | name                   | conf1                                   |
+  | updated                | 2020-08-13T00:55:08                     |
+  | values                 | {"innodb_buffer_pool_size": 1073741824} |
+  +------------------------+-----------------------------------------+
 
-$ openstack database configuration attach db1 conf1
+Once this is done, we then have to attach the configuration to our database and
+restart the instance:
 
-$ openstack database instance restart db1
+.. code-bloack:: bash
 
-app1 $ mysql -h db1 -uusr -p db -e "SHOW VARIABLES LIKE 'innodb_buffer_pool_size'"
-+-------------------------+------------+
-| Variable_name           | Value      |
-+-------------------------+------------+
-| innodb_buffer_pool_size | 1073741824 |
-+-------------------------+------------+
+  $ openstack database configuration attach db-instance-1 conf1
 
+  $ openstack database instance restart db1
 
+Now we can test on our instance that the parameter we wanted to update has
+changed:
 
+.. code-block:: bash
+
+  $ mysql -h db-instance-1 -uusr -p db -e "SHOW VARIABLES LIKE 'innodb_buffer_pool_size'"
+  +-------------------------+------------+
+  | Variable_name           | Value      |
+  +-------------------------+------------+
+  | innodb_buffer_pool_size | 1073741824 |
+  +-------------------------+------------+
 
 Additional notes
 ================
@@ -114,3 +125,5 @@ performance of your database:
 - Use volume type NVMe for workloads that are very intensive.
 - In the event that you do manage to run out of memory, you can increase the
   flavor (RAM in particular) of your instance to meet the new demand.
+
+  - you can do this using the ``openstack database instance resize flavor`` command
