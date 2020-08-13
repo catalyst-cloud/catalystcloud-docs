@@ -41,7 +41,7 @@ How to turn on an admission controller
 ======================================
 
 There are some other useful admission controller can be enabled to enhance
-the security of Kubernetes cluster. To turn on an admission controllers, user 
+the security of Kubernetes cluster. To turn on an admission controllers, user
 can do it by either command line or dashboard with label ``admission_control_list``.
 
 Command Line
