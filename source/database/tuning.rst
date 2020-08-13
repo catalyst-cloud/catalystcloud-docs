@@ -142,11 +142,6 @@ Now we can test that our instance has the parameter we wanted to update:
    :ref:`replica<database_replica>`.
 
 Additional notes
-================
-
-While tuning is an important part of database performance and management,
-there are some other actions you can take to improve the general performance of
-your database:
 
 - Use volume type NVMe for workloads that are very intensive.
 - In the event that you do manage to run out of memory, you can increase the
