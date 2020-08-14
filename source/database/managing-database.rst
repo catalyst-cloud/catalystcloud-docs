@@ -6,7 +6,7 @@ This section covers the ways that you are able to manage the different aspects
 of your database instances. These include configuring who has access to
 your instances, managing the size and flavor of your instances and how to
 activate and track the logging of your instances.
-This section follows on from the previous example in 'creating your database'
+This section follows on from the previous example in 'creating your database.'
 It references the instance that was made in that example.
 
 ******************
@@ -93,8 +93,8 @@ user that can access the database from any location. This is the same behaviour
 that is displayed when the user is created as part of the initial database
 instance creation.
 
-The other example uses the ``--host`` argument which allows a user to be
-created that can only connect from the specified IP address.
+The other example uses the ``--host`` argument which creates a user that can
+only connect from a specified IP address.
 
 .. code-block:: bash
 
@@ -107,7 +107,6 @@ created that can only connect from the specified IP address.
   | dbusr   | %         | myDB      |
   | newuser | %         | myDB      |
   +---------+-----------+-----------+
-
 
   $ openstack database user create db-instance-1 newuser2 userpass2 --host 10.0.0.15 --databases myDB
 
@@ -243,7 +242,7 @@ instance or not.
   | general    | USER | Disabled |         0 |       0 | None      | None   |
   +------------+------+----------+-----------+---------+-----------+--------+
 
-At the moment our, database instance does not have logging enabled. The
+At the moment our database instance does not have logging enabled. The
 following shows how to enable slow_query specifically.
 
 .. code-block:: bash
