@@ -265,6 +265,7 @@ following shows how to enable slow_query specifically.
   # Check to confirm this action
 
   $ openstack database log list db-instance-1
+
   +------------+------+----------+-----------+---------+-----------+--------+
   | Name       | Type | Status   | Published | Pending | Container | Prefix |
   +------------+------+----------+-----------+---------+-----------+--------+
@@ -277,6 +278,7 @@ Finally we publish the log using:
 .. code-block:: bash
 
   $ openstack database log set db-instance-1 --publish slow_query
+
   +-----------+----------------------------------------------------------------+
   | Field     | Value                                                          |
   +-----------+----------------------------------------------------------------+
