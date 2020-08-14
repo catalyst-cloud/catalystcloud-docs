@@ -7,11 +7,11 @@ essential to getting the best performance out of your resources. The following
 section covers some of the basic information around tuning, our best practices
 and our recommendations for custom tuning on the Catalyst Cloud.
 
-To start, its important to not that our database instances are pre-tuned. Our
-tuning is set up to make use of resources in an optimal way for a wide variety
+To start, its important to note that our database instances are pre-tuned. Our
+tuning is set up to make use of resources that suit a wide variety
 of use cases. There will still be times when specific configuration parameters
-need to be amended for specific workloads or use cases for your database.
-We'll discuss how to do this later on.
+need to be amended for more high performance workloads. We'll discuss how to
+do this later on.
 
 The auto-tuned parameters are:
 
@@ -72,11 +72,7 @@ through those documents will be a necessity.
 .. _`percona`: https://www.percona.com/blog/2017/10/18/chose-mysql-innodb_log_file_size/
 
 
-Before committing to changing any of these parameters on youe main database,
-you can test the behaviour of your new configuration by using a
-:ref:`replica<database_replica>`.
-
-That being said, for write heave workloads, the parameters to look at changing
+For write heave workloads, the parameters to look at changing
 would be:
 
 .. code-block:: bash
@@ -93,15 +89,20 @@ For read heavy workloads, you could take a look at:
    # Be careful as this can be allocated in each connection.
    # You will run out of memory if you make it too big)!
 
+Before committing to changing any of these parameters on your main database,
+you can test the behaviour of your new configuration by using a
+:ref:`replica<database_replica>`.
+
 
 How to change parameters
 ========================
 
-Now that we know what we are looking at changing, next we'll cover the process
-of implementing these changes. We go about this, by creating a configuration
-format, attaching it to our instance, and restarting the database. To begin,
-we need to create our new config file with our new parameters. In this example,
-we are going to be increasing the innodb_buffer_pool_size:
+Now that we know what we are looking at changing, next we will cover the
+process of implementing these changes. We go about this, by creating a
+configuration format, attaching it to our instance, and restarting the
+database. To begin, we need to create our new config file with our new
+parameters. In this example, we are going to be increasing the
+innodb_buffer_pool_size:
 
 .. code-block:: bash
 
@@ -123,7 +124,7 @@ we are going to be increasing the innodb_buffer_pool_size:
 Once this is done, we then have to attach the configuration to our database and
 restart the instance:
 
-.. code-bloack:: bash
+.. code-block:: bash
 
   $ openstack database configuration attach db-instance-1 conf1
 
