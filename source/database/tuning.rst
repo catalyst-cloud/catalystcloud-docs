@@ -58,9 +58,9 @@ are able to tune your database to have specifications that fit your needs. In
 the following section we will discuss some of the common parameters to change
 when wanting to improve performance with read/write operations.
 These are only some of the **common** parameters
-and a more comprehensive list is available from the `mySQL docs`_.
+and a more comprehensive list is available from the `MySQL docs`_.
 
-The mySQL documents have a much more in depth explanation of how tuning works
+The MySQL documents have a much more in depth explanation of how tuning works
 and how to go about tuning your database. If you are considering tuning your
 database heavily to suite your needs at a very specific level, then reading
 through those documents will be a necessity.
@@ -70,10 +70,11 @@ through those documents will be a necessity.
   Another good resource to read when looking for more information on tuning and
   how it works can be found on this `percona`_ blog about tuning.
 
-.. _`mySQL docs`: https://dev.mysql.com/doc/
+.. _`MySQL docs`: https://dev.mysql.com/doc/
 .. _`percona`: https://www.percona.com/blog/2017/10/18/chose-mysql-innodb_log_file_size/
 
-For write heave workloads, the parameters to look at changing would be:
+
+For write heavy workloads, the parameters to look at changing would be:
 
 .. code-block:: bash
 
