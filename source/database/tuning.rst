@@ -73,9 +73,7 @@ through those documents will be a necessity.
 .. _`mySQL docs`: https://dev.mysql.com/doc/
 .. _`percona`: https://www.percona.com/blog/2017/10/18/chose-mysql-innodb_log_file_size/
 
-
-For write heave workloads, the parameters to look at changing
-would be:
+For write heave workloads, the parameters to look at changing would be:
 
 .. code-block:: bash
 
@@ -121,7 +119,6 @@ Once this is done, we then have to attach the configuration to our database and
 restart the instance:
 
 .. code-block:: bash
-
   $ openstack database configuration attach db-instance-1 conf1
 
   $ openstack database instance restart db1
