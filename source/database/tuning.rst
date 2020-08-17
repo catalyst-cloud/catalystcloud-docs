@@ -4,14 +4,16 @@ Tuning your database
 
 Tuning your database is an important part of database management and is
 essential to getting the best performance out of your resources. The following
-section covers some of the basic information around tuning, our best practices
-and our recommendations for custom tuning on the Catalyst Cloud.
+section covers some of the basic information around tuning, what auto-tuning we
+have for default databases, and jumping off points for more information on the
+tuning process.
 
-To start, its important to not that our database instances are pre-tuned. Our
-tuning is set up to make use of resources in an optimal way for a wide variety
-of use cases. There will still be times when specific configuration parameters
-need to be amended for specific workloads or use cases for your database.
-We'll discuss how to do this later on.
+To start, by default our databases have some auto-tuned parameters that are
+set up when you first create your instance. This auto-tuning makes
+use of the database resources in a way which suits a variety of general
+use cases. This means that there will still be times when specific
+configuration parameters can be changed to optimize your resources for high
+performance workloads; but we will discuss how to do this later on.
 
 The auto-tuned parameters are:
 
@@ -33,11 +35,11 @@ The auto-tuned parameters are:
 The above calculations are supposed to take the amount of RAM you receive
 from your flavor and return a value, in MB, for each parameter. For example,
 if we were to use the c1.c2r2 flavor which has 2048 MB of RAM and plug it into
-one of the equations below, we would find that:
+one of the equations, we would find that:
 
 .. code-block:: bash
 
-   key_buffer_size = 50 * 2048 / 512 = 200MB
+   key_buffer_size = 50 * [2048] / 512 = 200MB
 
 Paired with the right flavor, these parameters will suit most of your needs.
 However, if you have particularly heavy read or write workloads, you are able
@@ -71,13 +73,7 @@ through those documents will be a necessity.
 .. _`mySQL docs`: https://dev.mysql.com/doc/
 .. _`percona`: https://www.percona.com/blog/2017/10/18/chose-mysql-innodb_log_file_size/
 
-
-Before committing to changing any of these parameters on youe main database,
-you can test the behaviour of your new configuration by using a
-:ref:`replica<database_replica>`.
-
-That being said, for write heave workloads, the parameters to look at changing
-would be:
+For write heave workloads, the parameters to look at changing would be:
 
 .. code-block:: bash
 
@@ -90,18 +86,17 @@ For read heavy workloads, you could take a look at:
 .. code-block:: bash
 
    sort_buffer_size (a few MB is typical for complex SELECT queries)
-   # Be careful as this can be allocated in each connection.
-   # You will run out of memory if you make it too big)!
-
+   # Be careful as this can be allocated in each connection. You will run out of memory if you make it too big)!
 
 How to change parameters
 ========================
 
-Now that we know what we are looking at changing, next we'll cover the process
-of implementing these changes. We go about this, by creating a configuration
-format, attaching it to our instance, and restarting the database. To begin,
-we need to create our new config file with our new parameters. In this example,
-we are going to be increasing the innodb_buffer_pool_size:
+Now that we know what we are looking at changing, next we will cover the
+process of implementing these changes. We go about this, by creating a
+configuration format, attaching it to our instance, and restarting the
+database. To begin, we need to create our new config file with our new
+parameters. In this example, we are going to be increasing the
+innodb_buffer_pool_size:
 
 .. code-block:: bash
 
@@ -123,14 +118,12 @@ we are going to be increasing the innodb_buffer_pool_size:
 Once this is done, we then have to attach the configuration to our database and
 restart the instance:
 
-.. code-bloack:: bash
-
+.. code-block:: bash
   $ openstack database configuration attach db-instance-1 conf1
 
   $ openstack database instance restart db1
 
-Now we can test on our instance that the parameter we wanted to update has
-changed:
+Now we can test that our instance has the parameter we wanted to update:
 
 .. code-block:: bash
 
@@ -141,12 +134,18 @@ changed:
   | innodb_buffer_pool_size | 1073741824 |
   +-------------------------+------------+
 
+.. Note::
+
+   Before committing to changing any of these parameters on your main database,
+   you can test the behaviour of your new configuration by using a
+   :ref:`replica<database_replica>`.
+
 Additional notes
 ================
 
-While these are the parameters that affect the read/write commands to the
-database, there are some other actions you can take to improve general
-performance of your database:
+While tuning is an important part of database performance and management,
+there are some other actions you can take to improve the general performance of
+your database:
 
 - Use volume type NVMe for workloads that are very intensive.
 - In the event that you do manage to run out of memory, you can increase the

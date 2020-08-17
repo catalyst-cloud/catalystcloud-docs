@@ -149,7 +149,7 @@ the following command to create our new instance:
   +------------------------+--------------------------------------+
 
 We have to wait while the instance builds. Keep checking on the status of the
-new instance. Once it is ``ACTIVE`` we can continue.
+new instance, once it is ``ACTIVE`` we can continue.
 
 .. code-block:: bash
 
@@ -207,7 +207,7 @@ remove databases from it.
 
   $ openstack database db create db-instance-1 myDB2
 
-To check the results we use the following command:
+To check our command worked we use the following command:
 
 .. code-block:: bash
 
