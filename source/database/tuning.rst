@@ -73,8 +73,12 @@ through those documents will be a necessity.
 .. _`MySQL docs`: https://dev.mysql.com/doc/
 .. _`percona`: https://www.percona.com/blog/2017/10/18/chose-mysql-innodb_log_file_size/
 
+<<<<<<< HEAD
 
 For write heavy workloads, the parameters to look at changing would be:
+=======
+For write heave workloads, the parameters to look at changing would be:
+>>>>>>> 7e555eb... Small update to format of tuning (#272)
 
 .. code-block:: bash
 
@@ -142,6 +146,11 @@ Now we can test that our instance has the parameter we wanted to update:
    :ref:`replica<database_replica>`.
 
 Additional notes
+================
+
+While tuning is an important part of database performance and management,
+there are some other actions you can take to improve the general performance of
+your database:
 
 - Use volume type NVMe for workloads that are very intensive.
 - In the event that you do manage to run out of memory, you can increase the
