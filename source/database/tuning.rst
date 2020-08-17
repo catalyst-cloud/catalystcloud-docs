@@ -74,8 +74,7 @@ through those documents will be a necessity.
 .. _`percona`: https://www.percona.com/blog/2017/10/18/chose-mysql-innodb_log_file_size/
 
 
-For write heave workloads, the parameters to look at changing
-would be:
+For write heavy workloads, the parameters to look at changing would be:
 
 .. code-block:: bash
 
@@ -121,7 +120,6 @@ Once this is done, we then have to attach the configuration to our database and
 restart the instance:
 
 .. code-block:: bash
-
   $ openstack database configuration attach db-instance-1 conf1
 
   $ openstack database instance restart db1
@@ -144,6 +142,11 @@ Now we can test that our instance has the parameter we wanted to update:
    :ref:`replica<database_replica>`.
 
 Additional notes
+================
+
+While tuning is an important part of database performance and management,
+there are some other actions you can take to improve the general performance of
+your database:
 
 - Use volume type NVMe for workloads that are very intensive.
 - In the event that you do manage to run out of memory, you can increase the
