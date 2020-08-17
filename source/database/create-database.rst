@@ -14,7 +14,7 @@ In order to launch a new database instance we need to first decide on a few
 options, these include:
 
 * The **datastore type** which defines the type of database to be deployed.
-  For this instance we are using mySQL.
+  For this instance we are using MySQL.
 * The **database version** which is informed by your datastore type.
 * The **flavor**, which determines the vCPU and RAM assigned to the
   instance.
@@ -35,7 +35,7 @@ First, lets determine what datastore types are available to us.
   +--------------------------------------+-------+
 
 
-Now lets see what versions of mysql we can use. We can do this a
+Now lets see what versions of MySQL we can use. We can do this a
 couple of ways, either by looking at the full description of the datastore type
 or by explicitly querying the version of a particular datastore type:
 
