@@ -422,8 +422,8 @@ on the assumption that the container will eventually be consistent.
 For ``SLO`` the difference is that a user-defined manifest file describing
 the object segments is required. It also does not rely on eventually
 consistent container listings to do so. This means that the segments can
-be held in different container locations. The fact that once all files are
-can't then change is the reason why these are referred to as 'static' objects.
+be held in different container locations. The fact that once all files can't
+then change is the reason why these are referred to as 'static' objects.
 
 A more manual approach
 ======================
