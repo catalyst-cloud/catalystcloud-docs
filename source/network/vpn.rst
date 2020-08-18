@@ -35,6 +35,85 @@ We will illustrate how to create the the VPN using the following approaches:
 Requirements
 ============
 
+.. tabs::
+
+  .. tab:: Command line
+
+    In order to find these parameters you first need to know the name of the router
+    you wish to use and a subnet connected to that router.
+
+    You can use the following commands to find these:
+
+    .. code-block:: bash
+
+     $ openstack router list
+     $ openstack subnet list
+
+    To find the Project ID (tenant ID), Router ID and Router IP address, you
+    can issue the following command using the name of the router you found
+    previously:
+
+    .. code-block:: bash
+
+     $ openstack router show example-router
+     +-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+     | Field                 | Value                                                                                                                                                                                      |
+     +-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+     | admin_state_up        | True                                                                                                                                                                                       |
+     | external_gateway_info | {"network_id": "849ab1e9-7ac5-4618-8801-e6176fbbcf30", "enable_snat": true, "external_fixed_ips": [{"subnet_id": "aef23c7c-6c53-4157-8350-d6879c43346c", "ip_address": "150.242.41.212"}]} |
+     | id                    | 1e715c96-e92a-487a-a0e9-7877ed357194                                                                                                                                                       |
+     | name                  | example-router                                                                                                                                                                             |
+     | routes                |                                                                                                                                                                                            |
+     | status                | ACTIVE                                                                                                                                                                                     |
+     | tenant_id             | 0cb6b9b744594a619b0b7340f424858b                                                                                                                                                           |
+     +-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+    The Router IP address is the value associated with the "ip_address" key
+    within the external_gateway_info JSON data.
+
+    To find the Subnet ID and Subnet CIDR range, issue the following command
+    using the subnet name you found previously:
+
+    .. code-block:: bash
+
+     $ openstack subnet show example-subnet
+     +-------------------+-----------------------------------------------+
+     | Field             | Value                                         |
+     +-------------------+-----------------------------------------------+
+     | allocation_pools  | {"start": "10.0.20.10", "end": "10.0.20.200"} |
+     | cidr              | 10.0.20.0/24                                  |
+     | dns_nameservers   | 202.78.247.197                                |
+     |                   | 202.78.247.198                                |
+     |                   | 202.78.247.199                                |
+     | enable_dhcp       | True                                          |
+     | gateway_ip        | 10.0.20.1                                     |
+     | host_routes       |                                               |
+     | id                | 46fb98d1-d9d2-458f-8245-28b3dcf574b7          |
+     | ip_version        | 4                                             |
+     | ipv6_address_mode |                                               |
+     | ipv6_ra_mode      |                                               |
+     | name              | example-subnet                                |
+     | network_id        | 3599a1dc-e712-4b4c-9208-76566b76a118          |
+     | project_id        | 3d5d40b4a6904e6db4dc5321f53d4f39              |
+     | subnetpool_id     | None                                          |
+     +-------------------+-----------------------------------------------+
+
+    If you are creating a VPN that connects your projects between Catalyst
+    Cloud Regions, then the *remote peer router IP* and *remote peer subnet CIDR*
+    range will be the values associated with the subnet and router in the other
+    region. You can determine these in the same way as shown above while
+    connected to the other region. If you are setting up a VPN to a different
+    peer, then the *peer router IP* will be the publicly accessible IPv4
+    address of that router, while the *remote peer Subnet CIDR range* will be
+    the subnet behind that router whose traffic you wish to route via the VPN
+    to access the local subnet.
+
+    .. note::
+     If you are connecting to a remote peer that is not a Catalyst Cloud router,
+     you may need to modify some of the parameters used in the following steps.
+
+    By now you should have the required values you need to create a VPN.
+=======
 In order to set up a VPN, we need to identify some key information:
 
 * Router name
