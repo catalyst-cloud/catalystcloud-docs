@@ -1,5 +1,5 @@
 ##################################
-Using object storage
+Using containers
 ##################################
 
 There are several different methods available to you for interacting with the
@@ -10,9 +10,10 @@ can use to create and edit your object storage containers.
 Via the dashboard
 ===================
 
-Data must be stored in a container (also referred to as a bucket) so we need
-to create at least one container prior to uploading data. To create a new
-container, navigate to the "Containers" section and click "Create Container".
+When using the object storage service, your data must be stored in a container
+(also referred to as a bucket.) So our first step is to create at least one
+container prior to uploading any data. To create a new container, navigate to
+the "Containers" section on the dashboard and click "Create Container".
 
 .. image:: assets/containers_ui.png
    :align: center
@@ -23,7 +24,7 @@ click "Create".
 .. note::
 
   Setting "Public" level access on a container means that anyone
-  with the container's URL can access the content of that container.
+  with the container's URL can access the contents of that container.
 
 .. image:: assets/create_container.png
   :align: center
@@ -35,13 +36,13 @@ content.
 .. image:: assets/new_container.png
    :align: center
 
-Click on the "Browse" button to select the file you wish to upload and click
-"Upload File".
+Click on the "Browse" button to select the file you wish to upload and once
+selected click "Upload File".
 
 .. image:: assets/doing_upload.png
    :align: center
 
-In the Containers view the Object Count has gone up to one and the size of
+In the containers view the Object Count has gone up to one and the size of
 the container is now 314 Bytes.
 
 .. image:: assets/uploaded_file.png
@@ -63,7 +64,7 @@ that you have to prepare before continuing are:
   your cloud project. See :ref:`here<access_control>` for more details.
 
 Once you have met these requirements, we you can continue with whichever
-method you choose; detailed below.
+method you choose:
 
 |
 
@@ -189,10 +190,6 @@ method you choose; detailed below.
 
             <h4> Requirements </h4>
 
-        To be able to interact with the Swift API directly you will need to have
-        sourced a set of valid OpenStack credentials. These can be obtained from the
-        RC file (under Access & Security, API Access, or using the command line tools).
-
         In addition to sourcing the correct environment variables, you will also need
         to have installed the standard client library for swift, which in this case is
         the Python Swiftclient. This can be added to your current Python environment;
@@ -221,7 +218,7 @@ method you choose; detailed below.
         to use when connecting.
 
         The code block will use the environment variables sourced from your openrc
-        file, explained in :ref:`installing the command line tools<command-line-interface>`, to :
+        file to:
 
         1) create a container on your project
         2) add a file to the container
