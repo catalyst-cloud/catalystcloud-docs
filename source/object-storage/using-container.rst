@@ -30,8 +30,8 @@ click "Create".
   :align: center
 
 You should now see the newly created container. As this is a new container, it
-currently does not contain any data. Click on "Upload Object" to add some
-content.
+currently does not contain any data. Click on the upload button next to
+"Folder" to add some content.
 
 .. image:: assets/new_container.png
    :align: center
@@ -43,7 +43,7 @@ selected click "Upload File".
    :align: center
 
 In the containers view the Object Count has gone up to one and the size of
-the container is now 314 Bytes.
+the container is now 5 Bytes.
 
 .. image:: assets/uploaded_file.png
    :align: center
@@ -63,7 +63,7 @@ that you have to prepare before continuing are:
 * You must ensure that you have the correct role for using object storage on
   your cloud project. See :ref:`here<access_control>` for more details.
 
-Once you have met these requirements, we you can continue with whichever
+Once you have met these requirements, you can continue with whichever
 method you choose:
 
 |
@@ -160,7 +160,7 @@ method you choose:
 
     .. tab:: Swift API
 
-        For this section of the documentation, we will cover the basic features for
+        For this section of the documentation, we will cover the basic features of
         using the Swift object storage API. For a more in depth understanding of the
         features that are offered via this API we recommend reading through the
         official `OpenStack documentation
@@ -214,7 +214,7 @@ method you choose:
 
         The code below demonstrates how you can use the Python-Swiftclient to interact
         with swift via the version 2 compatible (auth) API. This version uses
-        the same endpoint for both regions, but you have to specify which one you want
+        the same endpoint for all regions, but you have to specify which one you want
         to use when connecting.
 
         The code block will use the environment variables sourced from your openrc

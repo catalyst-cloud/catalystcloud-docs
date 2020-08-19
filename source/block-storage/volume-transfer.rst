@@ -35,7 +35,7 @@ on the **accept transfer** button:
 
 .. image:: _assets/accept-transfer.png
 
-Then we input our details from previously and our transfer will be complete.
+Then we input our details that we saved and our transfer will be complete.
 
 .. image:: _assets/input-id-and-key.png
 
