@@ -3,36 +3,35 @@ Transferring a volume to another project
 ########################################
 
 In this example, we will cover how to transfer volumes between different
-projects on the Catalyst Cloud.
+projects on the Catalyst Cloud. Before we begin, there are some requirements
+that you have to check:
 
-Before we begin, there are some things that you have to check:
-
-- Does the project your moving the volume to, have a large enough quota to
-  support the new volume?
-- Does the volume have any dependencies? (attachments, snapshots, images etc.)
+- Does your new project have a large enough quota to support the new volume?
+- Does your volume have any dependencies? (attachments, snapshots, images etc.)
 
 ***************************************
-Transferring a volume via the dashboard
+Via the dashboard
 ***************************************
 
-First we have to select the volume we are wanting to transfer to our other
-project:
+First we have to select the volume we are wanting to transfer:
 
 .. image:: _assets/transfer-volume.png
 
-Once we have our volume we click on the dropdown menu to the right and we
-select the "create transfer" option from our list.
+Once we have our volume, we click on the dropdown menu to the right and we
+select the **create transfer** option from our list.
 
 .. image:: _assets/transfer-dropdown.png
 
-Our transfer needs a name and once this is done and you click
-**Create volume transfer** a transfer ID and key will be issued to you. You
-will need these to accept the transfer from your other project:
+The next step is to give our transfer a name and click
+**Create volume transfer**
 
 .. image:: _assets/create-transfer-name.png
 
-Once you have these details saved to accept the transfer, you can swap to your
-other project and click on the *accept transfer* button:
+After this, you will see a popup appear that contains a transfer ID and key.
+You will need these to accept the transfer from your other project.
+
+Once you have these details saved, you can swap to your other project and click
+on the **accept transfer** button:
 
 .. image:: _assets/accept-transfer.png
 
@@ -41,15 +40,20 @@ Then we input our details from previously and our transfer will be complete.
 .. image:: _assets/input-id-and-key.png
 
 ***************************************
-Transferring a volume via the CLI
+Via the CLI
 ***************************************
 
-When using the CLI you will have to source two different shell environments
-that have been set up using the openRC files from your different projects.
+When using the CLI there a couple of things that you need to set up before you
+can successfully transfer your volume.
 
-For the rest of this example we will refer to the shell that is sourced from
-the project that originally had the volume as ``console one`` and the shell
-that is sourced from our project that we are trying to move the volume too as
+#. You will need to download the openRC files from each of your instances.
+#. You will need to open two different shell environments.
+#. You will then need to source the two shell environments with the two different
+   openRC files.
+
+For the rest of this example we will refer to the shell that has sourced
+the project which originally had our volume as ``console one``. And the shell
+that has sourced the project that we are trying to move the volume too as
 ``console two``.
 
 .. Note::
@@ -57,7 +61,8 @@ that is sourced from our project that we are trying to move the volume too as
   You must have both of your projects sourced in the same region to be able to
   transfer a volume between them.
 
-In console one, we have to find the volume that we want to transfer:
+In console one, we use the following code to find the volume that we want to
+transfer:
 
 .. code-block:: bash
 
@@ -68,8 +73,8 @@ In console one, we have to find the volume that we want to transfer:
    | e58527cf-34d2-42bc-85fd-e689cc088dbd | transfer-example           | available |   10 |                                           |
    +--------------------------------------+----------------------------+-----------+------+-------------------------------------------+
 
-Once we have the volume that we want to transfer, in console one, we create the
-following transfer request:
+Once we have the volume that we want to transfer, in console one, we create a
+transfer request using the following:
 
 .. code-block:: bash
 
@@ -84,8 +89,8 @@ following transfer request:
    | volume_id  | e58527cf-34d2-42bc-85fd-e689cc088dbd |
    +------------+--------------------------------------+
 
-Now we have our transfer ID and our auth_key for our transfer. We swap over
-to console two and we use the following to accept the transfer request.
+Now that we have our transfer ID and our auth_key; we swap over
+to console two and we use the following to accept the transfer request:
 
 .. code-block:: bash
 
