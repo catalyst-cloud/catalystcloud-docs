@@ -393,11 +393,16 @@ method you choose:
 
     .. tab:: cURL
 
-        To access object storage using cURL it will be necessary to provide credentials
-        to authenticate the request.
+        To access object storage using cURL it is necessary to provide credentials
+        to authenticate any requests you make.
 
-        This can be done by sourcing your OpenRC file and retrieving the account specific details via the
-        Swift command line tools, then exporting the required variables as shown below.
+        This can be done by sourcing your OpenRC file and retrieving your account specific details via the
+        Swift command line tools; then exporting the required variables as shown below.
+
+        .. Note::
+
+           You will need to use an openRC file that does NOT use MFA, otherwise
+           the swift API will not be able to interact with your requests correctly.
 
         .. code-block:: bash
 
@@ -423,15 +428,21 @@ method you choose:
             $ export storageURL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
             $ export token="5f5a043e1bd24a8fa84b8785cca8e0fc"
 
+        To create a new container, use the following cURL request:
+
+        .. code-block:: bash
+
+            curl -i -X PUT -H "X-Auth-Token: $token" $storageURL/mycontainer
+
         Then run the following command to get a list of all available containers for
-        that tenant:
+        your project:
 
         .. code-block:: bash
 
             curl -i -X GET -H "X-Auth-Token: $token" $storageURL
 
-        You can optionally specify alternative output formats; for example to use XML
-        or JSON using the following syntax:
+        You can optionally specify alternative output formats. For example: to have XML
+        or JSON returned use the following syntax:
 
         .. code-block:: bash
 
@@ -444,3 +455,26 @@ method you choose:
         .. code-block:: bash
 
             curl -i -X GET -H "X-Auth-Token: $token" $storageURL/mycontainer
+
+        To upload a file to your container, use the following cURL format:
+
+        .. code-block:: bash
+
+            curl -i -T <my_object> -X PUT -H "X-Auth-Token: $token" $storageURL/mycontainer
+
+        To delete a file from your container, use this code:
+
+        .. code-block:: bash
+
+           curl -X DELETE -H "X-Auth-Token: <token>" <storage url>/mycontainer/myobject
+
+        Finally, to delete a container you can use the following syntax.
+
+        .. Note::
+
+           A container must be empty before you try and delete it. Otherwise the
+           operation will fail.
+
+        .. code-block:: bash
+
+            curl -X DELETE -H "X-Auth-Token: <token>" <storage url>/mycontainer
