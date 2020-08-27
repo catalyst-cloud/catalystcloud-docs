@@ -869,3 +869,132 @@ been replaced by node-3.
   | 83a75000-178c-4d5e-9e2f-a3b005ec4438 | dev-cluster-ipzptyqqnoje-node-1   | ACTIVE | private=10.0.0.5                       |       | c1.c2r2 |
   | 63f5206c-2105-489c-8fd8-a493876277e5 | dev-cluster-ipzptyqqnoje-master-0 | ACTIVE | private=10.0.0.4                       |       | c1.c2r2 |
   +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
+
+
+***********
+Node Groups
+***********
+
+Node groups, also known as node pools, are a means to create collections of
+resources that provide a way to enforce scheduling requirements within a
+cluster. This functionality is only supported for Kubernetes clusters.
+
+When a cluster is created it already has two node groups, default-master and
+default-worker, the number and type of nodes that you specify at creation time
+become the defaults for each of these pools.
+
+Using the ``openstack coe nodegroup`` command we can subsequently add, modify
+or delete additional custom node groups within our cluster. These groups allow
+for customised configurations such as, node image, node storage type and base
+node resources, to be applied to the nodes in that group.
+
+.. Note::
+
+  All nodes in a given node group are identical to one another, so any changes
+  to the node configuration will be applied to all nodes in the node group.
+
+Working with node groups
+========================
+
+First lets list the default nodes on our cluster named kube-test.
+
+.. code-block:: console
+
+  $ openstack coe nodegroup list kube-test
+  +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+--------+
+  | uuid                                 | name           | flavor_id | image_id                             | node_count | status          | role   |
+  +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+--------+
+  | ac36585b-a031-4f4a-84f1-46d90bb910a9 | default-master | c1.c2r4   | 5de1a6a3-3ee1-4593-8c88-f724c65fc3d0 |          3 | CREATE_COMPLETE | master |
+  | 7eebd682-5bc7-4025-bb74-9f6c9264bd57 | default-worker | c1.c4r8   | 5de1a6a3-3ee1-4593-8c88-f724c65fc3d0 |          2 | CREATE_COMPLETE | worker |
+  +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+--------+
+
+Creating a node group
+---------------------
+
+Now let's add a new nodegroup to our cluster. While it is possible to create a
+new nodegroup by providing the ClusterID and a node group name it is also
+possible to provide some extra parameters at the time of creation.
+
+With this in mind we will create a new nodegroup with the following
+
+* node count of two (if this is not provided it will default to one)
+* a node role called **test** (if this is not provided it will default to worker)
+
+.. code-block:: console
+
+  $ openstack coe nodegroup create kube-test --node-count 2 --role test
+  Request to create nodegroup cf483236-f74d-4bac-bde9-4e5a2789476d accepted
+
+We can check our new node group with the following command.
+
+.. code-block:: console
+
+  $ openstack coe nodegroup list kube-test
+  +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+--------+
+  | uuid                                 | name           | flavor_id | image_id                             | node_count | status          | role   |
+  +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+--------+
+  | ac36585b-a031-4f4a-84f1-46d90bb910a9 | default-master | c1.c2r4   | 5de1a6a3-3ee1-4593-8c88-f724c65fc3d0 |          3 | UPDATE_COMPLETE | master |
+  | 7eebd682-5bc7-4025-bb74-9f6c9264bd57 | default-worker | c1.c4r8   | 5de1a6a3-3ee1-4593-8c88-f724c65fc3d0 |          9 | UPDATE_COMPLETE | worker |
+  | cf483236-f74d-4bac-bde9-4e5a2789476d | test-nodegroup | c1.c4r8   | 5de1a6a3-3ee1-4593-8c88-f724c65fc3d0 |          2 | CREATE_COMPLETE | test   |
+  +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+--------+
+
+It is also possible to use the role as a filter to limit output.
+
+.. code-block:: console
+
+  $ openstack coe nodegroup list kube-test --role test
+  +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+------+
+  | uuid                                 | name           | flavor_id | image_id                             | node_count | status          | role |
+  +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+------+
+  | cf483236-f74d-4bac-bde9-4e5a2789476d | test-nodegroup | c1.c4r8   | 5de1a6a3-3ee1-4593-8c88-f724c65fc3d0 |          2 | CREATE_COMPLETE | test |
+  +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+------+
+
+Roles can be used to show the purpose of a node group, and multiple node groups
+can be given the same role if they share a common purpose.
+
+.. code-block:: console
+
+  kubectl get nodes -L magnum.openstack.org/role
+  NAME                                        STATUS   ROLES    AGE     VERSION   ROLE
+  prod-1-18-2-42ocujctdnyv-master-0           Ready    master   15d     v1.18.2   master
+  prod-1-18-2-42ocujctdnyv-master-1           Ready    master   15d     v1.18.2   master
+  prod-1-18-2-42ocujctdnyv-master-2           Ready    master   15d     v1.18.2   master
+  prod-1-18-2-42ocujctdnyv-node-0             Ready    <none>   15d     v1.18.2   worker
+  prod-1-18-2-42ocujctdnyv-node-1             Ready    <none>   15d     v1.18.2   worker
+  prod-1-18-2-42ocujctdnyv-node-2             Ready    <none>   9m47s   v1.18.2   worker
+  prod-1-18-2-test-node-lr3p5s7iios6-node-0   Ready    <none>   2m32s   v1.18.2   test
+  prod-1-18-2-test-node-lr3p5s7iios6-node-1   Ready    <none>   2m31s   v1.18.2   test
+
+These roles can then be be used for scheduling through the use of a node
+selector as shown here.
+
+.. code-block:: yaml
+
+  nodeSelector:
+    magnum.openstack.org/role: test
+
+
+Resizing a node group
+---------------------
+
+Resizing a node group is done with the same API as resizing a cluster, but
+the **--nodegroup** parameter must be used.
+
+.. code-block:: console
+
+  $ openstack coe cluster resize kube-test --nodegroup test-nodegroup 1
+  Request to resize cluster kube-test has been accepted.
+
+It is also possible to use the **--nodes-to-remove** parameter may be used to
+remove specific nodes when decreasing the size of a node group.
+
+Deleting a node group
+---------------------
+
+Any node group except the default master and worker node groups can be
+deleted, by specifying the cluster and nodegroup name or ID.
+
+.. code-block:: console
+
+  $ openstack coe nodegroup delete kube-test test-nodegroup
+
