@@ -1,7 +1,3 @@
-***********************
-Using the Openstack SDK
-***********************
-
 The Catalyst Cloud is built on top of the OpenStack project. There are many
 Software Development Kits for a variety of different languages available for
 OpenStack. Some of these SDKs are written specifically for OpenStack while
@@ -13,18 +9,17 @@ You will find an up to date list of recommended SDKs at
 http://developer.openstack.org/. A more exhaustive list that includes in
 development SDKs is available at https://wiki.openstack.org/wiki/SDKs.
 
-This section covers the OpenstackSDK which is a python based sdk with
+This section covers the OpenstackSDK which is a python based SDK with
 support currently only provided for python3. This sdk came out of 3
 separate libraries originally: shade, os-client-config and
 python-openstacksdk. They each have their own history on how they
 were created but after awhile it was clear that there was a lot
 to be gained by merging the three projects.
 
-Installing OpenstackSDK
-=======================
+|
 
-The recommended way to install an up to date version of the OpenstackSDK is to
-use Python's pip installer. Simply run:
+Firstly, we have to install the OpenstackSDK. The recommended way to get the
+up to date version of the SDK is to use Python's pip installer. Simply run:
 
 .. code-block:: bash
 
@@ -33,17 +28,14 @@ use Python's pip installer. Simply run:
 It is recommended that you use the openstack sdk from a virtual
 environment. More information can be found here: :ref:`python-virtual-env`
 
-OpenStack credentials
-=====================
-
-The first step in getting an instance running is to provide your Python script
+Now that we have the OpenstackSDK installed, the next step in getting an
+instance running is to provide your Python script
 with the correct credentials and configuration appropriate for your project.
 The easiest way to achieve this is to make use of environment variables. You
 can make use of the standard variables provided by an OpenStack RC file as
 described at :ref:`source-rc-file`.
 
-Creating an instance
-====================
+|
 
 Once you have set your environment variables, we are able to create an instance
 using the openstack-SDK. We have prepared below a python script that will

@@ -1,6 +1,5 @@
-****************************************
 Windows instance using the web interface
-****************************************
+----------------------------------------
 
 Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
 
@@ -21,7 +20,7 @@ Otherwise, let's proceed with building a windows instance.
   not affect this tutorial.
 
 Configure instance security group
-=================================
+---------------------------------
 
 You will add  a security group and a rule for your instance so that it can be
 accessed using SSH.
@@ -71,7 +70,7 @@ menu, leave the defaults for the other fields. Click "Add".
 
 
 Booting an instance
-===================
+-------------------
 
 We are now ready to launch your first instance. Select launch instance from the
 instances list:
@@ -125,7 +124,7 @@ required before you can log in.
 
 
 Allocate a floating IP
-======================
+----------------------
 
 To associate a floating IP with your instance, you need to navigate to the
 "Floating IPs" tab of the "Access & Security" section.
@@ -149,7 +148,7 @@ In this example, select the "first-instance" port and click "Associate":
 
 
 Connect to the new instance
-===========================
+---------------------------
 First you must set the Administrator password. To do this, go to the
 "Instances" section, click on first-instance under "Instance Name" and select
 the "Console" tab.
@@ -157,7 +156,7 @@ the "Console" tab.
 Once the following screen loads, click on OK to continue.
 
 Firewall rules required to allow access to the console in the cloud dashboard
------------------------------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
 

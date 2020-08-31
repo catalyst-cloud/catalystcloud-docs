@@ -1,9 +1,5 @@
 .. _launching-your-first-instance-using-terraform:
 
-***************
-Using terraform
-***************
-
 `Terraform`_ is an open source infrastructure configuration and provisioning
 tool developed by `Hashicorp`_. Terraform supports the configuration of many
 kinds of infrastructure, including the Catalyst Cloud. It achieves this by
@@ -25,9 +21,6 @@ For further information on using Terraform with OpenStack, see the linked
 .. _blog: http://blog.scottlowe.org/2015/11/25/intro-to-terraform/
 
 
-Install Terraform
-=================
-
 Installation of Terraform is very simple. Go to the `Terraform download`_
 page and choose the zip file that matches your operating system and
 architecture. Unzip this file to the location where Terraform's binaries
@@ -46,9 +39,6 @@ for detailed install instructions.
  $ wget https://releases.hashicorp.com/terraform/0.12.12/terraform_0.12.12_linux_amd64.zip
  $ unzip unzip terraform_0.12.12_linux_amd64.zip
 
-
-OpenStack credentials
-=====================
 
 Before running Terraform, ensure your OpenStack credentials have been
 set up. The easiest way to achieve this is by making use of environment
@@ -69,9 +59,10 @@ Catalyst Cloud APIs.
 Once Terraform had been installed and the OpenStack credentials have been set
 up, a first instance may be built.
 
+|
 
-Download the Terraform first instance configuration file
-========================================================
+To create an instance using terraform, you must have a configuration file
+prepared to construct your resources.
 
 It is beyond the scope of this documentation to explain how Terraform
 configuration files are written. A pre-prepared example is provided in the
@@ -108,10 +99,8 @@ Download the configuration file:
     ``image_id``,   and ``flavor_id``.
 
 
-Run Terraform plan
-==================
-
-The "terraform plan" command outlines the plan that Terraform will execute:
+The "terraform plan" command outlines the list of operations that Terraform
+will execute:
 
 .. code-block:: bash
 
@@ -226,10 +215,6 @@ The "terraform plan" command outlines the plan that Terraform will execute:
   It is a good idea to review the output of this command. Check the resources that
   will be created match your intentions.
 
-
-Run Terraform apply
-===================
-
 The "terraform apply" command executes the plan, creating OpenStack
 resources:
 
@@ -338,11 +323,11 @@ resources:
  State path: terraform.tfstate
 
 
-Run Terraform delete
-====================
+Once the terraform apply command has completed, your resources will be built
+and you will be able to monitor them on the cloud.
 
-The "terraform destroy" command will delete the OpenStack resources created
-previously.
+If you wish to clean up these resources, the "terraform destroy" command will
+delete any of the resources that were created using the previous command.
 
 .. note::
 
