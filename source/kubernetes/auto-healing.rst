@@ -17,6 +17,23 @@ self-healing that Kubernetes performs for pods.
 Auto-healing is enabled by default. If desirable, auto-healing can be disabled
 at cluster creation time via the label ``auto_healing_enabled=false``.
 
+*****************
+How does it work?
+*****************
+
+An agent called ``magnum-auto-healer`` is deployed as a daemon set to the
+Kubernetes cluster (automatically, during cluster creation time). It monitors
+the health state of the following  components:
+
+* For master nodes, it monitors the output of the ``healthz`` API call for
+  the health status of ``kube-apiserver`` and ``etcd`` every 30 seconds.
+* For all nodes, it monitors if the ``kubelet`` status is ready every 30
+  seconds.
+
+A repair action is triggered if any component is unhealthy for more than 3
+minutes. The repair procedure rebuilds the unhealthy node from scratch, while
+minimising impact to running application workloads as much as possible.
+
 ****************************
 Support more node conditions
 ****************************
@@ -58,58 +75,48 @@ node conditions.
 
 .. code-block:: yaml
 
-  cluster-name: 718439c2-933c-4288-abc7-c3e6ba617663
-  dry-run: false
-  cloud-provider: openstack
-  repair-delay-after-add: 3m
-  openstack:
-    user-id: 937509608ad344d0b226f5946f64d23b
-    password: "password"
-    auth-url: http://192.168.200.200/identity
-    region: RegionOne
-    project-id: d40141b0d5604fbdabfa65dbe8eceb7a
-  kubernetes:
-      api-host:
-      kubeconfig: /home/feilong/config
-  healthcheck:
-      master:
-        - type: Endpoint
-          params:
-            unhealthy-duration: 3m
-            protocol: HTTPS
-            port: 6443
-            endpoints: ["/healthz"]
-            ok-codes: [200]
-        - type: NodeCondition
-          params:
-            unhealthy-duration: 3m
-            types: ["Ready"]
-            ok-values: ["True"]
-      worker:
-        - type: NodeCondition
-          params:
-            unhealthy-duration: 3m
-            types: ["Ready"]
-            ok-values: ["True"]
-        - type: NodeCondition
-          params:
-            unhealthy-duration: 3m
-            types: ["DiskPressure"]
-            ok-values: ["False"]
-
-*****************
-How does it work?
-*****************
-
-An agent called ``magnum-auto-healer`` is deployed as a daemon set to the
-Kubernetes cluster (automatically, during cluster creation time). It monitors
-the health state of the following  components:
-
-* For master nodes, it monitors the output of the ``healthz`` API call for
-  the health status of ``kube-apiserver`` and ``etcd`` every 30 seconds.
-* For all nodes, it monitors if the ``kubelet`` status is ready every 30
-  seconds.
-
-A repair action is triggered if any component is unhealthy for more than 3
-minutes. The repair procedure rebuilds the unhealthy node from scratch, while
-minimising impact to running application workloads as much as possible.
+  apiVersion: v1
+  data:
+    config.yaml: |
+      cluster-name: 99d18ecb-7e9a-4837-aeac-0dae82f419bd
+      dry-run: false
+      monitor-interval: 30s
+      check-delay-after-add: 20m
+      leader-elect: true
+      healthcheck:
+        master:
+          - type: Endpoint
+            params:
+              unhealthy-duration: 3m
+              protocol: HTTPS
+              port: 6443
+              endpoints: ["/healthz"]
+              ok-codes: [200]
+          - type: NodeCondition
+            params:
+              unhealthy-duration: 3m
+              types: ["Ready"]
+              ok-values: ["True"]
+        worker:
+          - type: NodeCondition
+            params:
+              unhealthy-duration: 3m
+              types: ["Ready"]
+              ok-values: ["True"]
+          - type: NodeCondition
+            params:
+              unhealthy-duration: 3m
+              types: ["DiskPressure"]
+              ok-values: ["False"]
+      openstack:
+        auth-url: http://192.168.202.1/identity/v3
+        user-id: 2622d1fa39b0411abb183afcbc70536d
+        password: uR2sGAi8wX5Dwgiejx
+        trust-id: e08c5190f19e4dc7bcbb72ba0f25bde5
+        region: RegionOne
+        ca-file: /etc/kubernetes/ca-bundle.crt
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: null
+    namespace: kube-system
+    name: magnum-auto-healer-config

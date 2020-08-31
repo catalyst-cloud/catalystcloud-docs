@@ -37,12 +37,13 @@ admission controllers are enabled by default:
 * ResourceQuota
 
 
-How to turn on an admission controller
-======================================
+How to override admission controllers
+=====================================
 
 There are some other useful admission controller can be enabled to enhance
-the security of Kubernetes cluster. To turn on an admission controllers, user
-can do it by either command line or dashboard with label ``admission_control_list``.
+the security of Kubernetes cluster. To override existing admission controllers,
+user can do it by either command line or dashboard with label
+``admission_control_list``.
 
 Command Line
 ~~~~~~~~~~~~
@@ -52,7 +53,15 @@ With command line, when creating a new Kubernetes cluster, please use label
 
 .. code-block:: bash
 
-  openstack coe cluster create k8s-1 --merge-labels --labels admission_control_list=PodSecurityPolicy --cluster-template kubernetes-v1.18.2-prod-20200630
+  openstack coe cluster create k8s-1 --merge-labels --labels admission_control_list=NamespaceLifecycle,LimitRanger,SecurityContextDeny,ServiceAccount,ResourceQuota,PodSecurityPolicy --cluster-template kubernetes-v1.18.2-prod-20200630
+
+.. Note::
+  To override the default admission controller list, you have to provider
+  the full list you want to apply. For instance, in above example, you also
+  need to at least provide admission controller like ServiceAccount, NamespaceLifecycle
+  and etc to make sure it won't break the cluster bootstrap. We recommend to
+  at least include these admission controllers: ``NamespaceLifecycle``, ``LimitRanger``,
+  ``SecurityContextDeny``, ``ServiceAccount``, ``ResourceQuota``.
 
 Dashboard
 ~~~~~~~~~
