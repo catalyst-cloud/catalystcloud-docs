@@ -139,5 +139,5 @@ Addons Versions
 ***************
 
 At this stage, Catalyst Cloud Kubernetes Service doesn't support upgrade the
-addons' versions, such as Calico, CoreDNS etc. 
+addons' versions, such as Calico, CoreDNS etc.
 
