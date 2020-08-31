@@ -26,9 +26,9 @@ Ready condition enabled by Catalyst Cloud Kubernetes service auto healing,
 shown as below:
 
 +--------------------+----------------------------------------------------------+
-| Node Condition     | Description                                              | 
+| Node Condition     | Description                                              |
 +====================+==========================================================+
-| Ready              | True if the node is healthy and ready to accept pods,    | 
+| Ready              | True if the node is healthy and ready to accept pods,    |
 |                    | False if the node is not healthy and is not accepting    |
 |                    | pods, and Unknown if the node controller has not heard   |
 |                    | from the node in the last node-monitor-grace-period      |
@@ -51,10 +51,10 @@ shown as below:
 +--------------------+----------------------------------------------------------+
 | KernelDeadlock     | True if the kernel has no deadlock otherwise False       |
 +--------------------+----------------------------------------------------------+
-		
+
 To support more conditions monitoring and healing, you can just edit the
 configmap named ``magnum-auto-healer-config`` shown as below to support additional
-node conditions.   							
+node conditions.
 
 .. code-block:: yaml
 
