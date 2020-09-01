@@ -3,32 +3,35 @@ Via the Command line
 ********************
 
 After reading the overview, you should have a decent idea of what resources are
-required for a compute instance to run.  We are now able to go about creating
-a new instance. There are a number of different methods
-that you can use to create your instance, these range from using the dashboard,
-using the command line, or using an orchestration engine to manage all of the
-resources you require. The following sections will cover the different programs
-or methods you can use from you command line, to create an instance.
+required for a compute instance to run.  Now that we know what is needed, we
+can now begin creating a new instance. There are a number of different methods
+that you can use to create your instance. These include: using the
+dashboard, using the command line, or using an orchestration engine to manage
+all of the resources you require. The following sections will cover the
+different programs or methods you can use, from the command line, to create an
+instance.
 
 Requirements
 ============
 
-Before we get started, you will have to source and openRC file. If you have not
-already sourced on, in your command line, then you can follow the steps found
-:ref:`here<command-line-interface>`.
+Before we get started, you will have to source an openRC file. This will give
+you the required environment variables, so that you are able to create
+resources on your project. You can find a guide
+:ref:`here<command-line-interface>`  on how to source an openRC file.
 
-Once this is done, you can follow the steps to creating your instance using any
-of the methods below.
+Once this is done, you can follow the steps found in the guides below, to
+create your instance.
 
-Command line methods:
-=====================
 
-.. _launching-your-first-instance-using-ansible:
 .. _using-a-bash-script:
+.. _launching-your-first-instance-using-ansible:
 .. _using-the-command-line-interface:
 .. _launching-your-first-instance-using-heat:
 .. _launching-your-first-instance-using-terraform:
 .. _uploading-an-ssh-key:
+
+Command line methods
+====================
 
 .. tabs::
 
@@ -63,7 +66,8 @@ Resource cleanup using the command line
 At this point you may want to clean up the OpenStack resources that have been
 created. Running the following commands should remove all networks, routers,
 ports, security groups and instances. These commands will work regardless of
-the method you used to create the resources. Note that the order in which you
+the method you used to create the resources as long as the names of your
+resources, match the ones below. Note that the order in which you
 delete resources is important.
 
 .. warning::
