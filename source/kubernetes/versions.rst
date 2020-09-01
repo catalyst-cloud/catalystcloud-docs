@@ -132,5 +132,12 @@ CNI Version
 ***********
 
 The only supported CNI on Catalyst Cloud Kubernetes Service is Calico and the
-current versions is v3.13.1
+current versions is v3.13.1.
+
+***************
+Addons Versions
+***************
+
+At this stage, Catalyst Cloud Kubernetes Service doesn't support upgrade the
+addons' versions, such as Calico, CoreDNS etc.
 
