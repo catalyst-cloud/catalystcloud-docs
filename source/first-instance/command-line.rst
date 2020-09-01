@@ -1,16 +1,8 @@
-.. _using-the-command-line-interface:
-
-********************************
-Using the command line interface
-********************************
 
 The following is assumed:
 
 * You have installed the OpenStack command line tools
 * You have sourced an OpenRC file
-
-If you haven't done the above, please refer to the
-:ref:`command-line-interface` section for details on how to do so.
 
 The following steps are broken down to show you how each individual part is
 done. Even if you already have the required elements to create an
@@ -226,8 +218,6 @@ This example uses the Ubuntu image to create an instance.
   Image IDs will change over time. Remember always to check what is available
   using ``openstack image list --public``.
 
-
-.. _uploading-an-ssh-key:
 
 After we have these resources, we need to add an SSH key:
 

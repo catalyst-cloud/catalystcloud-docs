@@ -1,4 +1,3 @@
-.. _launching-your-first-instance-using-heat:
 
 Heat is the native OpenStack orchestration tool. This section demonstrates how
 to create a first instance using Heat.
@@ -92,16 +91,12 @@ does not. If the template validates, it may be used to build the stack:
   | stack_status_reason | Stack CREATE started                                                                      |
   +---------------------+-------------------------------------------------------------------------------------------+
 
-
-
 The ``stack_status`` indicates that creation is in progress. Use the
 ``event list`` command to check on the stack's orchestration progress:
 
 .. code-block:: bash
 
  $  openstack stack event list first-instance-stack
-
-
 
 View the output of the ``stack show`` command for further details:
 

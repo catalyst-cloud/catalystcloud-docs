@@ -1,5 +1,3 @@
-.. _launching-your-first-instance-using-ansible:
-
 `Ansible`_ is a popular open source configuration management and application
 deployment tool. Ansible provides a set of core modules for interacting with
 OpenStack. This makes Ansible an ideal tool for providing both OpenStack
@@ -49,9 +47,7 @@ install script in order to install Ansible.
   Catalyst Cloud.
 
 Before running the Ansible playbooks, ensure your OpenStack credentials have
-been set up. The easiest way to achieve this is by making use of environment
-variables. Use the standard variables provided by an OpenStack RC file as
-described in :ref:`source-rc-file`. These variables are read by the
+been set up. The variables from your sourced openRC file are read by the
 Ansible ``os_auth`` module, and will provide Ansible with the credentials
 required to access the Catalyst Cloud APIs.
 
@@ -129,15 +125,15 @@ variable, or override the variable when running the playbook as shown below:
  PLAY RECAP *********************************************************************
  localhost                  : ok=8    changed=6    unreachable=0    failed=0
 
-
-
 .. tip::
 
   Pay careful attention to the console output. It provides lots of useful information.
 
 
   After the network has been set up successfully, run the ``launch-instance.yml``
-playbook:
+  playbook:
+
+|
 
 .. code-block:: bash
 

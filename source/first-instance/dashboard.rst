@@ -1,11 +1,16 @@
 .. _first-instance-with-dashboard:
 
-Now we're going to take you step by step on the process of creating a Linux
-instance on the Catalyst Cloud.
+#######################
+Using the web dashboard
+#######################
 
+The web dashboard is the easier way of creating an instance as you can visually
+see your instance being built with each step. The dashboard itself is also easy
+to navigate and the steps below should be easy to follow.
 
+****************
 Before you begin
-----------------
+****************
 
 1) We assume you've already `signed up <https://catalystcloud.nz/signup/>`_ to
    the Catalyst Cloud.
@@ -18,9 +23,9 @@ Before you begin
 
 Otherwise, let's proceed with building your first instance.
 
-
+********************
 Networking resources
---------------------
+********************
 
 This section will cover how to create the networking resources required to host
 your instance. Should you already have them available on your project, then you
@@ -28,9 +33,9 @@ can ignore this section of the tutorial and move on to "uploading an ssh key"
 
 .. include:: ../_scripts/create-network-dashboard.rst
 
-
+********************
 Uploading an SSH key
---------------------
+********************
 
 The first thing we need to do is to have a way to access the instances we
 create. Typically this is done by a Secure Shell tunnel, or SSH. To allow our
@@ -62,7 +67,7 @@ Click ``Copy Private Key to Clipboard`` and paste it into a text file in a
 secure location. Make sure the file is saved as plain text.
 
 Importing an existing key pair
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------
 
 If you already have an SSH key pair, you can import the public key into
 Catalyst Cloud.
@@ -82,9 +87,9 @@ Name the key pair, and paste your public key into the box.
 
 Now that you've either imported or created an SSH key pair, we can continue.
 
-
+*********************************
 Configure instance security group
----------------------------------
+*********************************
 
 By default, instances are inaccessible from all external IP addresses on all
 ports. So we'll need to create an extra security group to let us SSH into the
@@ -131,9 +136,9 @@ When you're happy, select ``Add`` to add the rule to the security group.
 We now have a security group that will allow SSH access to our soon to be
 created instance.
 
-
+*******************
 Booting an instance
--------------------
+*******************
 
 We are now ready to launch our first instance! Navigate to the ``Instances``
 page.
@@ -221,9 +226,9 @@ The floating IP is a way to access your new instance.
 Congratulations, you've now booted an instance. Now we'll connect to it with an
 SSH tunnel so you can start using it.
 
-
+***************************
 Connect to the new instance
----------------------------
+***************************
 
 Before we SSH in, we should give the private SSH key the correct, more secure
 permissions.
@@ -243,9 +248,9 @@ the Instances list, or under the ``Floating IPs`` window.
 You should be able to SSH into, and interact with this instance as you would
 any Ubuntu server.
 
-
+***********************
 Learning more from here
------------------------
+***********************
 
 Now you've learned a great deal about Catalyst Cloud instances, security groups
 , floating ips, SSH key pairs, and images. To move forward from here, you might

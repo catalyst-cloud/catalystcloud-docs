@@ -1,24 +1,34 @@
-****************************
-Creating your first instance
-****************************
+********************
+Via the Command line
+********************
 
-Now that we know what resources are required for a compute instance to run, we
-have to go about creating the instance. There are a number of different methods
+After reading the overview, you should have a decent idea of what resources are
+required for a compute instance to run.  We are now able to go about creating
+a new instance. There are a number of different methods
 that you can use to create your instance, these range from using the dashboard,
 using the command line, or using an orchestration engine to manage all of the
-resources you require.
+resources you require. The following sections will cover the different programs
+or methods you can use from you command line, to create an instance.
 
-The following sections will cover the different programs or methods you can use
-to create your first instance:
+Requirements
+============
 
-Via the dashboard
-=================
+Before we get started, you will have to source and openRC file. If you have not
+already sourced on, in your command line, then you can follow the steps found
+:ref:`here<command-line-interface>`.
 
-.. include:: dashboard.rst
+Once this is done, you can follow the steps to creating your instance using any
+of the methods below.
 
-Command line methods
-====================
+Command line methods:
+=====================
 
+.. _launching-your-first-instance-using-ansible:
+.. _using-a-bash-script:
+.. _using-the-command-line-interface:
+.. _launching-your-first-instance-using-heat:
+.. _launching-your-first-instance-using-terraform:
+.. _uploading-an-ssh-key:
 
 .. tabs::
 
@@ -81,10 +91,5 @@ delete resources is important.
 
  # delete ssh key
  $ openstack keypair delete first-instance-key
-
-Creating a windows instance
-===========================
-
-.. include:: dashboard-windows.rst
 
 

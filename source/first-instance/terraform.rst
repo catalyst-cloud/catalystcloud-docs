@@ -1,4 +1,3 @@
-.. _launching-your-first-instance-using-terraform:
 
 `Terraform`_ is an open source infrastructure configuration and provisioning
 tool developed by `Hashicorp`_. Terraform supports the configuration of many
@@ -41,11 +40,8 @@ for detailed install instructions.
 
 
 Before running Terraform, ensure your OpenStack credentials have been
-set up. The easiest way to achieve this is by making use of environment
-variables. Use the standard variables provided by an OpenStack RC file as
-described in :ref:`source-rc-file`. These variables are read by the
-`OpenStack provider`_ and will provide Terraform with permissions to access the
-Catalyst Cloud APIs.
+set up. These variables are read by the `OpenStack provider`_ and will provide
+Terraform with permissions to access the Catalyst Cloud APIs.
 
 .. _OpenStack provider: https://www.terraform.io/docs/providers/openstack/index.html
 

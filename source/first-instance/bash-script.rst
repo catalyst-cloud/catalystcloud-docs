@@ -1,5 +1,3 @@
-.. _using-a-bash-script:
-
 The bash script provided here comprises all the commands from the Openstack CLI
 example in a single script.
 
