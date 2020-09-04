@@ -29,17 +29,17 @@ It is recommended that you use the openstack sdk from a virtual
 environment. More information can be found here: :ref:`python-virtual-env`
 
 Now that we have the OpenstackSDK installed, the next step in getting an
-instance running is to provide your Python script
-with the correct credentials and configuration appropriate for your project. If
-you have already sourced your OpenRC file, then this step has been taken care
-of already. If you still need to source your OpenRC, there is a link above in
-the requirements section of this document .
+instance running is to provide your Python script with the correct credentials
+and configuration for your project. If you have already sourced
+your OpenRC file, then this step has been taken care
+of. If you still need to source your OpenRC, there is a link above in
+the requirements section of this document.
 
 |
 
 Once your environment variables have been set, we are able to create an
 instance using the openstack-SDK. We have prepared below a python script that
-will create all the various resources needed to set up a blank ubuntu18
+will create all the various resources needed to set up a blank ubuntu-18
 instance with a block storage volume attached. If you want to create an
 instance with different parameters, you can see find information on how to
 create your own scripts on the `OpenstackSDK documentation`_:

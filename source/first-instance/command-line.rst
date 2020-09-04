@@ -19,8 +19,8 @@ give you a full view of how the individual pieces work together.
  from an OpenRC file.
 
 
-First thing we have to do is create our required network resources to host our
-instance:
+The first thing we have to do is create the required network resources to host
+our instance:
 
 Using the following code blocks we will create a router called "border-router"
 with a gateway to "public-net". Also we will create a private network, called
@@ -65,7 +65,7 @@ with a gateway to "public-net". Also we will create a private network, called
  +-----------------+--------------------------------------+
 
 
-Next, set your :ref:`DNS Name Servers <name_servers>` variables. Then create a
+Next, set your :ref:`DNS Name Server <name_servers>` variables. Then create a
 subnet of the "private-net" network, assigning the appropriate DNS server to
 that subnet.
 

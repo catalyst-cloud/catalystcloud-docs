@@ -3,12 +3,12 @@ Via the Command line
 ********************
 
 After reading the overview, you should have a decent idea of what resources are
-required for a compute instance to run.  Now that we know what is needed, we
+required for a compute instance to run and we
 can now begin creating a new instance. There are a number of different methods
 that you can use to create your instance. These include: using the
 dashboard, using the command line, or using an orchestration engine to manage
 all of the resources you require. The following sections will cover the
-different programs or methods you can use, from the command line, to create an
+different programs or methods you can use, from the console, to create an
 instance.
 
 Requirements
@@ -19,8 +19,8 @@ you the required environment variables, so that you are able to create
 resources on your project. You can find a guide
 :ref:`here<command-line-interface>`  on how to source an openRC file.
 
-Once this is done, you can follow the steps found in the guides below, to
-create your instance.
+Once this is done, you can follow any of the guides below, to create your
+instance.
 
 
 .. _using-a-bash-script:

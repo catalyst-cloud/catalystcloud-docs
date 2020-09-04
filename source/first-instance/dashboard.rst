@@ -4,9 +4,10 @@
 Using the web dashboard
 #######################
 
-The web dashboard is the easier way of creating an instance as you can visually
-see your instance being built with each step. The dashboard itself is also easy
-to navigate and the steps below should be easy to follow.
+The web dashboard is the easiest way of creating an instance as you can
+visually see your resources being built with each step. The dashboard itself is
+also easy to navigate and you should be able to follow the steps below
+regardless of your background with cloud based systems.
 
 ****************
 Before you begin
