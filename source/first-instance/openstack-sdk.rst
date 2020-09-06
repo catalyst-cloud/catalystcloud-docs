@@ -41,7 +41,7 @@ Once your environment variables have been set, we are able to create an
 instance using the openstack-SDK. We have prepared below a python script that
 will create all the various resources needed to set up a blank ubuntu-18
 instance with a block storage volume attached. If you want to create an
-instance with different parameters, you can see find information on how to
+instance with different parameters, you can find information on how to
 create your own scripts on the `OpenstackSDK documentation`_:
 
 .. _OpenstackSDK documentation: https://docs.openstack.org/openstacksdk/latest/

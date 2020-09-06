@@ -42,13 +42,13 @@ Enter a name and description and click "Create Security Group":
 
 Now click on "Manage Rules" for the group you have created
 
-.. image:: ../_static/fi-security-group-rules-manage.png
+.. image:: dashboard_assets/windows-dashboard/manage-rules-sec-group.png
    :align: center
 
 
 Click on “Add Rule”:
 
-.. image:: ../_static/fi-security-group-rule-add.png
+.. image:: dashboard_assets/windows-dashboard/add-rules-sg-highlight.png
    :align: center
 
 
