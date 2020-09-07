@@ -9,7 +9,7 @@ the steps required to achieve this.
 
 .. _creating_networks:
 
-.. include:: ../_scripts/create-network-dashboard.rst
+.. include:: ../network/_scripts/create-network-dashboard.rst
 
 |
 
