@@ -4,8 +4,10 @@
 Using the web dashboard
 #######################
 
-Now we're going to take you step by step on the process of creating a Linux
-instance on the Catalyst Cloud.
+The web dashboard is the easiest way of creating an instance as you can
+visually see your resources being built with each step. The dashboard itself is
+also easy to navigate and you should be able to follow the steps below
+regardless of your background with cloud based systems.
 
 ****************
 Before you begin
@@ -45,7 +47,7 @@ You can either import an existing public key or have the Catalyst Cloud
 create a key pair for you. We document both below.
 
 Creating a new key pair
-=======================
+-----------------------
 
 If you haven't generated a SSH key pair before, Catalyst Cloud can create one
 for you.
@@ -66,7 +68,7 @@ Click ``Copy Private Key to Clipboard`` and paste it into a text file in a
 secure location. Make sure the file is saved as plain text.
 
 Importing an existing key pair
-==============================
+------------------------------
 
 If you already have an SSH key pair, you can import the public key into
 Catalyst Cloud.

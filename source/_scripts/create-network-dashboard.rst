@@ -1,6 +1,6 @@
 
 Creating the required network elements
-======================================
+--------------------------------------
 
 We need to create a router and network/subnet.
 

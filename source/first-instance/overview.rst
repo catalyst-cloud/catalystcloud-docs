@@ -118,7 +118,7 @@ Operating system images
 
 In order to create an instance, you will need to have a pre-built operating
 system in the form of an Image.  Images are stored in the Image service
-(Glance). The Catalyst Cloud provide a set of images for general use and also
+(Glance). The Catalyst Cloud provides a set of images for general use and also
 allows you to upload your own images.
 
 .. note::

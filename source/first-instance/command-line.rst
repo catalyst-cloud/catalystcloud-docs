@@ -1,16 +1,8 @@
-.. _using-the-command-line-interface:
-
-********************************
-Using the command line interface
-********************************
 
 The following is assumed:
 
 * You have installed the OpenStack command line tools
 * You have sourced an OpenRC file
-
-If you haven't done the above, please refer to the
-:ref:`command-line-interface` section for details on how to do so.
 
 The following steps are broken down to show you how each individual part is
 done. Even if you already have the required elements to create an
@@ -27,11 +19,12 @@ give you a full view of how the individual pieces work together.
  from an OpenRC file.
 
 
-Creating the required network elements
-======================================
+The first thing we have to do is create the required network resources to host
+our instance:
 
-Create a router called "border-router" with a gateway to "public-net".
-Also create what will be a private network, called "private-net":
+Using the following code blocks we will create a router called "border-router"
+with a gateway to "public-net". Also we will create a private network, called
+"private-net":
 
 .. note::
  If you have completed one of the other tutorials, make sure that when you create
@@ -72,8 +65,9 @@ Also create what will be a private network, called "private-net":
  +-----------------+--------------------------------------+
 
 
-Set your :ref:`DNS Name Servers <name_servers>` variables. Then create a subnet
-of the "private-net" network, assigning the appropriate DNS server to that subnet.
+Next, set your :ref:`DNS Name Server <name_servers>` variables. Then create a
+subnet of the "private-net" network, assigning the appropriate DNS server to
+that subnet.
 
 .. code-block:: bash
 
@@ -111,8 +105,7 @@ Now create a router interface on the "private-subnet" subnet:
 
  $ openstack router add subnet border-router private-subnet
 
-Choosing a flavor
-=================
+After this we choose a Flavor for our instance:
 
 The Flavor of an instance specifies the disk, CPU, and memory allocated to  an
 instance. Use ``openstack flavor list`` to see a list of available
@@ -165,10 +158,9 @@ This example assigns a c1.c1r1 flavor to the instance.
  using ``openstack flavor list``.
 
 
-Choosing an image
-=================
+Next, we will have to choose an image:
 
-In order to create an instance, you will use a pre-built Operating System
+In order to create an instance, we will use a pre-built Operating System
 known as an Image. Images are stored in the Glance service.
 
 .. note::
@@ -227,10 +219,7 @@ This example uses the Ubuntu image to create an instance.
   using ``openstack image list --public``.
 
 
-.. _uploading-an-ssh-key:
-
-Uploading an SSH key
-====================
+After we have these resources, we need to add an SSH key:
 
 When an instance is created, OpenStack places an SSH key on the instance which
 can be used for shell access. By default, Ubuntu will install this key for the
@@ -267,10 +256,9 @@ Use ``openstack keypair create`` to upload your Public SSH key.
  Keypairs must be created in each region being used.
 
 
-Choosing a network
-==================
+Now we choose the network to host our instance:
 
-List the available networks and choose the appropriate network to use.
+List the available networks and choose the appropriate one to use.
 Assign the Network ID to an environment variable and export it for later use.
 
 .. code-block:: bash
@@ -295,11 +283,12 @@ be booted on this network. Choose "private-net" when assigning a network to the 
   using ``openstack network list``.
 
 
-Configure instance security group
-=================================
+Now that we have our network set up, we will need to create a security group:
+
 .. _security-group-first-instance:
 
-Create a security group called "first-instance-sg".
+For our example instance, we are going to create a security group called
+"first-instance-sg".
 
 .. code-block:: bash
 
@@ -315,7 +304,6 @@ Create a security group called "first-instance-sg".
  | rules       | direction='egress', ethertype='IPv4', id='afc19e4d-a3d3-467f-8da3-3a07d3d59acc' |
  |             | direction='egress', ethertype='IPv6', id='e027c9b3-f59b-40bb-b4ea-d44a0f057d7f' |
  +-------------+---------------------------------------------------------------------------------+
-
 
 Create a rule within the "first-instance-sg" security group.
 
@@ -335,7 +323,6 @@ and export it for later use.
 
  $ export CC_SECURITY_GROUP_ID=$( openstack security group show first-instance-sg -f value -c id )
 
-
 Assign the local external IP address to an environment variable and export it
 for later use:
 
@@ -350,7 +337,6 @@ for later use:
  what ``CC_REMOTE_CIDR_NETWORK`` should be, ask your network administrator, or visit
  http://ifconfig.me to find your IP address. Use "<IP_ADDRESS>/32" as ``CC_REMOTE_CIDR_NETWORK``
  to allow traffic only from your current effective IP.
-
 
 Create a rule to restrict SSH access to your instance to the current public IP
 address:
@@ -374,9 +360,7 @@ address:
  | security_group_id | 14aeedb8-5e9c-4617-8cf9-6e072bb41886 |
  +-------------------+--------------------------------------+
 
-
-Booting an instance
-===================
+Now we actually create our instance:
 
 Use the ``openstack server create`` command, supplying the information
 obtained in previous steps and exported as environment variables.
@@ -429,14 +413,11 @@ As the Instance builds, its details will be provided. This includes its ID
  | user_id                              | <USER_ID>                                                  |
  +--------------------------------------+------------------------------------------------------------+
 
-
-
 .. note::
 
  Observe that the status is ``BUILD`` Catalyst Cloud instances build very quickly,
  but it still takes a few seconds. Wait a few seconds and ask for the status of
  this instance using the ``<INSTANCE_ID>`` or name (if unique) of this instance.
-
 
 .. code-block:: bash
 
@@ -472,11 +453,7 @@ As the Instance builds, its details will be provided. This includes its ID
  | user_id                              | <USER_ID>                                                  |
  +--------------------------------------+------------------------------------------------------------+
 
-
-Allocate a floating IP
-======================
-
-In order to connect to the instance, first allocate a Floating IP.
+In order to connect to the instance, we first need to allocate a Floating IP.
 Use the ID of "public-net" (obtained previously with ``openstack network
 list``) to request a new Floating IP.
 
@@ -513,48 +490,9 @@ Associate this Floating IP with the instance:
 
  $ openstack server add floating ip first-instance $CC_PUBLIC_IP
 
-
-Connect to the new instance
-===========================
-
 Connecting to the Instance should be as easy as:
 
 .. code-block:: bash
 
  $ ssh ubuntu@$CC_PUBLIC_IP
 
-
-Resource cleanup using the command line
-=======================================
-
-At this point you may want to clean up the OpenStack resources that have been
-created. Running the following commands should remove all networks, routers,
-ports, security groups and instances. These commands will work regardless of
-the method you used to create the resources. Note that the order in which you
-delete resources is important.
-
-.. warning::
-
- The following commands will delete all the resources you have created
- including networks and routers. Do not run these commands unless you wish to
- delete all these resources.
-
-.. code-block:: bash
-
- # delete the instances
- $ openstack server delete first-instance
-
- # delete router interface
- $ openstack router remove port border-router $( openstack port list -f value -c ID --router border-router )
-
- # delete router
- $ openstack router delete border-router
-
- # delete network
- $ openstack network delete private-net
-
- # delete security group
- $ openstack security group delete first-instance-sg
-
- # delete ssh key
- $ openstack keypair delete first-instance-key

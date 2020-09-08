@@ -1,11 +1,5 @@
-.. _using-a-bash-script:
-
-*******************
-Using a bash script
-*******************
-
-The bash script provided here comprises all the commands from the section
-:ref:`using-the-command-line-interface` in a single script.
+The bash script provided here comprises all the commands from the Openstack CLI
+example in a single script.
 
 Download and run this script using the following commands:
 
@@ -29,12 +23,8 @@ Download and run this script using the following commands:
   :language: bash
 
 
-
-Resource cleanup using a bash script
-====================================
-
-This script includes all the commands from the CLI cleanup previously mentioned
-in a single bash script.
+Instead of using the resource cleanup commands in the section below, you can
+use the following bash script:
 
 You can download and run this script using the following commands:
 

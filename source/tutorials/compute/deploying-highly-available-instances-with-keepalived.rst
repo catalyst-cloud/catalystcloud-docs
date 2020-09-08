@@ -4,8 +4,8 @@ Deploying highly available instances with keepalived
 
 This tutorial assumes you have installed the OpenStack command line tools and
 sourced an openrc file, as explained at :ref:`command-line-interface`. We also
-assume that you have uploaded an SSH key, as explained at
-:ref:`uploading-an-ssh-key`.
+assume that you have uploaded an SSH key, as explained
+:ref:`here<uploading-an-ssh-key>`.
 
 
 Introduction
