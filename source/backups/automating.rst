@@ -17,7 +17,7 @@ hand menu of the dashboard, then click on the ``+Invite User`` button.
 Fill in the Invite User form as shown, making sure the only Role selected is
 Object Storage.
 
-.. image:: /_static/invite_object_user.png
+.. image:: _static/invite_object_user.png
    :align: center
 
 |
@@ -26,7 +26,7 @@ Once you receive the invite, complete the sign-in process as
 the new user. There should now be a new user with Object Storage as their only
 available role.
 
-.. image:: /_static/object_user.png
+.. image:: _static/object_user.png
    :align: center
 
 |
@@ -47,7 +47,7 @@ Now we can create our backup process. This will consist of:
 Here is the basic script to manage the running of the Duplicity backups.
 Typically, this would be placed somewhere like ``/usr/local/bin``.
 
-.. literalinclude:: /_scripts/duplicity-backup.sh
+.. literalinclude:: _scripts/duplicity-backup.sh
   :language: bash
 
 This script defines the control parameters such as retention and frequency for
@@ -55,7 +55,7 @@ the backup tasks as well as providing authentication information for object
 storage. The previous script is expecting to find this in
 ``/etc/duplicity/duplicity-vars.sh``.
 
-.. literalinclude:: /_scripts/duplicity-vars.sh
+.. literalinclude:: _scripts/duplicity-vars.sh
   :language: bash
 
 Then we need to define the backup definitions. Create a file with a name

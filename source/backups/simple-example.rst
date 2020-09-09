@@ -55,8 +55,6 @@ file called foo.sh.
   Errors 0
   -------------------------------------------------
 
-
-
 We can verify the state of our backups with:
 
 .. code-block:: bash

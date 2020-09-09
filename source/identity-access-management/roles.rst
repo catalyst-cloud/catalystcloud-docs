@@ -11,7 +11,7 @@ Project users
 From this screen it is possible to manage which users have access to the
 project and the permissions that they will be assigned.
 
-.. image:: ../_static/project_users.png
+.. image:: _static/project_users.png
 
 Roles
 =====
@@ -461,14 +461,14 @@ click "Invite".
 
 |
 
-.. image:: ../_static/invite_user.png
+.. image:: _static/invite_user.png
 
 |
 
 Once a new project member has been invited the "Invited Users" count will
 increase.
 
-.. image:: ../_static/invited_count.png
+.. image:: _static/invited_count.png
 
 |
 
@@ -489,11 +489,11 @@ drop down on an individual user
 
 |
 
-.. image:: ../_static/revoke_user.png
+.. image:: _static/revoke_user.png
 
 or select multiple users using the check boxes on the Project Users list and
 then click "Revoke Users" on the upper right of the page.
 
 |
 
-.. image:: ../_static/revoke_multiple_users.png
+.. image:: _static/revoke_multiple_users.png

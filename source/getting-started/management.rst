@@ -17,7 +17,7 @@ are applied to each region in the current project. It also shows the available
 **Pre-approved Quota Sizes** that can be selected and the actions that can be
 taken for the quota in each region.
 
-.. image:: ../_static/current_quotas.png
+.. image:: assets/current_quotas.png
 
 |
 
@@ -25,14 +25,14 @@ By clicking on the *View Size* action on the **Quota Sizes** table it is
 possible to see a breakdown of the limits for each resource within that quota
 band.
 
-.. image:: ../_static/quota_sizes.png
+.. image:: assets/quota_sizes.png
 
 |
 
 Finally the **Previous Quota Changes** gives a historical view of any quota
 adjustments that have been made within the current project.
 
-.. image:: ../_static/previous_quota_changes.png
+.. image:: assets/previous_quota_changes.png
 
 |
 
@@ -42,13 +42,13 @@ Updating a quota
 To change the current quota limit for a given region, click on the
 *Update Quota* action, the following form will be displayed
 
-.. image:: ../_static/update_quota_sizes.png
+.. image:: assets/update_quota_sizes.png
 
 |
 
 Select the new quota value and click submit
 
-.. image:: ../_static/increase_quota.png
+.. image:: assets/increase_quota.png
 
 |
 
@@ -56,7 +56,7 @@ If your requested change does not fall into the - category the
 **Previous Quota Changes** area will display a message showing the current
 state of your request.
 
-.. image:: ../_static/pending_change.png
+.. image:: assets/pending_change.png
 
 |
 
@@ -64,7 +64,7 @@ For pre-approved and accepted changes the display will update to show the new
 *Current Quota Size* next to the appropriate region and the **Previous Quota
 Changes** will
 
-.. image:: ../_static/quota_updated.png
+.. image:: assets/quota_updated.png
 
 |
 

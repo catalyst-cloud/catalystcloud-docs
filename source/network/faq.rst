@@ -42,7 +42,7 @@ Using a bash script on an instance
 
 You can use a bash script we have written for this purpose:
 
-.. literalinclude:: ../_scripts/whats-my-ip.sh
+.. literalinclude:: _scripts/whats-my-ip.sh
   :language: bash
 
 You can download and run this script on an instance:

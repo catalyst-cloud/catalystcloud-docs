@@ -216,7 +216,7 @@ if the variables were set correctly, run the following command:
 
 The output should show the following 5 variables
 
-.. image:: ../_static/powershell_env.png
+.. image:: assets/powershell_env.png
    :align: center
 
 

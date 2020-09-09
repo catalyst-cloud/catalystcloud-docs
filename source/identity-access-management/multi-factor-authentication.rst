@@ -24,7 +24,7 @@ To see this navigate to the following
 
 |
 
-.. image:: ../_static/settings.png
+.. image:: _static/settings.png
 
 |
 
@@ -32,7 +32,7 @@ From here you will be able to set up MFA for your user account.
 
 |
 
-.. image:: ../_static/mfa_settings.png
+.. image:: _static/mfa_settings.png
 
 |
 
@@ -45,7 +45,7 @@ to complete the entry and submit it otherwise you will have to redo it.
 
 |
 
-.. image:: ../_static/mfa_activate.png
+.. image:: _static/mfa_activate.png
 
 |
 
@@ -65,7 +65,7 @@ and prompted to re-login using MFA.
 
 |
 
-.. image:: ../_static/mfa_login_activated_msg.png
+.. image:: _static/mfa_login_activated_msg.png
 
 |
 
@@ -74,7 +74,7 @@ your authentication app and click **Sign In**.
 
 |
 
-.. image:: ../_static/mfa_login_totp.png
+.. image:: _static/mfa_login_totp.png
 
 |
 
@@ -96,12 +96,12 @@ passcode and click Submit,
 
 |
 
-.. image:: ../_static/remove_mfa.png
+.. image:: _static/remove_mfa.png
 
 If the passcode was successful you will be redirected to the login screen and
 prompted to re-login without using MFA.
 
-.. image:: ../_static/mfa_removed_login.png
+.. image:: _static/mfa_removed_login.png
 
 
 MFA from the commandline
@@ -115,11 +115,11 @@ This can be obtained in a couple of places as shown here.
 
 |
 
-.. image:: ../_static/user_menu_openrc.png
+.. image:: _static/user_menu_openrc.png
 
 |
 
-.. image:: ../_static/api_access_openrc.png
+.. image:: _static/api_access_openrc.png
 
 |
 

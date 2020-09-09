@@ -32,7 +32,7 @@ This section will cover how to create the networking resources required to host
 your instance. Should you already have them available on your project, then you
 can ignore this section of the tutorial and move on to "uploading an ssh key"
 
-.. include:: ../_scripts/create-network-dashboard.rst
+.. include:: ../network/_scripts/create-network-dashboard.rst
 
 ********************
 Uploading an SSH key

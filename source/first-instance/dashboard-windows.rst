@@ -176,14 +176,14 @@ for the following Catalyst Cloud API hosts
 - nz_wlg_2: 202.78.240.218 & 2404:130:20:2::218
 
 
-.. image:: ../_static/fi-windows-login.png
+.. image:: dashboard_assets/windows-dashboard/fi-windows-login.png
    :align: center
 
 
 You will then be prompted by the following screen to create a new administrator
 password.
 
-.. image:: ../_static/fi-windows-login-2.png
+.. image:: dashboard_assets/windows-dashboard/fi-windows-login-2.png
    :align: center
 
 

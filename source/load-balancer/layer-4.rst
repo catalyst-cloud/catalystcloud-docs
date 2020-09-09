@@ -32,7 +32,7 @@ the code into the new file you create on your instances.
 
 **script** flask_app.py
 
-.. literalinclude:: ../_scripts/flask_app.py
+.. literalinclude:: _scripts/flask_app.py
 
 Follow the instructions below to install the required dependencies.
 

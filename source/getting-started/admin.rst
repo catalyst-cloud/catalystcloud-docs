@@ -123,7 +123,7 @@ The web dashboard has a region selector dropbox on the top left corner. It
 indicates the current region you are connected to and allows you to easily
 switch to another region.
 
-.. image:: ../_static/region_dropdown.png
+.. image:: assets/region_dropdown.png
 
 Via the CLI
 -----------
@@ -276,7 +276,7 @@ Via the dashboard
 On the dashboard, you can change which project you are working on using the
 dropdown on the top left corner.
 
-.. image:: ../_static/project_dropdown.png
+.. image:: assets/project_dropdown.png
 
 Via the CLI
 -----------
