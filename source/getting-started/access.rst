@@ -1,8 +1,8 @@
 .. _access_to_catalyst_cloud:
 
-############################
-Accessing the Catalyst Cloud
-############################
+###################################
+How can I interact with my project?
+###################################
 
 In the previous section, we learned about the various services the Catalyst
 Cloud offers. Now we'll learn about the various ways you can interact with
