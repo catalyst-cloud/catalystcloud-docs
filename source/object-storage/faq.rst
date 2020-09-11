@@ -2,9 +2,9 @@
 FAQ
 ###
 
-===================================
+***********************************
 Can I use s3cmd for object storage?
-===================================
+***********************************
 
 There is a powerful open source tool for managing object storage called
 s3cmd. It is available from http://s3tools.org/s3cmd and was originally
@@ -17,7 +17,7 @@ order to use s3cmd with the Catalyst Cloud, you need to customise the
 s3cmd configuration file.
 
 Configuration changes
----------------------
+=====================
 
 The following changes need to be specified in the .s3cfg file.
 
@@ -29,7 +29,7 @@ The following changes need to be specified in the .s3cfg file.
   use_https = True
 
 Compatibility with S3
----------------------
+=====================
 
 Please refer to the Object Storage section for OpenStack Swift
 compatibility to S3 APIs.

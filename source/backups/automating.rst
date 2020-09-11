@@ -1,5 +1,7 @@
+#################################
 Automating backup tasks with cron
-=================================
+#################################
+
 In order to make this process more useful, we could automate our backup tasks
 by creating a cronjob to run the Duplicity backups on a regular basis, by means
 of a shell script.
@@ -9,8 +11,10 @@ project that is only given rights to access object storage. The main
 justification for this is that in order to have scripts run commands unattended
 it is necessary to embed plaintext password information in the scripts.
 
+************************
 Creating the backup user
-------------------------
+************************
+
 To create a new user account, go to ``Management -> Project Users`` in the left
 hand menu of the dashboard, then click on the ``+Invite User`` button.
 
@@ -35,8 +39,10 @@ You can then download a copy of the backup user's OpenStack RC file: see
 :ref:`source-rc-file`, which will provide the credential information for the
 following section.
 
+***************************
 Creating the backup scripts
----------------------------
+***************************
+
 Now we can create our backup process. This will consist of:
 
 - the backup script itself

@@ -8,8 +8,9 @@ downloaded using the Glance client.
 This tutorial assumes you have installed the OpenStack command line tools and
 sourced an openrc file, as explained on :ref:`command-line-interface`.
 
+*************************
 Identifying the volume(s)
-=========================
+*************************
 
 The ``openstack volume list`` command can be used to list all volumes
 available.
@@ -21,14 +22,15 @@ are attached to a given compute instance:
 
   openstack server show <instance-name-or-id> | grep "volumes_attached"
 
+********************
 Uploading the volume
-====================
+********************
 
 The procedure to upload a volume will vary depending on whether the volume is
 attached to an instance (active) or not.
 
 Uploading a detached (inactive) volume
---------------------------------------
+======================================
 
 With the command ``openstack image create --volume <volume-name-or-id>
 <image-name>``, a detached volume can be uploaded to the image service:
@@ -54,7 +56,7 @@ With the command ``openstack image create --volume <volume-name-or-id>
 
 
 Uploading an attached (active) volume
--------------------------------------
+=====================================
 
 To upload an active volume (a volume that is currently attached to a compute
 instance and in use), you must first take a snapshot of the volume using the
@@ -161,10 +163,9 @@ Finally we check to make sure that our image has been made and then we save it.
 
   $ openstack image save --file <new-file-name> <name-of-the-image-from-last-step>
 
-
-
+*********************
 Downloading the image
-=====================
+*********************
 
 Copying a volume from the block storage service to the image service can take
 some time (depending on volume size). First, you should confirm that the upload

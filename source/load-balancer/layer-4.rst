@@ -5,7 +5,6 @@ Layer 4 load balancing
 This example illustrates how to load balance traffic on port 80 and 443 to two
 compute instances running a mock Python Flask web application.
 
-
 ***********
 Preparation
 ***********

@@ -1,9 +1,9 @@
 .. _administrating_the_catalyst_cloud:
 .. _additional-info:
 
-#################################
+###############################
 Additional info and terminology
-#################################
+###############################
 
 The information below includes different management systems, terminology, and
 general information that you will need to get started with your project.
@@ -89,8 +89,6 @@ You can request the creation of more projects via the `Support
 Requests`_ panel.
 
 .. _Support Requests: https://dashboard.cloud.catalyst.net.nz/management/tickets/
-
-
 
 Changing project
 ================

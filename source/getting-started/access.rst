@@ -104,7 +104,7 @@ dashboard at any time to request a change to the white-listed IPs.
 |
 
 Whitelisting and access
-=========================
+=======================
 
 All compute instances on the Catalyst Cloud have whitelisted IP addresses by
 default. Because compute instances are whitelisted, you can use them as a

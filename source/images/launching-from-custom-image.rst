@@ -1,6 +1,6 @@
-*****************************************
+#########################################
 Launching an instance from a custom image
-*****************************************
+#########################################
 
 On the dashboard you will find the image you uploaded on “Images & Snapshots”
 under your private images. Click on the Launch button and:

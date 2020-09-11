@@ -2,9 +2,9 @@
 Creating volumes using LVM
 ##########################
 
-
+************
 What is LVM?
-------------
+************
 
 The Logical Volume Manager (LVM) is a user space tool set designed to provide a
 higher level management of disk storage on a linux system than the traditional
@@ -30,8 +30,9 @@ software such as partitioning utilities that the disk is being used. This
 avoids the possibility of someone firing up a partitioning program, seeing an
 un-partitioned disk and attempting to use it for some other purpose.
 
+******************************************
 Creating a logical volume on a single disk
-------------------------------------------
+******************************************
 The first thing to do is identify the disks available for use, to do this
 use ``lvmdiskscan`` while on a **compute instance**; and while having ``Sudo``
 privileges.

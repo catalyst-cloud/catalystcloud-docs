@@ -1,7 +1,6 @@
-
-**********
+##########
 HOT format
-**********
+##########
 
 More information on the HOT format can be found on the OpenStack user
 guide at: http://docs.openstack.org/user-guide/hot-guide/hot.html

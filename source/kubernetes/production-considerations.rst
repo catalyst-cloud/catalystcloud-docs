@@ -8,15 +8,18 @@ This section of the documentation will discuss different common practices and
 considerations that are important to creating a cluster that is able to handle
 the demands of a production environment.
 
+**********************
 Network considerations
-======================
+**********************
+
 The first things you need to consider before creating your cluster is the
 specifications around networking. The following are common and important
 questions that you must answer before you begin building any production
 clusters.
 
 Where is your cluster going to live?
-------------------------------------
+====================================
+
 A cluster, like most of the resources on the Catalyst Cloud, must sit on a
 network inside your project. However, it is up to you whether you want to have
 your cluster sitting on its own network isolated from your other resources, or
@@ -26,7 +29,8 @@ on what resources your cluster is going to be using or interacting with and
 how you want to construct your system.
 
 Publicly accessible or private?
--------------------------------
+===============================
+
 Another consideration that you need to make in regards to networking is,
 whether you want the cluster to be publicly or privately accessible. The
 majority of the time, production clusters are deployed in an internal network
@@ -39,7 +43,8 @@ you can take the time to learn the security practices necessary to run a
 public cluster.
 
 What is the address?
---------------------
+====================
+
 The final thing to consider about networking is the actual address of the
 cluster itself. Before creating a cluster it is important to consider which
 subnet you are going to use for the network that the kubernetes cluster
@@ -68,8 +73,10 @@ to the following:
 For the specifics on how to change label values in a cluster template when
 creating your cluster please see :ref:`here<modifying_a_cluster_with_labels>`.
 
+********
 Security
-========
+********
+
 The security of a cluster is mainly affected by how many access points there
 are to the cluster. As such, the following mainly speaks on important options
 for access to your cluster that you should consider.
@@ -92,7 +99,7 @@ options are there for you to decide.
 .. _limiting_access:
 
 Limiting access to the API
---------------------------
+==========================
 
 If you have already opted to go with a private cluster then this consideration
 is of less importance to you. If, however, you have deployed a publicly
@@ -131,9 +138,10 @@ The resulting command would look like this.
     --node-count 2 \
     --master-count 3
 
-
+********
 Capacity
-========
+********
+
 Your capacity needs will vary wildly depending on what you need to utilize a
 cluster for. Therefore when we talk about capacity considerations for
 *a production cluster* it is difficult to be specific, as each users needs will
@@ -162,8 +170,10 @@ are working with a quota that is smaller than your demand requires than you
 will run in to errors constantly. That is why it is also important that you
 increase your quota size based on demand.
 
+**********
 Monitoring
-==========
+**********
+
 An important part of running a production cluster is making sure that it is
 healthy and that you can track what actions have taken place on your clusters.
 You can monitor the status of your cluster at any time using the

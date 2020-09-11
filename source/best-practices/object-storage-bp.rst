@@ -11,8 +11,9 @@ rot). The corruption of a single bit can be detected and automatically restored
 to a healthy state. The loss of a region, server or a disk leads to the data
 being quickly recovered from another disk, server or region.
 
+*************
 Data location
-=============
+*************
 
 When using object storage, the normal practice for where to hold your data is
 the region closest to your physical location. This is so that the
@@ -23,22 +24,25 @@ should be consistent. That means you won't have to worry about where to
 upload your data, it will always be available to you with no drop in access
 speed regardless of where you are.
 
+**************
 Logging access
-==============
+**************
 
 For both security and auditing reasons, logging who has accessed your storage
 objects and what actions the took on them is a standard best practice.
 
+************************************
 Schedule actions to not slow traffic
-====================================
+************************************
 
 If many different users are trying to upload or download to/from the same
 container in object storage; the multiple actions will slow each other down. If
 you are uploading/downloading large amounts of data then it is a best practice
 to schedule these actions, so that the overall performance is not affected.
 
+*****************
 Deletion policies
-=================
+*****************
 
 There are a number of polices that you may wish to use when it comes to dealing
 with deleting data from your storage options. The following are some of the

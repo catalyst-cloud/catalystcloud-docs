@@ -7,8 +7,9 @@ object storage service. The following sections cover the most common tools that
 people use. Each of these examples shows some of the basic commands that you
 can use to create and edit your object storage containers.
 
+*****************
 Via the dashboard
-===================
+*****************
 
 When using the object storage service, your data must be stored in a container
 (also referred to as a bucket.) So our first step is to create at least one
@@ -48,12 +49,12 @@ the container is now 5 Bytes.
 .. image:: assets/uploaded_file.png
    :align: center
 
-
+********************
 Via the command line
-======================
+********************
 
 Prerequisites
--------------
+=============
 
 For several of the methods detailed below, you will have to prepare your
 command line environment before continuing with the examples. The key things

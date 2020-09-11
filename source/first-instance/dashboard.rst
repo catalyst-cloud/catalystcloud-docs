@@ -47,7 +47,7 @@ You can either import an existing public key or have the Catalyst Cloud
 create a key pair for you. We document both below.
 
 Creating a new key pair
------------------------
+=======================
 
 If you haven't generated a SSH key pair before, Catalyst Cloud can create one
 for you.
@@ -68,7 +68,7 @@ Click ``Copy Private Key to Clipboard`` and paste it into a text file in a
 secure location. Make sure the file is saved as plain text.
 
 Importing an existing key pair
-------------------------------
+==============================
 
 If you already have an SSH key pair, you can import the public key into
 Catalyst Cloud.
@@ -221,7 +221,6 @@ The floating IP is a way to access your new instance.
 
 .. image:: dashboard_assets/set-floating-ip.png
 
-|
 |
 
 Congratulations, you've now booted an instance. Now we'll connect to it with an

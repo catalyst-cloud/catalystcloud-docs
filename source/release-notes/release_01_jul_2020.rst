@@ -8,8 +8,6 @@ The main changes of note in this release are:
   that of General Availability (GA) and as such it is considered to be suitable
   for use with production workloads.
 
-
-
 ***************************
 Kubernetes service (Magnum)
 ***************************

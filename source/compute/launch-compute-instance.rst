@@ -129,7 +129,6 @@ Select your volume and ensure it now appears under Allocated like this.
 Complete the rest of the Launch Instance dialogue as required and launch the
 instance.
 
-
 ******
 Flavor
 ******
@@ -157,7 +156,6 @@ mitigated by scaling applications horizontally on multiple compute instances in
 an anti-affinity group. We monitor the performance of our physical servers and
 have the ability to move compute instances around, without downtime, to spread
 out load if required.
-
 
 ***********************
 Instance initialisation

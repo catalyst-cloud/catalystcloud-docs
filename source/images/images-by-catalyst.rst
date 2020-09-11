@@ -1,8 +1,8 @@
 .. _images:
 
-***************
+###############
 Types of images
-***************
+###############
 
 Catalyst provides some pre-configured operating system images to make it easier
 for you to get started on the cloud.
@@ -43,8 +43,9 @@ they are suitable for your needs and fit for purpose. Catalyst provides them
 change, you can always upload your own images, crafted the way you like, or
 take a snapshot of ours and modify it the way you need.
 
+***************************************************
 How can I identify the images provided by Catalyst?
-===================================================
+***************************************************
 
 The images provided by Catalyst are uploaded to projectID (also known as tenant
 previously)
@@ -61,9 +62,9 @@ For a less verbose view filter by column name
 
   openstack image list -c ID -c Name -c Project --long | grep 94b566de52f9423fab80ceee8c0a4a23
 
-
+*******************************
 Images provided by our partners
-===============================
+*******************************
 
 +------------------+-----------+-----------------+
 | Operating system | User-name | Partner         |
@@ -75,9 +76,9 @@ Before using the images provided by our Partners, you should always confirm
 that they are suitable for your needs and fit for purpose. Catalyst provides
 them "as is", without warranty of any kind.
 
-
+*******************************
 Creating your own custom images
-===============================
+*******************************
 
 The OpenStack upstream documentation provides detailed instructions on how to
 prepare all major operating systems to run in the cloud:

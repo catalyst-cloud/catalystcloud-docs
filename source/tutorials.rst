@@ -10,11 +10,12 @@ services on the cloud. We've separated these tutorials below by what services
 they pertain most to; for those that don't fall clearly into one of the
 services on the cloud, they are under the "other" section.
 
+********************
 Tutorials by service
-====================
+********************
 
 Compute tutorials
------------------
+=================
 
 .. toctree::
    :maxdepth: 1
@@ -24,7 +25,7 @@ Compute tutorials
    tutorials/compute/ansible-create-x-servers-using-in-memory-inventory
 
 Container tutorials
--------------------
+===================
 
 .. toctree::
    :maxdepth: 1
@@ -34,7 +35,7 @@ Container tutorials
    tutorials/containers/docker-getting-started-with-swarm-mode-tutorial-on-the-catalyst-cloud
 
 Image tutorials
----------------
+===============
 
 .. toctree::
    :maxdepth: 1
@@ -43,7 +44,7 @@ Image tutorials
    tutorials/images/deploying-a-turnkey-image
 
 Network tutorials
------------------
+=================
 
 .. toctree::
    :maxdepth: 1
@@ -52,7 +53,7 @@ Network tutorials
    tutorials/network/cloud-socks-proxy-over-ssh
 
 Orchestration tutorials
------------------------
+=======================
 
 .. toctree::
    :maxdepth: 1
@@ -61,7 +62,7 @@ Orchestration tutorials
    tutorials/orchestration/ansible-driven-puppet
 
 Storage tutorials
------------------
+=================
 
 .. toctree::
    :maxdepth: 1
@@ -69,7 +70,7 @@ Storage tutorials
    tutorials/storage/downloading-compute-instances-volumes
 
 Other tutorials
----------------
+===============
 
 .. toctree::
    :maxdepth: 1

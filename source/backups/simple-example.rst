@@ -1,5 +1,6 @@
+################
 A simple example
-================
+################
 
 Firstly, lets check our connectivity to the object store. If we run the
 following for an existing empty container, in this case 'first-container', we

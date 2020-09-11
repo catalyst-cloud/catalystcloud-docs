@@ -221,7 +221,6 @@ listener.
   | updated_at                | None                                 |
   +---------------------------+--------------------------------------+
 
-
 ****************
 Create the pools
 ****************
@@ -277,7 +276,6 @@ Create the second pool.
   | session_persistence | None                                 |
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
-
 
 ***************
 Add the members
@@ -335,7 +333,6 @@ Add the second member to the second pool.
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
-
 ********************
 Create the L7 policy
 ********************
@@ -365,7 +362,6 @@ Create the layer 7 policy.
   | name                | policy1                              |
   +---------------------+--------------------------------------+
 
-
 ******************
 Create the L7 rule
 ******************
@@ -392,7 +388,6 @@ Create a rule for the policy.
   | operating_status    | OFFLINE                              |
   +---------------------+--------------------------------------+
 
-
 ************
 Assign a VIP
 ************
@@ -406,7 +401,6 @@ VIP Port ID and then assign it a floating ip address.
   export FIP=`openstack floating ip create public-net -f value -c floating_ip_address`
   export VIP_PORT_ID=`openstack loadbalancer show lb_test -f value -c vip_port_id`
   openstack floating ip set --port $VIP_PORT_ID $FIP
-
 
 **************
 Test the setup

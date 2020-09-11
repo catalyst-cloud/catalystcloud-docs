@@ -294,9 +294,8 @@ documentation under tutorials.
 For a reference of all commands supported by the CLI, refer to the `OpenStack
 Client documentation <https://docs.openstack.org/python-openstackclient>`_.
 
-*************
 The next step
-*************
+=============
 
 We highly recommend that if you are going to be using the CLI often that you
 take the time to go through the documentation section on :ref:`setting up your

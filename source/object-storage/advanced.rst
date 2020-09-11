@@ -3,9 +3,9 @@ Advanced features
 #################
 
 
-========================================
+****************************************
 Static websites hosted in object storage
-========================================
+****************************************
 
 It is possible to host simple websites that contain only static content from
 within a container.
@@ -75,9 +75,9 @@ You should now be able to view the index file as a website.
 
 https://object-storage.nz-por-1.catalystcloud.io:443/v1/%AUTH_ID%/%container_name%/
 
-=================
+*****************
 Object versioning
-=================
+*****************
 
 This provides a means by which multiple versions of your content can be stored
 allowing for recovery from unintended overwrites.
@@ -192,9 +192,9 @@ convention outlined above.
   +-------------------------------+
 
 
-=============
+*************
 Temporary URL
-=============
+*************
 
 This is a means by which a temporary URL can be generated, to allow
 unauthenticated access to the Swift object at the given path. The
@@ -226,8 +226,10 @@ should expire.
 - in the nested container structure : bar_container/quux.md
 - with key : my_secret_tempurl_key
 
+
 Creating temporary URLs in the Catalyst Cloud
 =============================================
+
 At the time of writing, the only method currently available for the creation
 of temporary URLs is using the command line tools.
 
@@ -287,9 +289,9 @@ successful, the request should return the contents of the object.
 You could also access the object by taking the same URL that you passed to cURL
 and pasting it into a web browser.
 
-==========================
+**************************
 Working with large objects
-==========================
+**************************
 
 Typically, the size of a single object cannot exceed 5GB. It is possible,
 however, to use several smaller objects to break up the large object. When this
@@ -307,8 +309,9 @@ There are tools available, both GUI and CLI, that will handle the segmentation
 of large objects for you. For all other cases, you must manually split the
 oversized files and manage the manifest objects yourself.
 
+*********************************
 Using the Swift command line tool
-=================================
+*********************************
 
 The Swift tool which is included in the `python-swiftclient`_ library, for
 example, is capable of handling oversized files and gives you the choice of
@@ -324,7 +327,8 @@ container using the Swift tool. To keep the output brief, a 512MB file
 is used in the example.
 
 example 1 : DLO
----------------
+===============
+
 The default mode for the tool is the ``dynamic large object`` type, so in this
 example, the only other parameter that is required is the segment size.
 The ``-S`` flag is used to specify the size of each chunk, in this case
@@ -344,7 +348,8 @@ The ``-S`` flag is used to specify the size of each chunk, in this case
 |
 
 example 2 : SLO
----------------
+===============
+
 In the second example, the same segment size as above is used, but you specify
 that the object type must now be the ``static large object`` type.
 
@@ -401,8 +406,9 @@ and overwrites, etc. You can override this behaviour with the --leave-segments
 option if desired; this is useful if you want to have multiple versions of
 the same large object available.
 
+*********************************************************
 Dynamic Large Objects (DLO) vs Static Large Objects (SLO)
-==========================================================
+*********************************************************
 
 The main difference between the two object types is to do with the associated
 manifest file that describes the overall object structure within Swift.
@@ -424,6 +430,7 @@ the object segments is required. It also does not rely on eventually
 consistent container listings to do so. This means that the segments can
 be held in different container locations. The fact that once all files can't
 then change is the reason why these are referred to as 'static' objects.
+
 
 A more manual approach
 ======================
