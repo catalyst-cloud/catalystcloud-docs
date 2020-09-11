@@ -128,8 +128,8 @@ contacted by the alarm should be set up to perform some action based on this
 alert. This is typically paired with the orchestration service to implement
 autohealing and autoscaling functions for your instances.
 
-Kubernetes
-==========
+Kubernetes service
+==================
 
 Kubernetes is a system that is designed to manage the deployment, scaling, and
 health of containerised applications. The Catalyst Kubernetes service is a
