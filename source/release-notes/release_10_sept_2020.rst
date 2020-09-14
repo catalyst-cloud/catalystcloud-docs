@@ -9,10 +9,10 @@ service.
 Container Infra (Magnum)
 ************************
 
-The existing templates have been updated to include the latest applicable
-version of Kubernetes.
+New versions of the templates have been created to provide the latest
+applicable version of Kubernetes for each template.
 
-Please note the template names have changed to reflect this.
+The new template names are as follows:
 
 * kubernetes-v1.16.14-dev-20200827
 * kubernetes-v1.16.14-prod-20200827
