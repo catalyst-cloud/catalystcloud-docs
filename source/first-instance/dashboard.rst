@@ -1,8 +1,8 @@
-.. _first-instance-with-dashboard:
-
 #######################
 Using the web dashboard
 #######################
+
+.. _first-instance-with-dashboard:
 
 The web dashboard is the easiest way of creating an instance as you can
 visually see your resources being built with each step. The dashboard itself is
