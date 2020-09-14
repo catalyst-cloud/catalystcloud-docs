@@ -50,8 +50,9 @@ to change these parameters to achieve a better performance.
    Not all of the parameters that you are able to change are present in our
    list of auto-defined parameters.
 
+**************************
 What parameters to change?
-==========================
+**************************
 
 The previous list is only what we auto-tune for a basic database instance. You
 are able to tune your database to have specifications that fit your needs. In
@@ -93,8 +94,9 @@ For read heavy workloads, you could take a look at:
    sort_buffer_size (a few MB is typical for complex SELECT queries)
    # Be careful as this can be allocated in each connection. You will run out of memory if you make it too big)!
 
+************************
 How to change parameters
-========================
+************************
 
 Now that we know what we are looking at changing, next we will cover the
 process of implementing these changes. We go about this, by creating a
@@ -124,6 +126,7 @@ Once this is done, we then have to attach the configuration to our database and
 restart the instance:
 
 .. code-block:: bash
+
   $ openstack database configuration attach db-instance-1 conf1
 
   $ openstack database instance restart db1
@@ -145,8 +148,9 @@ Now we can test that our instance has the parameter we wanted to update:
    you can test the behaviour of your new configuration by using a
    :ref:`replica<database_replica>`.
 
+****************
 Additional notes
-================
+****************
 
 While tuning is an important part of database performance and management,
 there are some other actions you can take to improve the general performance of
