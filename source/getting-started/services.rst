@@ -148,9 +148,9 @@ use on our cloud is free. You do not pay an additional fee to use Kubernetes,
 you only pay for the resources that are consumed by your clusters e.g. the
 instance and networks etc.
 
-******************************
-What can you do with services?
-******************************
+**********************************
+What can you do with each service?
+**********************************
 
 Catalyst Cloud is an entirely automated platform that adheres to the NIST
 definition of `true cloud computing <https://csrc.nist.gov/publications/d

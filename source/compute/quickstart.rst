@@ -24,11 +24,12 @@ are:
 .. _Heat: https://wiki.openstack.org/wiki/Heat
 .. _Terraform: https://www.terraform.io/
 
+*****************
 Dashboard example
-=================
+*****************
 
 Uploading an SSH key
---------------------
+====================
 
 The first thing we need to do is to make sure we have a way to access the
 instances we create. We use **SSH** to allow access to our instances. You can
@@ -36,7 +37,7 @@ either import an existing public key or have the Catalyst Cloud create a key
 pair for you. We document both below:
 
 Creating a new key pair
------------------------
+=======================
 
 If you haven't generated a SSH key pair before, Catalyst Cloud can create one
 for you.
@@ -57,7 +58,7 @@ Click **Copy Private Key to Clipboard** and paste it into a text file in a
 secure location. Make sure the file is saved as plain text.
 
 Importing an existing key pair
-------------------------------
+==============================
 
 If you already have an SSH key pair, you can import the public key onto the
 Catalyst Cloud.
@@ -78,7 +79,7 @@ Name the key pair, and paste your public key into the box.
 Now that you've either imported or created an SSH key pair, we can continue.
 
 Configure instance security group
----------------------------------
+=================================
 
 By default, instances are inaccessible from all external IP addresses on all
 ports. So we'll need to create an extra security group to let us SSH into the
@@ -124,7 +125,7 @@ We now have a security group that will allow SSH access to our soon to be
 created instance.
 
 Booting an instance
--------------------
+===================
 
 We are now ready to launch our first instance! Navigate to the **Instances**
 page.
@@ -209,7 +210,7 @@ SSH tunnel so you can start using it.
 
 
 Connect to the new instance
----------------------------
+===========================
 
 Before we SSH in, we should give the private SSH key the correct, more secure
 permissions.
@@ -228,6 +229,10 @@ the Instances list, or under the **Floating IPs** window.
 
 You should be able to SSH into, and interact with this instance as you would
 any Ubuntu server.
+
+*********************
+Command line examples
+*********************
 
 Configuration for code blocks
 =============================

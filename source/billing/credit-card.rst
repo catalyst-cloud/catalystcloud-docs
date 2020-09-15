@@ -56,9 +56,9 @@ After adding the credit card, your Project Billing Details should have been upda
 .. image:: resources/billing-details-updated.png
    :align: center
 
-********************
-Adding a credit card
-********************
+********************************
+Adding an additional credit card
+********************************
 
 .. note::
    If you have credit card payment as your selected method. You cannot delete a credit

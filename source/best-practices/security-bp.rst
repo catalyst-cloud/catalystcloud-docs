@@ -1,5 +1,5 @@
 #######################
-Security best practices
+Security
 #######################
 
 This section covers some best practices for security on the Catalyst Cloud, and
