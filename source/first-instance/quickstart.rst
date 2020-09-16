@@ -1,6 +1,6 @@
-####################
-Via the Command line
-####################
+##########################
+Using programmatic methods
+##########################
 
 After reading the overview, you should have a decent idea of what resources are
 required for a compute instance to run and we
