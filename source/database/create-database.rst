@@ -18,6 +18,7 @@ options, these include:
 * The **database version** which is informed by your datastore type.
 * The **flavor**, which determines the vCPU and RAM assigned to the
   instance.
+* You will also need to source an OpenRC file in the correct region
 
 .. Note::
   It is also necessary to have an existing network on the project that you
