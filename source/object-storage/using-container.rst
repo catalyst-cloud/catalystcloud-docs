@@ -49,9 +49,9 @@ the container is now 5 Bytes.
 .. image:: assets/uploaded_file.png
    :align: center
 
-********************
-Via the command line
-********************
+************************
+Via programmatic methods
+************************
 
 Prerequisites
 =============

@@ -74,7 +74,7 @@ dashboard as seen below
 .. image:: assets/container-after-create.png
 
 ********************
-Command line methods
+Programmatic methods
 ********************
 
 .. tabs::
