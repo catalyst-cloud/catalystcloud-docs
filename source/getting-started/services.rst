@@ -122,11 +122,11 @@ Alarm service
 =============
 
 The alarm service allows you to create alarms that monitor custom parameters on
-your project and alert you when something changes. An alarm when triggered will
-inform some other service or software of a state change; whichever service is
-contacted by the alarm should be set up to perform some action based on this
-alert. This is typically paired with the orchestration service to implement
-autohealing and autoscaling functions for your instances.
+your project and alert you if these parameters are met. An alarm when
+triggered, will inform some other service or software of a state change.
+Services contacted by the alarm should be set up to perform some action based
+on this alert. This typically is used alongside the orchestration service to
+implement autohealing and autoscaling protocols for your compute instances.
 
 Kubernetes service
 ==================
@@ -134,7 +134,7 @@ Kubernetes service
 Kubernetes is a system that is designed to manage the deployment, scaling, and
 health of containerised applications. The Catalyst Kubernetes service is a
 fully managed service and opens up the use of Kubernetes clusters to developers
-without needing to have specialist knowledge on the platform. It also frees you
+without needing to have specialist knowledge of the platform. It also frees you
 up to focus on what really matters to your business, knowing that the
 Kubernetes service is monitored and managed by us 24/7.
 
