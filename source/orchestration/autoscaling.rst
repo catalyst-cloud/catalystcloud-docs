@@ -1,26 +1,30 @@
 .. _autoscaling-on-catalyst-cloud:
 
-********************
+############
 Auto scaling
-********************
+############
 
+*************
 Prerequisites
--------------
+*************
+
 - You must have the ``Heat Stack Owner`` role.
 - You must have ``aodhclient``, which you can install via ``pip``
 - You must have a network set up that can host webservers.
 - You must have sourced an RC file on your command line
 
+*********************
 Bullet point overview
----------------------
+*********************
 
 - Create a heat stack with two loadbalanced webservers.
 - Create a ``ceilometer_cpu_high_alarm`` and a ``ceilometer_cpu_low_alarm``
 - Cause one of the instances to exceed the high alarm threshold.
 - Observe as the alarm is triggered and the service is scaled up.
 
+*******
 Process
--------
+*******
 
 This example will create an alarm that monitors a set of simulated webservers.
 We will configure our alarm so that should a webserver's CPU usage exceed 20%

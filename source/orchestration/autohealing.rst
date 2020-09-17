@@ -1,26 +1,30 @@
 .. _autohealing-on-catalyst-cloud:
 
-************
+############
 Auto healing
-************
+############
 
+*************
 Prerequisites
--------------
+*************
+
 - You must have the ``Heat Stack Owner`` role.
 - You must have ``aodhclient``, which you can install via ``pip``
 - You must have a network set up that can host webservers.
 - You must have sourced an RC file on your command line
 
+*********************
 Bullet point overview
----------------------
+*********************
 
 - Create a heat stack with two loadbalanced webservers.
 - Create a ``loadbalancer_member_health`` alarm
 - Induce failure to one or more of the webservers.
 - Observe as the alarm is triggered and the `errored` webserver is replaced.
 
+*******
 Process
--------
+*******
 
 This example will create an alarm that monitors a set of simulated webservers.
 We will configure our alarm so that should a webserver go down the alarm will

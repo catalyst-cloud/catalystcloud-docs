@@ -2,8 +2,9 @@
 FAQ
 ###
 
+*****************************************************
 How do I find the external IP address of my instance?
-=====================================================
+*****************************************************
 
 There are scenarios where you may need to know the external IP address that
 instances in your project are using. For example, you may wish to allow traffic
@@ -18,7 +19,7 @@ will be the external address of the router they are using to access the
 There are a number of methods you can use to find the IP address:
 
 Using DNS on an instance
-------------------------
+========================
 
 From a cloud instance run the following command:
 
@@ -28,7 +29,7 @@ From a cloud instance run the following command:
  150.242.43.13
 
 Using HTTP on an instance
--------------------------
+=========================
 
 From a cloud instance run the following command:
 
@@ -38,11 +39,11 @@ From a cloud instance run the following command:
  150.242.43.13
 
 Using a bash script on an instance
-----------------------------------
+==================================
 
 You can use a bash script we have written for this purpose:
 
-.. literalinclude:: ../_scripts/whats-my-ip.sh
+.. literalinclude:: _scripts/whats-my-ip.sh
   :language: bash
 
 You can download and run this script on an instance:
@@ -55,14 +56,15 @@ You can download and run this script on an instance:
  finding your external ip ...
  Your external IP address is: 150.242.43.13
 
+**************************************
 Using the OpenStack command line tools
-======================================
+**************************************
 
 The method you use to find the external IP address will depend on whether the
 instance has a floating IP address or not:
 
 For an instance with a floating IP
-----------------------------------
+==================================
 
 You can find the Floating IP of an instance in the instances list on the
 dashboard. From the command line you can use the following command:
@@ -73,7 +75,7 @@ dashboard. From the command line you can use the following command:
  150.242.43.13
 
 For an instance without a floating IP
--------------------------------------
+=====================================
 
 From a host where you have the OpenStack command line clients installed run the
 following command:
@@ -93,9 +95,9 @@ If you have ``jq`` installed you can run the following command:
  $ openstack router show border-router -f value -c external_gateway_info | jq -r '.external_fixed_ips[].ip_address'
  150.242.43.12
 
-
+*******************************
 Why can't I SSH to my instance?
-===============================
+*******************************
 
 The standard way to SSH to an instance is to simply do so directly using an SSH
 client like this:
@@ -128,7 +130,7 @@ error then you have an authentication issue. If you are encountering a
 different SSH error, then it is likely there is an issue with your instance.
 
 Network issues
---------------
+==============
 
 If you are encountering a ``Connection timed out`` error from your SSH client
 then you have a network connection issue. The most common reason for this is a
@@ -180,8 +182,9 @@ commands:
 There are also numerous web sites that provide this information:
 https://www.google.co.nz/search?q=whats%20my%20ip.
 
+***********************************
 Security group setup for SSH access
-===================================
+***********************************
 
 Assuming you have already assigned a floating IP address to your instance,
 you will also need to create a security group and associate it with the
@@ -236,8 +239,9 @@ Return to the instance page, from the Actions drop-down menu on the right
 select ``Edit Security Groups``. Click the plus on your new security group and
 ensure it now appears as one of the Instance Security Groups.
 
+**********************
 Testing network access
-======================
+**********************
 
 If you want to test you have set up security groups properly for SSH access,
 you can check port 22 on the floating IP for an SSH banner using telnet or
@@ -253,7 +257,7 @@ If you do not see an SSH banner, then it is likely you have not configured your
 security group rules appropriately.
 
 Authentication issues
----------------------
+=====================
 
 If you are encountering a ``Permission denied (publickey).`` error from your
 SSH client then you have an authentication issue. If you are getting this error
@@ -265,8 +269,9 @@ then check the following:
 
 .. _ssh-user:
 
+********
 SSH user
-========
+********
 
 As stated previously a typical SSH connection command looks like this:
 
@@ -280,8 +285,9 @@ change this as required for the distribution you are using as explained at
 
 .. _ssh_keypairs:
 
+*************
 SSH key pairs
-=============
+*************
 
 SSH key pairs are required for SSH access to instances. You can either import
 an existing key pair or you can have a key pair created for you.
@@ -294,7 +300,7 @@ the default user of the cloud image you are using (see :ref:`ssh-user`) when
 your instance is created.
 
 Default key pair
-----------------
+================
 
 If you have imported a default SSH key pair (eg ``~/.ssh/id_rsa*``), then you
 should be able to SSH using the standard SSH command:
@@ -304,7 +310,7 @@ should be able to SSH using the standard SSH command:
   $ ssh ubuntu@103.254.156.248
 
 Alternate key pair
-------------------
+==================
 
 If your SSH key pair is not in the standard location, you will need to use
 the ``-i`` flag to SSH to indicate the key you wish to use.
@@ -318,7 +324,7 @@ the ``-i`` flag to SSH to indicate the key you wish to use.
   The ``-i`` flag should reference the private key.
 
 Created key pair
-----------------
+================
 
 If you selected ``+ Create Key Pair`` from the dashboard, your browser
 should have downloaded and saved the private key file for you. This will be
@@ -354,8 +360,9 @@ To write the public key to a file you can issue the following command:
 
   $ ssh-keygen -f ~/.ssh/keyname.pem -y > ~/.ssh/keyname.pub
 
+*************************************
 Verifying SSH public key fingerprints
-=====================================
+*************************************
 
 According to `Wikipedia`_:
 
@@ -412,11 +419,12 @@ correct user's authorised keys, issue the following command:
   ci-info: | ssh-rsa | 34:de:c7:b7:f1:26:7f:88:d5:e7:10:6c:ab:af:a2:03 |    -    | you@hostname |
   ci-info: +---------+-------------------------------------------------+---------+--------------+
 
+***************
 Instance issues
-===============
+***************
 
 No route to host
-----------------
+================
 
 If you are encountering a ``No route to host`` error, it is likely there is
 an issue with your instance. You should check that the instance is running:
@@ -431,7 +439,7 @@ case, OpenStack will reply to a SSH connection attempt with a ICMP host
 unreachable packet.
 
 Connection refused
-------------------
+==================
 
 A ``connection refused`` error is caused by a TCP RST packet when attempting to
 connect to the SSH port.

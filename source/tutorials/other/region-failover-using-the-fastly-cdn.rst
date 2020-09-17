@@ -7,9 +7,9 @@ sourced an openrc file, as explained at :ref:`command-line-interface`. You also
 need to have uploaded an SSH key called ``nginx-demo-key``, as explained
 at :ref:`uploading-an-ssh-key`.
 
-
+************
 Introduction
-============
+************
 
 This tutorial demonstrates how to set up automatic failover for a website that
 is hosted in two different Catalyst Cloud regions. In order to achieve
@@ -72,8 +72,9 @@ provide combined monitoring and automated failover:
 - http://www.dnsmadeeasy.com/services/dnsfailover/
 - https://www.zoneedit.com/failover.html
 
+**********
 Fastly CDN
-==========
+**********
 
 This tutorial demonstrates how you can use the `Fastly`_ CDN service to provide
 automatic failover between Catalyst Cloud regions.
@@ -126,8 +127,9 @@ Disadvantages of this solution include:
 - Requires entering into a commercial relationship with an additional company
 - Your site content is cached outside of New Zealand (this is also a positive)
 
+*************
 Website setup
-=============
+*************
 
 Now that you understand what you are trying to achieve here, your first task is
 to set up your website in both regions. You are going to configure a simple
@@ -153,8 +155,9 @@ Heat templates you will be using:
 
  This heat template references an SSH key called ``nginx-demo-key``. You will need to change this to a key that already exists or upload a key with this name. This key needs to exist in both regions.
 
+************************************************************
 Building the Nginx Stack in two regions using Heat templates
-============================================================
+************************************************************
 
 In order to demonstrate region failover, you need to be running the service we
 wish to failover in both regions. To achieve this, you will build two simple
@@ -303,8 +306,9 @@ Test this now:
 
 Now you are ready to configure Fastly to begin proxying for your site.
 
+*************
 Fastly signup
-=============
+*************
 
 You need to `signup`_ to Fastly in order to configure your service. You can use
 the free developer trial to evaluate the service: you get $50 of traffic for
@@ -315,8 +319,9 @@ select.
 
 .. _pricing: https://docs.fastly.com/guides/account-types-and-billing/accounts-and-pricing-plans
 
+**************************
 Fastly basic configuration
-==========================
+**************************
 
 .. note::
 
@@ -387,8 +392,9 @@ This is expected due to the Cache-Control headers you have set in Nginx.
 
 .. _varnish: https://www.varnish-cache.org/
 
+***********************************
 Fastly backup backend configuration
-===================================
+***********************************
 
 The next step is to configure your backup site. Click on the **configure** tab
 on the toolbar.
@@ -431,8 +437,9 @@ Now edit the original backend, rename it **primary** and ensure that
 .. image:: ../_static/rf-edit-backend-update.png
    :align: center
 
+*********************************
 Fastly health check configuration
-=================================
+*********************************
 
 The next step is to configure a health check for your site. You will only be
 doing this for the primary instance. Click on the green **+ New** button to
@@ -456,8 +463,9 @@ See the Fastly `health checks tutorial`_ for additional information.
 
 .. _health checks tutorial: https://docs.fastly.com/guides/basic-configuration/health-checks-tutorial
 
+*****************************
 Fastly failover configuration
-=============================
+*****************************
 
 Now you are going to follow the Fastly `documentation for configuring a
 failover origin server`_.
@@ -536,8 +544,9 @@ this point.
 .. image:: ../_static/rf-valid-activate.png
    :align: center
 
+***********************
 Testing region failover
-=======================
+***********************
 
 To test region failover, you will log in to your primary server and issue
 the following commands:
@@ -573,8 +582,9 @@ indicate when the nginx stop and start commands are executed.
 
  There is a small amount of downtime when the primary is not available and Fastly has not yet switched as the threshold for switching has not been reached. This window can be made shorter by increasing the Fastly Health Check Frequency. Also note that you have explicitly disabled caching for the purposes of this demonstration. In normal operations, Fastly will continue to serve cached content during this window.
 
+************************************
 Restrict HTTP access to fastly nodes
-====================================
+************************************
 
 To finish, you are going to restrict HTTP access to fastly nodes. As Fastly is
 proxying for your site, there is no need for users to hit the site directly.

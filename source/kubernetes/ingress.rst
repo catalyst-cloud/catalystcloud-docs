@@ -213,7 +213,6 @@ that holds the files you created during the deployment.
   clusterrolebinding.rbac.authorization.k8s.io "octavia-ingress-controller" deleted
   statefulset.apps "octavia-ingress-controller" deleted
 
-
 **********************************
 Using the Nginx ingress controller
 **********************************

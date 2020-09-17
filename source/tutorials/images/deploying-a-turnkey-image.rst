@@ -7,16 +7,18 @@ sourced an openrc file, as explained at :ref:`command-line-interface`. We also
 assume that you have uploaded an SSH key, as explained at
 :ref:`uploading-an-ssh-key`.
 
+************
 Introduction
-============
+************
 
 In this tutorial you will learn how to deploy a `Turnkey Linux`_ image onto the
 Catalyst Cloud using the command line tools.
 
 .. _Turnkey Linux: https://www.turnkeylinux.org/
 
+************************
 Pre-requisites and setup
-========================
+************************
 
 First, retrieve the required image from `Turnkey Linux`_, for this
 example you will use the following image ``turnkey-core-14.1-jessie-amd64``.
@@ -39,8 +41,9 @@ change into the directory containing the image files.
   -rw-r--r-- 1 glyndavies glyndavies  15755328 Apr 12 13:20 turnkey-core-14.1-jessie-amd64-initrd
   -rw-r--r-- 1 glyndavies glyndavies   3120288 Apr 12 13:20 turnkey-core-14.1-jessie-amd64-kernel
 
+*******************
 Creating the images
-===================
+*******************
 
 Three images need to be created to allow this to work correctly.
 These are the ramdisk image, the kernel image and that actual
@@ -142,8 +145,9 @@ Finally we create the ``Turnkey`` image:
 
   $ TL_TURNKEY_ID=$(openstack image show turnkey-img -c id -f value) && echo $TL_TURNKEY_ID
 
+************************
 Deploy the turnkey image
-========================
+************************
 
 Now that you have a local version of the ``Turnkey Linux`` image hosted on the
 Catalyst Cloud, you can use this to create your new instance. Once again you will

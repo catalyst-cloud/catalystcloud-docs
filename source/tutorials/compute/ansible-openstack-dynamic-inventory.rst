@@ -13,8 +13,9 @@ This tutorial assumes the following:
 
 .. _Ansible: https://www.ansible.com/
 
+************
 Introduction
-============
+************
 
 In order for Ansible to run playbooks and tasks, it needs to know which
 machines to operate on. The standard way that Ansible achieves this is to use
@@ -38,8 +39,9 @@ we can use to integrate Ansible with the Catalyst Cloud. This allows us
 to use Ansible for configuration management of Catalyst Cloud instances
 irrespective of what method has been used to create those instances.
 
+****************************************
 Downloading the dynamic inventory script
-========================================
+****************************************
 
 The latest version of the script is available here:
 https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/openstack.py
@@ -59,8 +61,9 @@ to be dynamically populated from your Catalyst Cloud project.
 
  $ sudo cp openstack.py /etc/ansible/hosts
 
+************************************
 Testing the dynamic inventory script
-========================================
+************************************
 
 Now we can test the script:
 

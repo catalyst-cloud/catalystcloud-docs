@@ -2,9 +2,9 @@
 Deploying a HPC SLURM cluster
 #############################
 
-
+************
 Introduction
-============
+************
 
 In this tutorial you will learn how to deploy a high performance computing
 (`HPC`_) cluster on the `Catalyst Cloud`_ using `elasticluster`_ and `SLURM`_.
@@ -42,8 +42,9 @@ downloaded, and finally, the cluster being destroyed.
   only for ElastiCluster. You may need to adjust things (e.g. create a dedicated
   elasticluster security group), if you are doing this in a shared VPC.
 
+*************
 Prerequisites
-==============
+*************
 
 Install Python development tools:
 
@@ -76,8 +77,9 @@ Install the Catalyst Cloud OpenStack client tools:
       python-glanceclient python-ceilometerclient python-heatclient       \
       python-neutronclient python-swiftclient python-openstackclient
 
+*************************
 Configuring ElastiCluster
-=========================
+*************************
 
 Create template configuration files for ElastiCluster:
 
@@ -135,9 +137,9 @@ configuration file compatible with the Catalyst Cloud is provided below:
   # Use whatever flavour you'd like to use for your compute nodes.
   flavor=c1.c16r64
 
-
+*********************
 Configuring the cloud
-=====================
+*********************
 
 Create SSH keys for ElastiCluster (no passphrase):
 
@@ -158,8 +160,9 @@ fails, then try the openstack command):
 
   openstack security group rule create --dst-port 22 default
 
+*******************
 Using ElastiCluster
-===================
+*******************
 
 The following commands are provided as examples of how to use ElastiCluster to
 create and interact with a simple SLURM cluster. For more information on
@@ -202,8 +205,9 @@ Terminate (destroy) the cluster:
 
   elasticluster stop cluster
 
+***********
 Using SLURM
-===========
+***********
 
 Connect to the front-end node of the SLURM cluster over SSH as described on the
 previous section.
@@ -239,9 +243,10 @@ List the jobs in the queue:
 
   squeue
 
-
+**************************
 Using anti-affinity groups
-==========================
+**************************
+
 There is an options to use elasticluster with server group anti-affinity
 groups to ensure best load distribution in Openstack cluster.
 To use this feature clone elasticluster from the repository shown below, this

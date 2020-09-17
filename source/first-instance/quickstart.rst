@@ -1,6 +1,6 @@
-********************
-Via the Command line
-********************
+##########################
+Using programmatic methods
+##########################
 
 After reading the overview, you should have a decent idea of what resources are
 required for a compute instance to run and we
@@ -11,8 +11,9 @@ to manage all of the resources you require. The following sections will cover
 the different programs or methods you can use, from the command line, to create
 an instance.
 
+************
 Requirements
-============
+************
 
 Before we get started, you will have to source an openRC file. This will give
 you the required environment variables, so that you are able to create
@@ -29,8 +30,9 @@ instance.
 .. _launching-your-first-instance-using-terraform:
 .. _uploading-an-ssh-key:
 
+********************
 Command line methods
-====================
+********************
 
 .. tabs::
 
@@ -58,9 +60,9 @@ Command line methods
 
         .. include:: openstack-sdk.rst
 
-
+***************************************
 Resource cleanup using the command line
-=======================================
+***************************************
 
 At this point you may want to clean up the OpenStack resources that have been
 created. Running the following commands should remove all networks, routers,

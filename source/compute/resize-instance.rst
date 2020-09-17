@@ -21,12 +21,12 @@ To resize a compute instance, go to the Instances panel on the dashboard and
 locate the instance to be resized. On the Actions column, click on the downward
 arrow to list more actions and then click on Resize Instance as shown below:
 
-.. image:: ../_static/compute-resize-button.png
+.. image:: _static/compute-resize-button.png
    :align: center
 
 The resize dialogue will pop up, allowing you to chose a new flavor.
 
-.. image:: ../_static/compute-resize-action.png
+.. image:: _static/compute-resize-action.png
    :align: center
 
 .. note::
@@ -40,7 +40,7 @@ The status of the instance will change to preparing to resize or migrate,
 resized or migrated and finally “Confirm or Revert Resize/Migrate” as shown
 below:
 
-.. image:: ../_static/compute-confirm-resize.png
+.. image:: _static/compute-confirm-resize.png
    :align: center
 
 Once the resize operation has been completed, our cloud will prompt you to

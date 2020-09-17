@@ -1,8 +1,8 @@
 .. _alarm-service-on-catalyst-cloud:
 
-********
+########
 Overview
-********
+########
 
 The alarm service allows a user to set up alarms that monitor the state of
 various objects in the cloud. The alarms wait for specific events to occur;
@@ -16,8 +16,9 @@ tells your system to perform some action. In this scenario it could be to: spin
 up a new instance with more CPU power, or increase the amount of VCPUs your
 instance is using.
 
+***************
 Threshold rules
-===============
+***************
 
 These are the rules that you define for your alarms. With these you can
 specify what events will require a state change to your alarms.
@@ -43,8 +44,9 @@ states:
 - ``insufficient data`` There are not enough datapoints available in the
   evaluation periods to meaningfully determine the alarm state.
 
+****************
 Composite alarms
-================
+****************
 
 These enable users to have multiple triggering conditions, using
 ``and`` and ``or`` relations, on their alarms. For example, "if CPU usage >

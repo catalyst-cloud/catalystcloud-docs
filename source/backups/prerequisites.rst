@@ -1,5 +1,6 @@
+#############
 Prerequisites
-=============
+#############
 
 If you're using a major Linux distribution, you should be able to find a
 pre-compiled package in the repositories. If not, then a tar file is available

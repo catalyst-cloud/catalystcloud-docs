@@ -7,8 +7,9 @@ elements that get created in the cloud. While this is necessary in order to
 have things work correctly, it does cause the occasional problem when trying to
 delete unwanted items.
 
+**************************
 Deleting an entire network
-==========================
+**************************
 
 One area where this crops up from time to time is while removing network
 elements, so here is the recommended process for deleting an entire network and
@@ -24,16 +25,18 @@ you could also remove these at this stage. This process is most easily done via
 the Dashboard in the network section as it shows you in the topology what the
 dependencies are via the lines to one another.
 
+**********************************
 Deleting specific network elements
-==================================
+**********************************
 
 If you are looking to only remove certain elements, then you would have to
 ensure that all dependencies on that network are removed first. In some
 cases, these dependencies might be nested, meaning that the obvious
 dependency may also have less obvious dependencies.
 
+*******************************************
 An example - finding the dependency problem
-===========================================
+*******************************************
 
 One example of this would be trying to remove a network that is connected
 to a router but also still in use by a VPN. If you try and remove the router

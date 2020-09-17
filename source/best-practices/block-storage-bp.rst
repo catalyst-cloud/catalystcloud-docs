@@ -17,8 +17,9 @@ ensuring they are identical.
 The solution is designed and implemented with very high availability and data
 resiliency in mind. It has no single points of failure.
 
+*****************************
 Volume names should be unique
-=============================
+*****************************
 
 All volumes have a UUID that differentiate between them, however these are not
 very easy to read for human users. Therefore it is a best practice to make sure
@@ -33,12 +34,12 @@ to tell which volume holds which data.
   information etc. You also need to avoid using '/' in your naming, instead you
   should use '-'
 
-
+*********************************************
 Best practice for maximising disk performance
-=============================================
+*********************************************
 
 I/O Readahead
--------------
+=============
 
 It is recommended to increase the I/O readahead value for the volume to improve
 performance. This parameter determines the number of kilobytes that the kernel

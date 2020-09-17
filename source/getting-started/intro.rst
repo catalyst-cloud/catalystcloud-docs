@@ -1,8 +1,8 @@
 .. _introduction-to-catalyst-cloud:
 
-############################
-The basics of Catalyst Cloud
-############################
+##################################
+Introduction to the Cloud platform
+##################################
 
 This section of the documentation is for people that are entirely new to cloud
 computing and/or the Catalyst Cloud.

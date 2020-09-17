@@ -13,8 +13,9 @@ replicated across regions or you wish to save money on a cheaper policy. In
 this case you can choose a replication policy that keeps three replicas of your
 data in a single region instead of having them spread across all of them.
 
+*****************************
 What are the storage policies
-=============================
+*****************************
 
 The following are the storage policies available, each of these (as their names
 suggest) are related to one of the regions on the Catalyst cloud:
@@ -40,8 +41,9 @@ You can create your container via the Dashboard or through the use of the
 command line, making use of the openstack CLI or by making calls to the object
 storage API directly. All of which are detailed below.
 
+****************
 Dashboard method
-================
+****************
 
 It is now a required field when creating a container, to choose a replication
 policy. The following will go through the process of creating a new container
@@ -71,8 +73,9 @@ dashboard as seen below
 
 .. image:: assets/container-after-create.png
 
-Console methods
-===================
+********************
+Programmatic methods
+********************
 
 .. tabs::
 

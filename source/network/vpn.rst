@@ -509,11 +509,11 @@ elements in order to avoid ambiguity when running commands.
       | dpd                      | {'action': 'restart', 'interval': 15, 'timeout': 150} |
       +--------------------------+-------------------------------------------------------+
 
-      Your VPN has been created, note that you will need to create appropriate security group rules.
+    Your VPN has been created, note that you will need to create appropriate security group rules.
 
 
-      The script source is included below for reference:
+    The script source is included below for reference:
 
 
-    .. literalinclude:: ../_scripts/create-vpn.sh
+    .. literalinclude:: _scripts/create-vpn.sh
       :language: bash

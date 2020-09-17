@@ -216,7 +216,7 @@ if the variables were set correctly, run the following command:
 
 The output should show the following 5 variables
 
-.. image:: ../_static/powershell_env.png
+.. image:: assets/powershell_env.png
    :align: center
 
 
@@ -244,9 +244,8 @@ manner.
 For a reference of all commands supported by the CLI, refer to the `OpenStack
 Client documentation <https://docs.openstack.org/python-openstackclient>`_.
 
-*************
 The next step
-*************
+=============
 
 We highly recommend that if you are going to be using the CLI often that you
 take the time to go through the documentation section on :ref:`setting up your

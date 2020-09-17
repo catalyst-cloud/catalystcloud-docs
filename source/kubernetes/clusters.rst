@@ -304,7 +304,6 @@ and diagnosing cluster problems. By default, it redirects everything to stdout.
 
   $ kubectl cluster-info dump
 
-
 ******************************
 Deploying a Kubernetes cluster
 ******************************
@@ -312,7 +311,6 @@ Deploying a Kubernetes cluster
 If you are wanting to set up a cluster via the Catalyst Cloud dashboard, there
 is a :ref:`guide<dashboard-cluster-creation>` under the quickstart section you
 can follow.
-
 
 Private vs Public cluster API access
 ====================================
@@ -820,8 +818,6 @@ up to four we would issue the following command.
 
   $ openstack coe cluster resize dev-cluster 4
   Request to resize cluster dev-cluster has been accepted.
-
-
 
 Repairing a worker node
 =======================

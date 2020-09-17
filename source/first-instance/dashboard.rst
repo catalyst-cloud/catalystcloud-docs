@@ -1,8 +1,8 @@
-.. _first-instance-with-dashboard:
-
 #######################
 Using the web dashboard
 #######################
+
+.. _first-instance-with-dashboard:
 
 The web dashboard is the easiest way of creating an instance as you can
 visually see your resources being built with each step. The dashboard itself is
@@ -32,7 +32,7 @@ This section will cover how to create the networking resources required to host
 your instance. Should you already have them available on your project, then you
 can ignore this section of the tutorial and move on to "uploading an ssh key"
 
-.. include:: ../_scripts/create-network-dashboard.rst
+.. include:: ../network/_scripts/create-network-dashboard.rst
 
 ********************
 Uploading an SSH key
@@ -221,7 +221,6 @@ The floating IP is a way to access your new instance.
 
 .. image:: dashboard_assets/set-floating-ip.png
 
-|
 |
 
 Congratulations, you've now booted an instance. Now we'll connect to it with an

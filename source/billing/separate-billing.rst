@@ -1,6 +1,6 @@
-****************
+################
 Separate billing
-****************
+################
 
 As mentioned above, with our billing API the user can easily deal with their
 invoices and make their life easier. We are providing a small script as a
@@ -17,11 +17,12 @@ hosted customers based on that customers usage.
   Cloud billing API to get a separate billing based on the latest invoice. It
   should be fairly simple to change the code to meet other requirements.
 
+**********
 How to use
-==========
+**********
 
 Preparing your local environment
---------------------------------
+================================
 
 Create a python virtual environment and install the libraries required by the
 command line tool in it.
@@ -33,7 +34,7 @@ command line tool in it.
   pip install -r requirements.txt
 
 Get billing information based on the prefix of customer
--------------------------------------------------------
+=======================================================
 
 Source an openrc file with your credentials to access the Catalyst Cloud, as
 described at
@@ -76,7 +77,7 @@ The output will look similar to this:
 
 
 Get billing information when there are no unique resource prefixes defined
---------------------------------------------------------------------------
+==========================================================================
 
 The parameter **prefix** is used to filter the invoice to get separate billing
 information for different customers. If resources have been created without

@@ -19,7 +19,7 @@ Download and run this script using the following commands:
  have your own that you wish to use. Otherwise the script will use the
  catalyst cloud DNS by default.
 
-.. literalinclude:: ../_scripts/create-first-instance.sh
+.. literalinclude:: _scripts/bash/create-first-instance.sh
   :language: bash
 
 
@@ -38,5 +38,5 @@ You can download and run this script using the following commands:
 
  You may wish to edit the script before executing, for example to add a prefix.
 
-.. literalinclude:: ../_scripts/delete-first-instance.sh
+.. literalinclude:: _scripts/bash/delete-first-instance.sh
   :language: bash
