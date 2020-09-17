@@ -87,18 +87,18 @@ want to save changes. When restoring from an incremental backup, the process
 is the same as for a normal backup; The database service handles the
 complexity of applying the incremental changes.
 
-To create a new incremental backup we have to use the trove API directly, the
-command that we are going to use is:
+To create a new incremental backup we use the following command
 
 .. code-block:: bash
 
-  $ trove backup-create INSTANCE_ID backup1.1  --parent BACKUP_ID
+  $ openstack database backup create DATABASE_ID backup1.1 --incremental
 
 
 For the purposes of this example I have named the incremental backup
-*backup1.1*. For any subsequent backups, you would name them 1.2, 1.3 etc. In
-these instances when you have to specify the parent ID, you would use the ID
-number of your previous incremental backup. In this case backup1.1
+*backup1.1*. For any subsequent backups, you would name them 1.2, 1.3 etc.
+
+# In these instances when you have to specify the parent ID, you would use the ID
+# number of your previous incremental backup. In this case backup1.1
 
 
 
