@@ -108,7 +108,7 @@ only connect from a specified IP address.
   | newuser | %         | myDB      |
   +---------+-----------+-----------+
 
-  $ openstack database user create db-instance-1 newuser2 userpass2 --host 10.0.0.15 --databases myDB
+  $ openstack database user create db-instance-1 newuser2 userpass2 --host 10.0.0.80 --databases myDB
 
   $ openstack database user list db-instance-1
   +----------+-----------+-----------+
