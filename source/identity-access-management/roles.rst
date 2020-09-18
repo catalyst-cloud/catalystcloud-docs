@@ -46,9 +46,9 @@ are as the name suggests all to do with Kubernetes and the control of clusters.
 Information on the Kubernetes roles can be found
 :ref:`here <kubernetes-user-access>`
 
-**************
-General roles:
-**************
+*************
+General roles
+*************
 
 Project admin
 =============
@@ -79,7 +79,7 @@ access.
 
 The list of explicit permissions for the project moderator role:
 
-   .. code-block:: console
+.. code-block:: console
 
    +-----------------------+------------------------------------------------------------------------+
    | Project Moderator     | keystone.identity.project_users_access                                 |
