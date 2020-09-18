@@ -75,11 +75,16 @@ through those documents will be a necessity.
 .. _`percona`: https://www.percona.com/blog/2017/10/18/chose-mysql-innodb_log_file_size/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 For write heavy workloads, the parameters to look at changing would be:
 =======
 For write heave workloads, the parameters to look at changing would be:
 >>>>>>> 7e555eb... Small update to format of tuning (#272)
+=======
+
+For write heavy workloads, the parameters to look at changing would be:
+>>>>>>> 34088d64e62746bf9af233d869f1a96069eacc9c
 
 .. code-block:: bash
 
@@ -129,7 +134,11 @@ restart the instance:
 
   $ openstack database configuration attach db-instance-1 conf1
 
+<<<<<<< HEAD
   $ openstack database instance restart db-instance-1
+=======
+  $ openstack database instance restart db1
+>>>>>>> 34088d64e62746bf9af233d869f1a96069eacc9c
 
 Now we can test that our instance has the parameter we wanted to update:
 

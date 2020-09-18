@@ -63,7 +63,7 @@ We do this by picking a flavor from the available list:
 
 .. code-block:: bash
 
-  $ openstack database flavor list
+  $ openstack flavor list --limit 10
   +--------------------------------------+------------------+-------+-------+------+-----------+
   | ID                                   | Name             |   RAM | vCPUs | Disk | Ephemeral |
   +--------------------------------------+------------------+-------+-------+------+-----------+
@@ -195,7 +195,6 @@ this instance.
   | Name |
   +------+
   | myDB |
-  | sys  |
   +------+
 
 *****************************
@@ -219,7 +218,6 @@ To check our command worked we use the following command:
   +-------+
   | myDB  |
   | myDB2 |
-  | sys   |
   +-------+
 
 To delete a database, you can use the following command:
@@ -229,8 +227,6 @@ To delete a database, you can use the following command:
   $ openstack database instance delete myDB2
   # wait until the console returns, it will reply with a message saying your database was deleted.
 
-
-.. _backups-for-databases:
 
 **************************
 Creating a public database
@@ -255,7 +251,7 @@ is publicly available, but only from the specific cidr range: 202.37.199.1/24
   --volume-type b1.standard \
   --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48 \
   --is-public \
-  --allowed-cidr 10.1.0.1/24 \
-  --allowed-cidr 202.37.199.1/24
+  --allowed-cidr 202.37.199.1/24 \
+  db-instance-1
 
 

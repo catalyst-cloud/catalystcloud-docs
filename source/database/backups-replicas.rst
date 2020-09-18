@@ -76,7 +76,6 @@ Destroy the instance and create a new one using the backup as a source:
   +----------+
   1 row in set (0.41 sec)
 
-
 Incremental backups
 ===================
 
@@ -99,8 +98,6 @@ For the purposes of this example I have named the incremental backup
 
 # In these instances when you have to specify the parent ID, you would use the ID
 # number of your previous incremental backup. In this case backup1.1
-
-
 
 .. _database_replica:
 
