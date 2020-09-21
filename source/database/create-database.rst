@@ -124,13 +124,13 @@ the following command to create our new instance:
 .. code-block:: bash
 
   $ openstack database instance create db-instance-1\
-  --flavor e3feb785-af2e-41f7-899b-6bbc4e0b526e \ # this is the flavor ID for your instance
+  e3feb785-af2e-41f7-899b-6bbc4e0b526e \ # this is the flavor ID for your instance
   --size 5 \
   --datastore mysql \
-  --datastore-version 5.7.29 \
+  --datastore_version 5.7.29 \
   --databases myDB \
   --users dbusr:dbpassword \
-  --volume-type b1.standard \
+  --volume_type b1.standard \
   --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48
 
   +------------------------+--------------------------------------+
@@ -241,17 +241,17 @@ is publicly available, but only from the specific cidr range: 202.37.199.1/24
 
 .. code-block:: bash
 
-  $ openstack database instance create \
-  --flavor e3feb785-af2e-41f7-899b-6bbc4e0b526e \
+  $ openstack database instance create db-instance-1 \
+  e3feb785-af2e-41f7-899b-6bbc4e0b526e \
   --size 5 \
   --datastore mysql \
-  --datastore-version 5.7.29 \
+  --datastore_version 5.7.29 \
   --databases myDB \
   --users dbusr:dbpassword \
-  --volume-type b1.standard \
+  --volume_type b1.standard \
   --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48 \
   --is-public \
   --allowed-cidr 202.37.199.1/24 \
-  db-instance-1
+
 
 

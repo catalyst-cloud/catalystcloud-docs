@@ -46,13 +46,13 @@ Destroy the instance and create a new one using the backup as a source:
   $ openstack database instance delete db-instance-1     # wait for it to be deleted...
 
   $ openstack database instance create db-instance-1-rebuild \
-  --flavor e3feb785-af2e-41f7-899b-6bbc4e0b526e \
+  e3feb785-af2e-41f7-899b-6bbc4e0b526e \
   --size 5 \
   --datastore mysql \
-  --datastore-version 5.7.29 \
+  --datastore_version 5.7.29 \
   --databases myDB \
   --users dbusr:dbpassword \
-  --volume-type b1.standard \
+  --volume_type b1.standard \
   --backup db1-backup \
   --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48
 
@@ -79,7 +79,7 @@ Destroy the instance and create a new one using the backup as a source:
 Incremental backups
 ===================
 
-In addition to creating individual backups, you can also use the database
+In addition to creating a single backup, you can also use the database
 service to create incremental backups. This means you can chain together
 backups without needing to create an entirely new source backup each time you
 want to save changes. When restoring from an incremental backup, the process
@@ -95,9 +95,8 @@ To create a new incremental backup we use the following command
 
 For the purposes of this example I have named the incremental backup
 *backup1.1*. For any subsequent backups, you would name them 1.2, 1.3 etc.
-
-# In these instances when you have to specify the parent ID, you would use the ID
-# number of your previous incremental backup. In this case backup1.1
+For these subsequent backups, when you have to specify the parent ID you would
+use the ID number of your previous incremental backup. In this case backup1.1
 
 .. _database_replica:
 
@@ -126,13 +125,13 @@ The command to create a replica is:
 .. code-block:: bash
 
   $ openstack database instance create db-replica-1
-    --flavor e3feb785-af2e-41f7-899b-6bbc4e0b526e \
+    e3feb785-af2e-41f7-899b-6bbc4e0b526e \
     --size 5 \
-    --volume-type b1.standard  \
+    --volume_type b1.standard  \
     --datastore mysql \
-    --datastore-version 5.7.29 \
+    --datastore_version 5.7.29 \
     --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48 \
-    --replica-of db-instance-1
+    --replica_of db-instance-1
 
   $ openstack database instance list
   +--------------------------------------+---------------+-----------+-------------------+--------+--------------------------------------+------+--------+
