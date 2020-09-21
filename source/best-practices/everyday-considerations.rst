@@ -1,10 +1,11 @@
 
-***********************
+#######################
 Everyday considerations
-***********************
+#######################
 
+**********************
 Getting the correct ID
-======================
+**********************
 
 For user created objects within the cloud it is always advisable to lookup ID
 values before using them in any type of command to ensure that the correct
@@ -29,8 +30,9 @@ it can be reused in subsequent commands.
 Similar mechanisms exist for doing this with other tool sets such as Ansible,
 Terraform and the various supported development SDKs.
 
+************************************
 Create an incident response playbook
-====================================
+************************************
 
 An incident response playbook is a tool that companies use to deal with
 issues in a routine and standardised way. There are a variety of different
@@ -49,8 +51,9 @@ here, the next step involving catalyst would be to raise a ticket via our
 
 .. _`support service`: https://catalystcloud.nz/support/support-centre/
 
+************
 Back up data
-============
+************
 
 This is a standard practice for any business. Making sure that if some form
 of catastrophe were to befall you system, that you have backups to recover

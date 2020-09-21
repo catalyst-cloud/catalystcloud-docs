@@ -1,11 +1,13 @@
-.. _first-instance-with-dashboard:
-
 #######################
 Using the web dashboard
 #######################
 
-Now we're going to take you step by step on the process of creating a Linux
-instance on the Catalyst Cloud.
+.. _first-instance-with-dashboard:
+
+The web dashboard is the easiest way of creating an instance as you can
+visually see your resources being built with each step. The dashboard itself is
+also easy to navigate and you should be able to follow the steps below
+regardless of your background with cloud based systems.
 
 ****************
 Before you begin
@@ -30,7 +32,7 @@ This section will cover how to create the networking resources required to host
 your instance. Should you already have them available on your project, then you
 can ignore this section of the tutorial and move on to "uploading an ssh key"
 
-.. include:: ../_scripts/create-network-dashboard.rst
+.. include:: ../network/_scripts/create-network-dashboard.rst
 
 ********************
 Uploading an SSH key
@@ -45,7 +47,7 @@ You can either import an existing public key or have the Catalyst Cloud
 create a key pair for you. We document both below.
 
 Creating a new key pair
-=======================
+-----------------------
 
 If you haven't generated a SSH key pair before, Catalyst Cloud can create one
 for you.
@@ -66,7 +68,7 @@ Click ``Copy Private Key to Clipboard`` and paste it into a text file in a
 secure location. Make sure the file is saved as plain text.
 
 Importing an existing key pair
-==============================
+------------------------------
 
 If you already have an SSH key pair, you can import the public key into
 Catalyst Cloud.
@@ -219,7 +221,6 @@ The floating IP is a way to access your new instance.
 
 .. image:: dashboard_assets/set-floating-ip.png
 
-|
 |
 
 Congratulations, you've now booted an instance. Now we'll connect to it with an

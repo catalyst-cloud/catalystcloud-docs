@@ -14,8 +14,9 @@ OpenStack as a remote provider for Vagrant.
 
 .. _providers: https://docs.vagrantup.com/v2/providers/index.html
 
+***************************
 Vagrant OpenStack providers
-===========================
+***************************
 
 Currently there are two different Vagrant OpenStack providers in common usage:
 `vagrant-openstack-plugin`_ and `vagrant-openstack-provider`_. The
@@ -28,8 +29,9 @@ Be sure you know which provider you are using.
 
 This tutorial uses the ``vagrant-openstack-provider``.
 
+*****
 Setup
-=====
+*****
 
 This tutorial assumes a number of things:
 
@@ -46,8 +48,9 @@ This tutorial assumes a number of things:
 * You will be letting the provider create an SSH keypair for you
 * You have sourced an openrc file, as described at :ref:`source-rc-file`
 
+******************
 Install the plugin
-==================
+******************
 
 The first step is to install the ``vagrant-openstack-provider`` plugin:
 
@@ -55,8 +58,9 @@ The first step is to install the ``vagrant-openstack-provider`` plugin:
 
  $ vagrant plugin install vagrant-openstack-provider
 
+********************
 Create a Vagrantfile
-====================
+********************
 
 The next step is to create a ``Vagrantfile`` in the root of your repository:
 
@@ -98,8 +102,9 @@ The next step is to create a ``Vagrantfile`` in the root of your repository:
 
  end
 
+******************
 Create an instance
-==================
+******************
 
 Now you can run ``vagrant up`` to create your instance:
 
@@ -133,8 +138,9 @@ Now you can run ``vagrant up`` to create your instance:
 
 .. _rsync: https://rsync.samba.org/
 
+*******************
 SSH to the instance
-====================
+*******************
 
 You can now connect to your instance via SSH:
 
@@ -167,7 +173,7 @@ You can now connect to your instance via SSH:
  Connection to 150.242.41.75 closed.
 
 Documentation
-=============
+*************
 
 For Vagrant documentation, consult https://docs.vagrantup.com/v2/. For
 documentation on the Vagrant OpenStack provider, consult

@@ -4,12 +4,12 @@ Deploying highly available instances with keepalived
 
 This tutorial assumes you have installed the OpenStack command line tools and
 sourced an openrc file, as explained at :ref:`command-line-interface`. We also
-assume that you have uploaded an SSH key, as explained at
-:ref:`uploading-an-ssh-key`.
+assume that you have uploaded an SSH key, as explained
+:ref:`here<uploading-an-ssh-key>`.
 
-
+************
 Introduction
-============
+************
 
 In this tutorial, you will learn how to deploy a highly available instance pair
 using VRRP. This tutorial is largely based on a `blog post`_ by Aaron O'Rosen
@@ -28,9 +28,10 @@ will use the ``openstack`` command line tool to complete the setup
 manually. You will then replicate the manual configuration using a ``heat``
 template to instantiate the same stack automatically.
 
-
+**********************************
 Virtual router redundancy protocol
-==================================
+**********************************
+
 `VRRP`_ provides hardware redundancy and automatic failover for routers. It
 allows specifying a virtual router which maps to two or more physical routers.
 Individual VRRP router instances share an IP address, but at any time, only one
@@ -64,8 +65,9 @@ and IP protocol number 112. The protocol is defined in `RFC3768`_.
 
 .. _article: http://louwrentius.com/configuring-attacking-and-securing-vrrp-on-linux.html
 
+*********************
 Allowed address pairs
-=====================
+*********************
 
 Allowed Address Pairs is a Neutron Extension that extends the port attribute to
 enable you to specify arbitrary ``mac_address/ip_address(cidr)`` pairs that are
@@ -109,8 +111,9 @@ As you can see, the Allowed Address Pairs extension is available.
 
 .. _clone-orchestration-repo:
 
+**********************************
 Clone orchestration git repository
-==================================
+**********************************
 
 Before you start you should check out the
 https://github.com/catalyst/catalystcloud-orchestration git repository. You will
@@ -120,8 +123,9 @@ be using some scripts and Heat templates from this repository in this tutorial.
 
   $ git clone https://github.com/catalyst/catalystcloud-orchestration.git && ORCHESTRATION_DIR="$(pwd)/catalystcloud-orchestration" && echo $ORCHESTRATION_DIR
 
+*************
 Network setup
-=============
+*************
 
 First, create a network called ``vrrp-net`` where you can run your highly
 available hosts:
@@ -328,8 +332,9 @@ Then create the ports with your preferred IP addresses
   | updated_at            | None                                                                                  |
   +-----------------------+---------------------------------------------------------------------------------------+
 
+********************
 Security group setup
-====================
+********************
 
 Now create the ``vrrp-sec-group`` security group with rules to
 allow HTTP, SSH and ICMP ingress:
@@ -441,8 +446,9 @@ each other via VRRP broadcasts:
   | updated_at        | None                                 |
   +-------------------+--------------------------------------+
 
+*****************
 Instance creation
-=================
+*****************
 
 The next step is to boot two instances where you will run Keepalived and
 Apache. You will be using the Ubuntu 14.04 image and ``c1.c1r1`` flavor. You
@@ -617,9 +623,9 @@ Check the instances have been created:
   | c8a2c1ec-73f2-4f6b-8107-6ca1d28da2c3 | vrrp-master | ACTIVE | vrrp-net=10.0.0.4                        | ubuntu-14.04-x86_64 | c1.c1r1 |
   +--------------------------------------+-------------+--------+------------------------------------------+---------------------+---------+
 
-
+*********************
 Virtual address setup
-=====================
+*********************
 
 The next step is to create the IP address that will be used by your virtual
 router:
@@ -664,8 +670,6 @@ router:
   | trunk_details         | None                                                                                        |
   | updated_at            | None                                                                                        |
   +-----------------------+---------------------------------------------------------------------------------------------+
-
-
 
 Now you need to create a floating IP and point it to your virtual router IP
 using its port ID:
@@ -763,8 +767,9 @@ You should now have a stack that looks something like this:
 
 .. _updating-instance:
 
+************************************************
 Updating existing VRRP instances to use fixed IP
-================================================
+************************************************
 
 To update **existing** VRRP instances to use fixed IP on their interfaces,
 obtain the port ID of the instances and update the port:
@@ -817,8 +822,9 @@ files:
 
 .. _vrrp-testing:
 
+************
 VRRP testing
-============
+************
 
 You should now have a working VRRP setup, so try it out! You should be able
 to curl the floating IP associated with your virtual router:
@@ -847,8 +853,9 @@ Curl again:
 
 .. _instance-access:
 
+***************
 Instance access
-===============
+***************
 
 If you want to take a closer look at what is happening when you switch between
 VRRP hosts, you need to SSH to the instances. You won't use the floating IP
@@ -950,8 +957,9 @@ At this point you have successfully set up Keepalived with automatic failover
 between instances. If this is all that you require for your setup, you can
 stop here.
 
+****************
 Resource cleanup
-================
+****************
 
 At this point many people will want to clean up the OpenStack resources you
 have been using in this tutorial. Running the following commands should remove
@@ -982,9 +990,9 @@ order in which you delete resources is important.
   # delete security group
   $ openstack security group delete vrrp-sec-group
 
-
+**************************
 Setup using heat templates
-==========================
+**************************
 
 Up to this point in this tutorial, you have been using the Nova and Neutron
 command line clients to set up our system. You have needed to run a large number
@@ -1087,8 +1095,9 @@ set these, the assigned addresses will be inconsistent across Heat invocations.
 
 This configuration is mirrored for the backup instance.
 
+********************************************
 Building the VRRP stack using heat templates
-============================================
+********************************************
 
 Before we start, check that the template is valid:
 

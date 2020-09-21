@@ -1,20 +1,23 @@
 .. _access_control:
 
-**************
+##############
 Access control
-**************
+##############
 
 .. _project_users:
 
+*************
 Project users
-=============
+*************
+
 From this screen it is possible to manage which users have access to the
 project and the permissions that they will be assigned.
 
-.. image:: ../_static/project_users.png
+.. image:: _static/project_users.png
 
+*****
 Roles
-=====
+*****
 
 Roles are given out to different accounts by a project administrator or
 moderator. These allow the accounts
@@ -43,11 +46,12 @@ are as the name suggests all to do with Kubernetes and the control of clusters.
 Information on the Kubernetes roles can be found
 :ref:`here <kubernetes-user-access>`
 
+**************
 General roles:
-==============
+**************
 
 Project admin
--------------
+=============
 
 The *Project Admin* role allows users to have full control over who has access
 to the project, including adding moderators and inviting other people to join
@@ -66,7 +70,7 @@ The list of explicit permissions for the project admin role:
    +-----------------------+------------------------------------------------------------------------+
 
 Project moderator
------------------
+=================
 
 The *Project Moderator* role can invite other people to join your project and
 update their roles, but cannot change any of the roles that a project admin has.
@@ -82,7 +86,7 @@ The list of explicit permissions for the project moderator role:
    +-----------------------+------------------------------------------------------------------------+
 
 Project member
---------------
+==============
 
 The *Project Member* role gives users access to all services on your project.
 The role does not however allow them to invite other people to join the project
@@ -291,7 +295,7 @@ quite extensive as the role covers almost all the service on the cloud:
    +-----------------------+------------------------------------------------------------------------+
 
 Heat stack owner
-----------------
+================
 
 The *Heat Stack Owner* role allows users access to the Heat Cloud Orchestration
 Service. Users who attempt to use Heat when they do not have this role will
@@ -365,7 +369,7 @@ The list of explicit permissions for the Heat stack owner role:
    +-----------------------+------------------------------------------------------------------------+
 
 Compute start/stop
-------------------
+==================
 
 The *Compute Start/Stop* role allows users to start, stop, hard reboot and soft
 reboot compute instances. In addition, this role now also supports shelving
@@ -394,7 +398,7 @@ The list of explicit permissions for the compute start/stop role:
    +-----------------------+------------------------------------------------------------------------+
 
 Object storage
---------------
+==============
 
 The *Object Storage* role allows users to create, update and delete containers,
 and objects within those containers. Creative and destructive actions related
@@ -428,7 +432,7 @@ The list of explicit permissions for the object storage role:
    +-----------------------+------------------------------------------------------------------------+
 
 Auth only
----------
+=========
 
 The *Auth Only* role is the most restrictive role. Users are only able to
 manage their own account information. This role cannot view, create or destroy
@@ -444,56 +448,61 @@ The list of explicit permissions for the auth only role:
    |                       | openstack.quota.show                                                   |
    +-----------------------+------------------------------------------------------------------------+
 
+*************************
 Kubernetes specific roles
-=========================
+*************************
 
 There are certain roles that are used for kubernetes actions only and are
 required to perform specific actions on kubernetes clusters. They can be
 found in the :ref:`kubernetes <kubernetes-user-access>` section of the
 documentation.
 
-
+*****************
 Adding a new user
-=================
+*****************
+
 To add a new user click on "Invite User", add the email of the user that you
 wish to invite and select the 'Roles' that you wish to assign to them, then
 click "Invite".
 
 |
 
-.. image:: ../_static/invite_user.png
+.. image:: _static/invite_user.png
 
 |
 
 Once a new project member has been invited the "Invited Users" count will
 increase.
 
-.. image:: ../_static/invited_count.png
+.. image:: _static/invited_count.png
 
 |
 
 Once the user clicks on the link in the invitation email the "Invited Users"
 count will decrease by 1 and the user will appear in the Project Users panel.
 
+***************
 Updating a user
-===============
+***************
+
 Selecting the "Update User" action from the main "Project Users" screen will
 load the same panel as the one presented when inviting a new user. It is then
 possible to modify the current roles assigned to the user.
 
-
+********************
 Revoking user access
-====================
+********************
+
 To remove access to a project you can select 'Revoke User' from the Actions
 drop down on an individual user
 
 |
 
-.. image:: ../_static/revoke_user.png
+.. image:: _static/revoke_user.png
 
 or select multiple users using the check boxes on the Project Users list and
 then click "Revoke Users" on the upper right of the page.
 
 |
 
-.. image:: ../_static/revoke_multiple_users.png
+.. image:: _static/revoke_multiple_users.png

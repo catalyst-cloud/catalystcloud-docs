@@ -12,8 +12,6 @@ this.
 
 .. _`Calico`: docs.projectcalico.org/v2.6/introduction/
 
-
-
 **************************
 Create a simple deployment
 **************************

@@ -9,12 +9,13 @@ the steps required to achieve this.
 
 .. _creating_networks:
 
-.. include:: ../_scripts/create-network-dashboard.rst
+.. include:: _scripts/create-network-dashboard.rst
 
 |
 
+*************
 Using the CLI
-===============
+*************
 
 You are also able to create a network using the CLI. If you look through
 :ref:`this <using-the-command-line-interface>` section of the documentation.

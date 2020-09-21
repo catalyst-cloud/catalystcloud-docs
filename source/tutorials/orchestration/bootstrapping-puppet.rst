@@ -13,8 +13,9 @@ This tutorial assumes the following:
 * You have a basic understanding of Heat templates as shown at
   :ref:`launching-your-first-instance-using-heat`.
 
+************
 Introduction
-============
+************
 
 In this tutorial, you will see how to add a new server to an existing
 Catalyst Cloud network and configure it with `Puppet`_ and have it check in to
@@ -27,8 +28,9 @@ creation of the instance and then run a nested cloud-config script via
 .. _Puppet: https://puppetlabs.com/
 .. _cloud-init: http://cloudinit.readthedocs.org/en/latest/index.html
 
+*****
 Setup
-=====
+*****
 
 You will make use of Heat template to deploy a single instance into an existing
 network hosted in the Catalyst Cloud. In order to make this work, you need to
@@ -61,8 +63,9 @@ create a port and assign a floating IP to the server.
   | 450cb9f7-b297-40fe-a855-fc187bb27b2a | mgmt-subnet |
   +--------------------------------------+-------------+
 
+**************
 Implementation
-==============
+**************
 
 This snippet ( included in the template below ) is responsible for passing
 the cloud-config script puppet_bootstrap.yaml to cloud-init
@@ -219,8 +222,9 @@ It performs the following tasks:
   # Useful for troubleshooting cloud-init issues
   output: {all: '| tee -a /var/log/cloud-init-output.log'}
 
+*******************
 Creating the server
-===================
+*******************
 
 To create the server, run the following Heat command. This will create a new
 server called server1 in a stack named puppet-slave-stack
@@ -235,8 +239,9 @@ Here's how to check the progress of your deployment:
 
   openstack console log show server1
 
+**********
 Final note
-==========
+**********
 
 Unless your Puppet Master is configured to automatically sign agent certificate
 requests, you will need to sign your new server's cert before the first Puppet

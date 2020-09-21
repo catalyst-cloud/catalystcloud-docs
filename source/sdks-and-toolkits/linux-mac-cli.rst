@@ -157,7 +157,7 @@ enabled openrc file, select the dropdown in the upper right corner of the dash
 board and click on ``OpenStack RC File v3``. Select ``Save As`` when prompted to
 select the location on your machine to save this file to.
 
-.. image:: ../_static/openrc-no-mfa.png
+.. image:: assets/openrc-no-mfa.png
    :align: center
 
 If you need more information on using the file see :ref:`source-rc-file`.
@@ -241,7 +241,7 @@ To download an OpenStack RC file from the dashboard:
   You are also able to download the Openstack RC file from the top-right
   corner where your login details are display as shown below:
 
-.. image:: ../_static/openrc-no-mfa.png
+.. image:: assets/openrc-no-mfa.png
   :align: right
 
 Difference between OpenRC with or without MFA
@@ -294,9 +294,8 @@ documentation under tutorials.
 For a reference of all commands supported by the CLI, refer to the `OpenStack
 Client documentation <https://docs.openstack.org/python-openstackclient>`_.
 
-*************
 The next step
-*************
+=============
 
 We highly recommend that if you are going to be using the CLI often that you
 take the time to go through the documentation section on :ref:`setting up your

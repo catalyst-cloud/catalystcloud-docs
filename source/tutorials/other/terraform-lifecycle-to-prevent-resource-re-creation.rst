@@ -10,9 +10,9 @@ manage Catalyst Cloud.
 
 .. _Terraform: https://www.terraform.io/
 
-
+*******
 Problem
-=======
+*******
 
 In Catalyst Cloud we provide OS images that users can use to start their
 virtual machines. We update our images regularly so the image name stays
@@ -58,8 +58,9 @@ in response to image id change.
 
   ------------------------------------------------------------------------
 
+*********************
 Lifecycle or image ID
-=====================
+*********************
 One possible solution is to use `image_id` in the Terraform manifest, this will
 pin `image_id` to specific value so that change in `image_name` won't affect
 the resource.

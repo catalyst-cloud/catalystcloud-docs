@@ -125,7 +125,7 @@ restart the instance:
 
   $ openstack database configuration attach db-instance-1 conf1
 
-  $ openstack database instance restart db1
+  $ openstack database instance restart db-instance-1
 
 Now we can test that our instance has the parameter we wanted to update:
 

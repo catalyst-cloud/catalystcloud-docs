@@ -1,5 +1,7 @@
+#################
 What is duplicity
-=================
+#################
+
 Duplicity is a band-width efficient backup utility capable of providing
 encrypted, digitally signed, versioned, remote backups in a space efficient
 manner.

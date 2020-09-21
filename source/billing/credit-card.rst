@@ -12,8 +12,9 @@ can setup a credit card to pay your invoices.
 You and/or your billing contact will still receive a usage summary from us
 each month with your usage details and a confirmation that your invoice has been paid.
 
+*******************************************
 Adding and switching to credit card payment
-===========================================
+*******************************************
 
 To setup a credit card, please login_ to the dashboard and follow these steps:
 
@@ -55,9 +56,9 @@ After adding the credit card, your Project Billing Details should have been upda
 .. image:: resources/billing-details-updated.png
    :align: center
 
-
-Adding a credit card
-====================
+********************************
+Adding an additional credit card
+********************************
 
 .. note::
    If you have credit card payment as your selected method. You cannot delete a credit
@@ -89,9 +90,9 @@ option, you can still select it in the Project Billing Details tab:
 .. image:: resources/billing-details-multiple-cards.png
    :align: center
 
-
+****************************
 Switching to invoice payment
-============================
+****************************
 
 .. note::
    Once the payment method has been approved, you will be able to delete the selected

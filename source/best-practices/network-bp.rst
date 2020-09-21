@@ -2,9 +2,9 @@
 Networks
 ########
 
-
+************************************
 Virtual router high availability
-================================
+************************************
 
 In the same way that if a compute instance fails, if a physical network node
 fails our monitoring systems will detect the failure and trigger the evacuate
@@ -17,9 +17,9 @@ failover between routers will take milliseconds which will most likely not be
 noticed. Meanwhile customers requiring Higher availability are advised to
 combine compute instances from multiple regions where possible.
 
-
+*************************************
 Networks are isolated between regions
-=====================================
+*************************************
 
 By default your networks and instance cannot access or connect to one another
 across different regions. Regions are completely independent and isolated from

@@ -107,7 +107,7 @@ as explained
 Here is an example using Ubuntu 18.04 as the image on a b1.sr-r3-nvme-1000
 volume.
 
-.. image:: ../_static/nvme-root-vol-test-1.png
+.. image:: _static/nvme-root-vol-test-1.png
    :align: center
 
 Once the volume has been successfully created we can launch the instance.
@@ -118,17 +118,16 @@ section as required.
 On the Source page set ``Select Boot Source`` to ``Volume``, you should now be
 able to see the volume you created in the previous step under ``Available``.
 
-.. image:: ../_static/nvme-root-vol-test-2.png
+.. image:: _static/nvme-root-vol-test-2.png
    :align: center
 
 Select your volume and ensure it now appears under Allocated like this.
 
-.. image:: ../_static/nvme-root-vol-test-3.png
+.. image:: _static/nvme-root-vol-test-3.png
    :align: center
 
 Complete the rest of the Launch Instance dialogue as required and launch the
 instance.
-
 
 ******
 Flavor
@@ -157,7 +156,6 @@ mitigated by scaling applications horizontally on multiple compute instances in
 an anti-affinity group. We monitor the performance of our physical servers and
 have the ability to move compute instances around, without downtime, to spread
 out load if required.
-
 
 ***********************
 Instance initialisation

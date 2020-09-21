@@ -1,9 +1,9 @@
-***
+###
 FAQ
-***
+###
 
 What operating systems are supported by the Catalyst Cloud?
-===========================================================
+***********************************************************
 
 You should be able to run all major operating systems supporting the x86_64
 architecture. The following operating systems have already been tested by

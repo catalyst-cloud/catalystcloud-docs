@@ -1,12 +1,12 @@
 
 Creating the required network elements
-======================================
+--------------------------------------
 
 We need to create a router and network/subnet.
 
 Navigate to the "Routers" section and click "Create Router":
 
-.. image:: ../_static/router-main-page.png
+.. image:: /network/_static/router-main-page.png
    :align: center
 
 |
@@ -14,21 +14,21 @@ Navigate to the "Routers" section and click "Create Router":
 Name the router "border-router", select the admin state check-box and select
 "public-net" as the external network:
 
-.. image:: ../_static/router-create.png
+.. image:: /network/_static/router-create.png
    :align: center
 
 |
 
 Navigate to the "Networks" section and click "Create Network":
 
-.. image:: ../_static/network-main-page.png
+.. image:: /network/_static/network-main-page.png
    :align: center
 
 |
 
 Name your network "private-net", select create subnet and click "Next":
 
-.. image:: ../_static/network-create.png
+.. image:: /network/_static/network-create.png
    :align: center
 
 |
@@ -36,7 +36,7 @@ Name your network "private-net", select create subnet and click "Next":
 Name your subnet "private-subnet", choose an address for your subnet in CIDR
 notation and click "Next":
 
-.. image:: ../_static/subnet-create.png
+.. image:: /network/_static/subnet-create.png
    :align: center
 
 |
@@ -55,33 +55,33 @@ the different fields however you'd like. Specifications like:
 At the moment if you leave the DNS field blank the dashboard will automatically
 allocate it to the catalyst cloud DNS. So it is entirely optional.
 
-.. image:: ../_static/Create-network-subnetdetails.png
+.. image:: /network/_static/Create-network-subnetdetails.png
    :align: center
 
 |
 
 Click on the router name in the router list:
 
-.. image:: ../_static/router-status.png
+.. image:: /network/_static/router-status.png
    :align: center
 
 |
 
 Select the "Interfaces" tab and click "+Add Interface":
 
-.. image:: ../_static/router-add-interface.png
+.. image:: /network/_static/router-add-interface.png
    :align: center
 
 |
 
 Select the correct subnet:
 
-.. image:: ../_static/router-interface-popup.png
+.. image:: /network/_static/router-interface-popup.png
    :align: center
 
 |
 
 You should now have a network topology that looks like this:
 
-.. image:: ../_static/network-topology.png
+.. image:: /network/_static/network-topology.png
    :align: center

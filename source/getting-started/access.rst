@@ -1,8 +1,8 @@
 .. _access_to_catalyst_cloud:
 
-############################
-Accessing the Catalyst Cloud
-############################
+###################################
+How can I interact with my project?
+###################################
 
 In the previous section, we learned about the various services the Catalyst
 Cloud offers. Now we'll learn about the various ways you can interact with
@@ -104,7 +104,7 @@ dashboard at any time to request a change to the white-listed IPs.
 |
 
 Whitelisting and access
-=========================
+=======================
 
 All compute instances on the Catalyst Cloud have whitelisted IP addresses by
 default. Because compute instances are whitelisted, you can use them as a

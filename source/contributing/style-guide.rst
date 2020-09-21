@@ -1,6 +1,6 @@
-***********
+###########
 Style guide
-***********
+###########
 
 This style guide describes the conventions that are followed by our
 documentation project. If you follow them, your documents will pass the doc8
@@ -9,8 +9,9 @@ tests and compile cleanly.
 This documentation uses `Python-sphinx <http://sphinx.pocoo.org/>`_, which
 itself uses `reStructuredText <http://sphinx-doc.org/rest.html>`_ syntax.
 
+*********
 Filenames
-=========
+*********
 
 Use only lowercase alphanumeric characters and ``-`` (minus) symbol.
 
@@ -19,11 +20,12 @@ Suffix filenames with the ``.rst`` extension.
 Do not add 'example' or 'service' to titles of pages as these should be self
 evident.
 
+**********
 Text style
-==========
+**********
 
 Bold
-----
+====
 
 We use bold text when we are referring to something important or when we are
 directly talking about an element of a service that we want to direct the user
@@ -35,7 +37,7 @@ Example: "You will find this under the **Container Infra** section of the
 dashboard" OR "Remember **DO NOT** delete this file until after..."
 
 Highlighting
-------------
+============
 
 We use this when we are referring to a specific command piece of code that we
 are talking about, but we do not want to use a code-block for. To use this
@@ -44,11 +46,12 @@ you need to place the string between two sets of tilde
 
 Example: " Now you should have your ``token`` sourced..."
 
+***********
 Whitespaces
-===========
+***********
 
 Indentation
------------
+===========
 
 Indent with 2 spaces.
 
@@ -57,7 +60,7 @@ Except:
 * ``toctree`` directive requires a 3 space indentation.
 
 Blank lines
------------
+===========
 
 Two blank lines before over lined sections, i.e. before H1 and H2.
 One blank line before other sections.
@@ -80,13 +83,15 @@ line long.
 
   .. note:: A short note.
 
+***********
 Line length
-===========
+***********
 
 Limit all lines to a maximum of 79 characters.
 
+********
 Headings
-========
+********
 
 Use the following symbols to create headings:
 
@@ -148,8 +153,9 @@ There should be only one H1 in a document.
   See also `Sphinx's documentation about sections
   <http://sphinx.pocoo.org/rest.html#sections>`_.
 
+***********
 Code blocks
-===========
+***********
 
 Use the ``code-block`` directive **and** specify the programming language. As
 an example:
@@ -171,8 +177,9 @@ used:
 
 When documenting bash or shell scripts ``bash`` or ``sh`` should be used.
 
+***********
 Admonitions
-===========
+***********
 
 .. note:: Notes can be used to emphasise a point that requires more attention.
 
@@ -206,8 +213,9 @@ Admonitions
 
     A long reference that can span across multiple lines.
 
+******
 Tables
-======
+******
 
 Tables should use the grid notation.
 
@@ -231,11 +239,12 @@ Tables should use the grid notation.
   | body row 2             | ...        | ...      |          |
   +------------------------+------------+----------+----------+
 
+*****
 Lists
-=====
+*****
 
 Bullet lists
-------------
+============
 
 Use the following format to create bullet lists:
 
@@ -268,7 +277,7 @@ Use the following format to create bullet lists:
   * There should be an empty line after a list ends.
 
 Numbered lists
---------------
+==============
 
 Use the following format to create numbered lists:
 
@@ -288,8 +297,9 @@ Use the following format to create numbered lists:
      with no more than 80 characters in each line.
   #. There should be an empty line after a list ends.
 
+********************
 Links and references
-====================
+********************
 
 Use links and references footnotes with the ``target-notes`` directive.
 As an example:

@@ -12,23 +12,26 @@ configuration.
 Packer makes use of builders and provisioners to create custom bootable
 images.
 
+********
 Builders
-========
+********
 
 Packer supports a number of `builders`_ for different target platforms
 including Amazon EC2 AMI images, VirtualBox and VMware. When building images
 for the Catalyst Cloud you will be using the `OpenStack builder`_.
 
+************
 Provisioners
-============
+************
 
 `Provisioners`_ provide a way to configure a base image such that a new custom
 image can be created. Many provisioners are available, including shell
 provisioners and provisioners that use DevOps tools like Ansible, Puppet and
 Chef.
 
+*****
 Setup
-=====
+*****
 
 This tutorial assumes that you have sourced an openrc file, as described at
 :ref:`source-rc-file`. This is required in order for the `OpenStack builder`_
@@ -47,8 +50,9 @@ simple process:
  $ ./packer --version
  0.10.1
 
+*****************************
 Create a Packer template file
-=============================
+*****************************
 
 `Templates`_ are JSON files that configure the builders and provisioners that
 you will use to create our custom image.
@@ -90,8 +94,9 @@ on an Ubuntu 16.04 machine to the latest versions. You will then build a
    }]
  }
 
+*****************
 Building an image
-=================
+*****************
 
 Now you can build a new image called ``ubuntu1604_packer_test_1`` using this
 template:
@@ -155,8 +160,9 @@ template:
 
  The process of building a new image takes some time, so now would be a good time to make a cup of tea.
 
+****************
 Booting an image
-=================
+****************
 
 Once the packer build command is complete, your newly build image should be
 available:
@@ -259,8 +265,9 @@ you installed in the image:
  ssllabs-scan v1.3.0 (stable $Id: 81cb03888c46dd07fb4d97acffa6768b692efa49 $)
  API location: https://api.ssllabs.com/api/v2
 
+***********************************************
 Using Packer with Windows on the Catalyst Cloud
-===============================================
+***********************************************
 
 .. note::
 

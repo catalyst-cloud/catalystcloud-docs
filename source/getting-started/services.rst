@@ -1,8 +1,8 @@
 .. _services_on_the_catalyst_cloud:
 
-##############################
-Services on the Catalyst Cloud
-##############################
+########################################
+What services are on the Catalyst Cloud?
+########################################
 
 In the previous section, we learned that services on the Catalyst Cloud are
 pieces of hardware and software that we make easy and convenient to use by
@@ -12,9 +12,9 @@ offered by Catalyst Cloud so that we know *what* we can do on the Catalyst
 Cloud, even if right now we don't know *how* we can do it yet.
 
 
-****************************************
-What services are on the Catalyst Cloud?
-****************************************
+*************
+The services
+*************
 
 Compute service
 ===============
@@ -118,9 +118,39 @@ determine the actions it needs to take to make the stack match your definition.
 The orchestration service can either be used on it's own, or as another
 resource that automation tools can make use of to more easily do their job.
 
-******************************
-What can you do with services?
-******************************
+Alarm service
+=============
+
+The alarm service allows you to create alarms that monitor custom parameters on
+your project and alert you if these parameters are met. An alarm when
+triggered, will inform some other service or software of a state change.
+Services contacted by the alarm should be set up to perform some action based
+on this alert. This typically is used alongside the orchestration service to
+implement autohealing and autoscaling protocols for your compute instances.
+
+Kubernetes service
+==================
+
+Kubernetes is a system that is designed to manage the deployment, scaling, and
+health of containerised applications. The Catalyst Kubernetes service is a
+fully managed service and opens up the use of Kubernetes clusters to developers
+without needing to have specialist knowledge of the platform. It also frees you
+up to focus on what really matters to your business, knowing that the
+Kubernetes service is monitored and managed by us 24/7.
+
+On top of this, our Kubernetes service has been certified by the cloud native
+computing foundation. Meaning that you are able to take any clusters you have
+built on other cloud platforms and transfer them onto the Catalyst Cloud with
+ease.
+
+The last thing to mention about the Catalyst Kubernetes Service is that it's
+use on our cloud is free. You do not pay an additional fee to use Kubernetes,
+you only pay for the resources that are consumed by your clusters e.g. the
+instance and networks etc.
+
+**********************************
+What can you do with each service?
+**********************************
 
 Catalyst Cloud is an entirely automated platform that adheres to the NIST
 definition of `true cloud computing <https://csrc.nist.gov/publications/d

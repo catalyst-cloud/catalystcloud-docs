@@ -1,11 +1,5 @@
-.. _using-a-bash-script:
-
-*******************
-Using a bash script
-*******************
-
-The bash script provided here comprises all the commands from the section
-:ref:`using-the-command-line-interface` in a single script.
+The bash script provided here comprises all the commands from the Openstack CLI
+example in a single script.
 
 Download and run this script using the following commands:
 
@@ -25,16 +19,12 @@ Download and run this script using the following commands:
  have your own that you wish to use. Otherwise the script will use the
  catalyst cloud DNS by default.
 
-.. literalinclude:: ../_scripts/create-first-instance.sh
+.. literalinclude:: _scripts/bash/create-first-instance.sh
   :language: bash
 
 
-
-Resource cleanup using a bash script
-====================================
-
-This script includes all the commands from the CLI cleanup previously mentioned
-in a single bash script.
+Instead of using the resource cleanup commands in the section below, you can
+use the following bash script:
 
 You can download and run this script using the following commands:
 
@@ -48,5 +38,5 @@ You can download and run this script using the following commands:
 
  You may wish to edit the script before executing, for example to add a prefix.
 
-.. literalinclude:: ../_scripts/delete-first-instance.sh
+.. literalinclude:: _scripts/bash/delete-first-instance.sh
   :language: bash

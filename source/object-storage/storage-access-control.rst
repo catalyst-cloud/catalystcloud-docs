@@ -1,4 +1,3 @@
-
 .. _object-storage-access:
 
 ###############
@@ -116,7 +115,7 @@ containers we will receive a 403 error as access is currently forbidden.
 
 
 Creating a READ access rule
----------------------------
+===========================
 
 Now we need to check the current state of the access for the container we want
 to work with. To list the available object storage containers in your project
@@ -262,7 +261,7 @@ container and download them if desired.
 
 
 Creating a WRITE access rule
-----------------------------
+============================
 
 The ``READ ACL`` does not however give the user rights to create or delete
 objects in the container they can view. In order to do this they will need to

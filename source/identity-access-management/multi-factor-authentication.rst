@@ -1,7 +1,6 @@
-
-***************************
+###########################
 Multi factor authentication
-***************************
+###########################
 
 Catalyst Cloud provides the ability to further secure your cloud access by
 enabling multi factor authentication (MFA). This is a per user feature and once
@@ -15,16 +14,16 @@ access.
     This will only affect users that are consuming the APIs directly, users who only
     login through the dashboard will automatically be authenticating with the version 3 API.
 
-
+**************
 Activating MFA
-==============
+**************
 
 MFA needs to be enabled through the user setting option in the cloud dashboard.
 To see this navigate to the following
 
 |
 
-.. image:: ../_static/settings.png
+.. image:: _static/settings.png
 
 |
 
@@ -32,7 +31,7 @@ From here you will be able to set up MFA for your user account.
 
 |
 
-.. image:: ../_static/mfa_settings.png
+.. image:: _static/mfa_settings.png
 
 |
 
@@ -45,7 +44,7 @@ to complete the entry and submit it otherwise you will have to redo it.
 
 |
 
-.. image:: ../_static/mfa_activate.png
+.. image:: _static/mfa_activate.png
 
 |
 
@@ -65,7 +64,7 @@ and prompted to re-login using MFA.
 
 |
 
-.. image:: ../_static/mfa_login_activated_msg.png
+.. image:: _static/mfa_login_activated_msg.png
 
 |
 
@@ -74,21 +73,22 @@ your authentication app and click **Sign In**.
 
 |
 
-.. image:: ../_static/mfa_login_totp.png
+.. image:: _static/mfa_login_totp.png
 
 |
 
 
+****************************
 Which users have MFA enabled
-============================
+****************************
 
 Any project user that has one of the admin roles assigned to them can view all
 of the users currently able to access that project and see whether or not they
 have MFA enabled.
 
-
+************
 Removing MFA
-============
+************
 
 To remove MFA authentication from a user's account, login as that user, and
 access the MFA settings via the settings menu, as shown above. Add a valid
@@ -96,16 +96,16 @@ passcode and click Submit,
 
 |
 
-.. image:: ../_static/remove_mfa.png
+.. image:: _static/remove_mfa.png
 
 If the passcode was successful you will be redirected to the login screen and
 prompted to re-login without using MFA.
 
-.. image:: ../_static/mfa_removed_login.png
+.. image:: _static/mfa_removed_login.png
 
-
+************************
 MFA from the commandline
-========================
+************************
 
 Once MFA has been enabled for a user's account it is no longer possible use
 v2.0 authentication with keystone. For most users this simply means downloading
@@ -115,11 +115,11 @@ This can be obtained in a couple of places as shown here.
 
 |
 
-.. image:: ../_static/user_menu_openrc.png
+.. image:: _static/user_menu_openrc.png
 
 |
 
-.. image:: ../_static/api_access_openrc.png
+.. image:: _static/api_access_openrc.png
 
 |
 
