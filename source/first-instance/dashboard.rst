@@ -47,7 +47,7 @@ You can either import an existing public key or have the Catalyst Cloud
 create a key pair for you. We document both below.
 
 Creating a new key pair
--======================
+=======================
 
 If you haven't generated a SSH key pair before, Catalyst Cloud can create one
 for you.
