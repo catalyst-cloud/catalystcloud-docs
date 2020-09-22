@@ -25,4 +25,4 @@ spec:
         image: catalystcloud/helloworld-flask:latest
         ports:
         - name: helloworld-port
-          containerPort: 5000
+          containerPort: 8080

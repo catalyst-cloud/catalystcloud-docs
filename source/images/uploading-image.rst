@@ -1,21 +1,19 @@
-
-
-
-*******************************
-Uploading an image to the cloud
-*******************************
+######################
+Uploading to the cloud
+######################
 
 Please make sure you have converted your image to RAW before uploading it to
 our cloud. The previous section provides instructions on how to convert images
 from other formats to RAW.
 
+*********************
 Via the web dashboard
-=====================
+*********************
 
 On the images panel, click on create image. The create image dialogue will be
 displayed as shown below:
 
-.. image:: ../_static/image-create.png
+.. image:: _static/image-create.png
 
 1) On the image source, select "Image Location" to provide the URL that the
 image should be downloaded from, or select "Image File" to upload an image from
@@ -30,8 +28,9 @@ using a compressed format, like QCOW2, use the expanded size of the image.
 Finally, click on create image and wait until the image has been downloaded or
 uploaded.
 
+**************************
 Via the command line tools
-==========================
+**************************
 
 If the image is larger than 5GB, then you will have to use the OpenStack CLI to
 upload it to the cloud. This is due to a cap being placed on the dashboard.

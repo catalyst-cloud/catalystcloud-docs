@@ -1,8 +1,3 @@
-.. _launching-your-first-instance-using-heat:
-
-*******************************
-Using the orchestration service
-*******************************
 
 Heat is the native OpenStack orchestration tool. This section demonstrates how
 to create a first instance using Heat.
@@ -27,11 +22,8 @@ Heat templates:
  $ git clone https://github.com/catalyst/catalystcloud-orchestration.git && ORCHESTRATION_DIR="$(pwd)/catalystcloud-orchestration" && echo $ORCHESTRATION_DIR
 
 
-Uploading an SSH key
-====================
-
-Heat does not support uploading an SSH key. This step must be performed
-manually.
+To continue, we will need to have an SSH key for our instance. Heat does not
+support uploading an SSH key so this step must be performed manually.
 
 When an instance is created, OpenStack passes an SSH key to the instance which
 can be used for shell access. By default, Ubuntu will install this key for the
@@ -69,8 +61,7 @@ Use ``openstack keypair create`` to upload your Public SSH key.
  Keypairs must be created in each region being used.
 
 
-Building the First Instance Stack using a Heat Template
-=======================================================
+Now that we have our SSH key, we can start to build our instance:
 
 Select the following Heat template from the catalystcloud-orchestration
 repository cloned earlier. Before making use of a template, it is good practice
@@ -100,16 +91,12 @@ does not. If the template validates, it may be used to build the stack:
   | stack_status_reason | Stack CREATE started                                                                      |
   +---------------------+-------------------------------------------------------------------------------------------+
 
-
-
 The ``stack_status`` indicates that creation is in progress. Use the
 ``event list`` command to check on the stack's orchestration progress:
 
 .. code-block:: bash
 
  $  openstack stack event list first-instance-stack
-
-
 
 View the output of the ``stack show`` command for further details:
 
@@ -171,9 +158,6 @@ Floating IP of the instance:
  $ export CC_PUBLIC_IP=$( openstack floating ip show -f value -c floating_ip_address $CC_FLOATING_IP_ID )
  $ ssh ubuntu@$CC_PUBLIC_IP
 
-
-Deleting the First Instance Stack using Heat
-============================================
 
 .. warning::
 

@@ -1,8 +1,8 @@
 .. _launching-your-first-instance:
 
-********
+########
 Overview
-********
+########
 
 This section will demonstrate how to build an Ubuntu 18.04 server. After you
 have completed the steps, you will be able to log in to the server via SSH from
@@ -14,9 +14,13 @@ The following is assumed:
 * You have been assigned a project
 * Your user in that project has permissions to create the required resources.
 
-When a new project is created, a network, subnet, and router are built by
+When you create your first project, a network, subnet, and router are built by
 default. The process below outlines the steps required to do this if the
-default setup has been deleted or an additional network is required.
+default setup has been deleted or an additional network is required. If in the
+future you create any more projects, they will not be created with the default
+router and network. An example of how to create these resources specifically
+can be found under the :ref:`Network <creating_networks>` section of the
+documentation.
 
 .. note::
 
@@ -55,8 +59,9 @@ stack you have created via another method.
 By the end of this process you should have an instance running of an Ubuntu
 image that you're able to use however you'd like.
 
-Network Requirements
-====================
+********************
+Network requirements
+********************
 
 Before launching an instance, it is necessary to have some network resources in
 place. These may have already been created for you. In this documentation we
@@ -96,8 +101,9 @@ tunnel-mode VPN in the future to connect your OpenStack private network to
 another private network. Choosing a unique subnet now will ensure you will not
 experience collisions that need renumbering in the future.
 
-Compute Flavors
-===============
+***************
+Compute flavors
+***************
 
 The flavor of an instance is the CPU, memory and disk specifications of a
 compute instance. Catalyst flavors are named 'cX.cYrZ', where X is the
@@ -109,12 +115,13 @@ gigabytes of memory.
   Flavor names are identical across all regions, but the flavor IDs will
   vary.
 
-Operating System Images
-=======================
+***********************
+Operating system images
+***********************
 
 In order to create an instance, you will need to have a pre-built operating
 system in the form of an Image.  Images are stored in the Image service
-(Glance). The Catalyst Cloud provide a set of images for general use and also
+(Glance). The Catalyst Cloud provides a set of images for general use and also
 allows you to upload your own images.
 
 .. note::
@@ -124,8 +131,9 @@ allows you to upload your own images.
  should always look up an image based on its name and then retrieve the ID
  for it.
 
+********************
 Uploading an SSH key
-====================
+********************
 
 When an instance is created, OpenStack will pass an ssh key to the instance
 which can be used for shell access. By default, Ubuntu will install this key
@@ -139,8 +147,9 @@ listed here: :ref:`images`
 
 Keypairs must be created in each region being used.
 
-Security Groups
-===============
+***************
+Security groups
+***************
 
 Security groups are akin to a virtual firewall. All new instances are put in
 the 'default' security group. When unchanged, the default security group allows
@@ -165,8 +174,9 @@ the same rules to subsequent instances that you may create.
   you to limit the exposure of your compute instances and services to IP
   addresses or subnets that are trusted.
 
+************
 Floating IPs
-============
+************
 
 In order to connect to your instance, you will need to allocate a floating IP
 to the instance. Alternately, you could create a :ref:`VPN <vpn>` and save
@@ -176,7 +186,7 @@ instance will be offering a service to the greater internet.
 .. _connecting-to-instance:
 
 Connecting to an instance
-=========================
+*************************
 
 Once all of the previous things are set up, there are a few things to note
 about connecting to your instance via the CLI. One is that you need to make

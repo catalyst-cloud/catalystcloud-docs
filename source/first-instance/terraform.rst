@@ -1,8 +1,3 @@
-.. _launching-your-first-instance-using-terraform:
-
-***************
-Using Terraform
-***************
 
 `Terraform`_ is an open source infrastructure configuration and provisioning
 tool developed by `Hashicorp`_. Terraform supports the configuration of many
@@ -25,9 +20,6 @@ For further information on using Terraform with OpenStack, see the linked
 .. _blog: http://blog.scottlowe.org/2015/11/25/intro-to-terraform/
 
 
-Install Terraform
-=================
-
 Installation of Terraform is very simple. Go to the `Terraform download`_
 page and choose the zip file that matches your operating system and
 architecture. Unzip this file to the location where Terraform's binaries
@@ -43,19 +35,13 @@ for detailed install instructions.
  $ mkdir terraform-first-instance
  $ export TERRAFORM_DIR="$(pwd)/terraform-first-instance"
  $ cd $TERRAFORM_DIR
- $ wget https://releases.hashicorp.com/terraform/0.6.16/terraform_0.6.16_linux_amd64.zip
- $ unzip terraform_0.6.16_linux_amd64.zip
+ $ wget https://releases.hashicorp.com/terraform/0.12.12/terraform_0.12.12_linux_amd64.zip
+ $ unzip unzip terraform_0.12.12_linux_amd64.zip
 
-
-OpenStack credentials
-=====================
 
 Before running Terraform, ensure your OpenStack credentials have been
-set up. The easiest way to achieve this is by making use of environment
-variables. Use the standard variables provided by an OpenStack RC file as
-described in :ref:`source-rc-file`. These variables are read by the
-`OpenStack provider`_ and will provide Terraform with permissions to access the
-Catalyst Cloud APIs.
+set up. These variables are read by the `OpenStack provider`_ and will provide
+Terraform with permissions to access the Catalyst Cloud APIs.
 
 .. _OpenStack provider: https://www.terraform.io/docs/providers/openstack/index.html
 
@@ -69,9 +55,10 @@ Catalyst Cloud APIs.
 Once Terraform had been installed and the OpenStack credentials have been set
 up, a first instance may be built.
 
+|
 
-Download the Terraform first instance configuration file
-========================================================
+To create an instance using terraform, you must have a configuration file
+prepared to construct your resources.
 
 It is beyond the scope of this documentation to explain how Terraform
 configuration files are written. A pre-prepared example is provided in the
@@ -90,7 +77,7 @@ Download the configuration file:
 .. code-block:: bash
 
  $ cd $TERRAFORM_DIR
- $ wget https://raw.githubusercontent.com/catalyst/catalystcloud-orchestration/master/terraform/first-instance/first-instance.tf
+ $ wget https://raw.githubusercontent.com/catalyst-cloud/catalystcloud-orchestration/master/terraform/first-instance/first-instance-variables.tf
 
 
 .. note::
@@ -108,14 +95,13 @@ Download the configuration file:
     ``image_id``,   and ``flavor_id``.
 
 
-Run Terraform plan
-==================
-
-The "./terraform plan" command outlines the plan that Terraform will execute:
+The "terraform plan" command outlines the list of operations that Terraform
+will execute:
 
 .. code-block:: bash
 
- $ ./terraform plan
+ $ terraform init
+ $ terraform plan
  Refreshing Terraform state prior to plan...
 
 
@@ -225,16 +211,12 @@ The "./terraform plan" command outlines the plan that Terraform will execute:
   It is a good idea to review the output of this command. Check the resources that
   will be created match your intentions.
 
-
-Run Terraform apply
-===================
-
-The "./terraform apply" command executes the plan, creating OpenStack
+The "terraform apply" command executes the plan, creating OpenStack
 resources:
 
 .. code-block:: bash
 
- $ ./terraform apply
+ $ terraform apply
  openstack_compute_keypair_v2.keypair_1: Creating...
    name:       "" => "first-instance-key"
    public_key: "" => "ssh-rsa AAAAB3......"
@@ -337,11 +319,11 @@ resources:
  State path: terraform.tfstate
 
 
-Run Terraform delete
-====================
+Once the terraform apply command has completed, your resources will be built
+and you will be able to monitor them on the cloud.
 
-The "./terraform destroy" command will delete the OpenStack resources created
-previously.
+If you wish to clean up these resources, the "terraform destroy" command will
+delete any of the resources that were created using the previous command.
 
 .. note::
 

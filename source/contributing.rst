@@ -5,8 +5,6 @@ Contributing to the documentation
 Please refer to the following sections about how to contribute to our
 documentation.
 
-
-
 .. toctree::
    :maxdepth: 1
 

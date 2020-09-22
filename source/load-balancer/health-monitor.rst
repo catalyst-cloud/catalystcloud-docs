@@ -14,7 +14,6 @@ the pool.
   connections to unhealthy (offline) members of the pool, causing service
   disruption to clients.
 
-
 ************************
 Types of health monitors
 ************************
@@ -38,7 +37,6 @@ The following health monitor types are supported by the load balancer service.
   port. Your custom TCP application should be written to respond OK to the load
   balancer connecting, opening a TCP connection, and closing it again after the
   TCP handshake without sending any data.
-
 
 **********************
 Health monitor options
@@ -113,6 +111,29 @@ path '/health'
   | operating_status    | OFFLINE                              |
   +---------------------+--------------------------------------+
 
+The healthcheck response
+========================
+
+.. Note::
+
+  Please be aware that the application/website being deployed is responsible
+  for implementing the mechanism that responds to the loadbalancer's health
+  check
+
+If we take the simple `flask_app.py`_ example we used in the Layer 7 routing
+example we can see that is contains the following function.
+
+.. _`flask_app.py`: https://docs.catalystcloud.nz/load-balancer/layer-7.html#preparation
+
+.. code-block:: python
+
+  @app.route("/health")
+  def health():
+      return "healthy!"
+
+It is this function which would provide the **HTTP 200** response to the
+loadbalancer HTTP healthcheck described above. Without this the health check
+will not function.
 
 **************
 Best practices

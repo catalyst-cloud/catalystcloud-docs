@@ -1,4 +1,6 @@
-Sphinx==1.8.2
+Sphinx>=1.8.2
 -e git://github.com/catalyst-cloud/sphinx-catalystcloud-theme.git#egg=sphinx_catalystcloud_theme
-doc8==0.8.0
-sphinx-tabs==1.1.10
+doc8>=0.8.0
+sphinx-autobuild
+sphinx-tabs>=1.1.10
+aafigure>=0.5

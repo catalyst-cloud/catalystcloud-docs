@@ -90,7 +90,7 @@ with a template we wish to deploy from. To do this run the following command.
 
 We now need to convert the list of labels obtained in the previous step, to a
 comma separated list of key value pairs that include
-``auto_scaling_enabled``, ``,min_node_count`` and ``max_node_count``
+``auto_scaling_enabled``, ``min_node_count`` and ``max_node_count``
 
 .. code-block:: console
 
@@ -122,7 +122,7 @@ such as:
   below which a node can be considered for scale down. By default this is
   **0.5**.
 * ``scale-down-unneeded-time``  This is how long a node should be unneeded
-  before it is eligible to be scaled down.By default this is **10 minutes**.
+  before it is eligible to be scaled down. By default this is **10 minutes**.
 
 To change the scale down parameters we need to edit the cluster-autoscaler's
 current deployment settings. We can do this using ``kubectl``.

@@ -1,8 +1,8 @@
 .. _access_to_catalyst_cloud:
 
-############################
-Accessing the Catalyst Cloud
-############################
+###################################
+How can I interact with my project?
+###################################
 
 In the previous section, we learned about the various services the Catalyst
 Cloud offers. Now we'll learn about the various ways you can interact with
@@ -104,13 +104,13 @@ dashboard at any time to request a change to the white-listed IPs.
 |
 
 Whitelisting and access
-=========================
+=======================
 
 All compute instances on the Catalyst Cloud have whitelisted IP addresses by
 default. Because compute instances are whitelisted, you can use them as a
 "jump box" by creating an instance using the :ref:`cloud dashboard
 <cloud-dashboard>`, SSH-ing into the instance, and :ref:`installing
-<installing-the-cli>` and :ref:`configuring <configuring-the-cli>` the CLI
+<installing_cli_os>` and :ref:`configuring <configuring-the-cli>` the CLI
 tools there. An explanation of launching an instance using the web dashboard
 can be found :ref:`here <first-instance-with-dashboard>`.
 

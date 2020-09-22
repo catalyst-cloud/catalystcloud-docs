@@ -1,0 +1,51 @@
+# fluentd-s3-rbac.yml
+
+---
+# create logging namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fluentdlogging
+
+---
+# create the fluentd ServiceAccount
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: fluentd
+  namespace: fluentdlogging
+
+---
+# create fluentd ClusterRole to access pods and namespaces
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: fluentd
+  namespace: fluentdlogging
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch
+
+---
+# bind the ServiceAccount to the ClusterRole
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: fluentd
+roleRef:
+  kind: ClusterRole
+  name: fluentd
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: ServiceAccount
+  name: fluentd
+  namespace: fluentdlogging
+
+

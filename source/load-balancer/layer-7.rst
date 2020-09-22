@@ -82,7 +82,7 @@ Create a copy of the flask_app.py script (shown below) on each server.
 
 **script** flask_app.py
 
-.. literalinclude:: ../_scripts/flask_app.py
+.. literalinclude:: _scripts/flask_app.py
 
 Follow the instructions below to install the required dependencies.
 
@@ -115,7 +115,7 @@ terminal session) ensuring that both listening on port 80 and that each is
 given a unique endpoint_url. If you are intending on following along with
 the example below these will be:
 
-* live.example.com
+* login.example.com
 * shop.example.com
 
 .. code-block:: bash
@@ -145,14 +145,14 @@ The output for the services running on port 80 will look similar to this
 Create a load balancer
 **********************
 
-First lets create the loadbalancer. It will be called **lb_test_2** and it's
+First lets create the loadbalancer. It will be called **lb_test** and it's
 virtual IP address (VIP) will be attached to the local subnet
 **private-subnet**.
 
 .. code-block:: bash
 
   $ export SUBNET=`openstack subnet list --name private-subnet -f value -c ID`
-  $ openstack loadbalancer create --vip-subnet-id ${SUBNET} --name lb_test_2
+  $ openstack loadbalancer create --vip-subnet-id ${SUBNET} --name lb_test
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
@@ -162,7 +162,7 @@ virtual IP address (VIP) will be attached to the local subnet
   | flavor              |                                      |
   | id                  | afa1cd14-03e7-4bff-afed-8001d196b9df |
   | listeners           |                                      |
-  | name                | lb_test_2                            |
+  | name                | lb_test                              |
   | operating_status    | OFFLINE                              |
   | pools               |                                      |
   | project_id          | eac679e4896146e6827ce29d755fe289     |
@@ -175,7 +175,6 @@ virtual IP address (VIP) will be attached to the local subnet
   | vip_qos_policy_id   |                                      |
   | vip_subnet_id       | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
   +---------------------+--------------------------------------+
-
 
 *******************
 Create the listener
@@ -190,11 +189,11 @@ listener.
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
   | id                                   | name      | project_id                       | vip_address | provisioning_status | provider |
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
-  | afa1cd14-03e7-4bff-afed-8001d196b9df | lb_test_2 | eac679e4896146e6827ce29d755fe289 | 10.0.0.11   | ACTIVE              | octavia  |
+  | afa1cd14-03e7-4bff-afed-8001d196b9df | lb_test   | eac679e4896146e6827ce29d755fe289 | 10.0.0.11   | ACTIVE              | octavia  |
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
 .. code-block:: bash
 
-  $ openstack loadbalancer listener create --name http_listener --protocol HTTP --protocol-port 80 lb_test_2
+  $ openstack loadbalancer listener create --name http_listener --protocol HTTP --protocol-port 80 lb_test
   +---------------------------+--------------------------------------+
   | Field                     | Value                                |
   +---------------------------+--------------------------------------+
@@ -222,7 +221,6 @@ listener.
   | updated_at                | None                                 |
   +---------------------------+--------------------------------------+
 
-
 ****************
 Create the pools
 ****************
@@ -231,7 +229,7 @@ Create the first pool.
 
 .. code-block:: bash
 
-  $ openstack loadbalancer pool create --name http_pool --listener http_listener --protocol HTTP --lb-algorithm ROUND_ROBIN
+  $ openstack loadbalancer pool create --name http_pool_1 --listener http_listener --protocol HTTP --lb-algorithm ROUND_ROBIN
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
@@ -244,7 +242,7 @@ Create the first pool.
   | listeners           | b35681df-5bea-4f14-aa11-1dcb4396a8df |
   | loadbalancers       | afa1cd14-03e7-4bff-afed-8001d196b9df |
   | members             |                                      |
-  | name                | http_pool                            |
+  | name                | http_pool_1                          |
   | operating_status    | OFFLINE                              |
   | project_id          | eac679e4896146e6827ce29d755fe289     |
   | protocol            | HTTP                                 |
@@ -257,7 +255,7 @@ Create the second pool.
 
 .. code-block:: bash
 
-  $ openstack loadbalancer pool create --name http_pool_2 --loadbalancer lb_test_2 --protocol HTTP --lb-algorithm ROUND_ROBIN
+  $ openstack loadbalancer pool create --name http_pool_2 --loadbalancer lb_test --protocol HTTP --lb-algorithm ROUND_ROBIN
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
@@ -278,7 +276,6 @@ Create the second pool.
   | session_persistence | None                                 |
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
-
 
 ***************
 Add the members
@@ -336,7 +333,6 @@ Add the second member to the second pool.
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
-
 ********************
 Create the L7 policy
 ********************
@@ -366,7 +362,6 @@ Create the layer 7 policy.
   | name                | policy1                              |
   +---------------------+--------------------------------------+
 
-
 ******************
 Create the L7 rule
 ******************
@@ -393,7 +388,6 @@ Create a rule for the policy.
   | operating_status    | OFFLINE                              |
   +---------------------+--------------------------------------+
 
-
 ************
 Assign a VIP
 ************
@@ -405,9 +399,8 @@ VIP Port ID and then assign it a floating ip address.
 .. code-block:: bash
 
   export FIP=`openstack floating ip create public-net -f value -c floating_ip_address`
-  export VIP_PORT_ID=`openstack loadbalancer show lb_test_2 -f value -c vip_port_id`
+  export VIP_PORT_ID=`openstack loadbalancer show lb_test -f value -c vip_port_id`
   openstack floating ip set --port $VIP_PORT_ID $FIP
-
 
 **************
 Test the setup

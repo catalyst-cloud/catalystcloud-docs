@@ -1,55 +1,105 @@
 .. _using-volumes:
 
 ##########################
-Creating and using Volumes
+Creating and using volumes
 ##########################
 
-*****************************
-Creating a volume via the CLI
-*****************************
+***********************************
+Creating a volume via the dashboard
+***********************************
 
-Use the ``openstack volume create`` command to create a new volume:
+The easiest method to create and attach a volume to an instance would be to use
+the Catalyst Cloud `web dashboard`_. From the volumes tab on the dashboard you
+can create, delete, and manage your block storage volumes.
 
-.. code-block:: console
+.. _web dashboard: https://../first-instance/dashboard.cloud.catalyst.net.nz
 
-  $ openstack volume create --description 'database volume' --size 50 db-vol-01
-  +---------------------+--------------------------------------+
-  | Field               | Value                                |
-  +---------------------+--------------------------------------+
-  | attachments         | []                                   |
-  | availability_zone   | nz-por-1a                            |
-  | bootable            | false                                |
-  | consistencygroup_id | None                                 |
-  | created_at          | 2016-08-18T23:08:40.021641           |
-  | description         | database volume                      |
-  | encrypted           | False                                |
-  | id                  | 7e94a2f6-b4d2-47f1-83f7-a200e963404a |
-  | multiattach         | False                                |
-  | name                | db-vol-01                            |
-  | properties          |                                      |
-  | replication_status  | disabled                             |
-  | size                | 50                                   |
-  | snapshot_id         | None                                 |
-  | source_volid        | None                                 |
-  | status              | creating                             |
-  | type                | b1.standard                          |
-  | updated_at          | None                                 |
-  | user_id             | 4b934c44d8b24e60acad9609b641bee3     |
-  +---------------------+--------------------------------------+
+.. image:: _assets/volume-page.png
 
-Attach a volume to a compute instance
-=====================================
+Once you are here we we navigate to the **Create Volume** button on the top
+right. We are then met with this screen.
 
-Use the ``openstack server add volume`` command to attach the volume to an
+.. image:: _assets/create-vol.png
+
+From this example I have already filled out the requirements to create the
 instance:
 
-.. code-block:: console
+#. A name
+#. The volume type
+#. The size (in this example 50 GB)
+#. The region
 
-  $ openstack server add volume INSTANCE_NAME VOLUME_NAME
+Once we have all of these set, then we are create our volume.
 
-The command above assumes that your volume name is unique. If you have volumes
-with duplicate names, you will need to use the volume ID to attach it to a
-compute instance.
+After we have our new volume, we then are going to attach our volume to an
+instance. To do this we have to go to the **Manage Attachments** section.
+
+.. image:: _assets/manage-attachments.png
+
+From this screen we select the instance we want to attach our volume to. The
+dropdown from this pop up will display all your instances; for this example I
+am using an instance called "basic-instance". We also provide the path in the
+file structure where we want our volume to be available from; in this example I
+use /dev/vdb.
+
+.. image:: _assets/attach-to-instance.png
+
+Once this is done, then you should be able to see your new volume attached
+to your instance.
+
+*******************************************
+Creating a volume via from the command line
+*******************************************
+
+To create and attach a new volume, you can use one of the methods below:
+
+.. Note::
+
+  You must have :ref:`sourced an openrc file<source-rc-file>` before you can
+  use any of the following methods to create or attach a volume.
+
+.. tabs::
+
+    .. tab:: Openstack CLI
+
+        The following script will create a volume on your project:
+
+        .. literalinclude:: _scripts/cli/create-volume.sh
+            :language: shell
+            :caption: create-volume.sh
+
+        The next script will attach the previous volume to your instance. This
+        command assumes that your volume name is unique; If you have volumes
+        with duplicate names you will need to use the volume ID to attach the
+        correct volume to your compute instance.
+
+        .. literalinclude:: _scripts/cli/attach-volume.sh
+            :language: shell
+            :caption: attach-volume.sh
+
+    .. tab:: Terraform
+
+        The following assumes that you have already sourced an openRC file and
+        that you have downloaded and installed terraform.
+
+        The template file that you need to save is:
+
+        .. literalinclude:: _scripts/terraform/terraform-block-storage.tf
+            :language: shell
+            :caption: terraform-block-storage.tf
+
+        The commands you will need to use are:
+
+        .. literalinclude:: _scripts/terraform/terraform-create.sh
+            :language: shell
+            :caption: terraform-create.sh
+
+        To remove all resources associated with this terraform plan, you can use the
+        following:
+
+        .. literalinclude:: _scripts/terraform/terraform-destroy.sh
+            :language: shell
+            :caption: terraform-destroy.sh
 
 **********************
 Using volumes on Linux
@@ -63,7 +113,8 @@ The example below illustrates the use of a volume without LVM.
   but rather a demonstration that block volumes behave like regular disk drives
   attached to a server.
 
-Check that the disk is recognized by the OS on the instance using ``fdisk``:
+Once we have a command line that is connected via ssh to our instance, we check
+that our disk is recognized by the OS using ``fdisk``:
 
 .. code-block:: console
 
@@ -153,7 +204,7 @@ Label the partition:
   /dev/vdb1: LABEL="extra-disk" UUID="7dec7fb6-ff38-453b-9335-0c240d179262" TYPE="ext4" PARTUUID="235ac0e4-01"
 
 If you want the new file system to be mounted when the system reboots then you
-should add an entry to ``/etc/fstab``, for example making sure you have sudo
+should add an entry to ``/etc/fstab``. For example, making sure you have sudo
 privilege:
 
 .. code-block:: console

@@ -21,7 +21,7 @@ data by mounting the volume in a shared manner.
 .. Note::
 
   Volumes are ephemeral and they are tied to the lifetime of the pod. Once the
-  pod terminates and volumes and associated data within it are gone.
+  pod terminates all volumes and associated data within it are gone.
 
 To use a volume, a Pod specifies what volumes to provide for the Pod and where
 to mount them in the containers. The containers themselves see these presented
@@ -39,14 +39,14 @@ container mounts it as */logs*.
 
 
 ******************
-Persistent Volumes
+Persistent volumes
 ******************
 
 ``Persistent volumes`` on the other hand exist within Kubernetes but outside of
 the pods. They work differently in that pods need to claim a volume, based on
 a ``storage class``, to use it and will retain it throughout their lifetime
-until it is released. Persistent volumes will also have the option to retain
-the volume even if the their pods are destroyed.
+until it is released. Persistent volumes however, also have the option to
+retain the volume even if the their pods are destroyed.
 
 The cluster administrator can create pre-configured static PersistentVolumes
 (PV) that define a particular size and type of volume and these in turn can be
@@ -58,95 +58,52 @@ is found Kubernetes will attempt to dynamically provision the storage based
 on the volume claim. If no storage class is defined then the default storage
 class will be used.
 
-.. Note::
+Storage classes
+===============
 
-  In the current Technical Preview there is no ``default storage class``
-  defined for a new cluster in the Catalyst Cloud. This will need to be created
-  prior to using PersistentVolumes.
+Catalyst Cloud provides pre-defined storage classes for all of the block
+storage tiers in each region. There are storage classes available for the
+default `standard storage tier`_ and for each of the
+`performance storage tiers`_.
 
-Dynamic Allocation
+.. _`standard storage tier`: https://docs.catalystcloud.nz/block-storage/overview.html#the-standard-tier
+.. _`performance storage tiers`: https://docs.catalystcloud.nz/block-storage/overview.html#the-performance-tier
+
+The storage class names and their availability by region are as follows:
+
++--------------------+--------------+
+| Storage class name | Availability |
++====================+==============+
+| b1.standard        | | nz-hlz-1a  |
+|                    | | nz-por-1a  |
+|                    | | NZ-WLG-2   |
++--------------------+--------------+
+| b1.sr-r3-nvme-1000 | | nz-hlz-1a  |
+|                    | | nz-por-1a  |
++--------------------+--------------+
+| b1.sr-r3-nvme-2500 | | nz-hlz-1a  |
+|                    | | nz-por-1a  |
++--------------------+--------------+
+| b1.sr-r3-nvme-5000 | | nz-hlz-1a  |
+|                    | | nz-por-1a  |
++--------------------+--------------+
+
+Dynamic allocation
 ==================
 
 Lets look at the steps involved in dynamically allocating a PersistentVolume to
 a pod.
 
-First we need to create a storage class, for the Catalyst Cloud these will
-initially be limited to our usual block storage tier so the parameter for the
-``volume type`` must be set to ``b1.standard``.
+Next create a definition file for a PersistentVolumeClaim using a
+storage class class from the table above. We also need to specify a name for
+the claim and a size for the volume. In our example we will use the following:
 
-.. Note::
-
-  It is necessary to specify the availability zone for the storage class to be
-  defined in.
-
-To find the availability zone your cluster is in run the following.
-
-.. code-block:: bash
-
-  $ openstack availability zone list
-  +-----------+-------------+
-  | Zone Name | Zone Status |
-  +-----------+-------------+
-  | nz-hlz-1a | available   |
-  | nz-hlz-1a | available   |
-  +-----------+-------------+
-
-The current availability zones for all regions are as follows, please be aware
-that case matters in the name.
-
-Availability zones for “nz-hlz-1”
----------------------------------
-
-+-----------+-------------+
-| Zone Name | Zone Status |
-+===========+=============+
-| nz-hlz-1a | available   |
-+-----------+-------------+
-| nz-hlz-1a | available   |
-+-----------+-------------+
-
-Availability zones for “nz-por-1”
----------------------------------
-
-+-----------+-------------+
-| Zone Name | Zone Status |
-+===========+=============+
-| nz-por-1a | available   |
-+-----------+-------------+
-| nz-por-1a | available   |
-+-----------+-------------+
-
-Availability zones for “nz_wlg_2”
----------------------------------
-
-+-----------+-------------+
-| Zone Name | Zone Status |
-+===========+=============+
-| NZ-WLG-2  | available   |
-+-----------+-------------+
-| NZ-WLG-2  | available   |
-+-----------+-------------+
-
-Create the definition file for your storage type. We will call this storage
-class *block-storage-class* and update the availability and type parameters as
-discussed above.
-
-.. literalinclude:: _containers_assets/storage1.yaml
-
-Then create the storage class within your cluster.
-
-.. code-block:: bash
-
-  $ kubectl create -f storage1.yaml
-  storageclass.storage.k8s.io/block-storage-class created
-
-Next create a definition file for a PersistentVolumeClaim using the new
-storage class. As there is only the one storage class we can omit naming it in
-the definition as it will be used by default. Though we do need to specify a
-name for the claim and a size for the resulting volume, in this example we will
-use 1GB.
+* storage class : b1.standard
+* volume name : test-persistentvolumeclaim
+* volume size : 1 GB
 
 .. literalinclude:: _containers_assets/pvc1.yaml
+    :emphasize-lines: 6,10,13
 
 Now create a claim for the volume.
 
@@ -155,7 +112,7 @@ Now create a claim for the volume.
   $ kubectl create -f pvc1.yaml
   persistentvolumeclaim/test-persistentvolumeclaim created
 
-To access this from with in our pod we need to add a ``volumes`` entry
+To access this from within our pod we need to add a ``volumes`` entry
 specifying the PersistentVolumeClaim and giving it a name, then a
 ``volumeMounts`` entry to the container that links to the PVC by its name and
 finally a ``mountPath`` entry that defines the target path for the volume to
@@ -249,7 +206,7 @@ physical volume assigned to the claim will persist if the cluster is removed.
   of the StorageClass ``Reclaim Policy`` setting in this scenario.
 
 If the PersistentVolumeClaim resource was intentionally released prior to the
-cluster being terminated however then the usual retention policy for that
+cluster being terminated however, the usual retention policy for that
 storage class will apply.
 
 Retrieving data from an orphaned PersistentVolume
@@ -326,4 +283,5 @@ If it is necessary to access the data on the PersistentVolume device without
 creating a new cluster, the volume in question will need to be attached to an
 existing cloud instance and then mounted as a new volume within the filesystem.
 From here you should be able to follow the steps in the orphaned PVC section.
+
 

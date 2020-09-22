@@ -60,13 +60,13 @@ size of your volume?
 Well, as always, that depends.
 
 ************
-Boot Volumes
+Boot volumes
 ************
 
 There are a number of different options, the best option for you to use will
 depend on your circumstances.
 
-Create New Instance
+Create new instance
 ===================
 
 The best method is to spin up a new instance with a new volume and use
@@ -77,7 +77,7 @@ new instance.
 This assumes there is no permanent data stored on the boot volume that is
 outside the configuration management tool control.
 
-Use a Volume Snapshot
+Use a volume snapshot
 =====================
 
 Another method which is quick and safe is to perform a volume snapshot.
@@ -103,7 +103,7 @@ The reasons not to like this method are:
   created volume is deleted.
 * You will be charged for these cinder volumes and the snapshot.
 
-Old Fashioned Method
+Old fashioned method
 ====================
 
 Finally, there is the old fashioned method that involves:
@@ -113,7 +113,7 @@ Finally, there is the old fashioned method that involves:
 * Attach the new volume and the original to another instance.
 * Perform a copy using tools like dd.
 
-Non-boot Volumes
+Non-boot volumes
 ================
 
 The way to go is:

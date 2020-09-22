@@ -79,6 +79,7 @@ There are 4 typical scenarios as below:
 |                 | master_lb_floating_ip_enabled = True  | master_lb_floating_ip_enabled = False |
 +-----------------+---------------------------------------+---------------------------------------+
 
+.. _cluster-on-existing-net:
 
 **********************************
 Create cluster in existing network
@@ -97,7 +98,7 @@ and subnet:
 Turn on/off floating ip when creating cluster
 *********************************************
 
-Though it's not recommended, but it is possible to enable or disable floating
+Though it is not recommended, it is possible to enable or disable floating
 IP when creating a new cluster. This will override the floating IP behaviour
 defined in the cluster template. To enable floating IP you can run command
 as below:
@@ -114,9 +115,9 @@ or disable floating IP (if it's enabled in the cluster template):
   $ openstack coe cluster create my-cluster --cluster-template <Template ID> \
                                             --floating-ip-disabled
 
-***********************************
-Access Kubernetes API from Internet
-***********************************
+***************************************
+Access Kubernetes API from the internet
+***************************************
 
 .. warning::
 

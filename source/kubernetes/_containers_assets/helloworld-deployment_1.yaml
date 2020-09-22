@@ -19,4 +19,4 @@ spec:
         image: catalystcloud/helloworld-flask:1.1
         ports:
         - name: helloworld-port
-          containerPort: 5000
+          containerPort: 8080

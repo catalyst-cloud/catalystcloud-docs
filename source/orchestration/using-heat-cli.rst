@@ -1,8 +1,10 @@
-Using Heat via the command line tools
-=====================================
+#####################################
+Using heat via the command line tools
+#####################################
 
+****************
 Sample templates
-----------------
+****************
 
 Catalyst has published example templates that demonstrate the use of the cloud
 orchestration service at:
@@ -104,21 +106,23 @@ to start an instance - you need to specify which private network to attach to:
         networks:
           - network: {get_param: net}
 
+*******************
 Validate a template
--------------------
+*******************
 
 Before launching or updating a stack, you may want to ensure that the HOT
 provided is valid. The following command can be used to validate a HOT:
 
 .. code-block:: bash
 
- $ openstack orchestration template validate-f template-file.hot
+ $ openstack orchestration template validate -f hot -t template-file.HOT
 
 This command will return the yaml if it validates and will return an error with
 a message if it is invalid.
 
+****************
 Creating a stack
-----------------
+****************
 
 .. note::
 
@@ -152,8 +156,9 @@ Heat will return a confirmation message indicating the stack is being created:
   | stack_status_reason | Stack CREATE started                            |
   +---------------------+-------------------------------------------------+
 
+*********************************
 Showing information about a stack
----------------------------------
+*********************************
 
 To obtain information about a running stack:
 
@@ -201,8 +206,9 @@ Heat will return the following information about the stack:
   | timeout_mins          | None                                                                                                                                       |
   +-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------
 
+*******************************
 List resources owned by a stack
--------------------------------
+*******************************
 
 You can list the resources that belong to a stack with the command below:
 
@@ -215,9 +221,9 @@ You can list the resources that belong to a stack with the command below:
   | server        | 498df201-7206-4565-822d-3482fb10b5a7 | OS::Nova::Server | CREATE_COMPLETE | 2016-08-22T00:44:14Z |
   +---------------+--------------------------------------+------------------+-----------------+----------------------+
 
-
+******************************
 List events related to a stack
-------------------------------
+******************************
 
 You can list the events related to the life-cycle of a stack with the following
 command:
@@ -232,8 +238,9 @@ identify whether they are producing the expected events and results.
 Individual events can be further analysed using the ``heat event-show``
 command.
 
+****************
 Deleting a stack
-----------------
+****************
 
 To delete a stack:
 

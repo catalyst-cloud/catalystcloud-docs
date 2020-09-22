@@ -1,5 +1,6 @@
-A simple backup example
-=======================
+################
+A simple example
+################
 
 Firstly, lets check our connectivity to the object store. If we run the
 following for an existing empty container, in this case 'first-container', we
@@ -54,8 +55,6 @@ file called foo.sh.
   TotalDestinationSizeChange 231 (231 bytes)
   Errors 0
   -------------------------------------------------
-
-
 
 We can verify the state of our backups with:
 

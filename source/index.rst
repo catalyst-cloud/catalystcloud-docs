@@ -17,7 +17,7 @@ Contents:
    first-instance
    best-practices
    sdks-and-toolkits
-
+   alarm
    backups
    billing
    block-storage
@@ -31,9 +31,9 @@ Contents:
    object-storage
    orchestration
    tutorials
-
    release-notes
    contributing
+
 
 ******************
 External resources

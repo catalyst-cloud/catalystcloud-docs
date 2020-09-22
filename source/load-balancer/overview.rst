@@ -21,7 +21,6 @@ to this service:
   their state and divert traffic away from members that are not responding
   properly. Health monitors are associated with a pool.
 
-
 *****************
 High availability
 *****************
@@ -29,7 +28,6 @@ High availability
 The load balancer service is highly available by default. Two software load
 balancer instances are clustered using VRRP, allowing them to fail-over
 connections between the load balancers in around five seconds.
-
 
 *************************
 Load balancing algorithms
@@ -46,7 +44,6 @@ the behaviour of the load balancer:
 * ``Least Connection`` algorithm This algorithm selects the server with the
   fewest active transactions and then forwards the user request to the back
   end.
-
 
 ******************
 Layer 4 vs Layer 7

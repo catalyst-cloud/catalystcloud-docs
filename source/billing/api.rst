@@ -1,15 +1,15 @@
-
-***********
+###########
 Billing API
-***********
+###########
 
 Catalyst Cloud now provides a RESTful API to access our billing service. With
 the billing API, it's easy to get historical invoices and the cost for the
 current month. We have released an official Python client to help you consume
 the API, see https://pypi.python.org/pypi/python-distilclient.
 
+*****************************************
 How can I list my quotations or invoices?
-=========================================
+*****************************************
 
 After you have installed python-distilclient and python-openstackclient, you
 can easily run the following command to list invoices:

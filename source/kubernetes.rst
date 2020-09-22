@@ -13,15 +13,19 @@ Table of Contents:
    kubernetes/quickstart
    kubernetes/overview
    kubernetes/clusters
-   kubernetes/access-control
+   kubernetes/user-access
    kubernetes/auto-healing
    kubernetes/auto-scaling
+   kubernetes/ingress
+   kubernetes/production-considerations
    kubernetes/network-policies
-   kubernetes/nginx-ingress
    kubernetes/private-cluster
+   kubernetes/logging
    kubernetes/rolling-upgrade
    kubernetes/services
    kubernetes/storage
+   kubernetes/versions
+   kubernetes/security
 
 
 ******************
@@ -46,11 +50,3 @@ following command to assist our support team in helping you to resolve it.
 Known Issues
 ************
 
-**Cluster takes 15-25 minutes to deploy**
-
-
-* **Description:** Time to deploy a cluster is in the vicinity of 15-25
-  minutes.
-* **Status:** The cause of the problem is known and a release that reduces
-  deployment times being planned.
-* **Workaround:** None.
