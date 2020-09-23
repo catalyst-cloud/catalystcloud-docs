@@ -59,6 +59,7 @@ Orchestration tutorials
    :maxdepth: 1
 
    tutorials/orchestration/bootstrapping-puppet
+   tutorials/orchestration/autohealing-isolated-example
    tutorials/orchestration/ansible-driven-puppet
 
 Storage tutorials
