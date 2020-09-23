@@ -3,7 +3,7 @@ Additional permissions and access methods
 #########################################
 
 The following section details permissions that exists outside the scope of the
-roles, which we have focused on in the previous sections. We will also discuss
+roles we have focused on in the previous sections. We will also discuss
 different methods of accessing objects on your project without relying on the
 use of roles.
 
@@ -21,7 +21,7 @@ individual user who initially creates the cluster has additional permissions
 which allow them to interact directly with certain nodes of the cluster, and to
 dictate behaviour for the master nodes.
 
-Another example of having extra permissions after creating aon object is when
+Another example of having extra permissions after creating an object is when
 someone creates an instance and supplies their SSH key during creation. The
 user who creates the instance, using their SSH key, will be the only one able
 to access the instance. You can change this behaviour by including additional
@@ -58,8 +58,8 @@ this documentation.
 Instances and clusters
 ======================
 
-Another method of access control that affects instances and clusters is
-security groups. These are used to define what traffic is able
-to pass into or out of your instances. The full description of security groups
-and how they function can be found in the
-:ref:`network section<security-groups>` of the documentation.
+Another method of access control, that affects instances and clusters, is
+security groups. These are used to define what traffic is able to pass into or
+out of your instances. The full description of security groups and how they
+function can be found in the :ref:`network section<security-groups>` of the
+documentation.
