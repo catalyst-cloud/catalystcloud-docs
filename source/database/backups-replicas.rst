@@ -86,17 +86,34 @@ want to save changes. When restoring from an incremental backup, the process
 is the same as for a normal backup; The database service handles the
 complexity of applying the incremental changes.
 
-To create a new incremental backup we use the following command
+To create a new incremental backup we use the following command:
 
 .. code-block:: bash
 
   $ openstack database backup create DATABASE_ID backup1.1 --incremental
 
-
 For the purposes of this example I have named the incremental backup
 *backup1.1*. For any subsequent backups, you would name them 1.2, 1.3 etc.
-For these subsequent backups, when you have to specify the parent ID you would
-use the ID number of your previous incremental backup. In this case backup1.1
+
+If we were to go ahead and create a few more backups, we will see how each of
+the backups is related to the previous one, using the Parent_ID field:
+
+.. code-block:: bash
+
+  $ openstack database backup list
+  +--------------------------------------+--------------------------------------+------------+-----------+--------------------------------------+---------------------+
+  | ID                                   | Instance ID                          | Name       | Status    | Parent ID                            | Updated             |
+  +--------------------------------------+--------------------------------------+------------+-----------+--------------------------------------+---------------------+
+  | bd187812-7f2c-4df1-8d9a-87bae8b34ee3 | ac59dcd2-646c-41c7-bfc5-e1872f07d53e | backup1.2  | COMPLETED | 234682c5-e2b8-4708-9988-6829c16cf5c9 | 2020-09-29T02:05:08 |
+  | 234682c5-e2b8-4708-9988-6829c16cf5c9 | ac59dcd2-646c-41c7-bfc5-e1872f07d53e | backup1.1  | COMPLETED | eb4a16f7-7663-4ddd-990a-add99e5d8f4e | 2020-09-21T22:42:41 |
+  | eb4a16f7-7663-4ddd-990a-add99e5d8f4e | ac59dcd2-646c-41c7-bfc5-e1872f07d53e | original   | COMPLETED | None                                 | 2020-09-21T22:41:53 |
+  +--------------------------------------+--------------------------------------+------------+-----------+--------------------------------------+---------------------+
+
+As you can see, the backups are all related to the same instance, but their
+*parent ID* matches the previous incremental backup's *ID*. This shows you the
+connection between each of your incremental backups and helps you keep track
+of the order, if for some reason your naming convention is changed or isn't
+followed.
 
 .. _database_replica:
 
