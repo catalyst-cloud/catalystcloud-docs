@@ -12,7 +12,7 @@ Permissions
 ****************
 
 Some of the objects you create on your project will give ownership permissions
-to the user who created them. The most common example of this is when creating
+to the user who created them, the most common example of this is when creating
 a kubernetes cluster. If you are the person who created the cluster then you
 are known as the "cluster administrator." While there is a role required for
 interacting with kubernetes clusters (detailed in the
