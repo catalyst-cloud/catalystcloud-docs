@@ -88,9 +88,11 @@ complexity of applying the incremental changes.
 
 To create a new incremental backup we use the following command:
 
+
 .. code-block:: bash
 
   $ openstack database backup create DATABASE_ID backup1.1 --incremental
+
 
 For the purposes of this example I have named the incremental backup
 *backup1.1*. For any subsequent backups, you would name them 1.2, 1.3 etc.
@@ -114,6 +116,7 @@ As you can see, the backups are all related to the same instance, but their
 connection between each of your incremental backups and helps you keep track
 of the order, if for some reason your naming convention is changed or isn't
 followed.
+
 
 .. _database_replica:
 
