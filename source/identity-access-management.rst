@@ -28,3 +28,4 @@ any user on your project, but especially on accounts which have the
    identity-access-management/roles
    identity-access-management/multi-factor-authentication
    identity-access-management/best-practices
+   identity-access-management/additional-permissions
