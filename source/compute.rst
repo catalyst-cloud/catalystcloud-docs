@@ -36,3 +36,4 @@ Table of Contents
   compute/stop-instance
   compute/anti-affinity-groups-ha
   compute/faq
+  Best practices <compute/compute-bp>

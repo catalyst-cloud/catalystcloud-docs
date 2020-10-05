@@ -1,6 +1,7 @@
 ################################
-Block storage
+Block storage best practices
 ################################
+
 We run a distributed storage system that by default retains three copies of
 your data on different servers spread across a region (a datacenter).
 We can afford to lose many disks and multiple storage nodes without losing any
