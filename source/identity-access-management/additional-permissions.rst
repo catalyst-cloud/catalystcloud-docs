@@ -33,7 +33,7 @@ When creating a compute instance, you supply one SSH key and the only
 user who is able to access that instance will be the person with the matching
 private key. You can change this behaviour by creating additional users on the
 instance itself, either after logging in to the instance yourself or in a cloud
-config file; you then create any new users and provide a public ssh key for
+config file; you then create your new users and provide a public ssh key for
 each.
 
 ******************
