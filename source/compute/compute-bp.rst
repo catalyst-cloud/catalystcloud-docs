@@ -1,6 +1,6 @@
-#######
-Compute
-#######
+######################
+Compute best practices
+######################
 
 *****************
 High availability
