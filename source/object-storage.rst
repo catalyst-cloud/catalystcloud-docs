@@ -32,10 +32,9 @@ Table of Contents:
 .. toctree::
   :maxdepth: 1
 
-  object-storage/dashboard
-  object-storage/cli
-  object-storage/api
+  object-storage/using-container
   object-storage/advanced
   object-storage/storage-access-control
   object-storage/replication-policy
   object-storage/faq
+  Best practices <object-storage/object-storage-bp>

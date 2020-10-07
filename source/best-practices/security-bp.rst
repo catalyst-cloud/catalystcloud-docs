@@ -1,13 +1,13 @@
-
-***********************
-Security best practices
-***********************
+#######################
+Security
+#######################
 
 This section covers some best practices for security on the Catalyst Cloud, and
 for general security business standards in the tech sector today.
 
+******************
 Password protocols
-==================
+******************
 
 Password strength is defined by the entropy it has.
 This is to say how long it takes to brute force your password. If you have a
@@ -72,8 +72,9 @@ censor the password before sending it, as done below.
   OS_PROJECT_ID=fha98835bhnae8092n4388ujf
   OS_PASSWORD=XXXXXXXXXXXXX
 
+********************
 Update systems often
-====================
+********************
 
 Keeping your software up to date with the most current version of
 your applications and operating systems helps to keep you secure. Malicious
@@ -85,9 +86,9 @@ not be able to update it but for those that you can, it is recommended you
 keep them updated as regularly as possible. These updates usually include
 upgrades dealing with security a large portion of the time.
 
-
+*****************
 Encrypting emails
-=================
+*****************
 
 When sending emails that pertain to sensitive information,
 they should be encrypt using a PGP key or some other form of encryption. This
@@ -98,8 +99,9 @@ You should *never* send any form of private key or identification information
 over emails that are not encrypted. In some cases you may need to use a
 physical memory device (flash drive) to transport highly sensitive files.
 
+*****************
 Access management
-=================
+*****************
 
 Access management, is a set of practices and rules that make
 sure that your organisation knows exactly who has access to the resources that
@@ -112,9 +114,9 @@ on roles and their uses, please see the
 :ref:`identity access management <identity-access-management>` section of the
 documentation.
 
-
+***************
 Security groups
-===============
+***************
 
 Security groups are what allow you to safely and securely access the instances
 that you create on the Catalyst Cloud. When creating a security group, it

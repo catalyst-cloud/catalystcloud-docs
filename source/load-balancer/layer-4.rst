@@ -5,7 +5,6 @@ Layer 4 load balancing
 This example illustrates how to load balance traffic on port 80 and 443 to two
 compute instances running a mock Python Flask web application.
 
-
 ***********
 Preparation
 ***********
@@ -32,7 +31,7 @@ the code into the new file you create on your instances.
 
 **script** flask_app.py
 
-.. literalinclude:: ../_scripts/flask_app.py
+.. literalinclude:: _scripts/flask_app.py
 
 Follow the instructions below to install the required dependencies.
 

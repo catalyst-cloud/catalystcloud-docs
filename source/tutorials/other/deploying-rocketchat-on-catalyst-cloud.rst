@@ -15,8 +15,9 @@ This tutorial assumes the following:
 * A basic knowledge of Bash and YAML.
 * Have an SSH key already generated, preferably in :code:`/home/<user>/.ssh/`
 
+************
 Introduction
-============
+************
 
 In this tutorial we're going to set up Rocket.Chat on a Catalyst Cloud instance
 using nginx as an HTTPS reverse proxy to handle requests to and from the chat
@@ -43,8 +44,9 @@ then this part of the process may be extremely familiar to you, and you can
 choose to skip to `Automating our install using Cloud-Init`_
 if you wish.
 
-Setting up the Network
-======================
+**********************
+Setting up the network
+**********************
 
 First we want to set a prefix value for all of our object names so we can avoid
 future name conflicts. :code:`rocketchat` is a great choice because that's what
@@ -98,8 +100,9 @@ of the 10.0.0.0/24 address space.
 The network is now fully set up and configured. We'll connect our rocketchat
 instance up later on. For now we need to create some security rules.
 
-Security Settings
-=================
+*****************
+Security settings
+*****************
 
 It's important to consider what access is needed for our server to serve its
 purpose. For the purposes of this tutorial we are keeping these rules fairly
@@ -153,8 +156,8 @@ access on ports 80 and 443 for HTTP/S access.
   --dst-port 443 \
   "$CC_SECURITY_GROUP_ID"
 
-SSH Keys
---------
+SSH keys
+========
 
 We'll use this key to access the Rocket.Chat instance via SSH. These will be
 applied to the :code:`ubuntu` user on the Rocket.Chat instance.
@@ -165,8 +168,9 @@ applied to the :code:`ubuntu` user on the Rocket.Chat instance.
   SSH_KEY_NAME="$PREFIX-key"
   openstack keypair create --public-key ~/.ssh/id_rsa.pub $SSH_KEY_NAME
 
+***************************************
 Automating our install using Cloud-Init
-============================================
+***************************************
 
 Cloud Init is a system for configuring a new instance when it is first
 created. It takes all it's directives from a simple YAML file.
@@ -273,8 +277,9 @@ we wanted to install this on another version of Ubuntu, such as Bionic(18.04)
 or Trusty(14.04), then we can just make another cloud init file with that
 distro as the file extension.
 
+*********************************
 Creating the Rocket.Chat instance
-=================================
+*********************************
 
 When we create an instance we have to decide what specifications we want.
 In this case we're going to install Ubuntu 16.04 (Xenial), with a 1vCPU and

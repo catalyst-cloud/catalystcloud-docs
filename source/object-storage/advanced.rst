@@ -3,9 +3,9 @@ Advanced features
 #################
 
 
-========================================
+****************************************
 Static websites hosted in object storage
-========================================
+****************************************
 
 It is possible to host simple websites that contain only static content from
 within a container.
@@ -75,11 +75,9 @@ You should now be able to view the index file as a website.
 
 https://object-storage.nz-por-1.catalystcloud.io:443/v1/%AUTH_ID%/%container_name%/
 
-
-
-=================
-Object Versioning
-=================
+*****************
+Object versioning
+*****************
 
 This provides a means by which multiple versions of your content can be stored
 allowing for recovery from unintended overwrites.
@@ -194,9 +192,9 @@ convention outlined above.
   +-------------------------------+
 
 
-=============
+*************
 Temporary URL
-=============
+*************
 
 This is a means by which a temporary URL can be generated, to allow
 unauthenticated access to the Swift object at the given path. The
@@ -228,8 +226,10 @@ should expire.
 - in the nested container structure : bar_container/quux.md
 - with key : my_secret_tempurl_key
 
-Creating Temporary URLs in the Catalyst Cloud
+
+Creating temporary URLs in the Catalyst Cloud
 =============================================
+
 At the time of writing, the only method currently available for the creation
 of temporary URLs is using the command line tools.
 
@@ -289,9 +289,9 @@ successful, the request should return the contents of the object.
 You could also access the object by taking the same URL that you passed to cURL
 and pasting it into a web browser.
 
-==========================
-Working with Large Objects
-==========================
+**************************
+Working with large objects
+**************************
 
 Typically, the size of a single object cannot exceed 5GB. It is possible,
 however, to use several smaller objects to break up the large object. When this
@@ -309,8 +309,9 @@ There are tools available, both GUI and CLI, that will handle the segmentation
 of large objects for you. For all other cases, you must manually split the
 oversized files and manage the manifest objects yourself.
 
+*********************************
 Using the Swift command line tool
-=================================
+*********************************
 
 The Swift tool which is included in the `python-swiftclient`_ library, for
 example, is capable of handling oversized files and gives you the choice of
@@ -326,7 +327,8 @@ container using the Swift tool. To keep the output brief, a 512MB file
 is used in the example.
 
 example 1 : DLO
----------------
+===============
+
 The default mode for the tool is the ``dynamic large object`` type, so in this
 example, the only other parameter that is required is the segment size.
 The ``-S`` flag is used to specify the size of each chunk, in this case
@@ -346,7 +348,8 @@ The ``-S`` flag is used to specify the size of each chunk, in this case
 |
 
 example 2 : SLO
----------------
+===============
+
 In the second example, the same segment size as above is used, but you specify
 that the object type must now be the ``static large object`` type.
 
@@ -403,8 +406,9 @@ and overwrites, etc. You can override this behaviour with the --leave-segments
 option if desired; this is useful if you want to have multiple versions of
 the same large object available.
 
+*********************************************************
 Dynamic Large Objects (DLO) vs Static Large Objects (SLO)
-==========================================================
+*********************************************************
 
 The main difference between the two object types is to do with the associated
 manifest file that describes the overall object structure within Swift.
@@ -424,8 +428,9 @@ on the assumption that the container will eventually be consistent.
 For ``SLO`` the difference is that a user-defined manifest file describing
 the object segments is required. It also does not rely on eventually
 consistent container listings to do so. This means that the segments can
-be held in different container locations. The fact that once all files are
-can't then change is the reason why these are referred to as 'static' objects.
+be held in different container locations. The fact that once all files can't
+then change is the reason why these are referred to as 'static' objects.
+
 
 A more manual approach
 ======================
@@ -467,21 +472,21 @@ more involved. A detailed description of the process can be seen `here`_
 
 .. _here: https://docs.openstack.org/swift/latest/overview_large_objects.html#module-swift.common.middleware.slo
 
-==============================
+*****************************
 Interacting with QNAP devices
-==============================
+*****************************
 
-Through the use of our object storage service, you are able to store
-backups of files from your QNAP devices on the Catalyst Cloud. The following
+Another feature of the object storage service is that you are able to create
+and store backups from a QNAP device on the Catalyst Cloud. The following
 details the process for creating backups via the QNAP interactive dashboard
-and storing these backups inside a container on the Catalyst Cloud.
+and storing your backups inside a container on the Catalyst Cloud.
 
 After you have signed into your QNAP device you will have to navigate
-through the dashboard to the HBS 3 Hybrid Backup Sync service.
+through the dashboard to the *HBS 3 Hybrid Backup Sync* service.
 
 .. image:: assets/qnap/qnap-app-screen.png
 
-Once you select this service you will be met with the overview screen which
+Once you select this service, you will be met with the overview screen which
 gives you a look at the backups you already have and their current status. It
 also informs you of the status of any jobs that you may have for your backups
 and when they are scheduled to take place or the status of how the job has
@@ -522,23 +527,22 @@ supply the correct API endpoint for the ``Server Address:``
 | nz-hlz-1 | s3.object-storage.nz-hlz-1.catalystcloud.io:443 |
 +----------+-------------------------------------------------+
 
-After both of those have been done you will need to get your ec2 credentials
-which you can find on the Catalyst Cloud Dashboard under the API section.
+After both of those have been done you will need to get your ec2 credentials,
+which you can find under the API section of the Catalyst Cloud Dashboard.
 
 .. image:: assets/qnap/ec2-creds.png
 
-If you click on view credentials then it will give you the rest of the
-information you need to complete the step for creating the connection to the
-S3 API. After this you click the ``create`` button and we are taken the
-this screen:
+If you click on view credentials a window will pop up, with the rest of the
+information you need to complete the connection to the S3 API.
+After this, swap back to the QNAP dashboard and click the ``create`` button. We
+are then taken the this screen:
 
 .. image:: assets/qnap/select-bucket.png
 
-We are now connected with the object storage service on the Cloud, this allows
-us to either create a new bucket that we want to store our backups in, or
+Now that we have connected our QNAP device with the Catalyst Cloud, we can
+begin to either create a new bucket that we want to store our backups in, or
 select an already existing bucket to use instead. For this example I am going
-to use the `qnap-test-bucket` but the important part is making sure that you
-select or create a bucket to store your backup.
+to use the `qnap-test-bucket`.
 
 .. image:: assets/qnap/select-folder-in-bucket.png
 
@@ -546,7 +550,7 @@ On this screen we select or create a new folder to keep our backups in. For
 this example I created a folder called `Qnap-backup-folder.` After this has
 been selected click ``Add`` and it will take you to the next screen:
 
-.. image:: assets/qnap/schedualer.png
+.. image:: assets/qnap/scheduler.png
 
 The Scheduler allows you to create a job that will backup files for you
 automatically, with whatever parameters you see fit. For this example we are

@@ -2,14 +2,14 @@
 Creating volumes using LVM
 ##########################
 
-
+************
 What is LVM?
-------------
+************
 
 The Logical Volume Manager (LVM) is a user space tool set designed to provide a
 higher level management of disk storage on a linux system than the traditional
-approach of disks and partitions by creating a software abstraction of those
-physical devices.
+approach of disks and partitions. This is achieved by creating a software
+abstraction of those physical devices.
 
 This virtualization of the disks provides the following benefits:
 
@@ -30,10 +30,11 @@ software such as partitioning utilities that the disk is being used. This
 avoids the possibility of someone firing up a partitioning program, seeing an
 un-partitioned disk and attempting to use it for some other purpose.
 
+******************************************
 Creating a logical volume on a single disk
-------------------------------------------
+******************************************
 The first thing to do is identify the disks available for use, to do this
-use ``lvmdiskscan`` while on a **compute instance**. and while having ``Sudo``
+use ``lvmdiskscan`` while on a **compute instance**; and while having ``Sudo``
 privileges.
 
 .. code-block:: shell
@@ -55,7 +56,7 @@ This shows us that there are currently three disks available
 For this example /dev/vdb will be used to create the logical volume.
 
 There are several tools available for creating disk partitions, these include
-tools such as fdisk , parted and the GNU Parted. This example will use gdisk
+tools such as fdisk, parted and the GNU parted. This example will use gdisk
 and the steps are as follows:
 
 - load gdisk and select the disk to partition
@@ -208,8 +209,8 @@ The final step is to create a new logical volume using the **lvcreate** command
 , we will call it 'data' and create it in the volume group 'vg_data'.
 
 In the output above it shows that the volume group has 10GB available. That
-means that a logical volume could be created with any size up to that limit,
-To create a 5GB partition for instance specify the the size argument ``-l 5G``
+means that a logical volume could be created with any size up to that limit.
+To create a 5GB partition for instance, specify the the size argument ``-l 5G``
 . For this example the new volume will use all of the available free space with
 the following parameter ``-l 100%FREE``.
 
@@ -250,7 +251,7 @@ Running **lvmdiskscan** now should show that the new LVM volume is present.
       0 LVM physical volume whole disks
       1 LVM physical volume
 
-All that remains to be done now is add a filesystem to the LVM volume and
+All that remains to be done now is to add a filesystem to the LVM volume and
 create a mount point and a mount point entry in /etc/fstab and test that the
 volume mounts correctly.
 

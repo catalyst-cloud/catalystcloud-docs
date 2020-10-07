@@ -1,6 +1,6 @@
-***********************************
+###################################
 Importing existing virtual machines
-***********************************
+###################################
 
 Importing an unchanged existing virtual machine to the Catalyst Cloud is likely
 to work out of the box, but to get the best out of it and ensure that all API
@@ -9,11 +9,12 @@ steps and tweaks that we highly recommend. For example: cloud VMs have a
 cloud-init script that runs at boot time to fetch the configuration of the
 compute instance from our metadata agent.
 
+**************************
 Preparing your existing VM
-==========================
+**************************
 
 Debian and Ubuntu Linux
------------------------
+=======================
 
 Make sure GRUB is booting out of the master boot record on the first hard
 drive. While it is possible to import virtual machines with more complex disk

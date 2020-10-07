@@ -12,8 +12,6 @@ this.
 
 .. _`Calico`: docs.projectcalico.org/v2.6/introduction/
 
-
-
 **************************
 Create a simple deployment
 **************************
@@ -144,9 +142,6 @@ allowed and that this will apply to all pods.
     Allowing egress traffic:
       <none> (Selected pods are isolated for egress connectivity)
     Policy Types: Ingress
-
-
-
 
 Let's connect to the busybox pod again and try to access the app-pod service.
 This time we will add a timeout to our wget command as it will not succeed.

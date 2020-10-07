@@ -1,6 +1,6 @@
-****************************************
+########################################
 Windows instance using the web interface
-****************************************
+########################################
 
 Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
 
@@ -20,8 +20,9 @@ Otherwise, let's proceed with building a windows instance.
   catalyst cloud. Do not worry about their absence on your system, they will
   not affect this tutorial.
 
-Configure Instance Security Group
-=================================
+*********************************
+Configure instance security group
+*********************************
 
 You will add  a security group and a rule for your instance so that it can be
 accessed using SSH.
@@ -42,13 +43,13 @@ Enter a name and description and click "Create Security Group":
 
 Now click on "Manage Rules" for the group you have created
 
-.. image:: ../_static/fi-security-group-rules-manage.png
+.. image:: dashboard_assets/windows-dashboard/manage-rules-sec-group.png
    :align: center
 
 
 Click on “Add Rule”:
 
-.. image:: ../_static/fi-security-group-rule-add.png
+.. image:: dashboard_assets/windows-dashboard/add-rules-sg-highlight.png
    :align: center
 
 
@@ -69,9 +70,9 @@ menu, leave the defaults for the other fields. Click "Add".
   of your compute instances and services to IP addresses or subnets that are
   trusted.
 
-
-Booting an Instance
-===================
+*******************
+Booting an instance
+*******************
 
 We are now ready to launch your first instance. Select launch instance from the
 instances list:
@@ -116,16 +117,14 @@ Select the ``first-instance-sg`` security group from the list and click "Next":
 
 No key pair is required for a Windows instance. Click "Next":
 
-
-
 It will take a few seconds for your instance to build. You will see the Status,
 Task and Power State change during this process. When complete, the status will
 be "Active". You now have a running instance, but there are a few more steps
 required before you can log in.
 
-
-Allocate a Floating IP
-======================
+**********************
+Allocate a floating IP
+**********************
 
 To associate a floating IP with your instance, you need to navigate to the
 "Floating IPs" tab of the "Access & Security" section.
@@ -147,9 +146,10 @@ In this example, select the "first-instance" port and click "Associate":
 .. image:: dashboard_assets/windows-dashboard/manage-floating-ip.png
    :align: center
 
+***************************
+Connect to the new instance
+***************************
 
-Connect to the new Instance
-===========================
 First you must set the Administrator password. To do this, go to the
 "Instances" section, click on first-instance under "Instance Name" and select
 the "Console" tab.
@@ -157,7 +157,7 @@ the "Console" tab.
 Once the following screen loads, click on OK to continue.
 
 Firewall rules required to allow access to the console in the cloud dashboard
------------------------------------------------------------------------------
+=============================================================================
 
 .. note::
 
@@ -166,24 +166,26 @@ Firewall rules required to allow access to the console in the cloud dashboard
   allowing the following traffic.
 
 port
-^^^^
+----
+
 - 6080 (TCP)
 
 for the following Catalyst Cloud API hosts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------
+
 - nz-por-1: 202.78.247.202
 - nz-hlz-1: 202.78.244.90
 - nz_wlg_2: 202.78.240.218 & 2404:130:20:2::218
 
 
-.. image:: ../_static/fi-windows-login.png
+.. image:: dashboard_assets/windows-dashboard/fi-windows-login.png
    :align: center
 
 
 You will then be prompted by the following screen to create a new administrator
 password.
 
-.. image:: ../_static/fi-windows-login-2.png
+.. image:: dashboard_assets/windows-dashboard/fi-windows-login-2.png
    :align: center
 
 

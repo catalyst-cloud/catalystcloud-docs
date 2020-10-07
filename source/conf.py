@@ -33,7 +33,9 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.imgmath',
     'sphinx.ext.ifconfig',
-    'sphinx_tabs.tabs']
+    'sphinx_tabs.tabs',
+    'aafigure.sphinxext',
+    ]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -49,7 +51,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Catalyst Cloud'
-copyright = u'2016-2019, Catalyst IT'
+copyright = u'2016-2020, Catalyst IT'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the

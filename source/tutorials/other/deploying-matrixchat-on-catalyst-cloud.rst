@@ -13,8 +13,9 @@ This tutorial assumes the following:
   SRV record with the hostname :code:`_matrix._tcp` pointing to port
   :code:`8448` on the target instance.
 
+************
 Introduction
-============
+************
 
 Matrix is an open source, decentralized, and encrypted communication protocol.
 Data is not necessarily stored on a single server but in all servers
@@ -36,8 +37,9 @@ at the time of writing, is the most installed Matrix homeserver implementation.
 We're not going set up an instance on Catalyst Cloud as this has already been
 covered by the first-instance tutorials.
 
-Creating our Playbook
-=====================
+*********************
+Creating our playbook
+*********************
 
 We want to begin by adding our hostname so that Ansible knows what to do with
 it. Open :code:`/etc/ansible/hosts` on your machine in your preferred text
@@ -53,8 +55,9 @@ This will tell Ansible which set of hosts to run our playbook on. If we
 wanted to deploy to multiple hosts they could all be added to the chatservers
 host group and the same playbook would run on them also.
 
-Beginning the Installation
-==========================
+**************************
+Beginning the installation
+**************************
 
 To begin with we're going to create a new file and save it as
 :code:`matrixchat-playbook.yml`
@@ -92,8 +95,9 @@ We're going to want to use HTTPS later so we'll add the repository for certbot.
       apt:
         update_cache: yes
 
-Installing Synapse & Dependencies
-=================================
+*********************************
+Installing Synapse & dependencies
+*********************************
 
 We're going to install and build Synapse. To do this we'll need a few
 dependencies. We're also doing to install nginx configured as a reverse proxy
@@ -123,8 +127,9 @@ to enable web access to the built in matrix client.
       pip install --upgrade setuptools
       pip install https://github.com/matrix-org/synapse/tarball/master
 
-Applying Configurations
-=======================
+***********************
+Applying configurations
+***********************
 
 Before our system can do anything, we need to configure it. We're going
 to point our server at port 8008 as this is the port our matrix client runs at.
@@ -204,8 +209,9 @@ Hopefully nothing breaks and you should be able to go navigate a web browser to
 default matrix client. This is served over http and currently HTTPS will fail.
 We'll set that up next.
 
-Free HTTPS with Certbot and Let's Encrypt
-=========================================
+*****************************************
+Free HTTPS with certbot and let's encrypt
+*****************************************
 
 We want to secure communication between users and our server, so to do so
 we'll get an SSL certificate. Earlier when we were installing dependencies
@@ -229,8 +235,9 @@ this is done we need to restart nginx:
 Navigate to :code:`https://yourdomain.com` and you should see the exact same
 thing as before.
 
-Registering a User
-==================
+******************
+Registering a user
+******************
 
 Our server needs users, you can register a user via the web client, or you can
 create one using the command below. This will also prompt if you would
@@ -240,8 +247,9 @@ like the user you are creating to become an admin (for this server) as well.
 
   $ register_new_matrix_user -c ~/.synapse/homeserver.yaml https://localhost:8448
 
+*******
 Testing
-========
+*******
 
 Once you've created a user, attempt to login. If you'd like, we can test
 server federation by navigating to another client such as Riot,

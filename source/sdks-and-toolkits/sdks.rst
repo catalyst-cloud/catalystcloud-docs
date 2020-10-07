@@ -19,5 +19,5 @@ SDKs for all other major languages can be found at:
 https://wiki.openstack.org/wiki/SDKs
 
 Prior to accessing the Catalyst Cloud API endpoints, ensure you are working
-from a whitelisted IP address.  More information can be found under
+from a **whitelisted IP address**.  More information can be found under
 :ref:`Access and whitelist <access-and-whitelist>`

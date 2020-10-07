@@ -82,7 +82,7 @@ Create a copy of the flask_app.py script (shown below) on each server.
 
 **script** flask_app.py
 
-.. literalinclude:: ../_scripts/flask_app.py
+.. literalinclude:: _scripts/flask_app.py
 
 Follow the instructions below to install the required dependencies.
 
@@ -176,7 +176,6 @@ virtual IP address (VIP) will be attached to the local subnet
   | vip_subnet_id       | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
   +---------------------+--------------------------------------+
 
-
 *******************
 Create the listener
 *******************
@@ -221,7 +220,6 @@ listener.
   | timeout_tcp_inspect       |                                      |
   | updated_at                | None                                 |
   +---------------------------+--------------------------------------+
-
 
 ****************
 Create the pools
@@ -279,7 +277,6 @@ Create the second pool.
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
 
-
 ***************
 Add the members
 ***************
@@ -336,7 +333,6 @@ Add the second member to the second pool.
   | monitor_address     | None                                 |
   +---------------------+--------------------------------------+
 
-
 ********************
 Create the L7 policy
 ********************
@@ -366,7 +362,6 @@ Create the layer 7 policy.
   | name                | policy1                              |
   +---------------------+--------------------------------------+
 
-
 ******************
 Create the L7 rule
 ******************
@@ -393,7 +388,6 @@ Create a rule for the policy.
   | operating_status    | OFFLINE                              |
   +---------------------+--------------------------------------+
 
-
 ************
 Assign a VIP
 ************
@@ -407,7 +401,6 @@ VIP Port ID and then assign it a floating ip address.
   export FIP=`openstack floating ip create public-net -f value -c floating_ip_address`
   export VIP_PORT_ID=`openstack loadbalancer show lb_test -f value -c vip_port_id`
   openstack floating ip set --port $VIP_PORT_ID $FIP
-
 
 **************
 Test the setup

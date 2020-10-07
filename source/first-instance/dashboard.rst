@@ -1,11 +1,13 @@
-.. _first-instance-with-dashboard:
-
 #######################
 Using the web dashboard
 #######################
 
-Now we're going to take you step by step on the process of creating a Linux
-instance on the Catalyst Cloud.
+.. _first-instance-with-dashboard:
+
+The web dashboard is the easiest way of creating an instance as you can
+visually see your resources being built with each step. The dashboard itself is
+also easy to navigate and you should be able to follow the steps below
+regardless of your background with cloud based systems.
 
 ****************
 Before you begin
@@ -15,12 +17,22 @@ Before you begin
    the Catalyst Cloud.
 2) Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
 3) As a new user to the Catalyst Cloud your initial cloud project will come with
-   a pre-configured private network and a router connected to the internet. We
-   assume this is the case for this tutorial. If you have deleted this, or
-   would like to create additional networks then please see
-   :ref:`creating networks <creating_networks>` for details on how to do that.
+   a pre-configured private network and a router connected to the internet in
+   the Hamilton region. We still cover the proper steps to creating these
+   networking resources in this tutorial; in the case you wish to follow these
+   steps to create a network on a different region.
 
 Otherwise, let's proceed with building your first instance.
+
+********************
+Networking resources
+********************
+
+This section will cover how to create the networking resources required to host
+your instance. Should you already have them available on your project, then you
+can ignore this section of the tutorial and move on to "uploading an ssh key"
+
+.. include:: ../network/_scripts/create-network-dashboard.rst
 
 ********************
 Uploading an SSH key
@@ -77,7 +89,7 @@ Name the key pair, and paste your public key into the box.
 Now that you've either imported or created an SSH key pair, we can continue.
 
 *********************************
-Configure Instance Security Group
+Configure instance security group
 *********************************
 
 By default, instances are inaccessible from all external IP addresses on all
@@ -125,10 +137,8 @@ When you're happy, select ``Add`` to add the rule to the security group.
 We now have a security group that will allow SSH access to our soon to be
 created instance.
 
-
-
 *******************
-Booting an Instance
+Booting an instance
 *******************
 
 We are now ready to launch our first instance! Navigate to the ``Instances``
@@ -212,13 +222,12 @@ The floating IP is a way to access your new instance.
 .. image:: dashboard_assets/set-floating-ip.png
 
 |
-|
 
 Congratulations, you've now booted an instance. Now we'll connect to it with an
 SSH tunnel so you can start using it.
 
 ***************************
-Connect to the new Instance
+Connect to the new instance
 ***************************
 
 Before we SSH in, we should give the private SSH key the correct, more secure

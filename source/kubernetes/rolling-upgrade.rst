@@ -26,7 +26,6 @@ to gracefully terminate and will respect the ``PodDisruptionBudgets`` defined.
     Rolling upgrades are only supported when using production Kubernetes
     cluster templates provided by the Catalyst Cloud without modifications.
 
-
 *****************************
 Avoiding application downtime
 *****************************
@@ -125,7 +124,7 @@ Prerequisites:
 #. An existing Kubernetes cluster running a cluster template older than the
    latest template available. See the :ref:`quick start guide <k8s-quickstart>`
    for more information.
-#. The `Kubernetes`_ and :ref:`OpenStack CLI installed <installing-the-cli>`.
+#. The `Kubernetes`_ and :ref:`OpenStack CLI installed <installing_cli_os>`.
 #. An OpenStack and Kubernetes environment configuration set up. Check out
    :ref:`this guide <source-rc-file>` for setting up the OpenStack environment.
 

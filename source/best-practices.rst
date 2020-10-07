@@ -23,13 +23,13 @@ General best practices:
    best-practices/high-availability
    best-practices/security-bp
 
-Service specific best practices:
+Service specific best practices (found under each service section):
 
 
 .. toctree::
    :maxdepth: 1
 
-   best-practices/compute-bp
-   best-practices/network-bp
-   best-practices/block-storage-bp
-   best-practices/object-storage-bp
+   Compute <compute/compute-bp>
+   Network <network/network-bp>
+   Block storage <block-storage/block-storage-bp>
+   Object storage <object-storage/object-storage-bp>

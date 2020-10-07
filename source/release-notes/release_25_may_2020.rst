@@ -1,0 +1,74 @@
+############
+25 May 2020
+############
+
+The main changes of note in this release are:
+
+* Upgrade of the Kubernetes Service (Magnum) from stable/Queens to
+  stable/Train.
+* Predefined `storage classes`_ were added to the Kubernetes service.
+* Provide user friendly names for object storage policies in the dashboard.
+
+.. _`storage classes`: https://docs.catalystcloud.nz/kubernetes/storage.html#storage-classes
+
+***************************
+Kubernetes service (Magnum)
+***************************
+
+For a full list of the included changes please see upstream release
+notes for `stable/Stein`_ and `stable/Train`_
+
+.. _`stable/Stein`: https://docs.openstack.org/releasenotes/magnum/stein.html
+.. _`stable/Train`: https://docs.openstack.org/releasenotes/magnum/train.html
+
+New features
+============
+
+* Support for Kubernetes v1.16.x and above will be added and there will be new
+  cluster templates published reflecting this change.
+* The base operating system of nodes will be `Fedora CoreOS`_ since Fedora
+  Atomic has been made end-of-life.
+* `Podman`_ will to used to manage the kubernetes components
+  instead of using the default atomic system container.
+* The addons within the cluster that are provided by the Catalyst Cloud
+  templates, will also upgraded to latest stable version available at the time
+  of release.
+
+  - `Calico`_ 3.13.1
+  - `CoreDNS`_ 1.6.6
+  - `Kubernetes Web UI (dashboard)`_ 2.0.0
+  - `Prometheus`_ v2.13.1
+  - `Grafana`_ 6.4.2
+
+.. _`Fedora CoreOS`: https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/
+.. _Podman: https://podman.io/
+.. _Calico: https://docs.projectcalico.org/getting-started/kubernetes/
+.. _CoreDNS: https://coredns.io/
+.. _`Kubernetes Web UI (dashboard)`: https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
+.. _Prometheus: https://prometheus.io/
+.. _Grafana: https://grafana.com/
+
+* All addons related to Cloud Provider Openstack will be also upgraded to latest
+  stable version, the main ones of note being:
+
+  - `Keystone Webhook Authentication Authorization`_ v1.18.0
+  - `Octavia ingress controller`_ v1.18.0
+  - `Magnum auto healer`_ v1.18.0
+
+.. _`Keystone Webhook Authentication Authorization`: (https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/using-keystone-webhook-authenticator-and-authorizer.md)
+.. _`Octavia ingress controller`: https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/using-octavia-ingress-controller.md)
+.. _`Magnum auto healer`: https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/using-magnum-auto-healer.md)
+
+
+Known limitations
+=================
+
+Existing kubernetes clusters on version v1.15.x or earlier will not be able to
+upgrade to v1.16.x. This is due to the changes and dependencies imposed by
+moving to a new operating system for the cluster nodes.
+
+
+
+
+
+

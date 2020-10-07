@@ -1,9 +1,3 @@
-.. _launching-your-first-instance-using-ansible:
-
-*************
-Using ansible
-*************
-
 `Ansible`_ is a popular open source configuration management and application
 deployment tool. Ansible provides a set of core modules for interacting with
 OpenStack. This makes Ansible an ideal tool for providing both OpenStack
@@ -17,14 +11,9 @@ for instance configuration.
 Comprehensive documentation of the Ansible OpenStack modules is available at
 https://docs.ansible.com/ansible/list_of_cloud_modules.html#openstack
 And for any troubleshooting issues you may face using Ansible you can refer to
-the following https://docs.ansible.com/ansible-tower/2.2.0/html/administration/troubleshooting.html
-
-
+the following: https://docs.ansible.com/ansible-tower/2.2.0/html/administration/troubleshooting.html
 
 .. _install-ansible:
-
-Install Ansible
-===============
 
 A script is provided by Catalyst which installs the required Ansible and
 OpenStack libraries within a Python virtual environment. This script is part of
@@ -57,14 +46,8 @@ install script in order to install Ansible.
   Catalyst recommends customers use Ansible >= 2.0 and Shade >= 1.4 with the
   Catalyst Cloud.
 
-
-OpenStack credentials
-=====================
-
 Before running the Ansible playbooks, ensure your OpenStack credentials have
-been set up. The easiest way to achieve this is by making use of environment
-variables. Use the standard variables provided by an OpenStack RC file as
-described in :ref:`source-rc-file`. These variables are read by the
+been set up. The variables from your sourced openRC file are read by the
 Ansible ``os_auth`` module, and will provide Ansible with the credentials
 required to access the Catalyst Cloud APIs.
 
@@ -74,8 +57,8 @@ required to access the Catalyst Cloud APIs.
  mandatory authentication attributes will need to be included in the playbooks.
  See the "vars" section of the playbooks for details.
 
-Once the Ansible installation includes the required OpenStack modules, and the
-OpenStack credentials have been set up, a first instance may be built.
+Once we have the required Ansible and OpenStack libraries, and we have sourced
+our necessary credentials, we can start with our first playbook.
 
 The first instance playbooks are located under the `example-playbooks`
 directory and have been split up as follows:
@@ -84,11 +67,8 @@ directory and have been split up as follows:
   components.
 * The second playbook, ``launch-instance.yml`` launches the instance.
 
-
-Run the create network playbook
-===============================
-
-These are the tasks the ``create-network.yml`` playbook will perform:
+Starting with the first playbook, these are the tasks the
+``create-network.yml`` playbook will perform:
 
 .. code-block:: bash
 
@@ -145,18 +125,15 @@ variable, or override the variable when running the playbook as shown below:
  PLAY RECAP *********************************************************************
  localhost                  : ok=8    changed=6    unreachable=0    failed=0
 
-
-
 .. tip::
 
   Pay careful attention to the console output. It provides lots of useful information.
 
 
-Run the launch instance playbook
-================================
+  After the network has been set up successfully, run the ``launch-instance.yml``
+  playbook:
 
-After the network has been set up successfully, run the ``launch-instance.yml``
-playbook:
+|
 
 .. code-block:: bash
 
@@ -201,11 +178,8 @@ build image):
   Additional Ansible playbooks may now be used to configure this instance
   further, as required.
 
-
-Resource cleanup with an Ansible playbook
-=========================================
-
-This playbook will remove all resources created by the previous playbooks.
+Lastly, we have a playbook that you can use to cleanup all resources created
+by the previous playbooks.
 
 It has been included in the `catalystcloud-ansible`_ git repository referenced
 earlier, but may also be downloaded as follows:

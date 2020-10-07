@@ -21,7 +21,7 @@ This release introduced the following new functionality and improvements.
   network and are not visible from the Internet by default. If desirable,
   exposing the Kubernetes API to the internet is a simple additional step
   documented on the :ref:`private-cluster` section of the documentation.
-* Cluster :ref:`kubernetes-access-control` roles were added to provide a
+* Cluster :ref:`kubernetes-user-access` roles were added to provide a
   mechanism for handling cluster authentication and authorization based on the
   cloud user's login and associated roles.
 * The following new cluster template versions were introduced. The

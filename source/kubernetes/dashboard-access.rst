@@ -1,6 +1,5 @@
-
-The Catalyst Kubernetes Service enables the Kubernetes web dashboard by default
-(this behaviour can be overwritten if desirable).
+The Kubernetes dashboard is enabled by default on clusters deployed by the
+Catalyst Cloud (this behaviour can be overwritten using labels if desirable).
 
 In order to access the Kubernetes dashboard, you will need to retrieve the
 admin token for the cluster using the following command:
@@ -45,6 +44,4 @@ dashboard, as illustrated below.
 
 .. image:: _containers_assets/kubernetes_dashboard1.png
    :align: center
-
-
 

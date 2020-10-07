@@ -1,5 +1,6 @@
+###############################################
 Set up a puppet master and clients with ansible
-===============================================
+###############################################
 
 This tutorial will show you how to combine `Ansible`_ and `Puppet`_ to manage a
 dynamic set of servers on the Catalyst Cloud. This way you get the beautifully
@@ -25,8 +26,9 @@ If you follow this guide you will:
 -  Define new server roles and roll these out quickly in your project
 -  Use the above to have an "immutable infrastructure"
 
+************************
 Setup your puppet master
-------------------------
+************************
 
 We'll start by checking out the project skeleton and setting up some vars
 specific to your local setup.
@@ -147,8 +149,9 @@ Let's update our Puppet manifests and update the controller:
 
 OK, take a deep breath and get ready for part two - creating some hosts!
 
+*****************
 Create some hosts
------------------
+*****************
 
 In this step, you are going to quickly add two hosts and provision them with
 your Puppet Master. In your working copy, run:

@@ -1,9 +1,10 @@
-******************
+##################
 Submitting a patch
-******************
+##################
 
+****************
 Cloning the repo
-================
+****************
 
 Go to https://github.com/catalyst/catalystcloud-docs and fork the docs to your
 own account on GitHub.
@@ -34,9 +35,9 @@ Sync your branch with GitHub::
   ``<ticket-num>``: is optional and indicates the ticket number that the change
   is related to.
 
-
+*************************************
 Making your changes and contributions
-=====================================
+*************************************
 
 When you'd like to make changes to the content, you can see your changes by
 running the ``live_compile.sh`` script in the root directory::
@@ -70,8 +71,9 @@ Push the changes back to your personal branch::
 
   git push origin your-branch-name
 
+***********************************
 Submitting your changes to be added
-===================================
+***********************************
 
 Submit a `pull request <https://help.github.com/articles/using-pull-requests/>`_
 to Catalyst Cloud on GitHub.

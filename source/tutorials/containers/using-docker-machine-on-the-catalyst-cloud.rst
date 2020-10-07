@@ -29,8 +29,9 @@ client can be configured to talk to the remote Docker Engine, rather than
 talking to the local Docker Engine. This is achieved using environment
 variables.
 
+*****
 Setup
-=====
+*****
 
 This tutorial assumes a number of things:
 
@@ -46,8 +47,9 @@ This tutorial assumes a number of things:
 * You will be letting the driver create an SSH keypair for you
 * You have sourced an openrc file, as described at :ref:`source-rc-file`
 
-Install Docker Machine
-======================
+**********************
+Install docker machine
+**********************
 
 The first thing you need to do is install Docker Machine locally:
 
@@ -63,8 +65,9 @@ Check that Docker Machine is working:
  $ docker-machine -v
  docker-machine version 0.7.0, build a650a40
 
-Create a Security Group and rules
-=================================
+*********************************
+Create a security group and rules
+*********************************
 
 .. note::
 
@@ -166,8 +169,9 @@ admin, or visit http://ifconfig.me and get your IP address. Use
 "IP_ADDRESS/32" as YOUR_CIDR_NETWORK to allow traffic only from your current
 effective IP.
 
-Create a Cloud VM using Docker Machine
-======================================
+**************************************
+Create a Cloud VM using docker machine
+**************************************
 
 The next step is to provision a compute instance using Docker Machine. Docker
 Machine will instantiate a VM, get SSH access to this VM and will then install
@@ -246,8 +250,9 @@ interacting with the Docker daemon in the cloud instance:
 
  Docker Engine stores configuration parameters including SSL and SSH keys under ~/.docker/machine/
 
+***********************
 Create a test container
-=======================
+***********************
 
 Next, create a test image from which you will instantiate a container running
 in the cloud. You will run a simple webserver by basing your image on the
@@ -336,8 +341,9 @@ need to use ``sudo``:
  CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                         NAMES
  3f47ef854fbe        dojo/nginx          "nginx -g 'daemon off"   52 minutes ago      Up 52 minutes       0.0.0.0:80->80/tcp, 443/tcp   naughty_bell
 
+*************
 Documentation
-=============
+*************
 
 * `Docker Machine Documentation`_
 * `Docker Machine Installation Documentation`_
