@@ -471,3 +471,100 @@ more involved. A detailed description of the process can be seen `here`_
 
 
 .. _here: https://docs.openstack.org/swift/latest/overview_large_objects.html#module-swift.common.middleware.slo
+
+==============================
+Interacting with QNAP devices
+==============================
+
+Through the use of our object storage service, you are able to store
+backups of files from your QNAP devices on the Catalyst Cloud. The following
+details the process for creating backups via the QNAP interactive dashboard
+and storing these backups inside a container on the Catalyst Cloud.
+
+After you have signed into your QNAP device you will have to navigate
+through the dashboard to the HBS 3 Hybrid Backup Sync service.
+
+.. image:: assets/qnap/qnap-app-screen.png
+
+Once you select this service you will be met with the overview screen which
+gives you a look at the backups you already have and their current status. It
+also informs you of the status of any jobs that you may have for your backups
+and when they are scheduled to take place or the status of how the job has
+gone.
+
+.. image:: assets/qnap/qnap-overview.png
+
+From here we are going to navigate to the ``Backup & Restore`` tab and click on
+the ``create`` button which will display this dropdown:
+
+.. image:: assets/qnap/qnap-backup-dropdown.png
+
+Now we select ``Backup job.`` We are then able to choose the files and or
+folders that we want to create backups of. Once we have selected our files, we
+proceed to selecting the backup type we are going to use:
+
+.. image:: assets/qnap/backup-type.png
+
+From this screen you have to pick which backup destination you want to store
+your files in. We are going to be using the an S3 compatible API to communicate
+with the Catalyst Cloud, so from this screen we will click on the icon for
+``Amazon S3 & S3 Compatible.`` After which we come to this screen:
+
+.. image:: assets/qnap/create-storage-space.png
+
+From here, there are a few things that we have to do to ensure that the backup
+connection is created successfully. On this screen the ``Service Provider`` has
+to be changed from the default to `S3 compatible.` You will also have to
+supply the correct API endpoint for the ``Server Address:``
+
++----------+-------------------------------------------------+
+| Region   | Endpoint                                        |
++==========+=================================================+
+| nz-por-1 | s3.object-storage.nz-por-1.catalystcloud.io:443 |
++----------+-------------------------------------------------+
+| nz_wlg_2 | s3.object-storage.nz-wlg-2.catalystcloud.io:443 |
++----------+-------------------------------------------------+
+| nz-hlz-1 | s3.object-storage.nz-hlz-1.catalystcloud.io:443 |
++----------+-------------------------------------------------+
+
+After both of those have been done you will need to get your ec2 credentials
+which you can find on the Catalyst Cloud Dashboard under the API section.
+
+.. image:: assets/qnap/ec2-creds.png
+
+If you click on view credentials then it will give you the rest of the
+information you need to complete the step for creating the connection to the
+S3 API. After this you click the ``create`` button and we are taken the
+this screen:
+
+.. image:: assets/qnap/select-bucket.png
+
+We are now connected with the object storage service on the Cloud, this allows
+us to either create a new bucket that we want to store our backups in, or
+select an already existing bucket to use instead. For this example I am going
+to use the `qnap-test-bucket` but the important part is making sure that you
+select or create a bucket to store your backup.
+
+.. image:: assets/qnap/select-folder-in-bucket.png
+
+On this screen we select or create a new folder to keep our backups in. For
+this example I created a folder called `Qnap-backup-folder.` After this has
+been selected click ``Add`` and it will take you to the next screen:
+
+.. image:: assets/qnap/schedualer.png
+
+The Scheduler allows you to create a job that will backup files for you
+automatically, with whatever parameters you see fit. For this example we are
+not going to be using a scheduler and will manually commit our backup to the
+object store. From here you can keep clicking continue until we reach the final
+``create`` button.
+
+After which you should be returned to the dashboard. From here we select our
+backup sync that we have made and click the ``backup now`` button to manually
+trigger the job
+
+.. image:: assets/qnap/backup-now.png
+
+Once the job completes you should be able to see the backup files from QNAP in
+your object storage container on the Cloud Dashboard or through the QNAP
+dashboard.
