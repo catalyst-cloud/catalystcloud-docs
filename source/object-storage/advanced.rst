@@ -472,21 +472,21 @@ more involved. A detailed description of the process can be seen `here`_
 
 .. _here: https://docs.openstack.org/swift/latest/overview_large_objects.html#module-swift.common.middleware.slo
 
-==============================
+*****************************
 Interacting with QNAP devices
-==============================
+*****************************
 
-Through the use of our object storage service, you are able to store
-backups of files from your QNAP devices on the Catalyst Cloud. The following
+Another feature of the object storage service is that you are able to create
+and store backups from a QNAP device on the Catalyst Cloud. The following
 details the process for creating backups via the QNAP interactive dashboard
-and storing these backups inside a container on the Catalyst Cloud.
+and storing your backups inside a container on the Catalyst Cloud.
 
 After you have signed into your QNAP device you will have to navigate
-through the dashboard to the HBS 3 Hybrid Backup Sync service.
+through the dashboard to the *HBS 3 Hybrid Backup Sync* service.
 
 .. image:: assets/qnap/qnap-app-screen.png
 
-Once you select this service you will be met with the overview screen which
+Once you select this service, you will be met with the overview screen which
 gives you a look at the backups you already have and their current status. It
 also informs you of the status of any jobs that you may have for your backups
 and when they are scheduled to take place or the status of how the job has
@@ -527,23 +527,22 @@ supply the correct API endpoint for the ``Server Address:``
 | nz-hlz-1 | s3.object-storage.nz-hlz-1.catalystcloud.io:443 |
 +----------+-------------------------------------------------+
 
-After both of those have been done you will need to get your ec2 credentials
-which you can find on the Catalyst Cloud Dashboard under the API section.
+After both of those have been done you will need to get your ec2 credentials,
+which you can find under the API section of the Catalyst Cloud Dashboard.
 
 .. image:: assets/qnap/ec2-creds.png
 
-If you click on view credentials then it will give you the rest of the
-information you need to complete the step for creating the connection to the
-S3 API. After this you click the ``create`` button and we are taken the
-this screen:
+If you click on view credentials a window will pop up, with the rest of the
+information you need to complete the connection to the S3 API.
+After this, swap back to the QNAP dashboard and click the ``create`` button. We
+are then taken the this screen:
 
 .. image:: assets/qnap/select-bucket.png
 
-We are now connected with the object storage service on the Cloud, this allows
-us to either create a new bucket that we want to store our backups in, or
+Now that we have connected our QNAP device with the Catalyst Cloud, we can
+begin to either create a new bucket that we want to store our backups in, or
 select an already existing bucket to use instead. For this example I am going
-to use the `qnap-test-bucket` but the important part is making sure that you
-select or create a bucket to store your backup.
+to use the `qnap-test-bucket`.
 
 .. image:: assets/qnap/select-folder-in-bucket.png
 
@@ -551,7 +550,7 @@ On this screen we select or create a new folder to keep our backups in. For
 this example I created a folder called `Qnap-backup-folder.` After this has
 been selected click ``Add`` and it will take you to the next screen:
 
-.. image:: assets/qnap/schedualer.png
+.. image:: assets/qnap/scheduler.png
 
 The Scheduler allows you to create a job that will backup files for you
 automatically, with whatever parameters you see fit. For this example we are
