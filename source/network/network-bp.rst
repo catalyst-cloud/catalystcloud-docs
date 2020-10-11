@@ -1,6 +1,6 @@
-########
-Networks
-########
+######################
+Network best practices
+######################
 
 ************************************
 Virtual router high availability

@@ -134,11 +134,12 @@ Using docker (experimental)
 The Catalyst Cloud CLI is available as a Docker container that is easy to use,
 packaging the command line interface and all its dependencies.
 
-This tool requires Docker to be installed to function. You can find
-`instructions on how to install and configure Docker here`_. You can run the
-``docker ps`` command to confirm Docker has been successfully installed.
+In order to use this tool, you will need to have Docker already installed. You
+can find `instructions on how to install and configure Docker here`_. You can
+run the ``docker ps`` command to confirm Docker has been successfully installed.
 
-Run the following command to install the Catalyst Cloud CLI:
+Once you have Docker installed, run the following command to install the
+Catalyst Cloud CLI:
 
 .. code-block:: bash
 
@@ -151,14 +152,20 @@ Run the following command to install the Catalyst Cloud CLI:
   using the containerised version of the CLI, this command must be replaced with
   ``ccloud`` in the provided examples.
 
-If you are intending to use the containerised tools you will need to obtain the
-non MFA enabled openrc file for authentication.To get a copy of the non MFA
-enabled openrc file, select the dropdown in the upper right corner of the dash
-board and click on ``OpenStack RC File v3``. Select ``Save As`` when prompted to
-select the location on your machine to save this file to.
+If you are intending to use the containerised tools you will need to obtain an
+RC file so that you are able to communicate with the cloud. To
+get the RC file for your project, select the dropdown in the upper right corner
+of the dashboard and click on ``Download OpenStack RC File``. Click on the
+correct RC file; select ``Save As`` when prompted. Then select the location on
+your machine to save the RC file to.
 
-.. image:: assets/openrc-no-mfa.png
+.. image:: assets/RC-file-download.png
    :align: center
+
+.. Note::
+
+  Make sure that you download the RC file for the correct region you want to
+  work in.
 
 If you need more information on using the file see :ref:`source-rc-file`.
 
@@ -211,9 +218,8 @@ To download an OpenStack RC file from the dashboard:
 
 * Log in to your project on the dashboard and select your preferred region.
 
-* From the left hand menu select "API Access" and click on
-
-  "Download OpenStack RC File v3.0". Save this file on the host where the
+* From the left hand menu select "API Access" then click on "Download OpenStack RC file".
+  Select the file for "Linux/macOS" and save the file on the host where the
   client tools are going to be used from.
 
 * Source the configuration from the OpenStack RC file:
@@ -226,12 +232,17 @@ To download an OpenStack RC file from the dashboard:
   the file. Note that your password is not displayed on the screen as you type
   it in.
 
+  * Also enter your MFA code if you have this enabled. If not, then you can
+    ignore this step and press ``Enter`` when prompted. After this your
+    configuration should be complete.
+
   .. warning::
 
     You should never type in your password on the command line (or pass it as
     an argument to the client tools), because the password will be stored in
     plain text in the shell history file. This is unsafe and could allow a
     potential attacker to compromise your credentials.
+
 
 * You can confirm the configuration works by running a simple command, such as
   ``openstack network list`` and ensuring it returns no errors.
@@ -241,30 +252,28 @@ To download an OpenStack RC file from the dashboard:
   You are also able to download the Openstack RC file from the top-right
   corner where your login details are display as shown below:
 
-.. image:: assets/openrc-no-mfa.png
+.. image:: assets/RC-file-download.png
   :align: right
 
-Difference between OpenRC with or without MFA
-=============================================
+Difference between OpenRC for Linux/macOS and Windows
+=====================================================
 
 You will notice that when you go to download the OpenRC file from the
-dashboard there are 2 version available. One that says OpenStackRC v3
-and one that says OpenStackRC v3 (MFA Enabled)
+dashboard there are 2 version available. One that works for both Linux based
+systems alongside macOS, and one that works for only Windows systems.
 
-Of course if you have MFA enabled then you will want to download the MFA
-enabled file; However, this file can be used on accounts without multi-factor
-authentication. The difference between the two is that the normal
-OpenstackRC file keeps a copy of your Username and Password and uses those for
-authentication against the cloud. Where as the MFA uses a token that gets
-passed to the API's for confirmation.
+They function mostly in the same way, however there is a key difference for the
+Windows file. Normally if you are not using MFA you simply skip the prompt and
+your can authenticate without it. However when using windows powershell, you
+have to use the additional parameter ``-NoToken``.
 
-You do not need to have MFA enabled to use the MFA RC file. You can just
-enter nothing when prompted for it, and the system will create a token from
-your username and password and authenticate it that way.
-This is useful for those that care more about Security than convenience. The
-trade off is that the Token has a lifespan. After 14 hours the token will
-expire and you will have to re-authenticate your credentials to continue
-working on your project via the CLI.
+The reason for this is that linux and macOS can accept a token, only using a
+password, but the windows system cannot. So if you are not using MFA on a
+windows instance, you will not be issued a token, you will instead be
+authenticating only with a username and password.
+
+An example of this is shown in the :ref:`installing_windows_powershell_cli`
+section.
 
 ******************************
 Using the CLI on Linux and Mac

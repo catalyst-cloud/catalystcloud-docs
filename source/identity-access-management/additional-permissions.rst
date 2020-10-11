@@ -2,39 +2,45 @@
 Additional permissions and access methods
 #########################################
 
-The following section details permissions that exists outside the scope of the
-roles we have focused on in the previous sections. We will also discuss
-different methods of accessing objects on your project without relying on the
-use of roles.
+The following section details additional ways that you can restrict or allow
+user access to resources on your project. The sections below do not directly
+make  use of the **roles** we have discussed so far and instead focus on
+permissions that are given to the user by some other means.
+
+We have split these sections into *Permissions* which talks about certain
+cases where users are given more control over objects than others and
+*Methods of access* which discusses ways you can allow others to access
+resources from the cloud when normally they would have inadequate privileges.
 
 ****************
 Permissions
 ****************
 
-Some of the objects you create on your project will give ownership permissions
-to the user who created them, the most common example of this is when creating
-a kubernetes cluster. If you are the person who created the cluster then you
-are known as the "cluster administrator." While there is a role required for
-interacting with kubernetes clusters (detailed in the
-:ref:`kubernetes section <kubernetes-user-access>` of the documents) the
-individual user who initially creates the cluster has additional permissions
-which allow them to interact directly with certain nodes of the cluster, and to
-dictate behaviour for the master nodes.
+When creating certain objects on the cloud, there are unique commands that are
+only available to the individual who initially created the object. This is
+because when that user created the object they were given
+*ownership permissions* of the object. The most common example of this is when
+creating a kubernetes cluster. If you are the person who created the cluster
+then you are known as the **cluster administrator** and you will have access to
+a wider range of commands. While there is a role required for interacting with
+kubernetes clusters (detailed in the
+:ref:`kubernetes section <kubernetes-user-access>` of the documents) only the
+cluster administrator has the ability to interact directly with certain nodes
+of the cluster, and to dictate behaviour for the master nodes.
 
-Another example of having extra permissions after creating an object is when
-someone creates an instance and supplies their SSH key during creation. The
-user who creates the instance, using their SSH key, will be the only one able
-to access the instance. You can change this behaviour by including additional
-SSH keys in a cloud config file and injecting them into the instance when it is
-created. Or you can add these keys after the fact and restart your instance to
-have it acknowledge the new keys. Either way, you will not be able to access an
-instance if you have the incorrect SSH key to interface with it.
+A similar behaviour is observed when creating a cluster using your SSH key.
+When creating a compute instance, you supply one SSH key and the only
+user who is able to access that instance will be the person with the matching
+private key. You can change this behaviour by creating additional users on the
+instance itself, either after logging in to the instance yourself or in a cloud
+config file; you then create your new users and provide a public ssh key for
+each.
 
 ******************
 Methods of access
 ******************
 
-The following are alternative ways where you can give individuals access to
+The following are alternative ways in which you can give individuals access to
 different objects or resources on your project, without using a pre-defined
 role.
 
@@ -44,14 +50,14 @@ Object storage
 For object storage, you can make use of *container access control lists* (ACLs)
 to allow users who have the "auth_only" role to be able to view or edit the
 contents of your object storage containers. You can find the full list of
-permissions and restrictions you can set on your containers using ACLs
-in the `openstack swift documentation`_
+permissions and restrictions you can set on your containers in the
+`openstack swift documentation`_
 
 .. _`openstack swift documentation`: https://docs.openstack.org/swift/latest/overview_acl.html
 
 In addition to using ACLs to restrict or permit access to your object storage
 containers, you also have the option of making your containers public or giving
-them temporary URLs to allow access for a limited time. The process for which
+them temporary URLs to allow access for a limited time. The processes for these
 can be found in the :ref:`object storage<object-storage-access>` section of
 this documentation.
 

@@ -19,3 +19,4 @@ provides to the networking service as a whole.
    network/security-groups
    network/vpn
    network/faq
+   Best practices <network/network-bp>
