@@ -151,13 +151,13 @@ Run the following command to install the Catalyst Cloud CLI:
   using the containerised version of the CLI, this command must be replaced with
   ``ccloud`` in the provided examples.
 
-If you are intending to use the containerised tools you will need to obtain the
-non MFA enabled openrc file for authentication.To get a copy of the non MFA
-enabled openrc file, select the dropdown in the upper right corner of the dash
-board and click on ``OpenStack RC File v3``. Select ``Save As`` when prompted to
+If you are intending to use the containerised tools you will need an openrc
+file for authentication. To get a copy of the your projects openrc file, select
+the dropdown in the upper right corner of the dashboard and click on
+``OpenStack RC for Linux/macOS``. Select ``Save As`` when prompted, and
 select the location on your machine to save this file to.
 
-.. image:: assets/openrc-no-mfa.png
+.. image:: assets/RC-file-download.png
    :align: center
 
 If you need more information on using the file see :ref:`source-rc-file`.
@@ -212,9 +212,8 @@ To download an OpenStack RC file from the dashboard:
 * Log in to your project on the dashboard and select your preferred region.
 
 * From the left hand menu select "API Access" and click on
-
-  "Download OpenStack RC File v3.0". Save this file on the host where the
-  client tools are going to be used from.
+  "Download OpenStack RC File". Save the "OpenStack RC for Linux/macOS" file
+  on to the host where the client tools are going to be used from.
 
 * Source the configuration from the OpenStack RC file:
 
@@ -225,6 +224,9 @@ To download an OpenStack RC file from the dashboard:
 * When prompted for a password, enter the password of the user who downloaded
   the file. Note that your password is not displayed on the screen as you type
   it in.
+
+  * If you have MFA enabled on your account, this is also where you input your
+    code. If you do not have MFA enabled then simply hit ``ENTER``
 
   .. warning::
 
@@ -241,30 +243,29 @@ To download an OpenStack RC file from the dashboard:
   You are also able to download the Openstack RC file from the top-right
   corner where your login details are display as shown below:
 
-.. image:: assets/openrc-no-mfa.png
+.. image:: assets/RC-file-download.png
   :align: right
 
-Difference between OpenRC with or without MFA
-=============================================
+Difference between OpenRC for Linux/macOS and for Windows
+==========================================================
 
 You will notice that when you go to download the OpenRC file from the
-dashboard there are 2 version available. One that says OpenStackRC v3
-and one that says OpenStackRC v3 (MFA Enabled)
+dashboard there are 2 version available. One that is for Linux and Mac based
+systems, and one that is for Windows. The reason for this is because Windows
+Powershell works differently than the Linux and Mac equivalent.
 
-Of course if you have MFA enabled then you will want to download the MFA
-enabled file; However, this file can be used on accounts without multi-factor
-authentication. The difference between the two is that the normal
-OpenstackRC file keeps a copy of your Username and Password and uses those for
-authentication against the cloud. Where as the MFA uses a token that gets
-passed to the API's for confirmation.
+When authenticating with the linux/macOS open RC, you need to supply a password
+and MFA if you have it. If not, then you hit enter to
+continue and you are issued a token for authentication. This token lasts up to
+12 hours before you need to authenticate your details again. Powershell, does
+not work with this functionality and as such, if you do not have MFA then you
+need to authenticate only with your password using the ``--NoToken`` flag.
+This is discussed more in the :ref:`windows-configuration` section.
 
-You do not need to have MFA enabled to use the MFA RC file. You can just
-enter nothing when prompted for it, and the system will create a token from
-your username and password and authenticate it that way.
-This is useful for those that care more about Security than convenience. The
-trade off is that the Token has a lifespan. After 14 hours the token will
-expire and you will have to re-authenticate your credentials to continue
-working on your project via the CLI.
+This means that for Windows users authenticating without MFA, you are storing
+your password in your command line environment. This is not as secure as using
+a token, but this does mean that you will not have to *re-authenticate* because
+of an expired token.
 
 ******************************
 Using the CLI on Linux and Mac
