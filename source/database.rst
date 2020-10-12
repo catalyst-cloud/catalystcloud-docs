@@ -13,7 +13,8 @@ host multiple database systems from the same *database instance.* This is
 discussed later in the documentation.
 
 
-.. Note::
+.. Warning::
+
 
   This service is currently only available to invited users as a tech preview.
 
