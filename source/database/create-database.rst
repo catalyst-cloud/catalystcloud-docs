@@ -7,8 +7,26 @@ database instance, how to add and remove databases from your instance, and how
 to expose a database instance to the public.
 
 *********************************
-Gathering necessary information
+Prerequisites
 *********************************
+
+Configuring your command line
+=============================
+
+To interact with the database service on the cloud, you must have the
+following:
+
+- Your :ref:`openstack CLI<command-line-interface>` set up.
+- You must have :ref:`Sourced an openRC file<configuring-the-cli>` on your
+  current command line environment
+- You must have installed the `python trove-client tools
+  <https://pypi.org/project/python-troveclient/>`_.
+
+Once you have the necessary tools installed and you environment ready, you can
+proceed with the next step:
+
+Gathering necessary information
+===============================
 
 In order to launch a new database instance we need to first decide on a few
 options, these include:
@@ -63,7 +81,8 @@ We do this by picking a flavor from the available list:
 
 .. code-block:: bash
 
-  $ openstack flavor list --limit 10
+  $ openstack flavor list
+  # results truncated for brevity
   +--------------------------------------+------------------+-------+-------+------+-----------+
   | ID                                   | Name             |   RAM | vCPUs | Disk | Ephemeral |
   +--------------------------------------+------------------+-------+-------+------+-----------+
@@ -84,6 +103,7 @@ We do this by picking a flavor from the available list:
   | b4a3f931-dc86-480c-b7a7-c34b2283bfe7 | c1.c4r32         | 32768 |     4 |   10 |         0 |
   | c093745c-a6c7-4792-9f3d-085e7782eca6 | c1.c2r4          |  4096 |     2 |   10 |         0 |
   | e3feb785-af2e-41f7-899b-6bbc4e0b526e | c1.c2r2          |  2048 |     2 |   10 |         0 |
+  | ...                                  |                  |               |      |           |
   +--------------------------------------+------------------+-------+-------+------+-----------+
 
 Here is a table of the minimum requirements for databases based on their type:

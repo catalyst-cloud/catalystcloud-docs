@@ -28,6 +28,7 @@ Table of Contents:
   block-storage/uuid-mount
   block-storage/volume-transfer
   block-storage/faq
+  Best practices <block-storage/block-storage-bp>
 
 
 

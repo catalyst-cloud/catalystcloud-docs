@@ -1,6 +1,6 @@
-##############
-Object storage
-##############
+#############################
+Object storage best practices
+#############################
 
 Our object storage service is a fully distributed storage system, with no
 single points of failure and scalable to the exabyte level. The system is
