@@ -194,8 +194,10 @@ Configuration on Linux and Mac
 
 .. _configuring-the-cli:
 
-Prior to using the CLI, ensure you are working from a whitelisted IP address.
-More information can be found under :ref:`here <access-and-whitelist>`
+.. Warning::
+
+  Prior to using the CLI, ensure you are working from a whitelisted IP address.
+  More information can be found :ref:`here <access-and-whitelist>`
 
 .. _source-rc-file:
 
