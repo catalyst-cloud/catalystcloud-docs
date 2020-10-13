@@ -186,6 +186,8 @@ command below:
 Configuration on Windows
 ******************************
 
+.. _windows-configuration:
+
 Setting up the command line environment on Windows
 ==================================================
 
