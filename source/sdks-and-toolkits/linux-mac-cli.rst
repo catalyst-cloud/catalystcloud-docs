@@ -229,7 +229,7 @@ To download an OpenStack RC file from the dashboard:
 
   * If you have MFA enabled on your account, this is also where you input your
     code. If you do not have MFA enabled then simply hit ``ENTER``
-
+    
   .. warning::
 
     You should never type in your password on the command line (or pass it as

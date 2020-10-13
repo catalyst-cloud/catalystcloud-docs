@@ -2,7 +2,6 @@
 Creating the required network elements
 ======================================
 
-
 We need to create a router and network/subnet.
 
 Navigate to the "Routers" section and click "Create Router":
