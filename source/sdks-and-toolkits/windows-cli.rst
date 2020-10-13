@@ -186,39 +186,52 @@ command below:
 Configuration on Windows
 ******************************
 
+.. _windows-configuration:
+
 Setting up the command line environment on Windows
 ==================================================
 
-As the standard OpenStack RC file will not work in its current form, it is
-necessary to take a different approach.
+Much like the Mac and Linux approach, we are going to use a RC file to source
+our environment variables. There are two different ways to source your
+environment variables from this RC file, they depend on whether you have set up
+MFA or not.
 
-To do this we will need to create the equivalent script using PowerShell. Add
-the following lines, replacing the place holder entries with the appropriate
-details from your OpenStack RC file which can be obtained following the steps
-above.
+Before we continue with either method, we have to download the correct RC file
+from the dashboard:
 
-.. code-block:: bash
+.. image:: assets/RC-file-download.png
 
-  $env:OS_AUTH_URL = "https://api.cloud.catalyst.net.nz:5000/v3"
-  $env:OS_TENANT_NAME = "<tenant-name>"
-  $env:OS_TENANT_ID = "<tenant-id>"
-  $env:OS_USERNAME = "<username>"
+Sourcing your environment with MFA
+----------------------------------
 
-  $password = Read-Host 'Please enter your OpenStack Password' -AsSecureString
-  $env:OS_PASSWORD = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($password))
+First, open powershell and navigate to the directory that has our file:
 
-Save the file as a '.ps1' file and run it from a PowerShell session. To confirm
-if the variables were set correctly, run the following command:
+.. image:: assets/sourcing-rc-file.png
 
-.. code-block:: bash
+Next, we source our file. You will be prompted for your password and your MFA
+code; after you have supplied these, your environment variables should be
+sourced:
 
-  Get-ChildItem Env: | Where-Object {$_.name -match "OS_"}
+.. image:: assets/with-token.png
 
-The output should show the following 5 variables
+You will be able to test that your environment variables have been sourced
+using the ``Get-OpenstackEnv`` command:
 
-.. image:: assets/powershell_env.png
-   :align: center
+.. image:: assets/get-env.png
 
+Sourcing your environment without MFA
+-------------------------------------
+
+If you have not set up MFA for your account, you will have to add ``-NoToken``
+to the end of your command when sourcing your RC file, then continue with
+inputting your password:
+
+.. image:: assets/no-token.png
+
+To view more information about the source command and the RC file itself, you
+can add ``-h`` or ``-help`` to the end of the source command:
+
+.. image:: assets/help-flag.png
 
 ******************************
 Using the CLI on Windows

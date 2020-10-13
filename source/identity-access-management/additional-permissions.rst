@@ -36,7 +36,6 @@ instance itself, either after logging in to the instance yourself or in a cloud
 config file; you then create your new users and provide a public ssh key for
 each.
 
-
 ******************
 Methods of access
 ******************
@@ -53,7 +52,6 @@ to allow users who have the "auth_only" role to be able to view or edit the
 contents of your object storage containers. You can find the full list of
 permissions and restrictions you can set on your containers in the
 `openstack swift documentation`_
-
 
 .. _`openstack swift documentation`: https://docs.openstack.org/swift/latest/overview_acl.html
 
