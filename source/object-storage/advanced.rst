@@ -506,7 +506,7 @@ proceed to selecting the backup type we are going to use:
 .. image:: assets/qnap/backup-type.png
 
 From this screen you have to pick which backup destination you want to store
-your files in. We are going to be using the an S3 compatible API to communicate
+your files in. We are going to be using the S3 compatible API to communicate
 with the Catalyst Cloud, so from this screen we will click on the icon for
 ``Amazon S3 & S3 Compatible.`` After which we come to this screen:
 
@@ -532,10 +532,10 @@ which you can find under the API section of the Catalyst Cloud Dashboard.
 
 .. image:: assets/qnap/ec2-creds.png
 
-If you click on view credentials a window will pop up, with the rest of the
+If you click on view credentials a window will pop up with the rest of the
 information you need to complete the connection to the S3 API.
-After this, swap back to the QNAP dashboard and click the ``create`` button. We
-are then taken the this screen:
+After this, swap back to the QNAP dashboard, input your credential information
+and click the ``create`` button. We are then taken the this screen:
 
 .. image:: assets/qnap/select-bucket.png
 
