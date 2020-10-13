@@ -151,10 +151,10 @@ Run the following command to install the Catalyst Cloud CLI:
   using the containerised version of the CLI, this command must be replaced with
   ``ccloud`` in the provided examples.
 
-If you are intending to use the containerised tools you will need an openrc
-file for authentication. To get a copy of the your projects openrc file, select
-the dropdown in the upper right corner of the dashboard and click on
-``OpenStack RC for Linux/macOS``. Select ``Save As`` when prompted, and
+If you are intending to use the containerised tools you will need to acquire
+an openRC file for authentication. To get a copy of the your projects openrc
+file, select the dropdown in the upper right corner of the dashboard and click
+on ``OpenStack RC for Linux/macOS``. Select ``Save As`` when prompted, and
 select the location on your machine to save this file to.
 
 .. image:: assets/RC-file-download.png
