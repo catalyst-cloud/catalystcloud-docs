@@ -231,7 +231,7 @@ You should be able to SSH into, and interact with this instance as you would
 any Ubuntu server.
 
 *********************
-Command line examples
+Programmatic examples
 *********************
 
 Configuration for code blocks
