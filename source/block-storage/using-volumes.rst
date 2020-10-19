@@ -101,6 +101,64 @@ To create and attach a new volume, you can use one of the methods below:
             :language: shell
             :caption: terraform-destroy.sh
 
+    .. tab:: Heat
+
+        **Heat** is the native Openstack orchestration tool and functions by
+        reading a template and creating a stack on your project using
+        information contained within and from your environment variables.
+
+        The following template will create a new volume and attach it to an
+        existing instance on your project:
+
+        .. literalinclude:: _scripts/heat/create-attach-volume.yaml
+           :language: shell
+           :caption: heat-create-volume.yaml
+
+        You will need to save this file as a .yaml and change some of the
+        parameters so that your volume will attach to the correct instance.
+
+        Once that is done, you will need to validate the template before it is
+        used to create your stack.
+
+        .. code-block:: bash
+
+          # Navigate to the directory that contains your yaml file and run the following:
+
+          $ openstack orchestration template validate -t heat-create-volume.yaml
+
+        If the template is outputted on your command line, then the template is
+        valid. If you receive an error, then you will need to fix the error
+        before you can use the template.
+
+        Once you have a valid template, you can run the following code to
+        create a new stack named ``new-volume-stack``:
+
+        .. code-block:: bash
+
+          $ openstack stack create -t heat-create-volume.yaml new-volume-stack
+
+        The ``stack_status`` indicates that creation is in progress. Use the
+        ``event list`` command to check on the stack's orchestration progress:
+
+        .. code-block:: bash
+
+         $  openstack stack event list new-volume-stack
+
+        .. warning::
+
+          If a stack has been orchestrated using Heat, it is generally a good idea to also
+          use Heat to delete that stack's resources. Deleting components of a Heat
+          orchestrated stack manually, whether using the other command line tools or the
+          web interface, can result in resources or stacks being left in an inconsistent
+          state.
+
+        To delete the ``new-volume-stack`` you can use the following code:
+
+        .. code-block:: bash
+
+         $ openstack stack delete new-volume-stack
+         Are you sure you want to delete this stack(s) [y/N]? y
+
 **********************
 Using volumes on Linux
 **********************
