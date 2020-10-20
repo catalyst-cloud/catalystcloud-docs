@@ -28,6 +28,11 @@ instances simultaneously.
 Managing server groups
 **********************
 
+.. Note::
+
+  Before using any of the following methods, you will have to source your
+  environment variables using an :ref:`openRC file.<configuring-the-cli>`
+
 .. tabs::
 
     .. tab:: Openstack CLI
@@ -102,6 +107,23 @@ Managing server groups
               - net-name: "{{ private_network_name }}"
             security_groups: "default,{{ security_group_name }}"
             scheduler_hints: "group=78f2aabc-e73a-4c72-88fd-79185797548c"
+
+    .. tab:: Terraform
+
+      The following is a terraform plan that will create an anti-affinity
+      server group and an instance that will be put into it. For this script we
+      assume that you are familiar with Terraform and know how to use a
+      terraform plan.
+
+      .. Note::
+
+        Before using this script you will have to change some variables
+        in the script to fit your project.
+
+      .. literalinclude:: _scripts/terraform/anti-affinity/terraform-variables.tf
+          :language: shell
+          :caption: terraform-variables.tf
+
 
 
 Via the APIs
