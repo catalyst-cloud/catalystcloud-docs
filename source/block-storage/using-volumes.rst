@@ -62,13 +62,12 @@ To create and attach a new volume, you can use one of the methods below:
 
     .. tab:: Openstack CLI
 
-        The following script will create a volume on your project:
+        The following command will create a volume on your project:
 
         .. literalinclude:: _scripts/cli/create-volume.sh
             :language: shell
-            :caption: create-volume.sh
 
-        The next script will attach the previous volume to your instance. This
+        The next command will attach the previous volume to your instance. This
         command assumes that your volume name is unique; If you have volumes
         with duplicate names you will need to use the volume ID to attach the
         correct volume to your compute instance.
@@ -80,9 +79,15 @@ To create and attach a new volume, you can use one of the methods below:
     .. tab:: Terraform
 
         The following assumes that you have already sourced an openRC file and
-        that you have downloaded and installed terraform.
+        that you have downloaded and installed terraform. Terraform works by
+        reading a template file and creating resources on the cloud based off
+        of the defined structure in the template.
 
-        The template file that you need to save is:
+        The template file we are using will create a volume and attach it to an
+        existing instance.
+
+        Save the following script and change the variables so that they fit
+        your project:
 
         .. literalinclude:: _scripts/terraform/terraform-block-storage.tf
             :language: shell
