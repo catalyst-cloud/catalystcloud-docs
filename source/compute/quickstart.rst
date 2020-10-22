@@ -231,7 +231,7 @@ You should be able to SSH into, and interact with this instance as you would
 any Ubuntu server.
 
 *********************
-Command line examples
+Programmatic examples
 *********************
 
 Configuration for code blocks
@@ -313,16 +313,16 @@ fits your project before you run any of these templates.
 
         The template file that you need to save is:
 
-        .. literalinclude:: _scripts/terraform/terraform-variables.tf
+        .. literalinclude:: _scripts/terraform/quickstart/terraform-variables.tf
             :language: shell
             :caption: terraform-variables.tf
 
         The commands you will need to use are:
 
-        .. literalinclude:: _scripts/terraform/terraform-create.sh
+        .. literalinclude:: _scripts/terraform/quickstart/terraform-create.sh
             :language: shell
             :caption: terraform-create.sh
 
-        .. literalinclude:: _scripts/terraform/terraform-destroy.sh
+        .. literalinclude:: _scripts/terraform/quickstart/terraform-destroy.sh
             :language: shell
             :caption: terraform-destroy.sh

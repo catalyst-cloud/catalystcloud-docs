@@ -47,9 +47,9 @@ use /dev/vdb.
 Once this is done, then you should be able to see your new volume attached
 to your instance.
 
-*******************************************
-Creating a volume via from the command line
-*******************************************
+********************************************
+Creating a volume using programmatic methods
+********************************************
 
 To create and attach a new volume, you can use one of the methods below:
 
@@ -62,13 +62,12 @@ To create and attach a new volume, you can use one of the methods below:
 
     .. tab:: Openstack CLI
 
-        The following script will create a volume on your project:
+        The following command will create a volume on your project:
 
         .. literalinclude:: _scripts/cli/create-volume.sh
             :language: shell
-            :caption: create-volume.sh
 
-        The next script will attach the previous volume to your instance. This
+        The next command will attach the previous volume to your instance. This
         command assumes that your volume name is unique; If you have volumes
         with duplicate names you will need to use the volume ID to attach the
         correct volume to your compute instance.
@@ -80,9 +79,15 @@ To create and attach a new volume, you can use one of the methods below:
     .. tab:: Terraform
 
         The following assumes that you have already sourced an openRC file and
-        that you have downloaded and installed terraform.
+        that you have downloaded and installed terraform. Terraform works by
+        reading a template file and creating resources on the cloud based off
+        of the defined structure in the template.
 
-        The template file that you need to save is:
+        The template file we are using will create a volume and attach it to an
+        existing instance.
+
+        Save the following script and change the variables so that they fit
+        your project:
 
         .. literalinclude:: _scripts/terraform/terraform-block-storage.tf
             :language: shell
@@ -100,6 +105,65 @@ To create and attach a new volume, you can use one of the methods below:
         .. literalinclude:: _scripts/terraform/terraform-destroy.sh
             :language: shell
             :caption: terraform-destroy.sh
+
+    .. tab:: Heat
+
+        **Heat** is the native Openstack orchestration tool and functions by
+        reading a template and creating a stack on your project using
+        information contained within the template and from your environment
+        variables.
+
+        The following template will create a new volume and attach it to an
+        existing instance on your project:
+
+        .. literalinclude:: _scripts/heat/create-attach-volume.yaml
+           :language: shell
+           :caption: heat-create-volume.yaml
+
+        You will need to save this file as a ``.yaml`` and change some of the
+        parameters so that your volume will attach to the correct instance.
+
+        Once that is done, you will need to validate the template before it is
+        used to create your stack.
+
+        .. code-block:: bash
+
+          # Navigate to the directory that contains your yaml file and run the following:
+
+          $ openstack orchestration template validate -t heat-create-volume.yaml
+
+        If the template is outputted on your command line, then the template is
+        valid. If you receive an error, then you will need to fix the error
+        before you can use the template.
+
+        Once you have a valid template, you can run the following code to
+        create a new stack named ``new-volume-stack``:
+
+        .. code-block:: bash
+
+          $ openstack stack create -t heat-create-volume.yaml new-volume-stack
+
+        The ``stack_status`` indicates that creation is in progress. Use the
+        ``event list`` command to check on the stack's orchestration progress:
+
+        .. code-block:: bash
+
+         $  openstack stack event list new-volume-stack
+
+        .. warning::
+
+          If a stack has been orchestrated using Heat, it is generally a good idea to also
+          use Heat to delete that stack's resources. Deleting components of a Heat
+          orchestrated stack manually, whether using the other command line tools or the
+          web interface, can result in resources or stacks being left in an inconsistent
+          state.
+
+        To delete the ``new-volume-stack`` you can use the following code:
+
+        .. code-block:: bash
+
+         $ openstack stack delete new-volume-stack
+         Are you sure you want to delete this stack(s) [y/N]? y
 
 **********************
 Using volumes on Linux

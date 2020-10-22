@@ -1,0 +1,49 @@
+#
+# HOT template for creating a new volume and attaching it to an instance
+#
+heat_template_version: 2015-04-30
+
+description: >
+  HOT template for building a new volume and attaching it to an instance
+
+parameter_groups:
+- label: New-Volume
+  description: New volume creation and attachment
+  parameters:
+  - volume
+  - volume_size
+  - instance
+
+parameters:
+
+  volume:
+    type: string
+    description: Name of the new volume
+    default: heat-new-volume
+
+  volume_size:
+    type: number
+    description: size of the volume you want to create
+    default: 5
+    constraints:
+      - range: {min: 1, max: 100}
+        description: the size of the volume is between 1 - 100GB
+
+  instance:
+    type: string
+    description: ID of the instance you want the volume to be attached to
+    defaults: <INSERT-ID-HERE>
+
+
+resources:
+  cinder_volume:
+    type: OS::Cinder::Volume
+    properties:
+      size: { get_param: volume_size }
+
+  volume_attachment:
+    type: OS::Cinder::VolumeAttachment
+    properties:
+      volume_id: { get_resource: cinder_volume }
+      instance_uuid: { get_param: instance }
+      mountpoint: /dev/sdb

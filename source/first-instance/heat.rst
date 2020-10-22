@@ -158,7 +158,6 @@ Floating IP of the instance:
  $ export CC_PUBLIC_IP=$( openstack floating ip show -f value -c floating_ip_address $CC_FLOATING_IP_ID )
  $ ssh ubuntu@$CC_PUBLIC_IP
 
-
 .. warning::
 
   If a stack has been orchestrated using Heat, it is generally a good idea to also
