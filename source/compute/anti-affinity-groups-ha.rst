@@ -67,9 +67,11 @@ Managing server groups
 
       |
 
-      When launching a compute instance, you can pass a hint to our cloud scheduler
-      to indicate it belongs to a server group. This is done using the ``--hint
-      group=$GROUP_ID`` parameter, as indicated below.
+      Once you have created a server group, any new instances that you create
+      can be added to it. You can do this by passing a hint to our cloud
+      scheduler when creating your instance, to indicate it belongs to a
+      server group. This is done using the ``--hint group=$GROUP_ID``
+      parameter, as indicated below.
 
       .. code-block:: bash
 
@@ -109,14 +111,14 @@ Managing server groups
     .. tab:: Terraform
 
       The following is a terraform plan that will create an anti-affinity
-      server group and an instance that will be put into it. For this script we
-      assume that you are familiar with Terraform and know how to use a
-      terraform plan.
+      server group and create an instance that is added to our server group.
+      For this example we assume that you are familiar with Terraform and know
+      how to use a terraform plan.
 
       .. Note::
 
-        Before using this script you will have to change some variables
-        in the script to fit your project.
+        Before using this plan you will have to change some variables
+        so that it fits your project.
 
       .. literalinclude:: _scripts/terraform/anti-affinity/terraform-variables.tf
           :language: shell
@@ -124,14 +126,14 @@ Managing server groups
 
     .. tab:: Heat
 
-      For this tutorial, it is assumed that you have knowledge of HEAT and know
-      how to use HOT templates.
+      For this tutorial, it is assumed that you have some knowledge of HEAT and
+      know how to use HOT templates.
 
-      The following template can be used to create an
-      anti-affinity server group. Once this group is created, you can use the
-      method described in the CLI section to create new instances that will use
-      your new server group. We have to use tje CLI method as HEAT does not
-      natively support creating instances and attaching them to server groups.
+      The following template can be used to create an anti-affinity server
+      group. Once this group is created, you can use the method described in
+      the CLI section to create new instances that will use your new server
+      group. We have to use the CLI method as HEAT does not natively support
+      attaching instances to server groups.
 
       .. code-block::
 
@@ -174,8 +176,8 @@ Managing server groups
         2020-10-21 20:58:30Z [AA-group.anti_affinity_group]: CREATE_COMPLETE  state changed
         2020-10-21 20:58:30Z [AA-group]: CREATE_COMPLETE  Stack CREATE completed successfully
 
-      Once the stack is at ``CREATE_COMPLETE``, you will be able to add new
-      instances that you create to your new server group.
+      Once the stack is at ``CREATE_COMPLETE``, you will be able to add any new
+      instances that you create to your anti-affinity server group.
 
 Via the APIs
 ============

@@ -110,7 +110,8 @@ To create and attach a new volume, you can use one of the methods below:
 
         **Heat** is the native Openstack orchestration tool and functions by
         reading a template and creating a stack on your project using
-        information contained within and from your environment variables.
+        information contained within the template and from your environment
+        variables.
 
         The following template will create a new volume and attach it to an
         existing instance on your project:
