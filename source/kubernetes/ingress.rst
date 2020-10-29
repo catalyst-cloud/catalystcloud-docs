@@ -40,8 +40,11 @@ be consulted for details on the correct setup.
 Using the Octavia ingress controller
 ************************************
 
-This guide explains how to deploy an Octavia ingress controller in to a
-Kubernetes cluster running on an Openstack cloud.
+The Octavia ingress controller is enabled by default on the Catalyst Cloud.
+
+As part of this a  service account with the necessary cluster role binding has
+already been created. A configmap has also been deployed to handle the
+necessary authentication with the controller.
 
 Some working examples
 =====================
@@ -82,55 +85,10 @@ The create a service to expose the pods on port 80.
 Deploying the ingress
 =====================
 
-In order to setup up the ingress controller we need to create a service
-account for this purpose and associate it with an appropriate cluster role
-that has the necessary cluster rights.
-
-.. literalinclude:: _containers_assets/octavia-ing-rbac.yml
-   :language: yaml
-
-.. code-block:: console
-
-  $ kubectl apply -f octavia-ing-rbac.yml
-  serviceaccount/octavia-ingress-controller created
-  clusterrolebinding.rbac.authorization.k8s.io/octavia-ingress-controller created
-
-The file **octavia-ing-configmap.yml** below, defines the configuration for the
-ingress controller. It requires several user, cluster and project specific
-details to be entered. The following commands can assist with acquiring this
-information.
-
-The password entry and cluster name will need to be supplied by the user.
-
-.. code-block:: console
-
-  # to get the subnet-id for the cluster1
-  $ clustername='<YOUR_CLUSTER_NAME>'
-  $ openstack subnet list | grep $clustername | awk -F'\| ' '{ print $2 }'
-
-  # to get the floating-network-id
-  $ openstack network list --external -c ID -f value
-
-  # to get the project-id auth-url and region
-  $ openstack configuration show -c auth.project_id -f value -c auth_url -f value -c region_name -f value -f yaml
-
-  # to get the user-id
-  $ openstack token issue -c user_id -f value -f yaml
-
-.. literalinclude:: _containers_assets/octavia-ing-configmap.yml
-   :language: yaml
-
-Once the file has been updated with the correct information create the
-configmap.
-
-.. code-block:: console
-
-  $ kubectl apply -f octavia-ing-configmap.yml
-  configmap/octavia-ingress-controller-config created
-
-Next we define the ingress itself. This provides the rules and conditions for
-the ingress controller to route traffic to the applications. We have defined
-the following:
+As the majority of the ingress configuration has alread been taken care uf for
+us we only need to define the ingress itself. This provides the rules and
+conditions for the ingress controller to route traffic to the applications. We
+have defined the following:
 
 * a host name for host-based routing
 * a default path for the entry URL
@@ -144,26 +102,6 @@ the following:
   $ kubectl apply -f octavia-ing-ingress.yml
   ingress.networking.k8s.io/test-octavia-ingress created
 
-Finally we deploy the ingress controller as a statefulset. This deploys a
-single replica running the ``octavia-ing-configmap.yml`` container. It mounts
-the configuration as a volume in the pod.
-
-.. literalinclude:: _containers_assets/octavia-ing-statefulset.yml
-   :language: yaml
-
-.. code-block:: console
-
-  $ kubectl apply -f octavia-ing-statefulset.yml
-  statefulset.apps/octavia-ingress-controller unchanged
-
-Once the pod is deployed we need to wait until the ingress is assigned a
-floating IP address as shown below.
-
-.. code-block:: console
-
-  $ kubectl get ing
-  NAME                   HOSTS              ADDRESS          PORTS   AGE
-  test-octavia-ingress   api.sample.com     103.197.61.251   80      3m43s
 
 Now we can test our connectivity with the following.
 

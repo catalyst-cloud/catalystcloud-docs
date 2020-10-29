@@ -18,5 +18,6 @@ provides to the networking service as a whole.
    network/deleting-network
    network/security-groups
    network/vpn
+   network/shared-network
    network/faq
    Best practices <network/network-bp>
