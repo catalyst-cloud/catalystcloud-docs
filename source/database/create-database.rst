@@ -20,7 +20,10 @@ following:
 - You must have :ref:`Sourced an openRC file<configuring-the-cli>` on your
   current command line environment
 - You must have installed the `python trove-client tools
-  <https://pypi.org/project/python-troveclient/>`_.
+  <https://pypi.org/project/python-troveclient/3.3.2/>`_.
+
+  - This tutorial is written to work with the 3.3.2 version of the client tools.
+    We are looking at upgrading to a newer version in the near future.
 
 Once you have the necessary tools installed and you environment ready, you can
 proceed with the next step:
