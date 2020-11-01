@@ -89,10 +89,10 @@ Managing server groups
 
     .. tab:: Ansible
 
-      The example below illustrates how the ``server group hint`` can be passed
-      in an Ansible playbook using the os_server module. This means when the
-      playbook creates a compute instance, it also puts it into the desired
-      server group:
+      The example below illustrates how the ``scheduler_hints`` parameter can
+      be passed in an Ansible playbook using the os_server module. This means
+      when the playbook creates a compute instance, it also puts the instance
+      into the desired server group:
 
       .. code-block:: yaml
 
