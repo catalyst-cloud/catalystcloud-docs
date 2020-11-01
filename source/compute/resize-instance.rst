@@ -51,9 +51,9 @@ Via the command line
 ************************
 
 Before continuing, make sure that you have sourced an openRC file so that you
-are able to interact with your project via the command line. You are not sure
-how to download or source your RC file, you can follow the
-:ref:`guide<command-line-interface>` from earlier in the documentation.
+are able to interact with your project via the command line. If you are not
+sure how to download or source your openRC file, you can follow the
+:ref:`guide<command-line-interface>` from earlier in this documentation.
 
 
 Once you have sourced your openRC file, we can begin gathering the
@@ -91,16 +91,17 @@ new flavor we want our instance to have:
   | ...                                  |            |        |      |           |       |           |
   +--------------------------------------+------------+--------+------+-----------+-------+-----------+
 
-For this example we will be resizing our instance to the c1.c1r2 flavor. For
-more information on flavors, their naming convention and purpose, please refer
-to the previous page in this section: :ref:`launching a compute instance<flavors-information>`.
+For this example we will be resizing our instance from c1.c1r1 to the c1.c1r2
+flavor. For more information on flavors, their naming convention and purpose,
+please refer to the previous page in this section:
+:ref:`launching a compute instance<flavors-information>`.
 
 We will now create an environment variable for our flavorID and for the
 the instance we want to resize:
 
 .. code-block:: bash
 
-  # First we get our current instance's ID by using the following
+  # First, we get our current instance's ID by using the following:
   $ openstack server list
 
   +--------------------------------------+------------------------+---------------+--------------------------+------------------------------+---------+
@@ -126,8 +127,9 @@ Like the dashboard example, the resize command is split into two parts, one to
 perform the resize and another to confirm that the resize was successful so
 that the old instance may be released.
 
-Before we confirm or resize, we have to wait for the status of our instance to
-be ``VERIFY_RESIZE``. You can check the status by using the following:
+Before we confirm our resize, we have to wait for the status of our instance to
+change to: ``VERIFY_RESIZE``. You can check the status of your instance using
+the following:
 
 .. code-block:: bash
 
@@ -145,10 +147,9 @@ confirm our resize:
 
   $ openstack server resize confirm $instanceID
 
-  # We can then confirm our instance has been resized by showing our instance and looking at the flavor ID
+  # We can then confirm that our instance has been resized by 'showing' our instance and looking at the flavor
 
   $ openstack server show $instanceID
-
   +-----------------------------+----------------------------------------------------------+
   | Field                       | Value                                                    |
   +-----------------------------+----------------------------------------------------------+
@@ -184,11 +185,11 @@ confirm our resize:
 
 
 ***************************
-Via orchestration languages
+Via orchestration tools
 ***************************
 
 Like the command line method, you will need to source an openRC file before you
-continue with any of these methods. Once you have the openRC file sourced, you
+continue with any of the following. Once you have your openRC file sourced, you
 will be able to continue with any of the following methods.
 
 
@@ -229,16 +230,17 @@ will be able to continue with any of the following methods.
     .. tab:: Terraform
 
       This tutorial assumes that you have knowledge of how terraform works and
-      manages your resources. We also assumes that you have already used
-      terraform to create your instance, and that you now wish to resize it.
+      manages your resources. The following also assumes that you have already
+      created your resources with a terraform template and you are now trying
+      to change the flavor of that template to update your existing resources.
 
-      To resize an instance using terraform, there are two things that you will
-      need to change in your template. We need to update our flavor ID to to
-      use our new size, and we need to add an optional argument to our
-      resource deceleration to ignore the need to confirm our instance resize.
+      To resize an instance using terraform, there are two things that we will
+      need to change in our template. We need to update the flavor ID to match
+      the new size we want to use, and we need to add an optional argument to
+      our resource deceleration; to ignore the need to confirm our instance
+      resize.
 
-      First, we need to find the new flavor ID that we want to resize our
-      instance with. We can find this with the following:
+      First, we need to find the flavor ID that we will resize our instance to:
 
       .. code-block::
 
@@ -264,8 +266,8 @@ will be able to continue with any of the following methods.
         | ...                                  |            |        |      |           |       |           |
         +--------------------------------------+------------+--------+------+-----------+-------+-----------+
 
-      Once we have the ID of the flavor we want our instance to be resized to
-      (for our example we will use the c1.c1r2 flavor) we need to look at our
+      Once we have the flavor we want our instance to be resized to
+      (for this example we will use the c1.c1r2 flavor) we need to look at our
       template and change the flavor ID that we are using. For the following
       example, we are using a template that has declared the flavor as a
       variable.
