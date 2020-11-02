@@ -133,6 +133,8 @@ instance.
 Flavor
 ******
 
+.. _flavors-information:
+
 The compute instance flavor (US spelling is correct here) defines the amount of
 CPU and RAM allocated to your virtual servers. The price per hour for a compute
 instance varies according to its flavor. Existing flavors can be found here:
