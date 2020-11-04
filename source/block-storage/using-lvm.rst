@@ -251,8 +251,8 @@ Running **lvmdiskscan** now should show that the new LVM volume is present.
       0 LVM physical volume whole disks
       1 LVM physical volume
 
-All that remains to be done now is to add a filesystem to the LVM volume and
-you will have a functioning LVM. Once this is done you will need to follow the
+All that remains to be done now is to add a filesystem to the LVM and
+you will have a functional LVM. Once this is done you will need to follow the
 next section on how to mount your new volume.
 
 .. code-block:: shell
@@ -298,9 +298,9 @@ which volumes are present:
   0 LVM physical volume whole disks
   1 LVM physical volume
 
-From the previous section we know that ``/dev/vg_data/test`` is our LVM volume.
-Once we have our LVM, we then have to create a mount point and update our fstab
-file with the information on our LVM and our newly created folder.
+From the previous section we know that ``/dev/vg_data/test`` is our LVM.
+Once we have our volume, we then have to create a mount point and update our
+fstab file with the information on our LVM and our newly created folder.
 We update the fstab file so that whenever the server starts up, it mounts our
 LVM automatically on our folder.
 
