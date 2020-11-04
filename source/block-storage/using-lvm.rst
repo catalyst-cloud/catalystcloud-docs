@@ -1,5 +1,5 @@
 ##########################
-Creating volumes using LVM
+Volumes using LVM
 ##########################
 
 ************
@@ -31,7 +31,7 @@ avoids the possibility of someone firing up a partitioning program, seeing an
 un-partitioned disk and attempting to use it for some other purpose.
 
 ******************************************
-Creating a logical volume on a single disk
+Creating a logical volume
 ******************************************
 The first thing to do is identify the disks available for use, to do this
 use ``lvmdiskscan`` while on a **compute instance**; and while having ``Sudo``
@@ -251,9 +251,9 @@ Running **lvmdiskscan** now should show that the new LVM volume is present.
       0 LVM physical volume whole disks
       1 LVM physical volume
 
-All that remains to be done now is to add a filesystem to the LVM volume and
-create a mount point and a mount point entry in /etc/fstab and test that the
-volume mounts correctly.
+All that remains to be done now is to add a filesystem to the LVM and
+you will have a functional LVM. Once this is done you will need to follow the
+next section on how to mount your new volume.
 
 .. code-block:: shell
 
@@ -269,14 +269,62 @@ volume mounts correctly.
   Creating journal (32768 blocks): done
   Writing superblocks and filesystem accounting information: done
 
+***************************
+Mounting a logical volume
+***************************
+
+Once you have created a new LVM you will need to mount it before you are able
+to access the storage space it has. The following guide will cover how to mount
+your existing LVM onto your instance.
+
+.. Note::
+
+  If you are using an existing volume from a previous instance, you will need
+  to attach your volume to the new instance first. You can use
+  ``openstack server add volume <INSTANCE_NAME> <VOLUME_NAME>`` to do this.
+
+First, we need to find the name of our LVM. The following code will show you
+which volumes are present:
+
+.. code-block:: shell
+
+  root@lvm-test:~# lvmdiskscan
+  /dev/vg_data/test [      10.00 GiB]
+  /dev/vda1         [      11.00 GiB]
+  /dev/vdb1         [      10.00 GiB] LVM physical volume
+  /dev/vdc          [      10.00 GiB]
+  2 disks
+  1 partition
+  0 LVM physical volume whole disks
+  1 LVM physical volume
+
+From the previous section we know that ``/dev/vg_data/test`` is our LVM.
+Once we have our volume, we then have to create a mount point and update our
+fstab file with the information on our LVM and our newly created folder.
+We update the fstab file so that whenever the server starts up, it mounts our
+LVM automatically on our folder.
+
+.. code-block:: shell
+
+  # We will create a folder called 'data' to serve as our mount point
   root@lvm-test:~# mkdir /data
 
+  # We then update our fstab file to have our LVM mount on our '/data' folder.
   root@lvm-test:~# cat /etc/fstab
   LABEL=cloudimg-rootfs	/	 ext4	defaults	0 0
   /dev/vg_data/data   	/data    ext4	defaults	0 0
 
+  # Once this is done, we use the following command to force all volumes listed in the fstab to mount:
   root@lvm-test:~# mount -a
 
+Finally, once we have updated our fstab and forced our LVM to mount, we can
+view the mount information of our volumes using the following:
+
+.. code-block:: shell
+
+  # Output truncated for brevity
   root@lvm-test:~# mount
   ...
   /dev/mapper/vg_data-data on /data type ext4 (rw,relatime,data=ordered)
+
+Once this is done, you should be able to access your LVM from your mount point.
