@@ -317,8 +317,8 @@ LVM automatically on our folder.
   # Once this is done, we use the following command to force all volumes listed in the fstab to mount:
   root@lvm-test:~# mount -a
 
-Finally, once we have updated our fstab and forced an update we can view the
-mount information of our volumes using the following:
+Finally, once we have updated our fstab and forced our LVM to mount, we can
+view the mount information of our volumes using the following:
 
 .. code-block:: shell
 
