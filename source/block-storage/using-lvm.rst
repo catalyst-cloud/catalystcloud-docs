@@ -165,6 +165,12 @@ labelled as LVM physical volumes, this can be done this using **pvcreate**.
 While there is only /dev/vdb1 being added at this time it is possible to pass
 multiple devices at once.
 
+.. warning::
+
+  Using the pvcreate command will wipe any data that already exists on your
+  volume. Only use this command on an empty volume if you do not want to lose
+  data.
+
 The **pvs** (or **pvdisplay**) command can then be used to confirm the status
 of the available physical volumes.
 
