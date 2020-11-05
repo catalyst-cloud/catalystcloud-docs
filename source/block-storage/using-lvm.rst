@@ -48,7 +48,7 @@ privileges.
     0 LVM physical volume whole disks
     0 LVM physical volumes
 
-This shows us that there are currently three disks available
+This shows us that there are currently three disks available.
 
 - /dev/vda1, which is a partition on the disk /dev/vda
 - /dev/vdb and /dev/vdc, which are un-partitioned disks
