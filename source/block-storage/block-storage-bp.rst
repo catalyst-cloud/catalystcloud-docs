@@ -18,6 +18,27 @@ ensuring they are identical.
 The solution is designed and implemented with very high availability and data
 resiliency in mind. It has no single points of failure.
 
+***********************************
+When to use each type of volume
+***********************************
+
+The root volume of your compute instance should only be used for operating
+system data. We recommend you add additional volumes to your compute
+instances to persist application data. For example: when running a MySQL
+database, you should add at least one additional volume with enough space to
+hold your database and mount it on ``/var/lib/mysql``.
+
+While block volumes can be formatted and used independently, we highly
+recommend you use a logical volume management layer, such as LVM, in
+production environments. By using LVM you will be able to add additional
+volumes and resize file-systems without downtime. Please consult the
+documentation of your operating system for information on how to use LVM.
+
+If you are using volumes independently (without LVM, in a development
+scenario), then you must label your partitions to ensure they will be mounted
+correctly. The order of the devices (sdb, sdc, etc) may change and, when
+unlabelled, may result in them being mounted incorrectly.
+
 *****************************
 Volume names should be unique
 *****************************

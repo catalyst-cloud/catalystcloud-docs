@@ -115,24 +115,14 @@ Creating an instance with an NVMe root disk
 If you want to launch an instance using an NVMe root volume check out
 :ref:`boot-with-nvme-volume` for more information.
 
+*******
+Backups
+*******
 
-**************
-Best practices
-**************
-
-The root volume of your compute instance should only be used for operating
-system data. We recommend you add additional volumes to your compute
-instances to persist application data. For example: when running a MySQL
-database, you should add at least one additional volume with enough space to
-hold your database and mount it on ``/var/lib/mysql``.
-
-While block volumes can be formatted and used independently, we highly
-recommend you use a logical volume management layer, such as LVM, in
-production environments. By using LVM you will be able to add additional
-volumes and resize file-systems without downtime. Please consult the
-documentation of your operating system for information on how to use LVM.
-
-If you are using volumes independently (without LVM, in a development
-scenario), then you must label your partitions to ensure they will be mounted
-correctly. The order of the devices (sdb, sdc, etc) may change and, when
-unlabelled, may result in them being mounted incorrectly.
+As a precaution, it is important to create backups that secure your data in the
+event of some catastrophe. Whether this is from a natural disaster, user error
+or some other unfortunate event, you want to ensure that the data you have
+is saved in a secure fashion. We highly recommended that you create backups of
+all of your volumes after you have created them. You can follow the guides
+found in the :ref:`backups` section of the documentation to create and automate
+your backup tasks.
