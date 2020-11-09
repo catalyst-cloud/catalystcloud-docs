@@ -657,7 +657,7 @@ we need to retrieve the configuration and store it to a local directory.
   release that will make this possible using a converged configuration file.
 
 If you run ``eval $(openstack coe cluster config <cluster-name>)`` within a
-directory that alre$ ady contains the configuration for a cluster it will fail.
+directory that already contains the configuration for a cluster it will fail.
 If this is intentional, as in the case of upgrading a cluster that has been
 rebuilt, then this is possible by adding the ``--force`` flag, like this.
 
