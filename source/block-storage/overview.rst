@@ -124,5 +124,5 @@ event of some catastrophe. Whether this is from a natural disaster, user error
 or some other unfortunate event, you want to ensure that the data you have
 is saved in a secure fashion. We highly recommended that you create backups of
 all of your volumes after you have created them. You can follow the guides
-found in the :ref:`backups` section of the documentation to create and automate
+found in the :ref:`backups<backups>` section of the documentation to create and automate
 your backup tasks.
