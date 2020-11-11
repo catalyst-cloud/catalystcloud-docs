@@ -479,3 +479,168 @@ method you choose:
         .. code-block:: bash
 
             curl -X DELETE -H "X-Auth-Token: <token>" <storage url>/mycontainer
+
+    .. tab:: Heat Orchestration
+
+        Using Heat you are able to manage a large number of resources using a
+        stack that you construct and manage using a pre-designed template. The following
+        example assumes that you have some knowledge of Heat and how to use these
+        template files.
+
+        The following code snippet is the minimum required to construct an object storage
+        container using Heat:
+
+        .. code-block:: bash
+
+            heat_template_version: 2015-04-30
+
+            description: >
+                Creating a swift container using HEAT
+
+            resources:
+
+              swift_container:
+                type: OS::Swift::Container
+                properties:
+                  PurgeOnDelete: FALSE
+                  name: heat-container
+
+        For more information on the object storage containers and what
+        customization options you can apply to them, please see the
+        `Openstack Heat`_  documentation
+
+        .. _Openstack Heat: https://docs.openstack.org/heat/latest/template_guide/openstack.html#OS::Swift::Container
+
+        Once you have your template constructed, you should make sure to validate
+        the template before you use it to create any resources. You can do this
+        by running the following code:
+
+        .. code-block:: bash
+
+            $ openstack orchestration template validate -t <your-template-name>
+
+        If your template is constructed correctly then the output of this code
+        should be a copy of your template. If there is an error inside your template
+        then you will be notified of the error in the output.
+
+        Once you have ensured your template is valid, you can construct your
+        stack:
+
+        .. code-block:: bash
+
+            $ openstack stack create -t <template> <stack-name>
+
+        The ``stack_status`` indicates that creation is in progress. Use the
+        ``event list`` command to check on the stack's orchestration progress:
+
+        .. code-block:: bash
+
+            $ openstack stack event list <stack-name>
+            2020-11-09 22:53:56Z [container-stack]: CREATE_IN_PROGRESS  Stack CREATE started
+            2020-11-09 22:53:57Z [container-stack.swift_container]: CREATE_IN_PROGRESS  state changed
+            2020-11-09 22:54:01Z [container-stack.swift_container]: CREATE_COMPLETE  state changed
+            2020-11-09 22:54:01Z [container-stack]: CREATE_COMPLETE  Stack CREATE completed successfully
+
+
+        Once your status has reached CREATE_COMPLETE you should be able to see
+        the resources on your project.
+
+    .. tab:: Terraform
+
+        This tutorial assumes that you have some experience with `Terraform`_
+        and that you have an understanding of how Terraform scripts are written
+        and how they function. We also assume that you have all of the
+        prerequisites to run Terraform scripts.
+
+        .. _Terraform: https://www.terraform.io/
+
+        The following script will create an object storage container on your
+        project.
+
+        .. code-block:: bash
+
+            provider "openstack" {
+            }
+            resource "openstack_objectstorage_container_v1" "container_1" {
+              name   = "tf-test-container-1"
+              metadata = {
+                test = "true"
+              }
+              content_type = "application/json"
+            }
+
+        Once you have saved this script you need switch to the correct directory
+        and run the following commands to create your object storage container.
+        The first command will outline what resources are going ot be made and
+        managed by Terraform and what their outputs will be:
+
+        .. code-block:: bash
+
+            $ terraform plan
+              Refreshing Terraform state in-memory prior to plan...
+              The refreshed state will be used to calculate this plan, but will not be
+              persisted to local or remote state storage.
+              ------------------------------------------------------------------------
+              An execution plan has been generated and is shown below.
+              Resource actions are indicated with the following symbols:
+                + create
+
+              Terraform will perform the following actions:
+
+                # openstack_objectstorage_container_v1.container_1 will be created
+                + resource "openstack_objectstorage_container_v1" "container_1" {
+                    + content_type  = "application/json"
+                    + force_destroy = false
+                    + id            = (known after apply)
+                    + metadata      = {
+                        + "test" = "true"
+                      }
+                    + name          = "tf-test-container-1"
+                    + region        = (known after apply)
+                  }
+
+              Plan: 1 to add, 0 to change, 0 to destroy.
+              ------------------------------------------------------------------------
+              Note: You didn't specify an "-out" parameter to save this plan, so Terraform
+              can't guarantee that exactly these actions will be performed if
+              "terraform apply" is subsequently run.
+
+        After you review the Terraform plan and ensure that it has all the
+        resources you want to be created, you can use the following code to
+        create your new resources:
+
+        .. code-block:: bash
+
+            $ terraform apply
+              ... #truncated for brevity
+              Do you want to perform these actions?
+              Terraform will perform the actions described above.
+              Only 'yes' will be accepted to approve.
+
+              Enter a value: yes
+
+              openstack_objectstorage_container_v1.container_1: Creating...
+              openstack_objectstorage_container_v1.container_1: Creation complete after 5s [id=tf-test-container-1]
+
+              Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+        Once you have reached this step you should have an object storage container created
+        and managed by Terraform. If you want to delete this container in the future, as
+        well as any other resources created in you plan, you can use the following code to
+        delete them:
+
+        .. code-block:: bash
+
+            $ terraform destroy
+              ... # truncated for brevity
+              Do you really want to destroy all resources?
+              Terraform will destroy all your managed infrastructure, as shown above.
+              There is no undo. Only 'yes' will be accepted to confirm.
+
+              Enter a value: yes
+
+              openstack_objectstorage_container_v1.container_1: Destroying... [id=tf-test-container-1]
+              openstack_objectstorage_container_v1.container_1: Destruction complete after 1s
+
+              Destroy complete! Resources: 1 destroyed.
+
