@@ -76,7 +76,12 @@ Deploy this to the cluster with the following command.
 
   $ kubectl apply -f deployment-echoserver.yml
 
-The create a service to expose the pods on port 80.
+.. Note::
+
+  For Ingress to work correctly the service that exposes the application needs
+  to be created using ``--type=NodePort``
+
+The create a service to expose the pods on port 80 with the type **NodePort**.
 
 .. code-block:: console
 
