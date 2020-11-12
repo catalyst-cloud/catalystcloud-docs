@@ -482,13 +482,13 @@ method you choose:
 
     .. tab:: Heat Orchestration
 
-        Using Heat you are able to manage a large number of resources using a
-        stack that you construct and manage using a pre-designed template. The following
-        example assumes that you have some knowledge of Heat and how to use these
+        Using Heat you are able to manage a large number of resources by utilising a
+        stack that will construct and monitor your objects. You can create a stack by using a pre-designed template.
+        The following example assumes that you have some knowledge of Heat and how to use these
         template files.
 
-        The following code snippet is the minimum required to construct an object storage
-        container using Heat:
+        The following code snippet contains the minimum required components to construct
+        an object storage container using Heat:
 
         .. code-block:: bash
 
@@ -505,22 +505,21 @@ method you choose:
                   PurgeOnDelete: FALSE
                   name: heat-container
 
-        For more information on the object storage containers and what
-        customization options you can apply to them, please see the
-        `Openstack Heat`_  documentation
+        For more information on object storage containers and what
+        customization options you can select for them, please see the
+        `Openstack Heat`_  documentation.
 
         .. _Openstack Heat: https://docs.openstack.org/heat/latest/template_guide/openstack.html#OS::Swift::Container
 
         Once you have your template constructed, you should make sure to validate
-        the template before you use it to create any resources. You can do this
-        by running the following code:
+        it before creating any resources. You can do this by running the following code:
 
         .. code-block:: bash
 
             $ openstack orchestration template validate -t <your-template-name>
 
         If your template is constructed correctly then the output of this code
-        should be a copy of your template. If there is an error inside your template
+        should print out a copy of your template. If there is an error inside your template
         then you will be notified of the error in the output.
 
         Once you have ensured your template is valid, you can construct your
@@ -549,13 +548,16 @@ method you choose:
 
         This tutorial assumes that you have some experience with `Terraform`_
         and that you have an understanding of how Terraform scripts are written
-        and how they function. We also assume that you have all of the
+        and how they function. We also assume that you have installed all of the
         prerequisites to run Terraform scripts.
 
         .. _Terraform: https://www.terraform.io/
 
-        The following script will create an object storage container on your
-        project.
+        Below is an example template that contains the basic information required
+        for Terraform to create an object storage container on the cloud. You can
+        view the full list of customization options for this resource on the `Terraform documentation`_
+
+        .. _Terraform documentation: https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs/resources/objectstorage_container_v1
 
         .. code-block:: bash
 
@@ -569,9 +571,9 @@ method you choose:
               content_type = "application/json"
             }
 
-        Once you have saved this script you need switch to the correct directory
-        and run the following commands to create your object storage container.
-        The first command will outline what resources are going ot be made and
+        Once you have saved this script you need to switch to the correct directory
+        and run the following commands to create your new object storage container.
+        The first command will outline what resources are going to be made and
         managed by Terraform and what their outputs will be:
 
         .. code-block:: bash
@@ -624,9 +626,9 @@ method you choose:
 
               Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
-        Once you have reached this step you should have an object storage container created
+        Once you have reached this step, you should have an object storage container created
         and managed by Terraform. If you want to delete this container in the future, as
-        well as any other resources created in you plan, you can use the following code to
+        well as any other resources created in your plan, you can use the following code to
         delete them:
 
         .. code-block:: bash
