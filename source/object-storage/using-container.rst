@@ -169,7 +169,7 @@ method you choose:
 
         .. raw:: html
 
-            <h4> API endpoints </h4>
+            <h3> API endpoints </h3>
 
         +----------+---------+--------------------------------------------------------------------------+
         | Region   | Version | Endpoint                                                                 |
@@ -189,10 +189,32 @@ method you choose:
 
         .. raw:: html
 
-            <h4> Requirements </h4>
+            <h3> Requirements </h4>
 
-        In addition to sourcing the correct environment variables, you will also need
-        to have installed the standard client library for swift, which in this case is
+            <h4> Sourcing the correct environment variables </h5>
+
+        Like the the other methods in this tutorial section, you will need to source an
+        openRC file to interact with your object storage container. However, the openRC
+        file we normally use to source our environment variables will not work with
+        this example. This is because the swift API does not use token
+        authentication, it only allows for username and password authentication.
+
+        Because of this, we have created the following file that you can save
+        as a ``.sh`` and use to source your environment variables the same as
+        you would with a normal RC file. Some of the
+        variables in this file are placeholders and you will have to change them
+        to match the specifications for your project. Once this is done you
+        should be able to source the file the same as any other openRC file:
+
+        .. literalinclude:: assets/old-rc-file-format.sh
+          :language: shell
+
+        .. raw:: html
+
+          <h4> Installing the correct packages</h4>
+
+        After this file is edited and sourced, you will also need to install the
+        standard client library for swift, which in this case is
         the Python Swiftclient. This can be added to your current Python environment;
         the example below illustrates how:
 
@@ -210,8 +232,7 @@ method you choose:
 
         .. raw:: html
 
-            <h4> Sample code </h4>
-
+            <h3> Sample code </h3>
 
         The code below demonstrates how you can use the Python-Swiftclient to interact
         with swift via the version 2 compatible (auth) API. This version uses
