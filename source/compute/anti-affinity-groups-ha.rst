@@ -1,32 +1,73 @@
 .. _anti-affinity:
 
-###########################
-Anti-affinity groups for HA
-###########################
+############################
+Using server affinity for HA
+############################
 
-..
-  Affinity and anti-affinity groups allow you to ensure compute instances are
-  placed on the same or different hypervisors (physical servers).
+Server affinity refers to the practice of ensuring compute instances are
+either: allocated to the same **or** allocated to explicitly different
+hypervisors (physical servers). The process of having your instances allocated
+on the same hypervisor is known as server *"affinity"* and the process of
+separating your instances across hypervisors is known as server
+*"anti-affinity"*
 
-Anti-affinity groups allow you to ensure compute instances are placed on
-different physical servers.
+*Server affinity* is useful when you want to ensure that the data transfer
+amongst compute instances is as fast as possible. On the other hand it may
+increase CPU contention or reduce the availability of your application
+(a single server going down affects all compute instances in the group.)
 
-..
-  Server affinity is useful when you want to ensure that the data transfer
-  amongst compute instances is as fast as possible. On the other hand it may
-  reduce the availability of your application (a single server going down
-  affects all compute instances in the group) or increase CPU contention.
-
-Server anti-affinity is useful when you want to increase the availability of an
-application within a region and create redundancy for your compute instances.
+Server *anti-affinity* is useful when you want to increase the availability of
+an application within a region and create redundancy for your compute instances.
 Compute instances in an anti-affinity group are placed on different physical
 servers, ensuring that the failure of a server will not affect all your compute
 instances simultaneously.
 
 
-**********************
-Managing server groups
-**********************
+****************************************
+Using the dashboard
+****************************************
+
+There are two parts to the management of server groups. The first part is the
+creation of a server group, that has the policy that you want. The next is
+adding instances to your server group.
+
+Starting with the creation of your server group, we first need to navigate to
+the **server groups** section of the dashboard:
+
+.. image:: _static/Server-group-mainpage.png
+   :align: center
+
+From here we select **+ Create Server Group** and the following screen will
+appear:
+
+.. image:: _static/server-group-create.png
+   :align: center
+
+After we input a name and select the policy that we want our group to have (in
+our case we will use Anti-affinity, since this is the most common policy) we
+click submit and wait for our server group to build.
+
+.. image:: _static/server-groups-filled-in.png
+   :align: center
+
+Once our group is created we should be able to see it from this page:
+
+.. image:: _static/server-group-created.png
+   :align: center
+
+Now that we have our created Anti-affinity group, we can start adding instances
+to it. It is important to note that only new instances can be added to a server
+group. You cannot add instance that have already been created because the
+server group cannot retroactively enforce its policies on them. You can declare
+the server group you want your instance to be a part of when creating it,
+from the following screen:
+
+.. image:: _static/create-instance-server-group.png
+   :align: center
+
+*****************************************************
+Using programmatic methods
+*****************************************************
 
 .. Note::
 

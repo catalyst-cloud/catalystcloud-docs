@@ -306,7 +306,7 @@ Kubernetes **namespaces** are a way to provide virtual clusters inside the
 same physical cluster. They assist different projects, teams, or customers in
 sharing a Kubernetes cluster.
 
-In order to do this namespace provide the following:
+In order to use namespacing, you will need to provide the following:
 
 * A scope for names.
 * A mechanism to attach authorization and policy to a subsection of the
