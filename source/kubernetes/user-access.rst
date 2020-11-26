@@ -299,6 +299,8 @@ enabled OpenStack RC file** again.
 Using namespaces for granular access control
 ********************************************
 
+.. _kube-namespaces:
+
 It is possible, through the use of **roles** and **namespaces**,  to
 achieve a much more granular level of access control.
 
