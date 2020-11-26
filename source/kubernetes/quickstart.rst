@@ -287,7 +287,7 @@ If you wish to save the configuration to a different location you can use the
 
 Once we have the CLI configured by pointing the ``$KUBECONFIG`` variable to a
 configuration file, we can then begin to use ``kubectl`` to interact with the
-cluster. To test everything works, we can issue a simple command show the
+cluster. To test everything works, we can issue a simple command to show the
 details of the cluster:
 
 .. code-block:: bash

@@ -211,7 +211,7 @@ method you choose:
 
         .. raw:: html
 
-          <h4> Installing the correct packages</h4>
+          <h4> Installing the correct tools</h4>
 
         After this file is edited and sourced, you will also need to install the
         standard client library for swift, which in this case is
