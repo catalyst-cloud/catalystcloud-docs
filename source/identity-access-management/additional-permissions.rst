@@ -18,17 +18,27 @@ Permissions
 
 When creating certain objects on the cloud, there are unique commands that are
 only available to the individual who initially created the object. This is
-because when that user created the object they were given
-*ownership permissions* of the object. The most common example of this is when
-creating a kubernetes cluster. If you are the person who created the cluster
-then you are known as the **cluster administrator** and you will have access to
-a wider range of commands. While there is a role required for interacting with
-kubernetes clusters (detailed in the
-:ref:`kubernetes section <kubernetes-user-access>` of the documents) only the
-cluster administrator has the ability to interact directly with certain nodes
-of the cluster, and to dictate behaviour for the master nodes.
+because when a user creates an object they are given *ownership permissions* of
+that object.
 
-A similar behaviour is observed when creating a cluster using your SSH key.
+The most common example of this is when creating a kubernetes
+cluster. If you are the person who created the cluster then you are known as
+the **cluster administrator** and you will be the only user that can access
+that cluster. While there is a role which dictates whether a user is able to
+interact with **any** kubernetes clusters
+(detailed in the :ref:`kubernetes section <kubernetes-user-access>` of the
+documents) only the **cluster administrator** is able to initially communicate
+with a cluster once it is created. This is because a relation is made, upon the
+clusters creation, between the administrator and the cluster. Without going
+into extreme detail on how this relationship functions, it
+can be simplified down to: the user who created the cluster has extra
+permissions when dealing with the cluster that the kubernetes roles do not
+cover. These permissions can be given to other users however, taking advantage
+of :ref:`kubernetes namespaces<kube-namespaces>`. The important thing to note
+in this example, is that permissions can be given to users that are not covered
+directly in the roles we have talked about so far.
+
+A similar behaviour is observed when creating an instance using your SSH key.
 When creating a compute instance, you supply one SSH key and the only
 user who is able to access that instance will be the person with the matching
 private key. You can change this behaviour by creating additional users on the
