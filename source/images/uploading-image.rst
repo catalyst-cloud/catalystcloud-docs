@@ -6,37 +6,18 @@ Please make sure you have converted your image to RAW before uploading it to
 our cloud. The previous section provides instructions on how to convert images
 from other formats to RAW.
 
-*********************
-Via the web dashboard
-*********************
-
-On the images panel, click on create image. The create image dialogue will be
-displayed as shown below:
-
-.. image:: _static/image-create.png
-
-1) On the image source, select "Image Location" to provide the URL that the
-image should be downloaded from, or select "Image File" to upload an image from
-your file system.
-
-2) Select the appropriate format for your image. We strongly recommend the use
-of RAW images.
-
-3) Set the minimum disk size to at least the size of the image. If you are
-using a compressed format, like QCOW2, use the expanded size of the image.
-
-Finally, click on create image and wait until the image has been downloaded or
-uploaded.
-
 **************************
 Via the command line tools
 **************************
+.. Warning::
 
-If the image is larger than 5GB, then you will have to use the OpenStack CLI to
-upload it to the cloud. This is due to a cap being placed on the dashboard.
+  If the Image you are trying to upload is larger than 500MB you **must** use
+  the OpenStack CLI to upload it to the cloud. This is due to a cap being
+  placed on the dashboard.
+
 Ensure that you have the OpenStack command line tools
-installed and that you have sourced an openrc file, as explained on
-:ref:`command-line-interface`.
+installed and that you have sourced an openrc file, as explained in the
+:ref:`CLI tools and SDKs section<command-line-interface>`.
 
 To upload the converted image to the Catalyst Cloud:
 
@@ -67,3 +48,25 @@ To upload the converted image to the Catalyst Cloud:
   | visibility       | private                                                                                                  |
   +------------------+----------------------------------------------------------------------------------------------------------+
 
+
+*********************
+Via the web dashboard
+*********************
+
+On the images panel, click on create image. The create image dialogue will be
+displayed as shown below:
+
+.. image:: _static/image-create.png
+
+1) On the image source, select "Location" to provide the URL that the
+image should be downloaded from, or select source type "File" to upload an
+image from your file system.
+
+2) Select the appropriate format for your image. We strongly recommend the use
+of RAW images.
+
+3) Set the minimum disk size to at least the size of the image. If you are
+using a compressed format, like QCOW2, use the expanded size of the image.
+
+Finally, click on create image and wait until the image has been downloaded or
+uploaded.
