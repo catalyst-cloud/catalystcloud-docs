@@ -3,12 +3,15 @@ Launching an instance from a custom image
 #########################################
 
 On the dashboard you will find the image you uploaded under the *Images*
-section of the dashboard. You can either click on the *Launch* button next to
+section. From here, you can either click on the *Launch* button next to
 your Image, or go to the Instances section and create a new instance.
-Regardless of the method you use, you will reach the "Source" section when
-creating your new instance. Select “Boot from image (creates a new volume).”
-as the instance boot source. Also ensure the volume size is at least the same
-size as the image uploaded:
+
+Regardless of the method you use, once you reach the "Source" section of
+instance creation select “Boot from image (creates a new volume).”
+as the boot source. Then find your custom image from the list below
+(if you clicked *launch* straight from the image menu it should already be
+selected.) Also ensure the volume size is at least the same size as the image
+uploaded:
 
 .. image:: _static/launching-image-boot-cut.png
 
