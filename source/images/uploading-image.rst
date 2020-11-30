@@ -16,8 +16,8 @@ Via the command line tools
   placed on the dashboard.
 
 Ensure that you have the OpenStack command line tools
-installed and that you have sourced an openrc file, as explained on
-:ref:`command-line-interface`.
+installed and that you have sourced an openrc file, as explained in the
+:ref:`CLI tools and SDKs section<command-line-interface>`.
 
 To upload the converted image to the Catalyst Cloud:
 
@@ -58,9 +58,9 @@ displayed as shown below:
 
 .. image:: _static/image-create.png
 
-1) On the image source, select "Image Location" to provide the URL that the
-image should be downloaded from, or select "Image File" to upload an image from
-your file system.
+1) On the image source, select "Location" to provide the URL that the
+image should be downloaded from, or select source type "File" to upload an
+image from your file system.
 
 2) Select the appropriate format for your image. We strongly recommend the use
 of RAW images.
