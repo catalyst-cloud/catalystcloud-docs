@@ -343,6 +343,7 @@ is:
 * *The cluster resource to access* : pod
 * *Resource access level* : get, list, watch
 
+.. _non-admin-cluster-user:
 
 Authenticating a non-admin cluster user
 =======================================

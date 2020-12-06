@@ -4,8 +4,9 @@ Additional permissions and access methods
 
 The following section details additional ways that you can restrict or allow
 user access to resources on your project. The sections below do not directly
-make  use of the **roles** we have discussed so far and instead focus on
-permissions that are given to the user by some other means.
+make use of the **roles** we have discussed so far and instead focus on
+permissions or access that are provided to the user or application by some
+other means.
 
 We have split these sections into *Permissions* which talks about certain
 cases where users are given more control over objects than others and
@@ -18,48 +19,85 @@ Permissions
 
 When creating certain objects on the cloud, there are unique commands that are
 only available to the individual who initially created the object. This is
-because when a user creates an object they are given *ownership permissions* of
-that object.
+because when the user creates the object they are assigned the equivalent
+**root** or **admin** level rights for that object.
 
-The most common example of this is when creating a kubernetes
-cluster. If you are the person who created the cluster then you are known as
-the **cluster administrator** and you will be the only user that can access
-that cluster. While there is a role which dictates whether a user is able to
+Kubernetes cluster access
+=========================
+
+One common example of this is when creating a kubernetes cluster. If you are
+the person launching the cluster then you will have your cloud credentials
+mapped to those of the **cluster administrator** through the use of a
+trust created between your user and the cluster admin user. This in turn means
+you will be the only user that can access that cluster by default.
+
+While there is a role which dictates whether a user is able to
 interact with **any** kubernetes clusters
 (detailed in the :ref:`kubernetes section <kubernetes-user-access>` of the
 documents) only the **cluster administrator** is able to initially communicate
-with a cluster once it is created. This is because a relation is made, upon the
-clusters creation, between the administrator and the cluster. Without going
-into extreme detail on how this relationship functions, it
-can be simplified down to: the user who created the cluster has extra
-permissions when dealing with the cluster that the kubernetes roles do not
-cover. These permissions can be given to other users however, taking advantage
-of :ref:`kubernetes namespaces<kube-namespaces>`. The important thing to note
-in this example, is that permissions can be given to users that are not covered
-directly in the roles we have talked about so far.
+with a cluster once it is created.
 
-A similar behaviour is observed when creating an instance using your SSH key.
-When creating a compute instance, you supply one SSH key and the only
-user who is able to access that instance will be the person with the matching
-private key. You can change this behaviour by creating additional users on the
-instance itself, either after logging in to the instance yourself or in a cloud
-config file; you then create your new users and provide a public ssh key for
-each.
+This trust provides the user with the *cluster admin* rights the ability to
+download the cluster config file which they can then use to provide
+authentication for tools such as **kubectl**.
+
+In order to provide other users access to this cluster the following is
+required:
+
+* The creation of a cluster config file that uses keystone as the means to
+  determine what right a user has in a cluster based on the roles they have
+  associated with their cloud user account. A copy of this needs to be shared
+  with all people that require access to the cluster.  See
+  :ref:`Authenticating a non-admin cluster user<non-admin-cluster-user>`
+* The addition of appropriate Kubernetes roles to those users that need access
+  to the cluster. For an explanation of these see
+  :ref:`user access<kubernetes-user-access>`
+
+
+Cloud server access
+===================
+
+A similar behaviour is observed when creating a new cloud instance. It is a
+best practice in cloud computing for user access to be restricted to
+authentication using public/private keypairs which allows for access via
+passwords to be disabled by defaul for greater security.
+
+When a new compute instance is launched you supply the public part of an SSH
+key, that you have access to, as one of the launch parameters, this is then
+added the the **.ssh/authorized_keys** file for the default user of the OS
+that you are deploying.
+
+For example:
+
+On an Ubuntu based compute instance you would log in as the user *ubuntu* using
+the SSH key that corresponds to the public key information you provided at
+instance creation time.
+
+In order to give additional users access to this instance you would need to do
+one of the following:
+
+* As the user with access you add new users within the OS itself using the
+  appropriate tools for that OS.
+* Alternatively you can add further public SH keys to the **authorized_keys**
+  giving the new users access to the instance via the existing default user.
+  While this might seem like a convenient approach it does mean you sacrifice
+  the ability to audit access to that server.
 
 ******************
 Methods of access
 ******************
 
-The following are alternative ways in which you can give individuals access to
-different objects or resources on your project, without using a pre-defined
-role.
+The following are ways in which you can restrict access for individuals and/or
+applications to different objects or resources in your project, without
+needing to use pre-defined roles or when access is anonymous and the use of a
+role is not feasible.
 
 Object storage
 ==============
 
 For object storage, you can make use of *container access control lists* (ACLs)
 to allow users who have the "auth_only" role to be able to view or edit the
-contents of your object storage containers. You can find the full list of
+contents of your object storage containers. You can find the full details of
 permissions and restrictions you can set on your containers in the
 `openstack swift documentation`_
 
