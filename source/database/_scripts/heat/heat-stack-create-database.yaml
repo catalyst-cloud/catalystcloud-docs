@@ -1,0 +1,52 @@
+#
+# HOT template for creating a new Database instance
+#
+
+heat_template_version: 2015-04-30
+
+parameters:
+
+  instance_name:
+    type: string
+    description: the name of your database instance
+    default: <INSTANCE NAME>
+
+  flavor:
+    type: string
+    description: Flavour for the servers
+    default: <FLAVOR ID>
+    constraints:
+      - custom_constraint: nova.flavor
+
+  datastore:
+    type: string
+    description: the type of datastore we are going to use. In this case mysql
+    default: mysql
+
+  datastore_version:
+    type: string
+    description: the version number of mysql
+    default: 5.7.29
+
+  network:
+    type: string
+    description: the network your instance will be attached to
+    default: <NETWORK ID>
+
+  size:
+    type: string
+    description: the size of your database instance in GB. For this example we'll use 5 GB
+    default: 5
+
+resources:
+  database:
+    type: OS::Trove::Instance
+    properties:
+      flavor: { get_param: flavor }
+      databases: [{name: DB-1}] #You can change the name of your database here
+      datastore_type: { get_param: datastore }
+      datastore_version: { get_param: datastore_version }
+      name: { get_param: instance_name }
+      networks: [network: { get_param: network }]
+      size: { get_param: size }
+      users: [{name: db_user_1, password: db_pass, databases: [DB-1]}] # you can change the password and user information here.
