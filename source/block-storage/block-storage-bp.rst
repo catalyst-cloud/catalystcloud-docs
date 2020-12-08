@@ -62,9 +62,11 @@ to tell which volume holds which data.
 Best practice for maximising disk performance
 *********************************************
 
-If you want a volume that is performant in terms of it's IO access then ensure
-that the volume is created using one of the NVMe storage tiers. There are
-three options available depending on the level of IOPS cap you require.
+When you are running workloads where I/O speed and consistency matter you will
+probably want a volume that is performant in terms of it's IO access. To ensure
+that this is the case the target volume should be created using one of the
+NVMe storage tiers. There are three options available depending on the level
+of IOPS cap you require.
 
 It is also important to note that block storage volumes are are
 **thin provisioned** ( also known as **sparse volumes** ). This means that the
