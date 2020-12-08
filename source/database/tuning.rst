@@ -144,16 +144,46 @@ Now we can test that our instance has the parameter we wanted to update:
    you can test the behaviour of your new configuration by using a
    :ref:`replica<database_replica>`.
 
-****************
-Additional notes
-****************
+*************
+Server tweaks
+*************
 
 While tuning is an important part of database performance and management,
 there are some other actions you can take to improve the general performance of
 your database:
 
-- Use volume type NVMe for workloads that are very intensive.
-- In the event that you do manage to run out of memory, you can increase the
-  flavor (RAM in particular) of your instance to meet the new demand.
+Disk performance
+================
 
-  - you can do this using the ``openstack database instance resize flavor`` command
+If you want a volume that is performant in terms of it's IO access then ensure
+that the database instance is created using one of the NVMe storage tiers.
+There are three options available depending on the level of IOPS cap you
+require.
+
+The **volume type** can be selected using the ``--volume_type`` parameter when
+creating your database. For example, if we wished to have a volume with an
+IOPS limit of 2000 we would do the following.
+
+.. code-block:: shell
+   :emphasize-lines: 8
+
+   $ openstack database instance create db-instance-1\
+   e3feb785-af2e-41f7-899b-6bbc4e0b526e \ # this is the flavor ID for your instance
+   --size 5 \
+   --datastore mysql \
+   --datastore_version 5.7.29 \
+   --databases myDB \
+   --users dbusr:dbpassword \
+   --volume_type b1.sr-r3-nvme-2000 \
+   --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48
+
+Memory
+======
+
+In the event that you do manage to run out of memory, you can increase the
+flavor (RAM in particular) of your instance to meet the new demand. You can
+do this using  the
+
+.. code-block::
+
+   openstack database instance resize flavor <instance> <flavor>
