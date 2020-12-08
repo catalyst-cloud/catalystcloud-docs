@@ -80,7 +80,8 @@ the disk after it is created but before creating the filesystem, thus ensuring
 that a more optimal allocation is done on the storage layer.
 
 Once the volume is partitioned and **before** the filesystem has been created,
-run the following command to pre-allocate the storage.
+run the following command to pre-allocate the storage. In this example our
+disk is attached as /dev/vdx.
 
 .. code:: shell
 
