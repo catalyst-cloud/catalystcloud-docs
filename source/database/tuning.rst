@@ -144,16 +144,34 @@ Now we can test that our instance has the parameter we wanted to update:
    you can test the behaviour of your new configuration by using a
    :ref:`replica<database_replica>`.
 
-****************
-Additional notes
-****************
+*************
+Server tweaks
+*************
 
 While tuning is an important part of database performance and management,
 there are some other actions you can take to improve the general performance of
 your database:
 
-- Use volume type NVMe for workloads that are very intensive.
-- In the event that you do manage to run out of memory, you can increase the
-  flavor (RAM in particular) of your instance to meet the new demand.
+Disk performance
+================
 
-  - you can do this using the ``openstack database instance resize flavor`` command
+There are some base configuration settings that should be taken into
+consideration when creating database volumes to ensure that the necessary
+I/O performance is achievable where it is needed. To see our best practice
+recommendations take a look at
+:ref:`disk performance<maximising-disk-performance>`
+
+In conjunction with this it is also advisable to increase the I/O readahead
+value, more information on that can be found
+:ref:`here<io-readahead>`
+
+Memory
+======
+
+In the event that you do manage to run out of memory, you can increase the
+flavor (RAM in particular) of your instance to meet the new demand. You can
+do this using  the
+
+.. code::
+
+   openstack database instance resize flavor <instance> <flavor>
