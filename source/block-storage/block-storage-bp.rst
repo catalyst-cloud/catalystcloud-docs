@@ -79,7 +79,7 @@ impact by pre-allocating the storage. This is achieved by writing zeroes to
 the disk after it is created but before creating the filesystem, thus ensuring
 that a more optimal allocation is done on the storage layer.
 
-Once the volume is partitioned and **before** the filesystem has been created,
+**Before**  the volume is partitioned and the filesystem has been created,
 run the following command to pre-allocate the storage. In this example our
 disk is attached as /dev/vdx.
 
@@ -87,12 +87,7 @@ disk is attached as /dev/vdx.
 
    $ dd if=dev/zero of=/dev/vdx bs=1M
 
-Once this has completed create the files system as usual; for example if were
-creating an ext4 filesystem we could run the following.
-
-.. code:: shell
-
-   $ mkfs.ext4 /dev/vdx
+Once this has completed create the disk partitions and filesystem as required.
 
 .. _io-readahead:
 
