@@ -87,7 +87,7 @@ run the following command to pre-allocate the storage.
    $ dd if=dev/zero of=/dev/vdx bs=1M
 
 Once this has completed create the files system as usual; for example if were
-creating an ext4 filesystem we c
+creating an ext4 filesystem we could run the following.
 
 .. code:: shell
 
