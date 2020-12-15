@@ -136,7 +136,7 @@ the following command to create our new instance:
   | flavor                 | e3feb785-af2e-41f7-899b-6bbc4e0b526e |
   | id                     | 8546dd23-4f5e-4151-9b33-db708dfd469a |
   | name                   | db-instance-1                        |
-  | region                 | test-1                               |
+  | region                 | nz_wlg_1                             |
   | service_status_updated | 2020-08-03T23:02:16                  |
   | status                 | BUILD                                |
   | updated                | 2020-08-03T23:02:16                  |
@@ -203,7 +203,7 @@ remove databases from it.
 
   $ openstack database db create db-instance-1 myDB2
 
-To check our command worked we use the following command:
+To check that our database was created we can use the following command:
 
 .. code-block:: bash
 
