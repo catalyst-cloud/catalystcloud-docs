@@ -56,9 +56,40 @@ to tell which volume holds which data.
   information etc. You also need to avoid using '/' in your naming, instead you
   should use '-'
 
+.. _maximising-disk-performance:
+
 *********************************************
 Best practice for maximising disk performance
 *********************************************
+
+When you are running workloads where I/O speed and consistency matter you will
+probably want a volume that is performant in terms of it's IO access. To ensure
+that this is the case the target volume should be created using one of the
+NVMe storage tiers. There are three options available depending on the level
+of IOPS cap you require.
+
+It is also important to note that block storage volumes are are
+**thin provisioned** ( also known as **sparse volumes** ). This means that the
+actual disk space is only allocated as it is used and as such may become
+fragmented or allocated in a sub-optimal manner. This in turn can possibly
+impact the ability of a volume to make full use of it's IOPS capability.
+
+For volumes where IO performance is critical it is possible to minimise this
+impact by pre-allocating the storage. This is achieved by writing zeroes to
+the disk after it is created but before creating the filesystem, thus ensuring
+that a more optimal allocation is done on the storage layer.
+
+**Before**  the volume is partitioned and the filesystem has been created,
+run the following command to pre-allocate the storage. In this example our
+disk is attached as /dev/vdx.
+
+.. code:: shell
+
+   $ dd if=dev/zero of=/dev/vdx bs=1M
+
+Once this has completed create the disk partitions and filesystem as required.
+
+.. _io-readahead:
 
 I/O Readahead
 =============
