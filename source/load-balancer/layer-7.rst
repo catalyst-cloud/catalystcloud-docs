@@ -82,7 +82,7 @@ Create a copy of the flask_app.py script (shown below) on each server.
 
 **script** flask_app.py
 
-.. literalinclude:: _scripts/flask_app.py
+.. literalinclude:: _scripts/layer4-files/flask_app.py
 
 Follow the instructions below to install the required dependencies.
 
