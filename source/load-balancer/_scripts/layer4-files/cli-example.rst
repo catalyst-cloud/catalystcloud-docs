@@ -6,9 +6,9 @@ This example illustrates how to load balance traffic on port 80 and 443 for two
 compute instances running a mock Python Flask web application.
 
 If you already have two or more compute instances running a web application
-listening on ports 80 and 443, you can skip this step. Otherwise, :ref:`launch two compute instances<quickstart_for_compute>`
-and follow the instructions below to run a simple Flask web
-application in each.
+listening on ports 80 and 443, you can skip this step. Otherwise,
+:ref:`launch two compute instances<quickstart_for_compute>` and follow the
+instructions below to run a simple Flask web application in each.
 
 The Flask app binds to ports 80 and 443 respectively and will send a simple
 HTTP response when a request is received on the listening ports.
