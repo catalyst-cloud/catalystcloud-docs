@@ -250,7 +250,7 @@ manner.
 **If you installed the CLI using pip:**
 
 1. Activate your virtual environment.
-2. :ref:`source-rc-file`
+2. :ref:`Source an Openstack RC file<windows-configuration>`
 3. Invoke the CLI with the ``openstack`` command
 
 

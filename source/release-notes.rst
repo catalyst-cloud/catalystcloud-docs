@@ -18,3 +18,5 @@ Table of Contents:
   release-notes/release_01_jul_2020
   release-notes/release_10_sept_2020
   release-notes/release_30_nov_2020
+  release-notes/release_18_jan_2021
+  release-notes/release_11_feb_2021
