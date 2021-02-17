@@ -152,8 +152,8 @@ elements in order to avoid ambiguity when running commands.
     * remote peer subnet CIDR : 10.20.30.0/24
 
     If you are setting up a VPN to a different peer, then the
-    **remote peer router IP** will be the publicly accessible IPv4 address of t
-    hat router, while the **remote peer subnet CIDR range** will be the subnet
+    **remote peer router IP** will be the publicly accessible IPv4 address of
+    that router, while the **remote peer subnet CIDR range** will be the subnet
     behind that router whose traffic you wish to route via the VPN to access
     the local subnet.
 
@@ -304,7 +304,7 @@ elements in order to avoid ambiguity when running commands.
 
     The Catalyst Cloud team have created a bash script that simplifies the
     procedure for creating a VPN. In order to run the script you will need to
-    know the following information or each region you will be creating a VPN
+    know the following information for each region you will be creating a VPN
     endpoint for. Details on how to obtain this information can be found
     in the Command Line example.
 
