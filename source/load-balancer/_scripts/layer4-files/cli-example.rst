@@ -426,7 +426,7 @@ monitor example.
   back-end server. By default this is “/”.
 * ``delay`` : Number of seconds to wait between health checks.
 * ``timeout`` : Number of seconds to wait for any given health check to
-  complete. timeout should always be smaller than delay.
+  complete. Timeout should always be smaller than delay.
 * ``max-retries`` : Number of subsequent health checks a given back-end server
   must fail before it is considered down, or that a failed back-end server
   must pass to be considered up again.

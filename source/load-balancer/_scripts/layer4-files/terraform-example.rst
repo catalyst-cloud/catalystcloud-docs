@@ -133,7 +133,7 @@ can run the ``terraform apply`` command and begin creating your resources:
   <h3> Deleting resources </h3>
 
 
-Should you wish to remove these resources you can use the command:
+Should you wish to remove these resources, you can use the command:
 
 .. code-block::
 

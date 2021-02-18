@@ -27,7 +27,7 @@ in the CLI section of this page on how to set them up correctly.
 
 Once you have these resources created, we are going to need to gather some
 information about them before we can construct our heat template.
-We will need to find find the following variables for our template:
+We will need to find the following variables for our template:
 
 
 - The subnet ID of the network your webservers are on. You can find this
@@ -138,7 +138,7 @@ webserver instances.
   <h3> Deleting your resources </h3>
 
 If you have created resources using Heat then it is also a good idea to
-remove them using heat as well. This is so that your stack is not left with
+remove them using Heat as well. This is so that your stack is not left with
 missing resources or in a faulty state.
 
 To remove all the resources created with our template; you can run the
