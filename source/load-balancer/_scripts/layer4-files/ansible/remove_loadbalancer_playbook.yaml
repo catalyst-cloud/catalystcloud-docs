@@ -1,0 +1,26 @@
+#!/usr/bin/env ansible-playbook
+#
+
+---
+- name: Clean up the resources from the previous playbook
+  hosts: localhost
+
+  vars:
+    vm_name: <insert_webserver_name>
+    lb_name: <insert_load_balancer_name>
+    health_monitor: <insert_health_monitor_name>
+
+  tasks:
+    - name: Gather facts about webserver
+      openstack.cloud.server_info:
+        server: "{{ vm_name }}"
+
+    - name: Remove the openstack loadbalancer
+      openstack.cloud.loadbalancer:
+        state: absent
+        name: "{{ lb_name }}"
+
+    - name: Remove the webserver
+      openstack.cloud.server:
+        state: absent
+        name: "{{ vm_name }}"

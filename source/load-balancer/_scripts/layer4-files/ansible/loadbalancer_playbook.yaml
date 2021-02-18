@@ -1,0 +1,104 @@
+#!/usr/bin/env ansible-playbook
+#
+# This playbook creates an instance running a simple webserver listening on
+# port 80 and adds a load balancer to it. A floating ip is created and associated
+# with the load balancer automatically. The floating ip address can be found
+# in the `public_vip_address` field of the final output.
+#
+# Please refer to https://docs.ansible.com/ansible/latest/collections/openstack/cloud/loadbalancer_module.html
+# for more detailed information about os_loadbalancer ansible module usage.
+#
+
+---
+- name: Create loadbalancer and add a simple webserver
+  hosts: localhost
+
+  vars:
+    vm_name: <insert_webserver_name>
+    image: ubuntu-20.04-x86_64 # image used for webserver
+    flavor: c1.c1r1 # A flavor with 1 core and 1 GB of RAM
+    network: <insert_network_name>
+    kaypair: <insert_key_name>
+    security_groups:
+      - <insert_lb_secgroup>
+    lb_name: <insert_load_balancer_name>
+    vip_subnet: <insert_subnet_name>
+    public_network: public-net
+
+  tasks:
+    - name: Create a simple webserver
+      openstack.cloud.server:
+        name: "{{ vm_name }}"
+        state: present
+        auto_ip: true
+        flavor: "{{ flavor }}"
+        image: "{{ image }}"
+        key_name: "{{ kaypair }}"
+        network: "{{ network }}"
+        security_groups: "{{ security_groups }}"
+        config_drive: true
+        userdata: |
+          {%- raw -%}#!/usr/bin/python
+          from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
+          import time
+          PORT_NUMBER = 80
+          class myHandler(BaseHTTPRequestHandler):
+              def do_GET(self):
+                  self.send_response(200)
+                  self.send_header('Content-type','text/html')
+                  self.end_headers()
+                  res_content = "Hello %s:%s - %s\n" % (self.client_address[0], self.client_address[1], time.strftime("%H:%M:%S", time.gmtime()))
+                  self.wfile.write(res_content)
+                  return
+          try:
+              server = HTTPServer(('', PORT_NUMBER), myHandler)
+              print 'Started httpserver on port ' , PORT_NUMBER
+              server.serve_forever()
+          except KeyboardInterrupt:
+              print 'shutting down the web server...'
+              server.socket.close()
+          {% endraw %}
+
+    - name: Gather facts about webserver
+      openstack.cloud.server_info:
+        server: "{{ vm_name }}"
+
+    - name: Create the openstack loadbalancer
+      openstack.cloud.loadbalancer:
+        name: "{{ lb_name }}"
+        state: present
+        vip_subnet: "{{ vip_subnet }}"
+        auto_public_ip: yes
+        public_network: "{{ public_network }}"
+        wait: yes
+        timeout: "600"
+        listeners:
+        - name: listener-80
+          protocol: TCP
+          protocol_port: 80
+          pool:
+            name: listener_80_pool
+            protocol: TCP
+            members:
+              - name: member-1
+                address: openstack.cloud.server.ip
+                protocol_port: 80
+                subnet: <<INSERT THE NAME OF YOUR SUBNET HERE>> #using a reference to the variable does not work for this declaration
+      vars:
+        query: 'addresses.{{ network }}[?"OS-EXT-IPS:type"==`fixed`].addr | [0]'
+      register: lb_info
+
+    - name: Create a health monitor for our load balancer
+      openstack.cloud.lb_health_monitor:
+        wait: true
+        admin_state_up: True
+        expected_codes: '200'
+        max_retries_down: '3'
+        http_method: GET
+        url_path: "/status"
+        pool: "listener_80_pool"
+        name: 'healthmonitor01'
+        delay: '10'
+        max_retries: '3'
+        resp_timeout: '5'
+        state: present
