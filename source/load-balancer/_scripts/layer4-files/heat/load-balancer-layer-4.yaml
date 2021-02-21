@@ -1,0 +1,83 @@
+heat_template_version: 2016-10-14
+
+description: |
+  The heat template is used to create a load balancer for a basic webserver
+parameters:
+  vip_subnet_id:
+    description: Should be a subnet of webserver_network_id
+    type: string
+    default: <INSERT SUBNET OF WEBSERVERS>
+  public_network:
+    description: Public network name, could get by 'openstack network list --external'
+    type: string
+    default: public-net
+  pool_member_1:
+    description: the first webserver that you want the loadbalancer to balance
+    type: string
+    default: <INTERNAL IP OF FIRST WEBSERVER>
+  pool_member_2:
+    description: the second webserver that you want to be loadbalanced
+    type: string
+    default: <INTERNAL IP OF SECOND WEBSERVER>
+
+resources:
+  security_group:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      rules: [
+        {protocol: "tcp", "port_range_min": 80, "port_range_max": 80},
+        {protocol: "tcp", "port_range_min": 443, "port_range_max": 443},
+      ]
+  loadbalancer:
+    type: OS::Octavia::LoadBalancer
+    properties:
+      vip_subnet: {get_param: vip_subnet_id}
+      name: Loadbalancer-heat-test
+  loadbalancer_public_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network: {get_param: public_network}
+      port_id: {get_attr: [loadbalancer, vip_port_id]}
+  listener:
+    type: OS::Octavia::Listener
+    properties:
+      name: webserver_listener
+      protocol: HTTP
+      protocol_port: 80
+      loadbalancer: {get_resource: loadbalancer}
+  loadbalancer_pool:
+    type: OS::Octavia::Pool
+    properties:
+      name: webserver-pool
+      lb_algorithm: ROUND_ROBIN
+      protocol: HTTP
+      listener: {get_resource: listener}
+  loadbalancer_pool_member_1:
+    type: OS::Octavia::PoolMember
+    properties:
+      address: {get_param: pool_member_1}
+      pool: {get_resource: loadbalancer_pool}
+      protocol_port: 80
+  loadbalancer_pool_member_2:
+    type: OS::Octavia::PoolMember
+    properties:
+      address: {get_param: pool_member_2}
+      pool: {get_resource: loadbalancer_pool}
+      protocol_port: 80
+  loadbalancer_healthmonitor:
+    type: OS::Octavia::HealthMonitor
+    properties:
+      delay: 5
+      max_retries: 3
+      pool: {get_resource: loadbalancer_pool}
+      timeout: 15
+      type: HTTP
+      http_method: GET
+      expected_codes: 200
+
+
+outputs:
+  lb_ip:
+    value: {get_attr: [loadbalancer_public_ip, floating_ip_address]}
+  lb_vip:
+    value: {get_attr: [loadbalancer, vip_address]}

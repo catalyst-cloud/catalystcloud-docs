@@ -60,7 +60,7 @@ Cloud server access
 A similar behaviour is observed when creating a new cloud instance. It is a
 best practice in cloud computing for user access to be restricted to
 authentication using public/private keypairs which allows for access via
-passwords to be disabled by defaul for greater security.
+passwords to be disabled by default for greater security.
 
 When a new compute instance is launched you supply the public part of an SSH
 key, that you have access to, as one of the launch parameters, this is then

@@ -6,6 +6,8 @@ Quickstart
 Overview
 ********
 
+.. _quickstart_for_compute:
+
 The purpose of this quickstart is to help you launch a compute instance that
 you can test and experiment with, in order to get a better understanding of
 how the compute service works.
