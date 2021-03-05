@@ -117,3 +117,77 @@ security groups. These are used to define what traffic is able to pass into or
 out of your instances. The full description of security groups and how they
 function can be found in the :ref:`network section<security-groups>` of the
 documentation.
+
+************************************
+Securing workloads behind Cloudflare
+************************************
+
+While Cloudflare does a great job at hiding the identity of your cloud resources from the casual
+observer it has to be made clear that it is possible, with some effort, for less scrupulous
+individuals to obtain this information. With that in mind we will outline here, at a high level,
+some further actions that can be taken to tighten up your access controls and help minimise your
+exposure to bad actors.
+
+The intention here is to enable as set of security group rules that will only allow inbound
+traffic from the known list of published Cloudflare IP addresses. These rules should be added to a
+single security group and then this, in turn, is applied to each of the public facing compute
+resources you wish to lock down.
+
+The following steps are a basic outline of the process/setup required to implement these access
+restrictions.
+
+* The script example included below needs to be run on a server that has access to both the
+  internet and the Catalyst Cloud API endpoints.
+* The script needs a method of authentication. This could be:
+
+  - a user sourcing their openrc file prior to running the script manually.
+  - using a `clouds.yaml`_ file to provide the required authentication details.
+
+* The security group in question ideally needs to exist in advance and be applied to all hosts
+  for which the rules should apply.
+* The script example does not cater to the fact that IP address ranges may be retired from the
+  CF IPv4 list.
+
+..  _`clouds.yaml`: https://docs.openstack.org/python-openstackclient/pike/configuration/index.html
+
+Example script for the creation of a security group and security group rule per entry in the
+Cloud Flare IPv4 address list file.
+
+Currently this is only adding a rule allowing ingress traffic to port 80 from each of the CF
+address ranges. To expand on this simply add more "openstack security group rule" entries to
+account for each required port.
+
+.. code-block:: bash
+
+  #!/usr/bin/env bash
+
+  SECURITY_GROUP="cf_rules"
+
+  # check if CF IP file available and exit if not
+  export EXIT_CODE=$(curl -o /dev/null --silent -Iw '%{http_code}' https://www.cloudflare.com/ips-v4)
+
+  if [ ${EXIT_CODE} != 200 ] ; then
+    echo "Could not retrieve CF IP address list"
+    exit 1
+  fi
+
+  # check if security group exists and create if not
+  # exit on failure
+  openstack security group show ${SECURITY_GROUP} > /dev/null 2>&1
+
+  if [ $? != 0 ]; then
+    echo "Security group :  ${SECURITY_GROUP} does not exist, creating now..."
+    response=$(openstack security group create ${SECURITY_GROUP})
+    if [[ "Error" == *${response}* ]]; then
+      echo -e "\n\nThere was an unexpected problem creating the security group, please investigate\n"
+      exit 66
+    fi
+  fi
+
+  # for each address in the CF ips-v4 file add a security group rule
+  for ip in $(curl -s https://www.cloudflare.com/ips-v4);
+  do
+
+    openstack security group rule create --remote-ip ${ip} --dst-port 80 --protocol tcp --ingress ${SECURITY_GROUP}
+
+  done
