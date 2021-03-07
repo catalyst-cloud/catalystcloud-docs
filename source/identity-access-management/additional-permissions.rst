@@ -1,21 +1,16 @@
 #########################################
-Additional permissions and access methods
+Additional management methods
 #########################################
 
 The following section details additional ways that you can restrict or allow
 user access to resources on your project. The sections below do not directly
 make use of the **roles** we have discussed so far and instead focus on
-permissions or access that are provided to the user or application by some
+permissions or access that are provided to users or applications by some
 other means.
 
-We have split these sections into *Permissions* which talks about certain
-cases where users are given more control over objects than others and
-*Methods of access* which discusses ways you can allow others to access
-resources from the cloud when normally they would have inadequate privileges.
-
-****************
-Permissions
-****************
+************************************
+Permissions given to resource owners
+************************************
 
 When creating certain objects on the cloud, there are unique commands that are
 only available to the individual who initially created the object. This is
@@ -57,7 +52,7 @@ required:
 Cloud server access
 ===================
 
-A similar behaviour is observed when creating a new cloud instance. It is a
+A similar behavior is observed when creating a new cloud instance. It is a
 best practice in cloud computing for user access to be restricted to
 authentication using public/private keypairs which allows for access via
 passwords to be disabled by default for greater security.
@@ -83,9 +78,9 @@ one of the following:
   While this might seem like a convenient approach it does mean you sacrifice
   the ability to audit access to that server.
 
-******************
-Methods of access
-******************
+********************************
+Restricting access without roles
+********************************
 
 The following are ways in which you can restrict access for individuals and/or
 applications to different objects or resources in your project, without
@@ -122,40 +117,40 @@ documentation.
 Securing workloads behind Cloudflare
 ************************************
 
-While Cloudflare does a great job at hiding the identity of your cloud resources from the casual
-observer it has to be made clear that it is possible, with some effort, for less scrupulous
-individuals to obtain this information. With that in mind we will outline here, at a high level,
-some further actions that can be taken to tighten up your access controls and help minimise your
+While Cloudflare does a great job at hiding the identity of your cloud
+resources from the casual observer it has to be made clear that it is possible
+with some effort, for less scrupulous individuals to obtain this information
+With that in mind we will outline here, at a high level, some further actions
+that can be taken to tighten up your access controls and help minimise your
 exposure to bad actors.
 
-The intention here is to enable as set of security group rules that will only allow inbound
-traffic from the known list of published Cloudflare IP addresses. These rules should be added to a
-single security group and then this, in turn, is applied to each of the public facing compute
-resources you wish to lock down.
+The intention here is to enable a set of security group rules that will only
+allow inbound traffic from the known list of published Cloudflare IP addresses.
+These rules should be added to a single security group and then this, in turn
+is applied to each of the public facing compute resources you wish to lock down.
 
-The following steps are a basic outline of the process/setup required to implement these access
-restrictions.
+The following steps are a basic outline of the process/setup required to
+implement these access restrictions.
 
-* The script example included below needs to be run on a server that has access to both the
-  internet and the Catalyst Cloud API endpoints.
+* The script example included below needs to be run on a server that has access
+  to both the internet and the Catalyst Cloud API endpoints.
 * The script needs a method of authentication. This could be:
-
   - a user sourcing their openrc file prior to running the script manually.
   - using a `clouds.yaml`_ file to provide the required authentication details.
 
-* The security group in question ideally needs to exist in advance and be applied to all hosts
-  for which the rules should apply.
-* The script example does not cater to the fact that IP address ranges may be retired from the
-  CF IPv4 list.
+* The security group in question ideally needs to exist in advance and be
+  applied to all hosts for which the rules should apply.
+* The script example does not cater to the fact that IP address ranges may be
+  retired from the CF IPv4 list.
 
 ..  _`clouds.yaml`: https://docs.openstack.org/python-openstackclient/pike/configuration/index.html
 
-Example script for the creation of a security group and security group rule per entry in the
-Cloud Flare IPv4 address list file.
+Example script for the creation of a security group and security group rule per
+entry in the Cloud Flare IPv4 address list file.
 
-Currently this is only adding a rule allowing ingress traffic to port 80 from each of the CF
-address ranges. To expand on this simply add more "openstack security group rule" entries to
-account for each required port.
+Currently this is only adding a rule allowing ingress traffic to port 80 from
+each of the CF address ranges. To expand on this simply add more "openstack
+security group rule" entries to account for each required port.
 
 .. code-block:: bash
 
