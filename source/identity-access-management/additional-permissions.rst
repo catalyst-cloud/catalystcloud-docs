@@ -9,7 +9,7 @@ permissions or access that are provided to users or applications by some
 other means.
 
 ************************************
-Permissions given to resource owners
+Owner permissions for new resources
 ************************************
 
 When creating certain objects on the cloud, there are unique commands that are
@@ -78,9 +78,9 @@ one of the following:
   While this might seem like a convenient approach it does mean you sacrifice
   the ability to audit access to that server.
 
-********************************
-Restricting access without roles
-********************************
+**************************************
+Restricting access without using roles
+**************************************
 
 The following are ways in which you can restrict access for individuals and/or
 applications to different objects or resources in your project, without
