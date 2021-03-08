@@ -5,22 +5,23 @@ Additional management methods
 The following section details additional ways that you can restrict or allow
 user access to resources on your project. The sections below do not directly
 make use of the **roles** we have discussed so far and instead focus on
-permissions or access that are provided to users or applications by some
+access or permissions that are provided to users or applications by some
 other means.
 
-************************************
-Owner permissions for new resources
-************************************
+***************************************
+Ownership permission of new resources
+***************************************
 
-When creating certain objects on the cloud, there are unique commands that are
-only available to the individual who initially created the object. This is
-because when the user creates the object they are assigned the equivalent
-**root** or **admin** level rights for that object.
+When creating certain objects on the cloud, access is sometimes limited to the 
+individual who initially created the object. This is because when the user 
+creates the object they are assigned the equivalent **root** or **admin** level 
+rights for that object. This is not a common occurrence for most of the 
+resources on the cloud, but it is relevant for the following examples:
 
 Kubernetes cluster access
 =========================
 
-One common example of this is when creating a kubernetes cluster. If you are
+The first example of this is when creating a kubernetes cluster. If you are
 the person launching the cluster then you will have your cloud credentials
 mapped to those of the **cluster administrator** through the use of a
 trust created between your user and the cluster admin user. This in turn means
@@ -119,7 +120,7 @@ Securing workloads behind Cloudflare
 
 While Cloudflare does a great job at hiding the identity of your cloud
 resources from the casual observer it has to be made clear that it is possible
-with some effort, for less scrupulous individuals to obtain this information
+with some effort, for less scrupulous individuals to obtain this information.
 With that in mind we will outline here, at a high level, some further actions
 that can be taken to tighten up your access controls and help minimise your
 exposure to bad actors.
@@ -145,8 +146,9 @@ implement these access restrictions.
 
 ..  _`clouds.yaml`: https://docs.openstack.org/python-openstackclient/pike/configuration/index.html
 
-Example script for the creation of a security group and security group rule per
-entry in the Cloud Flare IPv4 address list file.
+The following script is an example script for the creation of a security group 
+and security group rules for each entry in the Cloud Flare IPv4 address list 
+file.
 
 Currently this is only adding a rule allowing ingress traffic to port 80 from
 each of the CF address ranges. To expand on this simply add more "openstack
