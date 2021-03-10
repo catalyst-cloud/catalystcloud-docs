@@ -12,10 +12,10 @@ other means.
 Ownership permission of new resources
 ***************************************
 
-When creating certain objects on the cloud, access is sometimes limited to the 
-individual who initially created the object. This is because when the user 
-creates the object they are assigned the equivalent **root** or **admin** level 
-rights for that object. This is not a common occurrence for most of the 
+When creating certain objects on the cloud, access is sometimes limited to the
+individual who initially created the object. This is because when the user
+creates the object they are assigned the equivalent **root** or **admin** level
+rights for that object. This is not a common occurrence for most of the
 resources on the cloud, but it is relevant for the following examples:
 
 Kubernetes cluster access
@@ -146,8 +146,8 @@ implement these access restrictions.
 
 ..  _`clouds.yaml`: https://docs.openstack.org/python-openstackclient/pike/configuration/index.html
 
-The following script is an example script for the creation of a security group 
-and security group rules for each entry in the Cloud Flare IPv4 address list 
+The following script is an example script for the creation of a security group
+and security group rules for each entry in the Cloud Flare IPv4 address list
 file.
 
 Currently this is only adding a rule allowing ingress traffic to port 80 from

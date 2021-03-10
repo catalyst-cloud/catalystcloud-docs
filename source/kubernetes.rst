@@ -26,7 +26,6 @@ Table of Contents:
    kubernetes/storage
    kubernetes/versions
    kubernetes/security
-   kubernetes/pod-policy
 
 
 ******************
