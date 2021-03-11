@@ -1,15 +1,15 @@
 
 ************************************************
-Associating pod policy with openstack roles
+Associating Kubernetes RBAC with Openstack roles
 ************************************************
 
-By customizing the ``pod policy`` of your cluster, you are able to configure
-access for users based on their openstack roles. If we look at the
-*Project Member* role as an example; by default any user with this role
-will **not** have access to the pods on your cluster. However, by changing
-the default pod policy, you can allow access to all user on your
-project who have the *Project Member* role. Below we
-discuss the process of how you can make changes to the default pod policy and
+By creating a relationship between Kubernetes RBAC and Openstack keystone
+roles, you are able to configure access for users based on their openstack
+roles. If we look at the *Project Member* role as an example; by default any
+user with this role will **not** have access to the pods on your cluster.
+However, by creating an association with a kubernetes RBAC, you can allow access
+to your cluster for all user on your project who have the *Project Member* role.
+Below we discuss the process of how you can create this association and
 how you can define your own rules to allow users access to your cluster.
 
 Before we begin, there are a few resources that we are going to need to gather
@@ -21,8 +21,9 @@ need to have:
 - Kubectl installed (on your machine or your jumphost)
 - Your kube-admin config downloaded
 
-Once you have all of these set up we can start by taking a look at our
-default pod policy. To find the default policy we use the following command:
+Once you have all of these set up we need to start by taking a look at the
+default configmap that connects our openstack roles to our kube RBAC group.
+To find the default configmap we use the following command:
 
 .. code-block:: bash
 
@@ -66,9 +67,9 @@ policy says by default, using the following command:
   Events:  <none>
 
 We can see that by default our policy currently has the member role specified,
-but it does not have a group to sync with. We can use the following code
-snippet to update the config map; creating a new group and associate it with
-the member role. For this example we will call our group "pod-internal-group":
+but it does not have a group to sync with. We can create a group and associate
+it with the member role by updating our configmap. For this example we will
+call our group "pod-internal-group":
 
 .. Note::
 
@@ -113,7 +114,7 @@ the member role. For this example we will call our group "pod-internal-group":
 At this point we have now updated our sync policy to include a relationship
 between our *Project Member* role and our *pod-internal-group*.
 
-Next, we will create a set of RBAC roles and rolebindings for our group. This
+Now, we will create our set of RBAC roles and rolebindings for the group. This
 will give users who exist in this group permission to perform the commands that
 we specify in our rolebinding. These permissions will then extend to users with
 the *Project Member* role because of our keystone-sync configmap. For our

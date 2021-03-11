@@ -543,4 +543,4 @@ To remove the elements we created in this example run the following commands:
   $ kubectl delete namespace testapp
   namespace "testapp" deleted
 
-.. include:: pod-policy.rst
+.. include:: role-mapping.rst
