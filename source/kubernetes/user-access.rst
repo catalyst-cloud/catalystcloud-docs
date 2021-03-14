@@ -544,4 +544,3 @@ To remove the elements we created in this example run the following commands:
   namespace "testapp" deleted
 
 .. include:: role-mapping.rst
-
