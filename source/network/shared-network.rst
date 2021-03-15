@@ -18,9 +18,9 @@ The process consists of the following steps:
   receiving router's IP address
 
 
-#################
+*****************
 A working example
-#################
+*****************
 
 For this example we will be using the following two projects within the
 nz-hlz-1 (Hamilton) region. As the dashboard does not currently support the
