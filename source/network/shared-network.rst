@@ -63,7 +63,7 @@ Retrieve the UUID of the project.
 .. code-block:: console
 
   $ openstack config show -c auth.project_id -f value -c auth.project_name -f value -f yaml
-  auth.project_id: 83100bf293c946078f3d10a959ac0218
+  auth.project_id: 83100bf293c94607xxxxxxa959ac0218
   auth.project_name: catalyst-cloud/training
 
 Confirm what internal networks are currently available.
@@ -99,7 +99,7 @@ action.
 
 .. code-block:: console
 
-  $ openstack network rbac create --target-project 83100bf293c946078f3d10a959ac0218 \
+  $ openstack network rbac create --target-project 83100bf293c94607xxxxxxa959ac0218 \
   --action access_as_shared --type network b6b93acd-3511-4a35-b37e-7a66e792321f
   +-------------------+--------------------------------------+
   | Field             | Value                                |
@@ -109,8 +109,8 @@ action.
   | name              | None                                 |
   | object_id         | b6b93acd-3511-4a35-b37e-7a66e792321f |
   | object_type       | network                              |
-  | project_id        | eac679e4896146e6827ce29d755fe289     |
-  | target_project_id | 83100bf293c946078f3d10a959ac0218     |
+  | project_id        | eac679e489614xxxxxxce29d755fe289     |
+  | target_project_id | 83100bf293c94607xxxxxxa959ac0218     |
   +-------------------+--------------------------------------+
 
   $ openstack network rbac list
@@ -179,7 +179,7 @@ be needed to set up a static route.
   | network_id              | b6b93acd-3511-4a35-b37e-7a66e792321f                                                  |
   | numa_affinity_policy    | None                                                                                  |
   | port_security_enabled   | False                                                                                 |
-  | project_id              | 83100bf293c946078f3d10a959ac0218                                                      |
+  | project_id              | 83100bf293c94607xxxxxxa959ac0218                                                      |
   | propagate_uplink_status | None                                                                                  |
   | qos_network_policy_id   | None                                                                                  |
   | qos_policy_id           | None                                                                                  |

@@ -94,7 +94,7 @@ After this, we will create a volume from our snapshot.
 
    # then we execute the following command, changing the --image to be the ID of your snapshot.
    $ openstack volume create persistent-volume-bootable --size 20 --image aa1e6f8d-0689-4eaf-9a13-c2c16391a82c \
-   --description volume-from-ephemeral-shelved --bootable --os-project-id eac679e4896146e6827ce29d755fe289 \
+   --description volume-from-ephemeral-shelved --bootable --os-project-id eac679e489614xxxxxxce29d755fe289 \
    --availability-zone NZ-WLG-2 --type b1.standard
 
 
@@ -135,13 +135,13 @@ we use the create server command, adding the --volume flag:
    | image                       | ubuntu-18.04-x86_64 (102172df-9872-47df-b66b-2bcecb3a74b7) |
    | key_name                    | security-key                                               |
    | name                        | ephemeral-instance                                         |
-   | project_id                  | eac679e4896146e6827ce29d755fe289                           |
+   | project_id                  | eac679e489614xxxxxxce29d755fe289                           |
    | properties                  |                                                            |
    | security_groups             | name='default'                                             |
    |                             | name='security-group'                                      |
    | status                      | SHELVED_OFFLOADED                                          |
    | updated                     | 2019-09-18T23:11:59Z                                       |
-   | user_id                     | 8ca098df982a433ba746bc8c2d0683f5                           |
+   | user_id                     | 53b94a52e9dcxxxxxxx0079a9a3d6434                           |
    | volumes_attached            | id='09975851-7bb4-4935-814b-2e65d19fd433'                  |
    +-----------------------------+------------------------------------------------------------+
 
@@ -164,7 +164,7 @@ instead of ephemeral.
    +--------------------------------------+---------------------+------------------+------+--------------------------------------+----------------------------------+
    | ID                                   | Floating IP Address | Fixed IP Address | Port | Floating Network                     | Project                          |
    +--------------------------------------+---------------------+------------------+------+--------------------------------------+----------------------------------+
-   | 50e0c050-db2a-47bf-a478-871a84d1faa9 | 103.254.156.188     | None             | None | e0ba6b88-5360-492c-9c3d-119948356fd3 | eac679e4896146e6827ce29d755fe289 |
+   | 50e0c050-db2a-47bf-a478-871a84d1faa9 | 103.254.156.188     | None             | None | e0ba6b88-5360-492c-9c3d-119948356fd3 | eac679e489614xxxxxxce29d755fe289 |
    +--------------------------------------+---------------------+------------------+------+--------------------------------------+----------------------------------+
 
    $ openstack server add floating ip persistent-volume-instance 103.254.156.188

@@ -165,7 +165,7 @@ virtual IP address (VIP) will be attached to the local subnet
   | name                | lb_test                              |
   | operating_status    | OFFLINE                              |
   | pools               |                                      |
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | provider            | octavia                              |
   | provisioning_status | PENDING_CREATE                       |
   | updated_at          | None                                 |
@@ -189,7 +189,7 @@ listener.
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
   | id                                   | name      | project_id                       | vip_address | provisioning_status | provider |
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
-  | afa1cd14-03e7-4bff-afed-8001d196b9df | lb_test   | eac679e4896146e6827ce29d755fe289 | 10.0.0.11   | ACTIVE              | octavia  |
+  | afa1cd14-03e7-4bff-afed-8001d196b9df | lb_test   | eac679e489614xxxxxxce29d755fe289 | 10.0.0.11   | ACTIVE              | octavia  |
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
 .. code-block:: bash
 
@@ -209,7 +209,7 @@ listener.
   | loadbalancers             | afa1cd14-03e7-4bff-afed-8001d196b9df |
   | name                      | http_listener                        |
   | operating_status          | OFFLINE                              |
-  | project_id                | eac679e4896146e6827ce29d755fe289     |
+  | project_id                | eac679e489614xxxxxxce29d755fe289     |
   | protocol                  | HTTP                                 |
   | protocol_port             | 80                                   |
   | provisioning_status       | PENDING_CREATE                       |
@@ -244,7 +244,7 @@ Create the first pool.
   | members             |                                      |
   | name                | http_pool_1                          |
   | operating_status    | OFFLINE                              |
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | protocol            | HTTP                                 |
   | provisioning_status | PENDING_CREATE                       |
   | session_persistence | None                                 |
@@ -270,7 +270,7 @@ Create the second pool.
   | members             |                                      |
   | name                | http_pool_2                          |
   | operating_status    | OFFLINE                              |
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | protocol            | HTTP                                 |
   | provisioning_status | PENDING_CREATE                       |
   | session_persistence | None                                 |
@@ -298,7 +298,7 @@ you use the local addresses of your instances. In our example we use
   | id                  | d2497d5a-0c80-4037-84bf-6e3cb498126e |
   | name                | login.example.com                    |
   | operating_status    | NO_MONITOR                           |
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | protocol_port       | 80                                   |
   | provisioning_status | PENDING_CREATE                       |
   | subnet_id           | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
@@ -323,7 +323,7 @@ Add the second member to the second pool.
   | id                  | 4c6cb13c-a68d-45fd-9c72-3e34e38f50e9 |
   | name                | shop.example.com                     |
   | operating_status    | NO_MONITOR                           |
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | protocol_port       | 80                                   |
   | provisioning_status | PENDING_CREATE                       |
   | subnet_id           | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
@@ -349,7 +349,7 @@ Create the layer 7 policy.
   | description         |                                      |
   | admin_state_up      | True                                 |
   | rules               |                                      |
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | created_at          | 2018-06-27T04:55:47                  |
   | provisioning_status | PENDING_CREATE                       |
   | updated_at          | None                                 |
@@ -382,7 +382,7 @@ Create a rule for the policy.
   | updated_at          | None                                 |
   | value               | shop.example.com                     |
   | key                 | None                                 |
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | type                | HOST_NAME                            |
   | id                  | 4924fcf2-c508-47f1-a40a-afab0bca9e5f |
   | operating_status    | OFFLINE                              |

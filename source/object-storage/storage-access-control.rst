@@ -93,8 +93,8 @@ the output fields.
     +------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | expires    | 2019-08-19T12:59:17+0000                                                                                                                                                                |
     | id         | gAAAAABdWdhFLKs1OT8rGpiUqa_5BLFlxP-cg59HEGkHu81WLNkRk_Y_knnbS1CdCCE8qFECnmrubep652Dt6ITGgHQoXA0tZerOuxvkgvObEfsovHC61pOr8mvhZ0l7Nna9GcXLz37kJ05HifI3DiqodqrwfXNCsGpDq27DZ5z9LLPzqGvMBLI |
-    | project_id | eac679e4896146e6827ce29d755fe289                                                                                                                                                        |
-    | user_id    | 11d1cb41f05140ebadcec49b9a67a2d7                                                                                                                                                        |
+    | project_id | eac679e489614xxxxxxce29d755fe289                                                                                                                                                        |
+    | user_id    | 11d1cb41f05140ebadxxxxxx9a67a2d7                                                                                                                                                        |
     +------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -141,7 +141,7 @@ a specific container.
     +--------------+---------------------------------------+
     | Field        | Value                                 |
     +--------------+---------------------------------------+
-    | account      | AUTH_eac679e4896146e6827ce29d755fe289 |
+    | account      | AUTH_eac679e489614xxxxxxce29d755fe289 |
     | bytes_used   | 27                                    |
     | container    | access_1                              |
     | object_count | 1                                     |
@@ -193,7 +193,7 @@ are not supported for ACL definitions we will use the user id instead.
 
 .. code-block:: bash
 
-  swift post access_1 --read-acl "*:11d1cb41f05140ebadcec49b9a67a2d7"
+  swift post access_1 --read-acl "*:11d1cb41f05140ebadxxxxxx9a67a2d7"
 
 And if we check the state of the container now we can see that there is a
 ``read_acl`` field present with the user's id associated with it.
@@ -206,11 +206,11 @@ And if we check the state of the container now we can see that there is a
   +--------------+---------------------------------------+
   | Field        | Value                                 |
   +--------------+---------------------------------------+
-  | account      | AUTH_eac679e4896146e6827ce29d755fe289 |
+  | account      | AUTH_eac679e489614xxxxxxce29d755fe289 |
   | bytes_used   | 27                                    |
   | container    | access_1                              |
   | object_count | 1                                     |
-  | read_acl     | *:11d1cb41f05140ebadcec49b9a67a2d7    |
+  | read_acl     | *:11d1cb41f05140ebadxxxxxx9a67a2d7    |
   +--------------+---------------------------------------+
 
 If we now source the credentials for the user that has been granted access they
@@ -225,7 +225,7 @@ container.
   +--------------+---------------------------------------+
   | Field        | Value                                 |
   +--------------+---------------------------------------+
-  | account      | AUTH_eac679e4896146e6827ce29d755fe289 |
+  | account      | AUTH_eac679e489614xxxxxxce29d755fe289 |
   | bytes_used   | 27                                    |
   | container    | access_1                              |
   | object_count | 1                                     |
@@ -280,11 +280,11 @@ add a write access rule to the access_1 container for restricted-user-2.
   +--------------+---------------------------------------+
   | Field        | Value                                 |
   +--------------+---------------------------------------+
-  | account      | AUTH_eac679e4896146e6827ce29d755fe289 |
+  | account      | AUTH_eac679e489614xxxxxxce29d755fe289 |
   | bytes_used   | 27                                    |
   | container    | access_1                              |
   | object_count | 1                                     |
-  | read_acl     | *:11d1cb41f05140ebadcec49b9a67a2d7    |
+  | read_acl     | *:11d1cb41f05140ebadxxxxxx9a67a2d7    |
   | write_acl    | *:9298ecab1c90450abedcd82e0e4136ce    |
   +--------------+---------------------------------------+
 

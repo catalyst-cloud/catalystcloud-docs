@@ -187,7 +187,7 @@ elements in order to avoid ambiguity when running commands.
       | Description    |                                      |
       | ID             | 5f999c1b-f485-483b-91ad-a46e9dd9a0f1 |
       | Name           | VPN                                  |
-      | Project        | eac679e4896146e6827ce29d755fe289     |
+      | Project        | eac679e489614xxxxxxce29d755fe289     |
       | Router         | 34a4d812-7d77-4750-a9ee-169bbaa532c1 |
       | State          | True                                 |
       | Status         | PENDING_CREATE                       |
@@ -220,7 +220,7 @@ elements in order to avoid ambiguity when running commands.
       | Name                          | ike_policy                           |
       | Perfect Forward Secrecy (PFS) | group14                              |
       | Phase1 Negotiation Mode       | main                                 |
-      | Project                       | eac679e4896146e6827ce29d755fe289     |
+      | Project                       | eac679e489614xxxxxxce29d755fe289     |
       +-------------------------------+--------------------------------------+
 
     Then create a VPN IPSec policy called *ipsec_policy*.
@@ -246,7 +246,7 @@ elements in order to avoid ambiguity when running commands.
       | Lifetime                      | {'units': 'seconds', 'value': 3600}  |
       | Name                          | ipsec_policy                         |
       | Perfect Forward Secrecy (PFS) | group14                              |
-      | Project                       | eac679e4896146e6827ce29d755fe289     |
+      | Project                       | eac679e489614xxxxxxce29d755fe289     |
       | Transform Protocol            | esp                                  |
       +-------------------------------+--------------------------------------+
 
@@ -281,7 +281,7 @@ elements in order to avoid ambiguity when running commands.
       | Peer CIDRs               | 10.20.30.0/24                                         |
       | Peer ID                  | 150.242.40.137                                        |
       | Pre-shared Key           | supersecretpsk                                        |
-      | Project                  | eac679e4896146e6827ce29d755fe289                      |
+      | Project                  | eac679e489614xxxxxxce29d755fe289                      |
       | Route Mode               | static                                                |
       | State                    | True                                                  |
       | Status                   | PENDING_CREATE                                        |
@@ -408,7 +408,7 @@ elements in order to avoid ambiguity when running commands.
       | Description    |                                      |
       | ID             | 4c5faf25-dada-44c7-a7d4-f4e3a7ac500f |
       | Name           | vpn_service                          |
-      | Project        | 83100bf293c946078f3d10a959ac0218     |
+      | Project        | 83100bf293c94607xxxxxxa959ac0218     |
       | Router         | 34ea00e7-74bc-4f9f-b270-8e37a411d9e6 |
       | State          | True                                 |
       | Status         | PENDING_CREATE                       |
@@ -428,7 +428,7 @@ elements in order to avoid ambiguity when running commands.
       | Name                          | ike_policy                           |
       | Perfect Forward Secrecy (PFS) | group14                              |
       | Phase1 Negotiation Mode       | main                                 |
-      | Project                       | 83100bf293c946078f3d10a959ac0218     |
+      | Project                       | 83100bf293c94607xxxxxxa959ac0218     |
       +-------------------------------+--------------------------------------+
       +-------------------------------+--------------------------------------+
       | Field                         | Value                                |
@@ -441,7 +441,7 @@ elements in order to avoid ambiguity when running commands.
       | Lifetime                      | {'units': 'seconds', 'value': 3600}  |
       | Name                          | ipsec_policy                         |
       | Perfect Forward Secrecy (PFS) | group14                              |
-      | Project                       | 83100bf293c946078f3d10a959ac0218     |
+      | Project                       | 83100bf293c94607xxxxxxa959ac0218     |
       | Transform Protocol            | esp                                  |
       +-------------------------------+--------------------------------------+
       +----------------+--------------------------------------+
@@ -450,7 +450,7 @@ elements in order to avoid ambiguity when running commands.
       | Description    |                                      |
       | ID             | 84303467-9c62-47c7-91c9-9b873f81082d |
       | Name           | vpn_service                          |
-      | Project        | 83100bf293c946078f3d10a959ac0218     |
+      | Project        | 83100bf293c94607xxxxxxa959ac0218     |
       | Router         | d570c9c8-bde2-4f39-8fa9-c1cbec38073d |
       | State          | True                                 |
       | Status         | PENDING_CREATE                       |
@@ -470,7 +470,7 @@ elements in order to avoid ambiguity when running commands.
       | Name                          | ike_policy                           |
       | Perfect Forward Secrecy (PFS) | group14                              |
       | Phase1 Negotiation Mode       | main                                 |
-      | Project                       | 83100bf293c946078f3d10a959ac0218     |
+      | Project                       | 83100bf293c94607xxxxxxa959ac0218     |
       +-------------------------------+--------------------------------------+
       +-------------------------------+--------------------------------------+
       | Field                         | Value                                |
@@ -483,7 +483,7 @@ elements in order to avoid ambiguity when running commands.
       | Lifetime                      | {'units': 'seconds', 'value': 3600}  |
       | Name                          | ipsec_policy                         |
       | Perfect Forward Secrecy (PFS) | group14                              |
-      | Project                       | 83100bf293c946078f3d10a959ac0218     |
+      | Project                       | 83100bf293c94607xxxxxxa959ac0218     |
       | Transform Protocol            | esp                                  |
       +-------------------------------+--------------------------------------+
       +--------------------------+-------------------------------------------------------+
@@ -501,7 +501,7 @@ elements in order to avoid ambiguity when running commands.
       | Peer CIDRs               | 192.168.3.0/24                                        |
       | Peer ID                  | 103.197.61.206                                        |
       | Pre-shared Key           | pre_shared_key                                        |
-      | Project                  | 83100bf293c946078f3d10a959ac0218                      |
+      | Project                  | 83100bf293c94607xxxxxxa959ac0218                      |
       | Route Mode               | static                                                |
       | State                    | True                                                  |
       | Status                   | PENDING_CREATE                                        |

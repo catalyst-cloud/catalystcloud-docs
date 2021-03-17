@@ -123,7 +123,7 @@ After which we can create a volume from our snapshot.
   | status              | creating                             |
   | type                | b1.standard                          |
   | updated_at          | None                                 |
-  | user_id             | 8ca098df982a433ba746bc8c2d0683f5     |
+  | user_id             | 53b94a52e9dcxxxxxxx0079a9a3d6434     |
   +---------------------+--------------------------------------+
 
 We then can view the list of our volumes to confirm it's been created.

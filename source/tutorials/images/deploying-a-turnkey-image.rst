@@ -37,9 +37,9 @@ change into the directory containing the image files.
   $ cd turnkey-core-14.1-jessie-amd64/
   $ ls -l
   total 657176
-  -rw-r--r-- 1 glyndavies glyndavies 900616192 Apr 12 13:20 turnkey-core-14.1-jessie-amd64.img
-  -rw-r--r-- 1 glyndavies glyndavies  15755328 Apr 12 13:20 turnkey-core-14.1-jessie-amd64-initrd
-  -rw-r--r-- 1 glyndavies glyndavies   3120288 Apr 12 13:20 turnkey-core-14.1-jessie-amd64-kernel
+  -rw-r--r-- 1 glxxxxxxes glxxxxxxes 900616192 Apr 12 13:20 turnkey-core-14.1-jessie-amd64.img
+  -rw-r--r-- 1 glxxxxxxes glxxxxxxes  15755328 Apr 12 13:20 turnkey-core-14.1-jessie-amd64-initrd
+  -rw-r--r-- 1 glxxxxxxes glxxxxxxes   3120288 Apr 12 13:20 turnkey-core-14.1-jessie-amd64-kernel
 
 *******************
 Creating the images
