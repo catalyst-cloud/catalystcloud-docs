@@ -181,12 +181,12 @@ Heat will return the following information about the stack:
   | updated_time          | None                                                                                                                                       |
   | stack_status          | CREATE_COMPLETE                                                                                                                            |
   | stack_status_reason   | Stack CREATE completed successfully                                                                                                        |
-  | parameters            | OS::project_id: 3d5d40b4a6904e6db4dc5321f53d4f39                                                                                           |
+  | parameters            | OS::project_id: 3d5d40b4a6904e6db4xxxxxxf53d4f39                                                                                           |
   |                       | OS::stack_id: 700a9425-8ed8-4993-8773-eed4a276b040                                                                                         |
   |                       | OS::stack_name: mystack                                                                                                                    |
   |                       | flavor: c1.c1r1                                                                                                                            |
   |                       | image: atomic-7-x86_64                                                                                                                     |
-  |                       | key_name: glyndavies                                                                                                                       |
+  |                       | key_name: glxxxxxxes                                                                                                                       |
   |                       |                                                                                                                                            |
   | outputs               | - description: The networks of the deployed server                                                                                         |
   |                       |   output_key: server_networks                                                                                                              |
@@ -194,12 +194,12 @@ Heat will return the following information about the stack:
   |                       |     private-net:                                                                                                                           |
   |                       |     - 192.168.100.17                                                                                                                       |
   |                       |                                                                                                                                            |
-  | links                 | - href: https://api.nz-por-1.catalystcloud.io:8004/v1/3d5d40b4a6904e6db4dc5321f53d4f39/stacks/mystack/700a9425-8ed8-4993-8773-eed4a276b040 |
+  | links                 | - href: https://api.nz-por-1.catalystcloud.io:8004/v1/3d5d40b4a6904e6db4xxxxxxf53d4f39/stacks/mystack/700a9425-8ed8-4993-8773-eed4a276b040 |
   |                       |   rel: self                                                                                                                                |
   |                       |                                                                                                                                            |
   | parent                | None                                                                                                                                       |
   | disable_rollback      | True                                                                                                                                       |
-  | stack_user_project_id | 3d5d40b4a6904e6db4dc5321f53d4f39                                                                                                           |
+  | stack_user_project_id | 3d5d40b4a6904e6db4xxxxxxf53d4f39                                                                                                           |
   | stack_owner           | None                                                                                                                                       |
   | capabilities          | []                                                                                                                                         |
   | notification_topics   | []                                                                                                                                         |

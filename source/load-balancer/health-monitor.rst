@@ -92,7 +92,7 @@ path '/health'
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | name                | 80_healthcheck                       |
   | admin_state_up      | True                                 |
   | pools               | 96dde7c5-77c5-4ffe-9542-226714f5c58d |

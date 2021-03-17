@@ -317,8 +317,8 @@ and export it for later use.
  +--------------------------------------+-------------------+----------------------------------------+----------------------------------+
  | ID                                   | Name              | Description                            | Project                          |
  +--------------------------------------+-------------------+----------------------------------------+----------------------------------+
- | 14aeedb8-5e9c-4617-8cf9-6e072bb41886 | first-instance-sg | Network access for our first instance. | 0cb6b9b744594a619b0b7340f424858b |
- | 687512ab-f197-4f07-ae51-788c559883b9 | default           | default                                | 0cb6b9b744594a619b0b7340f424858b |
+ | 14aeedb8-5e9c-4617-8cf9-6e072bb41886 | first-instance-sg | Network access for our first instance. | 0cb6b9b744594a619bxxxxxxf424858b |
+ | 687512ab-f197-4f07-ae51-788c559883b9 | default           | default                                | 0cb6b9b744594a619bxxxxxxf424858b |
  +--------------------------------------+-------------------+----------------------------------------+----------------------------------+
 
  $ export CC_SECURITY_GROUP_ID=$( openstack security group show first-instance-sg -f value -c id )
@@ -401,7 +401,7 @@ As the Instance builds, its details will be provided. This includes its ID
  | hostId                               |                                                            |
  | id                                   | <INSTANCE_ID>                                              |
  | image                                | ubuntu-18.04-x86_64 (cab9f3f4-a3a5-488b-885e-892873c15f53) |
- | key_name                             | glyndavies                                                 |
+ | key_name                             | glxxxxxxes                                                 |
  | name                                 | first-instance                                             |
  | os-extended-volumes:volumes_attached | []                                                         |
  | progress                             | 0                                                          |

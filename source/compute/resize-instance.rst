@@ -178,7 +178,7 @@ confirm our resize:
   |                             | name='security-group'                                    |
   | status                      | ACTIVE                                                   |
   | updated                     | 2020-10-26T23:38:10Z                                     |
-  | user_id                     | 8ca098df982a433ba746bc8c2d0683f5                         |
+  | user_id                     | 53b94a52e9dcxxxxxxx0079a9a3d6434                         |
   | volumes_attached            | id='8b661df3-f5f2-429c-9be6-138d8f845553'                |
   |                             | id='dae41bf1-7b33-430b-b4ae-2080e72a8162'                |
   +-----------------------------+----------------------------------------------------------+

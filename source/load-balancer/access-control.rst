@@ -49,7 +49,7 @@ If we then view the listener we should see
     | loadbalancers               | 75dbce10-6848-4b6d-8237-31cc17948973 |
     | name                        | http_listener                        |
     | operating_status            | ONLINE                               |
-    | project_id                  | eac679e4896146e6827ce29d755fe289     |
+    | project_id                  | eac679e489614xxxxxxce29d755fe289     |
     | protocol                    | HTTP                                 |
     | protocol_port               | 80                                   |
     | provisioning_status         | ACTIVE                               |
@@ -111,7 +111,7 @@ ranges applied to the listener.
     | loadbalancers               | 75dbce10-6848-4b6d-8237-31cc17948973 |
     | name                        | http_listener                        |
     | operating_status            | ONLINE                               |
-    | project_id                  | eac679e4896146e6827ce29d755fe289     |
+    | project_id                  | eac679e489614xxxxxxce29d755fe289     |
     | protocol                    | HTTP                                 |
     | protocol_port               | 80                                   |
     | provisioning_status         | ACTIVE                               |

@@ -179,7 +179,7 @@ initiate an autohealing action on them.
   | name                      | test_lb_alarm                         |
   | ok_actions                | []                                    |
   | pool_id                   | 0da0911a-0b07-4937-99ab-c6f6e3404c39  |
-  | project_id                | eac679e4896146e6827ce29d755fe289      |
+  | project_id                | eac679e489614xxxxxxce29d755fe289      |
   | repeat_actions            | False                                 |
   | severity                  | low                                   |
   | stack_id                  | cc55271e-ddcd-4db0-8803-265f23297849  |

@@ -117,7 +117,7 @@ virtual IP address (VIP) will be attached to the local subnet
   | name                | lb_test_1                            |
   | operating_status    | OFFLINE                              |
   | pools               |                                      |
-  | project_id          | a3a9af91b9e547739bfcb02cc2acded0     |
+  | project_id          | a3a9af91b9e547739xxxxxxcc2acded0     |
   | provider            | octavia                              |
   | provisioning_status | PENDING_CREATE                       |
   | updated_at          | None                                 |
@@ -141,7 +141,7 @@ on ports 80 and 443 respectively.
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
   | id                                   | name      | project_id                       | vip_address | provisioning_status | provider |
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
-  | 547deffe-55fc-49be-ac52-e24c7fd22ece | lb_test_1 | a3a9af91b9e547739bfcb02cc2acded0 | 10.0.0.16   | ACTIVE              | octavia  |
+  | 547deffe-55fc-49be-ac52-e24c7fd22ece | lb_test_1 | a3a9af91b9e547739xxxxxxcc2acded0 | 10.0.0.16   | ACTIVE              | octavia  |
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
 
 .. code-block:: bash
@@ -162,7 +162,7 @@ on ports 80 and 443 respectively.
   | loadbalancers             | 547deffe-55fc-49be-ac52-e24c7fd22ece |
   | name                      | 80_listener                          |
   | operating_status          | OFFLINE                              |
-  | project_id                | a3a9af91b9e547739bfcb02cc2acded0     |
+  | project_id                | a3a9af91b9e547739xxxxxxcc2acded0     |
   | protocol                  | TCP                                  |
   | protocol_port             | 80                                   |
   | provisioning_status       | PENDING_CREATE                       |
@@ -188,7 +188,7 @@ on ports 80 and 443 respectively.
   | loadbalancers             | bfc1a299-3ec2-4681-974a-b7c47b52529f |
   | name                      | 443_listener                         |
   | operating_status          | OFFLINE                              |
-  | project_id                | eac679e4896146e6827ce29d755fe289     |
+  | project_id                | eac679e489614xxxxxxce29d755fe289     |
   | protocol                  | TCP                                  |
   | protocol_port             | 443                                  |
   | provisioning_status       | PENDING_CREATE                       |
@@ -208,8 +208,8 @@ To view the newly created listeners.
   +--------------------------------------+-----------------+--------------+----------------------------------+----------+---------------+----------------+
   | id                                   | default_pool_id | name         | project_id                       | protocol | protocol_port | admin_state_up |
   +--------------------------------------+-----------------+--------------+----------------------------------+----------+---------------+----------------+
-  | 380ea1df-e043-4167-90ca-03f044b620a3 | None            | 80_listener  | eac679e4896146e6827ce29d755fe289 | TCP      |            80 | True           |
-  | 724816cc-2dbd-42c8-9b61-19f49fa48165 | None            | 443_listener | eac679e4896146e6827ce29d755fe289 | TCP      |           443 | True           |
+  | 380ea1df-e043-4167-90ca-03f044b620a3 | None            | 80_listener  | eac679e489614xxxxxxce29d755fe289 | TCP      |            80 | True           |
+  | 724816cc-2dbd-42c8-9b61-19f49fa48165 | None            | 443_listener | eac679e489614xxxxxxce29d755fe289 | TCP      |           443 | True           |
   +--------------------------------------+-----------------+--------------+----------------------------------+----------+---------------+----------------+
 
 .. raw:: html
@@ -235,7 +235,7 @@ Then add a pool to each listener.
   | members             |                                      |
   | name                | 80_pool                              |
   | operating_status    | OFFLINE                              |
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | protocol            | TCP                                  |
   | provisioning_status | PENDING_CREATE                       |
   | session_persistence | None                                 |
@@ -259,7 +259,7 @@ Then add a pool to each listener.
   | members             |                                      |
   | name                | 443_pool                             |
   | operating_status    | OFFLINE                              |
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | protocol            | TCP                                  |
   | provisioning_status | PENDING_CREATE                       |
   | session_persistence | None                                 |
@@ -289,7 +289,7 @@ the command line.
   | id                  | 5ce83425-9d85-4da4-a057-4023e603ab2e |
   | name                | 80_member_1                          |
   | operating_status    | NO_MONITOR                           |
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | protocol_port       | 80                                   |
   | provisioning_status | PENDING_CREATE                       |
   | subnet_id           | None                                 |
@@ -311,7 +311,7 @@ the command line.
   | id                  | 5f973af6-7d59-4f64-a0b8-df5680d1bf78 |
   | name                | 80_member_2                          |
   | operating_status    | NO_MONITOR                           |
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | protocol_port       | 80                                   |
   | provisioning_status | PENDING_CREATE                       |
   | subnet_id           | None                                 |
@@ -329,8 +329,8 @@ Check that the members were created
   +--------------------------------------+-------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
   | id                                   | name        | project_id                       | provisioning_status | address  | protocol_port | operating_status | weight |
   +--------------------------------------+-------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
-  | 5ce83425-9d85-4da4-a057-4023e603ab2e | 80_member_1 | eac679e4896146e6827ce29d755fe289 | ACTIVE              | 10.0.0.4 |            80 | NO_MONITOR       |      1 |
-  | 5f973af6-7d59-4f64-a0b8-df5680d1bf78 | 80_member_2 | eac679e4896146e6827ce29d755fe289 | ACTIVE              | 10.0.0.6 |            80 | NO_MONITOR       |      1 |
+  | 5ce83425-9d85-4da4-a057-4023e603ab2e | 80_member_1 | eac679e489614xxxxxxce29d755fe289 | ACTIVE              | 10.0.0.4 |            80 | NO_MONITOR       |      1 |
+  | 5f973af6-7d59-4f64-a0b8-df5680d1bf78 | 80_member_2 | eac679e489614xxxxxxce29d755fe289 | ACTIVE              | 10.0.0.6 |            80 | NO_MONITOR       |      1 |
   +--------------------------------------+-------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
 
 Now repeat for the service on port 443
@@ -347,7 +347,7 @@ Now repeat for the service on port 443
   | id                  | ec245cb0-7548-4b25-881f-5a7dcd0c6e89 |
   | name                | 443_member_1                         |
   | operating_status    | NO_MONITOR                           |
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | protocol_port       | 443                                  |
   | provisioning_status | PENDING_CREATE                       |
   | subnet_id           | None                                 |
@@ -368,7 +368,7 @@ Now repeat for the service on port 443
   | id                  | f91e7d8e-a932-43da-8c9f-c37c0d58d864 |
   | name                | 443_member_2                         |
   | operating_status    | NO_MONITOR                           |
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | protocol_port       | 443                                  |
   | provisioning_status | PENDING_CREATE                       |
   | subnet_id           | None                                 |
@@ -383,8 +383,8 @@ Now repeat for the service on port 443
   +--------------------------------------+--------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
   | id                                   | name         | project_id                       | provisioning_status | address  | protocol_port | operating_status | weight |
   +--------------------------------------+--------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
-  | ec245cb0-7548-4b25-881f-5a7dcd0c6e89 | 443_member_1 | eac679e4896146e6827ce29d755fe289 | ACTIVE              | 10.0.0.4 |           443 | NO_MONITOR       |      1 |
-  | f91e7d8e-a932-43da-8c9f-c37c0d58d864 | 443_member_2 | eac679e4896146e6827ce29d755fe289 | ACTIVE              | 10.0.0.6 |           443 | NO_MONITOR       |      1 |
+  | ec245cb0-7548-4b25-881f-5a7dcd0c6e89 | 443_member_1 | eac679e489614xxxxxxce29d755fe289 | ACTIVE              | 10.0.0.4 |           443 | NO_MONITOR       |      1 |
+  | f91e7d8e-a932-43da-8c9f-c37c0d58d864 | 443_member_2 | eac679e489614xxxxxxce29d755fe289 | ACTIVE              | 10.0.0.6 |           443 | NO_MONITOR       |      1 |
   +--------------------------------------+--------------+----------------------------------+---------------------+----------+---------------+------------------+--------+
 
 .. raw:: html
@@ -400,7 +400,7 @@ example performs a simple static request at the URL path '/health'.
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
-  | project_id          | eac679e4896146e6827ce29d755fe289     |
+  | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | name                | 80_healthcheck                       |
   | admin_state_up      | True                                 |
   | pools               | 96dde7c5-77c5-4ffe-9542-226714f5c58d |

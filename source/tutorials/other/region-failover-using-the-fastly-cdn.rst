@@ -206,7 +206,7 @@ Check the output of stack show:
  |                      | Catalyst Cloud nz-por-1 region.                                                                                                            |
  | disable_rollback     | True                                                                                                                                       |
  | id                   | 13ad022c-cbd3-4211-984c-6a7a95f1c935                                                                                                       |
- | links                | https://api.nz-por-1.catalystcloud.io:8004/v1/0cb6b9b744594a619b0b7340f424858b/stacks/nginx-por-stack/13ad022c-cbd3-4211-984c-6a7a95f1c935 |
+ | links                | https://api.nz-por-1.catalystcloud.io:8004/v1/0cb6b9b744594a619bxxxxxxf424858b/stacks/nginx-por-stack/13ad022c-cbd3-4211-984c-6a7a95f1c935 |
  | notification_topics  | []                                                                                                                                         |
  | outputs              | []                                                                                                                                         |
  | parameters           | {                                                                                                                                          |
