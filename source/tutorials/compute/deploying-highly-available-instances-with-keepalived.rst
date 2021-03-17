@@ -564,7 +564,7 @@ path to the ``vrrp-setup.sh`` script):
   | hostId                      |                                                            |
   | id                          | c8a2c1ec-73f2-4f6b-8107-6ca1d28da2c3                       |
   | image                       | ubuntu-14.04-x86_64 (a7e6d3b5-9980-4ae0-a5b7-1ab3200bf403) |
-  | key_name                    | glyndavies                                                 |
+  | key_name                    | glxxxxxxes                                                 |
   | name                        | vrrp-master                                                |
   | progress                    | 0                                                          |
   | project_id                  | <PROJECT_ID>                           |
@@ -572,7 +572,7 @@ path to the ``vrrp-setup.sh`` script):
   | security_groups             | name='6b82f642-aa10-456a-a060-b6f8b8309f96'                |
   | status                      | BUILD                                                      |
   | updated                     | 2018-01-10T20:48:02Z                                       |
-  | user_id                     | b80eb08f12c34717b2b771e1eff9f501                           |
+  | user_id                     | b80eb08f12c34717xxxxxxe1eff9f501                           |
   | volumes_attached            |                                                            |
   +-----------------------------+------------------------------------------------------------+
 
@@ -599,7 +599,7 @@ path to the ``vrrp-setup.sh`` script):
   | hostId                      |                                                            |
   | id                          | 338bbb2c-3d63-4079-90d1-12d5065c6fa3                       |
   | image                       | ubuntu-14.04-x86_64 (a7e6d3b5-9980-4ae0-a5b7-1ab3200bf403) |
-  | key_name                    | glyndavies                                                 |
+  | key_name                    | glxxxxxxes                                                 |
   | name                        | vrrp-backup                                                |
   | progress                    | 0                                                          |
   | project_id                  | <PROJECT_ID>                           |
@@ -607,7 +607,7 @@ path to the ``vrrp-setup.sh`` script):
   | security_groups             | name='6b82f642-aa10-456a-a060-b6f8b8309f96'                |
   | status                      | BUILD                                                      |
   | updated                     | 2018-01-10T20:49:21Z                                       |
-  | user_id                     | b80eb08f12c34717b2b771e1eff9f501                           |
+  | user_id                     | b80eb08f12c34717xxxxxxe1eff9f501                           |
   | volumes_attached            |                                                            |
   +-----------------------------+------------------------------------------------------------+
 

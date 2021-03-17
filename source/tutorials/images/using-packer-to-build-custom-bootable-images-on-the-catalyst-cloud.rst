@@ -182,10 +182,10 @@ available:
  | min_disk         | 10                                                                                                                                                                                            |
  | min_ram          | 1                                                                                                                                                                                             |
  | name             | ubuntu1604_domain_check_packer                                                                                                                                                                |
- | owner            | 0cb6b9b744594a619b0b7340f424858b                                                                                                                                                              |
+ | owner            | 0cb6b9b744594a619bxxxxxxf424858b                                                                                                                                                              |
  | properties       | base_image_ref='49fb1409-c88e-4750-a394-56ddea80231d', direct_url='rbd://b0849a66-357e-4428-a84c-f5ccd277c076/images/e81c38a0-6fbf-4f62-b873-79af33e4f246/snap', image_location='snapshot',   |
- |                  | image_state='available', image_type='image', instance_uuid='e9655fb3-e239-4f4b-80e3-5476f098a132', kernel_id='None', owner_id='0cb6b9b744594a619b0b7340f424858b', ramdisk_id='None',          |
- |                  | user_id='8c1914eda99d406195674864f2846d45'                                                                                                                                                    |
+ |                  | image_state='available', image_type='image', instance_uuid='e9655fb3-e239-4f4b-80e3-5476f098a132', kernel_id='None', owner_id='0cb6b9b744594a619bxxxxxxf424858b', ramdisk_id='None',          |
+ |                  | user_id='8c1914eda99d406195xxxxxxf2846d45'                                                                                                                                                    |
  | protected        | False                                                                                                                                                                                         |
  | schema           | /v2/schemas/image                                                                                                                                                                             |
  | size             | 10737418240                                                                                                                                                                                   |
@@ -227,12 +227,12 @@ you installed in the image:
  | name                                 | ssl-scan                                                              |
  | os-extended-volumes:volumes_attached | []                                                                    |
  | progress                             | 0                                                                     |
- | project_id                           | 0cb6b9b744594a619b0b7340f424858b                                      |
+ | project_id                           | 0cb6b9b744594a619bxxxxxxf424858b                                      |
  | properties                           |                                                                       |
  | security_groups                      | [{u'name': u'default'}, {u'name': u'example-sg'}]                     |
  | status                               | BUILD                                                                 |
  | updated                              | 2016-08-31T04:50:36Z                                                  |
- | user_id                              | 8c1914eda99d406195674864f2846d45                                      |
+ | user_id                              | 8c1914eda99d406195xxxxxxf2846d45                                      |
  +--------------------------------------+-----------------------------------------------------------------------+
  $ openstack floating ip list
  +--------------------------------------+---------------------+------------------+--------------------------------------+

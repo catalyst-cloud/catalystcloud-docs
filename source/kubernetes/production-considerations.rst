@@ -134,7 +134,7 @@ The resulting command would look like this.
     --cluster-template kubernetes-v1.18.2-prod-20200630 \
     --labels master_lb_floating_ip_enabled=true,master_lb_allowed_cidrs=203.109.145.15/32 \
     --merge-labels \
-    --keypair glyndavies \
+    --keypair glxxxxxxes \
     --node-count 2 \
     --master-count 3
 

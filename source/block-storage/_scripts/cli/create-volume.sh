@@ -21,6 +21,6 @@ $ openstack volume create --description 'database volume' --size 50 db-vol-01
 | status              | creating                             |
 | type                | b1.standard                          |
 | updated_at          | None                                 |
-| user_id             | 4b934c44d8b24e60acad9609b641bee3     |
+| user_id             | 53b94a52e9dcxxxxxxx0079a9a3d6434     |
 +---------------------+--------------------------------------+
 

@@ -789,7 +789,7 @@ If we check the cluster state we can see it is now showing
   +--------------------------------------+-------------+------------+------------+--------------+--------------------+---------------+
   | uuid                                 | name        | keypair    | node_count | master_count | status             | health_status |
   +--------------------------------------+-------------+------------+------------+--------------+--------------------+---------------+
-  | d9d767eb-d94a-4a0b-baad-edc137250c11 | dev-cluster | glyndavies |          4 |            1 | UPDATE_IN_PROGRESS | UNKNOWN       |
+  | d9d767eb-d94a-4a0b-baad-edc137250c11 | dev-cluster | glxxxxxxes |          4 |            1 | UPDATE_IN_PROGRESS | UNKNOWN       |
   +--------------------------------------+-------------+------------+------------+--------------+--------------------+---------------+
 
 Once this changes to ``UPDATE_COMPLETE`` we can recheck the servers belonging to
