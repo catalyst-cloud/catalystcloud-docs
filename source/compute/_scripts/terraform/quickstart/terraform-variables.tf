@@ -5,13 +5,13 @@ provider "openstack" {
 }
 
 variable "public_network_id" {
-  default = "f10ad6de-a26d-4c29-8c64-2a7418d47f8f"
+  default = "f10ad6de-a26d-4c29-8c64-xxxxxxxxxxxx"
 }
 
-#nz-hlz-1	f10ad6de-a26d-4c29-8c64-2a7418d47f8f
+#nz-hlz-1	f10ad6de-a26d-4c29-8c64-xxxxxxxxxxxx
 
 variable "volume_image_ID" {
-  default = "964801a1-a1e9-4ab0-8166-a5c9456bca86 "
+  default = "964801a1-a1e9-4ab0-8166-xxxxxxxxxxxx "
 }
 
 variable "volume_type" {
@@ -19,11 +19,11 @@ variable "volume_type" {
 }
 
 variable "compute_image_ID" {
-  default = "964801a1-a1e9-4ab0-8166-a5c9456bca86 "
+  default = "964801a1-a1e9-4ab0-8166-xxxxxxxxxxxx "
 }
 
 variable "compute_flavor_ID" {
-  default = "6371ec4a-47d1-4159-a42f-83b84b80eea7"
+  default = "6371ec4a-47d1-4159-a42f-xxxxxxxxxxxx"
 }
 
 # Insert a valid SSH public key that you wish to use in default

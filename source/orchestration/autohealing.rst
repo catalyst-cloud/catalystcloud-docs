@@ -78,12 +78,12 @@ can see what is being created.
   +----------------------------+--------------------------------------+----------------------------+-----------------+----------------------+
   | resource_name              | physical_resource_id                 | resource_type              | resource_status | updated_time         |
   +----------------------------+--------------------------------------+----------------------------+-----------------+----------------------+
-  | loadbalancer_public_ip     | d54dcfd2-944d-48e3-830f-8cdbc46373a2 | OS::Neutron::FloatingIP    | CREATE_COMPLETE | 2019-10-10T01:26:34Z |
-  | autoscaling_group          | 7a4f0dc9-5ff9-40ce-8bb8-e621574501b6 | OS::Heat::AutoScalingGroup | CREATE_COMPLETE | 2019-10-10T01:26:34Z |
-  | listener                   | 1a0f2cd2-0d45-42f2-929c-7efd3674dc34 | OS::Octavia::Listener      | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
-  | loadbalancer_healthmonitor | 2773d0c1-bdcd-41c1-905d-a0c163e9c74c | OS::Octavia::HealthMonitor | CREATE_COMPLETE | 2019-10-10T01:26:34Z |
-  | loadbalancer_pool          | 30129a16-f6b7-434f-9648-09c306d699f8 | OS::Octavia::Pool          | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
-  | loadbalancer               | 5f9ea90e-97ae-4844-867e-3de70b32abf3 | OS::Octavia::LoadBalancer  | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
+  | loadbalancer_public_ip     | d54dcfd2-944d-48e3-830f-xxxxxxxxxxxx | OS::Neutron::FloatingIP    | CREATE_COMPLETE | 2019-10-10T01:26:34Z |
+  | autoscaling_group          | 7a4f0dc9-5ff9-40ce-8bb8-xxxxxxxxxxxx | OS::Heat::AutoScalingGroup | CREATE_COMPLETE | 2019-10-10T01:26:34Z |
+  | listener                   | 1a0f2cd2-0d45-42f2-929c-xxxxxxxxxxxx | OS::Octavia::Listener      | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
+  | loadbalancer_healthmonitor | 2773d0c1-bdcd-41c1-905d-xxxxxxxxxxxx | OS::Octavia::HealthMonitor | CREATE_COMPLETE | 2019-10-10T01:26:34Z |
+  | loadbalancer_pool          | 30129a16-f6b7-434f-9648-xxxxxxxxxxxx | OS::Octavia::Pool          | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
+  | loadbalancer               | 5f9ea90e-97ae-4844-867e-xxxxxxxxxxxx | OS::Octavia::LoadBalancer  | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
   +----------------------------+--------------------------------------+----------------------------+-----------------+----------------------+
 .. note::
 
@@ -155,8 +155,8 @@ initiate an autohealing action on them.
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
   | id                                   | name | project_id                       | provisioning_status | address       | protocol_port | operating_status | weight |
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
-  | 4eeac1a8-7837-41d9-8299-8d8f9f691b69 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.200 |            80 | ONLINE           |      1 |
-  | 2acbd21e-39d5-41fe-8fb9-b3d61333f0c9 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.201 |            80 | ONLINE           |      1 |
+  | 4eeac1a8-7837-41d9-8299-xxxxxxxxxxxx |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.200 |            80 | ONLINE           |      1 |
+  | 2acbd21e-39d5-41fe-8fb9-xxxxxxxxxxxx |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.201 |            80 | ONLINE           |      1 |
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
 
   $ openstack alarm create --name test_lb_alarm \
@@ -171,18 +171,18 @@ initiate an autohealing action on them.
   | Field                     | Value                                 |
   +---------------------------+---------------------------------------+
   | alarm_actions             | ['trust+heat:']                       |
-  | alarm_id                  | 8c701d87-679a-4c27-939b-360ac356de58  |
-  | autoscaling_group_id      | 9ec5bb8c-3b7f-4a71-858d-cb73d0d03b4e  |
+  | alarm_id                  | 8c701d87-679a-4c27-939b-xxxxxxxxxxxx  |
+  | autoscaling_group_id      | 9ec5bb8c-3b7f-4a71-858d-xxxxxxxxxxxx  |
   | description               | loadbalancer_member_health alarm rule |
   | enabled                   | True                                  |
   | insufficient_data_actions | []                                    |
   | name                      | test_lb_alarm                         |
   | ok_actions                | []                                    |
-  | pool_id                   | 0da0911a-0b07-4937-99ab-c6f6e3404c39  |
+  | pool_id                   | 0da0911a-0b07-4937-99ab-xxxxxxxxxxxx  |
   | project_id                | eac679e489614xxxxxxce29d755fe289      |
   | repeat_actions            | False                                 |
   | severity                  | low                                   |
-  | stack_id                  | cc55271e-ddcd-4db0-8803-265f23297849  |
+  | stack_id                  | cc55271e-ddcd-4db0-8803-xxxxxxxxxxxx  |
   | state                     | insufficient data                     |
   | state_reason              | Not evaluated yet                     |
   | state_timestamp           | 2019-10-31T01:19:22.992154            |
@@ -214,7 +214,7 @@ loadbalancer that is not the ``ERROR`` state.
   +--------------------------------------+----------------------------+---------------+-------------------+----------+---------+
   | alarm_id                             | type                       | name          | state             | severity | enabled |
   +--------------------------------------+----------------------------+---------------+-------------------+----------+---------+
-  | 18be0104-feed-4415-b9a5-55dcda0332ab | loadbalancer_member_health | test_lb_alarm | insufficient data | low      | True    |
+  | 18be0104-feed-4415-b9a5-xxxxxxxxxxxx | loadbalancer_member_health | test_lb_alarm | insufficient data | low      | True    |
   +--------------------------------------+----------------------------+---------------+-------------------+----------+---------+
 
 Now that the alarm is in place we can test it out by simulating the failure of
@@ -228,12 +228,12 @@ one of our application servers. For this example we can simulate a failure by
   +--------------------------------------+-------------------------------------------------------+--------+-----------------------------------------+---------------------+---------+
   | ID                                   | Name                                                  | Status | Networks                                | Image               | Flavor  |
   +--------------------------------------+-------------------------------------------------------+--------+-----------------------------------------+---------------------+---------+
-  | 4a35a813-ac9a-4195-9b25-ad5d9381f68e | au-5z37-rowgvu2inhwa-25buammtmf2s-server-mkvfo7vxlv64 | ACTIVE | private_net=192.168.2.200, 10.17.9.148  | cirros-0.3.1-x86_64 | m1.tiny |
-  | b80aa773-7330-4a00-9666-12980059050b | au-5z37-hlzbc66r2vrc-h6qxnp7n5wru-server-wyf3dksa6w3v | ACTIVE | private_net=192.168.2.201, 10.17.9.147  | cirros-0.3.1-x86_64 | m1.tiny |
+  | 4a35a813-ac9a-4195-9b25-xxxxxxxxxxxx | au-5z37-rowgvu2inhwa-25buammtmf2s-server-mkvfo7vxlv64 | ACTIVE | private_net=192.168.2.200, 10.17.9.148  | cirros-0.3.1-x86_64 | m1.tiny |
+  | b80aa773-7330-4a00-9666-xxxxxxxxxxxx | au-5z37-hlzbc66r2vrc-h6qxnp7n5wru-server-wyf3dksa6w3v | ACTIVE | private_net=192.168.2.201, 10.17.9.147  | cirros-0.3.1-x86_64 | m1.tiny |
   +--------------------------------------+-------------------------------------------------------+--------+-----------------------------------------+---------------------+---------+
 
   # Then we 'stop' this server
-  $ openstack server stop b80aa773-7330-4a00-9666-12980059050b
+  $ openstack server stop b80aa773-7330-4a00-9666-xxxxxxxxxxxx
 
 If we curl our service again we can see that ``192.168.2.201`` has stopped
 responding to our request and the one remaining server is receiving all the
@@ -256,8 +256,8 @@ status is now reporting ``ERROR``.
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
   | id                                   | name | project_id                       | provisioning_status | address       | protocol_port | operating_status | weight |
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
-  | 4eeac1a8-7837-41d9-8299-8d8f9f691b69 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.200 |            80 | ONLINE           |      1 |
-  | 2acbd21e-39d5-41fe-8fb9-b3d61333f0c9 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.201 |            80 | ERROR            |      1 |
+  | 4eeac1a8-7837-41d9-8299-xxxxxxxxxxxx |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.200 |            80 | ONLINE           |      1 |
+  | 2acbd21e-39d5-41fe-8fb9-xxxxxxxxxxxx |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.201 |            80 | ERROR            |      1 |
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
 
 Now that at least one member of the loadbalancer pool is reporting an
@@ -269,7 +269,7 @@ are satisfied and the alarm has transitioned from ``ok`` to ``alarm``.
   +--------------------------------------+----------------------------+---------------+------------+----------+---------+
   | alarm_id                             | type                       | name          | state      | severity | enabled |
   +--------------------------------------+----------------------------+---------------+------------+----------+---------+
-  | 18be0104-feed-4415-b9a5-55dcda0332ab | loadbalancer_member_health | test_lb_alarm | alarm      | low      | True    |
+  | 18be0104-feed-4415-b9a5-xxxxxxxxxxxx | loadbalancer_member_health | test_lb_alarm | alarm      | low      | True    |
   +--------------------------------------+----------------------------+---------------+------------+----------+---------+
 
 For the loadbalancer member health alarm the ``trust+heat://`` action will
@@ -282,12 +282,12 @@ a stack update.
   +----------------------------+--------------------------------------+----------------------------+--------------------+----------------------+
   | resource_name              | physical_resource_id                 | resource_type              | resource_status    | updated_time         |
   +----------------------------+--------------------------------------+----------------------------+--------------------+----------------------+
-  | loadbalancer_public_ip     | d54dcfd2-944d-48e3-830f-8cdbc46373a2 | OS::Neutron::FloatingIP    | CREATE_COMPLETE    | 2019-10-10T01:26:34Z |
-  | autoscaling_group          | 7a4f0dc9-5ff9-40ce-8bb8-e621574501b6 | OS::Heat::AutoScalingGroup | UPDATE_IN_PROGRESS | 2019-10-10T01:53:06Z |
-  | listener                   | 1a0f2cd2-0d45-42f2-929c-7efd3674dc34 | OS::Octavia::Listener      | CREATE_COMPLETE    | 2019-10-10T01:26:35Z |
-  | loadbalancer_healthmonitor | 2773d0c1-bdcd-41c1-905d-a0c163e9c74c | OS::Octavia::HealthMonitor | CREATE_COMPLETE    | 2019-10-10T01:26:34Z |
-  | loadbalancer_pool          | 30129a16-f6b7-434f-9648-09c306d699f8 | OS::Octavia::Pool          | CREATE_COMPLETE    | 2019-10-10T01:26:35Z |
-  | loadbalancer               | 5f9ea90e-97ae-4844-867e-3de70b32abf3 | OS::Octavia::LoadBalancer  | CREATE_COMPLETE    | 2019-10-10T01:26:35Z |
+  | loadbalancer_public_ip     | d54dcfd2-944d-48e3-830f-xxxxxxxxxxxx | OS::Neutron::FloatingIP    | CREATE_COMPLETE    | 2019-10-10T01:26:34Z |
+  | autoscaling_group          | 7a4f0dc9-5ff9-40ce-8bb8-xxxxxxxxxxxx | OS::Heat::AutoScalingGroup | UPDATE_IN_PROGRESS | 2019-10-10T01:53:06Z |
+  | listener                   | 1a0f2cd2-0d45-42f2-929c-xxxxxxxxxxxx | OS::Octavia::Listener      | CREATE_COMPLETE    | 2019-10-10T01:26:35Z |
+  | loadbalancer_healthmonitor | 2773d0c1-bdcd-41c1-905d-xxxxxxxxxxxx | OS::Octavia::HealthMonitor | CREATE_COMPLETE    | 2019-10-10T01:26:34Z |
+  | loadbalancer_pool          | 30129a16-f6b7-434f-9648-xxxxxxxxxxxx | OS::Octavia::Pool          | CREATE_COMPLETE    | 2019-10-10T01:26:35Z |
+  | loadbalancer               | 5f9ea90e-97ae-4844-867e-xxxxxxxxxxxx | OS::Octavia::LoadBalancer  | CREATE_COMPLETE    | 2019-10-10T01:26:35Z |
   +----------------------------+--------------------------------------+----------------------------+--------------------+----------------------+
 
   # After a few minutes, the stack status goes back to healthy. The ERROR load balancer member is replaced.
@@ -295,20 +295,20 @@ a stack update.
   +----------------------------+--------------------------------------+----------------------------+-----------------+----------------------+
   | resource_name              | physical_resource_id                 | resource_type              | resource_status | updated_time         |
   +----------------------------+--------------------------------------+----------------------------+-----------------+----------------------+
-  | loadbalancer_public_ip     | d54dcfd2-944d-48e3-830f-8cdbc46373a2 | OS::Neutron::FloatingIP    | CREATE_COMPLETE | 2019-10-10T01:26:34Z |
-  | autoscaling_group          | 7a4f0dc9-5ff9-40ce-8bb8-e621574501b6 | OS::Heat::AutoScalingGroup | UPDATE_COMPLETE | 2019-10-10T01:53:06Z |
-  | listener                   | 1a0f2cd2-0d45-42f2-929c-7efd3674dc34 | OS::Octavia::Listener      | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
-  | loadbalancer_healthmonitor | 2773d0c1-bdcd-41c1-905d-a0c163e9c74c | OS::Octavia::HealthMonitor | CREATE_COMPLETE | 2019-10-10T01:26:34Z |
-  | loadbalancer_pool          | 30129a16-f6b7-434f-9648-09c306d699f8 | OS::Octavia::Pool          | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
-  | loadbalancer               | 5f9ea90e-97ae-4844-867e-3de70b32abf3 | OS::Octavia::LoadBalancer  | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
+  | loadbalancer_public_ip     | d54dcfd2-944d-48e3-830f-xxxxxxxxxxxx | OS::Neutron::FloatingIP    | CREATE_COMPLETE | 2019-10-10T01:26:34Z |
+  | autoscaling_group          | 7a4f0dc9-5ff9-40ce-8bb8-xxxxxxxxxxxx | OS::Heat::AutoScalingGroup | UPDATE_COMPLETE | 2019-10-10T01:53:06Z |
+  | listener                   | 1a0f2cd2-0d45-42f2-929c-xxxxxxxxxxxx | OS::Octavia::Listener      | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
+  | loadbalancer_healthmonitor | 2773d0c1-bdcd-41c1-905d-xxxxxxxxxxxx | OS::Octavia::HealthMonitor | CREATE_COMPLETE | 2019-10-10T01:26:34Z |
+  | loadbalancer_pool          | 30129a16-f6b7-434f-9648-xxxxxxxxxxxx | OS::Octavia::Pool          | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
+  | loadbalancer               | 5f9ea90e-97ae-4844-867e-xxxxxxxxxxxx | OS::Octavia::LoadBalancer  | CREATE_COMPLETE | 2019-10-10T01:26:35Z |
   +----------------------------+--------------------------------------+----------------------------+-----------------+----------------------+
 
   $ openstack loadbalancer member list $poolid
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
   | id                                   | name | project_id                       | provisioning_status | address       | protocol_port | operating_status | weight |
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
-  | 4eeac1a8-7837-41d9-8299-8d8f9f691b69 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.200 |            80 | ONLINE           |      1 |
-  | f354fe18-c801-4729-90bb-0af29048ef46 |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.202 |            80 | ONLINE           |      1 |
+  | 4eeac1a8-7837-41d9-8299-xxxxxxxxxxxx |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.200 |            80 | ONLINE           |      1 |
+  | f354fe18-c801-4729-90bb-xxxxxxxxxxxx |      | bb609fa4634849919b0192c060c02cd7 | ACTIVE              | 192.168.2.202 |            80 | ONLINE           |      1 |
   +--------------------------------------+------+----------------------------------+---------------------+---------------+---------------+------------------+--------+
 
 Now that the stack update is complete the new server will start responding to

@@ -11,7 +11,7 @@ admin token for the cluster using the following command:
   Namespace:    kube-system
   Labels:       <none>
   Annotations:  kubernetes.io/service-account.name=admin
-                kubernetes.io/service-account.uid=cc4416d1-ca82-11e8-8993-123456789012
+                kubernetes.io/service-account.uid=cc4416d1-ca82-11e8-8993-xxxxxxxxxxxx
 
   Type:  kubernetes.io/service-account-token
 

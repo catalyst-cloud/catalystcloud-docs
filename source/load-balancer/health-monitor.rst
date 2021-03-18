@@ -95,7 +95,7 @@ path '/health'
   | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | name                | 80_healthcheck                       |
   | admin_state_up      | True                                 |
-  | pools               | 96dde7c5-77c5-4ffe-9542-226714f5c58d |
+  | pools               | 96dde7c5-77c5-4ffe-9542-xxxxxxxxxxxx |
   | created_at          | 2018-06-25T21:22:25                  |
   | provisioning_status | PENDING_CREATE                       |
   | updated_at          | None                                 |
@@ -107,7 +107,7 @@ path '/health'
   | max_retries_down    | 3                                    |
   | url_path            | /health                              |
   | type                | HTTP                                 |
-  | id                  | d8c8c074-574a-4e41-8c43-f0633a4e828d |
+  | id                  | d8c8c074-574a-4e41-8c43-xxxxxxxxxxxx |
   | operating_status    | OFFLINE                              |
   +---------------------+--------------------------------------+
 

@@ -45,8 +45,8 @@ With the command ``openstack image create --volume <volume-name-or-id>
   | container_format    | bare                                 |
   | disk_format         | raw                                  |
   | display_description |                                      |
-  | id                  | 14c25834-b7ae-4a36-b947-881d031017f1 |
-  | image_id            | 11f636db-0d15-4e97-88a0-244f25558f0b |
+  | id                  | 14c25834-b7ae-4a36-b947-xxxxxxxxxxxx |
+  | image_id            | 11f636db-0d15-4e97-88a0-xxxxxxxxxxxx |
   | image_name          | imgvol-img                           |
   | size                | 11                                   |
   | status              | uploading                            |
@@ -76,13 +76,13 @@ To take a snapshot of an active volume we first need to find the volume ID:
   +-------------+--------------------------------------+
   | created_at  | 2019-06-19T02:19:57.604002           |
   | description | None                                 |
-  | id          | e82b3e29-eced-4f6c-8985-228fb1cfd76f |
+  | id          | e82b3e29-eced-4f6c-8985-xxxxxxxxxxxx |
   | name        | test-image-from-CLI                  |
   | properties  |                                      |
   | size        | 50                                   |
   | status      | creating                             |
   | updated_at  | None                                 |
-  | volume_id   | 9a7d2ce9-c2c5-41d7-9e4e-83df2ccb58ff |
+  | volume_id   | 9a7d2ce9-c2c5-41d7-9e4e-xxxxxxxxxxxx |
   +-------------+--------------------------------------+
 
 Now that we have created a snapshot of a running volume, we can view the list
@@ -94,7 +94,7 @@ of snapshots to confirm its creation.
   +--------------------------------------+---------------------------+-------------+-----------+------+
   | ID                                   | Name                      | Description | Status    | Size |
   +--------------------------------------+---------------------+----------------+-----------+---------+
-  | e82b3e29-eced-4f6c-8985-228fb1cfd76f | test-snapshot-from-volume | None        | available |   50 |
+  | e82b3e29-eced-4f6c-8985-xxxxxxxxxxxx | test-snapshot-from-volume | None        | available |   50 |
   +--------------------------------------+---------------------------+-------------+-----------+------+
 
 After which we can create a volume from our snapshot.
@@ -112,13 +112,13 @@ After which we can create a volume from our snapshot.
   | created_at          | 2019-06-19T02:26:27.121055           |
   | description         | None                                 |
   | encrypted           | False                                |
-  | id                  | 6693045e-1448-4ec7-a1d6-5ba2ac7d070c |
+  | id                  | 6693045e-1448-4ec7-a1d6-xxxxxxxxxxxx |
   | multiattach         | False                                |
   | name                | new-vol-from-CLI                     |
   | properties          |                                      |
   | replication_status  | disabled                             |
   | size                | 50                                   |
-  | snapshot_id         | e82b3e29-eced-4f6c-8985-228fb1cfd76f |
+  | snapshot_id         | e82b3e29-eced-4f6c-8985-xxxxxxxxxxxx |
   | source_volid        | None                                 |
   | status              | creating                             |
   | type                | b1.standard                          |
@@ -135,8 +135,8 @@ After, we are able to create our image from the volume made from the snapshot.
   +--------------------------------------+-------------------+-----------+------+--------------------------------------------+
   | ID                                   | Name              | Status    | Size | Attached to                                |
   +--------------------------------------+-------------------+-----------+------+--------------------------------------------+
-  | 6693045e-1448-4ec7-a1d6-5ba2ac7d070c | new-vol-from-CLI  | available |   50 |                                            |
-  | 9a7d2ce9-c2c5-41d7-9e4e-83df2ccb58ff | original-volume   | in-use    |   50 | Attached to first-instance-CLI on /dev/vdb |
+  | 6693045e-1448-4ec7-a1d6-xxxxxxxxxxxx | new-vol-from-CLI  | available |   50 |                                            |
+  | 9a7d2ce9-c2c5-41d7-9e4e-xxxxxxxxxxxx | original-volume   | in-use    |   50 | Attached to first-instance-CLI on /dev/vdb |
   +--------------------------------------+-------------------+-----------+------+--------------------------------------------+
 
   $ openstack image create --volume <name-of-volume-made-from-snapshot> <name-of-new-image-made-from-volume-from-snapshot>
@@ -146,8 +146,8 @@ After, we are able to create our image from the volume made from the snapshot.
   | container_format    | bare                                 |
   | disk_format         | raw                                  |
   | display_description | None                                 |
-  | id                  | 6693045e-1448-4ec7-a1d6-5ba2ac7d070c |
-  | image_id            | a361ea04-fc0a-48ce-8b9c-d9a651395fb6 |
+  | id                  | 6693045e-1448-4ec7-a1d6-xxxxxxxxxxxx |
+  | image_id            | a361ea04-fc0a-48ce-8b9c-xxxxxxxxxxxx |
   | image_name          | image-from-vol-CLI-snapshot          |
   | size                | 50                                   |
   | status              | uploading                            |

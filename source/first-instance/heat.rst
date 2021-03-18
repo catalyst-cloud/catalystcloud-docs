@@ -81,7 +81,7 @@ does not. If the template validates, it may be used to build the stack:
   +---------------------+-------------------------------------------------------------------------------------------+
   | Field               | Value                                                                                     |
   +---------------------+-------------------------------------------------------------------------------------------+
-  | id                  | cb956f56-536a-4244-930d-62ae1eb2b182                                                      |
+  | id                  | cb956f56-536a-4244-930d-xxxxxxxxxxxx                                                      |
   | stack_name          | first-instance-stack                                                                      |
   | description         | HOT template for building the first instance stack on the Catalyst Cloud nz-por-1 region. |
   |                     |                                                                                           |
@@ -106,7 +106,7 @@ View the output of the ``stack show`` command for further details:
   +-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
   | Field                 | Value                                                                                                                                                   |
   +-----------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-  | id                    | cb956f56-536a-4244-930d-62ae1eb2b182                                                                                                                    |
+  | id                    | cb956f56-536a-4244-930d-xxxxxxxxxxxx                                                                                                                    |
   | stack_name            | first-instance-stack                                                                                                                                    |
   | description           | HOT template for building the first instance stack on the Catalyst Cloud nz-por-1 region.                                                               |
   |                       |                                                                                                                                                         |
@@ -115,7 +115,7 @@ View the output of the ``stack show`` command for further details:
   | stack_status          | CREATE_COMPLETE                                                                                                                                         |
   | stack_status_reason   | Stack CREATE completed successfully                                                                                                                     |
   | parameters            | OS::project_id: <PROJECT_ID>                                                                                                        |
-  |                       | OS::stack_id: cb956f56-536a-4244-930d-62ae1eb2b182                                                                                                      |
+  |                       | OS::stack_id: cb956f56-536a-4244-930d-xxxxxxxxxxxx                                                                                                      |
   |                       | OS::stack_name: first-instance-stack                                                                                                                    |
   |                       | domain_name: localdomain                                                                                                                                |
   |                       | host_name: first-instance                                                                                                                               |
@@ -129,14 +129,14 @@ View the output of the ``stack show`` command for further details:
   |                       | private_net_pool_start: 10.0.0.10                                                                                                                       |
   |                       | private_subnet_name: private-subnet                                                                                                                     |
   |                       | public_net: public-net                                                                                                                                  |
-  |                       | public_net_id: 849ab1e9-7ac5-4618-8801-e6176fbbcf30                                                                                                     |
+  |                       | public_net_id: 849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx                                                                                                     |
   |                       | router_name: border-router                                                                                                                              |
   |                       | secgroup_name: first-instance-sg                                                                                                                        |
   |                       | servers_flavor: c1.c1r1                                                                                                                                 |
   |                       |                                                                                                                                                         |
   | outputs               | []                                                                                                                                                      |
   |                       |                                                                                                                                                         |
-  | links                 | - href: https://api.nz-por-1.catalystcloud.io:8004/v1/<PROJECT_ID>/stacks/first-instance-stack/cb956f56-536a-4244-930d-62ae1eb2b182 |
+  | links                 | - href: https://api.nz-por-1.catalystcloud.io:8004/v1/<PROJECT_ID>/stacks/first-instance-stack/cb956f56-536a-4244-930d-xxxxxxxxxxxx |
   |                       |   rel: self                                                                                                                                             |
   |                       |                                                                                                                                                         |
   | parent                | None                                                                                                                                                    |

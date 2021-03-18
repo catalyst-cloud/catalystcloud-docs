@@ -117,12 +117,12 @@ Then list all of the available cluster templates.
   +--------------------------------------+----------------------------------+
   | uuid                                 | name                             |
   +--------------------------------------+----------------------------------+
-  | bc493321-6d30-44a1-b767-2196e523dd8e | kubernetes-v1.16.9-dev-20200602  |
-  | 99f51180-cdcb-4492-9163-5453f2a8998f | kubernetes-v1.16.9-prod-20200602 |
-  | c06970d9-0926-4e07-8042-01601d68a2a1 | kubernetes-v1.17.5-dev-20200615  |
-  | 2efc83d2-e6d6-4c3a-af3b-17463387d314 | kubernetes-v1.17.5-prod-20200615 |
-  | 228d392b-79e9-4472-8981-8947e2de1285 | kubernetes-v1.18.2-dev-20200630  |
-  | 903b954d-667a-45ca-8e5c-bab3bcf310f7 | kubernetes-v1.18.2-prod-20200630 |
+  | bc493321-6d30-44a1-b767-xxxxxxxxxxxx | kubernetes-v1.16.9-dev-20200602  |
+  | 99f51180-cdcb-4492-9163-xxxxxxxxxxxx | kubernetes-v1.16.9-prod-20200602 |
+  | c06970d9-0926-4e07-8042-xxxxxxxxxxxx | kubernetes-v1.17.5-dev-20200615  |
+  | 2efc83d2-e6d6-4c3a-af3b-xxxxxxxxxxxx | kubernetes-v1.17.5-prod-20200615 |
+  | 228d392b-79e9-4472-8981-xxxxxxxxxxxx | kubernetes-v1.18.2-dev-20200630  |
+  | 903b954d-667a-45ca-8e5c-xxxxxxxxxxxx | kubernetes-v1.18.2-prod-20200630 |
   +--------------------------------------+----------------------------------+
 
 To find more information on which template you want to use, you can view each
@@ -415,7 +415,7 @@ You can use the following command to check the status of the cluster:
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
   | uuid                                 | name        | keypair  | node_count | master_count | status             |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
-  | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
+  | c191470e-7540-43fe-af32-xxxxxxxxxxxx | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
 
 Alternatively, you can check the status of the cluster on the `Clusters panel`_
@@ -503,7 +503,7 @@ case our security group is called bastion-ssh-access and out public IP is
   +--------------------------------------+-------------+-----------+------------------+------------+-----------------------+
   | ID                                   | IP Protocol | Ethertype | IP Range         | Port Range | Remote Security Group |
   +--------------------------------------+-------------+-----------+------------------+------------+-----------------------+
-  | 42c1320c-98d5-4275-9c2d-b81b0eadac29 | tcp         | IPv4      | 114.110.xx.xx/32 | 22:22      | None                  |
+  | 42c1320c-98d5-4275-9c2d-xxxxxxxxxxxx | tcp         | IPv4      | 114.110.xx.xx/32 | 22:22      | None                  |
   +--------------------------------------+-------------+-----------+------------------+------------+-----------------------+
 
 Finally we need the IP address for the Kubernetes API endpoint
@@ -764,10 +764,10 @@ to the cluster and can see that we have a single master and three workers.
   +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
   | ID                                   | Name                              | Status | Networks                               | Image | Flavor  |
   +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
-  | 73222f7c-9219-4b64-809a-4d87700170e2 | dev-cluster-ipzptyqqnoje-node-2   | ACTIVE | private=10.0.0.6                       |       | c1.c2r2 |
-  | 83a75000-178c-4d5e-9e2f-a3b005ec4438 | dev-cluster-ipzptyqqnoje-node-1   | ACTIVE | private=10.0.0.5                       |       | c1.c2r2 |
-  | 94b2603e-cb0f-4292-8f3d-51bd475442dd | dev-cluster-ipzptyqqnoje-node-0   | ACTIVE | private=10.0.0.7                       |       | c1.c2r2 |
-  | 63f5206c-2105-489c-8fd8-a493876277e5 | dev-cluster-ipzptyqqnoje-master-0 | ACTIVE | private=10.0.0.4                       |       | c1.c2r2 |
+  | 73222f7c-9219-4b64-809a-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-node-2   | ACTIVE | private=10.0.0.6                       |       | c1.c2r2 |
+  | 83a75000-178c-4d5e-9e2f-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-node-1   | ACTIVE | private=10.0.0.5                       |       | c1.c2r2 |
+  | 94b2603e-cb0f-4292-8f3d-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-node-0   | ACTIVE | private=10.0.0.7                       |       | c1.c2r2 |
+  | 63f5206c-2105-489c-8fd8-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-master-0 | ACTIVE | private=10.0.0.4                       |       | c1.c2r2 |
   +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
 
 Let's assume that due to current demand we only require 2 worker nodes in our
@@ -789,7 +789,7 @@ If we check the cluster state we can see it is now showing
   +--------------------------------------+-------------+------------+------------+--------------+--------------------+---------------+
   | uuid                                 | name        | keypair    | node_count | master_count | status             | health_status |
   +--------------------------------------+-------------+------------+------------+--------------+--------------------+---------------+
-  | d9d767eb-d94a-4a0b-baad-edc137250c11 | dev-cluster | glxxxxxxes |          4 |            1 | UPDATE_IN_PROGRESS | UNKNOWN       |
+  | d9d767eb-d94a-4a0b-baad-xxxxxxxxxxxx | dev-cluster | glxxxxxxes |          4 |            1 | UPDATE_IN_PROGRESS | UNKNOWN       |
   +--------------------------------------+-------------+------------+------------+--------------+--------------------+---------------+
 
 Once this changes to ``UPDATE_COMPLETE`` we can recheck the servers belonging to
@@ -801,9 +801,9 @@ our cluster and confirm that we now only have two worker nodes present.
   +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
   | ID                                   | Name                              | Status | Networks                               | Image | Flavor  |
   +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
-  | 73222f7c-9219-4b64-809a-4d87700170e2 | dev-cluster-ipzptyqqnoje-node-2   | ACTIVE | private=10.0.0.6                       |       | c1.c2r2 |
-  | 83a75000-178c-4d5e-9e2f-a3b005ec4438 | dev-cluster-ipzptyqqnoje-node-1   | ACTIVE | private=10.0.0.5                       |       | c1.c2r2 |
-  | 63f5206c-2105-489c-8fd8-a493876277e5 | dev-cluster-ipzptyqqnoje-master-0 | ACTIVE | private=10.0.0.4                       |       | c1.c2r2 |
+  | 73222f7c-9219-4b64-809a-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-node-2   | ACTIVE | private=10.0.0.6                       |       | c1.c2r2 |
+  | 83a75000-178c-4d5e-9e2f-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-node-1   | ACTIVE | private=10.0.0.5                       |       | c1.c2r2 |
+  | 63f5206c-2105-489c-8fd8-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-master-0 | ACTIVE | private=10.0.0.4                       |       | c1.c2r2 |
   +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
 
 The case for increasing the number of worker nodes works in exactly the same
@@ -835,10 +835,10 @@ If we take a look at the nodes in our cluster
   +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
   | ID                                   | Name                              | Status | Networks                               | Image | Flavor  |
   +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
-  | 73222f7c-9219-4b64-809a-4d87700170e2 | dev-cluster-ipzptyqqnoje-node-2   | ACTIVE | private=10.0.0.6                       |       | c1.c2r2 |
-  | 83a75000-178c-4d5e-9e2f-a3b005ec4438 | dev-cluster-ipzptyqqnoje-node-1   | ACTIVE | private=10.0.0.5                       |       | c1.c2r2 |
-  | 94b2603e-cb0f-4292-8f3d-51bd475442dd | dev-cluster-ipzptyqqnoje-node-0   | ACTIVE | private=10.0.0.7                       |       | c1.c2r2 |
-  | 63f5206c-2105-489c-8fd8-a493876277e5 | dev-cluster-ipzptyqqnoje-master-0 | ACTIVE | private=10.0.0.4                       |       | c1.c2r2 |
+  | 73222f7c-9219-4b64-809a-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-node-2   | ACTIVE | private=10.0.0.6                       |       | c1.c2r2 |
+  | 83a75000-178c-4d5e-9e2f-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-node-1   | ACTIVE | private=10.0.0.5                       |       | c1.c2r2 |
+  | 94b2603e-cb0f-4292-8f3d-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-node-0   | ACTIVE | private=10.0.0.7                       |       | c1.c2r2 |
+  | 63f5206c-2105-489c-8fd8-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-master-0 | ACTIVE | private=10.0.0.4                       |       | c1.c2r2 |
   +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
 
 Let's assume for the purpose of this example, assume that
@@ -848,7 +848,7 @@ This will result in that node being removed and recreated.
 
 .. code-block:: console
 
-  $ openstack coe cluster resize --nodes-to-remove 94b2603e-cb0f-4292-8f3d-51bd475442dd dev-cluster 3
+  $ openstack coe cluster resize --nodes-to-remove 94b2603e-cb0f-4292-8f3d-xxxxxxxxxxxx dev-cluster 3
   Request to resize cluster dev-cluster has been accepted.
 
 The result is that we still have 3 worker nodes, but the problematic node-0 has
@@ -860,10 +860,10 @@ been replaced by node-3.
   +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
   | ID                                   | Name                              | Status | Networks                               | Image | Flavor  |
   +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
-  | 82624fd4-6ff9-4fa7-9be7-c038db0d0893 | dev-cluster-ipzptyqqnoje-node-3   | BUILD  |                                        |       | c1.c2r2 |
-  | 73222f7c-9219-4b64-809a-4d87700170e2 | dev-cluster-ipzptyqqnoje-node-2   | ACTIVE | private=10.0.0.6                       |       | c1.c2r2 |
-  | 83a75000-178c-4d5e-9e2f-a3b005ec4438 | dev-cluster-ipzptyqqnoje-node-1   | ACTIVE | private=10.0.0.5                       |       | c1.c2r2 |
-  | 63f5206c-2105-489c-8fd8-a493876277e5 | dev-cluster-ipzptyqqnoje-master-0 | ACTIVE | private=10.0.0.4                       |       | c1.c2r2 |
+  | 82624fd4-6ff9-4fa7-9be7-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-node-3   | BUILD  |                                        |       | c1.c2r2 |
+  | 73222f7c-9219-4b64-809a-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-node-2   | ACTIVE | private=10.0.0.6                       |       | c1.c2r2 |
+  | 83a75000-178c-4d5e-9e2f-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-node-1   | ACTIVE | private=10.0.0.5                       |       | c1.c2r2 |
+  | 63f5206c-2105-489c-8fd8-xxxxxxxxxxxx | dev-cluster-ipzptyqqnoje-master-0 | ACTIVE | private=10.0.0.4                       |       | c1.c2r2 |
   +--------------------------------------+-----------------------------------+--------+----------------------------------------+-------+---------+
 
 
@@ -900,8 +900,8 @@ First lets list the default nodes on our cluster named kube-test.
   +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+--------+
   | uuid                                 | name           | flavor_id | image_id                             | node_count | status          | role   |
   +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+--------+
-  | ac36585b-a031-4f4a-84f1-46d90bb910a9 | default-master | c1.c2r4   | 5de1a6a3-3ee1-4593-8c88-f724c65fc3d0 |          3 | CREATE_COMPLETE | master |
-  | 7eebd682-5bc7-4025-bb74-9f6c9264bd57 | default-worker | c1.c4r8   | 5de1a6a3-3ee1-4593-8c88-f724c65fc3d0 |          2 | CREATE_COMPLETE | worker |
+  | ac36585b-a031-4f4a-84f1-xxxxxxxxxxxx | default-master | c1.c2r4   | 5de1a6a3-3ee1-4593-8c88-xxxxxxxxxxxx |          3 | CREATE_COMPLETE | master |
+  | 7eebd682-5bc7-4025-bb74-xxxxxxxxxxxx | default-worker | c1.c4r8   | 5de1a6a3-3ee1-4593-8c88-xxxxxxxxxxxx |          2 | CREATE_COMPLETE | worker |
   +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+--------+
 
 Creating a node group
@@ -919,7 +919,7 @@ With this in mind we will create a new nodegroup with the following
 .. code-block:: console
 
   $ openstack coe nodegroup create kube-test --node-count 2 --role test
-  Request to create nodegroup cf483236-f74d-4bac-bde9-4e5a2789476d accepted
+  Request to create nodegroup cf483236-f74d-4bac-bde9-xxxxxxxxxxxx accepted
 
 We can check our new node group with the following command.
 
@@ -929,9 +929,9 @@ We can check our new node group with the following command.
   +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+--------+
   | uuid                                 | name           | flavor_id | image_id                             | node_count | status          | role   |
   +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+--------+
-  | ac36585b-a031-4f4a-84f1-46d90bb910a9 | default-master | c1.c2r4   | 5de1a6a3-3ee1-4593-8c88-f724c65fc3d0 |          3 | UPDATE_COMPLETE | master |
-  | 7eebd682-5bc7-4025-bb74-9f6c9264bd57 | default-worker | c1.c4r8   | 5de1a6a3-3ee1-4593-8c88-f724c65fc3d0 |          9 | UPDATE_COMPLETE | worker |
-  | cf483236-f74d-4bac-bde9-4e5a2789476d | test-nodegroup | c1.c4r8   | 5de1a6a3-3ee1-4593-8c88-f724c65fc3d0 |          2 | CREATE_COMPLETE | test   |
+  | ac36585b-a031-4f4a-84f1-xxxxxxxxxxxx | default-master | c1.c2r4   | 5de1a6a3-3ee1-4593-8c88-xxxxxxxxxxxx |          3 | UPDATE_COMPLETE | master |
+  | 7eebd682-5bc7-4025-bb74-xxxxxxxxxxxx | default-worker | c1.c4r8   | 5de1a6a3-3ee1-4593-8c88-xxxxxxxxxxxx |          9 | UPDATE_COMPLETE | worker |
+  | cf483236-f74d-4bac-bde9-xxxxxxxxxxxx | test-nodegroup | c1.c4r8   | 5de1a6a3-3ee1-4593-8c88-xxxxxxxxxxxx |          2 | CREATE_COMPLETE | test   |
   +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+--------+
 
 It is also possible to use the role as a filter to limit output.
@@ -942,7 +942,7 @@ It is also possible to use the role as a filter to limit output.
   +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+------+
   | uuid                                 | name           | flavor_id | image_id                             | node_count | status          | role |
   +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+------+
-  | cf483236-f74d-4bac-bde9-4e5a2789476d | test-nodegroup | c1.c4r8   | 5de1a6a3-3ee1-4593-8c88-f724c65fc3d0 |          2 | CREATE_COMPLETE | test |
+  | cf483236-f74d-4bac-bde9-xxxxxxxxxxxx | test-nodegroup | c1.c4r8   | 5de1a6a3-3ee1-4593-8c88-xxxxxxxxxxxx |          2 | CREATE_COMPLETE | test |
   +--------------------------------------+----------------+-----------+--------------------------------------+------------+-----------------+------+
 
 Roles can be used to show the purpose of a node group, and multiple node groups

@@ -1,10 +1,10 @@
 export CC_SEC_GROUP_NAME=first-instance-sg
 export CC_SERVERNAME=first-instance
-export CC_PUBLIC_NETWORK_ID=e0ba6b88-5360-492c-9c3d-119948356fd3
+export CC_PUBLIC_NETWORK_ID=e0ba6b88-5360-492c-9c3d-xxxxxxxxxxxx
 
-# Porirua public net = 849ab1e9-7ac5-4618-8801-e6176fbbcf30
-# Hamilton public net = f10ad6de-a26d-4c29-8c64-2a7418d47f8f
-# Wellington public net = e0ba6b88-5360-492c-9c3d-119948356fd3
+# Porirua public net = 849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx
+# Hamilton public net = f10ad6de-a26d-4c29-8c64-xxxxxxxxxxxx
+# Wellington public net = e0ba6b88-5360-492c-9c3d-xxxxxxxxxxxx
 
 $ openstack security group create $CC_SEC_GROUP_NAME
 

@@ -253,7 +253,7 @@ following shows how to enable slow_query specifically.
   | Field     | Value                                                          |
   +-----------+----------------------------------------------------------------+
   | container | None                                                           |
-  | metafile  | 6f4e35e6-58fa-4812-a075-3a20a29edd0b/mysql-slow_query_metafile |
+  | metafile  | 6f4e35e6-58fa-4812-a075-xxxxxxxxxxxx/mysql-slow_query_metafile |
   | name      | slow_query                                                     |
   | pending   | 182                                                            |
   | prefix    | None                                                           |
@@ -282,10 +282,10 @@ Finally we publish the log using:
   | Field     | Value                                                          |
   +-----------+----------------------------------------------------------------+
   | container | database_logs                                                  |
-  | metafile  | 6f4e35e6-58fa-4812-a075-3a20a29edd0b/mysql-slow_query_metafile |
+  | metafile  | 6f4e35e6-58fa-4812-a075-xxxxxxxxxxxx/mysql-slow_query_metafile |
   | name      | slow_query                                                     |
   | pending   | 0                                                              |
-  | prefix    | 6f4e35e6-58fa-4812-a075-3a20a29edd0b/mysql-slow_query          |
+  | prefix    | 6f4e35e6-58fa-4812-a075-xxxxxxxxxxxx/mysql-slow_query          |
   | published | 404                                                            |
   | status    | Published                                                      |
   | type      | USER                                                           |
@@ -295,7 +295,7 @@ Finally we publish the log using:
   +--------------------------------------------------------------------------------------+
   | Name                                                                                 |
   +--------------------------------------------------------------------------------------+
-  | 3bc0c29d-b6bc-4729-b6a8-b312fca5d3fc/mysql-slow_query/log-2020-08-05T22:19:09.621839 |
-  | 3bc0c29d-b6bc-4729-b6a8-b312fca5d3fc/mysql-slow_query_metafile                       |
+  | 3bc0c29d-b6bc-4729-b6a8-xxxxxxxxxxxx/mysql-slow_query/log-2020-08-05T22:19:09.621839 |
+  | 3bc0c29d-b6bc-4729-b6a8-xxxxxxxxxxxx/mysql-slow_query_metafile                       |
   +--------------------------------------------------------------------------------------+
 

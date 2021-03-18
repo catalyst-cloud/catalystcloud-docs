@@ -50,8 +50,8 @@ We will need to find the following variables for our template:
     +--------------------------------------+-----------------------+--------+----------------------------------------------+--------------------------+---------+
     | ID                                   | Name                  | Status | Networks                                     | Image                    | Flavor  |
     +--------------------------------------+-----------------------+--------+----------------------------------------------+--------------------------+---------+
-    | 52d0d0af-8d0b-4bf8-8264-762822ae0e25 | webserver-heat-test-2 | ACTIVE | lb-docs-tests=192.168.0.43                   | N/A (booted from volume) | c1.c1r1 |
-    | bfc4e791-717f-4777-a7f3-2add9481deff | webserver-heat-test   | ACTIVE | lb-docs-tests=192.168.0.42                   | N/A (booted from volume) | c1.c1r1 |
+    | 52d0d0af-8d0b-4bf8-8264-xxxxxxxxxxxx | webserver-heat-test-2 | ACTIVE | lb-docs-tests=192.168.0.43                   | N/A (booted from volume) | c1.c1r1 |
+    | bfc4e791-717f-4777-a7f3-xxxxxxxxxxxx | webserver-heat-test   | ACTIVE | lb-docs-tests=192.168.0.42                   | N/A (booted from volume) | c1.c1r1 |
     +--------------------------------------+-----------------------+--------+----------------------------------------------+--------------------------+---------+
 
     # We are taking the IP addresses: 192.168.0.43 and 192.168.0.42
@@ -120,7 +120,7 @@ create our stack:
     +---------------------+---------------------------------------------------------------------------+
     | Field               | Value                                                                     |
     +---------------------+---------------------------------------------------------------------------+
-    | id                  | bedbf02b-0094-44c8-a423-ffe223868291                                      |
+    | id                  | bedbf02b-0094-44c8-a423-xxxxxxxxxxxx                                      |
     | stack_name          | heat-lb-stack                                                             |
     | description         | The heat template is used to create a load balancer for a basic webserver |
     |                     |                                                                           |

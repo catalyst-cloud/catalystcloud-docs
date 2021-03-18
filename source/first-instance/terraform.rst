@@ -124,10 +124,10 @@ will execute:
  + openstack_compute_instance_v2.instance_1
      access_ip_v4:               "" => "<computed>"
      access_ip_v6:               "" => "<computed>"
-     flavor_id:                  "" => "28153197-6690-4485-9dbc-fc24489b0683"
+     flavor_id:                  "" => "28153197-6690-4485-9dbc-xxxxxxxxxxxx"
      flavor_name:                "" => "<computed>"
      floating_ip:                "" => "${openstack_compute_floatingip_v2.floatingip_1.address}"
-     image_id:                   "" => "378f3322-740f-4c4d-9864-aebeb41f21ab"
+     image_id:                   "" => "378f3322-740f-4c4d-9864-xxxxxxxxxxxx"
      image_name:                 "" => "<computed>"
      key_pair:                   "" => "first-instance-key"
      metadata.#:                 "" => "1"
@@ -181,7 +181,7 @@ will execute:
  + openstack_networking_router_v2.router_1
      admin_state_up:   "" => "<computed>"
      distributed:      "" => "<computed>"
-     external_gateway: "" => "849ab1e9-7ac5-4618-8801-e6176fbbcf30"
+     external_gateway: "" => "849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx"
      name:             "" => "border-router"
      region:           "" => "nz-por-1"
      tenant_id:        "" => "<computed>"
@@ -224,7 +224,7 @@ resources:
  openstack_networking_router_v2.router_1: Creating...
    admin_state_up:   "" => "<computed>"
    distributed:      "" => "<computed>"
-   external_gateway: "" => "849ab1e9-7ac5-4618-8801-e6176fbbcf30"
+   external_gateway: "" => "849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx"
    name:             "" => "border-router"
    region:           "" => "nz-por-1"
    tenant_id:        "" => "<computed>"
@@ -269,16 +269,16 @@ resources:
    gateway_ip:                 "" => "<computed>"
    ip_version:                 "" => "4"
    name:                       "" => "private-subnet"
-   network_id:                 "" => "1913210e-3921-4c9b-b8ab-a097b7c8fc7b"
+   network_id:                 "" => "1913210e-3921-4c9b-b8ab-xxxxxxxxxxxx"
    region:                     "" => "nz-por-1"
    tenant_id:                  "" => "<computed>"
  openstack_compute_instance_v2.instance_1: Creating...
    access_ip_v4:               "" => "<computed>"
    access_ip_v6:               "" => "<computed>"
-   flavor_id:                  "" => "28153197-6690-4485-9dbc-fc24489b0683"
+   flavor_id:                  "" => "28153197-6690-4485-9dbc-xxxxxxxxxxxx"
    flavor_name:                "" => "<computed>"
    floating_ip:                "" => "150.242.42.67"
-   image_id:                   "" => "378f3322-740f-4c4d-9864-aebeb41f21ab"
+   image_id:                   "" => "378f3322-740f-4c4d-9864-xxxxxxxxxxxx"
    image_name:                 "" => "<computed>"
    key_pair:                   "" => "first-instance-key"
    metadata.#:                 "" => "1"
@@ -302,8 +302,8 @@ resources:
  openstack_networking_subnet_v2.subnet_1: Creation complete
  openstack_networking_router_interface_v2.router_interface_1: Creating...
    region:    "" => "nz-por-1"
-   router_id: "" => "b1a302c2-3369-47bd-ad3f-b85465cd6b72"
-   subnet_id: "" => "53dda21d-6e27-43cb-86bf-deb576b10134"
+   router_id: "" => "b1a302c2-3369-47bd-ad3f-xxxxxxxxxxxx"
+   subnet_id: "" => "53dda21d-6e27-43cb-86bf-xxxxxxxxxxxx"
  openstack_compute_instance_v2.instance_1: Still creating... (10s elapsed)
  openstack_networking_router_interface_v2.router_interface_1: Creation complete
  openstack_compute_instance_v2.instance_1: Still creating... (20s elapsed)
@@ -340,14 +340,14 @@ delete any of the resources that were created using the previous command.
 
    Enter a value: yes
 
- openstack_compute_secgroup_v2.secgroup_1: Refreshing state... (ID: 1da4e4a5-5401-4f17-b379-2f397839eb9a)
- openstack_networking_network_v2.network_1: Refreshing state... (ID: 1913210e-3921-4c9b-b8ab-a097b7c8fc7b)
- openstack_compute_floatingip_v2.floatingip_1: Refreshing state... (ID: 580c174a-2972-4597-aedc-f21f5b421e21)
- openstack_networking_router_v2.router_1: Refreshing state... (ID: b1a302c2-3369-47bd-ad3f-b85465cd6b72)
+ openstack_compute_secgroup_v2.secgroup_1: Refreshing state... (ID: 1da4e4a5-5401-4f17-b379-xxxxxxxxxxxx)
+ openstack_networking_network_v2.network_1: Refreshing state... (ID: 1913210e-3921-4c9b-b8ab-xxxxxxxxxxxx)
+ openstack_compute_floatingip_v2.floatingip_1: Refreshing state... (ID: 580c174a-2972-4597-aedc-xxxxxxxxxxxx)
+ openstack_networking_router_v2.router_1: Refreshing state... (ID: b1a302c2-3369-47bd-ad3f-xxxxxxxxxxxx)
  openstack_compute_keypair_v2.keypair_1: Refreshing state... (ID: first-instance-key)
- openstack_networking_subnet_v2.subnet_1: Refreshing state... (ID: 53dda21d-6e27-43cb-86bf-deb576b10134)
- openstack_compute_instance_v2.instance_1: Refreshing state... (ID: 72776b0d-438e-421d-89fc-3a806eadd3eb)
- openstack_networking_router_interface_v2.router_interface_1: Refreshing state... (ID: 267afa19-f2df-4b17-96da-7a1d09f413b6)
+ openstack_networking_subnet_v2.subnet_1: Refreshing state... (ID: 53dda21d-6e27-43cb-86bf-xxxxxxxxxxxx)
+ openstack_compute_instance_v2.instance_1: Refreshing state... (ID: 72776b0d-438e-421d-89fc-xxxxxxxxxxxx)
+ openstack_networking_router_interface_v2.router_interface_1: Refreshing state... (ID: 267afa19-f2df-4b17-96da-xxxxxxxxxxxx)
  openstack_networking_router_interface_v2.router_interface_1: Destroying...
  openstack_compute_instance_v2.instance_1: Destroying...
  openstack_compute_instance_v2.instance_1: Still destroying... (10s elapsed)

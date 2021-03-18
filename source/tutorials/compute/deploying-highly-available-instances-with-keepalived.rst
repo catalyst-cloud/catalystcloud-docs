@@ -142,7 +142,7 @@ available hosts:
   | created_at                | None                                 |
   | description               | None                                 |
   | dns_domain                | None                                 |
-  | id                        | cb6c2c3a-c088-44ca-b80f-8758e3665e69 |
+  | id                        | cb6c2c3a-c088-44ca-b80f-xxxxxxxxxxxx |
   | ipv4_address_scope        | None                                 |
   | ipv6_address_scope        | None                                 |
   | is_default                | None                                 |
@@ -185,12 +185,12 @@ this case, the pool addresses are in the range 2-200, while the remainder of the
   | enable_dhcp       | True                                 |
   | gateway_ip        | 10.0.0.1                             |
   | host_routes       |                                      |
-  | id                | 2919a9ff-d44c-480e-bc0f-032e4fe07f0a |
+  | id                | 2919a9ff-d44c-480e-bc0f-xxxxxxxxxxxx |
   | ip_version        | 4                                    |
   | ipv6_address_mode | None                                 |
   | ipv6_ra_mode      | None                                 |
   | name              | vrrp-subnet                          |
-  | network_id        | cb6c2c3a-c088-44ca-b80f-8758e3665e69 |
+  | network_id        | cb6c2c3a-c088-44ca-b80f-xxxxxxxxxxxx |
   | project_id        | <PROJECT_ID>     |
   | revision_number   | None                                 |
   | segment_id        | None                                 |
@@ -218,7 +218,7 @@ new subnet and set its gateway as your public network:
   | external_gateway_info   | None                                 |
   | flavor_id               | None                                 |
   | ha                      | False                                |
-  | id                      | 79a6c45a-abf7-4e0a-9495-f9b517914f7f |
+  | id                      | 79a6c45a-abf7-4e0a-9495-xxxxxxxxxxxx |
   | name                    | vrrp-router                          |
   | project_id              | <PROJECT_ID>     |
   | revision_number         | None                                 |
@@ -245,10 +245,10 @@ To find the correct subnet and network ID use the following commands
 .. code-block:: bash
 
   $ VRRP_SUBNET_ID=$( openstack subnet show vrrp-subnet -f value -c id ) && echo $VRRP_SUBNET_ID
-  cd376d6f-42f4-46c2-8988-717b2f642af4
+  cd376d6f-42f4-46c2-8988-xxxxxxxxxxxx
 
   $ VRRP_NET_ID=$( openstack network show vrrp-net -f value -c id ) && echo $VRRP_NET_ID
-  98ec34ba-b25e-4720-ae5e-ab7a87fadc51
+  98ec34ba-b25e-4720-ae5e-xxxxxxxxxxxx
 
 Then create the ports with your preferred IP addresses
 
@@ -273,19 +273,19 @@ Then create the ports with your preferred IP addresses
   | dns_assignment        | fqdn='host-10-0-0-4.openstacklocal.', hostname='host-10-0-0-4', ip_address='10.0.0.4' |
   | dns_name              |                                                                                       |
   | extra_dhcp_opts       | None                                                                                  |
-  | fixed_ips             | ip_address='10.0.0.4', subnet_id='2919a9ff-d44c-480e-bc0f-032e4fe07f0a'               |
-  | id                    | 6bd99608-774c-41ba-ab88-378c90a02e8d                                                  |
+  | fixed_ips             | ip_address='10.0.0.4', subnet_id='2919a9ff-d44c-480e-bc0f-xxxxxxxxxxxx'               |
+  | id                    | 6bd99608-774c-41ba-ab88-xxxxxxxxxxxx                                                  |
   | ip_address            | None                                                                                  |
   | mac_address           | fa:16:3e:da:c1:19                                                                     |
   | name                  | vrrp_master_server_port                                                               |
-  | network_id            | cb6c2c3a-c088-44ca-b80f-8758e3665e69                                                  |
+  | network_id            | cb6c2c3a-c088-44ca-b80f-xxxxxxxxxxxx                                                  |
   | option_name           | None                                                                                  |
   | option_value          | None                                                                                  |
   | port_security_enabled | False                                                                                 |
   | project_id            | <PROJECT_ID>                                                      |
   | qos_policy_id         | None                                                                                  |
   | revision_number       | None                                                                                  |
-  | security_group_ids    | 1df52ef7-23d3-44ed-9a7d-89c30256d118                                                  |
+  | security_group_ids    | 1df52ef7-23d3-44ed-9a7d-xxxxxxxxxxxx                                                  |
   | status                | DOWN                                                                                  |
   | subnet_id             | None                                                                                  |
   | tags                  | None                                                                                  |
@@ -312,19 +312,19 @@ Then create the ports with your preferred IP addresses
   | dns_assignment        | fqdn='host-10-0-0-5.openstacklocal.', hostname='host-10-0-0-5', ip_address='10.0.0.5' |
   | dns_name              |                                                                                       |
   | extra_dhcp_opts       | None                                                                                  |
-  | fixed_ips             | ip_address='10.0.0.5', subnet_id='2919a9ff-d44c-480e-bc0f-032e4fe07f0a'               |
-  | id                    | 30a60e68-8311-4098-8236-012ad689d6de                                                  |
+  | fixed_ips             | ip_address='10.0.0.5', subnet_id='2919a9ff-d44c-480e-bc0f-xxxxxxxxxxxx'               |
+  | id                    | 30a60e68-8311-4098-8236-xxxxxxxxxxxx                                                  |
   | ip_address            | None                                                                                  |
   | mac_address           | fa:16:3e:a5:62:2a                                                                     |
   | name                  | vrrp_backup_server_port                                                               |
-  | network_id            | cb6c2c3a-c088-44ca-b80f-8758e3665e69                                                  |
+  | network_id            | cb6c2c3a-c088-44ca-b80f-xxxxxxxxxxxx                                                  |
   | option_name           | None                                                                                  |
   | option_value          | None                                                                                  |
   | port_security_enabled | False                                                                                 |
   | project_id            | <PROJECT_ID>                                                      |
   | qos_policy_id         | None                                                                                  |
   | revision_number       | None                                                                                  |
-  | security_group_ids    | 1df52ef7-23d3-44ed-9a7d-89c30256d118                                                  |
+  | security_group_ids    | 1df52ef7-23d3-44ed-9a7d-xxxxxxxxxxxx                                                  |
   | status                | DOWN                                                                                  |
   | subnet_id             | None                                                                                  |
   | tags                  | None                                                                                  |
@@ -347,12 +347,12 @@ allow HTTP, SSH and ICMP ingress:
   +-----------------+---------------------------------------------------------------------------------+
   | created_at      | None                                                                            |
   | description     | VRRP security group                                                             |
-  | id              | 6b82f642-aa10-456a-a060-b6f8b8309f96                                            |
+  | id              | 6b82f642-aa10-456a-a060-xxxxxxxxxxxx                                            |
   | name            | vrrp-sec-group                                                                  |
   | project_id      | <PROJECT_ID>                                                |
   | revision_number | None                                                                            |
-  | rules           | direction='egress', ethertype='IPv4', id='dc8a5cc8-6dfd-4582-97f9-7f18b0fe8b0c' |
-  |                 | direction='egress', ethertype='IPv6', id='db77df48-fd33-4eba-a53b-0bc7b23fc064' |
+  | rules           | direction='egress', ethertype='IPv4', id='dc8a5cc8-6dfd-4582-97f9-xxxxxxxxxxxx' |
+  |                 | direction='egress', ethertype='IPv6', id='db77df48-fd33-4eba-a53b-xxxxxxxxxxxx' |
   | updated_at      | None                                                                            |
   +-----------------+---------------------------------------------------------------------------------+
 
@@ -364,7 +364,7 @@ allow HTTP, SSH and ICMP ingress:
   | description       | None                                 |
   | direction         | ingress                              |
   | ether_type        | IPv4                                 |
-  | id                | 05c2ef77-51f6-4829-a834-4e839f4c6874 |
+  | id                | 05c2ef77-51f6-4829-a834-xxxxxxxxxxxx |
   | name              | None                                 |
   | port_range_max    | None                                 |
   | port_range_min    | None                                 |
@@ -373,7 +373,7 @@ allow HTTP, SSH and ICMP ingress:
   | remote_group_id   | None                                 |
   | remote_ip_prefix  | 0.0.0.0/0                            |
   | revision_number   | None                                 |
-  | security_group_id | 6b82f642-aa10-456a-a060-b6f8b8309f96 |
+  | security_group_id | 6b82f642-aa10-456a-a060-xxxxxxxxxxxx |
   | updated_at        | None                                 |
   +-------------------+--------------------------------------+
 
@@ -385,7 +385,7 @@ allow HTTP, SSH and ICMP ingress:
   | description       | None                                 |
   | direction         | ingress                              |
   | ether_type        | IPv4                                 |
-  | id                | ab6732ce-413b-4637-9d55-c45d559828af |
+  | id                | ab6732ce-413b-4637-9d55-xxxxxxxxxxxx |
   | name              | None                                 |
   | port_range_max    | 80                                   |
   | port_range_min    | 80                                   |
@@ -394,7 +394,7 @@ allow HTTP, SSH and ICMP ingress:
   | remote_group_id   | None                                 |
   | remote_ip_prefix  | 0.0.0.0/0                            |
   | revision_number   | None                                 |
-  | security_group_id | 6b82f642-aa10-456a-a060-b6f8b8309f96 |
+  | security_group_id | 6b82f642-aa10-456a-a060-xxxxxxxxxxxx |
   | updated_at        | None                                 |
   +-------------------+--------------------------------------+
 
@@ -406,7 +406,7 @@ allow HTTP, SSH and ICMP ingress:
   | description       | None                                 |
   | direction         | ingress                              |
   | ether_type        | IPv4                                 |
-  | id                | 95f8e7be-e6e0-4cd1-b166-5d275e3f884f |
+  | id                | 95f8e7be-e6e0-4cd1-b166-xxxxxxxxxxxx |
   | name              | None                                 |
   | port_range_max    | 22                                   |
   | port_range_min    | 22                                   |
@@ -415,7 +415,7 @@ allow HTTP, SSH and ICMP ingress:
   | remote_group_id   | None                                 |
   | remote_ip_prefix  | 0.0.0.0/0                            |
   | revision_number   | None                                 |
-  | security_group_id | 6b82f642-aa10-456a-a060-b6f8b8309f96 |
+  | security_group_id | 6b82f642-aa10-456a-a060-xxxxxxxxxxxx |
   | updated_at        | None                                 |
   +-------------------+--------------------------------------+
 
@@ -433,16 +433,16 @@ each other via VRRP broadcasts:
   | description       | None                                 |
   | direction         | ingress                              |
   | ether_type        | IPv4                                 |
-  | id                | bef20d57-eef5-41b1-98e6-fe912901fc98 |
+  | id                | bef20d57-eef5-41b1-98e6-xxxxxxxxxxxx |
   | name              | None                                 |
   | port_range_max    | None                                 |
   | port_range_min    | None                                 |
   | project_id        | <PROJECT_ID>     |
   | protocol          | 112                                  |
-  | remote_group_id   | 6b82f642-aa10-456a-a060-b6f8b8309f96 |
+  | remote_group_id   | 6b82f642-aa10-456a-a060-xxxxxxxxxxxx |
   | remote_ip_prefix  | None                                 |
   | revision_number   | None                                 |
-  | security_group_id | 6b82f642-aa10-456a-a060-b6f8b8309f96 |
+  | security_group_id | 6b82f642-aa10-456a-a060-xxxxxxxxxxxx |
   | updated_at        | None                                 |
   +-------------------+--------------------------------------+
 
@@ -464,19 +464,19 @@ To find the correct IDs you can use the following commands:
 .. code-block:: bash
 
  $ VRRP_IMAGE_ID=$( openstack image show ubuntu-14.04-x86_64 -f value -c id ) && echo $VRRP_IMAGE_ID
- a7e6d3b5-9980-4ae0-a5b7-1ab3200bf403
+ a7e6d3b5-9980-4ae0-a5b7-xxxxxxxxxxxx
 
  $ VRRP_FLAVOR_ID=$( openstack flavor show c1.c1r1 -f value -c id ) && echo $VRRP_FLAVOR_ID
- 28153197-6690-4485-9dbc-fc24489b0683
+ 28153197-6690-4485-9dbc-xxxxxxxxxxxx
 
  $ VRRP_NET_ID=$( openstack network show vrrp-net -f value -c id ) && echo $VRRP_NET_ID
- cb6c2c3a-c088-44ca-b80f-8758e3665e69
+ cb6c2c3a-c088-44ca-b80f-xxxxxxxxxxxx
 
  $ VRRP_MASTER_PORT=$(openstack port show vrrp_master_server_port -f value -c id) && echo $VRRP_MASTER_PORT
- 6bd99608-774c-41ba-ab88-378c90a02e8d
+ 6bd99608-774c-41ba-ab88-xxxxxxxxxxxx
 
  $ VRRP_BACKUP_PORT=$(openstack port show vrrp_backup_server_port -f value -c id) && echo $VRRP_BACKUP_PORT
- 1736183d-8beb-4131-bb60-eb447bcb18f4
+ 1736183d-8beb-4131-bb60-xxxxxxxxxxxx
 
 
  $ openstack keypair list
@@ -560,16 +560,16 @@ path to the ``vrrp-setup.sh`` script):
   | adminPass                   | 2X2Jao8nqk5G                                               |
   | config_drive                |                                                            |
   | created                     | 2018-01-10T20:48:02Z                                       |
-  | flavor                      | c1.c1r1 (28153197-6690-4485-9dbc-fc24489b0683)             |
+  | flavor                      | c1.c1r1 (28153197-6690-4485-9dbc-xxxxxxxxxxxx)             |
   | hostId                      |                                                            |
-  | id                          | c8a2c1ec-73f2-4f6b-8107-6ca1d28da2c3                       |
-  | image                       | ubuntu-14.04-x86_64 (a7e6d3b5-9980-4ae0-a5b7-1ab3200bf403) |
+  | id                          | c8a2c1ec-73f2-4f6b-8107-xxxxxxxxxxxx                       |
+  | image                       | ubuntu-14.04-x86_64 (a7e6d3b5-9980-4ae0-a5b7-xxxxxxxxxxxx) |
   | key_name                    | glxxxxxxes                                                 |
   | name                        | vrrp-master                                                |
   | progress                    | 0                                                          |
   | project_id                  | <PROJECT_ID>                           |
   | properties                  |                                                            |
-  | security_groups             | name='6b82f642-aa10-456a-a060-b6f8b8309f96'                |
+  | security_groups             | name='6b82f642-aa10-456a-a060-xxxxxxxxxxxx'                |
   | status                      | BUILD                                                      |
   | updated                     | 2018-01-10T20:48:02Z                                       |
   | user_id                     | b80eb08f12c34717xxxxxxe1eff9f501                           |
@@ -595,16 +595,16 @@ path to the ``vrrp-setup.sh`` script):
   | adminPass                   | UHeDaT2qtVSp                                               |
   | config_drive                |                                                            |
   | created                     | 2018-01-10T20:49:20Z                                       |
-  | flavor                      | c1.c1r1 (28153197-6690-4485-9dbc-fc24489b0683)             |
+  | flavor                      | c1.c1r1 (28153197-6690-4485-9dbc-xxxxxxxxxxxx)             |
   | hostId                      |                                                            |
-  | id                          | 338bbb2c-3d63-4079-90d1-12d5065c6fa3                       |
-  | image                       | ubuntu-14.04-x86_64 (a7e6d3b5-9980-4ae0-a5b7-1ab3200bf403) |
+  | id                          | 338bbb2c-3d63-4079-90d1-xxxxxxxxxxxx                       |
+  | image                       | ubuntu-14.04-x86_64 (a7e6d3b5-9980-4ae0-a5b7-xxxxxxxxxxxx) |
   | key_name                    | glxxxxxxes                                                 |
   | name                        | vrrp-backup                                                |
   | progress                    | 0                                                          |
   | project_id                  | <PROJECT_ID>                           |
   | properties                  |                                                            |
-  | security_groups             | name='6b82f642-aa10-456a-a060-b6f8b8309f96'                |
+  | security_groups             | name='6b82f642-aa10-456a-a060-xxxxxxxxxxxx'                |
   | status                      | BUILD                                                      |
   | updated                     | 2018-01-10T20:49:21Z                                       |
   | user_id                     | b80eb08f12c34717xxxxxxe1eff9f501                           |
@@ -619,8 +619,8 @@ Check the instances have been created:
   +--------------------------------------+-------------+--------+------------------------------------------+---------------------+---------+
   | ID                                   | Name        | Status | Networks                                 | Image               | Flavor  |
   +--------------------------------------+-------------+--------+------------------------------------------+---------------------+---------+
-  | 338bbb2c-3d63-4079-90d1-12d5065c6fa3 | vrrp-backup | ACTIVE | vrrp-net=10.0.0.5                        | ubuntu-14.04-x86_64 | c1.c1r1 |
-  | c8a2c1ec-73f2-4f6b-8107-6ca1d28da2c3 | vrrp-master | ACTIVE | vrrp-net=10.0.0.4                        | ubuntu-14.04-x86_64 | c1.c1r1 |
+  | 338bbb2c-3d63-4079-90d1-xxxxxxxxxxxx | vrrp-backup | ACTIVE | vrrp-net=10.0.0.5                        | ubuntu-14.04-x86_64 | c1.c1r1 |
+  | c8a2c1ec-73f2-4f6b-8107-xxxxxxxxxxxx | vrrp-master | ACTIVE | vrrp-net=10.0.0.4                        | ubuntu-14.04-x86_64 | c1.c1r1 |
   +--------------------------------------+-------------+--------+------------------------------------------+---------------------+---------+
 
 *********************
@@ -651,19 +651,19 @@ router:
   | dns_assignment        | fqdn='host-10-0-0-201.openstacklocal.', hostname='host-10-0-0-201', ip_address='10.0.0.201' |
   | dns_name              |                                                                                             |
   | extra_dhcp_opts       | None                                                                                        |
-  | fixed_ips             | ip_address='10.0.0.201', subnet_id='2919a9ff-d44c-480e-bc0f-032e4fe07f0a'                   |
-  | id                    | 45c3aadb-b4fe-41ab-84cf-ff047a5060ad                                                        |
+  | fixed_ips             | ip_address='10.0.0.201', subnet_id='2919a9ff-d44c-480e-bc0f-xxxxxxxxxxxx'                   |
+  | id                    | 45c3aadb-b4fe-41ab-84cf-xxxxxxxxxxxx                                                        |
   | ip_address            | None                                                                                        |
   | mac_address           | fa:16:3e:26:7c:03                                                                           |
   | name                  | vrrp-port                                                                                   |
-  | network_id            | cb6c2c3a-c088-44ca-b80f-8758e3665e69                                                        |
+  | network_id            | cb6c2c3a-c088-44ca-b80f-xxxxxxxxxxxx                                                        |
   | option_name           | None                                                                                        |
   | option_value          | None                                                                                        |
   | port_security_enabled | False                                                                                       |
   | project_id            | <PROJECT_ID>                                                            |
   | qos_policy_id         | None                                                                                        |
   | revision_number       | None                                                                                        |
-  | security_group_ids    | 1df52ef7-23d3-44ed-9a7d-89c30256d118                                                        |
+  | security_group_ids    | 1df52ef7-23d3-44ed-9a7d-xxxxxxxxxxxx                                                        |
   | status                | DOWN                                                                                        |
   | subnet_id             | None                                                                                        |
   | tags                  | None                                                                                        |
@@ -677,7 +677,7 @@ using its port ID:
 .. code-block:: bash
 
   $ VRRP_VR_PORT_ID=$(openstack port list | grep 10.0.0.201 | awk '{ print $2 }') && echo $VRRP_VR_PORT_ID
-  45c3aadb-b4fe-41ab-84cf-ff047a5060ad
+  45c3aadb-b4fe-41ab-84cf-xxxxxxxxxxxx
 
   $ openstack floating ip create --port $VRRP_VR_PORT_ID public-net
   +---------------------+--------------------------------------+
@@ -687,13 +687,13 @@ using its port ID:
   | description         | None                                 |
   | fixed_ip_address    | 10.0.0.201                           |
   | floating_ip_address | 150.242.41.83                        |
-  | floating_network_id | 849ab1e9-7ac5-4618-8801-e6176fbbcf30 |
-  | id                  | 34b3e6ac-1e79-415d-8f05-bd665d49375d |
+  | floating_network_id | 849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx |
+  | id                  | 34b3e6ac-1e79-415d-8f05-xxxxxxxxxxxx |
   | name                | 150.242.41.83                        |
-  | port_id             | 45c3aadb-b4fe-41ab-84cf-ff047a5060ad |
+  | port_id             | 45c3aadb-b4fe-41ab-84cf-xxxxxxxxxxxx |
   | project_id          | <PROJECT_ID>     |
   | revision_number     | None                                 |
-  | router_id           | 79a6c45a-abf7-4e0a-9495-f9b517914f7f |
+  | router_id           | 79a6c45a-abf7-4e0a-9495-xxxxxxxxxxxx |
   | status              | DOWN                                 |
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
@@ -706,10 +706,10 @@ using this address.
 .. code-block:: bash
 
   $ VRRP_MASTER_PORT=$(openstack port list | grep '10.0.0.4' | awk '{ print $2 }') && echo $VRRP_MASTER_PORT
-  6bd99608-774c-41ba-ab88-378c90a02e8d
+  6bd99608-774c-41ba-ab88-xxxxxxxxxxxx
 
   $ VRRP_BACKUP_PORT=$(openstack port list | grep '10.0.0.5' | awk '{ print $2 }') && echo $VRRP_BACKUP_PORT
-  30a60e68-8311-4098-8236-012ad689d6de
+  30a60e68-8311-4098-8236-xxxxxxxxxxxx
 
   $ openstack port set --allowed-address ip-address=10.0.0.201 $VRRP_MASTER_PORT
 
@@ -735,24 +735,24 @@ Check that the virtual router address is associated with this port under
   | created_at            | None                                                                                  |
   | data_plane_status     | None                                                                                  |
   | description           | None                                                                                  |
-  | device_id             | c8a2c1ec-73f2-4f6b-8107-6ca1d28da2c3                                                  |
+  | device_id             | c8a2c1ec-73f2-4f6b-8107-xxxxxxxxxxxx                                                  |
   | device_owner          | compute:None                                                                          |
   | dns_assignment        | fqdn='host-10-0-0-4.openstacklocal.', hostname='host-10-0-0-4', ip_address='10.0.0.4' |
   | dns_name              |                                                                                       |
   | extra_dhcp_opts       |                                                                                       |
-  | fixed_ips             | ip_address='10.0.0.4', subnet_id='2919a9ff-d44c-480e-bc0f-032e4fe07f0a'               |
-  | id                    | 6bd99608-774c-41ba-ab88-378c90a02e8d                                                  |
+  | fixed_ips             | ip_address='10.0.0.4', subnet_id='2919a9ff-d44c-480e-bc0f-xxxxxxxxxxxx'               |
+  | id                    | 6bd99608-774c-41ba-ab88-xxxxxxxxxxxx                                                  |
   | ip_address            | None                                                                                  |
   | mac_address           | fa:16:3e:da:c1:19                                                                     |
   | name                  | vrrp_master_server_port                                                               |
-  | network_id            | cb6c2c3a-c088-44ca-b80f-8758e3665e69                                                  |
+  | network_id            | cb6c2c3a-c088-44ca-b80f-xxxxxxxxxxxx                                                  |
   | option_name           | None                                                                                  |
   | option_value          | None                                                                                  |
   | port_security_enabled | False                                                                                 |
   | project_id            | <PROJECT_ID>                                                      |
   | qos_policy_id         | None                                                                                  |
   | revision_number       | None                                                                                  |
-  | security_group_ids    | 1df52ef7-23d3-44ed-9a7d-89c30256d118                                                  |
+  | security_group_ids    | 1df52ef7-23d3-44ed-9a7d-xxxxxxxxxxxx                                                  |
   | status                | ACTIVE                                                                                |
   | subnet_id             | None                                                                                  |
   | tags                  | None                                                                                  |
@@ -777,21 +777,21 @@ obtain the port ID of the instances and update the port:
 .. code-block:: bash
 
  $ VRRP_SUBNET_ID=$( openstack subnet show vrrp-subnet -f value -c id ) && echo $VRRP_SUBNET_ID
- 2919a9ff-d44c-480e-bc0f-032e4fe07f0a
+ 2919a9ff-d44c-480e-bc0f-xxxxxxxxxxxx
 
  $ VRRP_NET_ID=$( openstack network show vrrp-net -f value -c id ) && echo $VRRP_NET_ID
- cb6c2c3a-c088-44ca-b80f-8758e3665e69
+ cb6c2c3a-c088-44ca-b80f-xxxxxxxxxxxx
 
  $ VRRP_MASTER_ID=$(openstack server list | grep 'vrrp-master' | awk '{print $2}') && echo $VRRP_MASTER_ID
- c8a2c1ec-73f2-4f6b-8107-6ca1d28da2c3
+ c8a2c1ec-73f2-4f6b-8107-xxxxxxxxxxxx
 
  $ VRRP_MASTER_PORT=$(openstack port list --server $VRRP_MASTER_ID | grep '10.0.0.4' | awk '{print $2}') && echo $VRRP_MASTER_PORT
- 6bd99608-774c-41ba-ab88-378c90a02e8d
+ 6bd99608-774c-41ba-ab88-xxxxxxxxxxxx
 
  $ openstack port set --fixed-ip subnet=$VRRP_SUBNET_ID,ip_address=10.0.0.4 $VRRP_MASTER_PORT
 
  $ VRRP_BACKUP_ID=$(openstack server list | grep 'vrrp-backup' | awk '{print $2}') && echo $VRRP_BACKUP_ID
- d920fa78-a463-4e17-90de-d3167b97a4a3
+ d920fa78-a463-4e17-90de-xxxxxxxxxxxx
 
  $ VRRP_BACKUP_PORT=$(openstack port list --server $VRRP_BACKUP_ID | grep '10.0.0.5' | awk '{print $2}') && echo $VRRP_BACKUP_PORT
 
@@ -873,13 +873,13 @@ a floating IP to each instance for SSH access.
   | description         | None                                 |
   | fixed_ip_address    | 10.0.0.4                             |
   | floating_ip_address | 150.242.40.55                        |
-  | floating_network_id | 849ab1e9-7ac5-4618-8801-e6176fbbcf30 |
-  | id                  | 418211d3-2c4f-4a36-a96c-ab48b1f0336d |
+  | floating_network_id | 849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx |
+  | id                  | 418211d3-2c4f-4a36-a96c-xxxxxxxxxxxx |
   | name                | 150.242.40.55                        |
-  | port_id             | 6bd99608-774c-41ba-ab88-378c90a02e8d |
+  | port_id             | 6bd99608-774c-41ba-ab88-xxxxxxxxxxxx |
   | project_id          | <PROJECT_ID>     |
   | revision_number     | None                                 |
-  | router_id           | 79a6c45a-abf7-4e0a-9495-f9b517914f7f |
+  | router_id           | 79a6c45a-abf7-4e0a-9495-xxxxxxxxxxxx |
   | status              | DOWN                                 |
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
@@ -893,13 +893,13 @@ a floating IP to each instance for SSH access.
   | description         | None                                 |
   | fixed_ip_address    | 10.0.0.5                             |
   | floating_ip_address | 150.242.40.6                         |
-  | floating_network_id | 849ab1e9-7ac5-4618-8801-e6176fbbcf30 |
-  | id                  | f8eab0fd-1550-479f-bd6e-1e6300045545 |
+  | floating_network_id | 849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx |
+  | id                  | f8eab0fd-1550-479f-bd6e-xxxxxxxxxxxx |
   | name                | 150.242.40.6                         |
-  | port_id             | 30a60e68-8311-4098-8236-012ad689d6de |
+  | port_id             | 30a60e68-8311-4098-8236-xxxxxxxxxxxx |
   | project_id          | <PROJECT_ID>     |
   | revision_number     | None                                 |
-  | router_id           | 79a6c45a-abf7-4e0a-9495-f9b517914f7f |
+  | router_id           | 79a6c45a-abf7-4e0a-9495-xxxxxxxxxxxx |
   | status              | DOWN                                 |
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
@@ -1114,7 +1114,7 @@ does not. Assuming the template validates, build a stack:
   +---------------------+---------------------------------------------------------------------------------------------------+
   | Field               | Value                                                                                             |
   +---------------------+---------------------------------------------------------------------------------------------------+
-  | id                  | d5096a5e-4934-490e-822b-d5831fbf57d5                                                              |
+  | id                  | d5096a5e-4934-490e-822b-xxxxxxxxxxxx                                                              |
   | stack_name          | vrrp-stack                                                                                        |
   | description         | HOT template for building a Keepalived/Apache VRRP stack in the Catalyst Cloud (nz-por-1) region. |
   |                     |                                                                                                   |
@@ -1187,7 +1187,7 @@ can modify the appropriate parameters on the command line:
 
   $ OS_REGION_NAME=nz_wlg_2
   $ heat stack-create vrrp-stack --template-file $ORCHESTRATION_DIR/hot/ubuntu-14.04/vrrp-basic/vrrp.yaml /
-  --parameters "public_net_id=e0ba6b88-5360-492c-9c3d-119948356fd3;private_net_dns_servers=202.78.240.213,202.78.240.214,202.78.240.215"
+  --parameters "public_net_id=e0ba6b88-5360-492c-9c3d-xxxxxxxxxxxx;private_net_dns_servers=202.78.240.213,202.78.240.214,202.78.240.215"
 
 The ``stack-show`` and ``resource-list`` commands are useful commands for
 viewing the state of your stack. Give them a go:

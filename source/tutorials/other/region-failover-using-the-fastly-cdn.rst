@@ -182,7 +182,7 @@ Heat template is configured for the Porirua region, so start there:
  +--------------------------------------+-----------------+--------------------+----------------------+
  | id                                   | stack_name      | stack_status       | creation_time        |
  +--------------------------------------+-----------------+--------------------+----------------------+
- | 18d3a376-ac33-4740-a2d3-19879f4807af | nginx-por-stack | CREATE_IN_PROGRESS | 2015-11-12T20:19:42Z |
+ | 18d3a376-ac33-4740-a2d3-xxxxxxxxxxxx | nginx-por-stack | CREATE_IN_PROGRESS | 2015-11-12T20:19:42Z |
  +--------------------------------------+-----------------+--------------------+----------------------+
 
 As you can see, the creation is in progress. You can use the ``event-list``
@@ -205,8 +205,8 @@ Check the output of stack show:
  | description          | HOT template for building a simple nginx stack in the                                                                                      |
  |                      | Catalyst Cloud nz-por-1 region.                                                                                                            |
  | disable_rollback     | True                                                                                                                                       |
- | id                   | 13ad022c-cbd3-4211-984c-6a7a95f1c935                                                                                                       |
- | links                | https://api.nz-por-1.catalystcloud.io:8004/v1/0cb6b9b744594a619bxxxxxxf424858b/stacks/nginx-por-stack/13ad022c-cbd3-4211-984c-6a7a95f1c935 |
+ | id                   | 13ad022c-cbd3-4211-984c-xxxxxxxxxxxx                                                                                                       |
+ | links                | https://api.nz-por-1.catalystcloud.io:8004/v1/0cb6b9b744594a619bxxxxxxf424858b/stacks/nginx-por-stack/13ad022c-cbd3-4211-984c-xxxxxxxxxxxx |
  | notification_topics  | []                                                                                                                                         |
  | outputs              | []                                                                                                                                         |
  | parameters           | {                                                                                                                                          |
@@ -218,10 +218,10 @@ Check the output of stack show:
  |                      |   "image": "ubuntu-14.04-x86_64",                                                                                                          |
  |                      |   "private_net_pool_end": "10.10.0.200",                                                                                                   |
  |                      |   "domain_name": "localdomain",                                                                                                            |
- |                      |   "OS::stack_id": "13ad022c-cbd3-4211-984c-6a7a95f1c935",                                                                                  |
+ |                      |   "OS::stack_id": "13ad022c-cbd3-4211-984c-xxxxxxxxxxxx",                                                                                  |
  |                      |   "private_net_gateway": "10.10.0.1",                                                                                                      |
  |                      |   "public_net": "public-net",                                                                                                              |
- |                      |   "public_net_id": "849ab1e9-7ac5-4618-8801-e6176fbbcf30",                                                                                 |
+ |                      |   "public_net_id": "849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx",                                                                                 |
  |                      |   "private_net_pool_start": "10.10.0.2",                                                                                                   |
  |                      |   "private_net_dns_servers": "202.78.247.197,202.78.247.198,202.78.247.199",                                                               |
  |                      |   "private_net_name": "nginx-net",                                                                                                         |
@@ -250,7 +250,7 @@ region:
 
  $ OS_REGION_NAME=nz_wlg_2
  $ heat stack-create nginx-wlg-stack --template-file $ORCHESTRATION_DIR/hot/ubuntu-14.04/nginx-region-instance/nginx.yaml \
-   --parameters "public_net_id=e0ba6b88-5360-492c-9c3d-119948356fd3;private_net_dns_servers=202.78.240.213,202.78.240.214,202.78.240.215;host_name=backup"
+   --parameters "public_net_id=e0ba6b88-5360-492c-9c3d-xxxxxxxxxxxx;private_net_dns_servers=202.78.240.213,202.78.240.214,202.78.240.215;host_name=backup"
 
 Consult the output of the ``stack-show`` and ``resource-list`` commands to
 view the state of your stack:

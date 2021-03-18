@@ -68,26 +68,26 @@ new flavor we want our instance to have:
   +--------------------------------------+------------+--------+------+-----------+-------+-----------+
   | ID                                   | Name       |    RAM | Disk | Ephemeral | VCPUs | Is Public |
   +--------------------------------------+------------+--------+------+-----------+-------+-----------+
-  | 01d5b414-14d5-4349-b823-aa46afb6d628 | c1.c4r32   |  32768 |   10 |         0 |     4 | True      |
-  | 02d12ad8-badc-4a41-9dae-5cdfbb10f75e | c1.c1r4    |   4096 |   10 |         0 |     1 | True      |
-  | 0f3be84b-9d6e-44a8-8c3d-8a0dfe226674 | c1.c16r16  |  16384 |   10 |         0 |    16 | True      |
-  | 0f513d82-ffa0-4141-a98e-b6eace10d068 | c1.c2r6    |   6144 |   10 |         0 |     2 | True      |
-  | 11a1966e-4193-4763-8148-a34903408bcf | c1.c8r24   |  24576 |   10 |         0 |     8 | True      |
-  | 1c199662-65bd-4fbe-aece-0348c8fb21d6 | c1.c8r64   |  65536 |   10 |         0 |     8 | True      |
-  | 22afd80c-6a5e-49e6-a2c9-47e8bf113cae | c1.c4r2    |   2048 |   10 |         0 |     4 | True      |
-  | 2772d378-c1c3-464c-83b9-1a2d00d1b66b | c1.c4r4    |   4096 |   10 |         0 |     4 | True      |
-  | 2ba44887-5fe3-44cc-8bca-e2b60a206a66 | c1.c2r2    |   2048 |   10 |         0 |     2 | True      |
-  | 374fc408-7a30-483c-a8ce-fbaacef8cefd | c1.c32r16  |  16384 |   10 |         0 |    32 | True      |
-  | 3d11be79-5788-4d70-9058-4ccd20c750ee | c1.c1r05   |    512 |   10 |         0 |     1 | True      |
-  | 3df41a1b-fe84-4876-a1ef-fcde4df334dd | c1.c16r24  |  24576 |   10 |         0 |    16 | True      |
-  | 5643df3f-7a6d-476d-b035-acaecd54cfda | c1.c32r96  |  98304 |   10 |         0 |    32 | True      |
-  | 589b9451-ccc9-4b4c-b6c8-6e7da8149847 | c1.c32r256 | 262144 |   10 |         0 |    32 | True      |
-  | 59ae6d98-aee7-4595-8bf0-25d119dded9b | c1.c2r8    |   8192 |   10 |         0 |     2 | True      |
-  | 5eb576f1-3f61-4121-a5a5-09874103b721 | c1.c4r6    |   6144 |   10 |         0 |     4 | True      |
-  | 5ff0b09b-684c-4212-8edc-826f26f9ab78 | c1.c2r4    |   4096 |   10 |         0 |     2 | True      |
-  | 6104d093-4c74-4493-adb9-b2e0bd087628 | c1.c8r32   |  32768 |   10 |         0 |     8 | True      |
-  | 6371ec4a-47d1-4159-a42f-83b84b80eea7 | c1.c1r1    |   1024 |   10 |         0 |     1 | True      |
-  | a18d0408-f2cb-410d-a941-e200837961d2 | c1.c1r2    |   2048 |   10 |         0 |     1 | True      |
+  | 01d5b414-14d5-4349-b823-xxxxxxxxxxxx | c1.c4r32   |  32768 |   10 |         0 |     4 | True      |
+  | 02d12ad8-badc-4a41-9dae-xxxxxxxxxxxx | c1.c1r4    |   4096 |   10 |         0 |     1 | True      |
+  | 0f3be84b-9d6e-44a8-8c3d-xxxxxxxxxxxx | c1.c16r16  |  16384 |   10 |         0 |    16 | True      |
+  | 0f513d82-ffa0-4141-a98e-xxxxxxxxxxxx | c1.c2r6    |   6144 |   10 |         0 |     2 | True      |
+  | 11a1966e-4193-4763-8148-xxxxxxxxxxxx | c1.c8r24   |  24576 |   10 |         0 |     8 | True      |
+  | 1c199662-65bd-4fbe-aece-xxxxxxxxxxxx | c1.c8r64   |  65536 |   10 |         0 |     8 | True      |
+  | 22afd80c-6a5e-49e6-a2c9-xxxxxxxxxxxx | c1.c4r2    |   2048 |   10 |         0 |     4 | True      |
+  | 2772d378-c1c3-464c-83b9-xxxxxxxxxxxx | c1.c4r4    |   4096 |   10 |         0 |     4 | True      |
+  | 2ba44887-5fe3-44cc-8bca-xxxxxxxxxxxx | c1.c2r2    |   2048 |   10 |         0 |     2 | True      |
+  | 374fc408-7a30-483c-a8ce-xxxxxxxxxxxx | c1.c32r16  |  16384 |   10 |         0 |    32 | True      |
+  | 3d11be79-5788-4d70-9058-xxxxxxxxxxxx | c1.c1r05   |    512 |   10 |         0 |     1 | True      |
+  | 3df41a1b-fe84-4876-a1ef-xxxxxxxxxxxx | c1.c16r24  |  24576 |   10 |         0 |    16 | True      |
+  | 5643df3f-7a6d-476d-b035-xxxxxxxxxxxx | c1.c32r96  |  98304 |   10 |         0 |    32 | True      |
+  | 589b9451-ccc9-4b4c-b6c8-xxxxxxxxxxxx | c1.c32r256 | 262144 |   10 |         0 |    32 | True      |
+  | 59ae6d98-aee7-4595-8bf0-xxxxxxxxxxxx | c1.c2r8    |   8192 |   10 |         0 |     2 | True      |
+  | 5eb576f1-3f61-4121-a5a5-xxxxxxxxxxxx | c1.c4r6    |   6144 |   10 |         0 |     4 | True      |
+  | 5ff0b09b-684c-4212-8edc-xxxxxxxxxxxx | c1.c2r4    |   4096 |   10 |         0 |     2 | True      |
+  | 6104d093-4c74-4493-adb9-xxxxxxxxxxxx | c1.c8r32   |  32768 |   10 |         0 |     8 | True      |
+  | 6371ec4a-47d1-4159-a42f-xxxxxxxxxxxx | c1.c1r1    |   1024 |   10 |         0 |     1 | True      |
+  | a18d0408-f2cb-410d-a941-xxxxxxxxxxxx | c1.c1r2    |   2048 |   10 |         0 |     1 | True      |
   | ...                                  |            |        |      |           |       |           |
   +--------------------------------------+------------+--------+------+-----------+-------+-----------+
 
@@ -107,12 +107,12 @@ the instance we want to resize:
   +--------------------------------------+------------------------+---------------+--------------------------+------------------------------+---------+
   | ID                                   | Name                   | Status        | Networks                 | Image                        | Flavor  |
   +--------------------------------------+------------------------+---------------+--------------------------+------------------------------+---------+
-  | c097f22f-48be-48ea-b664-6dcd5fb48bfd | resizing-instance-test | Running       | private-net-1=10.0.0.194 | N/A (booted from volume)     | c1.c1r1 |
+  | c097f22f-48be-48ea-b664-xxxxxxxxxxxx | resizing-instance-test | Running       | private-net-1=10.0.0.194 | N/A (booted from volume)     | c1.c1r1 |
   +--------------------------------------+------------------------+---------------+--------------------------+------------------------------+---------+
 
   # Now taking both our instance ID and the flavor ID from before, we create the following variables
-  $ instanceID=c097f22f-48be-48ea-b664-6dcd5fb48bfd
-  $ flavorID=a18d0408-f2cb-410d-a941-e200837961d2
+  $ instanceID=c097f22f-48be-48ea-b664-xxxxxxxxxxxx
+  $ flavorID=a18d0408-f2cb-410d-a941-xxxxxxxxxxxx
 
 With our variables now taken care of, we can proceed with constructing our
 resize command. The basic structure of the command is
@@ -137,7 +137,7 @@ the following:
   +--------------------------------------+------------------------+-------------------+--------------------------+------------------------------+---------+
   | ID                                   | Name                   | Status            | Networks                 | Image                        | Flavor  |
   +--------------------------------------+------------------------+-------------------+--------------------------+------------------------------+---------+
-  | c097f22f-48be-48ea-b664-6dcd5fb48bfd | resizing-instance-test | VERIFY_RESIZE     | private-net-1=10.0.0.194 | N/A (booted from volume)     | c1.c1r1 |
+  | c097f22f-48be-48ea-b664-xxxxxxxxxxxx | resizing-instance-test | VERIFY_RESIZE     | private-net-1=10.0.0.194 | N/A (booted from volume)     | c1.c1r1 |
   +--------------------------------------+------------------------+-------------------+--------------------------+------------------------------+---------+
 
 Once our instance has the ``VERIFY_RESIZE`` status, we use the following to
@@ -165,9 +165,9 @@ confirm our resize:
   | addresses                   | private-net-1=10.0.0.194                                 |
   | config_drive                |                                                          |
   | created                     | 2020-10-21T01:28:55Z                                     |
-  | flavor                      | c1.c1r2 (a18d0408-f2cb-410d-a941-e200837961d2)           |
+  | flavor                      | c1.c1r2 (a18d0408-f2cb-410d-a941-xxxxxxxxxxxx)           |
   | hostId                      | bf7da04283554bf5aaa8fcf1252c1d391709777c0cc420ac4b6aa762 |
-  | id                          | c097f22f-48be-48ea-b664-6dcd5fb48bfd                     |
+  | id                          | c097f22f-48be-48ea-b664-xxxxxxxxxxxx                     |
   | image                       | N/A (booted from volume)                                 |
   | key_name                    | resize-instance-key                                      |
   | name                        | resizing-instance-test                                   |
@@ -179,8 +179,8 @@ confirm our resize:
   | status                      | ACTIVE                                                   |
   | updated                     | 2020-10-26T23:38:10Z                                     |
   | user_id                     | 53b94a52e9dcxxxxxxx0079a9a3d6434                         |
-  | volumes_attached            | id='8b661df3-f5f2-429c-9be6-138d8f845553'                |
-  |                             | id='dae41bf1-7b33-430b-b4ae-2080e72a8162'                |
+  | volumes_attached            | id='8b661df3-f5f2-429c-9be6-xxxxxxxxxxxx'                |
+  |                             | id='dae41bf1-7b33-430b-b4ae-xxxxxxxxxxxx'                |
   +-----------------------------+----------------------------------------------------------+
 
 
@@ -250,19 +250,19 @@ will be able to continue with any of the following methods.
         +--------------------------------------+------------+--------+------+-----------+-------+-----------+
         | ID                                   | Name       |    RAM | Disk | Ephemeral | VCPUs | Is Public |
         +--------------------------------------+------------+--------+------+-----------+-------+-----------+
-        | 01d5b414-14d5-4349-b823-aa46afb6d628 | c1.c4r32   |  32768 |   10 |         0 |     4 | True      |
-        | 02d12ad8-badc-4a41-9dae-5cdfbb10f75e | c1.c1r4    |   4096 |   10 |         0 |     1 | True      |
-        | 374fc408-7a30-483c-a8ce-fbaacef8cefd | c1.c32r16  |  16384 |   10 |         0 |    32 | True      |
-        | 3d11be79-5788-4d70-9058-4ccd20c750ee | c1.c1r05   |    512 |   10 |         0 |     1 | True      |
-        | 3df41a1b-fe84-4876-a1ef-fcde4df334dd | c1.c16r24  |  24576 |   10 |         0 |    16 | True      |
-        | 5643df3f-7a6d-476d-b035-acaecd54cfda | c1.c32r96  |  98304 |   10 |         0 |    32 | True      |
-        | 589b9451-ccc9-4b4c-b6c8-6e7da8149847 | c1.c32r256 | 262144 |   10 |         0 |    32 | True      |
-        | 59ae6d98-aee7-4595-8bf0-25d119dded9b | c1.c2r8    |   8192 |   10 |         0 |     2 | True      |
-        | 5eb576f1-3f61-4121-a5a5-09874103b721 | c1.c4r6    |   6144 |   10 |         0 |     4 | True      |
-        | 5ff0b09b-684c-4212-8edc-826f26f9ab78 | c1.c2r4    |   4096 |   10 |         0 |     2 | True      |
-        | 6104d093-4c74-4493-adb9-b2e0bd087628 | c1.c8r32   |  32768 |   10 |         0 |     8 | True      |
-        | 6371ec4a-47d1-4159-a42f-83b84b80eea7 | c1.c1r1    |   1024 |   10 |         0 |     1 | True      |
-        | a18d0408-f2cb-410d-a941-e200837961d2 | c1.c1r2    |   2048 |   10 |         0 |     1 | True      |
+        | 01d5b414-14d5-4349-b823-xxxxxxxxxxxx | c1.c4r32   |  32768 |   10 |         0 |     4 | True      |
+        | 02d12ad8-badc-4a41-9dae-xxxxxxxxxxxx | c1.c1r4    |   4096 |   10 |         0 |     1 | True      |
+        | 374fc408-7a30-483c-a8ce-xxxxxxxxxxxx | c1.c32r16  |  16384 |   10 |         0 |    32 | True      |
+        | 3d11be79-5788-4d70-9058-xxxxxxxxxxxx | c1.c1r05   |    512 |   10 |         0 |     1 | True      |
+        | 3df41a1b-fe84-4876-a1ef-xxxxxxxxxxxx | c1.c16r24  |  24576 |   10 |         0 |    16 | True      |
+        | 5643df3f-7a6d-476d-b035-xxxxxxxxxxxx | c1.c32r96  |  98304 |   10 |         0 |    32 | True      |
+        | 589b9451-ccc9-4b4c-b6c8-xxxxxxxxxxxx | c1.c32r256 | 262144 |   10 |         0 |    32 | True      |
+        | 59ae6d98-aee7-4595-8bf0-xxxxxxxxxxxx | c1.c2r8    |   8192 |   10 |         0 |     2 | True      |
+        | 5eb576f1-3f61-4121-a5a5-xxxxxxxxxxxx | c1.c4r6    |   6144 |   10 |         0 |     4 | True      |
+        | 5ff0b09b-684c-4212-8edc-xxxxxxxxxxxx | c1.c2r4    |   4096 |   10 |         0 |     2 | True      |
+        | 6104d093-4c74-4493-adb9-xxxxxxxxxxxx | c1.c8r32   |  32768 |   10 |         0 |     8 | True      |
+        | 6371ec4a-47d1-4159-a42f-xxxxxxxxxxxx | c1.c1r1    |   1024 |   10 |         0 |     1 | True      |
+        | a18d0408-f2cb-410d-a941-xxxxxxxxxxxx | c1.c1r2    |   2048 |   10 |         0 |     1 | True      |
         | ...                                  |            |        |      |           |       |           |
         +--------------------------------------+------------+--------+------+-----------+-------+-----------+
 
@@ -275,13 +275,13 @@ will be able to continue with any of the following methods.
       .. code-block::
 
         variable "compute_flavor_ID" {
-        default = "6371ec4a-47d1-4159-a42f-83b84b80eea7"
+        default = "6371ec4a-47d1-4159-a42f-xxxxxxxxxxxx"
         }
 
         # We will replace the default value with our new flavor ID so that it will look like this:
 
         variable "compute_flavor_ID" {
-        default = "a18d0408-f2cb-410d-a941-e200837961d2"
+        default = "a18d0408-f2cb-410d-a941-xxxxxxxxxxxx"
         }
 
       After we have changed our flavorID, we will need to add a

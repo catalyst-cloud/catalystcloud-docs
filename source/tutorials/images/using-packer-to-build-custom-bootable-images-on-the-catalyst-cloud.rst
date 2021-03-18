@@ -75,7 +75,7 @@ on an Ubuntu 16.04 machine to the latest versions. You will then build a
      "type": "openstack",
      "ssh_username": "ubuntu",
      "image_name": "ubuntu1604_packer_test_1",
-     "source_image": "49fb1409-c88e-4750-a394-56ddea80231d",
+     "source_image": "49fb1409-c88e-4750-a394-xxxxxxxxxxxx",
      "flavor": "c1.c1r1",
      "security_groups": ["example-sg"],
      "floating_ip_pool": "public-net"
@@ -108,11 +108,11 @@ template:
 
  ==> openstack: Discovering enabled extensions...
  ==> openstack: Loading flavor: c1.c1r1
-     openstack: Verified flavor. ID: 28153197-6690-4485-9dbc-fc24489b0683
- ==> openstack: Creating temporary keypair: packer 57c659c0-081a-3bef-2bdb-6cdba8fdaaf3 ...
- ==> openstack: Created temporary keypair: packer 57c659c0-081a-3bef-2bdb-6cdba8fdaaf3
+     openstack: Verified flavor. ID: 28153197-6690-4485-9dbc-xxxxxxxxxxxx
+ ==> openstack: Creating temporary keypair: packer 57c659c0-081a-3bef-2bdb-xxxxxxxxxxxx ...
+ ==> openstack: Created temporary keypair: packer 57c659c0-081a-3bef-2bdb-xxxxxxxxxxxx
  ==> openstack: Launching server...
-     openstack: Server ID: e9655fb3-e239-4f4b-80e3-5476f098a132
+     openstack: Server ID: e9655fb3-e239-4f4b-80e3-xxxxxxxxxxxx
  ==> openstack: Waiting for server to become ready...
  ==> openstack: Creating floating IP...
      openstack: Pool: public-net
@@ -143,18 +143,18 @@ template:
      openstack: Processing triggers for libc-bin (2.23-0ubuntu3) ...
      openstack: Cloning into 'ssllabs-scan'...
      openstack: go build ssllabs-scan.go
- ==> openstack: Stopping server: e9655fb3-e239-4f4b-80e3-5476f098a132 ...
-     openstack: Waiting for server to stop: e9655fb3-e239-4f4b-80e3-5476f098a132 ...
+ ==> openstack: Stopping server: e9655fb3-e239-4f4b-80e3-xxxxxxxxxxxx ...
+     openstack: Waiting for server to stop: e9655fb3-e239-4f4b-80e3-xxxxxxxxxxxx ...
  ==> openstack: Creating the image: ubuntu1604_domain_check_packer
-     openstack: Image: e81c38a0-6fbf-4f62-b873-79af33e4f246
- ==> openstack: Waiting for image ubuntu1604_domain_check_packer (image id: e81c38a0-6fbf-4f62-b873-79af33e4f246) to become ready...
+     openstack: Image: e81c38a0-6fbf-4f62-b873-xxxxxxxxxxxx
+ ==> openstack: Waiting for image ubuntu1604_domain_check_packer (image id: e81c38a0-6fbf-4f62-b873-xxxxxxxxxxxx) to become ready...
  ==> openstack: Deleted temporary floating IP 150.242.41.201
- ==> openstack: Terminating the source server: e9655fb3-e239-4f4b-80e3-5476f098a132 ...
- ==> openstack: Deleting temporary keypair: packer 57c659c0-081a-3bef-2bdb-6cdba8fdaaf3 ...
+ ==> openstack: Terminating the source server: e9655fb3-e239-4f4b-80e3-xxxxxxxxxxxx ...
+ ==> openstack: Deleting temporary keypair: packer 57c659c0-081a-3bef-2bdb-xxxxxxxxxxxx ...
  Build 'openstack' finished.
 
  ==> Builds finished. The artefacts of successful builds are:
- --> openstack: An image was created: e81c38a0-6fbf-4f62-b873-79af33e4f246
+ --> openstack: An image was created: e81c38a0-6fbf-4f62-b873-xxxxxxxxxxxx
 
 .. note::
 
@@ -169,22 +169,22 @@ available:
 
 .. code-block:: console
 
- $ openstack image show e81c38a0-6fbf-4f62-b873-79af33e4f246
+ $ openstack image show e81c38a0-6fbf-4f62-b873-xxxxxxxxxxxx
  +------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
  | Field            | Value                                                                                                                                                                                         |
  +------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
- | checksum         | 1abfc6cac5c989e5ad364c1fe0effbde                                                                                                                                                              |
+ | checksum         | 1abfc6cac5c989e5xxxxxx1fe0effbde                                                                                                                                                              |
  | container_format | bare                                                                                                                                                                                          |
  | created_at       | 2016-08-31T04:21:14Z                                                                                                                                                                          |
  | disk_format      | raw                                                                                                                                                                                           |
- | file             | /v2/images/e81c38a0-6fbf-4f62-b873-79af33e4f246/file                                                                                                                                          |
- | id               | e81c38a0-6fbf-4f62-b873-79af33e4f246                                                                                                                                                          |
+ | file             | /v2/images/e81c38a0-6fbf-4f62-b873-xxxxxxxxxxxx/file                                                                                                                                          |
+ | id               | e81c38a0-6fbf-4f62-b873-xxxxxxxxxxxx                                                                                                                                                          |
  | min_disk         | 10                                                                                                                                                                                            |
  | min_ram          | 1                                                                                                                                                                                             |
  | name             | ubuntu1604_domain_check_packer                                                                                                                                                                |
  | owner            | 0cb6b9b744594a619bxxxxxxf424858b                                                                                                                                                              |
- | properties       | base_image_ref='49fb1409-c88e-4750-a394-56ddea80231d', direct_url='rbd://b0849a66-357e-4428-a84c-f5ccd277c076/images/e81c38a0-6fbf-4f62-b873-79af33e4f246/snap', image_location='snapshot',   |
- |                  | image_state='available', image_type='image', instance_uuid='e9655fb3-e239-4f4b-80e3-5476f098a132', kernel_id='None', owner_id='0cb6b9b744594a619bxxxxxxf424858b', ramdisk_id='None',          |
+ | properties       | base_image_ref='49fb1409-c88e-4750-a394-xxxxxxxxxxxx', direct_url='rbd://b0849a66-357e-4428-a84c-xxxxxxxxxxxx/images/e81c38a0-6fbf-4f62-b873-xxxxxxxxxxxx/snap', image_location='snapshot',   |
+ |                  | image_state='available', image_type='image', instance_uuid='e9655fb3-e239-4f4b-80e3-xxxxxxxxxxxx', kernel_id='None', owner_id='0cb6b9b744594a619bxxxxxxf424858b', ramdisk_id='None',          |
  |                  | user_id='8c1914eda99d406195xxxxxxf2846d45'                                                                                                                                                    |
  | protected        | False                                                                                                                                                                                         |
  | schema           | /v2/schemas/image                                                                                                                                                                             |
@@ -201,8 +201,8 @@ you installed in the image:
 
 .. code-block:: console
 
- $ openstack server create --flavor c1.c1r1 --image e81c38a0-6fbf-4f62-b873-79af33e4f246 --key-name example-key \
- --security-group default --security-group example-sg --nic net-id=097a6779-ca20-4017-913e-715c7a2c9967 ssl-scan
+ $ openstack server create --flavor c1.c1r1 --image e81c38a0-6fbf-4f62-b873-xxxxxxxxxxxx --key-name example-key \
+ --security-group default --security-group example-sg --nic net-id=097a6779-ca20-4017-913e-xxxxxxxxxxxx ssl-scan
  +--------------------------------------+-----------------------------------------------------------------------+
  | Field                                | Value                                                                 |
  +--------------------------------------+-----------------------------------------------------------------------+
@@ -219,10 +219,10 @@ you installed in the image:
  | adminPass                            | XXXXXXXXXXXXXXX                                                       |
  | config_drive                         |                                                                       |
  | created                              | 2016-08-31T04:50:36Z                                                  |
- | flavor                               | c1.c1r1 (28153197-6690-4485-9dbc-fc24489b0683)                        |
+ | flavor                               | c1.c1r1 (28153197-6690-4485-9dbc-xxxxxxxxxxxx)                        |
  | hostId                               |                                                                       |
- | id                                   | 79d4e503-205d-4c40-a7d1-a2003844e3fd                                  |
- | image                                | ubuntu1604_domain_check_packer (e81c38a0-6fbf-4f62-b873-79af33e4f246) |
+ | id                                   | 79d4e503-205d-4c40-a7d1-xxxxxxxxxxxx                                  |
+ | image                                | ubuntu1604_domain_check_packer (e81c38a0-6fbf-4f62-b873-xxxxxxxxxxxx) |
  | key_name                             | example-key                                                           |
  | name                                 | ssl-scan                                                              |
  | os-extended-volumes:volumes_attached | []                                                                    |
@@ -238,7 +238,7 @@ you installed in the image:
  +--------------------------------------+---------------------+------------------+--------------------------------------+
  | ID                                   | Floating IP Address | Fixed IP Address | Port                                 |
  +--------------------------------------+---------------------+------------------+--------------------------------------+
- | a316c6b9-80ba-46ec-9b0a-1838eb6ce78a | 150.242.43.231      | None             | None                                 |
+ | a316c6b9-80ba-46ec-9b0a-xxxxxxxxxxxx | 150.242.43.231      | None             | None                                 |
  +--------------------------------------+---------------------+------------------+--------------------------------------+
  $ openstack server add floating ip ssl-scan 150.242.43.231
  $ ssh ubuntu@150.242.43.231

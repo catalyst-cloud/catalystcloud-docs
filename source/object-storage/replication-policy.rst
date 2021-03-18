@@ -225,7 +225,7 @@ Programmatic methods
         < Content-Type: text/html; charset=UTF-8
         < Content-Length: 0
         < Last-Modified: Wed, 20 Nov 2019 02:23:14 GMT
-        < Etag: d41d8cd98f00b204e9800998ecf8427e
+        < Etag: d41d8cd98f00b204xxxxxx98ecf8427e
         < X-Trans-Id: tx9c1ea1c7bd9d4c668be3f-005dd4a391
         <
         * Connection #0 to host object-storage.nz-wlg-2.catalystcloud.io left intact

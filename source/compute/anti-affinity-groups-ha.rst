@@ -147,7 +147,7 @@ Using programmatic methods
             nics:
               - net-name: "{{ private_network_name }}"
             security_groups: "default,{{ security_group_name }}"
-            scheduler_hints: "group=78f2aabc-e73a-4c72-88fd-79185797548c"
+            scheduler_hints: "group=78f2aabc-e73a-4c72-88fd-xxxxxxxxxxxx"
 
     .. tab:: Terraform
 

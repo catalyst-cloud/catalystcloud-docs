@@ -57,8 +57,8 @@ webservers:
   +--------------------------------------+--------------------+--------+----------------------------+--------------------------+---------+
   | ID                                   | Name               | Status | Networks                   | Image                    | Flavor  |
   +--------------------------------------+--------------------+--------+----------------------------+--------------------------+---------+
-  | 28ad54af-e0d2-47c9-8855-4245dbfa3628 | webserver-2        | ACTIVE | private-net=192.168.3.41   | N/A (booted from volume) | c1.c1r1 |
-  | 6ea96e5e-8b67-4ec3-80a3-460b5b116bad | webserver-1        | ACTIVE | private-net=192.168.3.40   | N/A (booted from volume) | c1.c1r1 |
+  | 28ad54af-e0d2-47c9-8855-xxxxxxxxxxxx | webserver-2        | ACTIVE | private-net=192.168.3.41   | N/A (booted from volume) | c1.c1r1 |
+  | 6ea96e5e-8b67-4ec3-80a3-xxxxxxxxxxxx | webserver-1        | ACTIVE | private-net=192.168.3.40   | N/A (booted from volume) | c1.c1r1 |
   +--------------------------------------+--------------------+--------+----------------------------+--------------------------+---------+
 
   # From this output, we can find the IP addresses under the "Networks" section:
@@ -99,11 +99,11 @@ can run the ``terraform apply`` command and begin creating your resources:
 
   openstack_networking_secgroup_v2.secgroup_1: Creating...
   openstack_networking_floatingip_v2.fip_1: Creating...
-  openstack_networking_secgroup_v2.secgroup_1: Creation complete after 2s [id=04a48ceb-44c4-4f71-9c16-ac7805a070d3]
+  openstack_networking_secgroup_v2.secgroup_1: Creation complete after 2s [id=04a48ceb-44c4-4f71-9c16-xxxxxxxxxxxx]
   openstack_networking_secgroup_rule_v2.secgroup_rule_1: Creating...
   openstack_lb_loadbalancer_v2.terra_load_balancer: Creating...
-  openstack_networking_secgroup_rule_v2.secgroup_rule_1: Creation complete after 0s [id=46f0734a-0468-4e03-a5fa-16d462c6f089]
-  openstack_networking_floatingip_v2.fip_1: Creation complete after 7s [id=cd8006d1-1010-47d8-b6af-a69ee7a349ea]
+  openstack_networking_secgroup_rule_v2.secgroup_rule_1: Creation complete after 0s [id=46f0734a-0468-4e03-a5fa-xxxxxxxxxxxx]
+  openstack_networking_floatingip_v2.fip_1: Creation complete after 7s [id=cd8006d1-1010-47d8-b6af-xxxxxxxxxxxx]
   openstack_lb_loadbalancer_v2.terra_load_balancer: Still creating... [10s elapsed]
   openstack_lb_loadbalancer_v2.terra_load_balancer: Still creating... [20s elapsed]
   openstack_lb_loadbalancer_v2.terra_load_balancer: Still creating... [30s elapsed]
@@ -111,20 +111,20 @@ can run the ``terraform apply`` command and begin creating your resources:
   openstack_lb_loadbalancer_v2.terra_load_balancer: Still creating... [50s elapsed]
   openstack_lb_loadbalancer_v2.terra_load_balancer: Still creating... [1m0s elapsed]
   openstack_lb_loadbalancer_v2.terra_load_balancer: Still creating... [1m10s elapsed]
-  openstack_lb_loadbalancer_v2.terra_load_balancer: Creation complete after 1m11s [id=5529a920-c32e-4eda-b533-98ece771fb0b]
+  openstack_lb_loadbalancer_v2.terra_load_balancer: Creation complete after 1m11s [id=5529a920-c32e-4eda-b533-xxxxxxxxxxxx]
   openstack_networking_floatingip_associate_v2.fip_associate: Creating...
   openstack_lb_listener_v2.listener_1: Creating...
-  openstack_networking_floatingip_associate_v2.fip_associate: Creation complete after 1s [id=cd8006d1-1010-47d8-b6af-a69ee7a349ea]
-  openstack_lb_listener_v2.listener_1: Creation complete after 9s [id=56b09389-bcd5-4e02-9eeb-e3d0f72e13e5]
+  openstack_networking_floatingip_associate_v2.fip_associate: Creation complete after 1s [id=cd8006d1-1010-47d8-b6af-xxxxxxxxxxxx]
+  openstack_lb_listener_v2.listener_1: Creation complete after 9s [id=56b09389-bcd5-4e02-9eeb-xxxxxxxxxxxx]
   openstack_lb_pool_v2.pool_1: Creating...
-  openstack_lb_pool_v2.pool_1: Creation complete after 5s [id=be81e2b6-927f-4f7a-affb-95d926355e9d]
+  openstack_lb_pool_v2.pool_1: Creation complete after 5s [id=be81e2b6-927f-4f7a-affb-xxxxxxxxxxxx]
   openstack_lb_member_v2.member_1: Creating...
   openstack_lb_member_v2.member_2: Creating...
   openstack_lb_monitor_v2.monitor_1: Creating...
-  openstack_lb_member_v2.member_1: Creation complete after 8s [id=9190707b-2358-422d-8cdd-90fd2b5a2d98]
-  openstack_lb_monitor_v2.monitor_1: Creation complete after 9s [id=67c133f7-3857-425c-8f4a-781c3b11a6f1]
+  openstack_lb_member_v2.member_1: Creation complete after 8s [id=9190707b-2358-422d-8cdd-xxxxxxxxxxxx]
+  openstack_lb_monitor_v2.monitor_1: Creation complete after 9s [id=67c133f7-3857-425c-8f4a-xxxxxxxxxxxx]
   openstack_lb_member_v2.member_2: Still creating... [10s elapsed]
-  openstack_lb_member_v2.member_2: Creation complete after 17s [id=d30ee7dc-63f4-4e41-8f27-bd2484383ab5]
+  openstack_lb_member_v2.member_2: Creation complete after 17s [id=d30ee7dc-63f4-4e41-8f27-xxxxxxxxxxxx]
 
   Apply complete! Resources: 10 added, 0 changed, 0 destroyed.
 
@@ -147,26 +147,26 @@ Should you wish to remove these resources, you can use the command:
 
     Enter a value: yes
 
-  openstack_networking_secgroup_rule_v2.secgroup_rule_1: Destroying... [id=46f0734a-0468-4e03-a5fa-16d462c6f089]
-  openstack_networking_floatingip_associate_v2.fip_associate: Destroying... [id=cd8006d1-1010-47d8-b6af-a69ee7a349ea]
-  openstack_lb_member_v2.member_2: Destroying... [id=d30ee7dc-63f4-4e41-8f27-bd2484383ab5]
-  openstack_lb_member_v2.member_1: Destroying... [id=9190707b-2358-422d-8cdd-90fd2b5a2d98]
-  openstack_lb_monitor_v2.monitor_1: Destroying... [id=67c133f7-3857-425c-8f4a-781c3b11a6f1]
+  openstack_networking_secgroup_rule_v2.secgroup_rule_1: Destroying... [id=46f0734a-0468-4e03-a5fa-xxxxxxxxxxxx]
+  openstack_networking_floatingip_associate_v2.fip_associate: Destroying... [id=cd8006d1-1010-47d8-b6af-xxxxxxxxxxxx]
+  openstack_lb_member_v2.member_2: Destroying... [id=d30ee7dc-63f4-4e41-8f27-xxxxxxxxxxxx]
+  openstack_lb_member_v2.member_1: Destroying... [id=9190707b-2358-422d-8cdd-xxxxxxxxxxxx]
+  openstack_lb_monitor_v2.monitor_1: Destroying... [id=67c133f7-3857-425c-8f4a-xxxxxxxxxxxx]
   openstack_networking_floatingip_associate_v2.fip_associate: Destruction complete after 1s
-  openstack_networking_floatingip_v2.fip_1: Destroying... [id=cd8006d1-1010-47d8-b6af-a69ee7a349ea]
+  openstack_networking_floatingip_v2.fip_1: Destroying... [id=cd8006d1-1010-47d8-b6af-xxxxxxxxxxxx]
   openstack_networking_secgroup_rule_v2.secgroup_rule_1: Destruction complete after 6s
   openstack_networking_floatingip_v2.fip_1: Destruction complete after 6s
   openstack_lb_monitor_v2.monitor_1: Destruction complete after 8s
   openstack_lb_member_v2.member_1: Destruction complete after 9s
-  openstack_lb_member_v2.member_2: Still destroying... [id=d30ee7dc-63f4-4e41-8f27-bd2484383ab5, 10s elapsed]
+  openstack_lb_member_v2.member_2: Still destroying... [id=d30ee7dc-63f4-4e41-8f27-xxxxxxxxxxxx, 10s elapsed]
   openstack_lb_member_v2.member_2: Destruction complete after 11s
-  openstack_lb_pool_v2.pool_1: Destroying... [id=be81e2b6-927f-4f7a-affb-95d926355e9d]
+  openstack_lb_pool_v2.pool_1: Destroying... [id=be81e2b6-927f-4f7a-affb-xxxxxxxxxxxx]
   openstack_lb_pool_v2.pool_1: Destruction complete after 3s
-  openstack_lb_listener_v2.listener_1: Destroying... [id=56b09389-bcd5-4e02-9eeb-e3d0f72e13e5]
+  openstack_lb_listener_v2.listener_1: Destroying... [id=56b09389-bcd5-4e02-9eeb-xxxxxxxxxxxx]
   openstack_lb_listener_v2.listener_1: Destruction complete after 5s
-  openstack_lb_loadbalancer_v2.terra_load_balancer: Destroying... [id=5529a920-c32e-4eda-b533-98ece771fb0b]
+  openstack_lb_loadbalancer_v2.terra_load_balancer: Destroying... [id=5529a920-c32e-4eda-b533-xxxxxxxxxxxx]
   openstack_lb_loadbalancer_v2.terra_load_balancer: Destruction complete after 7s
-  openstack_networking_secgroup_v2.secgroup_1: Destroying... [id=04a48ceb-44c4-4f71-9c16-ac7805a070d3]
+  openstack_networking_secgroup_v2.secgroup_1: Destroying... [id=04a48ceb-44c4-4f71-9c16-xxxxxxxxxxxx]
   openstack_networking_secgroup_v2.secgroup_1: Destruction complete after 9s
 
   Destroy complete! Resources: 10 destroyed.

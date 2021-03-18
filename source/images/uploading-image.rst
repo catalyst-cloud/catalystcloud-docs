@@ -27,17 +27,17 @@ To upload the converted image to the Catalyst Cloud:
   +------------------+----------------------------------------------------------------------------------------------------------+
   | Field            | Value                                                                                                    |
   +------------------+----------------------------------------------------------------------------------------------------------+
-  | checksum         | 84add06465aa223602257710f90699be                                                                         |
+  | checksum         | 84add06465aa22360xxxxxx0f90699be                                                                         |
   | container_format | bare                                                                                                     |
   | created_at       | 2017-08-22T01:17:58Z                                                                                     |
   | disk_format      | raw                                                                                                      |
-  | file             | /v2/images/2442ee5a-ddd4-4b7d-b08f-641e0707c4e9/file                                                     |
-  | id               | 2442ee5a-ddd4-4b7d-b08f-641e0707c4e9                                                                     |
+  | file             | /v2/images/2442ee5a-ddd4-4b7d-b08f-xxxxxxxxxxxx/file                                                     |
+  | id               | 2442ee5a-ddd4-4b7d-b08f-xxxxxxxxxxxx                                                                     |
   | min_disk         | 0                                                                                                        |
   | min_ram          | 0                                                                                                        |
   | name             | test-image                                                                                               |
   | owner            | b24exxxxxxxxxxxxxxxxxxxxxxxxxc6f                                                                         |
-  | properties       | direct_url='rbd://b08xxxxx-xxxx-xxxx-a84c-f5ccd277c076/images/2442ee5a-ddd4-4b7d-b08f-641e0707c4e9/snap' |
+  | properties       | direct_url='rbd://b08xxxxx-xxxx-xxxx-a84c-xxxxxxxxxxxx/images/2442ee5a-ddd4-4b7d-b08f-xxxxxxxxxxxx/snap' |
   | protected        | False                                                                                                    |
   | schema           | /v2/schemas/image                                                                                        |
   | size             | 8589934592                                                                                               |

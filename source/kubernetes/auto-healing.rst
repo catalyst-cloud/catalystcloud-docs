@@ -58,7 +58,7 @@ node conditions.
 
 .. code-block:: yaml
 
-  cluster-name: 718439c2-933c-4288-abc7-c3e6ba617663
+  cluster-name: 718439c2-933c-4288-abc7-xxxxxxxxxxxx
   dry-run: false
   cloud-provider: openstack
   repair-delay-after-add: 3m

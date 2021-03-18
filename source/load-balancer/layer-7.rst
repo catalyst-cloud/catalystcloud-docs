@@ -160,7 +160,7 @@ virtual IP address (VIP) will be attached to the local subnet
   | created_at          | 2018-06-27T03:47:29                  |
   | description         |                                      |
   | flavor              |                                      |
-  | id                  | afa1cd14-03e7-4bff-afed-8001d196b9df |
+  | id                  | afa1cd14-03e7-4bff-afed-xxxxxxxxxxxx |
   | listeners           |                                      |
   | name                | lb_test                              |
   | operating_status    | OFFLINE                              |
@@ -170,10 +170,10 @@ virtual IP address (VIP) will be attached to the local subnet
   | provisioning_status | PENDING_CREATE                       |
   | updated_at          | None                                 |
   | vip_address         | 10.0.0.11                            |
-  | vip_network_id      | 452fc8b7-218d-4279-99b2-3d46f9d016b7 |
-  | vip_port_id         | 095c4d86-7051-4618-967a-ddae50820118 |
+  | vip_network_id      | 452fc8b7-218d-4279-99b2-xxxxxxxxxxxx |
+  | vip_port_id         | 095c4d86-7051-4618-967a-xxxxxxxxxxxx |
   | vip_qos_policy_id   |                                      |
-  | vip_subnet_id       | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
+  | vip_subnet_id       | 0d10e475-045b-4b90-a378-xxxxxxxxxxxx |
   +---------------------+--------------------------------------+
 
 *******************
@@ -189,7 +189,7 @@ listener.
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
   | id                                   | name      | project_id                       | vip_address | provisioning_status | provider |
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
-  | afa1cd14-03e7-4bff-afed-8001d196b9df | lb_test   | eac679e489614xxxxxxce29d755fe289 | 10.0.0.11   | ACTIVE              | octavia  |
+  | afa1cd14-03e7-4bff-afed-xxxxxxxxxxxx | lb_test   | eac679e489614xxxxxxce29d755fe289 | 10.0.0.11   | ACTIVE              | octavia  |
   +--------------------------------------+-----------+----------------------------------+-------------+---------------------+----------+
 .. code-block:: bash
 
@@ -203,10 +203,10 @@ listener.
   | default_pool_id           | None                                 |
   | default_tls_container_ref | None                                 |
   | description               |                                      |
-  | id                        | b35681df-5bea-4f14-aa11-1dcb4396a8df |
+  | id                        | b35681df-5bea-4f14-aa11-xxxxxxxxxxxx |
   | insert_headers            | None                                 |
   | l7policies                |                                      |
-  | loadbalancers             | afa1cd14-03e7-4bff-afed-8001d196b9df |
+  | loadbalancers             | afa1cd14-03e7-4bff-afed-xxxxxxxxxxxx |
   | name                      | http_listener                        |
   | operating_status          | OFFLINE                              |
   | project_id                | eac679e489614xxxxxxce29d755fe289     |
@@ -237,10 +237,10 @@ Create the first pool.
   | created_at          | 2018-06-27T03:51:37                  |
   | description         |                                      |
   | healthmonitor_id    |                                      |
-  | id                  | e61c9da3-ef83-4aaf-88d0-326d2ee56b11 |
+  | id                  | e61c9da3-ef83-4aaf-88d0-xxxxxxxxxxxx |
   | lb_algorithm        | ROUND_ROBIN                          |
-  | listeners           | b35681df-5bea-4f14-aa11-1dcb4396a8df |
-  | loadbalancers       | afa1cd14-03e7-4bff-afed-8001d196b9df |
+  | listeners           | b35681df-5bea-4f14-aa11-xxxxxxxxxxxx |
+  | loadbalancers       | afa1cd14-03e7-4bff-afed-xxxxxxxxxxxx |
   | members             |                                      |
   | name                | http_pool_1                          |
   | operating_status    | OFFLINE                              |
@@ -263,10 +263,10 @@ Create the second pool.
   | created_at          | 2018-06-27T04:09:22                  |
   | description         |                                      |
   | healthmonitor_id    |                                      |
-  | id                  | 3efc552b-8cfd-43a8-be06-dddfb903d285 |
+  | id                  | 3efc552b-8cfd-43a8-be06-xxxxxxxxxxxx |
   | lb_algorithm        | ROUND_ROBIN                          |
   | listeners           |                                      |
-  | loadbalancers       | afa1cd14-03e7-4bff-afed-8001d196b9df |
+  | loadbalancers       | afa1cd14-03e7-4bff-afed-xxxxxxxxxxxx |
   | members             |                                      |
   | name                | http_pool_2                          |
   | operating_status    | OFFLINE                              |
@@ -295,13 +295,13 @@ you use the local addresses of your instances. In our example we use
   | address             | 10.0.0.5                             |
   | admin_state_up      | True                                 |
   | created_at          | 2018-06-27T04:02:06                  |
-  | id                  | d2497d5a-0c80-4037-84bf-6e3cb498126e |
+  | id                  | d2497d5a-0c80-4037-84bf-xxxxxxxxxxxx |
   | name                | login.example.com                    |
   | operating_status    | NO_MONITOR                           |
   | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | protocol_port       | 80                                   |
   | provisioning_status | PENDING_CREATE                       |
-  | subnet_id           | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
+  | subnet_id           | 0d10e475-045b-4b90-a378-xxxxxxxxxxxx |
   | updated_at          | None                                 |
   | weight              | 1                                    |
   | monitor_port        | None                                 |
@@ -320,13 +320,13 @@ Add the second member to the second pool.
   | address             | 10.0.0.7                             |
   | admin_state_up      | True                                 |
   | created_at          | 2018-06-27T04:55:08                  |
-  | id                  | 4c6cb13c-a68d-45fd-9c72-3e34e38f50e9 |
+  | id                  | 4c6cb13c-a68d-45fd-9c72-xxxxxxxxxxxx |
   | name                | shop.example.com                     |
   | operating_status    | NO_MONITOR                           |
   | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | protocol_port       | 80                                   |
   | provisioning_status | PENDING_CREATE                       |
-  | subnet_id           | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
+  | subnet_id           | 0d10e475-045b-4b90-a378-xxxxxxxxxxxx |
   | updated_at          | None                                 |
   | weight              | 1                                    |
   | monitor_port        | None                                 |
@@ -345,7 +345,7 @@ Create the layer 7 policy.
   +---------------------+--------------------------------------+
   | Field               | Value                                |
   +---------------------+--------------------------------------+
-  | listener_id         | b35681df-5bea-4f14-aa11-1dcb4396a8df |
+  | listener_id         | b35681df-5bea-4f14-aa11-xxxxxxxxxxxx |
   | description         |                                      |
   | admin_state_up      | True                                 |
   | rules               |                                      |
@@ -353,11 +353,11 @@ Create the layer 7 policy.
   | created_at          | 2018-06-27T04:55:47                  |
   | provisioning_status | PENDING_CREATE                       |
   | updated_at          | None                                 |
-  | redirect_pool_id    | 3efc552b-8cfd-43a8-be06-dddfb903d285 |
+  | redirect_pool_id    | 3efc552b-8cfd-43a8-be06-xxxxxxxxxxxx |
   | redirect_url        | None                                 |
   | action              | REDIRECT_TO_POOL                     |
   | position            | 1                                    |
-  | id                  | 2aa69093-b82a-4e2d-8013-0ec224f9a142 |
+  | id                  | 2aa69093-b82a-4e2d-8013-xxxxxxxxxxxx |
   | operating_status    | OFFLINE                              |
   | name                | policy1                              |
   +---------------------+--------------------------------------+
@@ -384,7 +384,7 @@ Create a rule for the policy.
   | key                 | None                                 |
   | project_id          | eac679e489614xxxxxxce29d755fe289     |
   | type                | HOST_NAME                            |
-  | id                  | 4924fcf2-c508-47f1-a40a-afab0bca9e5f |
+  | id                  | 4924fcf2-c508-47f1-a40a-xxxxxxxxxxxx |
   | operating_status    | OFFLINE                              |
   +---------------------+--------------------------------------+
 

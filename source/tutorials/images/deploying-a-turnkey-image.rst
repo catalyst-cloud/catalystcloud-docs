@@ -58,17 +58,17 @@ variable called ``TL_RAMDISK_ID``.
   +------------------+----------------------------------------------------------------------------------------------------------+
   | Field            | Value                                                                                                    |
   +------------------+----------------------------------------------------------------------------------------------------------+
-  | checksum         | fe64cdf0556012f6453d7ef15c0a205e                                                                         |
+  | checksum         | fe64cdf0556012f645xxxxxx5c0a205e                                                                         |
   | container_format | ari                                                                                                      |
   | created_at       | 2016-09-12T02:34:19Z                                                                                     |
   | disk_format      | ari                                                                                                      |
-  | file             | /v2/images/5115c995-d7f2-4499-8a21-885cff137912/file                                                     |
-  | id               | 5115c995-d7f2-4499-8a21-885cff137912                                                                     |
+  | file             | /v2/images/5115c995-d7f2-4499-8a21-xxxxxxxxxxxx/file                                                     |
+  | id               | 5115c995-d7f2-4499-8a21-xxxxxxxxxxxx                                                                     |
   | min_disk         | 0                                                                                                        |
   | min_ram          | 0                                                                                                        |
   | name             | turnkey-initrdturnkey-initrd                                                                             |
   | owner            | <OWNER_ID>                                                                                               |
-  | properties       | direct_url='rbd://b0849a66-357e-4428-a84c-f5ccd277c076/images/5115c995-d7f2-4499-8a21-885cff137912/snap' |
+  | properties       | direct_url='rbd://b0849a66-357e-4428-a84c-xxxxxxxxxxxx/images/5115c995-d7f2-4499-8a21-xxxxxxxxxxxx/snap' |
   | protected        | False                                                                                                    |
   | schema           | /v2/schemas/image                                                                                        |
   | size             | 15755328                                                                                                 |
@@ -89,17 +89,17 @@ Next we create the kernel image and store its ID in ``TL_KERNEL_ID``.
   +------------------+----------------------------------------------------------------------------------------------------------+
   | Field            | Value                                                                                                    |
   +------------------+----------------------------------------------------------------------------------------------------------+
-  | checksum         | 9ea41f0f085e2de0939984a3d4b6a707                                                                         |
+  | checksum         | 9ea41f0f085e2de09xxxxxx3d4b6a707                                                                         |
   | container_format | aki                                                                                                      |
   | created_at       | 2016-09-12T02:34:35Z                                                                                     |
   | disk_format      | aki                                                                                                      |
-  | file             | /v2/images/9cc60e22-1553-450e-9cec-9fefd6591200/file                                                     |
-  | id               | 9cc60e22-1553-450e-9cec-9fefd6591200                                                                     |
+  | file             | /v2/images/9cc60e22-1553-450e-9cec-xxxxxxxxxxxx/file                                                     |
+  | id               | 9cc60e22-1553-450e-9cec-xxxxxxxxxxxx                                                                     |
   | min_disk         | 0                                                                                                        |
   | min_ram          | 0                                                                                                        |
   | name             | turnkey-kernel                                                                                           |
   | owner            | <OWNER_ID>                                                                                               |
-  | properties       | direct_url='rbd://b0849a66-357e-4428-a84c-f5ccd277c076/images/9cc60e22-1553-450e-9cec-9fefd6591200/snap' |
+  | properties       | direct_url='rbd://b0849a66-357e-4428-a84c-xxxxxxxxxxxx/images/9cc60e22-1553-450e-9cec-xxxxxxxxxxxx/snap' |
   | protected        | False                                                                                                    |
   | schema           | /v2/schemas/image                                                                                        |
   | size             | 3120288                                                                                                  |
@@ -120,19 +120,19 @@ Finally we create the ``Turnkey`` image:
   +------------------+----------------------------------------------------------------------------------------------------------+
   | Field            | Value                                                                                                    |
   +------------------+----------------------------------------------------------------------------------------------------------+
-  | checksum         | e2642a2e2ffaddd0785a48ff19be9598                                                                         |
+  | checksum         | e2642a2e2ffaddd078xxxxxx19be9598                                                                         |
   | container_format | bare                                                                                                     |
   | created_at       | 2016-09-12T02:41:33Z                                                                                     |
   | disk_format      | ami                                                                                                      |
-  | file             | /v2/images/7af4b047-15c3-4d82-92df-9ae57b42cba8/file                                                     |
-  | id               | 7af4b047-15c3-4d82-92df-9ae57b42cba8                                                                     |
+  | file             | /v2/images/7af4b047-15c3-4d82-92df-xxxxxxxxxxxx/file                                                     |
+  | id               | 7af4b047-15c3-4d82-92df-xxxxxxxxxxxx                                                                     |
   | min_disk         | 0                                                                                                        |
   | min_ram          | 0                                                                                                        |
   | name             | turnkey-img                                                                                              |
   | owner            | <OWNER_ID>                                                                                               |
-  | properties       | direct_url='rbd://b0849a66-357e-4428-a84c-f5ccd277c076/images/7af4b047-15c3-4d82-92df-                   |
-  |                  | 9ae57b42cba8/snap', kernel_id='9cc60e22-1553-450e-9cec-9fefd6591200',                                    |
-  |                  | ramdisk_id='5115c995-d7f2-4499-8a21-885cff137912'                                                        |
+  | properties       | direct_url='rbd://b0849a66-357e-4428-a84c-xxxxxxxxxxxx/images/7af4b047-15c3-4d82-92df-                   |
+  |                  | 9ae57b42cba8/snap', kernel_id='9cc60e22-1553-450e-9cec-xxxxxxxxxxxx',                                    |
+  |                  | ramdisk_id='5115c995-d7f2-4499-8a21-xxxxxxxxxxxx'                                                        |
   | protected        | False                                                                                                    |
   | schema           | /v2/schemas/image                                                                                        |
   | size             | 900616192                                                                                                |
@@ -181,17 +181,17 @@ variables.
   | adminPass                            | GTDNrKEdYa8S                                                                |
   | config_drive                         |                                                                             |
   | created                              | 2016-09-12T22:22:03Z                                                        |
-  | flavor                               | c1.c1r1 (28153197-6690-4485-9dbc-fc24489b0683)                              |
+  | flavor                               | c1.c1r1 (28153197-6690-4485-9dbc-xxxxxxxxxxxx)                              |
   | hostId                               |                                                                             |
-  | id                                   | 8f969202-2cfa-472d-94c5-afc2417e72b0                                        |
-  | image                                | turnkey-img (1711d56a-f963-433d-b6ab-34cc4dd2f63c)                          |
+  | id                                   | 8f969202-2cfa-472d-94c5-xxxxxxxxxxxx                                        |
+  | image                                | turnkey-img (1711d56a-f963-433d-b6ab-xxxxxxxxxxxx)                          |
   | key_name                             | example-ket                                                                 |
   | name                                 | turnkey-instance                                                            |
   | os-extended-volumes:volumes_attached | []                                                                          |
   | progress                             | 0                                                                           |
   | project_id                           | <PROJECT_ID>                                                                |
   | properties                           |                                                                             |
-  | security_groups                      | [{u'name': u'default'}, {u'name': u'60467ab2-c004-4502-b91c-d004cffcb688'}] |
+  | security_groups                      | [{u'name': u'default'}, {u'name': u'60467ab2-c004-4502-b91c-xxxxxxxxxxxx'}] |
   | status                               | BUILD                                                                       |
   | updated                              | 2016-09-12T22:22:04Z                                                        |
   | user_id                              | <USER_ID>                                                                   |
@@ -206,7 +206,7 @@ to associate a floating IP with your new instance and access it via SSH.
   +--------------------------------------+-------------------------+---------+--------------------------------------------+
   | ID                                   | Name                    | Status  | Networks                                   |
   +--------------------------------------+-------------------------+---------+--------------------------------------------+
-  | 8f969202-2cfa-472d-94c5-afc2417e72b0 | first-instance          | ACTIVE  | private-net=192.168.100.43                 |
+  | 8f969202-2cfa-472d-94c5-xxxxxxxxxxxx | first-instance          | ACTIVE  | private-net=192.168.100.43                 |
   +--------------------------------------+-------------------------+---------+--------------------------------------------+
 
 .. note::

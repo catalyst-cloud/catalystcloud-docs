@@ -36,7 +36,7 @@ in response to image id change.
   The refreshed state will be used to calculate this plan, but will not be
   persisted to local or remote state storage.
 
-  openstack_compute_instance_v2.basic: Refreshing state... (ID: dca5cf20-70bd-474c-a05b-1939f0db557c)
+  openstack_compute_instance_v2.basic: Refreshing state... (ID: dca5cf20-70bd-474c-a05b-xxxxxxxxxxxx)
 
   ------------------------------------------------------------------------
 
@@ -47,9 +47,9 @@ in response to image id change.
   Terraform will perform the following actions:
 
   -/+ openstack_compute_instance_v2.basic (new resource required)
-        id:                  "dca5cf20-70bd-474c-a05b-1939f0db557c" => <computed> (forces new resource)
+        id:                  "dca5cf20-70bd-474c-a05b-xxxxxxxxxxxx" => <computed> (forces new resource)
         ...
-        image_id:            "ad091b52-742f-469e-8f3c-fd81cadf0743"  => "ed6468b1-0ebf-4b67-97cf-e9f67bf627ef" (forces new resource)
+        image_id:            "ad091b52-742f-469e-8f3c-xxxxxxxxxxxx"  => "ed6468b1-0ebf-4b67-97cf-xxxxxxxxxxxx" (forces new resource)
         image_name:          "ubuntu-18.04-x86_64"
         ...
 
@@ -69,7 +69,7 @@ the resource.
 
   resource "openstack_compute_instance_v2" "instance-name" {
     ...
-    image_id        = "ad091b52-742f-469e-8f3c-fd81cadf0743"
+    image_id        = "ad091b52-742f-469e-8f3c-xxxxxxxxxxxx"
   }
 
 while this solution works some people - others prefer to use `image_name` field

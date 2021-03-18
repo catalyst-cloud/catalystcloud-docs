@@ -124,7 +124,7 @@ and the steps are as follows:
   Command (? for help): p
   Disk /dev/vdb: 20971520 sectors, 10.0 GiB
   Logical sector size: 512 bytes
-  Disk identifier (GUID): 53C22F21-ABBF-4478-B0F9-393F7862233F
+  Disk identifier (GUID): 53C22F21-ABBF-4478-B0F9-xxxxxxxxxxxx
   Partition table holds up to 128 entries
   First usable sector is 34, last usable sector is 20971486
   Partitions will be aligned on 2048-sector boundaries
@@ -266,7 +266,7 @@ next section on how to mount your new volume.
   root@lvm-test:~# mkfs.ext4 /dev/vg_data/data
   mke2fs 1.42.13 (17-May-2015)
   Creating filesystem with 2620416 4k blocks and 655360 inodes
-  Filesystem UUID: 7551809b-9164-4ae4-ace3-c1f1486f9918
+  Filesystem UUID: 7551809b-9164-4ae4-ace3-xxxxxxxxxxxx
   Superblock backups stored on blocks:
   32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632
 

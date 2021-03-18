@@ -66,7 +66,7 @@ the ID of the cluster that needs to be upgraded:
     +--------------------------------------+------------------------------+-----------------+------------+--------------+-----------------+---------------+
     | uuid                                 | name                         | keypair         | node_count | master_count | status          | health_status |
     +--------------------------------------+------------------------------+-----------------+------------+--------------+-----------------+---------------+
-    | b2b13567-2441-40da-852a-8a92f178ea42 | test_cluster                 | my_keypair      |          3 |            3 | CREATE_COMPLETE | HEALTHY       |
+    | b2b13567-2441-40da-852a-xxxxxxxxxxxx | test_cluster                 | my_keypair      |          3 |            3 | CREATE_COMPLETE | HEALTHY       |
     +--------------------------------------+------------------------------+-----------------+------------+--------------+-----------------+---------------+
 
 Identify the version of Kubernetes you want to upgrade to
@@ -81,12 +81,12 @@ available, so you can choose the ID of the version you want to upgrade to:
     +--------------------------------------+----------------------------------------------------------------------+
     | uuid                                 | name                                                                 |
     +--------------------------------------+----------------------------------------------------------------------+
-    | 9c6e9df7-955a-465e-8460-e84e386624a0 | kubernetes-v1.11.6-prod-20190130                                     |
-    | 4fcb04bd-22ba-4e1c-ab21-ff0339051d15 | kubernetes-v1.11.6-dev-20190130                                      |
-    | b1d124db-b7cc-4085-8e56-859a0a7796e6 | kubernetes-v1.11.9-dev-20190402                                      |
-    | cf337c0a-86e6-45de-9985-17914e78f181 | kubernetes-v1.11.9-prod-20190402                                     |
-    | 967a2b86-8709-4c07-ae89-c0fe6d69d62d | kubernetes-v1.12.7-dev-20190403                                      |
-    | f8fc0c67-84af-4bb8-89fb-d29f4c926975 | kubernetes-v1.12.7-prod-20190403                                     |
+    | 9c6e9df7-955a-465e-8460-xxxxxxxxxxxx | kubernetes-v1.11.6-prod-20190130                                     |
+    | 4fcb04bd-22ba-4e1c-ab21-xxxxxxxxxxxx | kubernetes-v1.11.6-dev-20190130                                      |
+    | b1d124db-b7cc-4085-8e56-xxxxxxxxxxxx | kubernetes-v1.11.9-dev-20190402                                      |
+    | cf337c0a-86e6-45de-9985-xxxxxxxxxxxx | kubernetes-v1.11.9-prod-20190402                                     |
+    | 967a2b86-8709-4c07-ae89-xxxxxxxxxxxx | kubernetes-v1.12.7-dev-20190403                                      |
+    | f8fc0c67-84af-4bb8-89fb-xxxxxxxxxxxx | kubernetes-v1.12.7-prod-20190403                                     |
     +--------------------------------------+----------------------------------------------------------------------+
 
 Upgrade a running Kubernetes cluster
@@ -251,7 +251,7 @@ present in the current project and region:
   +--------------------------------------+------------------+------------+------------+--------------+-----------------+---------------+
   | uuid                                 | name             | keypair    | node_count | master_count | status          | health_status |
   +--------------------------------------+------------------+------------+------------+--------------+-----------------+---------------+
-  | b43ffae2-2d35-4951-b3f1-17a7acec3ade | k8s-upgrade-test | glxxxxxxes |          3 |            3 | CREATE_COMPLETE | HEALTHY       |
+  | b43ffae2-2d35-4951-b3f1-xxxxxxxxxxxx | k8s-upgrade-test | glxxxxxxes |          3 |            3 | CREATE_COMPLETE | HEALTHY       |
   +--------------------------------------+------------------+------------+------------+--------------+-----------------+---------------+
 
 .. note::
@@ -277,10 +277,10 @@ template versions:
   +--------------------------------------+----------------------------------+
   | uuid                                 | name                             |
   +--------------------------------------+----------------------------------+
-  | 7f01d58a-ba9b-41a4-b53a-b5064c235852 | kubernetes-v1.12.7-prod-20190403 |
-  | e18108b4-e33e-4bb1-bf02-77fc704371fa | kubernetes-v1.11.9-dev-20190402  |
-  | 889fdf85-cf31-4369-a047-aa798e54d2f8 | kubernetes-v1.11.9-prod-20190402 |
-  | 257050d6-57ba-474a-ac55-be06524bd289 | kubernetes-v1.12.7-dev-20190403  |
+  | 7f01d58a-ba9b-41a4-b53a-xxxxxxxxxxxx | kubernetes-v1.12.7-prod-20190403 |
+  | e18108b4-e33e-4bb1-bf02-xxxxxxxxxxxx | kubernetes-v1.11.9-dev-20190402  |
+  | 889fdf85-cf31-4369-a047-xxxxxxxxxxxx | kubernetes-v1.11.9-prod-20190402 |
+  | 257050d6-57ba-474a-ac55-xxxxxxxxxxxx | kubernetes-v1.12.7-dev-20190403  |
   +--------------------------------------+----------------------------------+
 
 Before we start the upgrade, in another session, we can monitor the
@@ -299,7 +299,7 @@ above.
 
 .. code-block:: bash
 
-  $ openstack coe cluster upgrade b43ffae2-2d35-4951-b3f1-17a7acec3ade 7f01d58a-ba9b-41a4-b53a-b5064c235852
+  $ openstack coe cluster upgrade b43ffae2-2d35-4951-b3f1-xxxxxxxxxxxx 7f01d58a-ba9b-41a4-b53a-xxxxxxxxxxxx
 
 At any point it is possible to check on the state of the nodes within the
 cluster to see how things are progressing by running the following.

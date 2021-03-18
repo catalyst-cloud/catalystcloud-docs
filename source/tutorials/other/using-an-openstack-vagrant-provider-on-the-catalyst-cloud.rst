@@ -118,9 +118,9 @@ Now you can run ``vagrant up`` to create your instance:
  ==> default:  -- Tenant          : example-tenant
  ==> default:  -- Name            : my-vagrant-box
  ==> default:  -- Flavor          : c1.c1r1
- ==> default:  -- FlavorRef       : 28153197-6690-4485-9dbc-fc24489b0683
+ ==> default:  -- FlavorRef       : 28153197-6690-4485-9dbc-xxxxxxxxxxxx
  ==> default:  -- Image           : ubuntu-14.04-x86_64
- ==> default:  -- ImageRef        : 9f2a6a6d-3e68-4914-8e53-b0079d77bb9d
+ ==> default:  -- ImageRef        : 9f2a6a6d-3e68-4914-8e53-xxxxxxxxxxxx
  ==> default:  -- KeyPair         : vagrant-generated-tsbqz367
  ==> default: Waiting for the server to be built...
  ==> default: Using floating IP 150.242.41.75
