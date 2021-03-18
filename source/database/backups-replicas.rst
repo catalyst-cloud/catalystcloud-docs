@@ -20,10 +20,10 @@ will be deleting the database to test the recovery process)
   | created              | 2020-08-05T22:24:14                  |
   | datastore            | mysql                                |
   | datastore_version    | 5.7.29                               |
-  | datastore_version_id | 8f2c5796-e1e1-4275-9917-4e3a61cbb76d |
+  | datastore_version_id | 8f2c5796-e1e1-4275-9917-xxxxxxxxxxxx |
   | description          | None                                 |
-  | id                   | bd358777-2c29-4672-a10a-da342e0701ac |
-  | instance_id          | 3bc0c29d-b6bc-4729-b6a8-b312fca5d3fc |
+  | id                   | bd358777-2c29-4672-a10a-xxxxxxxxxxxx |
+  | instance_id          | 3bc0c29d-b6bc-4729-b6a8-xxxxxxxxxxxx |
   | locationRef          | None                                 |
   | name                 | db1-backup                           |
   | parent_id            | None                                 |
@@ -36,7 +36,7 @@ will be deleting the database to test the recovery process)
   +--------------------------------------+--------------------------------------+------------+-----------+-----------+---------------------+
   | ID                                   | Instance ID                          | Name       | Status    | Parent ID | Updated             |
   +--------------------------------------+--------------------------------------+------------+-----------+-----------+---------------------+
-  | bd358777-2c29-4672-a10a-da342e0701ac | 3bc0c29d-b6bc-4729-b6a8-b312fca5d3fc | db1-backup | COMPLETED | None      | 2020-06-25T00:05:47 |
+  | bd358777-2c29-4672-a10a-xxxxxxxxxxxx | 3bc0c29d-b6bc-4729-b6a8-xxxxxxxxxxxx | db1-backup | COMPLETED | None      | 2020-06-25T00:05:47 |
   +--------------------------------------+--------------------------------------+------------+-----------+-----------+---------------------+
 
 Destroy the instance and create a new one using the backup as a source:
@@ -46,7 +46,7 @@ Destroy the instance and create a new one using the backup as a source:
   $ openstack database instance delete db-instance-1     # wait for it to be deleted...
 
   $ openstack database instance create db-instance-1-rebuild \
-  e3feb785-af2e-41f7-899b-6bbc4e0b526e \
+  e3feb785-af2e-41f7-899b-xxxxxxxxxxxx \
   --size 5 \
   --datastore mysql \
   --datastore_version 5.7.29 \
@@ -54,13 +54,13 @@ Destroy the instance and create a new one using the backup as a source:
   --users dbusr:dbpassword \
   --volume_type b1.standard \
   --backup db1-backup \
-  --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48
+  --nic net-id=908816f1-933c-4ff2-8595-xxxxxxxxxxxx
 
   $ openstack database instance list
   +--------------------------------------+-----------------------+-----------+-------------------+--------+--------------------------------------+------+--------+
   | ID                                   | Name                  | Datastore | Datastore Version | Status | Flavor ID                            | Size | Region |
   +--------------------------------------+-----------------------+-----------+-------------------+--------+--------------------------------------+------+--------+
-  | fadf1e7f-8e72-4eba-9bf3-517547afccfd | db-instance-1-rebuild | mysql     | 5.7.29            | BUILD  | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    5 | test-1 |
+  | fadf1e7f-8e72-4eba-9bf3-xxxxxxxxxxxx | db-instance-1-rebuild | mysql     | 5.7.29            | BUILD  | e3feb785-af2e-41f7-899b-xxxxxxxxxxxx |    5 | test-1 |
   +--------------------------------------+-----------------------+-----------+-------------------+--------+--------------------------------------+------+--------+
 
   Connect and check data in there:
@@ -106,9 +106,9 @@ the backups is related to the previous one, using the Parent_ID field:
   +--------------------------------------+--------------------------------------+------------+-----------+--------------------------------------+---------------------+
   | ID                                   | Instance ID                          | Name       | Status    | Parent ID                            | Updated             |
   +--------------------------------------+--------------------------------------+------------+-----------+--------------------------------------+---------------------+
-  | bd187812-7f2c-4df1-8d9a-87bae8b34ee3 | ac59dcd2-646c-41c7-bfc5-e1872f07d53e | backup1.2  | COMPLETED | 234682c5-e2b8-4708-9988-6829c16cf5c9 | 2020-09-29T02:05:08 |
-  | 234682c5-e2b8-4708-9988-6829c16cf5c9 | ac59dcd2-646c-41c7-bfc5-e1872f07d53e | backup1.1  | COMPLETED | eb4a16f7-7663-4ddd-990a-add99e5d8f4e | 2020-09-21T22:42:41 |
-  | eb4a16f7-7663-4ddd-990a-add99e5d8f4e | ac59dcd2-646c-41c7-bfc5-e1872f07d53e | original   | COMPLETED | None                                 | 2020-09-21T22:41:53 |
+  | bd187812-7f2c-4df1-8d9a-xxxxxxxxxxxx | ac59dcd2-646c-41c7-bfc5-xxxxxxxxxxxx | backup1.2  | COMPLETED | 234682c5-e2b8-4708-9988-xxxxxxxxxxxx | 2020-09-29T02:05:08 |
+  | 234682c5-e2b8-4708-9988-xxxxxxxxxxxx | ac59dcd2-646c-41c7-bfc5-xxxxxxxxxxxx | backup1.1  | COMPLETED | eb4a16f7-7663-4ddd-990a-xxxxxxxxxxxx | 2020-09-21T22:42:41 |
+  | eb4a16f7-7663-4ddd-990a-xxxxxxxxxxxx | ac59dcd2-646c-41c7-bfc5-xxxxxxxxxxxx | original   | COMPLETED | None                                 | 2020-09-21T22:41:53 |
   +--------------------------------------+--------------------------------------+------------+-----------+--------------------------------------+---------------------+
 
 As you can see, the backups are all related to the same instance, but their
@@ -145,20 +145,20 @@ The command to create a replica is:
 .. code-block:: bash
 
   $ openstack database instance create db-replica-1
-    e3feb785-af2e-41f7-899b-6bbc4e0b526e \
+    e3feb785-af2e-41f7-899b-xxxxxxxxxxxx \
     --size 5 \
     --volume_type b1.standard  \
     --datastore mysql \
     --datastore_version 5.7.29 \
-    --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48 \
+    --nic net-id=908816f1-933c-4ff2-8595-xxxxxxxxxxxx \
     --replica_of db-instance-1
 
   $ openstack database instance list
   +--------------------------------------+---------------+-----------+-------------------+--------+--------------------------------------+------+--------+
   | ID                                   | Name          | Datastore | Datastore Version | Status | Flavor ID                            | Size | Region |
   +--------------------------------------+---------------+-----------+-------------------+--------+--------------------------------------+------+--------+
-  | 6bd114d1-7251-42d6-9426-db598c085472 | db-instance-1 | mysql     | 5.7.29            | ACTIVE | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    5 | test-1 |
-  | 8ddd73b2-939c-496d-906a-4eab4000fff0 | db-replica-1  | mysql     | 5.7.29            | ACTIVE | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    5 | test-1 |
+  | 6bd114d1-7251-42d6-9426-xxxxxxxxxxxx | db-instance-1 | mysql     | 5.7.29            | ACTIVE | e3feb785-af2e-41f7-899b-xxxxxxxxxxxx |    5 | test-1 |
+  | 8ddd73b2-939c-496d-906a-xxxxxxxxxxxx | db-replica-1  | mysql     | 5.7.29            | ACTIVE | e3feb785-af2e-41f7-899b-xxxxxxxxxxxx |    5 | test-1 |
   +--------------------------------------+---------------+-----------+-------------------+--------+--------------------------------------+------+--------+
 
 Once you have a replica up and running, there will be a relationship between
@@ -180,8 +180,8 @@ process for this is detailed below:
    +--------------------------------------+-----------------------+-----------+-------------------+---------+-----------+--------------------------------------+------+--------+---------+
    | ID                                   | Name                  | Datastore | Datastore Version | Status  | Addresses | Flavor ID                            | Size | Region | Role    |
    +--------------------------------------+-----------------------+-----------+-------------------+---------+-----------+--------------------------------------+------+--------+---------+
-   | 6f4e35e6-58fa-4812-a075-3a20a29edd0b | db-replica-1          | mysql     | 5.7.29            | PROMOTE |           | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    5 | test-1 | replica |
-   | 96c3497f-2af4-442a-b5c5-da79b035cc09 | db-instance-1-rebuild | mysql     | 5.7.29            | PROMOTE |           | e3feb785-af2e-41f7-899b-6bbc4e0b526e |    5 | test-1 |         |
+   | 6f4e35e6-58fa-4812-a075-xxxxxxxxxxxx | db-replica-1          | mysql     | 5.7.29            | PROMOTE |           | e3feb785-af2e-41f7-899b-xxxxxxxxxxxx |    5 | test-1 | replica |
+   | 96c3497f-2af4-442a-b5c5-xxxxxxxxxxxx | db-instance-1-rebuild | mysql     | 5.7.29            | PROMOTE |           | e3feb785-af2e-41f7-899b-xxxxxxxxxxxx |    5 | test-1 |         |
    +--------------------------------------+-----------------------+-----------+-------------------+---------+-----------+--------------------------------------+------+--------+---------+
 
    # wait for status to change to ACTIVE

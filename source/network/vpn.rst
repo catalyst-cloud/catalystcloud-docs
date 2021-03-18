@@ -87,20 +87,20 @@ elements in order to avoid ambiguity when running commands.
       $ openstack router show border-router -c id -f value -c external_gateway_info -f value -f json
       {
         "external_gateway_info": {
-          "network_id": "f10ad6de-a26d-4c29-8c64-2a7418d47f8f",
+          "network_id": "f10ad6de-a26d-4c29-8c64-xxxxxxxxxxxx",
           "enable_snat": true,
           "external_fixed_ips": [
             {
-              "subnet_id": "a1549e09-4176-4322-860c-cadc68608b48",
+              "subnet_id": "a1549e09-4176-4322-860c-xxxxxxxxxxxx",
               "ip_address": "103.197.60.162"
             },
             {
-              "subnet_id": "8a7fe804-7fbe-43d0-aa1d-cfa03034ef22",
+              "subnet_id": "8a7fe804-7fbe-43d0-aa1d-xxxxxxxxxxxx",
               "ip_address": "2404:130:8020:8000::a2ea"
             }
           ]
         },
-        "id": "34a4d812-7d77-4750-a9ee-169bbaa532c1"
+        "id": "34a4d812-7d77-4750-a9ee-xxxxxxxxxxxx"
       }
 
     From the JSON data, the **router IP address** is the IPv4 value associated
@@ -131,15 +131,15 @@ elements in order to avoid ambiguity when running commands.
       $ openstack router show border-router -c external_gateway_info -f value -c interfaces_info -f value -f json
       {
         "external_gateway_info": {
-          "network_id": "849ab1e9-7ac5-4618-8801-e6176fbbcf30",
+          "network_id": "849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx",
           "enable_snat": true,
           "external_fixed_ips": [
             {
-              "subnet_id": "aef23c7c-6c53-4157-8350-d6879c43346c",
+              "subnet_id": "aef23c7c-6c53-4157-8350-xxxxxxxxxxxx",
               "ip_address": "150.242.40.137"
             },
             {
-              "subnet_id": "e8064b07-ac94-4172-91a1-2b2bd5cc157b",
+              "subnet_id": "e8064b07-ac94-4172-91a1-xxxxxxxxxxxx",
               "ip_address": "2404:130:4020:8000::7637"
             }
           ]
@@ -185,13 +185,13 @@ elements in order to avoid ambiguity when running commands.
       | Field          | Value                                |
       +----------------+--------------------------------------+
       | Description    |                                      |
-      | ID             | 5f999c1b-f485-483b-91ad-a46e9dd9a0f1 |
+      | ID             | 5f999c1b-f485-483b-91ad-xxxxxxxxxxxx |
       | Name           | VPN                                  |
       | Project        | eac679e489614xxxxxxce29d755fe289     |
-      | Router         | 34a4d812-7d77-4750-a9ee-169bbaa532c1 |
+      | Router         | 34a4d812-7d77-4750-a9ee-xxxxxxxxxxxx |
       | State          | True                                 |
       | Status         | PENDING_CREATE                       |
-      | Subnet         | 0d10e475-045b-4b90-a378-d0dc2f66c150 |
+      | Subnet         | 0d10e475-045b-4b90-a378-xxxxxxxxxxxx |
       | external_v4_ip | 103.197.60.162                       |
       | external_v6_ip | 2404:130:8020:8000::a2ea             |
       +----------------+--------------------------------------+
@@ -214,7 +214,7 @@ elements in order to avoid ambiguity when running commands.
       | Authentication Algorithm      | sha1                                 |
       | Description                   |                                      |
       | Encryption Algorithm          | aes-256                              |
-      | ID                            | c12da6a3-611a-497b-91c3-610b35bc6546 |
+      | ID                            | c12da6a3-611a-497b-91c3-xxxxxxxxxxxx |
       | IKE Version                   | v1                                   |
       | Lifetime                      | {'units': 'seconds', 'value': 14400} |
       | Name                          | ike_policy                           |
@@ -242,7 +242,7 @@ elements in order to avoid ambiguity when running commands.
       | Description                   |                                      |
       | Encapsulation Mode            | tunnel                               |
       | Encryption Algorithm          | aes-256                              |
-      | ID                            | 71917a1e-b553-429a-9745-51c24bc3e3f4 |
+      | ID                            | 71917a1e-b553-429a-9745-xxxxxxxxxxxx |
       | Lifetime                      | {'units': 'seconds', 'value': 3600}  |
       | Name                          | ipsec_policy                         |
       | Perfect Forward Secrecy (PFS) | group14                              |
@@ -271,9 +271,9 @@ elements in order to avoid ambiguity when running commands.
       +--------------------------+-------------------------------------------------------+
       | Authentication Algorithm | psk                                                   |
       | Description              |                                                       |
-      | ID                       | 3b5da18f-7bc2-440c-8e36-dc9765cc13be                  |
-      | IKE Policy               | c12da6a3-611a-497b-91c3-610b35bc6546                  |
-      | IPSec Policy             | 71917a1e-b553-429a-9745-51c24bc3e3f4                  |
+      | ID                       | 3b5da18f-7bc2-440c-8e36-xxxxxxxxxxxx                  |
+      | IKE Policy               | c12da6a3-611a-497b-91c3-xxxxxxxxxxxx                  |
+      | IPSec Policy             | 71917a1e-b553-429a-9745-xxxxxxxxxxxx                  |
       | Initiator                | bi-directional                                        |
       | MTU                      | 1500                                                  |
       | Name                     | vpn_site_connection                                   |
@@ -285,7 +285,7 @@ elements in order to avoid ambiguity when running commands.
       | Route Mode               | static                                                |
       | State                    | True                                                  |
       | Status                   | PENDING_CREATE                                        |
-      | VPN Service              | fdc3ecc3-32c7-47a7-97f0-6b6b702b61bd                  |
+      | VPN Service              | fdc3ecc3-32c7-47a7-97f0-xxxxxxxxxxxx                  |
       | dpd                      | {'action': 'restart', 'interval': 15, 'timeout': 150} |
       +--------------------------+-------------------------------------------------------+
 
@@ -406,13 +406,13 @@ elements in order to avoid ambiguity when running commands.
       | Field          | Value                                |
       +----------------+--------------------------------------+
       | Description    |                                      |
-      | ID             | 4c5faf25-dada-44c7-a7d4-f4e3a7ac500f |
+      | ID             | 4c5faf25-dada-44c7-a7d4-xxxxxxxxxxxx |
       | Name           | vpn_service                          |
       | Project        | 83100bf293c94607xxxxxxa959ac0218     |
-      | Router         | 34ea00e7-74bc-4f9f-b270-8e37a411d9e6 |
+      | Router         | 34ea00e7-74bc-4f9f-b270-xxxxxxxxxxxx |
       | State          | True                                 |
       | Status         | PENDING_CREATE                       |
-      | Subnet         | 5ea2199a-1a1e-40c5-a4cd-81dca872570c |
+      | Subnet         | 5ea2199a-1a1e-40c5-a4cd-xxxxxxxxxxxx |
       | external_v4_ip | 103.197.61.206                       |
       | external_v6_ip | 2404:130:8020:8000::2:ce58           |
       +----------------+--------------------------------------+
@@ -422,7 +422,7 @@ elements in order to avoid ambiguity when running commands.
       | Authentication Algorithm      | sha1                                 |
       | Description                   |                                      |
       | Encryption Algorithm          | aes-256                              |
-      | ID                            | ceebee2c-f5ac-44fa-a838-ea156114af2d |
+      | ID                            | ceebee2c-f5ac-44fa-a838-xxxxxxxxxxxx |
       | IKE Version                   | v1                                   |
       | Lifetime                      | {'units': 'seconds', 'value': 14400} |
       | Name                          | ike_policy                           |
@@ -437,7 +437,7 @@ elements in order to avoid ambiguity when running commands.
       | Description                   |                                      |
       | Encapsulation Mode            | tunnel                               |
       | Encryption Algorithm          | aes-256                              |
-      | ID                            | 77c66397-43e9-45db-b0cd-f02ff6d89c7e |
+      | ID                            | 77c66397-43e9-45db-b0cd-xxxxxxxxxxxx |
       | Lifetime                      | {'units': 'seconds', 'value': 3600}  |
       | Name                          | ipsec_policy                         |
       | Perfect Forward Secrecy (PFS) | group14                              |
@@ -448,13 +448,13 @@ elements in order to avoid ambiguity when running commands.
       | Field          | Value                                |
       +----------------+--------------------------------------+
       | Description    |                                      |
-      | ID             | 84303467-9c62-47c7-91c9-9b873f81082d |
+      | ID             | 84303467-9c62-47c7-91c9-xxxxxxxxxxxx |
       | Name           | vpn_service                          |
       | Project        | 83100bf293c94607xxxxxxa959ac0218     |
-      | Router         | d570c9c8-bde2-4f39-8fa9-c1cbec38073d |
+      | Router         | d570c9c8-bde2-4f39-8fa9-xxxxxxxxxxxx |
       | State          | True                                 |
       | Status         | PENDING_CREATE                       |
-      | Subnet         | 55c57cd5-1b94-4098-9cf6-cbca35c4900f |
+      | Subnet         | 55c57cd5-1b94-4098-9cf6-xxxxxxxxxxxx |
       | external_v4_ip | 150.242.41.251                       |
       | external_v6_ip | 2404:130:4020:8000::1:9c3a           |
       +----------------+--------------------------------------+
@@ -464,7 +464,7 @@ elements in order to avoid ambiguity when running commands.
       | Authentication Algorithm      | sha1                                 |
       | Description                   |                                      |
       | Encryption Algorithm          | aes-256                              |
-      | ID                            | a184e4c4-856f-4136-9ef1-2435ed42b4ba |
+      | ID                            | a184e4c4-856f-4136-9ef1-xxxxxxxxxxxx |
       | IKE Version                   | v1                                   |
       | Lifetime                      | {'units': 'seconds', 'value': 14400} |
       | Name                          | ike_policy                           |
@@ -479,7 +479,7 @@ elements in order to avoid ambiguity when running commands.
       | Description                   |                                      |
       | Encapsulation Mode            | tunnel                               |
       | Encryption Algorithm          | aes-256                              |
-      | ID                            | 9b41de10-194d-4e1d-9f2a-fa4d46f35dd7 |
+      | ID                            | 9b41de10-194d-4e1d-9f2a-xxxxxxxxxxxx |
       | Lifetime                      | {'units': 'seconds', 'value': 3600}  |
       | Name                          | ipsec_policy                         |
       | Perfect Forward Secrecy (PFS) | group14                              |
@@ -491,9 +491,9 @@ elements in order to avoid ambiguity when running commands.
       +--------------------------+-------------------------------------------------------+
       | Authentication Algorithm | psk                                                   |
       | Description              |                                                       |
-      | ID                       | 1521242f-7d63-43b7-aa62-f4a2e095525c                  |
-      | IKE Policy               | a184e4c4-856f-4136-9ef1-2435ed42b4ba                  |
-      | IPSec Policy             | 9b41de10-194d-4e1d-9f2a-fa4d46f35dd7                  |
+      | ID                       | 1521242f-7d63-43b7-aa62-xxxxxxxxxxxx                  |
+      | IKE Policy               | a184e4c4-856f-4136-9ef1-xxxxxxxxxxxx                  |
+      | IPSec Policy             | 9b41de10-194d-4e1d-9f2a-xxxxxxxxxxxx                  |
       | Initiator                | bi-directional                                        |
       | MTU                      | 1500                                                  |
       | Name                     | vpn_site_connection                                   |
@@ -505,7 +505,7 @@ elements in order to avoid ambiguity when running commands.
       | Route Mode               | static                                                |
       | State                    | True                                                  |
       | Status                   | PENDING_CREATE                                        |
-      | VPN Service              | 84303467-9c62-47c7-91c9-9b873f81082d                  |
+      | VPN Service              | 84303467-9c62-47c7-91c9-xxxxxxxxxxxx                  |
       | dpd                      | {'action': 'restart', 'interval': 15, 'timeout': 150} |
       +--------------------------+-------------------------------------------------------+
 

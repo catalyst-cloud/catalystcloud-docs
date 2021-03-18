@@ -91,11 +91,11 @@ server it's own public IP address. You open a terminal and run:
   | description         | None                                 |
   | fixed_ip_address    | None                                 |
   | floating_ip_address | 150.242.41.224                       |
-  | floating_network_id | 849ab1e9-7ac5-4618-8801-e6176fbbcf30 |
-  | id                  | 415fa158-fd7d-4b43-9002-0a55aa22a753 |
+  | floating_network_id | 849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx |
+  | id                  | 415fa158-fd7d-4b43-9002-xxxxxxxxxxxx |
   | name                | 150.242.41.224                       |
   | port_id             | None                                 |
-  | project_id          | 8ccc3286887e49cb9a40f023eba693b4     |
+  | project_id          | 8ccc3286887e49cbxxxxxx23eba693b4     |
   | qos_policy_id       | None                                 |
   | revision_number     | None                                 |
   | router_id           | None                                 |

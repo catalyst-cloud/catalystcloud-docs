@@ -85,11 +85,11 @@ the command line clients to achieve this. First create a security group:
  +-------------+---------------------------------------------------------------------------------+
  | description | network access for docker                                                       |
  | headers     |                                                                                 |
- | id          | f27b5889-8f43-4e57-ba99-8ea6b5d8da30                                            |
+ | id          | f27b5889-8f43-4e57-ba99-xxxxxxxxxxxx                                            |
  | name        | docker-security-group                                                           |
  | project_id  | 3d5d40b4a6904e6db4xxxxxxf53d4f39                                                |
- | rules       | direction='egress', ethertype='IPv4', id='ffaea025-3511-492f-b8ce-096df4089fd7' |
- |             | direction='egress', ethertype='IPv6', id='00132465-6141-4842-ad5c-acd47c7a53f5' |
+ | rules       | direction='egress', ethertype='IPv4', id='ffaea025-3511-492f-b8ce-xxxxxxxxxxxx' |
+ |             | direction='egress', ethertype='IPv6', id='00132465-6141-4842-ad5c-xxxxxxxxxxxx' |
  +-------------+---------------------------------------------------------------------------------+
 
 Now you need to create three rules:
@@ -109,8 +109,8 @@ You can issue the ``openstack security group list`` command to find your
  +--------------------------------------+-----------------------+-----------------------------------------+----------------------------------+
  | ID                                   | Name                  | Description                             | Project                          |
  +--------------------------------------+-----------------------+-----------------------------------------+----------------------------------+
- | 87426623-b895-4fa8-bf1b-b3ea6f074328 | default               | default                                 | 3d5d40b4a6904e6db4xxxxxxf53d4f39 |
- | f27b5889-8f43-4e57-ba99-8ea6b5d8da30 | docker-security-group | network access for docker               | 3d5d40b4a6904e6db4xxxxxxf53d4f39 |
+ | 87426623-b895-4fa8-bf1b-xxxxxxxxxxxx | default               | default                                 | 3d5d40b4a6904e6db4xxxxxxf53d4f39 |
+ | f27b5889-8f43-4e57-ba99-xxxxxxxxxxxx | docker-security-group | network access for docker               | 3d5d40b4a6904e6db4xxxxxxf53d4f39 |
  +--------------------------------------+-----------------------+-----------------------------------------+----------------------------------+
 
 
@@ -123,14 +123,14 @@ You can issue the ``openstack security group list`` command to find your
  | direction         | ingress                              |
  | ethertype         | IPv4                                 |
  | headers           |                                      |
- | id                | d988e327-01c7-4c80-8b72-8625b0ce425d |
+ | id                | d988e327-01c7-4c80-8b72-xxxxxxxxxxxx |
  | port_range_max    | 22                                   |
  | port_range_min    | 22                                   |
  | project_id        | 3d5d40b4a6904e6db4xxxxxxf53d4f39     |
  | protocol          | tcp                                  |
  | remote_group_id   | None                                 |
  | remote_ip_prefix  | 114.110.38.54/32                     |
- | security_group_id | f27b5889-8f43-4e57-ba99-8ea6b5d8da30 |
+ | security_group_id | f27b5889-8f43-4e57-ba99-xxxxxxxxxxxx |
  +-------------------+--------------------------------------+
  +-------------------+--------------------------------------+
  | Field             | Value                                |
@@ -138,14 +138,14 @@ You can issue the ``openstack security group list`` command to find your
  | direction         | ingress                              |
  | ethertype         | IPv4                                 |
  | headers           |                                      |
- | id                | 01fad37d-518f-48f2-93d6-3eeb29b4fda5 |
+ | id                | 01fad37d-518f-48f2-93d6-xxxxxxxxxxxx |
  | port_range_max    | 80                                   |
  | port_range_min    | 80                                   |
  | project_id        | 3d5d40b4a6904e6db4xxxxxxf53d4f39     |
  | protocol          | tcp                                  |
  | remote_group_id   | None                                 |
  | remote_ip_prefix  | 114.110.38.54/32                     |
- | security_group_id | f27b5889-8f43-4e57-ba99-8ea6b5d8da30 |
+ | security_group_id | f27b5889-8f43-4e57-ba99-xxxxxxxxxxxx |
  +-------------------+--------------------------------------+
  +-------------------+--------------------------------------+
  | Field             | Value                                |
@@ -153,14 +153,14 @@ You can issue the ``openstack security group list`` command to find your
  | direction         | ingress                              |
  | ethertype         | IPv4                                 |
  | headers           |                                      |
- | id                | 3b4e03a7-4d3e-4d88-afc8-ecd968469b06 |
+ | id                | 3b4e03a7-4d3e-4d88-afc8-xxxxxxxxxxxx |
  | port_range_max    | 2376                                 |
  | port_range_min    | 2376                                 |
  | project_id        | 3d5d40b4a6904e6db4xxxxxxf53d4f39     |
  | protocol          | tcp                                  |
  | remote_group_id   | None                                 |
  | remote_ip_prefix  | 114.110.38.54/32                     |
- | security_group_id | f27b5889-8f43-4e57-ba99-8ea6b5d8da30 |
+ | security_group_id | f27b5889-8f43-4e57-ba99-xxxxxxxxxxxx |
  +-------------------+--------------------------------------+
 
 

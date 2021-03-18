@@ -148,7 +148,7 @@ contents.
   +-----------+--------------+----------------------------------+
   | object    | container    | etag                             |
   +-----------+--------------+----------------------------------+
-  | file1.txt | my-container | 2767104ea585e1a98a23c52addeeae4a |
+  | file1.txt | my-container | 2767104ea585e1a98axxxxxxddeeae4a |
   +-----------+--------------+----------------------------------+
 
 Now if the original file is modified and uploaded to the same container, you
@@ -161,7 +161,7 @@ contents of the file have changed.
   +-----------+--------------+----------------------------------+
   | object    | container    | etag                             |
   +-----------+--------------+----------------------------------+
-  | file1.txt | my-container | 9673f4c3efc2ee8dd9edbc2ba60c76c4 |
+  | file1.txt | my-container | 9673f4c3efc2ee8dd9exxxxxx60c76c4 |
   +-----------+--------------+----------------------------------+
 
 If you show the containers again, you can see now that even though you only

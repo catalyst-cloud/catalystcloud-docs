@@ -146,7 +146,7 @@ The following code block assumes a few things:
       print('------------------------------------------------------------------------\n')
 
       router = conn.network.create_router(
-          name=ROUTER,external_gateway_info={'network_id':'849ab1e9-7ac5-4618-8801-e6176fbbcf30'}
+          name=ROUTER,external_gateway_info={'network_id':'849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx'}
       )
       router.add_interface(conn.network,subnet_id=conn.network.find_subnet(PRIVATE_SUBNET).id)
 
@@ -221,7 +221,7 @@ The following code block assumes a few things:
       conn.compute.add_floating_ip_to_server(instance,floating_IP.floating_ip_address)
       print('Allocated a floating IP. To access your instance use : ssh -i {key} ubuntu@{ip}'.format(key=PRIVATE_KEYPAIR_FILE, ip=floating_IP.floating_ip_address))
     else:
-      conn.network.create_ip(floating_network_id='849ab1e9-7ac5-4618-8801-e6176fbbcf30')
+      conn.network.create_ip(floating_network_id='849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx')
       floating_IP = conn.network.find_available_ip()
       conn.compute.add_floating_ip_to_server(instance,floating_IP.floating_ip_address)
       print('Created a floating IP. To access your instance use : ssh -i {key} ubuntu@{ip}'.format(key=PRIVATE_KEYPAIR_FILE, ip=floating_IP.floating_ip_address))

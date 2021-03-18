@@ -235,7 +235,7 @@ Make a new filesystem on the partition:
   $ sudo mkfs.ext4 /dev/vdb1
   mke2fs 1.42.13 (17-May-2015)
   Creating filesystem with 5242624 4k blocks and 1310720 inodes
-  Filesystem UUID: 7dec7fb6-ff38-453b-9335-0c240d179262
+  Filesystem UUID: 7dec7fb6-ff38-453b-9335-xxxxxxxxxxxx
   Superblock backups stored on blocks:
       32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
       4096000
@@ -264,8 +264,8 @@ Label the partition:
   $ sudo tune2fs -L 'extra-disk' /dev/vdb1
   tune2fs 1.42.13 (17-May-2015)
   $ sudo blkid
-  /dev/vda1: LABEL="cloudimg-rootfs" UUID="98c51306-83a2-49da-94a9-2a841c9f27b0" TYPE="ext4" PARTUUID="8cefe526-01"
-  /dev/vdb1: LABEL="extra-disk" UUID="7dec7fb6-ff38-453b-9335-0c240d179262" TYPE="ext4" PARTUUID="235ac0e4-01"
+  /dev/vda1: LABEL="cloudimg-rootfs" UUID="98c51306-83a2-49da-94a9-xxxxxxxxxxxx" TYPE="ext4" PARTUUID="8cefe526-01"
+  /dev/vdb1: LABEL="extra-disk" UUID="7dec7fb6-ff38-453b-9335-xxxxxxxxxxxx" TYPE="ext4" PARTUUID="235ac0e4-01"
 
 If you want the new file system to be mounted when the system reboots then you
 should add an entry to ``/etc/fstab``. For example, making sure you have sudo

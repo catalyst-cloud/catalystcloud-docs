@@ -4,7 +4,7 @@ export CC_IMAGE=ubuntu-20.04-x86_64
 export CC_KEYPAIR=<YOUR_KEY_NAME>
 export CC_SEC_GROUP_NAME=first-instance-sg
 export CC_SERVERNAME=first-instance
-export CC_PUBLIC_NETWORK_ID=f10ad6de-a26d-4c29-8c64-2a7418d47f8f
+export CC_PUBLIC_NETWORK_ID=f10ad6de-a26d-4c29-8c64-xxxxxxxxxxxx
 
 $ openstack security group create $CC_SEC_GROUP_NAME
 

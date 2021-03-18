@@ -55,32 +55,32 @@ To start, get the IDs of your router, subnet and router port.
   +--------------------------------------+---------------+
   | ID                                   | Name          |
   +--------------------------------------+---------------+
-  | 6be77df7-fa23-4eaa-8542-a0620fba68f8 | border-router |
+  | 6be77df7-fa23-4eaa-8542-xxxxxxxxxxxx | border-router |
   +--------------------------------------+---------------+
 
   $ openstack network list
   +--------------------------------------+-------------+--------------------------------------+
   | ID                                   | Name        | Subnets                              |
   +--------------------------------------+-------------+--------------------------------------+
-  | e0ba6b88-5360-492c-9c3d-119948356fd3 | public-net  | 8b88f8c7-0a5c-483b-9e55-f9a8c2ca93b4 |
-  | 6fe1b0b8-37ba-4e79-84ff-7799b6ccd7b3 | private-net | c5145b18-26f1-4053-bac4-d8d0bdc77b48 |
+  | e0ba6b88-5360-492c-9c3d-xxxxxxxxxxxx | public-net  | 8b88f8c7-0a5c-483b-9e55-xxxxxxxxxxxx |
+  | 6fe1b0b8-37ba-4e79-84ff-xxxxxxxxxxxx | private-net | c5145b18-26f1-4053-bac4-xxxxxxxxxxxx |
   +--------------------------------------+-------------+--------------------------------------+
 
   openstack port list --router border-router -c ID
   +--------------------------------------+
   | ID                                   |
   +--------------------------------------+
-  | 44f6d507-2969-4e8f-b03c-e7361d13109d |
+  | 44f6d507-2969-4e8f-b03c-xxxxxxxxxxxx |
   +--------------------------------------+
 
 Now try to delete the port from the router.
 
 .. code-block:: bash
 
-  $ openstack port delete 44f6d507-2969-4e8f-b03c-e7361d13109d
-  Failed to delete port with name or ID '44f6d507-2969-4e8f-b03c-e7361d13109d':
-  HttpException: Conflict (HTTP 409) (Request-ID: req-9b31b77a-36a7-4025-8e53-59b94aef2b26),
-  Port 44f6d507-2969-4e8f-b03c-e7361d13109d cannot be deleted directly via the port
+  $ openstack port delete 44f6d507-2969-4e8f-b03c-xxxxxxxxxxxx
+  Failed to delete port with name or ID '44f6d507-2969-4e8f-b03c-xxxxxxxxxxxx':
+  HttpException: Conflict (HTTP 409) (Request-ID: req-9b31b77a-36a7-4025-8e53-xxxxxxxxxxxx),
+  Port 44f6d507-2969-4e8f-b03c-xxxxxxxxxxxx cannot be deleted directly via the port
   API: has device owner network:router_interface
   1 of 1 ports failed to delete.
 
@@ -93,9 +93,9 @@ remove the interface.
 
 .. code-block:: bash
 
-  $ openstack router remove subnet 6be77df7-fa23-4eaa-8542-a0620fba68f8  c5145b18-26f1-4053-bac4-d8d0bdc77b48
-  HttpException: Conflict (HTTP 409) (Request-ID: req-a0821a75-e616-4e9a-a1a3-0f64574e07dc),
-  Subnet c5145b18-26f1-4053-bac4-d8d0bdc77b48 is used by VPNService 478073d3-a347-4d1a-8653-609788064147
+  $ openstack router remove subnet 6be77df7-fa23-4eaa-8542-xxxxxxxxxxxx  c5145b18-26f1-4053-bac4-xxxxxxxxxxxx
+  HttpException: Conflict (HTTP 409) (Request-ID: req-a0821a75-e616-4e9a-a1a3-xxxxxxxxxxxx),
+  Subnet c5145b18-26f1-4053-bac4-xxxxxxxxxxxx is used by VPNService 478073d3-a347-4d1a-8653-xxxxxxxxxxxx
 
 Success: now you can see what the problem is. It appears that your subnet is
 associated with a VPN. If you were to go ahead and remove the VPN, you would

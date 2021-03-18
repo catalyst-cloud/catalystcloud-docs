@@ -15,4 +15,4 @@ spec:
   persistentVolumeReclaimPolicy: Delete
   cinder:
     fsType: ext4
-    volumeID: 119f5f68-585e-41dd-b1a4-883fae7df74a
+    volumeID: 119f5f68-585e-41dd-b1a4-xxxxxxxxxxxx

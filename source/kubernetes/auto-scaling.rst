@@ -142,7 +142,7 @@ section as shown below.
         - ./cluster-autoscaler
         - --alsologtostderr
         - --cloud-provider=magnum
-        - --cluster-name=cad28c31-cf1c-40a7-b8c8-b9fff91a1113
+        - --cluster-name=cad28c31-cf1c-40a7-b8c8-xxxxxxxxxxxx
         - --cloud-config=/config/cloud-config
         - --nodes=1:4:default-worker
         - --scale-down-unneeded-time=10m
@@ -169,7 +169,7 @@ In the example below we have changed the following:
         - ./cluster-autoscaler
         - --alsologtostderr
         - --cloud-provider=magnum
-        - --cluster-name=cad28c31-cf1c-40a7-b8c8-b9fff91a1113
+        - --cluster-name=cad28c31-cf1c-40a7-b8c8-xxxxxxxxxxxx
         - --cloud-config=/config/cloud-config
         - --nodes=1:4:default-worker
         - --scale-down-unneeded-time=8m

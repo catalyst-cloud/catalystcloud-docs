@@ -111,7 +111,7 @@ innodb_buffer_pool_size:
   | datastore_name         | mysql                                   |
   | datastore_version_name | 5.7.29                                  |
   | description            | None                                    |
-  | id                     | acef615c-81a1-4f60-85e9-b7787ceb57dd    |
+  | id                     | acef615c-81a1-4f60-85e9-xxxxxxxxxxxx    |
   | instance_count         | 0                                       |
   | name                   | conf1                                   |
   | updated                | 2020-08-13T00:55:08                     |
@@ -168,14 +168,14 @@ IOPS limit of 2000 we would do the following.
    :emphasize-lines: 8
 
    $ openstack database instance create db-instance-1\
-   e3feb785-af2e-41f7-899b-6bbc4e0b526e \ # this is the flavor ID for your instance
+   e3feb785-af2e-41f7-899b-xxxxxxxxxxxx \ # this is the flavor ID for your instance
    --size 5 \
    --datastore mysql \
    --datastore_version 5.7.29 \
    --databases myDB \
    --users dbusr:dbpassword \
    --volume_type b1.sr-r3-nvme-2000 \
-   --nic net-id=908816f1-933c-4ff2-8595-f0f57c689e48
+   --nic net-id=908816f1-933c-4ff2-8595-xxxxxxxxxxxx
 
 Memory
 ======

@@ -116,16 +116,16 @@ Let's run this playbook with the dynamic inventory:
  PLAY [Ping cloud instances] ****************************************************
 
  TASK [setup] *******************************************************************
- ok: [ca13f6c2-600c-493d-936d-493ea9870b65]
- ok: [b495f9cc-47f9-49cc-9780-2aca72046837]
+ ok: [ca13f6c2-600c-493d-936d-xxxxxxxxxxxx]
+ ok: [b495f9cc-47f9-49cc-9780-xxxxxxxxxxxx]
 
  TASK [Test connection to instance] *********************************************
- ok: [b495f9cc-47f9-49cc-9780-2aca72046837]
- ok: [ca13f6c2-600c-493d-936d-493ea9870b65]
+ ok: [b495f9cc-47f9-49cc-9780-xxxxxxxxxxxx]
+ ok: [ca13f6c2-600c-493d-936d-xxxxxxxxxxxx]
 
  PLAY RECAP *********************************************************************
- b495f9cc-47f9-49cc-9780-2aca72046837 : ok=2    changed=0    unreachable=0    failed=0
- ca13f6c2-600c-493d-936d-493ea9870b65 : ok=2    changed=0    unreachable=0    failed=0
+ b495f9cc-47f9-49cc-9780-xxxxxxxxxxxx : ok=2    changed=0    unreachable=0    failed=0
+ ca13f6c2-600c-493d-936d-xxxxxxxxxxxx : ok=2    changed=0    unreachable=0    failed=0
 
 .. note::
 
@@ -226,10 +226,10 @@ the ``_meta`` key so you can view just the instance lists.
      "example-instance-01",
      "example-instance-02"
    ],
-   "instance-b495f9cc-47f9-49cc-9780-2aca72046837": [
+   "instance-b495f9cc-47f9-49cc-9780-xxxxxxxxxxxx": [
      "example-instance-02"
    ],
-   "instance-ca13f6c2-600c-493d-936d-493ea9870b65": [
+   "instance-ca13f6c2-600c-493d-936d-xxxxxxxxxxxx": [
      "example-instance-01"
    ],
    "meta-example_foobar": [

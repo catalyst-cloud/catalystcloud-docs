@@ -32,11 +32,11 @@ We will need to prepare a number of variables for our playbook:
     +--------------------------------------+-----------------------------------------------------------------+--------+
     | ID                                   | Name                                                            | Status |
     +--------------------------------------+-----------------------------------------------------------------+--------+
-    | 683f76b0-eec2-43c3-9143-d693829589a1 | atomic-7-x86_64                                                 | active |
-    | 7f352450-e87f-42b9-8238-c6d1f32ab8d9 | atomic-7-x86_64-20170502                                        | active |
-    | bc84a4a4-d73c-44c8-a65e-b694e61580a5 | atomic-7-x86_64-20170608                                        | active |
-    | 0be2db8d-017b-464f-8a46-9805185e6b14 | atomic-7-x86_64-20170714                                        | active |
-    | eedefeab-34d3-4f73-8421-3a2c3a854c52 | atomic-7-x86_64-20181018                                        | active |
+    | 683f76b0-eec2-43c3-9143-xxxxxxxxxxxx | atomic-7-x86_64                                                 | active |
+    | 7f352450-e87f-42b9-8238-xxxxxxxxxxxx | atomic-7-x86_64-20170502                                        | active |
+    | bc84a4a4-d73c-44c8-a65e-xxxxxxxxxxxx | atomic-7-x86_64-20170608                                        | active |
+    | 0be2db8d-017b-464f-8a46-xxxxxxxxxxxx | atomic-7-x86_64-20170714                                        | active |
+    | eedefeab-34d3-4f73-8421-xxxxxxxxxxxx | atomic-7-x86_64-20181018                                        | active |
     | ... Truncated for brevity            |                                                                 |        |
     +--------------------------------------+-----------------------------------------------------------------+--------+
 
@@ -48,11 +48,11 @@ We will need to prepare a number of variables for our playbook:
     +--------------------------------------+------------+--------+------+-----------+-------+-----------+
     | ID                                   | Name       |    RAM | Disk | Ephemeral | VCPUs | Is Public |
     +--------------------------------------+------------+--------+------+-----------+-------+-----------+
-    | 00e563b6-11e2-4468-ac55-8403f75bcbd2 | c1.c16r24  |  24576 |   10 |         0 |    16 | True      |
-    | 01ecf2cc-2047-4606-a53b-11eb4b2b3757 | c1.c8r6    |   6144 |   10 |         0 |     8 | True      |
-    | 02cb8214-2121-4d0d-b7fd-c36bb9b2e960 | c1.c4r24   |  24576 |   10 |         0 |     4 | True      |
-    | 07585040-f887-4ddb-a0d5-5fac4ff273a7 | c1.c8r16   |  16384 |   10 |         0 |     8 | True      |
-    | 1c558eba-0d8a-4d09-86dd-fdcf3bb9874e | c1.c32r24  |  24576 |   10 |         0 |    32 | True      |
+    | 00e563b6-11e2-4468-ac55-xxxxxxxxxxxx | c1.c16r24  |  24576 |   10 |         0 |    16 | True      |
+    | 01ecf2cc-2047-4606-a53b-xxxxxxxxxxxx | c1.c8r6    |   6144 |   10 |         0 |     8 | True      |
+    | 02cb8214-2121-4d0d-b7fd-xxxxxxxxxxxx | c1.c4r24   |  24576 |   10 |         0 |     4 | True      |
+    | 07585040-f887-4ddb-a0d5-xxxxxxxxxxxx | c1.c8r16   |  16384 |   10 |         0 |     8 | True      |
+    | 1c558eba-0d8a-4d09-86dd-xxxxxxxxxxxx | c1.c32r24  |  24576 |   10 |         0 |    32 | True      |
     | ... Truncated for Brevity            |            |        |      |           |       |           |
     +--------------------------------------+------------+--------+------+-----------+-------+-----------+
 
@@ -183,7 +183,7 @@ on your project:
     +--------------------------------------+------------+----------------------------------+--------------+---------------------+------------------+----------+
     | id                                   | name       | project_id                       | vip_address  | provisioning_status | operating_status | provider |
     +--------------------------------------+------------+----------------------------------+--------------+---------------------+------------------+----------+
-    | a797a67d-bab5-4ae5-af30-5f7d633286e5 | ansible-lb | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX | 192.168.0.39 | ACTIVE              | ONLINE           | amphora  |
+    | a797a67d-bab5-4ae5-af30-xxxxxxxxxxxx | ansible-lb | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX | 192.168.0.39 | ACTIVE              | ONLINE           | amphora  |
     +--------------------------------------+------------+----------------------------------+--------------+---------------------+------------------+----------+
 
 .. raw:: html

@@ -29,7 +29,7 @@ For this example we start off with creating a new volume:
   | created_at          | 2020-05-18T23:08:40.021641           |
   | description         | database volume                      |
   | encrypted           | False                                |
-  | id                  | 29375489-2399-4065-bae0-0b7fc9bd795e |
+  | id                  | 29375489-2399-4065-bae0-xxxxxxxxxxxx |
   | multiattach         | False                                |
   | name                | db-vol-02                            |
   | properties          |                                      |
@@ -134,7 +134,7 @@ Make a new filesystem on the partition:
   $ sudo mkfs.ext4 /dev/vdb1
   mke2fs 1.42.13 (17-May-2015)
   Creating filesystem with 5242624 4k blocks and 1310720 inodes
-  Filesystem UUID: 7dec7fb6-ff38-453b-9335-0c240d179262
+  Filesystem UUID: 7dec7fb6-ff38-453b-9335-xxxxxxxxxxxx
   Superblock backups stored on blocks:
       32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
       4096000
@@ -155,16 +155,16 @@ Find the UUID of your volume, in this case we are looking at /dev/vdb1:
 .. code-block:: console
 
   $ sudo blkid
-  /dev/vda1: LABEL="cloudimg-rootfs" UUID="2fb27efc-e5c6-4cdf-9cad-adbceb790835" TYPE="ext4" PARTUUID="409e6e06-500e-4dc1-ba69-7ce4c4e28f48"
-  /dev/vda15: LABEL="UEFI" UUID="24F2-64AC" TYPE="vfat" PARTUUID="82f225d4-5e76-448c-842f-c873c9067338"
-  /dev/vda14: PARTUUID="ef5a7630-67ef-4c9d-b1af-315ce5f495e2"
-  /dev/vdb1: UUID="02bea4be-22c7-4e34-ad2f-a7a42848c38d" TYPE="ext4" PARTUUID="c5cedbe1-01"
+  /dev/vda1: LABEL="cloudimg-rootfs" UUID="2fb27efc-e5c6-4cdf-9cad-xxxxxxxxxxxx" TYPE="ext4" PARTUUID="409e6e06-500e-4dc1-ba69-xxxxxxxxxxxx"
+  /dev/vda15: LABEL="UEFI" UUID="24F2-64AC" TYPE="vfat" PARTUUID="82f225d4-5e76-448c-842f-xxxxxxxxxxxx"
+  /dev/vda14: PARTUUID="ef5a7630-67ef-4c9d-b1af-xxxxxxxxxxxx"
+  /dev/vdb1: UUID="02bea4be-22c7-4e34-ad2f-xxxxxxxxxxxx" TYPE="ext4" PARTUUID="c5cedbe1-01"
 
 Mount the file system:
 
 .. code-block:: console
 
-  $ sudo mount UUID=02bea4be-22c7-4e34-ad2f-a7a42848c38d /mnt/extra-disk
+  $ sudo mount UUID=02bea4be-22c7-4e34-ad2f-xxxxxxxxxxxx /mnt/extra-disk
 
 If you want the new file system to be mounted when the system reboots then you
 should add an entry to ``/etc/fstab``. For example, making sure you have sudo

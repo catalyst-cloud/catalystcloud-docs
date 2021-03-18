@@ -66,7 +66,7 @@ is the case, you can find your project ID by issuing the following command:
 .. code-block:: bash
 
  $ echo $OS_PROJECT_ID
- 1234567892b04ed38247bab7d808e214
+ 1234567892b04ed3xxxxxxb7d808e214
 
  $ echo $OS_Project_NAME
  My-Example-Company-Ltd
@@ -76,7 +76,7 @@ Alternatively, you can use the ``openstack configuration show`` command:
 .. code-block:: bash
 
  $ openstack configuration show -c auth.project_id -f value
- 1234567892b04ed38247bab7d808e214
+ 1234567892b04ed3xxxxxxb7d808e214
 
  $ openstack configuration show -c auth.project_name -f value
  My-Example-Company-Ltd

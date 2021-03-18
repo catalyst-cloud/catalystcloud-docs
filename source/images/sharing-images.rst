@@ -17,7 +17,7 @@ share:
 .. code-block:: bash
 
   $ openstack image show -c id -f value ubuntu1604_base_packer
-  55d3168c-dbdc-40d9-8ee6-96aff4f9e741
+  55d3168c-dbdc-40d9-8ee6-xxxxxxxxxxxx
 
 While connected to the target project, issue the following command to find the
 project ID:
@@ -25,20 +25,20 @@ project ID:
 .. code-block:: bash
 
  $ openstack configuration show -c auth.project_id -f value
- 1234567892b04ed38247bab7d808e214
+ 1234567892b04ed3xxxxxxb7d808e214
 
 Now you can proceed to share the image from the source project with the target
 project. While connected to the source project, issue the following command:
 
 .. code-block:: bash
 
- $ openstack image add project 55d3168c-dbdc-40d9-8ee6-96aff4f9e741 1234567892b04ed38247bab7d808e214
+ $ openstack image add project 55d3168c-dbdc-40d9-8ee6-xxxxxxxxxxxx 1234567892b04ed3xxxxxxb7d808e214
  +------------+--------------------------------------+
  | Field      | Value                                |
  +------------+--------------------------------------+
  | created_at | 2016-11-17T02:52:24Z                 |
- | image_id   | 55d3168c-dbdc-40d9-8ee6-96aff4f9e741 |
- | member_id  | 1234567892b04ed38247bab7d808e214     |
+ | image_id   | 55d3168c-dbdc-40d9-8ee6-xxxxxxxxxxxx |
+ | member_id  | 1234567892b04ed3xxxxxxb7d808e214     |
  | schema     | /v2/schemas/member                   |
  | status     | pending                              |
  | updated_at | 2016-11-17T02:52:24Z                 |
@@ -52,18 +52,18 @@ Next, ensure you can see the shared image in the target project:
  +--------------------------------------+-----------------------------+
  | ID                                   | Name                        |
  +--------------------------------------+-----------------------------+
- | 55d3168c-dbdc-40d9-8ee6-96aff4f9e741 | ubuntu1604_base_packer      |
+ | 55d3168c-dbdc-40d9-8ee6-xxxxxxxxxxxx | ubuntu1604_base_packer      |
  +--------------------------------------+-----------------------------+
 
 Finally, accept the image in the target project:
 
 .. code-block:: bash
 
- $ glance --os-image-api-version 2 member-update 55d3168c-dbdc-40d9-8ee6-96aff4f9e741 1234567892b04ed38247bab7d808e214 accepted
+ $ glance --os-image-api-version 2 member-update 55d3168c-dbdc-40d9-8ee6-xxxxxxxxxxxx 1234567892b04ed3xxxxxxb7d808e214 accepted
  +--------------------------------------+----------------------------------+----------+
  | Image ID                             | Member ID                        | Status   |
  +--------------------------------------+----------------------------------+----------+
- | 55d3168c-dbdc-40d9-8ee6-96aff4f9e741 | 1234567892b04ed38247bab7d808e214 | accepted |
+ | 55d3168c-dbdc-40d9-8ee6-xxxxxxxxxxxx | 1234567892b04ed3xxxxxxb7d808e214 | accepted |
  +--------------------------------------+----------------------------------+----------+
 
 .. note::

@@ -146,7 +146,7 @@ Heat will return a confirmation message indicating the stack is being created:
   +---------------------+-------------------------------------------------+
   | Field               | Value                                           |
   +---------------------+-------------------------------------------------+
-  | id                  | f2975b89-4a34-4333-90e3-3712636f6d1b            |
+  | id                  | f2975b89-4a34-4333-90e3-xxxxxxxxxxxx            |
   | stack_name          | mystack                                         |
   | description         | Deploying a single compute instance using Heat. |
   |                     |                                                 |
@@ -173,7 +173,7 @@ Heat will return the following information about the stack:
   +-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
   | Field                 | Value                                                                                                                                      |
   +-----------------------+--------------------------------------------------------------------------------------------------------------------------------------------+
-  | id                    | 700a9425-8ed8-4993-8773-eed4a276b040                                                                                                       |
+  | id                    | 700a9425-8ed8-4993-8773-xxxxxxxxxxxx                                                                                                       |
   | stack_name            | mystack                                                                                                                                    |
   | description           | Deploying a single compute instance using Heat.                                                                                            |
   |                       |                                                                                                                                            |
@@ -182,7 +182,7 @@ Heat will return the following information about the stack:
   | stack_status          | CREATE_COMPLETE                                                                                                                            |
   | stack_status_reason   | Stack CREATE completed successfully                                                                                                        |
   | parameters            | OS::project_id: 3d5d40b4a6904e6db4xxxxxxf53d4f39                                                                                           |
-  |                       | OS::stack_id: 700a9425-8ed8-4993-8773-eed4a276b040                                                                                         |
+  |                       | OS::stack_id: 700a9425-8ed8-4993-8773-xxxxxxxxxxxx                                                                                         |
   |                       | OS::stack_name: mystack                                                                                                                    |
   |                       | flavor: c1.c1r1                                                                                                                            |
   |                       | image: atomic-7-x86_64                                                                                                                     |
@@ -194,7 +194,7 @@ Heat will return the following information about the stack:
   |                       |     private-net:                                                                                                                           |
   |                       |     - 192.168.100.17                                                                                                                       |
   |                       |                                                                                                                                            |
-  | links                 | - href: https://api.nz-por-1.catalystcloud.io:8004/v1/3d5d40b4a6904e6db4xxxxxxf53d4f39/stacks/mystack/700a9425-8ed8-4993-8773-eed4a276b040 |
+  | links                 | - href: https://api.nz-por-1.catalystcloud.io:8004/v1/3d5d40b4a6904e6db4xxxxxxf53d4f39/stacks/mystack/700a9425-8ed8-4993-8773-xxxxxxxxxxxx |
   |                       |   rel: self                                                                                                                                |
   |                       |                                                                                                                                            |
   | parent                | None                                                                                                                                       |
@@ -218,7 +218,7 @@ You can list the resources that belong to a stack with the command below:
   +---------------+--------------------------------------+------------------+-----------------+----------------------+
   | resource_name | physical_resource_id                 | resource_type    | resource_status | updated_time         |
   +---------------+--------------------------------------+------------------+-----------------+----------------------+
-  | server        | 498df201-7206-4565-822d-3482fb10b5a7 | OS::Nova::Server | CREATE_COMPLETE | 2016-08-22T00:44:14Z |
+  | server        | 498df201-7206-4565-822d-xxxxxxxxxxxx | OS::Nova::Server | CREATE_COMPLETE | 2016-08-22T00:44:14Z |
   +---------------+--------------------------------------+------------------+-----------------+----------------------+
 
 ******************************
@@ -255,5 +255,5 @@ Heat will return a confirmation message saying the stack is being deleted.
   +--------------------------------------+------------+--------------------+----------------------+
   | id                                   | stack_name | stack_status       | creation_time        |
   +--------------------------------------+------------+--------------------+----------------------+
-  | 1f913699-010e-4564-ba08-e57dc5e09bca | mystack    | DELETE_IN_PROGRESS | 2015-04-16T05:58:49Z |
+  | 1f913699-010e-4564-ba08-xxxxxxxxxxxx | mystack    | DELETE_IN_PROGRESS | 2015-04-16T05:58:49Z |
   +--------------------------------------+------------+--------------------+----------------------+

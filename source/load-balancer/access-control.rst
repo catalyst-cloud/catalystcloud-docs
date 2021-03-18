@@ -40,13 +40,13 @@ If we then view the listener we should see
     | admin_state_up              | True                                 |
     | connection_limit            | -1                                   |
     | created_at                  | 2020-03-30T00:33:06                  |
-    | default_pool_id             | 11fcf1df-a1dd-44c6-875d-e3d0b4fde179 |
+    | default_pool_id             | 11fcf1df-a1dd-44c6-875d-xxxxxxxxxxxx |
     | default_tls_container_ref   | None                                 |
     | description                 |                                      |
-    | id                          | 98daa436-a16a-4497-800f-06945005061c |
+    | id                          | 98daa436-a16a-4497-800f-xxxxxxxxxxxx |
     | insert_headers              | None                                 |
-    | l7policies                  | a3d03787-88e0-4d64-92ef-e4f83b1cf359 |
-    | loadbalancers               | 75dbce10-6848-4b6d-8237-31cc17948973 |
+    | l7policies                  | a3d03787-88e0-4d64-92ef-xxxxxxxxxxxx |
+    | loadbalancers               | 75dbce10-6848-4b6d-8237-xxxxxxxxxxxx |
     | name                        | http_listener                        |
     | operating_status            | ONLINE                               |
     | project_id                  | eac679e489614xxxxxxce29d755fe289     |
@@ -102,13 +102,13 @@ ranges applied to the listener.
     | admin_state_up              | True                                 |
     | connection_limit            | -1                                   |
     | created_at                  | 2020-03-30T00:33:06                  |
-    | default_pool_id             | 11fcf1df-a1dd-44c6-875d-e3d0b4fde179 |
+    | default_pool_id             | 11fcf1df-a1dd-44c6-875d-xxxxxxxxxxxx |
     | default_tls_container_ref   | None                                 |
     | description                 |                                      |
-    | id                          | 98daa436-a16a-4497-800f-06945005061c |
+    | id                          | 98daa436-a16a-4497-800f-xxxxxxxxxxxx |
     | insert_headers              | None                                 |
-    | l7policies                  | a3d03787-88e0-4d64-92ef-e4f83b1cf359 |
-    | loadbalancers               | 75dbce10-6848-4b6d-8237-31cc17948973 |
+    | l7policies                  | a3d03787-88e0-4d64-92ef-xxxxxxxxxxxx |
+    | loadbalancers               | 75dbce10-6848-4b6d-8237-xxxxxxxxxxxx |
     | name                        | http_listener                        |
     | operating_status            | ONLINE                               |
     | project_id                  | eac679e489614xxxxxxce29d755fe289     |

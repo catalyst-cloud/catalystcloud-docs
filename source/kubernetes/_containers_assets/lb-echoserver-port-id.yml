@@ -8,7 +8,7 @@
   metadata:
     name: echoserver-lb-service
     annotations:
-      loadbalancer.openstack.org/port-id: "ca981484-22f8-4e9d-94f5-e43594afb15e"
+      loadbalancer.openstack.org/port-id: "ca981484-22f8-4e9d-94f5-xxxxxxxxxxxx"
   spec:
     selector:
       app:  echoserver

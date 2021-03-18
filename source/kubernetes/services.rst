@@ -492,8 +492,8 @@ characteristics:
   $ openstack port show lb-vip-10-0-0-212 -f yaml -c fixed_ips -c id -c name
   fixed_ips:
   - ip_address: 10.0.0.212
-    subnet_id: 6ddad590-3a57-4fd1-990b-be067e3f657d
-  id: ca981484-22f8-4e9d-94f5-e43594afb15e
+    subnet_id: 6ddad590-3a57-4fd1-990b-xxxxxxxxxxxx
+  id: ca981484-22f8-4e9d-94f5-xxxxxxxxxxxx
   name: lb-vip-10-0-0-212
 
   $ openstack floating ip show 103.197.60.184 -f yaml -c fixed_ip_address -c floating_ip_address

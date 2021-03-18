@@ -49,7 +49,7 @@ parameters:
     type: string
     description: >
       ID of public network
-    default: f10ad6de-a26d-4c29-8c64-2a7418d47f8f
+    default: f10ad6de-a26d-4c29-8c64-xxxxxxxxxxxx
 
   private_net:
     type: string

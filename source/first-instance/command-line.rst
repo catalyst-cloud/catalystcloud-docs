@@ -125,27 +125,27 @@ use:
  +--------------------------------------+-----------+-------+------+-----------+-------+-----------+
  | ID                                   | Name      |   RAM | Disk | Ephemeral | VCPUs | Is Public |
  +--------------------------------------+-----------+-------+------+-----------+-------+-----------+
- | 01b42bbc-347f-43e8-9a07-0a51105a5527 | c1.c8r8   |  8192 |   10 |         0 |     8 | True      |
- | 0c7dc485-e7cc-420d-b118-021bbafa76d7 | c1.c2r8   |  8192 |   10 |         0 |     2 | True      |
- | 0f3be84b-9d6e-44a8-8c3d-8a0dfe226674 | c1.c16r16 | 16384 |   10 |         0 |    16 | True      |
- | 1750075c-cd8a-4c87-bd06-a907db83fec6 | c1.c1r2   |  2048 |   10 |         0 |     1 | True      |
- | 1d760238-67a7-4415-ab7b-24a88a49c117 | c1.c8r32  | 32768 |   10 |         0 |     8 | True      |
- | 28153197-6690-4485-9dbc-fc24489b0683 | c1.c1r1   |  1024 |   10 |         0 |     1 | True      |
- | 45060aa3-3400-4da0-bd9d-9559e172f678 | c1.c4r8   |  8192 |   10 |         0 |     4 | True      |
- | 4efb43da-132e-4b50-a9d9-b73e827938a9 | c1.c2r16  | 16384 |   10 |         0 |     2 | True      |
- | 62473bef-f73b-4265-a136-e3ae87e7f1e2 | c1.c4r4   |  4096 |   10 |         0 |     4 | True      |
- | 6a16e03f-9127-427c-99aa-3bdbdd58471a | c1.c16r8  |  8192 |   10 |         0 |    16 | True      |
- | 746b8230-b763-41a6-954c-b11a29072e52 | c1.c1r4   |  4096 |   10 |         0 |     1 | True      |
- | 7b74c2c5-f131-4981-90ef-e1dc1ae51a8f | c1.c8r16  | 16384 |   10 |         0 |     8 | True      |
- | 7cd52d7f-9272-47c9-a3ea-e8d7bc30a0bd | c1.c8r64  | 65536 |   10 |         0 |     8 | True      |
- | 88597cff-9503-492c-b005-98736f0bd705 | c1.c16r64 | 65536 |   10 |         0 |    16 | True      |
- | 92e03684-53d0-4f1e-9222-cf4fbb8ef15d | c1.c16r32 | 32768 |   10 |         0 |    16 | True      |
- | a197eac1-9565-4052-8199-dfd8f31e5553 | c1.c8r4   |  4096 |   10 |         0 |     8 | True      |
- | a80af444-9e8a-4984-9f7f-b46532052a24 | c1.c4r2   |  2048 |   10 |         0 |     4 | True      |
- | b152339e-e624-4705-9116-da9e0a6984f7 | c1.c4r16  | 16384 |   10 |         0 |     4 | True      |
- | b4a3f931-dc86-480c-b7a7-c34b2283bfe7 | c1.c4r32  | 32768 |   10 |         0 |     4 | True      |
- | c093745c-a6c7-4792-9f3d-085e7782eca6 | c1.c2r4   |  4096 |   10 |         0 |     2 | True      |
- | e3feb785-af2e-41f7-899b-6bbc4e0b526e | c1.c2r2   |  2048 |   10 |         0 |     2 | True      |
+ | 01b42bbc-347f-43e8-9a07-xxxxxxxxxxxx | c1.c8r8   |  8192 |   10 |         0 |     8 | True      |
+ | 0c7dc485-e7cc-420d-b118-xxxxxxxxxxxx | c1.c2r8   |  8192 |   10 |         0 |     2 | True      |
+ | 0f3be84b-9d6e-44a8-8c3d-xxxxxxxxxxxx | c1.c16r16 | 16384 |   10 |         0 |    16 | True      |
+ | 1750075c-cd8a-4c87-bd06-xxxxxxxxxxxx | c1.c1r2   |  2048 |   10 |         0 |     1 | True      |
+ | 1d760238-67a7-4415-ab7b-xxxxxxxxxxxx | c1.c8r32  | 32768 |   10 |         0 |     8 | True      |
+ | 28153197-6690-4485-9dbc-xxxxxxxxxxxx | c1.c1r1   |  1024 |   10 |         0 |     1 | True      |
+ | 45060aa3-3400-4da0-bd9d-xxxxxxxxxxxx | c1.c4r8   |  8192 |   10 |         0 |     4 | True      |
+ | 4efb43da-132e-4b50-a9d9-xxxxxxxxxxxx | c1.c2r16  | 16384 |   10 |         0 |     2 | True      |
+ | 62473bef-f73b-4265-a136-xxxxxxxxxxxx | c1.c4r4   |  4096 |   10 |         0 |     4 | True      |
+ | 6a16e03f-9127-427c-99aa-xxxxxxxxxxxx | c1.c16r8  |  8192 |   10 |         0 |    16 | True      |
+ | 746b8230-b763-41a6-954c-xxxxxxxxxxxx | c1.c1r4   |  4096 |   10 |         0 |     1 | True      |
+ | 7b74c2c5-f131-4981-90ef-xxxxxxxxxxxx | c1.c8r16  | 16384 |   10 |         0 |     8 | True      |
+ | 7cd52d7f-9272-47c9-a3ea-xxxxxxxxxxxx | c1.c8r64  | 65536 |   10 |         0 |     8 | True      |
+ | 88597cff-9503-492c-b005-xxxxxxxxxxxx | c1.c16r64 | 65536 |   10 |         0 |    16 | True      |
+ | 92e03684-53d0-4f1e-9222-xxxxxxxxxxxx | c1.c16r32 | 32768 |   10 |         0 |    16 | True      |
+ | a197eac1-9565-4052-8199-xxxxxxxxxxxx | c1.c8r4   |  4096 |   10 |         0 |     8 | True      |
+ | a80af444-9e8a-4984-9f7f-xxxxxxxxxxxx | c1.c4r2   |  2048 |   10 |         0 |     4 | True      |
+ | b152339e-e624-4705-9116-xxxxxxxxxxxx | c1.c4r16  | 16384 |   10 |         0 |     4 | True      |
+ | b4a3f931-dc86-480c-b7a7-xxxxxxxxxxxx | c1.c4r32  | 32768 |   10 |         0 |     4 | True      |
+ | c093745c-a6c7-4792-9f3d-xxxxxxxxxxxx | c1.c2r4   |  4096 |   10 |         0 |     2 | True      |
+ | e3feb785-af2e-41f7-899b-xxxxxxxxxxxx | c1.c2r2   |  2048 |   10 |         0 |     2 | True      |
  +--------------------------------------+-----------+-------+------+-----------+-------+-----------+
 
  $ export CC_FLAVOR_ID=$( openstack flavor show c1.c1r1 -f value -c id )
@@ -177,32 +177,32 @@ use:
  +--------------------------------------+---------------------------------+--------+
  | ID                                   | Name                            | Status |
  +--------------------------------------+---------------------------------+--------+
- | 5892a80a-abc4-46f0-b39a-ecb4c0cb5d36 | ubuntu-18.04-x86_64             | active |
- | 49fb1409-c88e-4750-a394-56ddea80231d | ubuntu-16.04-x86_64             | active |
- | c75df558-7d84-4f97-9a5d-6eb58aeadcce | ubuntu-12.04-x86_64             | active |
- | cab9f3f4-a3a5-488b-885e-892873c15f53 | ubuntu-14.04-x86_64             | active |
- | f595d7ed-69c0-46b7-a688-a9d12d1e52dc | debian-8-x86_64                 | active |
- | 64ce626e-d1c6-41f3-805e-a283e83e4d85 | centos-6.6-x86_64               | active |
- | d46fde0f-01b4-4c21-b5a0-0d05df927c49 | centos-7.0-x86_64               | active |
- | bfbc68e4-afd6-4384-8790-ecf0ac3dd6a3 | atomic-7-x86_64                 | active |
- | b941a846-8cec-4f59-a39e-3720a25823cc | coreos-1068.8.0-x86_64          | active |
- | c14d3623-8912-4502-b2cc-0487d9913686 | ubuntu-14.04-x86_64-20160803    | active |
- | 08dd4b82-bea9-4f58-8351-6958fe7aae23 | ubuntu-12.04-x86_64-20160803    | active |
- | 37b45c3a-2ce4-4a21-980b-d835512eb35a | ubuntu-16.04-x86_64-20160803    | active |
- | 881fab19-35c6-410d-8d46-70e7f4db8c89 | centos-7.0-x86_64-20160802      | active |
- | bee47bef-78f9-41e5-bc0d-786786fad388 | centos-6.6-x86_64-20160802      | active |
- | c1e1cd17-1de4-4100-b280-1d10ee4aa8c0 | atomic-7-x86_64-20160802        | active |
- | 3d7b214f-1b67-4c89-bac7-01d449101c76 | debian-8-x86_64-20160802        | active |
- | 8c431b2b-1d89-4137-8b79-f288bfe65c9a | windows-server-2012r2-x86_64    | active |
- | 98123ffa-18ea-454b-9509-74fc4abee95d | debian-8-x86_64-20160620        | active |
- | 2e6ec1de-553b-4fa8-9997-d8366019ac68 | coreos-1010.5.0-x86_64-20160802 | active |
- | 0f9a3680-25d6-4efa-b202-32f26b4030e4 | centos-6.6-x86_64-20160620      | active |
- | 9e52bf38-addf-4391-8005-224be9113a0f | centos-7.0-x86_64-20160620      | active |
- | d3901dfa-1d19-48f9-bfea-163cebeb62d0 | ubuntu-16.04-x86_64-20160621    | active |
- | 4edfdb20-3af9-4880-a135-6d5971078460 | ubuntu-12.04-x86_64-20160622    | active |
- | ffee7150-70de-48bb-99b9-6cf5666b368c | atomic-7-x86_64-20160620        | active |
- | 661b2022-0f50-4783-b398-62113efd6bb2 | ubuntu-14.04-x86_64-20160624    | active |
- | f641e7f8-c8ac-4667-9a84-8653716fc1ad | centos-6.5-x86_64               | active |
+ | 5892a80a-abc4-46f0-b39a-xxxxxxxxxxxx | ubuntu-18.04-x86_64             | active |
+ | 49fb1409-c88e-4750-a394-xxxxxxxxxxxx | ubuntu-16.04-x86_64             | active |
+ | c75df558-7d84-4f97-9a5d-xxxxxxxxxxxx | ubuntu-12.04-x86_64             | active |
+ | cab9f3f4-a3a5-488b-885e-xxxxxxxxxxxx | ubuntu-14.04-x86_64             | active |
+ | f595d7ed-69c0-46b7-a688-xxxxxxxxxxxx | debian-8-x86_64                 | active |
+ | 64ce626e-d1c6-41f3-805e-xxxxxxxxxxxx | centos-6.6-x86_64               | active |
+ | d46fde0f-01b4-4c21-b5a0-xxxxxxxxxxxx | centos-7.0-x86_64               | active |
+ | bfbc68e4-afd6-4384-8790-xxxxxxxxxxxx | atomic-7-x86_64                 | active |
+ | b941a846-8cec-4f59-a39e-xxxxxxxxxxxx | coreos-1068.8.0-x86_64          | active |
+ | c14d3623-8912-4502-b2cc-xxxxxxxxxxxx | ubuntu-14.04-x86_64-20160803    | active |
+ | 08dd4b82-bea9-4f58-8351-xxxxxxxxxxxx | ubuntu-12.04-x86_64-20160803    | active |
+ | 37b45c3a-2ce4-4a21-980b-xxxxxxxxxxxx | ubuntu-16.04-x86_64-20160803    | active |
+ | 881fab19-35c6-410d-8d46-xxxxxxxxxxxx | centos-7.0-x86_64-20160802      | active |
+ | bee47bef-78f9-41e5-bc0d-xxxxxxxxxxxx | centos-6.6-x86_64-20160802      | active |
+ | c1e1cd17-1de4-4100-b280-xxxxxxxxxxxx | atomic-7-x86_64-20160802        | active |
+ | 3d7b214f-1b67-4c89-bac7-xxxxxxxxxxxx | debian-8-x86_64-20160802        | active |
+ | 8c431b2b-1d89-4137-8b79-xxxxxxxxxxxx | windows-server-2012r2-x86_64    | active |
+ | 98123ffa-18ea-454b-9509-xxxxxxxxxxxx | debian-8-x86_64-20160620        | active |
+ | 2e6ec1de-553b-4fa8-9997-xxxxxxxxxxxx | coreos-1010.5.0-x86_64-20160802 | active |
+ | 0f9a3680-25d6-4efa-b202-xxxxxxxxxxxx | centos-6.6-x86_64-20160620      | active |
+ | 9e52bf38-addf-4391-8005-xxxxxxxxxxxx | centos-7.0-x86_64-20160620      | active |
+ | d3901dfa-1d19-48f9-bfea-xxxxxxxxxxxx | ubuntu-16.04-x86_64-20160621    | active |
+ | 4edfdb20-3af9-4880-a135-xxxxxxxxxxxx | ubuntu-12.04-x86_64-20160622    | active |
+ | ffee7150-70de-48bb-99b9-xxxxxxxxxxxx | atomic-7-x86_64-20160620        | active |
+ | 661b2022-0f50-4783-b398-xxxxxxxxxxxx | ubuntu-14.04-x86_64-20160624    | active |
+ | f641e7f8-c8ac-4667-9a84-xxxxxxxxxxxx | centos-6.5-x86_64               | active |
  +--------------------------------------+---------------------------------+--------+
 
  $ export CC_IMAGE_ID=$( openstack image show ubuntu-18.04-x86_64 -f value -c id )
@@ -301,8 +301,8 @@ For our example instance, we are going to create a security group called
  | id          | <SECURITY_GROUP_ID>                                                             |
  | name        | first-instance-sg                                                               |
  | project_id  | <PROJECT_ID>                                                                    |
- | rules       | direction='egress', ethertype='IPv4', id='afc19e4d-a3d3-467f-8da3-3a07d3d59acc' |
- |             | direction='egress', ethertype='IPv6', id='e027c9b3-f59b-40bb-b4ea-d44a0f057d7f' |
+ | rules       | direction='egress', ethertype='IPv4', id='afc19e4d-a3d3-467f-8da3-xxxxxxxxxxxx' |
+ |             | direction='egress', ethertype='IPv6', id='e027c9b3-f59b-40bb-b4ea-xxxxxxxxxxxx' |
  +-------------+---------------------------------------------------------------------------------+
 
 Create a rule within the "first-instance-sg" security group.
@@ -317,8 +317,8 @@ and export it for later use.
  +--------------------------------------+-------------------+----------------------------------------+----------------------------------+
  | ID                                   | Name              | Description                            | Project                          |
  +--------------------------------------+-------------------+----------------------------------------+----------------------------------+
- | 14aeedb8-5e9c-4617-8cf9-6e072bb41886 | first-instance-sg | Network access for our first instance. | 0cb6b9b744594a619bxxxxxxf424858b |
- | 687512ab-f197-4f07-ae51-788c559883b9 | default           | default                                | 0cb6b9b744594a619bxxxxxxf424858b |
+ | 14aeedb8-5e9c-4617-8cf9-xxxxxxxxxxxx | first-instance-sg | Network access for our first instance. | 0cb6b9b744594a619bxxxxxxf424858b |
+ | 687512ab-f197-4f07-ae51-xxxxxxxxxxxx | default           | default                                | 0cb6b9b744594a619bxxxxxxf424858b |
  +--------------------------------------+-------------------+----------------------------------------+----------------------------------+
 
  $ export CC_SECURITY_GROUP_ID=$( openstack security group show first-instance-sg -f value -c id )
@@ -357,7 +357,7 @@ address:
  | protocol          | tcp                                  |
  | remote_group_id   | None                                 |
  | remote_ip_prefix  | <REMOTE_CIDR_NETWORK>                |
- | security_group_id | 14aeedb8-5e9c-4617-8cf9-6e072bb41886 |
+ | security_group_id | 14aeedb8-5e9c-4617-8cf9-xxxxxxxxxxxx |
  +-------------------+--------------------------------------+
 
 Now we actually create our instance:
@@ -397,10 +397,10 @@ As the Instance builds, its details will be provided. This includes its ID
  | adminPass                            | <ADMIN_PASS>                                               |
  | config_drive                         |                                                            |
  | created                              | 2016-08-17T23:35:32Z                                       |
- | flavor                               | c1.c1r1 (28153197-6690-4485-9dbc-fc24489b0683)             |
+ | flavor                               | c1.c1r1 (28153197-6690-4485-9dbc-xxxxxxxxxxxx)             |
  | hostId                               |                                                            |
  | id                                   | <INSTANCE_ID>                                              |
- | image                                | ubuntu-18.04-x86_64 (cab9f3f4-a3a5-488b-885e-892873c15f53) |
+ | image                                | ubuntu-18.04-x86_64 (cab9f3f4-a3a5-488b-885e-xxxxxxxxxxxx) |
  | key_name                             | glxxxxxxes                                                 |
  | name                                 | first-instance                                             |
  | os-extended-volumes:volumes_attached | []                                                         |
@@ -437,10 +437,10 @@ As the Instance builds, its details will be provided. This includes its ID
  | addresses                            | private-net=10.0.0.12                                      |
  | config_drive                         |                                                            |
  | created                              | 2016-09-02T00:29:44Z                                       |
- | flavor                               | c1.c1r1 (28153197-6690-4485-9dbc-fc24489b0683)             |
+ | flavor                               | c1.c1r1 (28153197-6690-4485-9dbc-xxxxxxxxxxxx)             |
  | hostId                               | 4f39b132f41c2ab6113d5bbeedab6e1bc0b1a1095949dd64df815077   |
  | id                                   | <INSTANCE_ID>                                              |
- | image                                | ubuntu-18.04-x86_64 (49fb1409-c88e-4750-a394-56ddea80231d) |
+ | image                                | ubuntu-18.04-x86_64 (49fb1409-c88e-4750-a394-xxxxxxxxxxxx) |
  | key_name                             | first-instance-key                                         |
  | name                                 | first-instance                                             |
  | os-extended-volumes:volumes_attached | []                                                         |

@@ -10,7 +10,7 @@ $ openstack volume create --description 'database volume' --size 50 db-vol-01
 | created_at          | 2016-08-18T23:08:40.021641           |
 | description         | database volume                      |
 | encrypted           | False                                |
-| id                  | 7e94a2f6-b4d2-47f1-83f7-a200e963404a |
+| id                  | 7e94a2f6-b4d2-47f1-83f7-xxxxxxxxxxxx |
 | multiattach         | False                                |
 | name                | db-vol-01                            |
 | properties          |                                      |

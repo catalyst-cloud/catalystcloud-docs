@@ -70,7 +70,7 @@ transfer:
    +--------------------------------------+----------------------------+-----------+------+-------------------------------------------+
    | ID                                   | Name                       | Status    | Size | Attached to                               |
    +--------------------------------------+----------------------------+-----------+------+-------------------------------------------+
-   | e58527cf-34d2-42bc-85fd-e689cc088dbd | transfer-example           | available |   10 |                                           |
+   | e58527cf-34d2-42bc-85fd-xxxxxxxxxxxx | transfer-example           | available |   10 |                                           |
    +--------------------------------------+----------------------------+-----------+------+-------------------------------------------+
 
 Once we have the volume that we want to transfer, in console one, we create a
@@ -84,9 +84,9 @@ transfer request using the following:
    +------------+--------------------------------------+
    | auth_key   | XXXXXXXXXXXXXXXX                     |
    | created_at | 2020-08-10T01:28:29.581644           |
-   | id         | 0ead79fc-62f2-482d-bb3e-75101843555b |
+   | id         | 0ead79fc-62f2-482d-bb3e-xxxxxxxxxxxx |
    | name       | transfer_name                        |
-   | volume_id  | e58527cf-34d2-42bc-85fd-e689cc088dbd |
+   | volume_id  | e58527cf-34d2-42bc-85fd-xxxxxxxxxxxx |
    +------------+--------------------------------------+
 
 Now that we have our transfer ID and our auth_key; we swap over
@@ -94,13 +94,13 @@ to console two and we use the following to accept the transfer request:
 
 .. code-block:: bash
 
-   $ openstack volume transfer request accept --auth-key XXXXXXXXXXXXXXXX 0ead79fc-62f2-482d-bb3e-75101843555b
+   $ openstack volume transfer request accept --auth-key XXXXXXXXXXXXXXXX 0ead79fc-62f2-482d-bb3e-xxxxxxxxxxxx
    +-----------+--------------------------------------+
    | Field     | Value                                |
    +-----------+--------------------------------------+
-   | id        | 0ead79fc-62f2-482d-bb3e-75101843555b |
+   | id        | 0ead79fc-62f2-482d-bb3e-xxxxxxxxxxxx |
    | name      | transfer_name                        |
-   | volume_id | e58527cf-34d2-42bc-85fd-e689cc088dbd |
+   | volume_id | e58527cf-34d2-42bc-85fd-xxxxxxxxxxxx |
    +-----------+--------------------------------------+
 
 If we then check on console two, for the volumes we have available, we can
@@ -112,5 +112,5 @@ see that our volume has now been transferred to our second project:
    +--------------------------------------+----------------------------+-----------+------+-------------------------------------------+
    | ID                                   | Name                       | Status    | Size | Attached to                               |
    +--------------------------------------+----------------------------+-----------+------+-------------------------------------------+
-   | e58527cf-34d2-42bc-85fd-e689cc088dbd | transfer-example           | available |   10 |                                           |
+   | e58527cf-34d2-42bc-85fd-xxxxxxxxxxxx | transfer-example           | available |   10 |                                           |
    +--------------------------------------+----------------------------+-----------+------+-------------------------------------------+

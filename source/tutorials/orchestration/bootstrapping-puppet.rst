@@ -45,9 +45,9 @@ find these values, you need to run the following OpenStack commands.
   +--------------------------------------+------------+
   | ID                                   | Name       |
   +--------------------------------------+------------+
-  | 74be55e6-b303-473c-ac1a-185c39b6f7b3 | mgmt-net   |
-  | 849ab1e9-7ac5-4618-8801-e6176fcccf30 | public-net |
-  | e7adca02-5b8b-4c2e-9946-2e2eff55997a | front-end  |
+  | 74be55e6-b303-473c-ac1a-xxxxxxxxxxxx | mgmt-net   |
+  | 849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx | public-net |
+  | e7adca02-5b8b-4c2e-9946-xxxxxxxxxxxx | front-end  |
   +--------------------------------------+------------+
 
 You also need to know the ID of the front-end network subnet, in order to
@@ -59,8 +59,8 @@ create a port and assign a floating IP to the server.
   +--------------------------------------+-------------+
   | ID                                   | Name        |
   +--------------------------------------+-------------+
-  | 279a71ca-6772-4235-bbb4-c0ddf2029f67 | front-end   |
-  | 450cb9f7-b297-40fe-a855-fc187bb27b2a | mgmt-subnet |
+  | 279a71ca-6772-4235-bbb4-xxxxxxxxxxxx | front-end   |
+  | 450cb9f7-b297-40fe-a855-xxxxxxxxxxxx | mgmt-subnet |
   +--------------------------------------+-------------+
 
 **************
@@ -112,15 +112,15 @@ arguments from the command line, as shown `here`_.
       type: string
       description: >
         ID of public network for which floating IP addresses will be allocated
-      default: 849ab1e9-7ac5-4618-8801-e6176fcccf30
+      default: 849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx
     private_net_id:
       type: string
       description: ID of private network into which servers get deployed
-      default: e7adca02-5b8b-4c2e-9946-2e2eff55997a
+      default: e7adca02-5b8b-4c2e-9946-xxxxxxxxxxxx
     private_subnet_id:
       type: string
       description: ID of private sub network into which servers get deployed
-      default: 279a71ca-6772-4235-bbb4-c0ddf2029f67
+      default: 279a71ca-6772-4235-bbb4-xxxxxxxxxxxx
 
   resources:
     server1:

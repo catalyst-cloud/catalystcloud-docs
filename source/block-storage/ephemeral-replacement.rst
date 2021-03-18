@@ -72,11 +72,11 @@ current snapshot.
    +--------------------------------------+--------------------+-------------------+------------------------------------------+------------------------------+---------+
    | ID                                   | Name               | Status            | Networks                                 | Image                        | Flavor  |
    +--------------------------------------+--------------------+-------------------+------------------------------------------+------------------------------+---------+
-   | 9896d5e5-116f-4aa2-b962-f7b473b080d8 | ephemeral-instance | ACTIVE            | private-net-1=10.0.0.17, 103.254.156.188 | ubuntu-18.04-x86_64          | c1.c1r1 |
+   | 9896d5e5-116f-4aa2-b962-xxxxxxxxxxxx | ephemeral-instance | ACTIVE            | private-net-1=10.0.0.17, 103.254.156.188 | ubuntu-18.04-x86_64          | c1.c1r1 |
    +--------------------------------------+--------------------+-------------------+------------------------------------------+------------------------------+---------+
 
    # Then use the shelve command with the instance ID
-   $ openstack server shelve 9896d5e5-116f-4aa2-b962-f7b473b080d8
+   $ openstack server shelve 9896d5e5-116f-4aa2-b962-xxxxxxxxxxxx
 
 
 After this, we will create a volume from our snapshot.
@@ -88,12 +88,12 @@ After this, we will create a volume from our snapshot.
    +--------------------------------------+--------------------------------------+--------+
    | ID                                   | Name                                 | Status |
    +--------------------------------------+--------------------------------------+--------+
-   | aa1e6f8d-0689-4eaf-9a13-c2c16391a82c | ephemeral-instance-shelved           | active |
+   | aa1e6f8d-0689-4eaf-9a13-xxxxxxxxxxxx | ephemeral-instance-shelved           | active |
    +--------------------------------------+--------------------------------------+--------+
 
 
    # then we execute the following command, changing the --image to be the ID of your snapshot.
-   $ openstack volume create persistent-volume-bootable --size 20 --image aa1e6f8d-0689-4eaf-9a13-c2c16391a82c \
+   $ openstack volume create persistent-volume-bootable --size 20 --image aa1e6f8d-0689-4eaf-9a13-xxxxxxxxxxxx \
    --description volume-from-ephemeral-shelved --bootable --os-project-id eac679e489614xxxxxxce29d755fe289 \
    --availability-zone NZ-WLG-2 --type b1.standard
 
@@ -109,11 +109,11 @@ we use the create server command, adding the --volume flag:
    +--------------------------------------+--------------------+-------------------+------------------------------------------+------------------------------+---------+
    | ID                                   | Name               | Status            | Networks                                 | Image                        | Flavor  |
    +--------------------------------------+--------------------+-------------------+------------------------------------------+------------------------------+---------+
-   | 9896d5e5-116f-4aa2-b962-f7b473b080d8 | ephemeral-instance | SHELVED_OFFLOADED | private-net-1=10.0.0.17, 103.254.156.188 | ubuntu-18.04-x86_64          | c1.c1r1 |
+   | 9896d5e5-116f-4aa2-b962-xxxxxxxxxxxx | ephemeral-instance | SHELVED_OFFLOADED | private-net-1=10.0.0.17, 103.254.156.188 | ubuntu-18.04-x86_64          | c1.c1r1 |
    +--------------------------------------+--------------------+-------------------+------------------------------------------+------------------------------+---------+
 
    # then we get the flavor and image ID's along with the security and network information from the previous instance
-   $ openstack server show 9896d5e5-116f-4aa2-b962-f7b473b080d8
+   $ openstack server show 9896d5e5-116f-4aa2-b962-xxxxxxxxxxxx
    +-----------------------------+------------------------------------------------------------+
    | Field                       | Value                                                      |
    +-----------------------------+------------------------------------------------------------+
@@ -129,10 +129,10 @@ we use the create server command, adding the --volume flag:
    | addresses                   | private-net-1=10.0.0.17, 103.254.156.188                   |
    | config_drive                |                                                            |
    | created                     | 2019-09-16T00:21:39Z                                       |
-   | flavor                      | c1.c1r1 (6371ec4a-47d1-4159-a42f-83b84b80eea7)             |
+   | flavor                      | c1.c1r1 (6371ec4a-47d1-4159-a42f-xxxxxxxxxxxx)             |
    | hostId                      |                                                            |
-   | id                          | 9896d5e5-116f-4aa2-b962-f7b473b080d8                       |
-   | image                       | ubuntu-18.04-x86_64 (102172df-9872-47df-b66b-2bcecb3a74b7) |
+   | id                          | 9896d5e5-116f-4aa2-b962-xxxxxxxxxxxx                       |
+   | image                       | ubuntu-18.04-x86_64 (102172df-9872-47df-b66b-xxxxxxxxxxxx) |
    | key_name                    | security-key                                               |
    | name                        | ephemeral-instance                                         |
    | project_id                  | eac679e489614xxxxxxce29d755fe289                           |
@@ -142,15 +142,15 @@ we use the create server command, adding the --volume flag:
    | status                      | SHELVED_OFFLOADED                                          |
    | updated                     | 2019-09-18T23:11:59Z                                       |
    | user_id                     | 53b94a52e9dcxxxxxxx0079a9a3d6434                           |
-   | volumes_attached            | id='09975851-7bb4-4935-814b-2e65d19fd433'                  |
+   | volumes_attached            | id='09975851-7bb4-4935-814b-xxxxxxxxxxxx'                  |
    +-----------------------------+------------------------------------------------------------+
 
    # you will also need to get your private-net id using the following command:
    $ openstack network show private-net -f value -c id
 
    # we then create our new instance with these parameters.
-   $ openstack server create --flavor 6371ec4a-47d1-4159-a42f-83b84b80eea7 \
-   --volume 666707a2-0835-449a-a093-b14015773cd3 --nic net-id=550677db-0232-418b-aeb5-f461cf907967 \
+   $ openstack server create --flavor 6371ec4a-47d1-4159-a42f-xxxxxxxxxxxx \
+   --volume 666707a2-0835-449a-a093-xxxxxxxxxxxx --nic net-id=550677db-0232-418b-aeb5-xxxxxxxxxxxx \
    --security-group default --security-group security-group persistent-volume-instance
 
 After this is completed, you should be able to assign a floating IP to your
@@ -164,7 +164,7 @@ instead of ephemeral.
    +--------------------------------------+---------------------+------------------+------+--------------------------------------+----------------------------------+
    | ID                                   | Floating IP Address | Fixed IP Address | Port | Floating Network                     | Project                          |
    +--------------------------------------+---------------------+------------------+------+--------------------------------------+----------------------------------+
-   | 50e0c050-db2a-47bf-a478-871a84d1faa9 | 103.254.156.188     | None             | None | e0ba6b88-5360-492c-9c3d-119948356fd3 | eac679e489614xxxxxxce29d755fe289 |
+   | 50e0c050-db2a-47bf-a478-xxxxxxxxxxxx | 103.254.156.188     | None             | None | e0ba6b88-5360-492c-9c3d-xxxxxxxxxxxx | eac679e489614xxxxxxce29d755fe289 |
    +--------------------------------------+---------------------+------------------+------+--------------------------------------+----------------------------------+
 
    $ openstack server add floating ip persistent-volume-instance 103.254.156.188

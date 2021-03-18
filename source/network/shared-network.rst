@@ -74,7 +74,7 @@ Confirm what internal networks are currently available.
   +--------------------------------------+---------------------+--------------------------------------+
   | ID                                   | Name                | Subnets                              |
   +--------------------------------------+---------------------+--------------------------------------+
-  | f94e78e1-690e-4fad-81f7-35dc52e7d072 | private-net         | 5ea2199a-1a1e-40c5-a4cd-81dca872570c |
+  | f94e78e1-690e-4fad-81f7-xxxxxxxxxxxx | private-net         | 5ea2199a-1a1e-40c5-a4cd-xxxxxxxxxxxx |
   +--------------------------------------+---------------------+--------------------------------------+
 
 We can confirm this using the Network Topology view from the dashboard.
@@ -91,7 +91,7 @@ Retrieve the UUID of the network to be shared, in this case private-net-2.
 .. code-block:: console
 
   $ openstack network show private-net-2 -c name -f value -c id -f value -f yaml
-  id: b6b93acd-3511-4a35-b37e-7a66e792321f
+  id: b6b93acd-3511-4a35-b37e-xxxxxxxxxxxx
   name: private-net-2
 
 Create the network RBAC policy using ``access_as_shared`` for the policy
@@ -100,14 +100,14 @@ action.
 .. code-block:: console
 
   $ openstack network rbac create --target-project 83100bf293c94607xxxxxxa959ac0218 \
-  --action access_as_shared --type network b6b93acd-3511-4a35-b37e-7a66e792321f
+  --action access_as_shared --type network b6b93acd-3511-4a35-b37e-xxxxxxxxxxxx
   +-------------------+--------------------------------------+
   | Field             | Value                                |
   +-------------------+--------------------------------------+
   | action            | access_as_shared                     |
-  | id                | 52cc1d1b-12e8-4d25-ab75-f9d1137ff5c7 |
+  | id                | 52cc1d1b-12e8-4d25-ab75-xxxxxxxxxxxx |
   | name              | None                                 |
-  | object_id         | b6b93acd-3511-4a35-b37e-7a66e792321f |
+  | object_id         | b6b93acd-3511-4a35-b37e-xxxxxxxxxxxx |
   | object_type       | network                              |
   | project_id        | eac679e489614xxxxxxce29d755fe289     |
   | target_project_id | 83100bf293c94607xxxxxxa959ac0218     |
@@ -117,7 +117,7 @@ action.
   +--------------------------------------+-------------+--------------------------------------+
   | ID                                   | Object Type | Object ID                            |
   +--------------------------------------+-------------+--------------------------------------+
-  | 52cc1d1b-12e8-4d25-ab75-f9d1137ff5c7 | network     | b6b93acd-3511-4a35-b37e-7a66e792321f |
+  | 52cc1d1b-12e8-4d25-ab75-xxxxxxxxxxxx | network     | b6b93acd-3511-4a35-b37e-xxxxxxxxxxxx |
   +--------------------------------------+-------------+--------------------------------------+
 
 |
@@ -134,8 +134,8 @@ network in the recieving project, either from the CLI, like this:
   +--------------------------------------+---------------+--------------------------------------+
   | ID                                   | Name          | Subnets                              |
   +--------------------------------------+---------------+--------------------------------------+
-  | b6b93acd-3511-4a35-b37e-7a66e792321f | private-net-2 | 6cc1e626-4bc6-4436-8e72-b1e79c4e3dd9 |
-  | f94e78e1-690e-4fad-81f7-35dc52e7d072 | private-net   | 5ea2199a-1a1e-40c5-a4cd-81dca872570c |
+  | b6b93acd-3511-4a35-b37e-xxxxxxxxxxxx | private-net-2 | 6cc1e626-4bc6-4436-8e72-xxxxxxxxxxxx |
+  | f94e78e1-690e-4fad-81f7-xxxxxxxxxxxx | private-net   | 5ea2199a-1a1e-40c5-a4cd-xxxxxxxxxxxx |
   +--------------------------------------+---------------+--------------------------------------+
 
 or from the dashboard's topology view.
@@ -171,12 +171,12 @@ be needed to set up a static route.
   | dns_domain              | None                                                                                  |
   | dns_name                |                                                                                       |
   | extra_dhcp_opts         | None                                                                                  |
-  | fixed_ips               | ip_address='10.0.1.6', subnet_id='6cc1e626-4bc6-4436-8e72-b1e79c4e3dd9'               |
-  | id                      | 6c0f0344-be2d-4996-9d86-9cd6f5c42735                                                  |
+  | fixed_ips               | ip_address='10.0.1.6', subnet_id='6cc1e626-4bc6-4436-8e72-xxxxxxxxxxxx'               |
+  | id                      | 6c0f0344-be2d-4996-9d86-xxxxxxxxxxxx                                                  |
   | ip_allocation           | None                                                                                  |
   | mac_address             | fa:16:3e:63:6e:3d                                                                     |
   | name                    | shared-network-port                                                                   |
-  | network_id              | b6b93acd-3511-4a35-b37e-7a66e792321f                                                  |
+  | network_id              | b6b93acd-3511-4a35-b37e-xxxxxxxxxxxx                                                  |
   | numa_affinity_policy    | None                                                                                  |
   | port_security_enabled   | False                                                                                 |
   | project_id              | 83100bf293c94607xxxxxxa959ac0218                                                      |
@@ -185,7 +185,7 @@ be needed to set up a static route.
   | qos_policy_id           | None                                                                                  |
   | resource_request        | None                                                                                  |
   | revision_number         | None                                                                                  |
-  | security_group_ids      | fcf4a5f1-a37c-4c25-9c54-63680888dea3                                                  |
+  | security_group_ids      | fcf4a5f1-a37c-4c25-9c54-xxxxxxxxxxxx                                                  |
   | status                  | DOWN                                                                                  |
   | tags                    |                                                                                       |
   | trunk_details           | None                                                                                  |
@@ -206,11 +206,11 @@ following,
   $ openstack router show border-router -c interfaces_info -f value -f yaml
   interfaces_info:
   - ip_address: 10.0.1.6
-    port_id: 6c0f0344-be2d-4996-9d86-9cd6f5c42735
-    subnet_id: 6cc1e626-4bc6-4436-8e72-b1e79c4e3dd9
+    port_id: 6c0f0344-be2d-4996-9d86-xxxxxxxxxxxx
+    subnet_id: 6cc1e626-4bc6-4436-8e72-xxxxxxxxxxxx
   - ip_address: 192.168.3.1
-    port_id: e468db30-2b83-4a61-ad8a-3e57f469b6b9
-    subnet_id: 5ea2199a-1a1e-40c5-a4cd-81dca872570c
+    port_id: e468db30-2b83-4a61-ad8a-xxxxxxxxxxxx
+    subnet_id: 5ea2199a-1a1e-40c5-a4cd-xxxxxxxxxxxx
 
 or confirm via the topology view.
 
@@ -281,7 +281,7 @@ Remove the RBAC policy, using it's UUID
 
 .. code-block:: console
 
-  $ openstack network rbac delete 52cc1d1b-12e8-4d25-ab75-f9d1137ff5c7
+  $ openstack network rbac delete 52cc1d1b-12e8-4d25-ab75-xxxxxxxxxxxx
 
 Also make sure to remove any unneeded security group rules that may have been
 added as part of this process.

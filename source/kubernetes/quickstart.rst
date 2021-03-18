@@ -113,12 +113,12 @@ The following command will list all cluster templates available:
   +--------------------------------------+-----------------------------------+
   | uuid                                 | name                              |
   +--------------------------------------+-----------------------------------+
-  | 9a3f08e2-6091-490c-b423-f5c9fb425541 | kubernetes-v1.15.11-dev-20200330  |
-  | f2ac9cfc-30a8-42c9-89e4-e48f53c4fbe1 | kubernetes-v1.15.11-prod-20200330 |
-  | bc493321-6d30-44a1-b767-2196e523dd8e | kubernetes-v1.16.9-dev-20200602   |
-  | 99f51180-cdcb-4492-9163-5453f2a8998f | kubernetes-v1.16.9-prod-20200602  |
-  | c06970d9-0926-4e07-8042-01601d68a2a1 | kubernetes-v1.17.5-dev-20200615   |
-  | 2efc83d2-e6d6-4c3a-af3b-17463387d314 | kubernetes-v1.17.5-prod-20200615  |
+  | 9a3f08e2-6091-490c-b423-xxxxxxxxxxxx | kubernetes-v1.15.11-dev-20200330  |
+  | f2ac9cfc-30a8-42c9-89e4-xxxxxxxxxxxx | kubernetes-v1.15.11-prod-20200330 |
+  | bc493321-6d30-44a1-b767-xxxxxxxxxxxx | kubernetes-v1.16.9-dev-20200602   |
+  | 99f51180-cdcb-4492-9163-xxxxxxxxxxxx | kubernetes-v1.16.9-prod-20200602  |
+  | c06970d9-0926-4e07-8042-xxxxxxxxxxxx | kubernetes-v1.17.5-dev-20200615   |
+  | 2efc83d2-e6d6-4c3a-af3b-xxxxxxxxxxxx | kubernetes-v1.17.5-prod-20200615  |
   +--------------------------------------+-----------------------------------+
 
 We want to use the latest development template (which in the example above is
@@ -223,7 +223,7 @@ following command:
   --node-count 3 \
   --master-count 1
 
-  Request to create cluster c191470e-7540-43fe-af32-ad5bf84940d7 accepted
+  Request to create cluster c191470e-7540-43fe-af32-xxxxxxxxxxxx accepted
 
 This command will create a cluster that should be identical to the one we
 created using the dashboard method.
@@ -241,7 +241,7 @@ cluster:
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
   | uuid                                 | name        | keypair  | node_count | master_count | status             |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
-  | c191470e-7540-43fe-af32-ad5bf84940d7 | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
+  | c191470e-7540-43fe-af32-xxxxxxxxxxxx | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
 
 Alternatively, you can check the status of the cluster on the `Clusters`_
