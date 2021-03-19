@@ -37,7 +37,7 @@ Or getting current month quotation:
   ~$ openstack rating quotation list
   {
       "end": "2017-12-05 00:00:00",
-      "project_id": "94b566de52f9423fab80ceee8c0a4a23",
+      "project_id": "94b566de52f9423faxxxxxxe8c0a4a23",
       "project_name": "openstack",
       "quotations": {
           "2017-12-05": {

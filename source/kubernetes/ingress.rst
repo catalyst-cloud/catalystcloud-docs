@@ -365,7 +365,7 @@ service
     x-forwarded-port=80
     x-forwarded-proto=http
     x-real-ip=10.0.0.14
-    x-request-id=44b267885e34e253619ad6eabc9de69c
+    x-request-id=44b267885e34e2536xxxxxxabc9de69c
     x-scheme=http
 
   Request Body:
@@ -544,7 +544,7 @@ test the service
     x-forwarded-port=443
     x-forwarded-proto=https
     x-real-ip=10.0.0.13
-    x-request-id=3f871ce2c2d0b9935d9b45cae43e4d17
+    x-request-id=3f871ce2c2d0b9935d9bxxxxxx3e4d17
     x-scheme=https
 
   Request Body:
@@ -698,7 +698,7 @@ originating IP address included in the request headers.
     x-forwarded-proto=http
     x-original-uri=/ping
     x-real-ip=203.109.145.15
-    x-request-id=a244d459cce51cec15f5482fd4983709
+    x-request-id=a244d459cce51cec1xxxxxxfd4983709
     x-scheme=http
 
   Request Body:

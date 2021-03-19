@@ -14,7 +14,7 @@ should see something like this
   Collection Status
   -----------------
   Connecting with backend: BackendWrapper
-  Archive dir: /home/ubuntu/.cache/duplicity/cd3fc2f113a80b76b6827a6f7b16aee5
+  Archive dir: /home/ubuntu/.cache/duplicity/cd3fc2f113a80b76b6xxxxxx7b16aee5
 
   Found 0 secondary backup chains.
   No backup chains with active signatures found
@@ -66,7 +66,7 @@ We can verify the state of our backups with:
   Collection Status
   -----------------
   Connecting with backend: BackendWrapper
-  Archive dir: /home/ubuntu/.cache/duplicity/cd3fc2f113a80b76b6827a6f7b16aee5
+  Archive dir: /home/ubuntu/.cache/duplicity/cd3fc2f113a80b76b6xxxxxx7b16aee5
 
   Found 0 secondary backup chains.
 

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+echo -e "\n#######################"
+echo -e "Running pre-commit hook"
+echo -e "#######################"
+
+IFS="
+"
+echo -e "\nChecking for un-anonymised UUID values\n"
+matches=$(grep -rn --exclude={*png,*jpg} --exclude-dir={build,venv,src} \
+          -E "\b[a-z0-9]{32}\b|\b\w{8}-\w{4}-\w{4}-\w{4}-\w{12}\b" | grep -vi xxx)
+
+if [ -n "$matches" ]; then
+  echo "The following were identified as possible un-anonymised UUID values."
+  echo -e "Please correct these and resubmit the commit.\n"
+  for match in $matches; do
+    echo $match
+  done
+  echo ""
+  exit 1
+fi
+
+
+# check if trailing whitespace detected and print file name and exit with an error
+
+echo -e "\nRunning doc8 checks\n"
+source venv/bin/activate
+exec doc8 source
+
+
