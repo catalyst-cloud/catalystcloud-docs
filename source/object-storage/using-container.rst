@@ -432,7 +432,7 @@ method you choose:
 
             $ swift stat -v
              StorageURL: https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-                              Auth Token: 5f5a043e1bd24a8fa84b8785cca8e0fc
+                              Auth Token: 5f5a043e1bd24a8fa8xxxxxxcca8e0fc
                               Containers: 48
                                  Account: AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                                  Objects: 156
@@ -448,7 +448,7 @@ method you choose:
                            Accept-Ranges: bytes
 
             $ export storageURL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-            $ export token="5f5a043e1bd24a8fa84b8785cca8e0fc"
+            $ export token="5f5a043e1bd24a8fa8xxxxxxcca8e0fc"
 
         To create a new container, use the following cURL request:
 

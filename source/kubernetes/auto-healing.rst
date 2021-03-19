@@ -63,11 +63,11 @@ node conditions.
   cloud-provider: openstack
   repair-delay-after-add: 3m
   openstack:
-    user-id: 937509608ad344d0b226f5946f64d23b
+    user-id: 937509608ad344d0bxxxxxx46f64d23b
     password: "password"
     auth-url: http://192.168.200.200/identity
     region: RegionOne
-    project-id: d40141b0d5604fbdabfa65dbe8eceb7a
+    project-id: d40141b0d5604fbdxxxxxxdbe8eceb7a
   kubernetes:
       api-host:
       kubeconfig: /home/feilong/config

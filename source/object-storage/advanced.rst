@@ -279,7 +279,7 @@ successful, the request should return the contents of the object.
   Content-Length: 501
   Accept-Ranges: bytes
   Last-Modified: Mon, 09 Jan 2017 19:18:47 GMT
-  Etag: 137eed1d424a58831892172f5433594a
+  Etag: 137eed1d424a588318xxxxxx5433594a
   X-Timestamp: 1483989526.71129
   Content-Disposition: attachment; filename="file2.txt"; filename*=UTF-8''file2.txt
   X-Trans-Id: tx9aa84268bd984358b6afe-005873e2dd

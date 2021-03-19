@@ -274,7 +274,7 @@ add a write access rule to the access_1 container for restricted-user-2.
 
   # as clouduser
 
-  $ swift post access_1 --write-acl "*:9298ecab1c90450abedcd82e0e4136ce"
+  $ swift post access_1 --write-acl "*:9298ecab1c90450abexxxxxx0e4136ce"
 
   $ openstack container show access_1
   +--------------+---------------------------------------+
@@ -285,7 +285,7 @@ add a write access rule to the access_1 container for restricted-user-2.
   | container    | access_1                              |
   | object_count | 1                                     |
   | read_acl     | *:11d1cb41f05140ebadxxxxxx9a67a2d7    |
-  | write_acl    | *:9298ecab1c90450abedcd82e0e4136ce    |
+  | write_acl    | *:9298ecab1c90450abexxxxxx0e4136ce    |
   +--------------+---------------------------------------+
 
 
