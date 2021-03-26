@@ -13,9 +13,10 @@ host multiple database systems from the same *database instance.* This is
 discussed later in the documentation.
 
 
-.. Warning::
+.. Note::
 
-  This service is currently only available to invited users as a tech preview.
+  This service is currently available as an open Beta and improvements are still
+  being made.
 
 Table of contents:
 
