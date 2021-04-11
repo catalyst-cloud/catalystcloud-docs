@@ -20,3 +20,4 @@ Table of Contents:
   release-notes/release_30_nov_2020
   release-notes/release_18_jan_2021
   release-notes/release_11_feb_2021
+  release-notes/release_17_march_2021
