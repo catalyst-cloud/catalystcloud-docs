@@ -17,7 +17,7 @@ Catalyst Cloud Kubernetes Service supports each ``minor`` version for at least
 ``9`` months before deprecating it to give users enough time to upgrade their
 clusters. The 9 months is calculated based on that the Kubernetes community
 maintains release branches for the latest 3 minor versions and they release a
-new mintor version about every three months. User will get support from
+new minor version about every three months. User will get support from
 Catalyst Cloud to *any* patch and date version within these releases.
 
 What is Kubernetes Versions
@@ -66,27 +66,27 @@ Catalyst Cloud Kubernetes Service supports at least ``3`` minors versions. As lo
 as there is a new minor version released, Catalyst Cloud Kubernetes Service will
 try to get it certified (pass the CNCF conformance test) and released in ``30``
 days. And then deprecate the oldest minor version. For example, if the current
-3 minor versions are v1.17.x, v1.16.x and v1.15.x. Then as long as the new
-v1.18.x released, the version v1.15.x will be removed and out of supported.
+3 minor versions are v1.17.x, v1.16.x and v1.15.x. Then when the new v1.18.x
+version is released, the version v1.15.x will be removed and out of support.
 Out of support means whenever users ask for support, you will be asked
-to upgrade your clusters to supported versions first. In short, if the cluster
+to upgrade your clusters to a supported version first. In short, if the cluster
 is running on a minor version which has been deprecated, then the cluster is
 out of support.
 
 Catalyst Cloud Kubernetes Service supports the latest stable patch versions
 for each minor version. As long as there is a patch version released, the oldest
-patch version will be hidded/removed. For example, if current versions
-supported for v1.16.x are v1.16.9, then v1.16.9 will be hidded/removed in
+patch version will be hidden/removed. For example, if current versions
+supported for v1.16.x are v1.16.9, then v1.16.9 will be hidden/removed in
 favor of the release of v1.16.10.
 
 .. note::
 
-    For clarity, hidding a ``patch`` version/template doesn't mean it is out of
+    For clarity, hiding a ``patch`` version/template doesn't mean it is out of
     support, it means we are motivating customers to always use the latest one.
     If there is a bug impacting customers on the latest patch version we would
     either unhide the previous version or publish a new patch version.
 
-Users should always aim to run the latest patch version for each minor version
+Users should always aim to run the latest patch for each minor version
 to get the latest security enhancements. For example, if the current Kubernetes
 cluster is running on v1.16.9 and the new patch version is v1.16.10, then it
 is highly recommended to upgrade to v1.16.10 as soon as possible.
@@ -94,14 +94,14 @@ is highly recommended to upgrade to v1.16.10 as soon as possible.
 .. note::
 
     Catalyst Cloud reserves the right to add/remove a new/existing cluster
-    template if there is a cirtical issue identified in the version without
+    template if there is a critical issue identified in the version without
     further notice.
 
 ****************************
 Upgrading Kubernetes Version
 ****************************
 
-When doing Kubernetes version upgrade, minor vesion cannot be skipped. For
+When doing Kubernetes version upgrade, minor version cannot be skipped. For
 example, if the current cluster version is v1.16.x, then it's not allowed
 to upgrade to v1.18.x. You have to upgrade to v1.17.x and then do another
 upgrade to v1.18.x.
@@ -109,7 +109,7 @@ upgrade to v1.18.x.
 .. note::
 
     Catalyst Cloud reserves the right to do a force patch version upgrade if
-    there is an urgent critical security vulnerbility (`CVE`_ rated as high) and
+    there is an urgent critical security vulnerability (`CVE`_ rated as high) and
     the customer cannot be reached.
 
 .. _`CVE`: https://cve.mitre.org/
@@ -119,9 +119,9 @@ Node OS Version and CRI Version
 *******************************
 
 Catalyst Cloud Kubernetes Service is using Fedora CoreOS as the Kubernetes Node
-operating system, the original image will be updated regularly. We're using Podman
-and systemd to manage all the Kubernetes components and using Docker for the
-container runtime of Kubernetes.
+operating system, the original image will be updated regularly. We're using
+Podman and systemd to manage all the Kubernetes components and using Docker for
+the container runtime of Kubernetes.
 
 * Node Operating System: Fedora CoreOS 31
 * Docker: 18.09.8
@@ -141,3 +141,12 @@ Addons Versions
 At this stage, Catalyst Cloud Kubernetes Service doesn't support upgrade the
 addons' versions, such as Calico, CoreDNS etc.
 
+*******************
+Containerd Version
+*******************
+
+For any template after version v1.20.x we are using containerd at runtime to
+create our cluster in place of Docker. You can find more information on this
+change in the following blog: `Don't Panic: Kubernetes and Docker`_
+
+.. _`Don't Panic: Kubernetes and Docker`: https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/
