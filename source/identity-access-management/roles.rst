@@ -384,7 +384,6 @@ The list of explicit permissions for the Heat stack owner role:
    |                       | openstack.orchestration.stacks:show_snapshot                           |
    |                       | openstack.orchestration.stacks:delete_snapshot                         |
    |                       | openstack.orchestration.stacks:list_snapshots                          |
-   |                       | openstack.billing.get_measurements
    |                       | openstack.orchestration.stacks:restore_snapshot                        |
    |                       | openstack.orchestration.stacks:List_outputs                            |
    |                       | openstack.orchestration.stacks:show_output                             |
