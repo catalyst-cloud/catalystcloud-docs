@@ -56,9 +56,10 @@ Project admin
 
 The *Project Admin* role allows users to have full control over who has access
 to the project, including adding moderators and inviting other people to join
-it. However, this role is purely for administrating purposes. It does not
-allow you to access or view all resources, you still need the member role for
-that.
+it. However, this role is purely for administration purposes and as such
+limits the amount of access and visibility within the project and typically
+cannot interact with deployed resources in a meaningful way. In order to do
+this you require the member role.
 
 The list of explicit permissions for the project admin role:
 
@@ -74,9 +75,9 @@ Project moderator
 =================
 
 The *Project Moderator* role can invite other people to join your project and
-update their roles, but cannot change any of the roles that a project admin has.
-This role also has the same problem as the Admin role in regards to resource
-access.
+update their roles, but cannot change any of the roles that a project admin
+has. This role also has the same restrictions as the Admin role in regards to
+resource access.
 
 The list of explicit permissions for the project moderator role:
 
@@ -84,6 +85,25 @@ The list of explicit permissions for the project moderator role:
 
    +-----------------------+------------------------------------------------------------------------+
    | Project Moderator     | keystone.identity.project_users_access                                 |
+   +-----------------------+------------------------------------------------------------------------+
+
+Billing
+=======
+
+The *Billing* role only allows a user to view billing usage information. This
+includes the monthly cost breakdown and total costs for the current month.
+This role also has the same restrictions as the Admin role in regards to
+resource access.
+
+The list of explicit permissions for the billing role:
+
+.. code-block:: console
+
+   +-----------------------+------------------------------------------------------------------------+
+   | Billing               | openstack.billing.get_credits                                          |
+   |                       | openstack.billing.get_measurements                                     |
+   |                       | openstack.billing.get_invoices                                         |
+   |                       | openstack.billing.get_quotations                                       |
    +-----------------------+------------------------------------------------------------------------+
 
 Project member
