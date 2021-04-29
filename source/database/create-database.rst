@@ -25,7 +25,7 @@ following:
   - This tutorial is written to work with the 3.3.2 version of the client tools.
     We are looking at upgrading to a newer version in the near future.
 
-Once you have the necessary tools installed and you environment ready, you can
+Once you have the necessary tools installed and your environment ready, you can
 proceed with the next step:
 
 Gathering necessary information
@@ -35,14 +35,10 @@ In order to launch a new database instance we need to first decide on a few
 options, these include:
 
 * The **datastore type** which defines the type of database to be deployed.
-  For this instance we are using MySQL.
 * The **database version** which is informed by your datastore type.
-* The **flavor**, which determines the vCPU and RAM assigned to the
-  instance.
+* The **flavor**, which determines the vCPU and RAM assigned to the instance.
 * You will also need to source an OpenRC file in the correct region
-
-.. Note::
-  It is also necessary to have an existing network on the project that you
+* It is also necessary to have an **existing network** on the project that you
   wish to deploy the database instance to.
 
 First, lets determine what datastore types are available to us.
@@ -50,19 +46,28 @@ First, lets determine what datastore types are available to us.
 .. code-block:: bash
 
   $ openstack datastore list
-  +--------------------------------------+-------+
-  | ID                                   | Name  |
-  +--------------------------------------+-------+
-  | c681e699-5493-4599-9d9c-xxxxxxxxxxxx | mysql |
-  +--------------------------------------+-------+
+  +--------------------------------------+------------+
+  | ID                                   | Name       |
+  +--------------------------------------+------------+
+  | 93b40b75-5a44-4926-aa3c-xxxxxxxxxxxx | postgresql |
+  | b1452789-1e33-4eb1-866e-xxxxxxxxxxxx | mysql      |
+  +--------------------------------------+------------+
 
+.. Note::
 
-Now lets see what versions of MySQL we can use. We can do this a
-couple of ways, either by looking at the full description of the datastore type
-or by explicitly querying the version of a particular datastore type:
+  The openstack commands that are used in this tutorial should be the same
+  regardless of the datastore that you choose. The only difference will by
+  the datastore type and version you use to create your database.
+
+For this example we are going to use mySQL.
+
+Next we need to see what versions of MySQL we can use. We can do this a in
+couple of ways. Either by looking at the full description of the datastore type,
+or by explicitly querying the version of a particular datastore:
 
 .. code-block:: bash
 
+  # Getting the full description of our datastore
   $ openstack datastore show mysql
   +---------------+-----------------------------------------------+
   | Field         | Value                                         |
@@ -72,6 +77,7 @@ or by explicitly querying the version of a particular datastore type:
   | versions (id) | 5.7.29 (8f2c5796-e1e1-4275-9917-xxxxxxxxxxxx) |
   +---------------+-----------------------------------------------+
 
+  # Querying the version of our datastore
   $ openstack datastore version list mysql
   +--------------------------------------+--------+
   | ID                                   | Name   |
@@ -109,27 +115,15 @@ We do this by picking a flavor from the available list:
   | ...                                  |                  |               |      |           |
   +--------------------------------------+------------------+-------+-------+------+-----------+
 
-Here is a table of the minimum requirements for databases based on their type:
-
-+---------+----------+-----------+-------+
-|Database | RAM (MB) | Disk (GB) | VCPUs |
-+=========+==========+===========+=======+
-|MySQL    |512       | 5         |1      |
-+---------+----------+-----------+-------+
-|Cassandra|2048      | 5         |1      |
-+---------+----------+-----------+-------+
-|MongoDB  |1024      | 5         |1      |
-+---------+----------+-----------+-------+
-|Redis    |512       | 5         |1      |
-+---------+----------+-----------+-------+
 
 ***********************************
 Launching the new database instance
 ***********************************
 
 Based on the information we gathered in the previous section we are now
-able to create our database instance. This will require a private network from
-your project, that we can attach the database instance to.
+able to create our database instance. This will require a private network that
+has already been created on your project, that we can attach the database
+instance to.
 
 .. code-block:: bash
 

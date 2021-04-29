@@ -3,11 +3,17 @@ Managing your databases
 #######################
 
 This section covers the ways that you are able to manage the different aspects
-of your database instances. These include configuring who has access to
-your instances, managing the size and flavor of your instances and how to
-activate and track the logging of your instances.
-This section follows on from the previous example in 'creating your database.'
-It references the instance that was made in that example.
+of your database instances. These include configuring who has access to your
+instances, managing the size and flavor of your instances and how to activate
+and track the logging of your instances. This section follows on from the
+previous example in 'creating your database.' It references the instance that
+was made in that example.
+
+.. warning::
+
+  Currently we only support management of mySQL datastores on the Catalyst
+  Cloud. For other datastore services like postgreSQL, we do not yet support
+  user and database management.
 
 ******************
 Configuring access
