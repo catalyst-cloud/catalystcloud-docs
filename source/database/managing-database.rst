@@ -9,12 +9,6 @@ and track the logging of your instances. This section follows on from the
 previous example in 'creating your database.' It references the instance that
 was made in that example.
 
-.. warning::
-
-  Currently we only support management of mySQL datastores on the Catalyst
-  Cloud. For other datastore services like postgreSQL, we do not yet support
-  user and database management.
-
 ******************
 Configuring access
 ******************
@@ -73,8 +67,8 @@ above.
   | is_root_enabled | True  |
   +-----------------+-------+
 
-We can check that this has worked if we are able to access the database and run
-the following query:
+If we are using a MySQL database, we can check that this has worked if we are
+able to access the database and run the following query:
 
 .. code-block:: bash
 
@@ -95,12 +89,17 @@ likely that further users will need to be added over time.
 
 This can be done using the openstack commandline. Below we can see two example
 of how we can add a new user to our myDB database. One example creates a
-user that can access the database from any location. This is the same behaviour
+user that can access the database from any location. This is the same behavior
 that is displayed when the user is created as part of the initial database
 instance creation.
 
 The other example uses the ``--host`` argument which creates a user that can
 only connect from a specified IP address.
+
+.. Note::
+
+  Support for commands using "openstack database ``user`` or ``db``
+  have not been added for PostgreSQL instances and will not work at this time.
 
 .. code-block:: bash
 

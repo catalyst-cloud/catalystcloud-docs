@@ -59,7 +59,7 @@ First, lets determine what datastore types are available to us.
   regardless of the datastore that you choose. The only difference will by
   the datastore type and version you use to create your database.
 
-For this example we are going to use mySQL.
+For this example we are going to use MySQL.
 
 Next we need to see what versions of MySQL we can use. We can do this a in
 couple of ways. Either by looking at the full description of the datastore type,
@@ -141,13 +141,13 @@ the following command to create our new instance:
 .. code-block:: bash
 
   $ openstack database instance create db-instance-1\
-  e3feb785-af2e-41f7-899b-xxxxxxxxxxxx \ # this is the flavor ID for your instance
+  --flavor e3feb785-af2e-41f7-899b-xxxxxxxxxxxx \ # this is the flavor ID for your instance
   --size 5 \
   --datastore mysql \
-  --datastore_version 5.7.29 \
+  --datastore-version 5.7.29 \
   --databases myDB \
   --users dbusr:dbpassword \
-  --volume_type b1.standard \
+  --volume-type b1.standard \
   --nic net-id=908816f1-933c-4ff2-8595-xxxxxxxxxxxx
 
   +------------------------+--------------------------------------+
@@ -204,6 +204,11 @@ that has been assigned to it.
 
 The final step in this section is to see what databases we have running within
 this instance.
+
+.. Note::
+
+  Currently the support for this command will only work with databases using the
+  MySQL datastore image at this time.
 
 .. code-block:: bash
 
