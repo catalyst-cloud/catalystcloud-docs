@@ -61,7 +61,7 @@ First, lets determine what datastore types are available to us.
 
 For this example we are going to use MySQL.
 
-Next we need to see what versions of MySQL we can use. We can do this a in
+Next we need to see what versions of MySQL we can use. We can do this in a
 couple of ways. Either by looking at the full description of the datastore type,
 or by explicitly querying the version of a particular datastore:
 

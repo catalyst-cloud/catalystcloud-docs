@@ -67,7 +67,7 @@ above.
   | is_root_enabled | True  |
   +-----------------+-------+
 
-If we are using a MySQL database, we can check that this has worked if we are
+Since we are using a MySQL database, we can check that this has worked if we are
 able to access the database and run the following query:
 
 .. code-block:: bash
