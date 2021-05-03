@@ -38,8 +38,9 @@ options, these include:
 * The **database version** which is informed by your datastore type.
 * The **flavor**, which determines the vCPU and RAM assigned to the instance.
 * You will also need to source an OpenRC file in the correct region
-* It is also necessary to have an **existing network** on the project that you
-  wish to deploy the database instance to.
+* It is also necessary to have an **existing network**,  which is attached to a
+  router and has a working subnet, on the project that you wish to deploy the
+  database instance to.
 
 First, lets determine what datastore types are available to us.
 

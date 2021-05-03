@@ -98,8 +98,8 @@ only connect from a specified IP address.
 
 .. Note::
 
-  Support for commands using "openstack database ``user`` or ``db``
-  have not been added for PostgreSQL instances and will not work at this time.
+  The commands using "openstack database ``user`` or ``db`` are currently not
+  supported for PostgreSQL instances and will not work at this time.
 
 .. code-block:: bash
 
