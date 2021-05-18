@@ -29,5 +29,5 @@ Database dashboard functionality
 Alongside our database being moved from technical preview to open beta, we are
 also bringing a GUI for creating database resources using our dashboard. It is
 important to note though that this service is still in Beta and so some of the
-dashboard functions are not fully fleshed out as of this moment in time. We will
+dashboard functions are not fully available as of this moment in time. We will
 resolve these issues before moving the service out of beta.
