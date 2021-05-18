@@ -39,7 +39,7 @@ than you would 18 randomly generated characters.
    deyp78&*fasbk!~)&(*
 
    # an example of a strong passphrase would be
-   boatdrillchargerkeysstop
+   boat drill charger keys stop
    # this could be more specific and meaningful to you, or random like the one above
 
 The last thing about passwords that you need to be considerate of, is password
