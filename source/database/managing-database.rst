@@ -3,11 +3,11 @@ Managing your databases
 #######################
 
 This section covers the ways that you are able to manage the different aspects
-of your database instances. These include configuring who has access to
-your instances, managing the size and flavor of your instances and how to
-activate and track the logging of your instances.
-This section follows on from the previous example in 'creating your database.'
-It references the instance that was made in that example.
+of your database instances. These include configuring who has access to your
+instances, managing the size and flavor of your instances and how to activate
+and track the logging of your instances. This section follows on from the
+previous example in 'creating your database.' It references the instance that
+was made in that example.
 
 ******************
 Configuring access
@@ -67,8 +67,8 @@ above.
   | is_root_enabled | True  |
   +-----------------+-------+
 
-We can check that this has worked if we are able to access the database and run
-the following query:
+Since we are using a MySQL database, we can check that this has worked if we are
+able to access the database and run the following query:
 
 .. code-block:: bash
 
@@ -89,12 +89,17 @@ likely that further users will need to be added over time.
 
 This can be done using the openstack commandline. Below we can see two example
 of how we can add a new user to our myDB database. One example creates a
-user that can access the database from any location. This is the same behaviour
+user that can access the database from any location. This is the same behavior
 that is displayed when the user is created as part of the initial database
 instance creation.
 
 The other example uses the ``--host`` argument which creates a user that can
 only connect from a specified IP address.
+
+.. Note::
+
+  The commands using "openstack database ``user`` or ``db`` are currently not
+  supported for PostgreSQL instances and will not work at this time.
 
 .. code-block:: bash
 
