@@ -21,4 +21,8 @@ Table of Contents:
   release-notes/release_18_jan_2021
   release-notes/release_11_feb_2021
   release-notes/release_17_march_2021
+<<<<<<< HEAD
 
+=======
+  release-notes/release_04_may_2021
+>>>>>>> 3067c426e8fd2e5a4bfd867a0c28dd17ba365736
