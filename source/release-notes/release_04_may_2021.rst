@@ -7,7 +7,7 @@ Catalyst Cloud has delivered features that we've deemed worthy of progression
 to beta.
 
 ****************************************
-Database as a service(Trove)
+Database as a service (Trove)
 ****************************************
 
 Database service Beta
