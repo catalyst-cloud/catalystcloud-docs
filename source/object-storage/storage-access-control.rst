@@ -14,33 +14,37 @@ the ``Auth Only`` role and give them access to our container using an Access
 Control List. You can find more information on the auth only role
 :ref:`here <access_control>`.
 
-**This tutorial assumes the following:**
+***************************
+Assumptions before we begin
+***************************
+
+The following are a list of assumptions that this tutorial makes about your
+project before we can begin looking at the steps to creating an ACL. If you
+do not have these pre-requisites then it will be useful to take a second to
+set things up so you can follow along with the example.
+
+We assume that:
 
 * You have installed the OpenStack command line tools and understand how to
   work with an OpenStack RC file, as explained at :ref:`command-line-interface`
+* For the purposes of this tutorial you have 3 users available, they are:
 
-This walk through will make use of the following, preconfigured setup.
+  * a cloud-user
+  * restricted-user-1
+  * restricted-user-2
+  * Initially both of the restricted users will have just the ``Auth Only`` role
+    assigned to them. The cloud-user will have the ``Project Member`` role assigned.
+* You have two containers that will be used for these tutorials. In the
+  examples below they are named, access_1 and access_2.
 
-**Users**
-For the purposes of this tutorial we have 3 users available, they are
-
-* clouduser
-* restricted-user-1
-* restricted-user-2
-
-Initially both of the restricted users will have just the ``Auth Only`` role
-assigned to them. The clouduser will have the ``Project Member`` role assigned.
-
-**Object Storage**
-There are 2 object storage containers available, these are access_1 and
-access_2. They have no existing ACLs assigned to them. The container access_1
-has a single file stored within it called foo.txt.
+  * We assume that these containers have no existing ACLs assigned to them
+  * There should be a single file stored in access_1 called "foo.txt"
 
 **************************
 Using access control lists
 **************************
 
-By combining the use of ``Access Control Lists`` (**ACL**) with the ``Auth
+By combining the use of Access Control Lists (**ACL**) with the ``Auth
 Only`` role, we are able to provide more granular read and write access to
 either specific users or other cloud projects.
 

@@ -349,7 +349,7 @@ method you choose:
 
         .. code-block:: bash
 
-          keystone ec2-credentials-create
+          $ openstack ec2 credentials create
 
         If you are using boto to interact with the API, you need boto installed on your
         current Python environment. The example below illustrates how to install boto
