@@ -5,12 +5,14 @@ Managing access
 ###############
 
 The typical user roles, such as ``Project Member`` or ``Object Storage``, that
-allow access to people that need to work with object storage do not provide for
-any level of granular control in regard to limiting a users level of access to
-individual object storage containers and the objects within them.
+allow access to users that need to work with object storage work as an all or
+nothing approach; either the user has the role and can do anything with the
+container, or they don't and they can't interact with it at all.
 
-To overcome this it is now possible to create a user with the ``Auth Only``
-role. This role is described in more detail here.
+To overcome this limitation it is now possible to create a user with
+the ``Auth Only`` role and give them access to our container using an Access
+Control List. You can find more information on the auth only role
+:ref:`here <access_control>`.
 
 **This tutorial assumes the following:**
 
