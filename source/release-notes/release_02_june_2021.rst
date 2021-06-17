@@ -21,6 +21,7 @@ when rebuilding a node based on an image change.
 Fixed CA rotate
 ===============
 
+A regression issue with CA rotate has been resolved in this release.
 
 *************************************
 Password Complexity changes (Horizon)
@@ -31,15 +32,6 @@ password complexity policy for all user accounts. This will not affect any
 existing passwords for user accounts, and your current access will not be
 affected by the change. However, when changing a password via the dashboard the
 new complexity policy will apply.
-
-The new policy requires either of the following:
-
-- a password with 12 characters and 3 of 4 character groups (lowercase, uppercase, numbers, special chars excluding space); or
-- a passphrase with 18 characters and 2 of 4 character group (lowercase, uppercase, numbers, special chars including space)
-
-We encourage all customers to change their passwords on a regular basis, and to
-enable Multi-Factor Authentication on user accounts. This will assist in
-protecting your accounts from unauthorized use.
 
 More information on the new policy and other security practices can be found
 :ref:`here <password_protocols>`
@@ -58,11 +50,6 @@ insecure, from the allowed list of ciphers when communicating with our API
 endpoints.
 
 This will affect all Catalyst Cloud API endpoints except Object Storage.
-The API endpoints will continue to offer a standard set of secure ciphers,
-widely supported by up-to-date implementations of TLS. However, if your software
-or operating system is not being kept up to date, or is too old to support
-current implementations of TLS, it may not have the required support for modern
-secure ciphers.
 
 In particular, the following ciphers will no longer be available via our API
 endpoints:
