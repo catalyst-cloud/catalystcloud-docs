@@ -22,3 +22,4 @@ Table of Contents:
   release-notes/release_11_feb_2021
   release-notes/release_17_march_2021
   release-notes/release_04_may_2021
+  release-notes/release_02_june_2021

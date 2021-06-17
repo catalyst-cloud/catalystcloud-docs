@@ -5,6 +5,8 @@ Security
 This section covers some best practices for security on the Catalyst Cloud, and
 for general security business standards in the tech sector today.
 
+.. _password_protocols:
+
 ******************
 Password protocols
 ******************
