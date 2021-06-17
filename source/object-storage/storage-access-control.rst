@@ -5,13 +5,13 @@ Managing access
 ###############
 
 The typical user roles, such as ``Project Member`` or ``Object Storage``, that
-allow access to users that need to work with object storage work as an all or
+allow users to work with object storage resource, function as an all or
 nothing approach; either the user has the role and can do anything with the
-container, or they don't and they can't interact with it at all.
+container, or they do not have the role and they can't interact with any resources.
 
-To overcome this limitation it is now possible to create a user with
-the ``Auth Only`` role and give them access to our container using an Access
-Control List. You can find more information on the auth only role
+To overcome this limitation it is now possible to create a user with the
+``Auth Only`` role and give them access to a container using an Access Control
+List. You can find more information on the auth only role
 :ref:`here <access_control>`.
 
 ****************************
@@ -48,13 +48,13 @@ the full list of API endpoints under :ref:`this section<apis>` of the
 documentation.
 
 For this example we will be using the object storage endpoint for nz-por-1, but
-you can use whichever one fits the region you work in:
+you can use whichever one fits the region you want to work in:
 
 .. code-block::
 
  https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_%projectid%
 
-Our next step is to get our Auth_ID. We can do this by running the following
+Our next step is to get our Project ID. We can do this by running the following
 command, where bucket_name is the name of our container:
 
 .. code-block:: bash
@@ -76,13 +76,7 @@ Using access control lists
 
 By combining the use of Access Control Lists (**ACLs**) with the **Auth
 Only** role, we are able to provide granular read/write access to
-our object storage container from specific users or from other cloud projects.
-
-.. Note::
-
-    While it is also possible to achieve the same level of object storage
-    access control using other roles available on the cloud, users with these
-    role will also have the ability to change other resources on your project.
+our object storage container for specific users or from other cloud projects.
 
 Configuring the user
 ====================
@@ -208,7 +202,7 @@ In this command:
 
 * **<container>** is the name of the container to apply the ACL to.
 * **<permissions>** is the string value denoting what access to assign to the
-    container.
+  container.
 
 The following table describes how the permissions are defined. These can be
 applied singularly or as a comma separated list to both the - -read-acl and

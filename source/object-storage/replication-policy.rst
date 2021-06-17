@@ -2,7 +2,7 @@
 Replication Policy
 ##################
 
-When you create a container through the use of our object storage service, that
+When you create a container through the use of the object storage service, that
 container will have a replication policy applied to it. The default policy
 ensures that the container is replicated across all three regions of
 the Catalyst Cloud. This is done as a means to provide geographic diversity and
@@ -37,9 +37,9 @@ suggest) are related to one of the regions on the Catalyst cloud:
   only way to change the policy of a container is during it's creation.
 
 There are multiple ways to create containers that use a single region policy.
-You can create your container via the Dashboard or through the use of the
-command line, making use of the openstack CLI or by making calls to the object
-storage API directly. All of which are detailed below.
+You can create your container via the Dashboard, by making use of the openstack
+CLI or by making calls to the object storage API directly. All of which are
+detailed below.
 
 ****************
 Dashboard method
