@@ -3,8 +3,9 @@
 #################
 
 This release includes some minor changes to the kubernetes service, a minor
-change to the password policy on the cloud and some important deprecation
-notices that will begin in future releases.
+change to the password policy on the cloud, an update to our object storage
+service and some important deprecation notices that will begin in future
+releases.
 
 ****************************************
 Kubernetes updates (Magnum)
@@ -36,11 +37,9 @@ new complexity policy will apply.
 More information on the new policy and other security practices can be found
 :ref:`here <password_protocols>`
 
-
-*****************************************
-Deprecation notices (HA proxy and Cinder)
-*****************************************
-
+**********************************************
+Deprecation notices (HA proxy, Cinder, Glance)
+**********************************************
 
 Insecure ciphers on API endpoints to be disabled
 ================================================
@@ -72,3 +71,45 @@ block storage service are able to use the cinder v3 API.
 If you are using the python-cinderclient tools to interact with your project
 then making sure you have the up to date version of these tools will ensure this
 deprecation does not effect you.
+
+Deprecation of the Image service v1 API
+=======================================
+
+As of this month we are treating the Image service v1 API (known as Glance)
+as deprecated. This API will remain functional until it is disabled at a later
+date, however if you are using the version 1 API we strongly advise that you
+reconfigure any tools or configuration to use a newer version and perform
+testing.
+
+We expect at least six months before the version 1 API will be disabled, and
+we will provide an update at least one month before it is disabled. To ensure
+that you are still able to interact with the image service as this change takes
+place, we recommend updating your version of the python-glanceclient tools to
+version 2.8 or above.
+
+To get the most current version of the python-glanceclient tools on linux based
+systems, you can run the following command:
+
+.. code-block::
+
+    pip install python-glanceclient -U
+
+
+****************************
+Object Storage Improvements
+****************************
+
+Recently we have made some improvements to our object storage service. This
+update sees a number of improvements being made to the service, with a
+focus around compatibility with Amazon's S3 Object storage service.
+
+The most recent improvements are:
+
+* Support 'version 4' signatures for S3 requests, enabling a wider range
+  of S3-compatible tools to be used with our Object Storage
+* Improved error messages when using S3 requests so they match the
+  expected behavior on errors
+* Improved the method of calculating static large object sizes, when
+  versioned containers are involved
+* Resolved random occurrences of 404 responses to some requests for objects
+* A number of other bug fixes and general improvements
