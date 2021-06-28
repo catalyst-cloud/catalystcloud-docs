@@ -7,9 +7,9 @@ some environment variables for use. Sourcing an openRC file will take care of
 most of the required environment variables, however we need to gather some
 information to set the last few.
 
-First need to set a storageURL for ourselves. We do this by grabbing the correct
-Auth API from :ref:`this section<apis>` of the documentation. For our example we
-will use the Porirua region's API:
+First we need to set a storageURL for ourselves. We do this by grabbing the
+correct Auth API from :ref:`this section<apis>` of the documentation. For our
+example we will use the Porirua region's API:
 ``https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_``
 
 Next we need to find our project ID. We can do this by using the following
@@ -51,7 +51,8 @@ region policy:
     {'name': 'nz-wlg-2--o1--sr-r3', 'aliases': 'nz-wlg-2--o1--sr-r3'}]
 
     # If you are using an username and password to authenticate instead of a
-    # token you will need to export an "OS_AUTH_TOKEN" for our later use.
+    # token you will need to export an "OS_AUTH_TOKEN" for later use.
+
     $ swift stat -v
                         StorageURL: https://object-storage.ostst.wgtn.cat-it.co.nz:443/v1/AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
                         Auth Token: gAAAAABdwJ5KkgWpKIHN_4xaFxkqPpvivOO2Qc4kavx832WC3GNws74icYXvzGUQy7eHxkSgbSpbPzj-j2PikiY6KmbwaqFdlStRSUXbmW0ZR6edoKzw8fDy7FXedR1kWR-j83HQfICzw802Z1zbnZw1Tho7F6vDVo5OEyQw6ORQTSINl6diBD4
@@ -69,7 +70,7 @@ region policy:
         X-Account-Project-Domain-Id: default
                         X-Trans-Id: tx5deb854e32d94eec8c658-005dd47fc0
 
-    # Once we have the policy we need (and an Auth Token if you don't have one)
+    # Once we have the policy we need (and an Auth Token if you did not already have one)
     # We export them for use later.
 
     $ export OS_AUTH_TOKEN="gAAAAABdwJ5KkgWpKIHN_4xaFxkqPpvivOO2Qc4kavx832WC3GNws74icYXvzGUQy7eHxkSgbSpbPzj-j2PikiY6KmbwaqFdlStRSUXbmW0ZR6edoKzw8fDy7FXedR1kWR-j83HQfICzw802Z1zbnZw1Tho7F6vDVo5OEyQw6ORQTSINl6diBD4"
@@ -79,9 +80,9 @@ region policy:
 
     <h3> Creating our container </h3>
 
-To create a container with a non-default policy we have to specify which
-policy we want to use in a curl command. In this example we are goint to create
-a container called "cont-pol"
+To create a container with a non-default policy we are going to curl the swift
+API with a PUT command. In this example we are going to create a container
+called "cont-pol" with the policy we specified before.
 
 .. Note::
 
@@ -137,7 +138,7 @@ directory; in our case we will use a file called "file1.txt"
     <
     * Connection #0 to host object-storage.nz-wlg-2.catalystcloud.io left intact
 
-Finally we check our containers and what rules they have applied to them to
+Finally we check our containers and what rules they have applied to them, to
 confirm our new container is using the correct policy.
 
 .. code-block:: bash
