@@ -81,10 +81,10 @@ Programmatic methods
 
   .. tab:: Openstack CLI
 
-    .. include:: assets/replication-openstack.rst
+    .. include:: tutorial-scripts/replication-openstack.rst
 
   .. tab:: API method
 
-    .. include:: assets/replication-api.rst
+    .. include:: tutorial-scripts/replication-api.rst
 
 

@@ -75,24 +75,24 @@ method you choose:
 
     .. tab:: Openstack CLI
 
-      .. include:: assets/openstackCLI.rst
+      .. include:: tutorial-scripts/openstackCLI.rst
 
     .. tab:: Swift API
 
-      .. include:: assets/swiftAPI.rst
+      .. include:: tutorial-scripts/swiftAPI.rst
 
     .. tab:: S3 API
 
-      .. include:: assets/s3api.rst
+      .. include:: tutorial-scripts/s3api.rst
 
     .. tab:: cURL
 
-      .. include:: assets/curl.rst
+      .. include:: tutorial-scripts/curl.rst
 
     .. tab:: Heat Orchestration
 
-      .. include:: assets/heat.rst
+      .. include:: tutorial-scripts/heat.rst
 
     .. tab:: Terraform
 
-      .. include:: assets/terraform.rst
+      .. include:: tutorial-scripts/terraform.rst

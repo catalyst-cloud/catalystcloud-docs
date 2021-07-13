@@ -1,20 +1,37 @@
 To access object storage using cURL it is necessary to provide credentials
 to authenticate any requests you make.
 
-This can be done by sourcing your OpenRC file and retrieving your account specific details via the
-Swift command line tools; then exporting the required variables as shown below.
+This can be done by sourcing your OpenRC file and retrieving your account
+specific details via the Swift command line tools; then exporting the required
+variables as shown below.
 
-.. Note::
-
-   You will need to use an openRC file that does NOT use MFA, otherwise
-   the swift API will not be able to interact with your requests correctly.
 
 .. code-block:: bash
 
     $ source openstack-openrc.sh
 
+    # we then need to create a OS_STORAGE_URL environment variable.
+    # To create this variable we will need to find our project ID:
+
+    $ openstack project show <name of the project you sourced your OpenRC with>
+    +-------------+----------------------------------+
+    | Field       | Value                            |
+    +-------------+----------------------------------+
+    | description |                                  |
+    | domain_id   | default                          |
+    | enabled     | True                             |
+    | id          | 1xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54 |
+    | tags        | []                               |
+    +-------------+----------------------------------+
+
+    # We then export this ID with the storage API for the region we are working in
+    # For this example we will use the Porirua region:
+
+    $ export OS_STORAGE_URL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_1xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54
+
+    # Then we grab our auth token for later use:
     $ swift stat -v
-     StorageURL: https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+     StorageURL: https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_1xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54
                       Auth Token: 5f5a043e1bd24a8fa8xxxxxxcca8e0fc
                       Containers: 48
                          Account: AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -30,7 +47,6 @@ Swift command line tools; then exporting the required variables as shown below.
                     Content-Type: text/plain; charset=utf-8
                    Accept-Ranges: bytes
 
-    $ export storageURL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
     $ export token="5f5a043e1bd24a8fa8xxxxxxcca8e0fc"
 
 To create a new container, use the following cURL request:
