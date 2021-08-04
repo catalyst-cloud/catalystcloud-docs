@@ -21,3 +21,48 @@ https://wiki.openstack.org/wiki/SDKs
 Prior to accessing the Catalyst Cloud API endpoints, ensure you are working
 from a **whitelisted IP address**.  More information can be found under
 :ref:`Access and whitelist <access-and-whitelist>`
+
+********************
+Client tool versions
+********************
+
+Each of the services we have on our Cloud require a different client tool to
+interact with. Earlier in this section we covered how to install these into a
+virtual environment so that you are able to use the openstack command line.
+
+Below is a list of the Client tools and their currently supported version on the
+Catalyst Cloud. When upgrading a service, in order to be able to interact with
+any new features you should check to make sure that your client tools are up to
+date with oru currently supported version.
+
++-----------------+--------------------+----------------------------+
+| Service         | Toolkit            |Supported version           |
++=================+====================+============================+
+| cloudformation  |
++-----------------+-
+| compute         |
++-----------------+-
+| computev3       |
++-----------------+-
+| ec2             |
++-----------------+-
+| identity        |
++-----------------+-
+| image           |
++-----------------+-
+| metering        |
++-----------------+-
+| network         |
++-----------------+-
+| object-store    |
++-----------------+-
+| orchestration   |
++-----------------+-
+| rating          |
++-----------------+-
+| s3              |
++-----------------+-
+| volume          |
++-----------------+-
+| volumev2        |
++-----------------+--------------------------------------------------+
