@@ -311,7 +311,7 @@ that routes the incoming requests to the echo service based on the the URL path
 "/ping". This requires the use of the ``annotation`` **kubernetes.io/ingress.
 class: nginx**
 
-.. literalinclude:: _containers_assets/ingress-create.rst
+.. literalinclude:: _containers_assets/ingress-create.sh
   :language: shell
 
 Wait for IP address to be allocated
@@ -475,7 +475,7 @@ ping". This time we will also add configuration for TLS support. This change
 adds the hosts that the ingress will accept traffic for and the cluster secret
 that will provide the certificate used for the encryption.
 
-.. literalinclude:: _containers_assets/ingress-tls-create.rst
+.. literalinclude:: _containers_assets/ingress-tls-create.sh
   :language: shell
 
 Once the ingress is active and has been assigned an external IP address we can
@@ -580,7 +580,7 @@ configuration.
 
 This is the actual configuration that will be used by the helm chart.
 
-.. literalinclude:: _containers_assets/ingress-configure-proxy.rst
+.. literalinclude:: _containers_assets/ingress-configure-proxy.sh
   :language: shell
 
 We install it as we have previously.
@@ -598,7 +598,7 @@ We install it as we have previously.
 
 Finally we can set up the ingress as we have for the previous examples.
 
-.. literalinclude:: _containers_assets/ingress-create-proxy.rst
+.. literalinclude:: _containers_assets/ingress-create-proxy.sh
   :language: shell
 
 Once the external IP is available we can test it with curl as we have
