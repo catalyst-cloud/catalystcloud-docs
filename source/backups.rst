@@ -10,14 +10,22 @@ natural disasters affecting a region or human error causing systems to go down.
 Having a well maintained backup of your system is vital to helping your
 business get back to a high operational standard quickly.
 
-The following section covers a basic overview, showing you how to create a
-server backup utilizing `Duplicity`_, our object storage service and a
-more advanced tutorial on how to automate the backup process.
+The following sections cover several methods for creating and maintaining
+backups on the cloud as well as ways to automate the backup process.
+
+The main method of backing up your instances will be through the in built
+backup commands using openstack. Alternatively, we also discuss ways that you
+can use `Duplicity`_ to create backups as well.
 
 .. _Duplicity: http://duplicity.nongnu.org/
 
-Before you continue with the examples below, there are a few assumptions
-that need to be considered:
+The main distinction between the two is that the default openstack backups
+creates a new volume resources that holds a copy of your data from that point
+in time. While Duplicity creates a file that you can store elsewhere, for
+example in object storage.
+
+Before you continue with the examples linked below, there are a few assumptions
+that are made for which you should consider before jumping in further:
 
 1)
  You are familiar with the Linux command line and Openstack CLI tools.
