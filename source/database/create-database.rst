@@ -42,6 +42,14 @@ options, these include:
   router and has a working subnet, on the project that you wish to deploy the
   database instance to.
 
+.. Warning::
+
+  When choosing a size for the volume attached to your database there is a
+  limit of 200GB per volume. There is also a limit of 800GB per region for the
+  collective amount of volumes you have attached to your database instances.
+
+  For this example we will only be using a 5GB volume for our database instance.
+
 First, lets determine what datastore types are available to us.
 
 .. code-block:: bash
