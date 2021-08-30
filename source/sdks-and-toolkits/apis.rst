@@ -93,9 +93,9 @@ Endpoints for “nz_wlg_2”
 +-----------------+-------------------------------------------------------------------------+
 | computev3       | https://api.cloud.catalyst.net.nz:8774/v3                               |
 +-----------------+-------------------------------------------------------------------------+
-| container infra | https://api.cloud.catalyst.net.nz:9511/v1                           |
+| container infra | https://api.cloud.catalyst.net.nz:9511/v1                               |
 +-----------------+-------------------------------------------------------------------------+
-| database        | https://api.cloud.catalyst.net.nz:8779/v1.0/%projectid%             |
+| database        | https://api.cloud.catalyst.net.nz:8779/v1.0/%projectid%                 |
 +-----------------+-------------------------------------------------------------------------+
 | ec2             | https://api.cloud.catalyst.net.nz:8773/services/Cloud                   |
 +-----------------+-------------------------------------------------------------------------+
