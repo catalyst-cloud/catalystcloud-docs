@@ -326,7 +326,7 @@ creation command.
 
 .. code-block:: bash
 
-  --floating-ip-enabled
+  --labels master_lb_floating_ip_enabled=True --merge-labels
 
 The actual usage would look like this.
 
@@ -334,9 +334,11 @@ The actual usage would look like this.
 
   $ openstack coe cluster create <Cluster name> \
   --cluster-template <Template ID> \
-  --floating-ip-enabled
+  --labels master_lb_floating_ip_enabled=True --merge-labels
 
 .. Note::
+
+  The `--merge-labels` is mandatory.
 
   This guide covers the steps to creating a kubernetes cluster
   from scratch. But if you wish to create a cluster on an existing
