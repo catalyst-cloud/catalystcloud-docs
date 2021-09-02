@@ -4,13 +4,13 @@ Backups
 
 .. _backups:
 
-Backups are an important part of a business plan to maintain a high level of
-functionality in the face of unforeseeable events. Whether these be from
-natural disasters affecting a region or human error causing systems to go down.
-Having a well maintained backup of your system is vital to helping your
+Backups are an important part of a business plan, in order to maintain a high
+level of functionality in the face of unforeseeable events. Whether these be
+from natural disasters affecting a region or human error causing systems to go
+down. Having a well maintained backup of your system is vital to helping your
 business get back to a high operational standard quickly.
 
-The following sections cover several methods for creating and maintaining
+The following sections cover different methods for creating and maintaining
 backups on the cloud as well as ways to automate the backup process.
 
 The main method of backing up your instances will be through the in built
@@ -24,22 +24,11 @@ creates a new volume resources that holds a copy of your data from that point
 in time. While Duplicity creates a file that you can store elsewhere, for
 example in object storage.
 
-Before you continue with the examples linked below, there are a few assumptions
-that are made for which you should consider before jumping in further:
-
-1)
- You are familiar with the Linux command line and Openstack CLI tools.
-2)
- You have installed the OpenStack command line tools and sourced an openrc
- file, as explained in :ref:`command-line-interface`.
-
 The following are the different sections that go into greater detail on
 specific issues.
 
 .. toctree::
    :maxdepth: 1
 
-   backups/duplicity
-   backups/prerequisites
-   backups/simple-example
+   backups/creating-backup
    backups/automating
