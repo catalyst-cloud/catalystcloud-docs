@@ -133,8 +133,11 @@ to the load balancer of Kubernetes API with below command:
 
   $ openstack coe cluster create my-cluster --cluster-template <Template ID> \
                                             --labels <existing labels>,master_lb_floating_ip_enabled=True
+                                            --merge-labels
 
 .. note::
+
+  The parameter `--merge-labels` is mandatory.
 
   To update a label when creating a cluster, you have to set all the labels
   from the template to do override.
