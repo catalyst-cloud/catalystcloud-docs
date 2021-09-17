@@ -19,7 +19,7 @@ can use `Duplicity`_ to create backups as well.
 
 .. _Duplicity: http://duplicity.nongnu.org/
 
-The main distinction between the two is that the default openstack backups
+The main distinction between the two is that the default openstack backup
 creates a new volume resources that holds a copy of your data from that point
 in time. While Duplicity creates a file that you can store elsewhere, for
 example in object storage.
