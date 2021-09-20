@@ -49,9 +49,44 @@ initial backup:
 
     $ openstack volume backup create $volumeID
 
-For future backups of the same volume you can make use of the ``incremental``
-optional argument. Instead of creating an entirely new backup, the incremental
-argument will create a snapshot with the differences between the previous backup
-and the current state of the volume.
+Now that we have our backup created, we can view it with the following commands.
+
+.. code-block:: bash
+
+    $ openstack volume backup list
+    +--------------------------------------+------+-------------+-----------+------+
+    | ID                                   | Name | Description | Status    | Size |
+    +--------------------------------------+------+-------------+-----------+------+
+    | 376a741c-XXXX-XXXX-XXXX-XXXXXXX7881c | None | None        | available | 5    |
+    +--------------------------------------+------+-------------+-----------+------+
+    # Once we have our backup ID we can view more information about it like so:
+
+    $ openstack volume backup show 376a741c-XXXX-XXXX-XXXX-XXXXXXX7881c
+    +-----------------------+--------------------------------------+
+    | Field                 | Value                                |
+    +-----------------------+--------------------------------------+
+    | availability_zone     | nz-por-1a                            |
+    | container             | volumes_backup_nz-por-1              |
+    | created_at            | 2021-09-20T04:13:08.000000           |
+    | data_timestamp        | 2021-09-20T04:13:08.000000           |
+    | description           | None                                 |
+    | fail_reason           | None                                 |
+    | has_dependent_backups | False                                |
+    | id                    | 376a741c-XXXX-XXXX-XXXX-XXXXXXX7881c |
+    | is_incremental        | False                                |
+    | name                  | None                                 |
+    | object_count          | 104                                  |
+    | size                  | 5                                    |
+    | snapshot_id           | None                                 |
+    | status                | available                            |
+    | updated_at            | 2021-09-20T04:14:59.000000           |
+    | volume_id             | 81599985-6aac-4a13-90e4-b550798729ee |
+    +-----------------------+--------------------------------------+
+
+For future backups of the original volume we can
+make use of the ``incremental`` optional argument. Instead of creating an
+entirely new backup, the incremental argument will create a snapshot with the
+differences between our current backup volume and the updated state of the
+original volume.
 
 .. include:: duplicity.rst

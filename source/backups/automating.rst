@@ -3,7 +3,7 @@ Automating backup tasks with cron
 #################################
 
 In order to make this process more useful, we could automate our backup tasks
-by creating a cronjob to run the Duplicity backups on a regular basis, by means
+by creating a cronjob to run backups on a regular basis, by means
 of a shell script.
 
 It is also best practice to create a separate backup user account in your cloud
@@ -50,7 +50,7 @@ Now we can create our backup process. This will consist of:
   information
 - the cron job to run the backup task
 
-Here is the basic script to manage the running of the Duplicity backups.
+Here is the basic script to manage the running of a **Duplicity** backup.
 Typically, this would be placed somewhere like ``/usr/local/bin``.
 
 .. literalinclude:: _scripts/duplicity-backup.sh
