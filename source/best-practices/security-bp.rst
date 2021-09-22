@@ -153,9 +153,10 @@ or upload your SSH keys is documented
 Resource and object naming
 **************************
 
-Resource names will be logged in our logging, audit logs and are provided on
-the invoices we send to you. Object names stored in our Object storage
-system will be logged in our logging and audit logs.
+When deciding on the names you are going to give your resources, it is important
+to note that the resource names you choose will be logged in our internal logs,
+audit logs and are included on the invoices we send to you. Object names stored
+in our Object storage system will be logged in our logging and audit logs.
 
 It is recommended that you don't use any sensitive, or personally identifiable
 information in either your resource names or object names.
