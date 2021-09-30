@@ -15,6 +15,35 @@ are made which you will need to consider before jumping in further:
  file, as explained in :ref:`this section of the documentation<command-line-interface>`.
 
 
+**************************
+Which method should I use?
+**************************
+
+While both of the methods we describe in this tutorial will create a backup of
+your data, there are some differences between them in how your backup is
+created, stored and maintained.
+
+When using openstack to create your backup, a point in time snapshot of your
+data is created. From this snapshot, openstack creates a volume that holds the
+information taken from that snapshot. This is your backup volume. A copy of this
+volume is then placed in object storage to serve as a safety net for the backup
+itself.
+
+Because this backup is created using a point in time snapshot, it is a 'crash
+consistent' solution that is able to restore your data to the specific point in
+time the original backup was taken. It does not ensure that the data is in a
+particular state after the restore.
+
+Alternatively, Duplicity when it creates a backup will make multiple attempts to
+capture a given file if it has been changed. This is due to duplicity being a
+file oriented backup rather than a point in time backup.
+
+Depending on the type of backup you want to create and the solution that best
+suits your situation, you may decide to use one method or another. Generally the
+basic openstack backup solution is easier for maintaining a crash consistent
+copy of your data somewhere ready to restore while Duplicity is able to perform
+a more rigorous capture of the state of your files.
+
 ***********************
 Using the Openstack CLI
 ***********************
