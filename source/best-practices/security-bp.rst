@@ -93,7 +93,7 @@ Encrypting emails
 *****************
 
 When sending emails that pertain to sensitive information,
-they should be encrypt using a PGP key or some other form of encryption. This
+they should be encrypted using a PGP key or some other form of encryption. This
 not only means that it's harder for your emails to be broken into, it also
 mitigates phishing attacks because your emails can be authenticated.
 
@@ -149,5 +149,14 @@ or upload your SSH keys is documented
    it to the entire internet, without the proper SSH key pair, they would not be
    able to access the instance.
 
+**************************
+Resource and object naming
+**************************
 
+When deciding on the names you are going to give your resources, it is important
+to note that the resource names you choose will be logged in our internal logs,
+audit logs and are included on the invoices we send to you. Object names stored
+in our Object storage system will be logged in our logging and audit logs.
 
+It is recommended that you don't use any sensitive, or personally identifiable
+information in either your resource names or object names.
