@@ -24,7 +24,7 @@ your data, there are some differences between them in how your backup is
 created, stored and maintained.
 
 When using Openstack to create your backup, a point in time snapshot of your
-data is created. From this snapshot, Openstack creates a volume, this is your
+data is created. From this snapshot, Openstack creates a volume; this is your
 backup volume. A copy of this volume is then placed in object storage in the
 back end for redundancy.
 
