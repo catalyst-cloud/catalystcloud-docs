@@ -1,62 +1,44 @@
+.. _managing_database:
+
 #######################
 Managing your databases
 #######################
 
 This section covers the ways that you are able to manage the different aspects
 of your database instances. These include configuring who has access to your
-instances, managing the size and flavor of your instances and how to activate
+databases, managing the size and flavor of your instances and how to activate
 and track the logging of your instances. This section follows on from the
 previous example in 'creating your database.' It references the instance that
 was made in that example.
+
+.. Warning::
+
+  In the examples below; Commands that use the "openstack database ``user`` or
+  ``db`` parameters are not supported for PostgreSQL instances and will not
+  work at this time.
 
 ******************
 Configuring access
 ******************
 
-.. Note::
+Before we continue, when talking about access for your database, it is important
+to know the distinction between access to your database and access to your
+database *instance*. In this section we discuss how to create users and
+add them to your database so that they are able to perform operations on it.
+These users only exist in the context of the ``database`` and have no ability to
+make changes to, nor interact with the underlying ``database instance``.
 
-  Users can't access the underlying compute instance that the database lies on,
-  they can only access the database if they have permissions. This is for
-  security purposes.
+Using the root user
+===================
 
+If a user was not specified when the instance was created, the only
+user account that will exist on the database is the ``root`` user. As mentioned
+in the previous section, when creating your database instance the ``password``
+field will be returned in the output of your ``create`` command. This is the
+root user password and is necessary to interact with your database as the root
+user.
 
-If a user was not added when the instance was created then the only
-user account that exists is the ``root`` user. However this is disabled by
-default.
-
-We can confirm this is the case by doing the following:
-
-.. code-block:: bash
-
-  $ openstack database root show db-instance-1
-  +-----------------+-------+
-  | Field           | Value |
-  +-----------------+-------+
-  | is_root_enabled | False |
-  +-----------------+-------+
-
-To enable the root login, run the following command against your database
-instance.
-
-.. code-block:: bash
-
-  $ openstack database root enable db-instance-1
-  +----------+--------------------------------------+
-  | Field    | Value                                |
-  +----------+--------------------------------------+
-  | name     | root                                 |
-  | password | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |
-  +----------+--------------------------------------+
-
-.. Note::
-
-  A random password will be generated for the root user, this will need to be
-  noted down as it cannot be retrieved again. If the password is misplaced the
-  only option is to re-run the enable command which will generate a new
-  random password.
-
-To confirm the root account is now enabled, simply re-run the same command as
-above.
+We can confirm our root user exists using:
 
 .. code-block:: bash
 
@@ -67,8 +49,23 @@ above.
   | is_root_enabled | True  |
   +-----------------+-------+
 
+If you ever need to reset the root password then you can run the following
+command against your database instance:
+
+.. code-block:: bash
+
+
+  $ openstack database root enable db-instance-1
+  +----------+--------------------------------------+
+  | Field    | Value                                |
+  +----------+--------------------------------------+
+  | name     | root                                 |
+  | password | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |
+  +----------+--------------------------------------+
+
 Since we are using a MySQL database, we can check that this has worked if we are
-able to access the database and run the following query:
+able to access the database and run the following query. In order for this query
+to reach the database instance, we need to use a jumpbox on our project:
 
 .. code-block:: bash
 
@@ -80,6 +77,7 @@ able to access the database and run the following query:
   | root@10.0.0.83 |
   +----------------+
 
+
 Creating new users
 ==================
 
@@ -88,18 +86,13 @@ instance (using the ``--users <username>:<password>`` argument) it is more than
 likely that further users will need to be added over time.
 
 This can be done using the openstack commandline. Below we can see two example
-of how we can add a new user to our myDB database. One example creates a
+of how we can add a new user to our *myDB* database. One example creates a
 user that can access the database from any location. This is the same behavior
 that is displayed when the user is created as part of the initial database
 instance creation.
 
 The other example uses the ``--host`` argument which creates a user that can
 only connect from a specified IP address.
-
-.. Note::
-
-  The commands using "openstack database ``user`` or ``db`` are currently not
-  supported for PostgreSQL instances and will not work at this time.
 
 .. code-block:: bash
 
