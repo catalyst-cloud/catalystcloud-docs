@@ -63,12 +63,17 @@ command against your database instance:
   | password | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |
   +----------+--------------------------------------+
 
-Since we are using a MySQL database, we can check that this has worked if we are
-able to access the database and run the following query. In order for this query
-to reach the database instance, we need to use a jumpbox on our project:
+Since we are using a MySQL database, we can check that our root user is working
+if we are able to access the database and run the following query.
+In order for the following command to reach our database, it must be made from
+a location that can 'see' our database instance. For this example, we did not
+create a database instance accessible from the public and so you will need to
+create a ``jumpbox`` on your project in order for this command to reach your
+database instance:
 
 .. code-block:: bash
 
+  # From your jumpbox instance:
   $   mysql -h 10.0.0.83 -u root -p -e 'SELECT USER()'
   Enter password:
   +----------------+
