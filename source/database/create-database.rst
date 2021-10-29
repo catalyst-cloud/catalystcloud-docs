@@ -247,7 +247,7 @@ Adding and deleting databases
 
 .. Note::
 
-  The following commands are only relevant for the MySQL datastore image.
+  The following commands are only relevant for the MySQL datastore.
 
 Once you have a database instance deployed it is fairly simple to add and
 remove databases from it.
