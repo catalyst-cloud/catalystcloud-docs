@@ -20,10 +20,7 @@ following:
 - You must have :ref:`Sourced an openRC file<configuring-the-cli>` on your
   current command line environment
 - You must have installed the `python trove-client tools
-  <https://pypi.org/project/python-troveclient/3.3.2/>`_.
-
-  - This tutorial is written to work with the 3.3.2 version of the client tools.
-    We are looking at upgrading to a newer version in the near future.
+  <https://pypi.org/project/python-troveclient/5.1.1/>`_.
 
 Once you have the necessary tools installed and your environment ready, you can
 proceed with the next step:
@@ -41,6 +38,15 @@ options, these include:
 * It is also necessary to have an **existing network**,  which is attached to a
   router and has a working subnet, on the project that you wish to deploy the
   database instance to.
+
+.. Warning::
+
+  When choosing a size for the volume you attach to your database instance
+  there is a limit of 200GB per volume. There is also a limit of 800GB per
+  region for the collective amount of volumes you have attached to your
+  database instances.
+
+  For this example we will be using a 5GB volume for our database instance.
 
 First, lets determine what datastore types are available to us.
 
@@ -151,33 +157,44 @@ the following command to create our new instance:
   --volume-type b1.standard \
   --nic net-id=908816f1-933c-4ff2-8595-xxxxxxxxxxxx
 
-  +------------------------+--------------------------------------+
-  | Field                  | Value                                |
-  +------------------------+--------------------------------------+
-  | created                | 2020-08-03T23:02:16                  |
-  | datastore              | mysql                                |
-  | datastore_version      | 5.7.29                               |
-  | flavor                 | e3feb785-af2e-41f7-899b-xxxxxxxxxxxx |
-  | id                     | 8546dd23-4f5e-4151-9b33-xxxxxxxxxxxx |
-  | name                   | db-instance-1                        |
-  | region                 | test-1                               |
-  | service_status_updated | 2020-08-03T23:02:16                  |
-  | status                 | BUILD                                |
-  | updated                | 2020-08-03T23:02:16                  |
-  | volume                 | 5                                    |
-  +------------------------+--------------------------------------+
+  +--------------------------+--------------------------------------+
+  | Field                    | Value                                |
+  +--------------------------+--------------------------------------+
+  | allowed_cidrs            | []                                   |
+  | created                  | 2020-08-03T23:02:16                  |
+  | datastore                | mysql                                |
+  | datastore_version        | 5.7.29                               |
+  | datastore_version_number | None                                 |
+  | flavor                   | e3feb785-af2e-41f7-899b-xxxxxxxxxxxx |
+  | id                       | 8546dd23-4f5e-4151-9b33-xxxxxxxxxxxx |
+  | name                     | db-instance-1                        |
+  | password                 | Q3jjBGIsD4eGBqFsZ5xxxxxxxxxxxxxxxxxx |
+  | public                   | False                                |
+  | region                   | nz-por-1                             |
+  | service_status_updated   | 2020-08-03T23:02:16                  |
+  | status                   | BUILD                                |
+  | updated                  | 2020-08-03T23:02:16                  |
+  | volume                   | 5                                    |
+  +--------------------------+--------------------------------------+
 
-We have to wait while the instance builds. Keep checking on the status of the
-new instance, once it is ``ACTIVE`` we can continue.
+.. Note::
+
+  Take note of the 'password' field here. This will become relevant when we start to interact with
+  our database later on in the :ref:`managing our database<managing_database>` section and the password is only
+  visible when initially creating your database instance.
+
+Once we have run the previous command, we have to wait while the instance
+builds. Keep checking on the status of the new instance; once it is ``HEALTHY``
+we can continue.
 
 .. code-block:: bash
 
   $ openstack database instance list
-  +--------------------------------------+---------------+-----------+-------------------+--------+-----------+--------------------------------------+------+--------+------+
-  | ID                                   | Name          | Datastore | Datastore Version | Status | Addresses | Flavor ID                            | Size | Region | Role |
-  +--------------------------------------+---------------+-----------+-------------------+--------+-----------+--------------------------------------+------+--------+------+
-  | 8546dd23-4f5e-4151-9b33-xxxxxxxxxxxx | db-instance-1 | mysql     | 5.7.29            | BUILD  |           | e3feb785-af2e-41f7-899b-xxxxxxxxxxxx |    5 | test-1 |      |
-  +--------------------------------------+---------------+-----------+-------------------+--------+-----------+--------------------------------------+------+--------+------+
+  +--------------------------------------+---------------+-----------+-------------------+--------+-----------+--------------------------------------+------+----------+------+
+  | ID                                   | Name          | Datastore | Datastore Version | Status | Addresses | Flavor ID                            | Size | Region   | Role |
+  +--------------------------------------+---------------+-----------+-------------------+--------+-----------+--------------------------------------+------+----------+------+
+  | 8546dd23-4f5e-4151-9b33-xxxxxxxxxxxx | db-instance-1 | mysql     | 5.7.29            | BUILD  |           | e3feb785-af2e-41f7-899b-xxxxxxxxxxxx |    5 | nz-por-1 |      |
+  +--------------------------------------+---------------+-----------+-------------------+--------+-----------+--------------------------------------+------+----------+------+
 
 Now let's view the details of our instance so that we can find the IP address
 that has been assigned to it.
@@ -185,23 +202,27 @@ that has been assigned to it.
 .. code-block:: bash
 
   $ openstack database instance show db-instance-1
-  +------------------------+--------------------------------------+
-  | Field                  | Value                                |
-  +------------------------+--------------------------------------+
-  | created                | 2020-08-03T23:02:16                  |
-  | datastore              | mysql                                |
-  | datastore_version      | 5.7.29                               |
-  | flavor                 | e3feb785-af2e-41f7-899b-xxxxxxxxxxxx |
-  | id                     | 8546dd23-4f5e-4151-9b33-xxxxxxxxxxxx |
-  | ip                     | 10.0.0.83                            |
-  | name                   | db-instance-1                        |
-  | region                 | test-1                               |
-  | service_status_updated | 2020-08-03T23:04:22                  |
-  | status                 | ACTIVE                               |
-  | updated                | 2020-08-03T23:02:30                  |
-  | volume                 | 5                                    |
-  | volume_used            | 0.13                                 |
-  +------------------------+--------------------------------------+
+  +------------------------+----------------------------------------------------+
+  | Field                  | Value                                              |
+  +------------------------+----------------------------------------------------+
+  | addresses                | [{'address': '10.0.0.83 ', 'type': 'private'}]   |
+  | allowed_cidrs            | []                                               |
+  | created                  | 2020-08-03T23:02:16                              |
+  | datastore                | mysql                                            |
+  | datastore_version        | 5.7.29                                           |
+  | datastore_version_number | None                                             |
+  | flavor                   | e3feb785-af2e-41f7-899b-xxxxxxxxxxxx             |
+  | id                       | 8546dd23-4f5e-4151-9b33-xxxxxxxxxxxx             |
+  | ip                       | 10.0.0.83                                        |
+  | public                   | False                                            |
+  | name                     | db-instance-1                                    |
+  | region                   | nz-por-1                                         |
+  | service_status_updated   | 2020-08-03T23:04:22                              |
+  | status                   | HEALTHY                                          |
+  | updated                  | 2020-08-03T23:02:30                              |
+  | volume                   | 5                                                |
+  | volume_used              | 0.13                                             |
+  +--------------------------+--------------------------------------------------+
 
 The final step in this section is to see what databases we have running within
 this instance.
@@ -209,7 +230,7 @@ this instance.
 .. Note::
 
   Currently the support for this command will only work with databases using the
-  MySQL datastore image at this time.
+  MySQL datastore image.
 
 .. code-block:: bash
 
@@ -223,6 +244,10 @@ this instance.
 *****************************
 Adding and deleting databases
 *****************************
+
+.. Note::
+
+  The following commands are only relevant for the MySQL datastore.
 
 Once you have a database instance deployed it is fairly simple to add and
 remove databases from it.
