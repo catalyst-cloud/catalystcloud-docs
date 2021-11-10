@@ -1,19 +1,12 @@
-########################
-Resilience and recovery
-########################
-
-Catalyst Cloud is a New Zealand based public cloud provider (akin to Amazon AWS
-or Microsoft Azure).
+###############################
+The shared responsibility model
+###############################
 
 Catalyst Cloud provides software defined infrastructure and platform services to
-customers, so that they can host applications as well as store & process data;
+customers so that they can host applications as well as store & process data;
 using the underlying infrastructure of the cloud. The services provided include:
 compute, block storage, object storage, networking, etc. These services are
 discussed in more detail in their respective sections of this documentation.
-
-************************************
-Shared responsibilities on the cloud
-************************************
 
 This section of the documentation is to clarify the nature of Catalyst Cloud's
 responsibilities in relation to your project on the cloud. The Catalyst Cloud
