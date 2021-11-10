@@ -59,7 +59,7 @@ control over if and how their data is replicated. You may choose to run an
 application and store its data in a single region or multiple regions depending
 on your need. If you
 choose to store your data in a single region, then there is a risk of incidents
-impacting that region (e.g. an earthquake destroying the building) With the
+impacting that region (e.g. an earthquake destroying a data-center) With the
 *shared operation and shared security* model that is used with the cloud, in
 this event, you are responsible for ensuring you have backups of your data or a
 disaster recovery mechanism for business continuity. If you are using services
@@ -68,17 +68,18 @@ have configured the services (e.g. level of replication of the data) and the
 SLAs provided are suitable for your business continuity plans.
 
 Catalyst's cloud services are available from three regions in New Zealand.
-Regions are data centres that are completely independent and isolated from each
-other, providing fault tolerance and geographic diversity. These regions are:
+Our regions are data centres that are completely independent and isolated from
+each other, providing fault tolerance and geographic diversity. These regions
+are:
 
 - Hamilton
 - Porirua
 - Wellington
 
-All our data centres have guaranteed power which is provided by UPSes and diesel
-generators. The diesel generators will start automatically in the event of a
-mains power failure. They also have N+1 or better cooling systems and have gas
-flood fire suppression systems.
+All our data centres have guaranteed power which is provided by Uninterupted
+Power Supplies (UPSes) and diesel generators. The diesel generators will start
+automatically in the event of a mains power failure. They also have N+1 or
+better cooling systems and have gas flood fire suppression systems.
 
 Each region is connected by our wide area network (WAN). Our WAN is built so
 that each region has multiple fibres which take diverse paths from a number of
@@ -90,7 +91,7 @@ According to the Catalyst Cloud terms and conditions
 to:
 
 - Check the SLA provided by each service and identify if they are suitable or
-  not for their business;
+  not for their business needs;
 - Implement their own high availability and disaster recovery plans for their
   applications or data they host on Catalyst Cloud;
 - Keep a copy or backup of their data outside the Catalyst Cloud.
