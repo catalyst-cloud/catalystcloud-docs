@@ -1,3 +1,5 @@
+.. _shared_responsibility_model:
+
 ###############################
 The shared responsibility model
 ###############################
@@ -89,3 +91,11 @@ to:
   applications or data they host on Catalyst Cloud;
 - Keep a copy or backup of their data outside the Catalyst Cloud.
 
+|
+
+Now that you are aware of how the shared responsibility model works on the
+Catalyst Cloud there are some terms and general knowledge you should be
+aware of before we start with an example of how to create your first instance.
+
+:ref:`Previous page <access_to_catalyst_cloud>` - :ref:`Next page
+<additional-info>`

@@ -12,5 +12,6 @@ section before using our cloud services.
    getting-started/intro
    getting-started/services
    getting-started/access
-   getting-started/admin
    getting-started/shared-responsibility-model
+   getting-started/additional-information
+
