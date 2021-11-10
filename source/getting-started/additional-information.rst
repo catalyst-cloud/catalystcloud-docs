@@ -476,5 +476,5 @@ opposed to specific features.
 Now that you understand the basics of the Catalyst Cloud, lets dive into a
 hands on example using the web dashboard!
 
-:ref:`Previous page <access_to_catalyst_cloud>` -
+:ref:`Previous page <shared_responsibility_model>` -
 :ref:`Next page <first-instance-with-dashboard>`
