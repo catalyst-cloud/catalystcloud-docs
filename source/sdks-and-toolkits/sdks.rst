@@ -21,3 +21,41 @@ https://wiki.openstack.org/wiki/SDKs
 Prior to accessing the Catalyst Cloud API endpoints, ensure you are working
 from a **whitelisted IP address**.  More information can be found under
 :ref:`Access and whitelist <access-and-whitelist>`
+
+********************
+Client tool versions
+********************
+
+Each of the services we have on our Cloud requires a different client tool to
+interact with from the command line. Earlier in this section we covered how to
+install these into a virtual environment so that you are able to use the
+openstack command line.
+
+Below is a list of the Client tools and their latest supported version on the
+Catalyst Cloud. When upgrading a service, in order to be able to interact with
+any new features, you should check to make sure that your client tools are up to
+date with our currently supported version:
+
++----------------+------------+--------------------------+
+| Service        | Toolkit    | Latest supported version |
++----------------+------------+--------------------------+
+| alarm          | aodh       | 1.2.0                    |
++----------------+------------+--------------------------+
+| block-storage  | cinder     | 1.11.0                   |
++----------------+------------+--------------------------+
+| compute        | nova       | 2.30.3                   |
++----------------+------------+--------------------------+
+| database       | trove      | 5.1.1                    |
++----------------+------------+--------------------------+
+| identity       | keystone   | 2.3.2                    |
++----------------+------------+--------------------------+
+| image          | glance     | 2.6.0                    |
++----------------+------------+--------------------------+
+| kubernetes     | magnum     | 3.2.2                    |
++----------------+------------+--------------------------+
+| network        | neutron    | 3.1.1                    |
++----------------+------------+--------------------------+
+| object-storage | swift      | 3.8.1                    |
++----------------+------------+--------------------------+
+| orchestration  | heat       | 1.18.1                   |
++----------------+------------+--------------------------+
