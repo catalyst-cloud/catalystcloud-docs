@@ -123,8 +123,7 @@ compute instances, as explained in :ref:`security-groups`.
 |
 
 Now that you understand how you can access the Catalyst Cloud, there are a few
-small administrative concerns to be aware of before we dive into a hands on
-demonstration.
+small administrative concerns to be aware of before we continue.
 
-:ref:`Previous page <access_to_catalyst_cloud>` - :ref:`Next page
-<administrating_the_catalyst_cloud>`
+:ref:`Previous page <services_on_the_catalyst_cloud>` - :ref:`Next page
+<shared_responsibility_model>`
