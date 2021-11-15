@@ -11,7 +11,7 @@ compute, block storage, object storage, networking, etc. These services are
 discussed in more detail in their respective sections of this documentation.
 
 This section of the documentation is to clarify the nature of Catalyst Cloud's
-responsibilities in relation to your project on the cloud. The Catalyst Cloud
+responsibilities in relation to your project on the cloud. Catalyst Cloud
 is responsible for the cloud platform itself, while customers are responsible
 for their applications and data. This is called a "shared operation and shared
 security" model.
