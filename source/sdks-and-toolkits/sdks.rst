@@ -33,8 +33,8 @@ openstack command line.
 
 Below is a list of the Client tools and their latest supported version on the
 Catalyst Cloud. When upgrading a service, in order to be able to interact with
-any new features you should check to make sure that your client tools are up to
-date with our currently supported version.
+any new features, you should check to make sure that your client tools are up to
+date with our currently supported version:
 
 +----------------+------------+--------------------------+
 | Service        | Toolkit    | Latest supported version |
