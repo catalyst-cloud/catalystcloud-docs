@@ -19,7 +19,7 @@ can copy paste the code into the new file you create on your instances.
 
 .. note::
 
-  You must also make sure that you have a security instance that allows access
+  You must also make sure that you have a security group that allows access
   to your instances from both the HTTP port (80) and the HTTPS port (443)
   otherwise the listeners and members (which are explained further on) won't be
   able to access your instances, meaning you will not be able to test the
