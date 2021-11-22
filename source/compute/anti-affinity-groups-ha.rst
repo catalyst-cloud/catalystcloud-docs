@@ -24,16 +24,16 @@ instances simultaneously.
 
 .. Warning::
 
-  When deciding a server affinity type to make use of, please keep in mind that
+  When deciding which server affinity type to use, please keep in mind that
   the policy behavior you choose will effect your servers behavior should a
   hypervisor experience a failure.
 
   * In the case of the *affinity* policy, if the hypervisor
-    your instances are running on goes down then all of your instances will go
-    down and will not be evacuated to another hypervisor.
+    your instances are running on goes down then all instances that are part of
+    that group may be unavailable for a period of time.
   * If you are using an *anti-affinity* policy and there is a hypervisor crash,
-    your instance may not be migrated if there is no other hypervisor that can
-    support the anti-affinity policy.
+    an affected instance may not be migrated until another hypervisor becomes
+    available that can support that same policy.
 
 
 ****************************************
