@@ -22,6 +22,19 @@ Compute instances in an anti-affinity group are placed on different physical
 servers, ensuring that the failure of a server will not affect all your compute
 instances simultaneously.
 
+.. Warning::
+
+  When deciding which server affinity type to use, please keep in mind that
+  the policy behavior you choose will effect your servers behavior should a
+  hypervisor experience a failure.
+
+  * In the case of the *affinity* policy, if the hypervisor
+    your instances are running on goes down then all instances that are part of
+    that group may be unavailable for a period of time.
+  * If you are using an *anti-affinity* policy and there is a hypervisor crash,
+    an affected instance may not be migrated until another hypervisor becomes
+    available that can support that same policy.
+
 
 ****************************************
 Using the dashboard
