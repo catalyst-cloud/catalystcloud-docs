@@ -85,7 +85,7 @@ allowing for recovery from unintended overwrites.
 To enable object versioning for a container, you must specify an **archive
 container** that will retain non-current versions via either the
 ``X-Versions-Location`` or ``X-History-Location header``. These two headers enable two
-distinct modes of operation which we weill discuss shortly.
+distinct modes of operation which we will discuss shortly.
 
 First, you need to create an archive container to store the older versions of
 your objects:
@@ -94,17 +94,17 @@ your objects:
 
   $ curl -i -X PUT -H "X-Auth-Token: $token" $storageURL/archive
 
-Now that we have our archive container, we can create a container to hold our
-objects. This is where we can choose which header type to use for our
-container.
+After you have create an archive container, you can create a regular container
+to store your objects in. This is where you are able to choose which header type
+to use for your container.
 
-* If we use the *X-History-Location* header, then object DELETE requests will
-  copy the current version to our archive container then remove the original
+* If you use the *X-History-Location* header, then object DELETE requests will
+  copy the current version to the archive container and remove the original
   from the versioned container.
 
-* If we instead use *X-Versions-Location*, then object DELETE requests will
+* If you instead use *X-Versions-Location*, then object DELETE requests will
   restore the most-recent version from the archive container, overwriting the
-  current version.
+  current version in your regular container.
 
 For this example, we are going to use the ``X-Versions-Location`` header:
 
