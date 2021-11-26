@@ -94,9 +94,9 @@ your objects:
 
   $ curl -i -X PUT -H "X-Auth-Token: $token" $storageURL/archive
 
-After you have create an archive container, you can create a regular container
-to store your objects in. This is where you are able to choose which header type
-to use for your container.
+Now that you have an archive, you can create another container to store your
+objects in. This is where you are able to choose which header type to use for
+your container.
 
 * If you use the *X-History-Location* header, then object DELETE requests will
   copy the current version to the archive container and remove the original
