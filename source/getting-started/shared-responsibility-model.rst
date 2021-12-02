@@ -17,6 +17,10 @@ running applications or data stored.
 The model Catalyst Cloud uses is sometimes called the "Shared Reponsibility
 Model", as there are responsibilities on both you and Catalyst Cloud.
 
+******************************
+Demarcation of Responsibilites
+******************************
+
 Catalyst Cloud is responsible for operating and securing:
 
 - Our data centres
@@ -85,7 +89,7 @@ can only be made by you with an understanding of your risk profile and
 business continuity needs.
 
 The full detail of both our and your obligations are in the Terms
-and Conditions, found here: (https://catalystcloud.nz/about/terms-and-conditions/)
+and Conditions, found here: https://catalystcloud.nz/about/terms-and-conditions/
 
 |
 
