@@ -6,7 +6,7 @@ The shared responsibility model
 
 Catalyst Cloud provides software defined infrastructure, platform services,
 and software services for you to host applications and to store or process
-data. The services cover a wider variety of aspects of how IT systems and
+data. The services cover a wide variety of aspects of how IT systems and
 data are stored and processed.
 
 An important aspect of running applications or storing data using Catalyst
@@ -63,7 +63,7 @@ Catalyst Cloud provides services with the expectation that you are
 responsible for the design of your systems and data store to meet your
 expectations of availability and durability. Catalyst Cloud's services
 have a number of features which can assist with making systems highly
-available, or protected agaonst loss from some kinds of failures, but
+available, or protected against loss from some kinds of failures, but
 the responsibility for making an application available or data durable
 is ultimately yours.
 
