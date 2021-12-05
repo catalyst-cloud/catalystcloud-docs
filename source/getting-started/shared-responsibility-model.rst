@@ -4,17 +4,22 @@
 The shared responsibility model
 ###############################
 
-Catalyst Cloud provides software defined infrastructure and platform services to
-customers so that they can host applications as well as store & process data;
-using the underlying infrastructure of the cloud. The services provided include:
-compute, block storage, object storage, networking, etc. These services are
-discussed in more detail in their respective sections of this documentation.
+Catalyst Cloud provides software defined infrastructure, platform services,
+and software services for you to host applications and to store or process
+data. The services cover a wide variety of aspects of how IT systems and
+data are stored and processed.
 
-This section of the documentation is to clarify the nature of Catalyst Cloud's
-responsibilities in relation to your project on the cloud. Catalyst Cloud
-is responsible for the cloud platform itself, while customers are responsible
-for their applications and data. This is called a "shared operation and shared
-security" model.
+An important aspect of running applications or storing data using Catalyst
+Cloud's services is the deliniation between the responsibilities that
+Catalyst Cloud has and the responsibilities you have, with respect to those
+running applications or data stored.
+
+The model Catalyst Cloud uses is sometimes called the "Shared Reponsibility
+Model", as there are responsibilities on both you and Catalyst Cloud.
+
+******************************
+Demarcation of Responsibilites
+******************************
 
 Catalyst Cloud is responsible for operating and securing:
 
@@ -29,7 +34,11 @@ Catalyst Cloud is responsible for operating and securing:
   - Our Hypervisors
   - Our Control plane
   - Our Management systems
-  - The Operating systems for Trove and Magnum resources
+  - The Operating systems for specific managed services (for example, the
+    Managed Database Service or the Managed Kuberentes Service)
+
+- Ensuring isolation of private resources between tenancies, where these
+  have been configured as private
 
 Customers are responsible for configuring, operating and securing:
 
@@ -44,52 +53,43 @@ Customers are responsible for configuring, operating and securing:
 - Authentication to your applications, resources and systems.
 - The Containers you run on the cloud
 - Application software and configuration
+- Any sharing of resources with the Internet or other tenants
 
-********************************
-Resilience of data and resources
-********************************
+***************************
+Availability and Durability
+***************************
 
-By using the different services provided by Catalyst Cloud, customers have
-control over if and how their data is replicated. You may choose to run an
-application and store its data in a single region or multiple regions depending
-on your need. If you
-choose to store your data in a single region, then there is a risk of incidents
-impacting that region (e.g. an earthquake destroying a data-center) With the
-*shared operation and shared security* model that is used with the cloud, in
-this event, you are responsible for ensuring you have backups of your data or a
-disaster recovery mechanism for business continuity. If you are using services
-across multiple regions, you are responsible for ensuring that the way you
-have configured the services (e.g. level of replication of the data) and the
-SLAs provided are suitable for your business continuity plans.
+Catalyst Cloud provides services with the expectation that you are
+responsible for the design of your systems and data store to meet your
+expectations of availability and durability. Catalyst Cloud's services
+have a number of features which can assist with making systems highly
+available, or protected against loss from some kinds of failures, but
+the responsibility for making an application available or data durable
+is ultimately yours.
 
-Catalyst's cloud services are available from three regions in New Zealand.
-Our regions are data centres that are completely independent and isolated from
-each other, providing fault tolerance and geographic diversity. These regions
-are:
+Although Catalyst Cloud provides in the Service Terms a definition of what
+we agree with you to be acceptable availability or durability, no service
+is provided with 100% assurance of availability or durability. For that
+reason, it is critical to ensure that your design takes into account
+that failures will happen, and design for the consequence of failures,
+to a level of risk that you have decided is acceptable.
 
-- Hamilton
-- Porirua
-- Wellington
+For example, you may store data in object storage in one of two ways:
+with a single-region copy, or with multiple-region copies. If you choose
+to store data in a single-region copy, it could be at more risk of loss
+than if stored in multiple regions. However, it is possible that data
+could be lost even in multiple-region configurations, although this is
+unlikely. Therefore, some data you may wish to protect by having
+additional backups in another platform or location.
 
-All our data centres have guaranteed power which is provided by Uninterupted
-Power Supplies (UPSes) and diesel generators. The diesel generators will start
-automatically in the event of a mains power failure. They also have N+1 or
-better cooling systems and have gas flood fire suppression systems.
+Under the Shared Responsibility Model, our obligations are to implement
+the services such that you should be able to reasonably rely on the stated
+service levels. But the assessment of risks for your systems and data
+can only be made by you with an understanding of your risk profile and
+business continuity needs.
 
-Each region is connected by our wide area network (WAN). Our WAN is built so
-that each region has multiple fibres which take diverse paths from a number of
-fibre providers to other regions. We have multiple Internet Service Providers to
-provide diversity and resiliency for our Internet connections.
-
-According to the Catalyst Cloud terms and conditions
-(https://catalystcloud.nz/about/terms-and-conditions/) customers are required
-to:
-
-- Check the SLA provided by each service and identify if they are suitable or
-  not for their business needs;
-- Implement their own high availability and disaster recovery plans for their
-  applications or data they host on Catalyst Cloud;
-- Keep a copy or backup of their data outside the Catalyst Cloud.
+The full detail of both our and your obligations are in the Terms
+and Conditions, found here: https://catalystcloud.nz/about/terms-and-conditions/
 
 |
 
