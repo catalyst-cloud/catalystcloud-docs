@@ -48,11 +48,6 @@ You can find instructions on how to install and set up the CLI :ref:`here
 with its functioning by following :ref:`this tutorial
 <using-the-command-line-interface>` to use it to deploy a compute instance.
 
-We're also working on a containerised version of the CLI designed to help you
-get up and running as quickly and intuitively as possible. You can `try it here
-<https://github.com/catalyst-cloud/openstackclient-container>`_.
-
-
 For more in depth documentation, the official OpenStack Client documentation is
 the most thorough source of information. You can `find it here
 <https://docs.openstack.org/python-openstackclient>`_.
