@@ -128,43 +128,6 @@ system.
           aodhclient
 
 
-Using docker (experimental)
-===========================
-
-The Catalyst Cloud CLI is available as a Docker container that is easy to use,
-packaging the command line interface and all its dependencies.
-
-This tool requires Docker to be installed to function. You can find
-`instructions on how to install and configure Docker here`_. You can run the
-``docker ps`` command to confirm Docker has been successfully installed.
-
-Run the following command to install the Catalyst Cloud CLI:
-
-.. code-block:: bash
-
-  bash <(wget -qO - https://raw.githubusercontent.com/catalyst-cloud/openstackclient-container/master/fetch-installer.sh) -a ccloud -u https://api.cloud.catalyst.net.nz:5000/v3
-
-
-.. Note::
-
-  Our documentation currently refers to the CLI command as ``openstack``. When
-  using the containerised version of the CLI, this command must be replaced with
-  ``ccloud`` in the provided examples.
-
-If you are intending to use the containerised tools you will need to acquire
-an openRC file for authentication. To get a copy of the your projects openrc
-file, select the dropdown in the upper right corner of the dashboard and click
-on ``OpenStack RC for Linux/macOS``. Select ``Save As`` when prompted, and
-select the location on your machine to save this file to.
-
-.. image:: assets/RC-file-download.png
-   :align: center
-
-If you need more information on using the file see :ref:`source-rc-file`.
-
-.. _instructions on how to install and configure Docker here: https://docs.docker.com/install/
-.. _CLI docker container: https://github.com/catalyst-cloud/openstackclient-container
-
 .. _upgrading-the-cli:
 
 Upgrading the CLI
@@ -281,17 +244,9 @@ environment then please check the :ref:`activate-venv` section of our
 documentation under tutorials.
 
 
-**If you installed the CLI using pip:**
-
 1. Activate your virtual environment.
 2. :ref:`source-rc-file`
 3. Invoke the CLI with the ``openstack`` command
-
-**If you installed the CLI using docker:**
-
-1. :ref:`source-rc-file`
-2. Invoke the CLI with the ``ccloud`` alias anywhere the ``openstack`` command
-   is otherwise used.
 
 
 For a reference of all commands supported by the CLI, refer to the `OpenStack
