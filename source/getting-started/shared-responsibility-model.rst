@@ -10,16 +10,16 @@ data. The services cover a wide variety of aspects of how IT systems and
 data are stored and processed.
 
 An important aspect of running applications or storing data using Catalyst
-Cloud's services is the deliniation between the responsibilities that
+Cloud's services is the delineation between the responsibilities that
 Catalyst Cloud has and the responsibilities you have, with respect to those
 running applications or data stored.
 
-The model Catalyst Cloud uses is sometimes called the "Shared Reponsibility
+The model Catalyst Cloud uses is sometimes called the "Shared Responsibility
 Model", as there are responsibilities on both you and Catalyst Cloud.
 
-******************************
-Demarcation of Responsibilites
-******************************
+*******************************
+Demarcation of Responsibilities
+*******************************
 
 Catalyst Cloud is responsible for operating and securing:
 
@@ -51,6 +51,9 @@ Customers are responsible for configuring, operating and securing:
 - Data stored on any services on the cloud (block storage, object storage,
   databases etc.)
 - Authentication to your applications, resources and systems.
+
+  - This includes managing and maintaining which users have access to your project(s).
+
 - The Containers you run on the cloud
 - Application software and configuration
 - Any sharing of resources with the Internet or other tenants
