@@ -80,7 +80,8 @@ on the cloud. To do so, you need to construct a command like the following:
 
 .. code-block:: bash
 
-  # make sure to substitute your package name in where it says "package_name.p12"
+  # make sure to substitute the name of your package in where it says "package_name.p12"
+
   $ openstack secret store --name="tls-secret" -t "application/octet-stream"
   -e "base64" --payload="$(base64 < package_name.p12)"
 
@@ -142,7 +143,9 @@ we created before:
   | tags                |                                      |
   +---------------------+--------------------------------------+
 
-Wait for it to be active
+Once we run this command we need to wait for our loadbalancer to become
+available. Once the provisioning_status of our loadbalancer is ``ACTIVE`` we can
+continue.
 
 .. code-block:: bash
 
@@ -153,13 +156,18 @@ Wait for it to be active
   | aXXXXXXX-XXXX-XXXX-XXXX-XXXXX02562da | tls-loadbalancer     | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX | 192.168.0.45 | ACTIVE              | ONLINE           | amphora  |
   +--------------------------------------+----------------------+----------------------------------+--------------+---------------------+------------------+----------+
 
-Create a listener that uses the secret and deals with the traffic
+Now that our loadbalancer is ready, we can move on to the next step. We need
+to create a listener on our loadbalancer. This is the part of the loadbalancer
+that interacts with our secret and actually performs the TLS functions.
 
 .. code-block:: bash
 
+  # ensure that you use the right name for your TLS secret when sourcing the default container.
+  # in this tutorial we used the name 'tls-secret'
+
   $ openstack loadbalancer listener create --protocol-port 443 --protocol
-  TERMINATED_HTTPS --name listener1 --default-tls-container=$(openstack secret
-  list | awk '/ tls-secret-test1 / {print $2}') tls-loadbalancer
+  TERMINATED_HTTPS --name tls-listener --default-tls-container=$(openstack secret
+  list | awk '/ tls-secret / {print $2}') tls-loadbalancer
 
   +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
   | Field                       | Value                                                                                                                                                                                                                                                                              |
@@ -168,15 +176,15 @@ Create a listener that uses the secret and deals with the traffic
   | connection_limit            | -1                                                                                                                                                                                                                                                                                 |
   | created_at                  | 2022-01-11T00:54:51                                                                                                                                                                                                                                                                |
   | default_pool_id             | None                                                                                                                                                                                                                                                                               |
-  | default_tls_container_ref   | https://api.nz-por-1.catalystcloud.io:9311/v1/secrets/bea75b1b-b1e2-4504-b4e3-ddf7c41929b2                                                                                                                                                                                         |
+  | default_tls_container_ref   | https://api.nz-por-1.catalystcloud.io:9311/v1/secrets/beXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                                                                                                                                                                         |
   | description                 |                                                                                                                                                                                                                                                                                    |
-  | id                          | 9a3bbd3c-ed72-4267-8322-ad5c5c4f931c                                                                                                                                                                                                                                               |
+  | id                          | 9aXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX                                                                                                                                                                                                                                               |
   | insert_headers              | None                                                                                                                                                                                                                                                                               |
   | l7policies                  |                                                                                                                                                                                                                                                                                    |
-  | loadbalancers               | a148f0b9-038a-4277-bdb7-f38df02562da                                                                                                                                                                                                                                               |
-  | name                        | listener1                                                                                                                                                                                                                                                                          |
+  | loadbalancers               | aXXXXXXX-XXXX-XXXX-XXXX-XXXXX02562da                                                                                                                                                                                                                                               |
+  | name                        | tls-listener                                                                                                                                                                                                                                                                          |
   | operating_status            | OFFLINE                                                                                                                                                                                                                                                                            |
-  | project_id                  | 773284c6936d4bdea37beedf5b832e54                                                                                                                                                                                                                                                   |
+  | project_id                  | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                                                                                                                                                                                                                                   |
   | protocol                    | TERMINATED_HTTPS                                                                                                                                                                                                                                                                   |
   | protocol_port               | 443                                                                                                                                                                                                                                                                                |
   | provisioning_status         | PENDING_CREATE                                                                                                                                                                                                                                                                     |
@@ -196,12 +204,15 @@ Create a listener that uses the secret and deals with the traffic
   | tags                        |                                                                                                                                                                                                                                                                                    |
   +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Create a pool with the right protocol
+Next we need to create a pool for our loadbalancer and add our webserver as a
+member. The important thing to consider about your pool is which algorithm you
+want to use for your traffic to be sorted. In this case we are going to stick
+to the round robin algorithm.
 
 .. code-block:: bash
 
-  $ openstack loadbalancer pool create --name pool1 --lb-algorithm ROUND_ROBIN
-  --listener listener1 --protocol HTTP
+  $ openstack loadbalancer pool create --name tls-pool --lb-algorithm ROUND_ROBIN
+  --listener tls-listener --protocol HTTP
 
   +----------------------+--------------------------------------+
   | Field                | Value                                |
@@ -212,12 +223,12 @@ Create a pool with the right protocol
   | healthmonitor_id     |                                      |
   | id                   | eb9df502-7abb-42c9-bf35-e893a683071b |
   | lb_algorithm         | ROUND_ROBIN                          |
-  | listeners            | 9a3bbd3c-ed72-4267-8322-ad5c5c4f931c |
-  | loadbalancers        | a148f0b9-038a-4277-bdb7-f38df02562da |
+  | listeners            | 9aXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX |
+  | loadbalancers        | aXXXXXXX-XXXX-XXXX-XXXX-XXXXX02562da |
   | members              |                                      |
-  | name                 | pool1                                |
+  | name                 | tls-pool                                |
   | operating_status     | OFFLINE                              |
-  | project_id           | 773284c6936d4bdea37beedf5b832e54     |
+  | project_id           | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX     |
   | protocol             | HTTP                                 |
   | provisioning_status  | PENDING_CREATE                       |
   | session_persistence  | None                                 |
@@ -232,13 +243,12 @@ Create a pool with the right protocol
   | alpn_protocols       |                                      |
   +----------------------+--------------------------------------+
 
-Add your webserver to the pool as a member
+Now we add our webserver as a member to the pool:
 
 .. code-block:: bash
 
   $ openstack loadbalancer member create --subnet-id
-  823053b3-f92d-407b-a2cd-2f392ecf8d69 --address 192.168.0.40
-  --protocol-port 80 pool1
+  $subnet_id --address 192.168.0.40 --protocol-port 80 tls-pool
 
   +---------------------+--------------------------------------+
   | Field               | Value                                |
@@ -249,10 +259,10 @@ Add your webserver to the pool as a member
   | id                  | b0f00795-8162-49e2-828b-2d585a04543e |
   | name                |                                      |
   | operating_status    | NO_MONITOR                           |
-  | project_id          | 773284c6936d4bdea37beedf5b832e54     |
+  | project_id          | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX     |
   | protocol_port       | 80                                   |
   | provisioning_status | PENDING_CREATE                       |
-  | subnet_id           | 823053b3-f92d-407b-a2cd-2f392ecf8d69 |
+  | subnet_id           | aaaXXXXXX-XXXX-XXXXXXXX-XXXXX-jmu2r3 |
   | updated_at          | None                                 |
   | weight              | 1                                    |
   | monitor_port        | None                                 |
@@ -261,3 +271,5 @@ Add your webserver to the pool as a member
   | tags                |                                      |
   +---------------------+--------------------------------------+
 
+Once that is done we should have a functioning loadbalancer that will perform
+TLS termination for our webserver.
