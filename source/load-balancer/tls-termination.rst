@@ -70,33 +70,34 @@ balancer.
 Creating a secret using the Barbican service
 ===================================================
 
-First, we need to create a secret containing our certificates and keys,
+First, we need to create a secret containing our TLS certificates and key,
 which we can safely store on the cloud using the Barbican service. To start,
 we need to create a package that contains all of our required inputs.
 
-Navigate to the folder containing your certificate,
-keyfile and any certificate chains required. Once there, you can use the
-following command to create a pkcs12 package:
+Navigate to the folder containing your certificate, keyfile and any certificate
+chains required. Once there, you can use the following command to create a
+pkcs12 package:
 
 .. code-block:: bash
 
-  $ openssl pkcs12 -export -inkey server.key -in server.crt -certfile ca-chain.crt -passout pass: -out <package_name>.p12
+  $ openssl pkcs12 -export -inkey <SERVER.key> -in <SERVER-CERTIFICATE.crt> -certfile <CERTIFICATE-CA-CHAIN.crt> -passout pass: -out <PACKAGE-NAME>.p12
 
-Once we have this our pkcs12 file, we can create a secret, which we will store
-on the cloud. To do so, you need to construct a command like the following:
+Once we have this our pkcs12 file, we can create a secret which we will store
+on the cloud. For this example we are going to name our secret *tls-secret-01*
+To do so, you need to construct a command like the following:
 
 .. code-block:: bash
 
-  # make sure to substitute the name of your package in where it says "package_name.p12"
+  # make sure to substitute the name of your package in where it says "PACKAGE-NAME.p12"
 
-  $ openstack secret store --name="tls-secret" -t "application/octet-stream"
-  -e "base64" --payload="$(base64 < package_name.p12)"
+  $ openstack secret store --name="tls-secret-01" -t "application/octet-stream"
+  -e "base64" --payload="$(base64 < PACKAGE-NAME.p12)"
 
   +---------------+--------------------------------------------------------------------------------------------+
   | Field         | Value                                                                                      |
   +---------------+--------------------------------------------------------------------------------------------+
   | Secret href   | https://api.nz-por-1.catalystcloud.io:9311/v1/secrets/beXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |
-  | Name          | tls-secret                                                                                 |
+  | Name          | tls-secret-01                                                                                 |
   | Created       | None                                                                                       |
   | Status        | None                                                                                       |
   | Content types | {'default': 'application/octet-stream'}                                                    |
@@ -107,15 +108,15 @@ on the cloud. To do so, you need to construct a command like the following:
   | Expiration    | None                                                                                       |
   +---------------+--------------------------------------------------------------------------------------------+
 
-Now that we have our package created and kept in our secret, we can move on to
-creating our loadbalancer.
+Now that we have our packaged certificates and key stored and kept in our
+secret, we can move on to creating our loadbalancer.
 
 Configuring a TLS terminated Load-balancer
 ===========================================
 
-With our secret stored on the cloud, there are only a few more steps left. Next
-we will need to create the loadbalancer that will look after our instance and
-perform our tls termination.
+With our TLS Certificate and Key stored on the cloud, there are only a few more
+steps left. Next we will need to create the loadbalancer that will look after
+our instance and perform our TLS termination.
 
 To do so, we use the following command, making use of the environment variable
 we created before:
@@ -164,17 +165,17 @@ continue.
   +--------------------------------------+----------------------+----------------------------------+--------------+---------------------+------------------+----------+
 
 Now that our loadbalancer is ready, we can move on to the next step. We need
-to create a listener on our loadbalancer. This is the part of the loadbalancer
+to create a listener for our loadbalancer. This is the part of the loadbalancer
 that interacts with our secret and actually performs the TLS functions.
 
 .. code-block:: bash
 
-  # ensure that you use the right name for your TLS secret when sourcing the default container.
-  # in this tutorial we used the name 'tls-secret'
+  # ensure that you are using the right name for your TLS secret when sourcing
+  # the default container. In this tutorial we used the name 'tls-secret-01'
 
   $ openstack loadbalancer listener create --protocol-port 443 --protocol
   TERMINATED_HTTPS --name tls-listener --default-tls-container=$(openstack secret
-  list | awk '/ tls-secret / {print $2}') tls-loadbalancer
+  list | awk '/ tls-secret-01 / {print $2}') tls-loadbalancer
 
   +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
   | Field                       | Value                                                                                                                                                                                                                                                                              |
