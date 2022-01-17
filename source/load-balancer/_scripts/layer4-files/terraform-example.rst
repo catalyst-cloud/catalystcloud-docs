@@ -45,7 +45,7 @@ on:
   +--------------------------------------+---------------------+--------------------------------------+-----------------+
   | ID                                   | Name                | Network                              | Subnet          |
   +--------------------------------------+---------------------+--------------------------------------+-----------------+
-  | aaa43782v-auih-d3hak4i7-bfmdb-jmu2r3 | lb-docs-test-subnet | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX | 192.168.0.0/24  |
+  | aaaXXXXXX-XXXX-XXXXXXXX-XXXXX-jmu2r3 | lb-docs-test-subnet | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX | 192.168.0.0/24  |
   +--------------------------------------+---------------------+--------------------------------------+-----------------+
 
 Once you have your subnet ID, next you will need to get the local IP of your
