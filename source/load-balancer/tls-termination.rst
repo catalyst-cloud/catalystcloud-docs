@@ -3,7 +3,7 @@ TLS Termination
 ###############
 
 In this section, we cover how to use openstack tools to create a loadbalancer
-that will handle TLS termination for your instances.
+which will handle TLS termination for your webservers.
 
 ***************
 Assumptions
@@ -31,16 +31,16 @@ following:
 Gathering the necessary inputs
 ===============================
 
-As this tutorial is focused on how to set up a TLS terminated loadbalancer, you
-will need to have the following resources already available to proceed with the
-rest of the tutorial.
+As this tutorial covers the steps on how to set up a TLS terminated
+loadbalancer, you will need to have the following resources already available so
+that we can use them as inputs later on in this guide. You will need:
 
 - A webserver on the cloud that is currently running your desired application.
 - The valid certificates and keys that relate to your webserver application/website.
-- You will also need the UUID of a subnet that you want your loadbalancer to be hosted on.
+- The UUID of the subnet that you want your loadbalancer to be hosted on.
 
-You can acquire that UUID by running the command and creating a environment
-variable for the ID:
+You can acquire the UUID of your subnet by running the following command and
+creating an environment variable for the ID:
 
 .. code-block:: bash
 
@@ -60,14 +60,15 @@ Creating a TLS terminated Load Balancer
 ***************************************
 
 Once you have set up your command line correctly and ensured that you have all
-of  the prerequisite resources ready, we can begin creating our new load
+of the prerequisite resources ready, we can begin creating our new load
 balancer.
 
 Creating a secret using the Barbican service
 ===================================================
 
 First, we need to create a secret containing our TLS certificates and key,
-which we can safely store on the cloud using the Barbican service. To start,
+which we can safely store on the cloud using the
+`Barbican <https://docs.openstack.org/barbican/latest/>`_ service. To start,
 we need to create a package that contains all of our required inputs.
 
 Navigate to the folder containing your certificate, keyfile and any certificate
@@ -78,13 +79,14 @@ pkcs12 package:
 
   $ openssl pkcs12 -export -inkey <SERVER.key> -in <SERVER-CERTIFICATE.crt> -certfile <CERTIFICATE-CA-CHAIN.crt> -passout pass: -out <PACKAGE-NAME>.p12
 
-Once we have this our pkcs12 file, we can create a secret which we will store
-on the cloud. For this example we are going to name our secret *tls-secret-01*
-To do so, you need to construct a command like the following:
+Once this command finishes running, it will have created a pkcs12 file that
+contains all of our certs and the corresponding key, packaged together. We can
+then create a secret containing this package, which we will store on the cloud.
+For this example we are going to name our secret *tls-secret-01*:
 
 .. code-block:: bash
 
-  # make sure to substitute the name of your package in where it says "PACKAGE-NAME.p12"
+  # Substitute your package name for "PACKAGE-NAME.p12"
 
   $ openstack secret store --name="tls-secret-01" -t "application/octet-stream"
   -e "base64" --payload="$(base64 < PACKAGE-NAME.p12)"
@@ -110,17 +112,16 @@ secret, we can move on to creating our loadbalancer.
 Configuring a TLS terminated Load-balancer
 ===========================================
 
-With our TLS Certificate and Key stored on the cloud, there are only a few more
+With our TLS Certificate and Key now stored on the cloud, there are only a few
 steps left. Next we will need to create the loadbalancer that will look after
 our instance and perform our TLS termination.
 
-To do so, we use the following command, making use of the environment variable
+To do so, we use the following command, including the environment variable
 we created before:
 
 .. code-block:: bash
 
-  $ openstack loadbalancer create --name tls-loadbalancer --vip-subnet-id
-  $subnet_id
+  $ openstack loadbalancer create --name tls-loadbalancer --vip-subnet-id $subnet_id
 
   +---------------------+--------------------------------------+
   | Field               | Value                                |
@@ -148,8 +149,8 @@ we created before:
   +---------------------+--------------------------------------+
 
 Once we run this command we need to wait for our loadbalancer to become
-available. Once the provisioning_status of our loadbalancer is ``ACTIVE`` we can
-continue.
+available. Once the ``provisioning_status`` of our loadbalancer is ``ACTIVE``
+we can continue.
 
 .. code-block:: bash
 
@@ -166,8 +167,8 @@ that interacts with our secret and actually performs the TLS functions.
 
 .. code-block:: bash
 
-  # ensure that you are using the right name for your TLS secret when sourcing
-  # the default container. In this tutorial we used the name 'tls-secret-01'
+  # Ensure that you are using the right name for your TLS secret when sourcing the default container.
+  # In this tutorial we used the name 'tls-secret-01'
 
   $ openstack loadbalancer listener create --protocol-port 443 --protocol
   TERMINATED_HTTPS --name tls-listener --default-tls-container=$(openstack secret
