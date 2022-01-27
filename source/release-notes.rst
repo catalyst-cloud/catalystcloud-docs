@@ -2,7 +2,9 @@
 Release notes
 #############
 
-This is the release notes section of the Catalyst Cloud Documentation.
+This is the release notes section of the Catalyst Cloud Documentation. These
+notes are updated when a release has changes that effect the end user
+experience of the cloud.
 
 Table of Contents:
 
@@ -25,3 +27,4 @@ Table of Contents:
   release-notes/release_02_june_2021
   release-notes/release_30_august_2021
   release-notes/release_12_oct_2021
+
