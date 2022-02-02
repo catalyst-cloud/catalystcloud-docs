@@ -6,7 +6,7 @@ TLS Termination
 
   The following tutorial makes use of the Barbican service on the cloud. This
   service is currently at a technical preview stage. To make use of this
-  service, you will need to raise a :ref:`support ticket<_admin-support>` to
+  service, you will need to raise a :ref:`support ticket<admin-support>` to
   request access for your project.
 
 In this section, we cover how to use openstack tools to create a loadbalancer
