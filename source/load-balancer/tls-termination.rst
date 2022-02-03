@@ -4,8 +4,8 @@ TLS Termination
 
 .. Warning::
 
-  The following tutorial makes use of the Barbican service on the cloud. This
-  service is currently at a technical preview stage. To make use of this
+  The following tutorial makes use of the Secret storage service on the cloud.
+  This service is currently at a technical preview stage. To make use of this
   service, you will need to raise a :ref:`support ticket<admin-support>` to
   request access for your project.
 
