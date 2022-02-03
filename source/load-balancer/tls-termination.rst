@@ -4,8 +4,8 @@ TLS Termination
 
 .. Warning::
 
-  The following tutorial makes use of the Barbican service on the cloud. This
-  service is currently at a technical preview stage. To make use of this
+  The following tutorial makes use of the Secret storage service on the cloud.
+  This service is currently at a technical preview stage. To make use of this
   service, you will need to raise a :ref:`support ticket<admin-support>` to
   request access for your project.
 
@@ -67,7 +67,7 @@ Once you have set up your command line correctly and ensured that you have all
 of the prerequisite resources ready, we can begin creating our new load
 balancer.
 
-Creating a secret using the Barbican service
+Creating a secret using the Secret Storage service
 ===================================================
 
 First, we need to create a secret containing our TLS certificates and key,
