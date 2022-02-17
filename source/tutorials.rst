@@ -81,3 +81,4 @@ Other tutorials
    tutorials/other/using-python-virtual-environments
    tutorials/other/deploying-rocketchat-on-catalyst-cloud
    tutorials/other/deploying-matrixchat-on-catalyst-cloud
+   tutorials/other/deploying-nextcloud
