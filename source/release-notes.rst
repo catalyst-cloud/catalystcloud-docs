@@ -27,4 +27,5 @@ Table of Contents:
   release-notes/release_02_june_2021
   release-notes/release_30_august_2021
   release-notes/release_12_oct_2021
+  release-notes/release_21_feb_2022
 
