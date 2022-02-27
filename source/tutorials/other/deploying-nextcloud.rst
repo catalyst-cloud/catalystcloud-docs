@@ -10,7 +10,8 @@ This tutorial assumes that you have the following prepared:
 
 You may also need the following depending on your preference:
 
-* Knowledge of how to create and use volumes (if you are using your own volume).
+* Knowledge of how to create and use volumes (if you are using your own
+  volume).
 
 * A volume created for storing Nextcloud data (if you are using terraform).
 
@@ -65,6 +66,10 @@ First, before we jump in to creating any resources using terraform, we'll need
 to prepare all of the tools that we're going to use in this tutorial. For that
 we can use the following code snippets:
 
+First, before we jump in to creating any resources using terraform, we'll need
+to prepare all of the tools that we're going to use in this tutorial. For that
+we can use the following code snippets:
+
 .. code-block:: bash
 
   $ sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
@@ -101,6 +106,7 @@ subnet, router, ssh key, and of course your instance itself. It is recommended
 to use the template provided above as it contains all of the necessary
 resources you will need for this tutorial.
 
+
 Before using the template, you will only need to make sure to
 change the following to your own so that the template functions on your
 project:
@@ -115,6 +121,7 @@ used for this template can be found at: `Terraform documentation`_
 
 The user_data section should also be changed so the the template file contains
 the file path of the cloud-init configuration file you intend to use.
+
 
 ==========================
 Using a cloud init file
@@ -137,6 +144,18 @@ the server using the ACME protocol.
 Creating your stack using terraform
 ===================================
 
+The `cloud init`_ file configures the software on the instance when it
+starts for the first time. In our case we want to install Nextcloud,
+so the cloud init file installs docker and writes systemd services
+to the instance.
+
+The containers started in the setup script are Nextcloud, `NGINX`_ and the
+`NGINX_proxy_acme_companion`_. The NGINX container is a reverse proxy for
+Nextcloud, and
+ensures communication with the Nextcloud server is encrypted. The acme
+companion automatically configures the letsencrypt certificates for the server
+using the ACME protocol.
+
 Now that we have all of the required software installed and our resources
 defined in our template files, we can use Terraform to construct our resources
 on the cloud.
@@ -147,6 +166,7 @@ on the cloud.
   $ terraform init
   $ terraform plan
   $ terraform apply --var domain_name="<your-domain-name>" --var host_name="<your-host-name>" --var ddns_password="<your-ddns-password>" --var file_upload_size="<size in mega-bytes>m" --var keyname="<your-key-name>" --var volume_uuid="<volume id>" --var image_type="<preferred-image-type>" --var flavor_type="<preferred-flavor-type>"
+
 
 .. Note::
 
@@ -219,18 +239,20 @@ How to configure each service:
 
 * Dashboard
 
-  - The dashboard can be changed to show updates on services you are interested
+  - The dashboard can be changed to show updates on services you're interested
     in via the **customise** button at the bottom of the screen.
 
 * Files
 
-  - Files can be added by pressing the plus in the upper left hand corner, these files can be up to 100MB in size.
+  - Files can be added by pressing the plus in the upper left hand corner,
+    these files can be up to 100MB in size.
 
 * Mail
 
   - Manual set up is recommended.
 
-  - See `Thunderbird documentation`_ for setting up Nextcloud with Thunderbird mail &calendar.
+  - See `Thunderbird documentation`_ for setting up Nextcloud with Thunderbird
+    mail &calendar.
 
 * Calendar
 
