@@ -21,8 +21,12 @@ Introduction
 Nextcloud is a free and open source suite of client-server software which
 manages the creation and hosting of files. It is becoming a popular alternative
 to similar software such as Dropbox and Google Drive. This tutorial will guide
+<<<<<<< HEAD
 you through the process of setting up a Nextcloud instance on the Catalyst
 Cloud.
+=======
+you through setting up a Nextcloud instance on Catalyst Cloud.
+>>>>>>> 58f8b341e3a0a3c896ec0036dd68148caf5a9e16
 
 ****************************************
 Creating a Nextcloud instance using Heat
@@ -32,9 +36,15 @@ Creating a Nextcloud instance using Heat
 Instructions
 ============
 
+<<<<<<< HEAD
 1. Navigate to the `Launch a stack`_ section of the dashboard.
 2. Select "URL" from the "Template Source" drop down menu.
 3. Copy and paste the following address in the "Template URL" box:
+=======
+1. Go to `Launch a stack`_.
+2. Select "URL" from the "Template Source" drop down menu.
+3. Copy and paste
+>>>>>>> 58f8b341e3a0a3c896ec0036dd68148caf5a9e16
 
 .. code-block:: bash
 
@@ -45,9 +55,14 @@ Instructions
    domain-name and hostname at this stage.
 6. Click "Launch"
 
+<<<<<<< HEAD
 It will take roughly 5 - 6 minutes for the instance to configure. After which,
 putting the domain name into your browser will take you to your Nextcloud
 instance.
+=======
+It will take about 5 - 6 minutes for the instance to configure, but after that
+put the domain name in the browser to access your Nextcloud instance.
+>>>>>>> 58f8b341e3a0a3c896ec0036dd68148caf5a9e16
 
 *************************
 Launching with Terraform
@@ -67,10 +82,19 @@ we can use the following code snippets:
 
 .. code-block:: bash
 
+<<<<<<< HEAD
   $ sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
   $ curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
   $ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
   $ sudo apt-get update && sudo apt-get install terraform
+=======
+  sudo apt-get update && sudo apt-get install -y gnupg \
+  software-properties-common curl
+  curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+  sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com \
+  $(lsb_release -cs) main"
+  sudo apt-get update && sudo apt-get install terraform
+>>>>>>> 58f8b341e3a0a3c896ec0036dd68148caf5a9e16
 
 
 ===================================
@@ -84,11 +108,20 @@ Open up a terminal and paste the following:
 
 .. code-block:: bash
 
+<<<<<<< HEAD
   $ sudo su
   $ mkdir /nextcloud-terraform
   $ cd /nextcloud-terraform
   $ wget https://raw.githubusercontent.com/yvonnewat/catalystcloud-orchestration/new/add-systemd-services/nextcloud/terraform/nextcloud.tf
   $ wget https://raw.githubusercontent.com/yvonnewat/catalystcloud-orchestration/new/add-systemd-services/nextcloud/terraform/cloud-init-nextcloud.tpl
+=======
+  sudo su
+  mkdir /nextcloud-terraform
+  cd /nextcloud-terraform
+  wget https://raw.githubusercontent.com/yvonnewat/catalystcloud-orchestration/new/add-systemd-services/nextcloud/terraform/nextcloud.tf
+
+  wget https://raw.githubusercontent.com/yvonnewat/catalystcloud-orchestration/new/add-systemd-services/nextcloud/terraform/cloud-init-nextcloud.tpl
+>>>>>>> 58f8b341e3a0a3c896ec0036dd68148caf5a9e16
 
 
 ====================================
@@ -118,8 +151,12 @@ so the cloud init file installs docker and writes systemd services
 to the instance.
 
 The containers started in the setup script are Nextcloud, `NGINX`_ and the
+<<<<<<< HEAD
 `NGINX_proxy_acme_companion`_. The NGINX container is a reverse proxy for
 Nextcloud, and
+=======
+`NGINX_proxy_acme_companion`_. The NGINX container is a reverse proxy for Nextcloud, and
+>>>>>>> 58f8b341e3a0a3c896ec0036dd68148caf5a9e16
 ensures communication with the Nextcloud server is encrypted. The acme companion
 automatically configures the letsencrypt certificates for the server using the
 ACME protocol.
@@ -201,8 +238,12 @@ How to configure each service:
 
 * Dashboard
 
+<<<<<<< HEAD
   - The dashboard can be changed to show updates on services you're interested
     in via the **customise** button at the bottom of the screen.
+=======
+  - The dashboard can be changed to show updates on services via the **customise** button at the bottom of the screen.
+>>>>>>> 58f8b341e3a0a3c896ec0036dd68148caf5a9e16
 
 * Files
 
@@ -216,11 +257,17 @@ How to configure each service:
 
 * Calendar
 
+<<<<<<< HEAD
   - You can import a calendar as a file or synchronize the Nextcloud calendar
     with one of your own.
 
   - If you want to synch it with a Thunderbird calendar, see the `Thunderbird
     documentation`_ for setting up Thunderbird mail.
+=======
+  - You can import a calendar as a file or synchronize the Nextcloud calendar with one of your own.
+
+  - See the `Thunderbird documentation`_ if you want to set up Thunderbird mail.
+>>>>>>> 58f8b341e3a0a3c896ec0036dd68148caf5a9e16
 
 * Contacts
 
