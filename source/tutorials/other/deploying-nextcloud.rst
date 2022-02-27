@@ -106,7 +106,6 @@ subnet, router, ssh key, and of course your instance itself. It is recommended
 to use the template provided above as it contains all of the necessary
 resources you will need for this tutorial.
 
-
 Before using the template, you will only need to make sure to
 change the following to your own so that the template functions on your
 project:
@@ -151,10 +150,10 @@ to the instance.
 
 The containers started in the setup script are Nextcloud, `NGINX`_ and the
 `NGINX_proxy_acme_companion`_. The NGINX container is a reverse proxy for
-Nextcloud, and
-ensures communication with the Nextcloud server is encrypted. The acme
-companion automatically configures the letsencrypt certificates for the server
-using the ACME protocol.
+Nextcloud, and ensures communication with the Nextcloud server is encrypted.
+The acme companion automatically configures the letsencrypt certificates for
+the server using the ACME protocol.
+
 
 Now that we have all of the required software installed and our resources
 defined in our template files, we can use Terraform to construct our resources
