@@ -27,4 +27,4 @@ Table of Contents:
   release-notes/release_2021-06-02.rst
   release-notes/release_2021-08-30.rst
   release-notes/release_2021-10-12.rst
-  release-notes/release_2022-2-21.rst
+  release-notes/release_2022-02-21.rst
