@@ -28,6 +28,3 @@ Table of Contents:
   release-notes/release_2021-08-30.rst
   release-notes/release_2021-10-12.rst
   release-notes/release_2022-02-21.rst
-
-
-

@@ -66,10 +66,6 @@ First, before we jump in to creating any resources using terraform, we'll need
 to prepare all of the tools that we're going to use in this tutorial. For that
 we can use the following code snippets:
 
-First, before we jump in to creating any resources using terraform, we'll need
-to prepare all of the tools that we're going to use in this tutorial. For that
-we can use the following code snippets:
-
 .. code-block:: bash
 
   $ sudo apt-get update && sudo apt-get install -y gnupg software-properties-common curl
@@ -110,6 +106,20 @@ Before using the template, you will only need to make sure to
 change the following to your own so that the template functions on your
 project:
 
+=======================================
+Using a terraform configuration file
+=======================================
+
+A template file should describe all the aspects of your system that you want to
+be constructed by Terraform. These aspects are resources such as the network,
+subnet, router, ssh key, and of course your instance itself. It is recommended
+to use the template provided above as it contains all of the necessary
+resources you will need for this tutorial.
+
+Before using the template, you will only need to make sure to
+change the following to your own so that the template functions on your
+project:
+
 - key name,
 - domain name,
 - host name
@@ -120,7 +130,6 @@ used for this template can be found at: `Terraform documentation`_
 
 The user_data section should also be changed so the the template file contains
 the file path of the cloud-init configuration file you intend to use.
-
 
 ==========================
 Using a cloud init file
@@ -138,21 +147,27 @@ Nextcloud, and ensures communication with the Nextcloud server is encrypted.
 The acme companion automatically configures some letsencrypt certificates for
 the server using the ACME protocol.
 
-===================================
-Creating your stack using terraform
-===================================
+==========================
+Using a cloud init file
+==========================
+>>>>>>> fixed release-notes inclusion and edits to nextcloud tutorial
 
-The `cloud init`_ file configures the software on the instance when it
-starts for the first time. In our case we want to install Nextcloud,
-so the cloud init file installs docker and writes systemd services
-to the instance.
+The `cloud init`_ file configures the software on an instance when it
+boots for the first time. In our case we want to install Nextcloud at runtime,
+so our cloud init file is set up to install docker and write systemd services
+to the instance. This is because we will be using a containerized version of
+Nextcloud.
 
 The containers started in the setup script are Nextcloud, `NGINX`_ and the
 `NGINX_proxy_acme_companion`_. The NGINX container is a reverse proxy for
 Nextcloud, and ensures communication with the Nextcloud server is encrypted.
-The acme companion automatically configures the letsencrypt certificates for
+
+The acme companion automatically configures some letsencrypt certificates for
 the server using the ACME protocol.
 
+===================================
+Creating your stack using terraform
+===================================
 
 Now that we have all of the required software installed and our resources
 defined in our template files, we can use Terraform to construct our resources
@@ -164,7 +179,6 @@ on the cloud.
   $ terraform init
   $ terraform plan
   $ terraform apply --var domain_name="<your-domain-name>" --var host_name="<your-host-name>" --var ddns_password="<your-ddns-password>" --var file_upload_size="<size in mega-bytes>m" --var keyname="<your-key-name>" --var volume_uuid="<volume id>" --var image_type="<preferred-image-type>" --var flavor_type="<preferred-flavor-type>"
-
 
 .. Note::
 
@@ -237,7 +251,7 @@ How to configure each service:
 
 * Dashboard
 
-  - The dashboard can be changed to show updates on services you're interested
+  - The dashboard can be changed to show updates on services you are interested
     in via the **customise** button at the bottom of the screen.
 
 * Files
