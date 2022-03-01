@@ -8,7 +8,7 @@ This tutorial assumes that you have the following prepared:
 
 * A domain name.
 
-* A record pointing to localhost (127.0.0.1) under a chosen host name.
+You may also need the following depending on your preference:
 
 * Knowledge of how to create and use volumes (if you are using your own volume).
 
