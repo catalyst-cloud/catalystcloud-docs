@@ -48,8 +48,6 @@ create your own scripts on the `OpenstackSDK documentation`_:
 
 The following code block assumes a few things:
 
-* Your external IP address has been whitelisted for API access as explained
-  under :ref:`Access and whitelist <access-and-whitelist>`.
 * You are using an RC file that does not use 2-factor-authentication.
   if you are using 2FA then you would need to change the `password` variable
   to be a `token`
