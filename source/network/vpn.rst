@@ -58,6 +58,10 @@ elements in order to avoid ambiguity when running commands.
   committed to your configuration management system source control in plain
   text.
 
+.. Warning::
+  The Pre Shared Key should be between 20 to 40 characters long and consist of alphanumeric characters only.
+  The Pre Shared Key must not contain the '&' character.
+
 .. tabs::
 
   .. tab:: Command line
