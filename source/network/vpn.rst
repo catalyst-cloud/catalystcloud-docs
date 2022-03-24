@@ -28,9 +28,7 @@ We will illustrate how to create the the VPN using the following approaches:
 
 * Using the Openstack command line tools.
 * With a bash script.
-* From the cloud dashboard *(coming soon)*
-* Using Ansible *(coming soon)*
-* Using Terraform *(coming soon)*
+* From the cloud dashboard
 
 Requirements
 ============
@@ -568,5 +566,169 @@ elements in order to avoid ambiguity when running commands.
     .. literalinclude:: _scripts/create-vpn.sh
       :language: bash
 
-  .. tab:: Console
+  .. tab:: Dashboard
 
+   In this tutorial we are going to set up a VPN connection to a remote router with IP ``150.242.40.137`` that has the
+   subnet ``10.20.30.0/24`` connected to it.
+
+   In our project we already have defined a router named `border-router` that is connected to the public network and
+   has a subnet called `private subnet` with a CIDR of ``10.0.0.0/24`` connected to one of it's interfaces.
+   The steps to create these resources are covered in :doc:`adding-network`
+
+   To create the VPN connection we are going to use the VPN screen which is accessed by clicking on the **VPN** item
+   underneath the **Network** group on the left hand menu of the console:
+
+   .. image:: _static/lhs-menu-network.png
+
+   |
+
+   Using the VPN screen we are going perform the following steps:
+
+   * Create a VPN Service
+   * Create a VPN IKE Policy
+   * Create a VPN IPSec Policy
+   * Create a VPN Endpoint Group for the local subnet
+   * Create a VPN Endpoint Group for the peer CIDR
+   * Create a VPN IPSec Site Connection
+
+   **Create a VPN Service**
+
+   First we select the **VPN Service** tab and click on the **+ Add VPN Service** button to create a VPN service.
+
+   .. image:: _static/vpn-services-tab.png
+
+   |
+
+   In the **Add VPN Service** dialog we do the following:
+
+   * name the VPN Service "vpn service"
+   * select "border-router" as the router for this VPN service.
+
+   .. Note::
+     We do not select the subnet for the service as this will be done later using the endpoint groups.
+
+   .. image:: _static/add-vpn-service.png
+
+   |
+
+   Click the **Add** button and the VPN service will be in the Pending Create state, it will become `Active` when we have
+   completed the IPSec connection.
+
+   .. image:: _static/vpn-service-pending-create.png
+
+   |
+
+   **Create IKe Policy**
+
+   Next we create the IKE policy for the VPN connection by selecting the **IKE Policies** tab and clicking on the
+   **+ Add IKE Policy** button.  In the dialog we named the policy "ike policy" we do the following:
+
+   * Name: ike policy
+   * Encryption algorithm: change to "aes-256"
+   * Lifetime value for IKE key: change to 14400
+   * Perfect Forward Secrecy: change to "group14".
+
+   .. image:: _static/add-ike-policy.png
+
+   |
+
+   **Create IPsec Policy**
+
+   Next we are going to create the IPSec policy by selecting the **IPsec Policies** tab and clicking on the
+   **+ Add IPsec Policy** button.  In the **Add IPsec Policy** dialog we are going to enter the following:
+
+   * Name: ipsec policy
+   * Encryption algorithm: aes-256
+   * Perfect Forward Secrecy: group14
+
+   The other fields we leave as the defaults.  Click the **Add** button and the policy is created.
+
+   .. image:: _static/add-ipsec-policy.png
+
+   |
+
+   **Create Endpoint Groups**
+
+   Next we are going to add to Endpoint Group one for the local subnet and the other for the remote subnet.  Select the
+   **Endpoint Groups** tab and click on the **+ Add Endpoint Group** button.  In the **Add Endpoint Group** dialog we
+   are going to enter the following:
+
+   * Name: local endpoint group
+   * Type: Subnet (for local systems)
+   * Local System Subnets: tick the box next to "10.0.0.0/24"
+
+   Click the **Add** button to create the endpoint group.
+
+   .. image:: _static/add-endpoint-group-local.png
+
+   |
+
+   Click the **+ Add Endpoint Group** button again and enter the following:
+
+   * Name: peer endpoint group
+   * Type: CIDR (for external systems)
+   * External System CIDRs: 10.20.30.0/24
+
+   Click the **Add** button to create the endpoint group.
+
+   .. image:: _static/add-endpoint-group-peer.png
+
+   |
+
+   You should now have two endpoint groups:
+
+   .. image:: _static/endpoint-groups-created.png
+
+   |
+
+   **Create an IPsec Site Connection**
+
+   Finally we are able to create the connection by selecting the **IPsec Site Connections** tab and clicking the
+   **+ Add IPsec Site Connection** button.
+
+   In the **Add IPsec Site Connection** dialog we are entering the following values:
+
+   * Name: vpn site connection
+   * VPN service associated with this connection: vpn service
+   * Endpoint group for local subnet(s): local endpoint group
+   * IKE policy associated with this connection: ike policy
+   * IPsec policy associated with this connection: ipsec policy
+   * Peer gateway public IPv4/IPv6 Address or FQDN: 150.242.40.137
+   * Peer router identity for authentication (Peer ID): 150.242.40.137
+   * Endpoint group for remote peer CIDR(s): peer endpoint group
+   * Pre-Shared Key (PSK) string: supersecretpsk
+
+   .. Note::
+    Leave the **Remote peer subnet(s)** field blank this is an old method of defining the peer CIDRs which has been
+    replaced by the Endpoint Groups.
+
+   .. image:: _static/add-ipsec-site-connection.png
+
+   |
+
+   Then click **Optional Parameters** and change the following:
+
+   * Dead peer detection actions: restart
+   * Dead peer detection interval: 15
+   * Dead peer detection timeout: 150
+
+   .. image:: _static/add-ipsec-site-connection-optional.png
+
+   |
+
+   Click the **Add** button and the IPsec Site Connection will be created:
+
+   .. image:: _static/ipsec-site-connection-pending-create.png
+
+   |
+
+   Once the IPsec site connection is created the VPN service will become active:
+
+   .. image:: _static/vpn-service-active.png
+
+   |
+
+    This process should be repeated
+    at the other end using the same configuration options and PSK. Once both
+    sides of the VPN are configured, the peers should automatically detect
+    each other and bring up the VPN.
