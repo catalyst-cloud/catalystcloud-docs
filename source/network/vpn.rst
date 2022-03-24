@@ -177,7 +177,7 @@ elements in order to avoid ambiguity when running commands.
     * Create a VPN Endpoint Group for the peer CIDR
     * Create a VPN IPSec Site Connection
 
-    This tutorial will cover setting up one half of the VPN in the Hamilton region.
+    This example will cover setting up one half of the VPN in the Hamilton region.
 
     First let's create a VPN Service called *vpn_service*.
 
@@ -285,7 +285,7 @@ elements in order to avoid ambiguity when running commands.
       +-------------+--------------------------------------+
       | Description |                                      |
       | Endpoints   | ['10.20.30.0/24']                    |
-      | ID          | f34578dc-aae8-4c02-abeb-1d61fc03ac1d |
+      | ID          | f34578dc-aae8-4c02-abeb-xxxxxxxxxxxx |
       | Name        | peer_endpoint_group                  |
       | Project     | 630116938c82479cxxxxxx3912c1d09c     |
       | Type        | cidr                                 |
@@ -568,10 +568,10 @@ elements in order to avoid ambiguity when running commands.
 
   .. tab:: Dashboard
 
-   In this tutorial we are going to set up a VPN connection to a remote router with IP ``150.242.40.137`` that has the
-   subnet ``10.20.30.0/24`` connected to it.
+   In this example we are going to set up a VPN connection in the Hamilton region to a remote router in the Porirua
+   region with a public IP ``150.242.40.137`` that has the private subnet ``10.20.30.0/24`` connected to it.
 
-   In our project we already have defined a router named `border-router` that is connected to the public network and
+   In the Hamilton region we already have defined a router named `border-router` that is connected to the public network and
    has a subnet called `private subnet` with a CIDR of ``10.0.0.0/24`` connected to one of it's interfaces.
    The steps to create these resources are covered in :doc:`adding-network`
 
@@ -618,10 +618,10 @@ elements in order to avoid ambiguity when running commands.
 
    |
 
-   **Create IKe Policy**
+   **Create IKE Policy**
 
    Next we create the IKE policy for the VPN connection by selecting the **IKE Policies** tab and clicking on the
-   **+ Add IKE Policy** button.  In the dialog we named the policy "ike policy" we do the following:
+   **+ Add IKE Policy** button.  In the dialog we named the policy "ike policy" we enter the following:
 
    * Name: ike policy
    * Encryption algorithm: change to "aes-256"
@@ -649,9 +649,10 @@ elements in order to avoid ambiguity when running commands.
 
    **Create Endpoint Groups**
 
-   Next we are going to add to Endpoint Group one for the local subnet and the other for the remote subnet.  Select the
-   **Endpoint Groups** tab and click on the **+ Add Endpoint Group** button.  In the **Add Endpoint Group** dialog we
-   are going to enter the following:
+   Next we are going to add to Endpoint Group one for the local subnet and the other for the remote subnet. Recall that
+   the local subnet called `private subnet` has a CIDR of ``10.0.0.0/24`` and the remote subnet has a CIDR of
+   ``10.20.30.0/24``. Select the **Endpoint Groups** tab and click on the **+ Add Endpoint Group** button.
+   In the **Add Endpoint Group** dialog we are going to enter the following:
 
    * Name: local endpoint group
    * Type: Subnet (for local systems)
@@ -697,6 +698,8 @@ elements in order to avoid ambiguity when running commands.
    * Peer router identity for authentication (Peer ID): 150.242.40.137
    * Endpoint group for remote peer CIDR(s): peer endpoint group
    * Pre-Shared Key (PSK) string: supersecretpsk
+
+   Recall that ``150.242.40.137`` is the public IP address of the remote router.
 
    .. Note::
     Leave the **Remote peer subnet(s)** field blank this is an old method of defining the peer CIDRs which has been
