@@ -28,9 +28,7 @@ We will illustrate how to create the the VPN using the following approaches:
 
 * Using the Openstack command line tools.
 * With a bash script.
-* From the cloud dashboard *(coming soon)*
-* Using Ansible *(coming soon)*
-* Using Terraform *(coming soon)*
+* From the cloud dashboard
 
 Requirements
 ============
@@ -78,11 +76,11 @@ elements in order to avoid ambiguity when running commands.
       nz-hlz-1
 
       $ openstack subnet list --name private-subnet -c Name -f value -c Subnet -f value -c ID -f value  -f table
-      +----------------+-------------+
-      | Name           | Subnet      |
-      +----------------+-------------+
-      | private-subnet | 10.0.0.0/24 |
-      +----------------+-------------+
+      +--------------------------------------+----------------+-------------+
+      | ID                                   | Name           | Subnet      |
+      +--------------------------------------+----------------+-------------+
+      | 1d701353-f120-413d-b33f-xxxxxxxxxxxx | private-subnet | 10.0.0.0/24 |
+      +--------------------------------------+----------------+-------------+
 
     Next let's find the required router information.
 
@@ -91,20 +89,20 @@ elements in order to avoid ambiguity when running commands.
       $ openstack router show border-router -c id -f value -c external_gateway_info -f value -f json
       {
         "external_gateway_info": {
-          "network_id": "f10ad6de-a26d-4c29-8c64-xxxxxxxxxxxx",
+          "network_id": "993e826c-74c2-4b44-ad6f-xxxxxxxxxxxx",
           "enable_snat": true,
           "external_fixed_ips": [
             {
-              "subnet_id": "a1549e09-4176-4322-860c-xxxxxxxxxxxx",
-              "ip_address": "103.197.60.162"
+              "subnet_id": "f44f9716-a08c-4972-909d-xxxxxxxxxxxx",
+              "ip_address": "10.10.8.3"
             },
             {
-              "subnet_id": "8a7fe804-7fbe-43d0-aa1d-xxxxxxxxxxxx",
-              "ip_address": "2404:130:8020:8000::a2ea"
+              "subnet_id": "7cae5aac-2d01-4cba-a171-xxxxxxxxxxxx",
+              "ip_address": "2404:130:4040:8::16"
             }
           ]
         },
-        "id": "34a4d812-7d77-4750-a9ee-xxxxxxxxxxxx"
+        "id": "ddd82b49-8bae-4a25-ae94-xxxxxxxxxxxx"
       }
 
     From the JSON data, the **router IP address** is the IPv4 value associated
@@ -175,29 +173,33 @@ elements in order to avoid ambiguity when running commands.
     * Create a VPN Service
     * Create a VPN IKE Policy
     * Create a VPN IPSec Policy
+    * Create a VPN Endpoint Group for the local subnet
+    * Create a VPN Endpoint Group for the peer CIDR
     * Create a VPN IPSec Site Connection
+
+    This example will cover setting up one half of the VPN in the Hamilton region.
 
     First let's create a VPN Service called *vpn_service*.
 
     .. code-block:: console
 
       $ openstack vpn service create \
-      --subnet private-subnet \
       --router border-router \
       vpn_service
       +----------------+--------------------------------------+
       | Field          | Value                                |
       +----------------+--------------------------------------+
       | Description    |                                      |
-      | ID             | 5f999c1b-f485-483b-91ad-xxxxxxxxxxxx |
-      | Name           | VPN                                  |
-      | Project        | eac679e489614xxxxxxce29d755fe289     |
-      | Router         | 34a4d812-7d77-4750-a9ee-xxxxxxxxxxxx |
+      | ID             | 99d8f06c-8cd8-44d6-9337-xxxxxxxxxxxx |
+      | Name           | vpn_service                          |
+      | Project        | 630116938c82479cxxxxxx3912c1d09c     |
+      | Router         | ddd82b49-8bae-4a25-ae94-xxxxxxxxxxxx |
       | State          | True                                 |
       | Status         | PENDING_CREATE                       |
-      | Subnet         | 0d10e475-045b-4b90-a378-xxxxxxxxxxxx |
-      | external_v4_ip | 103.197.60.162                       |
-      | external_v6_ip | 2404:130:8020:8000::a2ea             |
+      | Subnet         | None                                 |
+      | external_v4_ip | 10.10.8.3                            |
+      | external_v6_ip | 2404:130:4040:8::16                  |
+      | project_id     | 630116938c82479cxxxxxx3912c1d09c     |
       +----------------+--------------------------------------+
 
     Then create a VPN IKE policy called *ike_policy*.
@@ -218,13 +220,14 @@ elements in order to avoid ambiguity when running commands.
       | Authentication Algorithm      | sha1                                 |
       | Description                   |                                      |
       | Encryption Algorithm          | aes-256                              |
-      | ID                            | c12da6a3-611a-497b-91c3-xxxxxxxxxxxx |
+      | ID                            | d64b4355-576f-4f68-989d-xxxxxxxxxxxx |
       | IKE Version                   | v1                                   |
       | Lifetime                      | {'units': 'seconds', 'value': 14400} |
       | Name                          | ike_policy                           |
       | Perfect Forward Secrecy (PFS) | group14                              |
       | Phase1 Negotiation Mode       | main                                 |
-      | Project                       | eac679e489614xxxxxxce29d755fe289     |
+      | Project                       | 630116938c82479cxxxxxx3912c1d09c     |
+      | project_id                    | 630116938c82479cxxxxxx3912c1d09c     |
       +-------------------------------+--------------------------------------+
 
     Then create a VPN IPSec policy called *ipsec_policy*.
@@ -246,16 +249,57 @@ elements in order to avoid ambiguity when running commands.
       | Description                   |                                      |
       | Encapsulation Mode            | tunnel                               |
       | Encryption Algorithm          | aes-256                              |
-      | ID                            | 71917a1e-b553-429a-9745-xxxxxxxxxxxx |
+      | ID                            | 54367ef5-9e76-4827-888e-xxxxxxxxxxxx |
       | Lifetime                      | {'units': 'seconds', 'value': 3600}  |
       | Name                          | ipsec_policy                         |
       | Perfect Forward Secrecy (PFS) | group14                              |
-      | Project                       | eac679e489614xxxxxxce29d755fe289     |
+      | Project                       | 630116938c82479cxxxxxx3912c1d09c     |
       | Transform Protocol            | esp                                  |
+      | project_id                    | 630116938c82479cxxxxxx3912c1d09c     |
       +-------------------------------+--------------------------------------+
 
+    Then create an Endpoint Group for the local subnet called *local_endpoint_group*.
+
+    .. code-block:: bash
+
+      $ openstack vpn endpoint group create --type subnet --value private-subnet local_endpoint_group
+      +-------------+------------------------------------------+
+      | Field       | Value                                    |
+      +-------------+------------------------------------------+
+      | Description |                                          |
+      | Endpoints   | ['1d701353-f120-413d-b33f-xxxxxxxxxxxx'] |
+      | ID          | 5d972e8d-e7a0-45ea-8d91-xxxxxxxxxxxx     |
+      | Name        | local_endpoint_group                     |
+      | Project     | 630116938c82479cxxxxxx3912c1d09c         |
+      | Type        | subnet                                   |
+      | project_id  | 630116938c82479cxxxxxx3912c1d09c         |
+      +-------------+------------------------------------------+
+
+     Then create an Endpoint Group for the remote peer CIDR called *peer_endppoint_group*.
+
+    .. code-block:: bash
+
+      $ openstack vpn endpoint group create --type cidr --value 10.20.30.0/24 peer_endpoint_group
+      +-------------+--------------------------------------+
+      | Field       | Value                                |
+      +-------------+--------------------------------------+
+      | Description |                                      |
+      | Endpoints   | ['10.20.30.0/24']                    |
+      | ID          | f34578dc-aae8-4c02-abeb-xxxxxxxxxxxx |
+      | Name        | peer_endpoint_group                  |
+      | Project     | 630116938c82479cxxxxxx3912c1d09c     |
+      | Type        | cidr                                 |
+      | project_id  | 630116938c82479cxxxxxx3912c1d09c     |
+      +-------------+--------------------------------------+
+
+    .. note::
+
+      You can provide multiple ``--value`` arguments if you want to tunnel more
+      than one CIDR range.
+
+
     Finally we create a VPN IPSec site connection called *vpn_site_connection*.
-    This command makes use of the resources created in the last three steps.
+    This command makes use of the resources created in the last five steps.
 
     .. code-block:: bash
 
@@ -267,7 +311,8 @@ elements in order to avoid ambiguity when running commands.
       --dpd action=restart,interval=15,timeout=150 \
       --peer-address 150.242.40.137 \
       --peer-id 150.242.40.137 \
-      --peer-cidr 10.20.30.0/24 \
+      --local-endpoint-group local_endpoint_group \
+      --peer-endpoint-group peer_endpoint_group \
       --psk supersecretpsk \
       vpn_site_connection
       +--------------------------+-------------------------------------------------------+
@@ -275,28 +320,27 @@ elements in order to avoid ambiguity when running commands.
       +--------------------------+-------------------------------------------------------+
       | Authentication Algorithm | psk                                                   |
       | Description              |                                                       |
-      | ID                       | 3b5da18f-7bc2-440c-8e36-xxxxxxxxxxxx                  |
-      | IKE Policy               | c12da6a3-611a-497b-91c3-xxxxxxxxxxxx                  |
-      | IPSec Policy             | 71917a1e-b553-429a-9745-xxxxxxxxxxxx                  |
+      | ID                       | 8b47f318-d91a-4040-9156-xxxxxxxxxxxx                  |
+      | IKE Policy               | d64b4355-576f-4f68-989d-xxxxxxxxxxxx                  |
+      | IPSec Policy             | 54367ef5-9e76-4827-888e-xxxxxxxxxxxx                  |
       | Initiator                | bi-directional                                        |
+      | Local Endpoint Group ID  | 5d972e8d-e7a0-45ea-8d91-xxxxxxxxxxxx                  |
+      | Local ID                 |                                                       |
       | MTU                      | 1500                                                  |
       | Name                     | vpn_site_connection                                   |
       | Peer Address             | 150.242.40.137                                        |
-      | Peer CIDRs               | 10.20.30.0/24                                         |
+      | Peer CIDRs               |                                                       |
+      | Peer Endpoint Group ID   | f34578dc-aae8-4c02-abeb-xxxxxxxxxxxx                  |
       | Peer ID                  | 150.242.40.137                                        |
       | Pre-shared Key           | supersecretpsk                                        |
-      | Project                  | eac679e489614xxxxxxce29d755fe289                      |
+      | Project                  | 630116938c82479cxxxxxx3912c1d09c                      |
       | Route Mode               | static                                                |
       | State                    | True                                                  |
       | Status                   | PENDING_CREATE                                        |
-      | VPN Service              | fdc3ecc3-32c7-47a7-97f0-xxxxxxxxxxxx                  |
+      | VPN Service              | 99d8f06c-8cd8-44d6-9337-xxxxxxxxxxxx                  |
       | dpd                      | {'action': 'restart', 'interval': 15, 'timeout': 150} |
+      | project_id               | 630116938c82479cxxxxxx3912c1d09c                      |
       +--------------------------+-------------------------------------------------------+
-
-    .. note::
-
-      You can provide multiple ``--peer-cidr`` arguments if you want to tunnel more
-      than one CIDR range.
 
     You have now stood up one end of the VPN. This process should be repeated
     at the other end using the same configuration options and PSK. Once both
@@ -521,3 +565,173 @@ elements in order to avoid ambiguity when running commands.
 
     .. literalinclude:: _scripts/create-vpn.sh
       :language: bash
+
+  .. tab:: Dashboard
+
+   In this example we are going to set up a VPN connection in the Hamilton region to a remote router in the Porirua
+   region with a public IP ``150.242.40.137`` that has the private subnet ``10.20.30.0/24`` connected to it.
+
+   In the Hamilton region we already have defined a router named `border-router` that is connected to the public network and
+   has a subnet called `private subnet` with a CIDR of ``10.0.0.0/24`` connected to one of it's interfaces.
+   The steps to create these resources are covered in :doc:`adding-network`
+
+   To create the VPN connection we are going to use the VPN screen which is accessed by clicking on the **VPN** item
+   underneath the **Network** group on the left hand menu of the console:
+
+   .. image:: _static/lhs-menu-network.png
+
+   |
+
+   Using the VPN screen we are going perform the following steps:
+
+   * Create a VPN Service
+   * Create a VPN IKE Policy
+   * Create a VPN IPSec Policy
+   * Create a VPN Endpoint Group for the local subnet
+   * Create a VPN Endpoint Group for the peer CIDR
+   * Create a VPN IPSec Site Connection
+
+   **Create a VPN Service**
+
+   First we select the **VPN Service** tab and click on the **+ Add VPN Service** button to create a VPN service.
+
+   .. image:: _static/vpn-services-tab.png
+
+   |
+
+   In the **Add VPN Service** dialog we do the following:
+
+   * name the VPN Service "vpn service"
+   * select "border-router" as the router for this VPN service.
+
+   .. Note::
+     We do not select the subnet for the service as this will be done later using the endpoint groups.
+
+   .. image:: _static/add-vpn-service.png
+
+   |
+
+   Click the **Add** button and the VPN service will be in the Pending Create state, it will become `Active` when we have
+   completed the IPSec connection.
+
+   .. image:: _static/vpn-service-pending-create.png
+
+   |
+
+   **Create IKE Policy**
+
+   Next we create the IKE policy for the VPN connection by selecting the **IKE Policies** tab and clicking on the
+   **+ Add IKE Policy** button.  In the dialog we named the policy "ike policy" we enter the following:
+
+   * Name: ike policy
+   * Encryption algorithm: change to "aes-256"
+   * Lifetime value for IKE key: change to 14400
+   * Perfect Forward Secrecy: change to "group14".
+
+   .. image:: _static/add-ike-policy.png
+
+   |
+
+   **Create IPsec Policy**
+
+   Next we are going to create the IPSec policy by selecting the **IPsec Policies** tab and clicking on the
+   **+ Add IPsec Policy** button.  In the **Add IPsec Policy** dialog we are going to enter the following:
+
+   * Name: ipsec policy
+   * Encryption algorithm: aes-256
+   * Perfect Forward Secrecy: group14
+
+   The other fields we leave as the defaults.  Click the **Add** button and the policy is created.
+
+   .. image:: _static/add-ipsec-policy.png
+
+   |
+
+   **Create Endpoint Groups**
+
+   Next we are going to add to Endpoint Group one for the local subnet and the other for the remote subnet. Recall that
+   the local subnet called `private subnet` has a CIDR of ``10.0.0.0/24`` and the remote subnet has a CIDR of
+   ``10.20.30.0/24``. Select the **Endpoint Groups** tab and click on the **+ Add Endpoint Group** button.
+   In the **Add Endpoint Group** dialog we are going to enter the following:
+
+   * Name: local endpoint group
+   * Type: Subnet (for local systems)
+   * Local System Subnets: tick the box next to "10.0.0.0/24"
+
+   Click the **Add** button to create the endpoint group.
+
+   .. image:: _static/add-endpoint-group-local.png
+
+   |
+
+   Click the **+ Add Endpoint Group** button again and enter the following:
+
+   * Name: peer endpoint group
+   * Type: CIDR (for external systems)
+   * External System CIDRs: 10.20.30.0/24
+
+   Click the **Add** button to create the endpoint group.
+
+   .. image:: _static/add-endpoint-group-peer.png
+
+   |
+
+   You should now have two endpoint groups:
+
+   .. image:: _static/endpoint-groups-created.png
+
+   |
+
+   **Create an IPsec Site Connection**
+
+   Finally we are able to create the connection by selecting the **IPsec Site Connections** tab and clicking the
+   **+ Add IPsec Site Connection** button.
+
+   In the **Add IPsec Site Connection** dialog we are entering the following values:
+
+   * Name: vpn site connection
+   * VPN service associated with this connection: vpn service
+   * Endpoint group for local subnet(s): local endpoint group
+   * IKE policy associated with this connection: ike policy
+   * IPsec policy associated with this connection: ipsec policy
+   * Peer gateway public IPv4/IPv6 Address or FQDN: 150.242.40.137
+   * Peer router identity for authentication (Peer ID): 150.242.40.137
+   * Endpoint group for remote peer CIDR(s): peer endpoint group
+   * Pre-Shared Key (PSK) string: supersecretpsk
+
+   Recall that ``150.242.40.137`` is the public IP address of the remote router.
+
+   .. Note::
+    Leave the **Remote peer subnet(s)** field blank this is an old method of defining the peer CIDRs which has been
+    replaced by the Endpoint Groups.
+
+   .. image:: _static/add-ipsec-site-connection.png
+
+   |
+
+   Then click **Optional Parameters** and change the following:
+
+   * Dead peer detection actions: restart
+   * Dead peer detection interval: 15
+   * Dead peer detection timeout: 150
+
+   .. image:: _static/add-ipsec-site-connection-optional.png
+
+   |
+
+   Click the **Add** button and the IPsec Site Connection will be created:
+
+   .. image:: _static/ipsec-site-connection-pending-create.png
+
+   |
+
+   Once the IPsec site connection is created the VPN service will become active:
+
+   .. image:: _static/vpn-service-active.png
+
+   |
+
+    This process should be repeated
+    at the other end using the same configuration options and PSK. Once both
+    sides of the VPN are configured, the peers should automatically detect
+    each other and bring up the VPN.
