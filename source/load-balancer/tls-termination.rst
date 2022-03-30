@@ -9,7 +9,7 @@ TLS Termination
   service, you will need to raise a :ref:`support ticket<admin-support>` to
   request access for your project.
 
-In this section, we cover how to use openstack tools to create a loadbalancer
+In this section, we cover how to use openstack tools to create a load balancer
 which will handle TLS termination for your webservers.
 
 ***************
@@ -19,7 +19,7 @@ Prerequisites
 Configuring your command line
 =============================
 
-To interact with the loadbalancer service on the cloud, you must have the
+To interact with the load balancer service on the cloud, you must have the
 following prepared:
 
 - Your :ref:`openstack CLI<command-line-interface>` installed and set up.
@@ -36,12 +36,12 @@ Gathering the necessary inputs
 ===============================
 
 As this tutorial covers the steps on how to set up a TLS terminated
-loadbalancer, you will need to have the following resources already available so
+load balancer, you will need to have the following resources already available so
 that we can use them as inputs later on in this guide. You will need:
 
 - A webserver on the cloud that is currently running your desired application.
 - The valid certificates and keys that relate to your webserver application/website.
-- The UUID of the subnet that you want your loadbalancer to be hosted on.
+- The UUID of the subnet that you want your load balancer to be hosted on.
 
 You can acquire the UUID of your subnet by running the following command and
 creating an environment variable for the ID:
@@ -111,13 +111,13 @@ For this example we are going to name our secret *tls-secret-01*:
   +---------------+--------------------------------------------------------------------------------------------+
 
 Now that we have our packaged certificates and key stored and kept in our
-secret, we can move on to creating our loadbalancer.
+secret, we can move on to creating our load balancer.
 
 Configuring a TLS terminated Load-balancer
 ===========================================
 
 With our TLS Certificate and Key now stored on the cloud, there are only a few
-steps left. Next we will need to create the loadbalancer that will look after
+steps left. Next we will need to create the load balancer that will look after
 our instance and perform our TLS termination.
 
 To do so, we use the following command, including the environment variable
@@ -152,8 +152,8 @@ we created before:
   | tags                |                                      |
   +---------------------+--------------------------------------+
 
-Once we run this command we need to wait for our loadbalancer to become
-available. Once the ``provisioning_status`` of our loadbalancer is ``ACTIVE``
+Once we run this command we need to wait for our load balancer to become
+available. Once the ``provisioning_status`` of our load balancer is ``ACTIVE``
 we can continue.
 
 .. code-block:: bash
@@ -165,8 +165,8 @@ we can continue.
   | aXXXXXXX-XXXX-XXXX-XXXX-XXXXX02562da | tls-loadbalancer     | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX | 192.168.0.45 | ACTIVE              | ONLINE           | amphora  |
   +--------------------------------------+----------------------+----------------------------------+--------------+---------------------+------------------+----------+
 
-Now that our loadbalancer is ready, we can move on to the next step. We need
-to create a listener for our loadbalancer. This is the part of the loadbalancer
+Now that our load balancer is ready, we can move on to the next step. We need
+to create a listener for our load balancer. This is the part of the load balancer
 that interacts with our secret and actually performs the TLS functions.
 
 .. code-block:: bash
@@ -230,12 +230,12 @@ to the round robin algorithm.
   | created_at           | 2022-01-11T01:06:25                  |
   | description          |                                      |
   | healthmonitor_id     |                                      |
-  | id                   | eb9df502-7abb-42c9-bf35-e893a683071b |
+  | id                   | eb9df502-7abb-42c9-bf35-XXXXXXXXXXXX |
   | lb_algorithm         | ROUND_ROBIN                          |
   | listeners            | 9aXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX |
   | loadbalancers        | aXXXXXXX-XXXX-XXXX-XXXX-XXXXX02562da |
   | members              |                                      |
-  | name                 | tls-pool                                |
+  | name                 | tls-pool                             |
   | operating_status     | OFFLINE                              |
   | project_id           | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX     |
   | protocol             | HTTP                                 |
@@ -265,7 +265,7 @@ Now we add our webserver as a member to the pool:
   | address             | 192.168.0.40                         |
   | admin_state_up      | True                                 |
   | created_at          | 2022-01-11T01:07:45                  |
-  | id                  | b0f00795-8162-49e2-828b-2d585a04543e |
+  | id                  | b0f00795-8162-49e2-828b-XXXXXXXXXXXX |
   | name                |                                      |
   | operating_status    | NO_MONITOR                           |
   | project_id          | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX     |
@@ -280,5 +280,5 @@ Now we add our webserver as a member to the pool:
   | tags                |                                      |
   +---------------------+--------------------------------------+
 
-Once that is done we should have a functioning loadbalancer that will perform
+Once that is done we should have a functioning load balancer that will perform
 TLS termination for our webserver.
