@@ -55,8 +55,8 @@ To get your project_ID, you can run the following command:
 
 We then take the ID that we find from this output and we combine it with
 the Auth API from the region we want to operate in; in this case we are using
-Porirua region. We then export this environment variable as "*OS_STORAGE_URL*"
-like so:
+the Porirua region. We then export this environment variable as
+"*OS_STORAGE_URL*" like so:
 
 .. code-block:: bash
 
@@ -66,10 +66,11 @@ like so:
 
   <h4> Installing the correct tools</h4>
 
-After you have your environment variables sourced, you will also need to install
-the standard client library for swift, which in this case is
+
+After you have your environment variables sourced, you will also need to
+install the standard client library for swift, which in this case is
 the **python-swiftclient**. You can add this library to your current Python
-environment using the example below:
+environment using the code snippet below:
 
 .. code-block:: bash
 

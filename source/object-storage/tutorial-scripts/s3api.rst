@@ -27,15 +27,15 @@ common S3 calls and operations.
 
 You need valid EC2 credentials in order to interact with the S3 compatible API.
 You can obtain your EC2 credentials from the dashboard (under Access &
-Security, API Access), or using the command line tools:
+Security, API Access), or by using the command line tools:
 
 .. code-block:: bash
 
   $ openstack ec2 credentials create
 
-If you are using boto to interact with the API, you need boto installed on your
-current Python environment. The example below illustrates how to install boto
-on a virtual environment:
+If you are using planning to use boto to interact with the API, you will need
+boto installed on your current Python environment. The example below
+illustrates how to install boto on a virtual environment:
 
 .. code-block:: bash
 
@@ -54,7 +54,7 @@ on a virtual environment:
     <h4> Sample code </h4>
 
 
-The code below demonstrates how you can use boto to interact with the S3
+The code below is an example of a file using boto to interact with the S3
 compatible API.
 
 .. code-block:: python

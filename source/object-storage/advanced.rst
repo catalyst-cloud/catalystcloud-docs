@@ -7,23 +7,30 @@ Advanced features
 Static websites hosted in object storage
 ****************************************
 
-It is possible to host simple websites that contain only static content from
-within a container.
+Using the object storage service, it is possible to host simple websites that
+contain only static content from within a container. To do so, you will need to
+prepare some resources before we begin.
 
-First set up a container, and configure the read ACL to allow read access and
+You will need to have the following ready before you go further:
+
+- An understanding of object storage ACLs (discussed in the "managing access"
+  section of these docs)
+- Your standard html and css files needed for styling your website.
+
+First, set up a container and configure the read ACL to allow read access and
 optionally allow files to be listed.
 
 .. code-block:: bash
 
-  swift post con0
-  swift post -r '.r:*,.rlistings' con0
+  $ swift post con0
+  $ swift post -r '.r:*,.rlistings' con0
 
 To confirm the ACL settings, or any of the other metadata settings that follow
 run the following command:
 
 .. code-block:: bash
 
-  swift stat con0
+  $ swift stat con0
            Account: AUTH_b24e9ee3447e48eab1bc99cb894cac6f
          Container: con0
            Objects: 3
@@ -43,7 +50,7 @@ Next upload the files you wish to host:
 
 .. code-block:: bash
 
-  swift upload con0 index.html error.html image.png styles.css
+  $ swift upload con0 index.html error.html image.png styles.css
 
 It is possible to allow listing of all files in the container by enabling
 web-listings. It is also possible to style these listings using a separate CSS
@@ -84,8 +91,9 @@ allowing for recovery from unintended overwrites.
 
 To enable object versioning for a container, you must specify an **archive
 container** that will retain non-current versions via either the
-``X-Versions-Location`` or ``X-History-Location header``. These two headers enable two
-distinct modes of operation which we will discuss shortly.
+``X-Versions-Location`` or ``X-History-Location header``.
+These two headers enable two distinct modes of operation which we will discuss
+shortly.
 
 First, you need to create an archive container to store the older versions of
 your objects:
@@ -146,6 +154,7 @@ containers.
 .. code-block:: bash
 
   $ openstack container list --long
+
   +--------------+-------+-------+
   | Name         | Bytes | Count |
   +--------------+-------+-------+
@@ -160,6 +169,7 @@ contents.
 .. code-block:: bash
 
   $ openstack object create my-container file1.txt
+
   +-----------+--------------+----------------------------------+
   | object    | container    | etag                             |
   +-----------+--------------+----------------------------------+
@@ -173,6 +183,7 @@ contents of the file have changed.
 .. code-block:: bash
 
   $ openstack object create my-container file1.txt
+
   +-----------+--------------+----------------------------------+
   | object    | container    | etag                             |
   +-----------+--------------+----------------------------------+
@@ -186,6 +197,7 @@ archive container.
 .. code-block:: bash
 
   $ os container list --long
+
   +--------------+-------+-------+
   | Name         | Bytes | Count |
   +--------------+-------+-------+
@@ -200,6 +212,7 @@ convention outlined above.
 .. code-block:: bash
 
   $ openstack object list archive
+
   +-------------------------------+
   | Name                          |
   +-------------------------------+
@@ -259,6 +272,7 @@ You can then confirm the details of the key.
 .. code-block:: bash
 
   $ openstack object store account show
+
   +------------+---------------------------------------+
   | Field      | Value                                 |
   +------------+---------------------------------------+
@@ -476,10 +490,10 @@ manifest.
 
 .. code-block:: bash
 
-  curl -i $storageURL/lgfile -X PUT -H “X-Auth-Token: $token"
-  curl -i $storageURL/lgfile/split_aa -X PUT -H "X-Auth-Token: $token" -T split-aa
-  curl -i $storageURL/lgfile/split_ab -X PUT -H "X-Auth-Token: $token" -T split-ab
-  curl -i -X PUT -H "X-Auth-Token: $token" -H "X-Object-Manifest: lgfile/split_" -H "Content-Length: 0"  $storageURL/lgfile/manifest/1gb_sample.txt
+  $ curl -i $storageURL/lgfile -X PUT -H “X-Auth-Token:$token"
+  $ curl -i $storageURL/lgfile/split_aa -X PUT -H "X-Auth-Token:$token" -T split-aa
+  $ curl -i $storageURL/lgfile/split_ab -X PUT -H "X-Auth-Token:$token" -T split-ab
+  $ curl -i -X PUT -H "X-Auth-Token: $token" -H "X-Object-Manifest:lgfile/split" -H "Content-Length: 0"  $storageURL/lgfile/manifest/1gb_sample.txt
 
 A similar approach can also be taken to use the SLO type, but this is a lot
 more involved. A detailed description of the process can be seen `here`_

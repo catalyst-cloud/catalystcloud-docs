@@ -24,12 +24,15 @@ variables as shown below.
     | tags        | []                               |
     +-------------+----------------------------------+
 
-    # We then export this ID with the storage API for the region we are working in
-    # For this example we will use the Porirua region:
+We then export this ID with the storage API for the region we are working in.
+For this example we will use the Porirua region:
+
+.. code-block:: bash
 
     $ export OS_STORAGE_URL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_1xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54
 
     # Then we grab our auth token for later use:
+
     $ swift stat -v
      StorageURL: https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_1xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54
                       Auth Token: 5f5a043e1bd24a8fa8xxxxxxcca8e0fc
