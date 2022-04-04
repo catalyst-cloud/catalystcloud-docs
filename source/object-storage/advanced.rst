@@ -25,8 +25,8 @@ optionally allow files to be listed.
   $ swift post con0
   $ swift post -r '.r:*,.rlistings' con0
 
-To confirm the ACL settings, or any of the other metadata settings that follow
-run the following command:
+To confirm the ACL settings, or any other metadata settings that follow
+you can run the following command:
 
 .. code-block:: bash
 
@@ -46,15 +46,15 @@ run the following command:
   X-Storage-Policy: Policy-0
       Content-Type: text/plain; charset=utf-8
 
-Next upload the files you wish to host:
+Next, you will have to upload the files you wish to host:
 
 .. code-block:: bash
 
   $ swift upload con0 index.html error.html image.png styles.css
 
 It is possible to allow listing of all files in the container by enabling
-web-listings. It is also possible to style these listings using a separate CSS
-file to the one you would use to style the actual website.
+``web-listings``. It is also possible to style these listings using a separate
+CSS file to the one you would use to style the actual website.
 
 Upload the CSS file and enable the web listing and styling for the listing.
 
@@ -66,12 +66,12 @@ Upload the CSS file and enable the web listing and styling for the listing.
 
 You should now be able to view the files in the container by visiting
 the container's URL, where %AUTH_ID% & %container_name% are replaced by
-your values.
+the values specific to your project.
 
 https://object-storage.nz-por-1.catalystcloud.io:443/v1/%AUTH_ID%/%container_name%/
 
 To enable the container to work as a full website, it is also necessary to
-enable the index and optionally the error settings:
+enable the index, and optionally, the error settings:
 
 .. code-block:: bash
 
@@ -131,7 +131,7 @@ changes to objects in the container automatically result in a copy of the
 original object being placed in the archive container. The backed up version
 will have the following format:
 
-.. code-block:: bash
+.. code-block::
 
   <length><object_name>/<timestamp>
 
@@ -177,7 +177,7 @@ contents.
   +-----------+--------------+----------------------------------+
 
 Now if the original file is modified and uploaded to the same container, you
-get a successful confirmation, except this time you get a new etag, as the
+will get a successful confirmation, except this time you get a new etag, as the
 contents of the file have changed.
 
 .. code-block:: bash
@@ -258,8 +258,8 @@ should expire.
 Creating temporary URLs in the Catalyst Cloud
 =============================================
 
-At the time of writing, the only method currently available for the creation
-of temporary URLs is using the command line tools.
+Currently, the only method available for the creation of temporary URLs is
+through the use of the command line tools.
 
 Firstly you need to associate a secret key with your object store account.
 
@@ -295,8 +295,8 @@ the object "file2.txt" that is located in the container "my-container".
   /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005
 
 You can test this using cURL and appending the generated URL to the Catalyst
-Cloud's server URL "https://object-storage.nz-por-1.catalystcloud.io:443". If it is
-successful, the request should return the contents of the object.
+Cloud's server URL "https://object-storage.nz-por-1.catalystcloud.io:443". If
+it is successful, the request should return the contents of the object.
 
 .. code-block:: bash
 
