@@ -10,7 +10,7 @@ command. This allows you to keep track of any changes made to your project and
 identify exactly how they were made and who made them.
 
 This ability to track the information around what actions are performed on a
-project, allow you to maintain a comprehensive understanding of the status of
+project, allows you to maintain a comprehensive understanding of the status of
 the systems you build on the Catalyst Cloud.
 
 .. toctree::

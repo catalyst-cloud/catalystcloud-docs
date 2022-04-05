@@ -22,6 +22,11 @@ the "Containers" section on the dashboard and click "Create Container".
 Provide a name for the container and select the appropriate access level and
 click "Create".
 
+.. warning::
+
+  Please do not use an underscore "``_``" when naming your container. The
+  reasoning for this is explained in the programmatic examples below.
+
 .. note::
 
   Setting "Public" level access on a container means that anyone

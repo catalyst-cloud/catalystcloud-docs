@@ -27,9 +27,9 @@ Creating a container to house your logs
 
 As the functionality of the audit log service allows you to aggregate logging
 from multiple projects into one place, you will need to choose a location that
-can store the Logs from all of our project. If you only have one project, this
-step is still relevant as you will need a place for your logs to be directed
-to regardless.
+can store the logs from all of your projects. If you only have one project,
+this step is still relevant as you will need a place for your logs to be
+directed to regardless.
 
 This means our first step is to create an object storage container that will
 hold all of our logs. The reason that we choose an object storage container
@@ -37,7 +37,7 @@ over something like traditional block storage is that the object storage
 service is easier to communicate with via API and will scale in size to
 accommodate our logs over time.
 
-For this example, we will create a container named *Logs-repo*
+For this example, we will create a container named *logs-repo*
 
 .. code-block:: bash
 
@@ -70,8 +70,11 @@ For example:
 
 .. image:: user-invite-object-store.png
 
+This will send an email to your existing account, but logically, on the cloud,
+it is counted as a separate account with its own access and permissions.
 Once you have this new account created, you will need to confirm that is has a
-set of ec2 credentials. You can do so with the following command:
+set of ec2 credentials. You can do so by sourcing the RC file associated with
+this account and using the following command:
 
 .. code-block:: bash
 
