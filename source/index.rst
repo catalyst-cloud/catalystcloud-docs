@@ -18,6 +18,7 @@ Contents:
    best-practices
    sdks-and-toolkits
    alarm
+   audit-logs
    backups
    billing
    block-storage
