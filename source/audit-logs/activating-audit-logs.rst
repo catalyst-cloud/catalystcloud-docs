@@ -5,8 +5,8 @@ Log creation and access
 .. warning::
 
     The following service is still in a technical preview and as such, will have
-    limitations on performance. Any feedback is appreciated and can be provided
-    through a support ticket. Thank you.
+    limitations on features and scope. Any feedback is appreciated and can be
+    provided through a support ticket. Thank you.
 
 ***************************************
 Activating logs for your projects
@@ -26,7 +26,7 @@ Creating a container to house your logs
 =======================================
 
 As the functionality of the audit log service allows you to aggregate logging
-from multiple projects into one place, we will need to choose a location that
+from multiple projects into one place, you will need to choose a location that
 can store the Logs from all of our project. If you only have one project, this
 step is still relevant as you will need a place for your logs to be directed
 to regardless.
@@ -34,8 +34,8 @@ to regardless.
 This means our first step is to create an object storage container that will
 hold all of our logs. The reason that we choose an object storage container
 over something like traditional block storage is that the object storage
-service is easier to communicate via API and will scale in size to accommodate
-our logs over time.
+service is easier to communicate with via API and will scale in size to
+accommodate our logs over time.
 
 For this example, we will create a container named *Logs-repo*
 
@@ -56,13 +56,22 @@ Gather credentials for log access
 Now that we have our container, we move on to the next step which is gather
 credentials for your account in order to access the necessary log data.
 
-.. note::
+For this step, you will need to create a new user account for your project
+that only has the `Object Storage` role assigned. This is to restrict the
+permissions of said user to only the object storage service as the EC2
+credentials which are required for this step otherwise have a much larger reach
+into the project than is required to capture the logs; and would therefore be
+a security hazard.
 
-    It is recommended that you create a new user account for your project that only has
-    the `Object Storage` role assigned. This is to limit the ability of said user
-    to only the object storage service as the EC2 credentials which are required
-    for this step otherwise have a much larger reach into the project than is
-    required to capture the logs.
+The simplest way to create this account is to send an invitation to an existing
+user account on your project with `+object-storage` appended to their email.
+
+For example:
+
+.. image:: user-invite-object-store.png
+
+Once you have this new account created, you will need to confirm that is has a
+set of ec2 credentials. You can do so with the following command:
 
 .. code-block:: bash
 
@@ -74,8 +83,8 @@ credentials for your account in order to access the necessary log data.
     | 7d84281f4bc542b987ddbxxxxxxxxxxx | 100e767eeb7b48dcaf25xxxxxxxxxxxx |
     +----------------------------------+----------------------------------+
 
-    # Optional: Create a new EC2 credential. You should have one created already, but you may wish to create a new one anyway.
-    $ openstack ec2 credentials create
+    # Optional: Create a new EC2 credential. You should have one created already, but if not then you can create them like so:
+    $ openstack ec2 credentials create --user <object-storage-user>
     +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Field      | Value                                                                                                                                                   |
     +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -108,12 +117,14 @@ need to provide the following information in a support ticket in order for
 your projects to start receiving audit logs:
 
 #. The UUID of your object storage container
-#. The user credentials needed to access the log data for your project
-#. the list of projects that you want to start receiving log data for.
+#. The user name and UUID of the object storage user who's credentials are
+   needed.
+#. The list of projects that you want to start receiving log data for.
 
 .. warning::
 
-    Don't include the AUTH_KEY, have openstack admin user find it?
+    Do not include any information that would be sensitive or compromising,
+    such as the ``secret`` in the output of the ec2 credentials command.
 
 Once you have sent off your information to the Catalyst Cloud team and received
 confirmation, you should start to see .json log files appear in your
