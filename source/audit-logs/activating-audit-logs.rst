@@ -66,21 +66,6 @@ credentials for your account in order to access the necessary log data.
 
 .. code-block:: bash
 
-    # Optional: Create a new EC2 credential. Accounts should have one created already.
-
-    $ openstack ec2 credentials create
-
-    +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Field      | Value                                                                                                                                                   |
-    +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | access     | 7d84281f4bc542b987ddbxxxxxxxxxxx                                                                                                                        |
-    | links      | {u'self': u'https://api.osppd.por.catalystcloud.nz:5000/v3/users/bf32a9a2c69e4d718022101e867cccec/credentials/OS-EC2/7d84281f4bc542b987ddbxxxxxxxxxxx'} |
-    | project_id | 033556c5979b4c12814e7b6302cc6835                                                                                                                        |
-    | secret     | 100e767eeb7b48dcaf25xxxxxxxxxxxx                                                                                                                        |
-    | trust_id   | None                                                                                                                                                    |
-    | user_id    | bf32a9a2c69e4d71xxxxxxxxxxxxxxxx                                                                                                                        |
-    +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-
     # View EC2 credentials
     $ openstack ec2 credentials list -c Access -c Secret
     +----------------------------------+----------------------------------+
@@ -89,11 +74,26 @@ credentials for your account in order to access the necessary log data.
     | 7d84281f4bc542b987ddbxxxxxxxxxxx | 100e767eeb7b48dcaf25xxxxxxxxxxxx |
     +----------------------------------+----------------------------------+
 
+    # Optional: Create a new EC2 credential. You should have one created already, but you may wish to create a new one anyway.
+    $ openstack ec2 credentials create
+    +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Field      | Value                                                                                                                                                   |
+    +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | access     | 7d84281f4bc542b987ddbxxxxxxxxxxx                                                                                                                        |
+    | links      | {u'self': u'https://api.osppd.por.catalystcloud.nz:5000/v3/users/bf32a9a2c69e4d718022101e867cccec/credentials/OS-EC2/7d84281f4bc542b987ddbxxxxxxxxxxx'} |
+    | project_id | 033556c5979b4c1281xxxxxxxxxxxxxx                                                                                                                        |
+    | secret     | 100e767eeb7b48dcaf25xxxxxxxxxxxx                                                                                                                        |
+    | trust_id   | None                                                                                                                                                    |
+    | user_id    | bf32a9a2c69e4d71xxxxxxxxxxxxxxxx                                                                                                                        |
+    +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+
 Prepare a list of projects receive audit logs
 =============================================
 
 For this step, you will need to run the following command and save the UUID
-and name of the projects which you would like audit logs applied to.
+and name of the projects which you would like audit logs applied to. If you
+have multiple projects, you can still aggregate their logs into the single
+container you created a the start of this tutorial.
 
 .. code-block:: bash
 
