@@ -67,6 +67,13 @@ that you have to prepare before continuing are:
 Once you have met these requirements, you can continue with whichever
 method you choose:
 
+.. warning::
+
+  Please do not use an underscore "``_``" when naming your containers. This will
+  cause an error with the S3 api and you will receive errors through your CLI
+  when using this method. As a general practice we recommend avoiding
+  the use of an underscore regardless of the method you choose below.
+
 |
 
 .. _s3-api-documentation:
