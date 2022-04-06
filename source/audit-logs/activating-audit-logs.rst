@@ -22,14 +22,14 @@ Before going further, you will need to ensure that you have :ref:`sourced an
 openRC file<source-rc-file>` for your command line so that you are able to
 perform the commands mentioned in the following example.
 
-Creating a container to house your logs
-=======================================
+Creating an object storage container for your logs
+==================================================
 
 As the functionality of the audit log service allows you to aggregate logging
-from multiple projects into one place, you will need to choose a location that
-can store the logs from all of your projects. If you only have one project,
-this step is still relevant as you will need a place for your logs to be
-directed to regardless.
+from multiple projects into one object storage container, you will need to
+choose a location that can store the logs from all of your projects. If you
+only have one project, this step is still relevant as you will need a place
+for your logs to be directed to regardless.
 
 This means our first step is to create an object storage container that will
 hold all of our logs. The reason that we choose an object storage container
@@ -63,18 +63,19 @@ credentials which are required for this step otherwise have a much larger reach
 into the project than is required to capture the logs; and would therefore be
 a security hazard.
 
-The simplest way to create this account is to send an invitation to an existing
-user account on your project with `+object-storage` appended to their email.
+A convenient way to create this account is to send an invitation to an existing
+user account on your project with `+objectstorage` appended to their email.
 
 For example:
 
 .. image:: user-invite-object-store.png
 
-This will send an email to your existing account, but logically, on the cloud,
-it is counted as a separate account with its own access and permissions.
+This will send an email out to the address you provided. If you decided to use
+the appended `+objectstorage` on an existing email address, then you should
+receive your invitation in your existing mailbox.
 Once you have this new account created, you will need to confirm that is has a
 set of ec2 credentials. You can do so by sourcing the RC file associated with
-this account and using the following command:
+your new account and using the following command:
 
 .. code-block:: bash
 
@@ -99,13 +100,13 @@ this account and using the following command:
     | user_id    | bf32a9a2c69e4d71xxxxxxxxxxxxxxxx                                                                                                                        |
     +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Prepare a list of projects receive audit logs
-=============================================
+Prepare a list of projects to receive audit logs
+================================================
 
 For this step, you will need to run the following command and save the UUID
 and name of the projects which you would like audit logs applied to. If you
-have multiple projects, you can still aggregate their logs into the single
-container you created a the start of this tutorial.
+have multiple projects, you can aggregate their logs into the single
+container you created at the start of this tutorial.
 
 .. code-block:: bash
 
@@ -115,7 +116,7 @@ Send this information through to the Catalyst Cloud Team
 ==========================================================
 
 At this stage since this service is still in a technical preview, the final
-step needs to be preformed from the operations team. This means that you will
+step needs to be preformed by the operations team. This means that you will
 need to provide the following information in a support ticket in order for
 your projects to start receiving audit logs:
 
@@ -130,5 +131,5 @@ your projects to start receiving audit logs:
     such as the ``secret`` in the output of the ec2 credentials command.
 
 Once you have sent off your information to the Catalyst Cloud team and received
-confirmation, you should start to see .json log files appear in your
+confirmation, you should start to see the log files appear in your
 specified container.
