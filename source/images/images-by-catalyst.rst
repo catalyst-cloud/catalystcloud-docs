@@ -11,21 +11,41 @@ The table below lists the images provided by Catalyst and our partners, as well
 as the default user name you should use to log in to each one of them
 (unless you have overwritten the default user name with cloud-init).
 
-+---------------------+--------------------+-----------+----------------------------------------------------------------+
-| Operating system    | Image name prefix  | User-name | Licence/IP policy                                              |
-+=====================+====================+===========+================================================================+
-| Atomic Linux        | atomic-*           | centos    |                                                                |
-+---------------------+--------------------+-----------+----------------------------------------------------------------+
-| CentOS Linux        | centos-*           | centos    | https://www.centos.org/legal/licensing-policy/#distributions   |
-+---------------------+--------------------+-----------+----------------------------------------------------------------+
-| CoreOS Linux        | coreos-*           | core      | https://www.apache.org/licenses/LICENSE-2.0                    |
-+---------------------+--------------------+-----------+----------------------------------------------------------------+
-| Debian Linux        | debian-*           | debian    | https://www.debian.org/social_contract#guidelines              |
-+---------------------+--------------------+-----------+----------------------------------------------------------------+
-| Fedora Atomic Linux | fedora-atomic-*    | fedora    | https://fedoraproject.org/wiki/Legal:Licenses/LicenseAgreement |
-+---------------------+--------------------+-----------+----------------------------------------------------------------+
-| Ubuntu Linux        | ubuntu-*           | ubuntu    | https://ubuntu.com/legal/intellectual-property-policy          |
-+---------------------+--------------------+-----------+----------------------------------------------------------------+
++---------------------+-------------------+-----------+-------------------+
+| Operating system    | Image name prefix | User-name | Licence/IP policy |
++=====================+===================+===========+===================+
+| Atomic Linux        | atomic-*          | centos    |                   |
++---------------------+-------------------+-----------+-------------------+
+| CentOS Linux        | centos-*          | centos    | |centos_link|     |
++---------------------+-------------------+-----------+-------------------+
+| CoreOS Linux        | coreos-*          | core      | |apache_link|     |
++---------------------+-------------------+-----------+-------------------+
+| Debian Linux        | debian-*          | debian    | |debian_link|     |
++---------------------+-------------------+-----------+-------------------+
+| Fedora Atomic Linux | fedora-atomic-*   | fedora    | |fedora_link|     |
++---------------------+-------------------+-----------+-------------------+
+| Ubuntu Linux        | ubuntu-*          | ubuntu    | |ubuntu_link|     |
++---------------------+-------------------+-----------+-------------------+
+
+.. |centos_link| raw:: html
+
+    <a href="https://www.centos.org/legal/licensing-policy/#distributions" target="_blank">www.centos.org</a>
+
+.. |apache_link| raw:: html
+
+    <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">www.apache.org</a>
+
+.. |debian_link| raw:: html
+
+    <a href="https://www.debian.org/social_contract#guidelines" target="_blank">www.debian.org</a>
+
+.. |fedora_link| raw:: html
+
+    <a href="https://fedoraproject.org/wiki/Legal:Licenses/LicenseAgreement" target="_blank">fedoraproject.org</a>
+
+.. |ubuntu_link| raw:: html
+
+    <a href="https://ubuntu.com/legal/intellectual-property-policy" target="_blank">ubuntu.com</a>
 
 .. note::
 
