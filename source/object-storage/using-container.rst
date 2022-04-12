@@ -22,6 +22,11 @@ the "Containers" section on the dashboard and click "Create Container".
 You will need to provide a name for the container as well as select the
 appropriate access level and replication policy type before clicking "Submit".
 
+.. warning::
+
+  Please do not use an underscore "``_``" when naming your container. The
+  reasoning for this is explained in the programmatic examples below.
+
 .. note::
 
   Setting "Public" level access on a container means that anyone
@@ -66,6 +71,13 @@ that need to be prepared are:
 
 Once you have met these requirements, you can continue with any of the
 method you below:
+
+.. warning::
+
+  Please do not use an underscore "``_``" when naming your containers. This will
+  cause an error with the S3 api and you will receive errors through your CLI
+  when using this method. As a general practice we recommend avoiding
+  the use of an underscore regardless of the method you choose below.
 
 |
 

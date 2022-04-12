@@ -7,7 +7,7 @@ Managing access
 The typical user roles, such as ``Project Member`` or ``Object Storage``, that
 allow users to work with object storage resource function as an all or
 nothing approach; either the user has the role and can do anything with the
-container, or they do not have the role and they can not interact with any
+container, or they do not have the role and they can't interact with any
 resources.
 
 To overcome this limitation it is now possible to create a user with the
