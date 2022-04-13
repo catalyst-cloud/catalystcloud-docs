@@ -225,7 +225,7 @@ Temporary URL
 *************
 
 This is a means by which a temporary URL can be generated, to allow
-unauthenticated access to the Swift object at the given path. The
+unauthenticated access to a Swift object at a given path. The
 access is via the given HTTP method (e.g. GET, PUT) and is valid
 for the number of seconds specified when the URL is created.
 
@@ -235,19 +235,16 @@ interpreted as a Unix timestamp at which the URL should expire.
 
 The syntax for the tempurl creation command is:
 
-**swift tempurl [command-option] method seconds path key**
+``$ swift tempurl [command-option] [method] [seconds] [path] [key]``
 
 This generates a temporary URL allowing unauthenticated access to the Swift
-object at the given path, using the given HTTP method, for the given number of
-seconds, using the given TempURL key. If the optional --absolute argument is
-provided, seconds is instead interpreted as a Unix timestamp at which the URL
-should expire.
+object at the given path.
 
-**Example:**
+For example:
 
 .. code-block:: bash
 
-  swift tempurl GET $(date -d "Jan 1 2017" +%s) /v1/AUTH_foo/bar_container/quux.md my_secret_tempurl_key --absolute
+  $ swift tempurl GET $(date -d "Jan 1 2017" +%s) /v1/AUTH_foo/bar_container/quux.md my_secret_tempurl_key --absolute
 
 - sets the expiry using the absolute method to be Jan 1 2017
 - for the object : quux.md
@@ -286,12 +283,13 @@ You can then confirm the details of the key.
 Then, using the syntax outlined above, you can create a temporary URL to access
 an object residing in the object store.
 
-You will create a URL that will be valid for 600 seconds and provide access to
-the object "file2.txt" that is located in the container "my-container".
+For this example, we will create a URL that will be valid for 600 seconds and
+provide access to the object "file2.txt" that is located in the container
+"my-container".
 
 .. code-block:: bash
 
-  $ swift tempurl GET 600 /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt "testkey"
+  $ swift tempurl GET 600 /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt "testkey" \
   /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005
 
 You can test this using cURL and appending the generated URL to the Catalyst
@@ -338,25 +336,23 @@ There are tools available, both GUI and CLI, that will handle the segmentation
 of large objects for you. For all other cases, you must manually split the
 oversized files and manage the manifest objects yourself.
 
-*********************************
 Using the Swift command line tool
-*********************************
+=================================
 
-The Swift tool which is included in the `python-swiftclient`_ library, for
-example, is capable of handling oversized files and gives you the choice of
+The Swift tool which is included in the `python-swiftclient`_ library is
+capable of handling oversized files and gives you the choice of
 using either``static large objects (SLO)`` or``dynamic large objects (DLO)``,
 which will be explained in more detail later.
 
 .. _python-swiftclient: http://github.com/openstack/python-swiftclient
 
-|
-
-Here are two examples of how to upload a large object to an object storage
+Before getting in to the distinctions between SLO and DLO, here are two
+examples of how to upload a large object to an object storage
 container using the Swift tool. To keep the output brief, a 512MB file
 is used in the example.
 
 example 1 : DLO
-===============
+---------------
 
 The default mode for the tool is the ``dynamic large object`` type, so in this
 example, the only other parameter that is required is the segment size.
@@ -374,10 +370,8 @@ The ``-S`` flag is used to specify the size of each chunk, in this case
   large_file segment 2
   large_file
 
-|
-
 example 2 : SLO
-===============
+---------------
 
 In the second example, the same segment size as above is used, but you specify
 that the object type must now be the ``static large object`` type.
@@ -392,6 +386,8 @@ that the object type must now be the ``static large object`` type.
   large_file segment 2
   large_file segment 3
   large_file
+
+|
 
 Both of these approaches will successfully upload your large file into
 object storage. The file would be split into 100MB segments which are
@@ -431,9 +427,9 @@ the first until the last moment when the manifest file is updated.
 
 
 Swift will manage these segment files for you, deleting old segments on deletes
-and overwrites, etc. You can override this behaviour with the --leave-segments
-option if desired; this is useful if you want to have multiple versions of
-the same large object available.
+and overwrites, etc. You can override this behavior with the
+``--leave-segments`` option if desired; this is useful if you want to have
+multiple versions of the same large object available.
 
 *********************************************************
 Dynamic Large Objects (DLO) vs Static Large Objects (SLO)
@@ -479,8 +475,8 @@ The file 'large_file' is broken into 100MB chunks which are prefixed with
   $ split --bytes=100M large_file split-
 
 
-The upload of these segments is then handled by cURL. See `using curl`_
-for more information on how to do this.
+The upload of these segments is then handled by cURL. See :ref:`using
+curl<s3-api-documentation>` for more information on how to do this.
 
 .. _using curl: http://docs.catalystcloud.io/object-storage.html#using-curl
 
