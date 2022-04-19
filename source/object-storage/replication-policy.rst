@@ -45,7 +45,7 @@ detailed below.
 Dashboard method
 ****************
 
-It is now a required field when creating a container, to choose a replication
+It is a required field when creating a container, to choose a replication
 policy. The following will go through the process of creating a new container
 via the dashboard and show you how to choose your replication policy.
 Firstly, navigate to the 'containers' section under the object storage tab.
@@ -57,18 +57,18 @@ button. The button will open up a new window that should look like this:
 
 .. image:: assets/create-container.png
 
-We'll give our container a name and in the storage policy tab below, we select
-the region that we want our replicas to be created in. As you can see, by
-default the multi-region option is selected, but for this example we'll choose
-policy for the Porirua region and then click submit. Something important to
-mention is even though the policy we have chosen uses the Porirua region for
-storing the replicas, you are still able to access this container from any of
-our regions.
+We will give our container a name and in the storage policy tab below, we
+will select the region that we want our replicas to be created in. As you can
+see, by default the multi-region option is selected, but for this example we
+are going to choose the policy for the Porirua region and then click submit.
+Something important to mention is even though the policy we have chosen uses
+the Porirua region for storing the replicas, you are still able to access this
+container from any of our regions.
 
 .. image:: assets/create-container-dropdown.png
 
-After you've created your container, it will function as normal. You should be
-able to see the policy that your container has when selecting it from the
+After you have created your container, it will function as normal. You should
+be able to see the policy that your container has when selecting it from the
 dashboard as seen below
 
 .. image:: assets/container-after-create.png

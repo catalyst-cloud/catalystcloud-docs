@@ -56,7 +56,9 @@ more common policies.
 - Versioning policy: Whenever your volume is changed a new version is created
   and the previous state of the storage object is saved. Should your newest
   version suffer some failure, you have the option to reload the previous
-  saved state. This is a mixture of a delete and backup policy.
+  saved state. This is a mixture of a delete and backup policy. A tutorial for
+  how to set your own versioning policy can be find in our documentation here:
+  :ref:`Object Versioning<object-versioning>`
 - Role policy: Only users that have the correct permissions may see, use,
   access or delete objects in the container (or the container itself) more
   information on this can be found under the :ref:`object-storage-access`

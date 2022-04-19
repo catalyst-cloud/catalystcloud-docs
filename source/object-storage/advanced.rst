@@ -86,6 +86,8 @@ https://object-storage.nz-por-1.catalystcloud.io:443/v1/%AUTH_ID%/%container_nam
 Object versioning
 *****************
 
+.. _object-versioning:
+
 This provides a means by which multiple versions of your content can be stored
 allowing for recovery from unintended overwrites.
 
