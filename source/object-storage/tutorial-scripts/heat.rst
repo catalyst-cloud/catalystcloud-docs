@@ -1,10 +1,11 @@
-Using Heat you are able to manage a large number of resources by utilising a
-stack that will construct and monitor your objects. You can create a stack by using a pre-designed template.
-The following example assumes that you have some knowledge of Heat and how to use these
-template files.
+Using Heat you are able to manage a large number of resources programmatically,
+by utilizing a **stack** that will construct and monitor your
+resources for you. You can create a stack by using a pre-designed template. The
+following example assumes that you have some knowledge of Heat and how to
+use these template files.
 
-The following code snippet contains the minimum required components to construct
-an object storage container using Heat:
+The following code snippet contains the minimum required components to
+construct an object storage container using Heat:
 
 .. code-block:: bash
 
@@ -34,9 +35,9 @@ it before creating any resources. You can do this by running the following code:
 
     $ openstack orchestration template validate -t <your-template-name>
 
-If your template is constructed correctly then the output of this code
-should print out a copy of your template. If there is an error inside your template
-then you will be notified of the error in the output.
+If your template is constructed correctly then the output of this command
+should return a copy of your template. If there is an error inside your
+template, you will instead be notified of the error in the output.
 
 Once you have ensured your template is valid, you can construct your
 stack:

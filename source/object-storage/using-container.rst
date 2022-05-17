@@ -19,8 +19,8 @@ the "Containers" section on the dashboard and click "Create Container".
 .. image:: assets/containers_ui.png
    :align: center
 
-Provide a name for the container and select the appropriate access level and
-click "Create".
+You will need to provide a name for the container as well as select the
+appropriate access level and replication policy type before clicking "Submit".
 
 .. warning::
 
@@ -63,14 +63,14 @@ Prerequisites
 
 For several of the methods detailed below, you will have to prepare your
 command line environment before continuing with the examples. The key things
-that you have to prepare before continuing are:
+that need to be prepared are:
 
 * You must :ref:`Source an OpenRC file <command-line-interface>`.
 * You must ensure that you have the correct role for using object storage on
   your cloud project. See :ref:`here<access_control>` for more details.
 
-Once you have met these requirements, you can continue with whichever
-method you choose:
+Once you have met these requirements, you can continue with any of the
+method you below:
 
 .. warning::
 

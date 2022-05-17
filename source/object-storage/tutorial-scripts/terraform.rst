@@ -1,13 +1,14 @@
-This tutorial assumes that you have some experience with `Terraform`_
-and that you have an understanding of how Terraform scripts are written
-and how they function. We also assume that you have installed all of the
-prerequisites to run Terraform scripts.
+This tutorial assumes that you have some familiarity with `Terraform`_.
+The minimum knowledge this tutorial assumes is an understanding of how
+Terraform scripts are written and how they function. We also assume that you
+have installed all of the prerequisite tools to run Terraform scripts.
 
 .. _Terraform: https://www.terraform.io/
 
 Below is an example template that contains the basic information required
 for Terraform to create an object storage container on the cloud. You can
-view the full list of customization options for this resource on the `Terraform documentation`_
+view the full list of customization options for this resource on the
+`Terraform documentation`_
 
 .. _Terraform documentation: https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs/resources/objectstorage_container_v1
 
@@ -23,10 +24,10 @@ view the full list of customization options for this resource on the `Terraform 
       content_type = "application/json"
     }
 
-Once you have saved this script you need to switch to the correct directory
-and run the following commands to create your new object storage container.
-The first command will outline what resources are going to be made and
-managed by Terraform and what their outputs will be:
+Once you have saved this script you will need to switch to the correct
+directory and run the following commands to create your new object storage
+container. The first command will outline what resources are going to be made
+and managed by Terraform and what their outputs will be:
 
 .. code-block:: bash
 
@@ -61,7 +62,7 @@ managed by Terraform and what their outputs will be:
 
 After you review the Terraform plan and ensure that it has all the
 resources you want to be created, you can use the following code to
-create your new resources:
+create your new objects:
 
 .. code-block:: bash
 
@@ -78,9 +79,11 @@ create your new resources:
 
       Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
-Once you have reached this step, you should have an object storage container created
+Once you have reached this step, you should have an object storage container
+created
 and managed by Terraform. If you want to delete this container in the future, as
-well as any other resources created in your plan, you can use the following code to
+well as any other resources created in your plan, you can use the following
+code to
 delete them:
 
 .. code-block:: bash

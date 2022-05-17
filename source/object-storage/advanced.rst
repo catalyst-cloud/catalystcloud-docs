@@ -7,23 +7,30 @@ Advanced features
 Static websites hosted in object storage
 ****************************************
 
-It is possible to host simple websites that contain only static content from
-within a container.
+Using the object storage service, it is possible to host simple websites that
+contain only static content from within a container. To do so, you will need to
+prepare some resources before we begin.
 
-First set up a container, and configure the read ACL to allow read access and
+You will need to have the following ready before you go further:
+
+- An understanding of object storage ACLs (discussed in the "managing access"
+  section of these docs)
+- Your standard html and css files needed for styling your website.
+
+First, set up a container and configure the read ACL to allow read access and
 optionally allow files to be listed.
 
 .. code-block:: bash
 
-  swift post con0
-  swift post -r '.r:*,.rlistings' con0
+  $ swift post con0
+  $ swift post -r '.r:*,.rlistings' con0
 
-To confirm the ACL settings, or any of the other metadata settings that follow
-run the following command:
+To confirm the ACL settings, or any other metadata settings that follow
+you can run the following command:
 
 .. code-block:: bash
 
-  swift stat con0
+  $ swift stat con0
            Account: AUTH_b24e9ee3447e48eab1bc99cb894cac6f
          Container: con0
            Objects: 3
@@ -39,15 +46,15 @@ run the following command:
   X-Storage-Policy: Policy-0
       Content-Type: text/plain; charset=utf-8
 
-Next upload the files you wish to host:
+Next, you will have to upload the files you wish to host:
 
 .. code-block:: bash
 
-  swift upload con0 index.html error.html image.png styles.css
+  $ swift upload con0 index.html error.html image.png styles.css
 
 It is possible to allow listing of all files in the container by enabling
-web-listings. It is also possible to style these listings using a separate CSS
-file to the one you would use to style the actual website.
+``web-listings``. It is also possible to style these listings using a separate
+CSS file to the one you would use to style the actual website.
 
 Upload the CSS file and enable the web listing and styling for the listing.
 
@@ -59,12 +66,12 @@ Upload the CSS file and enable the web listing and styling for the listing.
 
 You should now be able to view the files in the container by visiting
 the container's URL, where %AUTH_ID% & %container_name% are replaced by
-your values.
+the values specific to your project.
 
 https://object-storage.nz-por-1.catalystcloud.io:443/v1/%AUTH_ID%/%container_name%/
 
 To enable the container to work as a full website, it is also necessary to
-enable the index and optionally the error settings:
+enable the index, and optionally, the error settings:
 
 .. code-block:: bash
 
@@ -79,13 +86,16 @@ https://object-storage.nz-por-1.catalystcloud.io:443/v1/%AUTH_ID%/%container_nam
 Object versioning
 *****************
 
+.. _object-versioning:
+
 This provides a means by which multiple versions of your content can be stored
 allowing for recovery from unintended overwrites.
 
 To enable object versioning for a container, you must specify an **archive
 container** that will retain non-current versions via either the
-``X-Versions-Location`` or ``X-History-Location header``. These two headers enable two
-distinct modes of operation which we will discuss shortly.
+``X-Versions-Location`` or ``X-History-Location header``.
+These two headers enable two distinct modes of operation which we will discuss
+shortly.
 
 First, you need to create an archive container to store the older versions of
 your objects:
@@ -123,7 +133,7 @@ changes to objects in the container automatically result in a copy of the
 original object being placed in the archive container. The backed up version
 will have the following format:
 
-.. code-block:: bash
+.. code-block::
 
   <length><object_name>/<timestamp>
 
@@ -146,6 +156,7 @@ containers.
 .. code-block:: bash
 
   $ openstack container list --long
+
   +--------------+-------+-------+
   | Name         | Bytes | Count |
   +--------------+-------+-------+
@@ -160,6 +171,7 @@ contents.
 .. code-block:: bash
 
   $ openstack object create my-container file1.txt
+
   +-----------+--------------+----------------------------------+
   | object    | container    | etag                             |
   +-----------+--------------+----------------------------------+
@@ -167,12 +179,13 @@ contents.
   +-----------+--------------+----------------------------------+
 
 Now if the original file is modified and uploaded to the same container, you
-get a successful confirmation, except this time you get a new etag, as the
+will get a successful confirmation, except this time you get a new etag, as the
 contents of the file have changed.
 
 .. code-block:: bash
 
   $ openstack object create my-container file1.txt
+
   +-----------+--------------+----------------------------------+
   | object    | container    | etag                             |
   +-----------+--------------+----------------------------------+
@@ -186,6 +199,7 @@ archive container.
 .. code-block:: bash
 
   $ os container list --long
+
   +--------------+-------+-------+
   | Name         | Bytes | Count |
   +--------------+-------+-------+
@@ -200,6 +214,7 @@ convention outlined above.
 .. code-block:: bash
 
   $ openstack object list archive
+
   +-------------------------------+
   | Name                          |
   +-------------------------------+
@@ -212,7 +227,7 @@ Temporary URL
 *************
 
 This is a means by which a temporary URL can be generated, to allow
-unauthenticated access to the Swift object at the given path. The
+unauthenticated access to a Swift object at a given path. The
 access is via the given HTTP method (e.g. GET, PUT) and is valid
 for the number of seconds specified when the URL is created.
 
@@ -222,19 +237,16 @@ interpreted as a Unix timestamp at which the URL should expire.
 
 The syntax for the tempurl creation command is:
 
-**swift tempurl [command-option] method seconds path key**
+``$ swift tempurl [command-option] [method] [seconds] [path] [key]``
 
 This generates a temporary URL allowing unauthenticated access to the Swift
-object at the given path, using the given HTTP method, for the given number of
-seconds, using the given TempURL key. If the optional --absolute argument is
-provided, seconds is instead interpreted as a Unix timestamp at which the URL
-should expire.
+object at the given path.
 
-**Example:**
+For example:
 
 .. code-block:: bash
 
-  swift tempurl GET $(date -d "Jan 1 2017" +%s) /v1/AUTH_foo/bar_container/quux.md my_secret_tempurl_key --absolute
+  $ swift tempurl GET $(date -d "Jan 1 2017" +%s) /v1/AUTH_foo/bar_container/quux.md my_secret_tempurl_key --absolute
 
 - sets the expiry using the absolute method to be Jan 1 2017
 - for the object : quux.md
@@ -245,8 +257,8 @@ should expire.
 Creating temporary URLs in the Catalyst Cloud
 =============================================
 
-At the time of writing, the only method currently available for the creation
-of temporary URLs is using the command line tools.
+Currently, the only method available for the creation of temporary URLs is
+through the use of the command line tools.
 
 Firstly you need to associate a secret key with your object store account.
 
@@ -259,6 +271,7 @@ You can then confirm the details of the key.
 .. code-block:: bash
 
   $ openstack object store account show
+
   +------------+---------------------------------------+
   | Field      | Value                                 |
   +------------+---------------------------------------+
@@ -272,17 +285,18 @@ You can then confirm the details of the key.
 Then, using the syntax outlined above, you can create a temporary URL to access
 an object residing in the object store.
 
-You will create a URL that will be valid for 600 seconds and provide access to
-the object "file2.txt" that is located in the container "my-container".
+For this example, we will create a URL that will be valid for 600 seconds and
+provide access to the object "file2.txt" that is located in the container
+"my-container".
 
 .. code-block:: bash
 
-  $ swift tempurl GET 600 /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt "testkey"
+  $ swift tempurl GET 600 /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt "testkey" \
   /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005
 
 You can test this using cURL and appending the generated URL to the Catalyst
-Cloud's server URL "https://object-storage.nz-por-1.catalystcloud.io:443". If it is
-successful, the request should return the contents of the object.
+Cloud's server URL "https://object-storage.nz-por-1.catalystcloud.io:443". If
+it is successful, the request should return the contents of the object.
 
 .. code-block:: bash
 
@@ -324,25 +338,23 @@ There are tools available, both GUI and CLI, that will handle the segmentation
 of large objects for you. For all other cases, you must manually split the
 oversized files and manage the manifest objects yourself.
 
-*********************************
 Using the Swift command line tool
-*********************************
+=================================
 
-The Swift tool which is included in the `python-swiftclient`_ library, for
-example, is capable of handling oversized files and gives you the choice of
+The Swift tool which is included in the `python-swiftclient`_ library is
+capable of handling oversized files and gives you the choice of
 using either``static large objects (SLO)`` or``dynamic large objects (DLO)``,
 which will be explained in more detail later.
 
 .. _python-swiftclient: http://github.com/openstack/python-swiftclient
 
-|
-
-Here are two examples of how to upload a large object to an object storage
+Before getting in to the distinctions between SLO and DLO, here are two
+examples of how to upload a large object to an object storage
 container using the Swift tool. To keep the output brief, a 512MB file
 is used in the example.
 
 example 1 : DLO
-===============
+---------------
 
 The default mode for the tool is the ``dynamic large object`` type, so in this
 example, the only other parameter that is required is the segment size.
@@ -360,10 +372,8 @@ The ``-S`` flag is used to specify the size of each chunk, in this case
   large_file segment 2
   large_file
 
-|
-
 example 2 : SLO
-===============
+---------------
 
 In the second example, the same segment size as above is used, but you specify
 that the object type must now be the ``static large object`` type.
@@ -378,6 +388,8 @@ that the object type must now be the ``static large object`` type.
   large_file segment 2
   large_file segment 3
   large_file
+
+|
 
 Both of these approaches will successfully upload your large file into
 object storage. The file would be split into 100MB segments which are
@@ -417,9 +429,9 @@ the first until the last moment when the manifest file is updated.
 
 
 Swift will manage these segment files for you, deleting old segments on deletes
-and overwrites, etc. You can override this behaviour with the --leave-segments
-option if desired; this is useful if you want to have multiple versions of
-the same large object available.
+and overwrites, etc. You can override this behavior with the
+``--leave-segments`` option if desired; this is useful if you want to have
+multiple versions of the same large object available.
 
 *********************************************************
 Dynamic Large Objects (DLO) vs Static Large Objects (SLO)
@@ -465,8 +477,8 @@ The file 'large_file' is broken into 100MB chunks which are prefixed with
   $ split --bytes=100M large_file split-
 
 
-The upload of these segments is then handled by cURL. See `using curl`_
-for more information on how to do this.
+The upload of these segments is then handled by cURL. See :ref:`using
+curl<s3-api-documentation>` for more information on how to do this.
 
 .. _using curl: http://docs.catalystcloud.io/object-storage.html#using-curl
 
@@ -476,10 +488,10 @@ manifest.
 
 .. code-block:: bash
 
-  curl -i $storageURL/lgfile -X PUT -H “X-Auth-Token: $token"
-  curl -i $storageURL/lgfile/split_aa -X PUT -H "X-Auth-Token: $token" -T split-aa
-  curl -i $storageURL/lgfile/split_ab -X PUT -H "X-Auth-Token: $token" -T split-ab
-  curl -i -X PUT -H "X-Auth-Token: $token" -H "X-Object-Manifest: lgfile/split_" -H "Content-Length: 0"  $storageURL/lgfile/manifest/1gb_sample.txt
+  $ curl -i $storageURL/lgfile -X PUT -H “X-Auth-Token:$token"
+  $ curl -i $storageURL/lgfile/split_aa -X PUT -H "X-Auth-Token:$token" -T split-aa
+  $ curl -i $storageURL/lgfile/split_ab -X PUT -H "X-Auth-Token:$token" -T split-ab
+  $ curl -i -X PUT -H "X-Auth-Token: $token" -H "X-Object-Manifest:lgfile/split" -H "Content-Length: 0"  $storageURL/lgfile/manifest/1gb_sample.txt
 
 A similar approach can also be taken to use the SLO type, but this is a lot
 more involved. A detailed description of the process can be seen `here`_
