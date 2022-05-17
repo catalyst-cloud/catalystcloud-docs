@@ -48,16 +48,26 @@ There are a number of polices that you may wish to use when it comes to dealing
 with deleting data from your storage options. The following are some of the
 more common policies.
 
-- Retention policy: This policy dictates that a volume/object cannot be deleted
+- Retention policy: This policy dictates that an object cannot be deleted
   until it reaches a certain age.
 - Object lock policy: The storage object is 'locked' and a specific user holds
   the 'key' to the instance and only they can choose to delete data from
   the instance or the instance itself.
-- Versioning policy: Whenever your volume is changed a new version is created
+- Versioning policy: Whenever your object is changed a new version is created
   and the previous state of the storage object is saved. Should your newest
   version suffer some failure, you have the option to reload the previous
-  saved state. This is a mixture of a delete and backup policy.
+  saved state. This is a mixture of a delete and backup policy. A tutorial for
+  how to set your own versioning policy can be find in our documentation here:
+  :ref:`Object Versioning<object-versioning>`
 - Role policy: Only users that have the correct permissions may see, use,
   access or delete objects in the container (or the container itself) more
   information on this can be found under the :ref:`object-storage-access`
   section.
+
+******************
+Encryption at rest
+******************
+
+Objects are stored encrypted at rest using encryption keys that Catayst Cloud
+control. Customers can, if they wish, use their own encryption before objects
+are uploaded to object storage.

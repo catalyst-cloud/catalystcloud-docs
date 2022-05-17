@@ -5,11 +5,12 @@ Managing access
 ###############
 
 The typical user roles, such as ``Project Member`` or ``Object Storage``, that
-allow users to work with object storage resource, function as an all or
-nothing approach; either the user has the role and can do anything with the
-container, or they do not have the role and they can't interact with any resources.
+allow users to work with object storage resources; function as an all or
+nothing approach. Either the user has the role and can do anything with the
+container, or they do not have the role and they can't interact with any
+object storage resources.
 
-To overcome this limitation it is now possible to create a user with the
+To overcome this limitation, it is now possible to create a user with the
 ``Auth Only`` role and give them access to a container using an Access Control
 List. You can find more information on the auth only role
 :ref:`here <access_control>`.
@@ -20,8 +21,8 @@ Assumptions before beginning
 
 The following are a list of assumptions that this tutorial makes about your
 project before we can begin looking at the steps to creating an ACL. If you
-do not have these pre-requisites then it will be useful to take a second to
-set things up so you can follow along with the example.
+do not have these pre-requisites already, then it will be useful to take a
+second to set things up so you can follow along with the example.
 
 We assume that:
 
@@ -32,19 +33,20 @@ We assume that:
   * a cloud-user
   * restricted-user-1
   * restricted-user-2
-  * Initially both of the restricted users will have just the ``Auth Only`` role
-    assigned to them. The cloud-user will have the ``Project Member`` role assigned.
+  * Initially both of the restricted users will have just the ``Auth Only``
+    role assigned to them. The cloud-user will have the ``Project Member``
+    role assigned.
 * You have two containers that will be used for these tutorials. In the
   examples below they are named, access_1 and access_2.
 
-  * We assume that these containers have no existing ACLs assigned to them
+  * We assume that these containers have no existing ACLs assigned to them.
   * There should be a single file stored in access_1 called "foo.txt"
 
 Another thing that you should be aware of before continuing with this example:
-If you are using a Token for authentication to the cloud you will need to set up
-another environment variable in order to interact with the Swift API. To start,
-we need to find the object storage API endpoint for our region. We can find
-the full list of API endpoints under :ref:`this section<apis>` of the
+If you are using a Token for authentication to the cloud you will need to set
+up another environment variable in order to interact with the Swift API. To
+start, we need to find the object storage API endpoint for our region. You can
+find the full list of API endpoints under :ref:`this section<apis>` of the
 documentation.
 
 For this example we will be using the object storage endpoint for nz-por-1, but
@@ -55,15 +57,15 @@ you can use whichever one fits the region you want to work in:
  https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_%projectid%
 
 Our next step is to get our Project ID. We can do this by running the following
-command, where bucket_name is the name of our container:
+command, where  ``bucket_name`` is the name of our container:
 
 .. code-block:: bash
 
   $ openstack container show <bucket_name> -c account -f value
   AUTH_773284c69XXXXXXXX37beedf421hj2fm
 
-Once we have both of these we can export our environment variable by adding both
-together like so:
+Once we have both of these we can export our environment variable by adding
+both together like so:
 
 .. code-block:: bash
 
@@ -76,10 +78,11 @@ Using access control lists
 
 By combining the use of Access Control Lists (**ACLs**) with the **Auth
 Only** role, we are able to provide granular read/write access to
-our object storage container for specific users or from other cloud projects.
+our object storage container(s) for specific users or from other cloud
+projects.
 
-Configuring the user
-====================
+Configuring a restricted user
+=============================
 
 In order to set up ACL controlled access you will first need to create a user
 that has ``Auth Only`` as it's only role. This can be done through the
@@ -99,6 +102,10 @@ only role that has been checked is the ``Auth Only`` role.
     allowing it to be filtered and managed without the need to create a whole
     new email account.
 
+As mentioned in the prerequisites for this section, we will need two
+restricted users. In our examples, they are named restricted-user-1 and
+restricted-user-2.
+
 Configuring the ACLs
 ====================
 
@@ -107,21 +114,22 @@ This part of the configuration will require the use of the command line tools.
 Getting the auth only users identity
 ------------------------------------
 
-First we need to retrieve the user ID for our Auth Only user. To do this you
-will need to log into the dashboard and download their openrc file. Source the
-file and then run the following command. It will provide the user_id as one of
-the output fields, be sure to make a note of this ID as we will use it later.
+First we need to retrieve the user ID for our auth_only user. To do this you
+will need to log into the dashboard as the restricted user and download their
+openRC file. Next, you will need to source the  openRC file, and then run the
+following command. It will provide the ``user_id`` as one of the output fields,
+be sure to make a note of this ID as we will use it later.
 
 .. code-block:: bash
 
-    # as the user restricted-user-1
+    # as the user: restricted-user-1
 
     $ openstack token issue
     +------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Field      | Value                                                                                                                                                                                   |
     +------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | expires    | 2019-08-19T12:59:17+0000                                                                                                                                                                |
-    | id         | gAAAAABdWdhFLKs1OT8rGpiUqa_5BLFlxP-cg59HEGkHu81WLNkRk_Y_knnbS1CdCCE8qFECnmrubep652Dt6ITGgHQoXA0tZerOuxvkgvObEfsovHC61pOr8mvhZ0l7Nna9GcXLz37kJ05HifI3DiqodqrwfXNCsGpDq27DZ5z9LLPzqGvMBLI |
+    | id         | gAAAAABdWdhFLKs1OT8rGpiUqa_5BLFlxP-XXXXXXXXXXXXXXXXXX_Y_knnbS1CdCCE8qFECnmrubep652Dt6ITGgHQoXA0tZerOuxvkgvObEfsovHC61pOr8mvhZ0l7Nna9GcXLz37kJ05HifI3DiqodqrwfXNCsGpDq27DZ5z9LLPzqGvMBLI |
     | project_id | eac679e489614xxxxxxce29d755fe289                                                                                                                                                        |
     | user_id    | 11d1cb41f05140ebadxxxxxx9a67a2d7                                                                                                                                                        |
     +------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -137,7 +145,7 @@ containers we will receive a 403 error as access is currently forbidden.
   Forbidden (HTTP 403)
 
 Once you have the restricted user's ID value you will need to swap back to a
-user with the Project Member or object storage role. Once that is done we can
+user with the project_member or object_storage role. Once that is done we can
 begin assigning ACLs to our container.
 
 
@@ -195,8 +203,8 @@ The syntax of the command to add a read ACL to a container is as follows:
 
     $ swift post <container> --read-acl "<permissions>"
 
-The same format is used for adding a write ACL and it is possible to add both in
-the same action.
+The same format is used for adding a write ACL and it is possible to add both
+in the same action.
 
 In this command:
 
@@ -210,7 +218,7 @@ applied singularly or as a comma separated list to both the - -read-acl and
 
 +--------------------------+----------------------------------------------------------+
 | Element                  | Description                                              |
-+==========================+==========================================================+
++--------------------------+----------------------------------------------------------+
 | <project-id>:<user-id>   | The specified user in the project has access             |
 +--------------------------+----------------------------------------------------------+
 | <project-id>:\*          | Any user with a role in the specified project has access |
@@ -299,7 +307,7 @@ objects in a container, they can only view the contents. In order to perform
 create or delete actions, the user will need to be included in the
 ``WRITE ACL``.
 
-First let's repeat the process we used earlier to add the read access rule; and
+First let's repeat the process we used earlier to add the read access rule, and
 instead add a write access rule for our restricted-user-2.
 
 .. code-block:: bash
@@ -352,8 +360,8 @@ has read access, this could be either **clouduser** or **restricted-user-1**.
   +---------+
 
 The final operation we need to verify is ability to delete an object. The
-following example show that we can remove any content in the container, even if
-it was not created by the current user.
+following example shows that we can remove any content in the container, even
+if it was not created by the current user.
 
 .. code-block:: bash
 

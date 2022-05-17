@@ -22,8 +22,8 @@ can use `Duplicity`_ to create backups as well.
 The main distinction between the two is that the default Openstack backup
 creates new volume resource that holds a copy of your data from the point
 in time you decided to back up your data. While Duplicity creates a
-file-orientated backup, allowing you to perform file-level restoration from your
-backup.
+file-orientated backup, allowing you to perform file-level restoration from
+your backup.
 
 The following are the different sections that go into greater detail on
 specific issues.

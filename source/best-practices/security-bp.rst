@@ -74,6 +74,15 @@ censor the password before sending it, as done below.
   OS_PROJECT_ID=fha98835bhnae8092n4388ujf
   OS_PASSWORD=XXXXXXXXXXXXX
 
+***************************
+Multi factor authentication
+***************************
+
+We recommend that you use multi factor authentication (MFA) on all accounts,
+please see :ref:`Multi factor authentication <multi_factor_authentication>`
+for details on how to implement this. You can review which accounts have MFA
+enabled on the Project Users panel in our dashboard.
+
 ********************
 Update systems often
 ********************

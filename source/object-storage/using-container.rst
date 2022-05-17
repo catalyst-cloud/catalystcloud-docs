@@ -19,8 +19,13 @@ the "Containers" section on the dashboard and click "Create Container".
 .. image:: assets/containers_ui.png
    :align: center
 
-Provide a name for the container and select the appropriate access level and
-click "Create".
+You will need to provide a name for the container as well as select the
+appropriate access level and replication policy type before clicking "Submit".
+
+.. warning::
+
+  Please do not use an underscore "``_``" when naming your container. The
+  reasoning for this is explained in the programmatic examples below.
 
 .. note::
 
@@ -58,14 +63,21 @@ Prerequisites
 
 For several of the methods detailed below, you will have to prepare your
 command line environment before continuing with the examples. The key things
-that you have to prepare before continuing are:
+that need to be prepared are:
 
 * You must :ref:`Source an OpenRC file <command-line-interface>`.
 * You must ensure that you have the correct role for using object storage on
   your cloud project. See :ref:`here<access_control>` for more details.
 
-Once you have met these requirements, you can continue with whichever
-method you choose:
+Once you have met these requirements, you can continue with any of the
+method you below:
+
+.. warning::
+
+  Please do not use an underscore "``_``" when naming your containers. This will
+  cause an error with the S3 api and you will receive errors through your CLI
+  when using this method. As a general practice we recommend avoiding
+  the use of an underscore regardless of the method you choose below.
 
 |
 
