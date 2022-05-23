@@ -26,8 +26,7 @@ http://developer.openstack.org/api-ref.html
 API endpoints
 *************
 
-Once authenticated and operating from a :ref:`whitelisted IP address
-<access-and-whitelist>`, you can obtain the service catalogue and the list of
+Once authenticated, you can obtain the service catalogue and the list of
 API endpoints on the current region from the identity service.
 
 From the dashboard, you can find the endpoints under Access and Security, API

@@ -261,10 +261,6 @@ Assumptions
 
 These examples assume the following:
 
-- You have whitelisted the public facing IP address that you will be using to
-  access the Catalyst Cloud APIs. Alternatively you can work from or via an
-  instance based in your cloud project, as it will have API access by default.
-
 - You have implemented an appropriate authentication method to allow you to
   interact with your Catalyst Cloud project. There are several options
   available to you depending on your tool of choice, some of these are:
