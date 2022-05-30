@@ -3,7 +3,8 @@ interact with the object storage service via the openstack command line.
 
 |
 
-To view the containers currently in existence in your project:
+To view the current containers on your project, you can use the ``openstack
+container list`` command:
 
 .. code-block:: bash
 
@@ -33,6 +34,7 @@ To create a new container: ``openstack container create <container_name>``
 .. code-block:: bash
 
     $ openstack container create mynewcontainer
+
     +---------+----------------+----------------------------------------------------+
     | account | container      | x-trans-id                                         |
     +---------+----------------+----------------------------------------------------+
@@ -47,6 +49,7 @@ To add a new object to a container:
 .. code-block:: bash
 
     $ openstack object create mynewcontainer hello.txt
+
     +-----------+----------------+----------------------------------+
     | object    | container      | etag                             |
     +-----------+----------------+----------------------------------+
@@ -55,7 +58,7 @@ To add a new object to a container:
 
 |
 
-To delete an object: ``openstack object delete <container> <object>``
+To delete an object from a container: ``openstack object delete <container> <object>``
 
 .. code-block:: bash
 
@@ -67,7 +70,7 @@ To delete a container: ``openstack container delete <container>``
 
 .. note::
 
-  this will only work if the container is empty.
+  this will only work if the container does not contain any objects.
 
 .. code-block:: bash
 

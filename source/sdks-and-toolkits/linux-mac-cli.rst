@@ -157,11 +157,6 @@ Configuration on Linux and Mac
 
 .. _configuring-the-cli:
 
-.. Warning::
-
-  Prior to using the CLI, ensure you are working from a whitelisted IP address.
-  More information can be found :ref:`here <access-and-whitelist>`
-
 .. _source-rc-file:
 
 Source an openstack RC file
