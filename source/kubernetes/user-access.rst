@@ -15,35 +15,34 @@ project using their existing cloud credentials.
 
 The OpenStack Keystone Identity roles related to the Kubernetes service are:
 
-* ``k8s_admin`` administrator of the cluster platform and able to perform all
-  operations within the cluster.
-* ``k8s_developer`` can deploy applications to the cluster but cannot change cluster
-  level operations including in the ``kube-system`` namespace.
-* ``k8s_viewer`` can only have view and obtain information of cluster
-  resources.
+* ``k8s_admin``: administrators of the cluster platform with full privileges to
+  perform any operation.
+* ``k8s_developer``: users able to deploy applications to the cluster platform,
+  who are restricted from performing cluster level operations.
+* ``k8s_viewer``: users able to view/obtain information about cluster resources.
 
-For a detailed list of permissions associated with this role, please refer to
+For a detailed list of permissions associated with these roles, please refer to
 role permissions table in this document.
 
 These roles can be added to an existing user through the :ref:`project_users`
 page by anyone who has the Project Admin or Project Moderator roles
 assigned to their account.
 
-+---------------+------------------------------------------------------------------+
-| Role          | Permissions                                                      |
-+===============+==================================================================+
-| k8s_admin     | Privileged users with maximum rights. Full admin access is       |
-|               | granted for Magnum cluster CRUD operations and all Kubernetes    |
-|               | namespaces.                                                      |
-+---------------+------------------------------------------------------------------+
-| k8s_developer | Privileged users with restricted rights. Kubernetes CRUD         |
-|               | operation access is granted to any namespace other than the      |
-|               | admin namespace.                                                 |
-+---------------+------------------------------------------------------------------+
-| k8s_viewer    | Non-privileged users able to perform READ actions in both Magnum |
-|               | and Kubernetes. Has access to all namespaces, excluding the      |
-|               | admin namespace.                                                 |
-+---------------+------------------------------------------------------------------+
++---------------+--------------------------------------------------------------+
+| Role          | Permissions                                                  |
++===============+==============================================================+
+| k8s_admin     | Privileged users with maximum rights. Full admin access is   |
+|               | granted for Magnum cluster CRUD operations and all           |
+|               | Kubernetes namespaces.                                       |
++---------------+--------------------------------------------------------------+
+| k8s_developer | Privileged users with restricted rights. Kubernetes CRUD     |
+|               | operation access is granted to any namespace other than the  |
+|               | admin (``kube-system``) namespace.                           |
++---------------+--------------------------------------------------------------+
+| k8s_viewer    | Non-privileged users able to perform READ actions in both    |
+|               | Magnum and Kubernetes. Has access to all namespaces,         |
+|               | excluding the admin namespace.                               |
++---------------+--------------------------------------------------------------+
 
 
 .. Warning::
