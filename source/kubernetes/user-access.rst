@@ -9,47 +9,78 @@ Introduction
 ************
 
 Kubernetes clusters launched on the Catalyst Cloud are integrated with the
-Identity and Access Management (IAM) service. Users with one of the roles
+OpenStack Keystone (Identity) service. Users with one of the roles
 listed below are able to interact with any Kubernetes clusters owned by their
 project using their existing cloud credentials.
 
-The IAM roles related to the Kubernetes service are:
+The OpenStack Keystone Identity roles related to the Kubernetes service are:
 
-* ``k8s-admin`` administrator of the cluster platform and able to perform all
-  operations within the cluster.
-* ``k8s-developer`` can deploy applications to the cluster but cannot perform
-  destructive operations within the ``kube-system`` namespace.
-* ``k8s-viewer`` can only have view and obtain information of cluster
-  resources.
+* ``k8s_admin``: administrators of the cluster platform with full privileges to
+  perform any operation.
+* ``k8s_developer``: users able to deploy applications to the cluster platform,
+  who are restricted from performing cluster level operations.
+* ``k8s_viewer``: users able to view/obtain information about cluster resources.
 
-For a detailed list of permissions associated with this role, please refer to
+For a detailed list of permissions associated with these roles, please refer to
 role permissions table in this document.
 
 These roles can be added to an existing user through the :ref:`project_users`
 page by anyone who has the Project Admin or Project Moderator roles
 assigned to their account.
 
-+---------------+------------------------------------------------------------------+
-| Role          | Permissions                                                      |
-+===============+==================================================================+
-| k8s_admin     | Allows user to perform CRUD operations to Magnum cluster and     |
-|               | have full admin access to Kubernetes. Has access to all          |
-|               | namespaces, including the admin namespace.                       |
-+---------------+------------------------------------------------------------------+
-| k8s_developer | Allow users to perform CRUD operations to Kubernetes resources.  |
-|               | The user has access to all namespaces, excluding the admin       |
-|               | namespace.                                                       |
-+---------------+------------------------------------------------------------------+
-| k8s_viewer    | Only allows the user to perform READ operations in both Magnum   |
-|               | and Kubernetes. Has access to all namespaces, excluding the      |
-|               | admin namespace.                                                 |
-+---------------+------------------------------------------------------------------+
++---------------+--------------------------------------------------------------+
+| Role          | Permissions                                                  |
++===============+==============================================================+
+| k8s_admin     | Privileged users with maximum rights. Full admin access is   |
+|               | granted for Magnum cluster CRUD operations and all           |
+|               | Kubernetes namespaces.                                       |
++---------------+--------------------------------------------------------------+
+| k8s_developer | Privileged users with restricted rights. Kubernetes CRUD     |
+|               | operation access is granted to any namespace other than the  |
+|               | admin (``kube-system``) namespace.                           |
++---------------+--------------------------------------------------------------+
+| k8s_viewer    | Non-privileged users able to perform READ actions in both    |
+|               | Magnum and Kubernetes. Has access to all namespaces,         |
+|               | excluding the admin namespace.                               |
++---------------+--------------------------------------------------------------+
+
+
+.. Warning::
+
+  The privileged roles deserve special attention when deploying kubernetes
+  clusters. The `RBAC permissions
+  <https://kubernetes.io/docs/reference/access-authn-authz/rbac/>`_ that grant
+  the ability to launch a pod in the cluster is a powerful right and use of a
+  more restrictive `Admission Controller
+  <https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/>`_
+  may be appropriate to meet specific customer security needs.
+
+  Please note: this means any user with the the k8s_developer role must be a 
+  trusted individual, as by default they're capable of escalating their own 
+  privileges.
+
+.. _`Admission Controller`` 
+
+Integrated Pod Policy Solutions:
+
+* `Pod Security Policies <https://kubernetes.io/docs/concepts/security/pod-security-policy/>`_ 
+  for Kubernetes clusters >=1.16 and <= 1.24.
+* `Pod Security Admission <https://kubernetes.io/docs/concepts/security/pod-security-admission/>`_ 
+  for Kubernetes clusters >=1.25.
+
+Example 3rd Party Policy Solutions:
+
+* `Open Policy Agent <https://www.openpolicyagent.org/docs/latest/>`_ / 
+  `Gatekeeper <https://github.com/open-policy-agent/gatekeeper/>`_
+* `Kyverno <https://github.com/kyverno/kyverno/>`_
 
 More information
 ================
 
-The following is a comprehensive list of the exact permissions that each role
+The following is a comprehensive list of the exact `RBAC permissions
+<https://kubernetes.io/docs/reference/access-authn-authz/rbac/>`_ that each role
 gives a user:
+
 
 .. code-block:: console
 
