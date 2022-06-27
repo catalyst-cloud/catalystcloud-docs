@@ -62,9 +62,9 @@ assigned to their account.
 Integrated Pod Policy Solutions:
 
 * `Pod Security Policies <https://kubernetes.io/docs/concepts/security/pod-security-policy/>`_
-  for Kubernetes clusters >=1.16 and <= 1.24.
+  for Kubernetes clusters >= 1.16 and <= 1.24.
 * `Pod Security Admission <https://kubernetes.io/docs/concepts/security/pod-security-admission/>`_
-  for Kubernetes clusters >=1.25.
+  for Kubernetes clusters >= 1.25.
 
 Example 3rd Party Policy Solutions:
 
