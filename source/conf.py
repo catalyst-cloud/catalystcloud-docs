@@ -51,7 +51,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Catalyst Cloud'
-copyright = u'2016-2021, Catalyst Cloud Ltd'
+copyright = u'2016-2022, Catalyst Cloud Ltd'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
