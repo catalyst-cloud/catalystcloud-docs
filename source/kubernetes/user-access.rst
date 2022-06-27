@@ -55,22 +55,20 @@ assigned to their account.
   <https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/>`_
   may be appropriate to meet specific customer security needs.
 
-  Please note: this means any user with the the k8s_developer role must be a 
-  trusted individual, as by default they're capable of escalating their own 
+  Please note: this means any user with the the k8s_developer role must be a
+  trusted individual, as by default they're capable of escalating their own
   privileges.
-
-.. _`Admission Controller`` 
 
 Integrated Pod Policy Solutions:
 
-* `Pod Security Policies <https://kubernetes.io/docs/concepts/security/pod-security-policy/>`_ 
+* `Pod Security Policies <https://kubernetes.io/docs/concepts/security/pod-security-policy/>`_
   for Kubernetes clusters >=1.16 and <= 1.24.
-* `Pod Security Admission <https://kubernetes.io/docs/concepts/security/pod-security-admission/>`_ 
+* `Pod Security Admission <https://kubernetes.io/docs/concepts/security/pod-security-admission/>`_
   for Kubernetes clusters >=1.25.
 
 Example 3rd Party Policy Solutions:
 
-* `Open Policy Agent <https://www.openpolicyagent.org/docs/latest/>`_ / 
+* `Open Policy Agent <https://www.openpolicyagent.org/docs/latest/>`_ /
   `Gatekeeper <https://github.com/open-policy-agent/gatekeeper/>`_
 * `Kyverno <https://github.com/kyverno/kyverno/>`_
 
@@ -575,3 +573,4 @@ To remove the elements we created in this example run the following commands:
   namespace "testapp" deleted
 
 .. include:: role-mapping.rst
+
