@@ -2,50 +2,115 @@
 Importing existing virtual machines
 ###################################
 
-Importing an unchanged existing virtual machine to the Catalyst Cloud is likely
-to work out of the box, but to get the best out of it and ensure that all API
-operations will work with your virtual machine, there are some preparation
-steps and tweaks that we highly recommend. For example: cloud VMs have a
-cloud-init script that runs at boot time to fetch the configuration of the
-compute instance from our metadata agent.
+Existing virtual machine images from other platforms or hypervisors may
+require changes to function on top of Catalyst Cloud. The changes may
+require specialised knowledge of the operating system the image is based
+on.
 
-**************************
-Preparing your existing VM
-**************************
+.. note::
 
-Debian and Ubuntu Linux
-=======================
+  Catalyst Cloud does not provide support for images you upload or
+  modify to run in Catalyst Cloud. We do not guarantee any compatibility
+  with any other platform for images.
 
-Make sure GRUB is booting out of the master boot record on the first hard
-drive. While it is possible to import virtual machines with more complex disk
-configurations, it will be easier if the virtual machine is backed by a single
-root-disk.
+********************
+Minimum Requirements
+********************
 
-Install the cloud-init script:
+The minimum requirements for an existing virtual machine image to be used
+in Catalyst Cloud is:
+
+* Intel or AMD "x86" architecture (for c1 compute instances)
+* Supports KVM/QEMU ``virtio`` storage and network drivers, and is
+  configured to use these for storage and networking
+* Uses DHCP on each network interface
+* Has ``cloud-init`` or an equivalent package installed
+* Linux-based operating system, Windows is not supported for import
+* Has the whole boot and OS components in a single disk image, not spread
+  over multiple disk images
+
+********************************
+Suggested Preparation for Import
+********************************
+
+The following steps are suggestions on steps needed to allow a machine
+image to be imported and successfully used to start an instance, but may
+not be all steps required to support a given application or workload.
+
+Linux
+=====
+
+You will need to check that the ``virtio`` drivers are able to be loaded
+during boot. By default, these should be available without any need to
+modify the system.
+
+However, you can check they are present with the following commands on
+the running machine:
 
 .. code-block:: bash
 
-  sudo apt-get install cloud-init
+  grep VIRTIO_BLK /boot/config-`uname -r`
+  grep VIRTIO_NET /boot/config-`uname -r`
 
-Configure cloud-init to use EC2 as its metadata source:
+These should return lines like:
+
+.. code-block:: kconfig
+
+  CONFIG_VIRTIO_BLK=m
+  CONFIG_VIRTIO_NET=m
+
+If no lines are reported, or they have ``n`` instead of ``m`` or ``y``.
+Then the kernel has no support for ``virtio`` drivers and must be changed
+to a kernel that does. Changing and selection of a new kernel is outside
+the scope of this document.
+
+If the lines end in ``m`` as above, then we need to check the modules are
+included in the bootstrap environment used during boot, called ``initrd``.
+The following command will check if the ``virtio`` drivers are present
+in the bootstrap environment:
 
 .. code-block:: bash
 
-  dpkg-reconfigure cloud-init
+  lsinitramfs /boot/initrd.img-`uname -r` | grep virtio
+
+This should output a number of references including ``virtio_blk`` and
+``virtio_net``, the most important two entries to see.
+
+Your machine should have ``/boot`` and the root filesystem in the same
+disk image. Although it is possible to create machines with multiple disks
+making up different parts of the system, this is an advanced configuration
+that requires careful planning and can be very difficult to create and
+launch systems in this way.
+
+``cloud-init`` provides tools to query the metadata exposed by Catalyst
+Cloud to the server, and is required to ensure features such as
+"user data scripts" are picked up and executed by the server. Recent
+versions should detect the metadata source provided by Catalyst Cloud
+without configuration.
+
+However, if this does need to be configured, the ``OpenStack`` datasource
+is the preferred one to use.
+
+Installation of ``cloud-init`` depends on the distribution of Linux your
+image uses:
+
+.. tabs::
+
+   .. tab:: Debian/Ubuntu
+
+      .. code-block:: bash
+
+        sudo apt-get install cloud-init
+
+   .. tab:: CentOS 8
+
+      .. code-block:: bash
+
+        sudo dnf -y install cloud-init
 
 Compute instances receive their network configuration from our cloud metadata
 agent and DHCP servers. As such, we recommend you configure the network
-interfaces (sudo vi /etc/network/interfaces) to use DHCP instead of a static
-IP.
-
-.. code-block:: bash
-
-  sudo vi /etc/network/interfaces
-
-.. code-block:: bash
-
-  auto eth0
-  iface eth0 inet dhcp
+interfaces to use DHCP instead of a static IP.
 
 .. note::
 
@@ -56,8 +121,8 @@ IP.
   Each virtual network created by you runs its own DHCP agent that is used
   to lease IPs directed by the compute and network services.
 
-Since the MAC addresses for your network interfaces will be different on the
-cloud, you must remove persistent net rules from udev:
+You may also need to remove any persistence rules for network interfaces.
+In Debian/Ubuntu, for example, this will purge the persistence rules:
 
 .. code-block:: bash
 
