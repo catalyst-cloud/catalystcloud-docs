@@ -63,3 +63,11 @@ more common policies.
   access or delete objects in the container (or the container itself) more
   information on this can be found under the :ref:`object-storage-access`
   section.
+
+******************
+Encryption at rest
+******************
+
+Objects are stored encrypted at rest using encryption keys that Catayst Cloud
+control. Customers can, if they wish, use their own encryption before objects
+are uploaded to object storage.

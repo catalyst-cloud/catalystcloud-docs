@@ -1,3 +1,5 @@
+.. _multi_factor_authentication:
+
 ###########################
 Multi factor authentication
 ###########################

@@ -86,11 +86,29 @@ For a less verbose view filter by column name
 Images provided by our partners
 *******************************
 
-+------------------+-----------+-----------------+
-| Operating system | User-name | Partner         |
-+==================+===========+=================+
-| Windows          | admin     | Silicon Systems |
-+------------------+-----------+-----------------+
++------------------+-------------------+-----------+-----------------+-------------------+
+| Operating system | Image name prefix | User-name | Partner         | Licence           |
++==================+===================+===========+=================+===================+
+| Windows          | windows-server-*  | admin     | Silicon Systems | |windows_link|    |
++------------------+-------------------+-----------+-----------------+-------------------+
+| Windows          | sql-server-*      | admin     | Silicon Systems | |sql_link|        |
++------------------+-------------------+-----------+-----------------+-------------------+
+
+.. |windows_link| raw:: html
+
+    <a href="https://www.microsoft.com/licensing/spur/productoffering/WindowsServer/all" target="_blank">SPUR for SPLA licensing</a>
+
+.. |sql_link| raw:: html
+
+    <a href="https://www.microsoft.com/licensing/spur/productoffering/sqlserver/all" target="_blank">SPUR for SPLA licensing</a>
+
+.. note::
+
+  SPUR: Services Provider Use Rights
+
+  SPLA: Services Provider License Agreement
+
+  With SPLA the Provider (here Silicon Systems) is the licensee.
 
 Before using the images provided by our Partners, you should always confirm
 that they are suitable for your needs and fit for purpose. Catalyst provides

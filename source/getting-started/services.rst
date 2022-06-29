@@ -160,8 +160,8 @@ don't need to wait for a human to do things for you.
 
 .. note::
   There are a few exceptions where human help *is* required for security
-  reasons. Signing up for the first time, increasing your
-  :ref:`quota <additional-info>`, and whitelisting IP addresses are the most common.
+  reasons. Signing up for the first time, and increasing your
+  :ref:`quota <additional-info>` are the most common.
   We intend to automate these in the future.
 
 Resources on the Catalyst Cloud can be created, deleted, assigned, resized,

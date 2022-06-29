@@ -32,7 +32,7 @@ parameters:
   instance:
     type: string
     description: ID of the instance you want the volume to be attached to
-    defaults: <INSERT-ID-HERE>
+    default: <INSERT-ID-HERE>
 
 
 resources:
