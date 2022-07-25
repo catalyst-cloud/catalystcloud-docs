@@ -93,7 +93,7 @@ your source project you can run the following command:
   # substitute the variables below for the respective IDs we used in the previous section.
   $ openstack image remove project $image_ID $target_project_ID
 
-Once this is done you should now longer be able to see the image on the target
+Once this is done you should no longer be able to see the image on the target
 project:
 
 .. code-block:: bash
