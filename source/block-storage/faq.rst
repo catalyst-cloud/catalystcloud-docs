@@ -84,10 +84,10 @@ Another method which is quick and safe is to perform a volume snapshot.
 
 The process is as follows:
 
-1) Shut down the instance.
-2) Take a volume snapshot. (as documented :ref:`here <using-volumes>`)
-3) Create volume from snapshot.
-4) Boot instance from volume.
+1. Shut down the instance.
+2. Take a volume snapshot.
+3. Create volume from snapshot.
+4. Boot instance from volume.
 
 This sequence can be performed either through the API/commands or the
 dashboard.
