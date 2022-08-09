@@ -53,7 +53,7 @@ as the default user name you should use to log in to each one of them
   instances launched by it to "ec2". This is done to preserve some level of
   compatibility with AWS CloudFormation.
 
-Our standard policy is not to modify or customize cloud images provided by
+Our standard policy is not to modify or customise cloud images provided by
 upstream Linux distributions. This gives you the assurance that you are running
 software exactly as provided by the software providers.
 
