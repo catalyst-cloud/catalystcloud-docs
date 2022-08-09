@@ -1,8 +1,8 @@
 .. _anti-affinity:
 
-############################
-Using server affinity for HA
-############################
+###########################################
+Using server affinity for high availability
+###########################################
 
 Server affinity refers to the practice of ensuring compute instances are
 either: allocated to the same **or** allocated to explicitly different
@@ -14,13 +14,27 @@ separating your instances across hypervisors is known as server
 *Server affinity* is useful when you want to ensure that the data transfer
 amongst compute instances is as fast as possible. On the other hand it may
 increase CPU contention or reduce the availability of your application
-(a single server going down affects all compute instances in the group.)
+as a single server going offline would affect all compute instances in the
+group.
 
 Server *anti-affinity* is useful when you want to increase the availability of
 an application within a region and create redundancy for your compute instances.
 Compute instances in an anti-affinity group are placed on different physical
-servers, ensuring that the failure of a server will not affect all your compute
-instances simultaneously.
+hypervisor hosts, ensuring that the failure of a server will not affect all your
+compute instances simultaneously.
+
+Affinity policies are strictly adhered to; compute instances that are unable to
+meet their affinity requirements due to hypervisor resourcing constraints will
+not start and will instead be flagged in an ``ERROR`` state.
+
+*Soft* affinity or anti-affinity policies are similar to the above, except that
+the affinity is treated as a recommendation as opposed to a strict rule. The
+compute scheduler will attempt to place compute instances onto as few (affinity)
+or as many (anti-affinity) hypervisor hosts as possible. Compute instances that
+are unable to meet their respective policy will still be started. This provides
+additional flexibility, but removes the absolute certainty that your compute
+instances are compliant withthe affinity policy you specified.
+
 
 .. Warning::
 
@@ -35,6 +49,8 @@ instances simultaneously.
     an affected instance may not be migrated until another hypervisor becomes
     available that can support that same policy.
 
+  Soft affinity and soft anit-affinity policies are not affected by this as
+  they operate on a 'best-effort' basis.
 
 ****************************************
 Using the dashboard
@@ -99,10 +115,12 @@ Using programmatic methods
 
       Where:
 
-      * ``$groupname`` is a name you choose (eg: app-servers)
-      * ``$policy`` is ``anti-affinity``
-
-      .. * ``$policy`` is either ``affinity`` or ``anti-affinity``
+      * ``$groupname`` is a name you choose (eg: ``app-servers``)
+      * ``$policy`` is one of the following options:
+        * ``affinity``
+        * ``anti-affinity``
+        * ``soft-affinity``
+        * ``soft-anti-affinity``
 
       To list server groups:
 
@@ -140,6 +158,9 @@ Using programmatic methods
         group. For example, we may not have enough capacity on the same hypervisor to
         place another instance in affinity, or enough hypervisors with sufficient
         capacity to place instances in anti-affinity.
+
+        In this case it may be preferable to use a 'soft' affinity option, depending
+        on your requirements.
 
     .. tab:: Ansible
 
@@ -189,7 +210,7 @@ Using programmatic methods
       group. We have to use the CLI method as HEAT does not natively support
       attaching instances to server groups.
 
-      .. code-block::
+      .. code-block:: yaml
 
         heat_template_version: 2015-04-30
 

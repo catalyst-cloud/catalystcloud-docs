@@ -53,15 +53,15 @@ Locale errors on Ubuntu Linux
 *****************************
 
 When launching an Ubuntu compute instance using the images provided by
-Canonical, we recommend you configure the locale using cloud-init. The
+Canonical, we recommend you configure the locale using `cloud-init<https://cloudinit.readthedocs.io>`. The
 example below illustrates how the locale can be defined at boot time using the
-cloud-config syntax.
+`cloud-config syntax<https://cloudinit.readthedocs.io/en/latest/topics/examples.html>`.
 
 .. code-block:: bash
 
   #cloud-config
   fqdn: instancename.example.com
-  locale: en_US.UTF-8
+  locale: en_NZ.UTF-8
 
 If the locale is not configured appropriately, you may get locale related
 errors, such as:
