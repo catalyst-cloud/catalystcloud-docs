@@ -14,24 +14,39 @@ Updates to Nova Compute Service
 Compute API Version Change
 ==========================
 
+The compute v2 API has changed from v2 to v2.1 which changes the API URL path
+from ``/v2`` to ``/v2.1``. So for example the compute v2 API for the Porirua
+region has now changed to ``https://api.nz-por-1.catalystcloud.io:8774/v2.1``.
+A complete list of API URLs can be found on the ``:ref:_apis:`.
 
-Most client applications should obtain the correct URL automatically from the service catalogue and therefore not require additional configuration. If any customers have specifically configured any applications or scripts to use the v2 API then they should be updated to use the v2.1 API instead.
+Most client applications should obtain the correct API URL automatically from
+the service catalogue and therefore not require additional configuration. If
+any customers have specifically configured any applications or scripts to use
+the v2 API then they should be updated to use the v2.1 API instead.
 
-The v2.1 API is required for some of the new compute features and will enable additional features in future. It also retains full backwards-compatibility with the old v2 API, so older software that only supports API v2 can be configured to use the v2.1 API without loss of functionality.
+The v2.1 API is required for some of the new compute features and will enable
+additional features in future. It also retains full backwards-compatibility
+with the old v2 API, so older software that only supports API v2 can be
+configured to use the v2.1 API without loss of functionality.
 
-The v2 API endpoint will continue to function as-is until the next compute service upgrade after which it will be retired completely.
+The v2 API endpoint will continue to function as-is until the next compute
+service upgrade after which it will be retired completely.
 
 Crash Dump Request
 ==================
 
-The instance action ``trigger_crash_dump`` has been added to the REST API in microversion 2.17. This allows customers to force instances to perform a crash dump for debugging purposes by requesting a non-maskable interrupt (NMI).
+The instance action ``trigger_crash_dump`` has been added to the REST API in
+microversion 2.17. This allows customers to force instances to perform a crash
+dump for debugging purposes by requesting a non-maskable interrupt (NMI).
 
-Operating systems configured to respond to the NMI will perform a core dump and reboot.
+Operating systems configured to respond to the NMI will perform a core dump and
+reboot.
 
 Example
 -------
 
-The ``nova`` command can be used to perform this operation against an instance, for example:
+The ``nova`` command can be used to perform this operation against an instance,
+for example:
 
 .. code-block:: bash
 
@@ -41,9 +56,12 @@ The ``nova`` command can be used to perform this operation against an instance, 
 Custom Descriptions for Servers
 ===============================
 
-A custom description attribute can be added when creating, rebuilding or updating a server instance. In order to use this new feature, relevant request headers must specify at least microversion 2.19.
+A custom description attribute can be added when creating, rebuilding or
+updating a server instance. In order to use this new feature, relevant request
+headers must specify at least microversion 2.19.
 
-To add a description when creating a server, add the ``--description`` argument followed by the description text to the ``openstack server create`` command.
+To add a description when creating a server, add the ``--description`` argument
+followed by the description text to the ``openstack server create`` command.
 
 Examples
 --------
@@ -68,18 +86,23 @@ View a server description:
 Deleted Server Events
 =====================
 
-Events can now be retrieved for instances that have been deleted which can be useful for auditing. Note that this only applies to instances deleted since this release.
+Events can now be retrieved for instances that have been deleted which can be
+useful for auditing. Note that this only applies to instances deleted since this release.
 
-This means that GET requests to the ``/v2.1/<tenant-id>/servers/<server-id>/os-instance-actions`` and ``/v2.1/<tenant-id>/servers/<server-id>/os-instance-actions/<req-id>`` endpoints will return instance-action items even if the instance corresponding to ``<server-id>`` has been deleted.
+This means that GET requests to the ``/v2.1/<tenant-id>/servers/<server-id>/os-instance-actions``
+and ``/v2.1/<tenant-id>/servers/<server-id>/os-instance-actions/<req-id>``
+endpoints will return instance-action items even if the instance corresponding
+to ``<server-id>`` has been deleted.
 
-Note that the server ID must be known prior to deletion in order to retrieve the event history. The ID of the server cannot be obtained after it is deleted.
+Note that the server ID must be known prior to deletion in order to retrieve
+the event history. The ID of the server cannot be obtained after it is deleted.
 
 Examples
 --------
 
 Obtain an existing server ID (required to list events from deleted servers):
 
-.. code-block:: none
+.. code-block:: text
 
     openstack server show -c id -f value example-server
     9acc297a-1b44-403d-badb-61e17d8a2315
@@ -92,7 +115,7 @@ Delete the server:
 
 Retrieve the event history of the deleted server:
 
-.. code-block:: none
+.. code-block:: text
 
     openstack server event list 9acc297a-1b44-403d-badb-61e17d8a2315
     +------------------------------------------+--------------------------------------+----------+----------------------------+
@@ -107,16 +130,23 @@ Retrieve the event history of the deleted server:
 EC2 Compute API Port Change
 ===========================
 
-The EC2 compute API now listens on port 8788 instead of 8773. The updated API URLs can be found on the API page of the dashboard.
+The EC2 compute API now listens on port 8788 instead of 8773. The updated API
+URLs can be found on the API page of the dashboard.
 
-Client software making use of the EC2 API for compute operations will need to be configured to use the new URL and port.
+Client software making use of the EC2 API for compute operations will need to
+be configured to use the new URL and port.
 
-Please note note that this change does not affect EC2 credentials or object storage; these continue to operate as before.
+Please note note that this change does not affect EC2 credentials or object
+storage; these continue to operate as before.
 
 Host Affinity Policies
 ======================
 
-Two new affinity policies are available; soft-affinty and soft-anti-affinity. These 'soft' policies are respectively similar to the existing affinity and anti-affinity policies, but differ from the existing policies in that they apply the (anti-)affinity rule as a preference rather than a strict rule. This difference is outlined in the table below:
+Two new affinity policies are available; soft-affinty and soft-anti-affinity.
+These 'soft' policies are respectively similar to the existing affinity and
+anti-affinity policies, but differ from the existing policies in that they
+apply the (anti-)affinity rule as a preference rather than a strict rule. This
+difference is outlined in the table below:
 
 .. list-table:: Affinity Policy Types
     :widths: 20 80
@@ -125,17 +155,26 @@ Two new affinity policies are available; soft-affinty and soft-anti-affinity. Th
     * - Policy
       - Description
     * - affinity
-      - Run all servers on the same hypervisor host. If this is not possible, do not start the servers that are unable to meet this policy.
+      - Run all servers on the same hypervisor host. If this is not possible,
+        do not start the servers that are unable to meet this policy.
     * - anti-affinity
-      - Run all servers on separate hypervisor hosts. If this is not possible, do not start the servers that are unable to meet this policy.
+      - Run all servers on separate hypervisor hosts. If this is not possible,
+        do not start the servers that are unable to meet this policy.
     * - soft-affinity
-      - Attempt to run all servers on the same hypervisor host. If this is not possible, start the remaining servers on as few other hypervisor hosts as possible.
+      - Attempt to run all servers on the same hypervisor host. If this is not
+        possible, start the remaining servers on as few other hypervisor hosts
+        as possible.
     * - soft-anti-affinity
-      - Attempt to run all on separate hypervisor hosts. If this is not possible, start the remaining servers on as many other hypervisor hosts as possible, even if some servers must end up sharing the same hypervisor host.
+      - Attempt to run all on separate hypervisor hosts. If this is not
+        possible, start the remaining servers on as many other hypervisor hosts
+        as possible, even if some servers must end up sharing the same
+        hypervisor host.
 
-In order to use this new feature, relevant request headers must specify at least microversion 2.15.
+In order to use this new feature, relevant request headers must specify at
+least microversion 2.15.
 
-Refer to the :ref:`anti-affinity` documentation for more information on server affinity.
+Refer to the :ref:`anti-affinity` documentation for more information on server
+affinity.
 
 Examples
 --------
@@ -155,14 +194,16 @@ Create a server group called ``bar`` with a soft anti-affinity policy:
 New Attributes in Server Group Request
 ======================================
 
-The attributes ``project-id`` and ``user-id`` are now included in the return data of ``os-server-groups`` API requests. In order to use this new feature, relevant request headers must specify at least microversion 2.13.
+The attributes ``project-id`` and ``user-id`` are now included in the return
+data of ``os-server-groups`` API requests. In order to use this new feature,
+relevant request headers must specify at least microversion 2.13.
 
 Examples
 --------
 
 Example command showing a new server group being created:
 
-.. code-block:: none
+.. code-block:: text
 
     openstack server group create example-group
     +----------+--------------------------------------+
@@ -176,7 +217,7 @@ Example command showing a new server group being created:
 
 Example command retrieving the server group information:
 
-.. code-block:: none
+.. code-block:: text
 
     openstack server group show --os-compute-api 2.13 test-group
     +------------+--------------------------------------+
@@ -197,9 +238,12 @@ Deprecation Notices
 Compute API v2
 ==============
 
-The compute v2 API endpoint has been replaced with API v2.1. The v2 endpoint will continue to function as-is until the next compute upgrade when it will be retired completely.
+The compute v2 API endpoint has been replaced with API v2.1. The v2 endpoint
+will continue to function as-is until the next compute upgrade when it will
+be retired completely.
 
 EC2 Compute API
 ===============
 
-The EC2 compute API on port 8773 is no longer available. This now listens on port 8788.
+The EC2 compute API on port 8773 is no longer available. This now listens on
+port 8788.
