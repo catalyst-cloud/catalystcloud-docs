@@ -4,7 +4,7 @@
 
 This relase brings a major upgrade to the compute service:
 
-* Compute service (Nova) has been upgraded from Liberty to Mitaka.
+* Compute service (Nova) has been upgraded.
 * EC2 API service upgrade and port change.
 
 *******************************
