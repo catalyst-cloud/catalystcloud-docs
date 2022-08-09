@@ -53,7 +53,7 @@ as the default user name you should use to log in to each one of them
   instances launched by it to "ec2". This is done to preserve some level of
   compatibility with AWS CloudFormation.
 
-Our standard policy is not to modify or customise cloud images provided by
+Our standard policy is not to modify or customize cloud images provided by
 upstream Linux distributions. This gives you the assurance that you are running
 software exactly as provided by the software providers.
 
@@ -67,20 +67,19 @@ take a snapshot of ours and modify it the way you need.
 How can I identify the images provided by Catalyst?
 ***************************************************
 
-The images provided by Catalyst are uploaded to projectID (also known as tenant
-previously)
-``94b566de52f9423faxxxxxxe8c0a4a23`` and are made public. With the command line
-tools, you can easily located them by running:
+The images provided by Catalyst can be identified using the projectID
+(``94b566de52f9423fab80ceee8c0a4a23``) that they are shared from. Using the
+command line tools, you can easily locate our shared images by running:
 
 .. code-block:: bash
 
-  openstack image list --long | grep 94b566de52f9423faxxxxxxe8c0a4a23
+  openstack image list --long | grep 94b566de52f9423fab80ceee8c0a4a23
 
-For a less verbose view filter by column name
+For a less verbose view, you can filter by column name.
 
 .. code-block:: bash
 
-  openstack image list -c ID -c Name -c Project --long | grep 94b566de52f9423faxxxxxxe8c0a4a23
+  openstack image list -c ID -c Name -c Project --long | grep 94b566de52f9423fab80ceee8c0a4a23
 
 *******************************
 Images provided by our partners
