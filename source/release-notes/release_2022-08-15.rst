@@ -17,7 +17,7 @@ Compute API Version Change
 The compute v2 API has changed from v2 to v2.1 which changes the API URL path
 from ``/v2`` to ``/v2.1``. So for example the compute v2 API for the Porirua
 region has now changed to ``https://api.nz-por-1.catalystcloud.io:8774/v2.1``.
-A complete list of API URLs can be found on the ``:ref:_apis:`.
+A complete list of API URLs can be found on the :ref:`_apis:` page.
 
 Most client applications should obtain the correct API URL automatically from
 the service catalogue and therefore not require additional configuration. If
