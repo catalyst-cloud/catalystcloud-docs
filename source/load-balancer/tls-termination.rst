@@ -9,7 +9,7 @@ TLS Termination
   service, you will need to raise a :ref:`support ticket<admin-support>` to
   request access for your project.
 
-In this section, we cover how to use openstack tools to create a loadbalancer
+In this section, we cover how to use openstack tools to create a load balancer
 which will handle TLS termination for your webservers.
 
 ***************
@@ -213,7 +213,7 @@ that interacts with our secret and actually performs the TLS functions.
   | tags                        |                                                                                                                                                                                                                                                                                    |
   +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Next we need to create a pool for our loadbalancer and add our webserver as a
+Next we need to create a pool for our load balancer and add our webserver as a
 member. The important thing to consider about your pool is which algorithm you
 want to use for your traffic to be sorted. In this case we are going to stick
 to the round robin algorithm.
