@@ -9,7 +9,7 @@ TLS Termination
   service, you will need to raise a :ref:`support ticket<admin-support>` to
   request access for your project.
 
-In this section, we cover how to use openstack tools to create a loadbalancer
+In this section, we cover how to use openstack tools to create a load balancer
 which will handle TLS termination for your webservers.
 
 ***************
