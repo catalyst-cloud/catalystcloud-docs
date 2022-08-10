@@ -25,6 +25,7 @@ s3cmd needs to use signature v2 as we've observed that it has a
 compatibility issue when communicating with our S3 interface using the
 default of signature v4.
 
+
 .. code-block:: ini
 
   host_base = object-storage.nz-por-1.catalystcloud.io:443
