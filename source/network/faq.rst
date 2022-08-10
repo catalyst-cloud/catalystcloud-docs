@@ -244,7 +244,7 @@ Testing network access
 **********************
 
 If you want to test your network access, you will have to set up your security
-groups properly for SSH access. Uou can check port 22 on the floating IP for an
+groups properly for SSH access. You can check port 22 on the floating IP for an
 SSH banner using telnet or netcat:
 
 .. code-block:: bash
