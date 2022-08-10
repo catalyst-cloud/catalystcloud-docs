@@ -23,7 +23,8 @@ select the appropriate API endpoint from :ref:`the API page <apis>`.
 
 s3cmd needs to use signature v2 as we've observed that it has a
 compatibility issue when communicating with our S3 interface using the
-default of signtuare v4.
+default of signature v4.
+
 
 .. code-block:: ini
 

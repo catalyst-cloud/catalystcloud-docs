@@ -243,9 +243,9 @@ ensure it now appears as one of the Instance Security Groups.
 Testing network access
 **********************
 
-If you want to test you have set up security groups properly for SSH access,
-you can check port 22 on the floating IP for an SSH banner using telnet or
-netcat:
+If you want to test your network access, you will have to set up your security
+groups properly for SSH access. You can check port 22 on the floating IP for an
+SSH banner using telnet or netcat:
 
 .. code-block:: bash
 
@@ -280,8 +280,8 @@ As stated previously a typical SSH connection command looks like this:
   $ ssh ubuntu@103.254.156.248
 
 Note the use of the ubuntu username, this is the default user for Ubuntu,
-change this as required for the distribution you are using as explained at
-:ref:`images`.
+you will need to change this as required for the distribution you are using as
+explained at :ref:`images`.
 
 .. _ssh_keypairs:
 
@@ -294,10 +294,16 @@ an existing key pair or you can have a key pair created for you.
 
 A key pair consists of two files: one contains the private key and the other
 contains the public key. The private key will remain on your local machine and
-should be kept private and secure. The public key is uploaded to your project
-and will be injected into the authorised keys (``~/.ssh/authorized_keys``) for
-the default user of the cloud image you are using (see :ref:`ssh-user`) when
-your instance is created.
+should be kept private and secure. The public key is uploaded to the cloud and
+is linked to your specific user account. This means that you can use the same
+key pair across multiple projects. However the keys are separated by region, so
+you need to take this into account when choosing which region you want to
+create your instance in.
+
+Once you create an instance, your key pair will be
+injected into the authorised keys (``~/.ssh/authorized_keys``)
+folder for the default user of the cloud image you are using (see
+:ref:`ssh-user`) when your instance is created.
 
 Default key pair
 ================
