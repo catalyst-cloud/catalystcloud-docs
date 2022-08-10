@@ -78,9 +78,10 @@ Downloading template files from Github
 ======================================
 
 Our next step is to gather a set of terraform template files, from which we can
-create our resources. For this example, we will be downloading a set of template
-files from the Catalyst Cloud github found at `catalyst cloud orchestration`_.
-Open up a terminal and run the following:
+create our resources. For this example, we will be downloading a set of
+template files from the Catalyst Cloud github found at
+`catalyst cloud orchestration`_. Open up a terminal and run the following:
+
 
 .. code-block:: bash
 
@@ -89,7 +90,6 @@ Open up a terminal and run the following:
   $ cd /nextcloud-terraform
   $ wget https://raw.githubusercontent.com/yvonnewat/catalystcloud-orchestration/new/add-systemd-services/nextcloud/terraform/nextcloud.tf
   $ wget https://raw.githubusercontent.com/yvonnewat/catalystcloud-orchestration/new/add-systemd-services/nextcloud/terraform/cloud-init-nextcloud.tpl
-
 
 =======================================
 Using a terraform configuration file
@@ -102,7 +102,8 @@ to use the template provided above as it contains all of the necessary
 resources you will need for this tutorial.
 
 Before using the template, you will only need to make sure to
-change the following to your own so that the template functions on your project:
+change the following to your own so that the template functions on your
+project:
 
 - key name,
 - domain name,
@@ -110,9 +111,7 @@ change the following to your own so that the template functions on your project:
 - and ddns password
 
 The terraform guide to writing your own configuration files, such as the one
-used for this template can be found at
-
-`Terraform documentation`_
+used for this template can be found at: `Terraform documentation`_
 
 The user_data section should also be changed so the the template file contains
 the file path of the cloud-init configuration file you intend to use.
@@ -130,6 +129,7 @@ Nextcloud.
 The containers started in the setup script are Nextcloud, `NGINX`_ and the
 `NGINX_proxy_acme_companion`_. The NGINX container is a reverse proxy for
 Nextcloud, and ensures communication with the Nextcloud server is encrypted.
+
 The acme companion automatically configures some letsencrypt certificates for
 the server using the ACME protocol.
 
@@ -190,8 +190,9 @@ Configuring Nextcloud
 **********************
 
 Upon first accessing Nextcloud, you will find it asks for an admin to sign up.
-Please choose the appropriate person in your organisation to complete this step.
-The admin role can add and remove users as well as enable and disable services.
+Please choose the appropriate person in your organisation to complete this
+step. The admin role can add and remove users as well as enable and disable
+services.
 
 Services that the Nextcloud container installs with:
 
@@ -250,9 +251,9 @@ Nextcloud Mobile
 ****************
 
 If you would like to use Nextcloud on your phone, there is an app available for
-Android and iOS. It is recommended you set this up by scanning the QR code which
-can be found by going into Settings -> Security -> Create new app password ->
-Show QR code for mobile apps.
+Android and iOS. It is recommended you set this up by scanning the QR code
+which can be found by going into Settings -> Security -> Create new app
+password -> Show QR code for mobile apps.
 
 The Nextcloud mobile application is primarily for accessing files and does not
 have the same tools as the desktop version. There is also a Nextcloud Talk
