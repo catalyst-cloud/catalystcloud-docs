@@ -10,8 +10,7 @@ This tutorial assumes that you have the following prepared:
 
 You may also need the following depending on your preference:
 
-* Knowledge of how to create and use volumes (if you are using your own
-  volume).
+* Knowledge of how to create and use volumes (if you are using your own volume).
 
 * A volume created for storing Nextcloud data (if you are using terraform).
 
@@ -106,20 +105,6 @@ Before using the template, you will only need to make sure to
 change the following to your own so that the template functions on your
 project:
 
-=======================================
-Using a terraform configuration file
-=======================================
-
-A template file should describe all the aspects of your system that you want to
-be constructed by Terraform. These aspects are resources such as the network,
-subnet, router, ssh key, and of course your instance itself. It is recommended
-to use the template provided above as it contains all of the necessary
-resources you will need for this tutorial.
-
-Before using the template, you will only need to make sure to
-change the following to your own so that the template functions on your
-project:
-
 - key name,
 - domain name,
 - host name
@@ -134,23 +119,6 @@ the file path of the cloud-init configuration file you intend to use.
 ==========================
 Using a cloud init file
 ==========================
-
-The `cloud init`_ file configures the software on an instance when it
-boots for the first time. In our case we want to install Nextcloud at runtime,
-so our cloud init file is set up to install docker and write systemd services
-to the instance. This is because we will be using a containerized version of
-Nextcloud.
-
-The containers started in the setup script are Nextcloud, `NGINX`_ and the
-`NGINX_proxy_acme_companion`_. The NGINX container is a reverse proxy for
-Nextcloud, and ensures communication with the Nextcloud server is encrypted.
-The acme companion automatically configures some letsencrypt certificates for
-the server using the ACME protocol.
-
-==========================
-Using a cloud init file
-==========================
->>>>>>> fixed release-notes inclusion and edits to nextcloud tutorial
 
 The `cloud init`_ file configures the software on an instance when it
 boots for the first time. In our case we want to install Nextcloud at runtime,
@@ -256,15 +224,13 @@ How to configure each service:
 
 * Files
 
-  - Files can be added by pressing the plus in the upper left hand corner,
-    these files can be up to 100MB in size.
+  - Files can be added by pressing the plus in the upper left hand corner, these files can be up to 100MB in size.
 
 * Mail
 
   - Manual set up is recommended.
 
-  - See `Thunderbird documentation`_ for setting up Nextcloud with Thunderbird
-    mail &calendar.
+  - See `Thunderbird documentation`_ for setting up Nextcloud with Thunderbird mail &calendar.
 
 * Calendar
 
