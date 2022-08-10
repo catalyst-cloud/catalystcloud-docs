@@ -1,6 +1,7 @@
 build/
 _build/
 venv/
+venv
 .build-tools.cson
 .DS_Store
 .vscode/

@@ -18,7 +18,12 @@ appropriate authentication details by customizing the s3cmd configuration file.
 Configuration changes
 =====================
 
-The following changes need to be specified in the .s3cfg file.
+The following changes need to be specified in the .s3cfg file. You can
+select the appropriate API endpoint from :ref:`the API page <apis>`.
+
+s3cmd needs to use signature v2 as we've observed that it has a
+compatibility issue when communicating with our S3 interface using the
+default of signtuare v4.
 
 .. code-block:: ini
 
