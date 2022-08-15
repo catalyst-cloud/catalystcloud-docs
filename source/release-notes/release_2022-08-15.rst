@@ -54,13 +54,13 @@ headers must specify at least microversion 2.19.
 Delete server events
 ==============================
 
-Events can now be retrieved for instances that have been deleted which can be
-useful for auditing. Note that this only applies to instances deleted since
-this release.
+Events can now be retrieved for instances that have been deleted, which can be
+useful when performing an audit. It's important to note that this only applies
+to instances deleted since this release.
 
 This means that GET requests for server events, sent to the correct endpoint
 for the v2.1 API will still return an output even for instances that have been
-deleted.
+deleted as long as you are able to specify the UUID of said instance.
 
 ===========================
 EC2 Compute API Port Change
@@ -80,11 +80,11 @@ storage; these continue to operate as before.
 New host affinity policies
 ===========================
 
-Two new affinity policies are available; soft-affinity and soft-anti-affinity.
-These 'soft' policies are respectively similar to the existing affinity and
-anti-affinity policies, but differ from the existing policies in that they
-apply the (anti-)affinity rule as a preference rather than a strict rule. This
-difference is outlined in the table below:
+Two new affinity policies are available this release; soft-affinity and
+soft-anti-affinity. These 'soft' policies are respectively similar to the
+existing affinity and anti-affinity policies, but differ from the existing
+policies in that they apply the (anti-)affinity rule as a preference rather
+than a strict rule. This difference is outlined in the table below:
 
 +--------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Policy             | Description                                                                                                                                                                                                             |
