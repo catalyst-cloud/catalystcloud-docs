@@ -29,7 +29,8 @@ remaining servers start on as few other hypervisor hosts as possible.
 
 *Soft anti-affinity* follows almost the same behavior as the regular
 anti-affinity policy, only this policy ensures that your servers start on
-as many differing hypervisor hosts as possible, even if some servers **must** end up sharing the same hypervisor.
+as many differing hypervisor hosts as possible, even if some servers **must**
+end up sharing the same hypervisor.
 
 .. Warning::
 
