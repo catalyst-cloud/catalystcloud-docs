@@ -86,22 +86,21 @@ existing affinity and anti-affinity policies, but differ from the existing
 policies in that they apply the (anti-)affinity rule as a preference rather
 than a strict rule. This difference is outlined in the table below:
 
-
 +---------------+--------------------------------------------------------+
 | Policy        | Description                                            |
 +===============+========================================================+
 | affinity      | Run all servers on the same hypervisor host.           |
 |               | If this is not possible, do not start the servers that |
 |               | are unable to meet this policy.                        |
-+--------------+---------------------------------------------------------+
++---------------+--------------------------------------------------------+
 | anti-affinity | Run all servers on separate hypervisor hosts. If this  |
 |               | is not possible, do not start the servers that are     |
 |               | unable to meet this policy.                            |
-+--------------+---------------------------------------------------------+
++---------------+--------------------------------------------------------+
 | soft-affinity | Attempt to run all servers on the same hypervisor      |
-|               | host.If this is not possible, start the remaining      |
+|               | host. If this is not possible, start the remaining     |
 |               | servers on as few other hypervisor hosts as possible.  |
-+--------------+---------------------------------------------------------+
++---------------+--------------------------------------------------------+
 
 
 In order to use this new feature, relevant request headers must specify at
