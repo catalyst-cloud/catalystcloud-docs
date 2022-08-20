@@ -60,6 +60,7 @@ Orchestration tutorials
 
    tutorials/orchestration/bootstrapping-puppet
    tutorials/orchestration/ansible-driven-puppet
+   tutorials/orchestration/terraform
 
 Storage tutorials
 =================
