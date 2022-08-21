@@ -2,35 +2,7 @@
 15 August 2022
 #################
 
-Major upgrade to the Compute (Nova) service. The changes include a new API
-version as well as several new features to the service.
-
-==========================
-Compute API version change
-==========================
-
-In this release the compute v2 API has been changed from v2 to v2.1. This
-therefore changes the API URL path from /v2 to /v2.1. So for example the
-compute v2 API for the Porirua region has now been changed to
-https://api.nz-por-1.catalystcloud.io:8774/v2.1.
-The updated API URLs can be found
-:ref:`in this section<apis>` of the documentation or on the API page of the
-dashboard.
-
-Most client applications should obtain the correct URL automatically from the
-service catalogue and therefore do not require additional configuration.
-However, any specially configured applications or scripts that use the
-v2 API that you have written yourself should be updated to use the v2.1 API
-instead.
-
-Additionally, The v2.1 API is required for some of the new compute features and
-will be a prerequisite for additional features in future. It also retains full
-backwards-compatibility with the old v2 API, so older software that only
-supports API v2 can be configured to use the v2.1 API without loss of
-functionality.
-
-The v2 API endpoint will continue to function as-is until the next compute
-service upgrade after which it will be retired completely.
+Major upgrade to the Compute (Nova) service.
 
 ==================
 Crash dump request
@@ -114,6 +86,28 @@ The attributes ``project-id`` and ``user-id`` are now included in the return
 data of ``os-server-groups`` API requests. In order to use this new feature,
 relevant request headers must specify at least microversion 2.13.
 
+==========================
+Compute API notice
+==========================
+
+Some of the new features described above are only accessible from the v2.1
+compute API. This is accessible from the same URL and port as the v2 API but
+requires that the path is changed from ``/v2/`` to ``/v2.1/``. So for example the
+compute API v2.1 for the Porirua region is
+``https://api.nz-por-1.catalystcloud.io:8774/v2.1/``.
+
+A list of API URLs can be found
+:ref:`in the API section<apis>` of this documentation and on the `API page of the
+dashboard <https://dashboard.cloud.catalyst.net.nz/project/api_access/>`_.
+
+For backwards compatibility reasons the service catalogue still publishes
+the v2 API, so in order to use the v2.1 API you will currently need to manually
+ove-ride this URL in the configuration of your cloud orchestration software.
+
+Please note that the compute v2 API endpoint is being deprecated and will be
+retired after the next major compute upgrade.
+
+
 ===================
 Deprecation Notices
 ===================
@@ -122,9 +116,7 @@ Deprecation Notices
 Compute API v2
 --------------
 
-The compute v2 API endpoint has been replaced with API v2.1. The v2 endpoint
-will continue to function as-is until the next compute upgrade when it will be
-retired completely.
+The compute v2 API endpoint is being deprecated and will be retired after the next major compute upgrade.
 
 ---------------
 EC2 Compute API
