@@ -35,5 +35,6 @@ Table of Contents:
   object-storage/advanced
   object-storage/storage-access-control
   object-storage/replication-policy
+  object-storage/software-configuration
   object-storage/faq
   Best practices <object-storage/object-storage-bp>

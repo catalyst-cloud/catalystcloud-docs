@@ -1,0 +1,126 @@
+#################
+15 August 2022
+#################
+
+Major upgrade to the Compute (Nova) service.
+
+==================
+Crash dump request
+==================
+
+The instance action ``trigger_crash_dump`` has been added to the REST API and
+will be available via the command line. This allows users to force
+instances to perform a crash dump for debugging purposes by requesting a
+non-maskable interrupt (NMI). Operating systems configured to respond to the
+NMI will perform a core dump and reboot.
+
+===============================
+Custom descriptions for servers
+===============================
+
+A custom description attribute can be added when creating, rebuilding or
+updating a server instance. In order to use this new feature, relevant request
+headers must specify at least microversion 2.19.
+
+==============================
+Delete server events
+==============================
+
+Events can now be retrieved for instances that have been deleted, which can be
+useful when performing an audit. It's important to note that this only applies
+to instances deleted since this release.
+
+This means that GET requests for server events, sent to the correct endpoint
+for the v2.1 API will still return an output even for instances that have been
+deleted as long as you are able to specify the UUID of said instance.
+
+===========================
+EC2 Compute API Port Change
+===========================
+
+The EC2 compute API has now been configured to listen on port 8788 instead of
+port 8773. The updated API URLs can be found on the API page of the dashboard
+and :ref:`in this section<apis>` of the documentation.
+
+Any Client software making use of the EC2 API for compute operations will need
+to be configured to use the new URL and port.
+
+Please note note that this change does not affect EC2 credentials or object
+storage; these continue to operate as before.
+
+===========================
+New host affinity policies
+===========================
+
+Two new affinity policies are available this release; soft-affinity and
+soft-anti-affinity. These 'soft' policies are respectively similar to the
+existing affinity and anti-affinity policies, but differ from the existing
+policies in that they apply the (anti-)affinity rule as a preference rather
+than a strict rule. This difference is outlined in the table below:
+
++---------------+--------------------------------------------------------+
+| Policy        | Description                                            |
++===============+========================================================+
+| affinity      | Run all servers on the same hypervisor host.           |
+|               | If this is not possible, do not start the servers that |
+|               | are unable to meet this policy.                        |
++---------------+--------------------------------------------------------+
+| anti-affinity | Run all servers on separate hypervisor hosts. If this  |
+|               | is not possible, do not start the servers that are     |
+|               | unable to meet this policy.                            |
++---------------+--------------------------------------------------------+
+| soft-affinity | Attempt to run all servers on the same hypervisor      |
+|               | host. If this is not possible, start the remaining     |
+|               | servers on as few other hypervisor hosts as possible.  |
++---------------+--------------------------------------------------------+
+
+
+In order to use this new feature, relevant request headers must specify at
+least microversion 2.15.
+
+======================================
+New Attributes in Server Group Request
+======================================
+
+The attributes ``project-id`` and ``user-id`` are now included in the return
+data of ``os-server-groups`` API requests. In order to use this new feature,
+relevant request headers must specify at least microversion 2.13.
+
+==========================
+Compute API notice
+==========================
+
+Some of the new features described above are only accessible from the v2.1
+compute API. This is accessible from the same URL and port as the v2 API but
+requires that the path is changed from ``/v2/`` to ``/v2.1/``. So for example the
+compute API v2.1 for the Porirua region is
+``https://api.nz-por-1.catalystcloud.io:8774/v2.1/``.
+
+A list of API URLs can be found
+:ref:`in the API section<apis>` of this documentation and on the `API page of the
+dashboard <https://dashboard.cloud.catalyst.net.nz/project/api_access/>`_.
+
+For backwards compatibility reasons the service catalogue still publishes
+the v2 API, so in order to use the v2.1 API you will currently need to manually
+ove-ride this URL in the configuration of your cloud orchestration software.
+
+Please note that the compute v2 API endpoint is being deprecated and will be
+retired after the next major compute upgrade.
+
+
+===================
+Deprecation Notices
+===================
+
+--------------
+Compute API v2
+--------------
+
+The compute v2 API endpoint is being deprecated and will be retired after the next major compute upgrade.
+
+---------------
+EC2 Compute API
+---------------
+
+The EC2 compute API on port 8773 is no longer available. This service now
+listens on port 8788.
