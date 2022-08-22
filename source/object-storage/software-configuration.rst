@@ -14,16 +14,21 @@ Duplicati has a backup tool for MS Windows, MacOS and Linux. It is available
 from: https://www.duplicati.com/ .  It is compatible with Catalyst Cloud
 object storage. To configure backing up to Catalyst Cloud:
 
-#. Using our dashboard, API or commandline, create an Object Storage container using your preferred Storage Policy.
-#. It is recommended that you use a dedicated user on Catalyst Cloud which only has the Object Storage role for performing backups.
+#. Using our dashboard, API or commandline, create an Object Storage container
+   using your preferred Storage Policy.
+#. It is recommended that you use a dedicated user on Catalyst Cloud which only
+   has the Object Storage role for performing backups.
 #. Use Menu -> Add Backup.
 #. Ensure 'Configure a new backup' is selected, go Next.
-#. Configure General backup settings. It is a good idea to use encryption for you backups, but it isn't required.
+#. Configure General backup settings. It is a good idea to use encryption for
+   you backups, but it isn't required.
 #. Configure Backup Destination:
 
    #. Storage Type: Select: Backup Object Storage / Swift
    #. Bucket name: Enter the name of the container you created in the Step 1.
-   #. OpenStack AuthURI: Select a identity API URL from :ref:`apis`.  If you are using single region replication, please select the identity API URL for the region the container is within.
+   #. OpenStack AuthURI: Select a identity API URL from :ref:`apis`.  If you
+      are using single region replication, please select the identity API URL
+      for the region the container is within.
    #. Keystone API version: Select: v3
    #. Domain Name: Enter: default
    #. Username & Password: The account credentials you'd like to use.
