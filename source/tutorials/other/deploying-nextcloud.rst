@@ -10,10 +10,10 @@ This tutorial assumes that you have the following prepared:
 
 You may also need the following depending on your preference:
 
-* Knowledge of how to create and use volumes (if you are using your own
+* Knowledge of how to create and use volumes (If you are using your own
   volume).
 
-* A volume created for storing Nextcloud data (if you are using terraform).
+* A volume created for storing Nextcloud data (If you are using terraform).
 
 ************
 Introduction
@@ -62,13 +62,9 @@ Launching with Terraform
 Installing Terraform
 ====================
 
-First, before we jump in to creating any resources using terraform, we'll need
-to prepare all of the tools that we're going to use in this tutorial. For that
-we can use the following code snippets:
-
-First, before we jump in to creating any resources using terraform, we'll need
-to prepare all of the tools that we're going to use in this tutorial. For that
-we can use the following code snippets:
+First, before we jump in to creating any resources using terraform, we will
+need to prepare all of the tools that we are going to use in the following
+tutorial. For that we can use these code snippets:
 
 .. code-block:: bash
 
@@ -143,18 +139,6 @@ the server using the ACME protocol.
 Creating your stack using terraform
 ===================================
 
-The `cloud init`_ file configures the software on the instance when it
-starts for the first time. In our case we want to install Nextcloud,
-so the cloud init file installs docker and writes systemd services
-to the instance.
-
-The containers started in the setup script are Nextcloud, `NGINX`_ and the
-`NGINX_proxy_acme_companion`_. The NGINX container is a reverse proxy for
-Nextcloud, and ensures communication with the Nextcloud server is encrypted.
-The acme companion automatically configures the letsencrypt certificates for
-the server using the ACME protocol.
-
-
 Now that we have all of the required software installed and our resources
 defined in our template files, we can use Terraform to construct our resources
 on the cloud.
@@ -169,11 +153,14 @@ on the cloud.
 
 .. Note::
 
-  a) If you choose to use an existing volume, replace ``volume id`` with the id of your previously created volume for the Nextcloud database.
+  a) If you choose to use an existing volume, replace ``volume id`` with the id
+     of your previously created volume for the Nextcloud database.
 
-  b) Only change the ``file_upload_size`` if you require more than the default (1024MB).
+  b) Only change the ``file_upload_size`` if you require more than the default
+     (1024MB).
 
-  c) A floating IP should be generated and printed after this step, it is recommended you take note of this as you may need it later.
+  c) A floating IP should be generated and printed after this step, it is
+     recommended you take note of this as you may need it later.
 
 =======================================================
 Check that Nextcloud has finished installing (Optional)
@@ -185,7 +172,7 @@ Open a terminal and type,
 
   $ ssh ubuntu@<floating-ip-address>
 
-When prompted if you'd like to connect to this ip address, answer yes.
+When prompted if you would like to connect to this ip address, answer yes.
 
 When this is finished you should find yourself accessing the server remotely.
 Next type,
@@ -238,7 +225,7 @@ How to configure each service:
 
 * Dashboard
 
-  - The dashboard can be changed to show updates on services you're interested
+  - The dashboard can be changed to show updates on services you are interested
     in via the **customise** button at the bottom of the screen.
 
 * Files
