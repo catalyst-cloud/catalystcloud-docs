@@ -10,9 +10,10 @@ This tutorial assumes that you have the following prepared:
 
 You may also need the following depending on your preference:
 
-* Knowledge of how to create and use volumes (if you are using your own volume).
+* Knowledge of how to create and use volumes (If you are using your own
+  volume).
 
-* A volume created for storing Nextcloud data (if you are using terraform).
+* A volume created for storing Nextcloud data (If you are using terraform).
 
 ************
 Introduction
@@ -61,9 +62,9 @@ Launching with Terraform
 Installing Terraform
 ====================
 
-First, before we jump in to creating any resources using terraform, we'll need
-to prepare all of the tools that we're going to use in this tutorial. For that
-we can use the following code snippets:
+First, before we jump in to creating any resources using terraform, we will
+need to prepare all of the tools that we are going to use in the following
+tutorial. For that we can use these code snippets:
 
 .. code-block:: bash
 
@@ -116,6 +117,7 @@ used for this template can be found at: `Terraform documentation`_
 The user_data section should also be changed so the the template file contains
 the file path of the cloud-init configuration file you intend to use.
 
+
 ==========================
 Using a cloud init file
 ==========================
@@ -148,13 +150,17 @@ on the cloud.
   $ terraform plan
   $ terraform apply --var domain_name="<your-domain-name>" --var host_name="<your-host-name>" --var ddns_password="<your-ddns-password>" --var file_upload_size="<size in mega-bytes>m" --var keyname="<your-key-name>" --var volume_uuid="<volume id>" --var image_type="<preferred-image-type>" --var flavor_type="<preferred-flavor-type>"
 
+
 .. Note::
 
-  a) If you choose to use an existing volume, replace ``volume id`` with the id of your previously created volume for the Nextcloud database.
+  a) If you choose to use an existing volume, replace ``volume id`` with the id
+     of your previously created volume for the Nextcloud database.
 
-  b) Only change the ``file_upload_size`` if you require more than the default (1024MB).
+  b) Only change the ``file_upload_size`` if you require more than the default
+     (1024MB).
 
-  c) A floating IP should be generated and printed after this step, it is recommended you take note of this as you may need it later.
+  c) A floating IP should be generated and printed after this step, it is
+     recommended you take note of this as you may need it later.
 
 =======================================================
 Check that Nextcloud has finished installing (Optional)
@@ -166,7 +172,7 @@ Open a terminal and type,
 
   $ ssh ubuntu@<floating-ip-address>
 
-When prompted if you'd like to connect to this ip address, answer yes.
+When prompted if you would like to connect to this ip address, answer yes.
 
 When this is finished you should find yourself accessing the server remotely.
 Next type,
@@ -224,13 +230,15 @@ How to configure each service:
 
 * Files
 
-  - Files can be added by pressing the plus in the upper left hand corner, these files can be up to 100MB in size.
+  - Files can be added by pressing the plus in the upper left hand corner,
+    these files can be up to 100MB in size.
 
 * Mail
 
   - Manual set up is recommended.
 
-  - See `Thunderbird documentation`_ for setting up Nextcloud with Thunderbird mail &calendar.
+  - See `Thunderbird documentation`_ for setting up Nextcloud with Thunderbird
+    mail &calendar.
 
 * Calendar
 
