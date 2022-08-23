@@ -172,7 +172,7 @@ service described above, with the following differences:
 * As Cloud Sync will sync files only, you cannot use it to backup a
   LUN, system settings, or application data from packages installed on
   your NAS.
-* Cloud Sync allows two-way synchonisation, that is writes and updates
+* Cloud Sync allows two-way synchronisation, that is writes and updates
   directly to the object storage service can be downloaded to your NAS
   automatically
 * When using Cloud Sync as a backup, restoring files is more
