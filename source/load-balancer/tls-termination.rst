@@ -223,7 +223,7 @@ balancer that interacts with our secret and actually performs the TLS functions.
 .. note::
 
   Each listener in a load balancer that you want to configure for TLS termination
-  will need a separate Barbican certificate uploaded for it to work. This behavior
+  will need a separate Barbican secret created for it to work. This behavior
   will be changed so that you only require one certificate in a future release for
   this service.
 
