@@ -1,0 +1,40 @@
+#################
+29 August 2022
+#################
+
+Minor upgrade to the Dashboard and to the Kubernetes service.
+
+*******************
+Dashboard (Horizon)
+*******************
+
+
+Fixed usage graph
+=================
+
+An error with the usage graph on the dashboard has been resolved. You should
+now be able to see your current use and costs using the graph without an issue.
+
+- horizon!24 (merged) - Feature to filter images based on horizon_visibility
+  image property to enable selectively hiding images from the dashboard.
+- horizon!29 (merged) - Buxfig to disable microversion checks for
+  auto_allocated_network and multiattach, resolving a description handling bug
+  with Nova Mitaka.
+
+************************
+Container Infra (Magnum)
+************************
+
+- Update Magnum to support k8s 1.22 and above. Ask Dale for info.
+- magnum-ui!15 (merged) - Bugfix for listing cluster upgrade templates.
+
+
+***********************
+Miscellaneous
+***********************
+
+Change to sign up credit
+========================
+
+We have reduced the length that the initial sign up credit is valid for on
+our cloud. It has been reduced from 1 year (365 days) to 3 months (90 days).
