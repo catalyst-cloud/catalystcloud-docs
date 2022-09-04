@@ -9,6 +9,14 @@ implement on the Catalyst Cloud is first made available via an API, then the
 command line interface (CLI) and finally the dashboard. As a result, it often
 takes three to six months for a new feature or service to reach the dashboard.
 
+.. note::
+
+  The API is rate limited to prevent one customer from denying access to
+  other customers. When the rate limit is hit, the endpoint will return
+  a standard HTTP error response (code 429), and a header indicating how
+  much to back-off before retrying. Not all tools correctly implement
+  backing off in response to this message.
+
 *************
 API reference
 *************
