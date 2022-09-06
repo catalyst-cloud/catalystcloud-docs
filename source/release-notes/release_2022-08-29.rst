@@ -8,26 +8,43 @@ Minor upgrade to the Dashboard and to the Kubernetes service.
 Dashboard (Horizon)
 *******************
 
+Bug fixes
+=========
 
-Fixed usage graph
-=================
+With this upgrade we have been able to resolve a number of bugs that our
+dashboard had been experiencing. These bugs include:
 
-An error with the usage graph on the dashboard has been resolved. You should
-now be able to see your current use and costs using the graph without an issue.
+- An error with the usage graph on the dashboard. You should
+  now be able to see your current use and costs using the graph without an
+  issue.
+- A bug that effected the error message when making changes to instances using
+  the dashboard. Error messages relating to microversion checks on
+  auto_allocated_networks should provide more precise error messages.
 
-- horizon!24 (merged) - Feature to filter images based on horizon_visibility
-  image property to enable selectively hiding images from the dashboard.
-- horizon!29 (merged) - Buxfig to disable microversion checks for
-  auto_allocated_network and multiattach, resolving a description handling bug
-  with Nova Mitaka.
+Ease of use changes
+===================
+
+Also included in this patch was a change to how we display images that are
+available from the dashboard. When selecting an image for an instance you
+should see a more optimally filtered list of images for you to chose from,
+prioritizing images that are still maintained and up to date.
 
 ************************
 Container Infra (Magnum)
 ************************
 
-- Update Magnum to support k8s 1.22 and above. Ask Dale for info.
-- magnum-ui!15 (merged) - Bugfix for listing cluster upgrade templates.
+New template types available
+============================
 
+Changes to the Kubernetes service have been made that include new template
+versions for the service. The new fully supported versions are 1.19, 1.20, and
+1.21.
+
+Additionally, creating clusters of version 1.22 is now available, however
+migrating existing clusters to this new version type will require some
+manual help from our engineering team. If you wish to upgrade to the newest
+version, please create a support ticket and let us know, we will arrange a time
+that works to preform this upgrade work.
 
 ***********************
 Miscellaneous
