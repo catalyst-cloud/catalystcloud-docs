@@ -1,0 +1,57 @@
+#################
+29 August 2022
+#################
+
+Minor upgrade to the Dashboard and to the Kubernetes service.
+
+*******************
+Dashboard (Horizon)
+*******************
+
+Bug fixes
+=========
+
+With this upgrade we have been able to resolve a number of bugs that our
+dashboard had been experiencing. These bugs include:
+
+- An error with the usage graph on the dashboard. You should
+  now be able to see your current usage and costs using the graph without an
+  issue.
+- An error message that displayed when making changes to instances using
+  the dashboard. Error messages relating to microversion checks on
+  auto_allocated_networks should now provide more precise information
+
+Ease of use changes
+===================
+
+Also included in this patch was a change to how we display images that are
+available from the dashboard. When selecting an image for an instance you
+should now see a more optimally filtered list of images to choose from,
+prioritizing images that are still maintained and up to date.
+
+************************
+Container Infra (Magnum)
+************************
+
+New template types available
+============================
+
+Changes to the Kubernetes service have been made that include new template
+versions for the service. The new fully supported versions are 1.19, 1.20, and
+1.21.
+
+Additionally, creating clusters of version 1.22 is now available, however
+migrating existing clusters to this new version type will require some
+manual help from our engineering team. If you wish to upgrade to the newest
+version, please create a support ticket and let us know, we will arrange a time
+that works to preform this upgrade work.
+
+***********************
+Miscellaneous
+***********************
+
+Change to sign up credit
+========================
+
+We have reduced the length that the initial sign up credit is valid for on
+our cloud. It has been reduced from 1 year (365 days) to 3 months (90 days).
