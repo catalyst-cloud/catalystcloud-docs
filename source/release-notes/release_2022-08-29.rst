@@ -15,18 +15,18 @@ With this upgrade we have been able to resolve a number of bugs that our
 dashboard had been experiencing. These bugs include:
 
 - An error with the usage graph on the dashboard. You should
-  now be able to see your current use and costs using the graph without an
+  now be able to see your current usage and costs using the graph without an
   issue.
-- A bug that effected the error message when making changes to instances using
+- An error message that displayed when making changes to instances using
   the dashboard. Error messages relating to microversion checks on
-  auto_allocated_networks should provide more precise error messages.
+  auto_allocated_networks should now provide more precise information
 
 Ease of use changes
 ===================
 
 Also included in this patch was a change to how we display images that are
 available from the dashboard. When selecting an image for an instance you
-should see a more optimally filtered list of images for you to chose from,
+should now see a more optimally filtered list of images to choose from,
 prioritizing images that are still maintained and up to date.
 
 ************************
