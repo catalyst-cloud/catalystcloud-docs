@@ -36,15 +36,13 @@ Container Infra (Magnum)
 New template types available
 ============================
 
-Changes to the Kubernetes service have been made that include new template
-versions for the service. The new fully supported versions are 1.19, 1.20, and
-1.21.
+We have numerous updates to our Kubernetes service including new revisions of templates
+for existing K8s releases. K8s releases 1.19, 1.20, and 1.21 are affected. Fedora CoreOS is
+upgraded in the template changes to address various CVEs.
 
-Additionally, creating clusters of version 1.22 is now available, however
-migrating existing clusters to this new version type will require some
-manual help from our engineering team. If you wish to upgrade to the newest
-version, please create a support ticket and let us know, we will arrange a time
-that works to preform this upgrade work.
+Additionally, K8s 1.22 clusters will soon be available! However, migrating existing clusters to
+this new version type will require some manual help from our engineering team. Once this
+template is available, if you wish to upgrade, please create a support ticket to let us know.
 
 ***********************
 Miscellaneous
