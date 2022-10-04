@@ -25,7 +25,8 @@ following prepared:
 - Your :ref:`openstack CLI<command-line-interface>` installed and set up.
 - You must have :ref:`Sourced an openRC file<configuring-the-cli>` on your
   current command line environment
-- For this tutorial, you must also have the following installed in your environment:
+- For this tutorial, you must also have the following installed in your
+  environment:
 
   - the `python barbican-client tools
     <https://pypi.org/project/python-barbicanclient/>`_.
@@ -36,11 +37,12 @@ Gathering the necessary inputs
 ===============================
 
 As this tutorial covers the steps on how to set up a TLS terminated
-load balancer, you will need to have the following resources already available so
-that we can use them as inputs later on in this guide. You will need:
+load balancer, you will need to have the following resources already available
+so that we can use them as inputs later on in this guide. You will need:
 
 - A webserver on the cloud that is currently running your desired application.
-- The valid certificates and keys that relate to your webserver application/website.
+- The valid certificates and keys that relate to your webserver application/
+  website.
 - The UUID of the subnet that you want your load balancer to be hosted on.
 
 You can acquire the UUID of your subnet by running the following command and
@@ -213,7 +215,7 @@ that interacts with our secret and actually performs the TLS functions.
   | tags                        |                                                                                                                                                                                                                                                                                    |
   +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Next we need to create a pool for our loadbalancer and add our webserver as a
+Next we need to create a pool for our load balancer and add our webserver as a
 member. The important thing to consider about your pool is which algorithm you
 want to use for your traffic to be sorted. In this case we are going to stick
 to the round robin algorithm.

@@ -17,10 +17,20 @@ increase CPU contention or reduce the availability of your application
 (a single server going down affects all compute instances in the group.)
 
 Server *anti-affinity* is useful when you want to increase the availability of
-an application within a region and create redundancy for your compute instances.
-Compute instances in an anti-affinity group are placed on different physical
-servers, ensuring that the failure of a server will not affect all your compute
-instances simultaneously.
+an application within a region and create redundancy for your compute
+instances. Compute instances in an anti-affinity group are placed on different
+physical servers, ensuring that the failure of a server will not affect all
+your compute instances simultaneously.
+
+*Soft-affinity* is respectively similar to normal affinity. There is a key
+different however in that this policy only *attempts* to run all servers on the
+same hypervisor host. If this is not possible, this policy ensures that your
+remaining servers start on as few other hypervisor hosts as possible.
+
+*Soft anti-affinity* follows almost the same behavior as the regular
+anti-affinity policy, only this policy ensures that your servers start on
+as many differing hypervisor hosts as possible, even if some servers **must**
+end up sharing the same hypervisor.
 
 .. Warning::
 

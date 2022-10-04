@@ -86,6 +86,16 @@ To make this integration easier, the OpenStack community has developed a range
 of software development kits (SDKs) for numerous languages. You can find a
 list `here <https://wiki.openstack.org/wiki/SDKs>`_.
 
+Catalyst Cloud will accept API requests (including those from the Command Line
+Interface or Automation tools mentioned above) from anywhere on the Internet.
+
+We limit the rate at which you can make API requests, to ensure that the service
+is accessable to everyone equally. If you make too many requests in a short
+amount of time, we will send back an HTTP error message indicating you have
+exceeded the limits. You may need to configure your software using the API
+to retry in response to this error message.
+
+|
 
 Now that you understand how you can access the Catalyst Cloud, there are a few
 small administrative concerns to be aware of before we continue.
