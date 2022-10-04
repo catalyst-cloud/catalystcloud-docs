@@ -7,6 +7,10 @@ Types of images
 Catalyst provides some pre-configured operating system images to make it easier
 for you to get started on the cloud.
 
+Catalyst provides only recent and supported images through the web dashboard,
+out of maintenance images may still be available via API listings and can be
+used for new instances when launched from the API.
+
 The table below lists the images provided by Catalyst and our partners, as well
 as the default user name you should use to log in to each one of them
 (unless you have overwritten the default user name with cloud-init).
@@ -14,15 +18,13 @@ as the default user name you should use to log in to each one of them
 +---------------------+-------------------+-----------+-------------------+
 | Operating system    | Image name prefix | User-name | Licence/IP policy |
 +=====================+===================+===========+===================+
-| Atomic Linux        | atomic-*          | centos    |                   |
-+---------------------+-------------------+-----------+-------------------+
 | CentOS Linux        | centos-*          | centos    | |centos_link|     |
 +---------------------+-------------------+-----------+-------------------+
 | CoreOS Linux        | coreos-*          | core      | |apache_link|     |
 +---------------------+-------------------+-----------+-------------------+
 | Debian Linux        | debian-*          | debian    | |debian_link|     |
 +---------------------+-------------------+-----------+-------------------+
-| Fedora Atomic Linux | fedora-atomic-*   | fedora    | |fedora_link|     |
+| Fedora CoreOS Linux | fedora-coreos-*   | core      | |fedora_link|     |
 +---------------------+-------------------+-----------+-------------------+
 | Ubuntu Linux        | ubuntu-*          | ubuntu    | |ubuntu_link|     |
 +---------------------+-------------------+-----------+-------------------+
