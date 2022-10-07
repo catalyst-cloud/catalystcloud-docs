@@ -6,19 +6,9 @@ FAQ
 I cannot connect to the dashboard or APIs
 *****************************************
 
-The dashboard is open to the public Internet, however various mechanisms are in
-place to protect the service. If you are having difficulty accessing the
-dashboard, please contact us.
-
-Our APIs are currently exposed to customers only (not open to the
-public Internet). We ask for your IP address during sign up, so we can provide
-you with access to the APIs. If your IP address has changed or you would like
-to add more IPs, please contact us to change the information provided.
-
-Please note you can access the Catalyst Cloud from a dynamic IP by proxying
-your connectivity through one of your cloud instances. When it comes to your
-compute instances, you are in full control of your own firewall rules and can
-expose them to the Internet.
+The dashboard and APIs are open to the public Internet, however various mechanisms
+are in place to protect the service. If you are having difficulty accessing the
+dashboard or APIs, please contact us.
 
 *************************
 Failed to delete resource
