@@ -2,6 +2,14 @@
 TLS Termination
 ###############
 
+.. warning::
+
+  The following tutorial makes use of the Secret storage service on the cloud.
+  This service is currently at a technical preview stage. To make use of this
+  service, you will need to raise a :ref:`support ticket<admin-support>` to
+  request access for your project.
+
+
 In this section, we cover how to use openstack tools to create a loadbalancer
 which will handle TLS termination for your webservers.
 
@@ -18,22 +26,25 @@ following prepared:
 - Your :ref:`openstack CLI<command-line-interface>` installed and set up.
 - You must have :ref:`Sourced an openRC file<configuring-the-cli>` on your
   current command line environment
-- For this tutorial, you must also have the following installed in your environment:
+- For this tutorial, you must also have the following installed in your
+  environment:
 
   - the `python barbican-client tools
     <https://pypi.org/project/python-barbicanclient/>`_.
 
   - the `openssl client <https://help.ubuntu.com/community/OpenSSL>`_.
 
+==============================
 Gathering the necessary inputs
-===============================
+==============================
 
 As this tutorial covers the steps on how to set up a TLS terminated
-loadbalancer, you will need to have the following resources already available so
-that we can use them as inputs later on in this guide. You will need:
+loadbalancer, you will need to have the following resources already available
+so that we can use them as inputs later on in this guide. You will need:
 
 - A webserver on the cloud that is currently running your desired application.
-- The valid certificates and keys that relate to your webserver application/website.
+- The valid certificates and keys that relate to your webserver application/
+  website.
 - The UUID of the subnet that you want your loadbalancer to be hosted on.
 
 You can acquire the UUID of your subnet by running the following command and
@@ -60,7 +71,7 @@ Once you have set up your command line correctly and ensured that you have all
 of the prerequisite resources ready, we can begin creating our new load
 balancer.
 
-Creating a secret using the Barbican service
+Creating a secret using the Secret Storage service
 ===================================================
 
 First, we need to create a secret containing our TLS certificates and key,
@@ -223,7 +234,7 @@ to the round robin algorithm.
   | created_at           | 2022-01-11T01:06:25                  |
   | description          |                                      |
   | healthmonitor_id     |                                      |
-  | id                   | eb9df502-7abb-42c9-bf35-e893a683071b |
+  | id                   | eb9df502-7abb-42c9-bf35-XXXXXXXXXXXX |
   | lb_algorithm         | ROUND_ROBIN                          |
   | listeners            | 9aXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX |
   | loadbalancers        | aXXXXXXX-XXXX-XXXX-XXXX-XXXXX02562da |
@@ -258,7 +269,7 @@ Now we add our webserver as a member to the pool:
   | address             | 192.168.0.40                         |
   | admin_state_up      | True                                 |
   | created_at          | 2022-01-11T01:07:45                  |
-  | id                  | b0f00795-8162-49e2-828b-2d585a04543e |
+  | id                  | b0f00795-8162-49e2-828b-XXXXXXXXXXXX |
   | name                |                                      |
   | operating_status    | NO_MONITOR                           |
   | project_id          | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX     |
