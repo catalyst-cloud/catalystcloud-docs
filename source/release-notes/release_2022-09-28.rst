@@ -2,19 +2,20 @@
 28 September 2022
 #################
 
-The changes for this release include an upgrade of both the Keystone
-(Authentication) and Swift (object storage) services, as well as a minor change
-to rate limiting and Neutron being added to the Audit log service.
+The changes for this release include an upgrade to both the Keystone
+(Authentication) and Swift (object storage) services. Also included is a minor
+change to rate limiting as well as Neutron being added to the Audit log
+service.
 
 *********************************
 Authentication upgrade (Keystone)
 *********************************
 
 With the upgrade to the keystone service completed we are now focusing on
-implementing new features that are possible with the new version. The first of
-which is that the records for user authentication are now encrypted at rest.
-Meaning should a malicious actor gain access to the records they would be
-unreadable.
+implementing new features that have become available with the new version of
+Keystone. The first of which is that the records for user authentication are
+now encrypted at rest. Meaning should a malicious actor gain access to the
+authentication records they would be unreadable.
 
 Other new features will be brought through as we are able to implement them and
 these will be detailed in future release notes.
@@ -26,14 +27,15 @@ Object storage upgrade (Swift)
 With this upgrade to the swift service, several bugs that were present in
 previous versions have been fixed. Namely, an edge case S3 signature
 computation mis-match was fixed and should no longer cause problems with s3
-integration. As well as a fix to how segmented data is governed by a
-containers policy.
+integration. Another fix was made to how segmented data is governed by a
+containers policy; it should now be consistent across all segmented pieces of
+data.
 
 ***************************
 Neutron added to audit logs
 ***************************
 
-This release sees the addition of the Neutron (Network) data included into the
+This release sees the addition of Neutron (Network) data beinig included in the
 audit log service. This means that the logs for your networking resources can
 also be managed using the audit log service that we provide.
 
@@ -41,6 +43,6 @@ also be managed using the audit log service that we provide.
 Change to rate limits
 *********************
 
-Additionally, we have made a change to the rate limits that we have on the
+Finally, we have made a change to the rate limits that we have on the
 cloud. This release we have doubled the maximum API rate limit.
 
