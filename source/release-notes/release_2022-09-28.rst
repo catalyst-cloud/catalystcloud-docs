@@ -13,12 +13,8 @@ Authentication upgrade (Keystone)
 
 With the upgrade to the keystone service completed we are now focusing on
 implementing new features that have become available with the new version of
-Keystone. The first of which is that the records for user authentication are
-now encrypted at rest. Meaning should a malicious actor gain access to the
-authentication records they would be unreadable.
-
-Other new features will be brought through as we are able to implement them and
-these will be detailed in future release notes.
+Keystone. New features will be brought through as we are able to implement them
+and these will be detailed in future release notes.
 
 ******************************
 Object storage upgrade (Swift)
