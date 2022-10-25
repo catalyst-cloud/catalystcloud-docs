@@ -3,7 +3,7 @@
 #################
 
 The changes for this release include an upgrade to both the Keystone
-(Authentication) and Swift (object storage) services. Also included is a minor
+(Authentication) and Swift (Object Storage) services. Also included is a minor
 change to rate limiting as well as Neutron being added to the Audit log
 service.
 
@@ -21,7 +21,7 @@ future release notes.
 Object storage upgrade (Swift)
 ******************************
 
-With this upgrade to the swift service, several bugs that were present in
+With this upgrade to the Swift service, several bugs that were present in
 previous versions have been fixed. Namely, an edge case S3 signature
 computation mis-match was fixed and should no longer cause problems with s3
 integration. Another fix was made to how segmented data is governed by a
@@ -32,9 +32,9 @@ data.
 Neutron added to audit logs
 ***************************
 
-This release sees the addition of Neutron (Network) data beinig included in the
-audit log service. This means that the logs for your networking resources can
-also be managed using the audit log service that we provide.
+This release sees the addition of Neutron (Network) configuration data being
+included in the audit log service. This means that logs for your network
+configuration can also be managed using the audit log service that we provide.
 
 *********************
 Change to rate limits
@@ -42,4 +42,3 @@ Change to rate limits
 
 Finally, we have made a change to the rate limits that we have on the
 cloud. This release we have doubled the maximum API rate limit.
-
