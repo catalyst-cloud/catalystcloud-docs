@@ -11,10 +11,11 @@ service.
 Authentication upgrade (Keystone)
 *********************************
 
-With the upgrade to the keystone service completed we are now focusing on
-implementing new features that have become available with the new version of
-Keystone. New features will be brought through as we are able to implement them
-and these will be detailed in future release notes.
+We have recently completed an upgrade to the underlying keystone service that
+is responsible for the management of authentication details on Catalyst Cloud.
+With this upgrade completed we can begin to add new features for this service
+in future releases. These features will be mentioned in more detail in
+future release notes.
 
 ******************************
 Object storage upgrade (Swift)
