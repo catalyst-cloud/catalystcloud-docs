@@ -33,8 +33,8 @@ Neutron added to audit logs
 ***************************
 
 This release sees the addition of Neutron (Network) configuration data being
-included in the audit log service. This means that logs for your network
-configuration can also be managed using the audit log service that we provide.
+included in the audit log service. This means you can now include network
+configuration in your security auditing solutions.
 
 *********************
 Change to rate limits
