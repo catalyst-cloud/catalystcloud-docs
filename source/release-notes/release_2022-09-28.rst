@@ -3,30 +3,28 @@
 #################
 
 The changes for this release include an upgrade to both the Keystone
-(Authentication) and Swift (Object Storage) services. Also included is a minor
-change to rate limiting as well as Neutron being added to the Audit log
-service.
+(Authentication) and Swift (Object Storage) services. Also included in this
+release, is a minor change to rate limiting as well as Neutron being added to
+the Audit log service.
 
 *********************************
 Authentication upgrade (Keystone)
 *********************************
 
-We have recently completed an upgrade to the underlying keystone service that
+We have recently completed an upgrade to the underlying Keystone service that
 is responsible for the management of authentication details on Catalyst Cloud.
 With this upgrade completed we can begin to add new features for this service
 in future releases. These features will be mentioned in more detail in
 future release notes.
 
 ******************************
-Object storage upgrade (Swift)
+Object Storage upgrade (Swift)
 ******************************
 
 With this upgrade to the Swift service, several bugs that were present in
-previous versions have been fixed. Namely, an edge case S3 signature
-computation mis-match was fixed and should no longer cause problems with s3
-integration. Another fix was made to how segmented data is governed by a
-containers policy; it should now be consistent across all segmented pieces of
-data.
+previous versions have been fixed. Specifically: A fix was made to the way
+object storage applied replication policies to stored data. No data was at
+risk while this fault was occurring.
 
 ***************************
 Neutron added to audit logs
