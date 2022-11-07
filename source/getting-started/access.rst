@@ -92,7 +92,7 @@ Interface or Automation tools mentioned above) from anywhere on the Internet.
 We limit the rate at which you can make API requests, to ensure that the service
 is accessable to everyone equally. If you make too many requests in a short
 amount of time, we will send back an HTTP error message (code 429)
-indicating you have exceeded the limits. You may need to configure your 
+indicating you have exceeded the limits. You may need to configure your
 software using the API to retry in response to this error message.
 
 |
