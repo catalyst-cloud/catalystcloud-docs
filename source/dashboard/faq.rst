@@ -6,9 +6,11 @@ FAQ
 I cannot connect to the dashboard or APIs
 *****************************************
 
-The dashboard is open to the public Internet, however various mechanisms are in
-place to protect the service. If you are having difficulty accessing the
-dashboard or APIs, please contact us by creating a support ticket.
+The dashboard and APIs are open to the public Internet, however various
+mechanisms are in place to protect the service. If you are having difficulty
+accessing the dashboard or APIs, please contact us by creating a support
+ticket.
+
 
 *************************
 Failed to delete resource
