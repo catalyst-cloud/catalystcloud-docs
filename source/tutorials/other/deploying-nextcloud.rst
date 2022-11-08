@@ -89,8 +89,8 @@ template files from the Catalyst Cloud github found at
   $ sudo su
   $ mkdir /nextcloud-terraform
   $ cd /nextcloud-terraform
-  $ wget https://raw.githubusercontent.com/yvonnewat/catalystcloud-orchestration/new/add-systemd-services/nextcloud/terraform/nextcloud.tf
-  $ wget https://raw.githubusercontent.com/yvonnewat/catalystcloud-orchestration/new/add-systemd-services/nextcloud/terraform/cloud-init-nextcloud.tpl
+  $ wget https://raw.githubusercontent.com/catalyst-cloud/catalystcloud-orchestration/master/nextcloud/terraform/nextcloud.tf
+  $ wget https://raw.githubusercontent.com/catalyst-cloud/catalystcloud-orchestration/master/nextcloud/terraform/cloud-init-nextcloud.tpl
 
 =======================================
 Using a terraform configuration file

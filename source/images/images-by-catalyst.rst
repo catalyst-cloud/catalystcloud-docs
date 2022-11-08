@@ -26,6 +26,10 @@ as the default user name you should use to log in to each one of them
 +---------------------+-------------------+-----------+-------------------+
 | Fedora CoreOS Linux | fedora-coreos-*   | core      | |fedora_link|     |
 +---------------------+-------------------+-----------+-------------------+
+| OpenSuse Leap Linux | opensuse-leap-*   | opensuse  | |opensuse_link|   |
++---------------------+-------------------+-----------+-------------------+
+| Suse SLES Linux     | suse-sles-*       | sles      | BYOS model        |
++---------------------+-------------------+-----------+-------------------+
 | Ubuntu Linux        | ubuntu-*          | ubuntu    | |ubuntu_link|     |
 +---------------------+-------------------+-----------+-------------------+
 
@@ -45,9 +49,17 @@ as the default user name you should use to log in to each one of them
 
     <a href="https://fedoraproject.org/wiki/Legal:Licenses/LicenseAgreement" target="_blank">fedoraproject.org</a>
 
+.. |opensuse_link| raw:: html
+
+    <a href="https://en.opensuse.org/openSUSE:License" target="_blank">opensuse.org</a>
+
 .. |ubuntu_link| raw:: html
 
     <a href="https://ubuntu.com/legal/intellectual-property-policy" target="_blank">ubuntu.com</a>
+
+.. note::
+
+  BOYS: Bring Your Own Subscription
 
 .. note::
 
