@@ -25,8 +25,9 @@ following prepared:
 
   - the `openssl client <https://help.ubuntu.com/community/OpenSSL>`_.
 
+==============================
 Gathering the necessary inputs
-===============================
+==============================
 
 As this tutorial covers the steps on how to set up a TLS terminated
 loadbalancer, you will need to have the following resources already available so
@@ -92,7 +93,7 @@ For this example we are going to name our secret *tls-secret-01*:
   | Field         | Value                                                                                      |
   +---------------+--------------------------------------------------------------------------------------------+
   | Secret href   | https://api.nz-por-1.catalystcloud.io:9311/v1/secrets/beXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX |
-  | Name          | tls-secret-01                                                                                 |
+  | Name          | tls-secret-01                                                                              |
   | Created       | None                                                                                       |
   | Status        | None                                                                                       |
   | Content types | {'default': 'application/octet-stream'}                                                    |
@@ -158,9 +159,16 @@ we can continue.
   | aXXXXXXX-XXXX-XXXX-XXXX-XXXXX02562da | tls-loadbalancer     | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX | 192.168.0.45 | ACTIVE              | ONLINE           | amphora  |
   +--------------------------------------+----------------------+----------------------------------+--------------+---------------------+------------------+----------+
 
+<<<<<<< HEAD
 Now that our loadbalancer is ready, we can move on to the next step. We need
 to create a listener for our loadbalancer. This is the part of the loadbalancer
 that interacts with our secret and actually performs the TLS functions.
+=======
+Now that our load balancer is ready, we can move on to the next step. We need
+to create a listener for our load balancer. This is the part of the
+load balancer that interacts with our secret and actually performs the TLS
+functions.
+>>>>>>> 28dc318a8d651af08e2b672946c5abf5758052d8
 
 .. code-block:: bash
 
@@ -184,7 +192,7 @@ that interacts with our secret and actually performs the TLS functions.
   | insert_headers              | None                                                                                                                                                                                                                                                                               |
   | l7policies                  |                                                                                                                                                                                                                                                                                    |
   | loadbalancers               | aXXXXXXX-XXXX-XXXX-XXXX-XXXXX02562da                                                                                                                                                                                                                                               |
-  | name                        | tls-listener                                                                                                                                                                                                                                                                          |
+  | name                        | tls-listener                                                                                                                                                                                                                                                                       |
   | operating_status            | OFFLINE                                                                                                                                                                                                                                                                            |
   | project_id                  | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX                                                                                                                                                                                                                                                   |
   | protocol                    | TERMINATED_HTTPS                                                                                                                                                                                                                                                                   |
