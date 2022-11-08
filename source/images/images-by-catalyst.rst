@@ -59,7 +59,7 @@ as the default user name you should use to log in to each one of them
 
 .. note::
 
-  BOYS: Bring Your Own Subscription
+  BYOS: Bring Your Own Subscription
 
 .. note::
 
