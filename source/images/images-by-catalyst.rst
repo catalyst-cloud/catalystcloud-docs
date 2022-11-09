@@ -15,23 +15,23 @@ The table below lists the images provided by Catalyst and our partners, as well
 as the default user name you should use to log in to each one of them
 (unless you have overwritten the default user name with cloud-init).
 
-+---------------------+-------------------+-----------+-------------------+
-| Operating system    | Image name prefix | User-name | Licence/IP policy |
-+=====================+===================+===========+===================+
-| CentOS Linux        | centos-*          | centos    | |centos_link|     |
-+---------------------+-------------------+-----------+-------------------+
-| CoreOS Linux        | coreos-*          | core      | |apache_link|     |
-+---------------------+-------------------+-----------+-------------------+
-| Debian Linux        | debian-*          | debian    | |debian_link|     |
-+---------------------+-------------------+-----------+-------------------+
-| Fedora CoreOS Linux | fedora-coreos-*   | core      | |fedora_link|     |
-+---------------------+-------------------+-----------+-------------------+
-| OpenSuse Leap Linux | opensuse-leap-*   | opensuse  | |opensuse_link|   |
-+---------------------+-------------------+-----------+-------------------+
-| Suse SLES Linux     | suse-sles-*       | sles      | BYOS model        |
-+---------------------+-------------------+-----------+-------------------+
-| Ubuntu Linux        | ubuntu-*          | ubuntu    | |ubuntu_link|     |
-+---------------------+-------------------+-----------+-------------------+
++-------------------------------------+-------------------+-----------+-------------------+
+| Operating system                    | Image name prefix | User-name | Licence/IP policy |
++=====================================+===================+===========+===================+
+| CentOS Linux                        | centos-*          | centos    | |centos_link|     |
++-------------------------------------+-------------------+-----------+-------------------+
+| CoreOS Linux                        | coreos-*          | core      | |apache_link|     |
++-------------------------------------+-------------------+-----------+-------------------+
+| Debian Linux                        | debian-*          | debian    | |debian_link|     |
++-------------------------------------+-------------------+-----------+-------------------+
+| Fedora CoreOS Linux                 | fedora-coreos-*   | core      | |fedora_link|     |
++-------------------------------------+-------------------+-----------+-------------------+
+| openSUSE Leap Linux                 | opensuse-leap-*   | opensuse  | |opensuse_link|   |
++-------------------------------------+-------------------+-----------+-------------------+
+| SUSE Linux Enterprise Server (SLES) | suse-sles-*       | sles      | BYOS model        |
++-------------------------------------+-------------------+-----------+-------------------+
+| Ubuntu Linux                        | ubuntu-*          | ubuntu    | |ubuntu_link|     |
++-------------------------------------+-------------------+-----------+-------------------+
 
 .. |centos_link| raw:: html
 
