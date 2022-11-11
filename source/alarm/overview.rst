@@ -31,7 +31,7 @@ For conventional threshold-oriented alarms, state transitions are governed by:
 - A statistic selection to aggregate the data.
 
 - A sliding time window to indicate how far back into the recent past you want
-  to look. e.g. "test every ten minutes and if for three consecutive minutes
+  to look. e.g. "test every ten minutes and if for thirty consecutive minutes
   then..."
 
 After setting up your rules, your alarm should appear in one of the following
