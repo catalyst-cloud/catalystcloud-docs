@@ -31,7 +31,7 @@ For conventional threshold-oriented alarms, state transitions are governed by:
 - A statistic selection to aggregate the data.
 
 - A sliding time window to indicate how far back into the recent past you want
-  to look. e.g. "test every minute and if for three consecutive minutes
+  to look. e.g. "test every ten minutes and if for thirty consecutive minutes
   then..."
 
 After setting up your rules, your alarm should appear in one of the following
@@ -44,6 +44,132 @@ states:
 - ``insufficient data`` There are not enough datapoints available in the
   evaluation periods to meaningfully determine the alarm state.
 
+Creating a Threshold Alarm
+==========================
+
+Alarms are created with the openstack commandline tool, using the command
+``openstack alarm create``.
+
+Suppose we want to create an alarm that changed state when the CPU usage
+of a server was greater than 70% for ten minutes.  We could then create
+the alarm with the following command:
+
+.. code-block:: bash
+
+    openstack alarm create --name "high cpu" --type threshold \
+      --description "High CPU" --severity critical --meter_name cpu_util \
+      --period 630 --statistic max --threshold 70 \
+      --comparison-operator gt \
+      --query resource_id=29a7a2ec-db72-4360-ad81-xxxxxxxxxxxx
+
+Where:
+
+* ``--meter_name cpu_util`` selects the meter to get data for.
+* ``--period 630`` is the period to evaluate the alarm over in seconds.
+* ``--statistic max`` is the statistic to use to aggregate the data over the evaluation period.
+* ``--threshold 70`` is the threshold to determine the alarm state.
+* ``--comparison-operator gt`` is the operator is use to compare the evaluated data against the threshold.
+* ``--query resource_id=29a7a2ec-db72-4360-ad81-xxxxxxxxxxxx`` selects the server to get the data for.
+
+The alarm create command will return output looking like the following:
+
+.. code-block:: bash
+
+    +---------------------------+--------------------------------------------------------+
+    | Field                     | Value                                                  |
+    +---------------------------+--------------------------------------------------------+
+    | alarm_actions             | []                                                     |
+    | alarm_id                  | b974b5b4-b7de-4012-82b8-xxxxxxxxxxxx                   |
+    | comparison_operator       | gt                                                     |
+    | description               | High CPU                                               |
+    | enabled                   | True                                                   |
+    | evaluate_timestamp        | 2022-11-10T21:48:10.604880                             |
+    | evaluation_periods        | 1                                                      |
+    | exclude_outliers          | False                                                  |
+    | insufficient_data_actions | []                                                     |
+    | meter_name                | cpu_util                                               |
+    | name                      | high cpu                                               |
+    | ok_actions                | []                                                     |
+    | period                    | 630                                                    |
+    | project_id                | b23a5e41d1af4c20974bxxxxxxxxxxxx                       |
+    | query                     | resource_id = 29a7a2ec-db72-4360-ad81-xxxxxxxxxxxx AND |
+    |                           | project_id = b23a5e41d1af4c20974bxxxxxxxxxxxx          |
+    | repeat_actions            | False                                                  |
+    | severity                  | critical                                               |
+    | state                     | insufficient data                                      |
+    | state_reason              | Not evaluated yet                                      |
+    | state_timestamp           | 2022-11-10T21:48:10.567074                             |
+    | statistic                 | max                                                    |
+    | threshold                 | 70.0                                                   |
+    | time_constraints          | []                                                     |
+    | timestamp                 | 2022-11-10T21:48:10.567074                             |
+    | type                      | threshold                                              |
+    | user_id                   | bf7b8d2ad74e474eac37xxxxxxxxxxxx                       |
+    +---------------------------+--------------------------------------------------------+
+
+Note that it has added your project id to the query.
+
+Updating a Threshold Alarm
+==========================
+
+The command ``openstack alarm update`` can to used to change the alarm.
+For example the threshold of the alarm created above can be changed using the command:
+
+.. code-block:: bash
+
+    openstack alarm update --threshold 50 b974b5b4-b7de-4012-82b8-xxxxxxxxxxxx
+
+Note that if you want to change the query of the threshold alarm then you must
+also set the ``--type threshold`` otherwise the command will try to interpret
+the query as a different type and return an error:
+
+.. code-block:: bash
+
+    openstack alarm update --query resource_id=d7839cb3-67a7-4258-a232-xxxxxxxxxxxx \
+      b974b5b4-b7de-4012-82b8-xxxxxxxxxxxx
+    Invalid input for field/attribute data. Value:
+    ...
+    Value not a valid list: resource_id=d7839cb3-67a7-4258-a232-xxxxxxxxxx
+    (HTTP 400) (Request-ID: req-645dada5-fc8d-4c1d-b948-68f0f2b9f0b3)
+
+Useful Meters
+=============
+
+The following is an incomplete list of meters that can be used to create a threshold alarm.
+
+Compute Resources
+-----------------
+
+* cpu_util (%)
+* disk.usage (Bytes)
+* memory.usage (MegaBytes)
+* disk.write.bytes.rate (Bytes/second)
+* disk.read.requests.rate (requests/second)
+* disk.read.bytes.rate (Bytes/second)
+* disk.write.requests.rate (requests/second)
+
+Object Storage
+--------------
+
+* storage.containers.objects.size (Bytes)
+* storage.objects.download.size.international (Bytes)
+* storage.objects.upload.size.international (Bytes)
+
+Router
+------
+
+* traffic.outbound.international (Bytes)
+* traffic.inbound.international (Bytes)
+* traffic.inbound.national (Bytes)
+* traffic.outbound.national (Bytes)
+
+Meter Resolution
+================
+
+Please be aware that the temporal resolution for meter data is approximately 10 minutes.
+Creating alarms that have a period of less than 600 seconds can result in alarms that
+may not get enough data to be evaluated.
+
 ****************
 Composite alarms
 ****************
@@ -52,7 +178,111 @@ These enable users to have multiple triggering conditions, using
 ``and`` and ``or`` relations, on their alarms. For example, "if CPU usage >
 70% for more than 10 minutes OR CPU usage > 90% for more than 1 minute..."
 
-|
+*********************
+Supported Alarm Types
+*********************
+
+Please be aware that Catalyst Cloud supports the following alarm types:
+
+- event
+
+- composite
+
+- threshold
+
+- loadbalancer_member_health
+
+The following alarm types are not supported:
+
+- gnocchi_resources_threshold
+
+- gnocchi_aggregation_by_metrics_threshold
+
+- gnocchi_aggregation_by_resources_threshold
+
+**************************
+Useful Commands For Alarms
+**************************
+
+Listing Alarms
+==============
+
+The command ``openstack alarm list`` will print a summary of your alarms:
+
+.. code-block:: bash
+
+    openstack alarm list
+    +--------------------------------------+-----------+------------------+-------------------+----------+---------+
+    | alarm_id                             | type      | name             | state             | severity | enabled |
+    +--------------------------------------+-----------+------------------+-------------------+----------+---------+
+    | b974b5b4-b7de-4012-82b8-xxxxxxxxxxxx | threshold | high cpu         | ok                | critical | True    |
+    +--------------------------------------+-----------+------------------+-------------------+----------+---------+
+
+Alarm Details
+=============
+
+The command ``openstack alarm show <alarm id>`` will print the details of a single alarm:
+
+.. code-block:: bash
+
+    openstack alarm show b974b5b4-b7de-4012-82b8-xxxxxxxxxxxx
+
+    +---------------------------+--------------------------------------------------------------------------------+
+    | Field                     | Value                                                                          |
+    +---------------------------+--------------------------------------------------------------------------------+
+    | alarm_actions             | []                                                                             |
+    | alarm_id                  | b974b5b4-b7de-4012-82b8-xxxxxxxxxxxx                                           |
+    | comparison_operator       | gt                                                                             |
+    | description               | High CPU                                                                       |
+    | enabled                   | True                                                                           |
+    | evaluate_timestamp        | 2022-11-10T23:41:08                                                            |
+    | evaluation_periods        | 1                                                                              |
+    | exclude_outliers          | False                                                                          |
+    | insufficient_data_actions | []                                                                             |
+    | meter_name                | cpu_util                                                                       |
+    | name                      | high cpu                                                                       |
+    | ok_actions                | []                                                                             |
+    | period                    | 630                                                                            |
+    | project_id                | b23a5e41d1af4c20974bxxxxxxxxxxxx                                               |
+    | query                     | resource_id = ba7dd28f-073f-4c71-9a1e-xxxxxxxxxxxx AND                         |
+    |                           | project_id = b23a5e41d1af4c20974bxxxxxxxxxxxx                                  |
+    | repeat_actions            | False                                                                          |
+    | severity                  | critical                                                                       |
+    | state                     | ok                                                                             |
+    | state_reason              | Transition to ok due to 1 samples inside threshold, most recent: 10.3036912752 |
+    | state_timestamp           | 2022-11-10T21:48:10.567074                                                     |
+    | statistic                 | max                                                                            |
+    | threshold                 | 50.0                                                                           |
+    | time_constraints          | []                                                                             |
+    | timestamp                 | 2022-11-10T22:20:31.232071                                                     |
+    | type                      | threshold                                                                      |
+    | user_id                   | bf7b8d2ad74e474eac37xxxxxxxxxxxx                                               |
+    +---------------------------+--------------------------------------------------------------------------------+
+
+Be aware that there is a bug that means that the state_timestamp does not get updated when the state changes.
+
+Alarm History
+=============
+
+The command ``openstack alarm-history show <alarm id>`` will print a complete
+history of the alarm, including any changes to the alarm configuration and all the state changes.
+
+.. code-block:: bash
+
+    openstack alarm-history show b974b5b4-b7de-4012-82b8-xxxxxxxxxxxx
+
+    +----------------------------+------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------+
+    | timestamp                  | type             | detail                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | event_id                             |
+    +----------------------------+------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------+
+    | 2022-11-10T22:20:38.685075 | state transition | {"transition_reason": "Transition to ok due to 1 samples inside threshold, most recent: 10.3036912752", "state": "ok"}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | 3532e29e-aae2-4b7a-8067-xxxxxxxxxxxx |
+    | 2022-11-10T22:20:31.232071 | rule change      | {"rule": {"meter_name": "cpu_util", "evaluation_periods": 1, "period": 630, "statistic": "max", "threshold": 50.0, "query": [{"field": "resource_id", "type": "", "value": "ba7dd28f-073f-4c71-9a1e-xxxxxxxxxxxx", "op": "eq"}, {"field": "project_id", "value": "b23a5e41d1af4c20974bxxxxxxxxxxxx", "op": "eq"}], "comparison_operator": "gt", "exclude_outliers": false}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | 495d5fec-2a2b-406e-a81b-xxxxxxxxxxxx |
+    | 2022-11-10T22:06:27.673645 | rule change      | {"rule": {"meter_name": "cpu_util", "evaluation_periods": 1, "period": 630, "statistic": "max", "threshold": 50.0, "query": [{"field": "resource_id", "type": "", "value": "29a7a2ec-db72-4360-ad81-xxxxxxxxxxxx", "op": "eq"}, {"field": "project_id", "value": "b23a5e41d1af4c20974bxxxxxxxxxxxx", "op": "eq"}], "comparison_operator": "gt", "exclude_outliers": false}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | 69086892-6cb3-4afa-9784-xxxxxxxxxxxx |
+    | 2022-11-10T21:48:10.567074 | creation         | {"state_reason": "Not evaluated yet", "user_id": "bf7b8d2ad74e474eac37xxxxxxxxxxxx", "name": "high cpu", "state": "insufficient data", "timestamp": "2022-11-10T21:48:10.567074", "description": "High CPU", "enabled": true, "state_timestamp": "2022-11-10T21:48:10.567074", "rule": {"meter_name": "cpu_util", "evaluation_periods": 1, "period": 630, "statistic": "max", "threshold": 70.0, "query": [{"field": "resource_id", "type": "", "value": "29a7a2ec-db72-4360-ad81-xxxxxxxxxxxx", "op": "eq"}, {"field": "project_id", "value": "b23a5e41d1af4c20974bxxxxxxxxxxxx", "op": "eq"}], "comparison_operator": "gt", "exclude_outliers": false}, "alarm_id": "b974b5b4-b7de-4012-82b8-xxxxxxxxxxxx", "time_constraints": [], "insufficient_data_actions": [], "repeat_actions": false, "ok_actions": [], "project_id": "b23a5e41d1af4c20974bxxxxxxxxxxxx", "type": "threshold", "alarm_actions": [], "severity": "critical"} | e44fa797-bef0-4460-9fa8-xxxxxxxxxxxx |
+    +----------------------------+------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------+
+
+***************
+Further Reading
+***************
 
 For more information on the Alarm service, you can visit `the openstack
 documentation on aodh`_
