@@ -161,9 +161,9 @@ we can continue.
   | aXXXXXXX-XXXX-XXXX-XXXX-XXXXX02562da | tls-loadbalancer     | XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX | 192.168.0.45 | ACTIVE              | ONLINE           | amphora  |
   +--------------------------------------+----------------------+----------------------------------+--------------+---------------------+------------------+----------+
 
-Now that our loadbalancer is ready, we can move on to the next step. We need
-to create a listener for our loadbalancer. This is the part of the loadbalancer
-that interacts with our secret and actually performs the TLS functions.
+Now that our load balancer is ready, we can move on to the next step. We need
+to create a listener for our load balancer. This is the part of the load
+balancer that interacts with our secret and actually performs the TLS functions.
 
 .. code-block:: bash
 
@@ -209,7 +209,15 @@ that interacts with our secret and actually performs the TLS functions.
   | tags                        |                                                                                                                                                                                                                                                                                    |
   +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-Next we need to create a pool for our loadbalancer and add our webserver as a
+.. note::
+
+  Each listener in a load balancer that you want to configure for TLS termination
+  will need a separate Barbican certificate uploaded for it to work. This behavior
+  will be changed so that you only require one certificate in a future release for
+  this service.
+
+
+Next we need to create a pool for our load balancer and add our webserver as a
 member. The important thing to consider about your pool is which algorithm you
 want to use for your traffic to be sorted. In this case we are going to stick
 to the round robin algorithm.
