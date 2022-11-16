@@ -33,6 +33,15 @@ as the default user name you should use to log in to each one of them
 | Ubuntu Linux                        | ubuntu-*          | ubuntu    | |ubuntu_link|     |
 +-------------------------------------+-------------------+-----------+-------------------+
 
+.. note::
+
+    BYOS (Bring Your Own Subscription): after launching a new instance from a
+    suse-sles-* image you'll have a running instance that is unable to receive
+    any software update, in order to keep your instance up to date you'll need a
+    SUSE registration code and to follow the registration process as explained
+    by the |suse_sles_registration|, after which your instance will appear on
+    the |suse_customer_center|.
+
 .. |centos_link| raw:: html
 
     <a href="https://www.centos.org/legal/licensing-policy/#distributions" target="_blank">www.centos.org</a>
@@ -57,9 +66,13 @@ as the default user name you should use to log in to each one of them
 
     <a href="https://ubuntu.com/legal/intellectual-property-policy" target="_blank">ubuntu.com</a>
 
-.. note::
+.. |suse_sles_registration| raw:: html
 
-  BYOS: Bring Your Own Subscription
+    <a href="https://documentation.suse.com/sle-public-cloud/all/single-html/public-cloud/#sec-admin-suseconnect" target="_blank">SUSE Public Cloud Guide</a>
+
+.. |suse_customer_center| raw:: html
+
+    <a href="https://scc.suse.com/" target="_blank">SUSE Customer Center</a>
 
 .. note::
 
