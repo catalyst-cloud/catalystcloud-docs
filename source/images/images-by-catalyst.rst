@@ -35,11 +35,11 @@ as the default user name you should use to log in to each one of them
 
 .. note::
 
-    BYOS (Bring Your Own Subscription): after launching a new instance from a
+    BYOS (Bring Your Own Subscription): After launching a new instance from a
     suse-sles-* image you will have a running instance that is unable to receive
-    any software updates. In order to keep your instance up to date, you will need a
+    any software updates. In order to keep your instance up to date you will need a
     SUSE registration code and you will have to follow the registration process
-    as explained by the |suse_sles_registration|, after which your instance will 
+    as explained by the |suse_sles_registration|; After which your instance will 
     appear on the |suse_customer_center|.
 
 .. |centos_link| raw:: html
