@@ -113,7 +113,8 @@ Updating a Threshold Alarm
 ==========================
 
 The command ``openstack alarm update`` can to used to change the alarm.
-For example the threshold of the alarm created above can be changed using the command:
+For example the threshold of the alarm created above can be changed using the
+command:
 
 .. code-block:: bash
 
@@ -135,13 +136,13 @@ the query as a different type and return an error:
 Useful Meters
 =============
 
-The following is an incomplete list of meters that can be used to create a threshold alarm.
+The following is an incomplete list of meters that can be used to create a
+threshold alarm.
 
 Compute Resources
 -----------------
 
 * cpu_util (%)
-* disk.usage (Bytes)
 * memory.usage (MegaBytes)
 * disk.write.bytes.rate (Bytes/second)
 * disk.read.requests.rate (requests/second)
@@ -166,9 +167,9 @@ Router
 Meter Resolution
 ================
 
-Please be aware that the temporal resolution for meter data is approximately 10 minutes.
-Creating alarms that have a period of less than 600 seconds can result in alarms that
-may not get enough data to be evaluated.
+Please be aware that the temporal resolution for meter data is approximately
+10 minutes. Creating alarms that have a period of less than 600 seconds can
+result in alarms that may not get enough data to be evaluated.
 
 ****************
 Composite alarms
@@ -221,7 +222,8 @@ The command ``openstack alarm list`` will print a summary of your alarms:
 Alarm Details
 =============
 
-The command ``openstack alarm show <alarm id>`` will print the details of a single alarm:
+The command ``openstack alarm show <alarm id>`` will print the details of a
+single alarm:
 
 .. code-block:: bash
 
@@ -259,13 +261,15 @@ The command ``openstack alarm show <alarm id>`` will print the details of a sing
     | user_id                   | bf7b8d2ad74e474eac37xxxxxxxxxxxx                                               |
     +---------------------------+--------------------------------------------------------------------------------+
 
-Be aware that there is a bug that means that the state_timestamp does not get updated when the state changes.
+Be aware that there is a bug that means that the state_timestamp does not get
+updated when the state changes.
 
 Alarm History
 =============
 
 The command ``openstack alarm-history show <alarm id>`` will print a complete
-history of the alarm, including any changes to the alarm configuration and all the state changes.
+history of the alarm, including any changes to the alarm configuration and all
+the state changes.
 
 .. code-block:: bash
 
