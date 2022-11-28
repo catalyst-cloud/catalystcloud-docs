@@ -33,6 +33,7 @@ as the default user name you should use to log in to each one of them
 | Ubuntu Linux                        | ubuntu-*          | ubuntu    | |ubuntu_link|     |
 +-------------------------------------+-------------------+-----------+-------------------+
 
+
 .. admonition:: BYOS (Bring Your Own Subscription):
 
     After launching a new instance from a
