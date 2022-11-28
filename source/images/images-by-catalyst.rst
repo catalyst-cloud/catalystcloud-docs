@@ -33,9 +33,10 @@ as the default user name you should use to log in to each one of them
 | Ubuntu Linux                        | ubuntu-*          | ubuntu    | |ubuntu_link|     |
 +-------------------------------------+-------------------+-----------+-------------------+
 
-.. note::
 
-    BYOS (Bring Your Own Subscription): After launching a new instance from a
+.. admonition:: BYOS (Bring Your Own Subscription):
+
+    After launching a new instance from a
     suse-sles-* image you will have a running instance that is unable to receive
     any software updates. In order to keep your instance up to date you will need a
     SUSE registration code and you will have to follow the registration process
