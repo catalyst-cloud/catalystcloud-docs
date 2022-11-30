@@ -77,7 +77,7 @@ operating system needs to reboot to pick up the new configuration.
 Nested Virtualization
 **************************
 
-Nested virtualization is a feature that allows you to run KVM virtual machine
+Nested virtualization is a feature that allows you to run KVM virtual machines
 inside of an instance. This feature is available from the default images
 that are provided by Catalyst Cloud. Support for nested instances is only
 provided from Catalyst Cloud, up to the point of the initial instance that is
@@ -88,8 +88,8 @@ Additionally, there are some limitations that you should be aware of (and your
 users should be aware of) when using nested virtualization.
 
 #. Guests hosted using virtualization will fail to complete live migration.
-#. Guests will fail to automatically resume from suspension when it occurs
+#. Guests will fail to automatically resume from suspension when it occurs.
 
-These limitations are inherent to nested KVM virtualization cannot be mitigated
-from a higher level at this stage.
+These limitations are inherent to nested KVM virtualization and cannot be
+mitigated from a higher level at this stage.
 
