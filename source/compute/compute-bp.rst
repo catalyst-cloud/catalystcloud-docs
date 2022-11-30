@@ -77,12 +77,12 @@ operating system needs to reboot to pick up the new configuration.
 Nested Virtualization
 **************************
 
-It is possible on the cloud to host virtual machines inside of an instance on
-the cloud. This feature is available from the default images that are provided
-by Catalyst Cloud.  Support for nested instances is only provided from
-Catalyst Cloud, up to the point of the initial instance that is created using
-our cloud. Any further virtualized instances that are created are the
-responsibility of the customer to maintain and support.
+Nested virtualization is a feature that allows you to run KVM virtual machine
+inside of an instance. This feature is available from the default images
+that are provided by Catalyst Cloud. Support for nested instances is only
+provided from Catalyst Cloud, up to the point of the initial instance that is
+created using our cloud. Any further virtualized instances that are created are
+the responsibility of the customer to maintain and support.
 
 Additionally, there are some limitations that you should be aware of (and your
 users should be aware of) when using nested virtualization.
