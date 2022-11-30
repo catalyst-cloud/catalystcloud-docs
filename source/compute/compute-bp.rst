@@ -71,3 +71,25 @@ and balancing load amongst them) rather than vertically. It is possible to
 scale compute instances horizontally without downtime. Resizing compute
 instance vertically (up or down) will result in a brief downtime, because the
 operating system needs to reboot to pick up the new configuration.
+
+
+**************************
+Nested Virtualization
+**************************
+
+It is possible on the cloud to host virtual machines inside of an instance on
+the cloud. This feature is available from the default images that are provided
+by Catalyst Cloud.  Support for nested instances is only provided from
+Catalyst Cloud, up to the point of the initial instance that is created using
+our cloud. Any further virtualized instances that are created are the
+responsibility of the customer to maintain and support.
+
+Additionally, there are some limitations that you should be aware of (and your
+users should be aware of) when using nested virtualization.
+
+#. Guests hosted using virtualization will fail to complete live migration.
+#. Guests will fail to automatically resume from suspension when it occurs
+
+These limitations are inherent to nested KVM virtualization cannot be mitigated
+from a higher level at this stage.
+
