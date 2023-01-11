@@ -63,8 +63,14 @@ First, lets determine what datastore types are available to us.
 .. Note::
 
   The openstack commands that are used in this tutorial should be the same
-  regardless of the datastore that you choose. The only difference will by
-  the datastore type and version you use to create your database.
+  regardless of the datastore that you choose. The only differences will be
+  the datastore type, datastore version version and the maximum length of
+  the initial username assigned during database instance creation.
+  
+  Maximum initial username length by datastore type:
+  
+  * MySQL: 16 characters
+  * Postgres: 63 characters.
 
 For this example we are going to use MySQL.
 
