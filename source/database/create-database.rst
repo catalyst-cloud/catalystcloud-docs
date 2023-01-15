@@ -66,9 +66,9 @@ First, lets determine what datastore types are available to us.
   regardless of the datastore that you choose. The only differences will be
   the datastore type, datastore version version and the maximum length of
   the initial username assigned during database instance creation.
-  
+
   Maximum initial username length by datastore type:
-  
+
   * MySQL: 16 characters
   * Postgres: 63 characters.
 
