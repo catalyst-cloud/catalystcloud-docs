@@ -4,23 +4,24 @@
 GPU Support in Virtual Servers
 ##############################
 
-Some compute types support virtual GPUs, which require specific OS
-support to correctly function.
+**********************
+c2-gpu Virtual Servers
+**********************
 
-.. note::
-    This section only applies to "c2-gpu" flavor virtual servers.
+Each c2-gpu instance type includes one or more slices of NVIDIA A100
+GPUs. The slice size provided is "GRID A100D-20C", which provides
+2 compute pipelines and 20GB of video RAM from the card.
 
 .. warning::
 
-    GPU support is currently in Technical Preview only.
+    c2-gpu virtual servers are in Technical Preview only
 
-********************
 Minimum Requirements
-********************
+====================
 
 For "c2-gpu", the absolute minimum requirements are as follows:
 
-* A boot/OS disk of at least 30GB (to install CUDA support)
+* A boot/OS disk of at least 30GB (when installing CUDA support)
 * NVIDIA vGPU driver from the v15.0 series. This is currently version
   525.60.12.
 
@@ -29,27 +30,39 @@ exactly this version, and not any other. From time to time we will
 update the version needed, and inform you when this updated will be
 required on your virtual servers.
 
-In addition, NVIDIA support only the following virtual server operating
-systems in Catalyst Cloud:
+.. note::
 
-* Ubuntu 22.04, 20.04, and 18.04
+    Drivers provided by OS or distribution vendors should not be 
+    installed. Only the drivers specified here will function with
+    the vGPUs available.
 
-******************************
-Creating a vGPU virtual server
-******************************
+In addition, NVIDIA support only the following server operating
+systems for your vGPU virtual server while running in Catalyst Cloud:
+
+* Ubuntu 22.04, 20.04
+
+Tested by Catalyst Cloud, but not supported by NVIDIA are the following
+server operating systems:
+
+* Rocky Linux 8, 9
+
+All other OS images are unsupported or untested.
+
+Creating a c2-gpu virtual server
+================================
 
 Catalyst Cloud is not permitted to modify any OS image we provide
 to you, so driver installation must take place after the instance
 has been created.
 
 Ubuntu
-======
+******
 
 Once you have created an Ubuntu virtual server using a version supported
 by the NVIDIA drivers, you will need to perform the following steps.
 
 First, ensure all packages are up to date on your server and it is
-running the latest kernel:
+running the latest kernel (which will require a reboot):
 
 .. code-block:: bash
 
@@ -65,7 +78,33 @@ Then download and install the GRID driver package.
     curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_4a86b23fb83c4581995b87e37e3206a3/nvidia-guest-drivers/525/Linux/nvidia-linux-grid-525_525.60.13_amd64.deb
     sudo dpkg -i nvidia-linux-grid-525_525.60.13_amd64.deb
 
-And lastly install the CUDA toolkit, if CUDA support is required:
+Next, you will need to install the client license for vGPU support. 
+Download and save the license to ``/etc/nvidia/ClientConfigToken`` on
+your virtual server, using the following steps:
+
+.. code-block:: bash
+
+    cd /etc/nvidia/ClientConfigToken && curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_4a86b23fb83c4581995b87e37e3206a3/nvidia-guest-drivers/licenses/client_configuration_token_12-29-2022-15-20-23.tok
+
+Edit the GRID driver configuration file ``/etc/nvidia/gridd.conf`` and 
+ensure that ``FeatureType`` is set to ``1``. Then restart the NVIDIA
+``gridd`` daemon. The following commands apply the setting and restart
+the daemon:
+
+.. code-block:: bash
+    sudo sed -i -e '/^\(FeatureType=\).*/{s//\11/;:a;n;ba;q}' -e '$aFeatureType=1' /etc/nvidia/gridd.conf
+    sudo systemctl restart nvidia-gridd
+
+After the daemon has been restarted, check the license status of the 
+vGPU:
+
+.. code-block:: bash
+    nvidia-smi -q | grep 'License Status'
+
+This should return a line stating it is "Licensed" with an expiry in 
+the future.
+
+(Optional) Install the CUDA toolkit, if CUDA support is needed:
 
 .. code-block:: bash
 
@@ -81,15 +120,15 @@ to a command prompt.
     installation of CUDA toolkit. Those packages conflicts with
     required driver versions and will break your vGPU support.
 
-Lastly, ensure that the CUDA libraries are available for applications
-to link and load:
+To complete CUDA tookit installation, ensure that the CUDA libraries are
+available for applications to link and load:
 
 .. code-block:: bash
 
     sudo tee /etc/ld.so.conf.d/cuda.conf << /usr/local/cuda/lib64
 
 RHEL-derived Distributions
-===========================
+**************************
 
 Linux distributions derived from RHEL, such as Rocky Linux, need the
 following steps to install the drivers.
@@ -136,7 +175,33 @@ It may also produce an error about failing to register with DKMS, if you
 installed DKMS support above. This can be safely ignored, the modules
 will be rebuilt automatically despite the error message.
 
-Lastly, if CUDA support is required, install the related CUDA tools:
+Next, you will need to install the client license for vGPU support. 
+Download and save the license to ``/etc/nvidia/ClientConfigToken`` on
+your virtual server, using the following steps:
+
+.. code-block:: bash
+
+    cd /etc/nvidia/ClientConfigToken && curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_4a86b23fb83c4581995b87e37e3206a3/nvidia-guest-drivers/licenses/client_configuration_token_12-29-2022-15-20-23.tok
+
+Edit the GRID driver configuration file ``/etc/nvidia/gridd.conf`` and 
+ensure that ``FeatureType`` is set to ``1``. Then restart the NVIDIA
+``gridd`` daemon. The following commands apply the setting and restart
+the daemon:
+
+.. code-block:: bash
+    sudo sed -i -e '/^\(FeatureType=\).*/{s//\11/;:a;n;ba;q}' -e '$aFeatureType=1' /etc/nvidia/gridd.conf
+    sudo systemctl restart nvidia-gridd
+
+After the daemon has been restarted, check the license status of the 
+vGPU:
+
+.. code-block:: bash
+    nvidia-smi -q | grep 'License Status'
+
+This should return a line stating it is "Licensed" with an expiry in 
+the future.
+
+(Optional) Install the CUDA toolkit, if CUDA support is needed:
 
 .. code-block:: bash
 
@@ -148,12 +213,12 @@ to a command prompt.
 
 .. note::
 
-    We do not recommend using Debian or Ubuntu packages for the
+    We do not recommend using distribution-provided packages for the
     installation of CUDA toolkit. Those packages conflicts with
     required driver versions and will break your vGPU support.
 
-Finally, ensure that the CUDA libraries are available for applications
-to link and load:
+To complete CUDA tookit installation, ensure that the CUDA libraries are
+available for applications to link and load:
 
 .. code-block:: bash
 
