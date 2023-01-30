@@ -53,8 +53,8 @@ Via the Dashboard
 The project ID and name can be found on the `API Access`_ panel by clicking on
 the `View Credentials`_ button.
 
-.. _API Access: https://dashboard.cloud.catalyst.net.nz/project/api_access/
-.. _View Credentials: https://dashboard.cloud.catalyst.net.nz/project/api_access/view_credentials/
+.. _API Access: https://dashboard.catalystcloud.nz/project/api_access/
+.. _View Credentials: https://dashboard.catalystcloud.nz/project/api_access/view_credentials/
 
 Via the CLI
 -----------
@@ -88,7 +88,7 @@ Creating new projects
 You can request the creation of more projects via the `Support
 Requests`_ panel.
 
-.. _Support Requests: https://dashboard.cloud.catalyst.net.nz/management/tickets/
+.. _Support Requests: https://dashboard.catalystcloud.nz/management/tickets/
 
 Changing project
 ================
@@ -135,7 +135,7 @@ Administrator`` role.
 As a project administrator or moderator, you can invite and remove people from
 your projects using the `Project Users Panel`_.
 
-.. _Project Users Panel: https://dashboard.cloud.catalyst.net.nz/management/project_users/
+.. _Project Users Panel: https://dashboard.catalystcloud.nz/management/project_users/
 
 Project isolation
 =================
@@ -278,7 +278,7 @@ Management`_ panel.
 Catalyst may give you a call if you are about to exceed your quota and ask you
 whether you would like us to pro-actively increase the quota for you.
 
-.. _Quota Management: https://dashboard.cloud.catalyst.net.nz/management/quota/
+.. _Quota Management: https://dashboard.catalystcloud.nz/management/quota/
 
 
 .. _quota_management:
@@ -395,7 +395,7 @@ Raising a support request
 -------------------------
 
 If you need help, you can raise a support request with Catalyst via the `Support
-Requests <https://dashboard.cloud.catalyst.net.nz/management/tickets/>`_ panel.
+Requests <https://dashboard.catalystcloud.nz/management/tickets/>`_ panel.
 
 Most requests are resolved within one business day. If you would like faster
 response times or additional support, please consider purchasing one of our
