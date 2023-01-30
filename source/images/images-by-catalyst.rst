@@ -26,6 +26,8 @@ as the default user name you should use to log in to each one of them
 +-------------------------------------+-------------------+-----------+-------------------+
 | Fedora CoreOS Linux                 | fedora-coreos-*   | core      | |fedora_link|     |
 +-------------------------------------+-------------------+-----------+-------------------+
+| Rocky Linux                         | rocky-*           | rocky     | |rocky_link|      |
++-------------------------------------+-------------------+-----------+-------------------+
 | openSUSE Leap Linux                 | opensuse-leap-*   | opensuse  | |opensuse_link|   |
 +-------------------------------------+-------------------+-----------+-------------------+
 | SUSE Linux Enterprise Server (SLES) | suse-sles-*       | sles      | BYOS model        |
@@ -43,13 +45,13 @@ as the default user name you should use to log in to each one of them
     as explained by the |suse_sles_registration|; After which your instance will
     appear on the |suse_customer_center|.
 
-.. |centos_link| raw:: html
-
-    <a href="https://www.centos.org/legal/licensing-policy/#distributions" target="_blank">www.centos.org</a>
-
 .. |apache_link| raw:: html
 
     <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">www.apache.org</a>
+
+.. |centos_link| raw:: html
+
+    <a href="https://www.centos.org/legal/licensing-policy/#distributions" target="_blank">www.centos.org</a>
 
 .. |debian_link| raw:: html
 
@@ -59,13 +61,13 @@ as the default user name you should use to log in to each one of them
 
     <a href="https://fedoraproject.org/wiki/Legal:Licenses/LicenseAgreement" target="_blank">fedoraproject.org</a>
 
+.. |rocky_link| raw:: html
+
+    <a href="https://rockylinux.org/licensing/" target="_blank">rockylinux.org</a>
+
 .. |opensuse_link| raw:: html
 
     <a href="https://en.opensuse.org/openSUSE:License" target="_blank">opensuse.org</a>
-
-.. |ubuntu_link| raw:: html
-
-    <a href="https://ubuntu.com/legal/intellectual-property-policy" target="_blank">ubuntu.com</a>
 
 .. |suse_sles_registration| raw:: html
 
@@ -74,6 +76,10 @@ as the default user name you should use to log in to each one of them
 .. |suse_customer_center| raw:: html
 
     <a href="https://scc.suse.com/" target="_blank">SUSE Customer Center</a>
+
+.. |ubuntu_link| raw:: html
+
+    <a href="https://ubuntu.com/legal/intellectual-property-policy" target="_blank">ubuntu.com</a>
 
 .. note::
 
