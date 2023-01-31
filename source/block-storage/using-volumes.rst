@@ -31,6 +31,15 @@ instance:
 
 Once we have all of these set, then we are create our volume.
 
+.. Warning::
+
+  The create volume screen allows you to select a volume source to
+  create your new volume from. We strongly advise against using
+  "snapshot" or "volume" as a source for the new volume. These
+  will create hard dependencies on the volume or snapshot selected,
+  meaning you cannot delete the source volume or snapshot until your
+  new volume and all others created from the same source are deleted.
+
 After we have our new volume, we then are going to attach our volume to an
 instance. To do this we have to go to the **Manage Attachments** section.
 
