@@ -36,6 +36,7 @@ Table of Contents
   compute/stop-instance
   compute/gpu-support
   compute/create-new-from-existing
+  compute/change-type
   compute/anti-affinity-groups-ha
   compute/faq
   Best practices <compute/compute-bp>

@@ -32,7 +32,7 @@ required on your virtual servers.
 
 .. note::
 
-    Drivers provided by OS or distribution vendors should not be 
+    Drivers provided by OS or distribution vendors should not be
     installed. Only the drivers specified here will function with
     the vGPUs available.
 
@@ -78,7 +78,7 @@ Then download and install the GRID driver package.
     curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_4a86b23fb83c4581995b87e37e3206a3/nvidia-guest-drivers/525/Linux/nvidia-linux-grid-525_525.60.13_amd64.deb
     sudo dpkg -i nvidia-linux-grid-525_525.60.13_amd64.deb
 
-Next, you will need to install the client license for vGPU support. 
+Next, you will need to install the client license for vGPU support.
 Download and save the license to ``/etc/nvidia/ClientConfigToken`` on
 your virtual server, using the following steps:
 
@@ -86,22 +86,24 @@ your virtual server, using the following steps:
 
     cd /etc/nvidia/ClientConfigToken && curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_4a86b23fb83c4581995b87e37e3206a3/nvidia-guest-drivers/licenses/client_configuration_token_12-29-2022-15-20-23.tok
 
-Edit the GRID driver configuration file ``/etc/nvidia/gridd.conf`` and 
+Edit the GRID driver configuration file ``/etc/nvidia/gridd.conf`` and
 ensure that ``FeatureType`` is set to ``1``. Then restart the NVIDIA
 ``gridd`` daemon. The following commands apply the setting and restart
 the daemon:
 
 .. code-block:: bash
+
     sudo sed -i -e '/^\(FeatureType=\).*/{s//\11/;:a;n;ba;q}' -e '$aFeatureType=1' /etc/nvidia/gridd.conf
     sudo systemctl restart nvidia-gridd
 
-After the daemon has been restarted, check the license status of the 
+After the daemon has been restarted, check the license status of the
 vGPU:
 
 .. code-block:: bash
+
     nvidia-smi -q | grep 'License Status'
 
-This should return a line stating it is "Licensed" with an expiry in 
+This should return a line stating it is "Licensed" with an expiry in
 the future.
 
 (Optional) Install the CUDA toolkit, if CUDA support is needed:
@@ -175,7 +177,7 @@ It may also produce an error about failing to register with DKMS, if you
 installed DKMS support above. This can be safely ignored, the modules
 will be rebuilt automatically despite the error message.
 
-Next, you will need to install the client license for vGPU support. 
+Next, you will need to install the client license for vGPU support.
 Download and save the license to ``/etc/nvidia/ClientConfigToken`` on
 your virtual server, using the following steps:
 
@@ -183,22 +185,24 @@ your virtual server, using the following steps:
 
     cd /etc/nvidia/ClientConfigToken && curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_4a86b23fb83c4581995b87e37e3206a3/nvidia-guest-drivers/licenses/client_configuration_token_12-29-2022-15-20-23.tok
 
-Edit the GRID driver configuration file ``/etc/nvidia/gridd.conf`` and 
+Edit the GRID driver configuration file ``/etc/nvidia/gridd.conf`` and
 ensure that ``FeatureType`` is set to ``1``. Then restart the NVIDIA
 ``gridd`` daemon. The following commands apply the setting and restart
 the daemon:
 
 .. code-block:: bash
+
     sudo sed -i -e '/^\(FeatureType=\).*/{s//\11/;:a;n;ba;q}' -e '$aFeatureType=1' /etc/nvidia/gridd.conf
     sudo systemctl restart nvidia-gridd
 
-After the daemon has been restarted, check the license status of the 
+After the daemon has been restarted, check the license status of the
 vGPU:
 
 .. code-block:: bash
+
     nvidia-smi -q | grep 'License Status'
 
-This should return a line stating it is "Licensed" with an expiry in 
+This should return a line stating it is "Licensed" with an expiry in
 the future.
 
 (Optional) Install the CUDA toolkit, if CUDA support is needed:
