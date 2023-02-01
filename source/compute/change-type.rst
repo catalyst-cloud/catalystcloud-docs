@@ -9,13 +9,7 @@ from time to time you may want to convert from one type to another.
 
 This can be done in-place on existing virtual servers, using the
 "resize" function to choose not only a different size but a different
-type as well.
-
-*********************************
-How to change virtual server type
-*********************************
-
-TBD
+type as well. The resize process is documented in :ref:`resize-server`.
 
 *****************************
 Limitations on changing types
@@ -28,13 +22,14 @@ limitations which must be taken into account.
 
     The platform *does not* check if any of these limitations would
     affect your virtual server. It will (generally) allow you to change
-    types even if you applications or OS would not function.
+    types even if your applications or OS would not function.
 
 Downtime
 ========
 
-Changing between types requires the server to be shut down and
-restarted. The change cannot be done in a non-interrupting manner.
+As noted on in the page on resizing virtual servers, changing between
+types requires the server to be shut down and restarted. The change
+cannot be done in a non-interrupting manner.
 
 CPU Architecture
 ================
