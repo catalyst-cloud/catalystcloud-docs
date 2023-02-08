@@ -128,6 +128,7 @@ available for applications to link and load:
 .. code-block:: bash
 
     sudo tee /etc/ld.so.conf.d/cuda.conf << /usr/local/cuda/lib64
+    sudo ldconfig
 
 RHEL-derived Distributions
 **************************
@@ -227,6 +228,7 @@ available for applications to link and load:
 .. code-block:: bash
 
     sudo tee /etc/ld.so.conf.d/cuda.conf << /usr/local/cuda/lib64
+    sudo ldconfig
 
 **************
 Docker Support
