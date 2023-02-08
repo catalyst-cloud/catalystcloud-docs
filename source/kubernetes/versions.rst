@@ -98,6 +98,25 @@ is highly recommended to upgrade to v1.22.18 as soon as possible.
     further notice.
 
 ****************************
+Finding Available Versions
+****************************
+
+You can find the set of Kubernetes templates which are currently available in the web interface as well as on the command line. 
+
+.. code-block:: bash
+
+   $ openstack coe cluster template list
+   
+    +--------------------------------------+-----------------------------------+---------------------------------------------------------------------------------+
+    | uuid                                 | name                              | tags                                                                            |
+    +--------------------------------------+-----------------------------------+---------------------------------------------------------------------------------+
+    | 5c607342-9960-488e-99b6-92e36c93367a | kubernetes-v1.21.14-prod-20220816 | environment:prod,build_id:20220816,pipeline_id:26958,created_at:20220816T212519 |
+    | 4db24745-043a-4f95-a36b-f4803f46b3ac | kubernetes-v1.22.17-prod-20230125 | environment:prod,build_id:20230125,pipeline_id:31215,created_at:20230125T205559 |
+    | 4f4b6965-cbbb-4061-870d-0794c28fc423 | kubernetes-v1.23.16-prod-20230125 | environment:prod,build_id:20230125,pipeline_id:31216,created_at:20230125T211306 |
+    +--------------------------------------+-----------------------------------+---------------------------------------------------------------------------------+
+
+
+****************************
 Upgrading Kubernetes Version
 ****************************
 
@@ -123,16 +142,16 @@ operating system, the original image will be updated regularly. We're using
 Podman and systemd to manage all the Kubernetes components and using containerd for
 the container runtime of Kubernetes.
 
-* Node Operating System: Fedora CoreOS 31
-* Docker: 18.09.8
-* Podman: 1.8.1
+* Node Operating System: Fedora CoreOS 37
+* Docker: 20.10.12
+* Podman: 3.4.4
 
 ***********
 CNI Version
 ***********
 
 The only supported CNI on Catalyst Cloud Kubernetes Service is Calico and the
-current versions is v3.13.1.
+current versions is v3.23.0.
 
 ***************
 Addons Versions
