@@ -101,12 +101,13 @@ is highly recommended to upgrade to v1.22.18 as soon as possible.
 Finding Available Versions
 ****************************
 
-You can find the set of Kubernetes templates which are currently available in the web interface as well as on the command line. 
+You can find the set of Kubernetes templates which are currently available in
+the web interface as well as on the command line.
 
 .. code-block:: bash
 
    $ openstack coe cluster template list
-   
+
     +--------------------------------------+-----------------------------------+---------------------------------------------------------------------------------+
     | uuid                                 | name                              | tags                                                                            |
     +--------------------------------------+-----------------------------------+---------------------------------------------------------------------------------+
