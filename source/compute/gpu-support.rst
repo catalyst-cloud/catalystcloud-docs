@@ -78,13 +78,19 @@ Then download and install the GRID driver package.
     curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/15.0/linux/nvidia-linux-grid-525_525.60.13_amd64.deb
     sudo dpkg -i nvidia-linux-grid-525_525.60.13_amd64.deb
 
+.. note::
+
+    If you get a 404 response to this download, contact Catalyst Cloud
+    support as the driver versions may have been updated making this
+    documentation outdated.
+
 Next, you will need to install the client license for vGPU support.
 Download and save the license to ``/etc/nvidia/ClientConfigToken`` on
 your virtual server, using the following steps:
 
 .. code-block:: bash
 
-    cd /etc/nvidia/ClientConfigToken && curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/licenses/client_configuration_token_12-29-2022-15-20-23.tok
+    (cd /etc/nvidia/ClientConfigToken && curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/licenses/client_configuration_token_12-29-2022-15-20-23.tok)
 
 Edit the GRID driver configuration file ``/etc/nvidia/gridd.conf`` and
 ensure that ``FeatureType`` is set to ``1``. Then restart the NVIDIA
@@ -171,6 +177,12 @@ Then install the GRID driver package:
     curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/15.0/linux/NVIDIA-Linux-x86_64-525.60.13-grid.run
     sudo sh NVIDIA-Linux-x86_64-525.60.13-grid.run -s -Z
 
+.. note::
+
+    If you get a 404 response to this download, contact Catalyst Cloud
+    support as the driver versions may have been updated making this
+    documentation outdated.
+
 This may produce errors or warnings related to missing X libraries and
 Vulkan ICD loader. These warnings can be safely ignored.
 
@@ -184,7 +196,7 @@ your virtual server, using the following steps:
 
 .. code-block:: bash
 
-    cd /etc/nvidia/ClientConfigToken && curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/licenses/client_configuration_token_12-29-2022-15-20-23.tok
+    (cd /etc/nvidia/ClientConfigToken && curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/licenses/client_configuration_token_12-29-2022-15-20-23.tok)
 
 Edit the GRID driver configuration file ``/etc/nvidia/gridd.conf`` and
 ensure that ``FeatureType`` is set to ``1``. Then restart the NVIDIA
