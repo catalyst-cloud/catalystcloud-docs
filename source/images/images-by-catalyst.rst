@@ -97,6 +97,12 @@ they are suitable for your needs and fit for purpose. Catalyst provides them
 change, you can always upload your own images, crafted the way you like, or
 take a snapshot of ours and modify it the way you need.
 
+.. note::
+
+  In particular take note that the ``ubuntu-minimal-*`` images are not
+  compatible with the dashboard console as explained
+  `here <https://docs.catalystcloud.nz/compute/faq.html#dashboard-console-and-ubuntu-minimal-images>`_
+
 ***************************************************
 How can I identify the images provided by Catalyst?
 ***************************************************
