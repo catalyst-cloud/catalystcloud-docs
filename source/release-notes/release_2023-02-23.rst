@@ -1,0 +1,30 @@
+################
+23 February 2023
+################
+
+The changes for this release include the introduction of GPU virtual servers, CPU burstable virtual servers and
+nested virutalisation.
+
+******
+GPUaaS
+******
+
+Compute c2 GPU virtual servers are available in a technical preview in the nz-por-1 region.  The virtual GPU servers
+are resourced with high-frequency CPUs and NVIDIA A100 GPUs and are targeted at high performance computing work loads.
+Currently the tech-preview is by invitation only, but is planned to move into Beta soon.
+
+*************
+Burst Compute
+*************
+
+CPU burstable virtual servers are low cost virtual servers that are perfect for low demand and development environments.
+The CPU burstable virtual servers are available as new compute flavors in the nz-por-1 region. The CPU burstable
+flavors are currently available in a Beta release.
+
+*********************
+Nested Virtualisation
+*********************
+
+We have enabled the ability for nested virtualisation on our compute service. This features allow you to run virtual
+machines inside of your virtual server. You can now make greater use of your virtual server by hosting several VMs
+on it or by using hosting a VM containing a specialized environment such as mobile platform emulators.
