@@ -88,7 +88,7 @@ Image build process
                     "type": "openstack",
                     "identity_endpoint": "$OS_AUTH_URL",
                     "region": "$OS_REGION_NAME",
-                    "image_name": "$SOURCE_IMAGE_ID",
+                    "image_name": "$DEST_IMAGE_NAME",
                     "source_image": "$SOURCE_IMAGE_ID",
                     "flavor": "$FLAVOR_ID",
                     "floating_ip_network": "$FLOATING_IP_NETWORK",
