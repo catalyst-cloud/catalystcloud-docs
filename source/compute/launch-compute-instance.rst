@@ -167,10 +167,11 @@ oversubscribe RAM as this severely impacts on performance.
 Instance initialisation
 ***********************
 
-A script called cloud-init is included in all images provided by Catalyst
-Cloud. This script is there to assist you with instance configuration at boot
-time. It communicates with the meta-data agent of our cloud and, for example,
-configures the network of your compute instance as defined by you via our APIs.
+An application called `cloud-init`_ is included in all images provided by 
+Catalyst Cloud. This script is there to assist with instance configuration at
+boot time. It communicates with the meta-data agent in the cloud and, for
+example, configures the network of your compute instance as defined by you via
+our APIs.
 
 Cloud-init is very powerful. It's a de facto multi-distribution and multi-cloud
 way of handling the early initialisation of a cloud instance.
@@ -183,7 +184,6 @@ customisation script via the web dashboard).
 In the following sections, we provide examples that illustrate how to perform
 common initialisation tasks with cloud-init, using different configuration
 formats.
-
 
 .. tabs::
 
@@ -322,4 +322,6 @@ Cloud-init official docs
 
 For other formats and more detailed information on how to use cloud-init to
 initialise your compute instances, please refer to the `cloud-init official
-documentation <http://cloudinit.readthedocs.org/en/latest/index.html>`_.
+documentation <cloud-init>`_.
+
+.. _cloud-init: https://cloudinit.readthedocs.io

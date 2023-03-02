@@ -1,7 +1,7 @@
 .. _packer-tutorial:
 
 ##################################################################
-Using packer to build custom bootable images on the Catalyst Cloud
+Using Packer to build custom bootable images on the Catalyst Cloud
 ##################################################################
 
 This tutorial shows you how to use `Packer`_ to build custom bootable images on
