@@ -135,7 +135,7 @@ Image build process
                         "echo 'Installing CUDA. This may take a few minutes...'",
                         "sudo sh cuda_12.0.0_525.60.13_linux.run --silent --toolkit",
                         "rm -f cuda_12.0.0_525.60.13_linux.run",
-                        "sudo tee /etc/ld.so.conf.d/cuda.conf << /usr/local/cuda/lib64",
+                        "sudo tee /etc/ld.so.conf.d/cuda.conf <<< /usr/local/cuda/lib64",
                         "sudo ldconfig",
                         "sudo systemctl stop cloud-init",
                         "sudo rm -rf /var/lib/cloud/"
