@@ -167,7 +167,7 @@ oversubscribe RAM as this severely impacts on performance.
 Instance initialisation
 ***********************
 
-An application called `cloud-init`_ is included in all images provided by 
+An application called `cloud-init`_ is included in all images provided by
 Catalyst Cloud. This script is there to assist with instance configuration at
 boot time. It communicates with the meta-data agent in the cloud and, for
 example, configures the network of your compute instance as defined by you via

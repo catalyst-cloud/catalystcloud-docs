@@ -97,11 +97,11 @@ on an Ubuntu 16.04 machine to the latest versions. You will then build a
  }
 
 .. note::
-  
+
   Stopping cloud-init and removing its data directory are highly recommended
   as the final stages when creating any custom image. This helps ensure that
   components such as user data, SSH keys and networking are all configured
-  as expected when new instances are created from the custom image. 
+  as expected when new instances are created from the custom image.
 
 *****************
 Building an image
