@@ -1,3 +1,5 @@
+.. _adding-networks:
+
 ################
 Adding a network
 ################

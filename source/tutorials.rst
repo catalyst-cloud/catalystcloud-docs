@@ -42,6 +42,7 @@ Image tutorials
 
    tutorials/images/using-packer-to-build-custom-bootable-images-on-the-catalyst-cloud
    tutorials/images/deploying-a-turnkey-image
+   tutorials/images/using-packer-to-build-cuda-images
 
 Network tutorials
 =================

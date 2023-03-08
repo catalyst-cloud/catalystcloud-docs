@@ -51,9 +51,16 @@ All other OS images are unsupported or untested.
 Creating a c2-gpu virtual server
 ================================
 
-Catalyst Cloud is not permitted to modify any OS image we provide
-to you, so driver installation must take place after the instance
-has been created.
+To create a GPU-enabled virtual server, create an instance using a flavor
+prefixed with ``c2-gpu``.
+
+Catalyst Cloud is not permitted to provide modified operating system images
+so you will need to install supporting drivers to enable GPU support in
+GPU-enabled virtual servers as per the instructions below.
+
+To help with streamlining GPU server builds we've :ref:`provided examples on
+using Packer to build custom images that include GPU drivers and software<packer-tutorial-gpu>`.
+This process is recommended for bulk GPU compute deployments.
 
 Ubuntu
 ******
@@ -93,16 +100,16 @@ your virtual server, using the following steps:
     (cd /etc/nvidia/ClientConfigToken && curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/licenses/client_configuration_token_12-29-2022-15-20-23.tok)
 
 Edit the GRID driver configuration file ``/etc/nvidia/gridd.conf`` and
-ensure that ``FeatureType`` is set to ``1``. Then restart the NVIDIA
-``gridd`` daemon. The following commands apply the setting and restart
-the daemon:
+ensure that ``FeatureType`` is set to ``1``. Then restart the ``nvidia-
+gridd`` service. The following commands apply the setting and restart
+the service:
 
 .. code-block:: bash
 
     sudo sed -i -e '/^\(FeatureType=\).*/{s//\11/;:a;n;ba;q}' -e '$aFeatureType=1' /etc/nvidia/gridd.conf
     sudo systemctl restart nvidia-gridd
 
-After the daemon has been restarted, check the license status of the
+After the service has been restarted, check the license status of the
 vGPU:
 
 .. code-block:: bash
@@ -133,7 +140,7 @@ available for applications to link and load:
 
 .. code-block:: bash
 
-    sudo tee /etc/ld.so.conf.d/cuda.conf << /usr/local/cuda/lib64
+    sudo tee /etc/ld.so.conf.d/cuda.conf <<< /usr/local/cuda/lib64
     sudo ldconfig
 
 RHEL-derived Distributions
@@ -199,23 +206,23 @@ your virtual server, using the following steps:
     (cd /etc/nvidia/ClientConfigToken && curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/licenses/client_configuration_token_12-29-2022-15-20-23.tok)
 
 Edit the GRID driver configuration file ``/etc/nvidia/gridd.conf`` and
-ensure that ``FeatureType`` is set to ``1``. Then restart the NVIDIA
-``gridd`` daemon. The following commands apply the setting and restart
-the daemon:
+ensure that ``FeatureType`` is set to ``1``. Then restart the ``nvidia-
+gridd`` service. The following commands apply the setting and restart
+the service:
 
 .. code-block:: bash
 
     sudo sed -i -e '/^\(FeatureType=\).*/{s//\11/;:a;n;ba;q}' -e '$aFeatureType=1' /etc/nvidia/gridd.conf
     sudo systemctl restart nvidia-gridd
 
-After the daemon has been restarted, check the license status of the
+After the service has been restarted, check the license status of the
 vGPU:
 
 .. code-block:: bash
 
     nvidia-smi -q | grep 'License Status'
 
-This should return a line stating it is "Licensed" with an expiry in
+This should return a line stating it is "Licensed" with an expiry date in
 the future.
 
 (Optional) Install the CUDA toolkit, if CUDA support is needed:
@@ -239,7 +246,7 @@ available for applications to link and load:
 
 .. code-block:: bash
 
-    sudo tee /etc/ld.so.conf.d/cuda.conf << /usr/local/cuda/lib64
+    sudo tee /etc/ld.so.conf.d/cuda.conf <<< /usr/local/cuda/lib64
     sudo ldconfig
 
 **************
