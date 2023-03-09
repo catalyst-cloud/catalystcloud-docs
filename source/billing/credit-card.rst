@@ -121,5 +121,5 @@ Your Project Billing Details tab should have a pending message:
 .. image:: resources/pending-payment-method.png
 
 
-.. _login: https://dashboard.cloud.catalyst.net.nz/management/account/
+.. _login: https://dashboard.catalystcloud.nz/management/account/
 
