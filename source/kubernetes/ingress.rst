@@ -20,6 +20,10 @@ typically via an HTTP or L7 load balancer. It is vital that both pieces are
 properly configured to route traffic from an outside client to a Kubernetes
 Service.
 
+For more information, see `Kubernetes Ingress Documentation`_.
+
+.. _`Kubernetes Ingress Documentation`: https://kubernetes.io/docs/concepts/services-networking/ingress/
+
 Prerequisites
 =============
 
@@ -54,12 +58,12 @@ setup an Octavia ingress on your cluster.
 
 The following scenarios will be covered.
 
-* simple HTTP ingress
+* Simple HTTP ingress
 
 
-***************************
-Simple ingress with Octavia
-***************************
+********************************
+Simple HTTP ingress with Octavia
+********************************
 
 .. _ingress_test_app:
 
@@ -88,14 +92,50 @@ Then we need to create a service to expose the pods on port 80 with the type
 
 .. code-block:: console
 
-  $ kubectl expose deployment echoserver --type=NodePort --target-port=8080 --port 80 --name=echoserver-svc
+  $ kubectl expose deployment echoserver-deployment --type=NodePort --target-port=8080 --port 80 --name=echoserver-svc
+
+Before we move on to ingress, it's useful to test the Service from within the cluster
+
+.. code-block:: console
+
+  # Create a temporary pod in interactive mode, to test within pod networks.
+  $ kubectl run --rm -it --image nginx shell -- bash
+
+  # Request directly to the service address.
+  root@shell:/# curl http://echoserver-svc.default.svc.cluster.local
+
+    Hostname: echoserver-deployment-7fcdd7b5cd-kgp4r
+
+    Pod Information:
+      -no pod information available-
+
+    Server values:
+      server_version=nginx: 1.13.3 - lua: 10008
+
+    Request Information:
+      client_address=10.100.1.16
+      method=GET
+      real path=/
+      query=
+      request_version=1.1
+      request_scheme=http
+      request_uri=http://echoserver-svc.default.svc.cluster.local:8080/
+
+    Request Headers:
+      accept=*/*
+      host=echoserver-svc.default.svc.cluster.local
+      user-agent=curl/7.74.0
+
+    Request Body:
+      -no body in request-
+
 
 .. warning::
 
   After creating an Ingress, if an existing service is re-created with the
   same service port but with a different NodePort, the Ingress will not work
-  and you will need to manually update the Ingress to recognize the new node
-  port.
+  and you will need to recreate the Ingress or manually update it to send data
+  to the new node port.
 
 Deploying the ingress
 =====================
@@ -118,15 +158,19 @@ have defined the following:
   ingress.networking.k8s.io/test-octavia-ingress created
 
 
-Now we can test our connectivity with the following:
+Now we can test our connectivity against the Octavia Loadbalancer:
 
 .. code-block:: console
 
-  $ ip=103.197.61.251
-  $ curl -H "Host:api.sample.com" http://$ip/ping/
+  # Obtain IP address of ingress (it may take a minute or two to appear, as the loadbalancer is created)
+  $ kubectl get ingress test-octavia-ingress
+  NAME                   CLASS    HOSTS             ADDRESS      PORTS   AGE
+  test-octavia-ingress   <none>   api.example.com   10.10.8.81   80      119s
 
+  # Make a request against the Ingress loadbalancer IP.
+  $ curl -H "Host:api.example.com" http://10.10.8.81/
 
-  Hostname: echoserver-66ff84f846-ljc9h
+  Hostname: echoserver-deployment-7fcdd7b5cd-rmzll
 
   Pod Information:
     -no pod information available-
@@ -135,21 +179,22 @@ Now we can test our connectivity with the following:
     server_version=nginx: 1.13.3 - lua: 10008
 
   Request Information:
-    client_address=10.0.0.12
+    client_address=10.0.0.10
     method=GET
-    real path=/ping/
+    real path=/
     query=
     request_version=1.1
     request_scheme=http
-    request_uri=http://api.sample.com:8080/ping/
+    request_uri=http://api.example.com:8080/
 
   Request Headers:
     accept=*/*
-    host=api.sample.com
-    user-agent=curl/7.64.1
+    host=api.example.com
+    user-agent=curl/7.68.0
 
   Request Body:
     -no body in request-
+
 
 Cleanup
 =======
@@ -159,12 +204,13 @@ that holds the files you created during your deployment.
 
 .. code-block:: console
 
-  $ for i in octavia-ing-*; do kubectl delete -f $i ; done
-  configmap "octavia-ingress-controller-config" deleted
+  $ kubectl delete -f deployment-echoserver.yml -f octavia-ing-ingress.yml
+  deployment.apps "echoserver-deployment" deleted
   ingress.networking.k8s.io "test-octavia-ingress" deleted
-  serviceaccount "octavia-ingress-controller" deleted
-  clusterrolebinding.rbac.authorization.k8s.io "octavia-ingress-controller" deleted
-  statefulset.apps "octavia-ingress-controller" deleted
+
+  $ kubectl delete service echoserver-svc
+  service "echoserver-svc" deleted
+
 
 **********************************
 Using the Nginx ingress controller
