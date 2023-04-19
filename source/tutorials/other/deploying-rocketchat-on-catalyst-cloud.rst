@@ -26,7 +26,7 @@ server.
 We'll be using a self signed certificate for HTTPS encryption.
 Setting up a certificate from a CA such as `Let's Encrypt
 <https://letsencrypt.org/>`_ is very easy and packages such as `Certbot
-<http://certbot.eff.org>`_ make this process extremely user friendly.
+<https://certbot.eff.org>`_ make this process extremely user friendly.
 This will require a domain name set up, and is outside the scope of this
 tutorial.
 

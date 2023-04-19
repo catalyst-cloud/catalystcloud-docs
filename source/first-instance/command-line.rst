@@ -253,7 +253,7 @@ Use ``openstack keypair create`` to upload your Public SSH key.
 
 .. note::
 
- Keypairs must be created in each region being used.
+ Key pairs must be created in each region being used.
 
 
 Now we choose the network to host our instance:
@@ -335,7 +335,7 @@ for later use:
 
  Ensure that this variable is correctly set and if not, set it manually. If you are unsure of
  what ``CC_REMOTE_CIDR_NETWORK`` should be, ask your network administrator, or visit
- http://ifconfig.me to find your IP address. Use "<IP_ADDRESS>/32" as ``CC_REMOTE_CIDR_NETWORK``
+ https://ifconfig.me to find your IP address. Use "<IP_ADDRESS>/32" as ``CC_REMOTE_CIDR_NETWORK``
  to allow traffic only from your current effective IP.
 
 Create a rule to restrict SSH access to your instance to the current public IP

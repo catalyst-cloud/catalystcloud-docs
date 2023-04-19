@@ -42,7 +42,7 @@ New features
 
 .. _`Fedora CoreOS`: https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/
 .. _Podman: https://podman.io/
-.. _Calico: https://docs.projectcalico.org/getting-started/kubernetes/
+.. _Calico: https://docs.tigera.io/calico/latest/getting-started/kubernetes/
 .. _CoreDNS: https://coredns.io/
 .. _`Kubernetes Web UI (dashboard)`: https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 .. _Prometheus: https://prometheus.io/
@@ -55,9 +55,9 @@ New features
   - `Octavia ingress controller`_ v1.18.0
   - `Magnum auto healer`_ v1.18.0
 
-.. _`Keystone Webhook Authentication Authorization`: (https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/using-keystone-webhook-authenticator-and-authorizer.md)
-.. _`Octavia ingress controller`: https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/using-octavia-ingress-controller.md)
-.. _`Magnum auto healer`: https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/using-magnum-auto-healer.md)
+.. _`Keystone Webhook Authentication Authorization`: https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/keystone-auth/using-keystone-webhook-authenticator-and-authorizer.md
+.. _`Octavia ingress controller`: https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/octavia-ingress-controller/using-octavia-ingress-controller.md
+.. _`Magnum auto healer`: https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/magnum-auto-healer/using-magnum-auto-healer.md
 
 
 Known limitations

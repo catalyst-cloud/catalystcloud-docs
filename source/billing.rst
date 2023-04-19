@@ -27,5 +27,5 @@ your costs over time:
 .. image:: billing/resources/usage-cost.png
    :align: center
 
-.. _tool: https://dashboard.cloud.catalyst.net.nz/management/billing/
+.. _tool: https://dashboard.catalystcloud.nz/management/billing/
 

@@ -6,10 +6,10 @@ set up the underlying infrastructure and configure instances. As such Ansible
 can replace other tools, such as Heat for OpenStack orchestration, and Puppet
 for instance configuration.
 
-.. _Ansible: http://www.ansible.com/
+.. _Ansible: https://www.ansible.com/
 
 Comprehensive documentation of the Ansible OpenStack modules is available at
-https://docs.ansible.com/ansible/list_of_cloud_modules.html#openstack
+https://docs.ansible.com/ansible/latest/collections/openstack/cloud/index.html#plugins-in-openstack-cloud
 And for any troubleshooting issues you may face using Ansible you can refer to
 the following: https://docs.ansible.com/ansible-tower/2.2.0/html/administration/troubleshooting.html
 
@@ -20,7 +20,7 @@ OpenStack libraries within a Python virtual environment. This script is part of
 the `catalystcloud-ansible`_ git repository. Clone this repository and run the
 install script in order to install Ansible.
 
-.. _catalystcloud-ansible: https://github.com/catalyst/catalystcloud-ansible
+.. _catalystcloud-ansible: https://github.com/catalyst-cloud/catalystcloud-ansible
 
 .. code-block:: bash
 

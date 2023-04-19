@@ -25,8 +25,8 @@ To achieve this, you will create a ``heat`` template that will handle the
 creation of the instance and then run a nested cloud-config script via
 `cloud-init`_ that will handle the provisioning of Puppet on the new server.
 
-.. _Puppet: https://puppetlabs.com/
-.. _cloud-init: http://cloudinit.readthedocs.org/en/latest/index.html
+.. _Puppet: https://www.puppet.com/
+.. _cloud-init: https://cloudinit.readthedocs.io/en/latest/index.html
 
 *****
 Setup
@@ -81,7 +81,7 @@ The network ID values found previously have been added to the relevant
 parameters as defaults. It is also possible to pass these values in as
 arguments from the command line, as shown `here`_.
 
-.. _here: http://docs.openstack.org/cli-reference/heat.html#heat-stack-create
+.. _here: https://docs.openstack.org/python-openstackclient/latest/cli/plugin-commands/heat.html#stack-create
 
 
 .. code-block:: yaml

@@ -86,7 +86,7 @@ Finally you'll create a new file called ``duplicity-backup-cron``
 in /etc/cron.d/. This is the cron job that will be responsible for running the
 backups. See (`cron`_) for more information on this.
 
-.. _cron: http://man7.org/linux/man-pages/man8/cron.8.html
+.. _cron: https://man7.org/linux/man-pages/man8/cron.8.html
 
 .. code-block:: bash
 

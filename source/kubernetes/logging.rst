@@ -38,7 +38,7 @@ collector aimed at providing a unified logging layer with a pluggable
 architecture.
 
 .. _`Fluentd`: https://www.fluentd.org
-.. _`Cloud Native Computing Foundation (CNCF)`: https://cncf.io/
+.. _`Cloud Native Computing Foundation (CNCF)`: https://www.cncf.io/
 
 It attempts to structure all data as JSON in order to unify the collecting,
 filtering, buffering and outputting of log data from multiple sources and

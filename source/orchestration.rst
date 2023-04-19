@@ -23,7 +23,7 @@ to provision and manage software. It can run `Puppet`_ in standalone
 mode, or be used to present compute instances back to the Puppet/Chef master
 for software configuration.
 
-.. _Puppet: https://puppetlabs.com/
+.. _Puppet: https://www.puppet.com/
 
 On top of all the benefits that the cloud orchestration service offers you,
 there are no additional charges for its use.

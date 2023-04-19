@@ -66,11 +66,11 @@ This tutorial describes using a proxy redirection service. If you are
 interested in DNS based failover options, there are a number of providers who
 provide combined monitoring and automated failover:
 
-- http://totaluptime.com/solutions/cloud-dns/cloud-dns-failover/
-- http://dyn.com/managed-dns/active-failover/
+- https://totaluptime.com/solutions/cloud-dns-service/
+- https://www.oracle.com/cloud/networking/dns/
 - https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html
-- http://www.dnsmadeeasy.com/services/dnsfailover/
-- https://www.zoneedit.com/failover.html
+- https://dnsmadeeasy.com/services/dnsfailover
+- https://www.zoneedit.com/features/
 
 **********
 Fastly CDN
@@ -91,14 +91,14 @@ the caching rules set by the origin servers.
 
 .. _content delivery network: https://en.wikipedia.org/wiki/Content_delivery_network
 
-.. _many points of presence: https://www.fastly.com/network
+.. _many points of presence: https://www.fastly.com/network-map
 
 Please consult Fastly's `getting started guide`_ and `documentation`_ for more
 in depth coverage of how their service works.
 
-.. _getting started guide: https://docs.fastly.com/guides/basic-setup/getting-started-with-fastly
+.. _getting started guide: https://docs.fastly.com/en/guides/start-here
 
-.. _documentation: https://docs.fastly.com/guides/about-fastly-services/how-fastlys-cdn-service-works
+.. _documentation: https://docs.fastly.com/en/fundamentals/fastly-cdn
 
 Fastly has a number of features that make it useful for us:
 
@@ -317,7 +317,7 @@ select.
 
 .. _signup: https://www.fastly.com/signup
 
-.. _pricing: https://docs.fastly.com/guides/account-types-and-billing/accounts-and-pricing-plans
+.. _pricing: https://docs.fastly.com/en/guides/account-types
 
 **************************
 Fastly basic configuration
@@ -331,7 +331,7 @@ Please follow the Fastly documentation to `signup and create your first
 service`_. You can skip the final step of creating a CNAME for your domain if
 you do not wish to configure DNS.
 
-.. _signup and create your first service: https://docs.fastly.com/guides/basic-setup/sign-up-and-create-your-first-service
+.. _signup and create your first service: https://docs.fastly.com/en/guides/start-here
 
 Once you have signed up and logged in to the Fastly app using the verification
 link emailed to you, you will be presented with a Quick Start wizard.
@@ -390,7 +390,7 @@ Fastly uses the `varnish`_ cache from the ``Via: 1.1 varnish`` header.
 that Fastly is not caching any of your content from the ``X-Cache: MISS`` header.
 This is expected due to the Cache-Control headers you have set in Nginx.
 
-.. _varnish: https://www.varnish-cache.org/
+.. _varnish: https://varnish-cache.org/
 
 ***********************************
 Fastly backup backend configuration
@@ -413,7 +413,7 @@ you are happy that it is sane and validates. Please see the Fastly `working
 with services`_ documentation for more information about service versions and
 their activation.
 
-.. _working with services: https://docs.fastly.com/guides/basic-setup/working-with-services#service-versions-and-their-activation
+.. _working with services: https://docs.fastly.com/en/guides/working-with-services#understanding-services-and-versions
 
 .. image:: ../_static/rf-clone.png
    :align: center
@@ -461,7 +461,7 @@ you just created in the **Health Check** dropdown for this backend:
 
 See the Fastly `health checks tutorial`_ for additional information.
 
-.. _health checks tutorial: https://docs.fastly.com/guides/basic-configuration/health-checks-tutorial
+.. _health checks tutorial: https://docs.fastly.com/en/guides/working-with-health-checks
 
 *****************************
 Fastly failover configuration
@@ -470,7 +470,7 @@ Fastly failover configuration
 Now you are going to follow the Fastly `documentation for configuring a
 failover origin server`_.
 
-.. _documentation for configuring a failover origin server: https://docs.fastly.com/guides/performance-tuning/load-balancing-and-failover#configuring-a-failover-origin-server
+.. _documentation for configuring a failover origin server: https://docs.fastly.com/en/guides/automatic-load-balancing#enabling-load-balancing
 
 This comprises three steps:
 

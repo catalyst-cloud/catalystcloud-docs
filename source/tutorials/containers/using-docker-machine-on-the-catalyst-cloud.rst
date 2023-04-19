@@ -12,7 +12,7 @@ responsible for providing the lightweight runtime on which containers are run.
 
 .. _Docker: https://www.docker.com/
 
-.. _Docker Engine: https://www.docker.com/docker-engine
+.. _Docker Engine: https://docs.docker.com/engine/
 
 `Docker Machine`_ is a tool that allows you to provision Docker Engines either
 locally or hosted with a cloud provider. Docker Machine has a number of
@@ -20,9 +20,9 @@ different drivers to facilitate installing the Docker Engine on different cloud
 providers. On the Catalyst Cloud we will be making use of the OpenStack
 `driver`_.
 
-.. _driver: https://docs.docker.com/machine/drivers/openstack/
+.. _driver: https://superuser.openinfra.dev/articles/using-docker-machine-with-openstack/
 
-.. _Docker Machine: https://www.docker.com/docker-machine
+.. _Docker Machine: https://github.com/docker/machine
 
 Once a Docker Engine has been provisioned on a VM instance, the local docker
 client can be configured to talk to the remote Docker Engine, rather than
@@ -165,7 +165,7 @@ You can issue the ``openstack security group list`` command to find your
 
 
 If you are unsure of what ``YOUR_CIDR_NETWORK`` should be, ask your network
-admin, or visit http://ifconfig.me and get your IP address. Use
+admin, or visit https://ifconfig.me and get your IP address. Use
 "IP_ADDRESS/32" as YOUR_CIDR_NETWORK to allow traffic only from your current
 effective IP.
 
@@ -346,9 +346,5 @@ Documentation
 *************
 
 * `Docker Machine Documentation`_
-* `Docker Machine Installation Documentation`_
-* `Docker Machine OpenStack Driver Documentation`_
 
-.. _Docker Machine Documentation: https://www.docker.com/docker-machine
-.. _Docker Machine Installation Documentation: https://docs.docker.com/machine/install-machine/
-.. _Docker Machine OpenStack Driver Documentation: https://docs.docker.com/machine/drivers/openstack/
+.. _Docker Machine Documentation: https://github.com/docker/machine

@@ -225,7 +225,7 @@ This guide makes the following assumptions.
   OpenStack RC file, as explained at :ref:`command-line-interface`
 * You have installed `kubectl`_ and and familiar with its use.
 
-.. _`kubectl`: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+.. _`kubectl`: https://kubernetes.io/docs/tasks/tools/#kubectl
 
 Some working examples
 =====================

@@ -6,7 +6,7 @@ Submitting a patch
 Cloning the repo
 ****************
 
-Go to https://github.com/catalyst/catalystcloud-docs and fork the docs to your
+Go to https://github.com/catalyst-cloud/catalystcloud-docs and fork the docs to your
 own account on GitHub.
 
 Clone the docs::
@@ -51,11 +51,6 @@ save files, the changes will appear in your browser.
 If you are adding a new document, you may want to add it to the index.rst, so
 that people can find it when navigating the docs.
 
-If you're using the `Atom text editor <https://atom.io/>`_, we recommend
-installing the `Sphinx language <https://atom.io/packages/language-sphinx>`_
-package, and making extensive use of the Reflow selection command
-(``Shift+Ctrl+Q``).
-
 When done::
 
   git add source/*
@@ -75,7 +70,7 @@ Push the changes back to your personal branch::
 Submitting your changes to be added
 ***********************************
 
-Submit a `pull request <https://help.github.com/articles/using-pull-requests/>`_
+Submit a `pull request <https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests>`_
 to Catalyst Cloud on GitHub.
 
 Our awesome team of document reviewers will peer review and proof read your

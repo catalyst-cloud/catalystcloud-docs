@@ -12,7 +12,7 @@ https://wiki.openstack.org/wiki/OpenStackClients
 
 OpenStack has a very rich ecosystem. Often multiple SDK options exist for a
 given language. The 'Development resources for OpenStack clouds' page, found at
-http://developer.openstack.org/, provides recommendations for the most stable
+https://developer.openstack.org/, provides recommendations for the most stable
 and feature rich SDK for your preferred language.
 
 SDKs for all other major languages can be found at:
