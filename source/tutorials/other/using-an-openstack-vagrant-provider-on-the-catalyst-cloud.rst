@@ -92,10 +92,10 @@ The next step is to create a ``Vagrantfile`` in the root of your repository:
      # https://catalystcloud.nz/pricing/price-list/
      os.flavor               = 'c1.c1r1'
      # Select an image to start with.
-     # https://dashboard.cloud.catalyst.net.nz/project/images
+     # https://dashboard.catalystcloud.nz/project/images
      os.image                = 'ubuntu-14.04-x86_64'
      # Select from what you have available.
-     # https://dashboard.cloud.catalyst.net.nz/project/security_groups/
+     # https://dashboard.catalystcloud.nz/project/security_groups/
      os.security_groups      = ['default', 'dev']
      os.floating_ip_pool     = 'public-net'
    end

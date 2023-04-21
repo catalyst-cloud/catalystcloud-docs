@@ -15,7 +15,7 @@ Before you begin
 
 1) We assume you've already `signed up <https://catalystcloud.nz/signup/>`_ to
    the Catalyst Cloud.
-2) Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
+2) Log in to the dashboard at https://dashboard.catalystcloud.nz/
 3) As a new user to the Catalyst Cloud your initial cloud project will come with
    a pre-configured private network and a router connected to the internet in
    the Hamilton region. We still cover the proper steps to creating these

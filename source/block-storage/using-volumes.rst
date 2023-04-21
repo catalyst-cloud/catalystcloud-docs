@@ -12,7 +12,7 @@ The easiest method to create and attach a volume to an instance would be to use
 the Catalyst Cloud `web dashboard`_. From the volumes tab on the dashboard you
 can create, delete, and manage your block storage volumes.
 
-.. _web dashboard: https://../first-instance/dashboard.cloud.catalyst.net.nz
+.. _web dashboard: https://../first-instance/dashboard.catalystcloud.nz
 
 .. image:: _assets/volume-page.png
 

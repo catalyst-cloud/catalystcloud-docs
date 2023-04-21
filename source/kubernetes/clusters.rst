@@ -182,7 +182,7 @@ will not fail due to disk pressure, making for a more reliable and resilient
 cluster overall.
 
 
-.. _`Cluster Templates`: https://dashboard.cloud.catalyst.net.nz/project/cluster_templates
+.. _`Cluster Templates`: https://dashboard.catalystcloud.nz/project/cluster_templates
 
 .. _setting_up_kubectl:
 
@@ -423,7 +423,7 @@ You can use the following command to check the status of the cluster:
 Alternatively, you can check the status of the cluster on the `Clusters panel`_
 , in the ``Container Infra`` section of the Dashboard.
 
-.. _`Clusters panel`: https://dashboard.cloud.catalyst.net.nz/project/clusters
+.. _`Clusters panel`: https://dashboard.catalystcloud.nz/project/clusters
 
 Please wait until the status changes to ``CREATE_COMPLETE`` to proceed.
 
