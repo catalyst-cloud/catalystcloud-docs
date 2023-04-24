@@ -109,7 +109,7 @@ elements in order to avoid ambiguity when running commands.
     with the ``ip_address`` key within the ``external_gateway_info``.
 
     As we are creating a VPN that connects our Catalyst Cloud project across
-    two regions, the **remote reer router IP** and
+    two regions, the **remote peer router IP** and
     **remote peer subnet CIDR range** will be the values associated with the
     subnet and router in the other region.
 
@@ -735,3 +735,39 @@ elements in order to avoid ambiguity when running commands.
     at the other end using the same configuration options and PSK. Once both
     sides of the VPN are configured, the peers should automatically detect
     each other and bring up the VPN.
+
+*********************************
+Creating multiple VPN connections
+*********************************
+
+There are situations where you may need multiple VPNs to your Catalyst Cloud project, for example if you have offices
+in two locations and need VPNs from both to connect into your project.
+
+To create another VPN to your Catalyst Cloud project you can create another IPsec Site Connection under the same
+VPN Service by following these steps:
+
+* Create a VPN IKE Policy (if your new VPN needs a different policy)
+* Create a VPN IPSec Policy (if required)
+* Create a VPN Endpoint Group for the peer CIDR
+* Create a VPN IPSec Site Connection that uses the existing VPN Service
+
+You should now have two VPN Connections running on the same Router.
+
+.. image:: _static/vpn-connection-multiple.png
+
+.. Warning::
+
+  A Router can only support one VPN Service. If you add additional VPN Services to the same router then the existing
+  VPN Service will go down.
+
+********************************
+Troubleshooting a VPN connection
+********************************
+
+If your VPN connection fails to become active then we suggest using the following check list:
+
+* Check that the settings in the IKE Policy match at your local end and in Catalyst Cloud
+* Check that the settings in the IPSec Policy match at your local end and in Catalyst Cloud
+* Check that the pre-shared key matches at both ends
+* Check that the firewall at your end allows UDP traffic on ports 500 and 4500
+
