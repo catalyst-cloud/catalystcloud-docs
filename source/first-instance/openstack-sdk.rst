@@ -6,7 +6,7 @@ libraries are written to support a particular service like compute, while
 others attempt to provide a unified interface to all services.
 
 You will find an up to date list of recommended SDKs at
-http://developer.openstack.org/. A more exhaustive list that includes in
+https://developer.openstack.org/. A more exhaustive list that includes in
 development SDKs is available at https://wiki.openstack.org/wiki/SDKs.
 
 This section covers the OpenstackSDK which is a python based SDK with

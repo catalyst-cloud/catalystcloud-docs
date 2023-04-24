@@ -10,7 +10,7 @@ Kubernetes Versions
 
 Kubernetes community releases a minor version about every three months. In those
 minor version releases, there are some new features and bug fixes. Patch versions
-will be released more frequent (e.g. weekly) and genereally to include critical
+will be released more frequent (e.g. weekly) and generally to include critical
 fixes , e.g. security fixes.
 
 Catalyst Cloud Kubernetes Service supports each ``minor`` version for at least
@@ -54,10 +54,10 @@ example: *kubernetes-v1.23.16-prod-20230125*, the last 8 digits is the release
 date of this template tagged by Catalyst Cloud.
 
 
-For more information, see `Kubernetes Release Versioning`_.
+For more information, see `Kubernetes Releases`_.
 
-.. _`Semantic Versioning`: http://semver.org/
-.. _`Kubernetes Release Versioning`: https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md#kubernetes-release-versioning
+.. _`Semantic Versioning`: https://semver.org/
+.. _`Kubernetes Releases`: https://kubernetes.io/releases/
 
 Kubernetes Versions Support Policy
 ==================================

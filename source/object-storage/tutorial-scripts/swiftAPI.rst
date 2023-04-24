@@ -2,7 +2,7 @@ For this section of the documentation, we will cover the basic features of
 using the Swift object storage API. For a more in depth understanding of the
 features that are offered via this API we recommend reading through the
 official `OpenStack documentation
-<http://developer.openstack.org/api-ref/object-storage/>`_
+<https://docs.openstack.org/api-ref/object-store/>`_
 
 .. raw:: html
 

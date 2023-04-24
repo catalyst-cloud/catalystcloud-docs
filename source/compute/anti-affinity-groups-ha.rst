@@ -246,4 +246,4 @@ Using programmatic methods
 Via the APIs
 ============
 Please refer to the server groups API calls at
-http://developer.openstack.org/api-ref/compute/#server-groups-os-server-groups.
+https://docs.openstack.org/api-ref/compute/#server-groups-os-server-groups.

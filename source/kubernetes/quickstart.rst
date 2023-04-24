@@ -55,7 +55,7 @@ By default, the development Kubernetes template allocates:
 As a ``project admin`` you can change your quota using the `Quota Management`_
 panel in the dashboard, under the Management section.
 
-.. _`Quota Management`: https://dashboard.cloud.catalyst.net.nz/management/quota/
+.. _`Quota Management`: https://dashboard.catalystcloud.nz/management/quota/
 
 Download and install kubectl
 ============================
@@ -74,7 +74,7 @@ be used to quickly install ``kubectl`` on Linux as a static binary:
 For other platforms or installation methods, please refer to the `detailed
 instructions on how to install kubectl`_.
 
-.. _`detailed instructions on how to install kubectl`: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+.. _`detailed instructions on how to install kubectl`: https://kubernetes.io/docs/tasks/tools/#kubectl
 
 Choosing a cluster template
 ===========================
@@ -259,7 +259,7 @@ cluster:
 Alternatively, you can check the status of the cluster on the `Clusters`_
 panel, in the **Container Infra** section of the Dashboard.
 
-.. _`Clusters`: https://dashboard.cloud.catalyst.net.nz/project/clusters
+.. _`Clusters`: https://dashboard.catalystcloud.nz/project/clusters
 
 Once these steps have been followed you will and your cluster state becomes
 ``CREATE_COMPLETE``, you will be ready to use.

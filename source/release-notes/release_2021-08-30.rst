@@ -15,7 +15,7 @@ being deprecated in versions v1.21.x. of Kubernetes going forward. This means
 that while you can still choose to use this policy on the Catalyst Cloud, there
 will not be upstream support for the service.
 
-.. _PodSecurityPolicy: https://kubernetes.io/docs/concepts/policy/pod-security-policy/
+.. _PodSecurityPolicy: https://kubernetes.io/docs/concepts/security/pod-security-policy/
 
 .. _admission controllers: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/
 

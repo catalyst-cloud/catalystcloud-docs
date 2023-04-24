@@ -15,7 +15,7 @@ The web dashboard
 
 The cloud dashboard is a simple way to interact with
 The Catalyst Cloud. It is publicly available on the Internet and can be reached
-at: https://dashboard.cloud.catalyst.net.nz
+at: https://dashboard.catalystcloud.nz
 
 
 .. image:: assets/dashboard_view.png
@@ -50,7 +50,7 @@ with its functioning by following :ref:`this tutorial
 
 For more in depth documentation, the official OpenStack Client documentation is
 the most thorough source of information. You can `find it here
-<https://docs.openstack.org/python-openstackclient>`_.
+<https://docs.openstack.org/python-openstackclient/latest/>`_.
 
 
 ****************

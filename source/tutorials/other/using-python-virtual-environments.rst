@@ -10,7 +10,7 @@ reading `the virtualenv section of the Python documentation`_ for an overview.
 This page was made to provide a cheat sheet for the most commonly used commands
 and actions that you can take when using a python virtual environment.
 
-.. _the virtualenv section of the Python documentation: http://docs.python-guide.org/en/latest/dev/virtualenvs/
+.. _the virtualenv section of the Python documentation: https://docs.python-guide.org/dev/virtualenvs/
 
 ****************************
 Create a virtual environment

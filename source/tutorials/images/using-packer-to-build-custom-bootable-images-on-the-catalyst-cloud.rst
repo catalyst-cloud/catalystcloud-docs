@@ -382,9 +382,9 @@ accordingly, simply run the Packer build command as discussed above.
 
 .. _Packer: https://www.packer.io/
 .. _Hashicorp: https://www.hashicorp.com/
-.. _builders: https://www.packer.io/docs/templates/builders.html
-.. _Provisioners: https://www.packer.io/docs/templates/provisioners.html
-.. _Openstack builder: https://www.packer.io/docs/builders/openstack.html
-.. _Templates: https://www.packer.io/docs/templates/introduction.html
+.. _builders: https://developer.hashicorp.com/packer/docs/builders
+.. _Provisioners: https://developer.hashicorp.com/packer/docs/provisioners
+.. _Openstack builder: https://developer.hashicorp.com/packer/plugins/builders/openstack
+.. _Templates: https://developer.hashicorp.com/packer/docs/templates
 .. _ssllabs-scan: https://github.com/ssllabs/ssllabs-scan
-.. _golang: https://golang.org/
+.. _golang: https://go.dev/

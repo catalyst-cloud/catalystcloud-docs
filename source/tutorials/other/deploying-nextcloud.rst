@@ -279,10 +279,10 @@ Link References
 
 .. target-notes::
 
-.. _`Launch a stack`: https://dashboard.cloud.catalyst.net.nz/project/stacks/select_template
+.. _`Launch a stack`: https://dashboard.catalystcloud.nz/project/stacks/select_template
 .. _`catalyst cloud orchestration`: https://github.com/catalyst-cloud/catalystcloud-orchestration/tree/master/nextcloud/terraform
 .. _`Terraform documentation`: https://www.terraform.io/docs/language/index.html
-.. _`cloud init`: https://cloudinit.readthedocs.io/en/latest/topics/examples.html
+.. _`cloud init`: https://cloudinit.readthedocs.io/en/latest/reference/examples.html
 .. _`NGINX`: https://nginx.org/en/docs/
 .. _`NGINX_proxy_acme_companion`: https://github.com/nginx-proxy/acme-companion
 .. _`Nextcloud apps`: https://apps.nextcloud.com/

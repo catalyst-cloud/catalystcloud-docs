@@ -8,27 +8,27 @@ is the `Openstack provider`_.
 .. _Terraform: https://www.terraform.io/
 .. _Hashicorp: https://www.hashicorp.com/
 .. _providers: https://www.terraform.io/docs/providers/index.html
-.. _Openstack provider: https://www.terraform.io/docs/providers/openstack/index.html
+.. _Openstack provider: https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs
 
 For further information on using Terraform with OpenStack, see the linked
 `video`_ and `blog`_ post:
 
 * https://www.openstack.org/videos/tokio-2015/tokyo-3141
-* http://blog.scottlowe.org/2015/11/25/intro-to-terraform/
+* https://blog.scottlowe.org/2015/11/25/intro-to-terraform/
 
 .. _video: https://www.openstack.org/videos/tokio-2015/tokyo-3141
-.. _blog: http://blog.scottlowe.org/2015/11/25/intro-to-terraform/
+.. _blog: https://blog.scottlowe.org/2015/11/25/intro-to-terraform/
 
 
 Installation of Terraform is very simple. Go to the `Terraform download`_
 page and choose the zip file that matches your operating system and
 architecture. Unzip this file to the location where Terraform's binaries
 will reside on your system. Terraform is written in `Go`_, so it has minimal
-dependencies. Please refer to https://www.terraform.io/intro/getting-started/install.html
+dependencies. Please refer to https://developer.hashicorp.com/terraform/downloads
 for detailed install instructions.
 
 .. _Terraform download: https://www.terraform.io/downloads.html
-.. _Go: https://golang.org/
+.. _Go: https://go.dev/
 
 .. code-block:: bash
 
@@ -42,9 +42,6 @@ for detailed install instructions.
 Before running Terraform, ensure your OpenStack credentials have been
 set up. These variables are read by the `OpenStack provider`_ and will provide
 Terraform with permissions to access the Catalyst Cloud APIs.
-
-.. _OpenStack provider: https://www.terraform.io/docs/providers/openstack/index.html
-
 
 .. note::
 

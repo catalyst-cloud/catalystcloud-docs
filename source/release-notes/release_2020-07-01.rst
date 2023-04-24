@@ -15,7 +15,7 @@ Kubernetes service (Magnum)
 For a full list of the Kubernetes version changes please see upstream release
 notes for `1.18.2`_
 
-.. _`1.18.2`: https://kubernetes.io/docs/setup/release/notes/
+.. _`1.18.2`: https://github.com/kubernetes/kubernetes/tree/release-1.18/CHANGELOG
 
 New Features
 ============

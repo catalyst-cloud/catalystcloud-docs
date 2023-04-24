@@ -322,6 +322,6 @@ Cloud-init official docs
 
 For other formats and more detailed information on how to use cloud-init to
 initialise your compute instances, please refer to the `cloud-init official
-documentation <cloud-init>`_.
+documentation <cloud-init_>`_.
 
-.. _cloud-init: https://cloudinit.readthedocs.io
+.. _cloud-init: https://cloudinit.readthedocs.io/en/latest/

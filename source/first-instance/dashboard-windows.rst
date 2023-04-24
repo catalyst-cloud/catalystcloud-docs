@@ -2,7 +2,7 @@
 Windows instance using the web interface
 ########################################
 
-Log in to the dashboard at https://dashboard.cloud.catalyst.net.nz/
+Log in to the dashboard at https://dashboard.catalystcloud.nz/
 
 As a new user to the Catalyst Cloud, your initial cloud project will come
 with a pre-configured private network and a router connected to the internet.

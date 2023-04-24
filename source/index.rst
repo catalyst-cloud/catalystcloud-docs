@@ -45,7 +45,7 @@ The Catalyst Cloud documentation is intended as a supplement to the
 documentation maintained by the OpenStack Foundation.  It is meant to clarify
 details about the Catalyst Cloud that may not be applicable OpenStack in
 general. The OpenStack Foundation documents can be found at
-http://docs.openstack.org/.
+https://docs.openstack.org/.
 
 You can find more information about the Catalyst Cloud, including prices and
 its terms and conditions at https://catalystcloud.nz/.

@@ -8,7 +8,7 @@ simple orchestration of Ansible, combined with the vast library of modules
 available with Puppet.
 
 .. _Ansible: https://www.ansible.com/
-.. _Puppet: https://puppet.com/
+.. _Puppet: https://www.puppet.com/
 
 You will need:
 
@@ -54,7 +54,7 @@ specific to your local setup.
     # NB: This option stores your OS_PASSWORD in plaintext on the Puppet Master
     # with 0440 permissions.
     # If you're not comfortable storing your credentials in here, you can create an
-    # account at https://dashboard.cloud.catalyst.net.nz/management/project_users/
+    # account at https://dashboard.catalystcloud.nz/management/project_users/
     # and give it the project member role. Then use these credentials for the
     # remainder of this project.
     echo "ansible_store_os_password: yes" >> local-vars.yml
