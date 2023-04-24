@@ -93,9 +93,8 @@ allowing for recovery from unintended overwrites.
 
 To enable object versioning for a container, you must specify an **archive
 container** that will retain non-current versions via either the
-``X-Versions-Location`` or ``X-History-Location header``.
-These two headers enable two distinct modes of operation which we will discuss
-shortly.
+``X-Versions-Location`` or ``X-History-Location header``. These two headers
+enable two distinct modes of operation which we will discuss shortly.
 
 First, you need to create an archive container to store the older versions of
 your objects:
@@ -430,7 +429,7 @@ capable of handling oversized files and gives you the choice of
 using either``static large objects (SLO)`` or``dynamic large objects (DLO)``,
 which will be explained in more detail later.
 
-.. _python-swiftclient: http://github.com/openstack/python-swiftclient
+.. _python-swiftclient: https://github.com/openstack/python-swiftclient
 
 Before getting in to the distinctions between SLO and DLO, here are two
 examples of how to upload a large object to an object storage

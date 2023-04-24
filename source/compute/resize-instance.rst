@@ -1,16 +1,24 @@
+.. _resize-server:
+
 ####################
 Resizing an instance
 ####################
 
 The resize operation can be used to change the flavor (increase or decrease the
-amount of CPU and RAM) of a compute instance.
+amount of CPU and RAM, or change the type) of a compute instance.
 
 .. warning::
-  The resize operation causes a brief downtime of the compute instance, as the
-  guest operating system will be restarted to pick up the new configuration. If
-  you need to scale your application without downtime, consider scaling it
-  horizontally (add/remove compute instances) as opposed to vertically
-  (add/remove resources to an existing instance).
+
+  The resize operation will shutdown the virtual server, as the effect of
+  changing vCPUs, RAM, or type requires a full restart of the virtual
+  server. If you need to scale your application without downtime, consider
+  scaling it horizontally (add/remove compute instances) as opposed to
+  vertically (add/remove resources to an existing instance).
+
+.. note::
+
+  Changing types, including important limitations, is discussed in more
+  detail in :ref:`change-compute-type`.
 
 *****************
 Via the dashboard

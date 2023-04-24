@@ -35,9 +35,10 @@ as the default user name you should use to log in to each one of them
 | Ubuntu Linux                        | ubuntu-*          | ubuntu    | |ubuntu_link|     |
 +-------------------------------------+-------------------+-----------+-------------------+
 
-.. note::
 
-    BYOS (Bring Your Own Subscription): After launching a new instance from a
+.. admonition:: BYOS (Bring Your Own Subscription):
+
+    After launching a new instance from a
     suse-sles-* image you will have a running instance that is unable to receive
     any software updates. In order to keep your instance up to date you will need a
     SUSE registration code and you will have to follow the registration process
@@ -95,6 +96,12 @@ they are suitable for your needs and fit for purpose. Catalyst provides them
 *"as is"*, without warranty of any kind. If there is something you need to
 change, you can always upload your own images, crafted the way you like, or
 take a snapshot of ours and modify it the way you need.
+
+.. note::
+
+  In particular take note that the ``ubuntu-minimal-*`` images are not
+  compatible with the dashboard console as explained
+  `here <https://docs.catalystcloud.nz/compute/faq.html#dashboard-console-and-ubuntu-minimal-images>`_
 
 ***************************************************
 How can I identify the images provided by Catalyst?

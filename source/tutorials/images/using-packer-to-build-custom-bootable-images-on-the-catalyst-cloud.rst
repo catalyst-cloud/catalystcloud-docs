@@ -1,7 +1,7 @@
 .. _packer-tutorial:
 
 ##################################################################
-Using packer to build custom bootable images on the Catalyst Cloud
+Using Packer to build custom bootable images on the Catalyst Cloud
 ##################################################################
 
 This tutorial shows you how to use `Packer`_ to build custom bootable images on
@@ -89,10 +89,19 @@ on an Ubuntu 16.04 machine to the latest versions. You will then build a
        "sudo apt-get install -y golang-go make",
        "git clone https://github.com/ssllabs/ssllabs-scan",
        "cd /home/ubuntu/ssllabs-scan/",
-       "make"
+       "make",
+       "sudo systemctl stop cloud-init",
+       "sudo rm -rf /var/lib/cloud/"
      ]
    }]
  }
+
+.. note::
+
+  Stopping cloud-init and removing its data directory are highly recommended
+  as the final stages when creating any custom image. This helps ensure that
+  components such as user data, SSH keys and networking are all configured
+  as expected when new instances are created from the custom image.
 
 *****************
 Building an image
@@ -373,9 +382,9 @@ accordingly, simply run the Packer build command as discussed above.
 
 .. _Packer: https://www.packer.io/
 .. _Hashicorp: https://www.hashicorp.com/
-.. _builders: https://www.packer.io/docs/templates/builders.html
-.. _Provisioners: https://www.packer.io/docs/templates/provisioners.html
-.. _Openstack builder: https://www.packer.io/docs/builders/openstack.html
-.. _Templates: https://www.packer.io/docs/templates/introduction.html
+.. _builders: https://developer.hashicorp.com/packer/docs/builders
+.. _Provisioners: https://developer.hashicorp.com/packer/docs/provisioners
+.. _Openstack builder: https://developer.hashicorp.com/packer/plugins/builders/openstack
+.. _Templates: https://developer.hashicorp.com/packer/docs/templates
 .. _ssllabs-scan: https://github.com/ssllabs/ssllabs-scan
-.. _golang: https://golang.org/
+.. _golang: https://go.dev/

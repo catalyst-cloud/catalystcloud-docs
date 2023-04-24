@@ -33,4 +33,4 @@ else
 fi
 
 # Compile the documentation
-make html
+make html linkcheck

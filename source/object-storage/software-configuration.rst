@@ -70,7 +70,7 @@ s3cmd
 *****
 
 There is a powerful open source tool for managing object storage called
-s3cmd. It is available from http://s3tools.org/s3cmd and was originally
+s3cmd. It is available from https://s3tools.org/s3cmd and was originally
 written for managing object storage data in Amazon S3. It is also
 compatible with Catalyst Cloud object storage using the OpenStack S3
 API.

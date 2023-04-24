@@ -74,7 +74,7 @@ be used to quickly install ``kubectl`` on Linux as a static binary:
 For other platforms or installation methods, please refer to the `detailed
 instructions on how to install kubectl`_.
 
-.. _`detailed instructions on how to install kubectl`: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+.. _`detailed instructions on how to install kubectl`: https://kubernetes.io/docs/tasks/tools/#kubectl
 
 Choosing a cluster template
 ===========================

@@ -31,3 +31,4 @@ Table of Contents:
   release-notes/release_2022-08-15.rst
   release-notes/release_2022-08-29.rst
   release-notes/release_2022-09-28.rst
+  release-notes/release_2023-02-23.rst

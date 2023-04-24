@@ -36,7 +36,7 @@ Command line methods
 
 .. tabs::
 
-    .. tab:: Openstack CLI
+    .. tab:: OpenStack CLI
 
         .. include:: command-line.rst
 

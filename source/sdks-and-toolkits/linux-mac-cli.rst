@@ -245,7 +245,7 @@ documentation under tutorials.
 
 
 For a reference of all commands supported by the CLI, refer to the `OpenStack
-Client documentation <https://docs.openstack.org/python-openstackclient>`_.
+Client documentation <https://docs.openstack.org/python-openstackclient/latest/>`_.
 
 The next step
 =============

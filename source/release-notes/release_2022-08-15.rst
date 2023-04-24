@@ -98,7 +98,7 @@ compute API v2.1 for the Porirua region is
 
 A list of API URLs can be found
 :ref:`in the API section<apis>` of this documentation and on the `API page of the
-dashboard <https://dashboard.cloud.catalyst.net.nz/project/api_access/>`_.
+dashboard <https://dashboard.catalystcloud.nz/project/api_access/>`_.
 
 For backwards compatibility reasons the service catalogue still publishes
 the v2 API, so in order to use the v2.1 API you will currently need to manually

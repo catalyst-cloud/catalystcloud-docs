@@ -9,6 +9,7 @@ TLS Termination
   service, you will need to raise a :ref:`support ticket<admin-support>` to
   request access for your project.
 
+
 In this section, we cover how to use openstack tools to create a load balancer
 which will handle TLS termination for your webservers.
 
@@ -16,6 +17,7 @@ which will handle TLS termination for your webservers.
 Prerequisites
 ***************
 
+=============================
 Configuring your command line
 =============================
 
@@ -70,8 +72,9 @@ Once you have set up your command line correctly and ensured that you have all
 of the prerequisite resources ready, we can begin creating our new load
 balancer.
 
+==================================================
 Creating a secret using the Secret Storage service
-===================================================
+==================================================
 
 First, we need to create a secret containing our TLS certificates and key,
 which we can safely store on the cloud using the
@@ -116,8 +119,9 @@ For this example we are going to name our secret *tls-secret-01*:
 Now that we have our packaged certificates and key stored and kept in our
 secret, we can move on to creating our load balancer.
 
+==========================================
 Configuring a TLS terminated Load-balancer
-===========================================
+==========================================
 
 With our TLS Certificate and Key now stored on the cloud, there are only a few
 steps left. Next we will need to create the load balancer that will look after
@@ -169,9 +173,8 @@ we can continue.
   +--------------------------------------+----------------------+----------------------------------+--------------+---------------------+------------------+----------+
 
 Now that our load balancer is ready, we can move on to the next step. We need
-to create a listener for our load balancer. This is the part of the
-load balancer that interacts with our secret and actually performs the TLS
-functions.
+to create a listener for our load balancer. This is the part of the load
+balancer that interacts with our secret and actually performs the TLS functions.
 
 .. code-block:: bash
 
@@ -216,6 +219,13 @@ functions.
   | alpn_protocols              | ['http/1.1', 'http/1.0']                                                                                                                                                                                                                                                           |
   | tags                        |                                                                                                                                                                                                                                                                                    |
   +-----------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+.. note::
+
+  Each listener in a load balancer that you want to configure for TLS termination
+  will need a separate Barbican secret created for it to work. This behavior
+  will be changed so that you only require one certificate in a future release for
+  this service.
 
 Next we need to create a pool for our load balancer and add our webserver as a
 member. The important thing to consider about your pool is which algorithm you

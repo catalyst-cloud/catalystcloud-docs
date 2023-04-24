@@ -135,38 +135,43 @@ Flavor
 
 .. _flavors-information:
 
-The compute instance flavor (US spelling is correct here) defines the amount of
-CPU and RAM allocated to your virtual servers. The price per hour for a compute
-instance varies according to its flavor. Existing flavors can be found here:
+The compute instance "flavor" (spelt as the API spells it) defines the
+type of compute, and the amount of CPU and RAM allocated to your virtual
+servers. The price per hour for a compute instance varies according to
+its flavor. Supported flavors can be found here:
 https://catalystcloud.nz/services/iaas/compute/
 
-Our flavors are named after the amount of CPU and RAM they provide you, so you
-don't need to consult our documentation to find out their specifications. We
-currently provide a number of common combinations of CPU and RAM, and are
-prepared to introduce new flavors if required.
+Our flavors are named after the type of compute and amount of CPU and RAM
+(and any other significant resources) they provide you, so you don't need
+to consult our documentation to find out their specifications. We
+currently provide a number of common combinations of CPU and RAM.
 
-A virtual CPU (vCPU), also known as a virtual processor, is a time slice of a
-physical processing unit assigned to a compute instance or virtual machine. The
-mapping of virtual CPUs to physical cores is part of the performance and
-capacity management services performed by the Catalyst Cloud on your behalf. We
-aim to deliver the performance required by applications, and to increase cost
-efficiency to our customers by optimising hardware utilisation.
+A virtual CPU (vCPU) is a slice of a physical CPU. How these are sliced
+depend on the type of compute chosen. In general, one vCPU is mapped to
+one hardware thread on the physical core. Some types of compute will
+statically allocate these (assuring predictable performance), while
+others will timeslice further or dynamically allocate hardware threads
+as needed. This is documented in the product page about each type of
+virtual server.
 
-Since virtual CPUs do not map one-to-one to physical cores, some performance
-variation may occur over time. This variation tends to be small, and can be
-mitigated by scaling applications horizontally on multiple compute instances in
-an anti-affinity group. We monitor the performance of our physical servers and
-have the ability to move compute instances around, without downtime, to spread
-out load if required.
+RAM is always allocated 1:1 with the physical RAM. We do not
+oversubscribe RAM as this severely impacts on performance.
+
+.. note::
+  Some flavors have specific OS requirements which must be followed
+  when using those types of servers.
+
+  For "c2-gpu", see :ref:`gpu-support`.
 
 ***********************
 Instance initialisation
 ***********************
 
-A script called cloud-init is included in all images provided by the Catalyst
-Cloud. This script is there to assist you with instance configuration at boot
-time. It communicates with the meta-data agent of our cloud and, for example,
-configures the network of your compute instance as defined by you via our APIs.
+An application called `cloud-init`_ is included in all images provided by
+Catalyst Cloud. This script is there to assist with instance configuration at
+boot time. It communicates with the meta-data agent in the cloud and, for
+example, configures the network of your compute instance as defined by you via
+our APIs.
 
 Cloud-init is very powerful. It's a de facto multi-distribution and multi-cloud
 way of handling the early initialisation of a cloud instance.
@@ -179,7 +184,6 @@ customisation script via the web dashboard).
 In the following sections, we provide examples that illustrate how to perform
 common initialisation tasks with cloud-init, using different configuration
 formats.
-
 
 .. tabs::
 
@@ -318,4 +322,6 @@ Cloud-init official docs
 
 For other formats and more detailed information on how to use cloud-init to
 initialise your compute instances, please refer to the `cloud-init official
-documentation <http://cloudinit.readthedocs.org/en/latest/index.html>`_.
+documentation <cloud-init_>`_.
+
+.. _cloud-init: https://cloudinit.readthedocs.io/en/latest/

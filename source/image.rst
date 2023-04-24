@@ -32,4 +32,5 @@ using a checksum from their sources.
    images/uploading-image
    images/launching-from-custom-image
    images/sharing-images
+   images/downloading-image
    images/faq

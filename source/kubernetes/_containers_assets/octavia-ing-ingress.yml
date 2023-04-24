@@ -1,19 +1,22 @@
 # octavia-ing-ingress.yml
 
 ---
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: test-octavia-ingress
   annotations:
-    kubernetes.io/ingress.class: "openstack"
+    kubernetes.io/ingress.class: openstack
     octavia.ingress.kubernetes.io/internal: "false"
+  name: test-octavia-ingress
 spec:
   rules:
-  - host: api.sample.com
+  - host: api.example.com
     http:
       paths:
-      - path: /
-        backend:
-          serviceName: echoserver-svc
-          servicePort: 80
+      - backend:
+          service:
+            name: echoserver-svc
+            port:
+              number: 80
+        path: /
+        pathType: Prefix

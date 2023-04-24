@@ -95,6 +95,36 @@ Use the commands below to configure and generate your locales. Replace
   sudo dpkg-reconfigure locales
 
 
+*********************************************
+Dashboard console and ubuntu-minimal-* images
+*********************************************
+
+Due to how Canonical is building the ``ubuntu-minimal-*`` images, those are not
+compatible with the dashboard console functionality.
+
+Canonical is building the ubuntu-minimal-* images to be lightweight with an
+optimised kernel. In particular, that means those images are built with the
+``kvm`` kernel compiled without support for console on the virtual terminal,
+unlike the other ubuntu images that are built with the ``generic`` kernel and
+with support for console on the virtual terminal.
+Therefore the dashboard console will not work for instances built from the
+ubuntu-minimal-* images.
+
+Access to the dashboard console is through the ``Console`` tab once you look at
+the details of an instance, or through the ``Console`` action from the dropdown
+list when you're looking at the list of instances.
+
+If you try regardless, you'll find the following message on the dashboard
+console (the actual message vary slightly between ubuntu-minimal-* images,
+the example below is from ``ubuntu-minimal-20.04-x86_64``):
+
+.. image:: _static/compute-ubuntuminimal_1.png
+   :align: center
+
+This does not prevent the instances made from the ubuntu-minimal-* images to
+boot successfully and to otherwise be used as any other Ubuntu instance.
+
+
 ***********************************
 How to SSH from Windows using PuTTY
 ***********************************

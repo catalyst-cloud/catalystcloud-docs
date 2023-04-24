@@ -113,7 +113,8 @@ Updating a Threshold Alarm
 ==========================
 
 The command ``openstack alarm update`` can to used to change the alarm.
-For example the threshold of the alarm created above can be changed using the command:
+For example the threshold of the alarm created above can be changed using the
+command:
 
 .. code-block:: bash
 
@@ -130,45 +131,52 @@ the query as a different type and return an error:
     Invalid input for field/attribute data. Value:
     ...
     Value not a valid list: resource_id=d7839cb3-67a7-4258-a232-xxxxxxxxxx
-    (HTTP 400) (Request-ID: req-645dada5-fc8d-4c1d-b948-68f0f2b9f0b3)
+    (HTTP 400) (Request-ID: req-645dada5-fc8d-4c1d-b948-xxxxxxxxxxxx)
 
 Useful Meters
 =============
 
-The following is an incomplete list of meters that can be used to create a threshold alarm.
+The following is an incomplete list of meters that can be used to create a
+threshold alarm.
 
 Compute Resources
 -----------------
 
-* cpu_util (%)
-* disk.usage (Bytes)
-* memory.usage (MegaBytes)
-* disk.write.bytes.rate (Bytes/second)
-* disk.read.requests.rate (requests/second)
-* disk.read.bytes.rate (Bytes/second)
-* disk.write.requests.rate (requests/second)
+* `cpu_util` - Average CPU utilization (%)
+* `disk.read.bytes.rate` - Average rate of reads (Bytes/second)
+* `disk.read.requests.rate` - Average rate of read requests (requests/second)
+* `disk.write.bytes.rate` - Average rate of writes (Bytes/second)
+* `disk.write.requests.rate` - Average rate of write requests (requests/second)
+* `memory.usage` - Volume of RAM used by the instance from the amount of its allocated memory (MegaBytes)
 
 Object Storage
 --------------
 
-* storage.containers.objects.size (Bytes)
-* storage.objects.download.size.international (Bytes)
-* storage.objects.upload.size.international (Bytes)
+* `storage.containers.objects.size` - Total size of stored objects (Bytes)
+
+The following meters will only be available if the container has uploads or downloads of the specific type.
+
+* `storage.objects.download.size.international` - International download traffic from the container (Bytes)
+* `storage.objects.upload.size.international` - International upload traffic to the container (Bytes)
+* `storage.objects.upload.size.national` - National upload traffic to the container (Bytes)
+* `storage.objects.download.size.national` - National download traffic to the container (Bytes)
 
 Router
 ------
 
-* traffic.outbound.international (Bytes)
-* traffic.inbound.international (Bytes)
-* traffic.inbound.national (Bytes)
-* traffic.outbound.national (Bytes)
+Note that the following meters are only available from routers that are connected to the public internet.
+
+* `traffic.outbound.international` - Outbound International Traffic(Bytes)
+* `traffic.inbound.international` - Inbound International Traffic (Bytes)
+* `traffic.inbound.national` - Inbound National Traffic (Bytes)
+* `traffic.outbound.national` - Outbound National Traffic (Bytes)
 
 Meter Resolution
 ================
 
-Please be aware that the temporal resolution for meter data is approximately 10 minutes.
-Creating alarms that have a period of less than 600 seconds can result in alarms that
-may not get enough data to be evaluated.
+Please be aware that the temporal resolution for meter data is approximately
+10 minutes. Creating alarms that have a period of less than 600 seconds can
+result in alarms that may not get enough data to be evaluated.
 
 ****************
 Composite alarms
@@ -221,7 +229,8 @@ The command ``openstack alarm list`` will print a summary of your alarms:
 Alarm Details
 =============
 
-The command ``openstack alarm show <alarm id>`` will print the details of a single alarm:
+The command ``openstack alarm show <alarm id>`` will print the details of a
+single alarm:
 
 .. code-block:: bash
 
@@ -259,13 +268,15 @@ The command ``openstack alarm show <alarm id>`` will print the details of a sing
     | user_id                   | bf7b8d2ad74e474eac37xxxxxxxxxxxx                                               |
     +---------------------------+--------------------------------------------------------------------------------+
 
-Be aware that there is a bug that means that the state_timestamp does not get updated when the state changes.
+Be aware that there is a bug that means that the state_timestamp does not get
+updated when the state changes.
 
 Alarm History
 =============
 
 The command ``openstack alarm-history show <alarm id>`` will print a complete
-history of the alarm, including any changes to the alarm configuration and all the state changes.
+history of the alarm, including any changes to the alarm configuration and all
+the state changes.
 
 .. code-block:: bash
 

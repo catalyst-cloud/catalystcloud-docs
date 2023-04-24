@@ -8,7 +8,7 @@ simple orchestration of Ansible, combined with the vast library of modules
 available with Puppet.
 
 .. _Ansible: https://www.ansible.com/
-.. _Puppet: https://puppet.com/
+.. _Puppet: https://www.puppet.com/
 
 You will need:
 

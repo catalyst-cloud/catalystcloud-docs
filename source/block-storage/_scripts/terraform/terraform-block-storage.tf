@@ -15,7 +15,7 @@ variable "public_network_id" {
 #nz-hlz-1	f10ad6de-a26d-4c29-8c64-xxxxxxxxxxxx
 
 variable "volume_image_ID" {
-  default = "<INSERT THE UBUNTU 20.0 IMAGE ID FROM YOUR REGION>"
+  default = "<INSERT THE IMAGE ID FROM YOUR REGION>"
 }
 
 variable "instance_id" {
@@ -39,3 +39,4 @@ resource "openstack_blockstorage_volume_v2" "testvol" {
 resource "openstack_compute_volume_attach_v2" "va_1" {
   instance_id = "${var.instance_id}"
   volume_id   = "${openstack_blockstorage_volume_v2.testvol.id}"
+}

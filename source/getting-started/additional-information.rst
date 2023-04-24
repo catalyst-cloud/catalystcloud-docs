@@ -386,7 +386,7 @@ Status page
 
 Our status page shows the state of our services in each region and also informs
 you about planned maintenance. The status page can be found here:
-https://catalystcloud.nz/support/status/
+https://status.catalystcloud.nz/
 
 Support requests
 ================
@@ -426,11 +426,11 @@ Training
 
 Catalyst provides training on how to use the Catalyst Cloud in Auckland,
 Wellington and Christchurch. Upcoming training sessions can be found at
-https://catalyst.net.nz/training/upcoming-training.
+https://www.catalyst.net.nz/training.
 
 You can also request training to be delivered on your premises or customised
-for the needs of your team. Please contact Catalyst via our training page
-to discuss your needs: https://catalyst.net.nz/training-services
+for the needs of your team. Please contact Catalyst
+to discuss your needs: https://www.catalyst.net.nz/contact-us
 
 |
 

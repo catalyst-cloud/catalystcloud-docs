@@ -20,56 +20,63 @@ Introduction
 In order for Ansible to run playbooks and tasks, it needs to know which
 machines to operate on. The standard way that Ansible achieves this is to use
 an `inventory file`_ which lists the hosts and groups that playbooks will run
-against. This inventory is a plain text ini file that lives at
+against. This inventory is a plain text ini or yaml file that lives at
 ``/etc/ansible/hosts`` by default.
 
-.. _inventory file: http://docs.ansible.com/ansible/intro_inventory.html
+.. _inventory file: https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html
 
 A `dynamic inventory`_ provides a way for Ansible to pull in inventory
 information from other systems. This means that you do not need to manually
-sync your local inventory with another source, rather you can invoke a script
+sync your local inventory with another source, rather you can invoke a tool
 that queries the source directly and makes the information available to
-Ansible. Dynamic inventories are scripts that output JSON in a predefined
+Ansible. Dynamic inventories are scripts or plugins that output JSON in a predefined
 format that Ansible understands.
 
-.. _Dynamic inventory: http://docs.ansible.com/ansible/intro_dynamic_inventory.html
+.. _Dynamic inventory: https://docs.ansible.com/ansible/latest/inventory_guide/intro_dynamic_inventory.html
 
-The Ansible project has an OpenStack dynamic inventory script available which
+The Ansible project has an OpenStack dynamic inventory plugin available which
 we can use to integrate Ansible with the Catalyst Cloud. This allows us
 to use Ansible for configuration management of Catalyst Cloud instances
 irrespective of what method has been used to create those instances.
 
 ****************************************
-Downloading the dynamic inventory script
+Install the openstack ansible collection
 ****************************************
 
-The latest version of the script is available here:
-https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/openstack.py
-
-Download it and make it executable:
+Use the ansible-galaxy command to install the openstack.cloud collection.
+The collection includes modules for using Ansible with Openstack as well as the inventory plugin.
 
 .. code-block:: bash
 
- $ wget https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/openstack.py
- $ chmod +x openstack.py
+  $ ansible-galaxy collection install openstack.cloud
 
-Ansible supports replacing the standard inventory file with a dynamic inventory
-script. Do this only if you wish the default Ansible inventory on your system
-to be dynamically populated from your Catalyst Cloud project.
+You can verify that the inventory plugin is available by running the following command to
+list inventory plugins:
 
 .. code-block:: bash
 
- $ sudo cp openstack.py /etc/ansible/hosts
+  $ ansible-doc -t inventory -l
+
+You should see ``openstack.cloud.openstack`` listed in the available plugins.
+
 
 ************************************
-Testing the dynamic inventory script
+Testing the dynamic inventory plugin
 ************************************
 
-Now we can test the script:
+Create an inventory file named ``openstack.yml`` with the following contents:
+
+.. code-block:: yaml
+
+ plugin: openstack.cloud.openstack
+ expand_hostvars: yes
+ fail_on_errors: yes
+
+Now we can test the plugin:
 
 .. code-block:: bash
 
- $ ./openstack.py --list
+ $ ansible-inventory -i openstack.yml --list
 
 This will output JSON data about your compute instances.
 
@@ -77,7 +84,7 @@ You can filter this output as required:
 
 .. code-block:: bash
 
- $ ./openstack.py --list | grep ansible_ssh_host
+ $ ansible-inventory -i openstack.yml --list | grep ansible_ssh_host
          "ansible_ssh_host": "150.242.40.72",
          "ansible_ssh_host": "150.242.40.71",
 
@@ -85,19 +92,18 @@ or if you have ``jq`` installed:
 
 .. code-block:: bash
 
- $ ./openstack.py --list | jq -r '._meta.hostvars[].ansible_ssh_host'
+ $ ansible-inventory -i openstack.yml --list | jq -r '._meta.hostvars[].ansible_ssh_host'
  150.242.40.72
  150.242.40.71
- $ ./openstack.py --list | jq -r '._meta.hostvars[].openstack.name'
+ $ ansible-inventory -i openstack.yml --list | jq -r '._meta.hostvars[].openstack.name'
  example-instance-02
  example-instance-01
 
-Now that you have the inventory script working, you can use it in a playbook.
+Now that you have the inventory plugin working, you can use it in a playbook.
 You are going to use the following playbook:
 
 .. code-block:: yaml
 
- #!/usr/bin/env ansible-playbook
  ---
 
  - name: Ping cloud instances
@@ -111,46 +117,7 @@ Let's run this playbook with the dynamic inventory:
 
 .. code-block:: bash
 
- $ ansible-playbook -i ./openstack.py ping.yml
-
- PLAY [Ping cloud instances] ****************************************************
-
- TASK [setup] *******************************************************************
- ok: [ca13f6c2-600c-493d-936d-xxxxxxxxxxxx]
- ok: [b495f9cc-47f9-49cc-9780-xxxxxxxxxxxx]
-
- TASK [Test connection to instance] *********************************************
- ok: [b495f9cc-47f9-49cc-9780-xxxxxxxxxxxx]
- ok: [ca13f6c2-600c-493d-936d-xxxxxxxxxxxx]
-
- PLAY RECAP *********************************************************************
- b495f9cc-47f9-49cc-9780-xxxxxxxxxxxx : ok=2    changed=0    unreachable=0    failed=0
- ca13f6c2-600c-493d-936d-xxxxxxxxxxxx : ok=2    changed=0    unreachable=0    failed=0
-
-.. note::
-
- If you have replaced ``/etc/ansible/inventory`` then you don't need to call ``ansible-playbook`` with the ``-i`` flag.
-
-You will notice in the output above that the inventory script is passing
-instance IDs as the hostname. If you would prefer to use instance names, you can
-create a ``/etc/ansible/openstack.yml`` file with the following content:
-
-.. code-block:: yaml
-
- ansible:
-   use_hostnames: True
-   expand_hostvars: True
-
-.. note::
-
- The ``expand_hostvars`` option controls whether or not the inventory will make extra API calls to fill out additional information about each server.
-
-With this file in place, the output will change to use instance names rather
-than IDs:
-
-.. code-block:: bash
-
- $ ansible-playbook -i ./openstack.py ping.yml
+ $ ansible-playbook -i ./openstack.yml ping.yml
 
  PLAY [Ping cloud instances] ****************************************************
 
@@ -167,14 +134,17 @@ than IDs:
  example-instance-02        : ok=2    changed=0    unreachable=0    failed=0
 
 You will notice that your playbook is configured to operate against all hosts
-returned from the inventory script (set via ``hosts: all``). If you would like to
+returned from the inventory plugin (set via ``hosts: all``). If you would like to
 operate on a subset of hosts, there are a number of options.
+
+****************************************
+Using metadata to create groups of hosts
+****************************************
 
 If you look at the JSON output again, you can see the information about your
 instances is contained under the ``_meta`` key. The other top level keys of the
 returned JSON object point to lists of instances. These keys relate to various
-properties of your instances and are output by the dynamic inventory script
-dynamically.
+properties of your instances and are output by the inventory plugin dynamically.
 
 In addition to the automatic key creation, users can generate their own
 groupings based on instance metadata. In the following example, you have added two
@@ -267,7 +237,6 @@ of the ``group01`` group to run our playbook against only
 
 .. code-block:: yaml
 
- #!/usr/bin/env ansible-playbook
  ---
 
  - name: Ping cloud instances
@@ -281,7 +250,7 @@ Let's run this playbook with the dynamic inventory:
 
 .. code-block:: bash
 
- $ ansible-playbook -i ./openstack.py ping.yml
+ $ ansible-playbook -i ./openstack.yml ping.yml
 
  PLAY [Ping cloud instances] ****************************************************
 
