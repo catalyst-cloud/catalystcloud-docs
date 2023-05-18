@@ -42,6 +42,14 @@ We assume that:
   * We assume that these containers have no existing ACLs assigned to them.
   * There should be a single file stored in access_1 called "foo.txt"
 
+*******************
+Set the storage URL
+*******************
+
+.. Warning::
+  If the swift command isn't given the storage URL then it will try to log you
+  in again and will report an error about authentication options.
+
 Another thing that you should be aware of before continuing with this example:
 If you are using a Token for authentication to the cloud you will need to set
 up another environment variable in order to interact with the Swift API. To
@@ -54,23 +62,19 @@ you can use whichever one fits the region you want to work in:
 
 .. code-block::
 
- https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_%projectid%
+  https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_%projectid%
 
-Our next step is to get our Project ID. We can do this by running the following
-command, where  ``bucket_name`` is the name of our container:
-
-.. code-block:: bash
-
-  $ openstack container show <bucket_name> -c account -f value
-  AUTH_773284c69XXXXXXXX37beedf421hj2fm
-
-Once we have both of these we can export our environment variable by adding
-both together like so:
+The follow command sets the environmental variable for the swift command.
 
 .. code-block:: bash
 
-  $ export OS_STORAGE_URL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_773284c69XXXXXXXX37beedf421hj2fm"
+  $ export OS_STORAGE_URL = "https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_${OS_PROJECT_ID}"
 
+Alternately you can pass the url as a command line option:
+
+.. code-block:: bash
+
+  $ swift --os-storage-url https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_${OS_PROJECT_ID} list
 
 **************************
 Using access control lists
