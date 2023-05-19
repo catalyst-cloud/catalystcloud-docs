@@ -14,14 +14,9 @@ Introduction
 In this tutorial, you will learn how to deploy a highly available instance pair
 using VRRP. This tutorial is largely based on a `blog post`_ by Aaron O'Rosen
 with modifications appropriate for the Catalyst Cloud. Networks and names have
-been kept largely compatible with the source material. Additional information
-about configuring ``allowed_address_pairs`` in Heat was sourced from this
-`post`_.
+been kept largely compatible with the source material.
 
-.. _blog post: http://blog.aaronorosen.com/implementing-high-availability-instances-with-neutron-using-vrrp/
-
-.. _post: https://www.hastexo.com/blogs/syed/2014/08/05/orchestrating-highly-available-load-balancers-openstack-heat
-
+.. _blog post: https://medium.com/@aaronorosen/implementing-high-availability-instances-with-neutron-using-vrrp-cb6db6f8578
 
 You will be using two different methods to set up this stack. Initially you
 will use the ``openstack`` command line tool to complete the setup
@@ -59,11 +54,11 @@ and IP protocol number 112. The protocol is defined in `RFC3768`_.
 .. note::
 
   There is an extension to VRRP that uses IPSEC-AH (IP protocol 51) for
-  integrity (see http://www.keepalived.org/draft-ietf-vrrp-ipsecah-spec-00.txt).
+  integrity (see https://www.keepalived.org/draft-ietf-vrrp-ipsecah-spec-00.txt).
   This tutorial will demonstrate using standard VRRP. See this `article`_ for
   more information on securing VRRP.
 
-.. _article: http://louwrentius.com/configuring-attacking-and-securing-vrrp-on-linux.html
+.. _article: https://louwrentius.com/configuring-attacking-and-securing-vrrp-on-linux.html
 
 *********************
 Allowed address pairs
@@ -1030,7 +1025,7 @@ Note that the ``remote_mode`` is set to ``remote_group_id`` and
 ``remote_group_id`` is not set. If no value is set, then the rule uses the
 current security group (`heat documentation`_).
 
-.. _heat documentation: http://docs.openstack.org/developer/heat/template_guide/openstack.html#OS::Neutron::SecurityGroup-props
+.. _heat documentation: https://docs.openstack.org/heat/latest/template_guide/openstack.html#OS::Neutron::SecurityGroup
 
 The next code block demonstrates how to configure the port and floating IP that
 will be shared between the VRRP instances.
@@ -1084,7 +1079,7 @@ Note the line ``user_data_format: RAW`` in the server properties; this is
 required so that cloud init will setup the ``ubuntu`` user correctly (see this
 `blog post`__ for details).
 
-__ http://blog.scottlowe.org/2015/04/23/ubuntu-openstack-heat-cloud-init/
+__ https://blog.scottlowe.org/2015/04/23/ubuntu-openstack-heat-cloud-init/
 
 The ``allowed_address_pairs`` section associates the shared VRRP address with
 the instance port. You are explicitly setting the port IP address to

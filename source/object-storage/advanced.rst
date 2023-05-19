@@ -429,7 +429,7 @@ capable of handling oversized files and gives you the choice of
 using either``static large objects (SLO)`` or``dynamic large objects (DLO)``,
 which will be explained in more detail later.
 
-.. _python-swiftclient: http://github.com/openstack/python-swiftclient
+.. _python-swiftclient: https://github.com/openstack/python-swiftclient
 
 Before getting in to the distinctions between SLO and DLO, here are two
 examples of how to upload a large object to an object storage

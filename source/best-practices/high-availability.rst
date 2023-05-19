@@ -36,10 +36,10 @@ High availability tutorials
 ***************************
 
 There are a number of options available to Catalyst Cloud customers to enhance
-application availability. Catalyst has documented these in detail:
+application availability. Tutorials have documented these in detail:
 
 Providing highly available instances within a region:
-http://docs.catalystcloud.io/tutorials/compute/deploying-highly-available-instances-with-keepalived.html
+:doc:`/tutorials/compute/deploying-highly-available-instances-with-keepalived`
 
 Techniques for region failover:
-http://docs.catalystcloud.io/tutorials/other/region-failover-using-the-fastly-cdn.html
+:doc:`/tutorials/other/region-failover-using-the-fastly-cdn`

@@ -11,8 +11,8 @@ In this tutorial you will learn how to deploy a high performance computing
 
 .. _HPC: https://en.wikipedia.org/wiki/High-performance_computing
 .. _Catalyst Cloud: https://catalystcloud.nz/
-.. _elasticluster: https://gc3-uzh-ch.github.io/elasticluster/
-.. _SLURM: https://computing.llnl.gov/linux/slurm/
+.. _elasticluster: https://elasticluster.readthedocs.io/en/latest/index.html
+.. _SLURM: https://slurm.schedmd.com/overview.html
 
 ElastiCluster is an open source tool to create and manage compute clusters on
 cloud infrastructures. The project was originally created by the `Grid
@@ -24,7 +24,7 @@ SLURM is a highly scalable cluster management and resource manager, used by
 many of the world's supercomputers and computer clusters (it is the workload
 manager on about 60% of the `TOP500 supercomputers`_).
 
-.. _TOP500 supercomputers: http://www.top500.org/
+.. _TOP500 supercomputers: https://top500.org/
 
 The following video outlines what you will learn in this tutorial. It shows a
 SLURM HPC cluster being deployed automatically by ElastiCluster on the Catalyst
@@ -166,7 +166,7 @@ Using ElastiCluster
 
 The following commands are provided as examples of how to use ElastiCluster to
 create and interact with a simple SLURM cluster. For more information on
-ElastiCluster, please refer to https://elasticluster.readthedocs.org/.
+ElastiCluster, please refer to https://elasticluster.readthedocs.io/en/latest/.
 
 Deploy a SLURM cluster on the cloud using the configuration provided:
 

@@ -16,7 +16,7 @@ mount these volumes and access them as if they were a local filesystem.
 This also provides a mechanism for containers within a pod to be able to share
 data by mounting the volume in a shared manner.
 
-.. _`pods`: https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/
+.. _`pods`: https://kubernetes.io/docs/concepts/workloads/pods/
 
 .. Note::
 
@@ -29,7 +29,7 @@ as file systems. Kubernetes supports several different `volume types`_ , for
 this example we will use an ``emptyDir`` volume which is essentially an empty
 directory mounted on the host.
 
-.. _`volume types`: https://kubernetes.io/docs/concepts/storage/volumes/#types-of-volumes
+.. _`volume types`: https://kubernetes.io/docs/concepts/storage/volumes/#volume-types
 
 .. literalinclude:: _containers_assets/volume1.yaml
 

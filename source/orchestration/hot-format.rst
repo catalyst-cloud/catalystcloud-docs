@@ -3,11 +3,11 @@ HOT format
 ##########
 
 More information on the HOT format can be found on the OpenStack user
-guide at: http://docs.openstack.org/user-guide/hot-guide/hot.html
+guide at: https://docs.openstack.org/heat/latest/template_guide/hot_spec.html
 
 More information on resource types that can be orchestrated by Heat can be
 found at:
-http://docs.openstack.org/developer/heat/template_guide/openstack.html
+https://docs.openstack.org/heat/latest/template_guide/openstack.html
 
 .. note::
 

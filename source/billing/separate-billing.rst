@@ -37,8 +37,7 @@ Get billing information based on the prefix of customer
 =======================================================
 
 Source an openrc file with your credentials to access the Catalyst Cloud, as
-described at
-http://docs.catalystcloud.io/getting-started/cli.html#source-an-openstack-rc-file.
+described at :ref:`source-rc-file`
 
 .. note::
 

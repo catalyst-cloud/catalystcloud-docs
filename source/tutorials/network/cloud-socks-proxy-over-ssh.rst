@@ -88,7 +88,7 @@ On Windows
 
 In order to establish a SSH connection with your cloud tunnel you will need an
 SSH client. If you do not have one, you can download and install PuTTY from:
-http://the.earth.li/~sgtatham/putty/latest/x86/putty-0.63-installer.exe
+https://the.earth.li/~sgtatham/putty/latest/w64/putty.exe
 
 After installing PuTTY, open it and connect to your cloud tunnel instance. On
 the Category list, go to Connection, SSH and Tunnels. For the destination
@@ -160,7 +160,7 @@ OpenStack clients
 Most OpenStack command line clients use the urllib3 library. SOCKS5 support is
 offered via the `urllib3.contrib.socks`_ module.
 
-.. _urllib3.contrib.socks: https://urllib3.readthedocs.org/en/latest/contrib.html#socks
+.. _urllib3.contrib.socks: https://urllib3.readthedocs.io/en/stable/reference/contrib/socks.html
 
 cURL
 ====

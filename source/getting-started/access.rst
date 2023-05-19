@@ -50,7 +50,7 @@ with its functioning by following :ref:`this tutorial
 
 For more in depth documentation, the official OpenStack Client documentation is
 the most thorough source of information. You can `find it here
-<https://docs.openstack.org/python-openstackclient>`_.
+<https://docs.openstack.org/python-openstackclient/latest/>`_.
 
 
 ****************

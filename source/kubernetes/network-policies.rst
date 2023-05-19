@@ -10,7 +10,7 @@ In the following example we look at adding a default policy that denies all
 access to the cluster network and then look at how to add an exception to
 this.
 
-.. _`Calico`: docs.projectcalico.org/v2.6/introduction/
+.. _`Calico`: https://docs.tigera.io/archive/v2.6/introduction/
 
 **************************
 Create a simple deployment
@@ -25,7 +25,7 @@ First create a simple deployment with 2 replicas.
   ``-n <namespace>`` parameter for the kubectl commands or by adding a
   namespace declaration in manifest files.
 
-.. _`namespace`: kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+.. _`namespace`: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
 
 The image
 ``gcr.io/google-samples/hello-app:1.0`` provides a simple web app, listening

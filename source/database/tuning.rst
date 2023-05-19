@@ -72,8 +72,7 @@ through those documents will be a necessity.
   how it works can be found on this `percona`_ blog about tuning.
 
 .. _`MySQL docs`: https://dev.mysql.com/doc/
-.. _`percona`: https://www.percona.com/blog/2017/10/18/chose-mysql-innodb_log_file_size/
-
+.. _`percona`: https://www.percona.com/blog/chose-mysql-innodb_log_file_size/
 
 For write heavy workloads, the parameters to look at changing would be:
 

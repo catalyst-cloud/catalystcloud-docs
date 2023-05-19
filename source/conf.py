@@ -338,3 +338,19 @@ epub_exclude_files = ['search.html']
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'http://docs.python.org/': None}
+
+# External links to ignore when doing a link check
+# Some are example links and others are links to our APIs that error when performing a get.
+linkcheck_ignore = [r'http://localhost:8001/.*',
+                    r'http://202\.49\.241\.87:30001',
+                    r'http://www\.failover\.net\.nz\.global\.prod\.fastly\.net',
+                    r'https://api\.cloud\.catalyst\.net\.nz:8000/v1/',
+                    r'https://api\.cloud\.catalyst\.net\.nz:8788/services/Cloud',
+                    r'https://api\.nz-hlz-1\.catalystcloud\.io:8000/v1/',
+                    r'https://api\.nz-hlz-1\.catalystcloud\.io:8788/services/Cloud',
+                    r'https://api\.nz-por-1\.catalystcloud\.io:8788/services/Cloud',
+                    r'https://api\.nz-por-1\.catalystcloud\.io:8000/v1/',
+                    r'https://object-storage\.nz-hlz-1\.catalystcloud\.io(:443)?(/.*)?',
+                    r'https://object-storage\.nz-por-1\.catalystcloud\.io(443)?(/.*)?',
+                    r'https://object-storage\.nz-wlg-2\.catalystcloud\.io(:443)?(/.*)?',
+                    r'https://docs\.nextcloud\.com/server/latest/Nextcloud_User_Manual\.pdf#section\.5\.6']

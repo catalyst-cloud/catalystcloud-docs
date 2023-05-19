@@ -12,22 +12,16 @@ OpenStack as a remote provider for Vagrant.
 
 .. _Vagrant: https://www.vagrantup.com/
 
-.. _providers: https://docs.vagrantup.com/v2/providers/index.html
+.. _providers: https://developer.hashicorp.com/vagrant/docs/providers
 
-***************************
-Vagrant OpenStack providers
-***************************
+**************************
+Vagrant OpenStack provider
+**************************
 
-Currently there are two different Vagrant OpenStack providers in common usage:
-`vagrant-openstack-plugin`_ and `vagrant-openstack-provider`_. The
-configuration for both these providers is similar, which can lead to confusion.
-Be sure you know which provider you are using.
-
-.. _vagrant-openstack-plugin: https://github.com/cloudbau/vagrant-openstack-plugin
+Currently there is one main Vagrant OpenStack providers in common usage:
+`vagrant-openstack-provider`_.
 
 .. _vagrant-openstack-provider: https://github.com/ggiamarchi/vagrant-openstack-provider
-
-This tutorial uses the ``vagrant-openstack-provider``.
 
 *****
 Setup
@@ -175,10 +169,10 @@ You can now connect to your instance via SSH:
 Documentation
 *************
 
-For Vagrant documentation, consult https://docs.vagrantup.com/v2/. For
+For Vagrant documentation, consult https://developer.hashicorp.com/vagrant/docs. For
 documentation on the Vagrant OpenStack provider, consult
 https://github.com/ggiamarchi/vagrant-openstack-provider. You may also find
 this `presentation`_ by the developer of the plugin useful.
 
-.. _presentation: https://www.openstack.org/summit/openstack-paris-summit-2014/session-videos/presentation/use-openstack-as-a-vagrant-provider
+.. _presentation: https://www.openstack.org/videos/paris-2014/use-openstack-as-a-vagrant-provider
 

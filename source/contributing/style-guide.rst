@@ -6,8 +6,8 @@ This style guide describes the conventions that are followed by our
 documentation project. If you follow them, your documents will pass the doc8
 tests and compile cleanly.
 
-This documentation uses `Python-sphinx <http://sphinx.pocoo.org/>`_, which
-itself uses `reStructuredText <http://sphinx-doc.org/rest.html>`_ syntax.
+This documentation uses `Python-sphinx <https://www.sphinx-doc.org/en/master/>`_, which
+itself uses `reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_ syntax.
 
 *********
 Filenames
@@ -151,7 +151,7 @@ There should be only one H1 in a document.
 .. note::
 
   See also `Sphinx's documentation about sections
-  <http://sphinx.pocoo.org/rest.html#sections>`_.
+  <https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#sections>`_.
 
 ***********
 Code blocks

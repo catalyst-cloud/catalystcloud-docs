@@ -125,9 +125,7 @@ Then list all of the available cluster templates.
   | 903b954d-667a-45ca-8e5c-xxxxxxxxxxxx | kubernetes-v1.18.2-prod-20200630 |
   +--------------------------------------+----------------------------------+
 
-To find more information on which template you want to use, you can view each
-template via the `Cluster Templates`_ tab on our dashboard. For information
-on how volumes work and storage types in a cluster refer to the
+For information on how volumes work and storage types in a cluster refer to the
 :ref:`storage<storage>` section under the kubernetes documentation.
 
 Default volume types and sizes
@@ -181,9 +179,6 @@ ensures that the IOPS for the etcd volume are sufficient to a point that they
 will not fail due to disk pressure, making for a more reliable and resilient
 cluster overall.
 
-
-.. _`Cluster Templates`: https://dashboard.catalystcloud.nz/project/cluster_templates
-
 .. _setting_up_kubectl:
 
 ***************************************
@@ -209,7 +204,7 @@ Swiss army knife.
 The details for getting the latest version of kubectl can be found `here`_.
 
 .. _`kubectl`: https://kubernetes.io/docs/reference/kubectl/kubectl/
-.. _`here`: https://kubernetes.io/docs/tasks/tools/install-kubectl/#kubectl-install-1
+.. _`here`: https://kubernetes.io/docs/tasks/tools/#kubectl
 
 To install these tools on Linux via the command line as a simple binary,
 perform the following steps:
