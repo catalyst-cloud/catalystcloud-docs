@@ -42,13 +42,13 @@ We assume that:
   * We assume that these containers have no existing ACLs assigned to them.
   * There should be a single file stored in access_1 called "foo.txt"
 
-*******************
-Set the storage URL
-*******************
+***************************
+Setting up your storage URL
+***************************
 
 .. Warning::
-  If the swift command isn't given the storage URL then it will try to log you
-  in again and will report an error about authentication options.
+  If the swift command is not given the correct storage URL it will try to log
+  in to the cloud again, but will report an error about authentication options.
 
 Another thing that you should be aware of before continuing with this example:
 If you are using a Token for authentication to the cloud you will need to set
