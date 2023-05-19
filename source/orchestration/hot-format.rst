@@ -16,6 +16,9 @@ https://docs.openstack.org/heat/latest/template_guide/openstack.html
 
 The resource types available on the Catalyst Cloud are:
 
+* OS::Aodh::CompositeAlarm
+* OS::Aodh::EventAlarm
+* OS::Aodh::LBMemberHealthAlarm
 * OS::Cinder::Volume
 * OS::Cinder::VolumeAttachment
 * OS::Glance::Image
@@ -64,19 +67,14 @@ The resource types available on the Catalyst Cloud are:
 * OS::Nova::KeyPair
 * OS::Nova::Server
 * OS::Nova::ServerGroup
+* OS::Octavia::HealthMonitor
+* OS::Octavia::L7Policy
+* OS::Octavia::L7Rule
+* OS::Octavia::Listener
+* OS::Octavia::LoadBalancer
+* OS::Octavia::Pool
+* OS::Octavia::PoolMember
 * OS::Swift::Container
+* OS::Trove::Cluster
+* OS::Trove::Instance
 
-.. Resources to be added in the future
-.. * OS::Ceilometer::Alarm
-.. * OS::Ceilometer::CombinationAlarm
-.. * OS::Neutron::Firewall
-.. * OS::Neutron::FirewallPolicy
-.. * OS::Neutron::FirewallRule
-.. * OS::Neutron::LoadBalancer
-.. * OS::Neutron::Pool
-.. * OS::Neutron::PoolMember
-.. * OS::Sahara::Cluster
-.. * OS::Sahara::ClusterTemplate
-.. * OS::Sahara::NodeGroupTemplate
-.. * OS::Trove::Cluster
-.. * OS::Trove::Instance
