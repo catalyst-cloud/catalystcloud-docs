@@ -413,7 +413,7 @@ you are happy that it is sane and validates. Please see the Fastly `working
 with services`_ documentation for more information about service versions and
 their activation.
 
-.. _working with services: https://docs.fastly.com/en/guides/working-with-services#understanding-services-and-versions
+.. _working with services: https://docs.fastly.com/en/guides/working-with-services#understanding-fastly-services-and-versions
 
 .. image:: ../_static/rf-clone.png
    :align: center

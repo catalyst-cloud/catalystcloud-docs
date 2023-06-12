@@ -15,10 +15,8 @@ In this tutorial you will learn how to deploy a high performance computing
 .. _SLURM: https://slurm.schedmd.com/overview.html
 
 ElastiCluster is an open source tool to create and manage compute clusters on
-cloud infrastructures. The project was originally created by the `Grid
-Computing Competence Center`_ from the University of Zurich.
-
-.. _Grid Computing Competence Center: https://www.gc3.uzh.ch/
+cloud infrastructures. The project was originally created by the Grid
+Computing Competence Center from the University of Zurich.
 
 SLURM is a highly scalable cluster management and resource manager, used by
 many of the world's supercomputers and computer clusters (it is the workload
