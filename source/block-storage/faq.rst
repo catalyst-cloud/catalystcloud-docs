@@ -59,9 +59,9 @@ size of your volume?
 
 Well, as always, that depends.
 
-************
+============
 Boot volumes
-************
+============
 
 There are a number of different options, the best option for you to use will
 depend on your circumstances.
@@ -113,6 +113,7 @@ Finally, there is the old fashioned method that involves:
 * Attach the new volume and the original to another instance.
 * Perform a copy using tools like dd.
 
+================
 Non-boot volumes
 ================
 
