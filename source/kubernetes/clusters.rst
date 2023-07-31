@@ -179,6 +179,18 @@ ensures that the IOPS for the etcd volume are sufficient to a point that they
 will not fail due to disk pressure, making for a more reliable and resilient
 cluster overall.
 
+Server anti-affinity policy
+===========================
+
+We deploy clusters with a Server Group for control plane and worker nodes.
+The policy on these groups is set to `soft-anti-affinity` which provides best
+effort anti-affinity for all nodes and allows the number of worker nodes to
+grow beyond that of the number of hypervisors that may be available.
+For more information on server affinity, see `Using server affinity for HA`_.
+
+.. _`Using server affinity for HA`: https://docs.catalystcloud.nz/compute/anti-affinity-groups-ha.html
+
+
 .. _setting_up_kubectl:
 
 ***************************************

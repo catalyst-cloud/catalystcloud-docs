@@ -35,7 +35,7 @@ end up sharing the same hypervisor.
 .. Warning::
 
   When deciding which server affinity type to use, please keep in mind that
-  the policy behavior you choose will effect your servers behavior should a
+  the policy behavior you choose will affect your servers behavior should a
   hypervisor experience a failure.
 
   * In the case of the *affinity* policy, if the hypervisor

@@ -1,0 +1,16 @@
+################
+1 August 2023
+################
+
+************************
+Container Infra (Magnum)
+************************
+
+Our Magnum service has changed the affinity policy for all newly built clusters.
+
+Both Control Plane and Worker nodes now use `soft-anti-affinity`.
+This provides a best-effort spread of nodes across hypervisors and allows for more worker nodes than hypervisors available.
+
+For more information on server affinity, see `Using server affinity for HA`_.
+
+.. _`Using server affinity for HA`: https://docs.catalystcloud.nz/compute/anti-affinity-groups-ha.html
