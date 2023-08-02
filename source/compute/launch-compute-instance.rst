@@ -71,7 +71,15 @@ recommended option for most use cases, and in doubt, the one that should be
 selected.
 
 ``Ephemeral Disk`` is only recommended for true cloud native applications,
-built using the immutable infrastructure principle, or one-off jobs.
+built using the immutable infrastructure principle, or for one-off jobs. If
+you choose to use ephemeral storage for an instance it is highly
+recommended that you do not shelve your instance. Shelving an ephemeral
+instnance will create an image of your instance instead of a snapshot and
+this image will not be deleted when you unshelve your instance. Over
+time this can result in unecessary images being kept on your project. If
+you want to frequently shelve your instances then you should use
+``Persistent Volumes`` for them.
+
 
 Delete on terminate
 ===================
