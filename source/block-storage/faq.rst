@@ -4,22 +4,26 @@ FAQ
 
 .. _migrating-volumes:
 
-*****************************************
-How to migrate between HDD and NVMe disks
-*****************************************
+*********************************************
+How to migrate between different volume types
+*********************************************
 
-At the current time, support for a cloud native migration option between
-storage tiers is not supported. With that in mind here is our recommended
-approach for transferring data between 2 disks in different tiers.
+At the current time, support for changing volume type on an existing
+volume is not supported. However, by creating a new volume with
+the desired type, and copying data, we can switch between them.
 
 For the purpose of this example we will assume:
 
-* there is an existing HDD volume attached to the instance and mounted on /data
-* a new NVMe volume has been attached to the instance and
+* The operating system involved in Linux, and we recommend doing this
+  on a system which is not booted from the original volume
+* there is an existing volume attached to the instance and mounted on
+  ``/data``
+* a new volume of the desired new type has been attached to the instance
+  and
 
   - has been partitioned
   - has a file system created
-  - is mounted on /mnt/data_new
+  - is mounted on ``/mnt/data_new``
 
 We will be using `rsync`_ to perform the transfer as it allows us to maintain
 the volumes thin provisioned nature, and preserve the nature of any sparse
