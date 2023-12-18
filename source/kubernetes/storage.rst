@@ -63,11 +63,8 @@ Storage classes
 
 Catalyst Cloud provides pre-defined storage classes for all of the block
 storage tiers in each region. There are storage classes available for the
-default `standard storage tier`_ and for each of the
-`performance storage tiers`_.
-
-.. _`standard storage tier`: https://docs.catalystcloud.nz/block-storage/overview.html#the-standard-tier
-.. _`performance storage tiers`: https://docs.catalystcloud.nz/block-storage/overview.html#the-performance-tier
+default standard storage tier and for each of the
+performance storage tiers, see :doc:`/block-storage/volume-tiers`.
 
 The storage class names and their availability by region are as follows:
 
