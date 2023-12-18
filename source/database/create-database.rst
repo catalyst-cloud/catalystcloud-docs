@@ -37,7 +37,9 @@ options, these include:
 * You will also need to source an OpenRC file in the correct region
 * It is also necessary to have an **existing network**,  which is attached to a
   router and has a working subnet, on the project that you wish to deploy the
-  database instance to.
+  database instance to. The network that you create the database instance in
+  **must** have access to the internet, as it is required to download the
+  support files to start the database.
 
 .. Warning::
 
@@ -306,6 +308,3 @@ is publicly available, but only from the specific cidr range: 202.37.199.1/24
   --nic net-id=908816f1-933c-4ff2-8595-xxxxxxxxxxxx \
   --is-public \
   --allowed-cidr 202.37.199.1/24 \
-
-
-
