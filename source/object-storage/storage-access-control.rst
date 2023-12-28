@@ -98,13 +98,17 @@ only role that has been checked is the ``Auth Only`` role.
 
 .. Note::
 
-    It is possible to use an email with a **tag** for this user. A tag is
-    where an additional text string is appended with a "+" symbol to an
-    existing email address. e.g. operations+restricted-storage@example.com
+    It is possible to use an email with an extension for this user. An extension
+    is where an additional text string is inserted typically with a "+" symbol
+    within an existing email address. e.g. operations+restricted-storage@example.com
 
     This will send the email to the existing address of operations@example.com
     allowing it to be filtered and managed without the need to create a whole
     new email account.
+
+    You may need to check that your email server supports this feature, and
+    confirm that "+" is the correct symbol, some mail servers use different
+    symbols. For more information see `Email Sub-addressing`_.
 
 As mentioned in the prerequisites for this section, we will need two
 restricted users. In our examples, they are named restricted-user-1 and
@@ -385,3 +389,12 @@ Again we can confirm success of the request with one of our READ enabled users.
   +---------+
   | bar.txt |
   +---------+
+
+***************
+Link References
+***************
+
+.. target-notes::
+
+.. _`Email Sub-addressing`: https://en.wikipedia.org/wiki/Email_address#Sub-addressing
+
