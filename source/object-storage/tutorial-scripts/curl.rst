@@ -90,7 +90,7 @@ To delete a file from your container, use this code:
 
 .. code-block:: bash
 
-   curl -X DELETE -H "X-Auth-Token: <token>" <storage url>/mycontainer/myobject
+   curl -X DELETE -H "X-Auth-Token: <token>" <storage URL>/mycontainer/myobject
 
 Finally, to delete a container you can use the following syntax.
 
@@ -101,4 +101,4 @@ Finally, to delete a container you can use the following syntax.
 
 .. code-block:: bash
 
-    curl -X DELETE -H "X-Auth-Token: <token>" <storage url>/mycontainer
+    curl -X DELETE -H "X-Auth-Token: <token>" <storage URL>/mycontainer
