@@ -10,7 +10,7 @@ nothing approach. Either the user has the role and can do anything with the
 container, or they do not have the role and they can't interact with any
 object storage resources.
 
-To overcome this limitation, it is now possible to create a user with the
+To overcome this limitation, it is possible to create a user with the
 ``Auth Only`` role and give them access to a container using an Access Control
 List. You can find more information on the auth only role
 :ref:`here <access_control>`.
