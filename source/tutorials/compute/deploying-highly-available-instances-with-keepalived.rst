@@ -783,14 +783,14 @@ obtain the port ID of the instances and update the port:
  $ VRRP_MASTER_PORT=$(openstack port list --server $VRRP_MASTER_ID | grep '10.0.0.4' | awk '{print $2}') && echo $VRRP_MASTER_PORT
  6bd99608-774c-41ba-ab88-xxxxxxxxxxxx
 
- $ openstack port set --fixed-ip subnet=$VRRP_SUBNET_ID,ip_address=10.0.0.4 $VRRP_MASTER_PORT
+ $ openstack port set --fixed-ip subnet=$VRRP_SUBNET_ID,ip-address=10.0.0.4 $VRRP_MASTER_PORT
 
  $ VRRP_BACKUP_ID=$(openstack server list | grep 'vrrp-backup' | awk '{print $2}') && echo $VRRP_BACKUP_ID
  d920fa78-a463-4e17-90de-xxxxxxxxxxxx
 
  $ VRRP_BACKUP_PORT=$(openstack port list --server $VRRP_BACKUP_ID | grep '10.0.0.5' | awk '{print $2}') && echo $VRRP_BACKUP_PORT
 
- $ openstack port set --fixed-ip $VRRP_SUBNET_ID,ip_address=10.0.0.5 $VRRP_BACKUP_PORT
+ $ openstack port set --fixed-ip $VRRP_SUBNET_ID,ip-address=10.0.0.5 $VRRP_BACKUP_PORT
 
 Then log in to the instances and edit their network interfaces and resolv.conf
 files:
