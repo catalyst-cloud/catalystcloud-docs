@@ -12,18 +12,16 @@ What is a cluster?
 ******************
 
 A container cluster is the foundation of the Kubernetes Engine, it consists of
-one or more **control plane nodes** (also referred to as **master nodes**) and
-one or more **worker nodes**.
-It is made up of a collection of compute, networking, and storage resources
-necessary to run any given workload. Communication between them is achieved
-by way of a shared network.
+one or more **control plane node(s)** and one or more **worker node(s)**. It is made
+up of a collection of compute, networking, and storage resources necessary to
+run any given workloads. Communication between them is achieved by way of a
+shared network.
 
-The ``master node`` is the control plane of the cluster consisting of a
-collection of services responsible for providing the centralised scheduling,
-logic and management of all aspects of the cluster. While it is possible to run
-a cluster with a single master which hosts all of the required services it is
-more advisable, especially for production environments, to deploy your clusters
-in a multi-master *highly available* configuration.
+The control plane of a cluster consists of a collection of services responsible for
+providing the centralised scheduling, logic and management of all aspects of the cluster.
+While it is possible to run a cluster with a single master which hosts all of the required
+services it is more advisable, especially for production environments, to deploy your
+clusters in a multi-master *highly available* configuration.
 
 The following diagram shows the relation more clearly
 *(image sourced from rancher.com)*
@@ -46,11 +44,58 @@ The other half of the cluster is the machines designated as ``nodes``
 running workloads assigned by the scheduler using appropriate local and external
 resources.
 
+************
+ClusterAPI 
+************
+
+The Catalyst Cloud managed Kubernetes service uses `ClusterAPI`_ under the
+hood to manage clusters. ClusterAPI, or CAPI for short, is an open-source project
+that aims to simplify deploying and managing clusters. It achieves this by providing a set
+of declarative APIs that manage individual clusters in much the same way that the
+Kubernetes control plane manages Pods, Deployments and any other resources.
+
+.. _`ClusterAPI`: https://cluster-api.sigs.k8s.io/
+
+
+
+
 ********************
-The cluster template
+Base Images & Templates
 ********************
 
+Base OS Images
+==============
+
+A fundamental part of the ClusterAPI (CAPI) deploy process is actually managed by Catalyst
+Cloud automated pipelines and involves building a base OS image with several components
+necessary for instantiating and running a cluster pre-installed. These include `kubeadm,
+kubelet and kubectl`_. `kubeadm`_ is important in the build process as it performs the
+essential steps of configuring the Kubernetes API, initiating the control plane and
+joining nodes to a cluster. Kubelet and kubectl are part of the Kubernetes API itself and
+will be important when the cluster is running. The three binaries for `kubeadm, kubelet
+and kubectl`_ are always the same version and these determine the version of the
+Kubernetes cluster. The OS image build also pre-installs a number of important
+dependencies including a container runtime interface (CRI) such as `containerd`_ and a
+container networking interface (CNI) and performs some essential system and network
+configuration.
+
+.. Note:: 
+   Creation of base OS images for the managed Kubernetes is managed by Catalyst Cloud
+   directly. We do not support customer managed images for use with Kubernetes.
+
+.. _`kubeadm, kubelet and kubectl`: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl
+.. _`kubeadm`: https://kubernetes.io/docs/reference/setup-tools/kubeadm/
+.. _`containerd`: https://containerd.io
+
+Once the OS image build is complete, the automation pipelines will create a Magnum
+template which can then be used to create as well as upgrade a Kubernetes cluster via the
+web interface or the command line.
+
+.. NOTE (travis): I haven't been making dev templates and didn't realize that was a thing. We
+.. should discuss if we still want to do this.
+   
 .. Warning::
+
 
   In an effort to make the process of getting started with Kubernetes on the
   Catalyst Cloud a much simpler process, we have decided to modify the default
@@ -69,6 +114,8 @@ The cluster template
   As a reminder, it is considered best practice that production workloads are
   **not** deployed on a publicly accessible cluster.
 
+.. NOTE (travis): Much of this is probably no longer relevant as CAPI will not support many
+.. of the original Magnum-Heat template labels.
 A cluster template is a collection of parameters to describe how a cluster can
 be constructed. Some parameters are relevant to the infrastructure of the
 cluster, while others are for the particular COE. These templates work as a
@@ -83,10 +130,10 @@ Template types
 
 The naming convention used for the templates is broken down as follows:
 
-* **kubernetes-v1.18.2** : this is the version of kubernetes that the template
+* **kubernetes-v1.30.2** : this is the version of kubernetes that the template
   will use to create the cluster.
 * **-prod** or **-dev**: the type of environment to be created (see below).
-* **-20200615**: the date on which the template was created.
+* **-20240615**: the date on which the template was created.
 
 The difference between the development and production templates are:
 
@@ -118,12 +165,12 @@ Then list all of the available cluster templates.
   +--------------------------------------+----------------------------------+
   | uuid                                 | name                             |
   +--------------------------------------+----------------------------------+
-  | bc493321-6d30-44a1-b767-xxxxxxxxxxxx | kubernetes-v1.16.9-dev-20200602  |
-  | 99f51180-cdcb-4492-9163-xxxxxxxxxxxx | kubernetes-v1.16.9-prod-20200602 |
-  | c06970d9-0926-4e07-8042-xxxxxxxxxxxx | kubernetes-v1.17.5-dev-20200615  |
-  | 2efc83d2-e6d6-4c3a-af3b-xxxxxxxxxxxx | kubernetes-v1.17.5-prod-20200615 |
-  | 228d392b-79e9-4472-8981-xxxxxxxxxxxx | kubernetes-v1.18.2-dev-20200630  |
-  | 903b954d-667a-45ca-8e5c-xxxxxxxxxxxx | kubernetes-v1.18.2-prod-20200630 |
+  | bc493321-6d30-44a1-b767-xxxxxxxxxxxx | kubernetes-v1.28.9-dev-20200602  |
+  | 99f51180-cdcb-4492-9163-xxxxxxxxxxxx | kubernetes-v1.28.9-prod-20200602 |
+  | c06970d9-0926-4e07-8042-xxxxxxxxxxxx | kubernetes-v1.29.5-dev-20200615  |
+  | 2efc83d2-e6d6-4c3a-af3b-xxxxxxxxxxxx | kubernetes-v1.29.5-prod-20200615 |
+  | 228d392b-79e9-4472-8981-xxxxxxxxxxxx | kubernetes-v1.30.2-dev-20200630  |
+  | 903b954d-667a-45ca-8e5c-xxxxxxxxxxxx | kubernetes-v1.30.2-prod-20200630 |
   +--------------------------------------+----------------------------------+
 
 For information on how volumes work and storage types in a cluster refer to the
@@ -308,6 +355,20 @@ If you are wanting to set up a cluster via the Catalyst Cloud dashboard, there
 is a :ref:`guide<dashboard-cluster-creation>` under the quickstart section you
 can follow.
 
+How ClusterAPI builds a cluster
+===============================
+
+When a cluster build is initiated, CAPI uses the single Kubernetes OS image to spawn all
+nodes in the cluster. It begins by creating the control plane nodes. On the control plane
+node, kubeadm installs the respective API binaries such as kube-apiserver, kube-scheduler,
+kube-controller-manager and etcd for a specific Kubernetes version. It then starts the API
+components and waits for the control plane to report that it is running and healthy.
+Additional control plane nodes are also created and will join at this time.
+
+Once the control plane is up and running, CAPI then begins to spawn worker nodes using the
+same OS image. As the kubelet process on a worker node starts it joins the control plane.
+This process repeats until all worker nodes have joined successfully.
+
 Private vs Public cluster API access
 ====================================
 
@@ -349,8 +410,7 @@ To create a new **production** cluster run the following command:
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-cluster \
-  --cluster-template kubernetes-v1.18.2-prod-20200630 \
-  --keypair my-ssh-key \
+  --cluster-template kubernetes-v1.28.2-prod-20240630 \
   --node-count 3 \
   --master-count 3
 
@@ -359,8 +419,7 @@ To create a new **development** cluster run the following command:
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-cluster \
-  --cluster-template kubernetes-v1.18.2-dev-20200630 \
-  --keypair my-ssh-key \
+  --cluster-template kubernetes-v1.28.2-dev-20230630 \
   --node-count 3 \
   --master-count 1
 
@@ -369,6 +428,8 @@ To create a new **development** cluster run the following command:
 
 Customizing clusters using labels
 =================================
+
+.. NOTE(travis): Will need a list of labels still available with CAPI.
 
 It is possible to override the behaviour of a template by adding or modifying
 the labels supplied by the template.
@@ -389,10 +450,9 @@ use a cluster creation command like this:
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-cluster \
-  --cluster-template kubernetes-v1.18.2-prod-20200630 \
+  --cluster-template kubernetes-v1.28.2-prod-20240630 \
   --labels auto_scaling_enabled=true\
   --merge-labels \
-  --keypair my-ssh-key \
   --node-count 3 \
   --master-count 3
 
@@ -413,7 +473,7 @@ You can use the following command to check the status of the cluster:
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
   | uuid                                 | name        | keypair  | node_count | master_count | status             |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
-  | c191470e-7540-43fe-af32-xxxxxxxxxxxx | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
+  | c191470e-7540-43fe-af32-xxxxxxxxxxxx | k8s-cluster |          |          1 |            1 | CREATE_IN_PROGRESS |
   +--------------------------------------+-------------+----------+------------+--------------+--------------------+
 
 Alternatively, you can check the status of the cluster on the `Clusters panel`_
@@ -470,7 +530,7 @@ the following characteristics:
 
 * name - bastion
 * flavor - c1.c1r1
-* image - ubuntu-18.04-x86_64
+* image - ubuntu-22.04-x86_64
 * network - attached to the Kubernetes cluster network
 * security group - bastion-ssh-access
 * security group rules - ingress TCP/22 from 114.110.xx.xx ( public IP to allow

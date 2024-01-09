@@ -131,7 +131,7 @@ The resulting command would look like this.
 .. code-block:: console
 
     $ openstack coe cluster create k8s-cluster \
-    --cluster-template kubernetes-v1.18.2-prod-20200630 \
+    --cluster-template kubernetes-v1.28.2-prod-20230630 \
     --labels master_lb_floating_ip_enabled=true,master_lb_allowed_cidrs=203.109.145.15/32 \
     --merge-labels \
     --keypair glxxxxxxes \

@@ -105,8 +105,7 @@ shown here.
 .. code-block:: bash
 
   $ openstack coe cluster create my-cluster \
-  --cluster-template kubernetes-v1.12.7-prod-20190403 \
-  --keypair mykey \
+  --cluster-template kubernetes-v1.29.7-prod-20240403 \
   --master-count 3 \
   --node-count 3 \
   --labels auto_scaling_enabled=true,min_node_count=1,max_node_count=2,<existing-labels>

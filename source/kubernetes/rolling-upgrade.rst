@@ -81,12 +81,12 @@ available, so you can choose the ID of the version you want to upgrade to:
     +--------------------------------------+----------------------------------------------------------------------+
     | uuid                                 | name                                                                 |
     +--------------------------------------+----------------------------------------------------------------------+
-    | 9c6e9df7-955a-465e-8460-xxxxxxxxxxxx | kubernetes-v1.11.6-prod-20190130                                     |
-    | 4fcb04bd-22ba-4e1c-ab21-xxxxxxxxxxxx | kubernetes-v1.11.6-dev-20190130                                      |
-    | b1d124db-b7cc-4085-8e56-xxxxxxxxxxxx | kubernetes-v1.11.9-dev-20190402                                      |
-    | cf337c0a-86e6-45de-9985-xxxxxxxxxxxx | kubernetes-v1.11.9-prod-20190402                                     |
-    | 967a2b86-8709-4c07-ae89-xxxxxxxxxxxx | kubernetes-v1.12.7-dev-20190403                                      |
-    | f8fc0c67-84af-4bb8-89fb-xxxxxxxxxxxx | kubernetes-v1.12.7-prod-20190403                                     |
+    | 9c6e9df7-955a-465e-8460-xxxxxxxxxxxx | kubernetes-v1.28.6-prod-20230130                                     |
+    | 4fcb04bd-22ba-4e1c-ab21-xxxxxxxxxxxx | kubernetes-v1.28.6-dev-20230130                                      |
+    | b1d124db-b7cc-4085-8e56-xxxxxxxxxxxx | kubernetes-v1.28.9-dev-20230402                                      |
+    | cf337c0a-86e6-45de-9985-xxxxxxxxxxxx | kubernetes-v1.28.9-prod-20230402                                     |
+    | 967a2b86-8709-4c07-ae89-xxxxxxxxxxxx | kubernetes-v1.29.7-dev-20230403                                      |
+    | f8fc0c67-84af-4bb8-89fb-xxxxxxxxxxxx | kubernetes-v1.29.7-prod-20230403                                     |
     +--------------------------------------+----------------------------------------------------------------------+
 
 Upgrade a running Kubernetes cluster
@@ -277,10 +277,10 @@ template versions:
   +--------------------------------------+----------------------------------+
   | uuid                                 | name                             |
   +--------------------------------------+----------------------------------+
-  | 7f01d58a-ba9b-41a4-b53a-xxxxxxxxxxxx | kubernetes-v1.12.7-prod-20190403 |
-  | e18108b4-e33e-4bb1-bf02-xxxxxxxxxxxx | kubernetes-v1.11.9-dev-20190402  |
-  | 889fdf85-cf31-4369-a047-xxxxxxxxxxxx | kubernetes-v1.11.9-prod-20190402 |
-  | 257050d6-57ba-474a-ac55-xxxxxxxxxxxx | kubernetes-v1.12.7-dev-20190403  |
+  | 7f01d58a-ba9b-41a4-b53a-xxxxxxxxxxxx | kubernetes-v1.29.7-prod-20230403 |
+  | e18108b4-e33e-4bb1-bf02-xxxxxxxxxxxx | kubernetes-v1.28.9-dev-20230402  |
+  | 889fdf85-cf31-4369-a047-xxxxxxxxxxxx | kubernetes-v1.28.9-prod-20230402 |
+  | 257050d6-57ba-474a-ac55-xxxxxxxxxxxx | kubernetes-v1.29.7-dev-20230403  |
   +--------------------------------------+----------------------------------+
 
 Before we start the upgrade, in another session, we can monitor the

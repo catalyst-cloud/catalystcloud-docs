@@ -31,14 +31,13 @@ As mentioned above, simply defining an ingress resource is not sufficient to
 define Ingress, it also requires an ingress controller to implement the rule
 set provided by the resource.
 
-Catalyst Cloud provides the native **Octavia ingress controller** and it also
-supports other common ingress controllers such as the
-**Nginx ingress controller**.
+Catalyst Cloud supports common ingress controllers such as **Traefik** and the **Nginx ingress controller**.
 
 While all ingress controllers should fit the reference specification they do in
 fact operate slightly differently and the relevant vendor documentation should
 be consulted for details on the correct setup.
 
+.. TODO (travis): create an example using Traefik and/or nginx
 
 ************************************
 Using the Octavia ingress controller

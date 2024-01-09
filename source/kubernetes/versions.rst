@@ -43,14 +43,14 @@ For example:
 
   [major].[minor].[patch]
 
-  v1.23.16
-  v1.22.17
-  v1.21.14
+  v1.30.3
+  v1.29.11
+  v1.28.14
 
 Catalyst Cloud Kubernetes Service uses cluster template to manage each Kubernetes
 version and the matrix of addons that running on top of Kubernetes cluster. And
 users should be able to see the Kubernetes version from the cluster template name. For
-example: *kubernetes-v1.23.16-prod-20230125*, the last 8 digits is the release
+example: *kubernetes-v1.28.14-prod-20240625*, the last 8 digits is the release
 date of this template tagged by Catalyst Cloud.
 
 
@@ -66,8 +66,8 @@ Catalyst Cloud Kubernetes Service supports at least ``3`` minor versions. As lon
 as there is a new minor version released, Catalyst Cloud Kubernetes Service will
 try to get it certified (pass the CNCF conformance test) and released in ``30``
 days. And then deprecate the oldest minor version. For example, if the current
-3 minor versions are v1.23.x, v1.22.x and v1.21.x. Then when the new v1.24.x
-version is released, the version v1.21.x will be removed and out of support.
+3 minor versions are v1.30.x, v1.29.x and v1.28.x. Then when the new v1.31.x
+version is released, the version v1.28.x will be removed and out of support.
 Out of support means whenever users ask for support, you will be asked
 to upgrade your clusters to a supported version first. In short, if the cluster
 is running on a minor version which has been deprecated, then the cluster is
@@ -76,8 +76,8 @@ out of support.
 Catalyst Cloud Kubernetes Service supports the latest stable patch versions
 for each minor version. As long as there is a patch version released, the oldest
 patch version will be hidden/removed. For example, if current versions
-supported for v1.22.x are v1.22.17, then v1.22.17 will be hidden/removed in
-favor of the release of v1.22.18.
+supported for v1.30.x are v1.30.11, then v1.30.11 will be hidden/removed in
+favor of the release of v1.30.12.
 
 .. note::
 
@@ -88,8 +88,8 @@ favor of the release of v1.22.18.
 
 Users should always aim to run the latest patch for each minor version
 to get the latest security enhancements. For example, if the current Kubernetes
-cluster is running on v1.22.17 and the new patch version is v1.22.18, then it
-is highly recommended to upgrade to v1.22.18 as soon as possible.
+cluster is running on v1.30.15 and the new patch version is v1.30.16, then it
+is highly recommended to upgrade to v1.30.16 as soon as possible.
 
 .. note::
 
@@ -121,10 +121,14 @@ the web interface as well as on the command line.
 Upgrading Kubernetes Version
 ****************************
 
-When doing Kubernetes version upgrade, minor version cannot be skipped. For
-example, if the current cluster version is v1.21.x, then it's not allowed
-to upgrade directly to v1.23.x. You have to upgrade to v1.22.x and then do another
-upgrade to v1.23.x.
+When upgrading Kubernetes to a higher version, minor versions cannot be skipped. For
+example, if the current cluster version is v1.29.x, then it is not allowed
+to upgrade directly to v1.31.x. You must upgrade to v1.30.x and then do another
+upgrade to v1.31.x. For for an explanation of how the components of Kubernetes
+and their respective versions work please refer to the `version skew policy`_ 
+documentation.
+
+.. _`version skew policy`: https://kubernetes.io/releases/version-skew-policy/#supported-versions
 
 .. note::
 
@@ -134,9 +138,19 @@ upgrade to v1.23.x.
 
 .. _`CVE`: https://cve.mitre.org/
 
+
 *******************************
 Node OS Version and CRI Version
 *******************************
+.. TODO (travis): Change to Flatcar and discussion of kubeadm
+
+Kubernetes nodes are deployed on the `Flatcar Operating System`_. 
+
+
+.. _`Flatcar Operating System`: https://www.flatcar.org
+
+We build new operating system images on a regular basis as new versions of Kubernetes
+become available and new versions of the base operating system are released. 
 
 Catalyst Cloud Kubernetes Service is using Fedora CoreOS as the Kubernetes Node
 operating system, the original image will be updated regularly. We're using
