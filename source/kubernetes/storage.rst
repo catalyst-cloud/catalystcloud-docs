@@ -88,6 +88,14 @@ The storage class names and their availability by region are as follows:
 |                    | | nz-por-1a  |
 +--------------------+--------------+
 
+Limits
+======
+
+Nodes may not attach more than 25 persistent volumes, and this is
+enforced by the storage driver inside the cluster. Kubernetes will
+respect this limit and avoid placing a pod in a way that violates
+this limit.
+
 Dynamic allocation
 ==================
 
