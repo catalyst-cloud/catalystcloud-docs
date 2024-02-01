@@ -1,14 +1,10 @@
-# pvc-example1.yaml
+# pvc1-pod.yaml
 
 apiVersion: v1
 kind: Pod
 metadata:
   name: pod-pv-test
 spec:
-  volumes:
-    - name: test-persistentvolume
-      persistentVolumeClaim:
-        claimName: test-persistentvolumeclaim
   containers:
     - name: test-storage-container
       image: nginx:latest
@@ -18,3 +14,7 @@ spec:
       volumeMounts:
         - mountPath: "/data"
           name: test-persistentvolume
+  volumes:
+    - name: test-persistentvolume
+      persistentVolumeClaim:
+        claimName: test-persistentvolumeclaim

@@ -7,7 +7,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: b1.standard
+  storageClassName: b1.sr-r3-nvme-1000
   resources:
     requests:
       storage: 1Gi
