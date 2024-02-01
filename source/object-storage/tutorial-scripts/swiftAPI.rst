@@ -13,15 +13,15 @@ official `OpenStack documentation
 +==========+=========+==========================================================================+
 | nz-por-1 | 1       | https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_%tenantid%  |
 +----------+---------+--------------------------------------------------------------------------+
-|          | 2       | https://api.nz-por-1.catalystcloud.io:5000/v2.0                          |
+|          | 3       | https://api.nz-por-1.catalystcloud.io:5000                               |
 +----------+---------+--------------------------------------------------------------------------+
 | nz_wlg_2 | 1       | https://object-storage.nz-wlg-2.catalystcloud.io:443/v1/AUTH_%tenantid%  |
 +----------+---------+--------------------------------------------------------------------------+
-|          | 2       | https://api.cloud.catalyst.net.nz:5000/v2.0                              |
+|          | 3       | https://api.cloud.catalyst.net.nz:5000                                   |
 +----------+---------+--------------------------------------------------------------------------+
 | nz-hlz-1 | 1       | https://object-storage.nz-hlz-1.catalystcloud.io:443/v1/AUTH_%tenantid%  |
 +----------+---------+--------------------------------------------------------------------------+
-|          | 2       | https://api.nz-hlz-1.catalystcloud.io:5000/v2.0                          |
+|          | 3       | https://api.nz-hlz-1.catalystcloud.io:5000                               |
 +----------+---------+--------------------------------------------------------------------------+
 
 .. raw:: html
@@ -152,9 +152,13 @@ Replace the starting section of the previous file with the following:
   auth_username = os.environ['OS_USERNAME']
   auth_password = os.environ['OS_PASSWORD']
   auth_url = os.environ['OS_AUTH_URL']
-  project_name = os.environ['OS_PROJECT_NAME']
-  region_name = os.environ['OS_REGION_NAME']
-  options = {'tenant_name': project_name, 'region_name': region_name}
+
+  options = {
+          'tenant_name': os.environ['OS_PROJECT_NAME'],
+          'region_name': os.environ['OS_REGION_NAME'],
+          'user_domain_name': os.environ['OS_USER_DOMAIN_NAME'],
+          'project_domain_id': os.environ['OS_PROJECT_DOMAIN_ID']
+  }
 
 
   # Establish the connection with the object storage API
