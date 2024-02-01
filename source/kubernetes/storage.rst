@@ -142,7 +142,7 @@ We should soon be able to see this PVC transition to *Bound* status, as a
 
 
 .. code-block:: bash
-  
+
   $ kubectl get pvc
   NAME                         STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS         AGE
   test-persistentvolumeclaim   Bound    pvc-bca8b8ef-01b2-408e-aba6-bf9bef249e84   1Gi        RWO            b1.sr-r3-nvme-1000   17s
@@ -219,10 +219,10 @@ has a volume mounted from the storage class **block-storage-class** and the
         /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-p2npp (ro)
   Conditions:
     Type              Status
-    Initialized       True 
-    Ready             True 
-    ContainersReady   True 
-    PodScheduled      True 
+    Initialized       True
+    Ready             True
+    ContainersReady   True
+    PodScheduled      True
   Volumes:
     test-persistentvolume:
       Type:       PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
@@ -324,7 +324,7 @@ To initiate a resize, edit the ``PersistentVolumeClaim`` and set
    :emphasize-lines: 23
 
     $ kubectl edit pvc/test-persistentvolumeclaim
-    
+
     apiVersion: v1
     kind: PersistentVolumeClaim
     metadata:
@@ -369,9 +369,9 @@ In this example, we do not have a ``Deployment``, so we will delete and re-creat
 
 .. code-block:: bash
 
-  $ kubectl delete -f pvc1-pod.yaml 
+  $ kubectl delete -f pvc1-pod.yaml
   pod "pod-pv-test" deleted
-  $ kubectl create -f pvc1-pod.yaml 
+  $ kubectl create -f pvc1-pod.yaml
   pod/pod-pv-test created
 
 When the ``PersistentVolume`` is mounted on the new pod, it will be resized by
