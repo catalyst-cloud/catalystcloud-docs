@@ -12,12 +12,13 @@ What is a cluster?
 ******************
 
 A container cluster is the foundation of the Kubernetes Engine, it consists of
-one or more **master node(s)** and one or more **worker node(s)**. It is made
-up of a collection of compute, networking, and storage resources necessary to
-run any given workloads. Communication between them is achieved by way of a
-shared network.
+one or more **control plane nodes** (also referred to as **master nodes**) and
+one or more **worker nodes**.
+It is made up of a collection of compute, networking, and storage resources
+necessary to run any given workload. Communication between them is achieved
+by way of a shared network.
 
-The ``master`` server is the control plane of the cluster consisting of a
+The ``master node`` is the control plane of the cluster consisting of a
 collection of services responsible for providing the centralised scheduling,
 logic and management of all aspects of the cluster. While it is possible to run
 a cluster with a single master which hosts all of the required services it is
@@ -34,14 +35,15 @@ Some of the key services running on the master are:
 - The interface to the cluster via the ``API Server``, which provides a
   RESTful API frontend to the control plane.
 - Configuration and state of the cluster is managed by the ``cluster store``.
-  This is based on ``etcd``, which is a distributed key-value store, and
+  This is backed by ``etcd``, a distributed key-value store, and
   provides the single source of truth for the cluster and as such is the only
   stateful component within the cluster.
-- The ``scheduler``
+- The ``scheduler`` watches for pod creation events and binds them to a worker
+  node. The kubelet on that node is then responsible for starting the pod.
 
-The other half of the cluster is the machines designated as ``nodes``,
-previously referred to as minions. They are responsible for accepting and
-running workloads assigned by the master using appropriate local and external
+The other half of the cluster is the machines designated as ``nodes``
+(previously referred to as minions). They are responsible for accepting and
+running workloads assigned by the scheduler using appropriate local and external
 resources.
 
 ********************
@@ -74,8 +76,7 @@ blueprint for cluster creation, changing certain parameters for your cluster.
 
 Traditionally a cloud provider may supply pre-defined templates for users and
 it may also be possible, in some situations, for users to create their own
-templates. Initially Catalyst Cloud will only support the use of the
-pre-defined templates.
+templates. Catalyst Cloud only supports the use of the pre-defined templates.
 
 Template types
 ==============
