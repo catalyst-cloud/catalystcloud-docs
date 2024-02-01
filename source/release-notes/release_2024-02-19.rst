@@ -1,0 +1,46 @@
+################
+19 February 2024
+################
+
+Major upgrade to the identity (Keystone) service.
+
+===========================
+Identity v2 API Deprecation
+===========================
+
+The identity v2 API has been removed beginning from the date of this release.
+Only the v3 API is available after this date.
+
+Customers using an :ref:`openrc file <source-rc-file>` should download the
+latest version from the dashboard.
+
+Client applications currently configured to use the v2 API will need to be
+reconfigured to authenticate with Catalyst Cloud as follows:
+
+1.  Remove ``/v2.0`` from any authentication URLs.
+
+    * For example ``https://api.cloud.catalyst.net.nz:5000/v2.0`` should be
+      changed to ``https://api.cloud.catalyst.net.nz:5000/``.
+
+2.  When providing a user name or project name when authenticating then the user
+    domain and project domain must also be provided:
+
+    * User domain name: ``Default``.
+    * User domain ID: ``default``.
+
+    Note that when using the user ID and project ID for authenticating then the
+    domain is not required.
+
+3.  Confirm that client applications are authenticating against the Identity V3
+    API.
+
+    If it is possible to inspect HTTP requests made from the application then
+    the application should be seen to be requesting an auth token from the v3
+    endpoint, e.g. ``https://api.cloud.catalyst.net.nz:5000/v3/auth/tokens``.
+
+More information on using the identity v3 API can be found in the `Keystone
+documentation <https://docs.openstack.org/api-ref/identity/v3/#password-authentication-with-scoped-authorization>`_.
+
+Customers requiring assistance in migrating to the v3 API, or to wishing to
+confirm their account is no longer using the v2 API should raise a support
+ticket via the dashboard.
