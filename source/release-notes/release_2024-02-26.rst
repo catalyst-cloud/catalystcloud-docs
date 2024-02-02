@@ -30,10 +30,16 @@ the specific microversion of the API. The highest supported API microversion
 after this upgrade is 2.42. Requests for features that are newer than this
 microversion may result in an error being returned instead of the desired
 action being performed. This may occur with existing scripts, configurations
-and tools (e.g. Terraform) if such features are requests that were previously
-silently ignored when interfacing with the v2 API. If this occurs after the
-upgrade, check your instance deployment scripts for any such features in the
-first instance.
+and tools (e.g. Terraform/OpenTofu) if such features are requests that were
+previously silently ignored when interfacing with the v2 API. If this occurs
+after the upgrade, check your instance deployment scripts for any such features
+in the first instance.
+
+An example of a feature included in Terraform (and derivative products) is
+specifying the volume type at instance creation. This is not supported in the
+2.42 compute API so will return an error. To avoid this, please ensure that
+`openstack_compute_volume_attach_v2` resources do not use the `volume_type`
+argument.
 
 ====
 Tags
