@@ -41,6 +41,10 @@ reconfigured to authenticate with Catalyst Cloud as follows:
 More information on using the identity v3 API can be found in the `Keystone
 documentation <https://docs.openstack.org/api-ref/identity/v3/#password-authentication-with-scoped-authorization>`_.
 
+<<<<<<< HEAD
 Customers requiring assistance in migrating to the v3 API, or to wishing to
+=======
+Customers requiring assistance in migrating to the v3 API, or who are wishing to
+>>>>>>> 0af4d63 (Added Keystone upgrade notes for Feb 2024 (#464))
 confirm their account is no longer using the v2 API should raise a support
 ticket via the dashboard.
