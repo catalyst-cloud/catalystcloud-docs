@@ -1,0 +1,118 @@
+#############
+18 March 2024
+#############
+
+Major upgrade to the Compute (Nova) service. Most of the changes are internal
+however there are some public-facing changes as described below.
+
+==========================
+Compute API Version Change
+==========================
+
+The most significant change is retirement of the v2 compute API which was
+:ref:`deprecated in August 2022 <deprecate-compute-v2>`. This is replaced
+by the v2.1 API which features backwards compatibility with v2 but also
+introduces 'microversions' to determine the available features and
+capabilities of the compute service.
+
+The first aspect of the APi change is that the API URL path changes from `/v2`
+to `/v2.1`. So for example the compute v2 API for the Porirua region has now
+changed to https://api.nz-por-1.catalystcloud.io:8774/v2.1. The updated API
+URLs can be found on the `API page of the dashboard
+<https://dashboard.catalystcloud.nz/project/api_access/>`_.
+
+Most client applications should obtain the correct URL automatically from the
+service catalogue and therefore not require additional configuration. If any
+customers have specifically configured any applications or scripts to use the
+v2 API then they should be updated to use the v2.1 API instead.
+
+The v2.1 API is required for some of the new compute features and will enable
+additional features in future. It also retains full backwards-compatibility
+with the old v2 API, so older software that only supports API v2 can be
+configured to use the v2.1 API without loss of functionality.
+
+Note that the v2.1 API supports a number of new features that are dependent on
+the specific microversion of the API. **The highest supported API microversion
+after this upgrade is 2.42. Requests for features that are newer than this
+microversion may result in an error being returned instead of the desired
+action being performed.**
+
+These errors may occur with existing scripts, configurations and tools (e.g.
+Terraform/OpenTofu), particulary software that uses gophercloud to communicate
+with the compute API. Requests for newer features may have been silently
+ignored when interfacing with the v2 API in the past but may start to return
+errors after the upgrade.
+
+If customers encounter errors with the compute service after the upgrade,
+check instance deployment scripts to see if such features are being requested
+and remove these options.
+
+An example of a feature included in Terraform (and derivative products) is
+specifying the volume type at instance creation. This is not supported in the
+2.42 compute API so will return an error. To avoid this, please ensure that
+`openstack_compute_volume_attach_v2` resources do not use the `volume_type`
+argument.
+
+More information on the features available up to v2.42 can be found in the
+`OpenStack compute API documentation
+<https://docs.openstack.org/nova/latest/reference/api-microversion-history.html>`_.
+
+====
+Tags
+====
+
+-------------
+Instance tags
+-------------
+
+Simple string tags can now be added to servers to assist with filtering and
+sorting. There is also now support for virtual device role tagging.
+
+-----------
+Device tags
+-----------
+
+Device role tagging can assist with identifying which device is which inside
+the guest instance. When booting an instance, an optional arbitrary tag
+parameter can be set on virtual network interfaces and/or block device
+mappings. This tag is exposed to the instance through the metadata API. Each
+tagged virtual network interface is listed along with information about the
+virtual hardware, such as bus type (e.g. PCI), bus address (e.g. 0000:00:02.0)
+and MAC address. For tagged block devices, the exposed hardware metadata
+includes the bus (e.g. SCSI), bus address (e.g. 1:0:2:0) and serial number.
+
+The metadata service contains a corresponding devices section which lists any
+devices that are tagged as described in the previous paragraph, along with
+their hardware metadata.
+
+===================================
+API Microversion Header consistency
+===================================
+
+Microversions may now (since microversion 2.27) be requested with the
+``OpenStack-API-Version: compute 2.27`` header, in alignment with
+OpenStack-wide standards. The original format,
+``X-OpenStack-Nova-API-Version: 2.27``, may still be used.
+
+===================
+Deprecation Notices
+===================
+
+--------------
+Compute API v2
+--------------
+
+The compute v2 API endpoint is being replaced by the v2.1 API endpoint. Refer
+to details earlier in this page for more information.
+
+-------------------
+EC2 API Deprecation
+-------------------
+
+The EC2-compatible compute API provides an S3-like compute API service. There
+has not been any usage activity logged on this API for some time so it is now
+deprecated and will be retired after 31 March 2024.
+
+This does not affect the :ref:`S3 object storage API <s3-api-documentation>`
+or the ability to manage EC2 credentials; these features will continue to
+function as normal.
