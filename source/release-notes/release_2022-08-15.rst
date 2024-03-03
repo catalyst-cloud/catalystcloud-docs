@@ -112,6 +112,8 @@ retired after the next major compute upgrade.
 Deprecation Notices
 ===================
 
+.. _deprecate-compute-v2:
+
 --------------
 Compute API v2
 --------------
