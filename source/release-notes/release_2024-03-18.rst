@@ -15,7 +15,7 @@ by the v2.1 API which features backwards compatibility with v2 but also
 introduces 'microversions' to determine the available features and
 capabilities of the compute service.
 
-The first aspect of the APi change is that the API URL path changes from `/v2`
+The first aspect of the API change is that the URL path changes from `/v2`
 to `/v2.1`. So for example the compute v2 API for the Porirua region has now
 changed to https://api.nz-por-1.catalystcloud.io:8774/v2.1. The updated API
 URLs can be found on the `API page of the dashboard
@@ -38,7 +38,7 @@ microversion may result in an error being returned instead of the desired
 action being performed.**
 
 These errors may occur with existing scripts, configurations and tools (e.g.
-Terraform/OpenTofu), particulary software that uses gophercloud to communicate
+Terraform/OpenTofu), particularly software that uses gophercloud to communicate
 with the compute API. Requests for newer features may have been silently
 ignored when interfacing with the v2 API in the past but may start to return
 errors after the upgrade.
