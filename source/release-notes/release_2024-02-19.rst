@@ -4,6 +4,16 @@
 
 Major upgrade to the identity (Keystone) service.
 
+=======================
+Application Credentials
+=======================
+
+The upgrade adds Application Credentials to the identity service.  The new feature
+allows customers to create secrets to allow applications to authentication
+against Catalyst Cloud with a subset of roles and an optional expiry time.
+
+For more details see :doc:`/identity-access-management/application-credentials`
+
 ===========================
 Identity v2 API Deprecation
 ===========================
