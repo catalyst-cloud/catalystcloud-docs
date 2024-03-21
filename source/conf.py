@@ -11,7 +11,7 @@
 #
 # All configuration values have a default; values that are commented out
 # serve to show the default.
-
+import datetime
 import sys
 import os
 
@@ -51,7 +51,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Catalyst Cloud'
-copyright = u'2016-2022, Catalyst Cloud Ltd'
+copyright = u'2016-{}, Catalyst Cloud Ltd'.format(datetime.date.today().year)
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
