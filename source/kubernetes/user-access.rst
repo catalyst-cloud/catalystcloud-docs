@@ -8,6 +8,32 @@ User access
 Introduction
 ************
 
+Service User
+============
+
+.. NOTE (travis): Not sure if "arbiter" is a good word here.
+When creating resources such as Kubernetes clusters, OpenStack creates an
+object called a trust. The trust acts as a type of arbiter which the cluster
+uses when it needs to authenticate with the OpenStack API for performing tasks
+such as allocating volumes, creating loadbalancers or instantiating nodes to
+resize a cluster. The trust object is bound to a cluster throughout its lifetime and
+it cannot be transferred to another user via the OpenStack API.
+
+An important caveat to the trust model is that when a user account is removed
+or disabled for any reason, for example due to a developer leaving
+the project, the trust will no longer function. This presents a problem for the
+cluster as it will no longer have the means to authenticate with the OpenStack
+API and it will enter an unhealthy state.
+
+In order to avoid this scenario we recommend that users create a separate
+service user to manage Kubernetes clusters. Ideally the service user would have
+a descriptive username like `preprod-serviceuser@mycompany.nz`. In order to
+manage clusters it only needs the ``_member_`` role. It is not necessary or
+recommended to give it any other roles such as ``project_admin``.
+
+Project Users
+=============
+
 Kubernetes clusters launched on the Catalyst Cloud are integrated with the
 OpenStack Keystone (Identity) service. Users with one of the roles
 listed below are able to interact with any Kubernetes clusters owned by their
@@ -43,7 +69,6 @@ assigned to their account.
 |               | Magnum and Kubernetes. Has access to all namespaces,         |
 |               | excluding the admin namespace.                               |
 +---------------+--------------------------------------------------------------+
-
 
 .. Warning::
 

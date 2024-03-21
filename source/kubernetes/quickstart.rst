@@ -28,11 +28,26 @@ used to create a production ready cluster.
 Pre-requisites
 **************
 
-Ensure user has the required privileges
+Service user
+============
+
+As a first step, we recommend creating a service user in your account which you
+then use to create Kubernetes clusters. The service user can have an arbitrary
+name such as `preprod-serviceuser@mycompany.nz`. Please see the
+:ref:`kubernetes-user-access` section for more discussion on why a service user
+is needed.
+
+
+Ensure service user has the required privileges
 =======================================
 
-In order to create a Kubernetes cluster you need to ensure the user has been
-allocated the ``heat_stack_owner`` role.
+In order to create a Kubernetes cluster the service user only requires the ``_member_``
+role.
+
+.. Note::
+   The Kubernetes service user is only meant to create Kubernetes clusters and should not
+   perform any administrative functions on your account. It is important that it does
+   not have additional roles like ``project_admin``.
 
 Ensure quota is sufficient
 ==========================
@@ -52,7 +67,7 @@ By default, the development Kubernetes template allocates:
 * 3 security groups
 * 1 load balancer
 
-As a ``project admin`` you can change your quota using the `Quota Management`_
+A user with the ``project admin`` role can change your quota using the `Quota Management`_
 panel in the dashboard, under the Management section.
 
 .. _`Quota Management`: https://dashboard.catalystcloud.nz/management/quota/
@@ -113,18 +128,18 @@ The following command will list all cluster templates available:
   +--------------------------------------+-----------------------------------+
   | uuid                                 | name                              |
   +--------------------------------------+-----------------------------------+
-  | d4715786-441d-4c59-bb0f-XXXXXXXXXXXX | kubernetes-v1.19.6-dev-20210211   |
-  | 5c999fc7-715d-4213-9b4e-XXXXXXXXXXXX | kubernetes-v1.19.6-prod-20210211  |
-  | 76f3a1ed-d970-40d1-962e-XXXXXXXXXXXX | kubernetes-v1.18.14-dev-20210211  |
-  | bef3162b-2a15-4df2-b637-XXXXXXXXXXXX | kubernetes-v1.18.14-prod-20210211 |
-  | 7946001d-222b-43fd-8ffa-XXXXXXXXXXXX | kubernetes-v1.17.16-dev-20210211  |
-  | 35ec1bbf-c2e1-4cd9-8677-XXXXXXXXXXXX | kubernetes-v1.17.16-prod-20210211 |
-  | aadf25a0-46c5-4a40-ac37-XXXXXXXXXXXX | kubernetes-v1.20.4-prod-20210412  |
+  | d4715786-441d-4c59-bb0f-XXXXXXXXXXXX | kubernetes-v1.29.6-dev-20240211   |
+  | 5c999fc7-715d-4213-9b4e-XXXXXXXXXXXX | kubernetes-v1.29.6-prod-20240211  |
+  | 76f3a1ed-d970-40d1-962e-XXXXXXXXXXXX | kubernetes-v1.28.14-dev-20240211  |
+  | bef3162b-2a15-4df2-b637-XXXXXXXXXXXX | kubernetes-v1.28.14-prod-20240211 |
+  | 7946001d-222b-43fd-8ffa-XXXXXXXXXXXX | kubernetes-v1.27.16-dev-20240211  |
+  | 35ec1bbf-c2e1-4cd9-8677-XXXXXXXXXXXX | kubernetes-v1.27.16-prod-20240211 |
+  | aadf25a0-46c5-4a40-ac37-XXXXXXXXXXXX | kubernetes-v1.30.4-prod-20240412  |
   +--------------------------------------+-----------------------------------+
 
 
 We want to use the latest development template (which in the example above is
-``kubernetes-v1.19.6-dev-20200615``).
+``kubernetes-v1.29.6-dev-20200615``).
 
 Alternatively, a list of cluster templates can be seen in the
 **Cluster Template** dropdown of the **Create New Cluster** dialogue in the
@@ -132,7 +147,7 @@ dashboard, under the **Container Infra** section.
 
 .. Note::
 
-  Templates that are from the v1.20.x range onwards use containerd at runtime to
+  Templates that are from the v1.30.x range onwards use containerd at runtime to
   create a cluster.
 
 .. _dashboard-cluster-creation:
@@ -140,6 +155,9 @@ dashboard, under the **Container Infra** section.
 ***********************************************
 Creating a Kubernetes cluster via the dashboard
 ***********************************************
+.. Note::
+  For the following examples you will need to login to the dashboard as 
+  your service user.
 
 The simplest way to create a kubernetes cluster is through the Catalyst Cloud
 dashboard. The dashboard allows you to create, manage and monitor the current
@@ -215,6 +233,11 @@ If you have already created the cluster using the dashboard, you can safely
 skip this step of the tutorial. In this section we illustrate how the same
 operation can be done using the more powerful (and easier to automate) CLI.
 
+.. Note::
+   As with the dashboard example, you will need to ensure you are logging in
+   as the service user. Be sure to download the openrc file for the service user
+   rather than your personal account before proceeding.
+
 Before proceeding, please ensure you have :ref:`installed the
 CLI<installing_cli_os>` and :ref:`sourced an openrc file
 <configuring-the-cli>`.
@@ -225,7 +248,7 @@ following command:
 .. code-block:: bash
 
   $ openstack coe cluster create k8s-cluster \
-  --cluster-template kubernetes-v1.19.6-dev-20210211 \
+  --cluster-template kubernetes-v1.29.6-dev-20240211 \
   --keypair my-ssh-key \
   --node-count 3 \
   --master-count 1
@@ -237,8 +260,18 @@ created using the dashboard method.
 
 .. Note::
 
-  Templates in the v1.20.x series onward need to specify the additional label:
-  ``master_lb_floating_ip_enabled=True`` if you want to create a public cluster.
+  You can create a publicly accessible cluster by specifying the label ``master_lb_floating_ip_enabled=True``.
+
+.. code-block:: bash
+
+  $ openstack coe cluster create k8s-cluster \
+  --cluster-template kubernetes-v1.29.6-dev-20240211 \
+  --keypair my-ssh-key \
+  --node-count 3 \
+  --master-count 1\
+  --merge-labels --labels master_lb_floating_ip_enabled=True \
+
+  Request to create cluster c191470e-7540-43fe-af32-xxxxxxxxxxxx accepted
 
 Checking the status of the cluster
 ==================================
