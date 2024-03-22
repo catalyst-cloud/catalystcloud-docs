@@ -68,6 +68,25 @@ may also have an association to a back-end pool. Policies describe actions that
 should be taken by the load balancing software if all of the rules in the
 policy return true.
 
+L7 policy position
+^^^^^^^^^^^^^^^^^^
+
+The load balancer service maintains the relative order of the layer 7 policies
+for a given load balancer. The policy positions are kept in a strict numbered
+sequence starting at 1.  If changes are made to the positions of a load
+balancer's policies then the service will renumber the positions to maintain the
+sequence.  It is important to remember this if using an orchestration tool to
+manage the polices. The values of the policy positions when created may not
+match the positions specified.  This could caused your orchestration tool
+to mark the creation as a failure or lead to duplicate policies being created.
+
+For example if your load balancer has two policies: policy A at position 1 and
+policy B at position 2, and you created a new policy (C) also at position 1.
+The two existing policies will be moved to make space for the new policy, so
+that policy C is at position 1, A at 2 and B at 3.
+
+If you have two existing policies at positions 1 and 2 and create another policy
+at position 14 then it will be assigned to position 3 to maintain the sequence.
 
 ***********
 Preparation
