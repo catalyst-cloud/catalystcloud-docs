@@ -461,5 +461,5 @@ Test the following:
 
 * Connect to the loadbalancer VIP from a browser. The output should alternate
   between both back-end servers on port 80.
-* Connect to the healtmonitor url on $VIP/health
+* Connect to the healtmonitor URL on $VIP/health
 * Connect to $VIP:443 to confirm that the second service is also loadbalanced

@@ -86,7 +86,7 @@ called "cont-pol" with the policy we specified before.
 
 .. Note::
 
-    Make sure that you end the storage url with "/name-of-the-container" otherwise the API will not know what
+    Make sure that you end the storage URL with "/name-of-the-container" otherwise the API will not know what
     container you a referring to when you try to define it's storage policy.
 
 .. code-block:: bash

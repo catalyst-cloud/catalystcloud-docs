@@ -10,7 +10,7 @@ nothing approach. Either the user has the role and can do anything with the
 container, or they do not have the role and they can't interact with any
 object storage resources.
 
-To overcome this limitation, it is now possible to create a user with the
+To overcome this limitation, it is possible to create a user with the
 ``Auth Only`` role and give them access to a container using an Access Control
 List. You can find more information on the auth only role
 :ref:`here <access_control>`.
@@ -70,7 +70,7 @@ The follow command sets the environmental variable for the swift command.
 
   $ export OS_STORAGE_URL = "https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_${OS_PROJECT_ID}"
 
-Alternately you can pass the url as a command line option:
+Alternately you can pass the URL as a command line option:
 
 .. code-block:: bash
 
@@ -98,13 +98,17 @@ only role that has been checked is the ``Auth Only`` role.
 
 .. Note::
 
-    It is possible to use an email with a **tag** for this user. A tag is
-    where an additional text string is appended with a "+" symbol to an
-    existing email address. e.g. operations+restricted-storage@example.com
+    It is possible to use an email with an extension for this user. An extension
+    is where an additional text string is inserted typically with a "+" symbol
+    within an existing email address. e.g. operations+restricted-storage@example.com
 
     This will send the email to the existing address of operations@example.com
     allowing it to be filtered and managed without the need to create a whole
     new email account.
+
+    You may need to check that your email server supports this feature, and
+    confirm that "+" is the correct symbol, some mail servers use different
+    symbols. For more information see `Email Sub-addressing`_.
 
 As mentioned in the prerequisites for this section, we will need two
 restricted users. In our examples, they are named restricted-user-1 and
@@ -385,3 +389,12 @@ Again we can confirm success of the request with one of our READ enabled users.
   +---------+
   | bar.txt |
   +---------+
+
+***************
+Link References
+***************
+
+.. target-notes::
+
+.. _`Email Sub-addressing`: https://en.wikipedia.org/wiki/Email_address#Sub-addressing
+
