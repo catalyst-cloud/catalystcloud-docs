@@ -399,7 +399,7 @@ of code, here is an example in Python 3:
   print(url)
 
 The above code is based on the code for the swift tool:
-https://opendev.org/openstack/python-swiftclient
+https://opendev.org/openstack/python-swiftclient/src/tag/train-eol/swiftclient/utils.py#L71
 
 **************************
 Working with large objects

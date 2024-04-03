@@ -68,8 +68,10 @@ be obtained from your OpenStack RC file.
   # Swift credentials for Duplicity
   export SWIFT_USERNAME="somebody@example.com"
   export SWIFT_TENANTNAME="mycloudtenant"
-  export SWIFT_AUTHURL="https://api.cloud.catalyst.net.nz:5000/v2.0"
-  export SWIFT_AUTHVERSION="2"
+  export SWIFT_AUTHURL="https://api.cloud.catalyst.net.nz:5000"
+  export SWIFT_AUTHVERSION="3"
+  export SWIFT_USER_DOMAIN_NAME="default"
+  export SWIFT_PROJECT_DOMAIN_NAME="default"
 
   # With Keystone you pass the keystone password.
   echo "Please enter your OpenStack Password: "

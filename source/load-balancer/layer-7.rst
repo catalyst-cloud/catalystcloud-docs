@@ -126,7 +126,7 @@ the example below these will be:
   # activate the virtual environment
   $ source venv/bin/activate
 
-  # run the flask app - providing the correct port number and url
+  # run the flask app - providing the correct port number and URL
   $ python flask_app.py -p <port_number> -u <endpoint_url>
 
 The output for the services running on port 80 will look similar to this

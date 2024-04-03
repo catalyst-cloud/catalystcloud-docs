@@ -9,6 +9,40 @@ recommendation of any software or hardware mentioned; This is only a record of
 what we have observed as required configuration or details that our customers
 have notified us of.
 
+*********
+Cyberduck
+*********
+
+Cyberduck is free software, although the developers do ask for donations. It
+provides file access to many different services via many different protocols,
+such as FTP, SFTP, WebDAV, Swift, S3, Dropbox etc. It is available from:
+https://cyberduck.io .
+
+Currently when you use Cyberduck, there will be three entries for each folder
+and file shown. This is because we have three regions and Cyberduck queries
+all three. We expect to have profiles for our object storage available in
+Cyberduck soon which will resolve this issue.
+
+Configuration steps
+===================
+
+#. File -> Open Connection
+#. Select "OpenStack Swift (Keystone 3) in the top drop down.
+#. Server: select a "identity" URL from :ref:`apis` and enter only the server
+   name, e.g.: api.nz-por-1.catalystcloud.io
+#. Port: 5000
+#. Project:Domain:Username: Enter you project name, "default", and your
+   username, .e.g: example-com:default:operations@example.com
+#. Password: enter your password
+#. Click "Connect".
+
+This doesn't save the connection details, so if you connect okay, you'll want
+to add a bookmark, to do this:
+
+#. Bookmark -> New Bookmark
+#. Nickname: Enter a suitable nickname
+#. You can set the default folder on your local computer here as well.
+#. Click the little x on the top bar of the window.
 
 *********
 Duplicati
@@ -31,8 +65,8 @@ you can begin configuring Duplicati to work with our object storage service.
    service. (For purposes like backups we recommend that you use a dedicated
    user that only has the *object storage role* for permissions)
 
-Configuration steps:
-====================
+Configuration steps
+===================
 
 Once you have your prerequisites sorted, you can follow these steps to get your
 Duplicati backups sent to your object storage container:
@@ -65,6 +99,30 @@ Duplicati backups sent to your object storage container:
 Once this is complete you should see your backups start to appear in your
 selected object storage container.
 
+**********
+S3 Browser
+**********
+
+A commercial (free for personal use) client for MS Windows. It is available
+from https://s3browser.com/ . It is compatible
+with Catalyst Cloud object storage using the OpenStack S3 API.
+
+Configuration steps
+===================
+
+#. Accounts -> Add new account
+#. Account type: select "S3 Compatible Storage"
+#. REST Endpoint: select a "s3" URL from :ref:`apis`
+#. Access Key & Secret Access Key: EC2 credentials (you may wish to create a dedicated user).
+#. Select "advanced settings"
+#. Signature version: select "Signature V4"
+#. Select "Close"
+#. Select "Add new account"
+
+You should now be able to connect to the account and then browse, upload,
+download etc. You may occasionally receive errors that some functionality
+isn't supported.
+
 *****
 s3cmd
 *****
@@ -76,7 +134,7 @@ compatible with Catalyst Cloud object storage using the OpenStack S3
 API.
 
 While it is compatible, you will need to ensure that you specify the
-appropriate authentication details by customizing the s3cmd configuration file.
+appropriate authentication details by customising the s3cmd configuration file.
 
 Configuration changes
 =====================
@@ -210,7 +268,7 @@ service described above, with the following differences:
 * When using Cloud Sync as a backup, restoring files is more
   complicated and not provided directly in the Synology NAS UI.
 * Cloud Sync can be configured to limit the use of bandwidth while
-  syncing, while Hyper Backup will not limit bandwidith usage.
+  syncing, while Hyper Backup will not limit bandwidth usage.
 * Cloud Sync will not maintain a history of versions itself, the sync
   is current data only.
 
@@ -292,3 +350,19 @@ from the dashboard.
 
 Note: If you have enabled "Data Encryption", you will not be able
 to restore files with this method.
+
+******
+WinSCP
+******
+
+WinSCP is an open source and free SFTP and FTP client for MS Windows. It also
+supports S3, and is compatible with Catalyst Cloud object storage using the
+OpenStack S3 API. It is available from https://winscp.net/ .
+
+Configuration steps
+===================
+
+#. New site
+#. File protocol: Amazon S3
+#. Host name: select the appropriate "s3" endpoint from :ref:`the API page <apis>`.
+#. Access Key & Secret Access Key: EC2 credentials (you may wish to create a dedicated user).
