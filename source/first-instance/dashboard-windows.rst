@@ -24,7 +24,7 @@ Otherwise, let's proceed with building a windows instance.
 Configure instance security group
 *********************************
 
-You will add  a security group and a rule for your instance so that it can be
+You will add a security group and a rule for your instance so that it can be
 accessed using SSH.
 
 Navigate to the "Security Groups" tab of the left sidebar under the "Network"
@@ -40,25 +40,16 @@ Enter a name and description and click "Create Security Group":
 .. image:: dashboard_assets/windows-dashboard/create-security-group.png
    :align: center
 
-
-Now click on "Manage Rules" for the group you have created
-
-.. image:: dashboard_assets/windows-dashboard/manage-rules-sec-group.png
-   :align: center
-
-
-Click on “Add Rule”:
-
-.. image:: dashboard_assets/windows-dashboard/add-rules-sg-highlight.png
-   :align: center
-
-
-Create a rule to allow RDP access. This can be selected from the Rule drop down
-menu, leave the defaults for the other fields. Click "Add".
+For this example we are going to create a rule to allow RDP access.
+This can be selected from the rule drop down menu. We will leave the
+defaults for the other fields and then click "Add".
 
 .. image:: dashboard_assets/windows-dashboard/Add-rules.png
    :align: center
 
+There is no particular reason that we are using RDP for this example,
+this is just to demonstrate how to pick and configure a security group
+rule for your instance.
 
 .. warning::
 
@@ -81,16 +72,17 @@ instances list:
    :align: center
 
 First thing that we do when creating this instance, is give it a name. For this
-example we will use fi-windows. An important thing to note here also is that
-at the moment our windows images are only available in certain regions. This
-demonstration uses the nz-por-1a region.
+example we will use fi-windows.
 
 .. image:: dashboard_assets/windows-dashboard/name-instance-screen.png
    :align: center
 
-When creating a Windows instance you need to select the
-``windows-server-2016r2-x86_64`` image from the image list first. The volume
-size should automatically update to what is needed to run this image.
+When creating a Windows instance you need to select the correct
+image from the image list. In this example we are using
+``windows-server-2016r2-x86_64``. However this could be any windows
+image that is available from the image service on the cloud. The volume
+size for our instance should automatically update to what is needed
+to run this image.
 
 .. image:: dashboard_assets/windows-dashboard/windows-image.png
    :align: center
@@ -126,6 +118,9 @@ required before you can log in.
 Allocate a floating IP
 **********************
 
+In order to be able to access your instance from the internet and not
+just use it through the dashboard console, you will need to assign a floating
+IP to the instance so that it is visible to other devices.
 To associate a floating IP with your instance, you need to navigate to the
 "Floating IPs" tab of the "Access & Security" section.
 
@@ -151,32 +146,10 @@ Connect to the new instance
 ***************************
 
 First you must set the Administrator password. To do this, go to the
-"Instances" section, click on first-instance under "Instance Name" and select
-the "Console" tab.
+"Instances" section, click on **first-instance** under "Instance Name"
+and select the "Console" tab.
 
 Once the following screen loads, click on OK to continue.
-
-Firewall rules required to allow access to the console in the cloud dashboard
-=============================================================================
-
-.. note::
-
-  If the console shown in the image below fails to load or you see errors on
-  this page please ensure that your local machine and/or corporate firewall is
-  allowing the following traffic.
-
-port
-----
-
-- 6080 (TCP)
-
-for the following Catalyst Cloud API hosts
-------------------------------------------
-
-- nz-por-1: 202.78.247.202
-- nz-hlz-1: 202.78.244.90
-- nz_wlg_2: 202.78.240.218 & 2404:130:20:2::218
-
 
 .. image:: dashboard_assets/windows-dashboard/fi-windows-login.png
    :align: center
@@ -189,7 +162,30 @@ password.
    :align: center
 
 
-Upon completion of this step, it will be possible to connect to this
-instance with an RDP application. Connect via the floating public IP that you
+
+.. Note::
+
+  If the console shown in the image above fails to load or you see errors on
+  this page please ensure that your local machine and/or corporate firewall is
+  allowing the following traffic.
+
+Port information for windows firewall
+=====================================
+
+Upon completion of the previous step, it will be possible to connect to the
+instance with an RDP application, as we have added the RDP security group rule. 
+You can Connect via the floating public IP that you
 associated with your instance in the previous step. This address is visible in
 the Instances list and under the Floating IPs tab in Access & Security.
+
+port
+----
+
+- 6080 (TCP)
+
+for the following Catalyst Cloud API hosts
+------------------------------------------
+
+- nz-por-1: 202.78.247.202
+- nz-hlz-1: 202.78.244.90
+- nz_wlg_2: 202.78.240.218 & 2404:130:20:2::218

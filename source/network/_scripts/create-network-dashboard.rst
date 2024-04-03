@@ -40,7 +40,7 @@ also select create subnet and click "Next":
 
 Name your subnet "private-subnet". Here you can either select a network address you
 would want to use for your subnet, you can allow one to be assigned for you,
-or you can disable the gateway all together. For this tutorial we will apply a 
+or you can disable the gateway all together. For this tutorial we will apply a
 simple address and click "Next":
 
 .. image:: /network/_static/subnet-create.png
