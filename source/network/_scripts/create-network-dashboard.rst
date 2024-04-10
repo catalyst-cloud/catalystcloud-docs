@@ -12,7 +12,9 @@ Navigate to the "Routers" section and click "Create Router":
 
 |
 
-Name the router "border-router", select the admin state check-box and select
+For this example we will name our router "border-router", this is an
+arbitrary name, you could use whatever you would like.
+Then select the admin state check-box and select
 "public-net" as the external network:
 
 .. image:: /network/_static/router-create.png
@@ -27,15 +29,19 @@ Navigate to the "Networks" section and click "Create Network":
 
 |
 
-Name your network "private-net", select create subnet and click "Next":
+We will name our network "private-net", we will choose this name
+so that we do not confuse it with the "public-net". You should
+also select create subnet and click "Next":
 
 .. image:: /network/_static/network-create.png
    :align: center
 
 |
 
-Name your subnet "private-subnet", choose an address for your subnet in CIDR
-notation and click "Next":
+Name your subnet "private-subnet". Here you can either select a network address you
+would want to use for your subnet, you can allow one to be assigned for you,
+or you can disable the gateway all together. For this tutorial we will apply a
+simple address and click "Next":
 
 .. image:: /network/_static/subnet-create.png
    :align: center
