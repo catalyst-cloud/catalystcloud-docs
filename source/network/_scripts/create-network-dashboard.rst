@@ -29,7 +29,7 @@ Navigate to the "Networks" section and click "Create Network":
 
 |
 
-We will name our network "private-net", we choose this name
+We will name our network "private-net", we will choose this name
 so that we do not confuse it with the "public-net". You should
 also select create subnet and click "Next":
 
