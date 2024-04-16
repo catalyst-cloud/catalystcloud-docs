@@ -173,7 +173,7 @@ Port information for windows firewall
 =====================================
 
 Upon completion of the previous step, it will be possible to connect to the
-instance with an RDP application, as we have added the RDP security group rule. 
+instance with an RDP application, as we have added the RDP security group rule.
 You can Connect via the floating public IP that you
 associated with your instance in the previous step. This address is visible in
 the Instances list and under the Floating IPs tab in Access & Security.
