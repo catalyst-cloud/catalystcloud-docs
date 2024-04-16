@@ -6,16 +6,30 @@ This is the official documentation for the [Catalyst Cloud](https://catalystclou
 
 If you have anything to fix or details to add, please consult [Contributing to the documentation](http://docs.catalystcloud.nz/contributing.html).
 
+### Live development server
+
 To start a live reloading server, run:
 
-```
-./live_compile.sh
+```shell
+make live
 ```
 Then navigate in your preferred browser to `localhost:8000`.
 
 Changes from files edited in the `source` directory will now be updated in the browser
 after a brief delay. This makes editing the documentation and judging the effects
 of your changes much easier.
+
+To validate, build and check the external links use the command:
+
+```shell
+make compile
+```
+
+### External link checking
+
+If you add example URLs to the documentation that are not resolvable external 
+links, for example `http://localhost:8080` then add the link to `source/conf.py` under
+the setting `linkcheck_ignore`.
 
 ## Licence
 
