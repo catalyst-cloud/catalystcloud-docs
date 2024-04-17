@@ -4,7 +4,10 @@ Cyberduck
 
 Cyberduck is free software, although the developers do ask for donations. It
 provides file access to many different services via many different protocols,
-such as FTP, SFTP, WebDAV, Swift, S3, Dropbox etc. It is available from:
+such as FTP, SFTP, WebDAV, Swift, S3, Dropbox etc.
+
+You can install it from either the Windows or MacOS app stores, or by
+downloading an installer directly from the Cyberduck website:
 https://cyberduck.io .
 
 Currently when you use Cyberduck, there will be three entries for each folder
@@ -21,7 +24,7 @@ Configuration steps
    name, e.g.: api.nz-por-1.catalystcloud.io
 #. Port: 5000
 #. Project:Domain:Username: Enter you project name, "default", and your
-   username, .e.g: example-com:default:operations@example.com
+   username, e.g.: example-org-nz:default:operations@example.org.nz
 #. Password: enter your password
 #. Click "Connect".
 
