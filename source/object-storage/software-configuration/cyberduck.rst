@@ -4,7 +4,10 @@ Cyberduck
 
 Cyberduck is free software, although the developers do ask for donations. It
 provides file access to many different services via many different protocols,
-such as FTP, SFTP, WebDAV, Swift, S3, Dropbox etc. It is available from:
+such as FTP, SFTP, WebDAV, Swift, S3, Dropbox etc.
+
+You can install it from either the Windows or MacOS app stores, or by
+downloading an installer directly from the Cyberduck website:
 https://cyberduck.io .
 
 Currently when you use Cyberduck, there will be three entries for each folder

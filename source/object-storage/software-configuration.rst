@@ -15,6 +15,8 @@ have notified us of.
    software-configuration/cyberduck
    software-configuration/duplicity
    software-configuration/duplicati
+   software-configuration/kopia
+   software-configuration/rclone
    software-configuration/s3browser
    software-configuration/s3cmd
    software-configuration/synology-nas
