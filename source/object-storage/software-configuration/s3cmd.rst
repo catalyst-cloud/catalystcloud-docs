@@ -23,3 +23,10 @@ select the appropriate API endpoint from :ref:`the API page <apis>`.
 
   host_base = object-storage.nz-por-1.catalystcloud.io:443
   host_bucket = object-storage.nz-por-1.catalystcloud.io:443
+
+If you are on an older version of s3cmd, you may need to force the use of
+signature v2. To do this edit your .s3cfg file, and set:
+
+.. code-block:: ini
+
+  signature_v2 = True
