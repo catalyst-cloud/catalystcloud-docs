@@ -19,13 +19,7 @@ Configuration changes
 The following changes need to be specified in the .s3cfg file. You can
 select the appropriate API endpoint from :ref:`the API page <apis>`.
 
-s3cmd needs to use signature v2 as we've observed that it has a
-compatibility issue when communicating with our S3 interface using the
-default of signature v4.
-
 .. code-block:: ini
 
   host_base = object-storage.nz-por-1.catalystcloud.io:443
   host_bucket = object-storage.nz-por-1.catalystcloud.io:443
-  signature_v2 = True
-  use_https = True
