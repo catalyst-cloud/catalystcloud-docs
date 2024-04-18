@@ -173,9 +173,9 @@ https://catalystcloud.nz/about/national-infrastructure/
 +-------------+-----------------+--------------------+----------------------+
 | Region Code | Name            | PCI DSS certified? | ISO 27001 certified? |
 +=============+=================+====================+======================+
-| nz-por-1    | NZ Porirua 1    | Yes                | In progress          |
+| nz-por-1    | NZ Porirua 1    | Yes                | Yes                  |
 +-------------+-----------------+--------------------+----------------------+
-| nz_wlg_2    | NZ Wellington 2 | Yes                | In progress          |
+| nz_wlg_2    | NZ Wellington 2 | Yes                | Yes                  |
 +-------------+-----------------+--------------------+----------------------+
 | nz-hlz-1    | NZ Hamilton 1   | Yes                | Yes                  |
 +-------------+-----------------+--------------------+----------------------+
