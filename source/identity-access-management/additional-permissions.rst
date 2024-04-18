@@ -16,44 +16,12 @@ When creating certain objects on the cloud, access is sometimes limited to the
 individual who initially created the object. This is because when the user
 creates the object they are assigned the equivalent **root** or **admin** level
 rights for that object. This is not a common occurrence for most of the
-resources on the cloud, but it is relevant for the following examples:
-
-Kubernetes cluster access
-=========================
-
-The first example of this is when creating a kubernetes cluster. If you are
-the person launching the cluster then you will have your cloud credentials
-mapped to those of the **cluster administrator** through the use of a
-trust created between your user and the cluster admin user. This in turn means
-you will be the only user that can access that cluster by default.
-
-While there is a role which dictates whether a user is able to
-interact with **any** kubernetes clusters
-(detailed in the :ref:`kubernetes section <kubernetes-user-access>` of the
-documents) only the **cluster administrator** is able to initially communicate
-with a cluster once it is created.
-
-This trust provides the user with the *cluster admin* rights the ability to
-download the cluster config file which they can then use to provide
-authentication for tools such as **kubectl**.
-
-In order to provide other users access to this cluster the following is
-required:
-
-* The creation of a cluster config file that uses keystone as the means to
-  determine what right a user has in a cluster based on the roles they have
-  associated with their cloud user account. A copy of this needs to be shared
-  with all people that require access to the cluster.  See
-  :ref:`Authenticating a non-admin cluster user<non-admin-cluster-user>`
-* The addition of appropriate Kubernetes roles to those users that need access
-  to the cluster. For an explanation of these see
-  :ref:`user access<kubernetes-user-access>`
-
+resources on the cloud, but it is relevant for the following examples.
 
 Cloud server access
 ===================
 
-A similar behavior is observed when creating a new cloud instance. It is a
+This behavior is observed when creating a new cloud instance. It is a
 best practice in cloud computing for user access to be restricted to
 authentication using public/private keypairs which allows for access via
 passwords to be disabled by default for greater security.

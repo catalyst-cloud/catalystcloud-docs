@@ -1,324 +1,287 @@
+.. _kubernetes-ingress:
+
+
 #######
 Ingress
 #######
 
+
+In the section on :ref:`k8s-load-balancers` we explored how you can easily route
+traffic to a website by simply creating a ``LoadBalancer`` type service in Kubernetes.
+
+Although this approach works for basic websites, it doesn't work well when a
+website has more than one endpoint. For example, consider a website such as
+``example.com`` which has sub-domains ``food.example.com`` and
+``toys.example.com`` with endpoints at different applications. As shown in the
+following figure, each of these endpoints would require a separate load
+balancer, which add additional costs to your cluster. As the website adds more
+endpoints this can get quite expensive.
+
+.. figure:: _containers_assets/load-balancers.drawio.svg
+  :name: k8s-load-balancer-svc
+  :class: with-border
+
+Ingress provides a cost-effective alternative by making it possible to host multiple
+websites using a single load balancer. As seen in the following figure, Ingress
+allows you to route requests to different internal services by using
+sub-domains or paths. It also makes it easy to
+provide TLS termination for different websites.
+
+.. figure:: _containers_assets/ingress-combined.drawio.svg
+  :name: k8s-ingress
+  :class: with-border
+
+  **Left**: Using the ``toys`` and ``food`` subdomains for routing requests.
+  **Right**: Using the ``/toys`` and ``/food`` paths for routing requests.
+
 .. _ingress-controller:
 
-******************************
-What is an ingress controller?
-******************************
+****************
+What is Ingress?
+****************
 
-In Kubernetes, Ingress allows external users and client applications access
-to HTTP services. Ingress consists of two components.
+In Kubernetes, **Ingress** allows external users and client applications access
+to HTTP services. Ingress consists of two components:
 
-The `Ingress Resource` is a collection of rules for the inbound traffic to
-reach Services. These are Layer 7 (L7) rules that allow hostnames and
-optionally paths, to be directed to specific Services in Kubernetes.
+* An **Ingress Resource**, which is a collection of rules for the inbound traffic
+  to reach Services. These are Layer 7 (L7) rules that allow hostnames or paths
+  to be directed to specific Services in Kubernetes.
+* An **Ingress Controller**, which acts upon the rules set by the Ingress Resource,
+  typically via an HTTP or L7 load balancer.
 
-An `Ingress Controller` which acts upon the rules set by the Ingress Resource,
-typically via an HTTP or L7 load balancer. It is vital that both pieces are
-properly configured to route traffic from an outside client to a Kubernetes
-Service.
+It is vital that both pieces are properly configured to route traffic from
+an outside client to a Kubernetes Service.
 
-For more information, see `Kubernetes Ingress Documentation`_.
+For more information, refer to the `Kubernetes Ingress documentation`_.
 
-.. _`Kubernetes Ingress Documentation`: https://kubernetes.io/docs/concepts/services-networking/ingress/
+.. _`Kubernetes Ingress documentation`: https://kubernetes.io/docs/concepts/services-networking/ingress
 
-Prerequisites
-=============
+****
+Demo
+****
 
-As mentioned above, simply defining an ingress resource is not sufficient to
-define Ingress, it also requires an ingress controller to implement the rule
-set provided by the resource.
+The following sections will demonstrate how to host a web application using Ingress,
+using a demo application as an example.
 
-Catalyst Cloud provides the native **Octavia ingress controller** and it also
-supports other common ingress controllers such as the
-**Nginx ingress controller**.
+You can copy-and-paste manifest files on this page and apply them in order,
+and a working example Ingress Controller setup will be created in your cluster.
 
-While all ingress controllers should fit the reference specification they do in
-fact operate slightly differently and the relevant vendor documentation should
-be consulted for details on the correct setup.
+To run this demo, please make sure you have:
 
+* The :ref:`Kubernetes Admin <k8s-rbac-roles>` role assigned to your Catalyst Cloud user account in your project.
+* Installed the :ref:`Catalyst Cloud command line tools <sdks_and_toolkits>`,
+  and sourced the OpenRC file for your project in your terminal session.
+* Have retreived a :ref:`kubeconfig file <kubeconfig-file-location>` for your cluster.
+* Downloaded and installed `kubectl`_, the Kubernetes command line client.
+* Downloaded and installed `Helm`_, a package manager for Kubernetes applications.
 
-************************************
-Using the Octavia ingress controller
-************************************
-
-The Octavia ingress controller is enabled by default on the Catalyst Cloud.
-
-As part of this a  service account with the necessary cluster role binding has
-already been created. A configmap has also been deployed to handle the
-necessary authentication with the controller.
-
-Some working examples
-=====================
-
-The following code examples will walk you through all of the steps required to
-setup an Octavia ingress on your cluster.
-
-The following scenarios will be covered.
-
-* Simple HTTP ingress
-
-
-********************************
-Simple HTTP ingress with Octavia
-********************************
+.. _`kubectl`: https://kubernetes.io/releases/download/#kubectl
+.. _`Helm`: https://helm.sh/docs/intro/install
 
 .. _ingress_test_app:
 
-The test application
+The demo application
 ====================
 
-For our test application we will use a Google Cloud echoserver. To set this up,
-you will need to save the following as a .yml file:
+For our test application we will use an echoserver. To set this up,
+first create a YAML file called ``echoserver-deployment.yml`` with the following contents:
 
-.. include:: _containers_assets/deployment-echoserver.yml
+.. literalinclude:: _containers_assets/deployment-echoserver.yml
+    :language: yaml
 
-Once you've copied this, we can deploy it to the cluster with the following
-command.
+Now, create the deployment in the cluster with the following command.
 
-.. code-block:: console
+.. code-block:: bash
 
-  $ kubectl apply -f deployment-echoserver.yml
+  kubectl apply -f echoserver-deployment.yml
 
-.. Note::
+Create a `ClusterIP`_ service to expose the application internally on port 80.
 
-  For Ingress to work correctly the service that exposes the application needs
-  to be created using ``--type=NodePort``
+.. _`ClusterIP`: https://kubernetes.io/docs/concepts/services-networking/service/#type-clusterip
 
-Then we need to create a service to expose the pods on port 80 with the type
-**NodePort**.
+.. code-block:: bash
 
-.. code-block:: console
+  kubectl expose deploy echoserver --name echoserver --port 80 --target-port 8080
 
-  $ kubectl expose deployment echoserver-deployment --type=NodePort --target-port=8080 --port 80 --name=echoserver-svc
-
-Before we move on to ingress, it's useful to test the Service from within the cluster
+Verify that pods and services have been created:
 
 .. code-block:: console
 
-  # Create a temporary pod in interactive mode, to test within pod networks.
-  $ kubectl run --rm -it --image nginx shell -- bash
+  $ kubectl get all
+  NAME                              READY   STATUS    RESTARTS   AGE
+  pod/echoserver-6c456d4fcc-hmqts   1/1     Running   0          16s
 
-  # Request directly to the service address.
-  root@shell:/# curl http://echoserver-svc.default.svc.cluster.local
+  NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)   AGE
+  service/echoserver   ClusterIP   172.30.105.68   <none>        80/TCP    3s
+  service/kubernetes   ClusterIP   172.24.0.1      <none>        443/TCP   19h
 
-    Hostname: echoserver-deployment-7fcdd7b5cd-kgp4r
+  NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+  deployment.apps/echoserver   1/1     1            1           16s
 
-    Pod Information:
-      -no pod information available-
+  NAME                                    DESIRED   CURRENT   READY   AGE
+  replicaset.apps/echoserver-6c456d4fcc   1         1         1       16s
 
-    Server values:
-      server_version=nginx: 1.13.3 - lua: 10008
+We are also able to check if the echoserver application is working correctly.
 
-    Request Information:
-      client_address=10.100.1.16
-      method=GET
-      real path=/
-      query=
-      request_version=1.1
-      request_scheme=http
-      request_uri=http://echoserver-svc.default.svc.cluster.local:8080/
+First, login to the cluster using a temporary pod:
 
-    Request Headers:
-      accept=*/*
-      host=echoserver-svc.default.svc.cluster.local
-      user-agent=curl/7.74.0
+.. code-block:: bash
 
-    Request Body:
-      -no body in request-
+  kubectl run --rm -it --image nginx shell -- bash
 
+Now run the following command to make a request against the echoserver:
 
-.. warning::
+.. code-block:: bash
 
-  After creating an Ingress, if an existing service is re-created with the
-  same service port but with a different NodePort, the Ingress will not work
-  and you will need to recreate the Ingress or manually update it to send data
-  to the new node port.
+  curl http://echoserver.default.svc.cluster.local
 
-Deploying the ingress
-=====================
-
-As the majority of the ingress configuration has already been taken care of for
-us, we only need to define the ingress itself. This will provide the rules and
-conditions for the ingress controller to route traffic to our applications. We
-have defined the following:
-
-* a host name for host-based routing
-* a default path for the entry URL
-* a link to the backend service echoserver-svc on port 80
-
-.. literalinclude:: _containers_assets/octavia-ing-ingress.yml
-   :language: yaml
+If everything is working, you should see something similar to the following output.
 
 .. code-block:: console
 
-  $ kubectl apply -f octavia-ing-ingress.yml
-  ingress.networking.k8s.io/test-octavia-ingress created
+  root@shell:/# curl http://echoserver.default.svc.cluster.local
 
 
-Now we can test our connectivity against the Octavia Loadbalancer:
-
-.. code-block:: console
-
-  # Obtain IP address of ingress (it may take a minute or two to appear, as the loadbalancer is created)
-  $ kubectl get ingress test-octavia-ingress
-  NAME                   CLASS    HOSTS             ADDRESS      PORTS   AGE
-  test-octavia-ingress   <none>   api.example.com   10.10.8.81   80      119s
-
-  # Make a request against the Ingress loadbalancer IP.
-  $ curl -H "Host:api.example.com" http://10.10.8.81/
-
-  Hostname: echoserver-deployment-7fcdd7b5cd-rmzll
+  Hostname: echoserver-6c456d4fcc-hmqts
 
   Pod Information:
     -no pod information available-
 
   Server values:
-    server_version=nginx: 1.13.3 - lua: 10008
+    server_version=nginx: 1.14.2 - lua: 10015
 
   Request Information:
-    client_address=10.0.0.10
+    client_address=172.18.62.200
     method=GET
     real path=/
     query=
     request_version=1.1
     request_scheme=http
-    request_uri=http://api.example.com:8080/
+    request_uri=http://echoserver.default.svc.cluster.local:8080/
 
   Request Headers:
     accept=*/*
-    host=api.example.com
-    user-agent=curl/7.68.0
+    host=echoserver.default.svc.cluster.local
+    user-agent=curl/7.88.1
 
   Request Body:
     -no body in request-
 
+.. TODO(travis): move someplace below
 
-Cleanup
-=======
+.. Deploying Ingress
+.. =====================
+..
+.. As the majority of the ingress configuration has already been taken care of for
+.. us, we only need to define the ingress itself. This will provide the rules and
+.. conditions for the ingress controller to route traffic to our applications. We
+.. have defined the following:
+..
+.. * a host name for host-based routing
+.. * a default path for the entry URL
+.. * a link to the backend service echoserver on port 80
 
-To remove this setup from your cluster run the following from the directory
-that holds the files you created during your deployment.
+********************************
+Installing an Ingress Controller
+********************************
 
-.. code-block:: console
+We have an application running, but it can only be reached from *within* the cluster.
+Since we do not want to require our customers to log into a pod on the cluster to see the
+website, we need to make it accessible to the outside world on a public IP address.
 
-  $ kubectl delete -f deployment-echoserver.yml -f octavia-ing-ingress.yml
-  deployment.apps "echoserver-deployment" deleted
-  ingress.networking.k8s.io "test-octavia-ingress" deleted
+There are number of `ingress controllers`_ available from various vendors.
+Catalyst Cloud supports many of these, including `Ingress-Nginx`_ and `Traefik`_.
+Implementation for each will vary, so it is important
+to always refer to the vendor's documentation when using a particular Ingress Controller.
 
-  $ kubectl delete service echoserver-svc
-  service "echoserver-svc" deleted
+.. _`ingress controllers`: https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/#additional-controllers
+.. _`Ingress-Nginx`: https://kubernetes.github.io/ingress-nginx
+.. _`Traefik`: https://doc.traefik.io/traefik/providers/kubernetes-ingress
 
+.. _kubernetes-ingress-nginx:
 
-**********************************
-Using the Nginx ingress controller
-**********************************
+********************************
+Ingress-Nginx Ingress Controller
+********************************
 
-This guide explains how to deploy an Nginx ingress controller an existing
-Kubernetes cluster running on an Openstack cloud.
-
-This guide makes the following assumptions.
-
-* You have installed the OpenStack command line tools and sourced an
-  OpenStack RC file, as explained at :ref:`command-line-interface`
-* You have installed `kubectl`_ and and familiar with its use.
-
-.. _`kubectl`: https://kubernetes.io/docs/tasks/tools/#kubectl
-
-Some working examples
-=====================
-
-In order to use the Nginx ingress controller we first need to install it into
-our cluster. While this can be done by hand creating all of the required
-deployments, services and roles it is far simpler to use the ``ingress-nginx``
-chart to do this.
-
-The following 3 scenarios are all implemented using the same Helm chart with
-with differing configuration in order to achieve the necessary Nginx ingress
-behavior. They also use the same container as the backend service.
-
-* simple HTTP ingress
-* Ingress with TLS termination
-* Ingress with PROXY protocol support
+In this demo we will install the `Ingress-Nginx`_ ingress controller using Helm,
+and configure it to serve our echoserver application to the public Internet.
 
 Setting up Helm
 ===============
 
-If you do not already have helm installed you can see `installing helm`_ for
-more details.
+.. FIXME (travis): Should we have a separate section describing tools for installing things into a cluster?
 
-.. _`installing helm`: https://helm.sh/docs/using_helm/
+To install the ingress controller with Helm, we need to add the repository
+that will supply us with the Helm chart for it.
 
-Once Helm is installed we need to add the repository that will supply us with
-the Nginx ingress controller chart.
+To do this, run the following command:
 
-To do that run the following command.
+.. code-block:: bash
 
-.. code-block:: console
+  helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 
-  $ helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-
-
-We can confirm if the chart is present in our local helm repository like so:
+We can confirm that the chart is present in our local Helm repository using the following command:
 
 .. code-block:: console
 
   $ helm search repo ingress-nginx
-  NAME                       	CHART VERSION	    APP VERSION	    DESCRIPTION
-  ingress-nginx/ingress-nginx	2.3.0
+  NAME                       	CHART VERSION	APP VERSION	DESCRIPTION
+  ingress-nginx/ingress-nginx	4.10.0       	1.10.0     	Ingress controller for Kubernetes using NGINX a...
 
-*************************
-Simple ingress with Nginx
-*************************
+Deploying the Ingress Controller
+================================
 
-We will use the same :ref:`test application <ingress_test_app>` setup as shown
-previously in the Octavia example above. It will provide a simple web
-application that will respond to our requests.
+.. note::
 
+   Deploying an Ingress Controller requires the :ref:`Kubernetes Admin <k8s-rbac-roles>` role.
 
-First we need to install the Nginx ingress controller in our cluster. To do
-this run the following command and ensure that the output says
-``STATUS: deployed``.
+   For more information on granting Kubernetes RBAC roles to users,
+   please refer to :ref:`User Access <kubernetes-user-access>`.
 
-.. code-block:: bash
+First, we need to install the Nginx ingress controller in our cluster.
 
-  $ helm install nginx-ingress ingress-nginx/ingress-nginx
-  NAME: nginx-ingress
-  LAST DEPLOYED: Tue Jun  9 12:33:43 2020
-  NAMESPACE: default
+To do this, run the following command and ensure that the output says ``STATUS: deployed``.
+
+.. code-block:: console
+
+  $ helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --create-namespace
+  Release "ingress-nginx" does not exist. Installing it now.
+  NAME: ingress-nginx
+  LAST DEPLOYED: Wed Apr 17 10:35:05 2024
+  NAMESPACE: ingress-nginx
   STATUS: deployed
   REVISION: 1
   TEST SUITE: None
   NOTES:
   The ingress-nginx controller has been installed.
-  It may take a few minutes for the LoadBalancer IP to be available.
-  You can watch the status by running 'kubectl --namespace default get services -o wide -w nginx-ingress-ingress-nginx-controller'
+  It may take a few minutes for the load balancer IP to be available.
+  You can watch the status by running 'kubectl get service --namespace ingress-nginx ingress-nginx-controller --output wide --watch'
 
   An example Ingress that makes use of the controller:
-
-    apiVersion: networking.k8s.io/v1beta1
+    apiVersion: networking.k8s.io/v1
     kind: Ingress
     metadata:
-      annotations:
-        kubernetes.io/ingress.class: nginx
       name: example
       namespace: foo
     spec:
+      ingressClassName: nginx
       rules:
         - host: www.example.com
           http:
             paths:
-              - backend:
-                  serviceName: exampleService
-                  servicePort: 80
+              - pathType: Prefix
+                backend:
+                  service:
+                    name: exampleService
+                    port:
+                      number: 80
                 path: /
       # This section is only required if TLS is to be enabled for the Ingress
       tls:
-          - hosts:
-              - www.example.com
-            secretName: example-tls
+        - hosts:
+          - www.example.com
+          secretName: example-tls
 
   If TLS is enabled for the Ingress, a Secret containing the certificate and key must also be provided:
 
@@ -332,374 +295,513 @@ this run the following command and ensure that the output says
       tls.key: <base64 encoded key>
     type: kubernetes.io/tls
 
-It is possible to check the current state of the ingress controller by running
-the following piece of code. It will return an output similar to that shown
-above, from when the controller was deployed, updating the the **STATUS** where
-applicable.
+You can check the current state of the ingress controller by running
+the following command. It returns similar output to the previous command,
+with the ``STATUS`` being updated upon state changes.
 
 .. code-block:: bash
 
-  $ helm status nginx-ingress
+  helm status -n ingress-nginx ingress-nginx
 
 Now we need to wait until the ingress controller service gets an external
 IP address. We can use the following command to check this:
 
+.. code-block:: console
+
+  $ kubectl get service --namespace ingress-nginx ingress-nginx-controller --watch
+  NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
+  ingress-nginx-controller   LoadBalancer   172.24.53.166   192.0.2.1     80:32014/TCP,443:30489/TCP   5m35s
+
+Once we have our external IP address, we can move on to creating an ``Ingress``.
+
+.. note::
+
+   Creating an ``Ingress`` requires the :ref:`Kubernetes Developer <k8s-rbac-roles>` role.
+
+The below manifest routes the incoming requests to the echoserver based on the the URL path ``/ping``.
+
+.. literalinclude:: _containers_assets/echoserver-ingress.yml
+  :language: yaml
+
+Create a file called ``echoserver-ingress.yml`` with the above contents,
+and run the following command to apply the manifest.
+
 .. code-block:: bash
 
-  # The '-w' present in the command means that it will run the command in question and then watch for changes.
-  $ kubectl get services -w nginx-ingress-ingress-nginx-controller
+  kubectl apply -f echoserver-ingress.yml
 
-  NAME                                     TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)                      AGE
-  nginx-ingress-ingress-nginx-controller   LoadBalancer   10.254.63.124   103.197.61.141   80:32435/TCP,443:30432/TCP   146m
+Wait for an IP address to be assigned to the Ingress.
 
-Once we have our external IP address, we can move on to creating an ingress
-that routes the incoming requests to the echo service based on the the URL path
-"/ping". This requires the use of the ``annotation`` **kubernetes.io/ingress.
-class: nginx**
+This should be quick, as the Catalyst Cloud load balancer
+and IP address are allocated when the Ingress Controller is created.
 
-.. literalinclude:: _containers_assets/ingress-create.sh
-  :language: shell
+.. code-block:: console
 
-Wait for IP address to be allocated
-
-.. code-block:: bash
-
-  $ kubectl get ingress -w
-
+  $ kubectl get ingress --watch
   NAME        HOSTS              ADDRESS         PORTS   AGE
-  test-http   test.example.com   103.197.63.20   80      45s
+  echoserver  example.com        192.0.2.1       80      45s
 
-Send a request to the /ping URL on the client IP address seen on the echo
-service
+Once the publically accessible IP address has been assigned,
+send a request to the ``/ping`` endpoint using the following command
+(substituting ``192.0.2.1`` for the IP address of your echoserver).
 
 .. code-block:: bash
 
-  ip=103.197.63.20
-  curl -H "Host:test.example.com" http://$ip/ping
+  curl http://example.com/ping --resolve example.com:80:192.0.2.1
+
+If everything is working correctly, you should see something similar to
+the following output:
+
+.. code-block:: console
+
+  $ curl http://example.com/ping --resolve example.com:80:192.0.2.1
 
 
-  Hostname: echoserver
+  Hostname: echoserver-6c456d4fcc-hmqts
 
   Pod Information:
     -no pod information available-
 
   Server values:
-    server_version=nginx: 1.13.3 - lua: 10008
+    server_version=nginx: 1.14.2 - lua: 10015
 
   Request Information:
-    client_address=10.100.115.13
+    client_address=172.18.62.205
     method=GET
     real path=/ping
     query=
     request_version=1.1
     request_scheme=http
-    request_uri=http://test.example.com:8080/ping
+    request_uri=http://example.com:8080/ping
 
   Request Headers:
     accept=*/*
-    host=test.example.com
-    user-agent=curl/7.64.1
-    x-forwarded-for=10.0.0.14
-    x-forwarded-host=test.example.com
+    host=example.com
+    user-agent=curl/7.68.0
+    x-forwarded-for=10.0.0.11
+    x-forwarded-host=example.com
     x-forwarded-port=80
     x-forwarded-proto=http
-    x-real-ip=10.0.0.14
-    x-request-id=44b267885e34e2536xxxxxxabc9de69c
+    x-forwarded-scheme=http
+    x-real-ip=10.0.0.11
+    x-request-id=a87ccdf5c8c858df1ab2b8bc980fb881
     x-scheme=http
 
   Request Body:
     -no body in request-
 
-Cleanup
-=======
+.. _kubernetes-ingress-nginx-tls:
 
-Before moving on to the next example let's clean up the resources we created
-in this example.
+Ingress with TLS support
+========================
 
-.. code-block:: bash
+The Ingress we created in the previous section only allowed
+unencrypted HTTP traffic to our application.
+In the majority of cases you want traffic to be encrypted via HTTPS.
 
-  $ kubectl delete ingress test-http
-  $ helm delete nginx-ingress
+So let's reconfigure our Ingress to enable HTTPS.
+The extra steps involved are:
 
-
-******************************
-Nginx ingress with TLS support
-******************************
-
-In this example we will add TLS support on top our previous example. The extra
-steps involve are:
-
-* The creation of a self signed SSL certificate.
+* Creating a self-signed SSL certificate.
 * Creating a Kubernetes secret to hold the certificate.
-* Creating a new set of ingress rules to add port 443 and the details of how
-  to access the certificates.
+* Adding a new set of ingress rules to enable HTTPS on port 443,
+  and load the SSL certificate from the Kubernetes secret.
 
-For simplicity we will use a self signed certificate, though you can use
-certificates purchased from a provider in the exact same manner. The following
-code will create this for us.
+The first step is to create a self-signed certificate and private key
+to configure the Ingress with.
 
 .. code-block:: bash
 
-  $ if [ ! -f ./certs/tls.key ]; then
-    mkdir certs
-    openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 \
-        -keyout certs/tls.key \
-        -out certs/tls.crt \
-        -subj "/CN=test.example.com/O=Integration"
-  fi
+  openssl req -x509 \
+              -sha256 \
+              -nodes \
+              -days 365 \
+              -newkey rsa:4096 \
+              -keyout tls.key \
+              -out tls.crt \
+              -subj "/CN=example.com/O=Integration"
+
+The SSL certificate will be saved to ``tls.crt``, and the private key to ``tls.key``.
+
+.. note::
+
+  For production use, you will need to use a trusted certificate authority (CA)
+  to get your SSL certificate signed.
+
+  Once your SSL certificate has been signed, you can follow the instructions
+  below to configure your Ingress, substituting ``tls.crt`` for the certificate
+  file name, and ``tls.key`` for the private key file.
 
 Next we will create a TLS secret using the certificates created in the
 previous step.
 
 .. code-block:: bash
 
-  $ kubectl create secret tls tls-secret-test-example-com --key certs/tls.key --cert certs/tls.crt
+  kubectl create secret tls example-com-https --key tls.key --cert tls.crt
 
-Label the secret so it's easier to delete later
-
-.. code-block:: bash
-
-  $ (kubectl get secret -l group=test-example-com 2>/dev/null | grep tls-secret-test-example-com) || kubectl label secret tls-secret-test-example-com group=test-example-com
-
-As the helm config will remain the same as the previous example, we can go
-ahead and deploy the ingress controller.
+Additionally, label the secret so it will be easier to cleanup once we're done:
 
 .. code-block:: bash
 
-  $ helm install nginx-ingress ingress-nginx/ingress-nginx
-  NAME: nginx-ingress
-  LAST DEPLOYED: Tue Jun  9 12:33:43 2020
-  NAMESPACE: default
-  STATUS: deployed
-  REVISION: 1
-  TEST SUITE: None
-  NOTES:
-  The ingress-nginx controller has been installed.
-  It may take a few minutes for the LoadBalancer IP to be available.
-  You can watch the status by running 'kubectl --namespace default get services -o wide -w nginx-ingress-ingress-nginx-controller'
+  kubectl label secret example-com-https group=example-com
 
-  An example Ingress that makes use of the controller:
+Now create a new manifest called ``echoserver-ingress-https.yml``
+with the below contents.
 
-    apiVersion: networking.k8s.io/v1beta1
-    kind: Ingress
-    metadata:
-      annotations:
-        kubernetes.io/ingress.class: nginx
-      name: example
-      namespace: foo
-    spec:
-      rules:
-        - host: www.example.com
-          http:
-            paths:
-              - backend:
-                  serviceName: exampleService
-                  servicePort: 80
-                path: /
-      # This section is only required if TLS is to be enabled for the Ingress
-      tls:
-          - hosts:
-              - www.example.com
-            secretName: example-tls
+This will reconfigure our ``echoserver`` Ingress to accept traffic on HTTPS
+on port 443, and redirect all unencrypted HTTP traffic on port 80 to HTTPS instead.
 
-    If TLS is enabled for the Ingress, a Secret containing the certificate and key must also be provided:
+.. literalinclude:: _containers_assets/echoserver-ingress-https.yml
+  :language: yaml
 
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        name: example-tls
-        namespace: foo
-      data:
-        tls.crt: <base64 encoded cert>
-        tls.key: <base64 encoded key>
-      type: kubernetes.io/tls
-
-Once the loadbalancer is active and has an external IP we can create an
-ingress, in the same way as the previous example, that routes the incoming
-requests for test.example.com to the echo service based on the the URL path "/
-ping". This time we will also add configuration for TLS support. This change
-adds the hosts that the ingress will accept traffic for and the cluster secret
-that will provide the certificate used for the encryption.
-
-.. literalinclude:: _containers_assets/ingress-tls-create.sh
-  :language: shell
-
-Once the ingress is active and has been assigned an external IP address we can
-test the service:
+Run the following command to apply our changes:
 
 .. code-block:: bash
 
-  $ kubectl get ingress -w
-  NAME            HOSTS              ADDRESS          PORTS     AGE
-  test-with-tls   test.example.com   202.49.241.145   80, 443   41s
+  kubectl apply -f echoserver-ingress-https.yml
 
-  $ ip=202.49.241.145
-  $ curl -H "Host:test.example.com" https://$ip/ping --insecure
-  Hostname: echoserver-deployment-7d874bf66b-v6rrt
+The existing Ingress will be reconfigured in-place.
+
+.. code-block:: console
+
+  $ kubectl apply -f echoserver-ingress-https.yml
+  ingress.networking.k8s.io/echoserver configured
+
+The ``echoserver`` Ingress should now be accepting traffic on both port 80 and 443.
+
+.. code-block:: console
+
+  $ kubectl get ingress
+  NAME         CLASS   HOSTS         ADDRESS      PORTS     AGE
+  echoserver   nginx   example.com   192.0.2.1    80, 443   41m
+
+To make sure everything is working correctly, send a request
+to the ``/ping`` endpoint using HTTPS via the following ``curl`` command
+(substituting ``192.0.2.1`` for the public IP address of your application).
+
+.. code-block:: bash
+
+  curl -vk https://example.com/ping --resolve example.com:443:192.0.2.1
+
+If everything is working correctly, you should see something similar to
+the following output.
+
+We can see that the TLS handshake is completed successfully
+with the correct CN (``example.com``), and the echoserver
+homepage is returned by the application.
+
+.. code-block:: console
+
+  $ curl -vk https://example.com/ping --resolve example.com:443:192.0.2.1
+  * Added example.com:443:192.0.2.1 to DNS cache
+  * Hostname example.com was found in DNS cache
+  *   Trying 192.0.2.1:443...
+  * TCP_NODELAY set
+  * Connected to example.com (192.0.2.1) port 443 (#0)
+  * ALPN, offering h2
+  * ALPN, offering http/1.1
+  * successfully set certificate verify locations:
+  *   CAfile: /etc/ssl/certs/ca-certificates.crt
+    CApath: /etc/ssl/certs
+  * TLSv1.3 (OUT), TLS handshake, Client hello (1):
+  * TLSv1.3 (IN), TLS handshake, Server hello (2):
+  * TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+  * TLSv1.3 (IN), TLS handshake, Certificate (11):
+  * TLSv1.3 (IN), TLS handshake, CERT verify (15):
+  * TLSv1.3 (IN), TLS handshake, Finished (20):
+  * TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+  * TLSv1.3 (OUT), TLS handshake, Finished (20):
+  * SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384
+  * ALPN, server accepted to use h2
+  * Server certificate:
+  *  subject: CN=example.com; O=Integration
+  *  start date: Apr 16 23:33:11 2024 GMT
+  *  expire date: Apr 16 23:33:11 2025 GMT
+  *  issuer: CN=example.com; O=Integration
+  *  SSL certificate verify result: self signed certificate (18), continuing anyway.
+  * Using HTTP2, server supports multi-use
+  * Connection state changed (HTTP/2 confirmed)
+  * Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+  * Using Stream ID: 1 (easy handle 0x5593baec7340)
+  > GET /ping HTTP/2
+  > Host: example.com
+  > user-agent: curl/7.68.0
+  > accept: */*
+  >
+  * TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+  * TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+  * old SSL session ID is stale, removing
+  * Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+  < HTTP/2 200
+  < date: Tue, 16 Apr 2024 23:48:24 GMT
+  < content-type: text/plain
+  < strict-transport-security: max-age=31536000; includeSubDomains
+  <
+
+
+  Hostname: echoserver-6c456d4fcc-hmqts
 
   Pod Information:
     -no pod information available-
 
   Server values:
-    server_version=nginx: 1.13.3 - lua: 10008
+    server_version=nginx: 1.14.2 - lua: 10015
 
   Request Information:
-    client_address=10.100.189.71
+    client_address=172.18.62.205
     method=GET
     real path=/ping
     query=
     request_version=1.1
     request_scheme=http
-    request_uri=http://test.example.com:8080/ping
+    request_uri=http://example.com:8080/ping
 
   Request Headers:
     accept=*/*
-    host=test.example.com
-    user-agent=curl/7.64.1
-    x-forwarded-for=10.0.0.13
-    x-forwarded-host=test.example.com
+    host=example.com
+    user-agent=curl/7.68.0
+    x-forwarded-for=10.0.0.11
+    x-forwarded-host=example.com
     x-forwarded-port=443
     x-forwarded-proto=https
-    x-real-ip=10.0.0.13
-    x-request-id=3f871ce2c2d0b9935d9bxxxxxx3e4d17
+    x-forwarded-scheme=https
+    x-real-ip=10.0.0.11
+    x-request-id=89005bafa033a3005d00ab70860c6001
     x-scheme=https
 
   Request Body:
     -no body in request-
 
-Cleanup
-=======
+  * Connection #0 to host example.com left intact
 
-Before moving on to the next example let's clean up the resources we created
-in this example.
+We can also test whether or not redirection of unencrypted HTTP traffic is working.
 
-.. code-block:: bash
-
-  $ kubectl delete ingress test-with-tls
-  $ helm delete nginx-ingress
-
-*****************************************
-Nginx ingress with PROXY protocol support
-*****************************************
-
-For the final example we will enable support for the PROXY protocol. This
-provides visibility of the originating servers IP address to the backend
-services.
-
-There are 2 sets of configuration which we need to enable for this support to
-function.
-
-The configuration for the Nginx ingress requires the following parameters to be
-enabled.
-
-* ``use-proxy-protocol``
-  Will enable or disable the PROXY protocol to receive client connection (real
-  IP address) information passed through proxy servers and load balancers.
-
-* ``use-forwarded-headers``
-  If true, NGINX passes the incoming X-Forwarded-* headers to upstreams. Use
-  this option when NGINX is behind another L7 proxy / load balancer that is
-  setting these headers.
-
-  If false, NGINX ignores incoming X-Forwarded-* headers, filling them with the
-  request information it sees. Use this option if NGINX is exposed directly to
-  the internet, or it's behind a L3/packet-based load balancer that doesn't
-  alter the source IP in the packets.
-
-* ``compute-full-forwarded-for``
-  Will append the remote address to the X-Forwarded-For header instead of
-  replacing it. When this option is enabled, the upstream application is
-  responsible for extracting the client IP based on its own list of trusted
-  proxies.
-
-
-For the cluster itself the following annotation needs to be added to the
-configuration.
-
-* ``PROXY protocol``:
-  This option provides support so that you can use a Service in LoadBalancer
-  mode to configure a load balancer outside of Kubernetes itself, which will
-  forward connections prefixed with the PROXY protocol.
-
-  The load balancer will send an initial series of octets describing the
-  incoming connection.
-
-This is the actual configuration that will be used by the helm chart.
-
-.. literalinclude:: _containers_assets/ingress-configure-proxy.sh
-  :language: shell
-
-We install it as we have previously.
+Run the following ``curl`` to send a request to the unencrypted endpoint.
 
 .. code-block:: bash
 
-  $ helm install stable/nginx-ingress --name nginx-ingress -f nginx-ingress-controller-helm-values.yaml
-  NAME:   nginx-ingress
-  LAST DEPLOYED: Wed Aug 21 14:10:01 2019
-  NAMESPACE: default
-  STATUS: DEPLOYED
+  curl -vk http://example.com/ping --resolve example.com:80:192.0.2.1
 
-  <-- output truncated for brevity -->
+This time, a ``308 Permanent Redirect`` response directing the client
+to the HTTPS endpoint should be returned.
 
+.. code-block:: console
 
-Finally we can set up the ingress as we have for the previous examples.
+  $ curl -vk http://example.com/ping --resolve example.com:80:192.0.2.1
+  * Added example.com:80:192.0.2.1 to DNS cache
+  * Hostname example.com was found in DNS cache
+  *   Trying 192.0.2.1:80...
+  * TCP_NODELAY set
+  * Connected to example.com (192.0.2.1) port 80 (#0)
+  > GET /ping HTTP/1.1
+  > Host: example.com
+  > User-Agent: curl/7.68.0
+  > Accept: */*
+  >
+  * Mark bundle as not supporting multiuse
+  < HTTP/1.1 308 Permanent Redirect
+  < Date: Tue, 16 Apr 2024 23:50:26 GMT
+  < Content-Type: text/html
+  < Content-Length: 164
+  < Connection: keep-alive
+  < Location: https://example.com/ping
+  <
+  <html>
+  <head><title>308 Permanent Redirect</title></head>
+  <body>
+  <center><h1>308 Permanent Redirect</h1></center>
+  <hr><center>nginx</center>
+  </body>
+  </html>
+  * Connection #0 to host example.com left intact
 
-.. literalinclude:: _containers_assets/ingress-create-proxy.sh
-  :language: shell
+.. _kubernetes-ingress-nginx-proxy:
 
-Once the external IP is available we can test it with curl as we have
-previously. The important thing to note here is that now we can see the
-originating IP address included in the request headers.
+Ingress using the ``PROXY`` protocol
+====================================
+
+One downside of the standard Ingress Controller configuration is
+that the IP address of the client is not passed through to the application.
+
+In the ``curl`` output, we can see that the ``X-Forwarded-For`` and ``X-Real-IP``
+headers contain the internal IP address of the load balancer, **not** the client.
+
+.. code-block:: text
+  :emphasize-lines: 5,10
+
+  Request Headers:
+    accept=*/*
+    host=example.com
+    user-agent=curl/7.68.0
+    x-forwarded-for=10.0.0.11
+    x-forwarded-host=example.com
+    x-forwarded-port=443
+    x-forwarded-proto=https
+    x-forwarded-scheme=https
+    x-real-ip=10.0.0.11
+    x-request-id=89005bafa033a3005d00ab70860c6001
+    x-scheme=https
+
+To resolve this, we can reconfigure the Ingress Controller to use the ``PROXY`` protocol.
+
+The ``PROXY`` protocol is a network protocol for preserving a client's IP address
+when the client's TCP connection passes through a proxy or load balancer.
+This protocol is supported by both Catalyst Cloud Load Balancer as a Service
+and the Ingress-Nginx Ingress Controller, allowing us to use it to ensure
+the client's IP address gets passed through to the application.
+
+To setup our Ingress Controller, we must set the following controller options
+for the Helm chart:
+
+* ``use-proxy-protocol`` - Set to ``true`` to enable the ``PROXY`` protocol
+  on the Ingress Controller.
+* ``use-forwarded-headers`` - Set to ``true`` to make Nginx pass through
+  ``X-Forwarded-*`` headers to the backend application.
+* ``compute-full-forwarded-for`` - Set to ``true`` to append the remote address
+  to the ``X-Forwarded-For`` header, instead of completely replacing it.
+
+  * This may or may not need to be enabled, depending on what your application supports.
+
+For more information on how to customise a Helm chart, refer to
+`Customizing the Chart Before Installing`_ in the Helm documentation.
+
+.. _`Customizing the Chart Before Installing`: https://helm.sh/docs/intro/using_helm/#customizing-the-chart-before-installing
+
+In addition to the above, we need to set the following
+:ref:`Load Balancer Annotations <kubernetes-loadbalancer-annotations>`
+to configure the Kubernetes Load Balancer:
+
+* ``loadbalancer.openstack.org/proxy-protocol`` - Set to ``true`` to create
+  a ``PROXY`` load balancer on Catalyst Cloud.
+
+The final Helm controller configuration looks like this:
+
+.. literalinclude:: _containers_assets/ingress-nginx-proxy-config.yml
+  :language: yaml
+
+Save this file as ``ingress-nginx-proxy-config.yml``, and run the following command to apply
+our changes to the Ingress Controller.
 
 .. code-block:: bash
 
-  $ kubectl get ingress
-  NAME              HOSTS              ADDRESS          PORTS   AGE
-  test-with-proxy   test.example.com   202.49.241.165   80      80s
+  helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --create-namespace --values ingress-nginx-proxy-config.yml
 
-  $ ip=202.49.241.165
-  $ curl -H "Host:test.example.com" http://$ip/ping
-  Hostname: echoserver-7cc8b87c6f-h8ls5
+The existing Ingress Controller should have been modified with our changes.
+
+.. code-block:: console
+
+  $ helm status -n ingress-nginx ingress-nginx
+  NAME: ingress-nginx
+  LAST DEPLOYED: Wed Apr 17 15:53:00 2024
+  NAMESPACE: ingress-nginx
+  STATUS: deployed
+  REVISION: 2
+  TEST SUITE: None
+  NOTES:
+  The ingress-nginx controller has been installed.
+  It may take a few minutes for the load balancer IP to be available.
+  You can watch the status by running 'kubectl get service --namespace ingress-nginx ingress-nginx-controller --output wide --watch'
+
+  An example Ingress that makes use of the controller:
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: example
+      namespace: foo
+    spec:
+      ingressClassName: nginx
+      rules:
+        - host: www.example.com
+          http:
+            paths:
+              - pathType: Prefix
+                backend:
+                  service:
+                    name: exampleService
+                    port:
+                      number: 80
+                path: /
+      # This section is only required if TLS is to be enabled for the Ingress
+      tls:
+        - hosts:
+          - www.example.com
+          secretName: example-tls
+
+  If TLS is enabled for the Ingress, a Secret containing the certificate and key must also be provided:
+
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: example-tls
+      namespace: foo
+    data:
+      tls.crt: <base64 encoded cert>
+      tls.key: <base64 encoded key>
+    type: kubernetes.io/tls
+  $ kubectl get service --namespace ingress-nginx ingress-nginx-controller
+  NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)                      AGE
+  ingress-nginx-controller   LoadBalancer   172.24.53.166   192.0.2.1     80:32014/TCP,443:30489/TCP   5h22m
+
+We're now ready to check our application one more time.
+Run the following command to query the echoserver
+(substituting ``192.0.2.1`` for your deployment's IP address):
+
+.. code-block:: console
+  :emphasize-lines: 25,30
+
+  $ curl -k https://example.com/ping --resolve example.com:443:192.0.2.1
+
+
+  Hostname: echoserver-6c456d4fcc-hmqts
 
   Pod Information:
     -no pod information available-
 
   Server values:
-    server_version=nginx: 1.13.3 - lua: 10008
+    server_version=nginx: 1.14.2 - lua: 10015
 
   Request Information:
-    client_address=192.168.73.68
+    client_address=172.18.62.205
     method=GET
     real path=/ping
     query=
     request_version=1.1
     request_scheme=http
-    request_uri=http://test.example.com:8080/ping
+    request_uri=http://example.com:8080/ping
 
   Request Headers:
     accept=*/*
-    host=test.example.com
-    user-agent=curl/7.54.0
-    x-forwarded-for=203.109.145.15
-    x-forwarded-host=test.example.com
-    x-forwarded-port=80
-    x-forwarded-proto=http
-    x-original-uri=/ping
-    x-real-ip=203.109.145.15
-    x-request-id=a244d459cce51cec1xxxxxxfd4983709
-    x-scheme=http
+    host=example.com
+    user-agent=curl/7.68.0
+    x-forwarded-for=198.51.100.1
+    x-forwarded-host=example.com
+    x-forwarded-port=443
+    x-forwarded-proto=https
+    x-forwarded-scheme=https
+    x-real-ip=198.51.100.1
+    x-request-id=719dc3d46ee1f04edb861caf03c59a70
+    x-scheme=https
 
   Request Body:
     -no body in request-
 
+If ``X-Forwarded-For`` and ``X-Real-IP`` are correct
+(they are set to your local network's public IP address),
+then your application now has access to the original client IP address.
+
 Cleanup
 =======
 
-Before moving on to the next example let's clean up the resources we created
-in this example.
+And that's it!
+
+To clean up all of the resources created in the Kubernetes cluster in these demos,
+simply run the following commands.
 
 .. code-block:: bash
 
-  $ kubectl delete ingress test-with-proxy
-  $ helm delete nginx-ingress
-
+  kubectl delete ingress echoserver
+  kubectl delete service echoserver
+  kubectl delete secret echoserver-https
+  kubectl delete deployment echoserver
+  helm delete ingress-nginx
+  kubectl delete namespace ingress-nginx

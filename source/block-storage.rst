@@ -1,3 +1,5 @@
+.. _block-storage-intro:
+
 #############
 Block storage
 #############

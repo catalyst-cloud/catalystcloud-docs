@@ -342,6 +342,7 @@ intersphinx_mapping = {'http://docs.python.org/': None}
 # External links to ignore when doing a link check
 # Some are example links and others are links to our APIs that error when performing a get.
 linkcheck_ignore = [r'http://localhost:8001/.*',
+                    r'http://localhost:8888.*',
                     r'http://202\.49\.241\.87:30001',
                     r'http://www\.failover\.net\.nz\.global\.prod\.fastly\.net',
                     r'https://api\.cloud\.catalyst\.net\.nz:8000/v1/',

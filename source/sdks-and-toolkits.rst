@@ -1,3 +1,5 @@
+.. _sdks_and_toolkits:
+
 ##################
 CLI Tools and SDKs
 ##################

@@ -1,6 +1,8 @@
-##################################
-Using containers
-##################################
+.. _object-storage-using-containers:
+
+################
+Using Containers
+################
 
 There are several different methods available to you for interacting with the
 object storage service. The following sections cover the most common tools that
@@ -53,6 +55,8 @@ the container is now 5 Bytes.
 
 .. image:: assets/uploaded_file.png
    :align: center
+
+.. _object-storage-programmatic-methods:
 
 ************************
 Via programmatic methods

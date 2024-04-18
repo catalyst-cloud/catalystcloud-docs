@@ -1,86 +1,664 @@
+.. FIXME(travis): edit this section
+
 .. _kubernetes-user-access:
 
 ###########
-User access
+User Access
 ###########
 
-************
-Introduction
-************
+.. FIXME (travis): does this section belong in the create clusters section? It's not really about cluster access.
+.. Creating Clusters as Service User
+.. ============
+..
+.. When a user creates a Kubernetes cluster, OpenStack creates an object called a
+.. *trust*. Within the cluster, a trust is used to perform operations on the
+.. user's behalf such as creating load balancers, storage volumes or additional
+.. nodes when resizing a cluster. A trust mirrors the roles of the user who
+.. created the cluster. Consequently, when that user account is removed or
+.. disabled it will no longer be able to authenticate with the OpenStack API and
+.. may become unhealthy.
+..
+.. In order to avoid this scenario we recommend creating a separate *service user*
+.. to manage Kubernetes clusters. Ideally the service user should have a
+.. descriptive username like `serviceuser+prod@myexample.com`. In order to
+.. create clusters this user only needs the ``_member_`` role. It is not necessary
+.. or recommended to give it any other roles.
+..
+.. .. image:: _containers_assets/k8s_service_user_create.png
 
-Kubernetes clusters launched on the Catalyst Cloud are integrated with the
-OpenStack Keystone (Identity) service. Users with one of the roles
-listed below are able to interact with any Kubernetes clusters owned by their
-project using their existing cloud credentials.
+Managing how individuals and applications can interact with your Kubernetes
+cluster is critical to keeping your application secure.
+Catalyst Cloud Kubernetes Service integrates with the :ref:`identity-access-management`
+service to make it easy to manage access using role-based access control (RBAC).
 
-The OpenStack Keystone Identity roles related to the Kubernetes service are:
+In this section we will discuss how to grant Kubernetes RBAC roles to your
+Catalyst Cloud account, and use them to interact with your cluster.
 
-* ``k8s_admin``: administrators of the cluster platform with full privileges to
-  perform any operation.
-* ``k8s_developer``: users able to deploy applications to the cluster platform,
-  who are restricted from performing cluster level operations.
-* ``k8s_viewer``: users able to view/obtain information about cluster resources.
+.. _k8s-rbac-roles:
 
-For a detailed list of permissions associated with these roles, please refer to
-role permissions table in this document.
+*************************
+Role-Based Access Control
+*************************
 
-These roles can be added to an existing user through the :ref:`project_users`
-page by anyone who has the Project Admin or Project Moderator roles
-assigned to their account.
+Role-Based Access Control (RBAC) is one of the key pillars of Kubernetes
+security. RBAC determines who or what can interact with your clusters. It
+provides an easy way to assign or revoke permissions to groups of users.
+Permissions can be easily audited which is extremely valuable for ensuring
+compliance with strict regulatory and security requirements.
 
-+---------------+--------------------------------------------------------------+
-| Role          | Permissions                                                  |
-+===============+==============================================================+
-| k8s_admin     | Privileged users with maximum rights. Full admin access is   |
-|               | granted for Magnum cluster CRUD operations and all           |
-|               | Kubernetes namespaces.                                       |
-+---------------+--------------------------------------------------------------+
-| k8s_developer | Privileged users with restricted rights. Kubernetes CRUD     |
-|               | operation access is granted to any namespace other than the  |
-|               | admin (``kube-system``) namespace.                           |
-+---------------+--------------------------------------------------------------+
-| k8s_viewer    | Non-privileged users able to perform READ actions in both    |
-|               | Magnum and Kubernetes. Has access to all namespaces,         |
-|               | excluding the admin namespace.                               |
-+---------------+--------------------------------------------------------------+
+.. note::
 
+  Kubernetes RBAC roles only grant you permissions within Kubernetes.
+  These roles are separate from the standard user roles.
 
-.. Warning::
+  To create a Kubernetes cluster in your project, your user must be granted
+  the  :ref:`Project Member <project_member_role>` role.
 
-  The privileged roles deserve special attention when deploying kubernetes
-  clusters. The `RBAC permissions
-  <https://kubernetes.io/docs/reference/access-authn-authz/rbac/>`_ that grant
-  the ability to launch a pod in the cluster is a powerful right and use of a
-  more restrictive `Admission Controller
-  <https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/>`_
-  may be appropriate to meet specific customer security needs.
+  To interact with Kubernetes after your cluster is created,
+  even :ref:`Project Admins <project_admin_role>` need to grant themselves the appropriate
+  Kubernetes RBAC roles.
 
-  Please note: this means any user with the the k8s_developer role must be a
-  trusted individual, as by default they're capable of escalating their own
-  privileges.
+Catalyst Cloud provides the following roles which can be used
+to control access to Kubernetes clusters.
 
-Integrated Pod Policy Solutions:
+.. list-table:: Catalyst Cloud Kubernetes Role Permissions
+   :name: role-permissions
+   :widths: 15 10 50
+   :header-rows: 1
 
-* `Pod Security Policies <https://kubernetes.io/docs/concepts/security/pod-security-policy/>`_
-  for Kubernetes clusters >= 1.16 and <= 1.24.
-* `Pod Security Admission <https://kubernetes.io/docs/concepts/security/pod-security-admission/>`_
-  for Kubernetes clusters >= 1.25.
+   * - Role
+     - CLI Name
+     - Permissions
+   * - Kubernetes Admin
+     - ``k8s_admin``
+     - Privileged users with maximum rights. Full admin access is
+       granted for Catalyst Cloud Kubernetes Service cluster CRUD
+       operations and all Kubernetes namespaces in a cluster.
+   * - Kubernetes Developer
+     - ``k8s_developer``
+     - Privileged users with restricted rights.
+       Kubernetes CRUD operation access is granted to any namespace
+       other than the admin (``kube-system``) namespace.
+   * - Kubernetes Viewer
+     - ``k8s_viewer``
+     - Non-privileged users able to perform read actions in a
+       Catalyst Cloud Kubernetes Service cluster.
+       Has read-only access to all namespaces, excluding the admin namespace.
 
-Example 3rd Party Policy Solutions:
+Inviting users with assigned roles
+==================================
 
-* `Open Policy Agent <https://www.openpolicyagent.org/docs/latest/>`_ /
-  `Gatekeeper <https://github.com/open-policy-agent/gatekeeper/>`_
-* `Kyverno <https://github.com/kyverno/kyverno/>`_
+When inviting a new user to your Catalyst Cloud project,
+you can assign them the required roles for interacting with Kubernetes,
+so that when they create their account they will automatically have
+the required access.
 
-More information
+A good practice is to limit the roles you grant users
+to the minimum that are needed for the tasks they will perform.
+
+.. note::
+
+  Only :ref:`Project Admins <project_admin_role>` or
+  :ref:`Project Moderators <project_mod_role>` can invite users to a Catalyst Cloud project.
+
+.. tabs::
+
+  .. tab:: Kubernetes Admin
+
+    .. tabs::
+
+      .. group-tab:: CLI
+
+        Run the following command to invite a new user to your project,
+        replacing ``jondoe+k8s_admin@example.com`` with the email address
+        you wish to send the invite to.
+
+        .. note::
+
+          If you would like this user to be able to create and delete Kubernetes
+          clusters, as well as manage other Catalyst Cloud resources,
+          add the ``_member_`` (:ref:`Project Member <project_member_role>`) role
+          as an additional parameter to the command.
+
+        .. code-block:: bash
+
+          openstack project user invite jondoe+k8s_admin@example.com k8s_admin
+
+        An invite email will be sent to the provided email address.
+        Once the user accepts, their Catalyst Cloud account will be
+        automatically granted the requested roles in your project.
+
+      .. group-tab:: Dashboard
+
+        Navigate to the **Management -> Access Control -> Project Users** page,
+        and press the **+ Invite User** button in the top right of the page.
+
+        The **Invite User** window will open. Type in the email address of the user
+        to invite, and grant the new user the **k8s_admin** role by ticking it in the
+        role list.
+
+        .. note::
+
+          If you would like this user to be able to create and delete Kubernetes
+          clusters, as well as manage other Catalyst Cloud resources,
+          also assign them the :ref:`Project Member <project_member_role>` role.
+
+        .. image:: _containers_assets/k8s_admin_user_create.png
+
+        Once you are done, press **Invite** to send the invite.
+        Once the user accepts, their Catalyst Cloud account will be
+        automatically granted the requested roles in your project.
+
+  .. tab:: Kubernetes Developer
+
+    .. tabs::
+
+      .. group-tab:: CLI
+
+        Run the following command to invite a new user to your project,
+        replacing ``jondoe+k8s_dev@example.com`` with the email address
+        you wish to send the invite to.
+
+        .. code-block:: bash
+
+          openstack project user invite jondoe+k8s_dev@example.com k8s_developer
+
+        An invite email will be sent to the provided email address.
+        Once the user accepts, their Catalyst Cloud account will be
+        automatically granted the requested roles in your project.
+
+      .. group-tab:: Dashboard
+
+        Navigate to the **Management -> Access Control -> Project Users** page,
+        and press the **+ Invite User** button in the top right of the page.
+
+        The **Invite User** window will open. Type in the email address of the user
+        to invite, and grant the new user the **k8s_developer** role by ticking it
+        in the role list.
+
+        .. image:: _containers_assets/k8s_dev_user_create.png
+
+        Once you are done, press **Invite** to send the invite.
+        Once the user accepts, their Catalyst Cloud account will be
+        automatically granted the requested roles in your project.
+
+  .. tab:: Kubernetes Viewer
+
+    .. tabs::
+
+      .. group-tab:: CLI
+
+        Run the following command to invite a new user to your project,
+        replacing ``jondoe+k8s_viewer@example.com`` with the email address
+        you wish to send the invite to.
+
+        .. code-block:: bash
+
+          openstack project user invite jondoe+k8s_dev@example.com k8s_viewer
+
+        An invite email will be sent to the provided email address.
+        Once the user accepts, their Catalyst Cloud account will be
+        automatically granted the requested roles in your project.
+
+      .. group-tab:: Dashboard
+
+        Navigate to the **Management -> Access Control -> Project Users** page,
+        and press the **+ Invite User** button in the top right of the page.
+
+        The **Invite User** window will open. Type in the email address of the user
+        to invite, and grant the new user the **k8s_viewer** role by ticking it
+        in the role list.
+
+        .. image:: _containers_assets/k8s_viewer_user_create.png
+
+        Once you are done, press **Invite** to send the invite.
+        Once the user accepts, their Catalyst Cloud account will be
+        automatically granted the requested roles in your project.
+
+Granting roles to existing users
+================================
+
+:ref:`Project Admins <project_admin_role>` and :ref:`Project Moderators <project_mod_role>`
+can grant Kubernetes RBAC roles to existing users.
+
+.. tabs::
+
+  .. tab:: Kubernetes Admin
+
+    .. tabs::
+
+      .. group-tab:: CLI
+
+        Run the following command to grant the **Kubernetes Admin** role
+        to a Catalyst Cloud user (replacing ``jondoe+k8s_admin@example.com``
+        with the email address of the user).
+
+        .. code-block:: bash
+
+          openstack project user role add jondoe+k8s_admin@example.com k8s_admin
+
+      .. group-tab:: Dashboard
+
+        Navigate to the **Management -> Access Control -> Project Users** page.
+
+        Find the user you wish to grant the role to in the list, and press the
+        **Update User** button to open the **Update User** window.
+
+        .. image:: _containers_assets/k8s_admin_user_update.png
+
+        Grant the **Kubernetes Admin** role by ticking **k8s_admin**
+        in the role list, and press **Update** to save your changes.
+
+  .. tab:: Kubernetes Developer
+
+    .. tabs::
+
+      .. group-tab:: CLI
+
+        Run the following command to grant the **Kubernetes Developer** role
+        to a Catalyst Cloud user (replacing ``jondoe+k8s_dev@example.com``
+        with the email address of the user).
+
+        .. code-block:: bash
+
+          openstack project user role add jondoe+k8s_dev@example.com k8s_developer
+
+      .. group-tab:: Dashboard
+
+        Navigate to the **Management -> Access Control -> Project Users** page.
+
+        Find the user you wish to grant the role to in the list, and press the
+        **Update User** button to open the **Update User** window.
+
+        .. image:: _containers_assets/k8s_dev_user_update.png
+
+        Grant the **Kubernetes Developer** role by ticking **k8s_developer**
+        in the role list, and press **Update** to save your changes.
+
+  .. tab:: Kubernetes Viewer
+
+    .. tabs::
+
+      .. group-tab:: CLI
+
+        Run the following command to grant the **Kubernetes Viewer** role
+        to a Catalyst Cloud user (replacing ``jondoe+k8s_viewer@example.com``
+        with the email address of the user).
+
+        .. code-block:: bash
+
+          openstack project user role add jondoe+k8s_viewer@example.com k8s_viewer
+
+      .. group-tab:: Dashboard
+
+        Navigate to the **Management -> Access Control -> Project Users** page.
+
+        Find the user you wish to grant the role to in the list, and press the
+        **Update User** button to open the **Update User** window.
+
+        .. image:: _containers_assets/k8s_viewer_user_update.png
+
+        Grant the **Kubernetes Viewer** role by ticking **k8s_viewer**
+        in the role list, and press **Update** to save your changes.
+
+******************************
+Accessing a Kubernetes cluster
+******************************
+
+.. _kubeconfig-file-location:
+
+The kubeconfig file
+===================
+
+A `kubeconfig file`_ is required for :ref:`kubectl <setting_up_kubectl>` to
+interact with a Kubernetes cluster.
+
+On Catalyst Cloud there are two types of kubeconfig file,
+both of which can be downloaded via the API:
+
+.. NOTE(travis): eventually can be downloaded from Horizon as well.
+
+* **RBAC kubeconfig**: Provides access to the Kubernetes cluster based on
+  :ref:`user roles assigned in Catalyst Cloud <k8s-rbac-roles>`.
+
+  * This is recommended for most interaction with a managed Kubernetes cluster.
+
+* **Admin kubeconfig**: Allows unrestricted access to a Kubernetes cluster
+  using an **admin token** provided with the kubeconfig file.
+
+  * **Not recommended for general access.**
+    For most use cases, RBAC kubeconfig files should be used to interact with the cluster.
+    Refer to
+    :ref:`Retrieving the admin kubeconfig <retrieving-admin-kubeconfig>`
+    for more information.
+
+.. note::
+
+  Retrieving the kubeconfig file from Catalyst Cloud requires **Kubernetes Admin**
+  permissions.
+
+  **Kubernetes Developers** and **Kubernetes Viewers** cannot retrieve their own kubeconfig,
+  but an **RBAC kubeconfig** retrieved by a **Kubernetes Admin** can be shared with these users
+  to give them access to the cluster.
+
+.. _`kubeconfig file`: https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig
+
+.. _retrieving-rbac-kubeconfig:
+
+Retrieving the RBAC kubeconfig
+##############################
+
+Currently, the only way to retreve the kubeconfig file is
+to use the :ref:`Catalyst Cloud CLI <sdks_and_toolkits>`.
+
+.. tabs::
+
+  .. group-tab:: Linux / macOS
+
+    First, open a terminal window and :ref:`source your OpenRC file <source-rc-file>`
+    to authenticate with Catalyst Cloud.
+
+    To retrieve the RBAC kubeconfig file, run the ``openstack coe cluster config`` command
+    with the ``--use-keystone`` option. The exact usage is as follows:
+
+    .. code-block:: bash
+
+      openstack coe cluster config <CLUSTER-NAME> --use-keystone
+
+    This will save the kubeconfig file in the current directory under the name ``config``.
+
+    To configure ``kubectl`` to use the kubeconfig, run the following command
+    to set the ``KUBECONFIG`` environment variable to the current directory:
+
+    .. code-block:: bash
+
+      export KUBECONFIG=$(pwd)/config
+
+  .. group-tab:: Windows (PowerShell)
+
+    First, open a terminal window and :ref:`source your OpenRC file <windows-configuration>`
+    to authenticate with Catalyst Cloud.
+
+    To retrieve the RBAC kubeconfig file, run the ``openstack coe cluster config`` command
+    with the ``--use-keystone`` option. The exact usage is as follows:
+
+    .. code-block:: powershell
+
+      openstack coe cluster config <CLUSTER-NAME> --use-keystone
+
+    This will save the kubeconfig file in the current directory under the name ``config``.
+
+    To configure ``kubectl`` to use the kubeconfig, run the following command
+    to set the ``KUBECONFIG`` environment variable to the current directory:
+
+    .. code-block:: powershell
+
+      $Env:KUBECONFIG = $pwd\config
+
+  .. group-tab:: Windows (Command Prompt)
+
+    First, open a terminal window and :ref:`source your OpenRC file <windows-configuration>`
+    to authenticate with Catalyst Cloud.
+
+    To retrieve the RBAC kubeconfig file, run the ``openstack coe cluster config`` command
+    with the ``--use-keystone`` option. The exact usage is as follows:
+
+    .. code-block:: bat
+
+      openstack coe cluster config <CLUSTER-NAME> --use-keystone
+
+    This will save the kubeconfig file in the current directory under the name ``config``.
+
+    To configure ``kubectl`` to use the kubeconfig, run the following command
+    to set the ``KUBECONFIG`` environment variable to the current directory:
+
+    .. code-block:: bat
+
+      set KUBECONFIG=%cd%\config
+
+This ``config`` file can now be shared with other team members that need
+access to this cluster. This file provides the following levels of access:
+
+* Users with the **Kubernetes Admin**, **Kubernetes Developer** or **Kubernetes Viewer** role
+  will have access specified by that role (see :ref:`k8s-rbac-roles`).
+* Users without RBAC roles will not be able to access the cluster.
+
+.. _retrieving-admin-kubeconfig:
+
+Retrieving the admin kubeconfig (not recommended)
+#################################################
+
+.. warning::
+
+  The **admin kubeconfig** should not be used directly in most use cases.
+
+  Unlike the :ref:`RBAC kubeconfig <retrieving-rbac-kubeconfig>`, which requires
+  authenticating with Catalyst Cloud before providing cluster access,
+  the admin kubeconfig allows for **unrestricted access without authentication**.
+  Using this kubeconfig file makes it impossible to audit
+  **who or what is making changes to a cluster**.
+
+  A **Kubernetes Admin** can perform any task that the admin kubeconfig allows,
+  so this file is not necessary for everyday usage.
+  **Only use the admin kubeconfig file when required.**
+
+Currently, the only way to retreve the kubeconfig file is
+to use the :ref:`Catalyst Cloud CLI <sdks_and_toolkits>`.
+
+.. tabs::
+
+  .. group-tab:: Linux / macOS
+
+    First, open a terminal window and :ref:`source your OpenRC file <source-rc-file>`
+    to authenticate with Catalyst Cloud.
+
+    To retrieve the RBAC kubeconfig file, run the ``openstack coe cluster config`` command,
+    **without** the ``--use-keystone`` option. The exact usage is as follows:
+
+    .. code-block:: bash
+
+      openstack coe cluster config <CLUSTER-NAME>
+
+    This will save the kubeconfig file in the current directory under the name ``config``.
+
+    To configure ``kubectl`` to use the kubeconfig, run the following command
+    to set the ``KUBECONFIG`` environment variable to the current directory:
+
+    .. code-block:: bash
+
+      export KUBECONFIG=$(pwd)/config
+
+  .. group-tab:: Windows (PowerShell)
+
+    First, open a terminal window and :ref:`source your OpenRC file <windows-configuration>`
+    to authenticate with Catalyst Cloud.
+
+    To retrieve the RBAC kubeconfig file, run the ``openstack coe cluster config`` command,
+    **without** the ``--use-keystone`` option. The exact usage is as follows:
+
+    .. code-block:: powershell
+
+      openstack coe cluster config <CLUSTER-NAME>
+
+    This will save the kubeconfig file in the current directory under the name ``config``.
+
+    To configure ``kubectl`` to use the kubeconfig, run the following command
+    to set the ``KUBECONFIG`` environment variable to the current directory:
+
+    .. code-block:: powershell
+
+      $Env:KUBECONFIG = $pwd\config
+
+  .. group-tab:: Windows (Command Prompt)
+
+    First, open a terminal window and :ref:`source your OpenRC file <windows-configuration>`
+    to authenticate with Catalyst Cloud.
+
+    To retrieve the RBAC kubeconfig file, run the ``openstack coe cluster config`` command,
+    **without** the ``--use-keystone`` option. The exact usage is as follows:
+
+    .. code-block:: bat
+
+      openstack coe cluster config <CLUSTER-NAME>
+
+    This will save the kubeconfig file in the current directory under the name ``config``.
+
+    To configure ``kubectl`` to use the kubeconfig, run the following command
+    to set the ``KUBECONFIG`` environment variable to the current directory:
+
+    .. code-block:: bat
+
+      set KUBECONFIG=%cd%\config
+
+.. note::
+
+  The admin kubeconfig file contains an **admin token** that provides unrestricted access
+  to your cluster.
+
+  Make sure it is stored on your system with the appropriate permissions,
+  e.g. removing read/write access to anyone except your system user.
+
+Additional command line options
+###############################
+
+The ``openstack coe cluster config`` command can optionally take a few
+additional arguments:
+
+* ``--dir <path>`` - Specify an alternative directory to save the kubeconfig file to.
+
+  * By default, the kubeconfig file will be saved to the current directory.
+
+* ``--force`` - Recreate the ``config`` file in the specified directory if it already exists.
+
+  * By default, the command will fail if the ``config`` already exists in the specified directory.
+
+.. _setting_up_kubectl:
+
+Setting up kubectl
+##################
+
+Once the kubeconfig file has been downloaded, ``kubectl`` can be configured to use the
+``config`` file using one of the following methods:
+
+#. Passing it using the ``--kubeconfig`` command line argument.
+#. Setting the ``KUBECONFIG`` environment variable to the full path of the kubeconfig file.
+#. Saving the kubeconfig file to ``$HOME/.kube/config``.
+
+``kubectl`` looks for the kubeconfig file in the above order,
+with ``$HOME/.kube/config`` being checked last.
+
+**************************
+Interacting with a cluster
+**************************
+
+With the :ref:`kubeconfig file in place <kubeconfig-file-location>`, it is now
+possible to interact with a Kubernetes cluster. Depending on the level of
+access granted, the user will be able to query and/or create resources on the cluster.
+
+You can verify what your user can and cannot do using the ``kubectl auth can-i`` command.
+
+.. _k8s-admin-role:
+
+Kubernetes Admin
 ================
 
-The following is a comprehensive list of the exact `RBAC permissions
-<https://kubernetes.io/docs/reference/access-authn-authz/rbac/>`_ that each role
-gives a user:
+A user with the **Kubernetes Admin** (``k8s_admin``) role has the ability to perform any actions on the cluster.
 
+Check if your user can create pods in the ``default`` namespace:
 
 .. code-block:: console
+
+  $ kubectl auth can-i create pods -n default
+  yes
+
+Check if your user can create pods in **all** namespaces:
+
+.. code-block:: console
+
+  $ kubectl auth can-i create pods -A
+  yes
+
+Check if your user can delete secrets in **all** namespaces:
+
+.. code-block:: console
+
+  $ kubectl auth can-i delete secrets -A
+  yes
+
+.. _k8s-developer-role:
+
+Kubernetes Developer
+====================
+
+The **Kubernetes Developer** (``k8s_developer``) role allows a user to perform
+most everyday operations within all non-privileged namespaces.
+
+.. code-block:: console
+
+  $ kubectl auth can-i create pods -n default
+  yes
+
+However, a Kubernetes Developer is not allowed to perform any actions
+in the admin (``kube-system``) namespace.
+
+.. code-block:: console
+
+  $ kubectl auth can-i create pods -n kube-system
+  no
+
+Kubernetes Developers are also not allowed to perform certain cluster-level operations.
+
+.. code-block:: console
+
+  $ kubectl auth can-i patch clusterrolebinding
+  no
+  $ kubectl auth can-i create clusterrolebinding
+  no
+
+Production Considerations
+=========================
+
+The privileged roles deserve special attention when deploying Kubernetes clusters.
+
+The `RBAC permissions`_ that grant
+the ability to launch a pod in the cluster is a powerful privilege.
+Use of a more restrictive `Admission Controller`_ may be appropriate
+to meet specific customer security needs.
+
+Any user with the :ref:`k8s-admin-role` or :ref:`k8s-developer-role` role
+must be a trusted individual.
+
+.. _`RBAC permissions`: https://kubernetes.io/docs/reference/access-authn-authz/rbac
+.. _`Admission Controller`: https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers
+
+****************************
+Other ways to control access
+****************************
+
+There are a number of other tools available for managing RBAC to Kubernetes clusters.
+
+Integrated policy solutions:
+
+* `Pod Security Admission <https://kubernetes.io/docs/concepts/security/pod-security-admission>`_
+
+Third-party policy solutions:
+
+* `Open Policy Agent <https://www.openpolicyagent.org/docs/latest>`_
+* `Gatekeeper <https://open-policy-agent.github.io/gatekeeper/website>`_
+* `Kyverno <https://kyverno.io>`_
+
+********
+Appendix
+********
+
+.. _openstack-k8s-role-permissions:
+
+Kubernetes Role Permissions
+===========================
+
+This is a comprehensive list of the exact `RBAC permissions`_ that each role gives a user:
+
+.. code-block:: text
 
   +----------------------+-----------------------------------------------------+
   | Role                 | Permissions                                         |
@@ -271,306 +849,4 @@ gives a user:
   |                      | container.subjectAccessReviews.watch                |
   +----------------------+-----------------------------------------------------+
 
-*********************************
-Generating Kubernetes config file
-*********************************
-
-As the owner of the cluster (user who created it), you can run the following
-command to obtain the generic Kubernetes configuration file:
-
-.. code-block:: bash
-
-  $ openstack coe cluster config test-cluster --use-keystone
-
-The output of this command will be a file named ``config`` in the current
-working directory. This configuration file instructs ``kubectl`` to use the
-Catalyst Cloud credentials for authentication. A copy of this file will need
-to be made available to any user that requires access to the cluster.
-
-.. note::
-
-    If you run this command in the directory where your current ``config``
-    file exists it will fail. You will need to run this from a different
-    location.
-
-
-*********************
-Accessing the cluster
-*********************
-
-Once you have copied the config generated in the previous step, you need to
-create an environment variable to let ``kubectl`` know where to find its
-configuration file.
-
-.. code-block:: bash
-
-  $ export KUBECONFIG='/home/user/config'
-
-Next, you have to :ref:`source-rc-file` and export a variable with an access
-token as demonstrated below:
-
-.. code-block:: bash
-
-  export OS_TOKEN=$(openstack token issue -f yaml -c id | awk '{print $2}')
-
-Now, for the duration of the authentication token issued in the previous step,
-you should be able to use ``kubectl`` to interact with the cluster.
-
-.. code-block:: bash
-
-  kubectl cluster-info
-
-If the token expires, you can re-generate another token by sourcing the **MFA
-enabled OpenStack RC file** again.
-
-
-********************************************
-Using namespaces for granular access control
-********************************************
-
-.. _kube-namespaces:
-
-It is possible, through the use of **roles** and **namespaces**,  to
-achieve a much more granular level of access control.
-
-Kubernetes **namespaces** are a way to create virtual clusters inside a single
-physical cluster. This allows for different projects, teams, or customers
-to share a Kubernetes cluster.
-
-In order to use namespacing, you will need to provide the following:
-
-* A scope for names.
-* A mechanism to attach authorization and policy to a subsection of the
-  cluster.
-
-For a more in depth look at namespaces it is recommended that you read through
-the `official kubernetes documentation`_.
-
-.. _`official kubernetes documentation`: https://kubernetes.io/docs/tasks/administer-cluster/namespaces-walkthrough/
-
-An example namespace
-====================
-
-In this example we will provide access to some cluster resources for a cloud
-user that has none of the Kubernetes specific access roles (discussed above )
-applied to their account. We will refer to this as our **restricted user**.
-Before we begin, the following is a list of the different resources and actions
-that we are going to be taking or creating in this example:
-
-You will need to have these resources created before we start:
-
-* A cluster, in our example we have named ours: dev-cluster
-* A restricted user, in our example we have named them: clouduser
-
-We are going to be creating the following resource in the tutorial below:
-
-* *namespace* : testapp
-
-The level of access we are going to be supplying for users in this namespace
-is:
-
-* *The cluster resource to access* : pod
-* *Resource access level* : get, list, watch
-
-.. _non-admin-cluster-user:
-
-Authenticating a non-admin cluster user
-=======================================
-
-The first thing we need to address is a means for our restricted user to be
-able to authenticate with the cluster. To do this we will need to create
-a new configuration file that can be used by non administrator users. This
-will apply to all users on our project, including our restricted user.
-
-Creating a non-admin cluster config
------------------------------------
-
-As the **cluster administrator** we need to create a **cluster config file**
-that allows cloud project users to use the cloud's own authentication service
-as a means to access the cluster.
-
-We can do that with the following command:
-
-**$ openstack coe cluster config <CLUSTER_NAME> --use-keystone**
-
-For example:
-
-.. code-block:: console
-
-  $ openstack coe cluster config dev-cluster --use-keystone
-
-This config file can now be made available to other cloud users that need
-access to this cluster. By default this file will provide the following levels
-of access:
-
-* For a restricted project user, that is a project user with no Kubernetes
-  specific role assigned to their cloud account, the default is no cluster
-  access.
-* For a project user with a Kubernetes specific role assigned to their cloud
-  account, they will be assigned the level of access dictated by that role
-  (see above)
-
-Setting up the access policy
-============================
-
-.. Note::
-
-  Run the following commands as the **cluster administrator**.
-
-First, we will create a new namespace for the application to run in.
-
-.. code-block:: yaml
-
-  cat <<EOF | kubectl apply -f -
-  ---
-  apiVersion: v1
-  kind: Namespace
-  metadata:
-    name: testapp
-  EOF
-
-Confirm that is was created correctly.
-
-.. code-block:: console
-
-  $ kubectl get ns
-  NAME      STATUS   AGE
-  testapp   Active   3h45m
-
-Next we need to create a new role and a role binding in the cluster to provide
-the required access to our restricted user. The **role** defines **what**
-access is being provided, where the **rolebinding** defines **who** is to be
-given that access.
-
-Some of the key things to note in the manifest below are:
-
-* In the **Role** config
-
-  - ``apiGroups: [""]``, the use of "" indicates that it applies to the core
-    API group
-
-* In the **RoleBinding** config
-
-  - The name in ``subjects:`` is case sensitive.
-  - It is possible to add more than one subject to a role binding.
-  - The name in ``roleRef:`` must match the name of the role you wish to bind to.
-
-.. code-block:: yaml
-
-  cat <<EOF | kubectl apply -f -
-  ---
-  apiVersion: rbac.authorization.k8s.io/v1
-  kind: Role
-  metadata:
-    namespace: testapp
-    name: pod-viewer
-  rules:
-  - apiGroups: [""]
-    resources: ["pods"]
-    verbs: ["get", "watch", "list"]
-
-  ---
-  apiVersion: rbac.authorization.k8s.io/v1
-  kind: RoleBinding
-  metadata:
-    name: view-pods
-    namespace: testapp
-  subjects:
-  - kind: User
-    name: clouduser
-    apiGroup: rbac.authorization.k8s.io
-  roleRef:
-    kind: Role
-    name: pod-viewer
-    apiGroup: rbac.authorization.k8s.io
-  EOF
-
-Confirm that our Role and RoleBinding were created successfully in our new
-namespace.
-
-.. code-block:: console
-
-  $ kubectl get role,rolebinding -n testapp
-  NAME                                        AGE
-  role.rbac.authorization.k8s.io/pod-viewer   21s
-
-  NAME                                              AGE
-  rolebinding.rbac.authorization.k8s.io/view-pods   21s
-
-Testing our restricted users access
-===================================
-
-.. Note::
-
-  Run the following commands as the **restricted user**.
-
-Setting up our cloud authentication
------------------------------------
-
-To access the cluster we first need to authenticate against the cloud
-using an :ref:`openRC file<configuring-the-cli>`. Once the cloud authentication
-has been taken care of we need to set up the cluster config file to
-authenticate with the cluster.
-
-We do this by exporting the ``KUBECONFIG`` environment variable with the path
-to the files location, like so.
-
-.. code-block:: console
-
-  $ export KUBECONFIG=/home/clouduser/config
-
-Confirming cluster access
--------------------------
-
-We are now in a position to test that we have access to view pods in the
-namespace *testapp*. As we have not deployed any workloads as part of this
-example we will make use of the **kubectl**  inbuilt command to inspect
-authorisation. The command is constructed as follows:
-
-**$ kubectl auth can-i <action_to_check>**
-
-So in our case we want to check that we can get **pod** information from the
-testapp namespace, which would look like this.
-
-.. code-block:: console
-
-  $ kubectl auth can-i get pod --namespace testapp
-  yes
-
-Now lets confirm that we cannot view **services** in this namespace.
-
-.. code-block:: console
-
-  $ kubectl auth can-i get service --namespace testapp
-  no
-
-The final check is to confirm that our right to view pods does not apply in
-any other namespace. We will check the default to confirm that this is true.
-
-.. code-block:: console
-
-  $ kubectl auth can-i get pod --namespace default
-  no
-
-Cleaning up
-===========
-
-.. Note::
-
-  Run the following commands as the **cluster administrator**.
-
-To remove the elements we created in this example run the following commands:
-
-.. code-block:: console
-
-  $ kubectl delete rolebinding view-pods --namespace testapp
-  rolebinding.rbac.authorization.k8s.io "view-pods" deleted
-
-  $ kubectl delete role pod-viewer --namespace testapp
-  role.rbac.authorization.k8s.io "pod-viewer" deleted
-
-  $ kubectl delete namespace testapp
-  namespace "testapp" deleted
-
-.. include:: role-mapping.rst
-
+.. _`RBAC permissions`: https://kubernetes.io/docs/reference/access-authn-authz/rbac

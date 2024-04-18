@@ -1,6 +1,6 @@
-cat <<EOF > loadbalancer_internal_ip.yaml
-kind: Service
+---
 apiVersion: v1
+kind: Service
 metadata:
   name: lb-internal-ip
   namespace: default
@@ -14,5 +14,3 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-EOF
-kubectl apply -f loadbalancer_internal_ip.yaml

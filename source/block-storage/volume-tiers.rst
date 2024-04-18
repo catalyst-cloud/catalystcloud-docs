@@ -1,3 +1,6 @@
+
+.. _block-storage-volume-tiers:
+
 ############
 Volume Tiers
 ############

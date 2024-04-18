@@ -1,16 +1,72 @@
+:orphan:
+
+.. TODO(callumdickinson): Add this page back to the docs when auto-scaling is enabled.
+.. FIXME(travis): edit this section
 .. _auto-scaling:
 
 ############
-Auto scaling
+Auto Scaling
 ############
 
-************
-Introduction
-************
+The demands on any application vary over time. Whether its the daily changes in
+traffic volume on an online shopping platform or massive load from
+processing large sets of data, applications and their underlying infrastructure
+must be able to cope with changes in demand. It is important to both avoid
+downtime when demand increases as well as to avoid high costs of running many
+machines when demand decreases.
 
-The Kubernetes service on the Catalyst Cloud has an optional feature called
-``cluster auto-scaling`` capable of dynamically increasing or reducing the
-number of worker nodes, according their current resource allocation.
+It is not always easy or possible to predict what kind of resources will be
+necessary when creating a Kubernetes cluster. The decision one must make is
+whether to choose fewer nodes and risk downtime when the website is busy or
+choose more nodes and risk paying for unused resources.
+
+To assist with these scenarios, Catalyst Cloud Kubernetes Service provides a
+feature called **cluster auto-scaling**. Cluster auto-scaling enables a
+Kubernetes cluster to automatically increase or decrease the number of working
+nodes in response to changes in resource demand. In this section we will explore
+how you can use auto-scaling in your Kubernetes cluster.
+
+.. _k8s-auto-scaling-enable:
+
+*********************
+Enabling auto scaling
+*********************
+
+
+To enable cluster auto-scaling the labels below must be defined at
+cluster creation time:
+
+* ``auto_scaling_enabled=true``
+* ``min_node_count=${minimum}``
+* ``max_node_count=${maximum}``
+
+.. note::
+
+   Cluster auto-scaling only scales worker nodes. Control plane
+   nodes are not subject to auto-scaling.
+
+.. tabs::
+
+   .. tab:: Command Line
+
+      Create cluster with auto-scaling in the command line.
+
+      .. code-block:: console
+
+        openstack coe cluster create my-cluster \
+        --cluster-template kubernetes-v1.28.9-20240416 \
+        --master-count=3 \
+        --node-count=1 \
+        --merge-labels \
+        --labels auto_scaling_enabled=true,min_node_count=1,max_node_count=10
+
+
+   .. tab:: Web UI
+
+      Create cluster with auto-scaling in the web dashboard.
+
+      .. image:: _containers_assets/k8s-auto-scaling-web-ui.png
+
 
 .. note::
 
@@ -19,22 +75,18 @@ number of worker nodes, according their current resource allocation.
    (resource requests) in the pod specification to determine if the
    capacity allocated to a worker node.
 
-In order to enable this functionality the labels below must be defined at
- cluster creation time (with minimum and maximum node count be adjusted
- accordingly):
 
-* ``auto_scaling_enabled=true``
-* ``min_node_count=${minimum}``
-* ``max_node_count=${maximum}``
-
-The minimum number of nodes must be greater than zero and lower than the
-maximum. The maximum number of nodes must be greater than the minimum.
+The value for ``min_node_count`` **must** be greater than zero. The value for
+``max_node_count`` must be greater than the value for ``min_node_count``. The
+value for ``min_node_count`` overrides the `--node-count` argument if it is
+lower.
 
 The auto-scaling feature requires the use of resource requests for CPU and
-memory in the pod specification. The following deployment template illustrates
-the use of resource requests:
+memory in the pod specification. The following pod specification
+illustrates the use of resource requests:
 
 .. code-block:: yaml
+  :emphasize-lines: 9,10,11,12
 
   apiVersion: v1
   kind: Pod
@@ -58,131 +110,167 @@ The conditions that trigger a cluster resize are explained below:
   resource usage drops below the defined threshold (by default 50%) for a
   period of time.
 
-*****************
-A working example
-*****************
+**********************
+Auto scaling in action
+**********************
 
-Let's see how this works in practice by launching a new cluster that has
-cluster-autoscaling enabled.
+The following example assumes:
 
-Preparation
-===========
+* You have created a Catalyst Cloud Kubernetes cluster as demonstrated
+  :ref:`earlier <k8s-auto-scaling-enable>`.
+* You are authenticated as a user with one of the :ref:`Kubernetes RBAC roles
+  <k8s-rbac-roles>` which allow you to create resources on a
+  cluster.
 
-The first thing we need to do is get a list of the current labels associated
-with a template we wish to deploy from. To do this run the following command.
 
-.. code-block:: bash
+First, create a file called ``stressdeploy.yaml`` with the following
+content.
 
-    $ openstack coe cluster template show <template_name> -c labels -f yaml
-    labels:
-    cloud_provider_enabled: 'true'
-    cloud_provider_tag: 1.14.0-catalyst
-    container_infra_prefix: docker.io/catalystcloud/
-    heat_container_agent_tag: stein-dev
-    ingress_controller: octavia
-    kube_tag: v1.12.7
-    octavia_ingress_controller_tag: 1.14.0-catalyst
+.. code-block:: yaml
 
-.. note::
+    ---
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: scalestress
+      name: scalestress
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: scalestress
+      strategy: {}
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            app: scalestress
+        spec:
+          containers:
+          - image: polinux/stress
+            name: stress
+            command:
+              - stress
+              - --cpu
+              - "1"
+              - --io
+              - "1"
+              - --vm
+              - "1"
+              - --vm-bytes
+              - 128M
+              - --verbose
+            resources:
+              limits:
+                memory: 256Mi
+              requests:
+                cpu: "1"
+                memory: 128Mi
 
-    When adding or altering a label it is necessary, at the current time, to
-    supply all of the other labels that are present in the template.
-
-We now need to convert the list of labels obtained in the previous step, to a
-comma separated list of key value pairs that include
-``auto_scaling_enabled``, ``min_node_count`` and ``max_node_count``
+Now apply this deployment to your cluster.
 
 .. code-block:: console
 
-  auto_scaling_enabled=true,min_node_count=1,max_node_count=2,cloud_provider_enabled=true,cloud_provider_tag=1.14.0-catalyst,... <output truncated>
+   kubectl apply -f stressdeploy.yaml
 
-Cluster creation
-================
+   deployment.apps/scalestress created
 
-These are then passed as the label parameter to our cluster create command as
-shown here.
+You should now have a single ``Pod`` running from the ``scalestress``
+deployment.
 
-.. code-block:: bash
+.. code-block:: console
 
-  $ openstack coe cluster create my-cluster \
-  --cluster-template kubernetes-v1.12.7-prod-20190403 \
-  --keypair mykey \
-  --master-count 3 \
-  --node-count 3 \
-  --labels auto_scaling_enabled=true,min_node_count=1,max_node_count=2,<existing-labels>
+   kubectl get pods
+   NAME                           READY   STATUS    RESTARTS   AGE
+   scalestress-8489678776-wfqhx   1/1     Running   0          46m
 
-Tuning cluster-autoscaler parameters
-====================================
 
-There are several parameters that could change the auto-scaling behaviour,
-such as:
+Scaling up nodes
+^^^^^^^^^^^^^^^^
 
-* ``scale-down-utilization-threshold``  This is the Node utilization level,
-  which is defined as the sum of requested resources divided by capacity,
-  below which a node can be considered for scale down. By default this is
-  **0.5**.
-* ``scale-down-unneeded-time``  This is how long a node should be unneeded
-  before it is eligible to be scaled down. By default this is **10 minutes**.
+Next, let's scale this pod up a bit. Let's increase ``scalestress``
+to ten replicas to see what happens:
 
-To change the scale down parameters we need to edit the cluster-autoscaler's
-current deployment settings. We can do this using ``kubectl``.
 
-.. code-block:: bash
+.. code-block:: console
 
-  kubectl -n kube-system edit deployment cluster-autoscaler
+   kubectl scale deploy scalestress --replicas=10
+   deployment.apps/scalestress scaled
 
-This will open the corresponding YAML file in an editor. Locate the ``command``
-section as shown below.
 
-.. code-block:: bash
+Now we just sit back and watch the cluster nodes.
 
-    spec:
-      containers:
-      - command:
-        - ./cluster-autoscaler
-        - --alsologtostderr
-        - --cloud-provider=magnum
-        - --cluster-name=cad28c31-cf1c-40a7-b8c8-xxxxxxxxxxxx
-        - --cloud-config=/config/cloud-config
-        - --nodes=1:4:default-worker
-        - --scale-down-unneeded-time=10m
-        - --scale-down-delay-after-failure=3m
-        - --scale-down-delay-after-add=10m
-        image: docker.io/catalystcloud/cluster-autoscaler:v1.0
+.. code-block:: console
 
-If we wanted to change an existing vlue, simply edit it in place. If you need
-to override one of the default values that may not display be default, add it
-above the ``image:`` line making sure to match the indenting and formatting
-exactly.
+   kubectl get node -w
 
-In the example below we have changed the following:
+   NAME                                                    STATUS   ROLES           AGE    VERSION
+   my-cluster-qr5alwznm4m3-control-plane-6dcf69ec-zk8bg    Ready    control-plane   172m   v1.28.8
+   my-cluster-qr5alwznm4m3-control-plane-hefe69ec-zk8bg    Ready    control-plane   172m   v1.28.8
+   my-cluster-qr5alwznm4m3-control-plane-d38d69ec-zk8bg    Ready    control-plane   172m   v1.28.8
+   my-cluster-qr5alwznm4m3-default-worker-88bc9045-7kgxj   Ready    <none>          172m   v1.28.8
 
-* The ``scale-down-unneeded-time`` parameter has been reduced to 8 minutes.
-* The ``scale-down-utilization-threshold`` has been added in, with a value of
-  0.4 (40%).
+After a few minutes you should start to see nodes added to the cluster.
 
-.. code-block:: bash
+.. code-block:: console
 
-    spec:
-      containers:
-      - command:
-        - ./cluster-autoscaler
-        - --alsologtostderr
-        - --cloud-provider=magnum
-        - --cluster-name=cad28c31-cf1c-40a7-b8c8-xxxxxxxxxxxx
-        - --cloud-config=/config/cloud-config
-        - --nodes=1:4:default-worker
-        - --scale-down-unneeded-time=8m
-        - --scale-down-delay-after-failure=3m
-        - --scale-down-delay-after-add=10m
-        - --scale-down-utilization-threshold=0.4
-        image: docker.io/catalystcloud/cluster-autoscaler:v1.0
+   kubectl get node
 
-Once the required changes have been made save the file and exit. This will
-cause the deployment to create a new ``cluster-autoscaler pod`` and once it is
-``RUNNING`` it will remove the original one .
+   NAME                                                    STATUS   ROLES           AGE    VERSION
+   my-cluster-qr5alwznm4m3-control-plane-6dcf69ec-zk8bg    Ready    control-plane   3h9m    v1.28.8
+   my-cluster-qr5alwznm4m3-control-plane-hefe69ec-zk8bg    Ready    control-plane   3h9m    v1.28.8
+   my-cluster-qr5alwznm4m3-control-plane-d38d69ec-zk8bg    Ready    control-plane   3h9m    v1.28.8
+   my-cluster-qr5alwznm4m3-default-worker-88bc9045-6ms4n   Ready    <none>          6m49s   v1.28.8
+   my-cluster-qr5alwznm4m3-default-worker-88bc9045-7kgxj   Ready    <none>          3h6m    v1.28.8
+   my-cluster-qr5alwznm4m3-default-worker-88bc9045-m74cx   Ready    <none>          6m48s   v1.28.8
+   my-cluster-qr5alwznm4m3-default-worker-88bc9045-m9t7h   Ready    <none>          6m49s   v1.28.8
+   my-cluster-qr5alwznm4m3-default-worker-88bc9045-n8bl8   Ready    <none>          7m7s    v1.28.8
+   my-cluster-qr5alwznm4m3-default-worker-88bc9045-s7fw5   Ready    <none>          7m3s    v1.28.8
 
-For more detailed information about the Cluster-Autoscaler please take a look
-at the `FAQ`_ .
 
-.. _`FAQ`: https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md
+
+Scaling down nodes
+^^^^^^^^^^^^^^^^^^
+
+As you might expect, auto-scaling also works in the other direction too.
+Specifically it should scale the number of nodes back down again when they are
+no longer needed.
+
+Continuing with the previous example, let's scale the number of ``Pods`` back down
+to one and see what happens.
+
+
+.. code-block:: console
+
+   kubectl scale deploy scalestress --replicas=1
+   deployment.apps/scalestress scaled
+
+
+After about ten to fifteen minutes you should start to see nodes being removed from the
+cluster.
+
+.. code-block:: console
+
+   kubectl get node
+
+   NAME                                                    STATUS   ROLES           AGE    VERSION
+   my-cluster-qr5alwznm4m3-control-plane-6dcf69ec-zk8bg    Ready    control-plane   6h11m    v1.28.8
+   my-cluster-qr5alwznm4m3-control-plane-hefe69ec-zk8bg    Ready    control-plane   6h11m    v1.28.8
+   my-cluster-qr5alwznm4m3-control-plane-d38d69ec-zk8bg    Ready    control-plane   6h11m    v1.28.8
+   my-cluster-qr5alwznm4m3-default-worker-88bc9045-6ms4n   Ready    <none>          30m49s   v1.28.8
+
+
+*******
+Summary
+*******
+
+Auto-scaling is a versatile feature for managing demand on cluster resources.
+It enables your Kubernetes cluster to scale up or down when needed in
+response to changes in workload. It ensures that your application can
+cope with increased load and more importantly that you only use the resources
+you need.
+
+.. TODO(travis): need to do some work with pod horizontal autoscaling to see if that fits
+.. in here as part of the tutorial.
