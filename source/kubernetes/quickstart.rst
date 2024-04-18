@@ -2,37 +2,41 @@
 .. _k8s-quickstart:
 
 ###########
-Quick start
+Quick Start
 ###########
 
-The purpose of this quick start is to help you create a cluster that you can
-test and experiment with, so that you can gain a better understanding of how
-the Kubernetes platform works. To do this, we are going to be creating a
-cluster using the development template with network access from the public
-internet. We are using these options because the template creates a small
-cluster, meaning less of an operational cost, and the wider access that is
-provided by a publicly accessible cluster means that it's easier for us to
-conduct tests with multiple people and from multiple locations. However,
-because the cluster will be publicly accessible, this guide should **not** be
-used to create a production ready cluster.
+In this guide, we will create a Kubernetes cluster using the dashboard,
+and deploy a simple application to it.
 
-.. Note::
+.. warning::
 
-  This documentation assumes python-magnumclient is 2.12.0 or above please
-  refer to the :ref:`upgrading-the-cli` section of the documentation for
-  upgrade instructions as we recommend the use of the latest
-  version of the CLI to interact with the service.
+  The Kubernetes cluster deployed in this guide is not intended
+  to be used for production workloads.
 
 
-**************
-Pre-requisites
-**************
+*************
+Prerequisites
+*************
 
 Ensure user has the required privileges
 =======================================
 
-In order to create a Kubernetes cluster you need to ensure the user has been
-allocated the ``heat_stack_owner`` role.
+In order to manage Kubernetes clusters, your Catalyst Cloud user account
+must be allocated the following roles in the project:
+
+* The :ref:`project_member_role` (``_member_``) role, for viewing, creating and deleting
+  Kubernetes clusters using the Catalyst Cloud CLI or dashboard.
+* The :ref:`Kubernetes Admin <k8s-rbac-roles>` (``k8s_admin``) role, for granting
+  access to download the **kubeconfig** file, which is required to interact
+  with Kubernetes using the ``kubectl`` tool or the Kubernetes dashboard.
+
+.. note::
+
+  User roles for Kubernetes RBAC are separate from the standard roles.
+  To interact with Kubernetes after your cluster is created,
+  even Project Admins need to grant themselves the appropriate roles.
+
+  For more information, please refer to :ref:`kubernetes-user-access`.
 
 Ensure quota is sufficient
 ==========================
@@ -42,7 +46,7 @@ project is empty. However, if you already have some resources allocated, you
 may want to increase your quota to ensure there is sufficient capacity
 available to deploy Kubernetes.
 
-By default, the development Kubernetes template allocates:
+By default, Kubernetes templates allocate:
 
 * 4 compute instances
 * 8 vCPUs
@@ -52,385 +56,393 @@ By default, the development Kubernetes template allocates:
 * 3 security groups
 * 1 load balancer
 
-As a ``project admin`` you can change your quota using the `Quota Management`_
+As a :ref:`project_admin_role` you can change your quota using the `Quota Management`_
 panel in the dashboard, under the Management section.
 
 .. _`Quota Management`: https://dashboard.catalystcloud.nz/management/quota/
 
-Download and install kubectl
-============================
-
-The ``kubectl`` command line tool is the canonical way to interact with
-Kubernetes clusters and required by this tutorial. The instructions below can
-be used to quickly install ``kubectl`` on Linux as a static binary:
-
-.. code-block:: bash
-
-  $ curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s \
-  https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-  $ chmod +x ./kubectl
-  $ sudo mv ./kubectl /usr/local/bin/kubectl
-
-For other platforms or installation methods, please refer to the `detailed
-instructions on how to install kubectl`_.
-
-.. _`detailed instructions on how to install kubectl`: https://kubernetes.io/docs/tasks/tools/#kubectl
-
-Choosing a cluster template
-===========================
-
-.. Warning::
-
-  In an effort to make the process of getting started with Kubernetes on the
-  Catalyst Cloud a much simpler process, we have decided to modify the default
-  behaviour of the **development templates** we provide.
-
-  Effective from 1 July 2020, when one of these templates is used in the
-  creation of a new cluster it will, by default, provision a **floating IP** on
-  the Kubernetes API endpoint meaning that the resulting cluster will be
-  **publicly accessible over the internet**. It is possible to restrict access
-  to a public cluster, see :ref:`limiting_access` for more details.
-
-  If you wish to revert to the original behaviour of having a private cluster
-  please launch your cluster with the following flag
-  ``--floating-ip-disabled``
-
-  As a reminder, it is considered best practice that production workloads are
-  **not** deployed on a publicly accessible cluster.
-
-A cluster template is a blue-print to build a Kubernetes cluster (similar to
-machine images for the compute service). The cluster template specifies what
-version of Kubernetes will be installed and the features that will be enabled.
-For this quickstart, we are going to be using a development template. In
-comparison to a production template, the dev templates are locked to one master
-node rather than three and they have smaller sizes for their NVMe volumes.
-
-The following command will list all cluster templates available:
-
-.. code-block:: bash
-
-  $ openstack coe cluster template list
-  +--------------------------------------+-----------------------------------+
-  | uuid                                 | name                              |
-  +--------------------------------------+-----------------------------------+
-  | d4715786-441d-4c59-bb0f-XXXXXXXXXXXX | kubernetes-v1.19.6-dev-20210211   |
-  | 5c999fc7-715d-4213-9b4e-XXXXXXXXXXXX | kubernetes-v1.19.6-prod-20210211  |
-  | 76f3a1ed-d970-40d1-962e-XXXXXXXXXXXX | kubernetes-v1.18.14-dev-20210211  |
-  | bef3162b-2a15-4df2-b637-XXXXXXXXXXXX | kubernetes-v1.18.14-prod-20210211 |
-  | 7946001d-222b-43fd-8ffa-XXXXXXXXXXXX | kubernetes-v1.17.16-dev-20210211  |
-  | 35ec1bbf-c2e1-4cd9-8677-XXXXXXXXXXXX | kubernetes-v1.17.16-prod-20210211 |
-  | aadf25a0-46c5-4a40-ac37-XXXXXXXXXXXX | kubernetes-v1.20.4-prod-20210412  |
-  +--------------------------------------+-----------------------------------+
-
-
-We want to use the latest development template (which in the example above is
-``kubernetes-v1.19.6-dev-20200615``).
-
-Alternatively, a list of cluster templates can be seen in the
-**Cluster Template** dropdown of the **Create New Cluster** dialogue in the
-dashboard, under the **Container Infra** section.
-
-.. Note::
-
-  Templates that are from the v1.20.x range onwards use containerd at runtime to
-  create a cluster.
-
 .. _dashboard-cluster-creation:
 
-***********************************************
-Creating a Kubernetes cluster via the dashboard
-***********************************************
+Install the required tools
+==========================
 
-The simplest way to create a kubernetes cluster is through the Catalyst Cloud
-dashboard. The dashboard allows you to create, manage and monitor the current
-status of your clusters. For our quickstart, we are going to stick mostly to
-the default development template but we will make some changes through the
-process. From the **cluster** screen under the **container infra** tab, you
+This Quick Start guide for the most part involves using the Catalyst Cloud and Kubernetes
+dashboards to perform tasks, but some specific steps require use of command line tools.
+
+Please make sure you have:
+
+* Installed the :ref:`Catalyst Cloud command line tools <sdks_and_toolkits>`, and sourced
+  the OpenRC file for your project in your terminal session.
+* Downloaded and installed `kubectl <https://kubernetes.io/releases/download/#kubectl>`__,
+  the Kubernetes command line client.
+
+*****************************
+Creating a Kubernetes cluster
+*****************************
+
+The Catalyst Cloud dashboard allows you to create, manage and monitor
+the current status of your clusters.
+
+From the **Clusters** page under the **Container Infra** tab, you
 will see the following:
 
 .. image:: _containers_assets/cluster-main-screen.png
+    :align: center
 
-This screen gives you an overview of your clusters, their status and how many
-clusters you have measured against your quota. To create a new cluster from
-here, click on the *+ Create Cluster* button:
+This page gives you an overview of your clusters, their status and how many
+clusters you have, measured against your quota.
+
+To create a new cluster, click the **+ Create Cluster** button:
 
 .. image:: _containers_assets/create-cluster.png
+    :align: center
 
-Pick a name for your new cluster, add a keypair, choose the availability zone
-you want to deploy this cluster in, and choose from the dropdown list the
-latest development template available. Once that is done your screen should
-look something like this:
+Pick a **Name** for your new cluster, select a **Keypair** to use, and choose the
+latest **Cluster Template** available from the drop-down list.
+
+.. note::
+
+  If you do not yet have a keypair available, you can add one by
+  :ref:`creating a new keypair <creating-keypair>`, or
+  :ref:`importing an existing keypair <importing-keypair>`.
+
+Once that is done your screen should look something like this:
 
 .. image:: _containers_assets/quickstart-template-picked.png
+    :align: center
 
-We then move on to the size of our cluster. If you leave these fields empty
-they will take on the defaults outlined in the template, which is fine for our
-purposes. Since we have selected a development template, our number of
-master nodes is already locked to only one node. If we wanted to we can still
-specify the number of worker nodes, for this example we are using three nodes,
-which is the default anyway.
+Next, select the **Size** tab to configure the size and number of nodes in the cluster.
 
-.. Note::
+There are two types of nodes in Catalyst Cloud Kubernetes clusters:
+**Control Plane Nodes** (referred to in the dashboard as **Master Nodes**), and **Worker Nodes**.
 
-  When manually selecting a size, make sure that the flavor of your master
-  nodes is larger than c1.r1 if the default has not already been set higher.
+Control Plane Nodes are where the Kubernetes control plane is hosted,
+and Worker Nodes run the container deployments uploaded to Kubernetes.
+
+You may create any number of Worker Nodes, however Control Plane Nodes
+must be created with an uneven number e.g. 1, 3 or 5.
+
+In the example below, the cluster will be created with **1** Control Plane Node and **3** Worker Nodes.
+
+The flavors of the Control Plane Nodes and Worker Nodes
+can also be configured individually. For this guide we will use the default values.
 
 .. image:: _containers_assets/quickstart-size.png
+    :align: center
 
-Next we have the final required parameter, which is the network we want to
-deploy our cluster on. We can either choose an existing network or to create a
-new one. Additionally, we can select whether we want our cluster API to be
-accessible on the internet or only from our private network.
+Select the **Network** tab to configure the cluster's network access.
 
-For our quickstart, we are going to be creating a new network for our cluster
-and we are going to make it available publicly:
+A few options are available here, but for this guide, just make sure that
+**Create New Network** is checked (the default), to create a new virtual network for the cluster.
 
 .. image:: _containers_assets/quickstart-network.png
+    :align: center
 
-The other tabs: **management** and **advanced** allow you to set auto healing
-on your nodes and use labels to customise more advanced settings and features
-of the cluster. There is no need to change anything in these tabs for this
-tutorial.
+Finally, select the **Advanced** tab to set one more option.
 
-Once you have set all of these parameters, you can click submit and your
-cluster will begin creation. This process can take up to 20 minutes
-depending on the size of the cluster you are trying to build. You can monitor
-the progress of the cluster on the *Stack* screen under the *Orchestration*
-tab.
+To enable access to the Kubernetes API from the public Internet,
+add the following label to **Additional Labels**:
 
-.. image:: _containers_assets/stack-progress.png
+.. code-block:: bash
 
-Once the cluster has reached the ``CREATE_COMPLETE`` stage, you will be able
-to see it's status on the main *container infra* tab along with any other
-clusters you have created in the past.
+  master_lb_floating_ip_enabled=true
+
+The form should be filled out like this:
+
+.. image:: _containers_assets/quickstart-advanced.png
+    :align: center
+
+That should be everything you need to configure,
+so press the **Submit** button to create the cluster.
+
+You will be returned to the **Clusters** page, where you can monitor the state
+of your Kubernetes clusters. Our new cluster should be listed,
+in ``CREATE_IN_PROGRESS`` state.
+
+Creating a new Kubernetes cluster can take up to 20 minutes,
+depending on the size of the cluster you are trying to build.
+
+.. image:: _containers_assets/cluster-create-progress.png
+    :align: center
+
+Once the cluster has reached the ``CREATE_COMPLETE`` state, it is now up and running,
+and you can start using it.
 
 .. image:: _containers_assets/cluster-create-complete.png
-
-
-*****************************************
-Creating a Kubernetes cluster via the CLI
-*****************************************
-
-If you have already created the cluster using the dashboard, you can safely
-skip this step of the tutorial. In this section we illustrate how the same
-operation can be done using the more powerful (and easier to automate) CLI.
-
-Before proceeding, please ensure you have :ref:`installed the
-CLI<installing_cli_os>` and :ref:`sourced an openrc file
-<configuring-the-cli>`.
-
-To create a new **development** cluster that is publicly accessible run the
-following command:
-
-.. code-block:: bash
-
-  $ openstack coe cluster create k8s-cluster \
-  --cluster-template kubernetes-v1.19.6-dev-20210211 \
-  --keypair my-ssh-key \
-  --node-count 3 \
-  --master-count 1
-
-  Request to create cluster c191470e-7540-43fe-af32-xxxxxxxxxxxx accepted
-
-This command will create a cluster that should be identical to the one we
-created using the dashboard method.
-
-.. Note::
-
-  Templates in the v1.20.x series onward need to specify the additional label:
-  ``master_lb_floating_ip_enabled=True`` if you want to create a public cluster.
-
-Checking the status of the cluster
-==================================
-
-Cluster creation may take up to 20 minutes, depending on the size of the
-cluster. You can use the following command to monitor the status of the
-cluster:
-
-.. code-block:: bash
-
-  $ openstack coe cluster list
-  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
-  | uuid                                 | name        | keypair  | node_count | master_count | status             |
-  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
-  | c191470e-7540-43fe-af32-xxxxxxxxxxxx | k8s-cluster | testkey  |          1 |            1 | CREATE_IN_PROGRESS |
-  +--------------------------------------+-------------+----------+------------+--------------+--------------------+
-
-Alternatively, you can check the status of the cluster on the `Clusters`_
-panel, in the **Container Infra** section of the Dashboard.
-
-.. _`Clusters`: https://dashboard.catalystcloud.nz/project/clusters
-
-Once these steps have been followed you will and your cluster state becomes
-``CREATE_COMPLETE``, you will be ready to use.
+    :align: center
 
 
 ***************************
 Interacting with Kubernetes
 ***************************
 
-Cluster access via the CLI
-==========================
+.. _quickstart-configuring-kubectl:
 
-The ``kubectl`` command-line tool uses kubeconfig files to determine how to
-connect to the APIs of the Kubernetes cluster. The following command will
-download the necessary certificates and create a configuration file in your
-current directory. It will also export the ``KUBECONFIG`` variable on your
-behalf:
+Configuring ``kubectl``
+=======================
 
-.. code-block:: bash
+The `kubectl <https://kubernetes.io/docs/reference/kubectl/kubectl>`__ tool allows you
+to interact with your Catalyst Cloud Kubernetes cluster using the command line.
 
-  $ eval $(openstack coe cluster config k8s-cluster)
+As the Kubernetes dashboard of our cluster is not directly accessible from the Internet,
+we will use ``kubectl`` to gain access to the Kubernetes dashboard.
+
+First, run the following commands to create the **kubeconfig** file.
+The kubeconfig file contains the required metadata used to authenticate
+with the Kubernetes cluster.
+
+.. tabs::
+
+    .. group-tab:: Linux / macOS
+
+      .. note::
+
+        In the below examples, the kubeconfig file will be created in the current folder
+        of your terminal session.
+
+        If you wish to save the configuration to a different location, replace ``$(pwd)``
+        with your preferred destination folder.
+
+      The following command will create the kubeconfig in the target directory
+      with the filename ``config``.
+
+      .. code-block:: bash
+
+        openstack coe cluster config quickstart-cluster --use-keystone --dir "$(pwd)"
+
+      Now export the ``KUBECONFIG`` environment variable, to configure ``kubectl``
+      to connect to your cluster.
+
+      .. code-block:: bash
+
+        export KUBECONFIG="$(pwd)/config"
+
+    .. group-tab:: Windows (PowerShell)
+
+      .. note::
+
+        In the below examples, the kubeconfig file will be created in the current folder
+        of your terminal session.
+
+        If you wish to save the configuration to a different location, replace ``$pwd``
+        with your preferred destination folder.
+
+      The following command will create the kubeconfig in the target directory
+      with the filename ``config``.
+
+      .. code-block:: powershell
+
+        openstack coe cluster config quickstart-cluster --use-keystone --dir $pwd
+
+      Now define the ``KUBECONFIG`` environment variable, to configure ``kubectl``
+      to connect to your cluster.
+
+      .. code-block:: powershell
+
+        $Env:KUBECONFIG = $pwd\config
+
+    .. group-tab:: Windows (Command Prompt)
+
+      .. note::
+
+        In the below examples, the kubeconfig file will be created in the current folder
+        of your terminal session.
+
+        If you wish to save the configuration to a different location, replace ``%cd%``
+        with your preferred destination folder.
+
+      The following command will create the kubeconfig in the target directory
+      with the filename ``config``.
+
+      .. code-block:: bat
+
+        openstack coe cluster config quickstart-cluster --use-keystone --dir %cd%
+
+      Now define the ``KUBECONFIG`` environment variable, to configure ``kubectl``
+      to connect to your cluster.
+
+      .. code-block:: bat
+
+        set KUBECONFIG=%cd%\config
 
 .. note::
 
-  If you close your terminal session, the ``$KUBECONFIG`` variable exported by
-  the command above will be lost. For convenience, you may want to add this
-  environment variable to your shell profile, so it is always set.
+  The kubeconfig file uses the Catalyst Cloud authentication token in your terminal's environment
+  (provided by the OpenRC file) to authenticate with the Kubernetes API.
 
-If you wish to save the configuration to a different location you can use the
-``--dir <directory_name>`` parameter to select a different destination.
+  To be able to use ``kubectl``, your OpenRC file for the project must be sourced
+  (already done if you successfully created the kubeconfig),
+  **and** the ``KUBECONFIG`` environment variable must be defined.
 
-.. warning::
+Once we have the CLI configured, we can then begin to use ``kubectl`` to interact with the
+cluster.
 
-  If you are running multiple clusters, or are deleting and re-creating a
-  cluster, it is necessary to ensure that the current ``kubectl configuration``
-  is referencing the correct cluster configuration.
+To test everything works, run the ``kubectl cluster-info`` command to
+show the details of the cluster:
 
-Once we have the CLI configured by pointing the ``$KUBECONFIG`` variable to a
-configuration file, we can then begin to use ``kubectl`` to interact with the
-cluster. To test everything works, we can issue a simple command to show the
-details of the cluster:
-
-.. code-block:: bash
+.. code-block:: console
 
   $ kubectl cluster-info
-  Kubernetes master is running at https://103.254.156.157:6443
-  CoreDNS is running at https://103.254.156.157:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+  Kubernetes control plane is running at https://202.49.241.238:6443
+  CoreDNS is running at https://202.49.241.238:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 
   To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
-In order to view more in depth information about the cluster simply add the
-dump option to the above example. This generates output suitable for debugging
-and diagnosing cluster problems. By default, it redirects everything to stdout.
+Accessing the Kubernetes dashboard
+==================================
+
+Now that we have ``kubectl`` available, we can access the Kubernetes dashboard.
+
+.. tabs::
+
+    .. group-tab:: Linux / macOS
+
+      In the currently open terminal (with your OpenRC file sourced), run the following command
+      to fetch the authentication token from the environment, and copy it to the clipboard.
+
+      We will use this once the dashboard is open.
+
+      .. code-block:: bash
+
+        echo $OS_TOKEN
+
+    .. group-tab:: Windows (PowerShell)
+
+      In the currently open terminal (with your OpenRC file sourced), run the following command
+      to fetch the authentication token from the environment, and copy it to the clipboard.
+
+      We will use this once the dashboard is open.
+
+      .. code-block:: powershell
+
+        echo $Env:OS_TOKEN
+
+    .. group-tab:: Windows (Command Prompt)
+
+      In the currently open terminal (with your OpenRC file sourced), run the following command
+      to fetch the authentication token from the environment, and copy it to the clipboard.
+
+      We will use this once the dashboard is open.
+
+      .. code-block:: bat
+
+        echo %OS_TOKEN%
+
+Now run the following command in the same terminal window:
 
 .. code-block:: bash
 
-  $ kubectl cluster-info dump
+  kubectl proxy
 
-Cluster access via the Kubernetes dashboard
-===========================================
+This starts a proxy session which allows you to access the dashboard.
 
-.. include:: dashboard-access.rst
+.. code-block:: console
+
+  $ kubectl proxy
+  Starting to serve on 127.0.0.1:8001
+
+Once the proxy is running, open the following URL in your browser:
+
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
+
+You will be presented with a login screen, as shown below. Select
+**Token** as the authentication type and paste in the authentication token
+acquired in the previous steps.
+
+.. image:: _containers_assets/kubernetes_dashboard_login.png
+    :align: center
+
+Press **Sign in** to login, and you should now have the Kubernetes dashboard open in your browser.
+
+.. image:: _containers_assets/kubernetes_dashboard1.png
+   :align: center
 
 .. _simple_lb_deployment:
 
-*********************************
-Running a hello world application
-*********************************
+***************************
+Running a basic application
+***************************
 
-For this example we are going to deploy a container running a simple flask app
-that will respond with a basic 'Hello World' message that includes the host
-name and IP of the node responding to the request. This will sit behind a
-loadbalancer that will be publicly available on the internet via a floating ip
-and will serve requests to the application servers using the **round robin**
-algorithm.
+Let's try creating a deployment for a basic application on Kubernetes.
 
-The container image in question (**catalystcloud/helloworld version_1.1**) will
-be pulled by Kubernetes from the Docker Hub. The code below illustrates what
-this simple flask application does (there is no need to copy it):
+First, click the **+** button in the top right of the dashboard
+to open the **Create new resource** form.
 
-.. literalinclude:: _containers_assets/app.py
+.. image:: _containers_assets/kubernetes-create-new-resource-button.png
+   :align: center
 
-Creating the application deployment
-===================================
+Select **Create from input**, and paste the following YAML into the form.
 
-First we need to create a manifest like this. If you're following along with
-this example you should save this file as ``helloworld-deployment_1.yaml``
+This YAML creates a new deployment called ``quickstart-nginx``,
+which consists of a single ``nginx`` web server, serving the default test page via HTTP (port 80).
 
-.. literalinclude:: _containers_assets/helloworld-deployment_1.yaml
+.. code-block:: yaml
 
-Note how the deployment specifies three replicas and exposes the application on
-port 8080.
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: quickstart-nginx
+    labels:
+      app: quickstart-nginx
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        app: quickstart-nginx
+    template:
+      metadata:
+        labels:
+          app: quickstart-nginx
+      spec:
+        containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+          - containerPort: 80
 
-To deploy the application run the following command:
+The filled in form should look like this:
 
-.. code-block:: bash
+.. image:: _containers_assets/kubernetes-create-new-resource-page.png
+   :align: center
 
-  $ kubectl create -f helloworld-deployment_1.yaml
-  deployment.apps/helloworld-deployment created
+Press **Upload** to create the deployment.
 
-Check the state of the pods to confirm that they have all been deployed
-correctly. Once the status of all pods is ``Running`` you can continue to the
-next section.
+You will now directed back to the home page, where the new deployment
+will be tracked in real time:
 
-.. code-block:: bash
+.. image:: _containers_assets/kubernetes-create-new-resource-complete.png
+   :align: center
 
-  $ kubectl get pods
-  NAME                                     READY   STATUS              RESTARTS   AGE
-  helloworld-deployment-5bdfcbb467-648bd   1/1     Running             0          43s
-  helloworld-deployment-5bdfcbb467-wlb6n   0/1     ContainerCreating   0          43s
-  helloworld-deployment-5bdfcbb467-zrlvl   1/1     Running             0          43s
+Let's check that our new application is working properly.
+This application is not accessible from the Internet, so we will need to
+create a port forward from the local machine to the application in the cluster.
 
-Creating the loadbalancer service
-=================================
+Since the terminal window we have been using is currently running the
+``kubectl proxy`` command for the Kubernetes dashboard,
+open a new terminal window.
+Make sure to source your OpenRC file, and set the ``KUBECONFIG``
+environment variable (as shown in :ref:`quickstart-configuring-kubectl`).
 
-The deployment itself however does not provide a means for us to expose the
-application outside of the cluster. In order to do this we need to create a
-service to act as a go between.
-
-The manifest for our service definition will look like this.
-
-.. literalinclude:: _containers_assets/helloworld-service.yaml
-
-Note how it binds to port 80 TCP and uses a selector to direct traffic to pods
-that match the label ``helloworld``.
-
-To create the service run the following command.
-
-.. code-block:: bash
-
-  kubectl create -f helloworld-service.yaml
-  service/helloworld-service created
-
-Behind the scenes, Kubernetes will create a load balancer on the Catalyst Cloud
-and configure it to direct traffic to the application pods inside the cluster.
-
-The final step is to check on the state of the service and wait until the
-loadbalancer is active and the ``LoadBalancer Ingress`` field has received a
-publicly accessible floating IP address.
+Then, run the following command to create the port forward to the application:
 
 .. code-block:: bash
 
-  kubectl describe svc helloworld-service
-  Name:                     helloworld-service
-  Namespace:                default
-  Labels:                   <none>
-  Annotations:              <none>
-  Selector:                 app=helloworld
-  Type:                     LoadBalancer
-  IP:                       10.254.241.125
-  LoadBalancer Ingress:     202.49.241.67
-  Port:                     <unset>  80/TCP
-  TargetPort:               helloworld-port/TCP
-  NodePort:                 <unset>  32548/TCP
-  Endpoints:                192.168.209.128:8080,192.168.209.129:8080,192.168.43.65:8080
-  Session Affinity:         None
-  External Traffic Policy:  Cluster
-  Events:
-    Type     Reason                      Age                From                Message
-    ----     ------                      ----               ----                -------
-    Normal   EnsuringLoadBalancer        10m (x2 over 12m)  service-controller  Ensuring load balancer
-    Normal   EnsuringLoadBalancer        60s                service-controller  Ensuring load balancer
+  kubectl port-forward deployment/quickstart-nginx 8888:80
 
-Once your service is in this state you should be able to browse to the IP
-address shown in the LoadBalancer Ingress field and see a simple text output
-similar to the following.
+This maps port 80 from the application to port 8888 on the local machine.
 
-.. code-block:: bash
+.. code-block:: console
 
-  Hello World! From Server : helloworld-deployment-5bdfcbb467-c7rln @ 192.168.209.129
+  $ kubectl port-forward deployment/quickstart-nginx 8888:80
+  Forwarding from 127.0.0.1:8888 -> 80
+  Forwarding from [::1]:8888 -> 80
 
-If you refresh the browser you should also see the response update to reflect
-different host responses as the load balancer attempts to round robin the
-requests.
+You should now be able to open the following URL and access the application:
+
+http://localhost:8888
+
+If the following page is returned, congratulations!
+Your first deployment on a Catalyst Cloud Kubernetes cluster is working correctly.
+
+.. image:: _containers_assets/nginx-test-page.png
+   :align: center

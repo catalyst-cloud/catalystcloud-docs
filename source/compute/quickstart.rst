@@ -38,6 +38,8 @@ instances we create. We use **SSH** to allow access to our instances. You can
 either import an existing public key or have the Catalyst Cloud create a key
 pair for you. We document both below:
 
+.. _creating-keypair:
+
 Creating a new key pair
 =======================
 
@@ -58,6 +60,8 @@ Name and create the key pair.
 
 Click **Copy Private Key to Clipboard** and paste it into a text file in a
 secure location. Make sure the file is saved as plain text.
+
+.. _importing-keypair:
 
 Importing an existing key pair
 ==============================

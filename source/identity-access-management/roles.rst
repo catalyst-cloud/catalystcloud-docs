@@ -46,12 +46,15 @@ are as the name suggests all to do with Kubernetes and the control of clusters.
 Information on the Kubernetes roles can be found
 :ref:`here <kubernetes-user-access>`
 
+.. _general_roles:
+
 *************
 General roles
 *************
 
+.. _project_admin_role:
 
-Project admin
+Project Admin
 =============
 
 The *Project Admin* role allows users to have full control over who has access
@@ -71,7 +74,9 @@ The list of explicit permissions for the project admin role:
    |                       | keystone.identity.project_users_access                                 |
    +-----------------------+------------------------------------------------------------------------+
 
-Project moderator
+.. _project_mod_role:
+
+Project Moderator
 =================
 
 The *Project Moderator* role can invite other people to join your project and
@@ -86,6 +91,8 @@ The list of explicit permissions for the project moderator role:
    +-----------------------+------------------------------------------------------------------------+
    | Project Moderator     | keystone.identity.project_users_access                                 |
    +-----------------------+------------------------------------------------------------------------+
+
+.. _billing_role:
 
 Billing
 =======
@@ -106,7 +113,9 @@ The list of explicit permissions for the billing role:
    |                       | openstack.billing.get_quotations                                       |
    +-----------------------+------------------------------------------------------------------------+
 
-Project member
+.. _project_member_role:
+
+Project Member
 ==============
 
 The *Project Member* role gives users access to all services on your project.
@@ -315,7 +324,9 @@ quite extensive as the role covers almost all the service on the cloud:
    |                       | swift.auth.auth_token                                                  |
    +-----------------------+------------------------------------------------------------------------+
 
-Heat stack owner
+.. _heat_stack_owner_role:
+
+Heat Stack Owner
 ================
 
 The *Heat Stack Owner* role allows users access to the Heat Cloud Orchestration
@@ -389,7 +400,9 @@ The list of explicit permissions for the Heat stack owner role:
    |                       | openstack.orchestration.stacks:show_output                             |
    +-----------------------+------------------------------------------------------------------------+
 
-Compute start/stop
+.. _compute_start_stop_role:
+
+Compute Start/Stop
 ==================
 
 The *Compute Start/Stop* role allows users to start, stop, hard reboot and soft
@@ -418,7 +431,9 @@ The list of explicit permissions for the compute start/stop role:
    |                       | openstack.compute.unshelve                                             |
    +-----------------------+------------------------------------------------------------------------+
 
-Object storage
+.. _object_storage_role:
+
+Object Storage
 ==============
 
 The *Object Storage* role allows users to create, update and delete containers,
@@ -452,7 +467,9 @@ The list of explicit permissions for the object storage role:
    |                       | swift.auth.auth_token                                                  |
    +-----------------------+------------------------------------------------------------------------+
 
-Auth only
+.. _auth_only_role:
+
+Auth Only
 =========
 
 The *Auth Only* role is the most restrictive role. Users are only able to

@@ -1,3 +1,5 @@
+:orphan:
+
 .. _auto-healing:
 
 ############
@@ -20,6 +22,7 @@ at cluster creation time via the label ``auto_healing_enabled=false``.
 ****************************
 Support more node conditions
 ****************************
+.. FIXME(travis): Remove this section
 
 There are several built-in node conditions supported by Kubernetes except the
 Ready condition enabled by Catalyst Cloud Kubernetes service auto healing,

@@ -1,0 +1,40 @@
+---
+# Create the fluent.conf config map.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd
+  namespace: logging
+data:
+  fluent.conf: |
+    @include "#{ENV['FLUENTD_SYSTEMD_CONF'] || 'systemd'}.conf"
+    @include "#{ENV['FLUENTD_PROMETHEUS_CONF'] || 'prometheus'}.conf"
+    @include kubernetes.conf
+    @include conf.d/*.conf
+
+    <match **>
+      # docs: https://docs.fluentd.org/output/s3
+      @type s3
+      @id out_s3
+      @log_level info
+      s3_bucket "#{ENV['S3_BUCKET_NAME']}"
+      s3_region "#{ENV['S3_BUCKET_REGION']}"
+      s3_endpoint "#{ENV['S3_ENDPOINT_URL'] || use_default}"
+      force_path_style "#{ENV['S3_FORCE_PATH_STYLE'] || use_default ? true : false}"
+      aws_key_id "#{ENV['AWS_ACCESS_KEY_ID']}"
+      aws_sec_key "#{ENV['AWS_ACCESS_SECRET_KEY']}"
+      path "#{ENV['S3_PATH'] || use_default}"
+      s3_object_key_format "#{ENV['S3_OBJECT_KEY_FORMAT'] || '%{path}%Y/%m/%d/cluster-log-%{index}.%{file_extension}'}"
+      <inject>
+        time_key time
+        tag_key tag
+        localtime false
+      </inject>
+      <buffer>
+        @type file
+        path /var/log/fluentd-buffers/s3.buffer
+        timekey "#{ENV['S3_TIMEKEY'] || '3600'}"
+        timekey_use_utc true
+        chunk_limit_size "#{ENV['S3_CHUNK_LIMIT_SIZE'] || '256m'}"
+      </buffer>
+    </match>

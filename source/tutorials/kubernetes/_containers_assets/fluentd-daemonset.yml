@@ -1,0 +1,88 @@
+---
+# Create the Fluentd daemon set.
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd
+  namespace: logging
+  labels:
+    k8s-app: fluentd
+    addonmanager.kubernetes.io/mode: Reconcile
+spec:
+  selector:
+    matchLabels:
+      name: fluentd
+  template:
+    metadata:
+      labels:
+        name: fluentd
+    spec:
+      serviceAccountName: fluentd
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        effect: NoSchedule
+      containers:
+      - name: fluentd
+        # Check the Docker Hub page for updated versions of the image:
+        # https://hub.docker.com/r/fluent/fluentd-kubernetes-daemonset
+        image: fluent/fluentd-kubernetes-daemonset:v1.16-debian-s3-1
+        env:
+        - name: S3_BUCKET_NAME
+          value: "fluentd"
+        - name: OS_REGION_NAME
+          value: "nz-por-1"
+        # Required on Catalyst Cloud Kubernetes Service.
+        # For other Kubernetes clusters, this may need to be set to `json`
+        # if containerd is configured to use the `json-file` log driver.
+        - name: FLUENT_CONTAINER_TAIL_PARSER_TYPE
+          value: '/^(?<time>.+) (?<stream>stdout|stderr) [^ ]* (?<log>.*)$/'
+        # Optional values:
+        #  * S3_PATH - Add prefix to the log files in the target container/bucket.
+        #  * S3_OBJECT_KEY_FORMAT - Format string for the log file path.
+        #  * S3_TIMEKEY - Interval for log files, in seconds. Default is 3600 seconds (1 hour).
+        #  * S3_CHUNK_LIMIT_SIZE - Maximum size limit for chunks. Default is '256m' (256MB).
+        - name: S3_ENDPOINT_URL
+          value: "https://object-storage.$(OS_REGION_NAME).catalystcloud.io"
+        - name: S3_BUCKET_REGION
+          value: "us-east-1"
+        - name: S3_FORCE_PATH_STYLE
+          value: "true"
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: fluentd
+              key: aws_access_key_id
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: fluentd
+              key: aws_secret_access_key
+        - name: FLUENT_UID
+          value: "0"
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+        volumeMounts:
+        - name: var-log
+          mountPath: /var/log
+        - name: var-lib-docker-containers
+          mountPath: /var/lib/docker/containers
+          readOnly: true
+        - name: fluent-conf
+          mountPath: /fluentd/etc/fluent.conf
+          subPath: fluent.conf
+          readOnly: true
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: var-log
+        hostPath:
+          path: /var/log
+      - name: var-lib-docker-containers
+        hostPath:
+          path: /var/lib/docker/containers
+      - name: fluent-conf
+        configMap:
+          name: fluentd

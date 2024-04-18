@@ -1,20 +1,16 @@
-.. code-block:: yaml
-
-  # lb-echoserver-2.yml
-
-  ---
-  kind: Service
-  apiVersion: v1
-  metadata:
-    name: echoserver-lb-service
-    annotations:
-      loadbalancer.openstack.org/x-forwarded-for: "true"
-  spec:
-    selector:
-      app:  echoserver
-    type: LoadBalancer
-    ports:
-    - name: http
-      port: 80
-      targetPort: 8080
-      protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: echoserver-lb
+  annotations:
+    loadbalancer.openstack.org/x-forwarded-for: "true"
+spec:
+  selector:
+    app: echoserver
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+    protocol: TCP

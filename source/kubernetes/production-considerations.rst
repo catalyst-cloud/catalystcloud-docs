@@ -1,5 +1,9 @@
+:orphan:
+
+.. _k8s-production-considerations:
+
 #########################
-Production considerations
+Production Considerations
 #########################
 
 There are several considerations that you need to make before deciding how and
@@ -20,7 +24,7 @@ clusters.
 Where is your cluster going to live?
 ====================================
 
-A cluster, like most of the resources on the Catalyst Cloud, must sit on a
+A cluster, like most of the resources on Catalyst Cloud, must sit on a
 network inside your project. However, it is up to you whether you want to have
 your cluster sitting on its own network isolated from your other resources, or
 if you want to have your cluster sitting on the same network as other objects;
@@ -116,7 +120,7 @@ The default value is “” which means access is open to 0.0.0.0/0.
 .. Note::
 
     This will only work when the cluster has been deployed with a loadbalancer
-    in front of the Kubernetes API as is the case for all of the Catalyst Cloud
+    in front of the Kubernetes API as is the case for all Catalyst Cloud
     production templates.
 
 As an example of what the create command could look like, let's assume we wish
@@ -182,5 +186,3 @@ You can monitor the status of your cluster at any time using the
 Additionally, if you need to review or set up logging for your cluster, you
 can find more information on this topic under the
 :ref:`logging<kubernetes-logging>` tab of this documentation.
-
-

@@ -8,7 +8,7 @@ status.
 
 This release introduced the following new functionality and improvements.
 
-* It is now possible to perform a :ref:`rolling-upgrade` of the Kubernetes
+* It is now possible to perform a rolling-upgrade of the Kubernetes
   version of a running cluster with minimum to no impact on running
   applications.
 * Cluster :ref:`auto-healing` is a feature of the Kubernetes service that

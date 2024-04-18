@@ -1,8 +1,10 @@
+.. _object-storage:
+
 ##############
-Object storage
+Object Storage
 ##############
 
-Object storage is a web service used to store and retrieve data from anywhere
+Object Storage is a web service used to store and retrieve data from anywhere
 using native web protocols. Each object typically includes content data, a
 variable amount of metadata, and a globally unique identifier. All object
 storage operations are done via a modern and easy to use REST API.

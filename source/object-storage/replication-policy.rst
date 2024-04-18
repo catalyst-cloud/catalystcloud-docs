@@ -13,6 +13,9 @@ replicated across regions or you wish to save money on a cheaper policy. In
 this case you can choose a replication policy that keeps three replicas of your
 data in a single region instead of having them spread across all of them.
 
+.. _object-storage-storage-policies:
+.. _object-storage-replication-policies:
+
 *****************************
 What are the storage policies
 *****************************
@@ -20,17 +23,17 @@ What are the storage policies
 The following are the storage policies available, each of these (as their names
 suggest) are related to one of the regions on the Catalyst cloud:
 
-+--------------------------+------------------+------------------------+
-| Storage class            | Failure-domain   | Replicas               |
-+==========================+==================+========================+
-| nz--o1--mr-r3 (default)  | Multi-region     | 3 (one in each region) |
-+--------------------------+------------------+------------------------+
-| nz-wlg-2--o1--sr-r3      | Single-region    | 3 (all in one region)  |
-+--------------------------+------------------+------------------------+
-| nz-por-1--o1--sr-r3      | Single-region    | 3 (all in one region)  |
-+--------------------------+------------------+------------------------+
-| nz-hlz-1--o1--sr-r3      | Single-region    | 3 (all in one region)  |
-+--------------------------+------------------+------------------------+
++------------------------------+------------------+------------------------+
+| Storage class                | Failure-domain   | Replicas               |
++==============================+==================+========================+
+| ``nz--o1--mr-r3`` (default)  | Multi-region     | 3 (one in each region) |
++------------------------------+------------------+------------------------+
+| ``nz-wlg-2--o1--sr-r3``      | Single-region    | 3 (all in one region)  |
++------------------------------+------------------+------------------------+
+| ``nz-por-1--o1--sr-r3``      | Single-region    | 3 (all in one region)  |
++------------------------------+------------------+------------------------+
+| ``nz-hlz-1--o1--sr-r3``      | Single-region    | 3 (all in one region)  |
++------------------------------+------------------+------------------------+
 
 .. Warning::
   You cannot change the storage policy of an already existing container. The
@@ -86,5 +89,3 @@ Programmatic methods
   .. tab:: API method
 
     .. include:: tutorial-scripts/replication-api.rst
-
-

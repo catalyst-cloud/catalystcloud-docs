@@ -1,3 +1,6 @@
+
+.. _load-balancer-intro:
+
 #############
 Load balancer
 #############

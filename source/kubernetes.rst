@@ -1,9 +1,11 @@
+.. _kubernetes:
+
 ##########
 Kubernetes
 ##########
 
-Catalyst Kubernetes Service makes it easy for you to deploy, manage, and scale
-Kubernetes clusters to run containerised applications on the Catalyst Cloud.
+Catalyst Cloud Kubernetes Service makes it easy for you to deploy, manage, and scale
+Kubernetes clusters to run containerised applications on Catalyst Cloud.
 
 Table of Contents:
 
@@ -11,25 +13,20 @@ Table of Contents:
    :maxdepth: 1
 
    kubernetes/quickstart
-   kubernetes/overview
    kubernetes/clusters
    kubernetes/user-access
-   kubernetes/auto-healing
-   kubernetes/auto-scaling
+   kubernetes/load-balancers
    kubernetes/ingress
-   kubernetes/production-considerations
-   kubernetes/network-policies
-   kubernetes/private-cluster
-   kubernetes/logging
-   kubernetes/rolling-upgrade
-   kubernetes/services
+   kubernetes/cluster-upgrade
    kubernetes/storage
    kubernetes/versions
-   kubernetes/security
+   kubernetes/appendix
+   kubernetes/glossary
 
+.. TODO(callumdickinson): Add 'kubernetes/auto-scaling' below Production Consiterations.
 
 ******************
-Providing feedback
+Providing Feedback
 ******************
 
 We are keen to establish a feedback loop and collaborate with customers using
@@ -44,9 +41,4 @@ following command to assist our support team in helping you to resolve it.
 
 .. code-block:: bash
 
-  $ openstack coe cluster show <cluster_name>
-
-************
-Known Issues
-************
-
+  $ openstack coe cluster show -f json <cluster_name>
