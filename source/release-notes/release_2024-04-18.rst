@@ -1,0 +1,34 @@
+#############
+18 April 2024
+#############
+
+==================================
+Catalyst Cloud Kubernetes Service
+==================================
+
+We have released Cluster Templates for Kubernetes 1.28. From this version
+onwards, our service is powered by Cluster API which greatly improves how we
+support, manage and upgrade your clusters.
+
+We have also updated the Kubernetes documentation section with examples and
+up to date information.
+
+The :ref:`supported-kubernetes-versions` section may be of special note to
+users who want to know dates to expect for version release and deprecation.
+
+To get started using our CNCF Certified Kubernetes service, follow the
+:ref:`Kubernetes Quick-Start Guide<k8s-quickstart>`.
+
+===================
+Deprecation Notices
+===================
+
+------------------------
+Magnum Cluster Templates
+------------------------
+
+With the release of 1.28 for Catalyst Cloud Kubernetes Service, clusters
+built on 1.25 now transition to unsupported and 1.25 Cluster Templates
+are now hidden from the API.
+
+See :ref:`supported-kubernetes-versions` for more information.
