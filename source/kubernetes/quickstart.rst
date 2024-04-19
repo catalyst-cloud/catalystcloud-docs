@@ -283,8 +283,8 @@ show the details of the cluster:
 .. code-block:: console
 
   $ kubectl cluster-info
-  Kubernetes control plane is running at https://202.49.241.238:6443
-  CoreDNS is running at https://202.49.241.238:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+  Kubernetes control plane is running at https://192.0.2.1:6443
+  CoreDNS is running at https://192.0.2.1:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 
   To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
@@ -343,7 +343,7 @@ This starts a proxy session which allows you to access the dashboard.
 
 Once the proxy is running, open the following URL in your browser:
 
-http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:https/proxy
 
 You will be presented with a login screen, as shown below. Select
 **Token** as the authentication type and paste in the authentication token
