@@ -79,9 +79,12 @@ value for ``min_node_count`` overrides the `--node-count` argument if it is
 lower.
 
 .. note::
-   
+
    When auto-scaling is enabled, the value displayed for **node count** in the
-   dashboard and command line will not reflect the actual number of worker nodes.
+   dashboard and command line will not reflect the actual number of worker nodes
+   if the auto-scaler has made changes.
+
+   This is a bug and we are working to address this soon.
 
 The auto-scaling feature requires the use of resource requests for CPU and
 memory in the pod specification. The following pod specification
