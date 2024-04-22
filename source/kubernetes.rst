@@ -17,6 +17,7 @@ Table of Contents:
    kubernetes/user-access
    kubernetes/load-balancers
    kubernetes/ingress
+   kubernetes/auto-scaling
    kubernetes/cluster-upgrade
    kubernetes/storage
    kubernetes/versions

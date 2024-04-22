@@ -1,7 +1,4 @@
-:orphan:
 
-.. TODO(callumdickinson): Add this page back to the docs when auto-scaling is enabled.
-.. FIXME(travis): edit this section
 .. _auto-scaling:
 
 ############
@@ -80,6 +77,14 @@ The value for ``min_node_count`` **must** be greater than zero. The value for
 ``max_node_count`` must be greater than the value for ``min_node_count``. The
 value for ``min_node_count`` overrides the `--node-count` argument if it is
 lower.
+
+.. note::
+
+   When auto-scaling is enabled, the value displayed for **node count** in the
+   dashboard and command line will not reflect the actual number of worker nodes
+   if the auto-scaler has made changes.
+
+   This is a bug and we are working to address this soon.
 
 The auto-scaling feature requires the use of resource requests for CPU and
 memory in the pod specification. The following pod specification
