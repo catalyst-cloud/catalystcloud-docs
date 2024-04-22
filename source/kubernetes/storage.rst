@@ -95,7 +95,7 @@ a volume from Catalyst Cloud Block Storage which can be used by a ``Pod``.
 
    Attaching Catalyst Cloud Block Storage volume to a ``Pod`` using a ``PersistentVolumeClaim``.
 
-This can be demonstrated this with an example. We first need to specify a name
+This can be demonstrated with an example. We first need to specify a name
 for the PVC and a size for the volume:
 
 * storage class : b1.sr-r3-nvme-1000
