@@ -18,8 +18,8 @@ and deploy a simple application to it.
 Prerequisites
 *************
 
-Ensure user has the required privileges
-=======================================
+Ensuring your user has the required privileges
+==============================================
 
 In order to manage Kubernetes clusters, your Catalyst Cloud user account
 must be allocated the following roles in the project:
@@ -36,10 +36,10 @@ must be allocated the following roles in the project:
   To interact with Kubernetes after your cluster is created,
   even Project Admins need to grant themselves the appropriate roles.
 
-  For more information, please refer to :ref:`kubernetes-user-access`.
+  For more information, please refer to the :ref:`kubernetes-user-access` section of our kuberenetes documentation.
 
-Ensure quota is sufficient
-==========================
+Ensuring your Quota is sufficient
+=================================
 
 A small quota is sufficient to deploy the development cluster template if your
 project is empty. However, if you already have some resources allocated, you
@@ -63,8 +63,8 @@ panel in the dashboard, under the Management section.
 
 .. _dashboard-cluster-creation:
 
-Install the required tools
-==========================
+Installing the required tools
+=============================
 
 This Quick Start guide for the most part involves using the Catalyst Cloud and Kubernetes
 dashboards to perform tasks, but some specific steps require use of command line tools.
@@ -98,7 +98,7 @@ To create a new cluster, click the **+ Create Cluster** button:
     :align: center
 
 Pick a **Name** for your new cluster, select a **Keypair** to use, and choose the
-latest **Cluster Template** available from the drop-down list.
+latest **Cluster Template** version available from the drop-down list.
 
 .. note::
 
@@ -140,7 +140,9 @@ A few options are available here, but for this guide, just make sure that
 
 Finally, select the **Advanced** tab to set one more option.
 
-To enable access to the Kubernetes API from the public Internet,
+In order to be able to access our cluster from outside the
+virtual network we will need to make sure that the Kubernetes
+API is available from the public Internet. To do this,
 add the following label to **Additional Labels**:
 
 .. code-block:: bash
@@ -180,6 +182,10 @@ Interacting with Kubernetes
 
 Configuring ``kubectl``
 =======================
+
+.. Note::
+
+  Please ensure that you :ref:`source-rc-file` for your project before proceeding
 
 The `kubectl <https://kubernetes.io/docs/reference/kubectl/kubectl>`__ tool allows you
 to interact with your Catalyst Cloud Kubernetes cluster using the command line.
