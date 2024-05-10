@@ -31,7 +31,7 @@ To complete this tutorial you will need the following:
   inbound SSH access.
 * :ref:`Openrc file<source-rc-file>` for your Catalyst Cloud project sourced
   in your shell.
-* `Packer must be installed <https://developer.hashicorp.com/packer/downloads>`_
+* `Packer must be installed <https://developer.hashicorp.com/packer/install>`_
   on your system.
 * Sufficient quota capacity in your cloud project for Packer to create the
   temporary resources required to build the image.
@@ -124,17 +124,17 @@ Image build process
                         "set -e",
                         "sudo apt update",
                         "sudo apt install -y dkms",
-                        "curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/15.0/linux/nvidia-linux-grid-525_525.60.13_amd64.deb",
-                        "sudo dpkg -i nvidia-linux-grid-525_525.60.13_amd64.deb",
-                        "rm -f nvidia-linux-grid-525_525.60.13_amd64.deb",
+                        "curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/16.3/linux/nvidia-linux-grid-535_535.154.05_amd64.deb",
+                        "sudo dpkg -i nvidia-linux-grid-535_535.154.05_amd64.deb",
+                        "rm -f nvidia-linux-grid-535_535.154.05_amd64.deb",
                         "sudo mkdir -p /etc/nvidia/ClientConfigToken",
                         "(cd /etc/nvidia/ClientConfigToken && sudo curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/licenses/client_configuration_token_12-29-2022-15-20-23.tok)",
                         "sudo sed -i -e '/^\\\(FeatureType=\\\).*/{s//\\\11/;:a;n;ba;q}' -e '\$aFeatureType=1' /etc/nvidia/gridd.conf",
                         "sudo systemctl restart nvidia-gridd",
-                        "curl -O https://developer.download.nvidia.com/compute/cuda/12.0.0/local_installers/cuda_12.0.0_525.60.13_linux.run",
+                        "curl -O https://developer.download.nvidia.com/compute/cuda/12.1.0/local_installers/cuda_12.1.0_530.30.02_linux.run",
                         "echo 'Installing CUDA. This may take a few minutes...'",
-                        "sudo sh cuda_12.0.0_525.60.13_linux.run --silent --toolkit",
-                        "rm -f cuda_12.0.0_525.60.13_linux.run",
+                        "sudo sh cuda_12.1.0_530.30.02_linux.run --silent --toolkit",
+                        "rm -f cuda_12.1.0_530.30.02_linux.run",
                         "echo /usr/local/cuda/lib64 | sudo tee /etc/ld.so.conf.d/cuda.conf",
                         "sudo ldconfig",
                         "sudo systemctl stop cloud-init",
