@@ -12,11 +12,11 @@ to have that Gallagher Command Centre running on-site with all the management
 overhead, travel time or physical hardware maintenance that entails. In this guide,
 we will show you how to install and run Gallagher Command Centre in Catalyst Cloud.
 
-By the end of the guide, you should have a fully-installed and running Gallagher
+By the end of the guide, you should have a fully-installed Gallagher
 Command Centre application running virtually in the cloud; meaning you will be
 able to access, update and interact with that application from anywhere in the
-world, just with an internet connection! For this guide, we have assumed that you
-already have an account with Catalyst Cloud. If not, simply sign up `here!`_
+world. For this guide, we have assumed that you already have an account with
+Catalyst Cloud. If not, simply sign up `here!`_
 
 .. _here!: https://catalystcloud.nz/signup/
 
@@ -39,13 +39,12 @@ Do not worry, this should only take a few minutes and you can follow
 Creating an instance to house our command centre
 ================================================
 
-Further more, you will need to spin up a Windows VM in the cloud. There is a detailed “how to”
+Next, you will need to spin up a Windows VM in the cloud. There is a detailed “how to”
 for this, which you can find here: :ref:`first-instance-windows`. To run Gallagher Command
 Centre, you will need to simply make sure you are running the appropriate
 version of Windows for your Gallagher installation, and that you select the right size for
 your instance, as you will need to make sure you have enough CPU and RAM to run your
-Gallagher application. Below is a complete size-guide for the size of VM compared to
-the amount of doors your application will manage.
+Gallagher application.
 
 If you do need to increase the size of your VM as you have increased the amount of doors
 the application manages, you will need to follow `this guide`_ to resizing your VM,
@@ -67,7 +66,7 @@ These can take a while for Windows to find and download and will require at leas
 restart. We need to run these updates, however, as we will run into errors with the
 Gallagher application if your version of windows is not up to date.
 
-The good news is that, whilst Windows is updating, we can simultaneously download our
+The good news is that, whilst Windows is updating, you can simultaneously download your
 Gallagher installation package to the instance. You can do this simply by opening a web
 browser in your instance and navigate to the Gallagher Security website, log in into your
 account and downloading the packages. Alternatively, you can upload the installation
