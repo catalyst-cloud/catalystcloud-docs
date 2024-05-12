@@ -39,7 +39,7 @@ via the `Support Centre`_.
 
 If you have a specific issue with a cluster, please include the output of the
 following command to assist our support team in helping you to resolve any issues
-when creating your support ticket.
+when creating your cluster.
 
 .. code-block:: bash
 
