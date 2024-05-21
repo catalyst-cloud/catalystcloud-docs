@@ -97,14 +97,8 @@ To create a new cluster, click the **+ Create Cluster** button:
 .. image:: _containers_assets/create-cluster.png
     :align: center
 
-Pick a **Name** for your new cluster, select a **Keypair** to use, and choose the
+Pick a **Name** for your new cluster, and choose the
 latest **Cluster Template** version available from the drop-down list.
-
-.. note::
-
-  If you do not yet have a keypair available, you can add one by
-  :ref:`creating a new keypair <creating-keypair>`, or
-  :ref:`importing an existing keypair <importing-keypair>`.
 
 Once that is done your screen should look something like this:
 
@@ -114,7 +108,7 @@ Once that is done your screen should look something like this:
 Next, select the **Size** tab to configure the size and number of nodes in the cluster.
 
 There are two types of nodes in Catalyst Cloud Kubernetes clusters:
-**Control Plane Nodes** (referred to in the dashboard as **Master Nodes**), and **Worker Nodes**.
+**Control Plane Nodes** (formerly referred to as **Master Nodes**), and **Worker Nodes**.
 
 Control Plane Nodes are where the Kubernetes control plane is hosted,
 and Worker Nodes run the container deployments uploaded to Kubernetes.
@@ -132,34 +126,19 @@ can also be configured individually. For this guide we will use the default valu
 
 Select the **Network** tab to configure the cluster's network access.
 
-A few options are available here, but for this guide, just make sure that
-**Create New Network** is checked (the default), to create a new virtual network for the cluster.
+To enable access to the Kubernetes API from the public Internet, select
+'Accessible with public floating IP' from the **Floating IP** drop-down list.
+For the quickstart, we will leave the **Allowed CIDRs** field empty.
 
 .. image:: _containers_assets/quickstart-network.png
     :align: center
 
-Finally, select the **Advanced** tab to set one more option.
-
-In order to be able to access our cluster from outside the
-virtual network we will need to make sure that the Kubernetes
-API is available from the public Internet. To do this,
-add the following label to **Additional Labels**:
-
-.. code-block:: bash
-
-  master_lb_floating_ip_enabled=true
-
-The form should be filled out like this:
-
-.. image:: _containers_assets/quickstart-advanced.png
-    :align: center
-
-That should be everything you need to configure,
+That is everything you need to configure for this guide,
 so press the **Submit** button to create the cluster.
 
 You will be returned to the **Clusters** page, where you can monitor the state
 of your Kubernetes clusters. Our new cluster should be listed,
-in ``CREATE_IN_PROGRESS`` state.
+in ``CREATE_IN_PROGRESS`` state, refresh the browser to see the updated status.
 
 Creating a new Kubernetes cluster can take up to 20 minutes,
 depending on the size of the cluster you are trying to build.
@@ -173,6 +152,7 @@ and you can start using it.
 .. image:: _containers_assets/cluster-create-complete.png
     :align: center
 
+You can now download the **kubeconfig** file for the cluster using the **Download Kubeconfig** button.
 
 ***************************
 Interacting with Kubernetes
@@ -193,7 +173,15 @@ to interact with your Catalyst Cloud Kubernetes cluster using the command line.
 As the Kubernetes dashboard of our cluster is not directly accessible from the Internet,
 we will use ``kubectl`` to gain access to the Kubernetes dashboard.
 
-First, run the following commands to create the **kubeconfig** file.
+First, ensure you have downloaded the **kubeconfig** file from the Catalyst Cloud
+dashboard using the **Download Kubeconfig** button.
+
+.. note::
+
+  Your browser may download the **kubeconfig** file to another location. Specific
+  browser download locations are out of scope for this document, you can also locate these
+  within your browser.
+
 The kubeconfig file contains the required metadata used to authenticate
 with the Kubernetes cluster.
 
@@ -201,83 +189,44 @@ with the Kubernetes cluster.
 
     .. group-tab:: Linux / macOS
 
-      .. note::
-
-        In the below examples, the kubeconfig file will be created in the current folder
-        of your terminal session.
-
-        If you wish to save the configuration to a different location, replace ``$(pwd)``
-        with your preferred destination folder.
-
-      The following command will create the kubeconfig in the target directory
-      with the filename ``config``.
+      In a command line terminal environment (such as ``bash``) export the ``KUBECONFIG``
+      environment variable, to configure ``kubectl`` to connect to your cluster.
 
       .. code-block:: bash
 
-        openstack coe cluster config quickstart-cluster --use-keystone --dir "$(pwd)"
+        export KUBECONFIG="${HOME}/Downloads/quickstart1_kubeconfig"
 
-      Now export the ``KUBECONFIG`` environment variable, to configure ``kubectl``
-      to connect to your cluster.
+      Alternatively, if you have no other Kubernetes clusters, you could move the downloaded file `quickstart1_kubeconfig` to the default location for ``kubectl``, in `$HOME/.kube/config`.
 
       .. code-block:: bash
 
-        export KUBECONFIG="$(pwd)/config"
+        mv ${HOME}/Downloads/quickstart1_kubeconfig ${HOME}/.kube/config
+
 
     .. group-tab:: Windows (PowerShell)
 
-      .. note::
-
-        In the below examples, the kubeconfig file will be created in the current folder
-        of your terminal session.
-
-        If you wish to save the configuration to a different location, replace ``$pwd``
-        with your preferred destination folder.
-
-      The following command will create the kubeconfig in the target directory
-      with the filename ``config``.
-
-      .. code-block:: powershell
-
-        openstack coe cluster config quickstart-cluster --use-keystone --dir $pwd
-
-      Now define the ``KUBECONFIG`` environment variable, to configure ``kubectl``
+      In a PowerShell environment, define the ``KUBECONFIG`` environment variable, to configure ``kubectl``
       to connect to your cluster.
 
       .. code-block:: powershell
 
-        $Env:KUBECONFIG = $pwd\config
+        $Env:KUBECONFIG = \Users\<username>\Downloads\quickstart1_kubeconfig
 
     .. group-tab:: Windows (Command Prompt)
 
-      .. note::
-
-        In the below examples, the kubeconfig file will be created in the current folder
-        of your terminal session.
-
-        If you wish to save the configuration to a different location, replace ``%cd%``
-        with your preferred destination folder.
-
-      The following command will create the kubeconfig in the target directory
-      with the filename ``config``.
+      Define the ``KUBECONFIG`` environment variable, to configure ``kubectl``
+      to connect to your cluster using the downloaded file.
 
       .. code-block:: bat
 
-        openstack coe cluster config quickstart-cluster --use-keystone --dir %cd%
-
-      Now define the ``KUBECONFIG`` environment variable, to configure ``kubectl``
-      to connect to your cluster.
-
-      .. code-block:: bat
-
-        set KUBECONFIG=%cd%\config
+        set KUBECONFIG=\Users\<username>\Downloads\quickstart1_kubeconfig
 
 .. note::
 
-  The kubeconfig file uses the Catalyst Cloud authentication token in your terminal's environment
+  The **kubeconfig** file uses the Catalyst Cloud authentication token in your terminal's environment
   (provided by the OpenRC file) to authenticate with the Kubernetes API.
 
-  To be able to use ``kubectl``, your OpenRC file for the project must be sourced
-  (already done if you successfully created the kubeconfig),
+  To be able to use ``kubectl``, your OpenRC file for the project must be sourced,
   **and** the ``KUBECONFIG`` environment variable must be defined.
 
 Once we have the CLI configured, we can then begin to use ``kubectl`` to interact with the
