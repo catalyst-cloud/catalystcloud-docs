@@ -128,7 +128,7 @@ Select the **Network** tab to configure the cluster's network access.
 
 To enable access to the Kubernetes API from the public Internet, select
 'Accessible with public floating IP' from the **Floating IP** drop-down list.
-For the quickstart, we will leave the **Allowed CIDRs** field empty.
+For this guide, we will leave the **Allowed CIDRs** field empty.
 
 .. image:: _containers_assets/quickstart-network.png
     :align: center
@@ -138,7 +138,7 @@ so press the **Submit** button to create the cluster.
 
 You will be returned to the **Clusters** page, where you can monitor the state
 of your Kubernetes clusters. Our new cluster should be listed,
-in ``CREATE_IN_PROGRESS`` state, refresh the browser to see the updated status.
+in ``CREATE_IN_PROGRESS`` state. Refresh the page periodically to see the updated cluster status.
 
 Creating a new Kubernetes cluster can take up to 20 minutes,
 depending on the size of the cluster you are trying to build.
@@ -178,9 +178,10 @@ dashboard using the **Download Kubeconfig** button.
 
 .. note::
 
-  Your browser may download the **kubeconfig** file to another location. Specific
-  browser download locations are out of scope for this document, you can also locate these
-  within your browser.
+  Your browser may download the **kubeconfig** file to another location.
+  If you wish to download the **kubeconfig** file to a specific location
+  (and not the default location for your operating system), replace ``.../Downloads``
+  in the below file paths with your desired download location.
 
 The kubeconfig file contains the required metadata used to authenticate
 with the Kubernetes cluster.
@@ -196,21 +197,22 @@ with the Kubernetes cluster.
 
         export KUBECONFIG="${HOME}/Downloads/quickstart1_kubeconfig"
 
-      Alternatively, if you have no other Kubernetes clusters, you could move the downloaded file `quickstart1_kubeconfig` to the default location for ``kubectl``, in `$HOME/.kube/config`.
+      Alternatively, if you have no other Kubernetes clusters, you could move the downloaded file
+      (``quickstart1_kubeconfig``) to the default location for ``kubectl``, in ``$HOME/.kube/config``.
 
       .. code-block:: bash
 
-        mv ${HOME}/Downloads/quickstart1_kubeconfig ${HOME}/.kube/config
+        mkdir -p "${HOME}/.kube" && mv "${HOME}/Downloads/quickstart1_kubeconfig" "${HOME}/.kube/config"
 
 
     .. group-tab:: Windows (PowerShell)
 
-      In a PowerShell environment, define the ``KUBECONFIG`` environment variable, to configure ``kubectl``
+      In a PowerShell environment, define the ``KUBECONFIG`` environment variable to configure ``kubectl``
       to connect to your cluster.
 
       .. code-block:: powershell
 
-        $Env:KUBECONFIG = \Users\<username>\Downloads\quickstart1_kubeconfig
+        $Env:KUBECONFIG = $env:USERPROFILE\Downloads\quickstart1_kubeconfig
 
     .. group-tab:: Windows (Command Prompt)
 
@@ -219,7 +221,7 @@ with the Kubernetes cluster.
 
       .. code-block:: bat
 
-        set KUBECONFIG=\Users\<username>\Downloads\quickstart1_kubeconfig
+        set KUBECONFIG=%homedrive%%homepath%\Downloads\quickstart1_kubeconfig
 
 .. note::
 
