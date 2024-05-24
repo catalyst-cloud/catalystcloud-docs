@@ -4,9 +4,9 @@
 Versions
 ########
 
-*******************
-Kubernetes Versions
-*******************
+***************************
+Kubernetes Versions on CCKS
+***************************
 
 Kubernetes community releases currently happen approximately three times per year.
 These are called **minor version releases** (the ``y`` in ``v1.y.0``),
@@ -22,8 +22,9 @@ date they become unsupported.
 
 .. _supported-kubernetes-versions:
 
-Supported Kubernetes Versions
-=============================
+**********************************
+Supported CCKS Kubernetes Versions
+**********************************
 
 This table documents Catalyst Cloud Kubernetes Service minor versions, and their supported status.
 It does not show patch versions, as all patch versions for a supported minor version are supported.
@@ -46,9 +47,9 @@ It does not show patch versions, as all patch versions for a supported minor ver
      - 2023-04-05
      - 2024-04-18
    * - ``1.26``
-     - Supported
+     - Unsupported
      - 2023-09-11
-     - Expected 2024-05-17
+     - 2024-05-27
    * - ``1.27``
      - Supported
      - 2024-01-22
@@ -58,13 +59,88 @@ It does not show patch versions, as all patch versions for a supported minor ver
      - 2024-04-18
      - Expected 2024-10-28
    * - ``1.29``
-     - In development
-     - Expected 2024-05-15
+     - Supported
+     - 2024-05-27
      - Expected 2025-02-28
+   * - ``1.30``
+     - In development
+     - Expected 2024-07-15
+     - Expected 2025-06-28
 
 
-Kubernetes Versioning
+**********************
+Version upgrade notes
+**********************
+
+Version v1.28 to v1.29
 ======================
+
+This is the first minor version upgrade of CCKS that supports upgrade of existing clusters.
+
+Kubernetes `release changelog for v1.29 since v1.28`_.
+
+In addition to the Kubernetes changes, we have:
+
+* Extended :ref:`k8s-rbac-roles` to deny access to namespaces created by CCKS in addition to `kube-system`.
+  These include `openstack-system`, `tigera-operator`, `calico-apiserver` and `calico-system`.
+  This affects users with roles `k8s_viewer` and `k8s_developer`.
+* Upgraded patch version of Calico CNI.
+* Upgraded minor version of Cinder CSI and Cloud Provider Openstack.
+
+Note: There is an outstanding issue during this upgrade where the cluster control plane may become
+unavailable for a short duration.
+
+To read more about performing a cluster upgrade, refer to :ref:`cluster-upgrade-upgrading`.
+
+
+.. _`release changelog for v1.29 since v1.28`: https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.29.md
+
+
+Version v1.27 to v1.28
+======================
+
+The upgrade path for clusters of version v1.27 and prior is build a new cluster and migrate your workloads.
+For more information see :ref:`cluster-upgrade-rebuild-vs-inplace`.
+
+There are several changes to be aware of when deploying your workloads onto a newly built v1.28 cluster that
+are different to the older v1.27 and below clusters.
+
+Kubernetes `release changelog for v1.28 since v1.27`_.
+
+In addition to the Kubernetes changes, CCKS has had a significant change in the driver used to create clusters
+and several aspects have been revised.
+
+The major differences are:
+
+* The operating system for control plane and worker nodes is replaced with Flatcar Container OS (was Fedora Core OS).
+* CCKS now runs several operations from within a management cluster. This is largely not visible to end users, but
+  includes cluster operations such as:
+
+  * Auto-scaling pods (if configured) run within the management cluster.
+  * Auto-healing events (if configured) are monitored and actions taken from within the management cluster.
+  * Reconciliation loops within the management cluster keep resources in the desired state.
+    This means temporary failures are re-tried so cluster operations succeed more often, and
+    some cluster resources are re-created if they are inadvertently deleted.
+* Heat Stacks are no longer created in the customer project (in fact, they aren't created anywhere)
+* Customer SSH Keypairs are no longer placed on all nodes.
+
+As with all upgrades you are advised to test this in a non-production environment, and ensure all workloads and
+operations remain functional for your use-case.
+
+
+.. _`release changelog for v1.28 since v1.27`: https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.28.md
+
+
+Version 1.26 and below
+======================
+
+The upgrade path for clusters of version v1.27 and prior is build a new cluster and migrate your workloads.
+
+For more information see :ref:`cluster-upgrade-rebuild-vs-inplace`.
+
+**********************
+Kubernetes Versioning
+**********************
 
 Kubernetes versions follow `Semantic Versioning`_ terminology.
 Versions are expressed as ``x.y.z``, where ``x`` is the major version, ``y`` is the minor version
@@ -97,6 +173,9 @@ example:
 
   kubernetes-v1.28.9-20240416
 
+  Here, the Kubernetes version is v1.28.9 (Major version 1, Minor version 28 and Patch version 9).
+  The template creation date is 16th April 2024.
+
 The Cluster Template name contains the specific Kubernetes semantic version,
 and a date in ``YYYYMMDD`` format which represents the release date of the template on Catalyst Cloud.
 
@@ -109,8 +188,9 @@ For more information, see `Kubernetes Releases`_.
 .. _`Semantic Versioning`: https://semver.org
 .. _`Kubernetes Releases`: https://kubernetes.io/releases
 
+**********************************
 Kubernetes Versions Support Policy
-==================================
+**********************************
 
 Catalyst Cloud Kubernetes Service supports at least **3** minor versions.
 
@@ -166,8 +246,8 @@ Catalyst Cloud Kubernetes Service in the web interface as well as on the command
   | dafe4576-8de0-4024-a12a-1bc5197b474f | kubernetes-v1.28.9-20240416       | None                                                                            |
   +--------------------------------------+-----------------------------------+---------------------------------------------------------------------------------+
 
-Upgrading Kubernetes Version
-============================
+Upgrading Kubernetes Versions
+=============================
 
 When upgrading a cluster to a new version, skipping minor versions is **unsupported**.
 
