@@ -26,7 +26,7 @@ Prerequisites
 
 Before we get started, we need to make sure all of our networking is set up
 in the correct region (Porirua). To check this, log onto the Catalyst Cloud
-dashboard and navigate to the region tab [screenshot].
+dashboard and navigate to the region tab.
 
 Select nz-por-1 and check to make sure there is a router and network set up in this
 region. If you have never used Catalyst Cloud before, you will need to set these up.
