@@ -104,3 +104,5 @@ Other Tutorials
    tutorials/other/deploying-rocketchat-on-catalyst-cloud
    tutorials/other/deploying-matrixchat-on-catalyst-cloud
    tutorials/other/deploying-nextcloud
+   tutorials/other/gallagher-command-centre
+
