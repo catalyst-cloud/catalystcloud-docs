@@ -23,6 +23,13 @@ When each node is deleted, the following actions take place:
 2. **Drain**: All workloads are evicted from the node.
 3. **Delete**: The node is removed from the cluster and deleted.
 
+
+.. _cluster-upgrade-rebuild-vs-inplace:
+
+******************************
+Rebuilding vs in-place upgrade
+******************************
+
 .. note::
 
   Cluster upgrades are not supported for clusters running Kubernetes 1.27 and below.
@@ -30,10 +37,6 @@ When each node is deleted, the following actions take place:
   Please build a replacement cluster running on the latest available version.
   Once this has been done, you will be able to use the cluster upgrade API
   for future upgrades.
-
-******************************
-Rebuilding vs in-place upgrade
-******************************
 
 When you have a cluster running with Catalyst Cloud Kubernetes Service, you have two options for
 upgrading:
@@ -78,6 +81,8 @@ applications. To do so, the best practices below should be followed:
    shutdown, or alternatively a ``preStop`` hook should be defined.
 
 .. _`pod disruption budget`: https://kubernetes.io/docs/concepts/workloads/pods/disruptions
+
+.. _cluster-upgrade-upgrading:
 
 *******************
 Upgrading a cluster

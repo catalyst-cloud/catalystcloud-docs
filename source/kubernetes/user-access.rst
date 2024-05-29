@@ -78,12 +78,15 @@ to control access to Kubernetes clusters.
      - ``k8s_developer``
      - Privileged users with restricted rights.
        Kubernetes CRUD operation access is granted to any namespace
-       other than the admin (``kube-system``) namespace.
+       other than the managed (``kube-system``, ``openstack-system``,
+       ``tigera-operator``, ``calico-apiserver`` and ``calico-system``)
+       namespaces.
    * - Kubernetes Viewer
      - ``k8s_viewer``
      - Non-privileged users able to perform read actions in a
        Catalyst Cloud Kubernetes Service cluster.
-       Has read-only access to all namespaces, excluding the admin namespace.
+       Has read-only access to all namespaces, excluding the managed
+       namespaces.
 
 Inviting users with assigned roles
 ==================================
