@@ -1,3 +1,5 @@
+.. _first_instance_windows:
+
 ########################################
 Windows instance using the web interface
 ########################################
