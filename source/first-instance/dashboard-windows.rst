@@ -4,7 +4,6 @@
 Windows instance using the web interface
 ########################################
 
-.. _first-instance-windows:
 
 Log in to the dashboard at https://dashboard.catalystcloud.nz/
 

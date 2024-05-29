@@ -40,7 +40,7 @@ Creating an instance to house our command centre
 ================================================
 
 Next, you will need to spin up a Windows VM in the cloud. There is a detailed “how to”
-for this, which you can find here: :ref:`first-instance-windows`. To run Gallagher Command
+for this, which you can find here: :ref:`first_instance_windows`. To run Gallagher Command
 Centre, you will need to simply make sure you are running the appropriate
 version of Windows for your Gallagher installation, and that you select the right size for
 your instance, as you will need to make sure you have enough CPU and RAM to run your
