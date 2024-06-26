@@ -64,7 +64,7 @@ It does not show patch versions, as all patch versions for a supported minor ver
      - Expected 2025-02-28
    * - ``1.30``
      - In development
-     - Expected 2024-07-15
+     - Expected 2024-09-02
      - Expected 2025-06-28
 
 
