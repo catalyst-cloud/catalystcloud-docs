@@ -72,34 +72,39 @@ Available cluster labels
      - ``true``
      - ``true`` or ``false``
      - Install the Kubernetes Dashboard into the cluster.
-   * - ``monitoring_enabled``
+   * - ``boot_volume_size``
+     - Integer
+     - ``20``
+     - Whole numbers greater than 0.
+     - The size (in GiB) to create the boot volume for Control Plane and Worker nodes.
+
+       Currently, this is the only disk attached to nodes.
+   * - ``boot_volume_type``
+     - Enumeration
+     - `b1.sr-r3-nvme-1000`
+     - See :ref:`block-storage-volume-tiers` for a list of volume type names.
+     - The Block Storage volume type name to use for the boot volume.
+   * - ``auto_scaling_enabled``
      - Boolean
      - ``false``
      - ``true`` or ``false``
-     - Deploy a Prometheus monitoring stack into the cluster.
-..    * - ``auto_scaling_enabled``
-..      - Boolean
-..      - ``false``
-..      - ``true`` or ``false``
-..      - Enable cluster worker node auto-scaling.
+     - Enable cluster worker node auto-scaling.
 
-..        When set to ``true``, ``min_node_count`` and ``max_node_count``
-..        must also be set.
-..    * - ``min_node_count``
-..      - Integer
-..      - ``null``
-..      - Greater than 0
-..      - Minimum number of worker nodes for auto scaling.
+       When set to ``true``, ``min_node_count`` and ``max_node_count`` must also be set.
+   * - ``min_node_count``
+     - Integer
+     - ``null``
+     - Greater than 0
+     - Minimum number of worker nodes for auto scaling.
 
-..        This value is required if ``auto_scaling_enabled`` is ``true``.
-..    * - ``max_node_count``
-..      - Integer
-..      - ``null``
-..      - Greater than ``min_node_count``
-..      - Maximum number of worker nodes to scale out to,
-..        if auto scaling is enabled.
+       This value is required if ``auto_scaling_enabled`` is ``true``.
+   * - ``max_node_count``
+     - Integer
+     - ``null``
+     - Greater than ``min_node_count``
+     - Maximum number of worker nodes to scale out to, if auto scaling is enabled.
 
-..        This value is required if ``auto_scaling_enabled`` is ``true``.
+       This value is required if ``auto_scaling_enabled`` is ``true``.
 
 Applying labels when creating a cluster
 =======================================
