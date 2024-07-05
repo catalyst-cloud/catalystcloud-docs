@@ -105,6 +105,29 @@ Available cluster labels
      - Maximum number of worker nodes to scale out to, if auto scaling is enabled.
 
        This value is required if ``auto_scaling_enabled`` is ``true``.
+   * - ``auto_healing_enabled``
+     - Boolean
+     - ``true``
+     - ``true`` or ``false``
+     - Enable auto-healing on control plane and worker nodes.
+
+       With auto-healing enabled, if nodes become ``NotReady`` for an extended duration they will be
+       replaced.
+
+       Note: Control plane machines will only be remediated one at a time. Worker nodes will not be remediated
+       if 40% are considered unhealthy, preventing some cascading failures.
+
+   * - ``keystone_auth_enabled``
+     - Boolean
+     - ``true``
+     - ``true`` or ``false``
+     - With this option enabled, a deployment will be installed into your cluster allowing the use
+       of Role-Based Access Control with Catalyst Cloud's authentication system.
+
+       For more information see :ref:`k8s-rbac-roles`.
+
+       With this option disabled, the :ref:`admin kubeconfig<retrieving-admin-kubeconfig>` is still available as well as `Kubernetes API Access Control <https://kubernetes.io/docs/reference/access-authn-authz/>`_.
+
 
 Applying labels when creating a cluster
 =======================================
