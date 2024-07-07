@@ -75,34 +75,34 @@ Available cluster labels
    * - ``boot_volume_size``
      - Integer
      - ``20``
-     - Whole numbers greater than 0.
+     - Greater than 0
      - The size (in GiB) to create the boot volume for Control Plane and Worker nodes.
 
        Currently, this is the only disk attached to nodes.
    * - ``boot_volume_type``
      - Enumeration
-     - `b1.sr-r3-nvme-1000`
-     - See :ref:`block-storage-volume-tiers` for a list of volume type names.
+     - ``b1.sr-r3-nvme-1000``
+     - See :ref:`block-storage-volume-tiers` for a list of volume type names
      - The Block Storage volume type name to use for the boot volume.
    * - ``auto_scaling_enabled``
      - Boolean
      - ``false``
      - ``true`` or ``false``
-     - Enable cluster worker node auto-scaling.
+     - Enable Worker node auto scaling in the cluster.
 
        When set to ``true``, ``min_node_count`` and ``max_node_count`` must also be set.
    * - ``min_node_count``
      - Integer
      - ``null``
      - Greater than 0
-     - Minimum number of worker nodes for auto scaling.
+     - Minimum number of Worker nodes for auto scaling.
 
        This value is required if ``auto_scaling_enabled`` is ``true``.
    * - ``max_node_count``
      - Integer
      - ``null``
      - Greater than ``min_node_count``
-     - Maximum number of worker nodes to scale out to, if auto scaling is enabled.
+     - Maximum number of Worker nodes to scale out to, if auto scaling is enabled.
 
        This value is required if ``auto_scaling_enabled`` is ``true``.
 
