@@ -49,10 +49,10 @@ three options for IOPS limits.
      - NVMe
      - Single-site
      - 1000
-   * - b1.sr-r3-nvme-2000
+   * - b1.sr-r3-nvme-2500
      - NVMe
      - Single-site
-     - 2000
+     - 2500
    * - b1.sr-r3-nvme-5000
      - NVMe
      - Single-site
