@@ -390,9 +390,9 @@ Finally we need the IP address for the Kubernetes API endpoint
 
       Edit the kubeconfig file (named `config` by default), and under `clusters/0/cluster`:
 
-      1. Set the server address to `127.0.0.1:6443`
-      2. Add `insecure-skip-tls-verify: true`
-      3. (optional) Remove `certificate-authority-data`.
+      1. Set the server address to `127.0.0.1:6443`.
+      2. Add `insecure-skip-tls-verify: true`.
+      3. Remove `certificate-authority-data`.
 
       Example:
 
