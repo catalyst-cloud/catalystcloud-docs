@@ -31,7 +31,7 @@ If you're using a major Linux distribution, you should be able to find a
 pre-compiled package in the repositories. If not, then a tar file is available
 at `Duplicity`_.
 
-.. _Duplicity: http://duplicity.nongnu.org/
+.. _Duplicity: https://duplicity.gitlab.io/
 
 .. code-block:: bash
 

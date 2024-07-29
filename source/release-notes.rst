@@ -35,3 +35,4 @@ Table of Contents:
   release-notes/release_2024-02-19.rst
   release-notes/release_2024-03-18.rst
   release-notes/release_2024-04-18.rst
+  release-notes/release_2024-05-27.rst
