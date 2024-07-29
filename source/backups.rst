@@ -17,7 +17,7 @@ The main method of backing up your instances will be through the in built
 backup commands using Openstack. Alternatively, we also discuss ways that you
 can use `Duplicity`_ to create backups as well.
 
-.. _Duplicity: http://duplicity.nongnu.org/
+.. _Duplicity: https://duplicity.gitlab.io/
 
 The main distinction between the two is that the default Openstack backup
 creates new volume resource that holds a copy of your data from the point

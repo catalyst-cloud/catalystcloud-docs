@@ -456,15 +456,10 @@ This section shows how to manually resize an existing cluster using the Catalyst
 
 .. note::
 
-  Catalyst Cloud Kubernetes Service does not support auto-scaling
-  of worker nodes in clusters running Kubernetes 1.28 and above at this time.
+   When using **cluster auto-scaling**, you instead set a minimum and maximum node
+   count, and the auto scaler will perform the resize actions within the provided bounds.
 
-.. TODO(callumdickinson): When auto-scaling is re-enabled, replace the note with the following:
-
-..   When using **cluster auto-scaling**, you instead set a minimum and maximum node
-..   count, and the auto scaler will perform the resize actions within the provided bounds.
-
-..   For more information, please refer to :ref:`auto-scaling`.
+   For more information, please refer to :ref:`auto-scaling`.
 
 Growing or shrinking a cluster
 ==============================
