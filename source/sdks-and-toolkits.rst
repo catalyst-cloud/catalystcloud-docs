@@ -26,6 +26,7 @@ available to you, should you choose.
 .. toctree::
    :maxdepth: 1
 
+   sdks-and-toolkits/cli
    sdks-and-toolkits/linux-mac-cli
    sdks-and-toolkits/windows-cli
    sdks-and-toolkits/sdks
