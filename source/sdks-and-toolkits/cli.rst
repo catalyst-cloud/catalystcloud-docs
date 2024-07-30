@@ -143,7 +143,7 @@ Python 3.8 or later is required (available from Ubuntu 20.04 LTS onwards).
 
           .. image:: assets/windows-installer-step4.png
 
-          Now open a PowerShell or Command Prompt window, and run the following
+          Now open a PowerShell window, and run the following
           command to check that the ``python`` command is usable.
 
           .. code-block:: powershell
@@ -159,8 +159,7 @@ Python 3.8 or later is required (available from Ubuntu 20.04 LTS onwards).
           Python can be automatically installed using the
           `Scoop <https://scoop.sh>`_ command-line installer.
 
-          Once Scoop is installed, open PowerShell or a Command Prompt
-          and run the following command to install Python:
+          Once Scoop is installed, open PowerShell and run the following command to install Python:
 
           .. code-block:: powershell
 
@@ -224,7 +223,7 @@ using the correct versions.
   easier and quicker to get started with Catalyst Cloud.
 
   The standard OpenStack CLI packages can be installed and used
-  without installing Catalyst Cloud API Client, as documented below.
+  without installing the Catalyst Cloud API Client, as documented below.
 
 .. _cli-installation-procedure:
 
@@ -234,13 +233,13 @@ Procedure
 There are many ways to install the tools for using Catalyst Cloud on the command line,
 depending on your use case.
 
-Pick your preferred package to install, and installation method, and follow the documented steps.
+Pick your preferred package and installation method, and follow the documented steps.
 
 .. tabs::
 
   .. group-tab:: Catalyst Cloud API Client
 
-    Catalyst Cloud API Client is a standard Python package available on PyPI,
+    The Catalyst Cloud API Client is a standard Python package available on PyPI,
     and can be installed using one of the following methods.
 
     .. tabs::
@@ -251,7 +250,7 @@ Pick your preferred package to install, and installation method, and follow the 
         to your local user environment, while keeping the packages themselves
         in isolated environments to keep your system Python clean.
 
-        To install Catalyst Cloud API Client using pipx, run the following command:
+        To install the Catalyst Cloud API Client using pipx, run the following command:
 
         .. code-block:: bash
 
@@ -284,7 +283,7 @@ Pick your preferred package to install, and installation method, and follow the 
           $ openstack --version
           openstack 6.0.1
 
-        To update Catalyst Cloud API Client to the latest version,
+        To update the Catalyst Cloud API Client to the latest version,
         simply run ``pipx upgrade`` to update the package and
         all of its dependencies.
 
@@ -294,14 +293,14 @@ Pick your preferred package to install, and installation method, and follow the 
 
       .. group-tab:: pip
 
-        To install Catalyst Cloud API Client using pip, we need to create and activate
+        To install the Catalyst Cloud API Client using pip, we need to create and activate
         a **virtual environment** to install packages to.
 
         .. include:: cli/virtualenv.rst
 
-        We can now install Catalyst Cloud API Client into the virtual environment.
+        We can now install the Catalyst Cloud API Client into the virtual environment.
 
-        To install Catalyst Cloud API Client using pip, simply run the following command:
+        To install the package, run the following command:
 
         .. code-block:: bash
 
@@ -325,9 +324,9 @@ Pick your preferred package to install, and installation method, and follow the 
           Virtual environments are isolated from your user's runtime environment.
 
           When opening a new shell, you will need to activate the virtual environment
-          again to use Catalyst Cloud API Client.
+          again to use the Catalyst Cloud API Client.
 
-        To update Catalyst Cloud API Client to the latest version,
+        To update the Catalyst Cloud API Client to the latest version,
         run pip again with the ``--upgrade`` option to
         update the package and all of its dependencies.
 
@@ -337,14 +336,13 @@ Pick your preferred package to install, and installation method, and follow the 
 
   .. group-tab:: OpenStack CLI
 
-    While we recommend using :ref:`Catalyst Cloud API Client <cli-catalystcloud-client>`
+    While we recommend using the :ref:`Catalyst Cloud API Client <cli-catalystcloud-client>`
     to install the required CLI commands for interacting with Catalyst Cloud,
     it is not required.
 
     The individual OpenStack API client packages can be installed directly.
     This allows you to only install the packages required for the services
     you wish to use.
-
     For more information on the client packages required for specific services,
     refer to `Available Commands`_ in the Catalyst Cloud API Client documentation.
 
@@ -385,3 +383,7 @@ Pick your preferred package to install, and installation method, and follow the 
 
           When opening a new shell, you will need to activate the virtual environment
           again to use the OpenStack CLI.
+
+*************
+Configuration
+*************
