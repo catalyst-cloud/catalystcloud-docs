@@ -108,5 +108,5 @@ For more information on virtual environments, refer to the Python tutorial on
 
     .. code-block:: powershell
 
-      (catalystcloud-cli) > where python
+      (catalystcloud-cli) > (Get-Command python).Path
       ...\catalystcloud-cli\Scripts\python.exe
