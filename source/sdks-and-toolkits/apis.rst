@@ -43,125 +43,143 @@ endpoints.
 From the command line tools, you can run ``openstack catalog list`` to list the
 services and API endpoints of the current region.
 
-Endpoints for “nz-por-1”
-========================
+Endpoints for ``nz-por-1``
+==========================
 
-+-----------------+-------------------------------------------------------------------------+
-| Service         | Endpoint                                                                |
-+=================+=========================================================================+
-| alarming        | https://api.nz-por-1.catalystcloud.io:8042                              |
-+-----------------+-------------------------------------------------------------------------+
-| cloudformation  | https://api.nz-por-1.catalystcloud.io:8000/v1/                          |
-+-----------------+-------------------------------------------------------------------------+
-| compute         | https://api.nz-por-1.catalystcloud.io:8774/v2.1                         |
-+-----------------+-------------------------------------------------------------------------+
-| computev3       | https://api.nz-por-1.catalystcloud.io:8774/v3                           |
-+-----------------+-------------------------------------------------------------------------+
-| container infra | https://api.nz-por-1.catalystcloud.io:9511/v1                           |
-+-----------------+-------------------------------------------------------------------------+
-| database        | https://api.nz-por-1.catalystcloud.io:8779/v1.0/%projectid%             |
-+-----------------+-------------------------------------------------------------------------+
-| identity        | https://api.nz-por-1.catalystcloud.io:5000/                             |
-+-----------------+-------------------------------------------------------------------------+
-| image           | https://api.nz-por-1.catalystcloud.io:9292                              |
-+-----------------+-------------------------------------------------------------------------+
-| metering        | https://api.nz-por-1.catalystcloud.io:8777                              |
-+-----------------+-------------------------------------------------------------------------+
-| network         | https://api.nz-por-1.catalystcloud.io:9696/                             |
-+-----------------+-------------------------------------------------------------------------+
-| object-store    | https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_%projectid%|
-+-----------------+-------------------------------------------------------------------------+
-| orchestration   | https://api.nz-por-1.catalystcloud.io:8004/v1/%projectid%               |
-+-----------------+-------------------------------------------------------------------------+
-| ratingv2        | https://api.nz-por-1.catalystcloud.io:9999/                             |
-+-----------------+-------------------------------------------------------------------------+
-| s3              | https://object-storage.nz-por-1.catalystcloud.io/                       |
-+-----------------+-------------------------------------------------------------------------+
-| volume          | https://api.nz-por-1.catalystcloud.io:8776/v1/%projectid%               |
-+-----------------+-------------------------------------------------------------------------+
-| volumev2        | https://api.nz-por-1.catalystcloud.io:8776/v2/%projectid%               |
-+-----------------+-------------------------------------------------------------------------+
-| volumev3        | https://api.nz-por-1.catalystcloud.io:8776/v3/%projectid%               |
-+-----------------+-------------------------------------------------------------------------+
+.. list-table::
+   :header-rows: 1
 
-Endpoints for “nz_wlg_2”
-========================
+   * - Service Name
+     - Service Type
+     - Endpoint
+   * - Identity
+     - ``identity``
+     - ``https://api.nz-por-1.catalystcloud.io:5000``
+   * - Compute
+     - ``compute``
+     - ``https://api.nz-por-1.catalystcloud.io:8774/v2.1``
+   * - Compute
+     - ``computev3``
+     - ``https://api.nz-por-1.catalystcloud.io:8774/v3``
+   * - Networking
+     - ``network``
+     - ``https://api.nz-por-1.catalystcloud.io:9696/``
+   * - Load Balancer
+     - ``load-balancer``
+     - ``https://api.nz-por-1.catalystcloud.io:9876``
+   * - Block Storage
+     - ``volume``
+     - ``https://api.nz-por-1.catalystcloud.io:8776/v1/%project_id%``
+   * - Block Storage
+     - ``volumev2``
+     - ``https://api.nz-por-1.catalystcloud.io:8776/v2/%project_id%``
+   * - Block Storage
+     - ``volumev3``
+     - ``https://api.nz-por-1.catalystcloud.io:8776/v3/%project_id%``
+   * - Image
+     - ``image``
+     - ``https://api.nz-por-1.catalystcloud.io:9292``
+   * - Database
+     - ``database``
+     - ``https://api.nz-por-1.catalystcloud.io:8779/v1.0/%project_id%``
+   * - Orchestration
+     - ``orchestration``
+     - ``https://api.nz-por-1.catalystcloud.io:8004/v1/%project_id%``
+   * - Orchestration
+     - ``cloudformation``
+     - ``https://api.nz-por-1.catalystcloud.io:8000/v1/``
+   * - Kubernetes
+     - ``container-infra``
+     - ``https://api.nz-por-1.catalystcloud.io:9511/v1``
+   * - Object Storage
+     - ``object-store``
+     - ``https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_%project_id%``
+   * - Object Storage
+     - ``s3``
+     - ``https://object-storage.nz-por-1.catalystcloud.io:443``
+   * - Telemetry
+     - ``alarming``
+     - ``https://api.nz-por-1.catalystcloud.io:8042``
+   * - Billing
+     - ``ratingv2``
+     - ``https://api.nz-por-1.catalystcloud.io:9999``
 
-+-----------------+-------------------------------------------------------------------------+
-| Service         | Endpoint                                                                |
-+=================+=========================================================================+
-| alarming        | https://api.cloud.catalyst.net.nz:8042                                  |
-+-----------------+-------------------------------------------------------------------------+
-| cloudformation  | https://api.cloud.catalyst.net.nz:8000/v1/                              |
-+-----------------+-------------------------------------------------------------------------+
-| compute         | https://api.cloud.catalyst.net.nz:8774/v2.1                             |
-+-----------------+-------------------------------------------------------------------------+
-| computev3       | https://api.cloud.catalyst.net.nz:8774/v3                               |
-+-----------------+-------------------------------------------------------------------------+
-| container infra | https://api.cloud.catalyst.net.nz:9511/v1                               |
-+-----------------+-------------------------------------------------------------------------+
-| database        | https://api.cloud.catalyst.net.nz:8779/v1.0/%projectid%                 |
-+-----------------+-------------------------------------------------------------------------+
-| identity        | https://api.cloud.catalyst.net.nz:5000                                  |
-+-----------------+-------------------------------------------------------------------------+
-| image           | https://api.cloud.catalyst.net.nz:9292                                  |
-+-----------------+-------------------------------------------------------------------------+
-| metering        | https://api.cloud.catalyst.net.nz:8777                                  |
-+-----------------+-------------------------------------------------------------------------+
-| network         | https://api.cloud.catalyst.net.nz:9696/                                 |
-+-----------------+-------------------------------------------------------------------------+
-| object-store    | https://object-storage.nz-wlg-2.catalystcloud.io:443/v1/AUTH_%projectid%|
-+-----------------+-------------------------------------------------------------------------+
-| orchestration   | https://api.cloud.catalyst.net.nz:8004/v1/%projectid%                   |
-+-----------------+-------------------------------------------------------------------------+
-| ratingv2        | https://api.cloud.catalyst.net.nz:9999/                                 |
-+-----------------+-------------------------------------------------------------------------+
-| s3              | https://object-storage.nz-wlg-2.catalystcloud.io/                       |
-+-----------------+-------------------------------------------------------------------------+
-| volume          | https://api.cloud.catalyst.net.nz:8776/v1/%projectid%                   |
-+-----------------+-------------------------------------------------------------------------+
-| volumev2        | https://api.cloud.catalyst.net.nz:8776/v2/%projectid%                   |
-+-----------------+-------------------------------------------------------------------------+
-| volumev3        | https://api.cloud.catalyst.net.nz:8776/v3/%projectid%                   |
-+-----------------+-------------------------------------------------------------------------+
+Endpoints for ``nz-hlz-1``
+==========================
 
-Endpoints for “nz-hlz-1”
-========================
+.. list-table::
+   :header-rows: 1
 
-+-----------------+-------------------------------------------------------------------------+
-| Service         | Endpoint                                                                |
-+=================+=========================================================================+
-| alarming        | https://api.nz-hlz-1.catalystcloud.io:8042                              |
-+-----------------+-------------------------------------------------------------------------+
-| cloudformation  | https://api.nz-hlz-1.catalystcloud.io:8000/v1/                          |
-+-----------------+-------------------------------------------------------------------------+
-| compute         | https://api.nz-hlz-1.catalystcloud.io:8774/v2.1                         |
-+-----------------+-------------------------------------------------------------------------+
-| computev3       | https://api.nz-hlz-1.catalystcloud.io:8774/v3                           |
-+-----------------+-------------------------------------------------------------------------+
-| container infra | https://api.nz-hlz-1.catalystcloud.io:9511/v1                           |
-+-----------------+-------------------------------------------------------------------------+
-| database        | https://api.nz-hlz-1.catalystcloud.io:8779/v1.0/%projectid%             |
-+-----------------+-------------------------------------------------------------------------+
-| identity        | https://api.nz-hlz-1.catalystcloud.io:5000                              |
-+-----------------+-------------------------------------------------------------------------+
-| image           | https://api.nz-hlz-1.catalystcloud.io:9292                              |
-+-----------------+-------------------------------------------------------------------------+
-| metering        | https://api.nz-hlz-1.catalystcloud.io:8777                              |
-+-----------------+-------------------------------------------------------------------------+
-| network         | https://api.nz-hlz-1.catalystcloud.io:9696/                             |
-+-----------------+-------------------------------------------------------------------------+
-| object-store    | https://object-storage.nz-hlz-1.catalystcloud.io:443/v1/AUTH_%projectid%|
-+-----------------+-------------------------------------------------------------------------+
-| orchestration   | https://api.nz-hlz-1.catalystcloud.io:8004/v1/%projectid%               |
-+-----------------+-------------------------------------------------------------------------+
-| ratingv2        | https://api.nz-hlz-1.catalystcloud.io:9999/                             |
-+-----------------+-------------------------------------------------------------------------+
-| s3              | https://object-storage.nz-hlz-1.catalystcloud.io/                       |
-+-----------------+-------------------------------------------------------------------------+
-| volume          | https://api.nz-hlz-1.catalystcloud.io:8776/v1/%projectid%               |
-+-----------------+-------------------------------------------------------------------------+
-| volumev2        | https://api.nz-hlz-1.catalystcloud.io:8776/v2/%projectid%               |
-+-----------------+-------------------------------------------------------------------------+
-| volumev3        | https://api.nz-hlz-1.catalystcloud.io:8776/v3/%projectid%               |
-+-----------------+-------------------------------------------------------------------------+
+   * - Service Name
+     - Service Type
+     - Endpoint
+   * - Identity
+     - ``identity``
+     - ``https://api.nz-hlz-1.catalystcloud.io:5000``
+   * - Compute
+     - ``compute``
+     - ``https://api.nz-hlz-1.catalystcloud.io:8774/v2.1``
+   * - Compute
+     - ``computev3``
+     - ``https://api.nz-hlz-1.catalystcloud.io:8774/v3``
+   * - Networking
+     - ``network``
+     - ``https://api.nz-hlz-1.catalystcloud.io:9696/``
+   * - Load Balancer
+     - ``load-balancer``
+     - ``https://api.nz-hlz-1.catalystcloud.io:9876``
+   * - Block Storage
+     - ``volume``
+     - ``https://api.nz-hlz-1.catalystcloud.io:8776/v1/%project_id%``
+   * - Block Storage
+     - ``volumev2``
+     - ``https://api.nz-hlz-1.catalystcloud.io:8776/v2/%project_id%``
+   * - Block Storage
+     - ``volumev3``
+     - ``https://api.nz-hlz-1.catalystcloud.io:8776/v3/%project_id%``
+   * - Image
+     - ``image``
+     - ``https://api.nz-hlz-1.catalystcloud.io:9292``
+   * - Database
+     - ``database``
+     - ``https://api.nz-hlz-1.catalystcloud.io:8779/v1.0/%project_id%``
+   * - Orchestration
+     - ``orchestration``
+     - ``https://api.nz-hlz-1.catalystcloud.io:8004/v1/%project_id%``
+   * - Orchestration
+     - ``cloudformation``
+     - ``https://api.nz-hlz-1.catalystcloud.io:8000/v1/``
+   * - Kubernetes
+     - ``container-infra``
+     - ``https://api.nz-hlz-1.catalystcloud.io:9511/v1``
+   * - Object Storage
+     - ``object-store``
+     - ``https://object-storage.nz-hlz-1.catalystcloud.io:443/v1/AUTH_%project_id%``
+   * - Object Storage
+     - ``s3``
+     - ``https://object-storage.nz-hlz-1.catalystcloud.io:443``
+   * - Telemetry
+     - ``alarming``
+     - ``https://api.nz-hlz-1.catalystcloud.io:8042``
+   * - Billing
+     - ``ratingv2``
+     - ``https://api.nz-hlz-1.catalystcloud.io:9999``
+
+Endpoints for ``nz_wlg_2``
+==========================
+
+.. list-table::
+   :header-rows: 1
+
+   * - Service Name
+     - Service Type
+     - Endpoint
+   * - Identity
+     - ``identity``
+     - ``https://api.cloud.catalyst.net.nz:5000``
+   * - Object Storage
+     - ``object-store``
+     - ``https://object-storage.nz-wlg-2.catalystcloud.io:443/v1/AUTH_%project_id%``
+   * - Object Storage
+     - ``s3``
+     - ``https://object-storage.nz-wlg-2.catalystcloud.io:443``
