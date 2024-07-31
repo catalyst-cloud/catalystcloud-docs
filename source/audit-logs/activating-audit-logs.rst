@@ -15,12 +15,13 @@ Activating logs for your projects
 To get started using Audit logs, you will first need to activate the
 logging functionality for your projects.
 
-Prerequisites
-===============
+.. note::
 
-Before going further, you will need to ensure that you have :ref:`sourced an
-openRC file<source-rc-file>` for your command line so that you are able to
-perform the commands mentioned in the following example.
+  Before running the CLI commands documented below, make sure
+  you have the ``openstack`` command available in your environment,
+  and sourced the OpenRC file for your project.
+
+  For more information, please refer to the :ref:`cli` documentation.
 
 Creating an object storage container for your logs
 ==================================================

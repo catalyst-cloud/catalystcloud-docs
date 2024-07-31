@@ -62,10 +62,13 @@ Creating a volume using programmatic methods
 
 To create and attach a new volume, you can use one of the methods below:
 
-.. Note::
+.. note::
 
-  You must have :ref:`sourced an openrc file<source-rc-file>` before you can
-  use any of the following methods to create or attach a volume.
+  Before running the CLI commands documented below, make sure
+  you have the ``openstack`` command available in your environment,
+  and sourced the OpenRC file for your project.
+
+  For more information, please refer to the :ref:`cli` documentation.
 
 .. tabs::
 

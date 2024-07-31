@@ -40,7 +40,7 @@ This tutorial assumes a number of things:
 * You will be setting up a Ubuntu 14.04 instance
 * You will be using the ubuntu user
 * You will be letting the provider create an SSH keypair for you
-* You have sourced an openrc file, as described at :ref:`source-rc-file`
+* You have sourced an openrc file, as described at :ref:`cli-configuration`
 
 ******************
 Install the plugin
@@ -60,7 +60,7 @@ The next step is to create a ``Vagrantfile`` in the root of your repository:
 
 .. note::
 
- You are referencing environment variables in this configuration. Ensure you have followed the steps described at :ref:`source-rc-file`.
+ You are referencing environment variables in this configuration. Ensure you have followed the steps described at :ref:`cli-configuration`.
  Also note that the auth api has updated to v3. This Vagrantfile has been updated to use this version of the api. If your Vagrantfile has stopped working, compare it to the following. The changes are minor.
 
 .. code-block:: ruby
@@ -175,4 +175,3 @@ https://github.com/ggiamarchi/vagrant-openstack-provider. You may also find
 this `presentation`_ by the developer of the plugin useful.
 
 .. _presentation: https://www.openstack.org/videos/paris-2014/use-openstack-as-a-vagrant-provider
-
