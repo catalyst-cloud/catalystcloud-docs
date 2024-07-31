@@ -64,10 +64,13 @@ to hook these scripts into the process.
 Create a new volume copy
 ************************
 
-.. Note::
+.. note::
 
-  You must have :ref:`sourced an openrc file<source-rc-file>` before you can
-  use any of the command-line functions described here.
+  Before running the CLI commands documented below, make sure
+  you have the ``openstack`` command available in your environment,
+  and sourced the OpenRC file for your project.
+
+  For more information, please refer to the :ref:`cli` documentation.
 
 First, you need to identify the volume ID that you need to copy. This is done
 by retrieving the volumes attached to the instance you are cloning, then

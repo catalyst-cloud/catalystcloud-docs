@@ -84,10 +84,13 @@ such as stopping applications running inside the instance.
 Creating snapshots from the command-line
 ========================================
 
-.. Note::
+.. note::
 
-  You must have :ref:`sourced an openrc file<source-rc-file>` before you can
-  use any of the following methods to create a snapshot.
+  Before running the CLI commands documented below, make sure
+  you have the ``openstack`` command available in your environment,
+  and sourced the OpenRC file for your project.
+
+  For more information, please refer to the :ref:`cli` documentation.
 
 The following command will create a snapshot of a volume that is not
 current attached.
@@ -140,15 +143,16 @@ This will then create the new volume using the snapshot.
 Create volume using snapshot via command-line
 =============================================
 
-.. Note::
+.. note::
 
-  You must have :ref:`sourced an openrc file<source-rc-file>` before you can
-  use any of the following methods to create a volume from a snapshot.
+  Before running the CLI commands documented below, make sure
+  you have the ``openstack`` command available in your environment,
+  and sourced the OpenRC file for your project.
+
+  For more information, please refer to the :ref:`cli` documentation.
 
 The following command will create a volume using a snapshot with the
 default volume type:
 
 .. literalinclude:: _scripts/cli/create-vol-from-snap.sh
     :language: shell
-
-

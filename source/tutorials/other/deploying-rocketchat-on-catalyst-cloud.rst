@@ -11,7 +11,7 @@ configuration to a system automatically upon initialisation.
 This tutorial assumes the following:
 
 * You have installed the OpenStack CLI and sourced an OpenStack
-  RC file, as explained here - :ref:`source-rc-file`
+  RC file, as explained here - :ref:`cli`
 * A basic knowledge of Bash and YAML.
 * Have an SSH key already generated, preferably in :code:`/home/<user>/.ssh/`
 

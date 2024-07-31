@@ -36,15 +36,16 @@ must be allocated the following roles in the project:
   To interact with Kubernetes after your cluster is created,
   even Project Admins need to grant themselves the appropriate roles.
 
-  For more information, please refer to the :ref:`kubernetes-user-access` section of our kuberenetes documentation.
+  For more information, please refer to the
+  :ref:`Kubernetes User Access <kubernetes-user-access>` documentation.
 
-Ensuring your Quota is sufficient
+Ensuring your quota is sufficient
 =================================
 
-A small quota is sufficient to deploy the development cluster template if your
-project is empty. However, if you already have some resources allocated, you
-may want to increase your quota to ensure there is sufficient capacity
-available to deploy Kubernetes.
+A small quota is sufficient to deploy a cluster if your project is empty.
+However, if you already have some resources allocated, you may want to
+increase your quota to ensure there is sufficient capacity available
+to deploy Kubernetes.
 
 By default, Kubernetes templates allocate:
 
@@ -56,8 +57,8 @@ By default, Kubernetes templates allocate:
 * 3 security groups
 * 1 load balancer
 
-As a :ref:`project_admin_role` you can change your quota using the `Quota Management`_
-panel in the dashboard, under the Management section.
+As a :ref:`project_admin_role` you can request to change your quota
+using the `Quota Management`_ panel in the dashboard, under the Management section.
 
 .. _`Quota Management`: https://dashboard.catalystcloud.nz/management/quota/
 
@@ -71,8 +72,7 @@ dashboards to perform tasks, but some specific steps require use of command line
 
 Please make sure you have:
 
-* Installed the :ref:`Catalyst Cloud command line tools <sdks_and_toolkits>`, and sourced
-  the OpenRC file for your project in your terminal session.
+* Installed the Catalyst Cloud CLI tools. For more information, please refer to :ref:`cli`.
 * Downloaded and installed `kubectl <https://kubernetes.io/releases/download/#kubectl>`__,
   the Kubernetes command line client.
 
@@ -163,10 +163,6 @@ Interacting with Kubernetes
 Configuring ``kubectl``
 =======================
 
-.. Note::
-
-  Please ensure that you :ref:`source-rc-file` for your project before proceeding
-
 The `kubectl <https://kubernetes.io/docs/reference/kubectl/kubectl>`__ tool allows you
 to interact with your Catalyst Cloud Kubernetes cluster using the command line.
 
@@ -174,24 +170,20 @@ As the Kubernetes dashboard of our cluster is not directly accessible from the I
 we will use ``kubectl`` to gain access to the Kubernetes dashboard.
 
 First, ensure you have downloaded the **kubeconfig** file from the Catalyst Cloud
-dashboard using the **Download Kubeconfig** button.
+dashboard using the **Download Kubeconfig** button. Save the kubeconfig file
+to the Downloads folder in your home directory (if you'd like to save it somewhere
+else, replace ``.../Downloads`` in the documentation below with your chosen
+destination folder.)
 
-.. note::
-
-  Your browser may download the **kubeconfig** file to another location.
-  If you wish to download the **kubeconfig** file to a specific location
-  (and not the default location for your operating system), replace ``.../Downloads``
-  in the below file paths with your desired download location.
-
-The kubeconfig file contains the required metadata used to authenticate
-with the Kubernetes cluster.
+The next step is to configure ``kubectl`` to find the kubeconfig file,
+so it can look up how to connect to your cluster.
 
 .. tabs::
 
     .. group-tab:: Linux / macOS
 
-      In a command line terminal environment (such as ``bash``) export the ``KUBECONFIG``
-      environment variable, to configure ``kubectl`` to connect to your cluster.
+      In a command line terminal environment, export the ``KUBECONFIG`` environment variable.
+      ``kubectl`` uses this environment variable, if set.
 
       .. code-block:: bash
 
@@ -204,32 +196,24 @@ with the Kubernetes cluster.
 
         mkdir -p "${HOME}/.kube" && mv "${HOME}/Downloads/quickstart1_kubeconfig" "${HOME}/.kube/config"
 
+    .. group-tab:: Windows
 
-    .. group-tab:: Windows (PowerShell)
-
-      In a PowerShell environment, define the ``KUBECONFIG`` environment variable to configure ``kubectl``
-      to connect to your cluster.
+      In a PowerShell environment, define the ``KUBECONFIG`` environment variable.
+      ``kubectl`` uses this environment variable, if set.
 
       .. code-block:: powershell
 
         $Env:KUBECONFIG = $env:USERPROFILE\Downloads\quickstart1_kubeconfig
-
-    .. group-tab:: Windows (Command Prompt)
-
-      Define the ``KUBECONFIG`` environment variable, to configure ``kubectl``
-      to connect to your cluster using the downloaded file.
-
-      .. code-block:: bat
-
-        set KUBECONFIG=%homedrive%%homepath%\Downloads\quickstart1_kubeconfig
 
 .. note::
 
   The **kubeconfig** file uses the Catalyst Cloud authentication token in your terminal's environment
   (provided by the OpenRC file) to authenticate with the Kubernetes API.
 
-  To be able to use ``kubectl``, your OpenRC file for the project must be sourced,
-  **and** the ``KUBECONFIG`` environment variable must be defined.
+  Please make sure you have sourced the OpenRC file for your project
+  in your open terminal session.
+
+  For more information, please refer to :ref:`CLI Configuration <cli-configuration>`.
 
 Once we have the CLI configured, we can then begin to use ``kubectl`` to interact with the
 cluster.
@@ -263,27 +247,16 @@ Now that we have ``kubectl`` available, we can access the Kubernetes dashboard.
 
         echo $OS_TOKEN
 
-    .. group-tab:: Windows (PowerShell)
+    .. group-tab:: Windows
 
-      In the currently open terminal (with your OpenRC file sourced), run the following command
-      to fetch the authentication token from the environment, and copy it to the clipboard.
+      In the currently open PowerShell terminal (with your OpenRC file sourced), run the following
+      command to fetch the authentication token from the environment, and copy it to the clipboard.
 
       We will use this once the dashboard is open.
 
       .. code-block:: powershell
 
         echo $Env:OS_TOKEN
-
-    .. group-tab:: Windows (Command Prompt)
-
-      In the currently open terminal (with your OpenRC file sourced), run the following command
-      to fetch the authentication token from the environment, and copy it to the clipboard.
-
-      We will use this once the dashboard is open.
-
-      .. code-block:: bat
-
-        echo %OS_TOKEN%
 
 Now run the following command in the same terminal window:
 

@@ -4,7 +4,20 @@
 Catalyst Cloud CLI
 ##################
 
-.. _`Catalyst Cloud API Client`: https://pypi.org/project/catalystcloud-client
+This guide documents how to install, configure and use the command line interface (CLI)
+tools for interacting with Catalyst Cloud APIs.
+
+Catalyst Cloud supports a rich command line interface based around the
+`OpenStack Client <https://docs.openstack.org/python-openstackclient/latest/index.html>`_,
+an extensible command line interface for OpenStack-based clouds,
+along with a number of plugins for interacting with our numerous
+cloud services. The command line tools can be used on Linux, macOS and Windows.
+
+We provide a convenience package for installing OpenStack Client
+and the numerous plugins that provide access to our services called
+the :ref:`cli-installation-catalystcloud-client`.
+Using this package in the instructions below should make it easier
+to get your Catalyst Cloud CLI environment up and running.
 
 .. _cli-setup-python:
 
@@ -15,168 +28,52 @@ Setup Python
 The Catalyst Cloud CLI tools are written in Python, so before they can be installed,
 a working Python environment must be available on your system.
 
-To install the CLI tools for Catalyst Cloud, it is recommended to use
+It is recommended to install
 `a supported version of Python <https://devguide.python.org/versions>`_.
-When using the :ref:`Catalyst Cloud API Client <cli-catalystcloud-client>`,
+When using the :ref:`Catalyst Cloud API Client <cli-installation-catalystcloud-client>`,
 Python 3.8 or later is required (available from Ubuntu 20.04 LTS onwards).
 
 .. tabs::
 
   .. group-tab:: Debian / Ubuntu
 
-      Run the following commands to install Python on your system, and additional packages
-      required for managing virtual environments:
-
-      .. code-block:: bash
-
-        sudo apt-get update
-        sudo apt-get install -y python3 python3-dev python3-venv
-
-      Now run the following command to check that the ``python3`` command is usable.
-
-      .. code-block:: bash
-
-        python3 --version
-
-      If the installed Python version is printed, Python is working correctly.
-
-      .. code-block:: console
-
-        $ python3 --version
-        Python 3.12.4
+    .. include:: cli/python-debian.rst
 
   .. group-tab:: Fedora / Red Hat
 
-      Python is usually pre-installed on standard installations of Fedora
-      and Red Hat Enterprise Linux.
-
-      If it is not already installed, run the following command to install it:
-
-      .. code-block:: bash
-
-        sudo dnf install -y python3
-
-      Now run the following command to check that the ``python3`` command is usable.
-
-      .. code-block:: bash
-
-        python3 --version
-
-      If the installed Python version is printed, Python is working correctly.
-
-      .. code-block:: console
-
-        $ python3 --version
-        Python 3.12.4
+    .. include:: cli/python-redhat.rst
 
   .. group-tab:: macOS
 
-      While `Python for macOS <https://brew.sh/>`_ can be installed directly
-      from the website, we recommend using a package manager such as
-      `Homebrew <https://brew.sh>`_.
-
-      Once Homebrew is installed, just run the following command to install Python:
-
-      .. code-block:: bash
-
-        brew install python
-
-      Now run the following command to check that the ``python`` command is usable.
-
-      .. code-block:: bash
-
-        python --version
-
-      If the installed Python version is printed, Python is working correctly.
-
-      .. code-block:: console
-
-        $ python --version
-        Python 3.12.4
+    .. include:: cli/python-macos.rst
 
   .. group-tab:: Windows
 
-      .. tabs::
+    .. include:: cli/python-windows.rst
 
-        .. group-tab:: Installer
+.. _cli-build-tools:
 
-          First, download the latest version of
-          `Python for Windows <https://www.python.org/downloads/windows>`_
-          for your architecture (which will be **64-bit** for a regular
-          PC, or **ARM64** for an ARM-based PC).
+*****************
+Setup Build Tools
+*****************
 
-          .. image:: assets/windows-installer-download.png
+.. tabs::
 
-          Run the downloaded file to start the installation process.
+  .. group-tab:: Debian / Ubuntu
 
-          Make sure the "Use admin privileges when installing py.exe"
-          and "Add python.exe to PATH" are checked, and click
-          **Customize installation** to change some settings before
-          installation starts.
+    .. include:: cli/build-debian.rst
 
-          .. image:: assets/windows-installer-step1.png
+  .. group-tab:: Fedora / Red Hat
 
-          In the **Optional Features** section, we recommend
-          selecting all available options to install a fully featured
-          Python environment.
+    .. include:: cli/build-redhat.rst
 
-          If you would like a minimal installation, make sure that
-          "pip" is checked at a minimum. If "py" is selected, make sure
-          that "for all users (requires admin permissions)" is also checked.
+  .. group-tab:: macOS
 
-          Click **Next** to continue installation.
+    .. include:: cli/build-macos.rst
 
-          .. image:: assets/windows-installer-step2.png
+  .. group-tab:: Windows
 
-          In **Advanced Options**, make sure "Install Python for all users"
-          is checked.
-          The other options here can be changed according to your needs.
-          If unsure, leave them set to their defaults.
-
-          Now we are ready to install Python. Click **Install** to start.
-
-          .. image:: assets/windows-installer-step3.png
-
-          Once the installation is complete, you can simply click **Close**.
-
-          "Disable path length limit" is optional.
-
-          .. image:: assets/windows-installer-step4.png
-
-          Now open a PowerShell window, and run the following
-          command to check that the ``python`` command is usable.
-
-          .. code-block:: powershell
-
-            python --version
-
-          If the installed Python version is printed, Python is working correctly.
-
-          .. image:: assets/windows-installer-check.png
-
-        .. group-tab:: Scoop
-
-          Python can be automatically installed using the
-          `Scoop <https://scoop.sh>`_ command-line installer.
-
-          Once Scoop is installed, open PowerShell and run the following command to install Python:
-
-          .. code-block:: powershell
-
-            scoop install python
-
-          Now run the following command to check that the ``python`` command is usable.
-
-          .. code-block:: powershell
-
-            python --version
-
-          If the installed Python version is printed, Python is working correctly.
-
-          .. code-block:: powershell
-
-            > python --version
-            Python 3.12.4
+    .. include:: cli/build-windows.rst
 
 .. _cli-installation:
 
@@ -184,36 +81,22 @@ Python 3.8 or later is required (available from Ubuntu 20.04 LTS onwards).
 Installation
 ************
 
-Now that Python is installed and working, we can install the CLI tools
-used to interact with Catalyst Cloud.
+Now that Python and the required build tools are installed and working,
+we can install the CLI tools used to interact with Catalyst Cloud.
 
 .. _cli-installation-catalystcloud-client:
 
 Catalyst Cloud API Client
 =========================
 
-We now provide a package called the `Catalyst Cloud API Client`_ that makes it easy
-to install the packages for interacting with Catalyst Cloud in a command line environment.
+We now provide a package called the
+`Catalyst Cloud API Client <https://pypi.org/project/catalystcloud-client>`_
+that makes it easy to install the packages for interacting with Catalyst Cloud
+in a command line environment.
 
-Just install the ``catalystcloud-client`` package:
-
-.. tabs::
-
-  .. group-tab:: pipx
-
-    .. code-block:: bash
-
-      pipx install catalystcloud-client --include-deps
-
-  .. group-tab:: pip
-
-    .. code-block:: bash
-
-      pip install catalystcloud-client
-
-And the ``openstack`` command will become available, with all of the
-API client packages required for our cloud services automatically installed
-using the correct versions.
+Just install the ``catalystcloud-client`` package and the ``openstack`` command
+will become available, with all of the API client packages required for our
+cloud services automatically installed using the correct versions.
 
 .. note::
 
@@ -222,7 +105,7 @@ using the correct versions.
   It is a convenience option we provide for our customers to make it
   easier and quicker to get started with Catalyst Cloud.
 
-  The standard OpenStack CLI packages can be installed and used
+  The standard OpenStack Client packages can be installed and used
   without installing the Catalyst Cloud API Client, as documented below.
 
 .. _cli-installation-procedure:
@@ -334,32 +217,31 @@ Pick your preferred package and installation method, and follow the documented s
 
           python -m pip install --upgrade catalystcloud-client
 
-  .. group-tab:: OpenStack CLI
+  .. group-tab:: OpenStack Client
 
-    While we recommend using the :ref:`Catalyst Cloud API Client <cli-catalystcloud-client>`
-    to install the required CLI commands for interacting with Catalyst Cloud,
+    While we recommend using the Catalyst Cloud API Client to install
+    the required CLI commands for interacting with Catalyst Cloud,
     it is not required.
 
-    The individual OpenStack API client packages can be installed directly.
-    This allows you to only install the packages required for the services
-    you wish to use.
-    For more information on the client packages required for specific services,
-    refer to `Available Commands`_ in the Catalyst Cloud API Client documentation.
+    The individual OpenStack Client packages can be installed directly.
+    This allows you to, for example, only install the packages required
+    for the services you wish to use, which is useful for container image builds.
 
-    .. _`Available Commands`: https://github.com/catalyst-cloud/catalystcloud-client/blob/main/README.md#available-commands
+    For more information on the client packages required for specific services,
+    please refer to :ref:`cli-available-commands`.
 
     .. tabs::
 
       .. group-tab:: pip
 
-        To install the OpenStack CLI using pip, we need to create and activate
+        To install the OpenStack Client using pip, we need to create and activate
         a **virtual environment** to install packages to.
 
         .. include:: cli/virtualenv.rst
 
-        We can now install the OpenStack CLI into the virtual environment.
+        We can now install the OpenStack Client into the virtual environment.
 
-        To install the OpenStack CLI run the following command:
+        To install the packages, run the following command:
 
         .. code-block:: bash
 
@@ -381,9 +263,223 @@ Pick your preferred package and installation method, and follow the documented s
 
           Virtual environments are isolated from your user's runtime environment.
 
-          When opening a new shell, you will need to activate the virtual environment
-          again to use the OpenStack CLI.
+          When opening a new terminal, you will need to activate the virtual environment
+          again to use the OpenStack Client.
+
+.. _cli-configuration:
 
 *************
 Configuration
 *************
+
+The ``openstack`` command, and other applications that communicate
+with Catalyst Cloud such as Terraform and Ansible, use environment
+variables containing your user and project's details for authenticating
+with Catalyst Cloud.
+
+We provide **OpenRC files** which, upon authenticating with your password
+(and MFA verification code if required), will automatically configure
+these variables in your terminal session, which will allow you to use
+these applications to interact with Catalyst Cloud.
+
+.. tabs::
+
+  .. group-tab:: Debian / Ubuntu
+
+    .. include:: cli/openrc-unix.rst
+
+  .. group-tab:: Fedora / Red Hat
+
+    .. include:: cli/openrc-unix.rst
+
+  .. group-tab:: macOS
+
+    .. include:: cli/openrc-unix.rst
+
+  .. group-tab:: Windows
+
+    .. include:: cli/openrc-windows.rst
+
+.. note::
+
+  Note that configuration using OpenRC files only apply to the terminal session
+  in which the OpenRC file is sourced.
+
+  When opening a new terminal session, you will need to source your OpenRC file
+  and provide your password and MFA verification code again.
+
+.. _cli-usage:
+
+*****
+Usage
+*****
+
+At this point you should now have a working Catalyst Cloud CLI environment,
+but we can confirm this by running a test command that returns
+information from Catalyst Cloud.
+
+.. tabs::
+
+  .. group-tab:: Debian / Ubuntu
+
+    .. include:: cli/test-unix.rst
+
+  .. group-tab:: Fedora / Red Hat
+
+    .. include:: cli/test-unix.rst
+
+  .. group-tab:: macOS
+
+    .. include:: cli/test-unix.rst
+
+  .. group-tab:: Windows
+
+    .. include:: cli/test-windows.rst
+
+You can now use the available CLI commands to perform tasks
+on Catalyst Cloud, such as
+:ref:`launching a compute instance <compute-launching-an-instance>`.
+
+.. _cli-available-commands:
+
+******************
+Available Commands
+******************
+
+The following table contains a complete list of commands available
+using the ``openstack`` CLI command to interact with Catalyst Cloud.
+
+For more information on using these commands to interact with Catalyst Cloud,
+refer to our documentation for each service.
+
+.. list-table::
+   :header-rows: 1
+
+   * - Service
+     - Resource Type
+     - Command
+     - API Client Library
+   * - Identity
+     - Projects
+     - ``openstack project``
+     - ``python-keystoneclient``
+   * - Identity
+     - Users
+     - ``openstack user``
+     - ``python-keystoneclient``
+   * - Identity
+     - EC2 Credentials
+     - ``openstack ec2 credentials``
+     - ``python-keystoneclient``
+   * - Identity
+     - Application Credentials
+     - ``openstack application credential``
+     - ``python-keystoneclient``
+   * - Compute
+     - Instances / Servers
+     - ``openstack server``
+     - ``python-novaclient``
+   * - Compute
+     - Keypairs
+     - ``openstack keypair``
+     - ``python-novaclient``
+   * - Networking
+     - Networks
+     - ``openstack network``
+     - ``python-neutronclient``
+   * - Networking
+     - Routers
+     - ``openstack router``
+     - ``python-neutronclient``
+   * - Networking
+     - Floating IPs
+     - ``openstack floating ip``
+     - ``python-neutronclient``
+   * - Networking
+     - Security Groups
+     - ``openstack security group``
+     - ``python-neutronclient``
+   * - Networking
+     - VPNs
+     - ``openstack vpn``
+     - ``python-neutronclient``
+   * - Load Balancer
+     - Load Balancers
+     - ``openstack loadbalancer``
+     - ``python-octaviaclient``
+   * - Block Storage
+     - Volumes
+     - ``openstack volume``
+     - ``python-cinderclient``
+   * - Image
+     - Images
+     - ``openstack image``
+     - ``python-glanceclient``
+   * - Database
+     - Databases
+     - ``openstack database``
+     - ``python-troveclient``
+   * - Orchestration
+     - Stacks
+     - ``openstack stack``
+     - ``python-heatclient``
+   * - Kubernetes
+     - Clusters
+     - ``openstack coe cluster``
+     - ``python-magnumclient``
+   * - Kubernetes
+     - Node Groups
+     - ``openstack coe nodegroup``
+     - ``python-magnumclient``
+   * - Object Storage
+     - Containers
+     - ``openstack container``
+     - ``python-swiftclient``
+   * - Object Storage
+     - Objects
+     - ``openstack object``
+     - ``python-swiftclient``
+   * - Object Storage
+     - Accounts
+     - ``openstack object store account``
+     - ``python-swiftclient``
+   * - Secret Management
+     - Secrets
+     - ``openstack secret``
+     - ``python-barbicanclient``
+   * - Telemetry
+     - Metrics
+     - ``openstack metric``
+     - ``gnocchiclient``
+   * - Telemetry
+     - Alarms
+     - ``openstack alarm``
+     - ``aodhclient``
+   * - Billing
+     - Invoices
+     - ``openstack rating invoice``
+     - ``python-distilclient``
+   * - Billing
+     - Quotations
+     - ``openstack rating quotation``
+     - ``python-distilclient``
+   * - Billing
+     - Products
+     - ``openstack rating product``
+     - ``python-distilclient``
+   * - Administration
+     - Project Users
+     - ``openstack project user``
+     - ``python-adjutantclient``
+   * - Administration
+     - Project Quotas
+     - ``openstack project quota``
+     - ``python-adjutantclient``
+   * - Administration
+     - Manageable Roles
+     - ``openstack manageable roles``
+     - ``python-adjutantclient``
+   * - Administration
+     - Passwords
+     - ``openstack password``
+     - ``python-adjutantclient``

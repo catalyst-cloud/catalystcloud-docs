@@ -35,7 +35,7 @@ This tutorial assumes a number of things:
 * You are familiar with basic usage of the Catalyst Cloud (e.g. you have
   created your first instance as described at
   :ref:`launching-your-first-instance`)
-* You have sourced an openrc file, as described at :ref:`source-rc-file`
+* You have sourced an openrc file, as described at :ref:`cli-configuration`
 * You have a basic understanding of how to use `Ansible`_ on the Catalyst Cloud
   as shown at :ref:`launching-your-first-instance-using-ansible`
 
@@ -112,4 +112,3 @@ associated resources by running the ``remove-swarm-hosts.yaml`` playbook:
 .. code-block:: bash
 
  $ ansible-playbook --ask-sudo-pass remove-swarm-hosts.yaml
-

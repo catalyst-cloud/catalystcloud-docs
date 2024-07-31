@@ -69,8 +69,9 @@ and a working example Ingress Controller setup will be created in your cluster.
 To run this demo, please make sure you have:
 
 * The :ref:`Kubernetes Admin <k8s-rbac-roles>` role assigned to your Catalyst Cloud user account in your project.
-* Installed the :ref:`Catalyst Cloud command line tools <sdks_and_toolkits>`,
+* Installed the Catalyst Cloud command line tools,
   and sourced the OpenRC file for your project in your terminal session.
+  For more information, please refer to :ref:`cli`.
 * Have retreived a :ref:`kubeconfig file <kubeconfig-file-location>` for your cluster.
 * Downloaded and installed `kubectl`_, the Kubernetes command line client.
 * Downloaded and installed `Helm`_, a package manager for Kubernetes applications.

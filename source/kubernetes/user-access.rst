@@ -352,13 +352,13 @@ Retrieving the RBAC kubeconfig
 ##############################
 
 Currently, the only way to retreve the kubeconfig file is
-to use the :ref:`Catalyst Cloud CLI <sdks_and_toolkits>`.
+to use the :ref:`Catalyst Cloud CLI <cli>`.
 
 .. tabs::
 
   .. group-tab:: Linux / macOS
 
-    First, open a terminal window and :ref:`source your OpenRC file <source-rc-file>`
+    First, open a terminal window and :ref:`source your OpenRC file <cli-configuration>`
     to authenticate with Catalyst Cloud.
 
     To retrieve the RBAC kubeconfig file, run the ``openstack coe cluster config`` command
@@ -446,13 +446,13 @@ Retrieving the admin kubeconfig (not recommended)
   **Only use the admin kubeconfig file when required.**
 
 Currently, the only way to retreve the kubeconfig file is
-to use the :ref:`Catalyst Cloud CLI <sdks_and_toolkits>`.
+to use the :ref:`Catalyst Cloud CLI <cli>`.
 
 .. tabs::
 
   .. group-tab:: Linux / macOS
 
-    First, open a terminal window and :ref:`source your OpenRC file <source-rc-file>`
+    First, open a terminal window and :ref:`source your OpenRC file <cli-configuration>`
     to authenticate with Catalyst Cloud.
 
     To retrieve the RBAC kubeconfig file, run the ``openstack coe cluster config`` command,

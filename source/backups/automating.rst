@@ -36,8 +36,8 @@ available role.
 |
 
 You can then download a copy of the backup user's OpenStack RC file: see
-:ref:`source-rc-file`, which will provide the credential information for the
-following section.
+:ref:`Catalyst Cloud CLI Configuration <cli-configuration>`,
+which will provide the credential information for the following section.
 
 ***************************
 Creating the backup scripts

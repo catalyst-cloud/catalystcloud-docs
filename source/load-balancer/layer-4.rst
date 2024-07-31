@@ -13,7 +13,7 @@ While each of the examples below will have their own set of requirements,
 there are some things that you need to prepare no matter which method you are
 wanting to use. These include:
 
-- Sourcing an :ref:`openrc file<source-rc-file>`
+- :ref:`Sourcing an OpenRC file <cli-configuration>` for your Catalyst Cloud project
 - Uploading or creating your own SSH key
 - Whitelisting your IP address so that you can interact with the cloud from
   your command line.
@@ -41,4 +41,3 @@ below:
   .. tab:: Ansible
 
       .. include:: _scripts/layer4-files/ansible-example.rst
-

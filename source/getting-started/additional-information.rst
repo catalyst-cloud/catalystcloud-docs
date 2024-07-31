@@ -201,21 +201,30 @@ switch to another region.
 Via the CLI
 -----------
 
-The command line interface picks up the region configuration from the
-``$OS_REGION_NAME`` environment variable. To define the variable:
+The :ref:`cli` picks up the region configuration from the
+``OS_REGION_NAME`` environment variable.
 
-.. code-block:: bash
+To set this variable in your terminal session:
 
-  export OS_REGION_NAME="region-code"
+.. tabs::
 
-The easiest way to get this information set is to download the RC file for your
-project from the drop down tab at the top right of the dashboard; and use it as
-your source file while working on the command line. The RC file sets a number
-of variables like ``OS_REGION_NAME``. There is a comprehensive tutorial on
-:ref:`how to configure the CLI <source-rc-file>` in our documentation
+  .. group-tab:: Linux / macOS
 
-Alternatively you can use the ``--os-region-name`` option to specify the region
-on each call.
+    .. code-block:: bash
+
+      export OS_REGION_NAME="region-code"
+
+  .. group-tab:: Windows
+
+    .. code-block:: powershell
+
+      $Env:OS_REGION_NAME = "region-code"
+
+Alternatively, you can pass the ``--os-region-name`` option to the
+``openstack`` command to override the region on specific calls.
+
+For more information on configuring your Catalyst Cloud command line environment,
+please refer to :ref:`CLI Configuraton <cli-configuration>`.
 
 Via the APIs
 ------------

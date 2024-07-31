@@ -45,7 +45,7 @@ This tutorial assumes a number of things:
 * You will be setting up a Ubuntu 14.04 instance
 * You will be using the ubuntu user
 * You will be letting the driver create an SSH keypair for you
-* You have sourced an openrc file, as described at :ref:`source-rc-file`
+* You have sourced an openrc file, as described at :ref:`cli-configuration`
 
 **********************
 Install docker machine
@@ -181,7 +181,7 @@ progress and see any errors that may occur.
 
 .. note::
 
- You are making use of OpenStack environment variables in this command. Ensure you have followed the steps described at :ref:`source-rc-file`
+ You are making use of OpenStack environment variables in this command. Ensure you have followed the steps described at :ref:`cli-configuration`
 
 .. code-block:: bash
 
