@@ -1,7 +1,4 @@
-Python is usually pre-installed on standard installations of Fedora
-and Red Hat Enterprise Linux.
-
-If it is not already installed, run the following command to install it:
+Run the following command to install Python and development files:
 
 .. code-block:: bash
 

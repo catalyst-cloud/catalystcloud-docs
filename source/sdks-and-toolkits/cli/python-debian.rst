@@ -1,5 +1,5 @@
-Run the following commands to install Python on your system, and additional packages
-required for managing virtual environments:
+Run the following commands to install Python, development files,
+and additional packages required for managing virtual environments:
 
 .. code-block:: bash
 
