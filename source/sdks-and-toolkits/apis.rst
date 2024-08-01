@@ -103,6 +103,9 @@ Endpoints for ``nz-por-1``
    * - Billing
      - ``ratingv2``
      - ``https://api.nz-por-1.catalystcloud.io:9999``
+   * - Administration
+     - ``registration``
+     - ``https://api.cloud.catalyst.net.nz:8040/v1``
 
 Endpoints for ``nz-hlz-1``
 ==========================
@@ -164,6 +167,9 @@ Endpoints for ``nz-hlz-1``
    * - Billing
      - ``ratingv2``
      - ``https://api.nz-hlz-1.catalystcloud.io:9999``
+   * - Administration
+     - ``registration``
+     - ``https://api.cloud.catalyst.net.nz:8040/v1``
 
 Endpoints for ``nz_wlg_2``
 ==========================
@@ -183,3 +189,6 @@ Endpoints for ``nz_wlg_2``
    * - Object Storage
      - ``s3``
      - ``https://object-storage.nz-wlg-2.catalystcloud.io:443``
+   * - Administration
+     - ``registration``
+     - ``https://api.cloud.catalyst.net.nz:8040/v1``
