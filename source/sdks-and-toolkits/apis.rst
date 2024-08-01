@@ -189,6 +189,9 @@ Endpoints for ``nz_wlg_2``
    * - Object Storage
      - ``s3``
      - ``https://object-storage.nz-wlg-2.catalystcloud.io:443``
+   * - Billing
+     - ``ratingv2``
+     - ``https://api.cloud.catalyst.net.nz:9999``
    * - Administration
      - ``registration``
      - ``https://api.cloud.catalyst.net.nz:8040/v1``
