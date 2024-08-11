@@ -17,8 +17,8 @@ Catalyst Cloud and how it functions.
 Projects
 ********
 
-Everything you do on the Catalyst Cloud is in a ``project``. Use projects to
-separate the different things you work on. For example, have a project for each
+Everything on the Catalyst Cloud happens inside a ``project``. You can use projects
+to separate the different things you work on. For example, have a project for each
 organisation you work with, or one for each branch of your organisation.
 Something done in one project cannot effect any other projects.
 
@@ -27,9 +27,6 @@ dropdown in the top left corner.
 
 Information on how to invite new people to your project can be found :ref:`here
 <access_control>`.
-
-
-.. image:: assets/project_dropdown.png
 
 
 The Catalyst Cloud provides an isolated and multi-tenanted approach to creating
@@ -66,7 +63,7 @@ is the case, you can find your project ID by issuing the following command:
 .. code-block:: bash
 
  $ echo $OS_PROJECT_ID
- 1234567892b04ed3xxxxxxb7d808e214
+ 1234567892xxxxxxxxxxxxb7d808e214
 
  $ echo $OS_Project_NAME
  My-Example-Company-Ltd
@@ -76,7 +73,7 @@ Alternatively, you can use the ``openstack configuration show`` command:
 .. code-block:: bash
 
  $ openstack configuration show -c auth.project_id -f value
- 1234567892b04ed3xxxxxxb7d808e214
+ 11234567892xxxxxxxxxxxxb7d808e214
 
  $ openstack configuration show -c auth.project_name -f value
  My-Example-Company-Ltd
@@ -99,7 +96,7 @@ Via the dashboard
 On the dashboard, you can change which project you are working on using the
 dropdown on the top left corner.
 
-.. image:: assets/project_dropdown.png
+.. image:: assets/project-dropdown.png
 
 Via the CLI
 -----------
@@ -162,8 +159,6 @@ and isolated (each with their own *control plane*), providing
 fault tolerance and geographic diversity.
 
 
-.. image:: assets/region_dropdown.png
-
 Please visit our website for more information about our national
 infrastructure:
 https://catalystcloud.nz/about/national-infrastructure/
@@ -196,7 +191,7 @@ The web dashboard has a region selector dropbox on the top left corner. It
 indicates the current region you are connected to and allows you to easily
 switch to another region.
 
-.. image:: assets/region_dropdown.png
+.. image:: assets/region-dropdown.png
 
 Via the CLI
 -----------
@@ -291,7 +286,7 @@ are applied to each region in the current project. It also shows the available
 **Pre-approved Quota Sizes** that can be selected and the actions that can be
 taken for the quota in each region.
 
-.. image:: assets/current_quotas.png
+.. image:: assets/quota-main-page.png
 
 |
 
@@ -316,29 +311,21 @@ Updating a quota
 To change the current quota limit for a given region, click on the
 *Update Quota* action, the following form will be displayed
 
-.. image:: assets/update_quota_sizes.png
+.. image:: assets/update-quota-sizes.png
 
 |
 
 Select the new quota value and click submit
 
-.. image:: assets/increase_quota.png
-
-|
-
-If your requested change does not fall into the - category the
-**Previous Quota Changes** area will display a message showing the current
-state of your request.
-
-.. image:: assets/pending_change.png
+.. image:: assets/increase-quota.png
 
 |
 
 For pre-approved and accepted changes the display will update to show the new
-*Current Quota Size* next to the appropriate region and the **Previous Quota
-Changes** will
+*Current Quota Size* next to the appropriate region; and the **Previous Quota
+Changes** will have been updated to show this change.
 
-.. image:: assets/quota_updated.png
+.. image:: assets/quota-updated.png
 
 |
 
@@ -379,7 +366,7 @@ the support dropdown in the top right corner of the dashboard.
 If you are an organisation with more complex support needs, you may
 want to consider our premium support.
 
-.. image:: assets/support_dropdown.png
+.. image:: assets/support-dropdown.png
 
 Status page
 ===========
