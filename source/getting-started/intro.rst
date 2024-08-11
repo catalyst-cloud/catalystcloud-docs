@@ -70,7 +70,7 @@ OpenStack gives you the ability to provision no more or less than what you
 need, by allowing you to change how much you are using quickly, easily, and
 automatically, through a variety of tools.
 
-.. image:: assets/access_methods.png
+.. image:: assets/access_methods_cropped.png
 
 To obtain resources on Catalyst Cloud, you provision services. Catalyst Cloud
 services are pieces of hardware and software that we have in one of our data
