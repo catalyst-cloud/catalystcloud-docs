@@ -33,9 +33,10 @@ Chef.
 Setup
 *****
 
-This tutorial assumes that you have sourced an openrc file, as described at
-:ref:`source-rc-file`. This is required in order for the `OpenStack builder`_
-to interact with the Catalyst Cloud image service.
+First, make sure that you have sourced the OpenRC file for your project,
+as shown in the :ref:`CLI Configuration <cli-configuration>` documentation.
+This is required in order for the `OpenStack builder`_ to interact
+with the Catalyst Cloud image service.
 
 You will also need an appropriate security group to allow SSH access for the
 temporary build machine that Packer will create.

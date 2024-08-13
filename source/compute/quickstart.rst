@@ -260,19 +260,16 @@ The configuration details are as follows:
 - flavor name : c1.c1r1
 
 
-Assumptions
-===========
+Examples
+========
 
-These examples assume the following:
+.. note::
 
-- You have implemented an appropriate authentication method to allow you to
-  interact with your Catalyst Cloud project. There are several options
-  available to you depending on your tool of choice, some of these are:
+  Before running the CLI commands documented below, make sure
+  you have the ``openstack`` command available in your environment,
+  and sourced the OpenRC file for your project.
 
-  - Using an :ref:`openrc file<source-rc-file>`
-  - Using a clouds.yaml file
-
-- You have uploaded or created an SSH key.
+  For more information, please refer to the :ref:`cli` documentation.
 
 The following is a set of different templates that you can use to create
 your own compute instances. These instances will be the same as if you followed

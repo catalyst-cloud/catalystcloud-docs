@@ -29,8 +29,8 @@ To complete this tutorial you will need the following:
   access that the temporary instance can be connected to.
 * :ref:`A security group<security-groups>` in your cloud project that permits
   inbound SSH access.
-* :ref:`Openrc file<source-rc-file>` for your Catalyst Cloud project sourced
-  in your shell.
+* :ref:`Sourced the OpenRC file <cli-configuration>` for your Catalyst Cloud project
+  in your terminal session.
 * `Packer must be installed <https://developer.hashicorp.com/packer/downloads>`_
   on your system.
 * Sufficient quota capacity in your cloud project for Packer to create the

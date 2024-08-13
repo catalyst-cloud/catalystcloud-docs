@@ -1,3 +1,5 @@
+.. _compute-launching-an-instance:
+
 #####################
 Launching an instance
 #####################
