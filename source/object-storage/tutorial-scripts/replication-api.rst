@@ -37,7 +37,7 @@ environment variable as "*OS_STORAGE_URL*" like so:
     $ export OS_STORAGE_URL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_1xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54"
 
 After we have set our storage URL, we need to find the name of the policy we
-want our container to have. For this example we will use the wellington single
+want our container to have. For this example we will use the Wellington single
 region policy:
 
 .. code-block:: bash

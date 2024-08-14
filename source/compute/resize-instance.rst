@@ -47,7 +47,7 @@ The status of the instance will change to preparing to resize or migrate,
 resized or migrated and finally “Confirm or Revert Resize/Migrate” as shown
 below:
 
-.. image:: _static/compute-confirm-resize.png
+.. image:: _static/resize-instance.png
    :align: center
 
 Once the resize operation has been completed, our cloud will prompt you to
@@ -162,7 +162,7 @@ confirm our resize:
   | Field                       | Value                                                    |
   +-----------------------------+----------------------------------------------------------+
   | OS-DCF:diskConfig           | AUTO                                                     |
-  | OS-EXT-AZ:availability_zone | NZ-WLG-2                                                 |
+  | OS-EXT-AZ:availability_zone | NZ-HLZ-2                                                 |
   | OS-EXT-STS:power_state      | Running                                                  |
   | OS-EXT-STS:task_state       | None                                                     |
   | OS-EXT-STS:vm_state         | active                                                   |

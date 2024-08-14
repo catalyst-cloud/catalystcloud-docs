@@ -97,7 +97,6 @@ Other Tutorials
 .. toctree::
    :maxdepth: 1
 
-   tutorials/other/region-failover-using-the-fastly-cdn
    tutorials/other/using-an-openstack-vagrant-provider-on-the-catalyst-cloud
    tutorials/other/terraform-lifecycle-to-prevent-resource-re-creation
    tutorials/other/using-python-virtual-environments

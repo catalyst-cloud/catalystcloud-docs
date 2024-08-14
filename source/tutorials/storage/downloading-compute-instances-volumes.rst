@@ -106,7 +106,7 @@ After which we can create a volume from our snapshot.
   | Field               | Value                                |
   +---------------------+--------------------------------------+
   | attachments         | []                                   |
-  | availability_zone   | NZ-WLG-2                             |
+  | availability_zone   | NZ-HLZ-2                             |
   | bootable            | false                                |
   | consistencygroup_id | None                                 |
   | created_at          | 2019-06-19T02:26:27.121055           |
