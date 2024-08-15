@@ -60,7 +60,7 @@ check_credentials() {
   if [[ ${OS_PROJECT_ID} && ${OS_TOKEN} ]] || [[ ${OS_USERNAME} && ${OS_PASSWORD} && ${OS_PROJECT_ID} ]]; then
     OPENRC="True"
   else
-    MSG="No cloud credentials found in the current shell session, please source yopur openrc file."
+    MSG="No cloud credentials found in the current shell session, please source your openrc file."
     echo -e "${RED}${MSG}${NC}"
     exit 1
   fi
