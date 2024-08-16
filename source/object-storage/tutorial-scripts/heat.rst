@@ -1,18 +1,19 @@
-Using Heat you are able to manage a large number of resources programmatically,
+Using the Catalyst Cloud :ref:`Orchestration <cloud-orchestration>` service
+you are able to manage a large number of resources programmatically,
 by utilizing a **stack** that will construct and monitor your
 resources for you. You can create a stack by using a pre-designed template. The
-following example assumes that you have some knowledge of Heat and how to
+following example assumes that you have some knowledge of Orchestration and how to
 use these template files.
 
 The following code snippet contains the minimum required components to
-construct an object storage container using Heat:
+construct an object storage container using Orchestration:
 
 .. code-block:: bash
 
     heat_template_version: 2015-04-30
 
     description: >
-        Creating a swift container using HEAT
+        Creating a swift container using Orchestration
 
     resources:
 
@@ -20,13 +21,13 @@ construct an object storage container using Heat:
         type: OS::Swift::Container
         properties:
           PurgeOnDelete: FALSE
-          name: heat-container
+          name: orchestration-container
 
 For more information on object storage containers and what
 customization options you can select for them, please see the
-`Openstack Heat`_  documentation.
+`OpenStack Heat`_  documentation.
 
-.. _Openstack Heat: https://docs.openstack.org/heat/latest/template_guide/openstack.html#OS::Swift::Container
+.. _OpenStack Heat: https://docs.openstack.org/heat/latest/template_guide/openstack.html#OS::Swift::Container
 
 Once you have your template constructed, you should make sure to validate
 it before creating any resources. You can do this by running the following code:
