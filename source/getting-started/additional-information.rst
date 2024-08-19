@@ -154,12 +154,13 @@ impacting your business.
 Regions
 *******
 
-The Catalyst Cloud is delivered out of three data centres across
-New Zealand. On the dashboard, you can specify which data centre
-to host your resources in depending on your needs, with the dropdown
-in the top left corner. Each region is completely independent
-and isolated (each with their own *control plane*), providing
-fault tolerance and geographic diversity.
+Catalyst Cloud is delivered out of three regions across
+New Zealand, one of which being dedicated to
+geo-replicated object storage. On the dashboard, you can specify
+which region to host your resources in depending on your
+needs, with the dropdown in the top left corner. Each region is
+completely independent and isolated (each with their own
+*control plane*), providing fault tolerance and geographic diversity.
 
 
 .. image:: assets/region_dropdown.png

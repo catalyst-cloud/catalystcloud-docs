@@ -66,11 +66,7 @@ if [ ! -f $SSH_PUBLIC_KEY ]; then
     EXIT=1;
 fi
 
-if [[ $OS_REGION_NAME == "nz_wlg_2" ]]; then
-    CC_NAMESERVER_1=202.78.240.213
-    CC_NAMESERVER_2=202.78.240.214
-    CC_NAMESERVER_3=202.78.240.215
-elif [[ $OS_REGION_NAME == "nz-por-1" ]]; then
+if [[ $OS_REGION_NAME == "nz-por-1" ]]; then
     CC_NAMESERVER_1=202.78.247.197
     CC_NAMESERVER_2=202.78.247.198
     CC_NAMESERVER_3=202.78.247.199

@@ -41,5 +41,4 @@ application availability. Tutorials have documented these in detail:
 Providing highly available instances within a region:
 :doc:`/tutorials/compute/deploying-highly-available-instances-with-keepalived`
 
-Techniques for region failover:
-:doc:`/tutorials/other/region-failover-using-the-fastly-cdn`
+

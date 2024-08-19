@@ -10,7 +10,7 @@ export DUPLICITY_NUM_RETRIES='3'
 
 # Catalyst Cloud object storage credential information
 export SWIFT_USERNAME='<your-backup-user>@<your-project-name>'
-export SWIFT_REGIONNAME='nz_wlg_2'
+export SWIFT_REGIONNAME='nz-por-1'
 export SWIFT_TENANTNAME='<your-project-name>'
 export SWIFT_PASSWORD='<your-openrc-password>'
 export SWIFT_AUTHURL='https://api.cloud.catalyst.net.nz:5000'

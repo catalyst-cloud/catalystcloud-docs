@@ -13,7 +13,6 @@ variable "public_network_id" {
 
 # Depending on which region you are using, the public_network_id will need to be changed:
 #nz-por-1	849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx
-#nz_wlg_2	e0ba6b88-5360-492c-9c3d-xxxxxxxxxxxx
 #nz-hlz-1	f10ad6de-a26d-4c29-8c64-xxxxxxxxxxxx
 
 # Include a valid VIP subnet_id to be used for your load balancer later.

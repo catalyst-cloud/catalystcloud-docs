@@ -190,4 +190,3 @@ for the following Catalyst Cloud API hosts
 
 - nz-por-1: 202.78.247.202
 - nz-hlz-1: 202.78.244.90
-- nz_wlg_2: 202.78.240.218 & 2404:130:20:2::218
