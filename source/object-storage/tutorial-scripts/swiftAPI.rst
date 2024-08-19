@@ -8,27 +8,36 @@ official `OpenStack documentation
 
     <h3> API endpoints </h3>
 
-+----------+---------+--------------------------------------------------------------------------+
-| Region   | Version | Endpoint                                                                 |
-+==========+=========+==========================================================================+
-| nz-por-1 | 1       | https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_%tenantid%  |
-+----------+---------+--------------------------------------------------------------------------+
-|          | 3       | https://api.nz-por-1.catalystcloud.io:5000                               |
-+----------+---------+--------------------------------------------------------------------------+
-| nz_wlg_2 | 1       | https://object-storage.nz-wlg-2.catalystcloud.io:443/v1/AUTH_%tenantid%  |
-+----------+---------+--------------------------------------------------------------------------+
-|          | 3       | https://api.cloud.catalyst.net.nz:5000                                   |
-+----------+---------+--------------------------------------------------------------------------+
-| nz-hlz-1 | 1       | https://object-storage.nz-hlz-1.catalystcloud.io:443/v1/AUTH_%tenantid%  |
-+----------+---------+--------------------------------------------------------------------------+
-|          | 3       | https://api.nz-hlz-1.catalystcloud.io:5000                               |
-+----------+---------+--------------------------------------------------------------------------+
+.. list-table::
+   :header-rows: 1
+
+   * - Region
+     - API Version
+     - Endpoint
+   * - nz-por-1
+     - 1
+     - ``https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_%project_id%``
+   * -
+     - 3
+     - ``https://api.nz-por-1.catalystcloud.io:5000``
+   * - nz-hlz-1
+     - 1
+     - ``https://object-storage.nz-hlz-1.catalystcloud.io:443/v1/AUTH_%project_id%``
+   * -
+     - 3
+     - ``https://api.nz-hlz-1.catalystcloud.io:5000``
+   * - nz_wlg_2
+     - 1
+     - ``https://object-storage.nz-wlg-2.catalystcloud.io:443/v1/AUTH_%project_id%``
+   * -
+     - 3
+     - ``https://api.cloud.catalyst.net.nz:5000``
 
 .. raw:: html
 
-    <h3> Requirements </h4>
+    <h3> Requirements </h3>
 
-    <h4> Sourcing the correct environment variables </h5>
+    <h4> Sourcing the correct environment variables </h4>
 
 Like the the other methods in this tutorial section, you will need to source an
 openRC file to interact with the object storage APIs. However, there is
@@ -173,4 +182,3 @@ Replace the starting section of the previous file with the following:
 
 
   # ...You will then need to remove the previous piece of code that created a "conn=swiftclient.Connection" using the os_token variable.
-
