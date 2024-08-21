@@ -51,9 +51,9 @@ It does not show patch versions, as all patch versions for a supported minor ver
      - 2023-09-11
      - 2024-05-27
    * - ``1.27``
-     - Supported
+     - Unsupported
      - 2024-01-22
-     - Expected 2024-07-22
+     - 2024-08-26
    * - ``1.28``
      - Supported
      - 2024-04-18
@@ -63,14 +63,36 @@ It does not show patch versions, as all patch versions for a supported minor ver
      - 2024-05-27
      - Expected 2025-02-28
    * - ``1.30``
-     - In development
-     - Expected 2024-09-02
+     - Supported
+     - 2024-08-26
      - Expected 2025-06-28
+   * - ``1.31``
+     - In development
+     - Expected 2024-10-31
+     - Expected 2025-10-28
 
 
 **********************
 Version upgrade notes
 **********************
+
+Version v1.29 to v1.30
+======================
+
+Kubernetes `release changelog for v1.30 since v1.29`_.
+
+.. _`release changelog for v1.30 since v1.29`: https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.30.md
+
+In addition to the Kubernetes changes, we have:
+
+* Upgraded minor version of Calico CNI.
+* Upgraded minor version of Cinder CSI and Cloud Provider Openstack.
+
+
+Note that skipping minor versions when upgrading a cluster is unsupported and
+should not be attempted. For example, before upgrading to v1.30.x, you must 
+have upgraded to v1.29.x.
+
 
 Version v1.28 to v1.29
 ======================
