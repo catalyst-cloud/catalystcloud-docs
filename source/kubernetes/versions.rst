@@ -90,7 +90,7 @@ In addition to the Kubernetes changes, we have:
 
 
 Note that skipping minor versions when upgrading a cluster is unsupported and
-should not be attempted. For example, before upgrading to v1.30.x, you must 
+should not be attempted. For example, before upgrading to v1.30.x, you must
 have upgraded to v1.29.x.
 
 
