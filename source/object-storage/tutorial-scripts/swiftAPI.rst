@@ -15,14 +15,18 @@ official `OpenStack documentation
 +----------+---------+--------------------------------------------------------------------------+
 |          | 3       | https://api.nz-por-1.catalystcloud.io:5000                               |
 +----------+---------+--------------------------------------------------------------------------+
-| nz_wlg_2 | 1       | https://object-storage.nz-wlg-2.catalystcloud.io:443/v1/AUTH_%tenantid%  |
-+----------+---------+--------------------------------------------------------------------------+
-|          | 3       | https://api.cloud.catalyst.net.nz:5000                                   |
-+----------+---------+--------------------------------------------------------------------------+
 | nz-hlz-1 | 1       | https://object-storage.nz-hlz-1.catalystcloud.io:443/v1/AUTH_%tenantid%  |
 +----------+---------+--------------------------------------------------------------------------+
 |          | 3       | https://api.nz-hlz-1.catalystcloud.io:5000                               |
 +----------+---------+--------------------------------------------------------------------------+
+
+.. Note::
+
+  While our geo-replicated storage does backup to all three of our cloud regions (Porirua, Hamilton
+  and Wellington) It is preferable that you interact with the service with either the Porirua or
+  Hamilton region endpoints. Your data will still be replicated/stored in the Wellington region if
+  that is the replication policy you have opted for even if you access it from either of the other
+  regions.
 
 .. raw:: html
 
