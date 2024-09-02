@@ -3,7 +3,7 @@ High availability
 #################
 
 This document outlines the physical infrastructure and software features that
-make the Catalyst Cloud highly available and resilient. It covers built-in
+make Catalyst Cloud highly available and resilient. It covers built-in
 features that are inherited by every project and services that can be used to
 enhance the availability of web applications and websites hosted on the
 Catalyst Cloud.
@@ -12,14 +12,14 @@ Catalyst Cloud.
 24x7 monitoring
 ***************
 
-The catalyst cloud has robust fine-grained monitoring systems in place. These
+Catalyst Cloud has robust fine-grained monitoring systems in place. These
 systems are monitored 24x7.
 
 ********************
 Geographic diversity
 ********************
 
-The Catalyst Cloud provides multiple regions or geographical locations that you
+Catalyst Cloud provides multiple regions or geographical locations that you
 can use to host your applications. Regions are completely independent and
 isolated from each other, providing fault tolerance and geographic diversity.
 
@@ -36,7 +36,7 @@ High availability tutorials
 ***************************
 
 There are a number of options available to Catalyst Cloud customers to enhance
-application availability. Tutorials have documented these in detail:
+application availability. We have documented some of these in detailed tutorials:
 
 Providing highly available instances within a region:
 :doc:`/tutorials/compute/deploying-highly-available-instances-with-keepalived`

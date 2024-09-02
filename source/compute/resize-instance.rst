@@ -162,7 +162,7 @@ confirm our resize:
   | Field                       | Value                                                    |
   +-----------------------------+----------------------------------------------------------+
   | OS-DCF:diskConfig           | AUTO                                                     |
-  | OS-EXT-AZ:availability_zone | NZ-HLZ-2                                                 |
+  | OS-EXT-AZ:availability_zone | nz-hlz-1                                                 |
   | OS-EXT-STS:power_state      | Running                                                  |
   | OS-EXT-STS:task_state       | None                                                     |
   | OS-EXT-STS:vm_state         | active                                                   |

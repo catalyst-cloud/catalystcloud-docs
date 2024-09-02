@@ -38,10 +38,10 @@ Here are the steps for creating your first cloud instance:
 6. Associate a Floating IP
 7. Log in to your Instance
 
-There are a number of different ways to provision resources on the Catalyst
+There are a number of different ways to provision resources on Catalyst
 Cloud. We will show you how to complete these steps using the dashboard and the
 command line tools. If you are not comfortable with the command line, it will
-be easier to use the dashboard. As you become more familiar with the Catalyst
+be easier to use the dashboard. As you become more familiar with Catalyst
 Cloud it is worth learning how to provision resources programmatically.
 
 Each of the different methods have pro's and cons. Some are easier to
@@ -117,7 +117,7 @@ Operating system images
 
 In order to create an instance, you will need to have a pre-built operating
 system in the form of an Image.  Images are stored in the Image service
-(Glance). The Catalyst Cloud provides a set of images for general use and also
+(Glance). Catalyst Cloud provides a set of images for general use and also
 allows you to upload your own images.
 
 .. note::
