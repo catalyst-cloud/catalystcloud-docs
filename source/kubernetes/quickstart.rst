@@ -300,7 +300,7 @@ This starts a proxy session which allows you to access the dashboard.
 
 Once the proxy is running, open the following URL in your browser:
 
-http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:https/proxy
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:k8s-dashboard-kubernetes-dashboard:https/proxy/
 
 You will be presented with a login screen, as shown below. Select
 **Token** as the authentication type and paste in the authentication token
