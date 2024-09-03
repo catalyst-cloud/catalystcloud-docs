@@ -37,7 +37,7 @@ environment variable as "*OS_STORAGE_URL*" like so:
     $ export OS_STORAGE_URL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_1xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54"
 
 After we have set our storage URL, we need to find the name of the policy we
-want our container to have. For this example we will use the Wellington single
+want our container to have. For this example we will use the Porirua single
 region policy:
 
 .. code-block:: bash
@@ -74,7 +74,7 @@ region policy:
     # We export them for use later.
 
     $ export OS_AUTH_TOKEN="gAAAAABdwJ5KkgWpKIHN_4xaFxkqPpvivOO2Qc4kavx832WC3GNws74icYXvzGUQy7eHxkSgbSpbPzj-j2PikiY6KmbwaqFdlStRSUXbmW0ZR6edoKzw8fDy7FXedR1kWR-j83HQfICzw802Z1zbnZw1Tho7F6vDVo5OEyQw6ORQTSINl6diBD4"
-    $ export policy="nz-wlg-2--o1--sr-r3"
+    $ export policy="nz-por-1--o1--sr-r3"
 
 .. raw:: html
 
@@ -95,11 +95,11 @@ called "cont-pol" with the policy we specified before.
 
     *   Trying 202.78.240.219...
     > PUT /v1/AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/cont-pol HTTP/1.1
-    > Host: object-storage.nz-wlg-2.catalystcloud.io
+    > Host: object-storage.nz-por-1.catalystcloud.io
     > User-Agent: curl/7.58.0
     > Accept: */*
     > X-Auth-Token: gAAAAABd1H-_eoC2zXlZXVXRZs7CWem8bXqo-705zhux-GGcT2ZR6M6lyKDzvWC3mAf4XFWC9qN-hdrYvD4NJFwJmp5fug3L8u5G8EbVUxMhzNZMLQdOOAGuRAyTGmIdqD_Ax1hgQF8svBbF4nU6lbYKdFawzu4SyXqg_UBWhNxqHBzLENpASu8
-    > X-Storage-Policy: nz-wlg-2--o1--sr-r3
+    > X-Storage-Policy: nz-por-1--o1--sr-r3
     >
     < HTTP/1.1 201 Created
     < Server: nginx/1.16.0
@@ -109,7 +109,7 @@ called "cont-pol" with the policy we specified before.
     < X-Trans-Id: tx77ee63a2009c4dbc863c8-005dd72193
 
     <.. code-block:: bash
-    * Connection #0 to host object-storage.nz-wlg-2.catalystcloud.io left intact
+    * Connection #0 to host object-storage.nz-por-1.catalystcloud.io left intact
 
 Next we are going to put a file in our new container. You can either create a
 file and upload it or you can upload an existing file from your working
@@ -121,7 +121,7 @@ directory; in our case we will use a file called "file1.txt"
 
     Trying 202.78.240.219...
     > PUT /v1/AUTH_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/cont-pol/file1.txt HTTP/1.1
-    > Host: object-storage.nz-wlg-2.catalystcloud.io
+    > Host: object-storage.nz-por-1.catalystcloud.io
     > User-Agent: curl/7.58.0
     > Accept: */*
     > X-Auth-Token: gAAAAABd1H-_eoC2zXlZXVXRZs7CWem8bXqo-705zhux-GGcT2ZR6M6lyKDzvWC3mAf4XFWC9qN-hdrYvD4NJFwJmp5fug3L8u5G8EbVUxMhzNZMLQdOOAGuRAyTGmIdqD_Ax1hgQF8svBbF4nU6lbYKdFawzu4SyXqg_UBWhNxqHBzLENpASu8
@@ -136,7 +136,7 @@ directory; in our case we will use a file called "file1.txt"
     < Etag: d41d8cd98f00b204xxxxxx98ecf8427e
     < X-Trans-Id: tx9c1ea1c7bd9d4c668be3f-005dd4a391
     <
-    * Connection #0 to host object-storage.nz-wlg-2.catalystcloud.io left intact
+    * Connection #0 to host object-storage.nz-por-1.catalystcloud.io left intact
 
 Finally we check our containers and what rules they have applied to them, to
 confirm our new container is using the correct policy.
@@ -144,7 +144,7 @@ confirm our new container is using the correct policy.
 .. code-block:: bash
 
     # The thing to look out for here is that the "X-Account-Storage-Policy"
-    # contains the data size of our file. This examples uses the wellington replication policy.
+    # contains the data size of our file. This examples uses the Porirua replication policy.
 
     $ curl -i -X GET -H "X-Auth-Token: $OS_AUTH_TOKEN" $OS_STORAGE_URL
 
@@ -153,14 +153,14 @@ confirm our new container is using the correct policy.
     Date: Thu, 21 Nov 2019 22:26:17 GMT
     Content-Type: text/plain; charset=utf-8
     Content-Length: 9
-    X-Account-Storage-Policy-Nz-Wlg-2--O1--Sr-R3-Container-Count: 1
+    X-Account-Storage-Policy-Nz-Por-1--O1--Sr-R3-Container-Count: 1
     X-Account-Object-Count: 1
-    X-Account-Storage-Policy-Nz-Wlg-2--O1--Sr-R3-Object-Count: 1
+    X-Account-Storage-Policy-Nz-Por-1--O1--Sr-R3-Object-Count: 1
     X-Account-Storage-Policy-Nz--O1--Mr-R3-Bytes-Used: 0
     X-Account-Storage-Policy-Nz--O1--Mr-R3-Container-Count: 0
     X-Timestamp: 1530350012.25515
     X-Account-Storage-Policy-Nz--O1--Mr-R3-Object-Count: 0
-    X-Account-Storage-Policy-Nz-Wlg-2--O1--Sr-R3-Bytes-Used: 40356
+    X-Account-Storage-Policy-Nz-Por-1--O1--Sr-R3-Bytes-Used: 40356
     X-Account-Bytes-Used: 40356
     X-Account-Container-Count: 1
     Accept-Ranges: bytes
