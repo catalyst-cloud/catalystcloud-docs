@@ -162,7 +162,7 @@ You can now connect to your instance via SSH:
  0 updates are security updates.
 
 
- Last login: Mon Oct  5 01:59:48 2015 from wlg-office-ffw.catalyst.net.nz
+ Last login: Mon Oct  5 01:59:48 2015 from hlz-office-ffw.catalyst.net.nz
  ubuntu@my-vagrant-box:~$ logout
  Connection to 150.242.41.75 closed.
 

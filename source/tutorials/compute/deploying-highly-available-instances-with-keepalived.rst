@@ -1175,15 +1175,6 @@ progress of the creation process:
   | vrrp_shared_port               | OS::Neutron::Port            | CREATE_COMPLETE |
   +--------------------------------+------------------------------+-----------------+
 
-If you prefer to create this stack in the Wellington region, you
-can modify the appropriate parameters on the command line:
-
-.. code-block:: bash
-
-  $ OS_REGION_NAME=nz_wlg_2
-  $ heat stack-create vrrp-stack --template-file $ORCHESTRATION_DIR/hot/ubuntu-14.04/vrrp-basic/vrrp.yaml /
-  --parameters "public_net_id=e0ba6b88-5360-492c-9c3d-xxxxxxxxxxxx;private_net_dns_servers=202.78.240.213,202.78.240.214,202.78.240.215"
-
 The ``stack-show`` and ``resource-list`` commands are useful commands for
 viewing the state of your stack. Give them a go:
 

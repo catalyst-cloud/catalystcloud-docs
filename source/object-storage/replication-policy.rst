@@ -53,7 +53,7 @@ policy. The following will go through the process of creating a new container
 via the dashboard and show you how to choose your replication policy.
 Firstly, navigate to the 'containers' section under the object storage tab.
 
-.. image:: assets/container-dash-screenshot-underline.png
+.. image:: assets/container-landing-page.png
 
 Once here, we're going to make a new container by clicking on the "+ container"
 button. The button will open up a new window that should look like this:

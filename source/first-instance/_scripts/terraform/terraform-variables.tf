@@ -11,7 +11,6 @@ variable "public_network_id" {
 
 # From: http://docs.catalystcloud.io/network.html?highlight=public%20network
 #nz-por-1	849ab1e9-7ac5-4618-8801-xxxxxxxxxxxx
-#nz_wlg_2	e0ba6b88-5360-492c-9c3d-xxxxxxxxxxxx
 #nz-hlz-1	f10ad6de-a26d-4c29-8c64-xxxxxxxxxxxx
 
 variable "volume_image_ID" {

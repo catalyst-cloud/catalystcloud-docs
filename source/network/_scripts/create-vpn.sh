@@ -6,7 +6,7 @@
 
 # set the default VPN creation mode
 DEFAULT_MENU_PROMPT="Select the option you require or type 'q' to quit: "
-ARR_REGIONS=(Hamilton Porirua Wellington)
+ARR_REGIONS=(Hamilton Porirua)
 VPN_MODE=""
 REGION_1=""
 REGION_2=""
@@ -161,9 +161,6 @@ lookup_region_name() {
     ;;
     Porirua)
       ret_val="nz-por-1"
-    ;;
-    Wellington)
-      ret_val="nz_wlg_2"
     ;;
   esac
 }
