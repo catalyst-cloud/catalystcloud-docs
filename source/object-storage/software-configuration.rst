@@ -195,7 +195,7 @@ to our object storage service:
       click "Next"
    #. On the next page:
 
-      #. For "Identity Service endpoint" enter "https://api.nz-por-1.catalystcloud.io:5000/v3"
+      #. For "Identity Service endpoint" enter "https://api.nz-por-1.catalystcloud.io:5000/"
       #. For "Identity Service version" select "3.0" from the drop-down
       #. Enter your Catalyst Cloud username and password in the
          appropriate boxes
@@ -286,7 +286,7 @@ our object storage service:
    "Next".
 #. Enter the following details:
 
-   #. For "Identity Service endpoint", enter "https://api.nz-por-1.catalystcloud.io:5000/v3"
+   #. For "Identity Service endpoint", enter "https://api.nz-por-1.catalystcloud.io:5000/"
    #. For "Identity Service version", select "3.0" from the drop-down
    #. Enter your cloud username and password in "Username" and "Password"
    #. For "Tenant/Project" choose "id" from the drop-down, and then

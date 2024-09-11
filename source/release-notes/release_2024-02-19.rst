@@ -46,7 +46,7 @@ reconfigured to authenticate with Catalyst Cloud as follows:
 
     If it is possible to inspect HTTP requests made from the application then
     the application should be seen to be requesting an auth token from the v3
-    endpoint, e.g. ``https://api.nz-por-1.catalystcloud.io:5000/v3/auth/tokens``.
+    endpoint, e.g. ``https://api.nz-por-1.catalystcloud.io:5000/auth/tokens``.
 
 More information on using the identity v3 API can be found in the `Keystone
 documentation <https://docs.openstack.org/api-ref/identity/v3/#password-authentication-with-scoped-authorization>`_.
