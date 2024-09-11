@@ -22,8 +22,8 @@ Minimum Requirements
 For "c2-gpu", the absolute minimum requirements are as follows:
 
 * A boot/OS disk of at least 30GB (when installing CUDA support)
-* NVIDIA vGPU driver from the v15.0 series. This is currently version
-  525.60.12.
+* Compatible NVIDIA vGPU driver. This is currently version
+  535.154.05.
 
 The version of the driver loaded into your virtual server **must** be
 exactly this version, and not any other. From time to time we will
@@ -36,10 +36,12 @@ required on your virtual servers.
     installed. Only the drivers specified here will function with
     the vGPUs available.
 
+    Installing Ubuntu HWE kernel packages on Ubuntu is not recommended.
+
 In addition, NVIDIA support only the following server operating
 systems for your vGPU virtual server while running in Catalyst Cloud:
 
-* Ubuntu 22.04, 20.04
+* Ubuntu LTS 20.04, 22.04 and 24.04
 
 Tested by Catalyst Cloud, but not supported by NVIDIA are the following
 server operating systems:
@@ -82,8 +84,8 @@ Then download and install the GRID driver package.
 .. code-block:: bash
 
     sudo apt install -y dkms
-    curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/15.0/linux/nvidia-linux-grid-525_525.60.13_amd64.deb
-    sudo dpkg -i nvidia-linux-grid-525_525.60.13_amd64.deb
+    curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/16.7/linux/nvidia-linux-grid-535_535.183.06_amd64.deb
+    sudo dpkg -i nvidia-linux-grid-535_535.183.06_amd64.deb
 
 .. note::
 
@@ -100,9 +102,9 @@ your virtual server, using the following steps:
     (cd /etc/nvidia/ClientConfigToken && curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/licenses/client_configuration_token_12-29-2022-15-20-23.tok)
 
 Edit the GRID driver configuration file ``/etc/nvidia/gridd.conf`` and
-ensure that ``FeatureType`` is set to ``1``. Then restart the ``nvidia-
-gridd`` service. The following commands apply the setting and restart
-the service:
+ensure that ``FeatureType`` is set to ``1``. Then restart the
+``nvidia-gridd`` service. The following commands apply the setting and
+restart the service:
 
 .. code-block:: bash
 
@@ -123,8 +125,8 @@ the future.
 
 .. code-block:: bash
 
-    curl -O https://developer.download.nvidia.com/compute/cuda/12.0.0/local_installers/cuda_12.0.0_525.60.13_linux.run
-    sudo sh cuda_12.0.0_525.60.13_linux.run --silent --toolkit
+    curl -O https://developer.download.nvidia.com/compute/cuda/12.2.2/local_installers/cuda_12.2.2_535.104.05_linux.run
+    sudo sh cuda_12.2.2_535.104.05_linux.run --silent --toolkit
 
 This will run without any visible output for a while, before returning
 to a command prompt.
@@ -181,8 +183,8 @@ Then install the GRID driver package:
 
 .. code-block:: bash
 
-    curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/15.0/linux/NVIDIA-Linux-x86_64-525.60.13-grid.run
-    sudo sh NVIDIA-Linux-x86_64-525.60.13-grid.run -s -Z
+    curl -O https://object-storage.nz-por-1.catalystcloud.io/v1/AUTH_483553c6e156487eaeefd63a5669151d/gpu-guest-drivers/nvidia/grid/16.7/linux/NVIDIA-Linux-x86_64-535.183.06-grid.run
+    sudo sh NVIDIA-Linux-x86_64-535.183.06-grid.run -s -Z
 
 .. note::
 
@@ -229,8 +231,8 @@ the future.
 
 .. code-block:: bash
 
-    curl -O https://developer.download.nvidia.com/compute/cuda/12.0.0/local_installers/cuda_12.0.0_525.60.13_linux.run
-    sudo sh cuda_12.0.0_525.60.13_linux.run --silent --toolkit
+    curl -O https://developer.download.nvidia.com/compute/cuda/12.2.2/local_installers/cuda_12.2.2_535.104.05_linux.run
+    sudo sh cuda_12.2.2_535.104.05_linux.run --silent --toolkit
 
 This will run without any visible output for a while, before returning
 to a command prompt.
