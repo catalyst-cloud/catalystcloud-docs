@@ -22,3 +22,4 @@ Table of contents:
   database/managing-database
   database/backups-replicas
   database/tuning
+  database/versions-and-extensions
