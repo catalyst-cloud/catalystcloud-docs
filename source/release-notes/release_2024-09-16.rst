@@ -1,0 +1,65 @@
+#################
+16 September 2024
+#################
+
+Major upgrade to the Compute (Nova) service. Most of the changes are internal
+however there are some public-facing changes as described below.
+
+==========================
+Compute API Version Change
+==========================
+
+The compute v2.1 API has been upgraded from microversion v2.42 to v2.60. This
+introduces a number of useful changes:
+
+* Flavor specs are displayed when viewing server details.
+* Network interfaces and volumes can be attached with an optional tag
+  parameter. These tags are exposed internally to the server via the metadata
+  service which can be useful to aid with device identification.
+* Tags can now be specified when creating a server.
+* Server key pair can be set while rebuilding.
+* The ``limit`` and ``marker`` options can be used to perform paginated query
+  when listing instance actions. In addition the ``changes-since`` option can
+  also be used filter the results based on the last time the instance action
+  was updated.
+
+Requests for features that are newer than this microversion may result in an
+error being returned instead of the desired action being performed.
+
+=================
+Instance Keypairs
+=================
+
+When an instance is rebuilt the key pair associated with an instance can now
+be changed by other users within the same project. This means that instances
+built by users who are no longer active can be issued a replacement SSH key by
+rebuilding it.
+
+==========
+GPU Update
+==========
+
+The NVIDIA GPU driver is being updated release 535. This introduces support
+for:
+
+* Ubuntu 24.04 instances
+* CUDA 12.2
+
+An updated driver package (535.183.06) is available for GPU instances.
+This should be used for all new instance deployments; refer to the
+:ref:`GPU instructions <gpu-support>` for more information and download
+links.
+
+
+Existing GPU instances will continue to operate normally using the previous
+driver package, however a driver upgrade is required to use the new GPU
+capabilities.
+
+==============
+Resize Timeout
+==============
+
+Instances that are resized will automatically confirm the change after 15
+minutes unless manually reverted within that period. This ensures they don't
+indefinitely remain in a ``VERIFY_RESIZE`` state which can prevent other
+requested actions from being performed in future until the resize is verified.
