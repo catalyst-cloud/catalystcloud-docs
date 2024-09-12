@@ -298,7 +298,7 @@ This consists of an **Access Key ID** and a **Secret Access Key**.
       | access          | ee55dd44cc33bb2211aaee55dd44cc33                                                                                                                     |
       | access_token_id | None                                                                                                                                                 |
       | app_cred_id     | None                                                                                                                                                 |
-      | links           | {'self': 'https://api.nz-por-1.catalystcloud.io:5000/users/e5d4c3b2a1e5d4c3b2a1e5d4c3b2a1e5/credentials/OS-EC2/1a2b3c4d5e1a2b3c4d5e1a2b3c4d5e1a'} |
+      | links           | {'self': 'https://api.nz-por-1.catalystcloud.io:5000/v3/users/e5d4c3b2a1e5d4c3b2a1e5d4c3b2a1e5/credentials/OS-EC2/1a2b3c4d5e1a2b3c4d5e1a2b3c4d5e1a'} |
       | project_id      | e5d4c3b2a1e5d4c3b2a1e5d4c3b2a1e5                                                                                                                     |
       | secret          | 11aa22bb33cc44dd55ee11aa22bb33cc                                                                                                                     |
       | trust_id        | None                                                                                                                                                 |
