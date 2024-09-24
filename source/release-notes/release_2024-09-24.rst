@@ -1,0 +1,15 @@
+#################
+24 September 2024
+#################
+
+====================================================
+Object Storage and Image Service added to audit logs
+====================================================
+
+Both the object storage service and the image service are now producing audit
+logs which can be sent to an object storage container in your project.
+The audit logs for object storage record every access of the containers and
+objects in your project.
+
+See :doc:`/audit-logs/activating-audit-logs` for details on how request adding
+audit logging to your project.

@@ -1,6 +1,6 @@
-###############################
-Log creation and access
-###############################
+#############################
+Audit Log creation and access
+#############################
 
 .. warning::
 
@@ -8,15 +8,15 @@ Log creation and access
     limitations on features and scope. Any feedback is appreciated and can be
     provided through a support ticket. Thank you.
 
-***************************************
+*********************************
 Activating logs for your projects
-***************************************
+*********************************
 
 To get started using Audit logs, you will first need to activate the
 logging functionality for your projects.
 
 Prerequisites
-===============
+=============
 
 Before going further, you will need to ensure that you have :ref:`sourced an
 openRC file<source-rc-file>` for your command line so that you are able to
