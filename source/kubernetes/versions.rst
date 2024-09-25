@@ -121,7 +121,7 @@ To read more about performing a cluster upgrade, refer to :ref:`cluster-upgrade-
 Version v1.27 to v1.28
 ======================
 
-The upgrade path for clusters of version v1.27 and prior is build a new cluster and migrate your workloads.
+The upgrade path for clusters of version v1.27 and prior is to build a new cluster and migrate your workloads.
 For more information see :ref:`cluster-upgrade-rebuild-vs-inplace`.
 
 There are several changes to be aware of when deploying your workloads onto a newly built v1.28 cluster that
@@ -145,13 +145,22 @@ The major differences are:
     some cluster resources are re-created if they are inadvertently deleted.
 * Heat Stacks are no longer created in the customer project (in fact, they aren't created anywhere)
 * Customer SSH Keypairs are no longer placed on all nodes.
+* CCKS no longer offers Prometheus and Grafana stack as a managed deployment.
+  You can gain the same features by installing the `kube-prometheus-stack`_ helm charts, and gain customisation options.
+* The Octavia Ingress Controller is no longer installed as a managed deployment.
+  CCKS supports Kubernetes ``Service`` objects with ``type: Loadbalancer``.
+  This creates a single Octavia Loadbalancer for that service.
+  For ingress solutions that loadbalance to multiple services within your cluster you can install
+  `Ingress-NGINX`_, `Traefik Ingress`_, `Octavia Ingress controller`_ or another controller.
 
 As with all upgrades you are advised to test this in a non-production environment, and ensure all workloads and
 operations remain functional for your use-case.
 
-
 .. _`release changelog for v1.28 since v1.27`: https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.28.md
-
+.. _`kube-prometheus-stack`: https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack/
+.. _`Ingress-NGINX`: https://kubernetes.github.io/ingress-nginx/
+.. _`Traefik Ingress`: https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart
+.. _`Octavia Ingress controller`: https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/octavia-ingress-controller/using-octavia-ingress-controller.md
 
 Version 1.26 and below
 ======================
