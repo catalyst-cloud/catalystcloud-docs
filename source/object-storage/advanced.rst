@@ -272,7 +272,8 @@ Firstly, you need to ensure that you have set the environment variable for your 
 In order to do this you can use the following commands to find and set the variable:
 
 .. code-block:: bash
-    $ openstack project show <name of the project you sourced your OpenRC with>
+
+  $ openstack project show <name of the project you sourced your OpenRC with>
   +-------------+----------------------------------+
   | Field       | Value                            |
   +-------------+----------------------------------+
