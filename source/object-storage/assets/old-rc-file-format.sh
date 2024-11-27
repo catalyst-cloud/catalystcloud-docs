@@ -3,7 +3,7 @@
 # swift API. You will need to change the placeholder values which are indicated by the "<>" brackets.
 # By default, this file is set up to work with the porirua region, if you want to change this region,
 # then you will need to change the OS_AUTH_URL and the OS_REGION_NAME.
-export OS_AUTH_URL=https://api.nz-por-1.catalystcloud.io:5000/v3
+export OS_AUTH_URL=https://api.nz-por-1.catalystcloud.io:5000/
 export OS_PROJECT_ID=<INSERT PROJECT ID>
 export OS_PROJECT_NAME="<INSERT PROJECT NAME>"
 export OS_USER_DOMAIN_NAME="Default"
