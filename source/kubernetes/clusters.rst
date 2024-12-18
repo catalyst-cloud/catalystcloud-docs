@@ -176,6 +176,8 @@ Customising clusters using labels
 It is possible to override the behaviour of a template by adding or modifying
 the labels supplied by the template.
 
+Refer to the :ref:`k8s-cluster-labels` appendix section for a full list of supported labels.
+
 To do this, we need to provide the ``--merge-labels`` parameter along with the
 ``--labels`` parameter followed by the desired label or labels to modify.
 
