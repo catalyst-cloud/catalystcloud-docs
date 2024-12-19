@@ -12,8 +12,8 @@ Kubernetes community releases currently happen approximately three times per yea
 These are called **minor version releases** (the ``y`` in ``v1.y.0``),
 and contain new features and bug fixes.
 
-**Patch version releases** (the ``z`` in ``v1.28.z``) are released more frequently,
-and include minor bug fixes, and patches for critical security vulnerabilities.
+**Patch version releases** (the ``z`` in ``v1.31.z``) are released more frequently,
+and include minor bug fixes, OS updates, and patches for critical security vulnerabilities.
 
 Catalyst Cloud Kubernetes Service supports each **minor** version for *at least*
 **6** months before it transitions to unsupported, giving users enough time to upgrade
@@ -38,26 +38,14 @@ It does not show patch versions, as all patch versions for a supported minor ver
      - Current Status
      - Initial Release Date
      - Unsupported Date
-   * - ``1.24``
-     - Unsupported
-     - 2023-04-05
-     - 2024-01-22
-   * - ``1.25``
-     - Unsupported
-     - 2023-04-05
-     - 2024-04-18
-   * - ``1.26``
-     - Unsupported
-     - 2023-09-11
-     - 2024-05-27
    * - ``1.27``
      - Unsupported
      - 2024-01-22
      - 2024-08-26
    * - ``1.28``
-     - Supported
+     - Unsupported
      - 2024-04-18
-     - Expected 2024-10-28
+     - 2024-12-20
    * - ``1.29``
      - Supported
      - 2024-05-27
@@ -67,14 +55,37 @@ It does not show patch versions, as all patch versions for a supported minor ver
      - 2024-08-26
      - Expected 2025-06-28
    * - ``1.31``
-     - In development
-     - Expected 2024-10-31
+     - Supported
+     - 2024-12-20
      - Expected 2025-10-28
+   * - ``1.32``
+     - In development
+     - Expected 2025-02-24
+     - Expected 2026-02-28
 
 
 **********************
 Version upgrade notes
 **********************
+
+Version v1.30 to v1.31
+======================
+
+Kubernetes `release changelog for v1.31 since v1.30`_.
+
+.. _`release changelog for v1.31 since v1.30`: https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.31.md
+
+In addition to the Kubernetes changes, we have:
+
+* Upgraded minor versions of Calico CNI, CoreDNS, Cinder CSI and Cloud Provider Openstack.
+* Upgraded patch version of etcd.
+* Upgrades base OS flatcar to latest stable release.
+
+
+Note that skipping minor versions when upgrading a cluster is unsupported and
+should not be attempted. For example, before upgrading to v1.31.x, you must
+be running at least v1.30.x.
+
 
 Version v1.29 to v1.30
 ======================
@@ -87,6 +98,7 @@ In addition to the Kubernetes changes, we have:
 
 * Upgraded minor version of Calico CNI.
 * Upgraded minor version of Cinder CSI and Cloud Provider Openstack.
+* Upgrades base OS flatcar to latest stable release.
 
 
 Note that skipping minor versions when upgrading a cluster is unsupported and
@@ -282,9 +294,9 @@ Upgrading Kubernetes Versions
 
 When upgrading a cluster to a new version, skipping minor versions is **unsupported**.
 
-For example, if the current cluster version is v1.28.x, then you cannot
-upgrade directly to a v1.30.x. You have to upgrade to v1.29.x first,
-and then perform another upgrade to v1.30.x.
+For example, if the current cluster version is v1.29.x, then you cannot
+upgrade directly to a v1.31.x. You have to upgrade to v1.30.x first,
+and then perform another upgrade to v1.31.x.
 
 This is in line with the `Kubernetes Version Skew policy`_, and also takes into account the
 additional components that Catalyst Cloud Kubernetes Service is formed with.
