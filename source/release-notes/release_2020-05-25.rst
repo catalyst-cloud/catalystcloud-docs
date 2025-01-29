@@ -42,7 +42,7 @@ New features
 
 .. _`Fedora CoreOS`: https://docs.fedoraproject.org/en-US/fedora-coreos/getting-started/
 .. _Podman: https://podman.io/
-.. _Calico: https://docs.tigera.io/calico/latest/getting-started/kubernetes/
+.. _Calico: https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart
 .. _CoreDNS: https://coredns.io/
 .. _`Kubernetes Web UI (dashboard)`: https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 .. _Prometheus: https://prometheus.io/
