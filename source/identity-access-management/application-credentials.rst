@@ -59,6 +59,13 @@ If this is not given then the credential does not expire.
     | unrestricted | False                            |
     +--------------+----------------------------------+
 
+.. danger::
+   If a user who has application credentials has a role removed then the
+   identity service will delete all of the application credentials of the user
+   from the project.  This is regardless of whether the application credential
+   had the role or not.  CCKS uses application credentials to manage your
+   cluster, so do not remove any roles from the user who created the cluster.
+
 *******************************
 Using an Application Credential
 *******************************
