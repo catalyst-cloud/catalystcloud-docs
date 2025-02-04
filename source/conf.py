@@ -354,4 +354,7 @@ linkcheck_ignore = [r'http://localhost:8001/.*',
                     r'https://object-storage\.nz-hlz-1\.catalystcloud\.io(:443)?(/.*)?',
                     r'https://object-storage\.nz-por-1\.catalystcloud\.io(443)?(/.*)?',
                     r'https://object-storage\.nz-wlg-2\.catalystcloud\.io(:443)?(/.*)?',
-                    r'https://docs\.nextcloud\.com/server/latest/Nextcloud_User_Manual\.pdf#section\.5\.6']
+                    r'https://docs\.nextcloud\.com/server/latest/Nextcloud_User_Manual\.pdf#section\.5\.6',
+                    r'https://www\.catalyst\.net\.nz/',
+                    r'https://dev\.mysql\.com/doc/',
+                    ]
