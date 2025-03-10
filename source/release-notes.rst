@@ -12,6 +12,7 @@ Table of Contents:
   :maxdepth: 1
 
   release-notes/release_2025-02-20.rst
+  release-notes/release_2025-02-05.rst
   release-notes/release_2024-12-20.rst
   release-notes/release_2024-09-24.rst
   release-notes/release_2024-09-16.rst

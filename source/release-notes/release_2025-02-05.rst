@@ -1,0 +1,35 @@
+################
+05 February 2025
+################
+
+==================================
+Catalyst Cloud Kubernetes Service
+==================================
+
+We have released Cluster Templates for Kubernetes 1.32.
+
+The :ref:`supported-kubernetes-versions` section of our documentation has more
+information about this release and information on projected supported dates
+for this and other version releases.
+
+To get started using our CNCF Certified Kubernetes service, follow the
+:ref:`Kubernetes Quick-Start Guide<k8s-quickstart>`.
+
+===================
+Deprecation Notices
+===================
+
+------------------------
+Magnum Cluster Templates
+------------------------
+
+With the release of 1.31 for Catalyst Cloud Kubernetes Service, clusters
+built on 1.29 is scheduled to transition to unsupported on 28th Feb 2025 and these templates will be hidden from the Dashboard after this date.
+
+If you have clusters of version 1.29 and older, you should consider upgrading these soon.
+
+Building clusters with a hidden cluster template remains possible through the CLI and API.
+This supports the case where you need an identical version of an older cluster created.
+
+See :ref:`supported-kubernetes-versions` for more information, and upgrade your
+1.29 clusters.
