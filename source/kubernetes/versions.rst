@@ -38,18 +38,14 @@ It does not show patch versions, as all patch versions for a supported minor ver
      - Current Status
      - Initial Release Date
      - Unsupported Date
-   * - ``1.27``
-     - Unsupported
-     - 2024-01-22
-     - 2024-08-26
    * - ``1.28``
      - Unsupported
      - 2024-04-18
      - 2024-12-20
    * - ``1.29``
-     - Supported
+     - Unsupported
      - 2024-05-27
-     - 2025-02-28
+     - 2025-03-19
    * - ``1.30``
      - Supported
      - 2024-08-26
@@ -193,12 +189,6 @@ operations remain functional for your use-case.
 .. _`Traefik Ingress`: https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart
 .. _`Octavia Ingress controller`: https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/octavia-ingress-controller/using-octavia-ingress-controller.md
 
-Version 1.26 and below
-======================
-
-The upgrade path for clusters of version v1.27 and prior is build a new cluster and migrate your workloads.
-
-For more information see :ref:`cluster-upgrade-rebuild-vs-inplace`.
 
 **********************
 Kubernetes Versioning
