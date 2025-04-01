@@ -60,6 +60,8 @@ If possible, you should configure your software to deny using these ciphers and
 test that you can still interact with our API endpoints, to ensure that when
 these ciphers are removed you are not affected.
 
+.. _deprecation_of_v2_block:
+
 Deprecation of the v2 block storage API
 =======================================
 
