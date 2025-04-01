@@ -38,18 +38,14 @@ It does not show patch versions, as all patch versions for a supported minor ver
      - Current Status
      - Initial Release Date
      - Unsupported Date
-   * - ``1.27``
-     - Unsupported
-     - 2024-01-22
-     - 2024-08-26
    * - ``1.28``
      - Unsupported
      - 2024-04-18
      - 2024-12-20
    * - ``1.29``
-     - Supported
+     - Unsupported
      - 2024-05-27
-     - Expected 2025-02-28
+     - 2025-03-19
    * - ``1.30``
      - Supported
      - 2024-08-26
@@ -59,14 +55,33 @@ It does not show patch versions, as all patch versions for a supported minor ver
      - 2024-12-20
      - Expected 2025-10-28
    * - ``1.32``
-     - In development
-     - Expected 2025-02-24
+     - Supported
+     - 2025-02-05
      - Expected 2026-02-28
 
 
 **********************
 Version upgrade notes
 **********************
+
+Version v1.31 to v1.32
+======================
+
+Kubernetes `release changelog for v1.32 since v1.31`_.
+
+.. _`release changelog for v1.32 since v1.31`: https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.32.md
+
+In addition to the Kubernetes changes, we have:
+
+* Upgraded minor versions of Calico CNI, CoreDNS, Cinder CSI and Cloud Provider Openstack.
+* Upgraded patch version of k8s-keystone-auth.
+* Upgraded base OS Flatcar to latest stable release.
+
+
+Note that skipping minor versions when upgrading a cluster is unsupported and
+should not be attempted. For example, before upgrading to v1.32.x, you must
+be running at least v1.31.x.
+
 
 Version v1.30 to v1.31
 ======================
@@ -174,12 +189,6 @@ operations remain functional for your use-case.
 .. _`Traefik Ingress`: https://doc.traefik.io/traefik/getting-started/install-traefik/#use-the-helm-chart
 .. _`Octavia Ingress controller`: https://github.com/kubernetes/cloud-provider-openstack/blob/master/docs/octavia-ingress-controller/using-octavia-ingress-controller.md
 
-Version 1.26 and below
-======================
-
-The upgrade path for clusters of version v1.27 and prior is build a new cluster and migrate your workloads.
-
-For more information see :ref:`cluster-upgrade-rebuild-vs-inplace`.
 
 **********************
 Kubernetes Versioning
@@ -214,10 +223,10 @@ example:
 
 .. code-block:: text
 
-  kubernetes-v1.28.9-20240416
+  kubernetes-v1.31.4-20241220
 
-  Here, the Kubernetes version is v1.28.9 (Major version 1, Minor version 28 and Patch version 9).
-  The template creation date is 16th April 2024.
+  Here, the Kubernetes version is v1.31.4 (Major version 1, Minor version 31 and Patch version 4).
+  The template creation date is 20th December 2024.
 
 The Cluster Template name contains the specific Kubernetes semantic version,
 and a date in ``YYYYMMDD`` format which represents the release date of the template on Catalyst Cloud.
@@ -254,8 +263,8 @@ Kubernetes patch version is released, or an Operating System updated is availabl
 on our cloud. When a new Cluster Template is created, any existing Cluster Templates
 for the same minor version will be hidden.
 
-For example, when releasing patch version ``v1.28.9``, the Cluster Template for
-the previous patch version, ``v1.28.8`` will be marked as hidden.
+For example, when we release patch version ``v1.31.2``, the Cluster Template for
+the previous patch version, ``v1.31.1`` will be marked as hidden.
 
 .. note::
 
@@ -281,13 +290,14 @@ Catalyst Cloud Kubernetes Service in the web interface as well as on the command
 .. code-block:: console
 
   $ openstack coe cluster template list
-  +--------------------------------------+-----------------------------------+---------------------------------------------------------------------------------+
-  | uuid                                 | name                              | tags                                                                            |
-  +--------------------------------------+-----------------------------------+---------------------------------------------------------------------------------+
-  | 456a5390-67c3-4a89-b1e8-ba8dbf529506 | kubernetes-v1.26.14-prod-20240218 | environment:prod,build_id:20240218,pipeline_id:40826,created_at:20240218T183133 |
-  | b922a741-099a-4987-bc32-d5f3e3a4beed | kubernetes-v1.27.11-prod-20240218 | environment:prod,build_id:20240218,pipeline_id:40827,created_at:20240218T183254 |
-  | dafe4576-8de0-4024-a12a-1bc5197b474f | kubernetes-v1.28.9-20240416       | None                                                                            |
-  +--------------------------------------+-----------------------------------+---------------------------------------------------------------------------------+
+  +--------------------------------------+------------------------------+------+
+  | uuid                                 | name                         | tags |
+  +--------------------------------------+------------------------------+------+
+  | 59b4440d-05f1-4088-971c-60d5bd11690c | kubernetes-v1.30.7-20241121  | None |
+  | ee9d62ac-bbf1-4b88-9e2a-d5e083e73708 | kubernetes-v1.31.4-20241220  | None |
+  | 5613be85-5f5f-45ca-9f60-cad5c2850224 | kubernetes-v1.32.1-20250121  | None |
+  +--------------------------------------+------------------------------+------+
+
 
 Upgrading Kubernetes Versions
 =============================
