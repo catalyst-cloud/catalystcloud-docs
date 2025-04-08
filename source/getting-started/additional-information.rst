@@ -163,7 +163,7 @@ completely independent and isolated (each with their own
 *control plane*), providing fault tolerance and geographic diversity.
 
 
-.. image:: assets/region_dropdown.png
+.. image:: assets/project_dropdown.png
 
 Please visit our website for more information about our national
 infrastructure:
@@ -195,7 +195,7 @@ The web dashboard has a region selector dropbox on the top left corner. It
 indicates the current region you are connected to and allows you to easily
 switch to another region.
 
-.. image:: assets/region_dropdown.png
+.. image:: assets/project_dropdown.png
 
 Via the CLI
 -----------
