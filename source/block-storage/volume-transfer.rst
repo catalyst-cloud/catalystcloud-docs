@@ -15,7 +15,7 @@ Via the dashboard
 
 First we have to select the volume we are wanting to transfer:
 
-.. image:: _assets/transfer-volume.png
+.. image:: _assets/volume-page.png
 
 Once we have our volume, we click on the dropdown menu to the right and we
 select the **create transfer** option from our list.
