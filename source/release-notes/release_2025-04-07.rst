@@ -1,0 +1,47 @@
+#############
+7 April 2025
+#############
+
+This release contains two major upgrades with a number of useful new features
+and capabilities. The details of these are described below.
+
+=====================
+Block storage upgrade
+=====================
+
+The block storage backend (Cinder) is being upgraded. With this update
+the V1 API for the block storage service will no longer be available. Additionally
+we would like to reiterate that the V2 API has been deprecated for some time and
+will no longer be available after the 1st of June 2025. You can read more on this
+in the notice here: :ref:`deprecation_of_v2_block`.
+
+In addition, the following public-facing changes will occur:
+
+* The block storage v3 API microversion changes from 3.27 to 3.59.
+* Volumes can now be resized online (while attached to instances).
+* Improved sorting and filtering of results returned by the API.
+
+Requests for features that are newer than v3.59 may result in an
+error being returned instead of the desired action being performed.
+
+=======================
+Compute service upgrade
+=======================
+
+The compute service (Nova) is being upgraded. Most of the changes are internal
+however there are some public-facing changes as described below.
+
+The compute v2.1 API has been upgraded from microversion v2.60 to v2.79. This
+introduces a number of useful changes:
+
+* Ed25519 SSH keys are supported.
+* Volume type (e.g. NVMe) can be specified directly when creating a server.
+* Servers that are members of server groups include their group memberships
+  when retrieving server details.
+* The ``delete_on_termination`` option can be set when attaching volumes to
+  servers, and the state of this option is provided by the API when viewing
+  server volume attachments.
+* A reason can be added when locking a server.
+
+Requests for features that are newer than v2.79 may result in an
+error being returned instead of the desired action being performed.
