@@ -82,7 +82,8 @@ In addition to the Kubernetes changes, we have:
 * Upgraded minor versions of  CoreDNS, Cinder CSI and Cloud Provider Openstack.
 * Upgraded patch version of k8s-keystone-auth.
 * Upgraded base OS Flatcar to latest stable release.
-* Added kubeReserved to worker nodes to reserve memory and vCPU for Kubelet overhead to avoid OOM events. This value scales based on node size. More information on this can be found at this page `reserve-compute-resources`_.
+* Added kubeReserved to worker nodes to reserve memory and vCPU for Kubelet overhead to avoid OOM events.
+  This value scales based on node size. More information on this can be found at this page `reserve-compute-resources`_.
 
 .. _`reserve-compute-resources`: https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/
 
