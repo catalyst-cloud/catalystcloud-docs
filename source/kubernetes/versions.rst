@@ -58,11 +58,38 @@ It does not show patch versions, as all patch versions for a supported minor ver
      - Supported
      - 2025-02-05
      - Expected 2026-02-28
+   * - ``1.33``
+     - Supported
+     - 2025-05-14
+     - Expected 2026-06-28
+
 
 
 **********************
 Version upgrade notes
 **********************
+
+
+Version v1.32 to v1.33
+======================
+
+Kubernetes `release changelog for v1.33 since v1.32`_.
+
+.. _`release changelog for v1.33 since v1.32`: https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.33.md
+
+In addition to the Kubernetes changes, we have:
+
+* Upgraded minor versions of  CoreDNS, Cinder CSI and Cloud Provider Openstack.
+* Upgraded patch version of k8s-keystone-auth.
+* Upgraded base OS Flatcar to latest stable release.
+* Added kubeReserved to worker nodes to reserve memory and vCPU for Kubelet overhead to avoid OOM events. This value scales based on node size. More information on this can be found at this page `reserve-compute-resources`_.
+
+.. _`reserve-compute-resources`: https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/
+
+Note that skipping minor versions when upgrading a cluster is unsupported and
+should not be attempted. For example, before upgrading to v1.33.x, you must
+be running at least v1.32.x.
+
 
 Version v1.31 to v1.32
 ======================
