@@ -21,7 +21,7 @@ Available cluster labels
 ========================
 
 .. list-table::
-   :widths: 25 10 10 20 30
+   :widths: 35 15 10 20 30
    :header-rows: 1
 
    * - Label
@@ -266,3 +266,108 @@ Some labels can have multiple values set for them.
         }
 
       .. _`openstack_containerinfra_cluster_v1`: https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs/resources/containerinfra_cluster_v1
+
+.. _k8s-kubelet-reserved:
+
+*******************
+Reserved Resources
+*******************
+
+For Kubernetes to function, the system daemons consume some vCPU time and
+memory. When Kubernetes schedules pods, it will only allow them to be placed
+on nodes that have available capacity.
+
+A fully packed node needs to take into account the resource consumption of the
+system daemons as well as the pod limits. For this reason, we reserve some
+resources (both vCPU and memory) for the system daemons.
+
+When choosing node flavors and viewing node capacity in Kubernetes you will
+notice a difference between the allocated and reported available capacity.
+
+We reserve vCPU and memory as a reducing percentage the more resources the
+node has. Example node sizes and the current kubeReserved algorithm are
+provided in the table below to give approximate values for available
+capacity. These are subject to change, consult your node details within your
+cluster for the actual available capacity to the Kubernetes scheduler.
+
+Reserved vCPU capacity values for select example compute flavours:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Example Flavor name
+     - vCPU in Flavor (cores)
+     - Reserved vCPU (millicore)
+     - Kubernetes Available vCPU (millicore)
+     - Percentage reserved
+   * - c1.c1r2
+     - 1
+     - 60 millicore
+     - 940 millicore
+     - 6%
+   * - c1.c2r2
+     - 2
+     - 70 millicore
+     - 1930 millicore
+     - 3.5%
+   * - c1.c4r4
+     - 4
+     - 80 millicore
+     - 3920 millicore
+     - 2%
+   * - c1.c8r8
+     - 8
+     - 90 millicore
+     - 7910 millicore
+     - 1.13%
+   * - c1.c16r16
+     - 16
+     - 110 millicore
+     - 15890 millicore
+     - 0.68%
+   * - c1.c32r16
+     - 32
+     - 150 millicore
+     - 31850 millicore
+     - 0.47%
+
+And the corresponding reserved memory values for the same example flavours:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Example Flavor name
+     - Memory in Flavor (MiB)
+     - Memory Reserved (MiB)
+     - Kubernetes Available Memory (MiB)
+     - Percentage reserved
+   * - c1.c1r2
+     - 2048
+     - 512
+     - 1536
+     - 25%
+   * - c1.c2r2
+     - 2048
+     - 512
+     - 1536
+     - 25%
+   * - c1.c4r4
+     - 4096
+     - 1024
+     - 3072
+     - 25%
+   * - c1.c8r8
+     - 8192
+     - 1844
+     - 6348
+     - 22.5%
+   * - c1.c16r16
+     - 16384
+     - 2664
+     - 13720
+     - 16.25%
+   * - c1.c32r32
+     - 32768
+     - 3648
+     - 29120
+     - 11.13%
