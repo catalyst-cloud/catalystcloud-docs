@@ -69,6 +69,18 @@ It does not show patch versions, as all patch versions for a supported minor ver
 Version upgrade notes
 **********************
 
+Patch versions v1.30.13, v1.31.9, v1.32.5
+==========================================
+
+In patch releases, to keep compatibility we typically only upgrade the
+underlying OS and upgrade Kubernetes itself.
+
+This patch release contains an additional bugfix that was introduced in
+v1.33.0 that adds ``kubeReserved`` to worker nodes and as such some capacity
+will no longer be available to workload pods.
+
+To learn more about ``kubeReserved`` please refer to
+the :ref:`k8s-kubelet-reserved` documentation topic.
 
 Version v1.32 to v1.33
 ======================
