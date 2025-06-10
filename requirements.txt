@@ -4,3 +4,4 @@ doc8>=0.8.0
 sphinx-autobuild
 sphinx-tabs>=2.0.0
 aafigure>=0.5
+myst_parser>=3.0.1
