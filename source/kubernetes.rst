@@ -24,7 +24,12 @@ Table of Contents:
    kubernetes/appendix
    kubernetes/glossary
 
-.. TODO(callumdickinson): Add 'kubernetes/auto-scaling' below Production Consiterations.
+******************
+Usage Tutorials
+******************
+
+Specific examples of using Catalyst Cloud Kubernetes Service can also be found
+in the :ref:`Kubernetes tutorials <kubernetes-tutorials>` section.
 
 ******************
 Providing Feedback
