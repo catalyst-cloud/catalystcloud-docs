@@ -32,6 +32,7 @@ Table of Contents
 
   compute/quickstart
   compute/launch-compute-instance
+  compute/console
   compute/resize-instance
   compute/stop-instance
   compute/change-type
