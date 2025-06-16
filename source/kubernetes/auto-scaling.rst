@@ -140,9 +140,12 @@ content.
 
 .. note::
 
-    We use the ``nginx`` image below to highlight that it's not current usage of CPU or memory but the resource requests that triggers node auto-scaling.
+    We use the ``nginx`` image below to highlight that it's not current usage
+    of CPU or memory but the resource requests that triggers node
+    auto-scaling.
 
-    ie. More website visits will not trigger the scaling, but changing replicas of a deployment, or adding deployments may. 
+    ie. More website visits will not trigger the scaling, but changing
+    replicas of a deployment, or adding deployments may.
 
 
 .. code-block:: yaml
@@ -265,7 +268,7 @@ After ten minutes, the candidate nodes will be cordoned, drained and removed fro
 
 .. code-block:: console
 
-  $ kubectl get nodes 
+  $ kubectl get nodes
   NAME                                             STATUS   ROLES           AGE     VERSION
   cluster-rdwcodlwtmuf-control-plane-b4jgx          Ready    control-plane   4d23h   v1.32.1
   cluster-rdwcodlwtmuf-default-worker-ghb8h-fwgmx   Ready    <none>          3d22h   v1.32.1
@@ -297,8 +300,8 @@ So, to update the autoscaling values, we should update the fields
 
    .. tab:: Command Line
 
-      Set existing cluster `min_node_count` and `max_node_count` fields in the command
-      line.
+      Set existing cluster `min_node_count` and `max_node_count` fields in the
+      command line.
 
       .. code-block:: console
 
@@ -309,7 +312,9 @@ So, to update the autoscaling values, we should update the fields
 
       This action cannot be performed in the Web UI currently.
 
-These fields can also be set on a non-default nodegroup in Terraform either at creation time or on existing resources without triggering replacement of the nodegroup.
+These fields can also be set on a non-default nodegroup in Terraform either at
+creation time or on existing resources without triggering replacement of the
+nodegroup.
 
 
 *******
