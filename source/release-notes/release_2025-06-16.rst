@@ -9,12 +9,18 @@
 Catalyst Cloud Kubernetes Service
 ==================================
 
-We have released an upgrade for the API service of CCKS, with this comes several useful changes:
+We have released an upgrade for the API service of CCKS, with this comes
+several useful changes:
 
-* The autoscaling feature now permits updates to the `min_node_count` and `max_node_count` fields
-  on Node Group resources. See :ref:`autoscaling-modifying-minmax` for more information and examples.
-* Cluster ``status_reason`` now contains an additional property ``addons`` which indicates the progress of installation of manifests into your cluster. This can be useful for identifying issues that may be preventing installation, such as webhook configuration.
-* Clusters being upgraded will no longer transition to ``UPDATE_COMPLETE`` before all nodes have been replaced.
+* The autoscaling feature now permits updates to the `min_node_count` and
+  `max_node_count` fields on Node Group resources.
+  See :ref:`autoscaling-modifying-minmax` for more information and examples.
+* Cluster ``status_reason`` now contains an additional property ``addons``
+  which indicates the progress of installation of manifests into your
+  cluster. This can be useful for identifying issues that may be preventing
+  installation, such as webhook configuration.
+* Clusters being upgraded will no longer transition to ``UPDATE_COMPLETE``
+  before all nodes have been replaced.
 
 To get started using our CNCF Certified Kubernetes service, follow the
 :ref:`Kubernetes Quick-Start Guide<k8s-quickstart>`.
