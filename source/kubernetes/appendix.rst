@@ -267,6 +267,50 @@ Some labels can have multiple values set for them.
 
       .. _`openstack_containerinfra_cluster_v1`: https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs/resources/containerinfra_cluster_v1
 
+
+
+.. _k8s-managed-namespaces:
+
+***********************
+Managed Resources
+***********************
+
+Within a cluster created by CCKS there are a number of deployments, daemonsets
+and other controllers Catalyst Cloud deploy and manage.
+
+These may change based on the selection of features your cluster was created
+with, and may change during upgrades to new versions. These provide core
+functionality that keep your cluster operational and should not be modified
+except via the CCKS API.
+
+CCKS also relies on being able to generate join tokens using the Kubernetes
+API of the cluster. This means if the Kubernetes API is not available due to
+a required webhook service not functioning (via `validatingwebhookconfiguration`
+or `mutatingwebhookconfiguration`), newly provisioned nodes may be unable to
+join the cluster.
+
+The current list of managed namespaces in a newly created cluster is below,
+and these namespaces should not be used for other purposes or modified.
+
+.. list-table::
+   :header-rows: 1
+
+   * - Namespace
+     - Purpose
+   * - calico-apiserver
+     - Kubernetes CNI
+   * - calico-system
+     - Kubernetes CNI
+   * - kube-system
+     - Kubernetes API and core components.
+   * - kubernetes-dashboard
+     - K8s dashboard deployment, if selected to install.
+   * - openstack-system
+     - Cloud integration with OpenStack
+   * - tigera-operator
+     - Kubernetes CNI Operator
+
+
 .. _k8s-kubelet-reserved:
 
 *******************
