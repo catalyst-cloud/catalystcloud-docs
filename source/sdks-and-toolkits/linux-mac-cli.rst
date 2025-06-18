@@ -40,9 +40,9 @@ system.
           # activate the virtual environment
           source venv/bin/activate
 
-          # install the Openstack commandline tools into the virtual environment. In some 
-          # cases you may need to use pipx instead of pip, but the packages you need to 
-          # install are the same regardless. 
+          # install the Openstack commandline tools into the virtual environment. In some
+          # cases you may need to use pipx instead of pip, but the packages you need to
+          # install are the same regardless.
           pip install -U pip \
           wheel \
           python-openstackclient \
