@@ -36,6 +36,7 @@ extensions = [
     'sphinx_tabs.tabs',
     'aafigure.sphinxext',
     'myst_parser',
+    'sphinx_reredirects'
     ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -371,3 +372,7 @@ linkcheck_ignore = [r'http://localhost:8001/.*',
                     r'https://api\.nz-hlz-1\.catalystcloud\.io:8777',
                     r'https://api\.nz-hlz-1\.catalystcloud\.io:8779/v1\.0',
                     ]
+
+redirects = {
+    "compute/change-type": "/compute/instance-types.html"
+}
