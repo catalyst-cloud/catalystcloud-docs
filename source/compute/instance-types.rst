@@ -147,6 +147,9 @@ It is important to note that your workloads and operating systems
 using accelerated types must have appropriate drivers and licenses
 for any accelerator present.
 
+Accelerated types may have additional requirements the OS must follow
+for the accelerator to be functional. For GPUs, see :ref:`gpu-support`.
+
 **********************
 vCPU and pCPU Policies
 **********************
@@ -204,7 +207,9 @@ never execute the OS code installed.
 In most cases, converting between the same architecture provided by
 different vendors will boot, but note that like CPU generation this
 may result in software which does not perform to the same level. For
-example, switching between Intel and AMD x86-64 CPUs.
+example, switching between Intel and AMD x86-64 CPUs is generally low
+risk for most code but there are still differences that may affect
+performance.
 
 Consult the tables above for which vendor and architecture any instance
 type is.

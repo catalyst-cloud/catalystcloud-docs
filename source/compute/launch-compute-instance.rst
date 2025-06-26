@@ -146,30 +146,15 @@ Flavor
 The compute instance "flavor" (spelt as the API spells it) defines the
 type of compute, and the amount of CPU and RAM allocated to your virtual
 servers. The price per hour for a compute instance varies according to
-its flavor. Supported flavors can be found here:
-https://catalystcloud.nz/services/iaas/compute/
+its flavor.
 
 Our flavors are named after the type of compute and amount of CPU and RAM
 (and any other significant resources) they provide you, so you don't need
 to consult our documentation to find out their specifications. We
 currently provide a number of common combinations of CPU and RAM.
 
-A virtual CPU (vCPU) is a slice of a physical CPU. How these are sliced
-depend on the type of compute chosen. In general, one vCPU is mapped to
-one hardware thread on the physical core. Some types of compute will
-statically allocate these (assuring predictable performance), while
-others will timeslice further or dynamically allocate hardware threads
-as needed. This is documented in the product page about each type of
-virtual server.
-
-RAM is always allocated 1:1 with the physical RAM. We do not
-oversubscribe RAM as this severely impacts on performance.
-
-.. note::
-  Some flavors have specific OS requirements which must be followed
-  when using those types of servers.
-
-  For "c2-gpu", see :ref:`gpu-support`.
+More information about the differences between types can be found
+in the page on :ref:`instance-types`.
 
 ***********************
 Instance initialisation

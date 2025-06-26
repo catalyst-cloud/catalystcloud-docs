@@ -4,17 +4,21 @@
 GPU Support in Virtual Servers
 ##############################
 
+Catalyst Cloud provides several different instance types with GPUs.
+The requirements for the OS to support each instance type's GPU
+varies, so it's important to understand the differences.
+
 **********************
 c2-gpu Virtual Servers
 **********************
 
-Each c2-gpu instance type includes one or more slices of NVIDIA A100
+Each c2-gpu virtual server includes one slice of NVIDIA A100
 GPUs. The slice size provided is "GRID A100D-20C", which provides
 2 compute pipelines and 20GB of video RAM from the card.
 
 .. warning::
 
-    c2-gpu virtual servers are in Technical Preview only
+    c2-gpu virtual servers are classed as Beta
 
 Minimum Requirements
 ====================
