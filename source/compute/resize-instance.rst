@@ -18,7 +18,7 @@ amount of CPU and RAM, or change the type) of a compute instance.
 .. note::
 
   Changing types, including important limitations, is discussed in more
-  detail in :ref:`change-compute-type`.
+  detail in :ref:`change-instance-type`.
 
 *****************
 Via the dashboard

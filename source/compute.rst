@@ -31,11 +31,11 @@ Table of Contents
   :maxdepth: 1
 
   compute/quickstart
+  compute/instance-types
   compute/launch-compute-instance
   compute/console
   compute/resize-instance
   compute/stop-instance
-  compute/change-type
   compute/create-new-from-existing
   compute/gpu-support
   compute/anti-affinity-groups-ha
