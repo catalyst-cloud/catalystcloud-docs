@@ -6,8 +6,8 @@ Instance Types
 
 The Compute service offers virtual machines with different
 configurations and capabilities. Understanding which type should be
-used for a given workloads is important to both ensure you get the
-performance you expect, but also manage your compute service costs.
+used for a given workload is important to both ensure you get the
+performance you expect, while also managing your compute service costs.
 
 Catalyst Cloud provides a variety of compute types organised as
 types and sizes of resources, combined into a "flavor".
@@ -154,8 +154,8 @@ for the accelerator to be functional. For GPUs, see :ref:`gpu-support`.
 vCPU and pCPU Policies
 **********************
 
-A "vCPU" means a CPU that the virtual machine sees as able to be used
-by the operating system, and a "pCPU" means a CPU core that is actually
+A "vCPU" means a CPU that the virtual machine provides for an operating
+system to use, and a "pCPU" means a CPU core that is actually
 physically supporting the execution of the vCPU.
 
 Instance types may allocate a vCPU as a thread of a pCPU where the
@@ -165,12 +165,21 @@ cases a vCPU is simply allocated to a pCPU.
 An instance type may also treat pCPU as shared between more than one
 VM, or dedicated to a single specific VM. Where the pCPU is dedicated
 and vCPUs are threads of a pCPU, the threads are always allocated as
-siblings on pCPUs.
+siblings on pCPUs. The nature of shared pCPUs means the actual pCPU
+executing a vCPU will dynamically change, based on demand.
 
 It should be noted that vCPU performance depends on whether the pCPU
-is threaded, and whether the pCPUs are shared. The exact behavior of
-threads on a pCPU is documented in the CPU vendor's documentation or
-datasheets.
+is threaded, and whether the pCPUs are shared, in addition to usually
+expected differences about workload, CPU generation, and clock rates.
+The exact behavior of threads on a pCPU is documented in the CPU
+vendor's documentation or datasheets.
+
+Lastly, whether all vCPU are used by an operating system is dependant
+on the operating system. You may need to consult documentation for
+the operating system about any limits on vCPU, cores, and sockets.
+We are also unable to guarantee that a virtual server is provided with
+a CPU topology that will always implement the most optimal approach for
+any operating system or license for software.
 
 .. _change-instance-type:
 
@@ -179,11 +188,12 @@ Changing type of virtual servers
 ********************************
 
 You can change the type of virtual server after it has been created.
-The instance type can be changed by performing an offline resize. The
-server must be shutdown, and then you can select a different type and
-size following the :ref:`resize-server` process.
+The instance type can be changed by performing the :ref:`resize-server`
+process. Note that a resize needs the server to be stopped, which is
+either done automatically for you or you can stop and start the server
+yourself.
 
-However, while this can be done in-place, it is important to note
+While this change can be done in-place, it is important to note
 that the operating system and software must be tolerant of the
 differences between the old and new type the instance has.
 
