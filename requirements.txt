@@ -5,4 +5,3 @@ sphinx-autobuild
 sphinx-tabs>=2.0.0
 aafigure>=0.5
 myst_parser>=0.16.1
-sphinx-reredirects>=0.1.6
