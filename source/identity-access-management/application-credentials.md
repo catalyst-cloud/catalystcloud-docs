@@ -65,13 +65,20 @@ authenticate against Catalyst Cloud. Instead of providing a username
 and password the machine user can authenticate using the application
 credential ID and secret.
 
+When using the openstack command line the following options need to be set:
+ - `--os-auth-url` the endpoint for the authentication service.
+ - `--os-application-credential-secret` the application credential secret.
+ - `--os-application-credential-id` the application credential id.
+ - `--os-auth-type v3applicationcredential` tells the command that you are using an application credential. 
+ - `--os-region-name` set the region so that the command can find the correct service end point.
+
 For example the following lists the servers running in the project:
 
 ``` bash
 $ openstack server list --os-auth-url  https://api.nz-por-1.catalystcloud.io:5000  \
   --os-application-credential-secret mysupersecret \
   --os-application-credential-id 342ddaab6f7643a5a60b80f8d727bd97 \
-  --os-auth-type v3applicationcredential
+  --os-auth-type v3applicationcredential --os-region-name nz-por-1
 ```
 
 You can also obtain an authentication token and use that for further
