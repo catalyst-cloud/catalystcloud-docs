@@ -6,8 +6,8 @@
 Database Service
 ================
 
-We have updated the versions of databases to MySQL 5.7.36 and PostgreSQL 2.18.
-In addition the PostgreSQL 12.8 data store has the PostGIS extension available.
+We have updated the versions of databases to MySQL 5.7.36 and PostgreSQL 12.18.
+In addition the PostgreSQL 12.18 data store has the PostGIS extension available.
 
 See :doc:`/database/versions-and-extensions` for a list of database versions and
 available extensions.
