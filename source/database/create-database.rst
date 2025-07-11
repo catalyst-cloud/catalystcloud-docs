@@ -6,6 +6,11 @@ In this section we will work through the steps required to create a new
 database instance, how to add and remove databases from your instance, and how
 to expose a database instance to the public.
 
+.. Warning::
+
+  There are may be multiple versions of a database available for use. Whenever
+  possible you should use the latest version available.
+
 *********************************
 Prerequisites
 *********************************
