@@ -4,7 +4,7 @@ Database creation and access
 
 In this section we will work through the steps required to create a new
 database instance, how to add and remove databases from your instance, and how
-to expose a database instance to the public.
+to expose a database instance.
 
 .. Warning::
 
@@ -289,16 +289,21 @@ To delete a database, you can use the following command:
   # wait until the console returns, it will reply with a message saying your database was deleted.
 
 
-**************************
-Creating a public database
-**************************
+******************************************
+Creating an externally accessible database
+******************************************
 
-By default the database instances that you create will only be available via
+By default the database instances that you create will only be available to
 your internal network on the cloud. If you are wanting to have your database
 open to a wider audience then you will need to expose it to the Internet.
 
+.. Warning::
+
+  Ensure you suitably protect your database. Exposing to all IP addresses
+  (by not using ``--allowed-cidr``) is not advised.
+
 The following example shows how to create a database instance that
-is publicly available, but only from the specific CIDR range: 202.37.199.1/24
+is available externally, but only from the specific CIDR range: 202.37.199.1/24
 
 .. code-block:: bash
 
