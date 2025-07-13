@@ -4,7 +4,12 @@ Database creation and access
 
 In this section we will work through the steps required to create a new
 database instance, how to add and remove databases from your instance, and how
-to expose a database instance to the public.
+to expose a database instance.
+
+.. Warning::
+
+  There are may be multiple versions of a database available for use. Whenever
+  possible you should use the latest version available.
 
 *********************************
 Prerequisites
@@ -38,7 +43,7 @@ options, these include:
 * It is also necessary to have an **existing network**,  which is attached to a
   router and has a working subnet, on the project that you wish to deploy the
   database instance to. The network that you create the database instance in
-  **must** have access to the internet, as it is required to download the
+  **must** have access to the Internet, as it is required to download the
   support files to start the database.
 
 .. Warning::
@@ -66,13 +71,13 @@ First, lets determine what datastore types are available to us.
 
   The openstack commands that are used in this tutorial should be the same
   regardless of the datastore that you choose. The only differences will be
-  the datastore type, datastore version version and the maximum length of
+  the datastore type, datastore version and the maximum length of
   the initial username assigned during database instance creation.
 
   Maximum initial username length by datastore type:
 
   * MySQL: 16 characters
-  * Postgres: 63 characters.
+  * PostgreSQL: 63 characters.
 
 For this example we are going to use MySQL.
 
@@ -155,7 +160,7 @@ the following command to create our new instance:
 
 .. code-block:: bash
 
-  $ openstack database instance create db-instance-1\
+  $ openstack database instance create db-instance-1 \
   --flavor e3feb785-af2e-41f7-899b-xxxxxxxxxxxx \ # this is the flavor ID for your instance
   --size 5 \
   --datastore mysql \
@@ -284,16 +289,21 @@ To delete a database, you can use the following command:
   # wait until the console returns, it will reply with a message saying your database was deleted.
 
 
-**************************
-Creating a public database
-**************************
+******************************************
+Creating an externally accessible database
+******************************************
 
-By default the database instances that you create will only be available via
+By default the database instances that you create will only be available to
 your internal network on the cloud. If you are wanting to have your database
-open to a wider audience then you will need to expose it to the internet.
+open to a wider audience then you will need to expose it to the Internet.
+
+.. Warning::
+
+  Ensure you suitably protect your database. Exposing to all IP addresses
+  (by not using ``--allowed-cidr``) is not advised.
 
 The following example shows how to create a database instance that
-is publicly available, but only from the specific cidr range: 202.37.199.1/24
+is available externally, but only from the specific CIDR range: 202.37.199.1/24
 
 .. code-block:: bash
 
