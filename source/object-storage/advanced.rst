@@ -267,8 +267,8 @@ Legal Hold
 
 Object locking also supports legal holds, which prevent object deletion
 regardless of retention settings. A legal hold can be applied to or removed
-from an object version at any time during its lifetime by users with appropriate
-permissions.
+from an object version at any time during its lifetime by users with
+the ``LEGALHOLDPLACEHOLDER`` role.
 
 Interaction Between Lock Modes and Legal Hold
 ----------------------------------------------
@@ -302,38 +302,59 @@ Legal holds work independently of and in addition to retention-based locks:
 Enabling Object Locks via Swift API
 ===================================
 
-To enable object locking using the Swift API, you set headers when creating
-or updating containers and objects:
+Locking must be configured on the container level first, including the
+default retention to apply to newly created objects.
 
 Container-level Configuration
 -----------------------------
 
-Enable object locking on a container with default settings:
-
-.. code-block:: bash
-
-  $ curl -i -X POST -H "X-Auth-Token: $token" \
-    -H "X-Container-Lock-Enabled: true" \
-    -H "X-Container-Lock-Mode: governance" \
-    -H "X-Container-Lock-Days: 30" \
-    $storageURL/my-container
-
-Setting Default Retention on Container
----------------------------------------
-
-You can set default retention policies that will automatically apply to new
-objects uploaded to the container:
+To enable object locking on a container, update the container and
+set the following headers as appropriate:
 
 .. code-block:: bash
 
   # Set default retention with days
   $ curl -i -X POST -H "X-Auth-Token: $token" \
     -H "X-Container-Lock-Enabled: true" \
+    -H "X-Container-Lock-Mode: governance" \
+    -H "X-Container-Lock-Days: 365" \
+    $storageURL/my-container
+
+In this example, we are enabling locking in Governance mode, with
+a default retention of 365 days.
+
+.. warning::
+
+  Once object locking is enabled on a container, it cannot be
+  disabled. Mode and default retention can be changed for the container,
+  but applies only to newly created objects. The mode or retention of
+  existing objects is not affected by the container-level
+  configuration.
+
+.. note::
+
+  We recommend running in Governance mode when initially trialing
+  object locking, as this can be overridden easily during testing.
+  Production usage should always use Compliance mode as this provides
+  the highest level of protection.
+
+Changing Default Retention and Mode on a Container
+--------------------------------------------------
+
+You can change the default mode and retention for new objects on the
+container after it has been set. Existing objects are unaffected by
+these changes. Update the container as follows:
+
+.. code-block:: bash
+
+  # Set default retention with days, use compliance mode
+  $ curl -i -X POST -H "X-Auth-Token: $token" \
+    -H "X-Container-Lock-Enabled: true" \
     -H "X-Container-Lock-Mode: compliance" \
     -H "X-Container-Lock-Days: 365" \
     $storageURL/my-container
 
-  # Set default retention with years
+  # Set default retention with years, use governance mode
   $ curl -i -X POST -H "X-Auth-Token: $token" \
     -H "X-Container-Lock-Enabled: true" \
     -H "X-Container-Lock-Mode: governance" \
@@ -366,15 +387,31 @@ The response will include headers showing the current lock state:
 Object-level Configuration
 --------------------------
 
-Apply specific lock settings to individual objects:
+Object-level locks apply only to a specific object, and the locks are
+retained even if the configuration of the container is changed. Newly
+created objects will inhereit the defaults from the container
+configuration, but you can override the mode or retention when writing
+a new object. (In this situation, the unspecified options will use
+the container defaults.)
+
+You can extend the retention period, or change mode from Governance
+to Compliance. You can never change the lock mode on an object from
+Compliance back to Governance.
+
+The following will apply specific lock settings to individual objects:
 
 .. code-block:: bash
 
-  $ curl -i -X PUT -H "X-Auth-Token: $token" \
+  $ curl -i -X POST -H "X-Auth-Token: $token" \
     -H "X-Object-Lock-Enabled: true" \
     -H "X-Object-Lock-Mode: compliance" \
     -H "X-Object-Lock-Years: 1" \
     $storageURL/my-container/my-object
+
+In this example, we are setting a specific object to Compliance mode
+(which it may not have been before) and extending retention to one year
+from the point in time you made the request to update the object's
+locking.
 
 Checking Object Lock State
 ---------------------------
@@ -403,7 +440,13 @@ You can also use HEAD requests to get just the headers without the object conten
 Legal Hold Management
 ---------------------
 
-Apply or remove legal holds on objects:
+Legal Hold works separately to retention periods. A user with
+``LEGALHOLDPLACEHOLDER`` can set or remove legal holds at any time.
+As noted above, legal holds do not override retention locks, and
+an expired retention lock does not override legal holds.
+
+Setting the legal hold status on an object can be implemented by
+updating the object:
 
 .. code-block:: bash
 
