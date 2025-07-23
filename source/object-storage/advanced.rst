@@ -82,11 +82,11 @@ You should now be able to view the index file as a website.
 
 https://object-storage.nz-por-1.catalystcloud.io:443/v1/%AUTH_ID%/%container_name%/
 
+.. _object-versioning:
+
 *****************
 Object versioning
 *****************
-
-.. _object-versioning:
 
 This provides a means by which multiple versions of your content can be stored
 allowing for recovery from unintended overwrites.
@@ -220,6 +220,178 @@ convention outlined above.
   | 009file1.txt/1480982072.29403 |
   +-------------------------------+
 
+**************
+Object Locking
+**************
+
+Object Locking prevents the loss of information stored in Object
+Storage by preventing overwrites or deletion while an object is
+locked. The feature works in conjunction with :ref:`object-versioning`.
+
+Prerequisites for Object Locking
+==================================
+
+Before you can use object locking, you must first enable object versioning
+on your container. See the :ref:`object-versioning` section for detailed
+instructions on setting up versioning with the ``X-Versions-Location`` header.
+
+Object Lock Modes
+=================
+
+Object locking supports two distinct retention modes:
+
+**Governance Mode**
+  In governance mode, users cannot overwrite or delete an object version
+  or alter its lock settings unless they have special permissions. Some users
+  can be granted permission to alter the retention settings or delete the object
+  if necessary. Users with the ``LOCKPLACEHOLDER`` role can bypass governance
+  retention using the ``X-Lock-Bypass`` header.
+
+**Compliance Mode**
+  In compliance mode, a protected object version cannot be overwritten or deleted
+  by any user, including any admin users in your project. When an object is locked
+  in compliance mode, its retention mode cannot be changed, and its retention
+  period cannot be shortened. Compliance mode ensures that an object version
+  cannot be overwritten or deleted for the duration of the retention period.
+
+.. warning::
+
+   Once an object is locked in compliance mode, the lock cannot be overridden
+   or removed by anyone, including Catalyst Cloud's administrative staff.
+   This is an absolute protection that cannot be bypassed under any circumstances.
+   However, locks in either governance or compliance mode can be extended to
+   longer retention periods if needed.
+
+Legal Hold
+----------
+
+Object locking also supports legal holds, which prevent object deletion
+regardless of retention settings. A legal hold can be applied to or removed
+from an object version at any time during its lifetime by users with appropriate
+permissions.
+
+Enabling Object Locks via Swift API
+===================================
+
+To enable object locking using the Swift API, you set headers when creating
+or updating containers and objects:
+
+Container-level Configuration
+-----------------------------
+
+Enable object locking on a container with default settings:
+
+.. code-block:: bash
+
+  $ curl -i -X POST -H "X-Auth-Token: $token" \
+    -H "X-Container-Lock-Enabled: true" \
+    -H "X-Container-Lock-Mode: governance" \
+    -H "X-Container-Lock-Days: 30" \
+    $storageURL/my-container
+
+Setting Default Retention on Container
+---------------------------------------
+
+You can set default retention policies that will automatically apply to new
+objects uploaded to the container:
+
+.. code-block:: bash
+
+  # Set default retention with days
+  $ curl -i -X POST -H "X-Auth-Token: $token" \
+    -H "X-Container-Lock-Enabled: true" \
+    -H "X-Container-Lock-Mode: compliance" \
+    -H "X-Container-Lock-Days: 365" \
+    $storageURL/my-container
+
+  # Set default retention with years
+  $ curl -i -X POST -H "X-Auth-Token: $token" \
+    -H "X-Container-Lock-Enabled: true" \
+    -H "X-Container-Lock-Mode: governance" \
+    -H "X-Container-Lock-Years: 2" \
+    $storageURL/my-container
+
+.. note::
+
+   You can specify either days or years for the retention period, but not both.
+   Setting both ``X-Container-Lock-Days`` and ``X-Container-Lock-Years``
+   headers will result in an error.
+
+Checking Container Lock State
+-----------------------------
+
+To check the current lock configuration of a container:
+
+.. code-block:: bash
+
+  $ curl -i -H "X-Auth-Token: $token" $storageURL/my-container
+
+The response will include headers showing the current lock state:
+
+.. code-block::
+
+  X-Container-Lock-Enabled: true
+  X-Container-Lock-Mode: governance
+  X-Container-Lock-Days: 30
+
+Object-level Configuration
+--------------------------
+
+Apply specific lock settings to individual objects:
+
+.. code-block:: bash
+
+  $ curl -i -X PUT -H "X-Auth-Token: $token" \
+    -H "X-Object-Lock-Enabled: true" \
+    -H "X-Object-Lock-Mode: compliance" \
+    -H "X-Object-Lock-Years: 1" \
+    $storageURL/my-container/my-object
+
+Checking Object Lock State
+---------------------------
+
+To check the current lock status of an object:
+
+.. code-block:: bash
+
+  $ curl -i -H "X-Auth-Token: $token" $storageURL/my-container/my-object
+
+The response will include headers showing the current lock state:
+
+.. code-block::
+
+  X-Object-Lock-Enabled: true
+  X-Object-Lock-Mode: compliance
+  X-Object-Lock-Years: 1
+  X-Object-Lock-Lockeduntil: 2025-12-31T23:59:59.000
+
+You can also use HEAD requests to get just the headers without the object content:
+
+.. code-block:: bash
+
+  $ curl -i -I -H "X-Auth-Token: $token" $storageURL/my-container/my-object
+
+Legal Hold Management
+---------------------
+
+Apply or remove legal holds on objects:
+
+.. code-block:: bash
+
+  # Apply legal hold
+  $ curl -i -X POST -H "X-Auth-Token: $token" \
+    -H "X-Object-Lock-LegalHold: true" \
+    $storageURL/my-container/my-object
+
+S3 API Compatibility
+====================
+
+Object locking is enforced when accessing containers using the S3 Compatibility
+API. Setting locks on containers and objects is supported through the S3 API.
+
+.. note::
+
+   S3's Bulk API is not currently supported for object lock operations.
 
 *************
 Temporary URL
