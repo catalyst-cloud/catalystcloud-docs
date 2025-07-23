@@ -270,6 +270,35 @@ regardless of retention settings. A legal hold can be applied to or removed
 from an object version at any time during its lifetime by users with appropriate
 permissions.
 
+Interaction Between Lock Modes and Legal Hold
+----------------------------------------------
+
+Legal holds work independently of and in addition to retention-based locks:
+
+**Objects with Governance Mode Lock**
+  - If a legal hold is applied, the object cannot be deleted even if the
+    retention period expires
+  - Users with the ``LOCKPLACEHOLDER`` role can bypass the governance lock
+    with ``X-Lock-Bypass``, but **cannot** bypass a legal hold
+  - Both the retention lock and legal hold must be cleared before deletion
+
+**Objects with Compliance Mode Lock**
+  - If a legal hold is applied, the object cannot be deleted even after the
+    retention period expires
+  - No user can bypass compliance mode locks or legal holds
+  - Both protections must expire or be removed through proper channels
+
+**Objects with Legal Hold Only**
+  - Objects can have a legal hold without any retention-based lock
+  - The object cannot be deleted while the legal hold is active
+  - The legal hold can be removed by users with appropriate permissions
+
+**Combined Protection**
+  - When both retention locks and legal holds are present, **both** must
+    be cleared before the object can be deleted
+  - Legal holds provide an additional layer of protection that operates
+    independently of time-based retention policies
+
 Enabling Object Locks via Swift API
 ===================================
 
