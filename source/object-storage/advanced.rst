@@ -225,8 +225,13 @@ Object Locking
 **************
 
 Object Locking prevents the loss of information stored in Object
-Storage by preventing overwrites or deletion while an object is
-locked. The feature works in conjunction with :ref:`object-versioning`.
+Storage by preventing overwrites or deletion of versions of an object
+while an object is locked. The feature works in conjunction with
+:ref:`object-versioning`.
+
+As specific versions of an object are locked, you can still replace
+an object or mark it as deleted, while the past versions of the object
+remain protected from deletion or overwrite, and remain accessible.
 
 Prerequisites for Object Locking
 ==================================
@@ -269,6 +274,10 @@ Object locking also supports legal holds, which prevent object deletion
 regardless of retention settings. A legal hold can be applied to or removed
 from an object version at any time during its lifetime by users with
 the ``LEGALHOLDPLACEHOLDER`` role.
+
+Legal Hold is primarily useful if it is not known in advance how long
+a retention might be needed for, noting that it does not have the same
+level of protection as Compliance Mode locks.
 
 Interaction Between Lock Modes and Legal Hold
 ----------------------------------------------
@@ -335,8 +344,8 @@ a default retention of 365 days.
 
   We recommend running in Governance mode when initially trialing
   object locking, as this can be overridden easily during testing.
-  Production usage should always use Compliance mode as this provides
-  the highest level of protection.
+  Consider only using Compliance mode when it is necessary that no
+  user ever be able to delete data.
 
 Changing Default Retention and Mode on a Container
 --------------------------------------------------
@@ -391,12 +400,12 @@ Object-level locks apply only to a specific object, and the locks are
 retained even if the configuration of the container is changed. Newly
 created objects will inherit the defaults from the container
 configuration, but you can override the mode or retention when writing
-a new object. (In this situation, the unspecified options will use
-the container defaults.)
+a new object. (In this situation, the unspecified options for creating
+the object will use the container defaults.)
 
 You can extend the retention period, or change mode from Governance
 to Compliance. You can never change the lock mode on an object from
-Compliance back to Governance.
+Compliance back to Governance, even if the container policy is changed.
 
 The following will apply specific lock settings to individual objects:
 
@@ -428,7 +437,6 @@ The response will include headers showing the current lock state:
 
   X-Object-Lock-Enabled: true
   X-Object-Lock-Mode: compliance
-  X-Object-Lock-Years: 1
   X-Object-Lock-Lockeduntil: 2025-12-31T23:59:59.000
 
 You can also use HEAD requests to get just the headers without the object content:
@@ -454,6 +462,13 @@ updating the object:
   $ curl -i -X POST -H "X-Auth-Token: $token" \
     -H "X-Object-Lock-LegalHold: true" \
     $storageURL/my-container/my-object
+
+.. warning::
+
+  As noted above in the descriptions of Legal Hold, this feature does
+  not protect data to the same level as Compliance mode retention. It
+  is more like an open-ended Governance mode, where the lock can be
+  removed at will by a suitable user.
 
 S3 API Compatibility
 ====================
