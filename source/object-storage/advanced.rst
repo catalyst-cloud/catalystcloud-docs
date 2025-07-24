@@ -389,7 +389,7 @@ Object-level Configuration
 
 Object-level locks apply only to a specific object, and the locks are
 retained even if the configuration of the container is changed. Newly
-created objects will inhereit the defaults from the container
+created objects will inherit the defaults from the container
 configuration, but you can override the mode or retention when writing
 a new object. (In this situation, the unspecified options will use
 the container defaults.)
