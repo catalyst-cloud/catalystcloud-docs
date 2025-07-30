@@ -20,6 +20,7 @@ Table of Contents:
    kubernetes/auto-scaling
    kubernetes/cluster-upgrade
    kubernetes/storage
+   kubernetes/application-credentials
    kubernetes/versions
    kubernetes/appendix
    kubernetes/glossary
