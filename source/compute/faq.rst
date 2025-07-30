@@ -29,7 +29,7 @@ shelving instances is due to the fact that you are no longer paying for the
 compute services that a running instance uses. Instead, you are now only
 paying the much cheaper cost of storing a snapshot of your image on disk.
 
-To illustrate this, let's say you had a simple 1 vCPU 1Gb RAM instance
+To illustrate this, let's say you had a simple 1 vCPU 1GB RAM instance
 with a 10GB disk running 24/7 for an entire month, which we will assume is
 730 hours as an average.
 
