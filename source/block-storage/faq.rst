@@ -53,77 +53,38 @@ Where the options are:
 
 .. _`rsync`: https://rsync.samba.org
 
-****************************
-How to grow a cinder volume?
-****************************
+*********************
+How to grow a volume?
+*********************
 
 So you have been successfully using OpenStack, and now one of your volumes has
 started filling up. What is the best, quickest and safest way to grow the
 size of your volume?
 
-Well, as always, that depends.
+The block storage service supports the live extension of volumes regardless of
+whether that are boot volumes or additional volumes attached to your instance.
 
-============
-Boot volumes
-============
++++++++++++
+Via the CLI
++++++++++++
 
-There are a number of different options, the best option for you to use will
-depend on your circumstances.
+Using the openstack command you can extend a volume by increasing the size
+(in GB) using the set command.  In order for the command to support the live
+volume extension the minimum version of 3.42 for the Block Storage API needs to be given:
 
-Create new instance
-===================
+.. code-block:: bash
 
-The best method is to spin up a new instance with a new volume and use
-the configuration management tool of your choice to make sure it is as you
-want it. Terminate the old instance and attach all the data volumes to the
-new instance.
+  openstack --os-volume-api-version 3.42  volume set --size 40 9f69bb95-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
-This assumes there is no permanent data stored on the boot volume that is
-outside the configuration management tool control.
++++++++++++++++++
+Via the Dashboard
++++++++++++++++++
 
-Use a volume snapshot
-=====================
+Locate the volume in the Dashboard under the *Volumes* menu and then select the
+*Extend Volume* action:
 
-Another method which is quick and safe is to perform a volume snapshot.
+.. image:: _assets/extend-volume.png
 
-The process is as follows:
+In the dialog enter the new size of the volume and click on *Extend Volume*
 
-1. Shut down the instance.
-2. Take a volume snapshot.
-3. Create volume from snapshot.
-4. Boot instance from volume.
-
-This sequence can be performed either through the API/commands or the
-dashboard.
-
-A reason to like this method is that the original volume is maintained,
-it is quick and cloud-init grows the new instance filesystem to the new
-volume size on first boot.
-
-The reasons not to like this method are:
-
-* The host gets new keys, which may upset some applications.
-* The original volume and the snapshot cannot be deleted until the newly
-  created volume is deleted.
-* You will be charged for these cinder volumes and the snapshot.
-
-Old fashioned method
-====================
-
-Finally, there is the old fashioned method that involves:
-
-* Create a new bootable volume.
-* Shut down instance and detach boot volume.
-* Attach the new volume and the original to another instance.
-* Perform a copy using tools like dd.
-
-================
-Non-boot volumes
-================
-
-The way to go is:
-
-* Detach the volume from the instance
-* Extend the volume
-* Attach the volume to the instance
-* Adjust the disk within the OS as you would normally
+.. image:: _assets/extend-volume-dialog.png
