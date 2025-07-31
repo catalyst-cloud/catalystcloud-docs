@@ -7,6 +7,23 @@ the roles of the user who creates them and an expiry time can be set.
 
 ## Creating an Application Credential
 
+### Via the Dashboard
+
+To create an application credential via the Dashboard select the *Identity* 
+section on the left hand menu:
+
+![Application Credential Menu](_static/application_credentials_menu.png)
+
+Select the *+ Create Application Credential* button, and you will then be able to 
+enter the details of your new credential
+
+![Application Credential Create](_static/application_credential_create.png)
+
+If you don't enter a secret, then a secret will be generated and displayed when
+the credential has been created.  Be sure to record the secret for later use.
+
+### Via the Command Line
+
 The openstack command line can be used to create an application
 credential.
 
