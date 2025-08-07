@@ -4,21 +4,250 @@
 GPU Support in Virtual Servers
 ##############################
 
-Catalyst Cloud provides several different instance types with GPUs.
-The requirements for the OS to support each instance type's GPU
-varies, so it's important to understand the differences.
+********
+Overview
+********
+
+Catalyst Cloud provides several options for deloying instances with
+NVIDIA GPU acceleration that can be utilised by selecting the desired GPU
+:ref:`flavor <instance-types>` when creating the instances.
+
+All GPU instances require suitable drivers to be installed before the GPU can
+be utilised. Catalyst Cloud is not permitted to provide modified operating
+system images so customers deploying GPU instances will need to install
+suitable drivers themselves.
+
+Instances built using C2-GPU flavors use virtual GPU partitions which have
+special driver reqirements. Standard NVIDIA drivers supplied with operating
+systems cannot be used for C2-GPU. Please refer to the
+:ref:`C2-GPU instructions<c2-gpu-support>` for details.
+
+All other GPU instances use direct pass-through of the entire GPU hardware,
+so any driver that is compatible with the GPU hardware can be installed.
+Catalyst Cloud recommends using drivers supplied by the operating system vendor
+or downloaded directly from NVIDIA.
+
+These steps do not apply to Kubernetes worker nodes. For more information
+on using GPU with Kubernetes, please refer to the
+:doc:`cluster GPU acceleration documentation </kubernetes/gpu-acceleration>`.
+
+******************************
+Creating a GPU-backed Instance
+******************************
+
+To create a GPU-backed instance, simply :doc:`create an instance <launch-compute-instance>`
+using a GPU-backed flavor.
+
+The current GPU flavours available are:
+
+.. list-table::
+   :header-rows: 1
+
+   * - Flavour
+     - CPU Cores
+     - RAM
+     - GPU Model
+     - VRAM
+     - GPU Count
+   * - c2-gpu.c4r80g1
+     - 4
+     - 80GB
+     - NVIDIA A100 `2.20g MIG slice <https://docs.nvidia.com/datacenter/tesla/mig-user-guide/index.html#a100-mig-profiles>`_
+     - 20GB
+     - 1
+   * - c3-gpu.c24r96g1
+     - 24
+     - 96GB
+     - NVIDIA L40S
+     - 48GB
+     - 1
+   * - c3-gpu.c48r192g2
+     - 48
+     - 192GB
+     - NVIDIA L40S
+     - 48GB
+     - 2
+   * - c3-gpu.c96r384g4
+     - 96
+     - 384GB
+     - NVIDIA L40S
+     - 48GB
+     - 4
+
+Once the instance is created, suitable GPU drivers will need to be installed
+before the GPU can be used.
+
+********************
+Minimum Requirements
+********************
+
+The minimum requirements for GPU instances are as follows:
+
+* A boot/OS disk of at least 30GB (when installing CUDA support).
+  Windows instances should use at least 50GB.
+* Compatible NVIDIA GPU driver.
+
+The following operating systems have been tested with GPU support:
+
+* Ubuntu LTS 20.04 and later.
+* Rocky Linux 8 and later.
+* Windows Server 2019 and later.
+
+All other OS images are unsupported and untested.
+
+***********************
+GPU Driver Installation
+***********************
+
+.. note::
+
+    These steps do not apply to C2-CPU instances. Refer to the :ref:`C2-GPU
+    instructions<c2-gpu-support>` below when setting up C2-GPU instances.
+
+
+Basic Installation Process
+==========================
+
+.. tabs::
+
+    .. tab:: Ubuntu
+
+        The simplest method to install drivers is to use the packages supplied in the
+        operating system repositories. The 'server' driver packages are recommended:
+
+        .. code-block:: bash
+
+            sudo apt install nvidia-driver-570-server
+
+        .. note::
+
+            NVIDIA recently began providing the option of either a proprietary or an
+            open source driver. As of the 570 release the open source driver does not
+            work on g4 (4x GPU) flavours on Catalyst Cloud.
+
+        Once the driver is installed, use ``nvidia-smi`` to verify that the driver is
+        loaded and the GPU(s) detected:
+
+        .. code-block::
+
+            $ nvidia-smi
+            Mon Jun 30 02:40:15 2025
+            +-----------------------------------------------------------------------------------------+
+            | NVIDIA-SMI 570.133.20             Driver Version: 570.133.20     CUDA Version: 12.8     |
+            |-----------------------------------------+------------------------+----------------------+
+            | GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+            | Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+            |                                         |                        |               MIG M. |
+            |=========================================+========================+======================|
+            |   0  NVIDIA L40S                    Off |   00000000:04:00.0 Off |                    0 |
+            | N/A   29C    P0             84W /  350W |       0MiB /  46068MiB |      3%      Default |
+            |                                         |                        |                  N/A |
+            +-----------------------------------------+------------------------+----------------------+
+
+            +-----------------------------------------------------------------------------------------+
+            | Processes:                                                                              |
+            |  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+            |        ID   ID                                                               Usage      |
+            |=========================================================================================|
+            |  No running processes found                                                             |
+            +-----------------------------------------------------------------------------------------+
+
+        If that doesn't work, try running ``sudo modprobe nvidia`` to ensure the NVIDIA
+        driver is loaded, or reboot the instance.
+
+        Please refer to the :ref:`CUDA section <nvidia-cuda-support>` for instructions on installing the
+        CUDA toolkit.
+
+    .. tab:: Microsoft Windows
+
+        To use GPUs in Windows, simply download and install the latest drivers from:
+
+        https://www.nvidia.com/en-us/drivers/
+
+        Select the GPU model according to the flavour being used:
+
+        .. list-table::
+           :header-rows: 1
+
+           * - Compute Flavour
+             - GPU Model
+           * - C1A-GPU
+             - NVIDIA RTX A6000
+           * - C3-GPU
+             - NVIDIA L40S
+
+        Once the driver package is installed, verify that it is installed by checking
+        the GPU state in Device Manager, or running ``nvidia-smi`` from the command
+        prompt.
+
+Automated Driver Installation
+=============================
+
+For a more streamlined setup of GPU instances, the necessary GPU driver packages
+can be installed via :ref:`user data when creating instances <instance_initialisation>`.
+This means the GPU is ready to use within a few minutes of the instance booting
+up without requiring additional steps.
+
+.. tabs::
+
+    .. tab:: Linux
+
+        User data example for automatically installing NVIDIA driver release 570 on Ubuntu
+        24.04:
+
+        .. code-block:: yaml
+
+            #cloud-config
+
+            package_upgrade: true
+            packages:
+              - nvidia-driver-570-server
+
+        Other versions of Ubuntu and other distributions may require a different package name.
+        Please refer to the documentation for the specific distribution for more examples.
+
+    .. tab:: Microsoft Windows
+
+        Executing the NVIDIA driver installer with the ``/s`` argument runs it silently.
+        The examples below specify the 573 release for Windows Server 2022 and 2025 but
+        should work with any release if the URL is changed accordingly.
+
+        User data for Windows can be supplied as a straight PowerShell script or cloud-init
+        style configuration in YAML format.
+
+        Windows Server 2019 and later include ``curl`` so regular cloud-init style
+        config data can be used to run the necessary commands directly:
+
+        .. code-block:: yaml
+
+            #cloud-config
+
+            runcmd:
+              - curl -o nvidia.exe https://us.download.nvidia.com/tesla/573.39/573.39-data-center-tesla-desktop-winserver-2022-2025-dch-international.exe
+              - nvidia.exe /s
+
+        Alternatively a PowerShell script can be used directly instead:
+
+        .. code-block:: ps1
+
+            #ps1
+
+            Invoke-WebRequest https://us.download.nvidia.com/tesla/573.39/573.39-data-center-tesla-desktop-winserver-2022-2025-dch-international.exe -OutFile nvidia.exe
+            nvidia.exe /s
+
+        Refer to the `Cloudbase-Init documentation <https://cloudbase-init.readthedocs.io/en/latest/userdata.html>`_
+        for more information on user data configuration options for Windows.
+
+.. _c2-gpu-support:
 
 **********************
-c2-gpu Virtual Servers
+C2-GPU Virtual Servers
 **********************
 
-Each c2-gpu virtual server includes one slice of NVIDIA A100
-GPUs. The slice size provided is "GRID A100D-20C", which provides
-2 compute pipelines and 20GB of video RAM from the card.
-
-.. warning::
-
-    c2-gpu virtual servers are classed as Beta
+Unlike other GPU flavours, C2-GPU instances are provided with a partition of
+an NVIDIA A100 GPU rather than the entire capaciity of the card. The partition
+size provided is "GRID A100D-20C", which provides two compute pipelines and
+20GB of video RAM from the underlying GPU.
 
 Minimum Requirements
 ====================
@@ -54,19 +283,18 @@ server operating systems:
 
 All other OS images are unsupported or untested.
 
-Creating a c2-gpu virtual server
+Creating a C2-GPU virtual server
 ================================
 
 To create a GPU-enabled virtual server, create an instance using a flavor
 prefixed with ``c2-gpu``.
 
-Catalyst Cloud is not permitted to provide modified operating system images
-so you will need to install supporting drivers to enable GPU support in
-GPU-enabled virtual servers as per the instructions below.
-
-To help with streamlining GPU server builds we've :ref:`provided examples on
+To help with streamlining C2-GPU server builds we've :ref:`provided examples on
 using Packer to build custom images that include GPU drivers and software<packer-tutorial-gpu>`.
 This process is recommended for bulk GPU compute deployments.
+
+Installing Drivers for C2-GPU Instances
+=======================================
 
 Ubuntu
 ******
@@ -255,6 +483,63 @@ available for applications to link and load:
     sudo tee /etc/ld.so.conf.d/cuda.conf <<< /usr/local/cuda/lib64
     sudo ldconfig
 
+.. _nvidia-cuda-support:
+
+************
+CUDA Support
+************
+
+The CUDA version supported is specific to the NVIDIA driver release version.
+For most GPU flavors, simply download the appropriate CUDA toolkit version from
+NVIDIA to match the driver release used in the instance:
+
+https://docs.nvidia.com/cuda/cuda-installation-guide-linux/
+
+Some operating systems (e.g. Ubuntu) include CUDA packages in their
+repositories that can also be used instead, although they are usually older
+versions.
+
+In the case of C2-GPU instances the CUDA toolkit version is currently limited
+by driver release 535 which officially supports CUDA 12.2.
+
+NVIDIA provide compatibility libraries to allow applications compiled against
+newer CUDA releases to work. There are some caveats to this. Please refer to
+the NVIDIA CUDA compatibility guide for more information:
+
+https://docs.nvidia.com/deploy/pdf/CUDA_Compatibility.pdf
+
+
+CUDA Compatibility for C2-GPU in Ubuntu
+=======================================
+
+Catalyst Cloud suggests the following approach to enable CUDA 12.4 compatibility
+(for example) with C2-GPU on Ubuntu instances.
+
+Add the NVIDIA CUDA repo and signing keys and update the APT cache:
+
+.. code-block:: bash
+
+    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu$(lsb_release -rs | tr -d .)/x86_64/cuda-keyring_1.1-1_all.deb
+    sudo dpkg -i cuda-keyring_1.1-1_all.deb
+    sudo apt update
+
+Install the CUDA 12.4 compatibility package:
+
+.. code-block:: bash
+
+    sudo apt install cuda-compat-12-4
+
+When running your application you'll need to set the ``LD_LIBRARY_PATH``
+environment variable to the location of the CUDA compatibility libraries, which
+in this case is ``/usr/local/cuda-12.4/compat``. For example:
+
+.. code-block:: bash
+
+    LD_LIBRARY_PATH=/usr/local/cuda-12.4/compat /path/to/application
+
+If a different CUDA compatibility level is required then this can be
+substituted in the steps above, provided NVIDIA have provided it.
+
 **************
 Docker Support
 **************
@@ -263,4 +548,3 @@ NVIDIA provide documentation on supporting vGPU access from Docker
 containers here:
 
 https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html
-

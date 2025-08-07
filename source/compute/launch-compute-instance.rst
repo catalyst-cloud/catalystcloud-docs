@@ -153,12 +153,28 @@ Our flavors are named after the type of compute and amount of CPU and RAM
 to consult our documentation to find out their specifications. We
 currently provide a number of common combinations of CPU and RAM.
 
-More information about the differences between types can be found
-in the page on :ref:`instance-types`.
+A virtual CPU (vCPU) is a slice of a physical CPU. How these are sliced
+depend on the type of compute chosen. In general, one vCPU is mapped to
+one hardware thread on the physical core. Some types of compute will
+statically allocate these (assuring predictable performance), while
+others will timeslice further or dynamically allocate hardware threads
+as needed. This is documented in the product page about each type of
+virtual server.
+
+RAM is always allocated 1:1 with the physical RAM. We do not
+oversubscribe RAM as this severely impacts performance.
+
+.. note::
+  Some flavors have specific OS requirements which must be followed
+  when using those types of servers.
+
+  For GPU flavors please refer to :ref:`gpu-support`.
 
 ***********************
 Instance initialisation
 ***********************
+
+.. _instance_initialisation:
 
 An application called `cloud-init`_ is included in all images provided by
 Catalyst Cloud. This script is there to assist with instance configuration at

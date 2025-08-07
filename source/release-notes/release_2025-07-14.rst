@@ -1,0 +1,28 @@
+############
+14 July 2025
+############
+
+This release contains two major upgrades with a number of useful new features
+and capabilities. The details of these are described below.
+
+==============
+C3-GPU compute
+==============
+
+This release introduces the new `C3-GPU compute
+<https://catalystcloud.nz/services/iaas/compute/compute-c3-gpu/>`_ service,
+providing instances with dedicated NVIDIA L40S GPUs. Using dedicated GPUs means
+that any compatible driver release and CUDA toolkit version can be installed,
+unlike C2-GPU which is currently limited to driver release 535 and CUDA 12.2.
+
+C3 compute classes also offer dedicated CPU cores to workloads to ensure fast
+and predictable performance.
+
+================
+CCKS GPU Support
+================
+
+GPU worker support is now available in CCKS! For more information please refer
+to the :doc:`GPU documentation </kubernetes/gpu-acceleration>`.
+
+Please note that this is subject to availability of GPU capacity.
