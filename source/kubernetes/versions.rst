@@ -38,18 +38,14 @@ It does not show patch versions, as all patch versions for a supported minor ver
      - Current Status
      - Initial Release Date
      - Unsupported Date
-   * - ``1.28``
-     - Unsupported
-     - 2024-04-18
-     - 2024-12-20
    * - ``1.29``
      - Unsupported
      - 2024-05-27
      - 2025-03-19
    * - ``1.30``
-     - Supported
+     - Unsupported
      - 2024-08-26
-     - Expected 2025-06-28
+     - 2025-06-28
    * - ``1.31``
      - Supported
      - 2024-12-20
@@ -68,6 +64,15 @@ It does not show patch versions, as all patch versions for a supported minor ver
 **********************
 Version upgrade notes
 **********************
+
+Patch versions v1.31.11, v1.32.7 and v1.33.3
+============================================
+
+As of these versions GPU support has been added to our OS images which will
+auto-detect GPU compute flavors and install NVIDIA drivers.
+
+For more information on using GPU with Kubernetes, please refer to
+the :doc:`CCKS GPU acceleration documentation </kubernetes/gpu-acceleration>`.
 
 Patch versions v1.30.13, v1.31.9, v1.32.5
 ==========================================
