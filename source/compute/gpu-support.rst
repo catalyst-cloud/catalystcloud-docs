@@ -44,7 +44,7 @@ The current GPU flavours available are:
    :header-rows: 1
 
    * - Flavour
-     - CPU Cores
+     - vCPU
      - RAM
      - GPU Model
      - VRAM
