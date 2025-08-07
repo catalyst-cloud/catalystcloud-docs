@@ -6,6 +6,9 @@ GPU acceleration can be utilised in cluster worker nodes with little
 additional effort. This document describes the details for using
 GPU acceleration in Kubernetes.
 
+For additional documentation on GPU, see :ref:`GPU Support in Virtual
+Servers<gpu-support>`.
+
 GPU support is available beginning from the following CCKS cluster
 versions:
 
