@@ -88,7 +88,7 @@ your new account and using the following command:
     +----------------------------------+----------------------------------+
 
     # Optional: Create a new EC2 credential. You should have one created already, but if not then you can create them like so:
-    $ openstack ec2 credentials create --user <object-storage-user>
+    $ openstack ec2 credentials create
     +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Field      | Value                                                                                                                                                   |
     +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -120,7 +120,7 @@ step needs to be preformed by the operations team. This means that you will
 need to provide the following information in a support ticket in order for
 your projects to start receiving audit logs:
 
-#. The UUID of your object storage container
+#. The name of your object storage container
 #. The user name and UUID of the object storage user who's credentials are
    needed.
 #. The list of projects that you want to start receiving log data for.
