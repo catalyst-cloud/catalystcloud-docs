@@ -163,7 +163,8 @@ We'll increase it to 100GB so we have enough space for later.
 .. image:: ../first-instance/dashboard_assets/ubuntu-source.png
 
 Navigate to the **Flavor** tab. This is where we select the compute resources
-we want to assign to our compute instance.
+we want to assign to our compute instance. Flavors are described in more detail
+in :ref:`instance-types`.
 
 Order the flavors by **VCPUS**, and select an appropriate size.
 

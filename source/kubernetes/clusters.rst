@@ -102,23 +102,27 @@ Default Volume Types and Sizes
 ==============================
 
 By default, Kubernetes cluster nodes are provisioned using the
-following volume types and disk sizes:
+following :ref:`flavors <instance-types>`, volume types and disk sizes:
 
 .. list-table::
-   :header-rows: 1
 
-   * - Volume
-     - Type
-     - Size
-   * - Root Volume
+   * - Flavor
+     - c1.c2r4 (2x vCPU, 4GB RAM)
+   * - Root Volume Type
      - b1.sr-r3-nvme-1000
+   * - Root Volume Size
      - 20GB
 
-To change these values, you can provide additional labels to your template
+To change these values you can provide additional labels to your template
 (see :ref:`modifying_a_cluster_with_labels`).
+
+Selecting a GPU flavor for worker nodes will enable GPU acceleration for those
+workers. Refer to the :doc:`GPU documentation <gpu-acceleration>` for more information.
 
 For information on how volumes work, and the available storage types in a cluster,
 refer to the :ref:`kubernetes-storage` documentation.
+
+.. _deploying-kubernetes-cluster:
 
 ******************************
 Deploying a Kubernetes cluster
@@ -579,7 +583,7 @@ Now let's add a new nodegroup to our cluster with the following specifications
 
 * Node count of 2 (if this is not provided it will default to 1)
 * A node role called `test` (if this is not provided it will default to `worker`)
-* A nova flavor of `c1.c4r4`.
+* A :ref:`compute flavor <instance-types>` of `c1.c4r4`.
 * Node group name of `larger-pool`.
 
 .. code-block:: console

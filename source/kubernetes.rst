@@ -21,6 +21,7 @@ Table of Contents:
    kubernetes/cluster-upgrade
    kubernetes/storage
    kubernetes/application-credentials
+   kubernetes/gpu-acceleration
    kubernetes/versions
    kubernetes/appendix
    kubernetes/glossary
