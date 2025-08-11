@@ -26,6 +26,8 @@ as the default user name you should use to log in to each one of them
 +-------------------------------------+-------------------+-----------+-------------------+
 | Fedora CoreOS Linux                 | fedora-coreos-*   | core      | |fedora_link|     |
 +-------------------------------------+-------------------+-----------+-------------------+
+| Flatcar Container Linux             | flatcar-*         | core      | |flatcar_link|    |
++-------------------------------------+-------------------+-----------+-------------------+
 | Rocky Linux                         | rocky-*           | rocky     | |rocky_link|      |
 +-------------------------------------+-------------------+-----------+-------------------+
 | openSUSE Leap Linux                 | opensuse-leap-*   | opensuse  | |opensuse_link|   |
@@ -80,6 +82,10 @@ as the default user name you should use to log in to each one of them
 .. |ubuntu_link| raw:: html
 
     <a href="https://ubuntu.com/legal/intellectual-property-policy" target="_blank">ubuntu.com</a>
+
+.. |flatcar_link| raw:: html
+
+    <a href="https://www.flatcar.org/license" target="_blank">www.flatcar.org</a>
 
 .. note::
 
