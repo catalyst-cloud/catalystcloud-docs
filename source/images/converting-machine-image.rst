@@ -1,19 +1,21 @@
+.. _convert_image_to_raw:
 
-############################
-Converting the machine image
-############################
+#################
+Converting images
+#################
 
-Please make sure you have converted your image to RAW before uploading it to
-our cloud. While QCOW2 images will also work, they will not support
-copy-on-write operations. As a result, launching compute instances from these
-images or taking snapshots will take longer.
+Please make sure your image is a RAW image before uploading.
+
+While you can use QCOW2 images, they do not support copy-on-write operations.
+As a result, launching compute instances from these images or taking snapshots
+will take longer.
 
 **************************
 Tools for image conversion
 **************************
 
 Ensure you have the qemu-utils package installed, as it provides the tools
-required to convert the disk images.
+required to convert a disk image.
 
 On Debian or Ubuntu:
 
@@ -34,7 +36,7 @@ Converting to RAW
 From KVM QCOW2 to RAW
 =====================
 
-On a host with QEMU installed, convert the QCOW2 disk to a RAW disk:
+On a host with qemu-utils installed, convert the QCOW2 disk to a RAW disk:
 
 .. code-block:: bash
 
@@ -43,7 +45,7 @@ On a host with QEMU installed, convert the QCOW2 disk to a RAW disk:
 From VMWare VMDK to RAW
 =======================
 
-On a host with QEMU installed, convert the VMDK disk to a RAW disk:
+On a host with qemu-utils installed, convert the VMDK disk to a RAW disk:
 
 .. code-block:: bash
 
