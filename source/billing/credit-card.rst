@@ -6,7 +6,7 @@ Credit card payment
    Only users with the Project Admin role will be able to view and modify the
    billing details
 
-The Catalyst Cloud now accept payments via credit card. This section will explain how you
+Catalyst Cloud accept payments via credit card. This section will explain how you
 can setup a credit card to pay your invoices.
 
 You and/or your billing contact will still receive a usage summary from us
