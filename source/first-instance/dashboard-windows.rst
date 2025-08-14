@@ -6,7 +6,7 @@ Windows instance using the web interface
 
 Log in to the dashboard at https://dashboard.catalystcloud.nz/
 
-As a new user to the Catalyst Cloud, your initial cloud project will come
+As a new user to Catalyst Cloud, your initial cloud project will come
 with a pre-configured private network and a router connected to the internet.
 If you have deleted this, or would like to create additional networks then
 please see :ref:`creating_networks` for details on how to do that.

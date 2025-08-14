@@ -13,7 +13,7 @@ Introduction
 
 In this tutorial, you will learn how to deploy a highly available instance pair
 using VRRP. This tutorial is largely based on a `blog post`_ by Aaron O'Rosen
-with modifications appropriate for the Catalyst Cloud. Networks and names have
+with modifications appropriate for Catalyst Cloud. Networks and names have
 been kept largely compatible with the source material.
 
 .. _blog post: https://medium.com/@aaronorosen/implementing-high-availability-instances-with-neutron-using-vrrp-cb6db6f8578
@@ -69,7 +69,7 @@ enable you to specify arbitrary ``mac_address/ip_address(cidr)`` pairs that are
 allowed to pass through a port, regardless of the subnet associated with the
 network.
 
-Let's double check that this extension is available on the Catalyst Cloud:
+Let's double check that this extension is available on Catalyst Cloud:
 
 .. code-block:: bash
 
@@ -1204,5 +1204,5 @@ your original state:
   $ openstack stack delete vrrp-stack
   Are you sure you want to delete this stack(s) [y/N]? y
 
-This ends the tutorial on setting up hot swap VRRP instances in the Catalyst
+This ends the tutorial on setting up hot swap VRRP instances in Catalyst
 Cloud.

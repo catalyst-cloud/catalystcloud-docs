@@ -52,13 +52,13 @@ temporary in nature, such as batch jobs.
 Automatic restart on failure
 ****************************
 
-When server failures occur, the Catalyst Cloud will attempt to restart the
+When server failures occur, Catalyst Cloud will attempt to restart the
 affected compute instances on a healthy server to minimize their downtime.
 
 To benefit from this feature, your application must be configured and prepared
 to start automatically and resume its normal operation at boot time and your
 guest operating system to respond to ACPI power events.
-The operating system images supplied by Catalyst or our partners already have
+The operating system images supplied by Catalyst Cloud or our partners already have
 ACPI configured to respond to power events by default.
 
 

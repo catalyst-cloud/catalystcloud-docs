@@ -35,7 +35,7 @@ Uploading an SSH key
 
 The first thing we need to do is to make sure we have a way to access the
 instances we create. We use **SSH** to allow access to our instances. You can
-either import an existing public key or have the Catalyst Cloud create a key
+either import an existing public key or have Catalyst Cloud create a key
 pair for you. We document both below:
 
 .. _creating-keypair:
@@ -66,7 +66,7 @@ secure location. Make sure the file is saved as plain text.
 Importing an existing key pair
 ==============================
 
-If you already have an SSH key pair, you can import the public key onto the
+If you already have an SSH key pair, you can import the public key onto
 Catalyst Cloud.
 
 Navigate to the **Key Pairs** tab.

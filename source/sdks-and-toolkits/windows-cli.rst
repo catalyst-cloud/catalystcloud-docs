@@ -13,7 +13,7 @@ Windows (Powershell)
 
 The following guide will take you through the process, from beginning to end of
 installing python3 and all other dependencies that are needed for your command
-line to function correctly when interacting with the Catalyst Cloud.
+line to function correctly when interacting with Catalyst Cloud.
 The process also includes installing visual studio, installing pip and creating
 a python virtual environment on your command line.
 
@@ -105,7 +105,7 @@ and install our command line tools.
   # Now we install the Python openstack client libraries into our virtual environment
   $ pip install python-openstackclient python-ceilometerclient python-heatclient python-neutronclient python-swiftclient python-octaviaclient python-magnumclient
 
-Once you have installed the required libraries to work with the Catalyst
+Once you have installed the required libraries to work with Catalyst
 Cloud onto your virtual environment; You have to make sure that whenever you
 use powershell to interact with the cloud, you work on your Virtual
 Environment. It may save time to make a short python script that runs the
@@ -242,7 +242,7 @@ Using the CLI
 
 Once you have your command line set up and configured as per the previous steps
 of this documentation, you can proceed with using the command line to issue
-commands to your project on the Catalyst Cloud. The steps below show you
+commands to your project on Catalyst Cloud. The steps below show you
 how to initialize and set up your command line to function correctly in this
 manner.
 

@@ -2,7 +2,7 @@
 Security
 #######################
 
-This section covers some best practices for security on the Catalyst Cloud, and
+This section covers some best practices for security on Catalyst Cloud, and
 for general security business standards in the tech sector today.
 
 .. _password_protocols:
@@ -118,7 +118,7 @@ Access management, is a set of practices and rules that make
 sure that your organisation knows exactly who has access to the resources that
 you have previsioned in the cloud and what exactly these users can do with
 said resources.
-The Catalyst Cloud achieves a strong level of security in this regard by
+Catalyst Cloud achieves a strong level of security in this regard by
 the use of **Roles**. These are given to users by the project administrator and
 they impose restrictions or provide privileges to users. For more information
 on roles and their uses, please see the
@@ -130,7 +130,7 @@ Security groups
 ***************
 
 Security groups are what allow you to safely and securely access the instances
-that you create on the Catalyst Cloud. When creating a security group, it
+that you create on Catalyst Cloud. When creating a security group, it
 automatically has the following rules:
 
 .. image:: assets/security-group-screenshot.png
@@ -143,7 +143,7 @@ you can create to meet your needs.
 
 .. image:: assets/rule-types.png
 
-The standard that we use at Catalyst is an SSH key pair which you can upload or
+The standard that we use at Catalyst Cloud is an SSH key pair which you can upload or
 create via the dashboard. We use SSH keys because they provide an increased
 level of security beyond restricting ports. The full process of how to create
 or upload your SSH keys is documented

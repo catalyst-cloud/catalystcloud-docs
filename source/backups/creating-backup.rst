@@ -3,7 +3,7 @@ Creating a backup
 ################################
 
 The purpose of this section is to provide examples on how you can use different
-tools to create a backup of your data on the Catalyst Cloud.
+tools to create a backup of your data on Catalyst Cloud.
 
 Before you continue with the examples below, there are a few assumptions that
 are made which you will need to consider before jumping in further:

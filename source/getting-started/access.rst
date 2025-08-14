@@ -4,7 +4,7 @@
 How can I interact with my project?
 ###################################
 
-In the previous section, we learned about the various services the Catalyst
+In the previous section, we learned about the various services Catalyst
 Cloud offers. Now we'll learn about the various ways you can interact with
 these services.
 
@@ -14,7 +14,7 @@ The web dashboard
 *****************
 
 The cloud dashboard is a simple way to interact with
-The Catalyst Cloud. It is publicly available on the Internet and can be reached
+Catalyst Cloud. It is publicly available on the Internet and can be reached
 at: https://dashboard.catalystcloud.nz
 
 
@@ -60,8 +60,8 @@ Automation tools
 To utilise the most valuable aspects of cloud computing, or to manage and
 orchestrate a cloud computing environment at scale, automation tools are
 invaluable. Because Catalyst Cloud is based on the world's most popular open
-source cloud computing platform, OpenStack, many automation tools work with the
-Catalyst Cloud, or have plugins to work with the Catalyst Cloud.
+source cloud computing platform, OpenStack, many automation tools work with
+Catalyst Cloud, or have plugins/extensions available to work with Catalyst Cloud.
 
 Among our preferred automation tools are:
 
@@ -74,9 +74,9 @@ Among our preferred automation tools are:
 API access
 **********
 
-Behind the scenes, all of the access methods to the Catalyst Cloud are just
+Behind the scenes, all of the access methods to Catalyst Cloud are just
 accessing the Catalyst Cloud APIs. They just provide convenient abstractions to
-do so. Every action you perform on the Catalyst Cloud can be performed via the
+do so. Every action you perform on Catalyst Cloud can be performed via the
 APIs.
 This means that you can incorporate custom logic into your applications to
 modify your infrastructure. This is important for `SaaS
@@ -97,7 +97,7 @@ software using the API to retry in response to this error message.
 
 |
 
-Now that you understand how you can access the Catalyst Cloud, there are a few
+Now that you understand how you can access Catalyst Cloud, there are a few
 small administrative concerns to be aware of before we continue.
 
 :ref:`Previous page <services_on_the_catalyst_cloud>` - :ref:`Next page

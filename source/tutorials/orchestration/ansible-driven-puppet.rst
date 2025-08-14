@@ -3,7 +3,7 @@ Set up a puppet master and clients with ansible
 ###############################################
 
 This tutorial will show you how to combine `Ansible`_ and `Puppet`_ to manage a
-dynamic set of servers on the Catalyst Cloud. This way you get the beautifully
+dynamic set of servers on Catalyst Cloud. This way you get the beautifully
 simple orchestration of Ansible, combined with the vast library of modules
 available with Puppet.
 

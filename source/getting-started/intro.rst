@@ -5,7 +5,7 @@ Introduction to the Cloud platform
 ##################################
 
 This section of the documentation is for people that are entirely new to cloud
-computing and/or the Catalyst Cloud.
+computing and/or Catalyst Cloud.
 
 
 *****************************************
@@ -45,16 +45,16 @@ first. Saving yourself money and the hassle of negotiating changes. Once you
 are done with your task you can turn off your instance, release any other
 resources, and the bill stops there.
 
-***************************
-What is the Catalyst Cloud?
-***************************
+***********************
+What is Catalyst Cloud?
+***********************
 
 Catalyst Cloud is a cloud computing platform, based entirely in New Zealand.
 
 Catalyst Cloud was built with the open source project, `OpenStack`_. Using
 OpenStack our Cloud allows users like yourself to provision services.
 Provisioning is similar to renting. You can provision things such as storage
-space, compute capacity, or internet access. The building blocks you need to
+space, compute capacity, or Internet access. The building blocks you need to
 run a business's applications.
 
 .. note::

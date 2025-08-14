@@ -3,7 +3,7 @@ Getting started
 ###############
 
 This section provides you with the minimum information you need to get started
-with the Catalyst Cloud. We strongly recommend you read at least this
+with Catalyst Cloud. We strongly recommend you read at least this
 section before using our cloud services.
 
 .. toctree::

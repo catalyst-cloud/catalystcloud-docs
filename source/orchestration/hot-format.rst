@@ -11,10 +11,10 @@ https://docs.openstack.org/heat/latest/template_guide/openstack.html
 
 .. note::
 
-  Only resources related to services provided by the Catalyst Cloud should be
+  Only resources related to services provided by Catalyst Cloud should be
   used.
 
-The resource types available on the Catalyst Cloud are:
+The resource types available on Catalyst Cloud are:
 
 * OS::Aodh::CompositeAlarm
 * OS::Aodh::EventAlarm

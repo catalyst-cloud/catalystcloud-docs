@@ -185,7 +185,7 @@ our APIs.
 Cloud-init is very powerful. It's a de facto multi-distribution and multi-cloud
 way of handling the early initialisation of a cloud instance.
 
-When you launch a compute instance on the Catalyst Cloud, you can pass
+When you launch a compute instance on Catalyst Cloud, you can pass
 initialisation configuration to cloud-init via "user-data" (either using the
 ``--user-data`` parameter of ``openstack server create``, or as a post-creation
 customisation script via the web dashboard).
@@ -218,7 +218,7 @@ formats.
 
         #cloud-config
 
-        # On the Catalyst Cloud, the default username for access to your instances is:
+        # On Catalyst Cloud, the default username for access to your instances is:
         # - CentOS: centos
         # - CoreOS: core
         # - Debian: debian

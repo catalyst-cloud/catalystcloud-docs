@@ -74,7 +74,7 @@ The requirements are:
 * A Subnet with addressing and DHCP/DNS servers configured
 * A Router with a gateway set and an interface in a virtual network
 
-Catalyst operates, free of charge, a number of recursive DNS servers in each
+Catalyst Cloud operates, free of charge, a number of recursive DNS servers in each
 cloud region for use by Catalyst Cloud instances. They are:
 
 .. _name_servers:
@@ -102,7 +102,7 @@ Compute flavors
 ***************
 
 The flavor of an instance is the CPU, memory and disk specifications of a
-compute instance. Catalyst flavors are named 'cX.cYrZ', where X is the
+compute instance. Catalyst Cloud flavors are named 'cX.cYrZ', where X is the
 'compute generation', Y is the number of vCPUs, and Z is the number of
 gigabytes of memory.
 

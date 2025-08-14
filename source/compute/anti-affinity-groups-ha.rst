@@ -160,7 +160,7 @@ Using programmatic methods
 
       .. code-block:: yaml
 
-        - name: Create a compute instance on the Catalyst Cloud
+        - name: Create a compute instance on Catalyst Cloud
           os_server:
             state: present
             name: "{{ instance_name }}"

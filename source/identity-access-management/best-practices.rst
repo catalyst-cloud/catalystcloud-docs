@@ -8,7 +8,7 @@ Best Practices for roles
 Project admin
 *************
 
-It is recommended by Catalyst that you keep an admin account and a user
+It is recommended by Catalyst Cloud that you keep an admin account and a user
 account with moderation privileges. Separating your working account from the
 administrative account ensures that making changes to the structure of your
 project or major changes, must be a deliberate decision done on the

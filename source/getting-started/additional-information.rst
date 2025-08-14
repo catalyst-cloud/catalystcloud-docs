@@ -8,7 +8,7 @@ Additional info and terminology
 The information below includes different management systems, terminology, and
 general information that you will need to get started with your project.
 Reading through these should give you an understanding of how to control and
-manage your cloud project, as well as boost your current knowledge of the
+manage your cloud project, as well as boost your current knowledge of
 Catalyst Cloud and how it functions.
 
 .. _admin-projects:
@@ -17,7 +17,7 @@ Catalyst Cloud and how it functions.
 Projects
 ********
 
-Everything you do on the Catalyst Cloud is in a ``project``. Use projects to
+Everything you do on Catalyst Cloud is in a ``project``. Use projects to
 separate the different things you work on. For example, have a project for each
 organisation you work with, or one for each branch of your organisation.
 Something done in one project cannot effect any other projects.
@@ -32,7 +32,7 @@ Information on how to invite new people to your project can be found :ref:`here
 .. image:: assets/project_dropdown.png
 
 
-The Catalyst Cloud provides an isolated and multi-tenanted approach to creating
+Catalyst Cloud provides an isolated and multi-tenanted approach to creating
 workspaces. These workspaces are typically referred to as a ``project`` but for
 historical reasons you may also see them referred to as a ``tenant`` or
 a ``tenancy``.
@@ -43,7 +43,7 @@ a ``tenancy``.
 Finding my project ID
 =====================
 
-Every project on the Catalyst Cloud has a ``project name`` (a user friendly
+Every project on Catalyst Cloud has a ``project name`` (a user friendly
 name) and a ``project id`` (an auto-generated UUID). There are a number of ways
 to find your project ID and name.
 
@@ -129,7 +129,7 @@ options to specify the project on each call.
 Project access
 ==============
 
-The person who signed up to the Catalyst Cloud gets by default the ``Project
+The person who signed up to Catalyst Cloud gets by default the ``Project
 Administrator`` role.
 
 As a project administrator or moderator, you can invite and remove people from
@@ -219,7 +219,7 @@ on each call.
 Via the APIs
 ------------
 
-The API request you use to authenticate with the Catalyst Cloud allows you to
+The API request you use to authenticate with Catalyst Cloud allows you to
 scope a token on a given region. The token can then be used to interact with
 the API endpoints of the other services hosted in the same region.
 
@@ -248,7 +248,7 @@ resources independently when needed.
 Availability zones
 ==================
 
-The Catalyst Cloud does not use availability zones as a construct for
+Catalyst Cloud does not use availability zones as a construct for
 high-availability within regions. Instead, it uses server groups with
 anti-affinity polices to ensure compute instances are scheduled in different
 physical servers.
@@ -263,7 +263,7 @@ Quotas
 
 .. _quota-info:
 
-The Catalyst Cloud provides customers with a quota mechanism to protect them
+Catalyst Cloud provides customers with a quota mechanism to protect them
 from accidentally launching too many resources. This helps prevent unexpected
 and significant costs being invoiced to our customers. In fact, every cloud
 provider has a similar mechanism, but most do not expose this information to
@@ -274,7 +274,7 @@ of the dashboard. Quotas are a soft cap that can be changed at any time
 according to your needs. A quota change may be requested via the `Quota
 Management`_ panel.
 
-Catalyst may give you a call if you are about to exceed your quota and ask you
+Catalyst Cloud may give you a call if you are about to exceed your quota and ask you
 whether you would like us to pro-actively increase the quota for you.
 
 .. _Quota Management: https://dashboard.catalystcloud.nz/management/quota/
@@ -345,7 +345,7 @@ Changes** will
 Pre-approved vs requires approval
 =================================
 
-Pre-approved changes do not require any intervention from Catalyst to be
+Pre-approved changes do not require any intervention from Catalyst Cloud to be
 actioned and include any changes that would be a step down in quota size or any
 single step up to the next size tier.
 
@@ -370,7 +370,7 @@ Pre-approved sizes changes can be made as follows:
 Getting support
 ***************
 
-If you experience issues with the Catalyst Cloud, please check to
+If you experience issues with Catalyst Cloud, please check to
 see if the problem(s) are covered further on in this documentation.
 If no solution is found you will need to raise a support request with
 the support dropdown in the top right corner of the dashboard.
@@ -393,7 +393,7 @@ Support requests
 Raising a support request
 -------------------------
 
-If you need help, you can raise a support request with Catalyst via the `Support
+If you need help, you can raise a support request with Catalyst Cloud via the `Support
 Requests <https://dashboard.catalystcloud.nz/management/tickets/>`_ panel.
 
 Most requests are resolved within one business day. If you would like faster
@@ -406,8 +406,8 @@ times for priority one incidents are listed on the `premium support page
 Contacting your account manager
 -------------------------------
 
-Customers that have a premium support contract from
-Catalyst have a technical account manager. You
+Customers that have a premium support contract with
+Catalyst Cloud have a technical account manager. You
 should have received the contact details for your
 account manager when you
 applied for premium support.
@@ -423,7 +423,7 @@ solutions architect.
 Training
 ========
 
-Catalyst provides training on how to use the Catalyst Cloud in Auckland,
+Catalyst Cloud provides training on how to use the Catalyst Cloud in Auckland,
 Wellington and Christchurch. Upcoming training sessions can be found at
 https://www.catalyst.net.nz/training.
 

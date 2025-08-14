@@ -112,8 +112,8 @@ configurations.
 
 .. note::
 
-  Catalyst flavors are named 'cX.cYrZ', where X is the "compute generation", Y is
-  the number of vCPUs, and Z is the number of gigabytes of memory.
+  Catalyst Cloud flavors are named 'cX.cYrZ', where X is the "compute generation", Y is
+  the number of vCPUs, and Z is the number of gigabytes (GB) of memory.
 
 Choose a Flavor ID, assign it to an environment variable, then export for later
 use:
@@ -164,7 +164,7 @@ known as an Image. Images are stored in the Glance service.
 
 .. note::
 
-  Catalyst provides a number of popular images for general use. If your preferred image
+  Catalyst Cloud provides a number of popular images for general use. If your preferred image
   is not available, you may upload a custom image to Glance.
 
 Choose an Image ID, assign it to an environment variable, then export for later
@@ -210,7 +210,7 @@ This example uses the Ubuntu image to create an instance.
 
 .. note::
 
-  The amount of images that Catalyst Provides can be quite large, if you know what Operating System you want for your
+  The amount of images that Catalyst Cloud has available can be quite large, if you know what Operating System you want for your
   image you can use the command ``openstack image list -- public | grep <OPERATING SYSTEM>``
   to find it quicker than looking through this list. Another thing to note is that;
   Image IDs will be different in each region. Furthermore, images are periodically updated so
@@ -414,7 +414,7 @@ As the Instance builds, its details will be provided. This includes its ID
 
 .. note::
 
- Observe that the status is ``BUILD`` Catalyst Cloud instances build very quickly,
+ Observe that the status is ``BUILD``, Catalyst Cloud instances build very quickly,
  but it still takes a few seconds. Wait a few seconds and ask for the status of
  this instance using the ``<INSTANCE_ID>`` or name (if unique) of this instance.
 

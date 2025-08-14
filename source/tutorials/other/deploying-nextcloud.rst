@@ -22,7 +22,7 @@ Introduction
 Nextcloud is a free and open source suite of client-server software which
 manages the creation and hosting of files. It is becoming a popular alternative
 to similar software such as Dropbox and Google Drive. This tutorial will guide
-you through the process of setting up a Nextcloud instance on the Catalyst
+you through the process of setting up a Nextcloud instance on Catalyst
 Cloud.
 
 ****************************************
@@ -80,7 +80,7 @@ Downloading template files from Github
 
 Our next step is to gather a set of terraform template files, from which we can
 create our resources. For this example, we will be downloading a set of
-template files from the Catalyst Cloud github found at
+template files from the Catalyst Cloud github repository found at
 `catalyst cloud orchestration`_. Open up a terminal and run the following:
 
 

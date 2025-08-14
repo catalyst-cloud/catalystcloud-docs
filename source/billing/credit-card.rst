@@ -98,7 +98,7 @@ Switching to invoice payment
    Once the payment method has been approved, you will be able to delete the selected
    credit card.
 
-You can also change back to Invoice as your payment method. The Catalyst Cloud will
+You can also change back to Invoice as your payment method. Catalyst Cloud will
 receive a notification request from your project.
 
 Before changing back to invoice method, we may reach out to you for a bit more of

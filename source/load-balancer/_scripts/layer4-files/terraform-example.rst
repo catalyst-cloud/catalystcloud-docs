@@ -4,7 +4,7 @@
 
 For this example, we assume that you already have some knowledge of how
 Terraform functions and that you know how to construct a Terraform template.
-If you have not used terraform before, or are not sure how to use it on the
+If you have not used terraform before, or are not sure how to use it on
 Catalyst Cloud, you can find a good starting example under the
 :ref:`first instance<launching-your-first-instance-using-terraform>`
 section of the documents. If you are wanting an even more in depth look at

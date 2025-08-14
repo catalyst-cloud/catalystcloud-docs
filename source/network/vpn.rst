@@ -376,7 +376,7 @@ elements in order to avoid ambiguity when running commands.
       $ wget https://raw.githubusercontent.com/catalyst-cloud/catalystcloud-docs/master/source/network/_scripts/create-vpn.sh
 
       Below is an example of the script being used to create a region to region
-      VPN on the Catalyst Cloud:
+      VPN on Catalyst Cloud:
 
     .. code-block:: bash
 

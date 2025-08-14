@@ -1,14 +1,14 @@
 .. _services_on_the_catalyst_cloud:
 
-########################################
-What services are on the Catalyst Cloud?
-########################################
+####################################
+What services are on Catalyst Cloud?
+####################################
 
-In the previous section, we learned that services on the Catalyst Cloud are
+In the previous section, we learned that services on Catalyst Cloud are
 pieces of hardware and software that we make easy and convenient to use by
 controlling them through means such as our Dashboard or the CLI (Command line
 interface). Now we'll discuss the various services
-offered by Catalyst Cloud so that we know *what* we can do on the Catalyst
+offered by Catalyst Cloud so that we know *what* we can do on Catalyst
 Cloud, even if right now we don't know *how* we can do it yet.
 
 
@@ -22,7 +22,7 @@ Compute service
 The compute service provides compute power on demand, in the form of
 "instances". If you like to think about physical computers, you can imagine an
 instance as one or more CPUs and GB of RAM that you have provisioned usage of.
-Instances come in many sizes, as you can see on the Catalyst Cloud's `compute
+Instances come in many sizes, as you can see on Catalyst Cloud's `compute
 page`_.
 
 .. _`compute page`: https://catalystcloud.nz/services/iaas/compute/#prices
@@ -37,12 +37,12 @@ was created to make this as easy as possible.
 An image is a "pre-made" operating system installation that can be used
 immediately by an instance, rather than spending time installing the operating
 system, the drivers, miscellaneous files, and configurations that help the
-instance integrate better with the Catalyst Cloud. Images allow you to know
-that your preferred operating system will work on the Catalyst Cloud the first
+instance integrate better with Catalyst Cloud. Images allow you to know
+that your preferred operating system will work on Catalyst Cloud the first
 time you try.
 
-Among the operating systems provided out of the box on the Catalyst Cloud image
-service are Ubuntu, Microsoft Windows 2012-2016, Debian, and CentOS. You can
+Among the operating systems provided out of the box on Catalyst Cloud image
+service are Ubuntu, Microsoft Windows Server, Debian, and CentOS. You can
 also create your own custom images to account for your own specific needs.
 
 Block storage service
@@ -132,7 +132,7 @@ Kubernetes service
 ==================
 
 Kubernetes is a system that is designed to manage the deployment, scaling, and
-health of containerised applications. The Catalyst Kubernetes service is a
+health of containerised applications. The Catalyst Cloud Kubernetes Service is a
 fully managed service and opens up the use of Kubernetes clusters to developers
 without needing to have specialist knowledge of the platform. It also frees you
 up to focus on what really matters to your business, knowing that the
@@ -140,13 +140,8 @@ Kubernetes service is monitored and managed by us 24/7.
 
 On top of this, our Kubernetes service has been certified by the cloud native
 computing foundation. Meaning that you are able to take any clusters you have
-built on other cloud platforms and transfer them onto the Catalyst Cloud with
+built on other cloud platforms and transfer them onto Catalyst Cloud with
 ease.
-
-The last thing to mention about the Catalyst Kubernetes Service is that it's
-use on our cloud is free. You do not pay an additional fee to use Kubernetes,
-you only pay for the resources that are consumed by your clusters e.g. the
-instance and networks etc.
 
 **********************************
 What can you do with each service?
@@ -155,7 +150,7 @@ What can you do with each service?
 Catalyst Cloud is an entirely automated platform that adheres to the NIST
 definition of `true cloud computing <https://csrc.nist.gov/publications/d
 etail/sp/800-145/final>`_. Among other things, that means you have total and
-near instant control over all the services you use on the Catalyst Cloud. You
+near instant control over all the services you use on Catalyst Cloud. You
 don't need to wait for a human to do things for you.
 
 .. note::
@@ -164,15 +159,15 @@ don't need to wait for a human to do things for you.
   :ref:`quota <additional-info>` are the most common.
   We intend to automate these in the future.
 
-Resources on the Catalyst Cloud can be created, deleted, assigned, resized,
+Resources on Catalyst Cloud can be created, deleted, assigned, resized,
 copied, and edited at your convenience using one of the many tools available to
-interact with the Catalyst Cloud. Performing these administrative actions do
+interact with Catalyst Cloud. Performing these administrative actions do
 not cost anything.
 
-With the Catalyst Cloud, you have total control over your infrastructure. You
+With Catalyst Cloud, you have total control over your infrastructure. You
 have root/console access to your instances, and Catalyst Cloud places no
 restrictions on what software you use. This is because each
-:ref:`project <admin-projects>` on the Catalyst Cloud is
+:ref:`project <admin-projects>` on Catalyst Cloud is
 isolated from all the other projects. Isolation means that the resources and
 the actions taken in one project can't effect anything else outside of that
 project.
@@ -198,15 +193,15 @@ Instead, the organisation could implement an automated process that will only
 create a staging server when they are actively testing their application. This
 will save costs greatly.
 
-There is no minimum limit for the resources you need to consume on the Catalyst
+There is no minimum limit for the resources you need to consume on Catalyst
 Cloud per hour. In fact, we encourage you to disable your resources if you
 don't need them. This flexibility is one of the biggest reasons so many
-in-the-know organisations are building and migrating their applications to the
+in-the-know organisations are building and migrating their applications to
 Catalyst Cloud.
 
 |
 
-Now that we've discussed what services are available on the Catalyst Cloud, we
+Now that we've discussed what services are available on Catalyst Cloud, we
 can discuss how to use them.
 
 

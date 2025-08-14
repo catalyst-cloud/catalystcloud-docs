@@ -1,4 +1,4 @@
-The Catalyst Cloud is built on top of the OpenStack project. There are many
+Catalyst Cloud is built on top of the OpenStack project. There are many
 Software Development Kits for a variety of different languages available for
 OpenStack. Some of these SDKs are written specifically for OpenStack while
 others are multi cloud SDKs that have an OpenStack provider. Some of these

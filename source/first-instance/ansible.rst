@@ -15,7 +15,7 @@ the following: https://docs.ansible.com/ansible-tower/2.2.0/html/administration/
 
 .. _install-ansible:
 
-A script is provided by Catalyst which installs the required Ansible and
+A script is provided by Catalyst Cloud which installs the required Ansible and
 OpenStack libraries within a Python virtual environment. This script is part of
 the `catalystcloud-ansible`_ git repository. Clone this repository and run the
 install script in order to install Ansible.
@@ -43,7 +43,7 @@ install script in order to install Ansible.
 
 .. note::
 
-  Catalyst recommends customers use Ansible >= 2.0 and Shade >= 1.4 with the
+  Catalyst Cloud recommends customers use Ansible >= 2.0 and Shade >= 1.4 with
   Catalyst Cloud.
 
 Before running the Ansible playbooks, ensure your OpenStack credentials have
@@ -76,9 +76,9 @@ Starting with the first playbook, these are the tasks the
 
  playbook: create-network.yml
 
-  play #1 (localhost): Create a network in the Catalyst Cloud   TAGS: []
+  play #1 (localhost): Create a network in Catalyst Cloud   TAGS: []
     tasks:
-      Connect to the Catalyst Cloud TAGS: []
+      Connect to Catalyst Cloud TAGS: []
       Create a network  TAGS: []
       Create a subnet   TAGS: []
       Create a router   TAGS: []
@@ -101,7 +101,7 @@ variable, or override the variable when running the playbook as shown below:
  TASK [setup] *******************************************************************
  ok: [localhost]
 
- TASK [Connect to the Catalyst Cloud] *******************************************
+ TASK [Connect to Catalyst Cloud] *******************************************
  ok: [localhost]
 
  TASK [Create a network] ********************************************************
@@ -144,10 +144,10 @@ variable, or override the variable when running the playbook as shown below:
  TASK [setup] *******************************************************************
  ok: [localhost]
 
- TASK [Connect to the Catalyst Cloud] *******************************************
+ TASK [Connect to Catalyst Cloud] *******************************************
  ok: [localhost]
 
- TASK [Create a compute instance on the Catalyst Cloud] *************************
+ TASK [Create a compute instance on Catalyst Cloud] *************************
  changed: [localhost]
 
  TASK [Assign a floating IP] ****************************************************

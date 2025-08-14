@@ -14,7 +14,7 @@ Database service Beta
 =====================
 
 We are moving our database as a service offering to open beta. This allows all
-customers the ability to create their own managed database resources on the
+customers the ability to create their own managed database resources on
 Catalyst Cloud. Customers who participated in the technical preview of the
 service will begin being charged for database resources they consume from open
 beta onwards.

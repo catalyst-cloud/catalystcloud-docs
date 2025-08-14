@@ -3,7 +3,7 @@ Transferring a volume to another project
 ########################################
 
 In this example, we will cover how to transfer volumes between different
-projects on the Catalyst Cloud. Before we begin, there are some requirements
+projects on Catalyst Cloud. Before we begin, there are some requirements
 that you have to check:
 
 - Does your new project have a large enough quota to support the new volume?

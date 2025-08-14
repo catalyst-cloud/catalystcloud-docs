@@ -14,7 +14,7 @@ policy with the ``--storage-policy`` flag.
 
 .. Note::
     Even if a container only uses a single region for it's replication policy,
-    you are still able to access the container from any region on the Catalyst
+    you are still able to access the container from any region on Catalyst
     Cloud.
 
 .. code-block:: bash
