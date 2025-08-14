@@ -1,12 +1,11 @@
 .. _upload_images:
 
-######################
-Uploading to the cloud
-######################
+##################################
+Uploading images to Catalyst Cloud
+##################################
 
-Please make sure you have converted your image to RAW before uploading it to
-our cloud. The previous section provides instructions on how to convert images
-from other formats to RAW.
+Please make sure you have :ref:`converted your image to RAW <convert_image_to_raw>`
+before uploading it to our cloud.
 
 **************************
 Via the command line tools
@@ -15,13 +14,13 @@ Via the command line tools
 
   If the Image you are trying to upload is larger than 5GB you **must** use
   the OpenStack CLI to upload it to the cloud. This is due to a cap being
-  placed on the dashboard.
+  placed for uploads via our dashboard.
 
 Ensure that you have the OpenStack command line tools
 installed and that you have sourced an openrc file, as explained in the
 :ref:`CLI tools and SDKs section<command-line-interface>`.
 
-To upload the converted image to the Catalyst Cloud:
+To upload the converted image to Catalyst Cloud:
 
 .. code-block:: bash
 
