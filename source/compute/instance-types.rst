@@ -105,6 +105,8 @@ specific flavor has. These are summarised in the tables below:
     - 135%
     - 800%
 
+.. _compute-accel-types:
+
 *****************
 Accelerated Types
 *****************

@@ -12,15 +12,15 @@ Catalyst Cloud provides several options for deloying instances with
 NVIDIA GPU acceleration that can be utilised by selecting the desired GPU
 :ref:`flavor <instance-types>` when creating the instances.
 
-All GPU instances require suitable drivers to be installed before the GPU can
-be utilised. Catalyst Cloud is not permitted to provide modified operating
-system images so customers deploying GPU instances will need to install
-suitable drivers themselves.
+All GPU instances require suitable drivers to be installed in the
+operating system before the GPU can be utilised. This applies to both
+operating system images you upload, and to images provided by
+Catalyst Cloud.
 
-Instances built using C2-GPU flavors use virtual GPU partitions which have
+Instances built using c2-gpu flavors use virtual GPU partitions which have
 special driver reqirements. Standard NVIDIA drivers supplied with operating
-systems cannot be used for C2-GPU. Please refer to the
-:ref:`C2-GPU instructions<c2-gpu-support>` for details.
+systems cannot be used for c2-gpu instances. Please refer to the
+:ref:`c2-gpu instructions<c2-gpu-support>` for details.
 
 All other GPU instances use direct pass-through of the entire GPU hardware,
 so any driver that is compatible with the GPU hardware can be installed.
@@ -38,46 +38,20 @@ Creating a GPU-backed Instance
 To create a GPU-backed instance, simply :doc:`create an instance <launch-compute-instance>`
 using a GPU-backed flavor.
 
-The current GPU flavours available are:
-
-.. list-table::
-   :header-rows: 1
-
-   * - Flavour
-     - vCPU
-     - RAM
-     - GPU Model
-     - VRAM
-     - GPU Count
-   * - c2-gpu.c4r80g1
-     - 4
-     - 80GB
-     - NVIDIA A100 `2.20g MIG slice <https://docs.nvidia.com/datacenter/tesla/mig-user-guide/index.html#a100-mig-profiles>`_
-     - 20GB
-     - 1
-   * - c3-gpu.c24r96g1
-     - 24
-     - 96GB
-     - NVIDIA L40S
-     - 48GB
-     - 1
-   * - c3-gpu.c48r192g2
-     - 48
-     - 192GB
-     - NVIDIA L40S
-     - 48GB
-     - 2
-   * - c3-gpu.c96r384g4
-     - 96
-     - 384GB
-     - NVIDIA L40S
-     - 48GB
-     - 4
+The list of GPU-backed types and which GPUs they provide is listed
+under the :ref:`compute-accel-types` section of the Instance types
+documentation.
 
 Once the instance is created, suitable GPU drivers will need to be installed
 before the GPU can be used.
 
-********************
+*********************************
+Setup for most GPU instance types
+*********************************
+
+These requirements and instructions are for most GPU instance types
+except c2-gpu, which has a different process outlined below in :ref:`c2-gpu-support`.
+
 Minimum Requirements
 ********************
 
@@ -95,15 +69,8 @@ The following operating systems have been tested with GPU support:
 
 All other OS images are unsupported and untested.
 
-***********************
 GPU Driver Installation
 ***********************
-
-.. note::
-
-    These steps do not apply to C2-CPU instances. Refer to the :ref:`C2-GPU
-    instructions<c2-gpu-support>` below when setting up C2-GPU instances.
-
 
 Basic Installation Process
 ==========================
@@ -171,9 +138,11 @@ Basic Installation Process
 
            * - Compute Flavour
              - GPU Model
-           * - C1A-GPU
+           * - c1a-gpu
              - NVIDIA RTX A6000
-           * - C3-GPU
+           * - c2a-gpu
+             - NVIDIA A100 40GB
+           * - c3-gpu
              - NVIDIA L40S
 
         Once the driver package is installed, verify that it is installed by checking
@@ -240,19 +209,23 @@ up without requiring additional steps.
 
 .. _c2-gpu-support:
 
-**********************
-C2-GPU Virtual Servers
-**********************
+*******************************
+Setup for c2-gpu Instance Types
+*******************************
 
-Unlike other GPU flavours, C2-GPU instances are provided with a partition of
-an NVIDIA A100 GPU rather than the entire capaciity of the card. The partition
-size provided is "GRID A100D-20C", which provides two compute pipelines and
-20GB of video RAM from the underlying GPU.
+Unlike other GPU-backed types, c2-gpu instances are provided with a partition of
+an NVIDIA A100 GPU rather than the entire capacity of the card, using NVIDIA
+vGPU services. The partition size provided is "GRID A100D-20C", which
+provides two compute pipelines and 20GB of video RAM from the underlying GPU.
+
+vGPUs are isolated in hardware between different consumers, so there is
+no risk of information leaking or performance problems from other users
+of the same physical GPU.
 
 Minimum Requirements
-====================
+********************
 
-For "c2-gpu", the absolute minimum requirements are as follows:
+For c2-gpu, the absolute minimum requirements are as follows:
 
 * A boot/OS disk of at least 30GB (when installing CUDA support)
 * Compatible NVIDIA vGPU driver. This is currently version
@@ -283,21 +256,21 @@ server operating systems:
 
 All other OS images are unsupported or untested.
 
-Creating a C2-GPU virtual server
-================================
+Creating a c2-gpu virtual server
+********************************
 
 To create a GPU-enabled virtual server, create an instance using a flavor
-prefixed with ``c2-gpu``.
+prefixed with "c2-gpu".
 
-To help with streamlining C2-GPU server builds we've :ref:`provided examples on
+To help with streamlining c2-gpu server builds we've :ref:`provided examples on
 using Packer to build custom images that include GPU drivers and software<packer-tutorial-gpu>`.
 This process is recommended for bulk GPU compute deployments.
 
-Installing Drivers for C2-GPU Instances
-=======================================
+Installing Drivers for c2-gpu Instances
+***************************************
 
 Ubuntu
-******
+======
 
 Once you have created an Ubuntu virtual server using a version supported
 by the NVIDIA drivers, you will need to perform the following steps.
@@ -499,7 +472,7 @@ Some operating systems (e.g. Ubuntu) include CUDA packages in their
 repositories that can also be used instead, although they are usually older
 versions.
 
-In the case of C2-GPU instances the CUDA toolkit version is currently limited
+In the case of c2-gpu instances the CUDA toolkit version is currently limited
 by driver release 535 which officially supports CUDA 12.2.
 
 NVIDIA provide compatibility libraries to allow applications compiled against
@@ -509,11 +482,11 @@ the NVIDIA CUDA compatibility guide for more information:
 https://docs.nvidia.com/deploy/pdf/CUDA_Compatibility.pdf
 
 
-CUDA Compatibility for C2-GPU in Ubuntu
+CUDA Compatibility for c2-gpu in Ubuntu
 =======================================
 
 Catalyst Cloud suggests the following approach to enable CUDA 12.4 compatibility
-(for example) with C2-GPU on Ubuntu instances.
+(for example) with c2-gpu on Ubuntu instances.
 
 Add the NVIDIA CUDA repo and signing keys and update the APT cache:
 
