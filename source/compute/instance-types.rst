@@ -173,8 +173,8 @@ pCPU supports threads, this will be listed in the tables above as a
 to disable threading, and in those cases a vCPU is simply allocated
 to a pCPU and listed in the table above as "no threading" policy.
 
-Some physical CPUs support threading, but has been disabled for a
-specific compute type. The vCPU policy reflects this. It is not
+Some physical CPUs support threading, but this may have been disabled
+for a specific compute type. The vCPU policy reflects this. It is not
 possible to change the threading policy on individual virtual servers,
 it is set by the type of compute the virtual server is using.
 
