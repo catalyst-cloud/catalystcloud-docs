@@ -1,3 +1,5 @@
+.. _upload_images:
+
 ######################
 Uploading to the cloud
 ######################

@@ -1,3 +1,5 @@
+.. _using_snapshots:
+
 ###############
 Using Snapshots
 ###############
