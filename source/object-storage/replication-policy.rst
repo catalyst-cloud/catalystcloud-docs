@@ -40,7 +40,7 @@ suggest) are related to one of the regions on Catalyst cloud:
   only way to change the policy of a container is during it's creation.
 
 There are multiple ways to create containers that use a single region policy.
-You can create your container via the Dashboard, by making use of the openstack
+You can create your container via the Dashboard, by making use of the OpenStack
 CLI or by making calls to the object storage API directly. All of which are
 detailed below.
 
@@ -82,7 +82,7 @@ Programmatic methods
 
 .. tabs::
 
-  .. tab:: Openstack CLI
+  .. tab:: OpenStack CLI
 
     .. include:: tutorial-scripts/replication-openstack.rst
 

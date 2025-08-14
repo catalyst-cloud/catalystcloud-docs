@@ -3,12 +3,12 @@
 tool developed by `Hashicorp`_. Terraform supports the configuration of many
 kinds of infrastructure, including Catalyst Cloud. It achieves this by
 using components known as `providers`_. In the case of Catalyst Cloud, this
-is the `Openstack provider`_.
+is the `OpenStack Provider`_.
 
 .. _Terraform: https://www.terraform.io/
 .. _Hashicorp: https://www.hashicorp.com/
 .. _providers: https://www.terraform.io/docs/providers/index.html
-.. _Openstack provider: https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs
+.. _OpenStack Provider: https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs
 
 For further information on using Terraform with OpenStack, see the linked
 `video`_ and `blog`_ post:

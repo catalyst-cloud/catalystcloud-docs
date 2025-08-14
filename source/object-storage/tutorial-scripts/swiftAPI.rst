@@ -38,7 +38,7 @@ Like the the other methods in this tutorial section, you will need to source an
 openRC file to interact with the object storage APIs. However, there is
 an additional environment variable that we must manually set to be able to
 interact correctly with the swift API. We need to create an **OS_STORAGE_URL**
-variable so that swift is able to correctly authenticate using your openstack
+variable so that swift is able to correctly authenticate using your Catalyst Cloud
 credentials. We do this by taking one of the API endpoints from above, and
 adding our project_ID to it.
 

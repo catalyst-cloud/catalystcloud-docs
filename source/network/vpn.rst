@@ -26,7 +26,7 @@ the router and the CIDR of the private subnets.
 
 We will illustrate how to create the the VPN using the following approaches:
 
-* Using the Openstack command line tools.
+* Using the OpenStack command line tools.
 * With a bash script.
 * From the cloud dashboard
 

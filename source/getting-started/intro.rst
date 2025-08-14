@@ -60,9 +60,9 @@ space, compute capacity, or Internet access. The building blocks you need to
 run a business's applications.
 
 .. note::
-   Openstack requires a python interpreter to function and
+   OpenStack requires a python interpreter to function and
    is currently phasing out it's support for Python2. We therefore recommend
-   running Openstack using Python3.
+   running OpenStack using Python3.
 
 .. _`OpenStack`: https://www.openstack.org/software/
 

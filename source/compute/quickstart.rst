@@ -17,8 +17,8 @@ some of the most common methods that are being used by our customers. These
 are:
 
 - The Catalyst Cloud `web dashboard`_.
-- The Openstack `command line tools`_.
-- The Openstack `Heat`_ orchestration tool.
+- The OpenStack `command line tools`_.
+- The OpenStack `Heat`_ orchestration tool.
 - The Hashicorp `Terraform`_ orchestration tool.
 
 .. _command line tools: https://docs.openstack.org/newton/user-guide/cli.html
@@ -286,7 +286,7 @@ fits your project before you run any of these templates.
 
 .. tabs::
 
-    .. tab:: Openstack CLI
+    .. tab:: OpenStack CLI
 
         .. literalinclude:: _scripts/cli/cli_basic_compute_create.sh
             :language: shell

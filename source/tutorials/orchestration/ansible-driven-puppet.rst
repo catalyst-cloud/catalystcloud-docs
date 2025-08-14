@@ -47,7 +47,7 @@ specific to your local setup.
     echo "remote_access_cidr: `curl -4 my.ip.fi`/32" >> local-vars.yml
     # option 2: no restriction on ssh access to your public ip
     echo "remote_access_cidr: 0.0.0.0/0" >> local-vars.yml
-    # optional: set this to prefix openstack resources with a token, eg your
+    # optional: set this to prefix OpenStack resources with a token, eg your
     # username
     echo "namespace: linda-" >> local-vars.yml
 
@@ -200,7 +200,7 @@ server.
       hosts: localhost
       tasks:
 
-        - name: Delete the openstack server instance
+        - name: Delete the OpenStack server instance
           os_server: name="{{ oldhost_name }}" state=absent
 
         - name: Remove traces of the server from puppetmaster

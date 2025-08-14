@@ -24,9 +24,9 @@ construct an object storage container using Heat:
 
 For more information on object storage containers and what
 customization options you can select for them, please see the
-`Openstack Heat`_  documentation.
+`OpenStack Heat`_  documentation.
 
-.. _Openstack Heat: https://docs.openstack.org/heat/latest/template_guide/openstack.html#OS::Swift::Container
+.. _OpenStack Heat: https://docs.openstack.org/heat/latest/template_guide/openstack.html#OS::Swift::Container
 
 Once you have your template constructed, you should make sure to validate
 it before creating any resources. You can do this by running the following code:

@@ -246,7 +246,7 @@ Using anti-affinity groups
 **************************
 
 There is an options to use elasticluster with server group anti-affinity
-groups to ensure best load distribution in Openstack cluster.
+groups to ensure best load distribution in OpenStack cluster.
 To use this feature clone elasticluster from the repository shown below, this
 is a temporary step until the feature gets merged upstream.
 

@@ -25,7 +25,7 @@ Client tool versions
 Each of the services we have on our Cloud requires a different client tool to
 interact with from the command line. Earlier in this section we covered how to
 install these into a virtual environment so that you are able to use the
-openstack command line.
+openstack command.
 
 Below is a list of the Client tools and their latest supported version on
 Catalyst Cloud. When upgrading a service, in order to be able to interact with

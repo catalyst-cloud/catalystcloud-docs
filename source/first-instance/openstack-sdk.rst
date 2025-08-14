@@ -9,8 +9,8 @@ You will find an up to date list of recommended SDKs at
 https://developer.openstack.org/. A more exhaustive list that includes in
 development SDKs is available at https://wiki.openstack.org/wiki/SDKs.
 
-This section covers the OpenstackSDK which is a python based SDK with
-support currently only provided for python3. This sdk came out of 3
+This section covers the OpenStack SDK which is a python based SDK with
+support currently only provided for python3. This SDK came out of 3
 separate libraries originally: shade, os-client-config and
 python-openstacksdk. They each have their own history on how they
 were created but after awhile it was clear that there was a lot
@@ -18,17 +18,17 @@ to be gained by merging the three projects.
 
 |
 
-Firstly, we have to install the OpenstackSDK. The recommended way to get the
+Firstly, we have to install the OpenStack SDK. The recommended way to get the
 up to date version of the SDK is to use Python's pip installer. Simply run:
 
 .. code-block:: bash
 
  pip install openstacksdk
 
-It is recommended that you use the openstack sdk from a virtual
+It is recommended that you use the OpenStack SDK from a virtual
 environment. More information can be found here: :ref:`python-virtual-env`
 
-Now that we have the OpenstackSDK installed, the next step in getting an
+Now that we have the OpenStack SDK installed, the next step in getting an
 instance running is to provide your Python script with the correct credentials
 and configuration for your project. If you have already sourced
 your OpenRC file, then this step has been taken care
@@ -38,17 +38,17 @@ the requirements section of this document.
 |
 
 Once your environment variables have been set, we are able to create an
-instance using the openstack-SDK. We have prepared below a python script that
+instance using the OpenStack SDK. We have prepared below a python script that
 will create all the various resources needed to set up a blank ubuntu-18
 instance with a block storage volume attached. If you want to create an
 instance with different parameters, you can find information on how to
-create your own scripts on the `OpenstackSDK documentation`_:
+create your own scripts on the `OpenStack SDK documentation`_:
 
-.. _OpenstackSDK documentation: https://docs.openstack.org/openstacksdk/latest/
+.. _OpenStack SDK documentation: https://docs.openstack.org/openstacksdk/latest/
 
 The following code block assumes a few things:
 
-* You are using an RC file that does not use 2-factor-authentication.
+* You are using an RC file that does not use 2 factor authentication.
   if you are using 2FA then you would need to change the `password` variable
   to be a `token`
 * The region your instance is going to be made is the Porirua region.

@@ -99,7 +99,7 @@ Using programmatic methods
 
 .. tabs::
 
-    .. tab:: Openstack CLI
+    .. tab:: OpenStack CLI
 
       To create a server group:
 

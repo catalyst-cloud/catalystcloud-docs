@@ -21,7 +21,7 @@ Configuring your command line
 To interact with the database service on the cloud, you must have the
 following:
 
-- Your :ref:`openstack CLI<command-line-interface>` set up.
+- Your :ref:`OpenStack CLI<command-line-interface>` set up.
 - You must have :ref:`Sourced an openRC file<configuring-the-cli>` on your
   current command line environment
 - You must have installed the `python trove-client tools

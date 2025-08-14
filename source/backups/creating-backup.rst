@@ -9,7 +9,7 @@ Before you continue with the examples below, there are a few assumptions that
 are made which you will need to consider before jumping in further:
 
 1)
- You are familiar with the Linux command line and the Openstack CLI tools.
+ You are familiar with the Linux command line and the OpenStack CLI tools.
 2)
  You have installed the OpenStack command line tools and sourced an openrc
  file, as explained in :ref:`this section of the documentation<command-line-interface>`.
@@ -23,8 +23,8 @@ While both of the methods we describe in this tutorial will create a backup of
 your data, there are some differences between them in how your backup is
 created, stored and maintained.
 
-When using Openstack to create your backup, a point in time snapshot of your
-data is created. From this snapshot, Openstack creates a volume; this is your
+When using OpenStack to create your backup, a point in time snapshot of your
+data is created. From this snapshot, OpenStack creates a volume; this is your
 backup volume. A copy of this volume is then placed in object storage in the
 back end for redundancy.
 
@@ -41,18 +41,18 @@ file-level restoration from your backup should you need to.
 
 Depending on the type of backup you want to create and the solution that best
 suits your situation, you may decide to use one method or another. Generally the
-basic Openstack backup solution is easier for maintaining a crash consistent
+basic OpenStack backup solution is easier for maintaining a crash consistent
 copy of your data somewhere ready to restore while Duplicity is able to perform
 a more rigorous capture of the state of your files.
 
 ***********************
-Using the Openstack CLI
+Using the OpenStack CLI
 ***********************
 
 Creating your backup
 ====================
 
-To create a backup using the openstack command line tools, we first need to
+To create a backup using the OpenStack command line tools, we first need to
 find the original volume we are trying to back up. To show a list of the
 currently available volumes, you can use the following command:
 
@@ -68,7 +68,7 @@ currently available volumes, you can use the following command:
     $ export volumeID='81599985-XXXX-XXXX-XXXX-XXXXXXXXXXee'
 
 Once we have the volume that we want to back up we can construct our backup
-command. The syntax for creating a backup using the openstack CLI is:
+command. The syntax for creating a backup using the OpenStack CLI is:
 
 .. code-block:: bash
 
@@ -200,10 +200,10 @@ these backups. The syntax for the restore command is as follows:
 
     $ openstack volume backup restore <BACKUP_ID> <VOLUME_ID>
 
-Depending on which backup we want to use, Openstack will perform different
+Depending on which backup we want to use, OpenStack will perform different
 actions when restoring our volume.
 
-If we choose our original backup to restore from, then Openstack will perform a
+If we choose our original backup to restore from, then OpenStack will perform a
 full restore of our backup. This will restore the volume to the point in time
 our original backup was created.:
 
@@ -218,7 +218,7 @@ our original backup was created.:
     | volume_name | backup-vol-original                  |
     +-------------+--------------------------------------+
 
-If we choose to restore from our incremental backup, then Openstack will first
+If we choose to restore from our incremental backup, then OpenStack will first
 organize a list of the backups we have made starting with the initial backup. It
 will then perform a full restore starting from that backup and then layer on the
 additional backups afterward:

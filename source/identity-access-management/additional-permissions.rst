@@ -63,9 +63,9 @@ For object storage, you can make use of *container access control lists* (ACLs)
 to allow users who have the "auth_only" role to be able to view or edit the
 contents of your object storage containers. You can find the full details of
 permissions and restrictions you can set on your containers in the
-`openstack swift documentation`_
+`OpenStack Swift documentation`_
 
-.. _`openstack swift documentation`: https://docs.openstack.org/swift/latest/overview_acl.html
+.. _`OpenStack Swift documentation`: https://docs.openstack.org/swift/latest/overview_acl.html
 
 In addition to using ACLs to restrict or permit access to your object storage
 containers, you also have the option of making your containers public or giving

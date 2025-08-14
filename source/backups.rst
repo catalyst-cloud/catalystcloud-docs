@@ -14,12 +14,12 @@ The following sections cover different methods for creating and maintaining
 backups on the cloud as well as ways to automate the backup process.
 
 The main method of backing up your instances will be through the in built
-backup commands using Openstack. Alternatively, we also discuss ways that you
+backup commands using OpenStack. Alternatively, we also discuss ways that you
 can use `Duplicity`_ to create backups as well.
 
 .. _Duplicity: https://duplicity.gitlab.io/
 
-The main distinction between the two is that the default Openstack backup
+The main distinction between the two is that the default OpenStack backup
 creates new volume resource that holds a copy of your data from the point
 in time you decided to back up your data. While Duplicity creates a
 file-orientated backup, allowing you to perform file-level restoration from

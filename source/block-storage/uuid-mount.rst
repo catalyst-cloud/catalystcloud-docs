@@ -10,7 +10,7 @@ Creating a volume via the CLI
 
 Unlike our previous example, we are going to be creating and attaching a
 volume using its **UUID**, rather than a unique volume name. This process is
-only uniquely different for the openstack CLI, if you wish to use another
+only uniquely different for the OpenStack CLI, if you wish to use another
 method to create and attach your instance; you can follow the examples on the
 :ref:`using-volumes` page.
 

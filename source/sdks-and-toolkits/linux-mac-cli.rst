@@ -19,8 +19,8 @@ on the basic functions of the python virtual environment, please refer to the
 Operating system specific steps
 ===============================
 
-Here is an outline for installing the Openstack command line tools on the
-common Linux/Unix based systems. This includes OSX as it runs a BSD based
+Here is an outline for installing the OpenStack command line tools on the
+common Linux/Unix based systems. This includes macOS as it runs a BSD based
 system.
 
 .. tabs::
@@ -40,7 +40,7 @@ system.
           # activate the virtual environment
           source venv/bin/activate
 
-          # install the Openstack commandline tools into the virtual environment. In some
+          # install the OpenStack commandline tools into the virtual environment. In some
           # cases you may need to use pipx instead of pip, but the packages you need to
           # install are the same regardless.
           pip install -U pip \
@@ -69,7 +69,7 @@ system.
           # activate the virtual environment
           source venv/bin/activate
 
-          # install the Openstack commandline tools into the virtual environment
+          # install the OpenStack commandline tools into the virtual environment
           pip install -U pip \
           python-openstackclient \
           python-ceilometerclient \
@@ -95,7 +95,7 @@ system.
           # activate the virtual environment
           source venv/bin/activate
 
-          # install the Openstack commandline tools into the virtual environment
+          # install the OpenStack commandline tools into the virtual environment
           pip install -U pip \
           python-openstackclient \
           python-ceilometerclient \
@@ -118,7 +118,7 @@ system.
           virtualenv venv
           source venv/bin/activate
 
-          # Install the Python openstack client libraries into your virtual environment
+          # Install the Python OpenStack client libraries into your virtual environment
                     pip install -U pip \
           python-openstackclient \
           python-ceilometerclient \
@@ -202,7 +202,7 @@ To download an OpenStack RC file from the dashboard:
 
 .. Note::
 
-  You are also able to download the Openstack RC file from the top-right
+  You are also able to download the OpenStack RC file from the top-right
   corner where your login details are display as shown below:
 
 .. image:: assets/RC-file-download.png
@@ -216,7 +216,7 @@ dashboard there are 2 version available. One that is for Linux and Mac based
 systems, and one that is for Windows. The reason for this is because Windows
 Powershell works differently than the Linux and Mac equivalent.
 
-When authenticating with the linux/macOS open RC, you need to supply a password
+When authenticating with the Linux/macOS open RC, you need to supply a password
 and MFA if you have it. If not, then you hit enter to
 continue and you are issued a token for authentication. This token lasts up to
 12 hours before you need to authenticate your details again. Powershell, does

@@ -3,7 +3,7 @@ common S3 calls and operations.
 
 .. seealso::
 
-  Swift3 middleware emulates the S3 REST API on top of OpenStack. Swift is
+  Swift S3 middleware emulates the S3 REST API on top of OpenStack. Swift is
   documented fully `here
   <https://docs.openstack.org/mitaka/config-reference/object-storage/configure-s3.html>`_.
 

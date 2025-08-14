@@ -191,7 +191,7 @@ to our object storage service:
 #. Select which type of backup you want, either are supported.
 #. For Data backups:
 
-   #. Select "Openstack Swift" from the list of backup destinations and
+   #. Select "OpenStack Swift" from the list of backup destinations and
       click "Next"
    #. On the next page:
 

@@ -40,11 +40,11 @@ to use Ansible for configuration management of Catalyst Cloud instances
 irrespective of what method has been used to create those instances.
 
 ****************************************
-Install the openstack ansible collection
+Install the OpenStack Ansible collection
 ****************************************
 
 Use the ansible-galaxy command to install the openstack.cloud collection.
-The collection includes modules for using Ansible with Openstack as well as the inventory plugin.
+The collection includes modules for using Ansible with OpenStack as well as the inventory plugin.
 
 .. code-block:: bash
 

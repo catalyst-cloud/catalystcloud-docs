@@ -56,7 +56,7 @@ Command line methods
 
         .. include:: terraform.rst
 
-    .. tab:: Openstack SDK
+    .. tab:: OpenStack SDK
 
         .. include:: openstack-sdk.rst
 

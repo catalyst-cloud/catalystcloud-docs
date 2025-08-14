@@ -102,7 +102,7 @@ and install our command line tools.
   virtual environment
     $ .\ccloud\scripts\activate
 
-  # Now we install the Python openstack client libraries into our virtual environment
+  # Now we install the Python OpenStack client libraries into our virtual environment
   $ pip install python-openstackclient python-ceilometerclient python-heatclient python-neutronclient python-swiftclient python-octaviaclient python-magnumclient
 
 Once you have installed the required libraries to work with Catalyst
@@ -250,7 +250,7 @@ manner.
 **If you installed the CLI using pip:**
 
 1. Activate your virtual environment.
-2. :ref:`Source an Openstack RC file<windows-configuration>`
+2. :ref:`Source an OpenStack RC file<windows-configuration>`
 3. Invoke the CLI with the ``openstack`` command
 
 
@@ -264,4 +264,4 @@ We highly recommend that if you are going to be using the CLI often that you
 take the time to go through the documentation section on :ref:`setting up your
 first instance <using-the-command-line-interface>`, using the CLI method. It
 gives you a great step-by-step process to how to create an instance but also
-teaches you the common commands found in openstack and the CLI.
+teaches you the common commands found in OpenStack and the CLI.
