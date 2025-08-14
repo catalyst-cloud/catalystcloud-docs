@@ -36,14 +36,16 @@ instances and other resources are scheduled by the cloud and you are only
 billed for the amount of resources you use.
 
 For example: you need an instance to crunch numbers for a day. In a cloud
-system you only pay for however long it takes to complete your task. In a
-traditional system you would have to pay for an entire month of use.
-On the Catalyst Cloud, you only pay your instances down to the minute. And if
-you need more power for the instance during your number crunching you can
-increase the compute capacity without having to confirm with your provider
+system you only pay for how long you use the resources. In a
+traditional system you would have to pay for an entire month of use, or to
+buy/lease physical equipment.
+If you need more compute power (virtual CPUs (or vCPUs) or memory) for the
+instance during your number crunching you can
+increase the size of your instance without having to confirm with your provider
 first. Saving yourself money and the hassle of negotiating changes. Once you
-are done with your task you can turn off your instance, release any other
-resources, and the bill stops there.
+are done with your task you can turn off your instance, or reduce the size of
+the instance release any other resources, and the billing stops (or redeuces)
+then.
 
 ***********************
 What is Catalyst Cloud?
