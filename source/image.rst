@@ -1,27 +1,32 @@
-#############
-Image
-#############
+######
+Images
+######
 
-Images contain the information needed to install an operating system on a cloud
-instance, with all of the correct dependencies and additional programs needed
-to interact with the rest of the cloud infrastructure. These are different to
-just a copy of an operating system that is entirely blank; as an image contains
-a file structure, software and other non-factory setting configuration on it.
-For example, the catalyst Ubuntu_18.04 image contains a version of Git
-installed on it once it is started up. Other programs such as a base version
-of python are also installed.
+Images contain an operating system which can be cloned to a
+:ref:`volume <block-storage-intro>` and used to boot a cloud
+instance. These are different to just a base installation of an
+operating system, as most of the images we provide include tooling called
+cloud-init which retrieves configuration for both our cloud, and about the
+specific instance that you are creating.
 
-This allow you as a user to pick an image that most accurately
-resembles what you are wanting to have for your instance. This also saves you having to install additional software or setting up file structures etc.
-You are also able to make your own 'snapshots' from instances that you run,
-which you can then save and use as images of your own in the future, this is
-discussed later in this section.
+Having a wide range of images available will hopefully allow you to find one
+that meets your requirments. If they don't you are always able to upload your
+own images to use within your project(s). See :ref:`upload_images`.
 
-Additionally, you are able to upload your own images to your project to save
-time rebuilding any instances that you may have had previously. This is
-discussed further in this section. For our default images, we ensure that they
-are accurate to their upstream counterparts by downloading and validating them
-using a checksum from their sources.
+You are able to take a 'snapshot' of an instance once you have customised it
+and use that to start additional instances. This can simplify building a
+solution (or complicate it!). See :ref:`using_snapshots`.
+
+Once you have created a new instance from an image it is always a good idea to
+perform an upgrade of the packages installed, and to continue to do this in an
+on-going basis. It is part of
+:ref:`the shared responsibility mode <shared_responsibility_model>` that you are
+responsible for the security of the software within your instance(s).
+
+We update on a regular basis the images we provide, which are still supported
+by the providers. However these updates won't flow into your instances unless
+you rebuild them using a new image as noted just above. As part of this process
+we test them to ensure they are operating in a way that we expect.
 
 .. toctree::
    :maxdepth: 1
