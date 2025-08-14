@@ -48,7 +48,7 @@ The last thing about passwords that you need to be considerate of, is password
 protection. Follow these rules about access to or sharing information
 about passwords:
 
-- Don't send your password over the internet to anyone.
+- Don't send your password over the Internet to anyone.
 - Don't write passwords down and store them on a physical location.
 - Store any user ID's or passwords in an encrypted format.
 - Do not script any passwords for automatic log in.
@@ -135,7 +135,7 @@ automatically has the following rules:
 
 .. image:: assets/security-group-screenshot.png
 
-These mean that the security group can access the internet from IPv4 and v6
+These mean that the security group can access the Internet from IPv4 and IPv6
 with outward bound traffic. But at this stage there is no ingress traffic, you
 must define that yourself. When doing so you need to be careful and understand
 the type of access you wish to permit. Below is pictured the different rules
@@ -152,10 +152,10 @@ or upload your SSH keys is documented
 .. Warning::
    When creating an ingress rule for the security group you need to be careful
    about which ports you allow access to your instance on. Setting your port range
-   to 0.0.0.0./0 will open it to the entire internet meaning that
+   to 0.0.0.0./0 will open it to the entire Internet meaning that
    anyone should they find it can access your instance. The best practice for a
    secure instance is to use an SSH rule. This is because even should you expose
-   it to the entire internet, without the proper SSH key pair, they would not be
+   it to the entire Internet, without the proper SSH key, they would not be
    able to access the instance.
 
 **************************

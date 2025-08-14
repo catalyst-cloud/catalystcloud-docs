@@ -30,7 +30,7 @@ New Features
 * Support of the templates for Kubernetes v1.15.11 will be deprecated.
 * Added support for the sha256 digest check for k8s hyperkube image.
 * The behaviour of the Kubernetes **development templates** has changed to make
-  all new clusters created with them **publicly accessible over the internet**
+  all new clusters created with them **publicly accessible over the Internet**
   by default.
 * Added support to allow for cluster labels to be over-ridden at creation time
   by means of merging changes rather than having to provide the entire label

@@ -102,7 +102,7 @@ The following steps are a basic outline of the process/setup required to
 implement these access restrictions.
 
 * The script example included below needs to be run on a server that has access
-  to both the internet and the Catalyst Cloud API endpoints.
+  to both the Internet and the Catalyst Cloud API endpoints.
 * The script needs a method of authentication. This could be:
   - a user sourcing their openrc file prior to running the script manually.
   - using a `clouds.yaml`_ file to provide the required authentication details.

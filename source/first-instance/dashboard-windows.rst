@@ -7,7 +7,7 @@ Windows instance using the web interface
 Log in to the dashboard at https://dashboard.catalystcloud.nz/
 
 As a new user to Catalyst Cloud, your initial cloud project will come
-with a pre-configured private network and a router connected to the internet.
+with a pre-configured private network and a router connected to the Internet.
 If you have deleted this, or would like to create additional networks then
 please see :ref:`creating_networks` for details on how to do that.
 In addition, before trying to create a windows instance you should make sure
@@ -120,7 +120,7 @@ required before you can log in.
 Allocate a floating IP
 **********************
 
-In order to be able to access your instance from the internet and not
+In order to be able to access your instance from the Internet and not
 just use it through the dashboard console, you will need to assign a floating
 IP to the instance so that it is visible to other devices.
 To associate a floating IP with your instance, you need to navigate to the

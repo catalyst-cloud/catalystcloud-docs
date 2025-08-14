@@ -17,7 +17,7 @@ Before you begin
    Catalyst Cloud.
 2) Log in to the dashboard at https://dashboard.catalystcloud.nz/
 3) As a new user to Catalyst Cloud your initial cloud project will come with
-   a pre-configured private network and a router connected to the internet in
+   a pre-configured private network and a router connected to the Internet in
    the Hamilton region. We still cover the proper steps to creating these
    networking resources in this tutorial; in the case you wish to follow these
    steps to create a network on a different region.

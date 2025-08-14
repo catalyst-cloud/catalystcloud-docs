@@ -164,7 +164,7 @@ The following meters will only be available if the container has uploads or down
 Router
 ------
 
-Note that the following meters are only available from routers that are connected to the public internet.
+Note that the following meters are only available from routers that are connected to the public Internet.
 
 * `traffic.outbound.international` - Outbound International Traffic(Bytes)
 * `traffic.inbound.international` - Inbound International Traffic (Bytes)

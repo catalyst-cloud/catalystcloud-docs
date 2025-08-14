@@ -6,7 +6,7 @@ Overview
 
 This section will demonstrate how to build an Ubuntu 18.04 server. After you
 have completed the steps, you will be able to log in to the server via SSH from
-anywhere on the internet using an SSH key.
+anywhere on the Internet using an SSH key.
 
 The following is assumed:
 
@@ -177,7 +177,7 @@ Floating IPs
 In order to connect to your instance, you will need to allocate a floating IP
 to the instance. Alternately, you could create a :ref:`VPN <vpn>` and save
 some money by avoiding floating IPs altogether. VPNs are not feasible when the
-instance will be offering a service to the greater internet.
+instance will be offering a service to the greater Internet.
 
 .. _connecting-to-instance:
 

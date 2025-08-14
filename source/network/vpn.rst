@@ -19,7 +19,7 @@ that in both regions we have an identical network setup that looks like:
 
 * A network called private-net.
 * A subnet called private-subnet.
-* A router to the internet called border-router.
+* A router to the Internet called border-router.
 
 The only differences between the two setups will be the external IP address on
 the router and the CIDR of the private subnets.
