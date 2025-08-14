@@ -31,12 +31,12 @@ CPU characteristics of each of these types:
     * - c1
       - Intel x86-64
       - Sandy Bridge
-      - Each vCPU is a thread of a pCPU
+      - vCPU is a thread of a pCPU
       - pCPU are shared between VMs
     * - c3
       - Intel x86-64
       - Sapphire Rapids
-      - Each vCPU is a thread of a pCPU
+      - vCPU is a thread of a pCPU
       - pCPU are dedicated to a single VM
 
 All virtual servers are provided with no oversubscription of RAM (that
@@ -66,7 +66,7 @@ The CPU characteristics of these types are listed below:
     * - c2-burst
       - Intel x86-64
       - Skylake
-      - Each vCPU is one thread of a pCPU
+      - vCPU is a thread of a pCPU
 
 All virtual servers are provided with no oversubscription of RAM (that
 is, all RAM is backed 1:1 on a reserved basis). All virtual servers
@@ -129,21 +129,28 @@ are inherently not as cost efficient if the accelerator is not used.
     * - c1a-gpu
       - AMD x86-64
       - Milan
-      - Each vCPU is a thread of a pCPU
+      - vCPU is a pCPU (no threading)
       - pCPU are dedicated to a single VM
       - 1 or more NVIDIA RTX A6000 48GB GPU
     * - c2-gpu
       - Intel x86-64
       - Skylake
-      - Each vCPU is a thread of a pCPU
+      - vCPU is a thread of a pCPU
       - pCPU are shared between VMs
-      - Slice of NVIDIA A100 80GB GPU
+      - Slice of an NVIDIA A100 80GB GPU
+    * - c2a-gpu
+      - AMD x86-64
+      - Milan
+      - vCPU is a pCPU (no threading)
+      - pCPU are dedicated to a single VM
+      - 1 NVIDIA A100 40GB GPU
     * - c3-gpu
       - Intel x86-64
       - Sapphire Rapids
-      - Each vCPU is a thread of a pCPU
+      - vCPU is a thread of a pCPU
       - pCPU are dedicated to a single VM
       - 1 or more NVIDIA L40S 48GB GPU
+
 
 It is important to note that your workloads and operating systems
 using accelerated types must have appropriate drivers and licenses
@@ -161,8 +168,15 @@ system to use, and a "pCPU" means a CPU core that is actually
 physically supporting the execution of the vCPU.
 
 Instance types may allocate a vCPU as a thread of a pCPU where the
-pCPU supports threads. Some pCPU do not support threads, and in those
-cases a vCPU is simply allocated to a pCPU.
+pCPU supports threads, this will be listed in the tables above as a
+"thread" policy. Some pCPU do not support threads or are configured
+to disable threading, and in those cases a vCPU is simply allocated
+to a pCPU and listed in the table above as "no threading" policy.
+
+Some physical CPUs support threading, but has been disabled for a
+specific compute type. The vCPU policy reflects this. It is not
+possible to change the threading policy on individual virtual servers,
+it is set by the type of compute the virtual server is using.
 
 An instance type may also treat pCPU as shared between more than one
 VM, or dedicated to a single specific VM. Where the pCPU is dedicated
@@ -171,10 +185,11 @@ siblings on pCPUs. The nature of shared pCPUs means the actual pCPU
 executing a vCPU will dynamically change, based on demand.
 
 It should be noted that vCPU performance depends on whether the pCPU
-is threaded, and whether the pCPUs are shared, in addition to usually
-expected differences about workload, CPU generation, and clock rates.
-The exact behavior of threads on a pCPU is documented in the CPU
-vendor's documentation or datasheets.
+is threaded, whether threading is enabled, and whether the pCPUs are
+shared. These are in addition to usually expected differences about
+workload, CPU generation or features, and clock rates. The exact
+behavior of threads on a pCPU is documented in the CPU vendor's
+documentation or datasheets.
 
 Lastly, whether all vCPU are used by an operating system is dependant
 on the operating system. You may need to consult documentation for
