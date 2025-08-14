@@ -49,24 +49,22 @@ To upload the converted image to the Catalyst Cloud:
   +------------------+----------------------------------------------------------------------------------------------------------+
 
 
-*********************
-Via the web dashboard
-*********************
+*****************
+Via our dashboard
+*****************
 
-On the images panel, click on create image. The create image dialogue will be
+On the images panel, click on "Create Image". The Create Image dialogue will be
 displayed as shown below:
 
 .. image:: _static/image-create.png
 
-#. On the image source, select "Location" to provide the URL that the
-   image should be downloaded from, or select source type "File" to upload an
-   image from your file system.
+#. On the image source, select "Browse" to upload an image from your file
+   system.
 
 #. Select the appropriate format for your image. We strongly recommend the use
-   of RAW images.
+   of RAW images only.
 
 #. Set the minimum disk size to at least the size of the image. If you are
    using a compressed format, like QCOW2, use the expanded size of the image.
 
-Finally, click on create image and wait until the image has been downloaded or
-uploaded.
+Finally, click on "Create Image" and wait until the image has been uploaded.
