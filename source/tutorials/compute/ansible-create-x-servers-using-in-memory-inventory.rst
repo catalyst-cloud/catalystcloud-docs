@@ -110,7 +110,7 @@ the instances are created, the results are captured in a registered variable
 called *'newnodes'*. This is in turn iterated over using a *'loop'* to add the
 required details to the in-memory inventory, as shown in this snippet:
 
-.. literalinclude:: ../../../playbooks/create-x-servers.yml
+.. literalinclude:: ../_static/create-x-servers.yml
   :language: yaml
   :lines: 36-42
 
@@ -136,5 +136,5 @@ The playbook
 
 Here is the complete playbook containing the three plays outlined above:
 
-.. literalinclude:: ../../../playbooks/create-x-servers.yml
+.. literalinclude:: ../_static/create-x-servers.yml
   :language: yaml
