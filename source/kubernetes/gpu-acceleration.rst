@@ -34,7 +34,7 @@ two GPU-backed worker nodes using the c3-gpu.c24r96g1 flavor:
 .. code-block:: bash
 
   openstack coe cluster create cluster1 \
-  --cluster-template kubernetes-v1.33.2-20250623 \
+  --cluster-template kubernetes-v1.33.3 \
   --master-count 3 \
   --node-count 2 \
   --flavor c3-gpu.c24r96g1
@@ -43,8 +43,8 @@ Once the cluster is created, monitor its status until it reports healthy:
 
 .. code-block:: bash
 
-  $ openstack coe cluster show cluster1 -c health_status
-  READY
+  $ openstack coe cluster show cluster1 -f value -c health_status
+  HEALTHY
 
 Download the Kubernetes config file for the cluster from the Catalyst Cloud
 dashboard.
@@ -74,16 +74,18 @@ For example, run the following to create a pod running vectorAdd:
     apiVersion: v1
     kind: Pod
     metadata:
-    name: cuda-vectoradd
+      name: cuda-vectoradd
     spec:
-    restartPolicy: OnFailure
-    containers:
-    - name: cuda-vectoradd
+      restartPolicy: OnFailure
+      containers:
+      - name: cuda-vectoradd
         image: "nvcr.io/nvidia/k8s/cuda-sample:vectoradd-cuda12.5.0-ubi8"
         resources:
-        limits:
+          limits:
             nvidia.com/gpu: 1
     EOF
+
+
 
 After a minute or two the cuda-vectoradd pod logs shdould show a successful result:
 
