@@ -14,7 +14,7 @@ Cloud's services is the delineation between the responsibilities that
 Catalyst Cloud has and the responsibilities you have, with respect to those
 running applications or data stored.
 
-The model Catalyst Cloud uses is sometimes called the "Shared Responsibility
+The model Catalyst Cloud uses is called the "Shared Responsibility
 Model", as there are responsibilities on both you and Catalyst Cloud.
 
 *******************************
