@@ -4,19 +4,24 @@
 Types of images
 ###############
 
-Catalyst provides some pre-configured operating system images to make it easier
-for you to get started on the cloud.
+Catalyst Cloud provides some pre-configured operating system images to make it
+easier for you to get started on the cloud.
 
-Catalyst provides only recent and supported images through the web dashboard,
-out of maintenance images may still be available via API listings and can be
-used for new instances when launched from the API.
+Catalyst Cloud provides only recent and supported images through the web
+dashboard, out of maintenance images may still be available via API listings
+and can be used for new instances when launched from the API. We provide old
+instances to ensure any automation you might have to create instances using UUID
+will continue to find these images, however we recommend you use the latest
+version of an image, and supported distribution versions where ever possible. If
+you must run an older release of a distribution, it may be possible to purchase
+extended support for these.
 
-The table below lists the images provided by Catalyst and our partners, as well
-as the default user name you should use to log in to each one of them
+The table below lists the images provided by Catalyst Cloud,
+as well as the default user name you should use to log in to each one of them
 (unless you have overwritten the default user name with cloud-init).
 
 +-------------------------------------+-------------------+-----------+-------------------+
-| Operating system                    | Image name prefix | User-name | Licence/IP policy |
+| Operating system                    | Image name prefix | User name | Licence/IP policy |
 +=====================================+===================+===========+===================+
 | CentOS Linux                        | centos-*          | centos    | |centos_link|     |
 +-------------------------------------+-------------------+-----------+-------------------+
@@ -97,8 +102,8 @@ Our standard policy is not to modify or customise cloud images provided by
 upstream Linux distributions. This gives you the assurance that you are running
 software exactly as provided by the software providers.
 
-Before using the images provided by Catalyst, you should always confirm that
-they are suitable for your needs and fit for purpose. Catalyst provides them
+Before using the images provided by Catalyst Cloud, you should always confirm that
+they are suitable for your needs and fit for purpose. Catalyst Cloud provides them
 *"as is"*, without warranty of any kind. If there is something you need to
 change, you can always upload your own images, crafted the way you like, or
 take a snapshot of ours and modify it the way you need.
@@ -106,14 +111,13 @@ take a snapshot of ours and modify it the way you need.
 .. note::
 
   In particular take note that the ``ubuntu-minimal-*`` images are not
-  compatible with the dashboard console as explained
-  `here <https://docs.catalystcloud.nz/compute/faq.html#dashboard-console-and-ubuntu-minimal-images>`_
+  compatible with the dashboard console as explained on :ref:`ubuntu-minimal_dashboard_console`.
 
-***************************************************
-How can I identify the images provided by Catalyst?
-***************************************************
+*********************************************************
+How can I identify the images provided by Catalyst Cloud?
+*********************************************************
 
-The images provided by Catalyst can be identified using the projectID
+The images provided by Catalyst Cloud can be identified using the projectID
 (``94b566de52f9423fab80ceee8c0a4a23``) that they are shared from. Using the
 command line tools, you can easily locate our shared images by running:
 
@@ -156,7 +160,7 @@ Images provided by our partners
   With SPLA the Provider (here Silicon Systems) is the licensee.
 
 Before using the images provided by our Partners, you should always confirm
-that they are suitable for your needs and fit for purpose. Catalyst provides
+that they are suitable for your needs and fit for purpose. Catalyst Cloud provides
 them "as is", without warranty of any kind.
 
 *******************************
