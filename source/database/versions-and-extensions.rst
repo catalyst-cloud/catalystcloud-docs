@@ -1,3 +1,5 @@
+.. _database_versions:
+
 ##########################################
 Available database versions and extensions
 ##########################################
