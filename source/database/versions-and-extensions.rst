@@ -6,7 +6,8 @@ Available database versions and extensions
 Versions
 ********
 
-The following database versions are available on Catalyst Cloud:
+The following database versions are available on Catalyst Cloud. We recommend
+that whenever possible you use the latest database version we provide.
 
 .. list-table::
    :widths: 20 20
