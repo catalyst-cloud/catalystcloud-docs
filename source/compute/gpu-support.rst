@@ -483,7 +483,7 @@ https://docs.nvidia.com/deploy/pdf/CUDA_Compatibility.pdf
 
 
 CUDA Compatibility for c2-gpu in Ubuntu
-=======================================
+***************************************
 
 Catalyst Cloud suggests the following approach to enable CUDA 12.4 compatibility
 (for example) with c2-gpu on Ubuntu instances.
