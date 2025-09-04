@@ -60,12 +60,11 @@ It does not show patch versions, as all patch versions for a supported minor ver
      - Expected 2026-06-28
 
 
-
 **********************
 Version upgrade notes
 **********************
 
-Patch versions v1.31.11, v1.32.7 and v1.33.3
+Patch versions v1.31.12, v1.32.8 and v1.33.4
 ============================================
 
 As of these versions GPU support has been added to our OS images which will
