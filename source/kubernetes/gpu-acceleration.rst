@@ -12,9 +12,9 @@ Servers<gpu-support>`.
 GPU support is available beginning from the following CCKS cluster
 versions:
 
-* v1.31.11
-* v1.32.7
-* v1.33.3
+* v1.31.12
+* v1.32.8
+* v1.33.4
 
 .. note::
 
@@ -29,17 +29,25 @@ Creating a Cluster
 For the most part this is the same as :ref:`deploying a standard Kubernetes cluster
 <deploying-kubernetes-cluster>`, except that a suitable GPU flavor needs to be
 provided for the worker nodes. The following example deploys a simple cluster with
-two GPU-backed worker nodes using the c3-gpu.c24r96g1 flavor:
+two GPU-backed worker nodes using the ``c3-gpu.c24r96g1`` flavor:
 
 .. code-block:: bash
 
   openstack coe cluster create cluster1 \
-  --cluster-template kubernetes-v1.33.3 \
+  --cluster-template kubernetes-v1.33.4 \
   --master-count 3 \
   --node-count 2 \
   --flavor c3-gpu.c24r96g1
 
-Once the cluster is created, monitor its status until it reports healthy:
+Alternatively, GPU :ref:`clusters-nodegroups` can be added to an existing cluster:
+
+.. code-block:: bash
+
+  openstack coe nodegroup create cluster1 gpu \
+  --node-count 2 \
+  --flavor c3-gpu.c24r96g1
+
+Once the Cluster or Nodegroup is created, monitor the Cluster status until it reports healthy:
 
 .. code-block:: bash
 
@@ -54,6 +62,7 @@ used can be quite particular; the current version tested by Catalyst Cloud is
 v24.6.2.
 
 .. code-block:: bash
+
     helm repo add nvidia https://nvidia.github.io/gpu-operator
 
     helm install --generate-name -n gpu-operator --create-namespace nvidia/gpu-operator --version=v24.6.2 --set driver.enabled=false --set toolkit.enabled=true

@@ -535,6 +535,7 @@ In Kubernetes we can now see the additional worker nodes and pods can schedule t
   dev-cluster1-47ctpuwqwfsi-default-worker-10b73ddb-ljcf5   Ready    <none>          67m    v1.28.8   10.0.0.19     <none>        Flatcar Container Linux by Kinvolk 3815.2.0 (Oklo)   6.1.77-flatcar   containerd://1.7.13
   dev-cluster1-47ctpuwqwfsi-default-worker-10b73ddb-mbtwp   Ready    <none>          67m    v1.28.8   10.0.0.22     <none>        Flatcar Container Linux by Kinvolk 3815.2.0 (Oklo)   6.1.77-flatcar   containerd://1.7.13
 
+.. _clusters-nodegroups:
 
 ***********
 Node Groups
