@@ -54,8 +54,9 @@ used can be quite particular; the current version tested by Catalyst Cloud is
 v24.6.2.
 
 .. code-block:: bash
+    helm repo add nvidia https://nvidia.github.io/gpu-operator
 
-    helm install --wait --generate-name -n gpu-operator --create-namespace nvidia/gpu-operator --version=v24.6.2 --set driver.enabled=false --set toolkit.enabled=true
+    helm install --generate-name -n gpu-operator --create-namespace nvidia/gpu-operator --version=v24.6.2 --set driver.enabled=false --set toolkit.enabled=true
 
 At this point the cluster is ready to run GPU accelerated applications.
 
@@ -87,7 +88,7 @@ For example, run the following to create a pod running vectorAdd:
 
 
 
-After a minute or two the cuda-vectoradd pod logs shdould show a successful result:
+After a minute or two the cuda-vectoradd pod logs should show a successful result:
 
 .. code-block:: text
 
