@@ -95,6 +95,8 @@ Use the commands below to configure and generate your locales. Replace
   sudo dpkg-reconfigure locales
 
 
+.. _ubuntu-minimal_dashboard_console:
+
 *********************************************
 Dashboard console and ubuntu-minimal-* images
 *********************************************

@@ -14,7 +14,7 @@ Cloud's services is the delineation between the responsibilities that
 Catalyst Cloud has and the responsibilities you have, with respect to those
 running applications or data stored.
 
-The model Catalyst Cloud uses is sometimes called the "Shared Responsibility
+The model Catalyst Cloud uses is called the "Shared Responsibility
 Model", as there are responsibilities on both you and Catalyst Cloud.
 
 *******************************
@@ -57,6 +57,15 @@ Customers are responsible for configuring, operating and securing:
 - The Containers you run on the cloud
 - Application software and configuration
 - Any sharing of resources with the Internet or other tenants
+
+Customers are responsible for:
+
+- Patching the operating systems used in instances, even if Catalyst Cloud has
+  provided the :ref:`images <images>`.
+- Selection and updating of templates (for example, for :ref:`Catalyst Cloud
+  Kubernetes Service <kubernetes-versions>`)
+- Selection and updating of provided versions (for example, for :ref:`Database
+  as a Service <database_versions>`)
 
 ***************************
 Availability and Durability
