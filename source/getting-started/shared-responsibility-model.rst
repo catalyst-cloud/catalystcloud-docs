@@ -62,10 +62,10 @@ Customers are responsible for:
 
 - Patching the operating systems used in instances, even if Catalyst Cloud has
   provided the :ref:`images <images>`.
-- Selection and updating of templates (for example, for :ref:`Catalyst Cloud
-  Kubernetes Service <kubernetes-versions>`)
-- Selection and updating of provided versions (for example, for :ref:`Database
-  as a Service <database_versions>`)
+- Selection of initial templates, and then upgrading of templates (for example,
+  for :ref:`Catalyst Cloud Kubernetes Service <kubernetes-versions>`)
+- Selection of initial versions, and then upgrading of provided versions (for
+  example, for :ref:`Database as a Service <database_versions>`)
 
 ***************************
 Availability and Durability

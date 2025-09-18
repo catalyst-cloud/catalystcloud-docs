@@ -68,7 +68,8 @@ networking environment and addon installation options.
 
 Catalyst Cloud provide public templates for our supported managed kubernetes
 customers and these should provide the flexibility you need. We recommend
-that whenever possible you use the latest template version we provide.
+that whenever possible you use the latest template, and where possible
+kubernetes version we provide.
 
 Template Types
 ==============

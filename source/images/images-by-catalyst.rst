@@ -10,11 +10,20 @@ easier for you to get started on the cloud.
 Catalyst Cloud provides only recent and supported images through the web
 dashboard, out of maintenance images may still be available via API listings
 and can be used for new instances when launched from the API. We provide old
-instances to ensure any automation you might have to create instances using UUID
-will continue to find these images, however we recommend you use the latest
-version of an image, and supported distribution versions where ever possible. If
-you must run an older release of a distribution, it may be possible to purchase
-extended support for these.
+images to ensure any automation you might have to create instances using the
+UUID of an image will continue to find that image. However we recommend you
+use the latest version of an image, and supported distribution versions where
+ever possible. If you must run an older release of a distribution, it may be
+possible to purchase extended support from the upstream provider.
+
+When Catalyst Cloud updates a new version of a image, we add a suffix of the
+upload date to the previous image. The latest image has no suffix. For example,
+with Debian, the latest image for Debian 12 "Bookworm" is always
+debian-12-x86_64, but a previous published image might be
+debian-12-x86_64-20241217, but the UUID remains consistent even with the
+rename.  This means that if you create a new instance using the same image UUID
+(29f38676-3adf-4fa1-b995-24bde9d11b4b for debian-12-x86_64-20241217), then
+you'll get the same image.
 
 The table below lists the images provided by Catalyst Cloud,
 as well as the default user name you should use to log in to each one of them
