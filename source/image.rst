@@ -23,7 +23,7 @@ on-going basis. It is part of
 :ref:`the shared responsibility mode <shared_responsibility_model>` that you are
 responsible for the security of the software within your instance(s).
 
-We update on a regular basis the images we provide, which are still supported
+We update on a regular basis the images we provide, when they are still supported
 by the providers. However these updates won't flow into your instances unless
 you rebuild them using a new image as noted just above. As part of this process
 we test them to ensure they are operating in a way that we expect.
