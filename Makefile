@@ -20,7 +20,10 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) sou
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 
-.PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest gettext
+UID := $(shell id -u)
+GID := $(shell id -g)
+
+.PHONY: help clean html dirhtml singlehtml pickle json htmlhelp qthelp devhelp epub latex latexpdf text man changes linkcheck doctest gettext compile
 
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -50,6 +53,15 @@ help:
 
 clean:
 	rm -rf $(BUILDDIR)/*
+
+docker_compile:
+	docker run --rm  --volume ${PWD}:/opt/workspace --workdir /opt/workspace -e UID=$(shell id -u) -e GID=$(shell id -g) --entrypoint bash python:3.6 -x ./docker-setup.sh ./compile.sh
+
+docker_cli:
+	docker run --rm  --volume ${PWD}:/opt/workspace --workdir /opt/workspace -p 8000 --network host -e UID=$(shell id -u) -e GID=$(shell id -g) -it --entrypoint bash python:3.6 -x ./docker-setup.sh --cli
+
+docker_live:
+	docker run --rm  --volume ${PWD}:/opt/workspace --workdir /opt/workspace -p 8000 --network host -e UID=$(shell id -u) -e GID=$(shell id -g) -it --entrypoint bash python:3.6 -x ./docker-setup.sh ./live_compile.sh
 
 livehtml:
 	sphinx-autobuild -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
