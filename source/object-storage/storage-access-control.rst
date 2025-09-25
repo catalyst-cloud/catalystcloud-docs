@@ -68,7 +68,7 @@ The follow command sets the environmental variable for the swift command.
 
 .. code-block:: bash
 
-  $ export OS_STORAGE_URL = "https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_${OS_PROJECT_ID}"
+  $ export OS_STORAGE_URL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_${OS_PROJECT_ID}"
 
 Alternately you can pass the URL as a command line option:
 
