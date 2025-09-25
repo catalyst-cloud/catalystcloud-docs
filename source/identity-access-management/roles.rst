@@ -15,6 +15,12 @@ project and the permissions that they will be assigned.
 
 .. image:: _static/project_users.png
 
+You can access this information in addition to the dashboard via our
+Registration API or the command line if you have the ``python-adjutantclient``
+installed. For the API use the ``openstack/users`` call, from the command
+line run ``openstack project user list``. For more details on how to use these
+see :ref:`sdks_and_toolkits`.
+
 *****
 Roles
 *****
