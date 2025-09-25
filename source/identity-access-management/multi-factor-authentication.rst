@@ -88,6 +88,11 @@ Any project user that has one of the admin roles assigned to them can view all
 of the users currently able to access that project and see whether or not they
 have MFA enabled.
 
+This is visible in the :ref:`Project Users <project_users>` screen on our dashboard.
+
+A flag to indicate the status of MFA per user is included in the results of
+the ``openstack/users`` call of our Registration API.
+
 ************
 Removing MFA
 ************
