@@ -1,10 +1,10 @@
 
 The following is a tutorial that will show you how to create a container that
-has a single region replication policy, using the openstack command line tools.
+has a single region replication policy, using the OpenStack command line tools.
 There are a number of prerequisites you will need to meet before we can
 continue with this tutorial:
 
-- You must have version 5.2.0 or above of the openstack command line tools installed.
+- You must have version 5.2.0 or above of the OpenStack command line tools installed.
 - You need to have sourced an OpenRC file in your console.
 
 Once you have met these requirements we can create our container. For this
@@ -14,7 +14,7 @@ policy with the ``--storage-policy`` flag.
 
 .. Note::
     Even if a container only uses a single region for it's replication policy,
-    you are still able to access the container from any region on the Catalyst
+    you are still able to access the container from any region on Catalyst
     Cloud.
 
 .. code-block:: bash

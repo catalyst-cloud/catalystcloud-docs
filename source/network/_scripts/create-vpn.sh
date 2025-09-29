@@ -25,7 +25,7 @@ usage() {
   echo
   cat <<USAGE_DOC
   Usage: ./$(basename $0) [-h]
-  This script will assist in the creation of a VPN endpoint or endpoints on the Catalyst Cloud.
+  This script will assist in the creation of a VPN endpoint or endpoints on Catalyst Cloud.
   The default behaviour is to create a single VPN endpoint using the selected region.
 
   -h Print this usage guide

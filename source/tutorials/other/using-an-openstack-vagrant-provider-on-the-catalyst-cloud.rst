@@ -1,6 +1,6 @@
-#########################################################
-Using an openstack vagrant provider on the Catalyst Cloud
-#########################################################
+#####################################################
+Using an OpenStack Vagrant provider on Catalyst Cloud
+#####################################################
 
 `Vagrant`_ is a popular development tool that makes it easy to create and
 configure lightweight, reproducible, and portable development environments. It
@@ -18,7 +18,7 @@ OpenStack as a remote provider for Vagrant.
 Vagrant OpenStack provider
 **************************
 
-Currently there is one main Vagrant OpenStack providers in common usage:
+Currently there is one main Vagrant OpenStack provider in common usage:
 `vagrant-openstack-provider`_.
 
 .. _vagrant-openstack-provider: https://github.com/ggiamarchi/vagrant-openstack-provider
@@ -31,7 +31,7 @@ This tutorial assumes a number of things:
 
 * You are familiar with Vagrant and its use case and wish to make use of
   OpenStack as a provider
-* You are familiar with basic usage of the Catalyst Cloud (e.g. you have
+* You are familiar with basic usage of Catalyst Cloud (e.g. you have
   created your first instance as described at
   :ref:`launching-your-first-instance`)
 * You already have Vagrant installed on your machine

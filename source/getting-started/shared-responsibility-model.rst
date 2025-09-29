@@ -43,7 +43,7 @@ Catalyst Cloud is responsible for operating and securing:
 Customers are responsible for configuring, operating and securing:
 
 - Network configuration (such as security groups / firewall rules that control
-  access to the applications and systems they host on Catalyst cloud)
+  access to the applications and systems they host on Catalyst Cloud)
 - Operating systems relating to the images run on your compute resources
 
   - This includes any applications running or data stored on your instances.

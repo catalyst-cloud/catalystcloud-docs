@@ -1,7 +1,7 @@
 heat_template_version: 2018-08-31
 
 description: >
-  Heat template for building the first instance stack in the Catalyst Cloud
+  Heat template for building the first instance stack in Catalyst Cloud
   Hamilton (nz-hlz-1) region.
 
 parameter_groups:

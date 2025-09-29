@@ -19,14 +19,14 @@ that in both regions we have an identical network setup that looks like:
 
 * A network called private-net.
 * A subnet called private-subnet.
-* A router to the internet called border-router.
+* A router to the Internet called border-router.
 
 The only differences between the two setups will be the external IP address on
 the router and the CIDR of the private subnets.
 
 We will illustrate how to create the the VPN using the following approaches:
 
-* Using the Openstack command line tools.
+* Using the OpenStack command line tools.
 * With a bash script.
 * From the cloud dashboard
 
@@ -376,7 +376,7 @@ elements in order to avoid ambiguity when running commands.
       $ wget https://raw.githubusercontent.com/catalyst-cloud/catalystcloud-docs/master/source/network/_scripts/create-vpn.sh
 
       Below is an example of the script being used to create a region to region
-      VPN on the Catalyst Cloud:
+      VPN on Catalyst Cloud:
 
     .. code-block:: bash
 

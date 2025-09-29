@@ -59,7 +59,7 @@ this.
  PREFIX="rocketchat"
 
 Now we need a network for our instances, and a router to connect that network
-to the public internet.
+to the public Internet.
 
 .. code-block:: bash
 

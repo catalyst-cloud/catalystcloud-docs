@@ -2,7 +2,7 @@
 Billing API
 ###########
 
-Catalyst Cloud now provides a RESTful API to access our billing service. With
+Catalyst Cloud provides a RESTful API to access our billing service. With
 the billing API, it's easy to get historical invoices and the cost for the
 current month. We have released an official Python client to help you consume
 the API, see https://pypi.org/project/python-distilclient/.

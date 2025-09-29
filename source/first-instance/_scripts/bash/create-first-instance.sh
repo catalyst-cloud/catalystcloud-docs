@@ -56,7 +56,7 @@ fi
 
 # check the openstack command is available
 hash openstack 2>/dev/null || {
-    echo "Openstack command line client is not available, please install it before proceeding";
+    echo "openstack command line client is not available, please install it before proceeding";
     EXIT=1;
 }
 

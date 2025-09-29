@@ -3,7 +3,7 @@
   <h3> Creating a load balancer using Heat </h3>
 
 
-Heat is the native Openstack orchestration tool and functions by reading a
+Heat is the native OpenStack orchestration tool and functions by reading a
 template file and creating the resources defined within. In the following
 example, we are going to use a template to create a loadbalancer which will
 look after two webserver instances on ports 80 and 443 (for both webservers).

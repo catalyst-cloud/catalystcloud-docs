@@ -1,10 +1,10 @@
 
 ************************************************
-Associating Kubernetes RBAC with Openstack roles
+Associating Kubernetes RBAC with OpenStack roles
 ************************************************
 
-By creating a relationship between Kubernetes RBAC and Openstack keystone
-roles, you are able to configure access for users based on their openstack
+By creating a relationship between Kubernetes RBAC and OpenStack Keystone
+roles, you are able to configure access for users based on their OpenStack
 roles. If we look at the *Project Member* role as an example; by default any
 user with this role will **not** have access to the pods on your cluster.
 However, by creating an association with a kubernetes RBAC, you can allow access
@@ -22,7 +22,7 @@ need to have:
 - Your kube-admin config downloaded
 
 Once you have all of these set up we need to start by taking a look at the
-default configmap that connects our openstack roles to our kube RBAC group.
+default configmap that connects our OpenStack roles to our kube RBAC group.
 To find the default configmap we use the following command:
 
 .. code-block:: bash
@@ -44,7 +44,7 @@ To find the default configmap we use the following command:
   magnum-prometheus-operator-apiserver                           1      3d
   ------ Truncated for brevity -----
 
-The ``keystone-sync-policy`` is what we use to connect the openstack keystone
+The ``keystone-sync-policy`` is what we use to connect the OpenStack Keystone
 role with a *group* inside the k8s cluster. We can take a look at what our
 policy says by default, using the following command:
 
@@ -137,7 +137,7 @@ You can confirm this with the commands below:
 
 .. code-block::
 
-  # After swapping to our openstack user
+  # After swapping to our OpenStack user
   $ kubectl get pod
   Error from server (Forbidden): pods is forbidden: User "daniel" cannot list resource "pods" in API group "" in the namespace "default"
 

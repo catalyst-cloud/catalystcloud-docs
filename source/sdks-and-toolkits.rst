@@ -5,8 +5,8 @@ CLI Tools and SDKs
 ##################
 
 The command line tools are a set of packages that allow you to interact with
-the Catalyst Cloud from your command line. These are important, as the release
-schedule for the Catalyst Cloud is structured so that new features are always
+Catalyst Cloud from your command line. These are important, as the release
+schedule for Catalyst Cloud is structured so that new features are always
 added to the APIs and command line first. Meaning if you are wanting to take
 advantage of all the cloud has to offer; these command line tools are
 a necessity.

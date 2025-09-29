@@ -1,14 +1,14 @@
 .. _ansible_openstack-dynamic-inventory:
 
-#######################################################
-Using ansible dynamic inventories on the Catalyst Cloud
-#######################################################
+###################################################
+Using ansible dynamic inventories on Catalyst Cloud
+###################################################
 
 This tutorial assumes the following:
 
 * You have installed the OpenStack command line tools and sourced an
   OpenStack RC file, as explained at :ref:`command-line-interface`
-* You have a basic understanding of how to use `Ansible`_ on the Catalyst Cloud
+* You have a basic understanding of how to use `Ansible`_ on Catalyst Cloud
   as shown :ref:`here<launching-your-first-instance-using-ansible>`
 
 .. _Ansible: https://www.ansible.com/
@@ -35,16 +35,16 @@ format that Ansible understands.
 .. _Dynamic inventory: https://docs.ansible.com/ansible/latest/inventory_guide/intro_dynamic_inventory.html
 
 The Ansible project has an OpenStack dynamic inventory plugin available which
-we can use to integrate Ansible with the Catalyst Cloud. This allows us
+we can use to integrate Ansible with Catalyst Cloud. This allows us
 to use Ansible for configuration management of Catalyst Cloud instances
 irrespective of what method has been used to create those instances.
 
 ****************************************
-Install the openstack ansible collection
+Install the OpenStack Ansible collection
 ****************************************
 
 Use the ansible-galaxy command to install the openstack.cloud collection.
-The collection includes modules for using Ansible with Openstack as well as the inventory plugin.
+The collection includes modules for using Ansible with OpenStack as well as the inventory plugin.
 
 .. code-block:: bash
 

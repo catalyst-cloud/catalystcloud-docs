@@ -7,7 +7,7 @@ Introduction
 ************
 
 In this tutorial you will learn how to deploy a high performance computing
-(`HPC`_) cluster on the `Catalyst Cloud`_ using `elasticluster`_ and `SLURM`_.
+(`HPC`_) cluster on `Catalyst Cloud`_ using `elasticluster`_ and `SLURM`_.
 
 .. _HPC: https://en.wikipedia.org/wiki/High-performance_computing
 .. _Catalyst Cloud: https://catalystcloud.nz/
@@ -25,7 +25,7 @@ manager on about 60% of the `TOP500 supercomputers`_).
 .. _TOP500 supercomputers: https://top500.org/
 
 The following video outlines what you will learn in this tutorial. It shows a
-SLURM HPC cluster being deployed automatically by ElastiCluster on the Catalyst
+SLURM HPC cluster being deployed automatically by ElastiCluster on Catalyst
 Cloud, a data set being uploaded, the cluster being scaled on demand from 2 to
 10 nodes, the execution of an embarrassingly parallel job, the results being
 downloaded, and finally, the cluster being destroyed.
@@ -86,7 +86,7 @@ Create template configuration files for ElastiCluster:
   elasticluster list-templates 1> /dev/null 2>&1
 
 Edit the ElastiCluster configuration file (~/.elasticluster/config). A sample
-configuration file compatible with the Catalyst Cloud is provided below:
+configuration file compatible with Catalyst Cloud is provided below:
 
 .. code-block:: ini
 
@@ -246,7 +246,7 @@ Using anti-affinity groups
 **************************
 
 There is an options to use elasticluster with server group anti-affinity
-groups to ensure best load distribution in Openstack cluster.
+groups to ensure best load distribution in OpenStack cluster.
 To use this feature clone elasticluster from the repository shown below, this
 is a temporary step until the feature gets merged upstream.
 

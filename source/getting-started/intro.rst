@@ -5,7 +5,7 @@ Introduction to the Cloud platform
 ##################################
 
 This section of the documentation is for people that are entirely new to cloud
-computing and/or the Catalyst Cloud.
+computing and/or Catalyst Cloud.
 
 
 *****************************************
@@ -36,31 +36,33 @@ instances and other resources are scheduled by the cloud and you are only
 billed for the amount of resources you use.
 
 For example: you need an instance to crunch numbers for a day. In a cloud
-system you only pay for however long it takes to complete your task. In a
-traditional system you would have to pay for an entire month of use.
-On the Catalyst Cloud, you only pay your instances down to the minute. And if
-you need more power for the instance during your number crunching you can
-increase the compute capacity without having to confirm with your provider
+system you only pay for how long you use the resources. In a
+traditional system you would have to pay for an entire month of use, or to
+buy/lease physical equipment.
+If you need more compute power (virtual CPUs (or vCPUs) or memory) for the
+instance during your number crunching you can
+increase the size of your instance without having to confirm with your provider
 first. Saving yourself money and the hassle of negotiating changes. Once you
-are done with your task you can turn off your instance, release any other
-resources, and the bill stops there.
+are done with your task you can turn off your instance, or reduce the size of
+the instance release any other resources, and the billing stops (or redeuces)
+then.
 
-***************************
-What is the Catalyst Cloud?
-***************************
+***********************
+What is Catalyst Cloud?
+***********************
 
 Catalyst Cloud is a cloud computing platform, based entirely in New Zealand.
 
 Catalyst Cloud was built with the open source project, `OpenStack`_. Using
 OpenStack our Cloud allows users like yourself to provision services.
 Provisioning is similar to renting. You can provision things such as storage
-space, compute capacity, or internet access. The building blocks you need to
+space, compute capacity, or Internet access. The building blocks you need to
 run a business's applications.
 
 .. note::
-   Openstack requires a python interpreter to function and
+   OpenStack requires a python interpreter to function and
    is currently phasing out it's support for Python2. We therefore recommend
-   running Openstack using Python3.
+   running OpenStack using Python3.
 
 .. _`OpenStack`: https://www.openstack.org/software/
 

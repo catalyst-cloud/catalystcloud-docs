@@ -17,8 +17,8 @@ some of the most common methods that are being used by our customers. These
 are:
 
 - The Catalyst Cloud `web dashboard`_.
-- The Openstack `command line tools`_.
-- The Openstack `Heat`_ orchestration tool.
+- The OpenStack `command line tools`_.
+- The OpenStack `Heat`_ orchestration tool.
 - The Hashicorp `Terraform`_ orchestration tool.
 
 .. _command line tools: https://docs.openstack.org/newton/user-guide/cli.html
@@ -35,7 +35,7 @@ Uploading an SSH key
 
 The first thing we need to do is to make sure we have a way to access the
 instances we create. We use **SSH** to allow access to our instances. You can
-either import an existing public key or have the Catalyst Cloud create a key
+either import an existing public key or have Catalyst Cloud create a key
 pair for you. We document both below:
 
 .. _creating-keypair:
@@ -66,7 +66,7 @@ secure location. Make sure the file is saved as plain text.
 Importing an existing key pair
 ==============================
 
-If you already have an SSH key pair, you can import the public key onto the
+If you already have an SSH key pair, you can import the public key onto
 Catalyst Cloud.
 
 Navigate to the **Key Pairs** tab.
@@ -286,7 +286,7 @@ fits your project before you run any of these templates.
 
 .. tabs::
 
-    .. tab:: Openstack CLI
+    .. tab:: OpenStack CLI
 
         .. literalinclude:: _scripts/cli/cli_basic_compute_create.sh
             :language: shell

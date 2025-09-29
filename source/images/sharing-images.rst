@@ -4,7 +4,7 @@ Sharing images between projects
 
 In the event that you need to share custom images created in one project across
 one or multiple other projects, the following section describes how you are
-able to share your images using openstack API commands.
+able to share your images using OpenStack CLI commands.
 
 .. note::
 

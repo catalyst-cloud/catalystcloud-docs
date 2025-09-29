@@ -5,7 +5,7 @@ High availability
 This document outlines the physical infrastructure and software features that
 make Catalyst Cloud highly available and resilient. It covers built-in
 features that are inherited by every project and services that can be used to
-enhance the availability of web applications and websites hosted on the
+enhance the availability of web applications and websites hosted on
 Catalyst Cloud.
 
 ***************

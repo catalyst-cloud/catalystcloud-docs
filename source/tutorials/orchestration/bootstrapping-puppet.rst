@@ -6,7 +6,7 @@ Bootstrapping puppet from heat
 
 This tutorial assumes the following:
 
-* You have created a basic network setup in the Catalyst Cloud.
+* You have created a basic network setup in Catalyst Cloud.
 * You have access to a server that is acting as the Puppet Master.
 * You have installed the OpenStack command line tools and sourced an
   openrc file, as explained at :ref:`command-line-interface`.
@@ -33,7 +33,7 @@ Setup
 *****
 
 You will make use of Heat template to deploy a single instance into an existing
-network hosted in the Catalyst Cloud. In order to make this work, you need to
+network hosted in Catalyst Cloud. In order to make this work, you need to
 retrieve the relevant network IDs and add them into the template.
 
 The two networks you will be connecting to are front-end and public-net. To

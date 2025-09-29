@@ -6,7 +6,7 @@
 Private cluster
 ###############
 
-As a security best practice, isolating Kubernetes clusters from internet
+As a security best practice, isolating Kubernetes clusters from Internet
 access is one of the most desired features for enterprise users. On Catalyst
 Cloud, all the public templates after our Beta release
 (from 10 September, 2019) will create private clusters by default.
@@ -35,7 +35,7 @@ set on both the cluster template and cluster level.
 
 * ``floating_ip_enabled: false``
   When enabled it will assign a floating IP to all cluster master and worker
-  nodes. This means that all nodes are accessible from the internet, which
+  nodes. This means that all nodes are accessible from the Internet, which
   is not recommended.
 
   It's an attribute of cluster template, but it *can* be override when creating
@@ -118,7 +118,7 @@ or disable floating IP (if it's enabled in the cluster template):
                                             --floating-ip-disabled
 
 ***************************************
-Access Kubernetes API from the internet
+Access Kubernetes API from the Internet
 ***************************************
 
 .. warning::

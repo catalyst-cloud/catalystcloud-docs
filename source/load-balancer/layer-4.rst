@@ -26,7 +26,7 @@ below:
 
 .. tabs::
 
-  .. tab:: Openstack CLI
+  .. tab:: OpenStack CLI
 
       .. include:: _scripts/layer4-files/cli-example.rst
 

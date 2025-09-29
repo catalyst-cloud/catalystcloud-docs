@@ -30,7 +30,7 @@ New features
   Atomic has been made end-of-life.
 * `Podman`_ will to used to manage the kubernetes components
   instead of using the default atomic system container.
-* The addons within the cluster that are provided by the Catalyst Cloud
+* The addons within the cluster that are provided by Catalyst Cloud
   templates, will also upgraded to latest stable version available at the time
   of release.
 
@@ -48,7 +48,7 @@ New features
 .. _Prometheus: https://prometheus.io/
 .. _Grafana: https://grafana.com/
 
-* All addons related to Cloud Provider Openstack will be also upgraded to latest
+* All addons related to Cloud Provider OpenStack will be also upgraded to latest
   stable version, the main ones of note being:
 
   - `Keystone Webhook Authentication Authorization`_ v1.18.0

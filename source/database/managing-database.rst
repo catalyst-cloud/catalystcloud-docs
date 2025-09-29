@@ -90,9 +90,9 @@ While it is possible to create a database user when launching your database
 instance (using the ``--users <username>:<password>`` argument) it is more than
 likely that further users will need to be added over time.
 
-This can be done using the openstack commandline. Below we can see two example
+This can be done using the OpenStack command line. Below we can see two examples
 of how we can add a new user to our *myDB* database. One example creates a
-user that can access the database from any location. This is the same behavior
+user that can access the database from any location. This is the same behaviour
 that is displayed when the user is created as part of the initial database
 instance creation.
 

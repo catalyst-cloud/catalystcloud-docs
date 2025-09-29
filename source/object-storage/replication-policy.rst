@@ -5,7 +5,7 @@ Replication Policy
 When you create a container through the use of the object storage service, that
 container will have a replication policy applied to it. The default policy
 ensures that the container is replicated across all three regions of
-the Catalyst Cloud. This is done as a means to provide geographic diversity and
+Catalyst Cloud. This is done as a means to provide geographic diversity and
 security to your data in the event of a disaster affecting one of our regions.
 
 However, there are some scenarios where you may not need your data to be
@@ -21,7 +21,7 @@ What are the storage policies
 *****************************
 
 The following are the storage policies available, each of these (as their names
-suggest) are related to one of the regions on the Catalyst cloud:
+suggest) are related to one of the regions on Catalyst cloud:
 
 +------------------------------+------------------+------------------------+
 | Storage class                | Failure-domain   | Replicas               |
@@ -40,7 +40,7 @@ suggest) are related to one of the regions on the Catalyst cloud:
   only way to change the policy of a container is during it's creation.
 
 There are multiple ways to create containers that use a single region policy.
-You can create your container via the Dashboard, by making use of the openstack
+You can create your container via the Dashboard, by making use of the OpenStack
 CLI or by making calls to the object storage API directly. All of which are
 detailed below.
 
@@ -82,7 +82,7 @@ Programmatic methods
 
 .. tabs::
 
-  .. tab:: Openstack CLI
+  .. tab:: OpenStack CLI
 
     .. include:: tutorial-scripts/replication-openstack.rst
 

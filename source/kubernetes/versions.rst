@@ -95,7 +95,7 @@ Kubernetes `release changelog for v1.33 since v1.32`_.
 
 In addition to the Kubernetes changes, we have:
 
-* Upgraded minor versions of  CoreDNS, Cinder CSI and Cloud Provider Openstack.
+* Upgraded minor versions of  CoreDNS, Cinder CSI and Cloud Provider OpenStack.
 * Upgraded patch version of k8s-keystone-auth.
 * Upgraded base OS Flatcar to latest stable release.
 * Added kubeReserved to worker nodes to reserve memory and vCPU for Kubelet
@@ -117,7 +117,7 @@ Kubernetes `release changelog for v1.32 since v1.31`_.
 
 In addition to the Kubernetes changes, we have:
 
-* Upgraded minor versions of Calico CNI, CoreDNS, Cinder CSI and Cloud Provider Openstack.
+* Upgraded minor versions of Calico CNI, CoreDNS, Cinder CSI and Cloud Provider OpenStack.
 * Upgraded patch version of k8s-keystone-auth.
 * Upgraded base OS Flatcar to latest stable release.
 
@@ -136,7 +136,7 @@ Kubernetes `release changelog for v1.31 since v1.30`_.
 
 In addition to the Kubernetes changes, we have:
 
-* Upgraded minor versions of Calico CNI, CoreDNS, Cinder CSI and Cloud Provider Openstack.
+* Upgraded minor versions of Calico CNI, CoreDNS, Cinder CSI and Cloud Provider OpenStack.
 * Upgraded patch version of etcd.
 * Upgrades base OS flatcar to latest stable release.
 
@@ -156,7 +156,7 @@ Kubernetes `release changelog for v1.30 since v1.29`_.
 In addition to the Kubernetes changes, we have:
 
 * Upgraded minor version of Calico CNI.
-* Upgraded minor version of Cinder CSI and Cloud Provider Openstack.
+* Upgraded minor version of Cinder CSI and Cloud Provider OpenStack.
 * Upgrades base OS flatcar to latest stable release.
 
 
@@ -178,7 +178,7 @@ In addition to the Kubernetes changes, we have:
   These include `openstack-system`, `tigera-operator`, `calico-apiserver` and `calico-system`.
   This affects users with roles `k8s_viewer` and `k8s_developer`.
 * Upgraded patch version of Calico CNI.
-* Upgraded minor version of Cinder CSI and Cloud Provider Openstack.
+* Upgraded minor version of Cinder CSI and Cloud Provider OpenStack.
 
 Note: There is an outstanding issue during this upgrade where the cluster control plane may become
 unavailable for a short duration.

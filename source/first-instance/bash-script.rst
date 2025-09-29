@@ -1,4 +1,4 @@
-The bash script provided here comprises all the commands from the Openstack CLI
+The bash script provided here comprises all the commands from the OpenStack CLI
 example in a single script.
 
 Download and run this script using the following commands:

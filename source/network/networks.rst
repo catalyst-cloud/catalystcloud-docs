@@ -2,10 +2,10 @@
 Public networks
 ***************
 
-Catalyst operates a public network in each region. These public networks
+Catalyst Cloud operates a public network in each region. These public networks
 provide you with connectivity to the Internet and allow you to allocate
 floating IPs (public IPs that can be associated to your compute instances) from
-a pool managed by Catalyst.
+a pool managed by Catalyst Cloud.
 
 Our public networks are listed on the table below:
 
@@ -21,7 +21,7 @@ Our public networks are listed on the table below:
 DNS servers
 ***********
 
-Catalyst operates a number of recursive DNS servers in each cloud region for
+Catalyst Cloud operates a number of recursive DNS servers in each cloud region for
 use by Catalyst Cloud instances, free of charge. They are:
 
 +----------+------------------------------------------------+

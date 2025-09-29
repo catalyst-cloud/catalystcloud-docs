@@ -132,7 +132,7 @@ This can be obtained in a couple of places as shown here.
 
 Now when the openrc file is sourced there will be an extra prompt, which will
 require you to add a valid passcode. Once this has been entered successfully an
-openstack authentication token will be added as an environment variable in your
+OpenStack authentication token will be added as an environment variable in your
 current terminal session.
 
 

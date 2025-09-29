@@ -1,11 +1,11 @@
 .. _packer-tutorial:
 
-##################################################################
-Using Packer to build custom bootable images on the Catalyst Cloud
-##################################################################
+##############################################################
+Using Packer to build custom bootable images on Catalyst Cloud
+##############################################################
 
 This tutorial shows you how to use `Packer`_ to build custom bootable images on
-the Catalyst Cloud. Packer is an open source tool developed by `Hashicorp`_ for
+Catalyst Cloud. Packer is an open source tool developed by `Hashicorp`_ for
 creating machine images for multiple platforms from a single source
 configuration.
 
@@ -18,7 +18,7 @@ Builders
 
 Packer supports a number of `builders`_ for different target platforms
 including Amazon EC2 AMI images, VirtualBox and VMware. When building images
-for the Catalyst Cloud you will be using the `OpenStack builder`_.
+for Catalyst Cloud you will be using the `OpenStack builder`_.
 
 ************
 Provisioners
@@ -35,7 +35,7 @@ Setup
 
 This tutorial assumes that you have sourced an openrc file, as described at
 :ref:`source-rc-file`. This is required in order for the `OpenStack builder`_
-to interact with the Catalyst Cloud image service.
+to interact with Catalyst Cloud image service.
 
 You will also need an appropriate security group to allow SSH access for the
 temporary build machine that Packer will create.
@@ -58,7 +58,7 @@ Create a Packer template file
 you will use to create our custom image.
 
 In this example, you will create a basic template that can be invoked with the
-``packer build`` command. It will create an instance in the Catalyst cloud, and
+``packer build`` command. It will create an instance in Catalyst cloud, and
 once the instance is running, copy a script to it and run the script using SSH.
 Once the script has finished running, it will create a new Catalyst Cloud image
 that includes the changes you have made. Once this process is complete, it will
@@ -274,18 +274,18 @@ you installed in the image:
  ssllabs-scan v1.3.0 (stable $Id: 81cb03888c46dd07fb4d97acffa6768b692efa49 $)
  API location: https://api.ssllabs.com/api/v2
 
-***********************************************
-Using Packer with Windows on the Catalyst Cloud
-***********************************************
+*******************************************
+Using Packer with Windows on Catalyst Cloud
+*******************************************
 
 .. note::
 
-  At this time, due to a known issue in the Catalyst Cloud, it is not possible
+  At this time, due to a known issue in Catalyst Cloud, it is not possible
   to deploy a Windows image using Packer directly from the publicly available
   Windows image.
 
   In order to overcome this limitation, it is necessary to deploy a new
-  temporary Windows instance in the Catalyst Cloud. When launching this
+  temporary Windows instance in Catalyst Cloud. When launching this
   instance, you need to say Yes to ``Create New Volume`` when selecting
   the ``Instance Source``.
 
@@ -384,7 +384,7 @@ accordingly, simply run the Packer build command as discussed above.
 .. _Hashicorp: https://www.hashicorp.com/
 .. _builders: https://developer.hashicorp.com/packer/docs/builders
 .. _Provisioners: https://developer.hashicorp.com/packer/docs/provisioners
-.. _Openstack builder: https://developer.hashicorp.com/packer/plugins/builders/openstack
+.. _OpenStack builder: https://developer.hashicorp.com/packer/plugins/builders/openstack
 .. _Templates: https://developer.hashicorp.com/packer/docs/templates
 .. _ssllabs-scan: https://github.com/ssllabs/ssllabs-scan
 .. _golang: https://go.dev/

@@ -4,7 +4,7 @@
 
 The following example assumes that you already have some understanding of how
 Ansible playbooks work and how to construct your own. If you have not used
-Ansible before or are not sure about how to use it on the Catalyst cloud, a
+Ansible before or are not sure about how to use it on Catalyst Cloud, a
 good starting point is our example under the
 :ref:`first instance<launching-your-first-instance-using-terraform>`
 section of the documents. You can also find more information about Ansible in
@@ -165,7 +165,7 @@ To run our playbook we use the following:
     TASK [Gather facts about webserver] *********************************************************************************************************************************
     ok: [localhost]
 
-    TASK [Create the openstack loadbalancer] ****************************************************************************************************************************
+    TASK [Create the OpenStack loadbalancer] ****************************************************************************************************************************
     ok: [localhost]
 
     TASK [Create a health monitor for our load balancer] ****************************************************************************************************************

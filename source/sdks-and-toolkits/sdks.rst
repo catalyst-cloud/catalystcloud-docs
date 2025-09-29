@@ -3,11 +3,11 @@ Software development kits (SDKs)
 ################################
 
 A rich set of software development kits (SDKs) are available for OpenStack,
-providing language bindings and tools that make it easy for you to use the
+providing language bindings and tools that make it easy for you to use
 Catalyst Cloud.
 
 The official OpenStack clients are the native Python bindings for the OpenStack
-APIs and the recommended SDK for the Catalyst Cloud:
+APIs and the recommended SDK for Catalyst Cloud:
 https://wiki.openstack.org/wiki/OpenStackClients
 
 OpenStack has a very rich ecosystem. Often multiple SDK options exist for a
@@ -25,9 +25,9 @@ Client tool versions
 Each of the services we have on our Cloud requires a different client tool to
 interact with from the command line. Earlier in this section we covered how to
 install these into a virtual environment so that you are able to use the
-openstack command line.
+openstack command.
 
-Below is a list of the Client tools and their latest supported version on the
+Below is a list of the Client tools and their latest supported version on
 Catalyst Cloud. When upgrading a service, in order to be able to interact with
 any new features, you should check to make sure that your client tools are up to
 date with our currently supported version:

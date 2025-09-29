@@ -2,7 +2,7 @@
 Security
 #######################
 
-This section covers some best practices for security on the Catalyst Cloud, and
+This section covers some best practices for security on Catalyst Cloud, and
 for general security business standards in the tech sector today.
 
 .. _password_protocols:
@@ -48,7 +48,7 @@ The last thing about passwords that you need to be considerate of, is password
 protection. Follow these rules about access to or sharing information
 about passwords:
 
-- Don't send your password over the internet to anyone.
+- Don't send your password over the Internet to anyone.
 - Don't write passwords down and store them on a physical location.
 - Store any user ID's or passwords in an encrypted format.
 - Do not script any passwords for automatic log in.
@@ -118,7 +118,7 @@ Access management, is a set of practices and rules that make
 sure that your organisation knows exactly who has access to the resources that
 you have previsioned in the cloud and what exactly these users can do with
 said resources.
-The Catalyst Cloud achieves a strong level of security in this regard by
+Catalyst Cloud achieves a strong level of security in this regard by
 the use of **Roles**. These are given to users by the project administrator and
 they impose restrictions or provide privileges to users. For more information
 on roles and their uses, please see the
@@ -130,12 +130,12 @@ Security groups
 ***************
 
 Security groups are what allow you to safely and securely access the instances
-that you create on the Catalyst Cloud. When creating a security group, it
+that you create on Catalyst Cloud. When creating a security group, it
 automatically has the following rules:
 
 .. image:: assets/security-group-screenshot.png
 
-These mean that the security group can access the internet from IPv4 and v6
+These mean that the security group can access the Internet from IPv4 and IPv6
 with outward bound traffic. But at this stage there is no ingress traffic, you
 must define that yourself. When doing so you need to be careful and understand
 the type of access you wish to permit. Below is pictured the different rules
@@ -143,7 +143,7 @@ you can create to meet your needs.
 
 .. image:: assets/rule-types.png
 
-The standard that we use at Catalyst is an SSH key pair which you can upload or
+The standard that we use at Catalyst Cloud is an SSH key pair which you can upload or
 create via the dashboard. We use SSH keys because they provide an increased
 level of security beyond restricting ports. The full process of how to create
 or upload your SSH keys is documented
@@ -152,10 +152,10 @@ or upload your SSH keys is documented
 .. Warning::
    When creating an ingress rule for the security group you need to be careful
    about which ports you allow access to your instance on. Setting your port range
-   to 0.0.0.0./0 will open it to the entire internet meaning that
+   to 0.0.0.0./0 will open it to the entire Internet meaning that
    anyone should they find it can access your instance. The best practice for a
    secure instance is to use an SSH rule. This is because even should you expose
-   it to the entire internet, without the proper SSH key pair, they would not be
+   it to the entire Internet, without the proper SSH key, they would not be
    able to access the instance.
 
 **************************

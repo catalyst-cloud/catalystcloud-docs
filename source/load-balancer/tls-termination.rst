@@ -10,7 +10,7 @@ TLS Termination
   request access for your project.
 
 
-In this section, we cover how to use openstack tools to create a load balancer
+In this section, we cover how to use OpenStack tools to create a load balancer
 which will handle TLS termination for your webservers.
 
 ***************
@@ -24,7 +24,7 @@ Configuring your command line
 To interact with the load balancer service on the cloud, you must have the
 following prepared:
 
-- Your :ref:`openstack CLI<command-line-interface>` installed and set up.
+- Your :ref:`OpenStack CLI<command-line-interface>` installed and set up.
 - You must have :ref:`Sourced an openRC file<configuring-the-cli>` on your
   current command line environment
 - For this tutorial, you must also have the following installed in your

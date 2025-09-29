@@ -1,5 +1,5 @@
 The following is a list of the most commonly used commands that will help you
-interact with the object storage service via the openstack command line.
+interact with the object storage service via the OpenStack command line.
 
 |
 

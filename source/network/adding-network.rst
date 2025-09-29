@@ -15,9 +15,9 @@ the steps required to achieve this.
 
 Following the configuration details this tutorial has advised, you should
 now have a network called **private_network** that connects to your
-**border-router** and then on to the wider internet. This network can
+**border-router** and then on to the wider Internet. This network can
 then be used to host instances which will then be able to connect to the
-outside internet through this connection.
+outside Internet through this connection.
 
 |
 

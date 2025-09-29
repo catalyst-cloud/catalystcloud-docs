@@ -6,9 +6,9 @@ Using heat via the command line tools
 Sample templates
 ****************
 
-Catalyst has published example templates that demonstrate the use of the cloud
+Catalyst Cloud has published example templates that demonstrate the use of the cloud
 orchestration service at:
-https://github.com/catalyst/catalystcloud-orchestration.
+https://github.com/catalyst-cloud/catalystcloud-orchestration.
 
 .. note::
 
@@ -17,7 +17,7 @@ https://github.com/catalyst/catalystcloud-orchestration.
   compatibility with the AWS CloudFormation service.
 
 The following Heat Orchestration Template (HOT) is a simple example
-that illustrates how to launch a single instance on the Catalyst Cloud
+that illustrates how to launch a single instance on Catalyst Cloud
 using the Heat orchestration service. For a more interactive
 example of how to create an instance using a HOT template, please refer to
 :ref:`'your first instance using orchestration'

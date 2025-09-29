@@ -69,7 +69,7 @@ To create and attach a new volume, you can use one of the methods below:
 
 .. tabs::
 
-    .. tab:: Openstack CLI
+    .. tab:: OpenStack CLI
 
         The following command will create a volume on your project:
 
@@ -117,7 +117,7 @@ To create and attach a new volume, you can use one of the methods below:
 
     .. tab:: Heat
 
-        **Heat** is the native Openstack orchestration tool and functions by
+        **Heat** is the native OpenStack orchestration tool and functions by
         reading a template and creating a stack on your project using
         information contained within the template and from your environment
         variables.

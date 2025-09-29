@@ -42,7 +42,7 @@ The objective of having these playbooks is to provide your staff with a routine
 way of dealing with tasks and a clear path on what to do in the event of
 something going wrong.
 
-For incidents that occur with your projects on the Catalyst Cloud. We
+For incidents that occur with your projects on Catalyst Cloud. We
 recommended this documentation be one of the first places you check to solving
 your issues. The documentation is comprehensive and deals with most of the
 frequently encountered problems. Should you be unable to find your solution
@@ -57,7 +57,7 @@ Back up data
 
 This is a standard practice for any business. Making sure that if some form
 of catastrophe were to befall you system, that you have backups to recover
-to a working state. When it comes to the Catalyst Cloud, there are several
+to a working state. When it comes to Catalyst Cloud, there are several
 unique things that ensure data backup.
 
 Our Object and Block storage services create copies of the data stored on them

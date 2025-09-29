@@ -1,14 +1,14 @@
 
 `Terraform`_ is an open source infrastructure configuration and provisioning
 tool developed by `Hashicorp`_. Terraform supports the configuration of many
-kinds of infrastructure, including the Catalyst Cloud. It achieves this by
-using components known as `providers`_. In the case of the Catalyst Cloud, this
-is the `Openstack provider`_.
+kinds of infrastructure, including Catalyst Cloud. It achieves this by
+using components known as `providers`_. In the case of Catalyst Cloud, this
+is the `OpenStack Provider`_.
 
 .. _Terraform: https://www.terraform.io/
 .. _Hashicorp: https://www.hashicorp.com/
 .. _providers: https://www.terraform.io/docs/providers/index.html
-.. _Openstack provider: https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs
+.. _OpenStack Provider: https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs
 
 For further information on using Terraform with OpenStack, see the linked
 `video`_ and `blog`_ post:
@@ -41,7 +41,7 @@ for detailed install instructions.
 
 Before running Terraform, ensure your OpenStack credentials have been
 set up. These variables are read by the `OpenStack provider`_ and will provide
-Terraform with permissions to access the Catalyst Cloud APIs.
+Terraform with permissions to access Catalyst Cloud APIs.
 
 .. note::
 
@@ -87,8 +87,8 @@ Download the configuration file:
     file.
 
   * Ensure that variables referred to in the file match the correct OpenStack region.
-    The pre-prepared file has been set up to work with Catalyst's Porirua region.
-    Pay   particular attention to ``external_gateway``, ``dns_nameservers``,
+    The pre-prepared file has been set up to work with Catalyst Cloud's Porirua region.
+    Pay particular attention to ``external_gateway``, ``dns_nameservers``,
     ``image_id``,   and ``flavor_id``.
 
 

@@ -24,7 +24,7 @@ the credential has been created.  Be sure to record the secret for later use.
 
 ### Via the Command Line
 
-The openstack command line can be used to create an application
+The OpenStack CLI can be used to create an application
 credential.
 
 To create a credential with the same roles as your user and with a
@@ -82,7 +82,7 @@ authenticate against Catalyst Cloud. Instead of providing a username
 and password the machine user can authenticate using the application
 credential ID and secret.
 
-When using the openstack command line the following options need to be set:
+When using the OpenStack CLI the following options need to be set:
  - `--os-auth-url` the endpoint for the authentication service.
  - `--os-application-credential-secret` the application credential secret.
  - `--os-application-credential-id` the application credential id.
@@ -127,7 +127,7 @@ clouds:
 If you want to restrict the roles that the application credential has
 then we need to specify the role by the following names:
 
-  | Role               | Name in the Openstack command |
+  | Role               | Name in the OpenStack command |
   |--------------------|-------------------------------|
   | Project admin      | project_admin                 |
   | Project moderator  | project_mod                   |

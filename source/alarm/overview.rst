@@ -164,7 +164,7 @@ The following meters will only be available if the container has uploads or down
 Router
 ------
 
-Note that the following meters are only available from routers that are connected to the public internet.
+Note that the following meters are only available from routers that are connected to the public Internet.
 
 * `traffic.outbound.international` - Outbound International Traffic(Bytes)
 * `traffic.inbound.international` - Inbound International Traffic (Bytes)
@@ -295,7 +295,7 @@ the state changes.
 Further Reading
 ***************
 
-For more information on the Alarm service, you can visit `the openstack
-documentation on aodh`_
+For more information on the Alarm service, you can visit `the OpenStack
+documentation on Aodh`_
 
-.. _`the openstack documentation on aodh`: https://docs.openstack.org/aodh/latest/admin/telemetry-alarms.html
+.. _`the OpenStack documentation on Aodh`: https://docs.openstack.org/aodh/latest/admin/telemetry-alarms.html

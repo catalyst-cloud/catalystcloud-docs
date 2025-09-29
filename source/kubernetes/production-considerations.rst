@@ -89,7 +89,7 @@ The first issue which follows on from your networking considerations is, where
 am I going to be able to access the cluster? Because you have the option to
 make the cluster publicly accessible, you could create it so that you and those
 who need access to the cluster can do so wherever they are. This does come with
-the same risks as exposing anything to the public internet however.
+the same risks as exposing anything to the public Internet however.
 
 Alternatively, if you are creating a private cluster, you can refine the
 location from where you are able to access the cluster. This customization goes
@@ -127,7 +127,7 @@ As an example of what the create command could look like, let's assume we wish
 to create a cluster based on the following conditions:
 
 - It is based on a production template
-- It is publicly accessible via the internet
+- It is publicly accessible via the Internet
 - That access will be restricted to to a single IP address
 
 The resulting command would look like this.

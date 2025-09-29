@@ -6,7 +6,7 @@ Overview
 
 This section will demonstrate how to build an Ubuntu 18.04 server. After you
 have completed the steps, you will be able to log in to the server via SSH from
-anywhere on the internet using an SSH key.
+anywhere on the Internet using an SSH key.
 
 The following is assumed:
 
@@ -74,7 +74,7 @@ The requirements are:
 * A Subnet with addressing and DHCP/DNS servers configured
 * A Router with a gateway set and an interface in a virtual network
 
-Catalyst operates, free of charge, a number of recursive DNS servers in each
+Catalyst Cloud operates, free of charge, a number of recursive DNS servers in each
 cloud region for use by Catalyst Cloud instances. They are:
 
 .. _name_servers:
@@ -102,7 +102,7 @@ Compute flavors
 ***************
 
 The flavor of an instance is the CPU, memory and disk specifications of a
-compute instance. Catalyst flavors are named 'cX.cYrZ', where X is the
+compute instance. Catalyst Cloud flavors are named 'cX.cYrZ', where X is the
 'compute generation', Y is the number of vCPUs, and Z is the number of
 gigabytes of memory.
 
@@ -177,7 +177,7 @@ Floating IPs
 In order to connect to your instance, you will need to allocate a floating IP
 to the instance. Alternately, you could create a :ref:`VPN <vpn>` and save
 some money by avoiding floating IPs altogether. VPNs are not feasible when the
-instance will be offering a service to the greater internet.
+instance will be offering a service to the greater Internet.
 
 .. _connecting-to-instance:
 

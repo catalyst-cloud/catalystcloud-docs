@@ -3,7 +3,7 @@ Downloading from the cloud
 ##########################
 
 
-An image may be downloaded from Catalyst Cloud by using the :ref:`openstack CLI tools <command-line-interface>`.
+An image may be downloaded from Catalyst Cloud by using the :ref:`OpenStack CLI tools <command-line-interface>`.
 The command to download an image is:
 
 .. code-block:: bash

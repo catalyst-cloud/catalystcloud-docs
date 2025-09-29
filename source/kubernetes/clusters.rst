@@ -231,7 +231,7 @@ creation command.
   --labels master_lb_floating_ip_enabled=true --merge-labels
 
 It is important to note the security implications of doing this, as your Kubernetes
-API will be exposed to the internet.
+API will be exposed to the Internet.
 
 .. Note::
 

@@ -4,8 +4,8 @@
 Application programming interfaces (APIs)
 #########################################
 
-The Catalyst Cloud follows the "API first" design principle. Every service we
-implement on the Catalyst Cloud is first made available via an API, then the
+Catalyst Cloud follows the "API first" design principle. Every service we
+implement on Catalyst Cloud is first made available via an API, then the
 command line interface (CLI) and finally the dashboard. As a result, it often
 takes three to six months for a new feature or service to reach the dashboard.
 

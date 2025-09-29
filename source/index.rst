@@ -2,7 +2,7 @@
 Catalyst Cloud documentation
 ############################
 
-Kia ora and a warm welcome to the Catalyst Cloud!
+Kia ora and a warm welcome to Catalyst Cloud!
 
 Contents:
 
@@ -43,14 +43,14 @@ External resources
 
 The Catalyst Cloud documentation is intended as a supplement to the
 documentation maintained by the OpenStack Foundation.  It is meant to clarify
-details about the Catalyst Cloud that may not be applicable OpenStack in
+details about Catalyst Cloud that may not be applicable OpenStack in
 general. The OpenStack Foundation documents can be found at
 https://docs.openstack.org/.
 
-You can find more information about the Catalyst Cloud, including prices and
-its terms and conditions at https://catalystcloud.nz/.
+You can find more information about Catalyst Cloud, including prices and
+terms and conditions at https://catalystcloud.nz/.
 
-You can sign up to the Catalyst Cloud at https://catalystcloud.nz/signup/.
+You can sign up to Catalyst Cloud at https://catalystcloud.nz/signup/.
 
 ******************
 Indices and tables

@@ -1,6 +1,6 @@
-#######################################################################
-Docker "getting started with swarm mode" tutorial on the Catalyst Cloud
-#######################################################################
+###################################################################
+Docker "getting started with swarm mode" tutorial on Catalyst Cloud
+###################################################################
 
 The Docker Engine 1.12 includes a new feature known as `swarm mode`_ which
 allows the native management of a cluster of Docker Engines. This cluster of
@@ -32,11 +32,11 @@ Setup
 This tutorial assumes a number of things:
 
 * You are interested in Docker Swarm Mode and wish to complete the tutorial.
-* You are familiar with basic usage of the Catalyst Cloud (e.g. you have
+* You are familiar with basic usage of Catalyst Cloud (e.g. you have
   created your first instance as described at
   :ref:`launching-your-first-instance`)
 * You have sourced an openrc file, as described at :ref:`source-rc-file`
-* You have a basic understanding of how to use `Ansible`_ on the Catalyst Cloud
+* You have a basic understanding of how to use `Ansible`_ on Catalyst Cloud
   as shown at :ref:`launching-your-first-instance-using-ansible`
 
 ***************

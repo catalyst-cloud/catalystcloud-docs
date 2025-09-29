@@ -10,7 +10,7 @@ account's level of access to different resources on your project. This is
 important for security purposes as you do not want all users on on your
 project having unilateral control over all the resources on your system.
 IAM is also important for accountability reasons, as you can track closely
-which users have access to which resources and when they accessed them. The
+which users have access to which resources and when they accessed them.
 Catalyst Cloud makes use of *Roles* to define and restrict what access should
 be given to which users. The practices mentioned in the following sections
 will discuss in detail what the different roles are and how you are able to

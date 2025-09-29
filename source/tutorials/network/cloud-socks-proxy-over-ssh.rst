@@ -133,7 +133,7 @@ Chrome
 ------
 
 In your browser, enter the URL chrome://settings/search#proxy and click on the
-“Change proxy settings...” button. This should open your system internet
+“Change proxy settings...” button. This should open your system Internet
 options, where you can configure a SOCKS proxy as explained previously
 in the Internet Explorer example.
 

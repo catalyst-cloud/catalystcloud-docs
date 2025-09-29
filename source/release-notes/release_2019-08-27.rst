@@ -19,7 +19,7 @@ This release introduced the following new functionality and improvements.
   allocation
 * As a security best practice, Kubernetes clusters are now created in a private
   network and are not visible from the Internet by default. If desirable,
-  exposing the Kubernetes API to the internet is a simple additional step
+  exposing the Kubernetes API to the Internet is a simple additional step
   documented on the :ref:`private-cluster` section of the documentation.
 * Cluster :ref:`kubernetes-user-access` roles were added to provide a
   mechanism for handling cluster authentication and authorization based on the

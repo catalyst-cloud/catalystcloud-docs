@@ -411,9 +411,9 @@ Create a rule for the policy.
 Assign a VIP
 ************
 
-The final step is to assign a floating ip address to the VIP port on the
-loadbalancer. In order to do this we need to create a floating ip, find the
-VIP Port ID and then assign it a floating ip address.
+The final step is to assign a floating IP address to the VIP port on the
+loadbalancer. In order to do this we need to create a floating IP, find the
+VIP Port ID and then assign it a floating IP address.
 
 .. code-block:: bash
 

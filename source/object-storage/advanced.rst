@@ -274,8 +274,8 @@ Or by passing the expiry date:
   $ swift tempurl GET 2023-01-01 /v1/AUTH_foo/bar_container/quux.md my_secret_tempurl_key
 
 
-Creating temporary URLs in the Catalyst Cloud
-=============================================
+Creating temporary URLs in Catalyst Cloud
+=========================================
 
 Currently, there are two methods available for the creation of temporary URLs:
 through the use of the swift command line tool or by generating the temporary URL
@@ -341,7 +341,7 @@ an object residing in the object store.
   $ swift tempurl GET 600 /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt "testkey" \
     /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005
 
-You can test this using cURL and appending the generated URL to the Catalyst
+You can test this using cURL and appending the generated URL to Catalyst
 Cloud's object storage base URL "https://object-storage.nz-por-1.catalystcloud.io:443". If
 it is successful, the request should return the contents of the object.
 
