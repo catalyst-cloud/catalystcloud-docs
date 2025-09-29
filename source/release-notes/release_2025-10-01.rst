@@ -1,0 +1,36 @@
+##############
+1 October 2025
+##############
+
+==================================================
+Changes to bundled licensing for Microsoft Windows
+==================================================
+
+As of today there are changes to bundled licensing for Microsoft Windows images. The pricing changes do not affect
+customers providing their own licenses.
+
+Previously, Windows licenses were provided on an hourly basis but a recent review has found Catalyst Cloud may not be
+permitted by Microsoft to offer them this way. Therefore, Catalyst Cloud will be applying a new set of rules for
+bundled licenses from 1 October 2025.
+
+Bundled Windows licenses will be based on a strict calendar month regardless of total time a compute instance that uses
+a bundled license was running during the calendar month. The license will not apply to instances that are shelved for
+the entire month, but will apply for the whole month if unshelved for any time at all. Each compute instance using a
+bundled license needs its own license; they are not provided from a pool that is consumed on-demand. Only the license
+is charged on a monthly basis, compute hours remain charged on an hourly basis.
+
+At the same time, we're simplifying the way licenses are calculated. Previously a bundled license fee was specific to
+each size and type of compute instance. Under the new bundled license system, the type of compute will no longer affect
+the price, and bundled licenses will always be based on the same amount for each 2 vCPUs a compute instance has (with a
+minimum of 2 vCPU). Similar changes are being applied to images containing Microsoft SQL Server.
+
+Please refer to the `bundled licensing section on the Catalyst Cloud website
+<https://catalystcloud.nz/services/iaas/compute/bundled-os-licenses-for-compute/>`_ for details on pricing for running
+Windows and SQL Server images.
+
+======================================
+Microsoft Windows on all compute types
+======================================
+
+As a result of the above bundled licensing changes, server instances created from Microsoft Windows images can now be
+depoyed to any :doc:`compute (flavour) type </compute/instance-types>`, including GPU-backed types.
