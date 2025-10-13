@@ -152,5 +152,3 @@ default volume type:
 
 .. literalinclude:: _scripts/cli/create-vol-from-snap.sh
     :language: shell
-
-

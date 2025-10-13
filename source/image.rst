@@ -1,3 +1,6 @@
+.. _image:
+.. _images:
+
 ######
 Images
 ######

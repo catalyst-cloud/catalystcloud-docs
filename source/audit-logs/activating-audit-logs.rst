@@ -89,16 +89,16 @@ your new account and using the following command:
 
     # Optional: Create a new EC2 credential. You should have one created already, but if not then you can create them like so:
     $ openstack ec2 credentials create
-    +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Field      | Value                                                                                                                                                   |
-    +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | access     | 7d84281f4bc542b987ddbxxxxxxxxxxx                                                                                                                        |
-    | links      | {u'self': u'https://api.osppd.por.catalystcloud.nz:5000/v3/users/bf32a9a2c69e4d718022101e867cccec/credentials/OS-EC2/7d84281f4bc542b987ddbxxxxxxxxxxx'} |
-    | project_id | 033556c5979b4c1281xxxxxxxxxxxxxx                                                                                                                        |
-    | secret     | 100e767eeb7b48dcaf25xxxxxxxxxxxx                                                                                                                        |
-    | trust_id   | None                                                                                                                                                    |
-    | user_id    | bf32a9a2c69e4d71xxxxxxxxxxxxxxxx                                                                                                                        |
-    +------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+    +------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Field      | Value                                                                                                                                                  |
+    +------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | access     | 7d84281f4bc542b987ddbxxxxxxxxxxx                                                                                                                       |
+    | links      | {u'self': u'https://api.nz-por-1.catalystcloud.nz:5000/v3/users/bf32a9a2c69e4d718022101e867cccec/credentials/OS-EC2/7d84281f4bc542b987ddbxxxxxxxxxxx'} |
+    | project_id | 033556c5979b4c1281xxxxxxxxxxxxxx                                                                                                                       |
+    | secret     | 100e767eeb7b48dcaf25xxxxxxxxxxxx                                                                                                                       |
+    | trust_id   | None                                                                                                                                                   |
+    | user_id    | bf32a9a2c69e4d71xxxxxxxxxxxxxxxx                                                                                                                       |
+    +------------+--------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 Prepare a list of projects to receive audit logs
 ================================================

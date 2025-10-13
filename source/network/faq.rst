@@ -281,7 +281,7 @@ As stated previously a typical SSH connection command looks like this:
 
 Note the use of the ubuntu username, this is the default user for Ubuntu,
 you will need to change this as required for the distribution you are using as
-explained at :ref:`images`.
+explained at :ref:`image-types`.
 
 .. _ssh_keypairs:
 

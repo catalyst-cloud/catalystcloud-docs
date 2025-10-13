@@ -43,12 +43,15 @@ resource "openstack_compute_instance_v2" "instance_1" {
     name = "anti-affinity-terraform"
     image_id = "${var.compute_image_ID}"
     flavor_id = "${var.compute_flavor_ID}"
+    key_pair = "${var.keypair_name}"
     network {
         uuid = "${var.network_ID}"
     }
-    scheduler_hints{
-        group ="${openstack_compute_servergroup_v2.test-sg.id}"
-    }
-    key_pair = "${var.keypair_name}"
     security_groups = ["default"]
+    scheduler_hints {
+        group = "${openstack_compute_servergroup_v2.test-sg.id}"
+    }
+    metadata = {
+        "metering.server_group" = "${openstack_compute_servergroup_v2.test-sg.id}"
+    }
 }

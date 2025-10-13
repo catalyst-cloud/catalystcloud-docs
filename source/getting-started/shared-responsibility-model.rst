@@ -61,7 +61,7 @@ Customers are responsible for configuring, operating and securing:
 Customers are responsible for:
 
 - Patching the operating systems used in instances, even if Catalyst Cloud has
-  provided the :ref:`images <images>`.
+  provided the :ref:`images <image-types>`.
 - Selection of initial templates, and then upgrading of templates (for example,
   for :ref:`Catalyst Cloud Kubernetes Service <kubernetes-versions>`)
 - Selection of initial versions, and then upgrading of provided versions (for

@@ -1,3 +1,6 @@
+.. _network:
+.. _networks:
+
 #######
 Network
 #######

@@ -28,7 +28,7 @@ support uploading an SSH key so this step must be performed manually.
 When an instance is created, OpenStack passes an SSH key to the instance which
 can be used for shell access. By default, Ubuntu will install this key for the
 "ubuntu" user. Other operating systems have a different default user, as listed
-here: :ref:`images`
+here: :ref:`image-types`
 
 Use ``openstack keypair create`` to upload your Public SSH key.
 

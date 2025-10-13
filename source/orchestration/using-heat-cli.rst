@@ -2,6 +2,76 @@
 Using heat via the command line tools
 #####################################
 
+.. _orchestration-prerequisites:
+
+*************
+Prerequisites
+*************
+
+Setting up users
+================
+
+The following roles must be configured on your Catalyst Cloud user
+to be able to use the Orchestration Service:
+
+* :ref:`project_member_role`
+* :ref:`heat_stack_owner_role`
+
+For more information, see :ref:`Access Control <access_control>`.
+
+Setting up your environment
+===========================
+
+First, follow the instructions for :ref:`setting up the CLI Tools and SDKs <sdks_and_toolkits>`.
+
+Make sure you have :ref:`sourced the OpenRC file for your project <source-rc-file>` in an open terminal.
+
+Check that the ``openstack stack`` series of commands are available.
+If not, make sure the ``python-heatclient`` package is installed.
+
+.. code-block:: console
+
+  $ openstack stack --help
+  Command "stack" matches:
+    stack abandon
+    stack adopt
+    stack cancel
+    stack check
+    stack create
+    stack delete
+    stack environment show
+    stack event list
+    stack event show
+    stack export
+    stack failures list
+    stack file list
+    stack hook clear
+    stack hook poll
+    stack list
+    stack output list
+    stack output show
+    stack resource list
+    stack resource mark unhealthy
+    stack resource metadata
+    stack resource show
+    stack resource signal
+    stack resume
+    stack show
+    stack snapshot create
+    stack snapshot delete
+    stack snapshot list
+    stack snapshot restore
+    stack snapshot show
+    stack suspend
+    stack template show
+    stack update
+
+When using :ref:`auto-scaling <autoscaling-on-catalyst-cloud>` or
+:ref:`auto-healthing <autohealing-on-catalyst-cloud>` it is highly recommended
+to make sure you can also access the Catalyst Cloud
+:ref:`Metrics Service <metrics-getting-started>` and :ref:`Alarm Service <alarm-overview>`,
+as this will allow you to observe the state of the resources and metrics used.
+
 ****************
 Sample templates
 ****************
@@ -9,12 +79,6 @@ Sample templates
 Catalyst Cloud has published example templates that demonstrate the use of the cloud
 orchestration service at:
 https://github.com/catalyst-cloud/catalystcloud-orchestration.
-
-.. note::
-
-  The default username for all compute instances created by the cloud
-  orchestration service (Heat) is "ec2-user". This is done to retain
-  compatibility with the AWS CloudFormation service.
 
 The following Heat Orchestration Template (HOT) is a simple example
 that illustrates how to launch a single instance on Catalyst Cloud

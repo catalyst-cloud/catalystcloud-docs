@@ -29,6 +29,7 @@ Contents:
    image
    kubernetes
    load-balancer
+   metrics
    network
    object-storage
    orchestration

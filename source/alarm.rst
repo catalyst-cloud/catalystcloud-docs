@@ -1,33 +1,37 @@
+.. _alarm:
+
 #####
 Alarm
 #####
 
-.. _alarm:
+The Catalyst Cloud Alarm Service allows you to add cloud-based monitoring
+for resource metrics in your project.
 
-The alarm service allows you to create alarms that monitor objects on your
-project and can inform other services or programs of any state changes that
-occur. Because you are able to define the trigger conditions of your alarms,
-you can customize how your system will react to certain events. The two most
-common uses for the alarm service are for autohealing and autoscaling, each of
-which are important for having a highly available and robust system.
+Alarms are used to track the state of resource metrics
+published to the :ref:`Catalyst Cloud Metrics Service <metrics>`.
+By setting up actions to perform when the alarm is triggered such as
+sending notifications to external webhook URLs, this allows for easy
+integration with your chosen monitoring and alerting systems and
+saves some hassle trying to setup metric polling separately.
 
-By creating an alarm that is set up to monitor the health status of your
-objects, you are able to inform the orchestration engine of any unhealthy
-changes that may occur. Meaning that if any of the resources your alarm is
-monitoring where to experience difficulties, your system can react instantly
-with an automated process in place that will attempt to heal your resources as
-soon as the issue arises.
+There are a number of alarm types available, with a variety of useful
+configuration options that allow the Alarm Service to monitor
+aspects of practically any kind of workload or resource on Catalyst Cloud.
 
-Autoscaling works in much the same way, but instead of creating an alarm
-that monitors the health of the resources, you create an alarm that monitors
-the CPU usage of individual compute nodes. When you create your alarms, you can
-specify the threshold values of what the CPU usage has to exceed before you
-want to inform the orchestration engine that it needs to scale your instances;
-whether it is scaling up or down.
+The Alarm Service is also used by the :ref:`Catalyst Cloud Orchestration Service <cloud-orchestration>`
+to power its auto-scaling and auto-healing features.
+
+Table of Contents:
 
 .. toctree::
    :maxdepth: 1
 
    alarm/overview
-   orchestration/autohealing
-   orchestration/autoscaling
+   alarm/faq
+
+*********
+Tutorials
+*********
+
+Instructions on how to create alarms for common use cases
+are provided in the :ref:`Examples <alarm-examples>` section.

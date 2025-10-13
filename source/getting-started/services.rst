@@ -104,6 +104,17 @@ to assure compute instances are still available, handles the durability and
 updates for the load balancer, and provides a convenient interface to make
 setting up load balancing is as smooth and intuitive as possible.
 
+Metrics service
+===============
+
+The :ref:`Catalyst Cloud Metrics Service <metrics>` provides the ability to
+monitor and track the cloud resources running in your project.
+
+We collect a variety of metrics related to all resources running on our cloud.
+The Metrics Service provides a flexible API that allows you to query and aggregate
+those metrics, which can be used in a number of ways such as monitoring the performance
+of your instances, or creating dashboards for tracking resource usage within your project.
+
 Orchestration service
 =====================
 
@@ -207,5 +218,3 @@ can discuss how to use them.
 
 :ref:`Previous page <introduction-to-catalyst-cloud>` -
 :ref:`Next page <access_to_catalyst_cloud>`
-
-

@@ -103,9 +103,6 @@ resource "openstack_compute_instance_v2" "instance_1" {
         destination_type = "volume"
         delete_on_termination = false
     }
-    metadata {
-        group = "first-instance-group"
-    }
     network {
         name = "${openstack_networking_network_v2.network_1.name}"
     }
