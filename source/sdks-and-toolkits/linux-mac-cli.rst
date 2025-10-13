@@ -52,7 +52,8 @@ system.
           python-swiftclient \
           python-octaviaclient \
           python-magnumclient \
-          aodhclient
+          aodhclient \
+          gnocchiclient
 
     .. tab:: Debian 9
 
@@ -78,7 +79,8 @@ system.
           python-swiftclient \
           python-octaviaclient \
           python-magnumclient \
-          aodhclient
+          aodhclient \
+          gnocchiclient
 
     .. tab:: Centos 8
 
@@ -104,7 +106,8 @@ system.
           python-swiftclient \
           python-octaviaclient \
           python-magnumclient \
-          aodhclient
+          aodhclient \
+          gnocchiclient
 
     .. tab:: Mac OSX
 
@@ -119,7 +122,7 @@ system.
           source venv/bin/activate
 
           # Install the Python OpenStack client libraries into your virtual environment
-                    pip install -U pip \
+          pip install -U pip \
           python-openstackclient \
           python-ceilometerclient \
           python-heatclient \
@@ -127,7 +130,8 @@ system.
           python-swiftclient \
           python-octaviaclient \
           python-magnumclient \
-          aodhclient
+          aodhclient \
+          gnocchiclient
 
 
 .. _upgrading-the-cli:
@@ -151,7 +155,8 @@ command below:
   python-swiftclient \
   python-octaviaclient \
   python-magnumclient \
-  aodhclient
+  aodhclient \
+  gnocchiclient
 
 ******************************
 Configuration on Linux and Mac

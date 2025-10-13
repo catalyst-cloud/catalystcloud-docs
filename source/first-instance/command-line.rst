@@ -223,7 +223,7 @@ After we have these resources, we need to add an SSH key:
 When an instance is created, OpenStack places an SSH key on the instance which
 can be used for shell access. By default, Ubuntu will install this key for the
 "ubuntu" user. Other operating systems have a different default user, as listed
-here: :ref:`images`
+here: :ref:`image-types`
 
 Use ``openstack keypair create`` to upload your Public SSH key.
 
@@ -494,4 +494,3 @@ Connecting to the Instance should be as easy as:
 .. code-block:: bash
 
  $ ssh ubuntu@$CC_PUBLIC_IP
-

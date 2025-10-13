@@ -135,17 +135,25 @@ Using programmatic methods
       can be added to it. You can do this by passing a hint to our cloud
       scheduler when creating your instance, to indicate it belongs to a
       server group. This is done using the ``--hint group=$GROUP_ID``
-      parameter, as indicated below.
+      and ``--property metering.server_group=$GROUP_ID`` parameters,
+      as shown below.
 
       .. code-block:: bash
 
-        openstack server create --flavor $CC_FLAVOR_ID --image $CC_IMAGE_ID
-        --key-name $KEY_NAME --security-group default --security-group $SEC_GROUP
-        --nic net-id=$CC_PRIVATE_NETWORK_ID --hint group=$GROUP_ID first-instance
+        openstack server create first-instance \
+                                --flavor $CC_FLAVOR_ID \
+                                --image $CC_IMAGE_ID \
+                                --key-name $KEY_NAME \
+                                --security-group default \
+                                --security-group $SEC_GROUP \
+                                --nic net-id=$CC_PRIVATE_NETWORK_ID \
+                                --hint group=$GROUP_ID \
+                                --property metering.server_group=$GROUP_ID \
+                                first-instance
 
       .. note::
 
-        If you receive a `No valid host was found` error, it means that the cloud
+        If you receive a ``No valid host was found`` error, it means that the cloud
         scheduler could not find a suitable server to honour the policy of the server
         group. For example, we may not have enough capacity on the same hypervisor to
         place another instance in affinity, or enough hypervisors with sufficient
@@ -153,15 +161,15 @@ Using programmatic methods
 
     .. tab:: Ansible
 
-      The example below illustrates how the ``scheduler_hints`` parameter can
-      be passed in an Ansible playbook using the os_server module. This means
-      when the playbook creates a compute instance, it also puts the instance
-      into the desired server group:
+      The example below illustrates how the ``scheduler_hints`` and ``metadata``
+      parameters can be passed in an Ansible playbook using the ``openstack.cloud.server``
+      module. This means when the playbook creates a compute instance, it also puts the
+      instance into the desired server group:
 
       .. code-block:: yaml
 
         - name: Create a compute instance on Catalyst Cloud
-          os_server:
+          openstack.cloud.server:
             state: present
             name: "{{ instance_name }}"
             image: "{{ image }}"
@@ -169,8 +177,13 @@ Using programmatic methods
             flavor: "{{ flavor }}"
             nics:
               - net-name: "{{ private_network_name }}"
-            security_groups: "default,{{ security_group_name }}"
-            scheduler_hints: "group=78f2aabc-e73a-4c72-88fd-xxxxxxxxxxxx"
+            security_groups:
+              - default
+              - "{{ security_group_name }}"
+            scheduler_hints:
+              group: 78f2aabc-e73a-4c72-88fd-xxxxxxxxxxxx
+            metadata:
+              metering.server_group: 78f2aabc-e73a-4c72-88fd-xxxxxxxxxxxx
 
     .. tab:: Terraform
 

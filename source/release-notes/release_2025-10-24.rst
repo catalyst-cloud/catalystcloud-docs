@@ -1,0 +1,53 @@
+###############
+24 October 2025
+###############
+
+******************************
+Catalyst Cloud Metrics Service
+******************************
+
+We have launched the new Catalyst Cloud Metrics Service, in open beta.
+
+The Metrics Service increases the observability of your resources running in
+the cloud by exposing a number of useful metrics. With its comprehensive
+query API you can monitor your cloud resources, and get time-series data
+suitable for making dashboards.
+
+Along with metrics, a history of the state of resources is also kept
+for up to 90 days (with decreasing granularity), allowing a look into
+historical data in addition to monitoring the current state of resources.
+
+The Metrics Service is free to use for all Catalyst Cloud customers.
+To find out more, see :ref:`Catalyst Cloud Metrics Service <metrics>`.
+
+******
+Alarms
+******
+
+The Catalyst Cloud Alarm Service now uses the Metrics Service as
+the source for resource metrics. Threshold alarms monitoring resource
+metrics can be created using the ``gnocchi_resources_threshold`` and
+``gnocchi_aggregation_by_resources_threshold`` alarm types.
+
+For more information, see the documentation for the :ref:`Catalyst Cloud Alarm Service <alarm>`.
+
+*************
+Orchestration
+*************
+
+When configuring auto-scaling with the :ref:`Catalyst Cloud Orchestration Service <orchestration>`,
+alarms are now configured using one of the types backed by the Metrics Service listed above.
+
+For more information, see the documentation for
+:ref:`auto-scaling with the Catalyst Cloud Orchestration Service <autoscaling-on-catalyst-cloud>`.
+
+.. note::
+
+  These changes do not apply to :ref:`Catalyst Cloud Kubernetes Service (CCKS) <kubernetes>`
+  clusters running Kubernetes v1.28 and later, as newer clusters use a different mechanism
+  for auto-scaling.
+
+  If you have any CCKS clusters running Kubernetes v1.27 or earlier,
+  please consider :ref:`rebuilding your cluster <cluster-upgrade>`
+  to upgrade to the latest version of Kubernetes and ensure
+  your workloads continue working correctly.

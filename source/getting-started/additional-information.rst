@@ -444,35 +444,64 @@ If you have previous cloud computing or OpenStack experience, the table below
 describes how our services map back to OpenStack code-names and other cloud
 providers.
 
-+--------------------------------+-----------------+-----------------+
-| Service                        | OpenStack       | Amazon AWS      |
-+================================+=================+=================+
-| Identity and Access Control    | Keystone        | IAM             |
-+--------------------------------+-----------------+-----------------+
-| Compute                        | Nova            | EC2             |
-+--------------------------------+-----------------+-----------------+
-| Network                        | Neutron         | VPC             |
-+--------------------------------+-----------------+-----------------+
-| Block Storage                  | Cinder          | EBS             |
-+--------------------------------+-----------------+-----------------+
-| Object Storage                 | Swift           | S3              |
-+--------------------------------+-----------------+-----------------+
-| Load Balancer                  | Octavia         | ELB             |
-+--------------------------------+-----------------+-----------------+
-| Orchestration                  | Heat            | Cloud Formation |
-+--------------------------------+-----------------+-----------------+
-| Telemetry                      | Ceilometer      | Cloud Watch     |
-+--------------------------------+-----------------+-----------------+
-| Billing                        | Distil          |                 |
-+--------------------------------+-----------------+-----------------+
-| Registration                   | StackTask       |                 |
-+--------------------------------+-----------------+-----------------+
+.. list-table::
+  :width: 50%
+  :header-rows: 1
+
+  * - Service
+    - OpenStack
+    - Amazon AWS
+  * - Identity and Access Management
+    - Keystone
+    - IAM
+  * - Administration
+    - Adjutant
+    -
+  * - Compute
+    - Nova
+    - EC2
+  * - Image
+    - Glance
+    -
+  * - Block Storage
+    - Cinder
+    - EBS
+  * - Object Storage
+    - Swift
+    - S3
+  * - Network
+    - Neutron
+    - VPC
+  * - Load Balancer
+    - Octavia
+    - ELB
+  * - Orchestration
+    - Heat
+    - CloudFormation
+  * - Kubernetes
+    - Magnum
+    - EKS
+  * - Database
+    - Trove
+    - RDS
+  * - Secret Storage
+    - Barbican
+    - AWS Secrets Manager
+  * - Telemetry (Metrics)
+    - Gnocchi
+    - CloudWatch
+  * - Telemetry (Alarms)
+    - Aodh
+    - CloudWatch
+  * - Billing
+    - Distil
+    - AWS Billing Console
 
 Please note that functionality between cloud providers differs. The table above
 is only intended to map the broader domain space of each cloud service, as
 opposed to specific features.
 
-Now that you understand the basics of the Catalyst Cloud, lets dive into a
+Now that you understand the basics of Catalyst Cloud, let's dive into a
 hands on example using the web dashboard!
 
 :ref:`Previous page <shared_responsibility_model>` -

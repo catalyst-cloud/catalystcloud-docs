@@ -17,7 +17,8 @@ https://docs.openstack.org/heat/latest/template_guide/openstack.html
 The resource types available on Catalyst Cloud are:
 
 * OS::Aodh::CompositeAlarm
-* OS::Aodh::EventAlarm
+* OS::Aodh::GnocchiResourcesAlarm
+* OS::Aodh::GnocchiAggregationByResourcesAlarm
 * OS::Aodh::LBMemberHealthAlarm
 * OS::Cinder::Volume
 * OS::Cinder::VolumeAttachment
@@ -77,4 +78,3 @@ The resource types available on Catalyst Cloud are:
 * OS::Swift::Container
 * OS::Trove::Cluster
 * OS::Trove::Instance
-

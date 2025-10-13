@@ -1,4 +1,4 @@
-.. _images:
+.. _image-types:
 
 ###############
 Types of images
@@ -139,6 +139,8 @@ For a less verbose view, you can filter by column name.
 .. code-block:: bash
 
   openstack image list -c ID -c Name -c Project --long | grep 94b566de52f9423fab80ceee8c0a4a23
+
+.. _images-by-partners:
 
 *******************************
 Images provided by our partners

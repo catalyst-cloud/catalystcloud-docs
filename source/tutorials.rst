@@ -61,6 +61,17 @@ Kubernetes
    tutorials/kubernetes/storage-resizing-persistent-volume
    tutorials/kubernetes/storage-retrieving-data-orphaned-volume
 
+.. _metrics-tutorials:
+
+*******
+Metrics
+*******
+
+.. toctree::
+   :maxdepth: 1
+
+   tutorials/metrics/enable-memory-usage-metrics-on-windows.rst
+
 *******
 Network
 *******
@@ -104,4 +115,3 @@ Other Tutorials
    tutorials/other/deploying-matrixchat-on-catalyst-cloud
    tutorials/other/deploying-nextcloud
    tutorials/other/gallagher-command-centre
-

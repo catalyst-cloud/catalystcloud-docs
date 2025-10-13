@@ -1,3 +1,5 @@
+.. _kubernetes-gpu-acceleration:
+
 ################
 GPU Acceleration
 ################

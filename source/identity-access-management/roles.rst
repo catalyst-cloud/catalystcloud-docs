@@ -275,6 +275,24 @@ quite extensive as the role covers almost all the service on the cloud:
    |                       | openstack.loadbalancer.loadbalancer.*                                  |
    |                       | openstack.loadbalancer.pool.*                                          |
    |                       |                                                                        |
+   |                       | METRICS SERVICE                                                        |
+   |                       | gnocchi.aggregates.fetch                                               |
+   |                       | gnocchi.archive_policy.get                                             |
+   |                       | gnocchi.archive_policy.list                                            |
+   |                       | gnocchi.archive_policy_rule.get                                        |
+   |                       | gnocchi.archive_policy_rule.list                                       |
+   |                       | gnocchi.build.get                                                      |
+   |                       | gnocchi.capabilities.list                                              |
+   |                       | gnocchi.metric.get                                                     |
+   |                       | gnocchi.metric.get_measures                                            |
+   |                       | gnocchi.metric.list                                                    |
+   |                       | gnocchi.resource.get                                                   |
+   |                       | gnocchi.resource.history                                               |
+   |                       | gnocchi.resource.list                                                  |
+   |                       | gnocchi.resource.search                                                |
+   |                       | gnocchi.resource_type.get                                              |
+   |                       | gnocchi.resource_type.list                                             |
+   |                       |                                                                        |
    |                       | VOLUME SERVICE                                                         |
    |                       | openstack.volume.create                                                |
    |                       | openstack.volume.delete                                                |
@@ -335,16 +353,15 @@ quite extensive as the role covers almost all the service on the cloud:
 Heat Stack Owner
 ================
 
-The *Heat Stack Owner* role allows users access to the Heat Cloud Orchestration
-Service. Users who attempt to use Heat when they do not have this role will
+The *Heat Stack Owner* role allows users access to the
+:ref:`Catalyst Cloud Orchestration Service <cloud-orchestration>`.
+
+Users who attempt to use the service when they do not have this role will
 receive an error stating they are missing the required role. This role is
-required for interacting with the Cloud Orchestration Service, regardless of
+required for interacting with the Orchestration Service, regardless of
 other roles.
 
-For more information on this service, please consult the documentation at
-:ref:`Cloud orchestration. <cloud-orchestration>`
-
-The list of explicit permissions for the Heat stack owner role:
+The list of explicit permissions for the Heat Stack Owner role:
 
 .. code-block:: console
 
@@ -471,6 +488,43 @@ The list of explicit permissions for the object storage role:
    |                       | swift.tempurl.object                                                   |
    |                       | swift.auth.storage_url                                                 |
    |                       | swift.auth.auth_token                                                  |
+   +-----------------------+------------------------------------------------------------------------+
+
+.. _metric_reader_role:
+
+Metric Reader
+=============
+
+The *Metric Reader* role allows users read-only access to resources, metrics
+and measures stored in the :ref:`Catalyst Cloud Metrics Service <metrics>`
+for a project.
+
+.. note::
+
+  We do not support customers publishing their own resources, metrics or measures
+  to the Catalyst Cloud Metrics Service at this time.
+
+The list of explicit permissions for the metric reader role:
+
+.. code-block:: console
+
+   +-----------------------+------------------------------------------------------------------------+
+   | Metric Reader         | gnocchi.aggregates.fetch                                               |
+   |                       | gnocchi.archive_policy.get                                             |
+   |                       | gnocchi.archive_policy.list                                            |
+   |                       | gnocchi.archive_policy_rule.get                                        |
+   |                       | gnocchi.archive_policy_rule.list                                       |
+   |                       | gnocchi.build.get                                                      |
+   |                       | gnocchi.capabilities.list                                              |
+   |                       | gnocchi.metric.get                                                     |
+   |                       | gnocchi.metric.get_measures                                            |
+   |                       | gnocchi.metric.list                                                    |
+   |                       | gnocchi.resource.get                                                   |
+   |                       | gnocchi.resource.history                                               |
+   |                       | gnocchi.resource.list                                                  |
+   |                       | gnocchi.resource.search                                                |
+   |                       | gnocchi.resource_type.get                                              |
+   |                       | gnocchi.resource_type.list                                             |
    +-----------------------+------------------------------------------------------------------------+
 
 .. _auth_only_role:
