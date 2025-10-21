@@ -26,45 +26,61 @@ date they become unsupported.
 Supported CCKS Kubernetes Versions
 **********************************
 
-This table documents Catalyst Cloud Kubernetes Service minor versions, and their supported status.
-It does not show patch versions, as all patch versions for a supported minor version are supported.
+This table documents Catalyst Cloud Kubernetes Service minor versions and
+their supported status. It does not show patch versions, as all patch
+versions for a supported minor version are supported.
+
+For unsupported releases we list the latest template name in case an old
+version is needed for testing upgrades. Otherwise, these versions are hidden
+in the API.
 
 
 .. list-table::
-   :widths: 11 20 30 30
+   :widths: 11 20 30 30 30
    :header-rows: 1
 
    * - Version
      - Current Status
      - Initial Release Date
      - Unsupported Date
+     - Last Released Template
    * - ``1.29``
      - Unsupported
      - 2024-05-27
      - 2025-03-19
+     - ``kubernetes-v1.29.14-20250217``
    * - ``1.30``
      - Unsupported
      - 2024-08-26
      - 2025-06-28
+     - ``kubernetes-v1.30.14-20250623``
    * - ``1.31``
      - Supported
      - 2024-12-20
      - Expected 2025-10-28
+     -
    * - ``1.32``
      - Supported
      - 2025-02-05
      - Expected 2026-02-28
+     -
    * - ``1.33``
      - Supported
      - 2025-05-14
      - Expected 2026-06-28
+     -
+   * - ``1.34``
+     - In development
+     - Expected 2025-10-31
+     - Expected 2026-10-27
+     -
 
 
 **********************
 Version upgrade notes
 **********************
 
-Patch versions v1.31.12, v1.32.8 and v1.33.4
+Patch versions v1.31.13, v1.32.9 and v1.33.5
 ============================================
 
 As of these versions GPU support has been added to our OS images which will

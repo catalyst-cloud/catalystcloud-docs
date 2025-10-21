@@ -14,9 +14,9 @@ Servers<gpu-support>`.
 GPU support is available beginning from the following CCKS cluster
 versions:
 
-* v1.31.12
-* v1.32.8
-* v1.33.4
+* v1.31.13
+* v1.32.9
+* v1.33.5
 
 .. note::
 
