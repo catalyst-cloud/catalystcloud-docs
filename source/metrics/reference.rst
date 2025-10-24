@@ -833,7 +833,8 @@ metric values to their corresponding load balancer states.
 Kubernetes Clusters
 *******************
 
-:ref:`Catalyst Cloud Kubernetes Service (CCKS) <kubernetes>` clusters are tracked using the ``coe_cluster`` resource type.
+:ref:`Catalyst Cloud Kubernetes Service (CCKS) <kubernetes>` clusters are tracked using the ``coe_cluster`` resource
+type.
 
 Attributes
 ==========
