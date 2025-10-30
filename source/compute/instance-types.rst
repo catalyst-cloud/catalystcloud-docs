@@ -210,15 +210,23 @@ process. Note that a resize needs the server to be stopped, which is
 either done automatically for you or you can stop and start the server
 yourself.
 
-While this change can be done in-place, it is important to note
-that the operating system and software must be tolerant of the
-differences between the old and new type the instance has.
+While type changes can be performed in-place, instance types differ in
+numerous ways beyond CPU architecture and generation. These include
+virtualization implementation, hardware topology, memory subsystem
+characteristics, network performance, and underlying infrastructure
+components. Your operating system, applications, and workloads must be
+compatible with all aspects of the target instance type, not just the
+explicitly documented differences.
 
 .. warning::
 
-    The platform *does not* check if any of these limitations below
-    would affect your virtual server. It will (generally) allow you
-    to change types even if your applications or OS would not function.
+    The platform *does not* validate compatibility when changing
+    instance types. Type changes involve many differences beyond
+    those explicitly listed here, including virtualization technology,
+    hardware topology, memory architecture, and network performance
+    characteristics. Always test type changes thoroughly in a
+    non-production environment before applying them to production
+    workloads.
 
 CPU Architecture
 ================
@@ -272,3 +280,24 @@ any of these features, you may not be able to change types.
 
 These are primarily an issue when switching out of one of the types
 with accelerators.
+
+Testing Type Changes
+====================
+
+Before changing instance types in production, you should thoroughly
+test the change in a development or staging environment that mirrors
+your production workload. Key areas to validate include:
+
+* Application startup and functionality
+* Performance characteristics and benchmarks
+* Memory usage patterns and allocation behavior
+* Network throughput and latency requirements
+* Storage I/O performance
+* Any specialized hardware or virtualization dependencies
+* License compatibility (some software licenses are sensitive to
+  hardware changes)
+* Monitoring and alerting system compatibility
+
+Even when the documented specifications suggest compatibility, subtle
+differences in virtualization technology, hardware topology, or driver
+implementations may affect your specific workload in unexpected ways.
