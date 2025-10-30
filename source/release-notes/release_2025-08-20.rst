@@ -1,0 +1,27 @@
+##############
+20 August 2025
+##############
+
+This release introduces two new public compute offerings to the Porirua region (nz-por-1). These services are not
+currently available in the Hamilton region (nz-hlz-1).
+
+===============
+C1A-GPU Compute
+===============
+
+C1A-GPU is a new compute type featuring `dedicated NVIDIA RTX A6000 GPUs and AMD EPYC "Milan" CPUs
+<https://catalystcloud.nz/services/iaas/compute/compute-c1a-gpu/>`__. This is an excellent value offering for
+accessing GPU acceleration at a lower cost compared to C3-GPU. It is also supported by :doc:`Kubernetes worker
+nodes </kubernetes/gpu-acceleration>`.
+
+C1A-GPU compute is currently offered as a Beta service and is subject to our Beta conditions.
+
+==========
+C3 Compute
+==========
+
+C3 is our latest general compute offering featuring `dedicated performance with modern Intel Xeon 'Sapphire
+Rapids' series processors <https://catalystcloud.nz/services/iaas/compute/compute-c3/>`__ . To utilise C3 simply select
+a ``c3`` flavor when :doc:`deploying new server instances </compute/launch-compute-instance>`. Existing servers can
+also be :ref:`resized <resize-server>`, but note that the virtual hardware and network interface topology within the
+server may change to accomodate for the more modern capabilities of C3 compute.

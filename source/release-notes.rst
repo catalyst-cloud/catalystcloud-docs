@@ -13,6 +13,8 @@ Table of Contents:
 
   release-notes/release_2025-10-24.rst
   release-notes/release_2025-10-01.rst
+  release-notes/release_2025-09-08.rst
+  release-notes/release_2025-08-20.rst
   release-notes/release_2025-07-14.rst
   release-notes/release_2025-06-16.rst
   release-notes/release_2025-05-09.rst
