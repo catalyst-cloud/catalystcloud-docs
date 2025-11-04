@@ -57,8 +57,8 @@ in the API.
    * - ``1.31``
      - Supported
      - 2024-12-20
-     - Expected 2025-10-28
-     -
+     - 2025-11-07
+     - ``kubernetes-v1.31.13-20250917``
    * - ``1.32``
      - Supported
      - 2025-02-05
@@ -70,8 +70,8 @@ in the API.
      - Expected 2026-06-28
      -
    * - ``1.34``
-     - In development
-     - Expected 2025-10-31
+     - Supported
+     - 2025-11-06
      - Expected 2026-10-27
      -
 
@@ -79,6 +79,28 @@ in the API.
 **********************
 Version upgrade notes
 **********************
+
+
+Version v1.33 to v1.34
+======================
+
+Kubernetes `release changelog for v1.34 since v1.33`_.
+
+.. _`release changelog for v1.34 since v1.33`: https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.34.md#changelog-since-v1330
+
+In addition to the Kubernetes changes, we have:
+
+* Upgraded patch version of Calico CNI.
+* Upgraded base OS Flatcar to latest stable release.
+* Fixed a bug that was installing customer SSH keys onto nodes. This was causing problems when
+  transferring cluster ownership. Direct access to nodes is not supported but is possible
+  with privileged pods (eg. `kubectl ssh node` plugin).
+* Added reloader pod to support cluster credential rotation (API coming soon).
+
+Note that skipping minor versions when upgrading a cluster is unsupported and
+should not be attempted. For example, before upgrading to v1.34.x, you must
+be running at least v1.33.x.
+
 
 Patch versions v1.31.13, v1.32.9 and v1.33.5
 ============================================
@@ -89,18 +111,6 @@ auto-detect GPU compute flavors and install NVIDIA drivers.
 For more information on using GPU with Kubernetes, please refer to
 the :doc:`CCKS GPU acceleration documentation </kubernetes/gpu-acceleration>`.
 
-Patch versions v1.30.13, v1.31.9, v1.32.5
-==========================================
-
-In patch releases, to keep compatibility we typically only upgrade the
-underlying OS and upgrade Kubernetes itself.
-
-This patch release contains an additional bugfix that was introduced in
-v1.33.0 that adds ``kubeReserved`` to worker nodes and as such some capacity
-will no longer be available to workload pods.
-
-To learn more about ``kubeReserved`` please refer to
-the :ref:`k8s-kubelet-reserved` documentation topic.
 
 Version v1.32 to v1.33
 ======================
@@ -122,6 +132,20 @@ In addition to the Kubernetes changes, we have:
 Note that skipping minor versions when upgrading a cluster is unsupported and
 should not be attempted. For example, before upgrading to v1.33.x, you must
 be running at least v1.32.x.
+
+
+Patch versions v1.30.13, v1.31.9, v1.32.5
+==========================================
+
+In patch releases, to keep compatibility we typically only upgrade the
+underlying OS and upgrade Kubernetes itself.
+
+This patch release contains an additional bugfix that was introduced in
+v1.33.0 that adds ``kubeReserved`` to worker nodes and as such some capacity
+will no longer be available to workload pods.
+
+To learn more about ``kubeReserved`` please refer to
+the :ref:`k8s-kubelet-reserved` documentation topic.
 
 
 Version v1.31 to v1.32
@@ -156,6 +180,13 @@ In addition to the Kubernetes changes, we have:
 * Upgraded patch version of etcd.
 * Upgrades base OS flatcar to latest stable release.
 
+This upgrade contains an incompatiblity between v1.30 control plane nodes and
+v1.31 nodes. This typically causes the first worker node upgraded to fail
+joining the cluster and be replaced by autohealing, after which time the
+control plane nodes will have been upgraded. This requires label
+`auto_healing_enabled=True`, and without auto-healing the upgrade may stall.
+Please open a support ticket to either enable autohealing prior to your
+upgrade, or to resolve the issue during the upgrade.
 
 Note that skipping minor versions when upgrading a cluster is unsupported and
 should not be attempted. For example, before upgrading to v1.31.x, you must
