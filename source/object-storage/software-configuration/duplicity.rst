@@ -1,6 +1,8 @@
-***************
-Using Duplicity
-***************
+.. _duplicity_sect:
+
+*********
+Duplicity
+*********
 
 What is Duplicity?
 ==================
@@ -29,16 +31,14 @@ Prerequisites
 
 If you're using a major Linux distribution, you should be able to find a
 pre-compiled package in the repositories. If not, then a tar file is available
-at `Duplicity`_.
-
-.. _Duplicity: https://duplicity.gitlab.io/
+at `Duplicity <https://duplicity.gitlab.io/>`__.
 
 .. code-block:: bash
 
   sudo apt-get update
   sudo apt-get install duplicity
 
-Because we are going to authenticate against keystone, it is also necessary to
+Because we are going to authenticate against Keystone, it is also necessary to
 install ``python-keystoneclient``.
 
 .. code-block:: bash
@@ -187,3 +187,58 @@ running
   If you wish to back up the root '/' directory, it is advisable to add
   ``--exclude /proc`` as this may cause Duplicity to crash on the weird stuff
   in there.
+
+More comprehensive example
+==========================
+
+To have Duplicity really useful as a backup tool, we want to improve the
+process. This will consist of:
+
+- the backup script itself
+- the variables file to control the backup script and provide authentication
+  information
+- the cron job to run the backup task
+
+Here is the basic script to manage the running of a **Duplicity** backup.
+Typically, this would be placed somewhere like ``/usr/local/bin``.
+
+.. literalinclude:: _scripts/duplicity-backup.sh
+  :language: bash
+
+This script defines the control parameters such as retention and frequency for
+the backup tasks as well as providing authentication information for object
+storage. The previous script is expecting to find this in
+``/etc/duplicity/duplicity-vars.sh``.
+
+.. literalinclude:: _scripts/duplicity-vars.sh
+  :language: bash
+
+Then we need to define the backup definitions. Create a file with a name
+relevant to the backup task in ``/etc/duplicity/backup_sources.d`` and add at
+least the following two entries
+
+.. code-block:: bash
+
+  SRC="/path/to/files/"
+  DEST="swift://<container-name>"
+
+Depending on the nature of the thing you wish to back up, you may also need to
+include pre-backup commands such as the one shown below. This is to ensure that
+the data you wish to capture, in this case the contents of a gitlab repository,
+have been written to disk prior to the backup task running. Another example is
+taking database dumps.
+
+.. code-block:: bash
+
+  PRE_BACKUP_CMD="CRON=1 /opt/gitlab/bin/gitlab-rake gitlab:backup:create"
+
+Finally you'll create a new file called ``duplicity-backup-cron``
+in /etc/cron.d/. This is the cron job that will be responsible for running the
+backups. See (`cron`_) for more information on this.
+
+.. _cron: https://man7.org/linux/man-pages/man8/cron.8.html
+
+.. code-block:: bash
+
+  #
+  35 2 * * * root /usr/local/bin/duplicity-backup.sh >> /var/log/backup/duplicity.log 2>&1

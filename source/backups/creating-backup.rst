@@ -8,20 +8,18 @@ tools to create a backup of your data on Catalyst Cloud.
 Before you continue with the examples below, there are a few assumptions that
 are made which you will need to consider before jumping in further:
 
-1)
- You are familiar with the Linux command line and the OpenStack CLI tools.
-2)
- You have installed the OpenStack command line tools and sourced an openrc
- file, as explained in :ref:`this section of the documentation<command-line-interface>`.
-
+#. You are familiar with the Linux command line and the OpenStack CLI tools.
+#. You have installed the OpenStack command line tools and sourced an openrc
+   file, as explained in :ref:`this section of the
+   documentation<command-line-interface>`.
 
 **************************
 Which method should I use?
 **************************
 
-While both of the methods we describe in this tutorial will create a backup of
-your data, there are some differences between them in how your backup is
-created, stored and maintained.
+While both of the methods we describe will create a backup of your data,
+there are some differences between them in how your backup is created,
+stored and maintained.
 
 When using OpenStack to create your backup, a point in time snapshot of your
 data is created. From this snapshot, OpenStack creates a volume; this is your
@@ -33,16 +31,16 @@ consistent' solution that is able to restore your data to the specific point in
 time the original backup was taken. It does not ensure that the data is in a
 particular state after the restore.
 
-Duplicity on the other hand, creates a backup that will make multiple attempts
-to capture a given file if it has been changed. This is due to Duplicity being a
-file oriented backup rather than a point in time backup. As mentioned
-earlier, being a file oriented backup, Duplicity allows you to perform
+The other tools on the other hand, will create backups that make multiple attempts
+to capture a given file if it has been changed. This is due to them being
+file oriented tools rather than performing a point in time backup. As mentioned
+earlier, being a file oriented backup, They allow you to perform
 file-level restoration from your backup should you need to.
 
 Depending on the type of backup you want to create and the solution that best
 suits your situation, you may decide to use one method or another. Generally the
 basic OpenStack backup solution is easier for maintaining a crash consistent
-copy of your data somewhere ready to restore while Duplicity is able to perform
+copy of your data somewhere ready to restore while the others are able to perform
 a more rigorous capture of the state of your files.
 
 ***********************
@@ -234,4 +232,12 @@ additional backups afterward:
     | volume_name | backup-vol-original                  |
     +-------------+--------------------------------------+
 
-.. include:: duplicity.rst
+***********
+Other Tools
+***********
+
+Here are some sample backup tools, and how to configure them for operating with
+Catalyst Cloud:
+
+* :ref:`duplicati`
+* :ref:`duplicity_sect`
