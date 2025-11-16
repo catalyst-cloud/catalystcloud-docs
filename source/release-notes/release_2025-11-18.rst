@@ -2,9 +2,9 @@
 November 18th 2025
 ##################
 
-======================================================
+====================================
 Upgrade to the Block Storage service
-======================================================
+====================================
 
 With this release there have been some changes to the Block storage service. 
 The following is a list of features and changes that are included in this release: 
@@ -12,13 +12,18 @@ The following is a list of features and changes that are included in this releas
 Changes to the block storage service
 ------------------------------------
 
-- The microversion of the block storage service has been update from version 3.59 to 3.64
-- You can no longer create an incremental backup while having the parent backup in another project. 
+- The latest API microversion supported by the Block Storage Service has been updated 
+  from v3.59 to v3.64. For more information on the API changes, see the 
+  `API Microversion History`_.
+
 - Fixed a race condition between the `delete attachment` and `delete volume` operations, that used 
   leave deleted volumes sometimes stuck as attached to deleted instances.
 
-Deprications and removals: 
----------------------------
+.. _`API Microversion History`: https://docs.openstack.org/cinder/latest/contributor/api_microversion_history.html
 
-- The block storage v2 api is set for removal with this update. Traffic for the api will 
-  require use of the v3 api going forward.
+Deprecations and removals
+-------------------------
+
+- The deprecated Block Storage V2 API has been removed. This should not cause any issues as the V3 API 
+  has been the default in the client libraries for some time; if you are running into issues using the 
+  Block Storage Service, make sure you are using the V3 API.
