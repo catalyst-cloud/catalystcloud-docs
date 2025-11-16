@@ -1,28 +1,24 @@
-##############
-DATE
-##############
+##################
+November 18th 2025
+##################
 
 ======================================================
-Upgrade to the Block Storage service (Stein - Wallaby)
+Upgrade to the Block Storage service
 ======================================================
 
 With this release there have been some changes to the Block storage service. 
 The following is a list of features and changes that are included in this release: 
 
+Changes to the block storage service
+------------------------------------
 
-New Feature
----------------------------
-
-- A new backup driver has been added which enables backing up a volume to S3-compatible storage.
-
-Changes to behavior
----------------------------
-
+- The microversion of the block storage service has been update from version 3.59 to 3.64
 - You can no longer create an incremental backup while having the parent backup in another project. 
 - Fixed a race condition between the `delete attachment` and `delete volume` operations, that used 
-  leave deleted volumes sometimes stuck as attached to instances.
+  leave deleted volumes sometimes stuck as attached to deleted instances.
 
-Deprecations and removals
+Deprications and removals: 
 ---------------------------
 
-- Python 2.7 support is dropped and the minimum version of python that can be used is now Python 3.6
+- The block storage v2 api is set for removal with this update. Traffic for the api will 
+  require use of the v3 api going forward.

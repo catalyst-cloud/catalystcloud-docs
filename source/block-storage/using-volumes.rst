@@ -29,7 +29,7 @@ instance:
 #. The size (in this example 50 GB)
 #. The region
 
-Once we have all of these set we can create our volume and It should not take long
+Once we have all of these set we can create our volume and it should not take long
 before we can see it appear on the dashboard. After we have our 
 new volume, we then are going to create an attachment between it and an
 instance. To do this we have to go to the **Manage Attachments** section.

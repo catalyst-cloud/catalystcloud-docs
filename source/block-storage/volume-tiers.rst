@@ -19,7 +19,7 @@ on HDD, is recommended only for bulk storage where capacity and price
 are more important than performance and latency.
 
 In all cases, the performance specified is the maximum burstable level,
-and not a guaranteed minimum level of performance. 
+and not a guaranteed minimum level of performance.
 
 .. warning::
 

@@ -51,7 +51,7 @@ Where the options are:
   --info=progress2 : will show the overall progress info and transfer speed
   --numeric-ids : don't map uid/gid values by user/group name
 
-.. _`rsync`: http://rsync.samba.org
+.. _`rsync`: https://rsync.samba.org
 
 *********************
 How to grow a volume?
