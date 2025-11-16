@@ -24,7 +24,7 @@ an instance. Details on how to create volumes from different sources
 are under :ref:`this section<using_snapshots>` of the documentation.
 
 Block storage volumes can (with some exceptions) be detached or copied.
-Snapshots and backups can made of them, and they can be attached to 
+Snapshots and backups can be made of them, and they can be attached to 
 different servers as needed.
 
 The block storage service implements techniques to reduce the impact

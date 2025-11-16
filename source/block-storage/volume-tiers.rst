@@ -6,7 +6,7 @@ Volume Tiers
 ############
 
 Block Storage provides two different performance tiers for different
-workloads and use cases you may on our platform.
+workloads and use cases you may have.
 
 The two tiers are:
 
