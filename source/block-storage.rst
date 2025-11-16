@@ -4,29 +4,32 @@
 Block storage
 #############
 
-Block Storage is commonly used by virtual servers as "volumes", and
-behaves similar to disks attached to a physical server. They are
+Block storage, is the term used for *non-elastic* storage and is a vital
+component of many other services of the cloud. Most commonly, 
+block storage is used by virtual servers in the form of *volumes*,
+which behave similarly to how disks attach to a physical server. They are
 expected to be used with filesystems or storage support inside the
 operating system of an instance. Every virtual server will have
 at least one block storage volume attached (referred to as the "root"
 volume) containing the operating system.
 
-Block Storage volumes also back "Persistent Volumes" in our Managed
-Kubernetes services, so some of the concepts here apply to those as
-well.
+Block Storage volumes also back *Persistent Volumes* in our Managed
+Kubernetes services, so some of the concepts here will apply to 
+those as well.
 
-The contents of a block storage volume can created as empty or from
-a source image or existing copy of another device. Details on how to
-create volumes from different sources are under this section of
-the documentation.
+When creating a block storage volume you have the choice of creating
+an empty volume, or you can use a source image populate your new volume 
+with some default content that you want to be present when attached to 
+an instance. Details on how to create volumes from different sources
+are under :ref:`this section<using_snapshots>` of the documentation.
 
-Block storage volumes can (with some exceptions) be detached or copied,
-snapshots and backups made of them, and can be attached to different
-servers as needed.
+Block storage volumes can (with some exceptions) be detached or copied.
+Snapshots and backups can made of them, and they can be attached to 
+different servers as needed.
 
 The block storage service implements techniques to reduce the impact
 of a physical failure, such as maintaining multiple copies of a block
-storage volume and regular checks to see these copies are consistent.
+storage volume and regular checks to ensure these copies are consistent.
 However, you should always have backups of any block storage volumes,
 as failures can occur that affect data stored, and these features
 do not provide any means of recovery from deleted data inside the

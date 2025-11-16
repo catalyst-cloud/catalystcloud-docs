@@ -6,7 +6,7 @@ Volumes using LVM
 What is LVM?
 ************
 
-The Logical Volume Manager (LVM) is a user space tool set designed to provide a
+The Logical Volume Manager (LVM) is a user-space tool set designed to provide a
 higher level management of disk storage on a linux system than the traditional
 approach of disks and partitions. This is achieved by creating a software
 abstraction of those physical devices.
