@@ -47,4 +47,4 @@ Table of Contents:
   release-notes/release_2020-03-24.rst
   release-notes/release_2019-08-27.rst
   release-notes/release_2018-07-25.rst
-  release-notes/cinder-zed-release.rst
+  release-notes/release_2025-11-18.rst
