@@ -5,8 +5,8 @@
 Volume Tiers
 ############
 
-Block Storage provides two different performance tiers, for different
-workloads and use cases for Block Storage volumes.
+Block Storage provides two different performance tiers for different
+workloads and use cases you may have.
 
 The two tiers are:
 
@@ -16,12 +16,12 @@ The two tiers are:
 High Performance volumes are strongly recommended for most use
 cases, particularly operating system disks. Standard Performance, based
 on HDD, is recommended only for bulk storage where capacity and price
-are more important than performance.
+are more important than performance and latency.
 
 In all cases, the performance specified is the maximum burstable level,
 and not a guaranteed minimum level of performance.
 
-.. note::
+.. warning::
 
   Once a volume has been created with a specific type, it cannot be
   changed after the fact. Please follow the process outlined in
