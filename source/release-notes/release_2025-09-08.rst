@@ -1,0 +1,17 @@
+#################
+08 September 2025
+#################
+
+This release introduces new C3 compute capability to the Hamilton region (nz-hlz-1), completing availability in all
+of our compute regions.
+
+=============================
+C3 compute in nz-hlz-1 region
+=============================
+
+`C3 general compute <https://catalystcloud.nz/services/iaas/compute/compute-c3/>`__ is now available in our Hamilton
+region (nz-hlz-1). C3 is our latest compute offering featuring dedicated performance with modern Intel Xeon 'Sapphire
+Rapids' series processors. To utilise C3 simply select a ``c3`` flavor when :doc:`deploying new server instances
+</compute/launch-compute-instance>`. Existing servers can also be :ref:`resized <resize-server>`, but note that the
+virtual hardware and network interface topology within the server may change to accomodate for the more modern
+capabilities of C3 compute.
