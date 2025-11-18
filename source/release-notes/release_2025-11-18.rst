@@ -17,7 +17,7 @@ Changes to the block storage service
   `API Microversion History`_.
 
 - Fixed a race condition between the `delete attachment` and `delete volume` operations, that used 
-  leave deleted volumes sometimes stuck as attached to deleted instances.
+  to leave deleted volumes sometimes stuck as attached to deleted instances.
 
 .. _`API Microversion History`: https://docs.openstack.org/cinder/latest/contributor/api_microversion_history.html
 
