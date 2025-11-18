@@ -5,7 +5,7 @@ Block storage
 #############
 
 Block storage, is the term used for *non-elastic* storage and is a vital
-component of many other services of the cloud. Most commonly, 
+component of many other services of the cloud. Most commonly,
 block storage is used by virtual servers in the form of *volumes*,
 which behave similarly to how disks attach to a physical server. They are
 expected to be used with filesystems or storage support inside the
@@ -14,17 +14,17 @@ at least one block storage volume attached (referred to as the "root"
 volume) containing the operating system.
 
 Block Storage volumes also back *Persistent Volumes* in our Managed
-Kubernetes services, so some of the concepts here will apply to 
+Kubernetes services, so some of the concepts here will apply to
 those as well.
 
 When creating a block storage volume you have the choice of creating
-an empty volume, or you can use a source image populate your new volume 
-with some default content that you want to be present when attached to 
+an empty volume, or you can use a source image populate your new volume
+with some default content that you want to be present when attached to
 an instance. Details on how to create volumes from different sources
 are under :ref:`this section<using_snapshots>` of the documentation.
 
 Block storage volumes can (with some exceptions) be detached or copied.
-Snapshots and backups can be made of them, and they can be attached to 
+Snapshots and backups can be made of them, and they can be attached to
 different servers as needed.
 
 The block storage service implements techniques to reduce the impact
@@ -53,6 +53,3 @@ Table of Contents:
   block-storage/using-snapshots
   block-storage/faq
   Best practices <block-storage/block-storage-bp>
-
-
-
