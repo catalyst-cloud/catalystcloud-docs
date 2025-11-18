@@ -4,6 +4,10 @@ This is the official documentation for [Catalyst Cloud](https://catalystcloud.nz
 
 ## Contributions
 
+This repository is mirrored to github.com from our internal gitlab server.  
+We will still accept PR or issues on github.com, but they will be managed via 
+our internal gitlab pipeline. 
+
 If you have anything to fix or details to add, please consult [Contributing to the documentation](http://docs.catalystcloud.nz/contributing.html).
 
 To start a live reloading server, run:

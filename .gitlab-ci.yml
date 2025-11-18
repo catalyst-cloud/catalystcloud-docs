@@ -1,0 +1,51 @@
+---
+
+image: gitlab.int.catalystcloud.nz:4567/catalystcloud/python/python:3.6
+
+stages:
+  - test
+  - publish
+
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+
+# We should remove the catalyst cloud theme form src.  In the meantime
+# use --exists-action w to replace without needing to use a venv
+compile:
+  before_script:
+    - pip install -r requirements.txt --exists-action w
+  script:
+    - make compile
+
+doc8:
+  before_script:
+    - pip install -r requirements.txt --exists-action w
+  script:
+    - doc8 source
+
+linkcheck:
+  before_script:
+    - pip install -r requirements.txt --exists-action w
+  script:
+    - make linkcheck
+  allow_failure: true
+
+push_to_github:
+  image: gitlab.int.catalystcloud.nz:4567/catalystcloud/docker/docker:dind
+  stage: publish
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: never
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  before_script:
+    - git remote add "github" git@github.com:catalyst-cloud/catalystcloud-docs.git
+    - mkdir -m 600 ~/.ssh
+    - echo "${GITHUB_SSH_KEY}" > ~/.ssh/id_ed25519
+    - chmod 600 ~/.ssh/id_ed25519
+    - ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
+    - git fetch --quiet github
+  script:
+    - git push --force github/master
