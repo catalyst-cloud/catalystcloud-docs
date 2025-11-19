@@ -1,6 +1,6 @@
 ---
 
-image: gitlab.int.catalystcloud.nz:4567/catalystcloud/python/python:3.6
+image: ${CI_SERVER_HOST}:4567/catalystcloud/python/python:3.6
 
 stages:
   - test
@@ -34,7 +34,7 @@ linkcheck:
   allow_failure: true
 
 push_to_github:
-  image: gitlab.int.catalystcloud.nz:4567/catalystcloud/docker/docker:dind
+  image: ${CI_SERVER_HOST}:4567/catalystcloud/docker/docker:dind
   stage: publish
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
@@ -49,4 +49,4 @@ push_to_github:
     - git fetch --quiet github
     - git checkout -b $CI_DEFAULT_BRANCH
   script:
-    - git push --force github/master
+    - git push --force github master
