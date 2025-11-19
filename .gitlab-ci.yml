@@ -49,4 +49,4 @@ push_to_github:
     - git fetch --quiet github
     - git checkout -b $CI_DEFAULT_BRANCH
   script:
-    - git push --force github master
+    - git push --force github $CI_DEFAULT_BRANCH:master
