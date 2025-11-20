@@ -6,12 +6,12 @@ set up the underlying infrastructure and configure instances. As such Ansible
 can replace other tools, such as Heat for OpenStack orchestration, and Puppet
 for instance configuration.
 
-.. _Ansible: https://www.ansible.com/
+.. _Ansible: https://docs.ansible.com/
 
 Comprehensive documentation of the Ansible OpenStack modules is available at
-https://docs.ansible.com/ansible/latest/collections/openstack/cloud/index.html#plugins-in-openstack-cloud
+https://docs.ansible.com/projects/ansible/latest/collections/openstack/cloud/index.html#plugins-in-openstack-cloud
 And for any troubleshooting issues you may face using Ansible you can refer to
-the following: https://docs.ansible.com/ansible-tower/2.2.0/html/administration/troubleshooting.html
+the following: https://docs.ansible.com/projects/ansible/latest/
 
 .. _install-ansible:
 

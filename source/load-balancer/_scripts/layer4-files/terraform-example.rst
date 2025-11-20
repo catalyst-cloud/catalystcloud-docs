@@ -10,7 +10,7 @@ Catalyst Cloud, you can find a good starting example under the
 section of the documents. If you are wanting an even more in depth look at
 Terraform, you can also check the `Terraform documentation`_.
 
-.. _Terraform documentation: https://www.terraform.io/
+.. _Terraform documentation: https://developer.hashicorp.com/terraform
 
 
 .. raw:: html

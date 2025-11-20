@@ -437,5 +437,5 @@ additional components that Catalyst Cloud Kubernetes Service is formed with.
     there is an urgent critical security vulnerability
     (`CVE`_ rated as ``HIGH`` or ``CRITICAL``), and the customer cannot be contacted.
 
-.. _`CVE`: https://cve.mitre.org
+.. _`CVE`: https://www.cve.org
 .. _`Kubernetes Version Skew policy`: https://kubernetes.io/releases/version-skew-policy/

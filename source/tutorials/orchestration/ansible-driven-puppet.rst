@@ -7,7 +7,7 @@ dynamic set of servers on Catalyst Cloud. This way you get the beautifully
 simple orchestration of Ansible, combined with the vast library of modules
 available with Puppet.
 
-.. _Ansible: https://www.ansible.com/
+.. _Ansible: https://docs.ansible.com/
 .. _Puppet: https://www.puppet.com/
 
 You will need:

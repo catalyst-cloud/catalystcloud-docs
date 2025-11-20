@@ -3,7 +3,7 @@ The minimum knowledge this tutorial assumes is an understanding of how
 Terraform scripts are written and how they function. We also assume that you
 have installed all of the prerequisite tools to run Terraform scripts.
 
-.. _Terraform: https://www.terraform.io/
+.. _Terraform: https://developer.hashicorp.com/terraform
 
 Below is an example template that contains the basic information required
 for Terraform to create an object storage container on the cloud. You can

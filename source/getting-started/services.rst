@@ -159,8 +159,9 @@ What can you do with each service?
 **********************************
 
 Catalyst Cloud is an entirely automated platform that adheres to the NIST
-definition of `true cloud computing <https://csrc.nist.gov/publications/d
-etail/sp/800-145/final>`_. Among other things, that means you have total and
+definition of
+`true cloud computing <https://csrc.nist.gov/pubs/sp/800/145/final>`_.
+Among other things, that means you have total and
 near instant control over all the services you use on Catalyst Cloud. You
 don't need to wait for a human to do things for you.
 

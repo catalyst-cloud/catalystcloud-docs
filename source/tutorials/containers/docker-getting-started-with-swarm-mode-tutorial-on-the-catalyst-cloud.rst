@@ -23,7 +23,7 @@ will have access to three hosts exactly as described in the tutorial. A cleanup
 playbook is provided to remove all resources when you have completed the
 tutorial.
 
-.. _Ansible: https://www.ansible.com/
+.. _Ansible: https://docs.ansible.com/
 
 *****
 Setup

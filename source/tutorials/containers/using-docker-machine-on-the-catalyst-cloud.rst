@@ -20,9 +20,9 @@ different drivers to facilitate installing the Docker Engine on different cloud
 providers. On Catalyst Cloud we will be making use of the OpenStack
 `driver`_.
 
-.. _driver: https://superuser.openinfra.dev/articles/using-docker-machine-with-openstack/
+.. _driver: https://superuser.openinfra.org/articles/using-docker-machine-with-openstack/
 
-.. _Docker Machine: https://github.com/docker/machine
+.. _Docker Machine: https://github.com/docker-archive-public/docker.machine
 
 Once a Docker Engine has been provisioned on a VM instance, the local docker
 client can be configured to talk to the remote Docker Engine, rather than
@@ -347,4 +347,4 @@ Documentation
 
 * `Docker Machine Documentation`_
 
-.. _Docker Machine Documentation: https://github.com/docker/machine
+.. _Docker Machine Documentation: https://github.com/docker-archive-public/docker.machine/blob/master/README.md

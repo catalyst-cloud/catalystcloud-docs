@@ -5,9 +5,9 @@ kinds of infrastructure, including Catalyst Cloud. It achieves this by
 using components known as `providers`_. In the case of Catalyst Cloud, this
 is the `OpenStack Provider`_.
 
-.. _Terraform: https://www.terraform.io/
+.. _Terraform: https://developer.hashicorp.com/terraform
 .. _Hashicorp: https://www.hashicorp.com/
-.. _providers: https://www.terraform.io/docs/providers/index.html
+.. _providers:  https://developer.hashicorp.com/terraform/language
 .. _OpenStack Provider: https://registry.terraform.io/providers/terraform-provider-openstack/openstack/latest/docs
 
 For further information on using Terraform with OpenStack, see the linked
@@ -24,10 +24,10 @@ Installation of Terraform is very simple. Go to the `Terraform download`_
 page and choose the zip file that matches your operating system and
 architecture. Unzip this file to the location where Terraform's binaries
 will reside on your system. Terraform is written in `Go`_, so it has minimal
-dependencies. Please refer to https://developer.hashicorp.com/terraform/downloads
+dependencies. Please refer to https://developer.hashicorp.com/terraform/install
 for detailed install instructions.
 
-.. _Terraform download: https://www.terraform.io/downloads.html
+.. _Terraform download: https://developer.hashicorp.com/terraform/install
 .. _Go: https://go.dev/
 
 .. code-block:: bash
@@ -67,7 +67,7 @@ a template from which you can build your own configurations.
 
 .. _catalystcloud-orchestration: https://github.com/catalyst/catalystcloud-orchestration
 
-.. _Terraform documentation: https://www.terraform.io/docs/configuration/index.html
+.. _Terraform documentation: https://developer.hashicorp.com/terraform/language
 
 Download the configuration file:
 

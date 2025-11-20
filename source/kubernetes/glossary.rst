@@ -31,7 +31,7 @@ and private OCI registries.
 .. _`Docker`: https://www.docker.com
 .. _`containerd`: https://containerd.io
 .. _`Docker Hub`: https://hub.docker.com
-.. _`GitHub Packages`: https://github.com/features/packages
+.. _`GitHub Packages`: https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages
 
 ************************************
 Container Orchestration Engine (COE)

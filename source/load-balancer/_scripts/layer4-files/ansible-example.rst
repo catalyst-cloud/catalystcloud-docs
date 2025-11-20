@@ -10,7 +10,7 @@ good starting point is our example under the
 section of the documents. You can also find more information about Ansible in
 general on the `Ansible`_ homepage.
 
-.. _Ansible: https://www.ansible.com/
+.. _Ansible: https://docs.ansible.com/
 
 .. raw:: html
 

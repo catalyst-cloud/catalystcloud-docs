@@ -71,7 +71,7 @@ To run this demo, please make sure you have:
 * The :ref:`Kubernetes Admin <k8s-rbac-roles>` role assigned to your Catalyst Cloud user account in your project.
 * Installed the :ref:`Catalyst Cloud command line tools <sdks_and_toolkits>`,
   and sourced the OpenRC file for your project in your terminal session.
-* Have retreived a :ref:`kubeconfig file <kubeconfig-file-location>` for your cluster.
+* Have retrieved a :ref:`kubeconfig file <kubeconfig-file-location>` for your cluster.
 * Downloaded and installed `kubectl`_, the Kubernetes command line client.
 * Downloaded and installed `Helm`_, a package manager for Kubernetes applications.
 
@@ -194,7 +194,7 @@ Catalyst Cloud supports many of these, including `Ingress-Nginx`_ and `Traefik`_
 Implementation for each will vary, so it is important
 to always refer to the vendor's documentation when using a particular Ingress Controller.
 
-.. _`ingress controllers`: https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/#additional-controllers
+.. _`ingress controllers`: https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/#third-party-ingress-controllers
 .. _`Ingress-Nginx`: https://kubernetes.github.io/ingress-nginx
 .. _`Traefik`: https://doc.traefik.io/traefik/providers/kubernetes-ingress
 

@@ -8,7 +8,7 @@ undesirable resource re-creation.
 `Terraform`_ is an infrastructure as a code software that can be used to
 manage Catalyst Cloud.
 
-.. _Terraform: https://www.terraform.io/
+.. _Terraform: https://developer.hashicorp.com/terraform
 
 *******
 Problem

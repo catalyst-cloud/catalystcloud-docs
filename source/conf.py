@@ -346,8 +346,19 @@ intersphinx_mapping = { 'python': ('http://docs.python.org/', None) }
 
 linkcheck_timeout = 10
 linkcheck_rate_limit_timeout = 30.0
+
+# Openstack docs will redirect to the latest release
+# The virtio download to redirect to the latest release
+# The support-centre url redirects to the dashboard login.
+linkcheck_allowed_redirects = {
+    r'https://docs\.openstack\.org/': r'https://docs\.openstack\.org/.*',
+    r'https://fedorapeople\.org/groups/virt/virtio-win/direct-downloads/latest-virtio/.*': r'https://fedorapeople\.org/groups/virt/virtio-win/direct-downloads/.*',
+    r'https://catalystcloud.nz/support/support-centre(/)?': 'https://dashboard.catalystcloud.nz/?.*',
+    r'https://the\.earth\.li/~sgtatham/putty/latest/w64/putty.exe': r'https://the\.earth\.li/~sgtatham/putty/.*/w64/putty.exe'
+}
 # External links to ignore when doing a link check
 # Some are example links and others are links to our APIs that error when performing a get.
+# https://www.hashicorp.com/ fails with a 429 Too many requests
 linkcheck_ignore = [r'http://localhost:8001/.*',
                     r'http://localhost:8888.*',
                     r'http://202\.49\.241\.87:30001',
@@ -365,5 +376,6 @@ linkcheck_ignore = [r'http://localhost:8001/.*',
                     r'https://www\.catalyst\.net\.nz/',
                     r'https://dev\.mysql\.com/doc/',
                     r'https://api\.nz-(hlz|por)-1\.catalystcloud\.io:.*',
-                    r'https://dashboard.catalystcloud.nz/?.*'
+                    r'https://dashboard.catalystcloud.nz/?.*',
+                    r'https://www\.hashicorp\.com/'
                     ]

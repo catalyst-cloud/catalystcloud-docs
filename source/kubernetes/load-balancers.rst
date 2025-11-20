@@ -42,7 +42,7 @@ First, let's create a simple web application.
 Create a file called ``nginx-app.yml``, containing the following YAML
 (which is a deployment of an `Nginx`_ server).
 
-.. _`Nginx`: https://nginx.com
+.. _`Nginx`: https://www.f5.com/go/product/welcome-to-nginx
 
 .. literalinclude:: _containers_assets/nginx-app.yaml
     :language: yaml
@@ -398,7 +398,7 @@ In order to do this we need to enable `X-Forwarded-For`_ support.
 by load balancers/reverse proxies that are put in front of applications,
 and can be used to identify the originating IP address of the connecing client.
 
-.. _`X-Forwarded-For`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For
+.. _`X-Forwarded-For`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Forwarded-For
 
 If we deploy a standard ``LoadBalancer`` service in front of an application
 using the default settings, we can confirm that the original IP address of

@@ -72,7 +72,7 @@ If you're using :ref:`GPU acceleration on Catalyst Cloud Kubernetes Service <kub
 a Helm chart is available for `installing the exporter into your cluster`_.
 
 .. _`NVIDIA DCGM Prometheus Exporter`: https://docs.nvidia.com/datacenter/cloud-native/gpu-telemetry/latest/dcgm-exporter.html
-.. _`installing the exporter into your cluster`: https://github.com/NVIDIA/dcgm-exporter#quickstart-on-kubernetes
+.. _`installing the exporter into your cluster`: https://github.com/NVIDIA/dcgm-exporter?tab=readme-ov-file#quickstart-on-kubernetes
 
 *******************************************
 Deleted resources are not marked as "ended"

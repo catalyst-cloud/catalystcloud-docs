@@ -10,7 +10,7 @@ environments. Vagrant provides a plugin mechanism through which different VM
 LXC, Docker) or remote (AWS, OpenStack). This tutorial shows you how to use
 OpenStack as a remote provider for Vagrant.
 
-.. _Vagrant: https://www.vagrantup.com/
+.. _Vagrant:  https://developer.hashicorp.com/vagrant
 
 .. _providers: https://developer.hashicorp.com/vagrant/docs/providers
 

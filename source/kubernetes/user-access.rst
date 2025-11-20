@@ -646,7 +646,7 @@ Integrated policy solutions:
 
 Third-party policy solutions:
 
-* `Open Policy Agent <https://www.openpolicyagent.org/docs/latest>`_
+* `Open Policy Agent <https://www.openpolicyagent.org/docs>`_
 * `Gatekeeper <https://open-policy-agent.github.io/gatekeeper/website>`_
 * `Kyverno <https://kyverno.io>`_
 

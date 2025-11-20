@@ -11,7 +11,7 @@ This tutorial assumes the following:
 * You have a basic understanding of how to use `Ansible`_ on Catalyst Cloud
   as shown :ref:`here<launching-your-first-instance-using-ansible>`
 
-.. _Ansible: https://www.ansible.com/
+.. _Ansible: https://docs.ansible.com/
 
 ************
 Introduction
@@ -23,7 +23,7 @@ an `inventory file`_ which lists the hosts and groups that playbooks will run
 against. This inventory is a plain text ini or yaml file that lives at
 ``/etc/ansible/hosts`` by default.
 
-.. _inventory file: https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html
+.. _inventory file: https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_inventory.html
 
 A `dynamic inventory`_ provides a way for Ansible to pull in inventory
 information from other systems. This means that you do not need to manually
@@ -32,7 +32,7 @@ that queries the source directly and makes the information available to
 Ansible. Dynamic inventories are scripts or plugins that output JSON in a predefined
 format that Ansible understands.
 
-.. _Dynamic inventory: https://docs.ansible.com/ansible/latest/inventory_guide/intro_dynamic_inventory.html
+.. _Dynamic inventory: https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html
 
 The Ansible project has an OpenStack dynamic inventory plugin available which
 we can use to integrate Ansible with Catalyst Cloud. This allows us

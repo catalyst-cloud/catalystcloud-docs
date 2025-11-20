@@ -24,7 +24,7 @@ are:
 .. _command line tools: https://docs.openstack.org/newton/user-guide/cli.html
 .. _web dashboard: https://dashboard.catalystcloud.nz
 .. _Heat: https://wiki.openstack.org/wiki/Heat
-.. _Terraform: https://www.terraform.io/
+.. _Terraform:  https://developer.hashicorp.com/terraform
 
 *****************
 Dashboard example

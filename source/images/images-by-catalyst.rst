@@ -187,5 +187,5 @@ open source tool developed by `Hashicorp`_ for creating machine images for
 multiple platforms from a single source configuration. We have made a tutorial
 entitled :ref:`packer-tutorial` that demonstrates how to use Packer.
 
-.. _Packer: https://www.packer.io/
+.. _Packer: https://developer.hashicorp.com/packer
 .. _Hashicorp: https://www.hashicorp.com/

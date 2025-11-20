@@ -26,7 +26,7 @@ Duplicity is released under the terms of the GNU General Public License
 (`GPL`_), and as such is free software.
 
 .. _GPL: https://en.wikipedia.org/wiki/GNU_General_Public_License
-.. _backup chain: http://sqlbak.com/academy/backup-chain/
+.. _backup chain: https://sqlbak.com/academy/backup-chain/
 
 
 

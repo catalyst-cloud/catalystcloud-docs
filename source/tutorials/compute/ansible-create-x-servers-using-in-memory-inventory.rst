@@ -9,7 +9,7 @@ This tutorial assumes the following:
 * You have a basic understanding of how to use `Ansible`_ on Catalyst Cloud
   as shown :ref:`here<launching-your-first-instance-using-ansible>`
 
-.. _Ansible: https://www.ansible.com/
+.. _Ansible: https://docs.ansible.com/
 
 ************
 Introduction
@@ -23,8 +23,8 @@ likes of the `dynamic inventory`_  to pull inventory information from other
 systems. Details for this approach are shown at
 :ref:`ansible_openstack-dynamic-inventory`.
 
-.. _inventory file: https://docs.ansible.com/ansible/latest/inventory_guide/intro_inventory.html
-.. _Dynamic inventory: https://docs.ansible.com/ansible/latest/inventory_guide/intro_dynamic_inventory.html
+.. _inventory file: https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_inventory.html
+.. _Dynamic inventory: https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_dynamic_inventory.html
 
 Suppose, however, you needed to create 'x' number of instances which were
 transient in nature and had no existing details available to populate an
@@ -36,7 +36,7 @@ To get around this problem, we can make use of Ansible's ability to populate an
 in-memory inventory, using the `add_host`_ module, with information it
 generates while creating new instances.
 
-.. _add_host: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/add_host_module.html
+.. _add_host: https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/add_host_module.html
 
 *****************
 How does it work?

@@ -31,7 +31,7 @@ To complete this tutorial you will need the following:
   inbound SSH access.
 * :ref:`Openrc file<source-rc-file>` for your Catalyst Cloud project sourced
   in your shell.
-* `Packer must be installed <https://developer.hashicorp.com/packer/downloads>`_
+* `Packer must be installed <https://developer.hashicorp.com/packer/install>`_
   on your system.
 * Sufficient quota capacity in your cloud project for Packer to create the
   temporary resources required to build the image.

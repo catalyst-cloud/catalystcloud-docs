@@ -9,7 +9,7 @@ Duplicati
 *********
 
 Duplicati is a backup tool for MS Windows, MacOS and Linux. It is available
-from: https://www.duplicati.com/. It can be configured to work with Catalyst
+from: https://duplicati.com/. It can be configured to work with Catalyst
 Cloud's object storage service by following the steps below.
 
 Prerequisites

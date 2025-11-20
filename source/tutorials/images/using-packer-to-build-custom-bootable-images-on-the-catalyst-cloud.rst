@@ -380,11 +380,11 @@ accordingly, simply run the Packer build command as discussed above.
   $ ./packer build windows-build-file.json
 
 
-.. _Packer: https://www.packer.io/
+.. _Packer: https://developer.hashicorp.com/packer
 .. _Hashicorp: https://www.hashicorp.com/
 .. _builders: https://developer.hashicorp.com/packer/docs/builders
 .. _Provisioners: https://developer.hashicorp.com/packer/docs/provisioners
-.. _OpenStack builder: https://developer.hashicorp.com/packer/plugins/builders/openstack
+.. _OpenStack builder: https://developer.hashicorp.com/packer/integrations/hashicorp/openstack/latest/components/builder/openstack
 .. _Templates: https://developer.hashicorp.com/packer/docs/templates
 .. _ssllabs-scan: https://github.com/ssllabs/ssllabs-scan
 .. _golang: https://go.dev/

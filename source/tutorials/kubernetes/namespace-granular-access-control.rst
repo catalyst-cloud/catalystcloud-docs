@@ -23,7 +23,7 @@ In order to use namespacing, you will need to provide the following:
 For a more in depth look at namespaces it is recommended that you read through
 the `official kubernetes documentation`_.
 
-.. _`official kubernetes documentation`: https://kubernetes.io/docs/tasks/administer-cluster/namespaces-walkthrough/
+.. _`official kubernetes documentation`: https://kubernetes.io/docs/tutorials/cluster-management/namespaces-walkthrough/
 
 An example namespace
 ====================
