@@ -31,7 +31,7 @@ you can run the following command:
 .. code-block:: bash
 
   $ swift stat con0
-           Account: AUTH_b24e9ee3447e48eab1bc99cb894cac6f
+           Account: AUTH_b24e9XXXXXXe48eab1bc99cb894cac6f
          Container: con0
            Objects: 3
              Bytes: 35354
@@ -254,28 +254,8 @@ interpreted as a Unix timestamp at which the URL should expire.  The expiry
 time can also be given as a date time string in the format 'YYYY-mm-dd',
 'YYYY-mm-ddTHH:MM:ss' or 'YYYY-mm-ddTHH:MM:ssZ' (the last is in UTC).
 
-For example:
-
-.. code-block:: bash
-
-  $ swift tempurl GET $(date -d "Jan 1 2023" +%s)  /v1/AUTH_foo/bar_container/quux.md \
-    my_secret_tempurl_key --absolute
-
-- AUTH_foo is the object store account id
-- sets the expiry using the absolute method to be Jan 1 2023
-- for the object : quux.md
-- in the nested container structure : bar_container/quux.md
-- with key : my_secret_tempurl_key
-
-Or by passing the expiry date:
-
-.. code-block:: bash
-
-  $ swift tempurl GET 2023-01-01 /v1/AUTH_foo/bar_container/quux.md my_secret_tempurl_key
-
-
-Creating temporary URLs in Catalyst Cloud
-=========================================
+Creating temporary URLs in the Catalyst Cloud
+=============================================
 
 Currently, there are two methods available for the creation of temporary URLs:
 through the use of the swift command line tool or by generating the temporary URL
@@ -288,11 +268,31 @@ provide access to the object "file2.txt" that is located in the container
 Set the temporary URL secret key for your project
 -------------------------------------------------
 
-Firstly you need to associate a secret key with your object store account for your project.
+Firstly, you need to ensure that you have set the environment variable for your `OS_STORAGE_URL`
+In order to do this you can use the following commands to find and set the variable:
 
 .. code-block:: bash
 
-  $ openstack object store account set --property Temp-Url-Key='testkey'
+  $ openstack project show <name of the project you sourced your OpenRC with>
+  +-------------+----------------------------------+
+  | Field       | Value                            |
+  +-------------+----------------------------------+
+  | description |                                  |
+  | domain_id   | default                          |
+  | enabled     | True                             |
+  | id          | 7xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54 |
+  | tags        | []                               |
+  +-------------+----------------------------------+
+
+  # Then, using the ID found above as well as the API for the region you are working in, you export the following:
+
+  $ export OS_STORAGE_URL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_7xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54"
+
+Second you need to associate a secret key with your object store account for your project.
+
+.. code-block:: bash
+
+  $ swift post -m "Temp-URL-Key:[MYKEY]"
 
 You can then confirm the details of the key.
 
@@ -303,7 +303,7 @@ You can then confirm the details of the key.
   +------------+---------------------------------------+
   | Field      | Value                                 |
   +------------+---------------------------------------+
-  | Account    | AUTH_b24e9ee3447e48eab1bc99cb894cac6f |
+  | Account    | AUTH_b24e9XXXXXXe48eab1bc99cb894cac6f |
   | Bytes      | 128                                   |
   | Containers | 4                                     |
   | Objects    | 8                                     |
@@ -313,7 +313,18 @@ You can then confirm the details of the key.
 Note the value for "Account" above, this value identifies the project that the
 object is in and is used as part of path in the URL to the object.
 
-It is recommended that the key be at least 32 characters long.
+Alternatively, you can also create a key to be specific to one container.
+In order to do this you just append the name of your container to the end of the
+post command seen before, like so:
+
+.. code-block:: bash
+
+  $ swift post -m "Temp-URL-Key:[MYKEY] {my-container-name}"
+
+
+.. Note::
+
+  It is recommended that the key be at least 32 characters long.
 
 Determine the path to the object
 --------------------------------
@@ -321,12 +332,12 @@ Determine the path to the object
 The path to the object includes the URL path for the object storage API URL for your
 project, the container name and the object name.
 
-Suppose that the object storage API URL is ``https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f``.
+Suppose that the object storage API URL is ``https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_b24e9XXXXXXe48eab1bc99cb894cac6f``.
 
-Then the path we are interesting in is "/v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f".
+Then the path we are interesting in is "/v1/AUTH_b24e9XXXXXXe48eab1bc99cb894cac6f".
 
 If container is called "my-container" and the object is called "file2.txt" then
-the path to the object will be "/v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt".
+the path to the object will be "/v1/AUTH_b24e9XXXXXXe48eab1bc99cb894cac6f/my-container/file2.txt".
 
 For more details on the API endpoints see :doc:`/sdks-and-toolkits/apis`
 
@@ -338,8 +349,8 @@ an object residing in the object store.
 
 .. code-block:: bash
 
-  $ swift tempurl GET 600 /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt "testkey" \
-    /v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005
+  $ swift tempurl GET 600 /v1/AUTH_b24e9XXXXXXe48eab1bc99cb894cac6f/my-container/file2.txt "testkey" \
+    /v1/AUTH_b24e9XXXXXXe48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005
 
 You can test this using cURL and appending the generated URL to Catalyst
 Cloud's object storage base URL "https://object-storage.nz-por-1.catalystcloud.io:443". If
@@ -347,7 +358,7 @@ it is successful, the request should return the contents of the object.
 
 .. code-block:: bash
 
-  $ curl -i "https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005"
+  $ curl -i "https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_b24e9XXXXXXe48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005"
   HTTP/1.1 200 OK
   Server: nginx/1.10.1
   Date: Mon, 09 Jan 2017 19:22:05 GMT
@@ -385,7 +396,7 @@ of code, here is an example in Python 3:
   # the API endpoint for the object store for your account see the API access page on the dashboard
   object_store_api_url = 'https://object-storage.nz-por-1.catalystcloud.io:443'
   # the path to the object to share
-  object_path = '/v1/AUTH_b24e9ee3447e48eab1bc99cb894cac6f/my-container/file2.txt'
+  object_path = '/v1/AUTH_b24e9XXXXXXe48eab1bc99cb894cac6f/my-container/file2.txt'
   # The object store temp URL key
   key = 'testkey'
 
