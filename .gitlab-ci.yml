@@ -47,7 +47,5 @@ push_to_github:
     - chmod 600 ~/.ssh/id_ed25519
     - ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts
     - git fetch --quiet github
-    - git checkout $CI_DEFAULT_BRANCH
-    - git pull
   script:
-    - git push --force github $CI_DEFAULT_BRANCH:master
+    - git push --force github HEAD:master
