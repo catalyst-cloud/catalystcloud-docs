@@ -17,7 +17,7 @@ Catalyst Cloud and how it functions.
 Projects
 ********
 
-Everything on the Catalyst Cloud happens inside a ``project``. You can use projects
+Everything on Catalyst Cloud happens inside a ``project``. You can use projects
 to separate the different things you work on. For example, have a project for each
 organisation you work with, or one for each branch of your organisation.
 Something done in one project cannot effect any other projects.
@@ -29,7 +29,7 @@ Information on how to invite new people to your project can be found :ref:`here
 <access_control>`.
 
 
-The Catalyst Cloud provides an isolated and multi-tenanted approach to creating
+Catalyst Cloud provides an isolated and multi-tenanted approach to creating
 workspaces. These workspaces are typically referred to as a ``project`` but for
 historical reasons you may also see them referred to as a ``tenant`` or
 a ``tenancy``.
@@ -410,7 +410,7 @@ solutions architect.
 Training
 ========
 
-Catalyst Cloud provides training on how to use the Catalyst Cloud in Auckland,
+Catalyst Cloud provides training on how to use our platform in Auckland,
 Wellington and Christchurch. Upcoming training sessions can be found at
 https://www.catalyst.net.nz/training.
 

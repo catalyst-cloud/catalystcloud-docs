@@ -264,4 +264,4 @@ from your the directory of your file:
   python3 script-file-name.py
 
 After this is completed you should be able to see your new instance on your
-project in the catalyst cloud.
+project.
