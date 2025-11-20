@@ -344,6 +344,8 @@ epub_exclude_files = ['search.html']
 # Example configuration for intersphinx: refer to the Python standard library.
 # intersphinx_mapping = {'http://docs.python.org/': None}
 
+linkcheck_timeout = 10
+linkcheck_rate_limit_timeout = 30.0
 # External links to ignore when doing a link check
 # Some are example links and others are links to our APIs that error when performing a get.
 linkcheck_ignore = [r'http://localhost:8001/.*',
@@ -362,16 +364,6 @@ linkcheck_ignore = [r'http://localhost:8001/.*',
                     r'https://docs\.nextcloud\.com/server/latest/Nextcloud_User_Manual\.pdf#section\.5\.6',
                     r'https://www\.catalyst\.net\.nz/',
                     r'https://dev\.mysql\.com/doc/',
-                    r'https://api\.nz-hlz-1\.catalystcloud\.io:8004/v1',
-                    r'https://api\.nz-por-1\.catalystcloud\.io:8774/v2\.1',
-                    r'https://api\.nz-por-1\.catalystcloud\.io:8776/v3',
-                    r'https://api\.nz-por-1\.catalystcloud\.io:8776/v2',
-                    r'https://api\.nz-por-1\.catalystcloud\.io:8777',
-                    r'https://api\.nz-por-1\.catalystcloud\.io:8779/v1\.0',
-                    r'https://api\.nz-por-1\.catalystcloud\.io:8004/v1',
-                    r'https://api\.nz-hlz-1\.catalystcloud\.io:8774/v2\.1',
-                    r'https://api\.nz-hlz-1\.catalystcloud\.io:8776/v2',
-                    r'https://api\.nz-hlz-1\.catalystcloud\.io:8776/v3',
-                    r'https://api\.nz-hlz-1\.catalystcloud\.io:8777',
-                    r'https://api\.nz-hlz-1\.catalystcloud\.io:8779/v1\.0',
+                    r'https://api\.nz-(hlz|por)-1\.catalystcloud\.io:.*',
+                    r'https://dashboard.catalystcloud.nz/?.*'
                     ]
