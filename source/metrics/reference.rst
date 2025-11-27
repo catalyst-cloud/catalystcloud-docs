@@ -165,14 +165,17 @@ The following metrics are available for instance resources.
   for this metric to work. For more information, see
   :ref:`metrics-tutorials-memory-usage-metrics-on-windows`.
 
+.. _metrics-instance-status:
+
 Status Values
 =============
 
 Here is a table mapping ``instance`` metric values to their corresponding instance states.
 
 .. list-table::
-   :width: 20%
+   :width: 25%
    :header-rows: 1
+   :widths: 15 30
 
    * - Value
      - Status
@@ -202,6 +205,8 @@ Here is a table mapping ``instance`` metric values to their corresponding instan
      - ``SHELVED_OFFLOADED``
    * - ``12``
      - ``ERROR``
+
+.. _metrics-volumes:
 
 *******
 Volumes
@@ -251,6 +256,8 @@ The following metrics are available for volume resources.
      - Gauge
      - Medium
 
+.. _metrics-volume-snapshots:
+
 ****************
 Volume Snapshots
 ****************
@@ -298,6 +305,8 @@ The following metrics are available for volume snapshot resources.
      - Notification, Polling
      - Gauge
      - Medium
+
+.. _metrics-volume-backups:
 
 **************
 Volume Backups
@@ -351,6 +360,8 @@ The following metrics are available for volume backup resources.
      - Gauge
      - Medium
 
+.. _metrics-images:
+
 ******
 Images
 ******
@@ -402,6 +413,8 @@ The following metrics are available for image resources.
      - Gauge
      - Medium
 
+.. _metrics-networks:
+
 ********
 Networks
 ********
@@ -447,14 +460,17 @@ The following metrics are available for network resources.
      - Status
      - Long
 
+.. _metrics-network-status:
+
 Status Values
 =============
 
 Here is a table mapping ``network`` metric values to their corresponding network states.
 
 .. list-table::
-   :width: 20%
+   :width: 25%
    :header-rows: 1
+   :widths: 15 30
 
    * - Value
      - Status
@@ -466,6 +482,8 @@ Here is a table mapping ``network`` metric values to their corresponding network
      - ``DOWN``
    * - ``3``
      - ``ERROR``
+
+.. _metrics-routers:
 
 *******
 Routers
@@ -550,14 +568,17 @@ The following metrics are available for router resources.
      - Delta
      - High
 
+.. _metrics-router-status:
+
 Status Values
 =============
 
 Here is a table mapping ``router`` metric values to their corresponding router states.
 
 .. list-table::
-   :width: 20%
+   :width: 25%
    :header-rows: 1
+   :widths: 15 30
 
    * - Value
      - Status
@@ -569,6 +590,8 @@ Here is a table mapping ``router`` metric values to their corresponding router s
      - ``DOWN``
    * - ``3``
      - ``ERROR``
+
+.. _metrics-floating-ips:
 
 ************
 Floating IPs
@@ -653,14 +676,17 @@ The following metrics are available for floating IP resources.
      - Delta
      - High
 
+.. _metrics-floating-ip-status:
+
 Status Values
 =============
 
 Here is a table mapping ``ip.floating`` metric values to their corresponding floating IP states.
 
 .. list-table::
-   :width: 20%
+   :width: 25%
    :header-rows: 1
+   :widths: 15 30
 
    * - Value
      - Status
@@ -680,6 +706,8 @@ Here is a table mapping ``ip.floating`` metric values to their corresponding flo
      - ``PENDING_DELETE``
    * - ``7``
      - ``ERROR``
+
+.. _metrics-vpns:
 
 ****
 VPNs
@@ -726,6 +754,7 @@ The following metrics are available for VPN resources.
      - Status
      - Long
 
+.. _metrics-vpn-status:
 
 Status Values
 =============
@@ -733,8 +762,9 @@ Status Values
 Here is a table mapping ``network.services.vpn`` metric values to their corresponding VPN states.
 
 .. list-table::
-   :width: 20%
+   :width: 25%
    :header-rows: 1
+   :widths: 15 30
 
    * - Value
      - Status
@@ -754,6 +784,8 @@ Here is a table mapping ``network.services.vpn`` metric values to their correspo
      - ``PENDING_DELETE``
    * - ``7``
      - ``ERROR``
+
+.. _metrics-load-balancers:
 
 **************
 Load Balancers
@@ -800,6 +832,8 @@ The following metrics are available for load balancer resources.
      - Status
      - Long
 
+.. _metrics-load-balancer-status:
+
 Status Values
 =============
 
@@ -807,8 +841,9 @@ Here is a table mapping ``network.services.octavia.loadbalancer``
 metric values to their corresponding load balancer states.
 
 .. list-table::
-   :width: 20%
+   :width: 25%
    :header-rows: 1
+   :widths: 15 30
 
    * - Value
      - Status
@@ -828,6 +863,8 @@ metric values to their corresponding load balancer states.
      - ``PENDING_DELETE``
    * - ``7``
      - ``ERROR``
+
+.. _metrics-coe-clusters:
 
 *******************
 Kubernetes Clusters
@@ -904,14 +941,17 @@ The following metrics are available for cluster resources.
      - Gauge
      - Medium
 
+.. _metrics-coe-cluster-status:
+
 Status Values
 =============
 
 Here is a table mapping ``cim.coe.cluster`` metric values to their corresponding cluster states.
 
 .. list-table::
-   :width: 20%
+   :width: 25%
    :header-rows: 1
+   :widths: 15 30
 
    * - Value
      - Status
@@ -951,6 +991,8 @@ Here is a table mapping ``cim.coe.cluster`` metric values to their corresponding
      - ``CHECK_COMPLETE``
    * - ``17``
      - ``ADOPT_COMPLETE``
+
+.. _metrics-database-instances:
 
 ******************
 Database Instances
@@ -1020,14 +1062,17 @@ The following metrics are available for database instance resources.
      - Gauge
      - Medium
 
+.. _metrics-database-instance-status:
+
 Status Values
 =============
 
 Here is a table mapping ``database.instance`` metric values to their corresponding instance states.
 
 .. list-table::
-   :width: 20%
+   :width: 25%
    :header-rows: 1
+   :widths: 15 30
 
    * - Value
      - Status

@@ -162,7 +162,7 @@ When querying measures for a given :ref:`aggregation method <metrics-aggregation
 (e.g. ``mean``, ``max``, or ``sum``), the Metrics Service returns measures in the following format:
 
 .. list-table::
-   :width: 40%
+   :width: 50%
    :header-rows: 1
 
    * - Timestamp (ISO 8601)
@@ -208,25 +208,27 @@ one or more **aggregation methods** are used to query measures.
 Here are the aggregation methods available on our pre-aggregated metrics:
 
 .. list-table::
-   :header-rows: 1
+  :width: 75%
+  :header-rows: 1
+  :widths: 15 60
 
-   * - Aggregation Method
-     - Description
-   * - ``mean``
-     - The mean of the collected datapoints for the time period.
-       Available for most metric types.
-   * - ``rate:mean``
-     - The rate-of-change of the mean of the collected datapoints.
-       Available for cumulative metrics, such as CPU time consumed.
-   * - ``max``
-     - The maximum value from the collected datapoints.
-       Available for gauge metrics, such as block/object storage usage.
-   * - ``sum``
-     - All collected datapoints for the time period added together.
-       Available for delta metrics, such as network traffic.
-   * - ``last``
-     - The last recorded datapoint (chronologically) for the time period.
-       Available for status metrics.
+  * - Aggregation Method
+    - Description
+  * - ``mean``
+    - The mean of the collected datapoints for the time period.
+      Available for most metric types.
+  * - ``rate:mean``
+    - The rate-of-change of the mean of the collected datapoints.
+      Available for cumulative metrics, such as CPU time consumed.
+  * - ``max``
+    - The maximum value from the collected datapoints.
+      Available for gauge metrics, such as block/object storage usage.
+  * - ``sum``
+    - All collected datapoints for the time period added together.
+      Available for delta metrics, such as network traffic.
+  * - ``last``
+    - The last recorded datapoint (chronologically) for the time period.
+      Available for status metrics.
 
 When using the :ref:`metrics-aggregates-api` to re-aggregate measures on the fly,
 additional aggregation methods are available. `Here is a full list of the available aggregation methods`_.

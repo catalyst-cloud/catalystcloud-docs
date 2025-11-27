@@ -279,6 +279,11 @@ Get revisions within a specific time period
 
 .. include:: _sections/getting-started/resource-history/get-revisions-within-a-specific-time-period.rst
 
+Get history of multiple resources in one query
+==============================================
+
+.. include:: _sections/getting-started/resource-history/get-history-of-multiple-resources-in-one-query.rst
+
 .. _metrics-aggregates-api:
 
 **************
@@ -343,6 +348,11 @@ Get server group RAM usage as a percentage
 ------------------------------------------
 
 .. include:: _sections/getting-started/aggregates-api/get-server-group-ram-usage-as-a-percentage.rst
+
+Get status of instances in your project
+---------------------------------------
+
+.. include:: _sections/getting-started/aggregates-api/get-status-of-instances-in-your-project.rst
 
 Get per-volume block storage usage
 ----------------------------------

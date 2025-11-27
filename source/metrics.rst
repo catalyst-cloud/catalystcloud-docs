@@ -44,5 +44,8 @@ Table of Contents:
 Tutorials
 *********
 
-Additional examples of using the Catalyst Cloud Metrics Service
+Examples on how to use the Catalyst Cloud Metrics Service for common use cases
+are provided in :ref:`Getting Started <metrics-getting-started>`.
+
+Additional tutorials for the Metrics Service
 can be found in the :ref:`Metrics Tutorials <metrics-tutorials>` section.
