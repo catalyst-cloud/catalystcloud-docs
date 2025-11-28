@@ -21,11 +21,6 @@ if [[ ! -d venv ]]; then
     python3 -m venv venv
 fi
 
-# Create a Python virtual environment if needed
-if [ ! -d venv ]; then
-    python3 -m venv venv
-fi
-
 # Activate the virtual environment
 source venv/bin/activate
 

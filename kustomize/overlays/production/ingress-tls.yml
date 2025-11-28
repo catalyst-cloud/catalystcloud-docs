@@ -1,0 +1,25 @@
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: catalystcloud-docs
+  namespace: catalystcloud-docs
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-production
+spec:
+  tls:
+    - hosts:
+        - catalystcloud-docs.cc-gitlab-por-prod.por.catalystcloud.nz
+      secretName: catalystcloud-docs-tls
+  rules:
+    - host: catalystcloud-docs.cc-gitlab-por-prod.por.catalystcloud.nz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: catalystcloud-docs-svc
+                port:
+                  number: 80

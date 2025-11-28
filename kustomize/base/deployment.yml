@@ -1,0 +1,33 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalystcloud-docs
+  namespace: catalystcloud-docs
+  labels:
+    app: catalystcloud-docs
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: catalystcloud-docs
+  template:
+    metadata:
+      labels:
+        app: catalystcloud-docs
+    spec:
+      containers:
+        - name: catalystcloud-docs
+          image: gitlab.int.catalystcloud.nz:4567/catalystcloud/catalystcloud-docs:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: 250Mi
+              cpu: 100m
+            limits:
+              memory: 500Mi
+              cpu: 200m
+      imagePullSecrets:
+        - name: catalystcloud-registry-credentials

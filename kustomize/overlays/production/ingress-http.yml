@@ -1,0 +1,22 @@
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: catalystcloud-docs-http
+  namespace: catalystcloud-docs
+  annotations:
+    # NOTE: No IP whitelist since this website should be publicly accessible.
+    traefik.ingress.kubernetes.io/router.middlewares: ingress-traefik-https-redirect@kubernetescrd
+spec:
+  rules:
+    - host: catalystcloud-docs.cc-gitlab-por-prod.por.catalystcloud.nz
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: catalystcloud-docs-svc
+                port:
+                  number: 80

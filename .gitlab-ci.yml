@@ -1,41 +1,183 @@
 ---
 
-image: ${CI_SERVER_HOST}:4567/catalystcloud/python/python:3.6
+include:
+  - remote: https://gitlab.int.catalystcloud.nz/catalystcloud/gitlab-build-tools/raw/main/templates/buildah.gitlab-ci.yml
 
-stages:
-  - test
-  - publish
-
-workflow:
+.verify_template:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-
-
-# We should remove the catalyst cloud theme form src.  In the meantime
-# use --exists-action w to replace without needing to use a venv
-compile:
+  tags:
+    - k8srunner
+  variables:
+    PYTHON_VERSION: 3.12
+  image:
+    name: gitlab.int.catalystcloud.nz:4567/catalystcloud/python/python:${PYTHON_VERSION}-slim
   before_script:
-    - pip install -r requirements.txt --exists-action w
+    - apt-get update && apt-get install --yes build-essential git
+    - pip install -r requirements.txt
+
+lint:
+  extends: .verify_template
   script:
+    # NOTE: the html make target calls the doc8 utility.
     - make html
 
-doc8:
-  before_script:
-    - pip install -r requirements.txt --exists-action w
-  script:
-    - doc8 source
-
 linkcheck:
-  before_script:
-    - pip install -r requirements.txt --exists-action w
+  extends: .verify_template
   script:
     - make linkcheck
+  # NOTE: This link check can fail since this is an informational check.
   allow_failure: true
 
-push_to_github:
+build:
+  needs:
+    - lint
+  extends: .buildah
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  # variables:
+  #   KUBERNETES_EPHEMERAL_STORAGE_REQUEST: "2Gi"
+  script:
+    - >
+      buildah build
+      --no-cache
+      --label "org.opencontainers.image.created=${CI_COMMIT_TIMESTAMP}"
+      --label "org.opencontainers.image.revision=${CI_COMMIT_SHA}"
+      -t ${CI_REGISTRY_IMAGE}:${CI_PIPELINE_ID}
+      -f Dockerfile .
+    - buildah push ${CI_REGISTRY_IMAGE}:${CI_PIPELINE_ID}
+
+deploy-test:
+  image:
+    name: gitlab.int.catalystcloud.nz:4567/catalystcloud/kubernetes-tools/kubernetes-tools:latest
+    entrypoint: ['']
+  interruptible: true
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  needs:
+    - build
+  variables:
+    AGENT_KUBECONTEXT: catalystcloud/backend-services-team/magnum-clusters:cc-int-hlz-prod
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    on_stop: teardown-deploy-test
+    url: https://$CI_COMMIT_REF_SLUG.mr.int.catalystcloud.nz
+    auto_stop_in: 5 days
+  before_script:
+    - kubectl config use-context $AGENT_KUBECONTEXT
+    # DOCKER REGISTRY SECRET
+    # https://github.com/kubernetes-sigs/kustomize/issues/1420
+    - |
+      cat > kustomize/base/.dockerconfigjson <<EOF
+      {
+        "auths":{
+          "${CI_REGISTRY}":{
+            "username":"${CONTAINER_REGISTRY_ACCESS_USERNAME}",
+            "password":"${CONTAINER_REGISTRY_ACCESS_TOKEN}",
+            "auth":"$(echo -n "${CONTAINER_REGISTRY_ACCESS_USERNAME}:${CONTAINER_REGISTRY_ACCESS_TOKEN}" | base64)"
+          }
+        }
+      }
+      EOF
+  script:
+    - mkdir kustomize/overlays/mr-$CI_COMMIT_REF_SLUG
+    - |
+        cat > kustomize/overlays/mr-$CI_COMMIT_REF_SLUG/kustomization.yml <<EOF
+        apiVersion: kustomize.config.k8s.io/v1beta1
+        kind: Kustomization
+        resources:
+          - ../../base
+        namespace: mr-$CI_COMMIT_REF_SLUG
+        images:
+          - name: ${CI_REGISTRY_IMAGE}
+            newTag: "${CI_PIPELINE_ID}"
+        patches:
+          - target:
+              kind: Ingress
+              name: catalystcloud-docs
+            patch: |-
+              - op: replace
+                path: /spec/rules/0/host
+                value: ${CI_COMMIT_REF_SLUG}.mr.int.catalystcloud.nz
+              - op: replace
+                path: /spec/tls/0/hosts/0
+                value: ${CI_COMMIT_REF_SLUG}.mr.int.catalystcloud.nz
+        EOF
+    - kubectl apply -k kustomize/overlays/mr-$CI_COMMIT_REF_SLUG
+    # TODO: Dynamic dns
+  after_script:
+    - rm kustomize/base/.dockerconfigjson
+  artifacts:
+    when: always
+    paths:
+      - kustomize/overlays/mr-$CI_COMMIT_REF_SLUG/kustomization.yml
+
+teardown-deploy-test:
+  image:
+    name: gitlab.int.catalystcloud.nz:4567/catalystcloud/kubernetes-tools/kubernetes-tools:latest
+    entrypoint: ['']
+  allow_failure: true # Add this if you want to allow merging even if "pipelines must success" --> otherwise GitLab would block you from merging unless you manually run this job
+  environment:
+    name: review/$CI_COMMIT_REF_SLUG
+    action: stop
+  variables:
+    AGENT_KUBECONTEXT: catalystcloud/backend-services-team/magnum-clusters:cc-int-hlz-prod
+    GIT_STRATEGY: none
+  before_script:
+    - kubectl config use-context $AGENT_KUBECONTEXT
+  script:
+    - kubectl delete ns mr-$CI_COMMIT_REF_SLUG
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+
+deploy-prod:
+  image:
+    name: gitlab.int.catalystcloud.nz:4567/catalystcloud/kubernetes-tools/kubernetes-tools:latest
+    entrypoint: ['']
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  needs:
+    - build
+  environment:
+    name: production
+  variables:
+    AGENT_KUBECONTEXT: catalystcloud/backend-services-team/magnum-clusters:cc-ext-por-prod
+  before_script:
+    - kubectl config use-context $AGENT_KUBECONTEXT
+    # DOCKER REGISTRY SECRET
+    # https://github.com/kubernetes-sigs/kustomize/issues/1420
+    - |
+      cat > kustomize/base/.dockerconfigjson <<EOF
+      {
+        "auths":{
+          "${CI_REGISTRY}":{
+            "username":"${CONTAINER_REGISTRY_ACCESS_USERNAME}",
+            "password":"${CONTAINER_REGISTRY_ACCESS_TOKEN}",
+            "auth":"$(echo -n "${CONTAINER_REGISTRY_ACCESS_USERNAME}:${CONTAINER_REGISTRY_ACCESS_TOKEN}" | base64)"
+          }
+        }
+      }
+      EOF
+  script:
+    - |
+      echo "
+      images:
+        - name: gitlab.int.catalystcloud.nz:4567/catalystcloud/catalystcloud-docs
+          newTag: '${CI_PIPELINE_ID}'
+      " >> kustomize/overlays/production/kustomization.yml
+    - kubectl apply -k kustomize/overlays/production
+  after_script:
+    - rm kustomize/base/.dockerconfigjson
+  artifacts:
+    when: always
+    paths:
+      - kustomize/overlays/production/kustomization.yml
+
+push-to-github:
   image: ${CI_SERVER_HOST}:4567/catalystcloud/docker/docker:dind
-  stage: publish
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
       when: never

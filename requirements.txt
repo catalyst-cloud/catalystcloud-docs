@@ -1,7 +1,49 @@
-Sphinx>=4.2.0
--e git+https://github.com/catalyst-cloud/sphinx-catalystcloud-theme.git#egg=sphinx_catalystcloud_theme
-doc8>=0.8.0
-sphinx-autobuild
-sphinx-tabs>=2.0.0
-aafigure>=0.5
-myst_parser>=0.16.1
+# NOTE: These are the currently installed versions of the packages on the production system.
+aafigure==0.6
+alabaster==0.7.13
+attrs==21.4.0
+Babel==2.11.0
+certifi==2022.12.7
+charset-normalizer==2.0.12
+colorama==0.4.5
+doc8==0.11.2
+docutils==0.17.1
+idna==3.4
+imagesize==1.4.1
+importlib-metadata==4.8.3
+Jinja2==3.0.3
+livereload==2.6.3
+markdown-it-py==2.0.1
+MarkupSafe==2.0.1
+mdit-py-plugins==0.3.0
+mdurl==0.1.0
+myst-parser==0.16.1
+packaging==21.3
+pbr==5.11.1
+Pygments==2.14.0
+pyparsing==3.0.9
+pytz==2022.7.1
+PyYAML==6.0.1
+requests==2.27.1
+restructuredtext-lint==1.4.0
+Setuptools<81 # Needed for pkg_resources
+six==1.16.0
+snowballstemmer==2.2.0
+sphinx-autobuild==2021.3.14
+sphinx-tabs==3.3.1
+Sphinx==4.5.0
+sphinxcontrib-applehelp==1.0.2
+sphinxcontrib-devhelp==1.0.2
+sphinxcontrib-htmlhelp==2.0.0
+sphinxcontrib-jsmath==1.0.1
+sphinxcontrib-qthelp==1.0.3
+sphinxcontrib-serializinghtml==1.1.5
+standard-imghdr # Needed to fix: "Could not import extension sphinx.builders.epub3 (exception: No module named 'imghdr')"
+stevedore==3.5.2
+tornado==6.1
+typing_extensions==4.1.1
+urllib3==1.26.14
+zipp==3.6.0
+
+# Custom CatalystCloud theme
+sphinx-catalystcloud-theme@git+https://gitlab.int.catalystcloud.nz/catalystcloud/sphinx-catalystcloud-theme

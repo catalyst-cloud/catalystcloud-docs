@@ -1,0 +1,14 @@
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalystcloud-docs-svc
+  namespace: catalystcloud-docs
+spec:
+  selector:
+    app: catalystcloud-docs
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80

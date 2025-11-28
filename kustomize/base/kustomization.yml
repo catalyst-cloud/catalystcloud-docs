@@ -1,0 +1,13 @@
+---
+
+resources:
+  - deployment.yml
+  - ingress.yml
+  - namespace.yml
+  - service.yml
+
+secretGenerator:
+  - name: catalystcloud-registry-credentials
+    type: kubernetes.io/dockerconfigjson
+    files:
+      - .dockerconfigjson
