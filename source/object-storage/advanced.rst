@@ -412,6 +412,43 @@ of code, here is an example in Python 3:
 The above code is based on the code for the swift tool:
 https://opendev.org/openstack/python-swiftclient/src/tag/train-eol/swiftclient/utils.py#L71
 
+
+.. _object-expiry:
+
+*************
+Object Expiry
+*************
+
+You can schedule objects  to expire by setting the
+``X-Delete-At`` or ``X-Delete-After`` HTTP header. Once the object is deleted
+Swift will no longer serve the object and it will be deleted from disk shortly
+thereafter.
+
+- Set an object to expire at an absolute unix timestamp:
+
+  .. code-block:: bash
+
+     $ swift post CONTAINER OBJECT_FILENAME -H "X-Delete-At:UNIX_TIME"
+
+- Set an object to expire after a relative number of seconds:
+
+  .. code-block:: bash
+
+     $ swift post CONTAINER OBJECT_FILENAME -H "X-Delete-After:SECONDS"
+
+  This will be converted into ``X-Delete-At`` on the server:
+
+  .. code-block:: bash
+
+     $ swift stat CONTAINER OBJECT_FILENAME
+
+- Remove an ``X-Delete-At`` header from an object:
+
+  .. code-block:: bash
+
+     $ swift post CONTAINER OBJECT_FILENAME -H "X-Remove-Delete-At:"
+
+
 **************************
 Working with large objects
 **************************

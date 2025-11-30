@@ -1,0 +1,57 @@
+################
+02 December 2025
+################
+
+=====================================
+Upgrade to the Object Storage Service
+=====================================
+
+This release upgrades the Object Storage service. Note this release includes
+some deprecations.
+
+Changes to the Object Storage Service
+-------------------------------------
+
+- The object expirer has been enabled. Objects created on the object server
+  with ``X-Delete-At`` or ``X-Delete-After`` headers will be deleted on or
+  after the specified date or number of seconds has elapsed. For more details
+  see :ref:`object-expiry`.
+
+- s3api: CompleteMultipartUpload requests may now be safely retried.
+
+- s3api: Container ACLs are now cloned to the +segments container when it is
+  created.
+
+- Prefix-based tempurls may now be used to explore staticweb listings within
+  that prefix. Note that this opens a new ability to list containers from
+  tempurls, but only if staticweb’s ``X-Container-Meta-Web-Listings`` is
+  enabled.
+
+- s3api: Add basic read support for S3 object locking. This improves
+  compatibility with an Ansible S3 module. Write support is not yet
+  implemented, so get-object-lock-configuration will always 404.
+
+- The static large object (SLO) middleware now supports including a
+  ``?part-number=`` query parameter to request just part of a large object.
+  This may be used to enable efficient parallel downloads. For more
+  information, see the upstream documentation.
+
+- s3api: Now supports the ?partNumber= query parameter, enabling parallel
+  downloads.
+
+- s3api: Added support for aws-chunked transfers. AWS clients recently
+  began defaulting to this mode.
+
+- Account listings now include storage policy information for the containers
+  listed.
+
+
+Deprecations and Removals
+-------------------------
+
+These items have been deprecated by upstream, therefore we can't provide a
+date when these will take effect.
+
+- SHA-1 signatures are now deprecated for the formpost and tempurl. We will
+  ensure these keep working until the end of May 2026, after which they will
+  be disabled during the next major upgrade.

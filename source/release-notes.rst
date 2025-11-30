@@ -11,6 +11,7 @@ Table of Contents:
 .. toctree::
   :maxdepth: 1
 
+  release-notes/release_2025-12-04.rst
   release-notes/release_2025-11-18.rst
   release-notes/release_2025-11-06.rst
   release-notes/release_2025-10-24.rst
