@@ -4,6 +4,8 @@ kind: Kustomization
 
 resources:
 - ../../base
-- ./ingress.yml
 
 namespace: cc-ext-por-prod-catalystcloud-docs
+
+patches:
+- path: ingress-patch.yml

@@ -6,6 +6,8 @@ metadata:
   name: catalystcloud-docs
   namespace: catalystcloud-docs
   annotations:
+    # Remove the whitelist since this website is public.
+    traefik.ingress.kubernetes.io/router.middlewares: ingress-traefik-https-redirect@kubernetescrd
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   tls:
