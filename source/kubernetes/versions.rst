@@ -59,6 +59,7 @@ in the API.
      - 2024-12-20
      - 2025-11-07
      - ``kubernetes-v1.31.13-20250917``
+       ``kubernetes-v1.31.14-20251130``
    * - ``1.32``
      - Supported
      - 2025-02-05
@@ -79,6 +80,21 @@ in the API.
 **********************
 Version upgrade notes
 **********************
+
+
+Patch versions v1.31.14, v1.32.10, v1.33.6 and v1.34.2
+======================================================
+
+These patch versions contain two notable fixes:
+
+* Upgraded containerd to 1.7.29 to fix several container escape vulnerabilities
+  in runc. These are CVE-2025-31133, CVE-2025-52565 and CVE-2025-52881. No
+  active exploits have been identified but it is recommended to upgrade any
+  affected clusters to the latest patch version for security.
+* Fixed a bug previously only available in v1.34 that was installing customer
+  SSH keys onto nodes. This was causing problems when transferring cluster
+  ownership. Direct access to nodes is not supported but is possible with
+  privileged pods (eg. `kubectl ssh node` plugin).
 
 
 Version v1.33 to v1.34
