@@ -10,10 +10,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - catalystcloud-docs.cc-gitlab-por-prod.por.catalystcloud.nz
+        - catalystcloud-docs.cc-ext-por-prod.por.catalystcloud.nz
       secretName: catalystcloud-docs-tls
   rules:
-    - host: catalystcloud-docs.cc-gitlab-por-prod.por.catalystcloud.nz
+    - host: catalystcloud-docs.cc-ext-por-prod.por.catalystcloud.nz
       http:
         paths:
           - path: /

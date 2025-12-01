@@ -4,9 +4,6 @@ kind: Kustomization
 
 resources:
 - ../../base
-- ./ingress-http.yml
+- ./ingress.yml
 
-namespace: cc-int-hlz-prod-catalystcloud-docs
-
-patches:
-- path: ingress-tls.yml
+namespace: cc-ext-por-prod-catalystcloud-docs
