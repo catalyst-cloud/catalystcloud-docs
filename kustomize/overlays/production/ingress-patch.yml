@@ -7,7 +7,9 @@ metadata:
   namespace: catalystcloud-docs
   annotations:
     # Remove the whitelist since this website is public.
-    traefik.ingress.kubernetes.io/router.middlewares: ingress-traefik-https-redirect@kubernetescrd
+    # Update the traefik ingress middleware name to match the namespace for the external cluster.
+    # https://doc.traefik.io/traefik/reference/install-configuration/providers/overview/#provider-namespace
+    traefik.ingress.kubernetes.io/router.middlewares: internal-traefik-https-redirect@kubernetescrd
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   tls:

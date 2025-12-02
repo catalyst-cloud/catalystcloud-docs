@@ -8,7 +8,6 @@ metadata:
   annotations:
     traefik.ingress.kubernetes.io/router.middlewares: ingress-traefik-ipwhitelist@kubernetescrd,ingress-traefik-https-redirect@kubernetescrd
     cert-manager.io/cluster-issuer: letsencrypt-staging
-
 spec:
   ingressClassName: traefik
   tls:
