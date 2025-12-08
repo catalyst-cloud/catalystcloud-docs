@@ -317,6 +317,13 @@ retained in the project, even when the load balancer is deleted:
     annotations:
       loadbalancer.openstack.org/keep-floatingip: "true"
 
+.. warning::
+
+  This method cannot be used to retain floating IPs when a cluster is deleted.
+  Any floating IPs that you wish to retain after cluster deletion should be
+  disassociated from all cluster resources before scheduling deletion. See
+  :ref:`cluster-deletion` for more information.
+
 Here is an example service that creates a load balancer for an Nginx
 application.
 
@@ -551,7 +558,8 @@ Here is a list of load balancer annotations supported by Catalyst Cloud Kubernet
    * - ``loadbalancer.openstack.org/keep-floatingip``
      - Boolean
      - ``false``
-     - Set to ``true`` to retain the floating IP in the project upon deletion.
+     - Set to ``true`` to retain the floating IP in the project upon deletion
+       of the load balancer.
 
        For more information, see :ref:`kubernetes-loadbalancers-existing-fip`.
    * - ``loadbalancer.openstack.org/proxy-protocol``

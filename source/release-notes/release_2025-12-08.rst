@@ -1,0 +1,27 @@
+################
+08 December 2025
+################
+
+=================================
+Catalyst Cloud Kubernetes Service
+=================================
+
+Magnum Cluster Templates
+------------------------
+
+We have released cluster templates for Kubernetes v1.31.14, v1.32.10, v1.33.6
+and v1.34.2.
+
+These templates most notably patch several container escape vulnerabilities in
+runc. See the :ref:`supported-kubernetes-versions` section of our documentation
+for more information.
+
+
+Magnum Cluster Deletion
+-----------------------
+
+Magnum now performs automatic deletion of unused cluster resources, such as
+load balancers and floating IPs.
+
+Note that persistent volumes are not affected at this time and will require
+manual deletion. See :ref:`cluster-deletion` for more information.

@@ -537,6 +537,110 @@ In Kubernetes we can now see the additional worker nodes and pods can schedule t
   dev-cluster1-47ctpuwqwfsi-default-worker-10b73ddb-ljcf5   Ready    <none>          67m    v1.28.8   10.0.0.19     <none>        Flatcar Container Linux by Kinvolk 3815.2.0 (Oklo)   6.1.77-flatcar   containerd://1.7.13
   dev-cluster1-47ctpuwqwfsi-default-worker-10b73ddb-mbtwp   Ready    <none>          67m    v1.28.8   10.0.0.22     <none>        Flatcar Container Linux by Kinvolk 3815.2.0 (Oklo)   6.1.77-flatcar   containerd://1.7.13
 
+
+
+.. _cluster-deletion:
+
+****************
+Cluster Deletion
+****************
+
+Kubernetes clusters can be deleted when they are no longer needed. There are
+some considerations that should be made when performing this operation to avoid
+unexpected costs due to certain cloud resources being preserved, or unexpected
+deletion of cloud resources which are automatically discarded during the
+deletion process.
+
+Deleting a cluster
+==================
+
+Once you are certain a cluster is no longer needed, you may begin the process
+of deleting it. Additional cloud resources created by Magnum during the
+cluster's lifetime (identifiable by name containing the cluster ID and/or name)
+will be automatically discarded when the cluster is scheduled for deletion.
+These resources are treated identically as those manually created and can be
+consumed or reserved by other manually created resources. Consider checking
+that none of Magnum's resources have dependents that were manually created as
+they may prevent cluster deletion from progressing:
+
+* Network resources created during cluster creation including networks,
+  routers, subnets, ports, security groups, etc.
+
+  .. code-block:: console
+
+    $ openstack network list -c ID -c Name
+    +--------------------------------------+------------------------------------------------------------------------------------------+
+    | ID                                   | Name                                                                                     |
+    +--------------------------------------+------------------------------------------------------------------------------------------+
+    | 6f63d4fd-d128-469c-b95a-89c2a2eadc51 | k8s-clusterapi-cluster-magnum-2a6aec5bc77990641f88801268231c63-dev-cluster1-32h3pwv26743 |
+    +--------------------------------------+------------------------------------------------------------------------------------------+
+
+    $ openstack router list -c ID -c Name
+    +--------------------------------------+------------------------------------------------------------------------------------------+
+    | ID                                   | Name                                                                                     |
+    +--------------------------------------+------------------------------------------------------------------------------------------+
+    | 20b8693a-f8fb-4520-882a-d119fe97848c | k8s-clusterapi-cluster-magnum-2a6aec5bc77990641f88801268231c63-dev-cluster1-32h3pwv26743 |
+    +--------------------------------------+------------------------------------------------------------------------------------------+
+
+* Load balancers from services using the ``LoadBalancer`` type. For example,
+  from the chosen ingress controller.
+
+  .. code-block:: console
+
+    $ openstack loadbalancer list -c id -c name -c vip_address
+    +--------------------------------------+-------------------------------------------------------------------------------+-------------+
+    | id                                   | name                                                                          | vip_address |
+    +--------------------------------------+-------------------------------------------------------------------------------+-------------+
+    | 53e6eaf7-a9ee-4776-95c4-fd93b5ca672b | k8s-magnum-2a6aec5bc77990641f88801268231c63-dev-cluster1-32h3pwv26743-kubeapi | 10.0.0.221  |
+    | 19ca8a7e-7895-4a6d-ad8e-3674f4cf8fc6 | kube_service_dev-cluster1-32h3pwv26743_ingress-nginx_ingress-nginx-controller | 10.0.0.125  |
+    +--------------------------------------+-------------------------------------------------------------------------------+-------------+
+
+* Floating IPs provisioned by Magnum. For example, those associated with the
+  Kube API and the ingress controller as in the example above.
+
+  .. code-block:: console
+
+    $ openstack floating ip list -c ID -c "Floating IP Address" -c "Fixed IP Address"
+    +--------------------------------------+---------------------+------------------+
+    | ID                                   | Floating IP Address | Fixed IP Address |
+    +--------------------------------------+---------------------+------------------+
+    | 0bca9878-4076-4cdf-a1b2-2325256829c7 | 202.49.242.221      | 10.0.0.221       |
+    | ab487f0a-5fb3-428c-bce2-608dc2ced7ba | 202.49.241.238      | 10.0.0.125       |
+    +--------------------------------------+---------------------+------------------+
+
+.. warning::
+
+  Cluster deletion does not currently respect the
+  ``loadbalancer.openstack.org/keep-floatingip: "true"`` annotation on services
+  with the ``LoadBalancer`` type which only applies when the annotated service
+  is deleted but the cluster remains active. Floating IPs that you wish to
+  reuse must be disassociated with all cluster resources before cluster
+  deletion.
+
+If none of the above resources are required, you may schedule the cluster for
+deletion.
+
+.. code-block:: console
+
+  $ openstack coe cluster delete dev-cluster1
+  Request to delete cluster dev-cluster1 has been accepted.
+
+The cluster and its associated cloud resources will no longer be present in
+your project after a period of time. Persistent volumes provisioned by Cinder
+are the exception and will be preserved after a cluster is deleted regardless
+of their retention policy as these only apply during the cluster's active
+state.
+
+.. code-block:: console
+
+  $ openstack volume list -c ID -c Name -c "Attached to"
+  +--------------------------------------+------------------------------------------+----------------------------------------------+
+  | ID                                   | Name                                     | Attached to                                  |
+  +--------------------------------------+------------------------------------------+----------------------------------------------+
+  | af545633-43b8-4672-91f4-d0d9f19d5153 | pvc-8c0fff36-89a9-41b0-a121-b843f7a28671 |                                              |
+  +--------------------------------------+------------------------------------------+----------------------------------------------+
+
+
 .. _clusters-nodegroups:
 
 ***********

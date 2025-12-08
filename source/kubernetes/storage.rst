@@ -238,7 +238,7 @@ physical volume assigned to the claim will persist if the cluster is removed.
 
    If a cluster is deleted before removing resources, the persistence of the
    underlying volume is not affected by the setting of the ``StorageClass``
-   *Reclaim Policy*.
+   *Reclaim Policy*. See :ref:`cluster-deletion` for more information.
 
 
 If the ``PersistentVolumeClaim`` resource was intentionally released prior to the
