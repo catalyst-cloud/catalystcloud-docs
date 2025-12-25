@@ -42,7 +42,7 @@ stevedore==3.5.2
 tornado==6.1
 typing_extensions==4.1.1
 urllib3==1.26.14
-zipp==3.6.0
+zipp==3.19.1
 
 # Custom CatalystCloud theme
 sphinx-catalystcloud-theme@git+https://gitlab.int.catalystcloud.nz/catalystcloud/sphinx-catalystcloud-theme
