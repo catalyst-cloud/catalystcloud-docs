@@ -66,7 +66,7 @@ be obtained from your OpenStack RC file.
   #!/bin/bash
 
   # Swift credentials for Duplicity
-  export SWIFT_USERNAME="somebody@example.com"
+  export SWIFT_USERNAME="somebody@example.org.nz"
   export SWIFT_TENANTNAME="mycloudtenant"
   export SWIFT_AUTHURL="https://api.nz-por-1.catalystcloud.io:5000/"
   export SWIFT_AUTHVERSION="3"
@@ -240,5 +240,4 @@ backups. See (`cron`_) for more information on this.
 
 .. code-block:: bash
 
-  #
-  35 2 * * * root /usr/local/bin/duplicity-backup.sh >> /var/log/backup/duplicity.log 2>&1
+  35 2 * * * root /usr/local/bin/duplicity-backup.sh >> /var/log/duplicity.log 2>&1
