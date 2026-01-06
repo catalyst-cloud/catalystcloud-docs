@@ -81,6 +81,18 @@ in the API.
 Version upgrade notes
 **********************
 
+Patch versions v1.32.11, v1.33.7 and v1.34.3
+============================================
+
+This release fixes a GPU driver installation regression present in v1.31.14,
+v1.32.10, v1.33.6 and v1.34.2.
+
+Note there is no release available for v1.31.14 with this fix as it is no
+longer supported. It is recommended to upgrade clusters running v1.31.x to a
+newer supported version. See :ref:`supported-kubernetes-versions` and the
+:doc:`Cluster Upgrade </kubernetes/cluster-upgrade>` documentation for more
+information.
+
 
 Patch versions v1.31.14, v1.32.10, v1.33.6 and v1.34.2
 ======================================================
