@@ -42,7 +42,7 @@ standard-imghdr # Needed to fix: "Could not import extension sphinx.builders.epu
 stevedore==3.5.2
 tornado==6.1
 typing_extensions==4.1.1
-urllib3==1.26.14
+urllib3==2.6.3
 zipp==3.6.0
 
 # Custom CatalystCloud theme
