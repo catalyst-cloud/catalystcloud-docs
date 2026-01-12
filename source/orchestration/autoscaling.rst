@@ -10,7 +10,7 @@ any direct input from an administrator.
 
 The Catalyst Cloud Orchestration Service supports **auto-scaling groups**
 that can be used to **scale out** (increase the size of) or **scale in**
-(decrease the size of) a group of instances running in a stack.
+(reduce the size of) a cluster of instances running in a stack.
 
 .. contents::
     :local:
@@ -115,6 +115,9 @@ In this example stack, the following resources are created:
 * A set of alarms that monitor the state of the instances in the auto-scaling group,
   and notify the auto-scaling group to scale out or scale in the cluster when
   load exceeds the configured thresholds
+* (Optional) Another alarm that monitors the health of auto-scaling group
+  members, and automatically replaces them if they stop serving requests
+  (see :ref: `auto-healing <orchestration-autohealing>`)
 
 The stack templates consist of the following files:
 
@@ -476,10 +479,11 @@ The Orchestration Service will start creating the resources in the background.
   +---------------------+-----------------------------------------------------------------------+
   | Field               | Value                                                                 |
   +---------------------+-----------------------------------------------------------------------+
-  | id                  | dd254c00-2424-4b9a-a5a0-fff6bf9dc046                                  |
+  | id                  | 80f2488f-4b45-44d3-8bf2-72b61bf09d25                                  |
   | stack_name          | autoscaling-example                                                   |
   | description         | An example Catalyst Cloud Orchestration Service template              |
-  |                     | for building a cluster of web servers with auto-scaling.              |
+  |                     | for building a cluster of web servers with auto-scaling               |
+  |                     | and optional auto-healing.                                            |
   |                     |                                                                       |
   |                     | This provisions the following cloud resources:                        |
   |                     |                                                                       |
@@ -492,7 +496,10 @@ The Orchestration Service will start creating the resources in the background.
   |                     | * An auto-scaling group that launches, monitors and scales            |
   |                     |   a cluster of web server instances depending on the configured       |
   |                     |   load thresholds.                                                    |
-  | creation_time       | 2025-10-10T00:55:35Z                                                  |
+  |                     | * (Optional) Another alarm that monitors the health of auto-scaling   |
+  |                     |   group members, and automatically replaces them if they stop serving |
+  |                     |   requests.                                                           |
+  | creation_time       | 2026-02-13T04:50:00Z                                                  |
   | updated_time        | None                                                                  |
   | stack_status        | CREATE_IN_PROGRESS                                                    |
   | stack_status_reason | Stack CREATE started                                                  |
@@ -506,7 +513,7 @@ to continuously report the status of all created resources.
 
 .. code-block:: console
 
-   watch openstack stack resource list autoscaling-example
+  watch openstack stack resource list autoscaling-example
 
 It will take a few minutes for all resources in the stack to reach ``CREATE_COMPLETE`` state.
 
@@ -515,27 +522,28 @@ It will take a few minutes for all resources in the stack to reach ``CREATE_COMP
   +-----------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------+-----------------+----------------------+
   | resource_name                     | physical_resource_id                                                                | resource_type                                | resource_status | updated_time         |
   +-----------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------+-----------------+----------------------+
-  | autoscaling_up_policy             | 41e0751171fc4982acfef2c565f29ea7                                                    | OS::Heat::ScalingPolicy                      | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | subnet                            | 9c45e1a1-9878-40cb-b985-8dbdcfbf1339                                                | OS::Neutron::Subnet                          | CREATE_COMPLETE | 2025-10-10T22:06:18Z |
-  | bastion_server                    | 1842093a-eb7a-4380-9fe9-aab83bc95c4c                                                | OS::Nova::Server                             | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | network                           | d0331ea5-b6fb-4a52-bdfe-61375793ed1f                                                | OS::Neutron::Net                             | CREATE_COMPLETE | 2025-10-10T22:06:18Z |
-  | autoscaling_memory_low_alarm      | 5c55e371-f16c-4120-9fe2-9f3be11d71ab                                                | OS::Aodh::GnocchiAggregationByResourcesAlarm | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | internal_security_group_rule_ssh  | dee7d066-cb4c-4e66-a621-1fee53ccf3e8                                                | OS::Neutron::SecurityGroupRule               | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | loadbalancer_floating_ip          | 8944d3e1-17e0-4d08-bc74-2a7f68491b0d                                                | OS::Neutron::FloatingIP                      | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | autoscaling_group                 | 5c1c51ab-02f9-471c-a760-7b9e06426808                                                | OS::Heat::AutoScalingGroup                   | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | autoscaling_cpu_low_alarm         | f52a14d8-e1c4-4597-a08f-9c07b07ddb06                                                | OS::Aodh::GnocchiAggregationByResourcesAlarm | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | internal_security_group           | 5f8ce8f0-c6ca-4ece-9b8a-c2f6f5525123                                                | OS::Neutron::SecurityGroup                   | CREATE_COMPLETE | 2025-10-10T22:06:18Z |
-  | webserver_group                   | 7a612ef2-ad1d-49fa-a72d-51253761cdda                                                | OS::Nova::ServerGroup                        | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | loadbalancer_pool                 | 65b27c46-aa58-4986-8846-ffd80e2b8b24                                                | OS::Octavia::Pool                            | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | autoscaling_cpu_high_alarm        | 334411fa-8f4b-482d-ba05-c4399a7a3393                                                | OS::Aodh::GnocchiAggregationByResourcesAlarm | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | router                            | 006e2146-16d2-42d6-99d6-301bb1f130c8                                                | OS::Neutron::Router                          | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | bastion_floating_ip               | 36b944e0-b707-4fc7-91be-23fe89bf4c6b                                                | OS::Neutron::FloatingIP                      | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | loadbalancer_listener             | 2aba82b0-7970-45d3-9263-69ec8b65a6dd                                                | OS::Octavia::Listener                        | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | router_interface                  | 006e2146-16d2-42d6-99d6-301bb1f130c8:subnet_id=9c45e1a1-9878-40cb-b985-8dbdcfbf1339 | OS::Neutron::RouterInterface                 | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | internal_security_group_rule_http | 905afa55-6c92-467c-83cb-68601de482d6                                                | OS::Neutron::SecurityGroupRule               | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | autoscaling_memory_high_alarm     | a49a2804-f06d-48c4-a296-6fb925e4503e                                                | OS::Aodh::GnocchiAggregationByResourcesAlarm | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
-  | loadbalancer                      | 71a4c4ee-f051-4e98-abe5-cd1e98684202                                                | OS::Octavia::LoadBalancer                    | CREATE_COMPLETE | 2025-10-10T22:06:18Z |
-  | autoscaling_down_policy           | b596018eafbc4d6db4b4b0673b851816                                                    | OS::Heat::ScalingPolicy                      | CREATE_COMPLETE | 2025-10-10T22:06:17Z |
+  | autoscaling_memory_high_alarm     | 66397ec7-a3d9-4e19-9eee-9a47c596be55                                                | OS::Aodh::GnocchiAggregationByResourcesAlarm | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | loadbalancer_healthmonitor        | 0ea7e070-ca71-49c9-98ec-ae82ba2cd336                                                | OS::Octavia::HealthMonitor                   | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | router_interface                  | bc584bcf-6881-47fb-aece-555d1e3c7727:subnet_id=4fe1686d-d2fd-4929-a779-5aab069122c0 | OS::Neutron::RouterInterface                 | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | internal_security_group_rule_ssh  | 5449d154-7b7b-4e35-bc2a-b84eb9aa93b9                                                | OS::Neutron::SecurityGroupRule               | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | autoscaling_cpu_high_alarm        | beb24143-f4dc-4986-8967-9791bb8a6454                                                | OS::Aodh::GnocchiAggregationByResourcesAlarm | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | autoscaling_up_policy             | e43acac39e804d7e8bc14a7a28f2462d                                                    | OS::Heat::ScalingPolicy                      | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | autoscaling_cpu_low_alarm         | 267881e3-c727-461a-a6b3-0b3a69bcdb18                                                | OS::Aodh::GnocchiAggregationByResourcesAlarm | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | loadbalancer_floating_ip          | b2500fee-5897-4a19-9050-dd652b51de1c                                                | OS::Neutron::FloatingIP                      | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | autoscaling_memory_low_alarm      | d053c77c-0982-4cba-a4ed-ae49abc7e9c3                                                | OS::Aodh::GnocchiAggregationByResourcesAlarm | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | autoscaling_down_policy           | 7fb8cff6ce3e44138d8374e727728b88                                                    | OS::Heat::ScalingPolicy                      | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | autoscaling_group                 | a45fd5ee-ec09-4de9-a219-be9d75d9cda9                                                | OS::Heat::AutoScalingGroup                   | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | webserver_group                   | 328e5c69-c8a1-4cfa-a136-75554c4ade0b                                                | OS::Nova::ServerGroup                        | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | loadbalancer_pool                 | ddb8e780-a694-4613-8bd0-5e9e285beb0e                                                | OS::Octavia::Pool                            | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | loadbalancer_listener             | 1045b9a0-8caa-4fd2-88e1-d044a31cc681                                                | OS::Octavia::Listener                        | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | loadbalancer                      | 39601dbd-0e4d-4ccd-815b-5bf86ee980d4                                                | OS::Octavia::LoadBalancer                    | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | internal_security_group_rule_http | a43610e5-90ba-4e39-97bf-61666dbdc2e0                                                | OS::Neutron::SecurityGroupRule               | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | bastion_floating_ip               | 93efe3a5-5d04-4a1e-9088-19e05b618c92                                                | OS::Neutron::FloatingIP                      | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | router                            | bc584bcf-6881-47fb-aece-555d1e3c7727                                                | OS::Neutron::Router                          | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | bastion_server                    | 18ffa2f1-7801-4390-90b6-77ca8f47a766                                                | OS::Nova::Server                             | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | internal_security_group           | 1a9c4f43-14f0-4176-b2ea-d6098d0d019d                                                | OS::Neutron::SecurityGroup                   | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | subnet                            | 4fe1686d-d2fd-4929-a779-5aab069122c0                                                | OS::Neutron::Subnet                          | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | network                           | 09ebe892-b43e-43c7-99df-5accb8794f6e                                                | OS::Neutron::Net                             | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
   +-----------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------+-----------------+----------------------+
 
 .. note::
@@ -653,8 +661,8 @@ by getting the currently active server group members.
 
   $ openstack stack resource show autoscaling-example webserver_group -c attributes -f json | jq '.attributes.members'
   [
-    "a6745eaf-2939-4899-9966-3aaa229f617f",
-    "6cd4fef9-ba78-4342-afa7-ff5d6d12243e"
+    "40a126ee-f900-49f1-9865-276c23398c3c",
+    "f14716f4-5b55-40eb-82f4-1e475dd9f7f4"
   ]
 
 There are 4 auto-scaling alarms created in this example,
@@ -671,37 +679,37 @@ Check the state of the alarms to see if any are calling for scaling actions to b
 
   $ openstack stack resource show autoscaling-example autoscaling_cpu_high_alarm -c attributes -f json | jq '.attributes'
   {
-    "alarm_actions": [
-      "https://api.nz-por-1.catalystcloud.io:8000/v1/signal/arn%3Aopenstack%3Aheat%3A%3A9864e20f92ef47238becfe06b869d2ac%3Astacks/autoscaling-example/cb1e6eae-b59d-4788-8b9b-a21d2d16c150/resources/autoscaling_up_policy?SignatureMethod=HmacSHA256&AWSAccessKeyId=58caf713909b4be1813a63757cc89e1c&SignatureVersion=2&Signature=eBn3wJ21VeqpNxj%2BA00L0Q88joislaLEqPdDF7FZvfs%3D",
-      "trust+https://api.nz-por-1.catalystcloud.io:8004/v1/9864e20f92ef47238becfe06b869d2ac/stacks/autoscaling-example/cb1e6eae-b59d-4788-8b9b-a21d2d16c150/resources/autoscaling_up_policy/signal"
-    ],
-    "ok_actions": [],
-    "name": "autoscaling-example-autoscaling_cpu_high_alarm-p6bosunxssog",
-    "timestamp": "2025-10-10T22:08:11.081755",
+    "alarm_id": "beb24143-f4dc-4986-8967-9791bb8a6454",
+    "name": "autoscaling-example-autoscaling_cpu_high_alarm-t2fjccaljgkk",
     "description": "Scale out if average CPU usage exceeds 20%",
-    "time_constraints": [],
     "enabled": true,
-    "state_timestamp": "2025-10-10T22:08:11.081755",
-    "gnocchi_aggregation_by_resources_threshold_rule": {
-      "evaluation_periods": 1,
-      "metric": "cpu",
-      "threshold": 120000000000.0,
-      "granularity": 600,
-      "aggregation_method": "rate:mean",
-      "query": "{\"and\": [{\"or\": [{\"=\": {\"created_by_project_id\": \"9864e20f92ef47238becfe06b869d2ac\"}}, {\"and\": [{\"=\": {\"created_by_project_id\": \"ceecc421f7994cc397380fae5e495179\"}}, {\"=\": {\"project_id\": \"9864e20f92ef47238becfe06b869d2ac\"}}]}]}, {\"and\": [{\"=\": {\"server_group\": \"7a612ef2-ad1d-49fa-a72d-51253761cdda\"}}, {\"=\": {\"ended_at\": null}}]}]}",
-      "comparison_operator": "gt",
-      "resource_type": "instance"
-    },
-    "alarm_id": "334411fa-8f4b-482d-ba05-c4399a7a3393",
-    "state": "insufficient data",
+    "ok_actions": [],
+    "alarm_actions": [
+      "https://api.nz-por-1.catalystcloud.io:8000/v1/signal/arn%3Aopenstack%3Aheat%3A%3A9864e20f92ef47238becfe06b869d2ac%3Astacks/autoscaling-example/80f2488f-4b45-44d3-8bf2-72b61bf09d25/resources/autoscaling_up_policy?SignatureMethod=HmacSHA256&SignatureVersion=2&AWSAccessKeyId=...&Signature=puZRYF1Q%2FMXYz%2Fhi5Ng8lmY1g6xrcHvkKmPF0Sc3j6Y%3D",
+      "trust+https://api.nz-por-1.catalystcloud.io:8004/v1/9864e20f92ef47238becfe06b869d2ac/stacks/autoscaling-example/80f2488f-4b45-44d3-8bf2-72b61bf09d25/resources/autoscaling_up_policy/signal"
+    ],
     "insufficient_data_actions": [],
     "repeat_actions": true,
-    "user_id": "517bcd700274432d96f43616ac1e37ea",
-    "state_reason": "Not evaluated yet",
-    "project_id": "9864e20f92ef47238becfe06b869d2ac",
     "type": "gnocchi_aggregation_by_resources_threshold",
-    "evaluate_timestamp": "2025-10-10T23:23:43",
-    "severity": "low"
+    "time_constraints": [],
+    "project_id": "9864e20f92ef47238becfe06b869d2ac",
+    "user_id": "517bcd700274432d96f43616ac1e37ea",
+    "timestamp": "2026-02-13T04:52:34.646667",
+    "state": "insufficient data",
+    "state_timestamp": "2026-02-13T04:52:34.646667",
+    "state_reason": "Not evaluated yet",
+    "severity": "low",
+    "evaluate_timestamp": "2026-02-13T04:52:35",
+    "gnocchi_aggregation_by_resources_threshold_rule": {
+      "metric": "cpu",
+      "query": "{\"and\": [{\"or\": [{\"=\": {\"created_by_project_id\": \"9864e20f92ef47238becfe06b869d2ac\"}}, {\"and\": [{\"=\": {\"created_by_project_id\": \"ceecc421f7994cc397380fae5e495179\"}}, {\"=\": {\"project_id\": \"9864e20f92ef47238becfe06b869d2ac\"}}]}]}, {\"and\": [{\"=\": {\"server_group\": \"328e5c69-c8a1-4cfa-a136-75554c4ade0b\"}}, {\"=\": {\"ended_at\": null}}]}]}",
+      "resource_type": "instance",
+      "comparison_operator": "gt",
+      "threshold": 120000000000.0,
+      "aggregation_method": "rate:mean",
+      "evaluation_periods": 1,
+      "granularity": 600
+    }
   }
 
 Note that the alarm is in ``insufficient data`` state. This is normal for
@@ -715,37 +723,37 @@ Once some time has passed, the alarm should transition into ``ok`` state.
 
   $ openstack stack resource show autoscaling-example autoscaling_cpu_high_alarm -c attributes -f json | jq '.attributes'
   {
-    "alarm_actions": [
-      "https://api.nz-por-1.catalystcloud.io:8000/v1/signal/arn%3Aopenstack%3Aheat%3A%3A9864e20f92ef47238becfe06b869d2ac%3Astacks/autoscaling-example/cb1e6eae-b59d-4788-8b9b-a21d2d16c150/resources/autoscaling_up_policy?SignatureMethod=HmacSHA256&AWSAccessKeyId=58caf713909b4be1813a63757cc89e1c&SignatureVersion=2&Signature=eBn3wJ21VeqpNxj%2BA00L0Q88joislaLEqPdDF7FZvfs%3D",
-      "trust+https://api.nz-por-1.catalystcloud.io:8004/v1/9864e20f92ef47238becfe06b869d2ac/stacks/autoscaling-example/cb1e6eae-b59d-4788-8b9b-a21d2d16c150/resources/autoscaling_up_policy/signal"
-    ],
-    "ok_actions": [],
-    "name": "autoscaling-example-autoscaling_cpu_high_alarm-p6bosunxssog",
-    "timestamp": "2025-10-10T22:08:11.081755",
+    "alarm_id": "beb24143-f4dc-4986-8967-9791bb8a6454",
+    "name": "autoscaling-example-autoscaling_cpu_high_alarm-t2fjccaljgkk",
     "description": "Scale out if average CPU usage exceeds 20%",
-    "time_constraints": [],
     "enabled": true,
-    "state_timestamp": "2025-10-10T22:08:11.081755",
-    "gnocchi_aggregation_by_resources_threshold_rule": {
-      "evaluation_periods": 1,
-      "metric": "cpu",
-      "threshold": 120000000000.0,
-      "granularity": 600,
-      "aggregation_method": "rate:mean",
-      "query": "{\"and\": [{\"or\": [{\"=\": {\"created_by_project_id\": \"9864e20f92ef47238becfe06b869d2ac\"}}, {\"and\": [{\"=\": {\"created_by_project_id\": \"ceecc421f7994cc397380fae5e495179\"}}, {\"=\": {\"project_id\": \"9864e20f92ef47238becfe06b869d2ac\"}}]}]}, {\"and\": [{\"=\": {\"server_group\": \"7a612ef2-ad1d-49fa-a72d-51253761cdda\"}}, {\"=\": {\"ended_at\": null}}]}]}",
-      "comparison_operator": "gt",
-      "resource_type": "instance"
-    },
-    "alarm_id": "334411fa-8f4b-482d-ba05-c4399a7a3393",
-    "state": "ok",
+    "ok_actions": [],
+    "alarm_actions": [
+      "https://api.nz-por-1.catalystcloud.io:8000/v1/signal/arn%3Aopenstack%3Aheat%3A%3A9864e20f92ef47238becfe06b869d2ac%3Astacks/autoscaling-example/80f2488f-4b45-44d3-8bf2-72b61bf09d25/resources/autoscaling_up_policy?SignatureMethod=HmacSHA256&SignatureVersion=2&AWSAccessKeyId=...&Signature=puZRYF1Q%2FMXYz%2Fhi5Ng8lmY1g6xrcHvkKmPF0Sc3j6Y%3D",
+      "trust+https://api.nz-por-1.catalystcloud.io:8004/v1/9864e20f92ef47238becfe06b869d2ac/stacks/autoscaling-example/80f2488f-4b45-44d3-8bf2-72b61bf09d25/resources/autoscaling_up_policy/signal"
+    ],
     "insufficient_data_actions": [],
     "repeat_actions": true,
-    "user_id": "517bcd700274432d96f43616ac1e37ea",
-    "state_reason": "Transition to ok due to 1 samples inside threshold, most recent: 2780000000.0",
-    "project_id": "9864e20f92ef47238becfe06b869d2ac",
     "type": "gnocchi_aggregation_by_resources_threshold",
-    "evaluate_timestamp": "2025-10-10T23:23:43",
-    "severity": "low"
+    "time_constraints": [],
+    "project_id": "9864e20f92ef47238becfe06b869d2ac",
+    "user_id": "517bcd700274432d96f43616ac1e37ea",
+    "timestamp": "2026-02-13T04:52:34.646667",
+    "state": "ok",
+    "state_timestamp": "2026-02-13T04:52:34.646667",
+    "state_reason": "Transition to ok due to 1 samples inside threshold, most recent: 5445000000.0",
+    "severity": "low",
+    "evaluate_timestamp": "2026-02-13T04:52:35",
+    "gnocchi_aggregation_by_resources_threshold_rule": {
+      "metric": "cpu",
+      "query": "{\"and\": [{\"or\": [{\"=\": {\"created_by_project_id\": \"9864e20f92ef47238becfe06b869d2ac\"}}, {\"and\": [{\"=\": {\"created_by_project_id\": \"ceecc421f7994cc397380fae5e495179\"}}, {\"=\": {\"project_id\": \"9864e20f92ef47238becfe06b869d2ac\"}}]}]}, {\"and\": [{\"=\": {\"server_group\": \"328e5c69-c8a1-4cfa-a136-75554c4ade0b\"}}, {\"=\": {\"ended_at\": null}}]}]}",
+      "resource_type": "instance",
+      "comparison_operator": "gt",
+      "threshold": 120000000000.0,
+      "aggregation_method": "rate:mean",
+      "evaluation_periods": 1,
+      "granularity": 600
+    }
   }
 
 .. note::
@@ -770,7 +778,7 @@ using the IDs we fetched earlier.
 
 .. code-block:: console
 
-  $ openstack server show a6745eaf-2939-4899-9966-3aaa229f617f -c addresses -f json | jq --raw-output '.addresses | to_entries | [first][0].value[0]'
+  $ openstack server show 40a126ee-f900-49f1-9865-276c23398c3c -c addresses -f json | jq --raw-output '.addresses | to_entries | [first][0].value[0]'
   10.0.0.215
 
 With this, we can login to the web server via the jump host.
@@ -864,37 +872,37 @@ see that it has now been triggered.
 
   $ openstack stack resource show autoscaling-example autoscaling_cpu_high_alarm -c attributes -f json | jq '.attributes'
   {
-    "alarm_actions": [
-      "https://api.nz-por-1.catalystcloud.io:8000/v1/signal/arn%3Aopenstack%3Aheat%3A%3A9864e20f92ef47238becfe06b869d2ac%3Astacks/autoscaling-example/cb1e6eae-b59d-4788-8b9b-a21d2d16c150/resources/autoscaling_up_policy?SignatureMethod=HmacSHA256&AWSAccessKeyId=58caf713909b4be1813a63757cc89e1c&SignatureVersion=2&Signature=eBn3wJ21VeqpNxj%2BA00L0Q88joislaLEqPdDF7FZvfs%3D",
-      "trust+https://api.nz-por-1.catalystcloud.io:8004/v1/9864e20f92ef47238becfe06b869d2ac/stacks/autoscaling-example/cb1e6eae-b59d-4788-8b9b-a21d2d16c150/resources/autoscaling_up_policy/signal"
-    ],
-    "ok_actions": [],
-    "name": "autoscaling-example-autoscaling_cpu_high_alarm-p6bosunxssog",
-    "timestamp": "2025-10-10T22:08:11.081755",
+    "alarm_id": "beb24143-f4dc-4986-8967-9791bb8a6454",
+    "name": "autoscaling-example-autoscaling_cpu_high_alarm-t2fjccaljgkk",
     "description": "Scale out if average CPU usage exceeds 20%",
-    "time_constraints": [],
     "enabled": true,
-    "state_timestamp": "2025-10-10T22:08:11.081755",
-    "gnocchi_aggregation_by_resources_threshold_rule": {
-      "evaluation_periods": 1,
-      "metric": "cpu",
-      "threshold": 120000000000.0,
-      "granularity": 600,
-      "aggregation_method": "rate:mean",
-      "query": "{\"and\": [{\"or\": [{\"=\": {\"created_by_project_id\": \"9864e20f92ef47238becfe06b869d2ac\"}}, {\"and\": [{\"=\": {\"created_by_project_id\": \"ceecc421f7994cc397380fae5e495179\"}}, {\"=\": {\"project_id\": \"9864e20f92ef47238becfe06b869d2ac\"}}]}]}, {\"and\": [{\"=\": {\"server_group\": \"7a612ef2-ad1d-49fa-a72d-51253761cdda\"}}, {\"=\": {\"ended_at\": null}}]}]}",
-      "comparison_operator": "gt",
-      "resource_type": "instance"
-    },
-    "alarm_id": "334411fa-8f4b-482d-ba05-c4399a7a3393",
-    "state": "ok",
+    "ok_actions": [],
+    "alarm_actions": [
+      "https://api.nz-por-1.catalystcloud.io:8000/v1/signal/arn%3Aopenstack%3Aheat%3A%3A9864e20f92ef47238becfe06b869d2ac%3Astacks/autoscaling-example/80f2488f-4b45-44d3-8bf2-72b61bf09d25/resources/autoscaling_up_policy?SignatureMethod=HmacSHA256&SignatureVersion=2&AWSAccessKeyId=...&Signature=puZRYF1Q%2FMXYz%2Fhi5Ng8lmY1g6xrcHvkKmPF0Sc3j6Y%3D",
+      "trust+https://api.nz-por-1.catalystcloud.io:8004/v1/9864e20f92ef47238becfe06b869d2ac/stacks/autoscaling-example/80f2488f-4b45-44d3-8bf2-72b61bf09d25/resources/autoscaling_up_policy/signal"
+    ],
     "insufficient_data_actions": [],
     "repeat_actions": true,
-    "user_id": "517bcd700274432d96f43616ac1e37ea",
-    "state_reason": "Transition to ok due to 1 samples inside threshold, most recent: 2780000000.0",
-    "project_id": "9864e20f92ef47238becfe06b869d2ac",
     "type": "gnocchi_aggregation_by_resources_threshold",
-    "evaluate_timestamp": "2025-10-10T23:23:43",
-    "severity": "low"
+    "time_constraints": [],
+    "project_id": "9864e20f92ef47238becfe06b869d2ac",
+    "user_id": "517bcd700274432d96f43616ac1e37ea",
+    "timestamp": "2026-02-13T04:52:34.646667",
+    "state": "alarm",
+    "state_timestamp": "2026-02-13T04:55:35.079592",
+    "state_reason": "Transition to alarm due to 1 samples outside threshold, most recent: 54450000000.0",
+    "severity": "low",
+    "evaluate_timestamp": "2026-02-13T04:55:35",
+    "gnocchi_aggregation_by_resources_threshold_rule": {
+      "metric": "cpu",
+      "query": "{\"and\": [{\"or\": [{\"=\": {\"created_by_project_id\": \"9864e20f92ef47238becfe06b869d2ac\"}}, {\"and\": [{\"=\": {\"created_by_project_id\": \"ceecc421f7994cc397380fae5e495179\"}}, {\"=\": {\"project_id\": \"9864e20f92ef47238becfe06b869d2ac\"}}]}]}, {\"and\": [{\"=\": {\"server_group\": \"328e5c69-c8a1-4cfa-a136-75554c4ade0b\"}}, {\"=\": {\"ended_at\": null}}]}]}",
+      "resource_type": "instance",
+      "comparison_operator": "gt",
+      "threshold": 120000000000.0,
+      "aggregation_method": "rate:mean",
+      "evaluation_periods": 1,
+      "granularity": 600
+    }
   }
 
 The alarm has now notified the auto-scaling group that a scale out should occur.
@@ -906,8 +914,8 @@ we now see that a third instance has joined the cluster!
 
   $ openstack stack resource show autoscaling-example webserver_group -c attributes -f json | jq '.attributes.members'
   [
-    "87e11933-f057-4b45-86b6-da0bb4697905",
-    "d3d56962-988e-40d6-b5c7-ad7df1abbf63",
+    "40a126ee-f900-49f1-9865-276c23398c3c",
+    "f14716f4-5b55-40eb-82f4-1e475dd9f7f4",
     "c3bd7529-0140-4d7a-9bb3-ea8286e13dc5"
   ]
 
@@ -924,15 +932,277 @@ the third instance should have started responding to requests.
   $ curl http://192.0.2.2
   Hello, world! This request was served by au-x-f6tup25k7exn-jackdd47dc6k-webserver-7rzds4ycexj6 (10.0.0.105).
 
-Cleanup
-=======
+Conclusion
+==========
 
-We have successfully implemented an auto-scaling, highly available
-web application on the Catalyst Cloud Orchestration Service.
+We have covered all of the necessary tools to create an auto-scaling,
+highly available cluster managed by the Catalyst Cloud Orchestration Service.
 
-This concludes the tutorial. To clean up, all you need to do is
-delete the stack and all resources will be quickly deleted.
+The following sections cover additional functionality for further improving
+the reliability of your cluster. Read on to learn about this functionality,
+or if you no longer need your example stack, see :ref:`Deleting a stack <orchestration-stack-delete>`
+for instructions on how to delete your example stack.
+
+.. _orchestration-autohealing:
+.. _orchestration-autoscaling-autohealing:
+
+************
+Auto-healing
+************
+
+The Catalyst Cloud Orchestration Service allows you to configure
+**auto-healing** of load balancer members in an auto-scaling group.
+
+How it works
+============
+
+Auto-healing periodically checks the ability to connect to load balancer members
+using the combination of a :ref:`health monitor <loadbalancer-healthmonitor>` on
+the load balancer pool, and a :ref:`special type of alarm <alarm-load-balancer-member>`.
+If the alarm detects that any member (web server) has stopped serving requests,
+the unhealthy members will be automatically replaced to restore high availability.
+
+.. note::
+
+  A health monitor can be added to a load balancer pool even if auto-healing is not used.
+  When added to a regular load balancer, or a load balanced auto-scaling group **without**
+  auto-healing, it simply monitors the status of members, and takes them out of the pool
+  if they become unhealthy.
+
+  When using auto-healing, a health monitor is required.
+
+The first step is to add a health monitor to the load balancer pool, using the ``OS::Octavia::HealthMonitor``
+`resource type <https://docs.openstack.org/heat/latest/template_guide/openstack.html#OS::Octavia::HealthMonitor>`__.
+
+.. code-block:: yaml
+
+  loadbalancer_healthmonitor:
+    type: OS::Octavia::HealthMonitor
+    properties:
+      pool: {get_resource: loadbalancer_pool}
+      type: HTTP
+      timeout: {get_param: loadbalancer_healthmonitor_timeout}
+      max_retries: {get_param: loadbalancer_healthmonitor_max_retries}
+      delay: {get_param: loadbalancer_healthmonitor_delay}
+
+Next, create the load balancer member health alarm used to trigger member placements,
+using the ``OS::Aodh::LBMemberHealthAlarm``
+`resource type <https://docs.openstack.org/heat/latest/template_guide/openstack.html#OS::Aodh::LBMemberHealthAlarm>`__.
+
+.. code-block:: yaml
+
+  autoscaling_member_health_alarm:
+    type: OS::Aodh::LBMemberHealthAlarm
+    properties:
+      description: Replace members that have stopped serving requests
+      stack: {get_param: OS::stack_id}  # Automatically generated, does not need to be defined.
+      pool: {get_resource: loadbalancer_pool}
+      autoscaling_group_id: {get_resource: autoscaling_group}
+      alarm_actions:
+        - trust+heat://
+      repeat_actions: false
+
+.. note::
+
+  Auto-healing of auto-scaling group members without a load balancer is not supported.
+  Likewise, an auto-scaling group must be used when configuring auto-healing for
+  load balancer members.
+
+.. _orchestration-autoscaling-autohealing-enable:
+
+Enabling auto-healing
+=====================
+
+.. note::
+
+  This section assumes you have a functioning example auto-scaling stack
+  already up and running, named ``autoscaling-example``.
+
+  See :ref:`Creating the stack <orchestration-autoscaling-creation>`
+  to build an orchestration stack using our example templates.
+
+To enable auto-healing on your example stack, use the following command
+to set the ``autoscaling_autohealing_enable`` parameter to ``true``.
 
 .. code-block:: bash
 
-  openstack stack delete autoscaling-example
+  openstack stack update autoscaling-example --existing --parameter "autoscaling_autohealing_enable=true"
+
+The status of the stack will change to ``UPDATE_IN_PROGRESS``, and the resource changes will start to be made.
+
+.. code-block:: console
+
+  $ openstack stack update autoscaling-example --existing --parameter "autoscaling_autohealing_enable=true"
+  +---------------------+-----------------------------------------------------------------------+
+  | Field               | Value                                                                 |
+  +---------------------+-----------------------------------------------------------------------+
+  | id                  | 80f2488f-4b45-44d3-8bf2-72b61bf09d25                                  |
+  | stack_name          | autoscaling-example                                                   |
+  | description         | An example Catalyst Cloud Orchestration Service template              |
+  |                     | for building a cluster of web servers with auto-scaling               |
+  |                     | and optional auto-healing.                                            |
+  |                     |                                                                       |
+  |                     | This provisions the following cloud resources:                        |
+  |                     |                                                                       |
+  |                     | * Security groups to control access to/from instances.                |
+  |                     | * An internal network for all instances.                              |
+  |                     | * A bastion host with its own floating IP to allow SSH access         |
+  |                     |   into the cluster.                                                   |
+  |                     | * A load balancer to allow highly available access to the web servers |
+  |                     |   from the Internet, with its own floating IP.                        |
+  |                     | * An auto-scaling group that launches, monitors and scales            |
+  |                     |   a cluster of web server instances depending on the configured       |
+  |                     |   load thresholds.                                                    |
+  |                     | * (Optional) Another alarm that monitors the health of auto-scaling   |
+  |                     |   group members, and automatically replaces them if they stop serving |
+  |                     |   requests.                                                           |
+  | creation_time       | 2026-02-13T04:50:00Z                                                  |
+  | updated_time        | 2026-02-13T05:14:07Z                                                  |
+  | stack_status        | UPDATE_IN_PROGRESS                                                    |
+  | stack_status_reason | Stack UPDATE started                                                  |
+  +---------------------+-----------------------------------------------------------------------+
+
+Use the same command we used previously to see the result of the changes made.
+
+.. code-block:: bash
+
+  openstack stack resource list autoscaling-example
+
+The auto-scaling group will be updated with the new configuration,
+and a new load balancer member health alarm should have been created.
+
+.. code-block:: text
+
+  +-----------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------+-----------------+----------------------+
+  | resource_name                     | physical_resource_id                                                                | resource_type                                | resource_status | updated_time         |
+  +-----------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------+-----------------+----------------------+
+  | autoscaling_memory_high_alarm     | 66397ec7-a3d9-4e19-9eee-9a47c596be55                                                | OS::Aodh::GnocchiAggregationByResourcesAlarm | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | loadbalancer_healthmonitor        | 0ea7e070-ca71-49c9-98ec-ae82ba2cd336                                                | OS::Octavia::HealthMonitor                   | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | router_interface                  | bc584bcf-6881-47fb-aece-555d1e3c7727:subnet_id=4fe1686d-d2fd-4929-a779-5aab069122c0 | OS::Neutron::RouterInterface                 | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | internal_security_group_rule_ssh  | 5449d154-7b7b-4e35-bc2a-b84eb9aa93b9                                                | OS::Neutron::SecurityGroupRule               | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | autoscaling_cpu_high_alarm        | beb24143-f4dc-4986-8967-9791bb8a6454                                                | OS::Aodh::GnocchiAggregationByResourcesAlarm | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | autoscaling_up_policy             | e43acac39e804d7e8bc14a7a28f2462d                                                    | OS::Heat::ScalingPolicy                      | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | autoscaling_cpu_low_alarm         | 267881e3-c727-461a-a6b3-0b3a69bcdb18                                                | OS::Aodh::GnocchiAggregationByResourcesAlarm | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | loadbalancer_floating_ip          | b2500fee-5897-4a19-9050-dd652b51de1c                                                | OS::Neutron::FloatingIP                      | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | autoscaling_memory_low_alarm      | d053c77c-0982-4cba-a4ed-ae49abc7e9c3                                                | OS::Aodh::GnocchiAggregationByResourcesAlarm | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | autoscaling_down_policy           | 7fb8cff6ce3e44138d8374e727728b88                                                    | OS::Heat::ScalingPolicy                      | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | autoscaling_group                 | a45fd5ee-ec09-4de9-a219-be9d75d9cda9                                                | OS::Heat::AutoScalingGroup                   | UPDATE_COMPLETE | 2026-02-13T05:14:11Z |
+  | webserver_group                   | 328e5c69-c8a1-4cfa-a136-75554c4ade0b                                                | OS::Nova::ServerGroup                        | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | loadbalancer_pool                 | ddb8e780-a694-4613-8bd0-5e9e285beb0e                                                | OS::Octavia::Pool                            | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | loadbalancer_listener             | 1045b9a0-8caa-4fd2-88e1-d044a31cc681                                                | OS::Octavia::Listener                        | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | loadbalancer                      | 39601dbd-0e4d-4ccd-815b-5bf86ee980d4                                                | OS::Octavia::LoadBalancer                    | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | internal_security_group_rule_http | a43610e5-90ba-4e39-97bf-61666dbdc2e0                                                | OS::Neutron::SecurityGroupRule               | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | bastion_floating_ip               | 93efe3a5-5d04-4a1e-9088-19e05b618c92                                                | OS::Neutron::FloatingIP                      | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | router                            | bc584bcf-6881-47fb-aece-555d1e3c7727                                                | OS::Neutron::Router                          | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | bastion_server                    | 18ffa2f1-7801-4390-90b6-77ca8f47a766                                                | OS::Nova::Server                             | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | internal_security_group           | 1a9c4f43-14f0-4176-b2ea-d6098d0d019d                                                | OS::Neutron::SecurityGroup                   | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | subnet                            | 4fe1686d-d2fd-4929-a779-5aab069122c0                                                | OS::Neutron::Subnet                          | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | network                           | 09ebe892-b43e-43c7-99df-5accb8794f6e                                                | OS::Neutron::Net                             | CREATE_COMPLETE | 2026-02-13T04:50:01Z |
+  | autoscaling_member_health_alarm   | 65a4074f-3172-4dd0-a2f2-641dd64c5619                                                | OS::Aodh::LBMemberHealthAlarm                | CREATE_COMPLETE | 2026-02-13T05:14:07Z |
+  +-----------------------------------+-------------------------------------------------------------------------------------+----------------------------------------------+-----------------+----------------------+
+
+Testing
+=======
+
+Now that auto-healing has been enabled, let's simulate a member failure to make sure that it works.
+
+First, confirm that all load balancer members in the pool are healthy:
+
+.. code-block:: bash
+
+  openstack loadbalancer member list $(openstack stack resource show autoscaling-example loadbalancer_pool -c physical_resource_id -f value)
+
+All pool members should have an ``operating_status`` value of ``ONLINE``.
+
+.. code-block:: console
+
+  $ openstack loadbalancer member list $(openstack stack resource show autoscaling-example loadbalancer_pool -c physical_resource_id -f value)
+  +--------------------------------------+------+----------------------------------+---------------------+------------+---------------+------------------+--------+
+  | id                                   | name | project_id                       | provisioning_status | address    | protocol_port | operating_status | weight |
+  +--------------------------------------+------+----------------------------------+---------------------+------------+---------------+------------------+--------+
+  | 3aa1675b-748a-4558-bd53-4e15c434fc14 |      | 9864e20f92ef47238becfe06b869d2ac | ACTIVE              | 10.0.0.132 |            80 | ONLINE           |      1 |
+  | 66673bf2-b4e9-4f95-ba05-b787e66389d1 |      | 9864e20f92ef47238becfe06b869d2ac | ACTIVE              | 10.0.0.53  |            80 | ONLINE           |      1 |
+  +--------------------------------------+------+----------------------------------+---------------------+------------+---------------+------------------+--------+
+
+The easiest way to simulate a failure is to simply shut down one of the running instances.
+
+First, get a list of IDs for the currently running instances:
+
+.. code-block:: console
+
+  $ openstack stack resource show autoscaling-example webserver_group -c attributes -f json | jq '.attributes.members'
+  [
+    "40a126ee-f900-49f1-9865-276c23398c3c",
+    "f14716f4-5b55-40eb-82f4-1e475dd9f7f4"
+  ]
+
+Pick an ID and run ``openstack server stop`` to shut down the instance:
+
+.. code-block:: bash
+
+  openstack server stop 40a126ee-f900-49f1-9865-276c23398c3c
+
+Depending on the health monitor configuration it can take a few seconds for the
+pool member to be declared unhealthy, and up to a couple of minutes for the alarm
+to trigger the auto-healing process.
+
+To confirm that the alarm triggered, look at the history of the member health alarm:
+
+.. code-block:: bash
+
+  openstack alarm-history show $(openstack stack resource show autoscaling-example autoscaling_member_health_alarm -c physical_resource_id -f value)
+
+As you can see in the output below, the alarm triggered, and has now recovered after replacing the failed member.
+
+.. code-block:: console
+
+  $ openstack alarm-history show $(openstack stack resource show autoscaling-example autoscaling_member_health_alarm -c physical_resource_id -f value)
+  +----------------------------+------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------0+--------------------------------------+
+  | timestamp                  | type             | detail                                                                                                                                                         | event_id                             |
+  +----------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------+
+  | 2026-02-13T05:40:22.862453 | state transition | {"state": "ok", "transition_reason": "Transition to ok due to 0 members unhealthy, most recent: None"}                                                         | 391907ce-e37d-4c08-9609-523f62796a92 |
+  | 2026-02-13T05:39:23.120092 | state transition | {"state": "alarm", "transition_reason": "Transition to alarm due to 1 members unhealthy, most recent: {'id': 'c10cce5c-5af0-48f6-96e7-a52b5ce638ea', 'name':   | aff7c6fc-28db-4067-8beb-e76823ef2e63 |
+  |                            |                  | '', 'operating_status': 'ERROR', 'provisioning_status': 'ACTIVE', 'admin_state_up': True, 'address': '10.0.0.215', 'protocol_port': 80, 'weight': 1, 'backup': |                                      |
+  |                            |                  | False, 'subnet_id': None, 'project_id': '9864e20f92ef47238becfe06b869d2ac', 'created_at': '2026-02-13T04:52:23', 'updated_at': '2026-02-13T05:38:49',          |                                      |
+  |                            |                  | 'monitor_address': None, 'monitor_port': None, 'tags': [], 'tenant_id': '9864e20f92ef47238becfe06b869d2ac'}"}                                                  |                                      |
+  | 2026-02-13T05:15:24.183390 | state transition | {"state": "ok", "transition_reason": "Transition to ok due to 0 members unhealthy, most recent: None"}                                                         | 34fc1fa8-89df-4337-afa1-359b25a3ad8e |
+  | 2026-02-13T05:14:18.991393 | creation         | {"alarm_id": "65a4074f-3172-4dd0-a2f2-641dd64c5619", "type": "loadbalancer_member_health", "enabled": true, "name": "autoscaling-example-                      | 3d6d092a-22d4-4c15-9ff7-4137eee76f6f |
+  |                            |                  | autoscaling_member_health_alarm-w56dmoffsgzw", "description": "Replace members that have stopped serving requests", "timestamp":                               |                                      |
+  |                            |                  | "2026-02-13T05:14:18.991393", "user_id": "517bcd700274432d96f43616ac1e37ea", "project_id": "9864e20f92ef47238becfe06b869d2ac", "state": "insufficient data",   |                                      |
+  |                            |                  | "state_timestamp": "2026-02-13T05:14:18.991393", "state_reason": "Not evaluated yet", "ok_actions": [], "alarm_actions":                                       |                                      |
+  |                            |                  | ["trust+heat://...:delete@"], "insufficient_data_actions": [], "repeat_actions": false, "time_constraints": [], "severity":                                    |                                      |
+  |                            |                  | "low", "rule": {"pool_id": "ddb8e780-a694-4613-8bd0-5e9e285beb0e", "stack_id": "80f2488f-4b45-44d3-8bf2-72b61bf09d25", "autoscaling_group_id": "autoscaling-   |                                      |
+  |                            |                  | example-autoscaling_group-omxlucf733w6"}}                                                                                                                      |                                      |
+  +----------------------------+------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------------+
+
+The ID of one of the instances in the auto-scaling server group has changed accordingly.
+
+.. code-block:: console
+
+  $ openstack stack resource show autoscaling-example webserver_group -c attributes -f json | jq '.attributes.members'
+  [
+    "322a1e4c-8998-4eab-b04d-65b87f156bd7",
+    "f14716f4-5b55-40eb-82f4-1e475dd9f7f4"
+  ]
+
+All load balancer members are now back to a healthy state following the replacement
+of the failed instance.
+
+.. code-block:: console
+
+  $ openstack loadbalancer member list $(openstack stack resource show autoscaling-example loadbalancer_pool -c physical_resource_id -f value)
+  +--------------------------------------+------+----------------------------------+---------------------+------------+---------------+------------------+--------+
+  | id                                   | name | project_id                       | provisioning_status | address    | protocol_port | operating_status | weight |
+  +--------------------------------------+------+----------------------------------+---------------------+------------+---------------+------------------+--------+
+  | 3aa1675b-748a-4558-bd53-4e15c434fc14 |      | 9864e20f92ef47238becfe06b869d2ac | ACTIVE              | 10.0.0.132 |            80 | ONLINE           |      1 |
+  | 66673bf2-b4e9-4f95-ba05-b787e66389d1 |      | 9864e20f92ef47238becfe06b869d2ac | ACTIVE              | 10.0.0.53  |            80 | ONLINE           |      1 |
+  +--------------------------------------+------+----------------------------------+---------------------+------------+---------------+------------------+--------+
+
+Conclusion
+==========
+
+We have successfully implemented an auto-scaling, auto-healing,
+highly available web application on the Catalyst Cloud Orchestration Service.
+
+If you no longer need your example stack, see :ref:`Deleting a stack <orchestration-stack-delete>`
+for instructions on how to delete your example stack.

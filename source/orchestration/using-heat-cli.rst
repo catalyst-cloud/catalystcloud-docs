@@ -66,9 +66,8 @@ If not, make sure the ``python-heatclient`` package is installed.
     stack template show
     stack update
 
-When using :ref:`auto-scaling <autoscaling-on-catalyst-cloud>` or
-:ref:`auto-healthing <autohealing-on-catalyst-cloud>` it is highly recommended
-to make sure you can also access the Catalyst Cloud
+When using :ref:`auto-scaling <autoscaling-on-catalyst-cloud>`,
+it is highly recommended to make sure you can also access the Catalyst Cloud
 :ref:`Metrics Service <metrics-getting-started>` and :ref:`Alarm Service <alarm-overview>`,
 as this will allow you to observe the state of the resources and metrics used.
 
@@ -302,22 +301,68 @@ identify whether they are producing the expected events and results.
 Individual events can be further analysed using the ``heat event-show``
 command.
 
+.. _orchestration-stack-delete:
+
 ****************
 Deleting a stack
 ****************
 
-To delete a stack:
+Orchestration stacks can be deleted using the following command
+(substituting ``mystack`` with the name or ID of the stack you
+want to delete):
 
 .. code-block:: bash
 
+  openstack stack delete mystack
+
+You will be asked to confirm that you want to delete the stack.
+Enter ``y`` and press Enter to confirm the deletion.
+
+.. code-block:: console
+
   $ openstack stack delete mystack
+  Are you sure you want to delete this stack(s) [y/N]? y
 
-Heat will return a confirmation message saying the stack is being deleted.
+The stack will transition into ``DELETE_IN_PROGRESS`` state,
+and the resources will start to be deleted.
 
-.. code-block:: text
+.. code-block:: console
 
+  $ openstack stack list
   +--------------------------------------+------------+--------------------+----------------------+
   | id                                   | stack_name | stack_status       | creation_time        |
   +--------------------------------------+------------+--------------------+----------------------+
   | 1f913699-010e-4564-ba08-xxxxxxxxxxxx | mystack    | DELETE_IN_PROGRESS | 2015-04-16T05:58:49Z |
   +--------------------------------------+------------+--------------------+----------------------+
+
+All resources created by the stack will be automatically and quickly deleted.
+Once the resources owned by the stack have been deleted, the stack itself
+will be deleted and no longer available.
+
+You can watch the resources being deleted with the following command,
+to make sure all resources are being deleted properly:
+
+.. code-block:: bash
+
+  watch openstack stack resource list mystack
+
+.. note::
+
+  If any resources report a resource status of ``DELETE_FAILED``,
+  you can find out the reason using the following command:
+
+  .. code-block:: bash
+
+    openstack stack failures list mystack
+
+  If the output does not point to a particular root cause, try deleting the resource
+  manually using the CLI for the respective service; that should give you a better
+  idea of why the resource is failing to be deleted.
+
+  If a resource cannot be deleted due to being in an ``ERROR`` state, please
+  raise a ticket via the `Support Centre`_ and we will help you resolve the issue.
+
+  .. _`Support Centre`: https://catalystcloud.nz/support/support-centre
+
+  Once the resources that failed to delete have been cleaned up, the rest of the
+  resources should be deleted automatically.

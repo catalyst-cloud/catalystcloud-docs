@@ -55,6 +55,9 @@ Catalyst Cloud users with one of the following user roles can use the Alarm Serv
 (for more information, see :ref:`Access Control <access_control>`):
 
 * :ref:`project_member_role`
+* :ref:`alarm_member_role`
+* :ref:`alarm_reader_role`
+* :ref:`alarm_state_reader_role`
 
 Setting up your environment
 ===========================
@@ -423,12 +426,12 @@ Load balancer member health alarms
 ==================================
 
 This type of alarm is used for auto-healing of load balancer members in
-an auto-scaling group within a :ref:`Catalyst Cloud Orchestration Service <cloud-orchestration>` stack,
-using the ``loadbalancer_member_health`` alarm type.
+a :ref:`Catalyst Cloud Orchestration Service <cloud-orchestration>` stack
+auto-scaling group, using the ``loadbalancer_member_health`` alarm type.
 
 Alarms of this type should be managed using the stack itself.
 For more information, see the documentation for
-:ref:`auto-healing on the Catalyst Cloud Orchestration Service <autohealing-on-catalyst-cloud>`.
+:ref:`auto-healing on the Catalyst Cloud Orchestration Service <orchestration-autohealing>`.
 
 .. _alarm-actions:
 
@@ -616,6 +619,29 @@ All attributes related to the alarm are available.
   | resource_type             | instance                                                                      |
   +---------------------------+-------------------------------------------------------------------------------+
 
+.. _alarm-get-state:
+
+Get alarm state
+===============
+
+To get the state of an alarm, use the ``openstack alarm state get`` command
+with the alarm name or ID.
+
+.. code-block:: bash
+
+  openstack alarm state get ${alarm}
+
+This will only return the ``state`` field in the output.
+
+.. code-block:: console
+
+  $ openstack alarm state get test-alarm
+  +-------+-------+
+  | Field | Value |
+  +-------+-------+
+  | state | ok    |
+  +-------+-------+
+
 .. _alarm-update:
 
 Update an existing alarm
@@ -629,6 +655,32 @@ For example, to change the threshold on an existing alarm:
 .. code-block:: bash
 
   openstack alarm update ${alarm} --threshold 864
+
+.. _alarm-set-state:
+
+Set alarm state
+===============
+
+The state of an alarm can be temporarily overridden using the following command.
+
+.. code-block:: bash
+
+  openstack alarm state set ${alarm} --alarm "${state}"
+
+This is useful for testing whether or not any configured
+:ref:`alarm actions <alarm-actions>` work correctly.
+
+.. code-block:: console
+
+  $ openstack alarm state set test-alarm --alarm "alarm"
+  +-------+-------+
+  | Field | Value |
+  +-------+-------+
+  | state | alarm |
+  +-------+-------+
+
+When the alarm is next evaluated, it will be updated again to reflect the
+current correct state.
 
 .. _alarm-enable-disable:
 

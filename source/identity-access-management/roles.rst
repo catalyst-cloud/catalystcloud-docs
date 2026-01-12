@@ -144,8 +144,8 @@ quite extensive as the role covers almost all the service on the cloud:
    |                       | openstack.alarm.delete                                                 |
    |                       | openstack.alarm.list                                                   |
    |                       | openstack.alarm.show                                                   |
-   |                       | openstack.alarm.state get                                              |
-   |                       | openstack.alarm.state set                                              |
+   |                       | openstack.alarm.state.get                                              |
+   |                       | openstack.alarm.state.set                                              |
    |                       | openstack.alarm-history.search                                         |
    |                       | openstack.alarm-history.show                                           |
    |                       |                                                                        |
@@ -525,6 +525,73 @@ The list of explicit permissions for the metric reader role:
    |                       | gnocchi.resource.search                                                |
    |                       | gnocchi.resource_type.get                                              |
    |                       | gnocchi.resource_type.list                                             |
+   +-----------------------+------------------------------------------------------------------------+
+
+.. _alarm_member_role:
+
+Alarm Member
+============
+
+The *Alarm Member* role allows users to access and configure alarms on a project
+using the :ref:`Catalyst Cloud Alarm Service <alarm>`.
+
+The list of explicit permissions for the alarm member role:
+
+.. code-block:: console
+
+   +-----------------------+------------------------------------------------------------------------+
+   | Alarm Member          | openstack.alarm.create                                                 |
+   |                       | openstack.alarm.delete                                                 |
+   |                       | openstack.alarm.list                                                   |
+   |                       | openstack.alarm.show                                                   |
+   |                       | openstack.alarm.state.get                                              |
+   |                       | openstack.alarm.state.set                                              |
+   |                       | openstack.alarm-history.search                                         |
+   |                       | openstack.alarm-history.show                                           |
+   +-----------------------+------------------------------------------------------------------------+
+
+.. _alarm_reader_role:
+
+Alarm Reader
+============
+
+The *Alarm Reader* role allows users to access alarms on a project using
+the :ref:`Catalyst Cloud Alarm Service <alarm>`.
+
+Unlike the *Alarm Member* role, the *Alarm Reader* rule only grants read-only
+access, so users are only able to check the configuration, or monitor the state,
+of alarms.
+
+The list of explicit permissions for the alarm reader role:
+
+.. code-block:: console
+
+   +-----------------------+------------------------------------------------------------------------+
+   | Alarm Reader          | openstack.alarm.list                                                   |
+   |                       | openstack.alarm.show                                                   |
+   |                       | openstack.alarm.state.get                                              |
+   |                       | openstack.alarm-history.search                                         |
+   |                       | openstack.alarm-history.show                                           |
+   +-----------------------+------------------------------------------------------------------------+
+
+.. _alarm_state_reader_role:
+
+Alarm State Reader
+==================
+
+The *Alarm State Reader* role allows users to access the state of alarms on a project
+using the :ref:`Catalyst Cloud Alarm Service <alarm>`.
+
+This rule *only* grants access to the current state of an alarm, and not the configuration
+of the alarm itself. This makes it useful for securely monitoring alarms in external systems
+without exposing any credentials or tokens configured on the alarm.
+
+The list of explicit permissions for the alarm state reader role:
+
+.. code-block:: console
+
+   +-----------------------+------------------------------------------------------------------------+
+   | Alarm State Reader    | openstack.alarm.state.get                                              |
    +-----------------------+------------------------------------------------------------------------+
 
 .. _auth_only_role:

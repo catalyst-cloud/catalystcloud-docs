@@ -1,3 +1,6 @@
+.. _loadbalancer-healthmonitor:
+.. _loadbalancer-healthmonitors:
+
 ##############
 Health monitor
 ##############
