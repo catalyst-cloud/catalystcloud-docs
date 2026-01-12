@@ -4,6 +4,11 @@
 GPU Support in Virtual Servers
 ##############################
 
+.. warning::
+
+    The current "c2-gpu" instance types are deprecated, and will be removed and
+    replaced no later than 31 March 2026.
+
 ********
 Overview
 ********
@@ -212,6 +217,11 @@ up without requiring additional steps.
 *******************************
 Setup for c2-gpu Instance Types
 *******************************
+
+.. warning::
+
+    The current "c2-gpu" instance types are deprecated, and will be removed and
+    replaced no later than 31 March 2026.
 
 Unlike other GPU-backed types, c2-gpu instances are provided with a partition of
 an NVIDIA A100 GPU rather than the entire capacity of the card, using NVIDIA

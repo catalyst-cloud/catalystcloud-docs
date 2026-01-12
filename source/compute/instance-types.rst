@@ -116,6 +116,11 @@ workloads that are written to specifically target the accelerator
 provided. They are not suitable as general purpose servers, as they
 are inherently not as cost efficient if the accelerator is not used.
 
+.. warning::
+
+    The current "c2-gpu" instance types are deprecated, and will be removed and
+    replaced no later than 31 March 2026.
+
 .. list-table:: Accelerated Types
     :header-rows: 1
     :widths: 10 18 18 18 18 18
