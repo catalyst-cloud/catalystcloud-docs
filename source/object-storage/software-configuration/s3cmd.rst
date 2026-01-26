@@ -1,3 +1,7 @@
+.. index::
+   single: s3cmd
+   single: Client Software; s3cmd
+
 .. _s3cmd:
 
 *****

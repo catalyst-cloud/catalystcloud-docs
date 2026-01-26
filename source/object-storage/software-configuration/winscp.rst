@@ -1,3 +1,7 @@
+.. index::
+   single: WinSCP
+   single: Client Software; WinSCP
+
 ******
 WinSCP
 ******

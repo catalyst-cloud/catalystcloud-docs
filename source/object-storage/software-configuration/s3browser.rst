@@ -1,3 +1,7 @@
+.. index::
+   single: S3 Browser
+   single: Client Software; S3 Browser
+
 .. _s3browser:
 
 **********

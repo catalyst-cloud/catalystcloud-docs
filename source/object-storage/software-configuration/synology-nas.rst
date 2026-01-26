@@ -1,3 +1,7 @@
+.. index::
+   single: Synology NAS Hyper Backup
+   single: Client Software; Synology NAS Hyper Backup
+
 *************************
 Synology NAS Hyper Backup
 *************************
@@ -79,6 +83,10 @@ settings from backups you have in our object storage service.
 
 Consult the Synology documentation for more information on how to
 restore backups.
+
+.. index::
+   single: Synology NAS Cloud Sync
+   single: Client Software; Synology NAS Cloud Sync
 
 ***********************
 Synology NAS Cloud Sync

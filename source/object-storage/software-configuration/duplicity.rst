@@ -1,3 +1,7 @@
+.. index::
+   single: Duplicity
+   single: Client Software; Duplicity
+
 .. _duplicity_sect:
 
 *********

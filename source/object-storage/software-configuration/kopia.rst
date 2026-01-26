@@ -1,3 +1,7 @@
+.. index::
+   single: Kopia
+   single: Client Software; Kopia
+
 *****
 Kopia
 *****

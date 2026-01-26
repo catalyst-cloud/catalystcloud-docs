@@ -1,3 +1,7 @@
+.. index::
+   single: Duplicati
+   single: Client Software; Duplicati
+
 .. _duplicati:
 
 *********

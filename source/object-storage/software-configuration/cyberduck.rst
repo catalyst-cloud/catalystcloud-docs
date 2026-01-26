@@ -1,3 +1,9 @@
+.. index::
+   single: Cyberduck
+   single: Mountain Duck
+   single: Client Software; Cyberduck
+   single: Client Software; Mountain Duck
+
 .. _cyberduck:
 .. _mountainduck:
 

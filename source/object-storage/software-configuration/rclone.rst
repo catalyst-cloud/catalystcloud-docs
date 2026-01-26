@@ -1,3 +1,7 @@
+.. index::
+   single: Rclone
+   single: Client Software; Rclone
+
 ******
 Rclone
 ******
