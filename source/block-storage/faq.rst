@@ -8,54 +8,72 @@ FAQ
 How to migrate between different volume types
 *********************************************
 
-At the current time, support for changing volume type on an existing
-volume is not supported. However, by creating a new volume with
-the desired type, and copying data, we can switch between them.
+Volumes can be converted to a different type in-place provided they are not
+attached to a server. This allows volumes to be moved to a different storage
+tier, such as moving from standard storage to NVMe if additional performance is
+required.
 
-For the purpose of this example we will assume:
+To get a list of available volume types, use the ``openstack volume type list``
+command:
 
-* The operating system involved in Linux, and we recommend doing this
-  on a system which is not booted from the original volume
-* there is an existing volume attached to the instance and mounted on
-  ``/data``
-* a new volume of the desired new type has been attached to the instance
-  and
+.. code-block:: console
 
-  - has been partitioned
-  - has a file system created
-  - is mounted on ``/mnt/data_new``
+  $ openstack volume type list
+  +--------------------------------------+--------------------+-----------+
+  | ID                                   | Name               | Is Public |
+  +--------------------------------------+--------------------+-----------+
+  | 6b5bd490-98a7-48db-af62-092fbf0bc9f0 | b1.sr-r3-nvme-5000 | True      |
+  | 3dd4bb01-2cfa-41b1-80e1-9b1877298fc2 | b1.sr-r3-nvme-2500 | True      |
+  | 08c964fd-a3e7-4c47-b82f-abad010a683e | b1.sr-r3-nvme-1000 | True      |
+  | fc442ee4-c7b2-4f22-980a-fdac35b4097f | b1.standard        | True      |
+  +--------------------------------------+--------------------+-----------+
 
-We will be using `rsync`_ to perform the transfer as it allows us to maintain
-the volumes thin provisioned nature, and preserve the nature of any sparse
-files that may exist on the original disk.
+These examples work with a volume called ``demo-volume-1``; substitute this for
+the name or ID of the actual volume in question.
 
-The following code block is a template for you to fill in with your
-requirements:
+Check that the volume is not attached to a server:
+
+.. code-block:: console
+
+  $ openstack volume show demo-volume-1 -f yaml -c attachments -c status
+  attachments: []
+  status: available
+
+If the volume is attached to a server then the server ID it is attached to will
+be listed under ``attachments``. Any filesystems in the instance using this
+volume will need to be unmounted and then the volume detached from the server
+using the ``openstack server remove volume`` command.
+
+Once the volume shows status as ``available``, use the following example to
+migrate the volume type:
 
 .. code-block:: bash
 
-  rsync -avxHAXSW --numeric-ids --info=progress2 /data/ /mnt/data_new/
+  openstack volume set --retype-policy on-demand --type b1.sr-r3-nvme-1000 demo-volume-1
 
-Where the options are:
+Note that the ``--retype-policy on-demand`` option is essential.
 
-.. code-block:: text
+The volume may take a few minutes to complete migrating, depending on how much
+data has been written to it.
 
-  -a  : all files, with permissions, etc..
-  -v  : verbose, mention files
-  -x  : stay on one file system
-  -H  : preserve hard links (not included with -a)
-  -A  : preserve ACLs/permissions (not included with -a)
-  -X  : preserve extended attributes (not included with -a)
-  -S  : handle sparse files, such as virtual disks, efficiently
-  -W  : copy files whole (w/o delta-xfer algorithm)
-  --info=progress2 : will show the overall progress info and transfer speed
-  --numeric-ids : don't map uid/gid values by user/group name
+Use the ``openstack volume show`` command to check the state:
 
-.. _`rsync`: https://rsync.samba.org
+.. code-block:: console
 
-*********************
-How to grow a volume?
-*********************
+  $ openstack volume show demo-volume-1 -c status -c type
+  +--------+--------------------+
+  | Field  | Value              |
+  +--------+--------------------+
+  | status | retyping           |
+  | type   | b1.sr-r3-nvme-1000 |
+  +--------+--------------------+
+
+Once the volume migration has completed the status will show ``available`` and
+is ready to be re-attached to a server.
+
+********************
+How to grow a volume
+********************
 
 So you have been successfully using OpenStack, and now one of your volumes has
 started filling up. What is the best, quickest and safest way to grow the
@@ -68,13 +86,18 @@ whether that are boot volumes or additional volumes attached to your instance.
 Via the CLI
 +++++++++++
 
-Using the openstack command you can extend a volume by increasing the size
-(in GB) using the set command.  In order for the command to support the live
-volume extension the minimum version of 3.42 for the Block Storage API needs to be given:
+Using the ``openstack`` command you can extend a volume by increasing the size
+(in GB) using the ``set`` command. This example extends the volume called
+*demo-volume-1* to 40GB in size:
 
 .. code-block:: bash
 
-  openstack --os-volume-api-version 3.42  volume set --size 40 9f69bb95-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+  openstack --os-volume-api-version 3.42 volume set --size 40 demo-volume-1
+
+
+Note that in order for the command to support the live volume extension the
+minimum version of 3.42 for the Block Storage API needs to be given as shown
+above.
 
 +++++++++++++++++
 Via the Dashboard

@@ -1,0 +1,14 @@
+###############
+28 January 2026
+###############
+
+======================
+Volume Type Conversion
+======================
+
+Block storage volumes can now be converted between types in-place, provided
+they are not attached to a server. This includes migrating between standard
+and NVMe storage types, as well as the different tiers of NVMe.
+
+For details on how to do this please refer to :ref:`Migrating Volumes
+<migrating-volumes>`.

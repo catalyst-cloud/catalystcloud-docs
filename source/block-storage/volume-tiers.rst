@@ -23,10 +23,9 @@ and not a guaranteed minimum level of performance.
 
 .. warning::
 
-  Once a volume has been created with a specific type, it cannot be
-  changed after the fact. Please follow the process outlined in
-  :ref:`Migrating Volumes<migrating-volumes>` to migrate between
-  different volume types.
+  Once a volume has been created the type cannot be changed while it is in use.
+  Please follow the process outlined in :ref:`Migrating Volumes
+  <migrating-volumes>` to migrate between different volume types.
 
 ****************
 High Performance
