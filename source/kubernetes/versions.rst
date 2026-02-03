@@ -55,7 +55,7 @@ in the API.
      - 2025-06-28
      - ``kubernetes-v1.30.14-20250623``
    * - ``1.31``
-     - Supported
+     - Unsupported
      - 2024-12-20
      - 2025-11-07
      - ``kubernetes-v1.31.13-20250917``
