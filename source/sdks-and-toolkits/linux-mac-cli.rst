@@ -45,15 +45,7 @@ system.
           # install are the same regardless.
           pip install -U pip \
           wheel \
-          python-openstackclient \
-          python-ceilometerclient \
-          python-heatclient \
-          python-neutronclient \
-          python-swiftclient \
-          python-octaviaclient \
-          python-magnumclient \
-          aodhclient \
-          gnocchiclient
+          catalystcloud-client
 
     .. tab:: Debian 9
 
@@ -72,15 +64,7 @@ system.
 
           # install the OpenStack commandline tools into the virtual environment
           pip install -U pip \
-          python-openstackclient \
-          python-ceilometerclient \
-          python-heatclient \
-          python-neutronclient \
-          python-swiftclient \
-          python-octaviaclient \
-          python-magnumclient \
-          aodhclient \
-          gnocchiclient
+          catalystcloud-client
 
     .. tab:: Centos 8
 
@@ -99,15 +83,7 @@ system.
 
           # install the OpenStack commandline tools into the virtual environment
           pip install -U pip \
-          python-openstackclient \
-          python-ceilometerclient \
-          python-heatclient \
-          python-neutronclient \
-          python-swiftclient \
-          python-octaviaclient \
-          python-magnumclient \
-          aodhclient \
-          gnocchiclient
+          catalystcloud-client
 
     .. tab:: Mac OSX
 
@@ -123,15 +99,7 @@ system.
 
           # Install the Python OpenStack client libraries into your virtual environment
           pip install -U pip \
-          python-openstackclient \
-          python-ceilometerclient \
-          python-heatclient \
-          python-neutronclient \
-          python-swiftclient \
-          python-octaviaclient \
-          python-magnumclient \
-          aodhclient \
-          gnocchiclient
+          catalystcloud-client
 
 
 .. _upgrading-the-cli:

@@ -47,7 +47,7 @@ install script in order to install Ansible.
   Catalyst Cloud.
 
 Before running the Ansible playbooks, ensure your OpenStack credentials have
-been set up. The variables from your sourced openRC file are read by the
+been set up. The variables from your sourced OpenRC file are read by the
 Ansible ``os_auth`` module, and will provide Ansible with the credentials
 required to access the Catalyst Cloud APIs.
 

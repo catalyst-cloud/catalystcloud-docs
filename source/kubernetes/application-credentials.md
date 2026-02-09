@@ -22,7 +22,7 @@ request for us to update the cluster.
 ### Creating a new application credential
 
 Select a suitable user in your project and authenticate as that user on Catalyst 
-Cloud, either via an openrc file or the Dashboard.
+Cloud, either via an OpenRC file or the Dashboard.
 
 The key information that you will need is the id of the cluster.  The id can be 
 found by using the `openstack coe cluster list` command or via the Dashboard.

@@ -270,7 +270,7 @@ These examples assume the following:
   interact with your Catalyst Cloud project. There are several options
   available to you depending on your tool of choice, some of these are:
 
-  - Using an :ref:`openrc file<source-rc-file>`
+  - Using an :ref:`OpenRC file<source-rc-file>`
   - Using a clouds.yaml file
 
 - You have uploaded or created an SSH key.
@@ -311,7 +311,7 @@ fits your project before you run any of these templates.
 
     .. tab:: Terraform
 
-        The following assumes that you have already sourced an openRC file and
+        The following assumes that you have already sourced an OpenRC file and
         that you have downloaded and installed terraform.
 
         The template file that you need to save is:

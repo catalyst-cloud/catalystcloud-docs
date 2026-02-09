@@ -104,7 +104,7 @@ implement these access restrictions.
 * The script example included below needs to be run on a server that has access
   to both the Internet and the Catalyst Cloud API endpoints.
 * The script needs a method of authentication. This could be:
-  - a user sourcing their openrc file prior to running the script manually.
+  - a user sourcing their OpenRC file prior to running the script manually.
   - using a `clouds.yaml`_ file to provide the required authentication details.
 
 * The security group in question ideally needs to exist in advance and be

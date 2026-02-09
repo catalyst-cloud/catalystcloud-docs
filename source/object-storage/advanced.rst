@@ -65,10 +65,10 @@ Upload the CSS file and enable the web listing and styling for the listing.
   swift post -m 'web-listings-css:listings.css' con0
 
 You should now be able to view the files in the container by visiting
-the container's URL, where %AUTH_ID% & %container_name% are replaced by
+the container's URL, where ``%project_id%`` and ``%container_name%`` are replaced by
 the values specific to your project.
 
-https://object-storage.nz-por-1.catalystcloud.io:443/v1/%AUTH_ID%/%container_name%/
+https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_%project_id%/%container_name%/
 
 To enable the container to work as a full website, it is also necessary to
 enable the index, and optionally, the error settings:
@@ -80,7 +80,7 @@ enable the index, and optionally, the error settings:
 
 You should now be able to view the index file as a website.
 
-https://object-storage.nz-por-1.catalystcloud.io:443/v1/%AUTH_ID%/%container_name%/
+https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_%project_id%/%container_name%/
 
 *****************
 Object versioning
@@ -101,7 +101,7 @@ your objects:
 
 .. code-block:: bash
 
-  $ curl -i -X PUT -H "X-Auth-Token: $token" $storageURL/archive
+  $ curl -i -X PUT -H "X-Auth-Token: $OS_AUTH_TOKEN" $OS_STORAGE_URL/archive
 
 Now that you have an archive, you can create another container to store your
 objects in. This is where you are able to choose which header type to use for
@@ -119,7 +119,7 @@ For this example, we are going to use the ``X-Versions-Location`` header:
 
 .. code-block:: bash
 
-  $ curl -i -X PUT -H "X-Auth-Token: $token" -H 'X-Versions-Location: archive' $storageURL/my-container
+  $ curl -i -X PUT -H "X-Auth-Token: $OS_AUTH_TOKEN" -H 'X-Versions-Location: archive' $OS_STORAGE_URL/my-container
   HTTP/1.1 201 Created
   Server: nginx/1.10.1
   Date: Mon, 05 Dec 2016 23:50:00 GMT
@@ -268,25 +268,13 @@ provide access to the object "file2.txt" that is located in the container
 Set the temporary URL secret key for your project
 -------------------------------------------------
 
-Firstly, you need to ensure that you have set the environment variable for your `OS_STORAGE_URL`
-In order to do this you can use the following commands to find and set the variable:
+First, source your OpenRC file to ensure that you have the necessary
+environment variables set.
 
-.. code-block:: bash
-
-  $ openstack project show <name of the project you sourced your OpenRC with>
-  +-------------+----------------------------------+
-  | Field       | Value                            |
-  +-------------+----------------------------------+
-  | description |                                  |
-  | domain_id   | default                          |
-  | enabled     | True                             |
-  | id          | 7xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54 |
-  | tags        | []                               |
-  +-------------+----------------------------------+
-
-  # Then, using the ID found above as well as the API for the region you are working in, you export the following:
-
-  $ export OS_STORAGE_URL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_7xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54"
+.. note::
+    If your OpenRC file does not set the ``OS_STORAGE_URL`` variable, then you
+    are using an older version of the OpenRC file. Please download a new OpenRC
+    file from the dashboard.
 
 Second you need to associate a secret key with your object store account for your project.
 
@@ -358,7 +346,7 @@ it is successful, the request should return the contents of the object.
 
 .. code-block:: bash
 
-  $ curl -i "https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_b24e9XXXXXXe48eab1bc99cb894cac6f/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005"
+  $ curl -i "$OS_STORAGE_URL/my-container/file2.txt?temp_url_sig=2dbc1c2335a53d5548dab178d59ece7801e973b4&temp_url_expires=1483990005"
   HTTP/1.1 200 OK
   Server: nginx/1.10.1
   Date: Mon, 09 Jan 2017 19:22:05 GMT
@@ -609,9 +597,7 @@ The file 'large_file' is broken into 100MB chunks which are prefixed with
 
 
 The upload of these segments is then handled by cURL. See :ref:`using
-curl<s3-api-documentation>` for more information on how to do this.
-
-.. _using curl: http://docs.catalystcloud.io/object-storage.html#using-curl
+curl<object-storage-programmatic-methods>` for more information on how to do this.
 
 The first cURL command creates a new container. The next two upload the two
 segments created previously, and finally, a zero byte file is created for the
@@ -619,10 +605,10 @@ manifest.
 
 .. code-block:: bash
 
-  $ curl -i $storageURL/lgfile -X PUT -H “X-Auth-Token:$token"
-  $ curl -i $storageURL/lgfile/split_aa -X PUT -H "X-Auth-Token:$token" -T split-aa
-  $ curl -i $storageURL/lgfile/split_ab -X PUT -H "X-Auth-Token:$token" -T split-ab
-  $ curl -i -X PUT -H "X-Auth-Token: $token" -H "X-Object-Manifest:lgfile/split" -H "Content-Length: 0"  $storageURL/lgfile/manifest/1gb_sample.txt
+  $ curl -i "$OS_STORAGE_URL/lgfile" -X PUT -H “X-Auth-Token: $OS_AUTH_TOKEN"
+  $ curl -i "$OS_STORAGE_URL/lgfile/split_aa" -X PUT -H "X-Auth-Token: $OS_AUTH_TOKEN" -T split-aa
+  $ curl -i "$OS_STORAGE_URL/lgfile/split_ab" -X PUT -H "X-Auth-Token: $OS_AUTH_TOKEN" -T split-ab
+  $ curl -i -X PUT -H "X-Auth-Token: $OS_AUTH_TOKEN" -H "X-Object-Manifest:lgfile/split" -H "Content-Length: 0"  "$OS_STORAGE_URL/lgfile/manifest/1gb_sample.txt"
 
 A similar approach can also be taken to use the SLO type, but this is a lot
 more involved. A detailed description of the process can be seen `here`_

@@ -124,7 +124,7 @@ Getting the auth only users identity
 
 First we need to retrieve the user ID for our auth_only user. To do this you
 will need to log into the dashboard as the restricted user and download their
-openRC file. Next, you will need to source the  openRC file, and then run the
+OpenRC file. Next, you will need to source the  OpenRC file, and then run the
 following command. It will provide the ``user_id`` as one of the output fields,
 be sure to make a note of this ID as we will use it later.
 

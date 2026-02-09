@@ -1,37 +1,17 @@
 To access object storage using cURL it is necessary to provide credentials
 to authenticate any requests you make.
 
-This can be done by sourcing your OpenRC file and retrieving your account
-specific details via the Swift command line tools; then exporting the required
-variables as shown below.
-
+This can be done by sourcing your OpenRC file, which will set the environment
+variables you will need.
 
 .. code-block:: bash
 
     $ source openstack-openrc.sh
 
-    # we then need to create a OS_STORAGE_URL environment variable.
-    # To create this variable we will need to find our project ID:
-
-    $ openstack project show <name of the project you sourced your OpenRC with>
-    +-------------+----------------------------------+
-    | Field       | Value                            |
-    +-------------+----------------------------------+
-    | description |                                  |
-    | domain_id   | default                          |
-    | enabled     | True                             |
-    | id          | 1xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54 |
-    | tags        | []                               |
-    +-------------+----------------------------------+
-
-We then export this ID with the storage API for the region we are working in.
-For this example we will use the Porirua region:
+You can view the details of you Object Storage access with the ``swift stat``
+command:
 
 .. code-block:: bash
-
-    $ export OS_STORAGE_URL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_1xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54
-
-    # Then we grab our auth token for later use:
 
     $ swift stat -v
      StorageURL: https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_1xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54
@@ -50,47 +30,52 @@ For this example we will use the Porirua region:
                     Content-Type: text/plain; charset=utf-8
                    Accept-Ranges: bytes
 
-    $ export token="5f5a043e1bd24a8fa8xxxxxxcca8e0fc"
+.. note::
+
+    If this does not work check if your OpenRC file has set the ``OS_STORAGE_URL``
+    variable.  If your OpenRC does not set the ``OS_STORAGE_URL`` then you are
+    using an older OpenRC file. Please download a new OpenRC file from the dashboard.
+
 
 To create a new container, use the following cURL request:
 
 .. code-block:: bash
 
-    curl -i -X PUT -H "X-Auth-Token: $token" $storageURL/mycontainer
+    curl -i -X PUT -H "X-Auth-Token: $OS_AUTH_TOKEN" "$OS_STORAGE_URL/mycontainer"
 
 Then run the following command to get a list of all available containers for
 your project:
 
 .. code-block:: bash
 
-    curl -i -X GET -H "X-Auth-Token: $token" $storageURL
+    curl -i -X GET -H "X-Auth-Token: $OS_AUTH_TOKEN" "$OS_STORAGE_URL"
 
 You can optionally specify alternative output formats. For example: to have XML
 or JSON returned use the following syntax:
 
 .. code-block:: bash
 
-    curl -i -X GET -H "X-Auth-Token: $token" $storageURL?format=xml
-    curl -i -X GET -H "X-Auth-Token: $token" $storageURL?format=json
+    curl -i -X GET -H "X-Auth-Token: $OS_AUTH_TOKEN" "$OS_STORAGE_URL?format=xml"
+    curl -i -X GET -H "X-Auth-Token: $OS_AUTH_TOKEN" "$OS_STORAGE_URL?format=json"
 
 To view the objects within a container, simply append the container name to
 the cURL request:
 
 .. code-block:: bash
 
-    curl -i -X GET -H "X-Auth-Token: $token" $storageURL/mycontainer
+    curl -i -X GET -H "X-Auth-Token: $OS_AUTH_TOKEN" "$OS_STORAGE_URL/mycontainer"
 
 To upload a file to your container, use the following cURL format:
 
 .. code-block:: bash
 
-    curl -i -T <my_object> -X PUT -H "X-Auth-Token: $token" $storageURL/mycontainer
+    curl -i -T <my_object> -X PUT -H "X-Auth-Token: $OS_AUTH_TOKEN" "$OS_STORAGE_URL/mycontainer"
 
 To delete a file from your container, use this code:
 
 .. code-block:: bash
 
-   curl -X DELETE -H "X-Auth-Token: <token>" <storage URL>/mycontainer/myobject
+   curl -X DELETE -H "X-Auth-Token: $OS_AUTH_TOKEN" "$OS_STORAGE_URL/mycontainer/myobject"
 
 Finally, to delete a container you can use the following syntax.
 
@@ -101,4 +86,4 @@ Finally, to delete a container you can use the following syntax.
 
 .. code-block:: bash
 
-    curl -X DELETE -H "X-Auth-Token: <token>" <storage URL>/mycontainer
+    curl -X DELETE -H "X-Auth-Token: $OS_AUTH_TOKEN" "$OS_STORAGE_URL/mycontainer"

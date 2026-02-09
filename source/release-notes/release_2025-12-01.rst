@@ -1,0 +1,14 @@
+###############
+1 December 2025
+###############
+
+=================
+Object Storage O2
+=================
+
+We have added a new container replication policy to the Object Storage service.
+
+The policy uses erasure coding to allow for the recovery of the data even if
+a portion is lost.  The policy only stores a single copy of the data spread
+across the region, making the storage cost cheaper.  The policy is available in
+the NZ-POR-1 region.

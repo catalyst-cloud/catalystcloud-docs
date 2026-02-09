@@ -35,36 +35,12 @@ official `OpenStack documentation
     <h4> Sourcing the correct environment variables </h5>
 
 Like the the other methods in this tutorial section, you will need to source an
-openRC file to interact with the object storage APIs. However, there is
-an additional environment variable that we must manually set to be able to
-interact correctly with the swift API. We need to create an **OS_STORAGE_URL**
-variable so that swift is able to correctly authenticate using your Catalyst Cloud
-credentials. We do this by taking one of the API endpoints from above, and
-adding our project_ID to it.
+OpenRC file to interact with the object storage APIs.
 
-To get your project_ID, you can run the following command:
-
-.. code-block:: bash
-
-  $ openstack project show <name of the project you sourced your OpenRC with>
-  +-------------+----------------------------------+
-  | Field       | Value                            |
-  +-------------+----------------------------------+
-  | description |                                  |
-  | domain_id   | default                          |
-  | enabled     | True                             |
-  | id          | 7xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54 |
-  | tags        | []                               |
-  +-------------+----------------------------------+
-
-We then take the ID that we find from this output and we combine it with
-the Auth API from the region we want to operate in; in this case we are using
-the Porirua region. We then export this environment variable as
-"*OS_STORAGE_URL*" like so:
-
-.. code-block:: bash
-
-  $ export OS_STORAGE_URL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_7xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54"
+.. note::
+    If your OpenRC file does not set the ``OS_STORAGE_URL`` variable, then you
+    are using an older version of the OpenRC file. Please download a new OpenRC
+    file from the dashboard.
 
 .. raw:: html
 
@@ -143,7 +119,7 @@ authentication instead of token authentication.
 .. Note::
 
   You may need to change or set some additional environment variables for the following code snippet to work. However, if you have
-  authenticate using the ``--no-token`` flag on your openRC file, these should already be set.
+  authenticate using the ``--no-token`` flag on your OpenRC file, these should already be set.
 
 Replace the starting section of the previous file with the following:
 

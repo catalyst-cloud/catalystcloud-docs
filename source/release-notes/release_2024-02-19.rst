@@ -21,7 +21,7 @@ Identity v2 API Deprecation
 The identity v2 API has been removed beginning from the date of this release.
 Only the v3 API is available after this date.
 
-Customers using an :ref:`openrc file <source-rc-file>` should download the
+Customers using an :ref:`OpenRC file <source-rc-file>` should download the
 latest version from the dashboard.
 
 Client applications currently configured to use the v2 API will need to be

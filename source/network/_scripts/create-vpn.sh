@@ -55,7 +55,7 @@ handle_interruptions() {
 
 check_credentials() {
   # Look for $OS_* environment variables. If not defined, prompt the user to source
-  # their openrc file
+  # their OpenRC file
 
   if [[ ${OS_PROJECT_ID} && ${OS_TOKEN} ]] || [[ ${OS_USERNAME} && ${OS_PASSWORD} && ${OS_PROJECT_ID} ]]; then
     OPENRC="True"

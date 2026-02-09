@@ -46,10 +46,10 @@ Via the CLI
 When using the CLI there a couple of things that you need to set up before you
 can successfully transfer your volume.
 
-#. You will need to download the openRC files from each of your instances.
+#. You will need to download the OpenRC files from each of your instances.
 #. You will need to open two different shell environments.
 #. You will then need to source the two shell environments with the two different
-   openRC files.
+   OpenRC files.
 
 For the rest of this example we will refer to the shell that has sourced
 the project which originally had our volume as ``console one``. And the shell

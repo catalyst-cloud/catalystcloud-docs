@@ -33,4 +33,4 @@ Microsoft Windows on all compute types
 ======================================
 
 As a result of the above bundled licensing changes, server instances created from Microsoft Windows images can now be
-depoyed to any :doc:`compute (flavour) type </compute/instance-types>`, including GPU-backed types.
+deployed to any :doc:`compute (flavour) type </compute/instance-types>`, including GPU-backed types.

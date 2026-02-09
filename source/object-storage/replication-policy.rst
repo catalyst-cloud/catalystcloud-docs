@@ -10,8 +10,10 @@ security to your data in the event of a disaster affecting one of our regions.
 
 However, there are some scenarios where you may not need your data to be
 replicated across regions or you wish to save money on a cheaper policy. In
-this case you can choose a replication policy that keeps three replicas of your
-data in a single region instead of having them spread across all of them.
+this case you have two options: you can choose a replication policy that
+keeps three replicas of your data in a single region; or you can choose a
+replication policy that uses Erasure Coding to allow data to be recovered even
+if a portion is lost.
 
 .. _object-storage-storage-policies:
 .. _object-storage-replication-policies:
@@ -23,17 +25,19 @@ What are the storage policies
 The following are the storage policies available, each of these (as their names
 suggest) are related to one of the regions on Catalyst cloud:
 
-+------------------------------+------------------+------------------------+
-| Storage class                | Failure-domain   | Replicas               |
-+==============================+==================+========================+
-| ``nz--o1--mr-r3`` (default)  | Multi-region     | 3 (one in each region) |
-+------------------------------+------------------+------------------------+
-| ``nz-wlg-2--o1--sr-r3``      | Single-region    | 3 (all in one region)  |
-+------------------------------+------------------+------------------------+
-| ``nz-por-1--o1--sr-r3``      | Single-region    | 3 (all in one region)  |
-+------------------------------+------------------+------------------------+
-| ``nz-hlz-1--o1--sr-r3``      | Single-region    | 3 (all in one region)  |
-+------------------------------+------------------+------------------------+
++--------------------------------+------------------+------------------------+
+| Storage class                  | Failure-domain   | Replicas               |
++================================+==================+========================+
+| ``nz--o1--mr-r3`` (default)    | Multi-region     | 3 (one in each region) |
++--------------------------------+------------------+------------------------+
+| ``nz-wlg-2--o1--sr-r3``        | Single-region    | 3 (all in one region)  |
++--------------------------------+------------------+------------------------+
+| ``nz-por-1--o1--sr-r3``        | Single-region    | 3 (all in one region)  |
++--------------------------------+------------------+------------------------+
+| ``nz-hlz-1--o1--sr-r3``        | Single-region    | 3 (all in one region)  |
++--------------------------------+------------------+------------------------+
+| ``nz-por-1--o2--sr-standard``  | Single-region    | 1 Erasure Coded        |
++--------------------------------+------------------+------------------------+
 
 .. Warning::
   You cannot change the storage policy of an already existing container. The

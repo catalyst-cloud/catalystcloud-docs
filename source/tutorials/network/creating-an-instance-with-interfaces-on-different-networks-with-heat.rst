@@ -6,7 +6,7 @@ This tutorial assumes the following:
 
 * You have created a basic network setup in Catalyst Cloud.
 * You have installed the OpenStack command line tools and sourced an
-  openrc file, as explained at :ref:`command-line-interface`.
+  OpenRC file, as explained at :ref:`command-line-interface`.
 * You have a basic understanding of Heat templates as shown at
   :ref:`launching-your-first-instance-using-heat`.
 

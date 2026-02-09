@@ -2,8 +2,8 @@
 FAQ
 ###
 
-***********************************
-Can I use s3cmd for object storage?
-***********************************
+**********************************************************
+What applications and tools can I use with object storage?
+**********************************************************
 
 This content has been moved to :doc:`software-configuration`.

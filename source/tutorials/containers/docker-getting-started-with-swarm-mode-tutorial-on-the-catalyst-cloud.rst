@@ -35,7 +35,7 @@ This tutorial assumes a number of things:
 * You are familiar with basic usage of Catalyst Cloud (e.g. you have
   created your first instance as described at
   :ref:`launching-your-first-instance`)
-* You have sourced an openrc file, as described at :ref:`source-rc-file`
+* You have sourced an OpenRC file, as described at :ref:`source-rc-file`
 * You have a basic understanding of how to use `Ansible`_ on Catalyst Cloud
   as shown at :ref:`launching-your-first-instance-using-ansible`
 

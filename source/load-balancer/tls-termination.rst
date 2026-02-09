@@ -25,7 +25,7 @@ To interact with the load balancer service on the cloud, you must have the
 following prepared:
 
 - Your :ref:`OpenStack CLI<command-line-interface>` installed and set up.
-- You must have :ref:`Sourced an openRC file<configuring-the-cli>` on your
+- You must have :ref:`Sourced an OpenRC file<configuring-the-cli>` on your
   current command line environment
 - For this tutorial, you must also have the following installed in your
   environment:

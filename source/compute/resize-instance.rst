@@ -58,13 +58,13 @@ operation.
 Via the command line
 ************************
 
-Before continuing, make sure that you have sourced an openRC file so that you
+Before continuing, make sure that you have sourced an OpenRC file so that you
 are able to interact with your project via the command line. If you are not
-sure how to download or source your openRC file, you can follow the
+sure how to download or source your OpenRC file, you can follow the
 :ref:`guide<command-line-interface>` from earlier in this documentation.
 
 
-Once you have sourced your openRC file, we can begin gathering the
+Once you have sourced your OpenRC file, we can begin gathering the
 necessary info for our resize command. The first step is finding the ID of the
 new flavor we want our instance to have:
 
@@ -196,8 +196,8 @@ confirm our resize:
 Via orchestration tools
 ***************************
 
-Like the command line method, you will need to source an openRC file before you
-continue with any of the following. Once you have your openRC file sourced, you
+Like the command line method, you will need to source an OpenRC file before you
+continue with any of the following. Once you have your OpenRC file sourced, you
 will be able to continue with any of the following methods.
 
 

@@ -15,10 +15,10 @@ an instance.
 Requirements
 ************
 
-Before we get started, you will have to source an openRC file. This will give
+Before we get started, you will have to source an OpenRC file. This will give
 you the required environment variables, so that you are able to create
 resources on your project. You can find a guide
-:ref:`here<command-line-interface>`  on how to source an openRC file.
+:ref:`here<command-line-interface>`  on how to source an OpenRC file.
 
 Once this is done, you can follow any of the guides below, to create your
 instance.

@@ -66,7 +66,7 @@ Create a new volume copy
 
 .. Note::
 
-  You must have :ref:`sourced an openrc file<source-rc-file>` before you can
+  You must have :ref:`sourced an OpenRC file<source-rc-file>` before you can
   use any of the command-line functions described here.
 
 First, you need to identify the volume ID that you need to copy. This is done

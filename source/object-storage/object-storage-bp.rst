@@ -63,6 +63,6 @@ more common policies.
 Encryption at rest
 ******************
 
-Objects are stored encrypted at rest using encryption keys that Catayst Cloud
+Objects are stored encrypted at rest using encryption keys that Catalyst Cloud
 control. Customers can, if they wish, use their own encryption before objects
 are uploaded to object storage.

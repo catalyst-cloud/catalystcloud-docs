@@ -16,7 +16,7 @@ Before we begin, there are a few resources that we are going to need to gather
 before we can make changes to our cluster and the pod policy for it. You will
 need to have:
 
-- The correct :ref:`openrc<command-line-interface>` file sourced
+- The correct :ref:`OpenRC<command-line-interface>` file sourced
 - A way to ssh to your master node (a jumphost if you have a private cluster)
 - Kubectl installed (on your machine or your jumphost)
 - Your kube-admin config downloaded

@@ -9,7 +9,7 @@ Before you continue with the examples below, there are a few assumptions that
 are made which you will need to consider before jumping in further:
 
 #. You are familiar with the Linux command line and the OpenStack CLI tools.
-#. You have installed the OpenStack command line tools and sourced an openrc
+#. You have installed the OpenStack command line tools and sourced an OpenRC
    file, as explained in :ref:`this section of the
    documentation<command-line-interface>`.
 

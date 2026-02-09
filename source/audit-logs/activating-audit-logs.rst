@@ -19,7 +19,7 @@ Prerequisites
 =============
 
 Before going further, you will need to ensure that you have :ref:`sourced an
-openRC file<source-rc-file>` for your command line so that you are able to
+OpenRC file<source-rc-file>` for your command line so that you are able to
 perform the commands mentioned in the following example.
 
 Creating an object storage container for your logs

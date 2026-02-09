@@ -1,0 +1,12 @@
+###############
+9 February 2026
+###############
+
+====================================
+OS_STORAGE_URL added to OpenRC files
+====================================
+
+The OpenRC files downloaded from the dashboard now set the
+``OS_STORAGE_URL`` environmental variable.  The addition of this variable makes
+it easier to use the command line tools to interact with the Object Storage
+service.

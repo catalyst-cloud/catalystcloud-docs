@@ -95,7 +95,7 @@ Using programmatic methods
 .. Note::
 
   Before using any of the following methods, you will have to source your
-  environment variables using an :ref:`openRC file.<configuring-the-cli>`
+  environment variables using an :ref:`OpenRC file.<configuring-the-cli>`
 
 .. tabs::
 

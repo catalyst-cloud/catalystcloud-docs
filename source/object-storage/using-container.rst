@@ -89,7 +89,7 @@ method you below:
 
 .. tabs::
 
-    .. tab:: OpenSTack CLI
+    .. tab:: OpenStack CLI
 
       .. include:: tutorial-scripts/openstackCLI.rst
 

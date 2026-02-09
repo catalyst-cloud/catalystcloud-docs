@@ -3,41 +3,16 @@
     <h3> Requirements </h3>
 
 Before we can begin sending commands through the swift API we need to prepare
-some environment variables for use. Sourcing an openRC file will take care of
-most of the required environment variables, however we need to gather some
-information to set the last few.
+some environment variables for use. Sourcing an OpenRC file will take care of
+setting the required environment variables.
 
-First we need to set a storageURL for ourselves. We do this by grabbing the
-correct Auth API from :ref:`this section<apis>` of the documentation. For our
-example we will use the Porirua region's API:
-``https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_``
+.. note::
+    If your OpenRC file does not set the ``OS_STORAGE_URL`` environment
+    variable, then you are using an older version of the OpenRC file.
+    Please download a new OpenRC file from the dashboard.
 
-Next we need to find our project ID. We can do this by using the following
-command:
-
-.. code-block:: bash
-
-  $ openstack project show <name of the project you sourced your OpenRC with>
-  +-------------+----------------------------------+
-  | Field       | Value                            |
-  +-------------+----------------------------------+
-  | description |                                  |
-  | domain_id   | default                          |
-  | enabled     | True                             |
-  | id          | 1xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54 |
-  | tags        | []                               |
-  +-------------+----------------------------------+
-
-We then take the ID that we find from this output and we combine it with
-the Auth API from the region we want to operate in; exporting this
-environment variable as "*OS_STORAGE_URL*" like so:
-
-.. code-block:: bash
-
-    $ export OS_STORAGE_URL="https://object-storage.nz-por-1.catalystcloud.io:443/v1/AUTH_1xxxxxxxxxxxxxxxxxxxxxxxxxxxxe54"
-
-After we have set our storage URL, we need to find the name of the policy we
-want our container to have. For this example we will use the Porirua single
+We need to find the name of the policy we want our container to have.
+For this example we will use the Porirua single
 region policy:
 
 .. code-block:: bash

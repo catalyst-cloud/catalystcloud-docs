@@ -33,7 +33,7 @@ Chef.
 Setup
 *****
 
-This tutorial assumes that you have sourced an openrc file, as described at
+This tutorial assumes that you have sourced an OpenRC file, as described at
 :ref:`source-rc-file`. This is required in order for the `OpenStack builder`_
 to interact with Catalyst Cloud image service.
 

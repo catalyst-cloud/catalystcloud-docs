@@ -88,7 +88,7 @@ Creating snapshots from the command-line
 
 .. Note::
 
-  You must have :ref:`sourced an openrc file<source-rc-file>` before you can
+  You must have :ref:`sourced an OpenRC file<source-rc-file>` before you can
   use any of the following methods to create a snapshot.
 
 The following command will create a snapshot of a volume that is not
@@ -144,7 +144,7 @@ Create volume using snapshot via command-line
 
 .. Note::
 
-  You must have :ref:`sourced an openrc file<source-rc-file>` before you can
+  You must have :ref:`sourced an OpenRC file<source-rc-file>` before you can
   use any of the following methods to create a volume from a snapshot.
 
 The following command will create a volume using a snapshot with the

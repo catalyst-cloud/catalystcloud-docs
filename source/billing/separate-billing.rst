@@ -36,12 +36,12 @@ command line tool in it.
 Get billing information based on the prefix of customer
 =======================================================
 
-Source an openrc file with your credentials to access Catalyst Cloud, as
+Source an OpenRC file with your credentials to access Catalyst Cloud, as
 described at :ref:`source-rc-file`
 
 .. note::
 
-  If you do not source an openrc file, you will need to pass the
+  If you do not source an OpenRC file, you will need to pass the
   authentication information to the command line tool when running it. See
   ./separate-billing.py help for more information.
 

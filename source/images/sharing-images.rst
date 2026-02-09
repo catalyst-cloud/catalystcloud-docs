@@ -12,7 +12,7 @@ able to share your images using OpenStack CLI commands.
  when connected to the target. Ensure you are connected to the correct project
  when issuing these commands.
 
-After :ref:`sourcing an openRC file<source-rc-file>` for the project that
+After :ref:`sourcing an OpenRC file<source-rc-file>` for the project that
 houses the image you want to share, we will call this the **source project**
 going forward, we then need to find the UUID of the image we want to share.
 

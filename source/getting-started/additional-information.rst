@@ -57,7 +57,7 @@ Via the CLI
 -----------
 
 If you are using the OpenStack command line interface you have most likely
-sourced an openrc file, as explained in :ref:`command-line-interface`. If this
+sourced an OpenRC file, as explained in :ref:`command-line-interface`. If this
 is the case, you can find your project ID by issuing the following command:
 
 .. code-block:: bash

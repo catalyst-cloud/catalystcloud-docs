@@ -145,7 +145,7 @@ Create SSH keys for ElastiCluster (no passphrase):
 
   ssh-keygen -t rsa -b 4096 -f ~/elasticluster/id_rsa
 
-Source your openrc file, as explained on :ref:`command-line-interface`.
+Source your OpenRC file, as explained on :ref:`command-line-interface`.
 
 Allow ElastiCluster to connect to instances over SSH (if the nova command
 fails, then try the openstack command):

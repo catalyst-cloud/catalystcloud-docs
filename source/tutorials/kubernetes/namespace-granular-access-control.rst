@@ -148,7 +148,7 @@ Setting up our cloud authentication
 -----------------------------------
 
 To access the cluster we first need to authenticate against the cloud
-using an :ref:`openRC file<configuring-the-cli>`. Once the cloud authentication
+using an :ref:`OpenRC file<configuring-the-cli>`. Once the cloud authentication
 has been taken care of we need to set up the cluster config file to
 authenticate with the cluster.
 

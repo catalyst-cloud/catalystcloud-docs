@@ -40,7 +40,7 @@ This tutorial assumes a number of things:
 * You will be setting up a Ubuntu 14.04 instance
 * You will be using the ubuntu user
 * You will be letting the provider create an SSH keypair for you
-* You have sourced an openrc file, as described at :ref:`source-rc-file`
+* You have sourced an OpenRC file, as described at :ref:`source-rc-file`
 
 ******************
 Install the plugin

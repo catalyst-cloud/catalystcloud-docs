@@ -3,7 +3,7 @@ Deploying a turnkey Linux image on Catalyst Cloud
 #################################################
 
 This tutorial assumes you have installed the OpenStack command line tools and
-sourced an openrc file, as explained at :ref:`command-line-interface`. We also
+sourced an OpenRC file, as explained at :ref:`command-line-interface`. We also
 assume that you have uploaded an SSH key, as explained at
 :ref:`uploading-an-ssh-key`.
 

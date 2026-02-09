@@ -17,7 +17,7 @@ Via the command line tools
   placed for uploads via our dashboard.
 
 Ensure that you have the OpenStack command line tools
-installed and that you have sourced an openrc file, as explained in the
+installed and that you have sourced an OpenRC file, as explained in the
 :ref:`CLI tools and SDKs section<command-line-interface>`.
 
 To upload the converted image to Catalyst Cloud:

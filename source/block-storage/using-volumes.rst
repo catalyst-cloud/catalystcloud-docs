@@ -56,7 +56,7 @@ you can use one of the methods below:
 
 .. Note::
 
-  You must have :ref:`sourced an openrc file<source-rc-file>` before you can
+  You must have :ref:`sourced an OpenRC file<source-rc-file>` before you can
   use any of the following methods to create or attach a volume.
 
 .. tabs::
@@ -79,7 +79,7 @@ you can use one of the methods below:
 
     .. tab:: Terraform
 
-        The following assumes that you have already sourced an openRC file and
+        The following assumes that you have already sourced an OpenRC file and
         that you have downloaded and installed terraform. Terraform works by
         reading a template file and creating resources on the cloud based off
         of the defined structure in the template.

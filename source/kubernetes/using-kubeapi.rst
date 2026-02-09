@@ -91,7 +91,7 @@ Because the initial config file that you create contains all the certifications
 for your cluster, it is recommended that for production clusters you safely
 store this config file away and then create another config file that you
 can share between your staff. This new file allows people access to the cluster
-by authenticating with their openrc credentials. To create this new file,
+by authenticating with their OpenRC credentials. To create this new file,
 you can use the following:
 
 .. code-block:: bash
