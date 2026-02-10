@@ -123,7 +123,8 @@ In addition to the Kubernetes changes, we have:
 * Fixed a bug that was installing customer SSH keys onto nodes. This was causing problems when
   transferring cluster ownership. Direct access to nodes is not supported but is possible
   with privileged pods (eg. `kubectl ssh node` plugin).
-* Added reloader pod to support cluster credential rotation (API coming soon).
+* Added reloader pod to support cluster credential rotation. See
+  :doc:`Application Credentials </kubernetes/application-credentials>`.
 
 Note that skipping minor versions when upgrading a cluster is unsupported and
 should not be attempted. For example, before upgrading to v1.34.x, you must

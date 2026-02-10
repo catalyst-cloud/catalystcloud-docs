@@ -1,0 +1,14 @@
+###############
+5 February 2026
+###############
+
+=================================
+Catalyst Cloud Kubernetes Service
+=================================
+
+Kubernetes clusters can now have their ownership transferred between project
+users via automated application credential rotation. This process can be
+invoked via a command line action.
+
+For details on how to do this please refer to :doc:`Application Credentials
+</kubernetes/application-credentials>`.
