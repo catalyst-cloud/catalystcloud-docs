@@ -43,39 +43,43 @@ in the API.
      - Current Status
      - Initial Release Date
      - Unsupported Date
-     - Last Released Template
-   * - ``1.29``
-     - Unsupported
-     - 2024-05-27
-     - 2025-03-19
-     - ``kubernetes-v1.29.14-20250217``
-   * - ``1.30``
-     - Unsupported
-     - 2024-08-26
-     - 2025-06-28
-     - ``kubernetes-v1.30.14-20250623``
+     - Last Released Template(s)
+   * - ``1.35``
+     - TBA
+     - Expected 2026-04
+     -
+     -
+   * - ``1.34``
+     - Supported
+     - 2025-11-06
+     -
+     -
+   * - ``1.33``
+     - Supported
+     - 2025-05-14
+     -
+     -
+   * - ``1.32``
+     - Supported
+     - 2025-02-05
+     - Expected 2026-04
+     - ``kubernetes-v1.32.13-20260310``
    * - ``1.31``
      - Unsupported
      - 2024-12-20
      - 2025-11-07
      - ``kubernetes-v1.31.13-20250917``
        ``kubernetes-v1.31.14-20251130``
-   * - ``1.32``
-     - Supported
-     - 2025-02-05
-     - Expected 2026-02-28
-     -
-   * - ``1.33``
-     - Supported
-     - 2025-05-14
-     - Expected 2026-06-28
-     -
-   * - ``1.34``
-     - Supported
-     - 2025-11-06
-     - Expected 2026-10-27
-     -
-
+   * - ``1.30``
+     - Unsupported
+     - 2024-08-26
+     - 2025-06-28
+     - ``kubernetes-v1.30.14-20250623``
+   * - ``1.29``
+     - Unsupported
+     - 2024-05-27
+     - 2025-03-19
+     - ``kubernetes-v1.29.14-20250217``
 
 **********************
 Version upgrade notes
