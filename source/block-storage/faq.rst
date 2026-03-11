@@ -9,9 +9,9 @@ How to migrate between different volume types
 *********************************************
 
 Volumes can be converted to a different type in-place provided they are not
-attached to a server. This allows volumes to be moved to a different storage
-tier, such as moving from standard storage to NVMe if additional performance is
-required.
+attached to a server, and do not have any existing snapshots. This allows volumes
+to be moved to a different storage tier, such as moving from standard storage to
+NVMe if additional performance is required.
 
 To get a list of available volume types, use the ``openstack volume type list``
 command:
@@ -31,7 +31,14 @@ command:
 These examples work with a volume called ``demo-volume-1``; substitute this for
 the name or ID of the actual volume in question.
 
-Check that the volume is not attached to a server:
+First, check that there are no existing snapshots created from the volume:
+
+.. code-block:: console
+
+  $ openstack volume snapshot list --volume demo-volume-1 -f yaml
+  []
+
+Then check that the volume is not attached to a server:
 
 .. code-block:: console
 
