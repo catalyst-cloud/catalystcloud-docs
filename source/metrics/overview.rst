@@ -49,14 +49,14 @@ making queries against resources, and one or more :ref:`metrics <metrics-metrics
 that can be queried for :ref:`measures <metrics-measures>`.
 
 When attributes on a resource change (e.g. renamed), the corresponding object in the
-Metrics Service is updated accordingly. When a resource is deleted, the corresponding
-object in the Metrics Service will be marked with an "ended at" timestamp,
-allowing you to track and distinguish active resources from deleted ones in queries.
+Metrics Service is updated accordingly. When a resource is deleted, or if no measures
+have been published to the resource for at least 30 days, the corresponding object in
+the Metrics Service will be marked with an "ended at" timestamp, allowing you to track
+and distinguish active resources from deleted ones in queries.
 
-The Metrics Service keeps track of metadata changes,
-and a full history of changes can be queried up to 90 days in the past.
-Deleted resources, or old resources without any measures published
-for them, also expire after about 90 days.
+The Metrics Service keeps track of metadata changes, and a full history of changes
+can be queried up to 90 days in the past. Resources marked with an "ended at" timestamp
+are expired 90 days from the value set in the "ended at" timestamp.
 
 Here is an example of a resource and its associated metadata and metrics:
 

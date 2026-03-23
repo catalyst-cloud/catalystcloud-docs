@@ -1,0 +1,22 @@
+#############
+23 March 2026
+#############
+
+******************************
+Catalyst Cloud Metrics Service
+******************************
+
+Resources are now automatically marked as deleted after 30 days
+===============================================================
+
+:ref:`Resources <metrics-resources>` in the Catalyst Cloud Metrics Service
+that have not had any measures published to them for at least 30 days now
+automatically have their "ended at" timestamp set, to reflect the fact they
+they have either been deleted or been inactive for that amount of time.
+
+This helps to improve the performance of queries for active resources by
+reducing the amount of resources being counted as "active" to only ones
+that have recently had measures published. This is relevant in the rare case
+that delete notifications are missed (causing the resource in the Metrics Service
+to not be updated accordingly), or for resource types that are not automatically
+marked as deleted (for more information, see the :ref:`FAQ <metrics-faq-deleted-not-ended>`).

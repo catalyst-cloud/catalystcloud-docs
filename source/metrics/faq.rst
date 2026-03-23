@@ -74,6 +74,8 @@ a Helm chart is available for `installing the exporter into your cluster`_.
 .. _`NVIDIA DCGM Prometheus Exporter`: https://docs.nvidia.com/datacenter/cloud-native/gpu-telemetry/latest/dcgm-exporter.html
 .. _`installing the exporter into your cluster`: https://github.com/NVIDIA/dcgm-exporter?tab=readme-ov-file#quickstart-on-kubernetes
 
+.. _metrics-faq-deleted-not-ended:
+
 *******************************************
 Deleted resources are not marked as "ended"
 *******************************************
@@ -97,8 +99,10 @@ as "ended" in the Metrics Service, even if it is not one of the above
 resource types. Applications using the Metrics Service should be
 implemented in such a way that it handles this case without any errors.
 
-Once 90 days has passed after the resource is deleted, the Metrics Service
-will expire the corresponding resource metadata and metrics.
+To mitigate these issues, resources will automatically have the "ended at"
+timestamp set on then if they have not had any measures published for them
+for at least 30 days. After another 90 days, the resource will be expired
+from the Metrics Service.
 
 *****************************************
 One or more resource metrics do not exist
