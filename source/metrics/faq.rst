@@ -100,7 +100,7 @@ resource types. Applications using the Metrics Service should be
 implemented in such a way that it handles this case without any errors.
 
 To mitigate these issues, resources will automatically have the "ended at"
-timestamp set on then if they have not had any measures published for them
+timestamp set on them if they have not had any measures published to them
 for at least 30 days. After another 90 days, the resource will be expired
 from the Metrics Service.
 
