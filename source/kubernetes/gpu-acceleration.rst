@@ -67,7 +67,7 @@ v24.6.2.
 
     helm repo add nvidia https://nvidia.github.io/gpu-operator
 
-    helm install --generate-name -n gpu-operator --create-namespace nvidia/gpu-operator --version=v24.6.2 --set driver.enabled=false --set toolkit.enabled=true
+    helm install --generate-name -n gpu-operator --create-namespace nvidia/gpu-operator --version=v24.6.2 --set driver.enabled=false --set toolkit.enabled=false
 
 At this point the cluster is ready to run GPU accelerated applications.
 
