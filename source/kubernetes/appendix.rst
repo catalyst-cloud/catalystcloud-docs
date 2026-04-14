@@ -72,6 +72,9 @@ Available cluster labels
      - ``true``
      - ``true`` or ``false``
      - Install the Kubernetes Dashboard into the cluster.
+
+       Note: This feature is deprecated and scheduled for removal in v1.35. For more information,
+       see :ref:`kubernetes-versions`.
    * - ``boot_volume_size``
      - Integer
      - ``20``
@@ -305,6 +308,9 @@ and these namespaces should not be used for other purposes or modified.
      - Kubernetes API and core components.
    * - kubernetes-dashboard
      - K8s dashboard deployment, if selected to install.
+
+       Note: this feature is deprecated and scheduled for removal in v1.35. For
+       more information, see :ref:`kubernetes-versions`.
    * - openstack-system
      - Cloud integration with OpenStack
    * - tigera-operator

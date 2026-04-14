@@ -248,6 +248,16 @@ show the details of the cluster:
 Accessing the Kubernetes dashboard
 ==================================
 
+.. Warning::
+
+  The Kubernetes Dashboard is deprecated and scheduled for removal in v1.35. See
+  :ref:`kubernetes-versions` for more information.
+
+  Users are encouraged to consider `Headlamp`_ as an alternative. See
+  :doc:`../tutorials/kubernetes/headlamp` for a tutorial.
+
+.. _Headlamp: https://headlamp.dev
+
 Now that we have ``kubectl`` available, we can access the Kubernetes dashboard.
 
 .. tabs::
@@ -319,6 +329,16 @@ Press **Sign in** to login, and you should now have the Kubernetes dashboard ope
 ***************************
 Running a basic application
 ***************************
+
+.. Warning::
+
+  The Kubernetes Dashboard is deprecated and scheduled for removal in v1.35. See
+  :ref:`kubernetes-versions` for more information.
+
+  Users are encouraged to consider `Headlamp`_ as an alternative. See
+  :doc:`../tutorials/kubernetes/headlamp` for a tutorial.
+
+.. _Headlamp: https://headlamp.dev
 
 Let's try creating a deployment for a basic application on Kubernetes.
 

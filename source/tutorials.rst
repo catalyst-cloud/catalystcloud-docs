@@ -60,6 +60,7 @@ Kubernetes
    tutorials/kubernetes/storage-persistent-volume-retention
    tutorials/kubernetes/storage-resizing-persistent-volume
    tutorials/kubernetes/storage-retrieving-data-orphaned-volume
+   tutorials/kubernetes/headlamp
 
 .. _metrics-tutorials:
 
