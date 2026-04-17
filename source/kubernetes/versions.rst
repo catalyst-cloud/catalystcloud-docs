@@ -44,9 +44,14 @@ in the API.
      - Initial Release Date
      - Unsupported Date
      - Last Released Template(s)
-   * - ``1.35``
+   * - ``1.36``
      - TBA
-     - Expected 2026-04
+     - Expected 2026-07
+     -
+     -
+   * - ``1.35``
+     - Supported
+     - 2026-04-21
      -
      -
    * - ``1.34``
@@ -57,12 +62,12 @@ in the API.
    * - ``1.33``
      - Supported
      - 2025-05-14
-     -
+     - Expected 2026-07
      -
    * - ``1.32``
-     - Supported
+     - Unsupported
      - 2025-02-05
-     - Expected 2026-04
+     - 2026-04-21
      - ``kubernetes-v1.32.13-20260310``
    * - ``1.31``
      - Unsupported
@@ -84,6 +89,30 @@ in the API.
 **********************
 Version upgrade notes
 **********************
+
+Version v1.34 to v1.35
+======================
+
+Kubernetes `release changelog for v1.35 since v1.34`_.
+
+.. _`release changelog for v1.35 since v1.34`: https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.35.md#changelog-since-v1340
+
+In addition to the Kubernetes changes, we have:
+
+* Removed support for automated installation of the Kubernetes Dashboard via the Catalyst Cloud
+  Dashboard or ``kube_dashboard_enabled`` :ref:`cluster label <k8s-cluster-labels>`. Note that
+  upgrading to v1.35 *will remove* any existing installation of the Kubernetes Dashboard. Customers
+  are encouraged to consider `Headlamp`_ as an alternative solution. Refer to
+  :doc:`../tutorials/kubernetes/headlamp` for instructions on how to install Headlamp on CCKS.
+* Upgraded minor version of Calico CNI to v3.31.
+* Upgraded base OS Flatcar to latest stable release.
+* Upgraded containerd to 1.7.30.
+
+.. _`Headlamp`: https://headlamp.dev
+
+Note that skipping minor versions when upgrading a cluster is unsupported and
+should not be attempted. For example, before upgrading to v1.35.x, you must
+be running at least v1.34.x.
 
 Patch versions v1.32.11, v1.33.7 and v1.34.3
 ============================================

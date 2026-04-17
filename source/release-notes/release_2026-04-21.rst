@@ -1,0 +1,61 @@
+#############
+21 April 2026
+#############
+
+==================================
+Catalyst Cloud Kubernetes Service
+==================================
+
+----------------------
+v1.35 Cluster Template
+----------------------
+
+Cluster Templates for Kubernetes v1.35 are now available.
+
+The :ref:`supported-kubernetes-versions` section of our documentation has more information about
+this release and projected supported dates of all version releases.
+
+To get started using our CNCF Certified Kubernetes service, follow the
+:ref:`Kubernetes Quick-Start Guide<k8s-quickstart>`.
+
+-----------
+API Service
+-----------
+
+We have released an update for the API service of CCKS with two notable fixes:
+
+* The ``boot_volume_size`` :ref:`cluster label <k8s-cluster-labels>` now correctly applies
+  numerical values. There was a regression in previous versions.
+* Attempting to create or delete a cluster while authenticated using an application credenital
+  will now correctly report an error instead of becoming stuck in a ``CREATE_IN_PROGRESS`` or
+  ``DELETE_IN_PROGRESS`` state.
+
+===================
+Deprecation Notices
+===================
+
+--------------------
+Kubernetes Dashboard
+--------------------
+
+Automated installation of the Kubernetes Dashboard via the Catalyst Cloud Dashboard or the
+``kube_dashboard_enabled`` :ref:`cluster label <k8s-cluster-labels>` is now deprecated in v1.33 and
+v1.34. Support is removed in v1.35.
+
+Customers are encouraged to consider `Headlamp`_ as an alternative solution. Refer to
+:doc:`../tutorials/kubernetes/headlamp` for instructions on how to install Headlamp on CCKS.
+
+.. _`Headlamp`: https://headlamp.dev
+
+------------------------
+Magnum Cluster Templates
+------------------------
+
+With the release of v1.35 for Catalyst Cloud Kubernetes Service, clusters running v1.32 have
+transitioned to unsupported. These templates are now hidden from the Dashboard.
+
+Building clusters with a hidden cluster template remains possible through the CLI and API. This
+supports the case where you need an identical version of an older cluster created.
+
+See :ref:`supported-kubernetes-versions` for more information on how to upgrade your v1.32
+clusters.
