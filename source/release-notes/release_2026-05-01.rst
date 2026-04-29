@@ -1,0 +1,25 @@
+##########
+1 May 2026
+##########
+
+***************
+Compute Service
+***************
+
+Changes to C2-GPU Compute
+=========================
+
+The specifications for :ref:`C2-GPU compute instances <compute-accel-types>` have been changed.
+C2-GPU previously used partitioned NVIDIA A100 GPUs. The partitions have now been removed so
+C2-GPU instances now utilise an entire NVIDIA A100 80GB GPU.
+
+The CPU core and memory specifications have also been increased to reflect this change.
+
+The GPU change means that the NVIDIA drivers supplied with by operating system vendors can now
+be used, or standard drivers can be downloaded directly from NVIDIA's website. This also removes
+the GPU licensing requirement for C2-GPU.
+
+C2-GPU instances created before this date will no longer start or operate correctly and must be
+removed or resized. If they are resized then all existing NVIDIA drivers must beremoved from the
+operating system in the instance and the standard NVIDIA drivers installed as per the
+:Ref:`GPU documentation <gpu-driver-installation>`.

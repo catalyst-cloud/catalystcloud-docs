@@ -116,11 +116,6 @@ workloads that are written to specifically target the accelerator
 provided. They are not suitable as general purpose servers, as they
 are inherently not as cost efficient if the accelerator is not used.
 
-.. warning::
-
-    The current "c2-gpu" instance types are deprecated, and will be removed and
-    replaced no later than 31 March 2026.
-
 .. list-table:: Accelerated Types
     :header-rows: 1
     :widths: 10 18 18 18 18 18
@@ -139,10 +134,10 @@ are inherently not as cost efficient if the accelerator is not used.
       - 1 or more NVIDIA RTX A6000 48GB GPU
     * - c2-gpu
       - Intel x86-64
-      - Skylake
+      - Ice Lake
       - vCPU is a thread of a pCPU
       - pCPU are shared between VMs
-      - Slice of an NVIDIA A100 80GB GPU
+      - 1 or more NVIDIA A100 80GB GPU
     * - c2a-gpu
       - AMD x86-64
       - Milan

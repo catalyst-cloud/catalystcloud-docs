@@ -18,12 +18,6 @@ versions:
 * v1.32.9
 * v1.33.5
 
-.. note::
-
-    C2-GPU flavors are not currently supported in CCKS. If a worker node is
-    deployed using a C2-GPU flavor, the nodes will start but GPU acceleration
-    will be unavailable.
-
 ******************
 Creating a Cluster
 ******************
