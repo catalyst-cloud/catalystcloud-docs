@@ -69,8 +69,8 @@ To proceed with the setup steps below, some assumptions are made:
       it as a local system storage/share option;
     - Milestone Sys: Licensing and S3 bucket are set up within the VMS via the Tiger Bridge plug-in.
 
-The following setup steps assume that the Surveillance Bridge from Tiger Surveillance will running in the same host as
-the chosen VMS platform.
+The following setup steps assume that the Surveillance Bridge from Tiger Surveillance will be running in the same host
+as the chosen VMS platform.
 
 Installation
 ============
