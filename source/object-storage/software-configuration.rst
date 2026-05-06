@@ -19,5 +19,6 @@ have notified us of.
    software-configuration/rclone
    software-configuration/s3browser
    software-configuration/s3cmd
+   software-configuration/tiger-surveillance-bridge
    software-configuration/synology-nas
    software-configuration/winscp
