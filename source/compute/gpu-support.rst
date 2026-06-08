@@ -132,12 +132,8 @@ Basic Installation Process
 
            * - Compute Flavour
              - GPU Model
-           * - c1a-gpu
-             - NVIDIA RTX A6000
            * - c2-gpu
              - NVIDIA A100 80GB
-           * - c2a-gpu
-             - NVIDIA A100 40GB
            * - c3-gpu
              - NVIDIA L40S
 

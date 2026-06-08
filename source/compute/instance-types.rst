@@ -126,24 +126,12 @@ are inherently not as cost efficient if the accelerator is not used.
       - vCPU Policy
       - pCPU Policy
       - Accelerator
-    * - c1a-gpu
-      - AMD x86-64
-      - Milan
-      - vCPU is a pCPU (no threading)
-      - pCPU are dedicated to a single VM
-      - 1 or more NVIDIA RTX A6000 48GB GPU
     * - c2-gpu
       - Intel x86-64
       - Ice Lake
       - vCPU is a thread of a pCPU
-      - pCPU are shared between VMs
-      - 1 or more NVIDIA A100 80GB GPU
-    * - c2a-gpu
-      - AMD x86-64
-      - Milan
-      - vCPU is a pCPU (no threading)
       - pCPU are dedicated to a single VM
-      - 1 NVIDIA A100 40GB GPU
+      - 1 or more NVIDIA A100 80GB GPU
     * - c3-gpu
       - Intel x86-64
       - Sapphire Rapids

@@ -1,0 +1,13 @@
+###########
+9 June 2026
+###########
+
+***************
+Compute Service
+***************
+
+C1A and C2A GPU Compute
+=======================
+
+C1A and C2A GPU compute types are being retired next week. As of today new instances can no longer
+be created using these compute types.
