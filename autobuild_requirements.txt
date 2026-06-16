@@ -11,7 +11,7 @@ docutils==0.17.1
 idna==3.4
 imagesize==1.4.1
 importlib-metadata==4.8.3
-Jinja2==3.0.3
+Jinja2==3.1.6
 livereload==2.6.3
 markdown-it-py==2.0.1
 MarkupSafe==2.0.1
