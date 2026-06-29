@@ -1,32 +1,95 @@
 .. _database_versions:
 
-##########################################
-Available database versions and extensions
-##########################################
+####################################################
+Available database datastore versions and extensions
+####################################################
 
-********
-Versions
-********
+******************
+Datastore Versions
+******************
 
-The following database versions are available on Catalyst Cloud. We recommend
-that whenever possible you use the latest database version we provide.
+A Datastore is the database engine, currently Catalyst Cloud offers two datastores: MySQL and PostgreSQL.
+
+The following datastore versions are available on Catalyst Cloud. We recommend
+that whenever possible you use the latest datastore version we provide.
+
+=====
+MySQL
+=====
+
+MySQL datastore versions follow the format of ``major.minor.patch``, so 5.7.36 is major version 5, minor 7 and patch 36.
 
 .. list-table::
-   :widths: 20 20
+   :widths: 10 20 20 20
    :header-rows: 1
 
-   * - Database
-     - Version
-   * - MySQL
-     - 5.7.29
-   * - MySQL
-     - 5.7.36
-   * - PostgreSQL
-     - 12.4
-   * - PostgreSQL
-     - 12.17
-   * - PostgreSQL
-     - 12.18
+   * - Version
+     - Current Status
+     - Initial Release Date
+     - Unsupported Date
+   * - 5.7.29
+     - Available
+     - 2021-04-19
+     - 2027-06
+   * - 5.7.36
+     - Available
+     - 2024-05-09
+     - 2027-06
+   * - 8.0
+     - TBA
+     - Expected 2026-12
+     - TBA
+   * - 8.4
+     - TBA
+     - Expected 2027-03
+     - TBA
+   * - 9.0
+     - TBA
+     - Expected 2027-06
+     - TBA
+
+==========
+PostgreSQL
+==========
+
+PostgreSQL versions follow the format of ``major.minor``, so 12.18 is major version 12, minor 18
+
+.. list-table::
+   :widths: 10 20 20 20
+   :header-rows: 1
+
+   * - Version
+     - Current Status
+     - Initial Release Date
+     - Unsupported Date
+   * - 12.4
+     - Available
+     - 2021-04-19
+     - 2027-06
+   * - 12.17
+     - Available
+     - 2021-06-18
+     - 2027-06
+   * - 12.18
+     - Available
+     - 2024-05-04
+     - 2027-06
+   * - 13.44
+     - TBA
+     - 2026-12
+     - TBA
+   * - 14
+     - TBA
+     - 2026-12
+     - TBA
+   * - 15
+     - TBA
+     - 2026-12
+     - TBA
+   * - 16
+     - TBA
+     - 2026-12
+     - TBA
 
 *********************
 PostgreSQL extensions
