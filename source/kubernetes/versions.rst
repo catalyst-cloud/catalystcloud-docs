@@ -90,6 +90,19 @@ in the API.
 Version upgrade notes
 **********************
 
+Patch versions v1.33.13, v1.34.9 and v1.35.6
+============================================
+
+This release updates the base OS Flatcar to 4593.2.4 including kernel 6.12.95 to mitigate several
+vulnerabilities; most notably CVE-2026-46242, also known as "bad-epoll". No active exploits have
+been identified by Flatcar maintainers or Catalyst Cloud engineers but it is recommended to upgrade
+any clusters running older templates to the latest patch version for security.
+
+Note there is no release available for cluster templates v1.32.13 or older with these mitigations
+as they are no longer supported. It is recommended to upgrade clusters running unsupported versions
+to a newer supported version. See :ref:`supported-kubernetes-versions` and the
+:doc:`Cluster Upgrade </kubernetes/cluster-upgrade>` documentation for more information.
+
 Patch versions v1.33.12, v1.34.8 and v1.35.5
 ============================================
 
