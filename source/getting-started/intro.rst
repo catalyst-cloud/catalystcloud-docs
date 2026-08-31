@@ -66,14 +66,14 @@ even automatically, through a variety of tools.
 To obtain resources on Catalyst Cloud, you provision services. Catalyst Cloud
 services are pieces of hardware and software that we have in one of our data
 centres. We make these easy and convenient to use through
-a variety of tools including our `Dashboard web application`_, the :ref:`command
+a variety of tools including our `dashboard web application`_, the :ref:`command
 line interface <sdks_and_toolkits>` or a number of :ref:`orchestration services <cloud-orchestration>`
 
 .. _`Dashboard web application`: https://dashboard.catalystcloud.nz
 
 By exposing our hardware and software as services, we remove a lot of
-complexity from your day to day work. For example: you need to give a
-server it's own public IP address. You open a terminal and run:
+complexity from your day to day work. For example, if you need to give a
+server it's own public IP address you can open a terminal and run:
 
 .. code-block:: console
 
@@ -100,11 +100,11 @@ server it's own public IP address. You open a terminal and run:
   | updated_at          | None                                 |
   +---------------------+--------------------------------------+
 
-Now you have provisioned a public IP address. Now you run:
+Now you have provisioned a public IP address. Now you can run:
 
 .. code-block:: console
 
-  $ openstack server add floating ip my_server_name 150.242.41.224
+  $ openstack server add floating ip <my_server_name> 150.242.41.224
 
 Just like that, your server has a public IP address in seconds. Quick, easy
 and powerful. Every action on Catalyst Cloud can be performed just as quickly.

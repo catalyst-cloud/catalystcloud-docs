@@ -12,10 +12,6 @@ offered by Catalyst Cloud so that we know *what* we can do on Catalyst
 Cloud, even if right now we don't know *how* we can do it yet.
 
 
-*************
-The services
-*************
-
 Compute service
 ===============
 
