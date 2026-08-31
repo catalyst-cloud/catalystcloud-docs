@@ -17,22 +17,22 @@ Catalyst Cloud and how it functions.
 Projects
 ********
 
-Everything on Catalyst Cloud happens inside a ``project``. You can use projects
-to separate the different things you work on. For example, have a project for each
-organisation you work with, or one for each branch of your organisation.
-Something done in one project cannot effect any other projects.
+Everything on Catalyst Cloud happens inside of a ``project``. You can use projects
+to separate the different things that you work on. For example, you can create
+a project for each organisation you work with, or one for each branch you have 
+inside a single organisation. Because of the isolation between projects,
+anything you do in one project cannot effect any other project(s). You can 
+change which project you are working in on the dashboard, with the dropdown 
+in the top left corner.
 
-You can change which project you're working in on the dashboard, with the
-dropdown in the top left corner.
+As mentioned, these workspaces are typically referred to as a ``project`` but for
+historical reasons you may also see them referred to as a ``tenant`` or
+a ``tenancy``. The approach for organizing workspaces in this way is also referred 
+to as *multi-tenanted.*
 
 Information on how to invite new people to your project can be found :ref:`here
 <access_control>`.
 
-
-Catalyst Cloud provides an isolated and multi-tenanted approach to creating
-workspaces. These workspaces are typically referred to as a ``project`` but for
-historical reasons you may also see them referred to as a ``tenant`` or
-a ``tenancy``.
 
 .. _find-project-id:
 
