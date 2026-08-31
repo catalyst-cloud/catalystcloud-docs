@@ -17,9 +17,9 @@ Compute service
 
 The compute service provides compute power on demand, in the form of
 "instances". If you like to think about physical computers, you can imagine an
-instance as one or more CPUs and GB of RAM that you have provisioned usage of.
-Instances come in many sizes, as you can see on Catalyst Cloud's `compute
-page`_.
+instance as a combination of one or more CPUs and GBs of RAM that you 
+have provisioned usage of. Instances come in many sizes, as you can 
+see on Catalyst Cloud's `compute page`_.
 
 .. _`compute page`: https://catalystcloud.nz/services/iaas/compute/#prices
 
@@ -27,7 +27,7 @@ Image service
 =============
 
 It is a common task to install an operating system onto a block storage volume,
-so that you can boot the instance into the operating system. The image service
+so that you can boot an instance into the operating system. The image service
 was created to make this as easy as possible.
 
 An image is a "pre-made" operating system installation that can be used
@@ -37,8 +37,8 @@ instance integrate better with Catalyst Cloud. Images allow you to know
 that your preferred operating system will work on Catalyst Cloud the first
 time you try.
 
-Among the operating systems provided out of the box on Catalyst Cloud image
-service are Ubuntu, Microsoft Windows Server, Debian, and CentOS. You can
+Among the operating systems provided out of the box on Catalyst Cloud the image
+service includes Ubuntu, Microsoft Windows Server, Debian, and CentOS. You can
 also create your own custom images to account for your own specific needs.
 
 Block storage service
@@ -48,9 +48,10 @@ The block storage service provides volumes of data storage that you can attach
 to instances. You could imagine block storage volumes as hard disk drives and
 solid state drives on a physical computer. Block storage volumes can be as
 large or as small as you want them to be, however they are not dynamic; you
-decide beforehand how much storage you want to partition. In addition,
-block volumes are automatically replicated multiple times across the data
-centre to make your data very durable, and very available.
+decide beforehand how much storage you want to partition before attaching the 
+volume to your instance. In addition, block volumes are automatically 
+replicated multiple times across the region your resources are hosted in,
+to make your data very durable and very available.
 
 By attaching a volume to an instance, you mount it, making the file system
 available to the CPU and memory.
@@ -91,12 +92,12 @@ Applications trying to deliver at scale with high service levels on the cloud
 typically do so by delivering their services from numerous compute instances at
 once.
 
-However in order to balance requests between the many compute instances, a load
+However in order to balance requests between the many compute instances a load
 balancer is needed. The load balancer service makes managing this additional
 component easy.
 
-The load balancer assures requests are handled quickly, performs health checks
-to assure compute instances are still available, handles the durability and
+The load balancer service ensures requests are handled quickly, performs health checks
+to maintain your compute instances availability, handles the durability and
 updates for the load balancer, and provides a convenient interface to make
 setting up load balancing is as smooth and intuitive as possible.
 
@@ -114,10 +115,9 @@ of your instances, or creating dashboards for tracking resource usage within you
 Orchestration service
 =====================
 
-The orchestration service allows you to upload a template defining an
-application's infrastructure stack. The orchestration service will then work to
-deploy infrastructure that matches the definition in the template.
-
+The orchestration service allows you to use a template that defines an
+application's infrastructure 'stack' to deploy resourcse on the cloud that 
+match the definition of your template.
 Interestingly, you don't need to tell the orchestration service how to achieve
 your definition. Instead, the orchestration service will intelligently
 determine the actions it needs to take to make the stack match your definition.
@@ -145,14 +145,18 @@ without needing to have specialist knowledge of the platform. It also frees you
 up to focus on what really matters to your business, knowing that the
 Kubernetes service is monitored and managed by us 24/7.
 
-On top of this, our Kubernetes service has been certified by the cloud native
-computing foundation. Meaning that you are able to take any clusters you have
+On top of this, our Kubernetes service has been certified by the `cloud native
+computing foundation`_. Meaning that you are able to take any clusters you have
 built on other cloud platforms and transfer them onto Catalyst Cloud with
 ease.
 
-**********************************
+.. _`cloud native computing foundation`: https://www.cncf.io/
+
+|
+
+####################################
 What can you do with each service?
-**********************************
+####################################
 
 Catalyst Cloud is an entirely automated platform that adheres to the NIST
 definition of
@@ -165,7 +169,7 @@ don't need to wait for a human to do things for you.
   There are a few exceptions where human help *is* required for security
   reasons. Signing up for the first time, and increasing your
   :ref:`quota <additional-info>` are the most common.
-  We intend to automate these in the future.
+  
 
 Resources on Catalyst Cloud can be created, deleted, assigned, resized,
 copied, and edited at your convenience using one of the many tools available to
