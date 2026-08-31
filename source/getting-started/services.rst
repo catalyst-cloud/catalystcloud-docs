@@ -168,12 +168,12 @@ don't need to wait for a human to do things for you.
 .. note::
   There are a few exceptions where human help *is* required for security
   reasons. Signing up for the first time, and increasing your
-  :ref:`quota <additional-info>` are the most common.
+  :ref:`quota <quota-info>` are the most common.
   
 
 Resources on Catalyst Cloud can be created, deleted, assigned, resized,
 copied, and edited at your convenience using one of the many tools available to
-interact with Catalyst Cloud. Performing these administrative actions do
+interact with our platform. Performing these administrative actions do
 not cost anything.
 
 With Catalyst Cloud, you have total control over your infrastructure. You
