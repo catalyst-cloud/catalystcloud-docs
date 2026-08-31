@@ -5,7 +5,7 @@ How can I interact with my project?
 ###################################
 
 In the previous section, we learned about the various services Catalyst
-Cloud offers. Now we'll learn about the various ways you can interact with
+Cloud offers. Now we will learn about the various ways you can interact with
 these services.
 
 
@@ -22,12 +22,12 @@ at: https://dashboard.catalystcloud.nz
 
 Our web dashboard is a great tool that we recommend you have a look at before
 progressing. You'll notice on the left hand side the different tabs for
-services that are available to you as a user, services like our images, volumes
-and networking options. These are all explained in detail later, but getting
+services that are available to you as a user, services like our **images, volumes** 
+and **networking** options. These are all explained in detail later, but getting
 used to the layout of the dashboard can give insight into their functionality
 too.
 
-For more information on the Dashboard you can view it :ref:`here
+You can find more information about the Dashboard in our documentation :ref:`here
 <cloud-dashboard>`
 
 
@@ -75,7 +75,7 @@ API access
 **********
 
 Behind the scenes, all of the access methods to Catalyst Cloud are just
-accessing the Catalyst Cloud APIs. They just provide convenient abstractions to
+utilizing the Catalyst Cloud APIs. They just provide convenient abstractions to
 do so. Every action you perform on Catalyst Cloud can be performed via the
 APIs.
 This means that you can incorporate custom logic into your applications to

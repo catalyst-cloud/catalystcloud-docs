@@ -184,12 +184,12 @@ isolated from all the other projects. Isolation means that the resources and
 the actions taken in one project can't effect anything else outside of that
 project.
 
-***************************************
-How much do I need to pay for services?
-***************************************
 
-It's important to discuss how a true cloud computing platform like, Catalyst
-Cloud charges you for the resources you use; because it strongly effects the
+How much do I need to pay for services?
+=======================================
+
+It's important to discuss how a true cloud computing platform, like Catalyst
+Cloud, charges you for the resources you use; because it strongly effects the
 way you'll use it.
 
 Catalyst Cloud charges by the hour. Each hour, we check what resources you're

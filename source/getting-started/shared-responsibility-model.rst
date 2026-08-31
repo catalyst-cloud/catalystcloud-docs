@@ -14,8 +14,8 @@ Cloud's services is the delineation between the responsibilities that
 Catalyst Cloud has and the responsibilities you have, with respect to those
 running applications or data stored.
 
-The model Catalyst Cloud uses is called the "Shared Responsibility
-Model", as there are responsibilities on both you and Catalyst Cloud.
+The model Catalyst Cloud uses is called the *"Shared Responsibility
+Model"*, as there are responsibilities on both you and Catalyst Cloud.
 
 *******************************
 Demarcation of Responsibilities
@@ -101,11 +101,11 @@ can only be made by you with an understanding of your risk profile and
 business continuity needs.
 
 The full detail of both our and your obligations are in the Terms
-and Conditions, found here: https://catalystcloud.nz/about/terms-and-conditions/
+and Conditions, which can be found here: https://catalystcloud.nz/about/terms-and-conditions
 
 |
 
-Now that you are aware of how the shared responsibility model works on the
+Now that you are aware of how the shared responsibility model works on
 Catalyst Cloud there are some terms and general knowledge you should be
 aware of before we start with an example of how to create your first instance.
 
