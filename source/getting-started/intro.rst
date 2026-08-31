@@ -4,10 +4,6 @@
 Introduction to the Cloud platform
 ##################################
 
-This section of the documentation is for people that are entirely new to cloud
-computing and/or Catalyst Cloud.
-
-
 *****************************************
 What is different about a Cloud platform?
 *****************************************
