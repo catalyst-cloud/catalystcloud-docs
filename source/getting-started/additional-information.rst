@@ -18,9 +18,9 @@ Projects
 ********
 
 Everything on Catalyst Cloud happens inside of a ``project``. You can use projects
-to separate the different things that you work on. For example, you can create
+to separate out the different things that you work on. For example, you can create
 a project for each organisation you work with, or one for each branch you have 
-inside a single organisation. Because of the isolation between projects,
+inside of a single organisation. Because of the isolation between projects,
 anything you do in one project cannot effect any other project(s). You can 
 change which project you are working in on the dashboard, with the dropdown 
 in the top left corner.
@@ -104,7 +104,7 @@ Via the CLI
 The command line interface picks up the project configuration from the
 ``$OS_PROJECT_NAME`` and ``$OS_PROJECT_ID`` environment variables.
 
-To define these variable:
+To change these variables you can use the following:
 
 .. code-block:: bash
 
@@ -115,7 +115,7 @@ If a project ID is specified, the project name is not used. If only the project
 name is specified, the CLI will perform a lookup for the name to find the ID.
 
 Alternatively you can use the ``--os-project-name`` and ``--os-project-id``
-options to specify the project on each call.
+options to specify a project for an individual call.
 
 .. note::
 
@@ -126,8 +126,9 @@ options to specify the project on each call.
 Project access
 ==============
 
-The person who signed up to Catalyst Cloud gets by default the ``Project
-Administrator`` role.
+When you sign up to Catalyst Cloud and your initial project is create, the
+email address used in the sign up process is given the ``Project
+Administrator`` role by default.
 
 As a project administrator or moderator, you can invite and remove people from
 your projects using the `Project Users Panel`_.
@@ -137,8 +138,12 @@ your projects using the `Project Users Panel`_.
 Project isolation
 =================
 
-While projects are inherently secure, it is considered better to use
-multiple projects where it's feasible to do so. For example, it is sensible
+As mentioned previously, there is a level of isolation between projects 
+which creates a layer of security for your resources, by restricting access 
+to  only those with access to your project. 
+
+Additionally, project isolation is important if you are working with 
+multiple environments within your company. For example, it is sensible
 and useful to separate production workloads from development and testing
 environments, if only to help mitigate the possibility of human error
 impacting your business.
@@ -152,10 +157,8 @@ Regions
 *******
 
 Catalyst Cloud is delivered out of three regions across
-New Zealand, one of which being dedicated to
-geo-replicated object storage. On the dashboard, you can specify
-which region to host your resources in depending on your
-needs, with the dropdown in the top left corner. Each region is
+New Zealand, one of which being dedicated solely to
+geo-replicated object storage. Each region is
 completely independent and isolated (each with their own
 *control plane*), providing fault tolerance and geographic diversity.
 
@@ -186,9 +189,9 @@ Selecting a region
 Via the dashboard
 -----------------
 
-The web dashboard has a region selector dropbox on the top left corner. It
-indicates the current region you are connected to and allows you to easily
-switch to another region.
+The web dashboard has a region selector dropbox on the top left corner, shared with 
+the project change dropbox. It indicates the current region you are connected 
+to and allows you to easily switch to another region.
 
 .. image:: assets/region-dropdown.png
 
@@ -216,25 +219,30 @@ Via the APIs
 
 The API request you use to authenticate with Catalyst Cloud allows you to
 scope a token on a given region. The token can then be used to interact with
-the API endpoints of the other services hosted in the same region.
+the API endpoints of any service hosted in the same region.
 
 
 Data traffic between regions
 ============================
 
 The connectivity between compute instances hosted on different regions takes
-place over either our wide area network (WAN) or the Internet, when allowed by
+place over either our wide area network (WAN) or the Internet; when allowed by
 your security groups and network configuration.
 
-Contrary to data traffic within a given region, there are data transfer costs
-applicable to data traffic between regions.
+While there is no cost for data transfers inside a given region, there are 
+costs when sending data between regions. More information can be found on
+our website under the `price list`_.
+
+.. _price list: https://catalystcloud.nz/pricing/price-list
+
 
 
 Data replication
 ================
 
-With the exception of multi-region object storage service, resources are not
-replicated automatically across regions unless you do so. This provides users
+With the exception of the multi-region object storage service, resources are not
+replicated automatically across regions unless you specify this when creating
+your resources. This provides users
 the flexibility to introduce replication where required and to fail-over
 resources independently when needed.
 
@@ -245,7 +253,7 @@ Availability zones
 
 Catalyst Cloud does not use availability zones as a construct for
 high-availability within regions. Instead, it uses server groups with
-anti-affinity polices to ensure compute instances are scheduled in different
+anti-affinity polices to ensure compute instances are scheduled on different
 physical servers.
 
 For more information, please refer to the :ref:`anti-affinity` section of the
@@ -349,7 +357,7 @@ Pre-approved sizes changes can be made as follows:
 
 .. note::
 
-    Quota limits do not apply to object storage usage at this time.
+    Quota limits do not apply to object storage usage
 
 .. _admin-support:
 
@@ -363,7 +371,7 @@ If no solution is found you will need to raise a support request with
 the support dropdown in the top right corner of the dashboard.
 
 If you are an organisation with more complex support needs, you may
-want to consider our premium support.
+want to consider our premium support offering.
 
 .. image:: assets/support-dropdown.png
 
