@@ -4,7 +4,7 @@
 Overview
 ########
 
-This section will demonstrate how to build an Ubuntu 18.04 server. After you
+This section will demonstrate how to build an Ubuntu 26.04 server. After you
 have completed the steps, you will be able to log in to the server via SSH from
 anywhere on the Internet using an SSH key.
 
@@ -141,7 +141,15 @@ listed here: :ref:`image-types`
  Name your key using information such as the username and host on which the
  ssh key was generated so that it is easy to identify later.
 
-Keypairs must be created in each region being used.
+Without an ssh key you will not be able to access your instance. Similarly, if
+you lose access of your private key, you will not be able to gain shell access
+to your instance, unless you have set up another method of authentication/login. 
+
+Additionally, Keypairs must be created in each region even if you plan to re-use
+the same private/public keys; you will still need to recreate your keypair in any
+additional region if you plan to use multiple regions. However, you will not need 
+to do this per project as SSH keys are attached to your user account and not to your
+projects.  
 
 ***************
 Security groups
@@ -175,20 +183,21 @@ Floating IPs
 ************
 
 In order to connect to your instance, you will need to allocate a floating IP
-to the instance. Alternately, you could create a :ref:`VPN <vpn>` and save
-some money by avoiding floating IPs altogether. VPNs are not feasible when the
-instance will be offering a service to the greater Internet.
+to your server. Alternately, you could create a :ref:`VPN <vpn>` and save
+some money by avoiding floating IPs altogether. However please keep in mind that
+VPNs are not feasible when the instance will be offering a service to the 
+greater Internet.
 
 .. _connecting-to-instance:
 
 Connecting to an instance
 *************************
 
-Once all of the previous things are set up, there are a few things to note
-about connecting to your instance via the CLI. One is that you need to make
+Once all of these previous requirements are set up, there are a few things to 
+note about connecting to your instance via the CLI. One is that you need to make
 sure you reference the correct operating system that you are trying to connect
-to. Another things is that you accurately source where your ssh private key is,
-making sure that said key matches the public one you used to create your
+to. Another, is that you accurately source where your ssh private key is,
+making sure that said key matches the public one used to create your
 instance.
 
 For example, if you were trying to connect to an ubuntu image with the floating

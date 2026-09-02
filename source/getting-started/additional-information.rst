@@ -127,8 +127,8 @@ Project access
 ==============
 
 When you sign up to Catalyst Cloud and your initial project is create, the
-email address used in the sign up process is given the ``Project
-Administrator`` role by default.
+email address used in the sign up will be used for the initial user on 
+the project and is given the ``Project Administrator`` role by default.
 
 As a project administrator or moderator, you can invite and remove people from
 your projects using the `Project Users Panel`_.
@@ -139,8 +139,8 @@ Project isolation
 =================
 
 As mentioned previously, there is a level of isolation between projects 
-which creates a layer of security for your resources, by restricting access 
-to  only those with access to your project. 
+which provides a layer of security for your resources. Restricting access 
+to only the users who you have added to your project.
 
 Additionally, project isolation is important if you are working with 
 multiple environments within your company. For example, it is sensible
