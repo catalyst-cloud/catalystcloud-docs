@@ -143,13 +143,13 @@ listed here: :ref:`image-types`
 
 Without an ssh key you will not be able to access your instance. Similarly, if
 you lose access of your private key, you will not be able to gain shell access
-to your instance, unless you have set up another method of authentication/login. 
+to your instance, unless you have set up another method of authentication/login.
 
 Additionally, Keypairs must be created in each region even if you plan to re-use
 the same private/public keys; you will still need to recreate your keypair in any
-additional region if you plan to use multiple regions. However, you will not need 
+additional region if you plan to use multiple regions. However, you will not need
 to do this per project as SSH keys are attached to your user account and not to your
-projects.  
+projects.
 
 ***************
 Security groups
@@ -185,7 +185,7 @@ Floating IPs
 In order to connect to your instance, you will need to allocate a floating IP
 to your server. Alternately, you could create a :ref:`VPN <vpn>` and save
 some money by avoiding floating IPs altogether. However please keep in mind that
-VPNs are not feasible when the instance will be offering a service to the 
+VPNs are not feasible when the instance will be offering a service to the
 greater Internet.
 
 .. _connecting-to-instance:
@@ -193,7 +193,7 @@ greater Internet.
 Connecting to an instance
 *************************
 
-Once all of these previous requirements are set up, there are a few things to 
+Once all of these previous requirements are set up, there are a few things to
 note about connecting to your instance via the CLI. One is that you need to make
 sure you reference the correct operating system that you are trying to connect
 to. Another, is that you accurately source where your ssh private key is,

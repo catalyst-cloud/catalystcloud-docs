@@ -19,15 +19,15 @@ Projects
 
 Everything on Catalyst Cloud happens inside of a ``project``. You can use projects
 to separate out the different things that you work on. For example, you can create
-a project for each organisation you work with, or one for each branch you have 
+a project for each organisation you work with, or one for each branch you have
 inside of a single organisation. Because of the isolation between projects,
-anything you do in one project cannot effect any other project(s). You can 
-change which project you are working in on the dashboard, with the dropdown 
+anything you do in one project cannot effect any other project(s). You can
+change which project you are working in on the dashboard, with the dropdown
 in the top left corner.
 
 As mentioned, these workspaces are typically referred to as a ``project`` but for
 historical reasons you may also see them referred to as a ``tenant`` or
-a ``tenancy``. The approach for organizing workspaces in this way is also referred 
+a ``tenancy``. The approach for organizing workspaces in this way is also referred
 to as *multi-tenanted.*
 
 Information on how to invite new people to your project can be found :ref:`here
@@ -127,7 +127,7 @@ Project access
 ==============
 
 When you sign up to Catalyst Cloud and your initial project is create, the
-email address used in the sign up will be used for the initial user on 
+email address used in the sign up will be used for the initial user on
 the project and is given the ``Project Administrator`` role by default.
 
 As a project administrator or moderator, you can invite and remove people from
@@ -138,11 +138,11 @@ your projects using the `Project Users Panel`_.
 Project isolation
 =================
 
-As mentioned previously, there is a level of isolation between projects 
-which provides a layer of security for your resources. Restricting access 
+As mentioned previously, there is a level of isolation between projects
+which provides a layer of security for your resources. Restricting access
 to only the users who you have added to your project.
 
-Additionally, project isolation is important if you are working with 
+Additionally, project isolation is important if you are working with
 multiple environments within your company. For example, it is sensible
 and useful to separate production workloads from development and testing
 environments, if only to help mitigate the possibility of human error
@@ -189,8 +189,8 @@ Selecting a region
 Via the dashboard
 -----------------
 
-The web dashboard has a region selector dropbox on the top left corner, shared with 
-the project change dropbox. It indicates the current region you are connected 
+The web dashboard has a region selector dropbox on the top left corner, shared with
+the project change dropbox. It indicates the current region you are connected
 to and allows you to easily switch to another region.
 
 .. image:: assets/region-dropdown.png
@@ -229,7 +229,7 @@ The connectivity between compute instances hosted on different regions takes
 place over either our wide area network (WAN) or the Internet; when allowed by
 your security groups and network configuration.
 
-While there is no cost for data transfers inside a given region, there are 
+While there is no cost for data transfers inside a given region, there are
 costs when sending data between regions. More information can be found on
 our website under the `price list`_.
 

@@ -17,8 +17,8 @@ Compute service
 
 The compute service provides compute power on demand, in the form of
 "instances". If you like to think about physical computers, you can imagine an
-instance as a combination of one or more CPUs and GBs of RAM that you 
-have provisioned usage of. Instances come in many sizes, as you can 
+instance as a combination of one or more CPUs and GBs of RAM that you
+have provisioned usage of. Instances come in many sizes, as you can
 see on Catalyst Cloud's `compute page`_.
 
 .. _`compute page`: https://catalystcloud.nz/services/iaas/compute/#prices
@@ -48,8 +48,8 @@ The block storage service provides volumes of data storage that you can attach
 to instances. You could imagine block storage volumes as hard disk drives and
 solid state drives on a physical computer. Block storage volumes can be as
 large or as small as you want them to be, however they are not dynamic; you
-decide beforehand how much storage you want to partition before attaching the 
-volume to your instance. In addition, block volumes are automatically 
+decide beforehand how much storage you want to partition before attaching the
+volume to your instance. In addition, block volumes are automatically
 replicated multiple times across the region your resources are hosted in,
 to make your data very durable and very available.
 
@@ -67,7 +67,7 @@ One of object storage's biggest advantages is it's price. As an illustration,
 imagine you're provisioning a block storage volume for a database. Many of the
 bits you've provisioned within that volume are unused 0s, not yet used by the
 database to store any data. With object storage, you only pay for bits your
-files are using, not any empty, unproductive bits. This allows you to minimise
+files are using, not any empty, unproductive bits. This allows you to minimize
 your costs. Secondarily, data stored in object storage can be more efficiently
 stored than block storage, allowing Catalyst Cloud to charge less for it.
 
@@ -116,7 +116,7 @@ Orchestration service
 =====================
 
 The orchestration service allows you to use a template that defines an
-application's infrastructure 'stack' to deploy resourcse on the cloud that 
+application's infrastructure 'stack' to deploy resources on the cloud that
 match the definition of your template.
 Interestingly, you don't need to tell the orchestration service how to achieve
 your definition. Instead, the orchestration service will intelligently
@@ -169,7 +169,7 @@ don't need to wait for a human to do things for you.
   There are a few exceptions where human help *is* required for security
   reasons. Signing up for the first time, and increasing your
   :ref:`quota <quota-info>` are the most common.
-  
+
 
 Resources on Catalyst Cloud can be created, deleted, assigned, resized,
 copied, and edited at your convenience using one of the many tools available to

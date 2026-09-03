@@ -8,27 +8,27 @@ Introduction to the Cloud platform
 What is different about a Cloud platform?
 *****************************************
 
-While on the surface there are many similarities between the traditional 
-purchasing of VMs from a host provider and the use a cloud provider 
-to provision compute instances; looking closer at both platforms 
+While on the surface there are many similarities between the traditional
+purchasing of VMs from a host provider and the use a cloud provider
+to provision compute instances; looking closer at both platforms
 reveals some striking differences.
 
 In the past you may have purchased a series of virtual machines with a specific
 size for RAM and storage space. You would then pay a predefined amount for
 these virtual machines on a monthly basis. If you wanted to increase the size
 of your storage, RAM or the amount of virtual machines you are using, you would
-have to renegotiate the price of your monthly bill with your host provider. 
-While you had this "subscription" the virtual machines were yours and 
-you paid the same price regardless of how much you used them; 
-meaning that if you only used them for a week or anything less than 24/7 you 
+have to renegotiate the price of your monthly bill with your host provider.
+While you had this "subscription" the virtual machines were yours and
+you paid the same price regardless of how much you used them;
+meaning that if you only used them for a week or anything less than 24/7 you
 were not getting the most out of your monthly bill.
 
 On a cloud based system you only pay for what is used and you can change your
 resources on the fly. If you need to horizontally scale an instance you can
 simply spin up more compute nodes. If you need to increase the size of your
-block storage, then you can add a new volume to your existing instance, or 
-you can use our object storage service as an alternative. In a cloud 
-environment your instances and other resources are scheduled by the cloud 
+block storage, then you can add a new volume to your existing instance, or
+you can use our object storage service as an alternative. In a cloud
+environment your instances and other resources are scheduled by the cloud
 and you are only billed for the amount of resources you use.
 
 For example: you need an instance to crunch numbers for a day. In a cloud
@@ -36,8 +36,8 @@ system you only pay for how long the resources are being used. In a
 traditional system you would have to pay for an entire month of use for your
 resource, or you would need to buy/lease physical equipment.
 If you need more compute power (virtual CPUs (or vCPUs) or memory) for the
-instance during your number crunching you can increase the size of your 
-instance without having to confirm with your provider first. 
+instance during your number crunching you can increase the size of your
+instance without having to confirm with your provider first.
 Saving yourself money and the hassle of negotiating changes. Once you
 are done with your task you can turn off your instance, or reduce the size of
 the instance, release any other resources, and the billing stops (or redeuces)

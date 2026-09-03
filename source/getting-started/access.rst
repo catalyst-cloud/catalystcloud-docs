@@ -22,7 +22,7 @@ at: https://dashboard.catalystcloud.nz
 
 Our web dashboard is a great tool that we recommend you have a look at before
 progressing. You'll notice on the left hand side the different tabs for
-services that are available to you as a user, services like our **images, volumes** 
+services that are available to you as a user, services like our **images, volumes**
 and **networking** options. These are all explained in detail later, but getting
 used to the layout of the dashboard can give insight into their functionality
 too.
