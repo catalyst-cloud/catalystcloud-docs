@@ -126,7 +126,7 @@ options to specify a project for an individual call.
 Project access
 ==============
 
-When you sign up to Catalyst Cloud and your initial project is create, the
+When you sign up to Catalyst Cloud and your initial project is created, the
 email address used in the sign up will be used for the initial user on
 the project and is given the ``Project Administrator`` role by default.
 
