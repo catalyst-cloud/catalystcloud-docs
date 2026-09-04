@@ -185,7 +185,7 @@ Floating IPs
 In order to connect to your instance, you will need to allocate a floating IP
 to your server. Alternately, you could create a :ref:`VPN <vpn>` and avoid
 floating IPs altogether. However please keep in mind that while VPNs do provide
-an additional layer of privacy and security, they are not feasible when the 
+an additional layer of privacy and security, they are not feasible when the
 instance needs to offer a service to the greater Internet.
 
 .. _connecting-to-instance:
