@@ -40,7 +40,7 @@ sphinxcontrib-qthelp==1.0.3
 sphinxcontrib-serializinghtml==1.1.5
 standard-imghdr # Needed to fix: "Could not import extension sphinx.builders.epub3 (exception: No module named 'imghdr')"
 stevedore==3.5.2
-tornado==6.1
+tornado==6.5
 typing_extensions==4.1.1
 urllib3==1.26.14
 zipp==3.6.0
