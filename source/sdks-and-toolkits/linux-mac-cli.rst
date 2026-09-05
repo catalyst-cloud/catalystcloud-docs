@@ -10,11 +10,11 @@ Linux or Mac OS CLI
 Installation on Linux and Mac
 *****************************
 
-When installing the CLI using pip, it is recommended to use a python virtual
-environment to contain the required dependencies. The examples below all make
-reference to the use of a virtual environment. If you require more information
-on the basic functions of the python virtual environment, please refer to the
-:ref:`python-virtual-env` tutorial.
+On Debian 12, the OpenStack CLI tools are available directly as system
+packages (``python3-*``). On other distributions such as Ubuntu or macOS,
+it is recommended to install via pip into a python virtual environment. If
+you require more information on the basic functions of the python virtual
+environment, please refer to the :ref:`python-virtual-env` tutorial.
 
 Operating system specific steps
 ===============================
@@ -47,24 +47,18 @@ system.
           wheel \
           catalystcloud-client
 
-    .. tab:: Debian 9
+    .. tab:: Debian 12
 
         .. code-block:: bash
 
-          # Make sure the package cache is up to date and ensure you have
-          # Python3 installed
+          # Make sure the package cache is up to date and install the
+          # OpenStack command line tools directly from the Debian packages
           sudo apt update
-          sudo apt install -y python3-venv
-
-          # create a virtual environment using the Python3 virtual environment module
-          python3 -m venv venv
-
-          # activate the virtual environment
-          source venv/bin/activate
-
-          # install the OpenStack commandline tools into the virtual environment
-          pip install -U pip \
-          catalystcloud-client
+          sudo apt install -y python3-openstackclient \
+          python3-heatclient \
+          python3-magnumclient \
+          python3-octaviaclient \
+          python3-swiftclient
 
     .. tab:: Centos 8
 
@@ -206,15 +200,16 @@ of an expired token.
 Using the CLI on Linux and Mac
 ******************************
 
-This page assumes that you have installed the python virtual environment and
-other dependencies from the :ref:`installing_cli_os` page earlier in this
-section of the documentation. If you have, then the following should make
-sense. If you want more information about how to use the python virtual
-environment then please check the :ref:`activate-venv` section of our
-documentation under tutorials.
+This page assumes that you have installed the CLI tools from the
+:ref:`installing_cli_os` page earlier in this section of the documentation.
 
+.. note::
 
-1. Activate your virtual environment.
+  If you installed via pip into a virtual environment (Ubuntu or macOS), you
+  will need to activate it first. If you installed via system packages
+  (Debian 12), no activation step is required.
+
+1. If using a virtual environment, activate it first.
 2. :ref:`source-rc-file`
 3. Invoke the CLI with the ``openstack`` command
 
