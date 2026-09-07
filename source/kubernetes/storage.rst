@@ -230,34 +230,43 @@ has a volume mounted from the storage class **block-storage-class** and the
 Persistent Volume Retention
 ***************************
 
-When a ``PersistentVolume`` is used as a resource within a cluster through the
-creation of a ``PersistentVolumeClaim`` it is important to know that the underlying
-physical volume assigned to the claim will persist if the cluster is removed.
+``PersistentVolumeClaim`` and their associated ``PersistentVolume`` resources
+within a Kubernetes cluster are backed by block storage volumes. The retention
+of these block storage volumes depends on the persistent volume's reclaim
+policy inherited from its ``StorageClass``, by default.
 
-.. Note::
+The ``csi_cinder_reclaim_policy`` cluster label (see
+:ref:`Cluster Labels <k8s-cluster-labels>`) can be used to apply a reclaim
+policy to all default ``StorageClass`` resources of a provisioned cluster (the
+default is ``Retain``, if unspecified). Persistent volumes created with any of
+the default ``StorageClass`` options follow this reclaim policy, unless
+overridden, with one notable exception:
 
-   If a cluster is deleted before removing resources, the persistence of the
-   underlying volume is not affected by the setting of the ``StorageClass``
-   *Reclaim Policy*. See :ref:`cluster-deletion` for more information.
+.. warning::
 
+  If a cluster with persistent volumes is deleted, all underlying volumes are
+  retained and will *not* be deleted automatically, regardless of their
+  configured retention policy or the ``csi_cinder_reclaim_policy`` label set
+  for the cluster.
 
-If the ``PersistentVolumeClaim`` resource was intentionally released prior to the
-cluster being terminated however, the usual retention policy for that
-storage class will apply.
+Persistent volumes that are intentionally deleted while a cluster is active
+follow their configured reclaim policy. The key idea to note is that reclaim
+policies only apply to persistent volume operations and cluster deletion does
+not fall under this category. It is recommended to manage any persistent
+volumes via ``kubectl`` while a cluster is still active if you require the
+reclaim policy to apply.
 
-The default retention policy is ``Retain`` and is set on all
-``PersistentVolumeClaims`` in a cluster at cluster create time. It is
-possible to set an alternative value at cluster create time using the
-``csi_cinder_reclaim_policy`` label (See :ref:`cluster labels
-<k8s-cluster-labels>`).
-
-The ``Retain`` policy prevents accidental removal, and permits re-attachment to
-another Kubernetes cluster. For some workloads, it will be preferable to use
-the `Delete` reclaim policy which will remove both the automatically created
+If the ``csi_cinder_reclaim_policy`` label is unspecified, the default
+reclaim policy is ``Retain`` and is set on all ``StorageClass`` resources in a
+cluster at the time of creation. The ``Retain`` policy prevents accidental
+removal, and allows re-attachment of block storage volumes to another
+Kubernetes cluster. For some workloads, it may be preferable to use the
+``Delete`` reclaim policy which will remove both the automatically created
 ``PersistentVolume`` and the underlying block storage volume when the
 ``PersistentVolumeClaim`` is deleted.
 
-Refer to the Kubernetes documentation on `Persistent Volume Reclaiming`_ for more details.
+Refer to the Kubernetes documentation on `Persistent Volume Reclaiming`_ for
+more details.
 
 
 .. _`Persistent Volume Reclaiming`: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#reclaiming
@@ -265,7 +274,7 @@ Refer to the Kubernetes documentation on `Persistent Volume Reclaiming`_ for mor
 
 .. note::
    Please refer to our :ref:`tutorials <kubernetes-tutorials>` for more detailed
-   examples using persistant storage in Kubernetes.
+   examples using persistent storage in Kubernetes.
 
 
 *************************************************
