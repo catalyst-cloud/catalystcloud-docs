@@ -1,0 +1,20 @@
+#################
+21 September 2026
+#################
+
+=================================
+Catalyst Cloud Kubernetes Service
+=================================
+
+We have released an update for the API service of CCKS with two notable changes:
+
+* The `Kubernetes Version Skew Policy`_ is now enforced properly during upgrades. Worker nodegroup
+  upgrades will be delayed until all control plane nodes are upgraded and active. Previously, all
+  nodegroups were upgraded simultaneously.
+* Creating new clusters from, or upgrading existing clusters to, cluster templates v1.31 and older
+  is no longer possible. Incompatible cluster templates including ``kubernetes-v1.31.14-20251130``
+  and older are scheduled for removal after being unsupported since November 2025 or earlier.
+  Existing clusters on affected versions can no longer be upgraded. Users of these clusters seeking
+  an upgrade path are required to migrate to a newly built cluster on a supported version.
+
+.. _`Kubernetes Version Skew Policy`: https://kubernetes.io/releases/version-skew-policy

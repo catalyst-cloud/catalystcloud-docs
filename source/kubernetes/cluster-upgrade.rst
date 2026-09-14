@@ -32,7 +32,7 @@ Rebuilding vs in-place upgrade
 
 .. note::
 
-  Cluster upgrades are not supported for clusters running Kubernetes 1.27 and below.
+  Cluster upgrades are not supported for clusters running Kubernetes v1.31 and below.
 
   Please build a replacement cluster running on the latest available version.
   Once this has been done, you will be able to use the cluster upgrade API
@@ -108,13 +108,13 @@ Identify the Cluster Template to upgrade to
 
 When choosing the target Cluster Template, the following rules must be followed:
 
-1. Catalyst Cloud does **not** support upgrading clusters of version v1.27 or below. These must be
+1. Catalyst Cloud does **not** support upgrading clusters of version v1.31 or below. These must be
    rebuilt to a new version.
 2. Clusters must be upgraded to a later version only. Downgrading is not supported.
 3. In accordance with the `Kubernetes Version Skew Policy`_, clusters must be upgraded
    by one minor version at a time.
-   This means that, for example, a v1.28.x cluster must be upgraded to v1.29.x first,
-   before being upgraded to v1.30.x.
+   This means that, for example, a v1.33.x cluster must be upgraded to v1.34.x first,
+   before being upgraded to v1.35.x.
 
 .. _`Kubernetes Version Skew Policy`: https://kubernetes.io/releases/version-skew-policy
 

@@ -73,18 +73,17 @@ in the API.
      - Unsupported
      - 2024-12-20
      - 2025-11-07
-     - ``kubernetes-v1.31.13-20250917``
-       ``kubernetes-v1.31.14-20251130``
+     - :doc:`Removed 2026-09-21 </release-notes/release_2026-09-21>`
    * - ``1.30``
      - Unsupported
      - 2024-08-26
      - 2025-06-28
-     - ``kubernetes-v1.30.14-20250623``
+     - :doc:`Removed 2026-09-21 </release-notes/release_2026-09-21>`
    * - ``1.29``
      - Unsupported
      - 2024-05-27
      - 2025-03-19
-     - ``kubernetes-v1.29.14-20250217``
+     - :doc:`Removed 2026-09-21 </release-notes/release_2026-09-21>`
 
 **********************
 Version upgrade notes
