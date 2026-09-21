@@ -115,7 +115,6 @@ like in the following example.
 The following parameters are required for all alarm types:
 
 .. list-table::
-  :width: 50%
   :header-rows: 1
 
   * - Parameter
@@ -180,7 +179,6 @@ Alarms can be in one of the following states:
 .. list-table::
   :widths: 15 60
   :header-rows: 1
-  :width: 75%
 
   * - State
     - Description
@@ -453,7 +451,6 @@ to be invoked as actions.
 Actions can be configured for the following :ref:`alarm states <alarm-states>`:
 
 .. list-table::
-  :width: 70%
   :header-rows: 1
 
   * - Action Type
@@ -665,14 +662,14 @@ The state of an alarm can be temporarily overridden using the following command.
 
 .. code-block:: bash
 
-  openstack alarm state set ${alarm} --alarm "${state}"
+  openstack alarm state set ${alarm} --state "${state}"
 
 This is useful for testing whether or not any configured
 :ref:`alarm actions <alarm-actions>` work correctly.
 
 .. code-block:: console
 
-  $ openstack alarm state set test-alarm --alarm "alarm"
+  $ openstack alarm state set test-alarm --state "alarm"
   +-------+-------+
   | Field | Value |
   +-------+-------+
@@ -711,6 +708,64 @@ To delete an alarm that is no longer required, simply run the following command
 
   openstack alarm delete ${alarm}
 
+Configuring time constraints
+============================
+
+An alarm can have **time constraints** configured on it
+to have it only evaluate during specific time periods,
+using the ``--time-constraint`` parameter.
+
+.. code-block:: bash
+
+  --time-constraint 'name=<NAME>;start=<CRON>;duration=<SECONDS>[;description=<DESCRIPTION>][;timezone=<IANA-TIMEZONE>]'
+
+The following configuration options are available:
+
+.. list-table::
+  :widths: 10 10 10 60
+  :header-rows: 1
+
+  * - Option
+    - Type
+    - Default
+    - Description
+  * - ``name``
+    - String
+    - (required)
+    - The name of the time constraint.
+  * - ``start``
+    - cron expression
+    - (required)
+    - The start time of the time constraint period,
+      defined as a cron expression.
+  * - ``duration``
+    - Integer
+    - (required)
+    - The length of the time constraint period, in seconds.
+  * - ``description``
+    - String
+    - (none)
+    - A human-readable description of the time constraint.
+  * - ``timezone``
+    - IANA timezone
+    - ``Etc/UTC``
+    - The timezone to use when applying the time constraint.
+
+      **NOTE:** For New Zealand, use ``Pacific/Auckland``.
+      Using the correct timezone allows daylight savings to
+      be taken into account when required.
+
+Here is an example of a time constraint to configure an alarm to only
+run evaluations during working hours (9am-5pm on weekdays) in New Zealand time:
+
+.. code-block:: bash
+
+  openstack alarm create --name test-alarm \
+                         ... \
+                         --time-constraint 'name=workhours;start=0 9 * * 1-5;duration=28800;timezone=Pacific/Auckland'
+
+``--time-constraint`` can be specified multiple times to set multiple time constraint ranges.
+
 .. _alarm-examples:
 
 ********
@@ -746,7 +801,7 @@ to set the correct values for the alarm:
   num_vcpus=1
   granularity=600
   cpu_util=0.75  # Percentage as a decimal (0-1)
-  severify="critical"
+  severity="critical"
   resource_id=$(openstack server show "${instance_name}" -c id -f value)
   openstack alarm create --name "${instance_name}-cpu-util" \
                          --description "Alert when ${instance_name} CPU utilisation exceeds $(echo "${cpu_util} * 100" | bc)%" \
@@ -815,12 +870,13 @@ to set the correct values for the alarm:
   num_vcpus=1
   granularity=600
   cpu_util=0.75  # Percentage as a decimal (0-1)
-  severify="critical"
+  severity="critical"
+  group_id=$(openstack server group show "${group_name}" -c id -f value)
   openstack alarm create --name "${group_name}-cpu-util" \
                          --description "Alert when CPU utilisation exceeds $(echo "${cpu_util} * 100" | bc)% across all instances in ${test_group}" \
                          --type gnocchi_aggregation_by_resources_threshold \
                          --resource-type instance \
-                         --query "{\"and\": [{\"=\": {\"server_group\": \"${group_name}\"}}, {\"=\": {\"ended_at\": null}}]}" \
+                         --query "{\"and\": [{\"=\": {\"server_group\": \"${group_id}\"}}, {\"=\": {\"ended_at\": null}}]}" \
                          --metric cpu \
                          --aggregation-method rate:mean \
                          --granularity ${granularity} \
@@ -836,7 +892,7 @@ Fully enumerated, the command would look like this:
                          --description "Alert when CPU utilisation exceeds 75% across all instances in test-group" \
                          --type gnocchi_aggregation_by_resources_threshold \
                          --resource-type instance \
-                         --query '{"and": [{"=": {"server_group": "test-group"}}, {"=": {"ended_at": null}}]}' \
+                         --query '{"and": [{"=": {"server_group": "e750636c-cbb2-4cf9-836a-fe95cdfb6904"}}, {"=": {"ended_at": null}}]}' \
                          --metric cpu \
                          --aggregation-method rate:mean \
                          --granularity 600 \
@@ -859,7 +915,7 @@ instance exceeds 768MiB.
 
   instance_name="test-instance"
   threshold=768  # MiB
-  severify="critical"
+  severity="critical"
   resource_id=$(openstack server show "${instance_name}" -c id -f value)
   openstack alarm create --name "${instance_name}-memory-usage" \
                          --description "Alert when ${instance_name} memory usage exceeds ${threshold}MiB" \
@@ -918,12 +974,13 @@ to set the correct values for the alarm:
 
   group_name="test-group"
   threshold=768  # MiB
-  severify="critical"
+  severity="critical"
+  group_id=$(openstack server group show "${group_name}" -c id -f value)
   openstack alarm create --name "${group_name}-memory-usage" \
                          --description "Alert when memory usage exceeds ${threshold}MiB across all instances in ${test_group}" \
                          --type gnocchi_aggregation_by_resources_threshold \
                          --resource-type instance \
-                         --query "{\"and\": [{\"=\": {\"server_group\": \"${group_name}\"}}, {\"=\": {\"ended_at\": null}}]}" \
+                         --query "{\"and\": [{\"=\": {\"server_group\": \"${group_id}\"}}, {\"=\": {\"ended_at\": null}}]}" \
                          --metric memory.usage \
                          --aggregation-method mean \
                          --granularity ${granularity} \
@@ -939,68 +996,10 @@ Fully enumerated, the command would look like this:
                          --description "Alert when memory usage exceeds 768MiB across all instances in test-group" \
                          --type gnocchi_aggregation_by_resources_threshold \
                          --resource-type instance \
-                         --query '{"and": [{"=": {"server_group": "test-group"}}, {"=": {"ended_at": null}}]}' \
+                         --query '{"and": [{"=": {"server_group": "e750636c-cbb2-4cf9-836a-fe95cdfb6904"}}, {"=": {"ended_at": null}}]}' \
                          --metric memory.usage \
                          --aggregation-method mean \
                          --granularity 600 \
                          --threshold 768 \
                          --comparison-operator gt \
                          --severity critical
-
-Configuring time constraints
-============================
-
-An alarm can have **time constraints** configured on it
-to have it only evaluate during specific time periods,
-using the ``--time-constraint`` parameter.
-
-.. code-block:: bash
-
-  --time-constraint 'name=<NAME>;start=<CRON>;duration=<SECONDS>[;description=<DESCRIPTION>][;timezone=<IANA-TIMEZONE>]'
-
-The following configuration options are available:
-
-.. list-table::
-  :widths: 10 10 10 60
-  :header-rows: 1
-
-  * - Option
-    - Type
-    - Default
-    - Description
-  * - ``name``
-    - String
-    - (required)
-    - The name of the time constraint.
-  * - ``start``
-    - cron expression
-    - (required)
-    - The start time of the time constraint period,
-      defined as a cron expression.
-  * - ``duration``
-    - Integer
-    - (required)
-    - The length of the time constraint period, in seconds.
-  * - ``description``
-    - String
-    - (none)
-    - A human-readable description of the time constraint.
-  * - ``timezone``
-    - IANA timezone
-    - ``Etc/UTC``
-    - The timezone to use when applying the time constraint.
-
-      **NOTE:** For New Zealand, use ``Pacific/Auckland``.
-      Using the correct timezone allows daylight savings to
-      be taken into account when required.
-
-Here is an example of a time constraint to configure an alarm to only
-run evaluations during working hours (9am-5pm on weekdays) in New Zealand time:
-
-.. code-block:: bash
-
-  openstack alarm create --name test-alarm \
-                         ... \
-                         --time-constraint 'name=workhours;start=0 9 * * 1-5;duration=28800;timezone=Pacific/Auckland'
-
-``--time-constraint`` can be specified multiple times to set multiple time constraint ranges.
