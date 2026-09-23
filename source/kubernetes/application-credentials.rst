@@ -23,9 +23,14 @@ If you need to change the application credential associated with your cluster,
 you can use the credential rotation action available via a command in the
 Openstack client.
 
-Select a suitable user in your project and authenticate as that user using an
-OpenRC file. The user must not be authenticated using an existing application
-credential unless it was explicitly set to unrestricted at creation.
+Select a suitable user in your project and authenticate as that user using a
+password-based OpenRC file.
+
+.. warning::
+
+  A password-based OpenRC file must be used. The user must not be
+  authenticated using any other authentication method or cluster operations
+  will not work.
 
 Via the Command Line
 --------------------
